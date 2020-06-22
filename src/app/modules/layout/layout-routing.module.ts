@@ -3,29 +3,34 @@ import { Routes, RouterModule,  } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
+import { MiSaludComponent } from '../pacientes/mi-salud/mi-salud.component';
 import { GuardsGuard} from '../../guards/guards.guard'
+import { ProfesionalGuard } from '../../guards/profesional.guard'
+import { PacienteGuard } from '../../guards/paciente.guard'
 
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'mis-pacientes',
     component: LayoutComponent,
-    canActivate: [GuardsGuard],
+    canActivate: [ProfesionalGuard],
     children: [
       { path: '', component:  PacientesComponent }
+    ]
+  },
+  {
+    path: 'mi-salud',
+    component: LayoutComponent,
+    canActivate: [PacienteGuard],
+    children: [
+      { path: '', component:  MiSaludComponent }
     ]
   }
   
 ];
 
-const routes2: Routes = [
-  {
-    path: 'DOS',
-    component: LayoutComponent,
-    canActivate: [GuardsGuard]
-  }
-];
+
 
 @NgModule({
   imports: [
