@@ -1,0 +1,64 @@
+html {
+    height: 100%;
+  }
+  
+  body {
+    height: 100%;
+    margin: 0;
+    font-family: Ubuntu;
+    background: linear-gradient(#b3ffab, #67fffc);
+  }
+  
+  #header {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(#444444, #333333);
+    color: #bbbbbb;
+  }
+  
+  #headerContent {
+    margin-left: 10px;
+  }
+  
+  #page {
+    display: flex;
+    height: calc( 100vh - 30px);
+    width: 100%;
+   
+    /* calculate the height. Header is 30px */
+  }
+  
+  #sideBar {
+    background-color: rgb(251, 251, 251);
+    min-height: 100%;
+    width: 20%;
+    max-width: 250px;
+    min-width:200px;
+    border-right:6px solid #012a62;
+    .top {
+        text-align: center;
+        .img {
+            display: inline-block;
+            width: 95px;
+            height: 95px;
+            border:3px solid #f5f4f3;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 30px 0px 30px 0px;
+            img {
+                width: 150%;
+                margin-left: -25px;
+            }
+        }
+    }
+  }
+  
+  #content {
+    //background: blue;
+    flex: 1 0 auto;
+    width: 80%;
+    /* enable grow, disable shrink */
+  }
+
+  
