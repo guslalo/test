@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'mis-pacientes',
     component: LayoutComponent,
-    canActivate: [ProfesionalGuard],
+    //canActivate: [ProfesionalGuard],
     children: [
       { path: '', component:  PacientesComponent }
     ]
@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'mi-salud',
     component: LayoutComponent,
-    canActivate: [PacienteGuard],
+    //canActivate: [PacienteGuard],
     children: [
       { path: '', component:  MiSaludComponent }
     ]

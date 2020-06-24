@@ -10,8 +10,19 @@ export class GuardsGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if (sessionStorage.getItem('currentUser')) {
+      // logged in so return true
+      return true;
+    }
+
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+      return false;
+    }
+  
    
-    if (sessionStorage.getItem('user') === 'medico' || sessionStorage.getItem('user') === 'paciente') {
+   /* if (sessionStorage.getItem('user') === 'medico' || sessionStorage.getItem('user') === 'paciente') {
       return true;
     } else {
       this.router.navigate(['/'], {
@@ -20,8 +31,11 @@ export class GuardsGuard implements CanActivate {
         }
       });
       return false;
-    }
+    }*/
 
-  }
-  
 }
+  
+
+
+
+

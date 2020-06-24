@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { LoginService } from '../../services/login.services';
+import { AuthenticationService } from '../../services/authentication.service';
 
 
 @Component({
@@ -13,17 +13,21 @@ export class LoginComponent implements OnInit {
 
   user: any = { };
 
-  constructor( private loginservice:LoginService, private router: Router) { }
+  constructor( private authenticationService:AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     sessionStorage.removeItem('user');
   }
 
+  //susbscribe post authentication service
   loginUser() {
-    this.loginservice.loginUser(this.user.email, this.user.password)
+    this.authenticationService.loginUser(this.user.email, this.user.password)
     .subscribe(
       data => {
-        console.log(data);
+        sessionStorage.setItem('currentUser', JSON.stringify(data.token));
+        if(sessionStorage.getItem('currentUser')){
+          this.router.navigate(['/mis-pacientes']);
+        }
       },
       error => { 
         console.log(error);
