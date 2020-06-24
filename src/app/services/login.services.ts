@@ -8,16 +8,15 @@ import { Observable } from 'rxjs';
 
 export class LoginService {
 
-  private url = 'https://reqres.in/api/login';
-  
+  private loginUrl = 'https://reqres.in/api/colors';
 
   constructor(private http: HttpClient) {
   
   }
 
-  // post loginUser
-  loginUser(email, password): Observable<any> {
-    return this.http.post<any>(this.url, {email, password});
+  // get loginUser
+  loginUser(page:any): Observable<any> {
+    return this.http.get<any>(this.loginUrl);
   }
  
   

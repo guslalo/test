@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 
-
 //routing
 import { AuthRoutingModule } from './auth-routing.module';
 

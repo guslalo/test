@@ -3,14 +3,14 @@
     <div id="formContent">
       <!-- Icon -->
       <div class="fadeIn first">
-        <img src="../../../../../assets/img/Logo03.webp" id="icon" alt="itms"/>
+        <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
       </div>
   
       <!-- Login Form -->
       <form>
-        <input type="text"  class="fadeIn second"  placeholder="login"  [(ngModel)]="user.name" name="name">
-        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-        <input type="button" class="fadeIn fourth" value="Log In" (click)="login()">
+        <input type="text"  class="fadeIn second"  placeholder="email"  [(ngModel)]="user.email" name="email">
+        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" name="password" [(ngModel)]="user.password">
+        <input type="button" class="fadeIn fourth" value="Log In" (click)="loginUser()">
      
       </form>
       <!-- Remind Passowrd -->

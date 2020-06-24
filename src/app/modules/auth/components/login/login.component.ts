@@ -19,6 +19,18 @@ export class LoginComponent implements OnInit {
     sessionStorage.removeItem('user');
   }
 
+  loginUser() {
+    this.loginservice.loginUser(this.user.email, this.user.password)
+    .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => { 
+        console.log(error);
+      }
+    )
+  }
+
   login() {
     if(this.user.name === 'miguel') {
       sessionStorage.setItem('user','medico');
