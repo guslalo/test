@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UsersService } from '../../services/Users.service';
+import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserLogin } from '../../../../models/models';
 

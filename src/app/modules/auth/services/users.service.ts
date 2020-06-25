@@ -15,7 +15,7 @@ export class UsersService {
     
     constructor(private http: HttpClient, private router: Router) {  }
 
-    // post loginUser
+    // get user
     getusers( idUser?:any ): Observable<any> {
         if(idUser) {
             return this.http.get<any>( environment.baseUrl + this.users + idUser);
@@ -23,4 +23,11 @@ export class UsersService {
             return this.http.get<any>( environment.baseUrl + this.users);
         }
     }
+
+
+    //user current
+    getUserCurrent(user){
+        return user;
+    }
+
 }
