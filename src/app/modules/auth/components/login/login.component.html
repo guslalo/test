@@ -1,22 +1,20 @@
 
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.5)" color="#fff"> <!-- <p style="color: white" > cargando...</p> --> </ngx-spinner>
 <div class="wrapper fadeInDown d-flex align-items-center">
     <div id="formContent">
-      <!-- Icon -->
+      <!-- logo -->
       <div class="fadeIn first">
         <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
       </div>
-  
       <!-- Login Form -->
       <form>
         <input type="text"  class="fadeIn second"  placeholder="email"  [(ngModel)]="user.email" name="email">
         <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" name="password" [(ngModel)]="user.password">
-        <input type="button" class="fadeIn fourth" value="Log In" (click)="loginUser()">
-     
+        <input type="button" class="fadeIn fourth" value="Entrar" (click)="loginUser()">
       </form>
       <!-- Remind Passowrd -->
       <div id="formFooter" style="display: none;">
         <a class="underlineHover" href="#">Forgot Password?</a>
       </div>
-  
     </div>
   </div>

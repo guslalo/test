@@ -11,7 +11,7 @@ export class GuardsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (sessionStorage.getItem('currentUser')) {
+    if (sessionStorage.getItem('token')) {
       // logged in so return true
       return true;
     }
