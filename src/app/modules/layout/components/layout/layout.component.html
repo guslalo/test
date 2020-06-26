@@ -7,26 +7,28 @@
   
   <div id="page">
     <div id="sideBar">
-        <div class="top">
-            <div class="img">
-                <img src="assets/img/doctor.jpg" >
+        <ng-container *ngIf="user">
+            <div class="top">
+                <div class="img">
+                    <img [src]="user.image">
+                </div>
             </div>
-        </div>
-        <nav class="nav flex-column">
-            <a class="nav-link active" href="#">Inicio</a>
-            <ng-container *ngIf="user === 'medico'">
-                <a class="nav-link" href="#">Mis pacientes</a>
-                <a class="nav-link" href="#">Consultas</a>
-                <a class="nav-link" href="#">Mis datos</a>
-                <a class="nav-link" href="#">Mis disponibilidad</a>
-            </ng-container>
-            <ng-container *ngIf="user === 'paciente'">
-                <a class="nav-link" href="#">Visitas</a>
-                <a class="nav-link" href="#">Mi salud</a>
-                <a class="nav-link" href="#">Mis datos</a>
-            </ng-container>
-            <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
-        </nav>
+            <nav class="nav flex-column">
+                <a class="nav-link active" href="#">Inicio</a>
+                <ng-container *ngIf="user.type === 'medico'">
+                    <a class="nav-link" routerLink="/mis-pacientes">Mis pacientes</a>
+                    <a class="nav-link" routerLink="/ficha-paciente">Consultas</a>
+                    <a class="nav-link" href="javascript:;">Mis datos</a>
+                    <a class="nav-link" href="javascript:;">Mis disponibilidad</a>
+                </ng-container>
+                <ng-container *ngIf="user.type === 'paciente'">
+                    <a class="nav-link" href="javascript:;">Visitas</a>
+                    <a class="nav-link" href="javascript:;">Mi salud</a>
+                    <a class="nav-link" href="javascript:;">Mis datos</a>
+                </ng-container>
+                <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+            </nav>
+        </ng-container>
     </div>
     <div id="content">
         <router-outlet></router-outlet>

@@ -9,12 +9,13 @@ import { MiSaludComponent } from '../pacientes/mi-salud/mi-salud.component';
 import { GuardsGuard} from '../../guards/guards.guard'
 import { ProfesionalGuard } from '../../guards/profesional.guard'
 import { PacienteGuard } from '../../guards/paciente.guard'
+import { FichaPacienteComponent } from './../profesionales/ficha-paciente/ficha-paciente.component';
 
 const routes: Routes = [
   {
     path: 'mis-pacientes',
     component: LayoutComponent,
-    //canActivate: [ProfesionalGuard],
+     canActivate: [GuardsGuard],
     children: [
       { path: '', component:  PacientesComponent }
     ]
@@ -26,7 +27,15 @@ const routes: Routes = [
     children: [
       { path: '', component:  MiSaludComponent }
     ]
-  } 
+  },
+  {
+    path: 'ficha-paciente',
+    component: LayoutComponent,
+    canActivate: [GuardsGuard],
+    children: [
+      { path: '', component:  FichaPacienteComponent }
+    ]
+  }  
 ];
 
 @NgModule({

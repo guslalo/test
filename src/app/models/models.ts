@@ -4,8 +4,18 @@ export class UsersLogin {
 
 // cliente
 export class UserLogin {
+  constructor(
+    public id:number,
+    public type:string,
+    public email:string,
+    public name:string,
+    public image:string
+    ){
+
+  }
+  /*
   id:number;
-  perfil:string;
+  type:string;
   email:string;
-  name: string;
+  name:string;*/
 }

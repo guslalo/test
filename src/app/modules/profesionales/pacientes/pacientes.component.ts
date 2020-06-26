@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../../../models/models';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-pacientes',
@@ -8,11 +9,26 @@ import { UserLogin } from '../../../models/models';
 })
 export class PacientesComponent implements OnInit {
   public UserLogin: UserLogin;
-  constructor() { }
+  public users:any;
+  
+  constructor(public usersService:UsersService) { }
 
   ngOnInit(): void {
+    //this.user = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(this.UserLogin);
+    this.getUsers();
+  }
 
-    console.log(this.UserLogin);
+   //getUsers
+   getUsers(){
+    this.usersService.getusers().subscribe(
+      data => {
+        this.users = data.data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }
