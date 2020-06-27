@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     sessionStorage.clear();
     localStorage.clear();
+    this.spinner.hide();
   }
 
   //subscribe post authentication service
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
         if (sessionStorage.getItem('token')) {
           this.getUsers(this.user);
         }
-        this.spinner.hide();
+       
       },
       error => {
         this.spinner.hide();
@@ -83,6 +84,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
           //this.currentUserService.currentUser  = this.currentUser;
           this.router.navigate(['/mi-salud']);
+          this.spinner.hide();
         }
       },
       error => {

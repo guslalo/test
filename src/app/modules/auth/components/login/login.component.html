@@ -1,20 +1,42 @@
-
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.5)" color="#fff"> <!-- <p style="color: white" > cargando...</p> --> </ngx-spinner>
-<div class="wrapper fadeInDown d-flex align-items-center">
-    <div id="formContent">
-      <!-- logo -->
-      <div class="fadeIn first">
-        <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
-      </div>
-      <!-- Login Form -->
-      <form>
-        <input type="text"  class="fadeIn second"  placeholder="email"  [(ngModel)]="user.email" name="email">
-        <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" name="password" [(ngModel)]="user.password">
-        <input type="button" class="fadeIn fourth" value="Entrar" (click)="loginUser()">
-      </form>
-      <!-- Remind Passowrd -->
-      <div id="formFooter" style="display: none;">
-        <a class="underlineHover" href="#">Forgot Password?</a>
+<div class="container-fluid h-100 d-inline-block" id="login">
+  <div class="row h-100">
+    <div class="col-5 left">
+      <div class="logo h-100">  
+        <div class="fadeIn first w-50 mx-auto text-center">
+          <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+        </div>
       </div>
     </div>
+    <div class="col-7 right">
+      <div class="row vertical-center h-100">
+        <div class="col-6 mx-auto w-50 p-3 text-center align-self-center">
+          <form class="">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="email" [(ngModel)]="user.email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" [(ngModel)]="user.password">
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="text-right"><a href="javascript:," class="text-right">¿Has olvidado tu contraseña?</a></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button type="submit" class="btn btn-outline-primary btn-block">Crear cuenta</button>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-primary btn-block" (click)="loginUser()">Iniciar sesión</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+    </div>
   </div>
+</div>
+
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.5)"  type="line-scale" size="default" color="#fff"> <!-- <p style="color: white" > cargando...</p> --> </ngx-spinner>
