@@ -11,21 +11,21 @@ import { Router } from '@angular/router';
 
 export class AuthenticationService {
 
-    private loginUrl = 'login';
+    private loginUrl = 'v1/account/login';
 
     constructor(
         private http: HttpClient,
         private router: Router) {  }
 
     // post loginUser
-    loginUser(email, password): Observable<any> {
+    loginUser(username, password): Observable<any> {
         /*const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'application': 'CORPORATE'
             })
         };*/
-        return this.http.post<any>( environment.baseUrl + this.loginUrl , { email, password } );
+        return this.http.post<any>( environment.baseUrl + this.loginUrl , { username, password } );
     }
 
     /*

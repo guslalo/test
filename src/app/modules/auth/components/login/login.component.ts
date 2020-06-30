@@ -36,10 +36,11 @@ export class LoginComponent implements OnInit {
   //subscribe post authentication service
   loginUser() {
     this.spinner.show();
-    this.authenticationService.loginUser(this.user.email, this.user.password)
-    .subscribe(
+    this.authenticationService.loginUser(this.user.username, this.user.password)
+    .subscribe( 
       data => {
-        sessionStorage.setItem('token', JSON.stringify(data.token));
+        console.log(data);
+        sessionStorage.setItem('token', JSON.stringify(data.access_token));
         if (sessionStorage.getItem('token')) {
           this.getUsers(this.user);
         }
@@ -57,11 +58,12 @@ export class LoginComponent implements OnInit {
     this.UserService.getusers().subscribe(
       data => {
         console.log(data.data);
-         if(user.email === 'eve.holt@reqres.in'){
+         if(user.username === user.username ){
           let userMedico = data.data.filter( data => data.email === 'eve.holt@reqres.in' );
           this.currentUser = new UserLogin (
             1, 
             'medico', 
+            userMedico[0].username, 
             userMedico[0].email, 
             userMedico[0].first_name,
             userMedico[0].avatar
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit {
           this.currentUser = new UserLogin (
             2, 
             'paciente', 
+            userPaciente[0].email, 
             userPaciente[0].email, 
             userPaciente[0].first_name,
             userPaciente[0].avatar
