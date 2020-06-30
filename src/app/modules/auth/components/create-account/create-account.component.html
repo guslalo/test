@@ -1,1 +1,179 @@
-<p>create-account works!</p>
+<div class="container-fluid h-100 d-inline-block" id="login">
+    <div class="row h-100">
+      <div class="col-12 col-md-5 left d-none d-md-block">
+        <div class="logo h-100">  
+          <div class="fadeIn first w-50 mx-auto text-center">
+            <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-7  right">
+        <div class="row vertical-center h-100">
+          <div class="col-12 col-md-8 col-lg-7 mx-auto p-3  align-self-center">
+            <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+            <h2>Crear cuenta</h2>
+            <p>A continuación Ingrese sus datos para completar su registro.</p>
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate="" class="">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="nombre">Nombres *</label>
+                  <input 
+                  
+                    type="text" 
+                    name="nombre" 
+                    id="nombre" 
+                    [ngClass]="{'is-invalid': !form.get('nombre').valid}"
+                    class="form-control" placeholder="" 
+                    formControlName="nombre"
+                  >
+                  <div *ngIf="form.controls['nombre'].errors?.required" class="invalid-feedback">
+                    nombre es necesario
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="apellidos">Apellidos *</label>
+                  <input 
+                    [ngClass]="{'is-invalid': !form.get('apellidos').valid}"
+                    formControlName="apellidos"
+                    type="text" name="apellidos" 
+                    id="apellidos" class="form-control" placeholder=""
+                  >
+                  <div *ngIf="form.controls['apellidos'].errors?.required" class="invalid-feedback">
+                    apellido es necesario
+                  </div>
+                </div>
+              </div>
+              <!--<strong>{{form.value.apellidos}} </strong>-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="rut">Documento de identidad *</label>
+                    <input type="text" name="rut" id="rut" 
+                    class="form-control" placeholder="Ej: xxxxxxx-x"
+                    [ngClass]="{'is-invalid': !form.get('apellidos').valid}"
+                    formControlName="rut"
+                    >
+                  </div>
+                  <div class="form-group col">
+                    <label for="edad">Edad *</label>
+                    <input name="edad" name="edad" id="edad" type="text" class="form-control" placeholder=""
+                    [ngClass]="{'is-invalid': !form.get('edad').valid}"
+                    formControlName="edad"
+                    >
+                    <div *ngIf="form.controls['edad'].errors?.required" class="invalid-feedback">
+                      edad es necesario
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" 
+                        class="form-control" placeholder="ejemplo@ejemplo.cl"
+                        [ngClass]="{'is-invalid': !form.get('email').valid}"
+                        formControlName="email"
+                        >
+                    </div>
+                    <div *ngIf="form.controls['email'].errors?.required" class="invalid-feedback">
+                      email erroneo
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="newPassword">Genera una clave *</label>
+                    <input type="password" name="password" id="password" class="form-control" formControlName="password"
+                    [ngClass]="{'is-invalid': !form.get('password').valid}"
+                    formControlName="password"
+                    maxlength="20"
+                    >
+                    <div *ngIf="form.controls['password'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>* Al menos una mayúscula</li>
+                        <li>* Al menos un número</li>
+                        <li>* un largo mínimo de 8</li>
+                      </ul>
+                    </div>
+                    <password-strength-meter [password]="form.value.password"></password-strength-meter>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="confirmPasword">Repetir clave *</label>
+                    <input 
+                      type="password" name="confirmPasword" id="confirmPasword" 
+                      class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !form.get('confirmPasword').valid}"
+                      formControlName="confirmPasword"
+                      maxlength="20"
+                    >
+                    <div *ngIf="form.controls['confirmPasword'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>* Al menos una mayúscula</li>
+                        <li>* Al menos un número</li>
+                        <li>* un largo mínimo de 8</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col">
+                  <div class="alert alert-warning" role="alert">
+                    <div class="row">
+                      <div class="col-2 text-center">
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
+                        </svg>
+                      </div>
+                      <div class="col-10 pl-0">
+                        Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga  Mayusculas y minisculas. 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <button 
+                  [disabled]="!form.valid"
+                  type="submit" class="btn btn-primary btn-block"  
+                  data-toggle="modal" data-target="#exampleModal"
+                  >Crear cuenta</button>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-12 mt-3">
+                <a href="javascript:history.back()" class="text-right"> < Volver </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut tellus sed sapien semper egestas et in nibh. Duis cursus ipsum sagittis, laoreet velit in, rhoncus tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ur ornare. Pellentesque maximus erat ex, non pulvinar sapien fermentum ut. Vestibulum fringilla ac urna at sagittis. Nullam tincidunt tellus quis aliquet sollicitudin. Nulla eget fermentum urna.
+          Aenean sit amet orci posuere, pellentesque risus ut, blandit risus. Nulla molestie pharetra orci, ut ornare massa porttitor non. Suspendisse per. In hac habitasse platea dictumst. Cras consectetur luctus nibh, nec bibendum justo facilisamet neque vel nisl iaculis porttitor. Integer purus ante, interdum sollicitudin nibh faucibus, sollicitudin porta lorem.   
+          Maecenas quis nulla mattis justo laoreet viverra. Duis vitae lectus nec nulla viverra congue in sit amet quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu laoreet velit. In ac orci eget ort. Suspendisse potenti. Etiam ac rutrum nisl. Maecenas sed neque ex. Morbi vitae nulla ut augue suscipit elementum.
+          Quisque nulla arcu, mattis ut vehicula at, laoreet et est. Quisque lobortis laoreet odio at pretium. In hac habitasse platea dictumst. Nulla aliquet, dolor non condimentum aliquam, diam nibh scelerisque est, et sagittis sem eros eleifend erat. Quisque iaculis faucibus eros non malesuada. Sed tellus quam, egestas nec leo in, hendrerit euismod sem. Curabitur aliquet tellus sed ante lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Rechazar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCuenta()">Aceptar y crear cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.5)"  type="line-scale" size="default" color="#fff"> <!-- <p style="color: white" > cargando...</p> --> </ngx-spinner>
+  
