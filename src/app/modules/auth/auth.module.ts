@@ -21,6 +21,7 @@ import { BlockedAccountComponent } from './components/blocked-account/blocked-ac
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { SharedModule } from './../../shared/shared.module'
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     NgxSpinnerModule,
     PasswordStrengthMeterModule,
-    HttpClientModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
