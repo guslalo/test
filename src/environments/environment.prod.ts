@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl:'https://reqres.in/api/',
+  baseUrl:'https://backend-itms.azurewebsites.net/api/',
   client:'itms',
   apiKey: '',
   clientSecret: ''
