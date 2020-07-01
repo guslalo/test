@@ -17,6 +17,12 @@ import { RecoveryComponent } from './components/recovery/recovery.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 
+//Translation
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -31,7 +37,17 @@ import { BlockedAccountComponent } from './components/blocked-account/blocked-ac
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    })
   ],
   exports:[
   ],

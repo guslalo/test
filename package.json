@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "angular-password-strength-meter": "^2.0.0",
     "bootstrap": "^4.4.0",
     "jquery": "^3.5.1",

@@ -11,6 +11,13 @@
       <div class="row vertical-center h-100">
         <div class="col-12 col-sm-6 col-md-7 col-lg-5 mx-auto w-50 p-3 text-center align-self-center">
           <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+          <div class="contenedor">
+            <h1>{{ 'login.title' | translate }}</h1>
+            <div class="contenedor-botones">
+              <button [ngClass]="{'active': activeLang == 'es'}" (click)="cambiarLenguaje('es')">Español</button>
+              <button [ngClass]="{'active': activeLang == 'en'}" (click)="cambiarLenguaje('en')">Inglés</button>
+            </div>
+          </div>
           <form class="">
             <div class="form-group">
               <input type="username" class="form-control" id="username" name="username" placeholder="username" [(ngModel)]="user.username">

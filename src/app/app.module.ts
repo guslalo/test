@@ -10,6 +10,11 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { ProfesionalesModule } from './modules/profesionales/profesionales.module';
 
+//Translation
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 //routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,7 +32,17 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     NgbModule,
     AuthModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

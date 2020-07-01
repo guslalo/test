@@ -6,6 +6,8 @@ import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserLogin } from '../../../../models/models';
 
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-login',
@@ -19,13 +21,22 @@ export class LoginComponent implements OnInit {
   public user: any = { };
   public users: any = [ ];
   public currentUser:any = { };
+  public activeLang = 'es';
 
   constructor(
+    private translate: TranslateService,
     private spinner: NgxSpinnerService, 
     private authenticationService:AuthenticationService,
     public currentUserService:CurrentUserService,
     private UserService:UsersService, 
-    private router: Router) { }
+    private router: Router) {
+      this.translate.setDefaultLang(this.activeLang);
+     }
+
+    public cambiarLenguaje(lang) {
+      this.activeLang = lang;
+      this.translate.use(lang);
+    }
 
   ngOnInit(): void {
     sessionStorage.clear();
