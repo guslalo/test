@@ -9,143 +9,388 @@
       </div>
       <div class="col-12 col-md-7  right">
         <div class="row vertical-center h-100">
-          <div class="col-12 col-md-8 col-lg-7 mx-auto p-3  align-self-center">
+          <div class="col-12 col-md-9 col-lg-8 mx-auto p-3  align-self-center">
             <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
-            <h2>Crear cuenta</h2>
-            <p>A continuación Ingrese sus datos para completar su registro.</p>
-            <form [formGroup]="form" (ngSubmit)="submit()" novalidate="" class="">
-              <div class="form-row">
-                <div class="form-group col">
-                  <label for="nombre">Nombres *</label>
-                  <input 
-                  
-                    type="text" 
-                    name="nombre" 
-                    id="nombre" 
-                    [ngClass]="{'is-invalid': !form.get('nombre').valid}"
-                    class="form-control" placeholder="" 
-                    formControlName="nombre"
-                  >
-                  <div *ngIf="form.controls['nombre'].errors?.required" class="invalid-feedback">
-                    nombre es necesario
-                  </div>
-                </div>
-                <div class="col">
-                  <label for="apellidos">Apellidos *</label>
-                  <input 
-                    [ngClass]="{'is-invalid': !form.get('apellidos').valid}"
-                    formControlName="apellidos"
-                    type="text" name="apellidos" 
-                    id="apellidos" class="form-control" placeholder=""
-                  >
-                  <div *ngIf="form.controls['apellidos'].errors?.required" class="invalid-feedback">
-                    apellido es necesario
-                  </div>
-                </div>
-              </div>
-              <!--<strong>{{form.value.apellidos}} </strong>-->
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="rut">Documento de identidad *</label>
-                    <input type="text" name="rut" id="rut" 
-                    class="form-control" placeholder="Ej: xxxxxxx-x"
-                    [ngClass]="{'is-invalid': !form.get('apellidos').valid}"
-                    formControlName="rut"
-                    >
-                  </div>
-                  <div class="form-group col">
-                    <label for="edad">Edad *</label>
-                    <input name="edad" name="edad" id="edad" type="text" class="form-control" placeholder=""
-                    [ngClass]="{'is-invalid': !form.get('edad').valid}"
-                    formControlName="edad"
-                    >
-                    <div *ngIf="form.controls['edad'].errors?.required" class="invalid-feedback">
-                      edad es necesario
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" 
-                        class="form-control" placeholder="ejemplo@ejemplo.cl"
-                        [ngClass]="{'is-invalid': !form.get('email').valid}"
-                        formControlName="email"
-                        >
-                    </div>
-                    <div *ngIf="form.controls['email'].errors?.required" class="invalid-feedback">
-                      email erroneo
-                    </div>
-                </div>
-                <hr>
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="newPassword">Genera una clave *</label>
-                    <input type="password" name="password" id="password" class="form-control" formControlName="password"
-                    [ngClass]="{'is-invalid': !form.get('password').valid}"
-                    formControlName="password"
-                    maxlength="20"
-                    >
-                    <div *ngIf="form.controls['password'].errors?.pattern" class="invalid-feedback">
-                      <ul>
-                        <li>* Al menos una mayúscula</li>
-                        <li>* Al menos un número</li>
-                        <li>* un largo mínimo de 8</li>
-                      </ul>
-                    </div>
-                    <password-strength-meter [password]="form.value.password"></password-strength-meter>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="confirmPasword">Repetir clave *</label>
-                    <input 
-                      type="password" name="confirmPasword" id="confirmPasword" 
-                      class="form-control" placeholder=""
-                      [ngClass]="{'is-invalid': !form.get('confirmPasword').valid}"
-                      formControlName="confirmPasword"
-                      maxlength="20"
-                    >
-                    <div *ngIf="form.controls['confirmPasword'].errors?.pattern" class="invalid-feedback">
-                      <ul>
-                        <li>* Al menos una mayúscula</li>
-                        <li>* Al menos un número</li>
-                        <li>* un largo mínimo de 8</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              <div class="row">
-                <div class="col">
-                  <div class="alert alert-warning" role="alert">
-                    <div class="row">
-                      <div class="col-2 text-center">
-                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
-                        </svg>
-                      </div>
-                      <div class="col-10 pl-0">
-                        Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga  Mayusculas y minisculas. 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 col-md-12">
-                  <button 
-                  [disabled]="!form.valid"
-                  type="submit" class="btn btn-primary btn-block"  
-                  data-toggle="modal" data-target="#exampleModal"
-                  >Crear cuenta</button>
-                </div>
-              </div>
-            </form>
             <div class="row">
-              <div class="col-12 mt-3">
-                <a href="javascript:history.back()" class="text-right"> < Volver </a>
+              <div class="col ">
+                <h2>{{'crear-cuenta.title' | transloco }}</h2> 
+              </div>
+           
+              <div class="col">
+                <a href="javascript:history.back()" class="float-right volver"> < Volver </a>
               </div>
             </div>
+            <p>{{'crear-cuenta.ingrese' | transloco }}</p>
+            <mat-vertical-stepper linear #stepper>
+              <!-- paso 1-->      
+              <mat-step [stepControl]="formUno"> 
+                <form [formGroup]="formUno" (ngSubmit)="submit()" novalidate="" class="">
+                  <ng-template matStepLabel>
+                    <h4>{{'crear-cuenta.step1.subtitle' | transloco }}</h4>
+                  </ng-template>
+                  <!--row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="nombre">Nombres *</label>
+                      <input   
+                        type="text" 
+                        name="nombre" 
+                        id="nombre"
+                        class="form-control" 
+                        placeholder="" 
+                        [ngClass]="{'is-invalid': !formUno.get('nombre').valid && 
+                        formUno.get('nombre').touched}"
+                        formControlName="nombre"
+                      >
+                      <div *ngIf="formUno.controls['nombre'].errors?.required" class="invalid-feedback">
+                        nombre es necesario
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label for="apellidos">Apellidos *</label>
+                      <input 
+                        [ngClass]="{'is-invalid': !formUno.get('apellidos').valid && 
+                        formUno.get('apellidos').touched} "
+                        formControlName="apellidos"
+                        type="text" name="apellidos" 
+                        id="apellidos" class="form-control" placeholder=""
+                      >
+                      <div *ngIf="formUno.controls['apellidos'].errors?.required" class="invalid-feedback">
+                        apellido es necesario
+                      </div>
+                    </div>
+                  </div><!--/row-->
+                  <!--row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="razonSocial">Razón social *</label>
+                      <input   
+                        type="text" 
+                        name="razonSocial" 
+                        id="razonSocial"
+                        class="form-control" 
+                        placeholder="" 
+                        [ngClass]="{'is-invalid': !formUno.get('razonSocial').valid && 
+                        formUno.get('razonSocial').touched}"
+                        formControlName="razonSocial"
+                      >
+                      <div *ngIf="formUno.controls['razonSocial'].errors?.required" class="invalid-feedback">
+                        Razón social necesario
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label for="sexo">Sexo *</label>
+                      <select 
+                      formControlName="sexo" name="sexo" 
+                      id="sexo" class="form-control" placeholder=""
+                      class="form-control" id="sexo"
+                      [ngClass]="{'is-invalid': !formUno.get('sexo').valid && 
+                      formUno.get('sexo').touched} "
+                      >
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                      </select>
+                      <div *ngIf="formUno.controls['sexo'].errors?.required" class="invalid-feedback">
+                        indique su sexo
+                      </div>
+                    </div>
+                  </div><!--/row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" id="email" 
+                      class="form-control" placeholder="ejemplo@ejemplo.cl"
+                      [ngClass]="{'is-invalid': !formUno.get('email').valid && 
+                      formUno.get('email').touched}"
+                      formControlName="email"
+                      >
+                      <div *ngIf="formUno.controls['email'].errors?.required" class="invalid-feedback">
+                        email erroneo
+                      </div>
+                    </div>
+                    
+                    <div class="form-group col">
+                      <label for="telefono">Teléfono *</label>
+                      <input name="telefono" name="telefono" id="telefono" type="text" class="form-control" placeholder=""
+                        [ngClass]="{'is-invalid': !formUno.get('telefono').valid && 
+                        formUno.get('telefono').touched }"
+                        formControlName="telefono"
+                      >
+                      <div *ngIf="formUno.controls['telefono'].errors?.required" class="invalid-feedback">
+                        telefono es necesario
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-light" matStepperNext  [disabled]="!formUno.valid">Siguente</button>
+                  </div>          
+                </form>
+              </mat-step><!-- /paso 1--> 
+              <!-- paso 2--> 
+              <mat-step [stepControl]="formDos">
+                <form [formGroup]="formDos">
+                  <ng-template matStepLabel>
+                    <h4>{{'crear-cuenta.step2.subtitle' | transloco }}</h4>
+                  </ng-template>
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="nacimiento">Fecha de nacimiento *</label>
+                      <div class="input-group">
+                        <input class="form-control"
+                          id="nacimiento" 
+                          placeholder="yyyy-mm-dd"
+                          name="nacimiento" 
+                          [(ngModel)]="model" 
+                          [minDate]="{year: 1940, month: 1, day: 1}"
+                          ngbDatepicker #d="ngbDatepicker"
+                          formControlName="nacimiento"
+                          [ngClass]="{'is-invalid': !formDos.get('nacimiento').valid && 
+                          formDos.get('nacimiento').touched}"
+                          (click)="d.toggle()"
+                        >
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                        </div>
+                      </div>
+                      <div *ngIf="formDos.controls['nacimiento'].errors?.required" class="invalid-feedback">
+                        email erroneo
+                      </div>
+                    </div>
+                    <div class="form-group col">
+                      <label for="nacimiento">UF de nacimiento *</label>
+                      <input type="ufNacimiento" name="ufNacimiento" id="ufNacimiento" 
+                      class="form-control" placeholder="ejemplo@ejemplo.cl"
+                      [ngClass]="{'is-invalid': !formDos.get('ufNacimiento').valid && 
+                      formDos.get('ufNacimiento').touched}"
+                      formControlName="ufNacimiento"
+                      >
+                      <div *ngIf="formDos.controls['ufNacimiento'].errors?.required" class="invalid-feedback">
+                        email erroneo
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="municipio">Municipio de nacimiento *</label>
+                      <input type="text" name="municipio" id="municipio" class="form-control" formControlName="municipio"
+                      [ngClass]="{'is-invalid': !formDos.get('municipio').valid && 
+                      formDos.get('municipio').touched}"
+                      formControlName="municipio"
+                      maxlength="20"
+                      >
+                      <div *ngIf="formDos.controls['municipio'].errors?.pattern" class="invalid-feedback">
+                        error
+                      </div>
+                    </div>
+                    <div class="form-group col">
+                      <label for="confirmPasword">Nacionalidad *</label>
+                      <input 
+                        type="text" name="nacionalidad" id="nacionalidad" class="form-control" placeholder=""
+                        [ngClass]="{'is-invalid': !formDos.get('nacionalidad').valid && 
+                        formDos.get('nacionalidad').touched && formDos.get('nacionalidad') != formDos.get('nacionalidad')}"
+                        formControlName="nacionalidad"
+                        maxlength="20"
+                      >                    
+                      <div *ngIf="formDos.errors?.passwordNotMatch" class="invalid-feedback">
+                        pass erroneo
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <button type="button" class="btn btn-light float-right" (click)="mostrarForm(formDos)" [disabled]="!formDos.valid" matStepperNext>Siguente</button>
+                    </div>
+                  </div> 
+                </form>
+              </mat-step><!-- /paso 2--> 
+
+              <!--paso 3-->
+              <mat-step [stepControl]="formTres">
+                <form [formGroup]="formTres">
+                  <ng-template matStepLabel><h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4></ng-template>
+                  <!--row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="cep">CEP *</label>
+                      <input   
+                        type="text" 
+                        name="cep" 
+                        id="cep"
+                        class="form-control" 
+                        placeholder="" 
+                        [ngClass]="{'is-invalid': !formTres.get('cep').valid && 
+                        formTres.get('cep').touched}"
+                        formControlName="cep"
+                      >
+                      <div *ngIf="formTres.controls['cep'].errors?.required" class="invalid-feedback">
+                        CEP es necesario
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label for="uf">UF *</label>
+                      <input 
+                        [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
+                        formTres.get('uf').touched} "
+                        formControlName="uf"
+                        type="text" name="uf" 
+                        id="uf" class="form-control" placeholder=""
+                      >
+                      <div *ngIf="formTres.controls['uf'].errors?.required" class="invalid-feedback">
+                        UF es necesario
+                      </div>
+                    </div>
+                  </div><!--/row-->
+                  <!--row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="ciudad">Ciudad *</label>
+                      <input   
+                        type="text" 
+                        name="ciudad" 
+                        id="ciudad"
+                        class="form-control" 
+                        placeholder="" 
+                        [ngClass]="{'is-invalid': !formTres.get('ciudad').valid && 
+                        formTres.get('ciudad').touched}"
+                        formControlName="ciudad"
+                      >
+                      <div *ngIf="formTres.controls['ciudad'].errors?.required" class="invalid-feedback">
+                        ciudad necesario
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label for="barrio">Barrio *</label>
+                      <input   
+                        type="text" 
+                        name="barrio" 
+                        id="barrio"
+                        class="form-control" 
+                        placeholder="" 
+                        [ngClass]="{'is-invalid': !formTres.get('barrio').valid && 
+                        formTres.get('barrio').touched}"
+                        formControlName="barrio"
+                      >
+                      <div *ngIf="formTres.controls['barrio'].errors?.required" class="invalid-feedback">
+                        Barrio es necesario
+                      </div>
+                    </div>
+                  </div><!--/row-->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="calle">Calle</label>
+                      <input type="text" name="calle" id="calle" 
+                      class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !formTres.get('calle').valid && 
+                      formTres.get('calle').touched}"
+                      formControlName="calle"
+                      >
+                      <div *ngIf="formTres.controls['calle'].errors?.required" class="invalid-feedback">
+                        calle es necesario
+                      </div>
+                    </div>
+                    
+                    <div class="form-group col">
+                      <label for="numero">Número *</label>
+                      <input name="numero" name="numero" id="numero" type="text" class="form-control" placeholder=""
+                        [ngClass]="{'is-invalid': !formTres.get('numero').valid && 
+                        formTres.get('numero').touched }"
+                        formControlName="numero"
+                      >
+                      <div *ngIf="formTres.controls['numero'].errors?.required" class="invalid-feedback">
+                        número es necesario
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <button type="button" class="btn btn-light float-right" matStepperNext [disabled]="!formTres.valid">Siguente</button>
+                    </div>
+                  </div>
+                </form>
+              </mat-step><!--/paso 3-->
+               <!--paso 4-->
+              <mat-step [stepControl]="formCuatro"> 
+                <form [formGroup]="formCuatro">
+                  <ng-template matStepLabel><h4>{{'crear-cuenta.step4.subtitle' | transloco }}</h4></ng-template>
+                   <!--row-->
+                   <div class="form-row">
+                    <div class="form-group col">
+                      <label for="password">Genera una clave *</label>
+                      <input type="password" name="password" 
+                      id="password" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': !formCuatro.get('password').valid && 
+                      formCuatro.get('password').touched}"
+                      formControlName="password"
+                      maxlength="20"
+                      >
+                      <div *ngIf="formCuatro.controls['password'].errors?.pattern" class="invalid-feedback">
+                        <ul>
+                          <li>* Al menos una mayúscula</li>
+                          <li>* Al menos una minúscula</li>
+                          <li>* Al menos un número</li>
+                          <li>* un largo mínimo de 8 carácteres</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="form-group col">
+                      <label for="confirmPasword">Repetir clave *</label>
+                      <input 
+                        type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder=""
+                        [ngClass]="{'is-invalid': !formCuatro.get('confirmPassword').valid && 
+                        formCuatro.get('confirmPassword').touched && formCuatro.get('confirmPassword') != formCuatro.get('password')}"
+                        formControlName="confirmPassword"
+                        maxlength="20"
+                      >
+                      <div *ngIf="formCuatro.errors?.passwordNotMatch" class="invalid-feedback">
+                        pass erroneo
+                      </div>
+                    </div>
+                  </div>
+                  <password-strength-meter [password]="formCuatro.value.password"></password-strength-meter>
+                  <div class="row">
+                    <div class="col">
+                      <div class="alert alert-warning" role="alert">
+                        <div class="row">
+                          <div class="col-2 text-center">
+                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
+                            </svg>
+                          </div>
+                          <div class="col-10 pl-0">
+                            Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga una Mayusculas y minisculas. 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
+                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                    </div> 
+                    <div class="col-12 col-md-6">
+                      <button 
+                      (click)="submit()"
+                      [disabled]="!formCuatro.valid"
+                      type="submit" class="btn btn-primary float-right"  
+                      data-toggle="modal" data-target="#exampleModal"
+                      >Siguiente</button>
+                    </div>
+                  </div>
+                <!--/row-->
+                </form>   
+              </mat-step><!--/paso 4-->
+            </mat-vertical-stepper>
+          
+           
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserLogin } from '../../../../models/models';
 
-import { TranslateService } from '@ngx-translate/core';
+//translate
+import { TranslocoService } from '@ngneat/transloco';
 
 
 @Component({
@@ -21,27 +22,23 @@ export class LoginComponent implements OnInit {
   public user: any = { };
   public users: any = [ ];
   public currentUser:any = { };
-  public activeLang = 'es';
 
   constructor(
-    private translate: TranslateService,
+    private translocoService: TranslocoService,
     private spinner: NgxSpinnerService, 
     private authenticationService:AuthenticationService,
     public currentUserService:CurrentUserService,
     private UserService:UsersService, 
-    private router: Router) {
-      this.translate.setDefaultLang(this.activeLang);
-     }
-
-    public cambiarLenguaje(lang) {
-      this.activeLang = lang;
-      this.translate.use(lang);
-    }
+    private router: Router) { }
 
   ngOnInit(): void {
     sessionStorage.clear();
     localStorage.clear();
     this.spinner.hide();
+  
+  }
+  setActiveLang(lang: string) {
+    this.translocoService.setActiveLang(lang);
   }
 
   //subscribe post authentication service
@@ -68,8 +65,9 @@ export class LoginComponent implements OnInit {
   getUsers(user){
     this.UserService.getusers().subscribe(
       data => {
+        console.log(user.username);
         console.log(data.data);
-         if(user.username === user.username ){
+         if(user.username === 'eve.holt@reqres.in'){
           let userMedico = data.data.filter( data => data.email === 'eve.holt@reqres.in' );
           this.currentUser = new UserLogin (
             1, 
@@ -84,12 +82,12 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/mis-pacientes']);
       
         } else {
-          let userPaciente = data.data.filter( data => data.email === user.email ); 
+          let userPaciente = data.data.filter( data => data.email === 'eve.holt@reqres.in' ); 
           //this.currentUserService.currentUser  = userPaciente;
           this.currentUser = new UserLogin (
             2, 
             'paciente', 
-            userPaciente[0].email, 
+            userPaciente[0].username, 
             userPaciente[0].email, 
             userPaciente[0].first_name,
             userPaciente[0].avatar
@@ -97,7 +95,7 @@ export class LoginComponent implements OnInit {
           console.log(this.currentUser);
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
           //this.currentUserService.currentUser  = this.currentUser;
-          this.router.navigate(['/mi-salud']);
+          this.router.navigate(['/app']);
           this.spinner.hide();
         }
       },
@@ -107,24 +105,5 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  /*
-  login() {
-    if(this.user.name === 'miguel') {
-      sessionStorage.setItem('user','medico');
-      console.log('es medico redirgo a pagina medico');
-      this.router.navigate(['mis-pacientes']);
-    } else {
-      
-      console.log('no registrado');
-    }
-
-    if(this.user.name === 'paciente') {
-      sessionStorage.setItem('user','paciente');
-      console.log('es medico redirgo a pagina paciente');
-      this.router.navigate(['mi-salud']);
-    } 
-    
-   
-  }*/
 
 }

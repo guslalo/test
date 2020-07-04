@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 //modules
 import { LayoutComponent } from './components/layout/layout.component';
 import { ProfesionalesModule } from '../profesionales/profesionales.module';
+import { PacientesModule } from '../pacientes/pacientes.module';
 
 //routing
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -15,7 +16,8 @@ import { LayoutRoutingModule } from './layout-routing.module';
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    ProfesionalesModule
+    ProfesionalesModule,
+    PacientesModule
   ]
 })
 export class LayoutModule { }

@@ -2,5 +2,22 @@
   "principal.texto" : "Lista de frutas",
   "login" : {
     "title": "Iniciar sessión"
+  },
+  "crear-cuenta" : {
+    "title": "Crear cuenta",
+    "ingrese": "A continuación Ingrese sus datos para completar su registro.",
+    "step1": {
+      "subtitle":"Datos personales"
+    },
+    "step2": {
+      "subtitle":"Datos de nacimiento"
+    },
+    "step3": {
+      "subtitle":"Dirección"
+    },
+    "step4": {
+      "subtitle":"Generación contraseña"
+    }
   }
+  
 }

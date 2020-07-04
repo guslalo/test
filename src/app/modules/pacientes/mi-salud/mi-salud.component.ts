@@ -10,6 +10,7 @@ export class MiSaludComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -8,15 +8,15 @@
       </div>
     </div>
     <div class="col-12 col-md-7 right">
+      <ul class="globallanguage">
+        <li id="en" (click)="setActiveLang('en')"><a href="javascript:;">en</a></li>
+        <li id="es" (click)="setActiveLang('es')"><a href="javascript:;">es</a></li>
+      </ul>
       <div class="row vertical-center h-100">
         <div class="col-12 col-sm-6 col-md-7 col-lg-5 mx-auto w-50 p-3 text-center align-self-center">
           <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
           <div class="contenedor">
-            <h1>{{ 'login.title' | translate }}</h1>
-            <div class="contenedor-botones">
-              <button [ngClass]="{'active': activeLang == 'es'}" (click)="cambiarLenguaje('es')">Español</button>
-              <button [ngClass]="{'active': activeLang == 'en'}" (click)="cambiarLenguaje('en')">Inglés</button>
-            </div>
+            <h3>{{ 'login.title' | transloco }}</h3>
           </div>
           <form class="">
             <div class="form-group">

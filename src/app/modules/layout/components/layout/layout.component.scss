@@ -10,7 +10,7 @@ html {
   }
   
   #header {
-    height: 30px;
+    height:80px;
     display: flex;
     align-items: center;
     background: linear-gradient(#444444, #333333);
@@ -29,14 +29,26 @@ html {
    
     /* calculate the height. Header is 30px */
   }
-  
+  .nav {
+    a {
+      color: #ffffff;
+      padding: 1rem 2rem;
+      &:hover{
+        background: rgba($color: #000000, $alpha: 0.2);
+      }
+    }
+  }
   #sideBar {
-    background-color: rgb(251, 251, 251);
+    background-color:#636363;
     min-height: 100%;
     width: 20%;
     max-width: 250px;
     min-width:200px;
-    border-right:6px solid #012a62;
+    //border-right:6px solid #012a62;
+    .topSidebar {
+      height: 80px;
+      background:#444444;
+    }
     .top {
         text-align: center;
         .img {
@@ -53,6 +65,19 @@ html {
         }
     }
   }
+
+  .imguser {
+    display: inline-block;
+    width:45px;
+    height:45px;
+    border:3px solid #f5f4f3;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 5px 0px 5px 0px;
+    img {
+      width: 100%;
+    }
+}
   
   #content {
     //background: blue;

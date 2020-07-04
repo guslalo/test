@@ -18,10 +18,11 @@ import { CreateAccountComponent } from './components/create-account/create-accou
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 
 //Translation
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
-import { SharedModule } from './../../shared/shared.module'
+import { SharedModule } from './../../shared/shared.module';
+
+import  {MatStepperModule } from '@angular/material/stepper';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -39,16 +40,10 @@ import { SharedModule } from './../../shared/shared.module'
     FormsModule,
     NgxSpinnerModule,
     PasswordStrengthMeterModule,
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http);
-        },
-        deps: [ HttpClient ]
-      }
-    })
+    SharedModule.forRoot(),
+    NgbDatepickerModule,
+    MatStepperModule
+  
   ],
   exports:[
   ],

@@ -1,37 +1,83 @@
 <div class="container-fluid p-0">
-<div id="header">
-    <div id="headerContent">
-      Itms teleconsulta
-    </div>
-  </div>
-  
   <div id="page">
     <div id="sideBar">
+        <div class="topSidebar">
+            <div class="fadeIn first w-50 mx-auto text-center">
+                <img src="assets/img/logo.png" id="icon" alt="itms" class="img-fluid"/>
+            </div>
+        </div>
         <ng-container *ngIf="user">
-            <div class="top">
+            <div class="top" style="display: none;">
                 <div class="img">
                     <img [src]="user.image">
                 </div>
             </div>
-            <nav class="nav flex-column">
-                <a class="nav-link active" href="#">Inicio</a>
+            <nav class="nav flex-column mt-4">
+                <a class="nav-link active" routerLink="/app">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                      </svg>
+                    Inicio
+                </a>
                 <ng-container *ngIf="user.type === 'medico'">
                     <a class="nav-link" routerLink="/mis-pacientes">Mis pacientes</a>
                     <a class="nav-link" routerLink="/ficha-paciente">Ficha paciente</a>
                     <a class="nav-link" href="javascript:;">Mis datos</a>
                     <a class="nav-link" href="javascript:;">Mis disponibilidad</a>
                 </ng-container>
+
+                <!--menu paciente-->
                 <ng-container *ngIf="user.type === 'paciente'">
-                    <a class="nav-link" href="javascript:;">Visitas</a>
-                    <a class="nav-link" href="javascript:;">Mi salud</a>
-                    <a class="nav-link" href="javascript:;">Mis datos</a>
+                    <a class="nav-link" href="javascript:;">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                          </svg>
+                        Mi salud
+                    </a>
+                    <a class="nav-link" routerLink="mis-consultas">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmarks" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7 13l5 3V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10.234z"/>
+                            <path d="M14 14l-1-.6V2a1 1 0 0 0-1-1H4.268A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v12z"/>
+                        </svg>
+                        Mis consultas
+                    </a>
                 </ng-container>
                 <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
             </nav>
         </ng-container>
     </div>
     <div id="content">
-        <router-outlet></router-outlet>
+        <div id="header"> 
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col"><p style="display: none;">Itms teleconsulta</p></div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-7 align-self-center">
+                            <button type="button" class=" btn btn-outline-light rounded-pill float-right">Agendamento de cita</button>
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col align-self-center">
+                                    <p class="align-middle m-0 text-right">Olá, Guilherme!</p>
+                                </div>
+                                
+                                <div class="col-3">
+                                    <div class="imguser">
+                                        <img [src]="user.image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    <router-outlet></router-outlet>
     </div>
   </div>
 

@@ -14,8 +14,41 @@
 }
 
 @media screen and (max-width: 767px) {
+  .globallanguage {
+    right: 5px;
+    top: 10px;
+  }
   #login {
     background:#f8f9fa;
+  }
+}
+
+.globallanguage {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  &:first-child {
+    &::after {
+      color:#c3c3c3;
+      content: "|";
+      position: relative;
+      right:39px;
+    }
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+    &:first-child {
+      //padding: 0px 0px 0px 10px;
+    }
+    a {
+      color:#c3c3c3;
+      display: block;
+      padding: 0px 10px 0px 10px;
+      &:last-child {
+        //padding: 0px 0px 0px 10px;
+      }
+    }
   }
 }
 

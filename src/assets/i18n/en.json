@@ -2,6 +2,22 @@
   "principal.texto" : "List of fruits",
   "login" : {
     "title": "Log in"
+  },
+  "crear-cuenta" : {
+    "title": "Create Account",
+    "ingrese": "Enter your details to complete registration.",
+    "step1": {
+      "subtitle":"Personal information"
+    },
+    "step2": {
+      "subtitle":"Birth data"
+    },
+    "step3": {
+      "subtitle":"Adress"
+    },
+    "step4": {
+      "subtitle":"Password"
+    }
   }
   
 }

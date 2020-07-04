@@ -10,16 +10,13 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { ProfesionalesModule } from './modules/profesionales/profesionales.module';
 
-//Translation
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 //routing
 import { AppRoutingModule } from './app-routing.module';
 
 //components
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -34,15 +31,7 @@ import { AppComponent } from './app.component';
     AuthModule,
     LayoutModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http);
-        },
-        deps: [ HttpClient ]
-      }
-    })
+    TranslocoRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]
