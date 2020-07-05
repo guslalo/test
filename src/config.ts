@@ -5,9 +5,9 @@ export default {
   // OR, if you have not set up a web server that runs the learning-opentok-php code,
   // set these values to OpenTok API key, a valid session ID, and a token for the session.
   // For test purposes, you can obtain these from https://tokbox.com/account.
-  API_KEY: '46621542',
-  SESSION_ID: '1_MX40NjYyMTU0Mn5-MTU5Mzk3NjI0NzQ5NX41T1dLeGRkbUlzQ0FYY25JQm80anUzbHh-fg',
-  TOKEN: 'T1==cGFydG5lcl9pZD00NjYyMTU0MiZzaWc9NTBmYTczODdmNjZhMjMzNWQzOGUwYWQ1ZmM1OTYwNmNkODJlMjM5ZTpzZXNzaW9uX2lkPTFfTVg0ME5qWXlNVFUwTW41LU1UVTVNemszTmpJME56UTVOWDQxVDFkTGVHUmtiVWx6UTBGWVkyNUpRbTgwYW5VemJIaC1mZyZjcmVhdGVfdGltZT0xNTkzOTc2MjU1Jm5vbmNlPTAuMjk2NTA4MjU2NTAxODkyNCZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTkzOTc5ODU3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9'
+  API_KEY: '46822534', // 46621542
+  SESSION_ID: '1_MX40NjgyMjUzNH5-MTU5Mzk2MTE0Mzg0M35ZY1lFM09OcmVtVFRlVGc3cStvSWV2dTh-UH4',
+  TOKEN: 'T1==cGFydG5lcl9pZD00NjgyMjUzNCZzaWc9ODA0YWVlMDQzZWY0MWY4MjVjYjdjMjNkNmQwOGI2ZTEyNThhYmE2MDpzZXNzaW9uX2lkPTFfTVg0ME5qZ3lNalV6Tkg1LU1UVTVNemsyTVRFME16ZzBNMzVaWTFsRk0wOU9jbVZ0VkZSbFZHYzNjU3R2U1dWMmRUaC1VSDQmY3JlYXRlX3RpbWU9MTU5Mzk3ODI3NiZub25jZT0wLjU0OTA5MzE1MzcxMTg2MDgmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU5NDA2NDY3NiZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ=='
   
 }
 

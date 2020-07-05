@@ -11,13 +11,15 @@ export class OpentokService {
   session: OT.Session;
   token: string;
 
-  constructor() { }
-
+  constructor() {
+  
+   }
+ 
   getOT() {
     return OT;
   }
 
-  initSession() {
+  initSession(apiKey, token, sessionId) {
     if (config.API_KEY && config.TOKEN && config.SESSION_ID) {
       this.session = this.getOT().initSession(config.API_KEY, config.SESSION_ID);
       this.token = config.TOKEN;

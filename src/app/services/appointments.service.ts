@@ -9,7 +9,7 @@ import { environment } from './../../environments/environment';
 
 export class AppointmentsService {
  
-  private appointments = 'appointments/';
+  private appointments = 'v1/appointments/';
   private session = 'session/';
   
   constructor(private http: HttpClient) {  }
