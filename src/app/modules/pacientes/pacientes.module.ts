@@ -9,10 +9,17 @@ import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { WebcamModule } from 'ngx-webcam';
 
+import { PublisherComponent } from './publisher/publisher.component';
+import { SubscriberComponent } from './subscriber/subscriber.component';
+import { OpentokService } from '../../services/opentok.service';
+
 
 
 @NgModule({
-  declarations: [/*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, ConsultaComponent],
+  declarations: [
+    PublisherComponent,
+    SubscriberComponent,
+    /*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, ConsultaComponent],
   imports: [
     CommonModule,
     PacientesRoutingModule,
@@ -20,6 +27,9 @@ import { WebcamModule } from 'ngx-webcam';
   ],
   exports: [
     WebcamModule
+  ],
+  providers: [
+    OpentokService
   ]
 })
 export class PacientesModule { }

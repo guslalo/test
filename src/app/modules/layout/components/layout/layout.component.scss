@@ -10,7 +10,6 @@ html {
   }
   
   #header {
-    height:80px;
     display: flex;
     align-items: center;
     background: linear-gradient(#444444, #333333);
@@ -29,6 +28,9 @@ html {
    
     /* calculate the height. Header is 30px */
   }
+  .img-fluid {
+    max-width: 106px;
+  }
   .nav {
     a {
       color: #ffffff;
@@ -46,7 +48,7 @@ html {
     min-width:200px;
     //border-right:6px solid #012a62;
     .topSidebar {
-      height: 80px;
+      //height: 80px;
       background:#444444;
     }
     .top {

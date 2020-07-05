@@ -1,0 +1,46 @@
+app-publisher {
+    display: inline-block;
+    position: relative;
+    width:100%;
+}
+app-subscriber {
+    bottom: 0px;
+    right: 0px;
+}
+.videoLlamada {
+    max-width: 96%;
+}
+#videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.OT_mirrored {
+    width: 100% !important;
+    margin: 0px 0px 0px 0px !important;
+}
+#subscriber {
+    position: absolute;
+    z-index: 999;
+    right:0;
+    bottom: 0;
+}
+.modal-content {
+    background: #000000;
+}
+
+#exampleModal{
+    padding: 0px !important;
+}
+
+#publisher {
+    width: 100%;
+    z-index: 20;
+    border-radius: 3px;
+    video {
+        width: 100%;
+        display: inline-block;
+    }
+}
