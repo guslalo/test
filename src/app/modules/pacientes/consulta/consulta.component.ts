@@ -45,8 +45,12 @@ changeDetectorRef: ChangeDetectorRef;
     if(this.session){
       this.session.disconnect();
     }
-   this.getSessionCall();
+   
   
+  }
+
+  initCall(){
+    this.getSessionCall();
   }
 
   getSessionCall() {
