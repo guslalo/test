@@ -15,10 +15,6 @@ session: OT.Session;
 streams: Array<OT.Stream> = [];
 changeDetectorRef: ChangeDetectorRef;
 
-  public apiKey = "46822534";
-  public sessionId = "2_MX40NjYyMTU0Mn5-MTU5MzgwODE0NDcwMX5mQXBjTUpBNWlpQXhld1BGKytoNGhZSG9-fg";
-  public token = "T1==cGFydG5lcl9pZD00NjYyMTU0MiZzaWc9NmY2OTkyNThmZjgzMDIwNjFkMmQxZWJmNDA1ODA0ZWQ1YjE4NDZhMzpzZXNzaW9uX2lkPTJfTVg0ME5qWXlNVFUwTW41LU1UVTVNemd3T0RFME5EY3dNWDVtUVhCalRVcEJOV2xwUVhobGQxQkdLeXRvTkdoWlNHOS1mZyZjcmVhdGVfdGltZT0xNTkzODA4MTU4Jm5vbmNlPTAuMzcxMjQ0MTI2MDczMTk3NTcmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU5NjQwMDE1OCZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ==";
-  
   constructor( 
     private ref: ChangeDetectorRef, 
     private opentokService: OpentokService,
@@ -77,7 +73,7 @@ changeDetectorRef: ChangeDetectorRef;
         .then(() => this.opentokService.connect())
         .catch((err) => {
           console.error(err);
-          alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
+          //alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
         });
       },
       error => {
