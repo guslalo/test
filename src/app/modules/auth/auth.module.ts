@@ -21,8 +21,8 @@ import { BlockedAccountComponent } from './components/blocked-account/blocked-ac
 import { HttpClient } from '@angular/common/http';
 import { SharedModule } from './../../shared/shared.module';
 
-import  {MatStepperModule } from '@angular/material/stepper';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import  { MatStepperModule } from '@angular/material/stepper';
+import  { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

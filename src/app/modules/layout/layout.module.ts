@@ -6,18 +6,28 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ProfesionalesModule } from '../profesionales/profesionales.module';
 import { PacientesModule } from '../pacientes/pacientes.module';
 
+//import { SharedModule } from '../../shared/shared.module';
+import { TourMatMenuModule } from 'ngx-tour-md-menu';
+
 //routing
 import { LayoutRoutingModule } from './layout-routing.module';
 
 
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [
+    LayoutComponent
+  ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     ProfesionalesModule,
-    PacientesModule
+    PacientesModule,
+    TourMatMenuModule.forRoot()
+    //SharedModule
+  ],
+  exports:[
+    //TourMatMenuModule.forRoot()
   ]
 })
 export class LayoutModule { }

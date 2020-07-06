@@ -1,6 +1,8 @@
+<tour-step-template></tour-step-template>
+
 <div class="container-fluid p-0">
   <div id="page">
-    <div id="sideBar">
+    <div id="sideBar" tourAnchor="some"><!--some.anchor.id-->
         <div class="topSidebar">
             <div class="fadeIn first w-50 mx-auto text-center">
                 <img src="assets/img/logo.png" id="icon" alt="itms" class="img-fluid"/>
@@ -56,7 +58,8 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-7 align-self-center">
-                            <button type="button" class=" btn btn-outline-light rounded-pill float-right">Agendamento de cita</button>
+                            <button tourAnchor="agendar" 
+                            type="button" class=" btn btn-outline-light rounded-pill float-right">Agendamento de cita</button>
                         </div>
                         <div class="col-5">
                             <div class="row">

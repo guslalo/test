@@ -39,12 +39,23 @@ const routes: Routes = [
       { path: 'mis-pacientes', component:  PacientesComponent }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
-  } 
+  },
+  {
+    path: 'app-admin',
+    component: LayoutComponent,
+    //canActivate: [PacienteGuard],
+    children: [
+      { path: '', component:  InicioComponent },
+      { path: 'ficha-pacientes', component:  FichaPacienteComponent },
+      { path: 'mis-pacientes', component:  PacientesComponent }
+      //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
+    ]
+  }  
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule]
 })

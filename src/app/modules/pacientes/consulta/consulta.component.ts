@@ -54,7 +54,7 @@ id: number;
 
   initCall(){
     this.sub = this.route.params.subscribe(params => {
-      //this.id = +params['id']; // (+) converts string 'id' to a number
+      //this.id = +params['id']; // (+) 
       //get getRutas  
         console.log(params.appointmentId);
         this.getSessionCall(params.appointmentId);
@@ -80,8 +80,8 @@ id: number;
     let sessionId:any;
     this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
       data =>{
-        console.log(data.room);
-        this.opentokService.initSession('46822534', data.room.token, data.room.sessionId).then((session: OT.Session) => {
+        console.log(data.room); 
+        this.opentokService.initSession(data.room.token, data.room.sessionId).then((session: OT.Session) => {
           this.session = session;
           this.session.on('streamCreated', (event) => {
             this.streams.push(event.stream);
