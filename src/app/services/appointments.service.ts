@@ -8,20 +8,45 @@ import { environment } from './../../environments/environment';
 })
 
 export class AppointmentsService {
- 
-  private appointments = 'v1/appointments/';
-  private session = 'session/';
+  private appointments = 'v1/appointments';
+  private doctors = 'v1/doctors';
+  private session = '/session';
   
   constructor(private http: HttpClient) {  }
 
-  //  getAppointments
-  getAppointments( idUser?:any ): Observable<any> {
-    return this.http.get<any>(  environment.baseUrl + this.appointments);
+  //getAppointments
+  getAppointments( ): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Content-Type': 'application/json'
+      })
+    };
+   
+    return this.http.get<any>(  environment.baseUrl + this.appointments, httpOptions );
   }
 
-   // get getAppointmentsSession
-   getAppointmentsSession( ): Observable<any> {
-    return this.http.post<any>(  environment.baseUrl + this.appointments + this.session, {  } );
+  //getDoctors
+  getDoctors( ): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Content-Type': 'application/json'
+      })
+    };
+   
+    return this.http.get<any>(  environment.baseUrl + this.doctors, httpOptions );
+  }
+
+  //get getAppointmentsSession
+  getAppointmentsSession( appointmentId ): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<any>(  environment.baseUrl + this.appointments + this.session, { appointmentId }, httpOptions);
   }
 
 }

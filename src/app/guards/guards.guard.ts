@@ -11,28 +11,13 @@ export class GuardsGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (sessionStorage.getItem('token')) {
-      // logged in so return true
+    if (localStorage.getItem('token')) {
       return true;
     }
-
     // not logged in so redirect to login page with the return url
     this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
       return false;
-    }
-  
-   
-   /* if (sessionStorage.getItem('user') === 'medico' || sessionStorage.getItem('user') === 'paciente') {
-      return true;
-    } else {
-      this.router.navigate(['/'], {
-        queryParams: {
-          return: state.url
-        }
-      });
-      return false;
-    }*/
-
+  }
 }
   
 

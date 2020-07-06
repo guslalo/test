@@ -1,3 +1,4 @@
 [0625/184104.523:ERROR:process_reader_win.cc(127)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
 [0625/184104.523:ERROR:exception_snapshot_win.cc(99)] thread ID 6836 not found in process
 [0702/122219.458:WARNING:minidump_to_upload_parameters.cc(36)] duplicate key guid, discarding value 306583bc-4147-49e4-abb7-46a8a2672592
+[0705/215757.633:WARNING:minidump_to_upload_parameters.cc(36)] duplicate key guid, discarding value 306583bc-4147-49e4-abb7-46a8a2672592

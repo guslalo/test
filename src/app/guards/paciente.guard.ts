@@ -11,7 +11,7 @@ export class PacienteGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
    
-    if (sessionStorage.getItem('user') === 'paciente') {
+    if (JSON.parse(localStorage.getItem('currentUser')).type === 'paciente') {
       return true;
     } else {
       this.router.navigate(['/'], {

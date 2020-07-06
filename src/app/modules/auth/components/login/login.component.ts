@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    sessionStorage.clear();
+    //sessionStorage.clear();
     localStorage.clear();
     this.spinner.hide();
   
@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
     .subscribe( 
       data => {
         console.log(data);
-        sessionStorage.setItem('token', JSON.stringify(data.access_token));
-        if (sessionStorage.getItem('token')) {
+        localStorage.setItem('token', JSON.stringify(data.access_token));
+        console.log(JSON.parse(localStorage.getItem('token')));
+        if (localStorage.getItem('token')) {
           this.getUsers(this.user);
         }
        
@@ -67,11 +68,11 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(user.username);
         console.log(data.data);
-         if(user.username === 'eve.holt@reqres.in'){
+         if(user.username === 'medico@medico.cl'){
           let userMedico = data.data.filter( data => data.email === 'eve.holt@reqres.in' );
           this.currentUser = new UserLogin (
             1, 
-            'medico', 
+            'profesional', 
             userMedico[0].username, 
             userMedico[0].email, 
             userMedico[0].first_name,
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit {
           );
           //this.currentUserService.currentUser  = this.currentUser;
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-          this.router.navigate(['/mis-pacientes']);
+          this.router.navigate(['app/professional']);
       
         } else {
           let userPaciente = data.data.filter( data => data.email === 'eve.holt@reqres.in' ); 
@@ -94,8 +95,9 @@ export class LoginComponent implements OnInit {
           );
           console.log(this.currentUser);
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+          
           //this.currentUserService.currentUser  = this.currentUser;
-          this.router.navigate(['/app']);
+          this.router.navigate(['app-paciente']);
           this.spinner.hide();
         }
       },

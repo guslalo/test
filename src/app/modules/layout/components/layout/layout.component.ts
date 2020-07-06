@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from '../../../../services/current-user.service'
 import { UserLogin } from '../../../../models/models';
+import { slideInAnimation } from '../../../../shared/animations';  
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  animations: [ slideInAnimation ]
 })
 export class LayoutComponent implements OnInit {
 

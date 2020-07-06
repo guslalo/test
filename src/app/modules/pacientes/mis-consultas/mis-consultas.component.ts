@@ -16,6 +16,7 @@ export class MisConsultasComponent implements OnInit {
     this.appointmentsService.getAppointments().subscribe(
       data => {
         this.consultas = data;
+        console.log(this.consultas)
       },
       error => {
         console.log(error);

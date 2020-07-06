@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef  } from '@angular/core';
 import { OpentokService } from '../../../services/opentok.service';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import * as OT from '@opentok/client';
 
 @Component({
@@ -14,11 +15,15 @@ export class ConsultaComponent implements OnInit {
 session: OT.Session;
 streams: Array<OT.Stream> = [];
 changeDetectorRef: ChangeDetectorRef;
+selectedId: any;
+private sub: any;
+id: number;
 
   constructor( 
     private ref: ChangeDetectorRef, 
     private opentokService: OpentokService,
     private router:Router,
+    private route: ActivatedRoute,
     private appointmentsService:AppointmentsService
     ) { 
     this.changeDetectorRef = ref;
@@ -41,19 +46,39 @@ changeDetectorRef: ChangeDetectorRef;
     if(this.session){
       this.session.disconnect();
     }
+
+    
    
   
   }
 
   initCall(){
-    this.getSessionCall();
-  }
+    this.sub = this.route.params.subscribe(params => {
+      //this.id = +params['id']; // (+) converts string 'id' to a number
+      //get getRutas  
+        console.log(params.appointmentId);
+        this.getSessionCall(params.appointmentId);
 
-  getSessionCall() {
+    }); 
+  }
+  getAppointments() {
+    this.appointmentsService.getAppointments().subscribe(
+      data => {
+        //this.consultas = data;
+        console.log(data)
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  
+
+  getSessionCall(appointmentId) {
     let apiKey: any;
     let token:any;
     let sessionId:any;
-    this.appointmentsService.getAppointmentsSession().subscribe(
+    this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
       data =>{
         console.log(data.room);
         this.opentokService.initSession('46822534', data.room.token, data.room.sessionId).then((session: OT.Session) => {
@@ -84,7 +109,7 @@ changeDetectorRef: ChangeDetectorRef;
 
   closeCall(){
     this.session.disconnect();
-    this.router.navigate(['app/mis-consultas']);
+    this.router.navigate(['/app-paciente/mis-consultas']);
   }
 
 

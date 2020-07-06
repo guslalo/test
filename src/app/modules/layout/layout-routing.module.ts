@@ -15,13 +15,9 @@ import { ProfesionalGuard } from '../../guards/profesional.guard'
 import { PacienteGuard } from '../../guards/paciente.guard'
 import { FichaPacienteComponent } from './../profesionales/ficha-paciente/ficha-paciente.component';
 
+/*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
-
-/*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){
- 
-}*/
 const routes: Routes = [
- 
   {
     path: 'mis-pacientes',
     component: LayoutComponent,
@@ -31,30 +27,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'app',
+    path: 'app-paciente',
     component: LayoutComponent,
     //canActivate: [PacienteGuard],
     children: [
       { path: '', component:  InicioComponent },
       { path: 'mis-consultas', component:  MisConsultasComponent },
-      { path: 'ficha-paciente', component:  FichaPacienteComponent },
-      { path: 'consulta', component:  ConsultaComponent }
-    ]
-  },
-  {
-    path: 'mi-salud',
-    component: LayoutComponent,
-    //canActivate: [PacienteGuard],
-    children: [
-      { path: '', component:  MiSaludComponent }
-    ]
-  },
-  {
-    path: 'mis-consultas',
-    component: LayoutComponent,
-    //canActivate: [PacienteGuard],
-    children: [
-      { path: '', component:  MisConsultasComponent }
+      { path: 'mi-salud', component:  MiSaludComponent },
+      { path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
   },
   {
