@@ -19,14 +19,6 @@ import { FichaPacienteComponent } from './../profesionales/ficha-paciente/ficha-
 
 const routes: Routes = [
   {
-    path: 'mis-pacientes',
-    component: LayoutComponent,
-     canActivate: [GuardsGuard],
-    children: [
-      { path: '', component:  PacientesComponent }
-    ]
-  },
-  {
     path: 'app-paciente',
     component: LayoutComponent,
     //canActivate: [PacienteGuard],
@@ -38,13 +30,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'ficha-pacientes',
+    path: 'app-profesional',
     component: LayoutComponent,
-    canActivate: [GuardsGuard],
+    //canActivate: [PacienteGuard],
     children: [
-      { path: '', component:  FichaPacienteComponent }
+      { path: '', component:  InicioComponent },
+      { path: 'ficha-pacientes', component:  FichaPacienteComponent },
+      { path: 'mis-pacientes', component:  PacientesComponent }
+      //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
-  }  
+  } 
 ];
 
 @NgModule({
