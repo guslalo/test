@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'app-paciente',
     component: LayoutComponent,
-    //canActivate: [PacienteGuard],
+    canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioComponent },
       { path: 'mis-consultas', component:  MisConsultasComponent },
