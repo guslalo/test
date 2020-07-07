@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'app-profesional',
     component: LayoutComponent,
-    //canActivate: [PacienteGuard],
+    canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioComponent },
       { path: 'ficha-pacientes', component:  FichaPacienteComponent },
@@ -43,7 +43,7 @@ const routes: Routes = [
   {
     path: 'app-admin',
     component: LayoutComponent,
-    //canActivate: [PacienteGuard],
+    canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioComponent },
       { path: 'ficha-pacientes', component:  FichaPacienteComponent },

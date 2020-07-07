@@ -200,7 +200,9 @@
         <div class="modal-body text-center" style="position: relative;">
             <div *ngIf="session">
                 <app-publisher id="publisher" [session]="session"></app-publisher>
-                <app-subscriber id="subscriber" *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+                <div id="boxCalls">
+                    <app-subscriber id="subscriber" *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+                </div>
             </div>
             <!--<webcam [width]="width" [height]="height"></webcam>-->
         </div>

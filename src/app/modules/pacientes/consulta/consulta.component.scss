@@ -21,12 +21,19 @@ app-subscriber {
     width: 100% !important;
     margin: 0px 0px 0px 0px !important;
 }
-#subscriber {
+
+#boxCalls {
     position: absolute;
     z-index: 999;
     right:0;
     bottom: 50px;
+    width: 100%;
+    #subscriber {
+        display: inline-block;
+        margin:0px 5px 0px 5px;
+    }
 }
+
 .close {
     position: absolute;
 }
