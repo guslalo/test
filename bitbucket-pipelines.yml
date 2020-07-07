@@ -11,7 +11,7 @@ pipelines:
           - npm run build
           - apt-get update && apt-get install -y
           - apt-get install zip
-          - zip -r itms-frontend.zip dist/ DockerFile nginx-file.conf Dockerrun.aws.json
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
         artifacts:
           - itms-frontend.zip
     - step:
