@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef  } from '@angular/core';
 import { OpentokService } from '../../../services/opentok.service';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import * as OT from '@opentok/client';
-
+declare var $: any;
 @Component({
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
@@ -19,6 +19,8 @@ selectedId: any;
 private sub: any;
 id: number;
 public meet: boolean;
+@ViewChild('iniciarLlamada') iniciarLlamada;
+
 
   constructor( 
     private ref: ChangeDetectorRef, 
@@ -49,13 +51,22 @@ public meet: boolean;
     }
 
     this.route.params.subscribe(params => {
-    
+ 
       //this.id = +params['id']; // (+) 
       //get getRutas  
       /* */
       //console.log(params.appointmentId);
       if(params.appointmentId === '5f049b9948ab2c55c1db33fa') {
-         this.meet = true;
+        this.meet = true;
+        document.getElementById('button').click();
+        this.getSessionCall2('5f049b9948ab2c55c1db33fa');
+        //$('#iniciarLlamada').click();
+        //this.iniciarLlamada.nativeElement.click();
+        //document.getElementById("iniciarLlamada").click();
+        //this.iniciarLlamada.getNativeElement().click()
+        //iniciarLlamada.nativeElement.click()
+        
+         
           console.log(this.meet); 
         }else {
           this.meet = false;
