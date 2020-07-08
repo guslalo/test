@@ -75,7 +75,7 @@ public meet: boolean;
   initCall(){
     console.log(this.meet)
     if (this.meet){
-      this.getSessionCall2('5f049b9948ab2c55c1db33fa');
+      //this.getSessionCall2('5f049b9948ab2c55c1db33fa');
     } else {
       this.sub = this.route.params.subscribe(params => {
         //this.id = +params['id']; // (+) 
