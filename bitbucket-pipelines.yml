@@ -8,7 +8,7 @@ pipelines:
         name: "Build"
         script:
           - npm install
-          - npm run build
+          - npm run build --prod
           - apt-get update && apt-get install -y
           - apt-get install zip
           - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json

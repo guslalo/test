@@ -26,6 +26,14 @@ export class AppointmentsService {
     return this.http.get<any>(  environment.baseUrl + this.appointments, httpOptions );
   }
 
+  //getAppointments
+  getAppointments2(id): Observable<any> {
+    return this.http.get<any>(  environment.baseUrl + this.appointments + '/' + id );
+  }
+
+
+  //api.bdot.app/api/v1/appointemnts/5f049b9948ab2c55c1db33fa
+
   //getDoctors
   getDoctors( ): Observable<any> {
     const httpOptions = {
@@ -46,7 +54,7 @@ export class AppointmentsService {
         //'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(  environment.baseUrl + this.appointments + this.session, { appointmentId }, httpOptions);
+    return this.http.post<any>(  environment.baseUrl + this.appointments + this.session, { appointmentId });
   }
 
 }

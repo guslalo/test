@@ -67,8 +67,8 @@
                                     <p class="align-middle m-0 text-right">Olá, Guilherme!</p>
                                 </div>
                                 
-                                <div class="col-3">
-                                    <div class="imguser">
+                                <div class="col-3" >
+                                    <div  *ngIf="user" class="imguser">
                                         <img [src]="user.image">
                                     </div>
                                 </div>

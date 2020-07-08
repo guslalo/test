@@ -50,7 +50,16 @@ const routes: Routes = [
       { path: 'mis-pacientes', component:  PacientesComponent }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
-  }  
+  },
+  {
+    path: 'meet',
+    component: LayoutComponent,
+    canActivate: [],
+    children: [
+      { path: '', component:  MisConsultasComponent },
+      { path: 'cita/:appointmentId', component: ConsultaComponent }
+    ]
+  },  
 ];
 
 @NgModule({

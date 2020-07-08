@@ -40,7 +40,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('la peticion es server propio')
+    //console.log('la peticion es server propio')
     const token =  JSON.parse(localStorage.getItem('token'));
     req = req.clone({
       setHeaders: {

@@ -18,6 +18,7 @@ changeDetectorRef: ChangeDetectorRef;
 selectedId: any;
 private sub: any;
 id: number;
+public meet: boolean;
 
   constructor( 
     private ref: ChangeDetectorRef, 
@@ -47,22 +48,53 @@ id: number;
       this.session.disconnect();
     }
 
+    this.route.params.subscribe(params => {
     
-   
-  
+      //this.id = +params['id']; // (+) 
+      //get getRutas  
+      /* */
+      //console.log(params.appointmentId);
+      if(params.appointmentId === '5f049b9948ab2c55c1db33fa') {
+         this.meet = true;
+          console.log(this.meet); 
+        }else {
+          this.meet = false;
+        }
+     
+    }); 
+
   }
 
   initCall(){
-    this.sub = this.route.params.subscribe(params => {
-      //this.id = +params['id']; // (+) 
-      //get getRutas  
-        console.log(params.appointmentId);
-        this.getSessionCall(params.appointmentId);
-
-    }); 
+    console.log(this.meet)
+    if (this.meet){
+      this.getSessionCall2('5f049b9948ab2c55c1db33fa');
+    } else {
+      this.sub = this.route.params.subscribe(params => {
+        //this.id = +params['id']; // (+) 
+        //get getRutas  
+        console.log(params);
+          console.log(params.appointmentId);
+          this.getSessionCall(params.appointmentId);
+          
+  
+      }); 
+    }
+   
   }
   getAppointments() {
     this.appointmentsService.getAppointments().subscribe(
+      data => {
+        //this.consultas = data;
+        console.log(data)
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+  getAppointments2(id) {
+    this.appointmentsService.getAppointments2(id).subscribe(
       data => {
         //this.consultas = data;
         console.log(data)
@@ -79,6 +111,40 @@ id: number;
     let token:any;
     let sessionId:any;
     this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
+      data =>{
+        console.log(data.room);
+        console.log(data.room.token); 
+        this.opentokService.initSession(data.room.token, data.room.sessionId).then((session: OT.Session) => {
+          this.session = session;
+          this.session.on('streamCreated', (event) => {
+            this.streams.push(event.stream);
+            this.changeDetectorRef.detectChanges();
+          });
+          this.session.on('streamDestroyed', (event) => {
+            const idx = this.streams.indexOf(event.stream);
+            if (idx > -1) {
+              this.streams.splice(idx, 1);
+              this.changeDetectorRef.detectChanges();
+            }
+          });
+        })
+        .then(() => this.opentokService.connect())
+        .catch((err) => {
+          console.error(err);
+          //alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
+        });
+      },
+      error => {
+        console.log(error)
+      }
+    )
+   }
+
+   getSessionCall2(appointmentId) {
+    let apiKey: any;
+    let token:any;
+    let sessionId:any;
+    this.appointmentsService.getAppointments2(appointmentId).subscribe(
       data =>{
         console.log(data.room); 
         this.opentokService.initSession(data.room.token, data.room.sessionId).then((session: OT.Session) => {
