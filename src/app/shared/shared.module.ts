@@ -10,6 +10,7 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     TranslocoRootModule,
     TourMatMenuModule.forRoot(),
+    MatSnackBarModule,
     MatSliderModule,
     MatCardModule,
     RouterModule
@@ -28,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
   exports: [
     OnboardingComponent,
     TranslocoRootModule,
+    MatSnackBarModule,
     MatSliderModule,
     MatCardModule,
     RouterModule

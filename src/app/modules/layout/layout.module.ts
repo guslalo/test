@@ -13,6 +13,11 @@ import { TourMatMenuModule } from 'ngx-tour-md-menu';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 
+//inteceptores
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +33,11 @@ import { LayoutRoutingModule } from './layout-routing.module';
   ],
   exports:[
     //TourMatMenuModule.forRoot()
-  ]
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthTokenInterceptor, 
+    multi: true
+  }]
 })
 export class LayoutModule { }

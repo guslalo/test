@@ -194,17 +194,16 @@
     <div class="modal-dialog modal-xl videoLlamada">
       <div class="modal-content">
         <div class="modal-header" style="display: none;">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> 
         </div>
         <div class="modal-body text-center" style="position: relative;">
             <div *ngIf="session">
                 <app-publisher id="publisher" [session]="session"></app-publisher>
+               
                 <div id="boxCalls">
                     <app-subscriber id="subscriber" *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
                 </div>
             </div>
-            <!--<webcam [width]="width" [height]="height"></webcam>-->
         </div>
         <div class="modal-footer p-0">
           <button type="button" class="btn btn-secondary mr-4" data-dismiss="modal" (click)="closeCall()">Cerrar</button>

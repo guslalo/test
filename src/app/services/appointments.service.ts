@@ -18,7 +18,7 @@ export class AppointmentsService {
   getAppointments( ): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
         //'Content-Type': 'application/json'
       })
     };
@@ -30,7 +30,7 @@ export class AppointmentsService {
   getDoctors( ): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
         //'Content-Type': 'application/json'
       })
     };
@@ -42,7 +42,7 @@ export class AppointmentsService {
   getAppointmentsSession( appointmentId ): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
+        //'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
         //'Content-Type': 'application/json'
       })
     };
