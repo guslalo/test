@@ -57,7 +57,7 @@ const routes: Routes = [
     canActivate: [],
     children: [
       { path: '', component:  MisConsultasComponent },
-      { path: 'cita/:appointmentId', component: ConsultaComponent }
+      { path: ':appointmentId', component: ConsultaComponent }
     ]
   },  
 ];
