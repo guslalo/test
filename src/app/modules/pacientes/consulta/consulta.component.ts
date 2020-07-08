@@ -60,11 +60,7 @@ public meet: boolean;
         this.meet = true;
         document.getElementById('button').click();
         this.getSessionCall2('5f049b9948ab2c55c1db33fa');
-        //$('#iniciarLlamada').click();
-        //this.iniciarLlamada.nativeElement.click();
-        //document.getElementById("iniciarLlamada").click();
-        //this.iniciarLlamada.getNativeElement().click()
-        //iniciarLlamada.nativeElement.click()
+  
         
          
           console.log(this.meet); 
