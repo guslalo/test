@@ -1,5 +1,6 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, Input } from '@angular/core';
 import * as OT from '@opentok/client';
+declare var $: any;
 
 @Component({
   selector: 'app-subscriber',
@@ -15,10 +16,13 @@ export class SubscriberComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    const subscriber = this.session.subscribe(this.stream, this.subscriberDiv.nativeElement, {}, (err) => {
+    const subscriber = this.session.subscribe(this.stream, this.subscriberDiv.nativeElement, { width: 300,
+      height: 200},(a)=> (err) => {
       if (err) {
         alert(err.message);
       }
     });
+    $('#subscriber:first-child > div:first-child').css( 'width', '90%' );
+    $('#subscriber:first-child > div:first-child').css( 'height', '100vh' );
   }
 }

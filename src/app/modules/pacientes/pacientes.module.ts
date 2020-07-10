@@ -7,7 +7,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { PacientesRoutingModule } from '../pacientes/pacientes-routing.module';
 import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from './consulta/consulta.component';
-import { WebcamModule } from 'ngx-webcam';
+import { Consulta2Component } from './consulta2/consulta2.component';
+
 
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
@@ -19,14 +20,18 @@ import { OpentokService } from '../../services/opentok.service';
   declarations: [
     PublisherComponent,
     SubscriberComponent,
-    /*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, ConsultaComponent],
+  
+    /*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, 
+    ConsultaComponent,
+    Consulta2Component,
+  ],
   imports: [
     CommonModule,
     PacientesRoutingModule,
-    WebcamModule
+  
   ],
   exports: [
-    WebcamModule
+ 
   ],
   providers: [
     OpentokService

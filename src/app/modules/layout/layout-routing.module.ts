@@ -8,6 +8,7 @@ import { MiSaludComponent } from '../pacientes/mi-salud/mi-salud.component';
 import { InicioComponent } from '../pacientes/inicio/inicio.component';
 import { MisConsultasComponent } from '../pacientes/mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from '../pacientes/consulta/consulta.component';
+import { Consulta2Component } from '../pacientes/consulta2/consulta2.component';
 
 //guards
 import { GuardsGuard} from '../../guards/guards.guard'
@@ -26,8 +27,13 @@ const routes: Routes = [
       { path: '', component:  InicioComponent },
       { path: 'mis-consultas', component:  MisConsultasComponent },
       { path: 'mi-salud', component:  MiSaludComponent },
-      { path: 'consulta/:appointmentId', component: ConsultaComponent }
+      { path: 'consulta/:appointmentId', component: ConsultaComponent },
+     
     ]
+  },
+  { 
+    path: 'cita/:appointmentId', component: Consulta2Component,
+    canActivate: [GuardsGuard]
   },
   {
     path: 'app-profesional',

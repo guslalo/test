@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef,   } from '@angular/core';
 import { OpentokService } from '../../../services/opentok.service';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
@@ -6,11 +6,11 @@ import { switchMap } from 'rxjs/operators';
 import * as OT from '@opentok/client';
 declare var $: any;
 @Component({
-  selector: 'app-consulta',
-  templateUrl: './consulta.component.html',
-  styleUrls: ['./consulta.component.scss']
+  selector: 'app-consulta2',
+  templateUrl: './consulta2.component.html',
+  styleUrls: ['./consulta2.component.scss']
 })
-export class ConsultaComponent implements OnInit {
+export class Consulta2Component implements OnInit {
 
 session: OT.Session;
 streams: Array<OT.Stream> = [];
@@ -19,8 +19,7 @@ selectedId: any;
 private sub: any;
 id: number;
 public meet: boolean;
-public cita:any;
-
+@ViewChild('iniciarLlamada') iniciarLlamada;
 
 
   constructor( 
@@ -43,16 +42,23 @@ public cita:any;
       // RoutesRecognized
     });
   }
+  @ViewChild('hardwareVideo') hardwareVideo: any;
+
+  _navigator = <any> navigator;
+  localStream;
 
  
 
   ngOnInit(): void {
+  
+
     if(this.session){
       this.session.disconnect();
     }
+    
 
     this.route.params.subscribe(params => {
-      this.cita = params.appointmentId;
+ 
       //this.id = +params['id']; // (+) 
       //get getRutas  
       /* */
@@ -70,8 +76,12 @@ public cita:any;
         }
      
     }); 
+    this.initCall();
 
   }
+  
+ 
+
 
   initCall(){
     console.log(this.meet)
@@ -113,6 +123,9 @@ public cita:any;
     )
   }
   
+
+
+
 
   getSessionCall(appointmentId) {
     let apiKey: any;

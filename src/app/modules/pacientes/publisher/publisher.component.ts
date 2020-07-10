@@ -22,20 +22,29 @@ export class PublisherComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+  
+  
     var publisherOptions = {
       insertMode: 'append',
       width: 400,
-      height: 300
+      height: 300,
+      showControls: true
     };
     //var publisher = OT.initPublisher('publisherContainerElementId', publisherOptions);
     //.publish(publisher); //publisherOptions
 
     const OT = this.opentokService.getOT();
-    this.publisher = OT.initPublisher(this.publisherDiv.nativeElement, {insertMode: 'append', width:'100%', height:'90vh'});
-
+    this.publisher = OT.initPublisher(this.publisherDiv.nativeElement, {
+      insertMode: 'append',
+      width: 300,
+      height: 200,
+      showControls: true
+    } );/*, width:'100%', height:'90vh' */
+    
     if (this.session) {
       if (this.session['isConnected']()) {
         this.publish();
+        
       }
       this.session.on('sessionConnected', () => this.publish());
     }

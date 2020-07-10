@@ -1,0 +1,20 @@
+<div class="container-fluid bg-dark h-100 p-0">
+    <!--<button (click)="stopStream()">Stop </button>-->
+    <div *ngIf="session" class="boxVideos">
+        <div class="c">
+            <div class="subscriberBox">
+                <div class="inter bg-dark">
+                    <app-subscriber id="subscriber" *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+                </div>
+           </div>
+        </div>
+
+       
+
+       <div class="publisherBox">
+            <app-publisher id="publisher" [session]="session"></app-publisher>  
+        </div>
+       
+        
+    </div>
+</div>    <!--<div id="boxCalls"></div>-->

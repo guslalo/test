@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FichaPacienteComponent } from './ficha-paciente/ficha-paciente.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
-import { WebcamModule } from 'ngx-webcam';
+
 
 
 @NgModule({
@@ -11,8 +11,7 @@ import { WebcamModule } from 'ngx-webcam';
     PacientesComponent
   ],
   imports: [
-    CommonModule,
-    WebcamModule
+    CommonModule
   ],
   exports:[
     FichaPacienteComponent
