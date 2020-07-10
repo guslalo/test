@@ -36,13 +36,8 @@ const routes: Routes = [
     canActivate: [GuardsGuard]
   },
   {
-    path: 'meet',
-    component: LayoutComponent,
-    canActivate: [],
-    children: [
-      { path: '', component:  MisConsultasComponent },
-      { path: ':appointmentId', component: Consulta2Component }
-    ]
+    path: 'meet/:appointmentId',
+    component: Consulta2Component
   },
   {
     path: 'app-profesional',

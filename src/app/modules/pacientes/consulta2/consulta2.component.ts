@@ -65,7 +65,7 @@ public meet: boolean;
       //console.log(params.appointmentId);
       if(params.appointmentId === '5f049b9948ab2c55c1db33fa') {
         this.meet = true;
-        document.getElementById('button').click();
+       
         this.getSessionCall2('5f049b9948ab2c55c1db33fa');
   
         
