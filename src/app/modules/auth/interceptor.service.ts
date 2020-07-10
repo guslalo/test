@@ -62,7 +62,8 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         
         // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
         //this.errorService.show(errorMessage);
-        window.alert(errorMessage);
+        console.log(errorMessage);
+        //window.alert(errorMessage);
         return throwError(errorMessage);
       })
     );

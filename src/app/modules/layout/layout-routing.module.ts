@@ -36,6 +36,15 @@ const routes: Routes = [
     canActivate: [GuardsGuard]
   },
   {
+    path: 'meet',
+    component: LayoutComponent,
+    canActivate: [],
+    children: [
+      { path: '', component:  MisConsultasComponent },
+      { path: ':appointmentId', component: Consulta2Component }
+    ]
+  },
+  {
     path: 'app-profesional',
     component: LayoutComponent,
     canActivate: [GuardsGuard],
@@ -56,16 +65,7 @@ const routes: Routes = [
       { path: 'mis-pacientes', component:  PacientesComponent }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
-  },
-  {
-    path: 'meet',
-    component: LayoutComponent,
-    canActivate: [],
-    children: [
-      { path: '', component:  MisConsultasComponent },
-      { path: ':appointmentId', component: ConsultaComponent }
-    ]
-  },  
+  }
 ];
 
 @NgModule({
