@@ -13,6 +13,9 @@ import { Consulta2Component } from './consulta2/consulta2.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from '../../services/opentok.service';
+import { PerfilComponent } from './perfil/perfil.component';
+import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
+import { SoporteComponent } from './soporte/soporte.component';
 
 
 
@@ -24,6 +27,9 @@ import { OpentokService } from '../../services/opentok.service';
     /*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, 
     ConsultaComponent,
     Consulta2Component,
+    PerfilComponent,
+    CambiarClaveComponent,
+    SoporteComponent,
   ],
   imports: [
     CommonModule,

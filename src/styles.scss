@@ -7,3 +7,64 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a {
+    color: inherit;
+    &:hover{
+        color: inherit;
+    }
+
+    &.ayuda {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border: none;
+    border-bottom:3px solid #999999;
+    //border-color: #dee2e6 #dee2e6 #fff;
+   
+}
+a {
+    color: #7D7D7D;
+}
+table {
+    tr {
+        svg {
+            margin: 0px 10px 0px 0px;
+        }
+    }
+}
+.nav-tabs .nav-link {
+    border: none;
+}
+.nav-tabs {
+    a {
+        color: #7D7D7D;
+        border: none;
+        .active {
+            &:hover {
+                border: none;
+            }
+        }
+        &:hover {
+            border:  transparent;
+        }
+    }
+}
+
+h4 a {
+    color: #7D7D7D !important;
+}
+
+.item {
+    //border-bottom:1px solid #495057;
+    &:last-child {
+        border-bottom: none;
+    }
+}
+

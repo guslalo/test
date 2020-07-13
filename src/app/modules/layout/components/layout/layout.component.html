@@ -14,28 +14,75 @@
                     <img [src]="user.image">
                 </div>
             </div>
+            <div class="row boxConsulta mt-4" *ngIf="user.type === 'paciente'">
+                <div class="col text-center">
+                    <button class="btn btn-secondary align-self-center">
+                        <svg style="display:inline-block;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        </svg>
+                        Realizar consulta 
+                    </button>
+                </div>
+            </div>
             <nav class="nav flex-column mt-4">
-                <a class="nav-link active" routerLink="/app-paciente">
-                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
-                      </svg>
-                    Inicio
-                </a>
+             
+                <!--menu profesional-->
                 <ng-container *ngIf="user.type === 'profesional'">
-                    <a class="nav-link" routerLink="/mis-pacientes">Mis pacientes</a>
-                    <a class="nav-link" routerLink="/ficha-paciente">Ficha paciente</a>
-                    <a class="nav-link" href="javascript:;">Mis datos</a>
-                    <a class="nav-link" href="javascript:;">Mis disponibilidad</a>
+                       
+                    <a class="nav-link active" routerLink="/app-profesional">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                        </svg>
+                        Inicio
+                    </a>
+                    <a class="nav-link" routerLink="mi-agenda">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2 3a2 2 0 0 1 2-2h5.293a1 1 0 0 1 .707.293L13.707 5a1 1 0 0 1 .293.707V13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3zm7 2V2l4 4h-3a1 1 0 0 1-1-1zm-.5 2a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V11a.5.5 0 0 0 1 0V9.5H10a.5.5 0 0 0 0-1H8.5V7z"/>
+                        </svg>
+                        Mi agenda
+                    </a>
+                    <a class="nav-link" href="javascript:;">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                            <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        Mi disponibilidad
+                    </a>
+                    <a class="nav-link" routerLink="/mis-pacientes">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                        Mis pacientes
+                    </a>
+                    <a class="nav-link" href="javascript:;">
+                        <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-calendar3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        </svg>
+                        Historial de consultas
+                    </a>
+                    <a class="nav-link" style="display: none;" routerLink="/ficha-paciente">Ficha paciente</a>
                 </ng-container>
 
                 <!--menu paciente-->
                 <ng-container *ngIf="user.type === 'paciente'">
+                    <a class="nav-link active" routerLink="/app-paciente">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                        </svg>
+                        Inicio
+                    </a>
                     <a class="nav-link" routerLink="mi-salud">
                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                          </svg>
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
                         Mi salud
                     </a>
                     <a class="nav-link" routerLink="mis-consultas">
@@ -47,6 +94,13 @@
                     </a>
                 </ng-container>
                 <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+                <a class="ayuda nav-link" routerLink="ayuda">
+                    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M33 22.333C33 17.5229 29.7587 13.3205 25.1883 12.054C24.9015 5.35863 19.3656 0 12.6006 0C5.65254 0 0 5.65254 0 12.6006C0 14.8648 0.602637 17.0698 1.74732 19.0053L0.0464063 25.1548L6.19588 23.4538C7.97543 24.5057 9.9825 25.0987 12.054 25.1883C13.3199 29.7587 17.5229 33 22.333 33C24.2531 33 26.1203 32.4889 27.7606 31.5169L32.9536 32.9536L31.5169 27.7606C32.4889 26.1203 33 24.2531 33 22.333ZM6.50074 21.363L2.81918 22.3813L3.83754 18.6998L3.60551 18.3369C2.51174 16.6257 1.93359 14.6418 1.93359 12.6006C1.93359 6.71859 6.71859 1.93359 12.6006 1.93359C18.4826 1.93359 23.2676 6.71859 23.2676 12.6006C23.2676 18.4826 18.4826 23.2676 12.6006 23.2676C10.5594 23.2676 8.57549 22.6894 6.86426 21.595L6.50074 21.363ZM30.1802 30.1802L27.4487 29.4241L27.0838 29.6613C25.6697 30.5804 24.0268 31.0664 22.333 31.0664C18.5522 31.0664 15.2303 28.6217 14.0534 25.1167C19.8425 24.449 24.4496 19.8425 25.1174 14.0527C28.6217 15.2303 31.0664 18.5522 31.0664 22.333C31.0664 24.0268 30.5804 25.6697 29.662 27.0838L29.4248 27.4487L30.1802 30.1802Z" fill="#DADADA"/>
+                        <path d="M14.5342 9.66797C14.5342 10.2171 14.3105 10.7237 13.9045 11.095L11.6338 13.1736V15.5332H13.5674V14.0256L15.2103 12.522C16.0095 11.7904 16.4678 10.7508 16.4678 9.66797C16.4678 7.53521 14.7333 5.80078 12.6006 5.80078C10.4678 5.80078 8.7334 7.53521 8.7334 9.66797H10.667C10.667 8.60191 11.5345 7.73438 12.6006 7.73438C13.6666 7.73438 14.5342 8.60191 14.5342 9.66797Z" fill="#DADADA"/>
+                    </svg> 
+                    Ayuda
+                </a>
             </nav>
         </ng-container>
     </div>
@@ -64,7 +118,7 @@
                         <div class="col-5">
                             <div class="row">
                                 <div class="col align-self-center">
-                                    <p class="align-middle m-0 text-right">Olá, Guilherme!</p>
+                                    <p class="align-middle m-0 text-right"><a routerLink="perfil">Olá, Guilherme!</a></p>
                                 </div>
                                 
                                 <div class="col-3" >

@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(user.username);
         console.log(data.data);
-         if(user.username === 'medico@medico.cl'){
+         if(user.username === 'miguel@bluedott.tech'){
           let userMedico = data.data.filter( data => data.email === 'eve.holt@reqres.in' );
           this.currentUser = new UserLogin (
             1, 
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
           );
           //this.currentUserService.currentUser  = this.currentUser;
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-          this.router.navigate(['app/professional']);
+          this.router.navigate(['app-profesional']);
       
         } else {
           let userPaciente = data.data.filter( data => data.email === 'eve.holt@reqres.in' ); 
