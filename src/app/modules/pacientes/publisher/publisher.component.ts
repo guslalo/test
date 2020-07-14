@@ -47,8 +47,9 @@ export class PublisherComponent implements AfterViewInit {
   }
   desconectar() {
     this.publisher.destroy();
+    window.close();
     // this.location.back();
-    this.router.navigate(['app-paciente']);
+    //this.router.navigate(['app-paciente']);
   }
  
   ngAfterViewInit() {
