@@ -17,6 +17,10 @@
     }
     
 }
+
+.bg-dark {
+    background: #C4C4C4 !important;
+}
 .publishing {
     border:2px solid #ffffff;
 }
@@ -44,22 +48,16 @@
     align-self: auto;
     width: 400px;
 
-    /*
-    position: absolute;
-    z-index: 999;
-    right: 0;
-    top: 40px;
-    height: 90%;
-    width: 400px;*/
     #subscriber {
         display: inline-block;
         margin:0px 5px 5px 0px;
     }
+    
     app-subscriber {
         float: right;
          &:first-child {
-            left:25px;
-            top: 25px;
+            left: 0px;
+            top: 0px;
             position: absolute;
             width: 100%; 
             .OT_publisher, .OT_subscriber {
@@ -76,13 +74,22 @@
     }
    
 }
+.controls {
+    height: 100px;
+    position:absolute;
+    background: #393939;
+    width: 100%;
+    bottom: 0px;
+}
+
+
 .publisherBox {
     position: absolute;
     z-index: 2;
-    left: 50px;
-    bottom:25px;
-    overflow-x: hidden;
-    
+    left: 22px;
+    bottom: 121px;
+    //overflow-x: hidden;
+    width: 100%;
     app-publisher {
         video {
             border: 2px solid #ffffff;

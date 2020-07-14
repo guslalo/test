@@ -5,11 +5,13 @@ import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router
 import { switchMap } from 'rxjs/operators';
 import * as OT from '@opentok/client';
 declare var $: any;
+
 @Component({
   selector: 'app-consulta2',
   templateUrl: './consulta2.component.html',
   styleUrls: ['./consulta2.component.scss']
 })
+
 export class Consulta2Component implements OnInit {
 
 session: OT.Session;
@@ -19,6 +21,8 @@ selectedId: any;
 private sub: any;
 id: number;
 public meet: boolean;
+public toggleVideo:boolean = false;
+
 @ViewChild('iniciarLlamada') iniciarLlamada;
 
 
@@ -47,11 +51,12 @@ public meet: boolean;
   _navigator = <any> navigator;
   localStream;
 
- 
+
+
 
   ngOnInit(): void {
   
-
+  
     if(this.session){
       this.session.disconnect();
     }
@@ -194,7 +199,10 @@ public meet: boolean;
     )
    }
 
+ 
   closeCall(){
+   
+    
     this.session.disconnect();
     this.router.navigate(['/app-paciente/mis-consultas']);
   }

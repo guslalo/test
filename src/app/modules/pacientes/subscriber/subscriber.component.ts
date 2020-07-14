@@ -16,13 +16,25 @@ export class SubscriberComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    const subscriber = this.session.subscribe(this.stream, this.subscriberDiv.nativeElement, { width: 300,
-      height: 200},(a)=> (err) => {
+ 
+    const subscriber = this.session.subscribe(
+      this.stream, this.subscriberDiv.nativeElement, 
+      { width: 300,
+      height: 200, showControls:false }
+      ,(a)=> (err) => {
       if (err) {
         alert(err.message);
       }
     });
-    $('#subscriber:first-child > div:first-child').css( 'width', '90%' );
-    $('#subscriber:first-child > div:first-child').css( 'height', '100vh' );
+    $('#subscriber:first-child > div:first-child').css( 'width', '100%' );
+    $('#subscriber:first-child > div:first-child').css( 'height', 'calc(100vh - 100px)' );  
+    //subscriber.subscribeToVideo(false);
+    //mySubscriber.setStyle({nameDisplayMode: "off"});
+   
   }
+
+  
+
+
+
 }

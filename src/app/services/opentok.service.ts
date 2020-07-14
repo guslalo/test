@@ -1,15 +1,36 @@
 
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 
 import * as OT from '@opentok/client';
 import config from '../../config';
 
+const sub = new Subject<boolean>();
+
 @Injectable()
 export class OpentokService {
 
+
+
+// Tu funcion para solicitar el cambio
+mostrarComponentes(mostrar: boolean = true): void {
+    sub.next(mostrar);
+}
+
+// Tu observable, el cual se puede exponer y extender con otros operadores
+ mostrarComponentesObs(): Observable<boolean>{
+  return sub.asObservable();
+}
+
+toggleVideoemit(){
+  return this.toggleVideo = false;
+}/**/
+
+
   session: OT.Session;
   token: string;
+  public toggleVideo:boolean;
 
   constructor() {
   
@@ -46,4 +67,6 @@ export class OpentokService {
       });
     });
   }
+
+
 }

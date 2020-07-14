@@ -16,6 +16,7 @@ import { OpentokService } from '../../services/opentok.service';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from './soporte/soporte.component';
+import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
 
 
@@ -30,6 +31,7 @@ import { SoporteComponent } from './soporte/soporte.component';
     PerfilComponent,
     CambiarClaveComponent,
     SoporteComponent,
+    MisConsultasFilterComponent,
   ],
   imports: [
     CommonModule,
