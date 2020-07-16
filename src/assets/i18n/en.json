@@ -21,17 +21,52 @@
   "crear-cuenta" : {
     "title": "Create Account",
     "ingrese": "Enter your details to complete registration.",
+    "mayorEdad": "I am of age?",
     "step1": {
-      "subtitle":"Personal information"
+      "subtitle":"Personal information",
+      "formGroup": {
+        "name":"Name",
+        "lastName":"Last Name",
+        "secondLastName":"Last Name",
+        "gender":"Gender",
+        "email":"Email",
+        "confirmEmail":"Confirm email",
+        "phoneNumber":"Phone number"
+      }
     },
     "step2": {
-      "subtitle":"Birth data"
+      "subtitle":"Birth data",
+      "formGroup": {
+        "birthdate":"Birth date",
+        "ufBirth":"uf Birth",
+        "municipalityBirth":"municipality Birth",
+        "nacionality":"Nacionality"
+      }
     },
     "step3": {
-      "subtitle":"Adress"
+      "subtitle":"Adress",
+      "formGroup": {
+        "cep":"cep",
+        "uf":"uf",
+        "city":"City",
+        "neighborhood":"Neighborhood",
+        "street":"Street",
+        "streetNumber":"Street number"
+      }
     },
     "step4": {
-      "subtitle":"Password"
+      "subtitle":"Password",
+      "formGroup": {
+        "password":"Password",
+        "confirmPassword":"Confirm password",
+        "condicionPassword":{
+          "1":"* At least one capital letter",
+          "2":"* At least one lowercase",
+          "3":"* At least one number",
+          "4":"* Minimum length of 8 characters"
+        },
+        "remember":"Remember that you must create a key that contains alphanumeric characters and that contains at least one Uppercase and lowercase."
+      }
     }
   }
   

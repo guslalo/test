@@ -15,6 +15,8 @@
 .dropdown {
   background-color: #ffffff;
 }
+
+
 /*
 .dropdown { list-style: none; background: green; padding: 10px; display: inline-block; }
 .dropdown .nav-link {color:#fff; text-decoration: none;}
@@ -76,6 +78,10 @@
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: #FDBC20; 
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color:$color-primary; 
 }
 
 button.calendar, button.calendar:active {

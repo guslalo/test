@@ -1,7 +1,7 @@
 {
   "steps" : {
-    "next": "siguiente",
-    "back": "atrás"
+  "next": "siguiente",
+  "back": "atrás"
   },
   "language" : {
     "changue": "cambiar idioma",
@@ -21,18 +21,54 @@
   "crear-cuenta" : {
     "title": "Crear cuenta",
     "ingrese": "A continuación Ingrese sus datos para completar su registro.",
+    "mayorEdad": "¿Soy mayor de edad?",
     "step1": {
-      "subtitle":"Datos personales"
+      "subtitle":"Datos personales",
+      "formGroup": {
+        "name":"Nombre",
+        "lastName":"Apellido",
+        "secondLastName":"Segundo Apellido",
+        "gender":"Genero",
+        "email":"Email",
+        "confirmEmail":"Confirmar email",
+        "phoneNumber":"Teléfono"
+      }
     },
     "step2": {
-      "subtitle":"Datos de nacimiento"
+      "subtitle":"Datos de nacimiento",
+      "formGroup": {
+        "birthdate":"Fecha de nacimiento",
+        "ufBirth":"UF de nacimiento",
+        "municipalityBirth":"Municipio de nacimiento",
+        "nacionality":"Nacionalidad"
+      }
     },
     "step3": {
-      "subtitle":"Dirección"
+      "subtitle":"Dirección",
+      "formGroup": {
+        "cep":"Fecha de nacimiento",
+        "uf":"UF de nacimiento",
+        "city":"Ciudad",
+        "neighborhood":"Barrio",
+        "street":"Calle",
+        "streetNumber":"Numeración"
+      }
     },
     "step4": {
-      "subtitle":"Generación contraseña"
+      "subtitle":"Generación contraseña",
+      "formGroup": {
+        "password":"Genera una clave",
+        "confirmPassword":"Repetir clave",
+        "condicionPassword":{
+          "1":"* Al menos una mayúscula",
+          "2":"* Al menos una minúscula",
+          "3":"* Al menos un número",
+          "4":"* un largo mínimo de 8 carácteres"
+        },
+        "remember":"Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula y minúscula."
+      }
     }
   }
   
+
 }

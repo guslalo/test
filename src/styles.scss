@@ -4,7 +4,9 @@
 @import './assets/scss/variables.scss';
 @import './assets/scss/forms.scss';
 
-
+.color-primary {
+    color: $color-primary;
+}
  h3 {
     color:#505152;
  }
@@ -46,9 +48,10 @@ a {
     background-color: #fff;
     border: none;
     border-bottom:3px solid #999999;
-    //border-color: #dee2e6 #dee2e6 #fff;
-   
 }
+
+
+
 a {
     color: #7D7D7D;
 }

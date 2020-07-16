@@ -32,14 +32,16 @@
                   <div class="form-group col">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="customCheck1">
-                      <label class="custom-control-label" for="customCheck1">¿Tengo más de 18 años?</label>
+                      <label class="custom-control-label" for="customCheck1">
+                        {{'crear-cuenta.mayorEdad' | transloco }}
+                      </label>
                     </div>
                   </div>
                 </div>
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="name">Nombres *</label>
+                    <label for="name">{{'crear-cuenta.step1.formGroup.name' | transloco }} *</label>
                     <input   
                       type="text" 
                       name="name" 
@@ -51,11 +53,11 @@
                       formControlName="name"
                     >
                     <div *ngIf="formUno.controls['name'].errors?.required" class="invalid-feedback">
-                      nombre es necesario
+                      {{'crear-cuenta.step1.formGroup.name' | transloco }} es necesario
                     </div>
                   </div>
                   <div class="col">
-                    <label for="lastName">Apellidos *</label>
+                    <label for="lastName">{{'crear-cuenta.step1.formGroup.lastName' | transloco }} *</label>
                     <input 
                       [ngClass]="{'is-invalid': !formUno.get('lastName').valid && 
                       formUno.get('lastName').touched} "
@@ -64,30 +66,26 @@
                       id="lastName" class="form-control" placeholder=""
                     >
                     <div *ngIf="formUno.controls['lastName'].errors?.required" class="invalid-feedback">
-                      apellido es necesario
+                      {{'crear-cuenta.step1.formGroup.lastName' | transloco }}
+                       es necesario
                     </div>
                   </div>
                 </div><!--/row-->
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="razonSocial">Razón social *</label>
+                    <label for="secondlastName">{{'crear-cuenta.step1.formGroup.secondLastName' | transloco }}</label>
                     <input   
                       type="text" 
-                      name="razonSocial" 
-                      id="razonSocial"
+                      name="secondlastName" 
+                      id="secondlastName"
                       class="form-control" 
                       placeholder="" 
-                      [ngClass]="{'is-invalid': !formUno.get('razonSocial').valid && 
-                      formUno.get('razonSocial').touched}"
-                      formControlName="razonSocial"
+                      formControlName="secondlastName"
                     >
-                    <div *ngIf="formUno.controls['razonSocial'].errors?.required" class="invalid-feedback">
-                      Razón social necesario
-                    </div>
                   </div>
                   <div class="col">
-                    <label for="gender">Sexo *</label>
+                    <label for="gender">{{'crear-cuenta.step1.formGroup.gender' | transloco }} *</label>
                     <select 
                       formControlName="gender" name="gender" 
                       id="gender" class="form-control" placeholder=""
@@ -116,9 +114,23 @@
                       email erroneo
                     </div>
                   </div>
-                  
+
                   <div class="form-group col">
-                    <label for="phoneNumber">Teléfono *</label>
+                    <label for="confirmEmail">{{'crear-cuenta.step1.formGroup.confirmEmail' | transloco }}</label>
+                    <input type="confirmEmail" name="confirmEmail" id="confirmEmail" 
+                    class="form-control" placeholder="ejemplo@ejemplo.cl"
+                    [ngClass]="{'is-invalid': !formUno.get('confirmEmail').valid && 
+                    formUno.get('confirmEmail').touched}"
+                    formControlName="confirmEmail"
+                    >
+                    <div *ngIf="formUno.controls['confirmEmail'].errors?.required" class="invalid-feedback">
+                      email erroneo
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="phoneNumber">{{'crear-cuenta.step1.formGroup.phoneNumber' | transloco }} *</label>
                     <input name="phoneNumber" name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder=""
                       [ngClass]="{'is-invalid': !formUno.get('phoneNumber').valid && 
                       formUno.get('phoneNumber').touched }"
@@ -149,7 +161,9 @@
                 </ng-template>
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="birthdate">Fecha de nacimiento *</label>
+                    <label for="birthdate">
+                      {{'crear-cuenta.step2.formGroup.birthdate' | transloco }} *
+                    </label>
                     <div class="input-group">
                       <input class="form-control"
                         id="birthdate" 
@@ -168,11 +182,11 @@
                       </div>
                     </div>
                     <div *ngIf="formDos.controls['birthdate'].errors?.required" class="invalid-feedback">
-                      Fecha de nacimiento erroneo
+                      {{'crear-cuenta.step2.formGroup.birthdate' | transloco }} erroneo
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="ufBirth">UF de nacimiento *</label>
+                    <label for="ufBirth">{{'crear-cuenta.step2.formGroup.ufBirth' | transloco }} *</label>
                     <input type="ufBirth" name="ufBirth" id="ufBirth" 
                     class="form-control" 
                     [ngClass]="{'is-invalid': !formDos.get('ufBirth').valid && 
@@ -180,13 +194,13 @@
                     formControlName="ufBirth"
                     >
                     <div *ngIf="formDos.controls['ufBirth'].errors?.required" class="invalid-feedback">
-                      UF de nacimiento erroneo
+                      {{'crear-cuenta.step2.formGroup.ufBirth' | transloco }} erroneo
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="municipalityBirth">Municipio de nacimiento *</label>
+                    <label for="municipalityBirth">{{'crear-cuenta.step2.formGroup.municipalityBirth' | transloco }} *</label>
                     <input type="text" name="municipalityBirth" id="municipalityBirth" 
                     class="form-control" formControlName="municipalityBirth"
                     [ngClass]="{'is-invalid': !formDos.get('municipalityBirth').valid && 
@@ -199,7 +213,7 @@
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="confirmPasword">Nacionalidad *</label>
+                    <label for="confirmPasword">{{'crear-cuenta.step2.formGroup.nacionality' | transloco }} *</label>
                     <input 
                       type="text" name="nacionality" id="nacionality" class="form-control" placeholder=""
                       [ngClass]="{'is-invalid': !formDos.get('nacionality').valid && 
@@ -208,7 +222,7 @@
                       maxlength="20"
                     >  
                     <div *ngIf="formDos.controls['nacionality'].errors?.required" class="invalid-feedback">
-                      Nacionalidad erroneo
+                      {{'crear-cuenta.step2.formGroup.nacionality' | transloco }} erroneo
                     </div> 
                   </div>
                 </div>
@@ -234,11 +248,13 @@
             <!--paso 3-->
             <mat-step [stepControl]="formTres">
               <form [formGroup]="formTres">
-                <ng-template matStepLabel><h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4></ng-template>
+                <ng-template matStepLabel>
+                  <h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4>
+                </ng-template>
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="cep">CEP *</label>
+                    <label for="cep">{{'crear-cuenta.step3.formGroup.cep' | transloco }} *</label>
                     <input   
                       type="text" 
                       name="cep" 
@@ -250,11 +266,11 @@
                       formControlName="cep"
                     >
                     <div *ngIf="formTres.controls['cep'].errors?.required" class="invalid-feedback">
-                      CEP es necesario
+                      {{'crear-cuenta.step3.formGroup.cep' | transloco }} es necesario
                     </div>
                   </div>
                   <div class="col">
-                    <label for="uf">UF *</label>
+                    <label for="uf">{{'crear-cuenta.step3.formGroup.uf' | transloco }} *</label>
                     <input 
                       [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
                       formTres.get('uf').touched} "
@@ -263,14 +279,14 @@
                       id="uf" class="form-control" placeholder=""
                     >
                     <div *ngIf="formTres.controls['uf'].errors?.required" class="invalid-feedback">
-                      UF es necesario
+                      {{'crear-cuenta.step3.formGroup.uf' | transloco }} es necesario
                     </div>
                   </div>
                 </div><!--/row-->
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="city">Ciudad *</label>
+                    <label for="city">{{'crear-cuenta.step3.formGroup.city' | transloco }} *</label>
                     <input   
                       type="text" 
                       name="city" 
@@ -286,7 +302,7 @@
                     </div>
                   </div>
                   <div class="col">
-                    <label for="neighborhood">Barrio *</label>
+                    <label for="neighborhood">{{'crear-cuenta.step3.formGroup.neighborhood' | transloco }} *</label>
                     <input   
                       type="text" 
                       name="neighborhood" 
@@ -304,7 +320,7 @@
                 </div><!--/row-->
                 <div class="form-row">
                   <div class="form-group col">
-                    <label for="street">Calle</label>
+                    <label for="street">{{'crear-cuenta.step3.formGroup.street' | transloco }}</label>
                     <input type="text" name="street" id="street" 
                     class="form-control" placeholder=""
                     [ngClass]="{'is-invalid': !formTres.get('street').valid && 
@@ -312,12 +328,12 @@
                     formControlName="street"
                     >
                     <div *ngIf="formTres.controls['street'].errors?.required" class="invalid-feedback">
-                      calle es necesario
+                      {{'crear-cuenta.step3.formGroup.street' | transloco }} es necesario
                     </div>
                   </div>
                   
                   <div class="form-group col">
-                    <label for="streetNumber">Número *</label>
+                    <label for="streetNumber">{{'crear-cuenta.step3.formGroup.streetNumber' | transloco }} *</label>
                     <input name="streetNumber" name="streetNumber" 
                     id="streetNumber" type="number" class="form-control" placeholder=""
                       [ngClass]="{'is-invalid': !formTres.get('streetNumber').valid && 
@@ -325,19 +341,27 @@
                       formControlName="streetNumber"
                     >
                     <div *ngIf="formTres.controls['streetNumber'].errors?.required" class="invalid-feedback">
-                      número es necesario
+                      {{'crear-cuenta.step3.formGroup.streetNumber' | transloco }} es necesario
                     </div>
                   </div>
                 </div>
               
                 <div class="row">
                   <div class="col-12 col-md-6">
-                    <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                      {{ 'steps.back' | transloco }}
+                    </button>
                   </div>
                   <div class="col-12 col-md-6">
-                    <button type="button" class="btn btn-light float-right" matStepperNext [disabled]="!formTres.valid">Siguente</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-primary rounded-pill float-right"  
+                    matStepperNext  
+                    [disabled]="!formTres.valid">
+                    {{ 'steps.next' | transloco }}
+                  </button>
                   </div>
-                </div>
+                </div> 
               </form>
             </mat-step><!--/paso 3-->
 
@@ -348,7 +372,7 @@
                   <!--row-->
                   <div class="form-row">
                   <div class="form-group col">
-                    <label for="password">Genera una clave *</label>
+                    <label for="password">{{'crear-cuenta.step4.formGroup.password' | transloco }} *</label>
                     <input type="password" name="password" 
                     id="password" 
                     class="form-control"
@@ -359,15 +383,15 @@
                     >
                     <div *ngIf="formCuatro.controls['password'].errors?.pattern" class="invalid-feedback">
                       <ul>
-                        <li>* Al menos una mayúscula</li>
-                        <li>* Al menos una minúscula</li>
-                        <li>* Al menos un número</li>
-                        <li>* un largo mínimo de 8 carácteres</li>
+                        <li>{{'crear-cuenta.step4.formGroup.condicionPassword.1' | transloco }}</li>
+                        <li>{{'crear-cuenta.step4.formGroup.condicionPassword.2' | transloco }}</li>
+                        <li>{{'crear-cuenta.step4.formGroup.condicionPassword.3' | transloco }}</li>
+                        <li>{{'crear-cuenta.step4.formGroup.condicionPassword.4' | transloco }}</li>
                       </ul>
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="confirmPasword">Repetir clave *</label>
+                    <label for="confirmPasword">{{'crear-cuenta.step4.formGroup.confirmPassword' | transloco }} *</label>
                     <input 
                       type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder=""
                       [ngClass]="{'is-invalid': !formCuatro.get('confirmPassword').valid && 
@@ -376,22 +400,22 @@
                       maxlength="20"
                     >
                     <div *ngIf="formCuatro.errors?.passwordNotMatch" class="invalid-feedback">
-                      pass erroneo
+                      {{'crear-cuenta.step4.formGroup.confirmPassword' | transloco }}
                     </div>
                   </div>
                 </div>
                 <password-strength-meter [password]="formCuatro.value.password"></password-strength-meter>
                 <div class="row">
                   <div class="col">
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert  alert-secondary" role="alert">
                       <div class="row">
                         <div class="col-2 text-center">
-                          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill color-primary" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
                           </svg>
                         </div>
                         <div class="col-10 pl-0">
-                          Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga una Mayusculas y minisculas. 
+                          {{'crear-cuenta.step4.formGroup.remember' | transloco }}                        
                         </div>
                       </div>
                     </div>
@@ -400,15 +424,21 @@
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
-                    <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                      {{ 'steps.back' | transloco }}
+                    </button>
                   </div> 
                   <div class="col-12 col-md-6">
-                    <button 
-                    (click)="submit()"
-                    [disabled]="!formCuatro.valid"
-                    type="submit" class="btn btn-primary float-right"  
-                    data-toggle="modal" data-target="#exampleModal"
-                    >Siguiente</button>
+                    <button
+                      data-toggle="modal" data-target="#exampleModal"
+                      type="submit" 
+                      class="btn btn-primary rounded-pill float-right"  
+                      matStepperNext
+                      (click)="submit()"  
+                      [disabled]="!formCuatro.valid"
+                    >
+                      {{ 'steps.next' | transloco }}
+                    </button>
                   </div>
                 </div>
               <!--/row-->
@@ -416,7 +446,7 @@
             </mat-step><!--/paso 4-->
           </mat-vertical-stepper>
           <!--/stepper-->
-          
+
           <div class="col">
             <a href="javascript:history.back()" class="float-right volver"> 
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

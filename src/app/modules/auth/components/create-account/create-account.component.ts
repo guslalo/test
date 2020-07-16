@@ -47,9 +47,10 @@ export class CreateAccountComponent implements OnInit   {
     this.formUno = this._formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(2)]],
       lastName: [null, [Validators.required, Validators.minLength(2)]],
+      secondlastName: [null ],
       email: [null, [ Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
-      razonSocial: ['', [Validators.required, Validators.minLength(2)]],
+      confirmEmail: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]]
     });
     this.formDos = this._formBuilder.group({
@@ -95,6 +96,11 @@ export class CreateAccountComponent implements OnInit   {
  
   mostrarForm(form){
     console.log(form.controls);
+  }
+  confirmEmail(formGroup: FormGroup) {
+    const { value: email } = formGroup.get('password');
+    const { value: confirmEmail } = formGroup.get('confirmPassword');
+    return email === confirmEmail ? null : { passwordNotMatch: true };
   }
 
   confirmPass(formGroup: FormGroup) {
