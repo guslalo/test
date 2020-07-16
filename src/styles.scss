@@ -1,6 +1,22 @@
 /* Bootstrap SCSS*/
 @import '~bootstrap/scss/bootstrap';
 
+@import './assets/scss/variables.scss';
+@import './assets/scss/forms.scss';
+
+
+ h3 {
+    color:#505152;
+ }
+
+.bg-light {
+    background-color:$color-light !important;
+}
+
+.card {
+    border-radius: $border-radius;
+}
+
 body {
     height: 100vh;
 }
@@ -19,6 +35,10 @@ a {
         bottom: 0px;
         width: 100%;
     }
+}
+.iconMenu {
+    display: inline-block;
+    cursor: pointer;
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {

@@ -1,7 +1,22 @@
 {
-  "principal.texto" : "Lista de frutas",
+  "steps" : {
+    "next": "siguiente",
+    "back": "atrás"
+  },
+  "language" : {
+    "changue": "cambiar idioma",
+    "spanish": "español",
+    "english": "inglés"
+  },
   "login" : {
-    "title": "Iniciar sessión"
+    "title": "Acceder a cuenta",
+    "bienvenido": "Bienvenido a tu plataforma de teleconsulta",
+    "ingresa":"Ingresa con tu cuenta o crea una nueva para acceder.",
+    "copyright": "Powered by ITMS - Plataforma de medicina",
+    "access":"Acceder a la cuenta",
+    "forgotten":"¿Has olvidado tu contraseña?",
+    "login":"Iniciar sesión",
+    "create":"Crear una cuenta"   
   },
   "crear-cuenta" : {
     "title": "Crear cuenta",

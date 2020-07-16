@@ -3,21 +3,20 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-
-
-
-
-
+import { registerUser } from '../../../../models/registerUser';
 
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.scss']
+  styleUrls: ['../login/login.component.scss']
 })
 
 
 
 export class CreateAccountComponent implements OnInit   {
+
+  public userRegister: registerUser;
+
   model: NgbDateStruct;
   date: {year: number, month: number};
 
@@ -44,28 +43,28 @@ export class CreateAccountComponent implements OnInit   {
 
 
   ngOnInit(): void {
-    //this.validForm();
+
     this.formUno = this._formBuilder.group({
-      nombre: [null, [Validators.required, Validators.minLength(2)]],
-      apellidos: [null, [Validators.required, Validators.minLength(2)]],
+      name: [null, [Validators.required, Validators.minLength(2)]],
+      lastName: [null, [Validators.required, Validators.minLength(2)]],
       email: [null, [ Validators.email, Validators.required, Validators.minLength(2)]],
-      sexo: [null, [Validators.required, Validators.minLength(2)]],
+      gender: [null, [Validators.required, Validators.minLength(2)]],
       razonSocial: ['', [Validators.required, Validators.minLength(2)]],
-      telefono: ['', [Validators.required, Validators.minLength(2)]]
+      phoneNumber: ['', [Validators.required, Validators.minLength(2)]]
     });
     this.formDos = this._formBuilder.group({
-      nacimiento: ['', Validators.required],
-      ufNacimiento: ['',  Validators.required],
-      municipio: ['', Validators.required],
-      nacionalidad: ['', Validators.required]   
+      birthdate: ['', Validators.required],
+      ufBirth: ['',  Validators.required],
+      municipalityBirth: ['', Validators.required],
+      nacionality: ['', Validators.required]   
     });
     this.formTres = this._formBuilder.group({
       cep: ['', Validators.required],
       uf: ['', Validators.required],
-      ciudad: ['', Validators.required],
-      barrio: ['', Validators.required],
-      calle: ['', Validators.required],
-      numero: ['', Validators.required]
+      city: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      street: ['', Validators.required],
+      streetNumber: ['', Validators.required]
     });
     this.formCuatro = new FormGroup({
       'password': new FormControl('',[
@@ -93,101 +92,7 @@ export class CreateAccountComponent implements OnInit   {
     this.model = this.calendar.getToday();
   }
 
-  validarForm(){
-    this.formUno = this._formBuilder.group({
-      nombre: [null, [Validators.required, Validators.minLength(2)]],
-      apellidos: [null, [Validators.required, Validators.minLength(2)]],
-      email: [null, [ Validators.email, Validators.required, Validators.minLength(2)]],
-      sexo: [null, [Validators.required, Validators.minLength(2)]],
-      razonSocial: ['', [Validators.required, Validators.minLength(2)]],
-      telefono: ['', [Validators.required, Validators.minLength(2)]]
-    });
-    this.formDos = this._formBuilder.group({
-      nacimiento: ['', Validators.required],
-      ufNacimiento: ['',  Validators.required],
-      municipio: ['', Validators.required],
-      nacionalidad: ['', Validators.required]   
-    });
-    this.formTres = this._formBuilder.group({
-      cep: ['', Validators.required],
-      uf: ['', Validators.required],
-      ciudad: ['', Validators.required],
-      barrio: ['', Validators.required],
-      calle: ['', Validators.required],
-      numero: ['', Validators.required]
-    });
-    /*this.form = new FormGroup({
-      'password': new FormControl('',[
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
-      ]),
-      'confirmPassword':  new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20)
-      ])),
-    }, { 
-      validators: this.confirmPass.bind(this)  
-    },
-  );*/
-    /*
-    this.formCuatro = this._formBuilder.group({
-      'password': ['', [Validators.required,  Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/)]],
-      'confirmPassword':  new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(30)
-      ])),
-    }, { 
-      validators: this.confirmPass.bind(this)  
-    },
-    ) */
-  }
-  /*
-  validForm(){
-    this.form = new FormGroup({
-      'nombre': new FormControl('', [
-        Validators.minLength(2),
-        Validators.required
-      ]),
-      'apellidos': new FormControl('', [
-        Validators.minLength(2),
-        Validators.required
-      ]),
-      'email': new FormControl('',[
-        Validators.minLength(2),
-        Validators.email,
-        Validators.required
-      ]),
-      'telefono': new FormControl('',[
-        Validators.minLength(2),
-        Validators.required
-      ]),
-      'rut': new FormControl('',[
-        Validators.minLength(2),
-        Validators.required
-      ]),
-      'edad': new FormControl('',[
-        Validators.minLength(1),
-        Validators.required
-      ]),
-      'password': new FormControl('',[
-        Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
-      ]),
-      'confirmPassword':  new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(30)
-      ])),
-    }, { 
-      validators: this.confirmPass.bind(this)  
-    },
-  );
-  console.log(this.form);
-}*/
+ 
   mostrarForm(form){
     console.log(form.controls);
   }
@@ -201,14 +106,41 @@ export class CreateAccountComponent implements OnInit   {
   crearCuenta(){
     console.log(this.form);
     const formObject = {
-      email:this.form[0].email.value,
-      password:this.form[3].password.value,
+      personalData:{
+        name:this.form[0].name.value,
+        lastName:this.form[0].lastName.value,
+        gender:this.form[0].gender.value,
+        postalCode:"",
+        phoneNumber:this.form[0].phoneNumber.value,
+        email:this.form[0].email.value
+      },
+      birthData:{
+        birthdate:this.form[1].birthdate.value.toString(),
+        ufBirth:this.form[1].ufBirth.value,
+        municipalityBirth:this.form[1].municipalityBirth.value,
+        nacionality:this.form[1].nacionality.value,
+      },
+      addressData:{
+        cep:this.form[2].cep.value,
+        uf:this.form[2].uf.value,
+        city:this.form[2].city.value,
+        neighborhood:this.form[2].neighborhood.value,
+        street:this.form[2].street.value,
+        streetNumber:this.form[2].streetNumber.value
+      },
+      password:this.form[3].password.value
     }
+ 
     if (formObject) {
-      this.registerUser.registerUser(formObject.email, formObject.password).subscribe(
+      this.registerUser.registerUser(
+        formObject.personalData, 
+        formObject.birthData, 
+        formObject.addressData, 
+        formObject.password
+        ).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/mis-pacientes']);
+          this.router.navigate(['/']);
         },
         error => {
           console.log(error)
@@ -221,8 +153,5 @@ export class CreateAccountComponent implements OnInit   {
    console.log(this.form);
   }
 
-  stepper(){
-    
-  }
-
+  
 }

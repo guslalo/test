@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
+import { LeftColumnComponent } from './components/left-column/left-column.component';
 
 //Translation
 import { HttpClient } from '@angular/common/http';
@@ -23,6 +24,8 @@ import { SharedModule } from './../../shared/shared.module';
 
 import  { MatStepperModule } from '@angular/material/stepper';
 import  { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { LangComponent } from './components/lang/lang.component';
+
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import  { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     RecoveryComponent,
     CreateAccountComponent,
-    BlockedAccountComponent
+    BlockedAccountComponent,
+    LeftColumnComponent,
+    LangComponent
   ],
   imports: [
     CommonModule,

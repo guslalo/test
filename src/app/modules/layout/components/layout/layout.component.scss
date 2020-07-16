@@ -10,10 +10,14 @@ html {
   }
   
   #header {
+    position: relative;
+    z-index: 2;
+    height: 80px;
     display: flex;
     align-items: center;
-    background: linear-gradient(#444444, #333333);
+    background: #FFFFFF;
     color: #bbbbbb;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);
   }
   
   #headerContent {
@@ -22,7 +26,7 @@ html {
 
   #page {
     display: flex;
-    min-height: 100vh;
+    height: calc(100vh - 80px);
     //height: calc( 100vh - 30px);
     width: 100%;
    
@@ -33,16 +37,22 @@ html {
   }
   .nav {
     a {
-      color: #ffffff;
+      color: #3F3F3F;
       padding: 1rem 2rem;
+      &.active {
+        background: #F7F7F7;
+        border-left: 7px solid #3BC4CA;
+        color: #35A6F5;
+      }
       &:hover{
-        background: rgba($color: #000000, $alpha: 0.2);
+        background: rgba($color: #000000, $alpha: 0.1);
       }
     }
   }
   #sideBar {
     position: relative;
-    background-color:#636363;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
     min-height: 100%;
     width: 20%;
     max-width: 250px;
@@ -50,7 +60,7 @@ html {
     //border-right:6px solid #012a62;
     .topSidebar {
       //height: 80px;
-      background:#444444;
+      background:#FFFFFF;
     }
     .top {
         text-align: center;
@@ -83,10 +93,9 @@ html {
 }
   
   #content {
-    //background: blue;
+    background: #f2f2f2;
     flex: 1 0 auto;
     width: 80%;
-    /* enable grow, disable shrink */
   }
 
   

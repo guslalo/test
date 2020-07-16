@@ -1,7 +1,22 @@
 {
-  "principal.texto" : "List of fruits",
+  "steps" : {
+    "next": "next",
+    "back": "back"
+  },
+  "language" : {
+    "changue": "change language",
+    "spanish": "spanish",
+    "english": "english"
+  },
   "login" : {
-    "title": "Log in"
+    "title": "Log in",
+    "bienvenido": "Welcome to your platform of Medicine",
+    "ingresa":"Login with your account or create a new one to access.",
+    "copyright": "Powered by ITMS - Medicine platform",
+    "access":"Access account",
+    "forgotten":"forgotten your password?",
+    "login":"Login",
+    "create":"Create sccount"         
   },
   "crear-cuenta" : {
     "title": "Create Account",

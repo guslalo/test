@@ -1,401 +1,437 @@
 <div class="container-fluid h-100 d-inline-block" id="login">
-    <div class="row h-100">
-      <div class="col-12 col-md-5 left d-none d-md-block">
-        <div class="logo h-100">  
-          <div class="fadeIn first w-50 mx-auto text-center">
-            <img src="assets/img/Logo03.webp" id="icon" alt="itms"/>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-7  right">
-        <div class="row vertical-center h-100">
-          <div class="col-12 col-md-9 col-lg-8 mx-auto p-3  align-self-center">
-            <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
-            <div class="row">
-              <div class="col ">
-                <h2>{{'crear-cuenta.title' | transloco }}</h2> 
-              </div>
-           
-              <div class="col">
-                <a href="javascript:history.back()" class="float-right volver"> < Volver </a>
-              </div>
-            </div>
-            <p>{{'crear-cuenta.ingrese' | transloco }}</p>
-            <mat-vertical-stepper linear #stepper>
-              <!-- paso 1-->      
-              <mat-step [stepControl]="formUno"> 
-                <form [formGroup]="formUno" (ngSubmit)="submit()" novalidate="" class="">
-                  <ng-template matStepLabel>
-                    <h4>{{'crear-cuenta.step1.subtitle' | transloco }}</h4>
-                  </ng-template>
-                  <!--row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="nombre">Nombres *</label>
-                      <input   
-                        type="text" 
-                        name="nombre" 
-                        id="nombre"
-                        class="form-control" 
-                        placeholder="" 
-                        [ngClass]="{'is-invalid': !formUno.get('nombre').valid && 
-                        formUno.get('nombre').touched}"
-                        formControlName="nombre"
-                      >
-                      <div *ngIf="formUno.controls['nombre'].errors?.required" class="invalid-feedback">
-                        nombre es necesario
-                      </div>
-                    </div>
-                    <div class="col">
-                      <label for="apellidos">Apellidos *</label>
-                      <input 
-                        [ngClass]="{'is-invalid': !formUno.get('apellidos').valid && 
-                        formUno.get('apellidos').touched} "
-                        formControlName="apellidos"
-                        type="text" name="apellidos" 
-                        id="apellidos" class="form-control" placeholder=""
-                      >
-                      <div *ngIf="formUno.controls['apellidos'].errors?.required" class="invalid-feedback">
-                        apellido es necesario
-                      </div>
-                    </div>
-                  </div><!--/row-->
-                  <!--row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="razonSocial">Razón social *</label>
-                      <input   
-                        type="text" 
-                        name="razonSocial" 
-                        id="razonSocial"
-                        class="form-control" 
-                        placeholder="" 
-                        [ngClass]="{'is-invalid': !formUno.get('razonSocial').valid && 
-                        formUno.get('razonSocial').touched}"
-                        formControlName="razonSocial"
-                      >
-                      <div *ngIf="formUno.controls['razonSocial'].errors?.required" class="invalid-feedback">
-                        Razón social necesario
-                      </div>
-                    </div>
-                    <div class="col">
-                      <label for="sexo">Sexo *</label>
-                      <select 
-                      formControlName="sexo" name="sexo" 
-                      id="sexo" class="form-control" placeholder=""
-                      class="form-control" id="sexo"
-                      [ngClass]="{'is-invalid': !formUno.get('sexo').valid && 
-                      formUno.get('sexo').touched} "
-                      >
-                        <option>Masculino</option>
-                        <option>Femenino</option>
-                      </select>
-                      <div *ngIf="formUno.controls['sexo'].errors?.required" class="invalid-feedback">
-                        indique su sexo
-                      </div>
-                    </div>
-                  </div><!--/row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="email">Email</label>
-                      <input type="email" name="email" id="email" 
-                      class="form-control" placeholder="ejemplo@ejemplo.cl"
-                      [ngClass]="{'is-invalid': !formUno.get('email').valid && 
-                      formUno.get('email').touched}"
-                      formControlName="email"
-                      >
-                      <div *ngIf="formUno.controls['email'].errors?.required" class="invalid-feedback">
-                        email erroneo
-                      </div>
-                    </div>
-                    
-                    <div class="form-group col">
-                      <label for="telefono">Teléfono *</label>
-                      <input name="telefono" name="telefono" id="telefono" type="text" class="form-control" placeholder=""
-                        [ngClass]="{'is-invalid': !formUno.get('telefono').valid && 
-                        formUno.get('telefono').touched }"
-                        formControlName="telefono"
-                      >
-                      <div *ngIf="formUno.controls['telefono'].errors?.required" class="invalid-feedback">
-                        telefono es necesario
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <button type="button" class="btn btn-light" matStepperNext  [disabled]="!formUno.valid">Siguente</button>
-                  </div>          
-                </form>
-              </mat-step><!-- /paso 1--> 
-              <!-- paso 2--> 
-              <mat-step [stepControl]="formDos">
-                <form [formGroup]="formDos">
-                  <ng-template matStepLabel>
-                    <h4>{{'crear-cuenta.step2.subtitle' | transloco }}</h4>
-                  </ng-template>
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="nacimiento">Fecha de nacimiento *</label>
-                      <div class="input-group">
-                        <input class="form-control"
-                          id="nacimiento" 
-                          placeholder="yyyy-mm-dd"
-                          name="nacimiento" 
-                          [(ngModel)]="model" 
-                          [minDate]="{year: 1940, month: 1, day: 1}"
-                          ngbDatepicker #d="ngbDatepicker"
-                          formControlName="nacimiento"
-                          [ngClass]="{'is-invalid': !formDos.get('nacimiento').valid && 
-                          formDos.get('nacimiento').touched}"
-                          (click)="d.toggle()"
-                        >
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
-                        </div>
-                      </div>
-                      <div *ngIf="formDos.controls['nacimiento'].errors?.required" class="invalid-feedback">
-                        email erroneo
-                      </div>
-                    </div>
-                    <div class="form-group col">
-                      <label for="nacimiento">UF de nacimiento *</label>
-                      <input type="ufNacimiento" name="ufNacimiento" id="ufNacimiento" 
-                      class="form-control" placeholder="ejemplo@ejemplo.cl"
-                      [ngClass]="{'is-invalid': !formDos.get('ufNacimiento').valid && 
-                      formDos.get('ufNacimiento').touched}"
-                      formControlName="ufNacimiento"
-                      >
-                      <div *ngIf="formDos.controls['ufNacimiento'].errors?.required" class="invalid-feedback">
-                        email erroneo
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="municipio">Municipio de nacimiento *</label>
-                      <input type="text" name="municipio" id="municipio" class="form-control" formControlName="municipio"
-                      [ngClass]="{'is-invalid': !formDos.get('municipio').valid && 
-                      formDos.get('municipio').touched}"
-                      formControlName="municipio"
-                      maxlength="20"
-                      >
-                      <div *ngIf="formDos.controls['municipio'].errors?.pattern" class="invalid-feedback">
-                        error
-                      </div>
-                    </div>
-                    <div class="form-group col">
-                      <label for="confirmPasword">Nacionalidad *</label>
-                      <input 
-                        type="text" name="nacionalidad" id="nacionalidad" class="form-control" placeholder=""
-                        [ngClass]="{'is-invalid': !formDos.get('nacionalidad').valid && 
-                        formDos.get('nacionalidad').touched && formDos.get('nacionalidad') != formDos.get('nacionalidad')}"
-                        formControlName="nacionalidad"
-                        maxlength="20"
-                      >                    
-                      <div *ngIf="formDos.errors?.passwordNotMatch" class="invalid-feedback">
-                        pass erroneo
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 col-md-6">
-                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
-                    </div>
-                    <div class="col-12 col-md-6">
-                      <button type="button" class="btn btn-light float-right" (click)="mostrarForm(formDos)" [disabled]="!formDos.valid" matStepperNext>Siguente</button>
-                    </div>
-                  </div> 
-                </form>
-              </mat-step><!-- /paso 2--> 
+  <div class="row h-100">
+    <!--columnleft-->
+    <div class="col-12 col-md-4 left d-none d-md-block">
+      <app-left-column></app-left-column>
+    </div><!--/columnleft-->
+    
+    <div class="col-12 col-md-8 right">
+      <!--lang component-->
+      <div class="boxIdioma">
+        <app-lang></app-lang>
+      </div><!--/lang component-->
 
-              <!--paso 3-->
-              <mat-step [stepControl]="formTres">
-                <form [formGroup]="formTres">
-                  <ng-template matStepLabel><h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4></ng-template>
-                  <!--row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="cep">CEP *</label>
-                      <input   
-                        type="text" 
-                        name="cep" 
-                        id="cep"
-                        class="form-control" 
-                        placeholder="" 
-                        [ngClass]="{'is-invalid': !formTres.get('cep').valid && 
-                        formTres.get('cep').touched}"
-                        formControlName="cep"
-                      >
-                      <div *ngIf="formTres.controls['cep'].errors?.required" class="invalid-feedback">
-                        CEP es necesario
-                      </div>
-                    </div>
-                    <div class="col">
-                      <label for="uf">UF *</label>
-                      <input 
-                        [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
-                        formTres.get('uf').touched} "
-                        formControlName="uf"
-                        type="text" name="uf" 
-                        id="uf" class="form-control" placeholder=""
-                      >
-                      <div *ngIf="formTres.controls['uf'].errors?.required" class="invalid-feedback">
-                        UF es necesario
-                      </div>
-                    </div>
-                  </div><!--/row-->
-                  <!--row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="ciudad">Ciudad *</label>
-                      <input   
-                        type="text" 
-                        name="ciudad" 
-                        id="ciudad"
-                        class="form-control" 
-                        placeholder="" 
-                        [ngClass]="{'is-invalid': !formTres.get('ciudad').valid && 
-                        formTres.get('ciudad').touched}"
-                        formControlName="ciudad"
-                      >
-                      <div *ngIf="formTres.controls['ciudad'].errors?.required" class="invalid-feedback">
-                        ciudad necesario
-                      </div>
-                    </div>
-                    <div class="col">
-                      <label for="barrio">Barrio *</label>
-                      <input   
-                        type="text" 
-                        name="barrio" 
-                        id="barrio"
-                        class="form-control" 
-                        placeholder="" 
-                        [ngClass]="{'is-invalid': !formTres.get('barrio').valid && 
-                        formTres.get('barrio').touched}"
-                        formControlName="barrio"
-                      >
-                      <div *ngIf="formTres.controls['barrio'].errors?.required" class="invalid-feedback">
-                        Barrio es necesario
-                      </div>
-                    </div>
-                  </div><!--/row-->
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="calle">Calle</label>
-                      <input type="text" name="calle" id="calle" 
-                      class="form-control" placeholder=""
-                      [ngClass]="{'is-invalid': !formTres.get('calle').valid && 
-                      formTres.get('calle').touched}"
-                      formControlName="calle"
-                      >
-                      <div *ngIf="formTres.controls['calle'].errors?.required" class="invalid-feedback">
-                        calle es necesario
-                      </div>
-                    </div>
-                    
-                    <div class="form-group col">
-                      <label for="numero">Número *</label>
-                      <input name="numero" name="numero" id="numero" type="text" class="form-control" placeholder=""
-                        [ngClass]="{'is-invalid': !formTres.get('numero').valid && 
-                        formTres.get('numero').touched }"
-                        formControlName="numero"
-                      >
-                      <div *ngIf="formTres.controls['numero'].errors?.required" class="invalid-feedback">
-                        número es necesario
-                      </div>
+      <div class="row vertical-center h-100">
+        <div class="col-12 col-md-9 col-lg-8 mx-auto p-3  align-self-center">
+          <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+          <div class="row">
+            <div class="col ">
+              <h2>{{'crear-cuenta.title' | transloco }}</h2> 
+            </div>
+          </div>
+          <p>{{'crear-cuenta.ingrese' | transloco }}</p>
+          <!--stepper-->
+          <mat-vertical-stepper linear #stepper>
+            <!-- paso 1-->      
+            <mat-step [stepControl]="formUno"> 
+              <form [formGroup]="formUno" (ngSubmit)="submit()" novalidate="" class="">
+                <ng-template matStepLabel>
+                  <h4>{{'crear-cuenta.step1.subtitle' | transloco }}</h4>
+                </ng-template>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                      <label class="custom-control-label" for="customCheck1">¿Tengo más de 18 años?</label>
                     </div>
                   </div>
-                
-                  <div class="row">
-                    <div class="col-12 col-md-6">
-                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
-                    </div>
-                    <div class="col-12 col-md-6">
-                      <button type="button" class="btn btn-light float-right" matStepperNext [disabled]="!formTres.valid">Siguente</button>
+                </div>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="name">Nombres *</label>
+                    <input   
+                      type="text" 
+                      name="name" 
+                      id="name"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formUno.get('name').valid && 
+                      formUno.get('name').touched}"
+                      formControlName="name"
+                    >
+                    <div *ngIf="formUno.controls['name'].errors?.required" class="invalid-feedback">
+                      nombre es necesario
                     </div>
                   </div>
-                </form>
-              </mat-step><!--/paso 3-->
-               <!--paso 4-->
-              <mat-step [stepControl]="formCuatro"> 
-                <form [formGroup]="formCuatro">
-                  <ng-template matStepLabel><h4>{{'crear-cuenta.step4.subtitle' | transloco }}</h4></ng-template>
-                   <!--row-->
-                   <div class="form-row">
-                    <div class="form-group col">
-                      <label for="password">Genera una clave *</label>
-                      <input type="password" name="password" 
-                      id="password" 
-                      class="form-control"
-                      [ngClass]="{'is-invalid': !formCuatro.get('password').valid && 
-                      formCuatro.get('password').touched}"
-                      formControlName="password"
+                  <div class="col">
+                    <label for="lastName">Apellidos *</label>
+                    <input 
+                      [ngClass]="{'is-invalid': !formUno.get('lastName').valid && 
+                      formUno.get('lastName').touched} "
+                      formControlName="lastName"
+                      type="text" name="lastName" 
+                      id="lastName" class="form-control" placeholder=""
+                    >
+                    <div *ngIf="formUno.controls['lastName'].errors?.required" class="invalid-feedback">
+                      apellido es necesario
+                    </div>
+                  </div>
+                </div><!--/row-->
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="razonSocial">Razón social *</label>
+                    <input   
+                      type="text" 
+                      name="razonSocial" 
+                      id="razonSocial"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formUno.get('razonSocial').valid && 
+                      formUno.get('razonSocial').touched}"
+                      formControlName="razonSocial"
+                    >
+                    <div *ngIf="formUno.controls['razonSocial'].errors?.required" class="invalid-feedback">
+                      Razón social necesario
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="gender">Sexo *</label>
+                    <select 
+                      formControlName="gender" name="gender" 
+                      id="gender" class="form-control" placeholder=""
+                      class="form-control" id="gender"
+                      [ngClass]="{'is-invalid': !formUno.get('gender').valid && 
+                      formUno.get('gender').touched}"
+                    >
+                      <option>Masculino</option>
+                      <option>Femenino</option>
+                    </select>
+                    <div *ngIf="formUno.controls['gender'].errors?.required" class="invalid-feedback">
+                      indique su sexo
+                    </div>
+                  </div>
+                </div><!--/row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" 
+                    class="form-control" placeholder="ejemplo@ejemplo.cl"
+                    [ngClass]="{'is-invalid': !formUno.get('email').valid && 
+                    formUno.get('email').touched}"
+                    formControlName="email"
+                    >
+                    <div *ngIf="formUno.controls['email'].errors?.required" class="invalid-feedback">
+                      email erroneo
+                    </div>
+                  </div>
+                  
+                  <div class="form-group col">
+                    <label for="phoneNumber">Teléfono *</label>
+                    <input name="phoneNumber" name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !formUno.get('phoneNumber').valid && 
+                      formUno.get('phoneNumber').touched }"
+                      formControlName="phoneNumber"
+                    >
+                    <div *ngIf="formUno.controls['phoneNumber'].errors?.required" class="invalid-feedback">
+                      telefono es necesario
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button 
+                    type="button" 
+                    class="btn btn-primary rounded-pill float-right"  
+                    matStepperNext  
+                    [disabled]="!formUno.valid">
+                    {{ 'steps.next' | transloco }}
+                  </button>
+                </div>          
+              </form>
+            </mat-step><!-- /paso 1--> 
+            
+            <!-- paso 2--> 
+            <mat-step [stepControl]="formDos">
+              <form [formGroup]="formDos">
+                <ng-template matStepLabel>
+                  <h4>{{'crear-cuenta.step2.subtitle' | transloco }}</h4>
+                </ng-template>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="birthdate">Fecha de nacimiento *</label>
+                    <div class="input-group">
+                      <input class="form-control"
+                        id="birthdate" 
+                        placeholder="yyyy-mm-dd"
+                        name="birthdate" 
+                        [(ngModel)]="model" 
+                        [minDate]="{year: 1940, month: 1, day: 1}"
+                        ngbDatepicker #d="ngbDatepicker"
+                        formControlName="birthdate"
+                        [ngClass]="{'is-invalid': !formDos.get('birthdate').valid && 
+                        formDos.get('birthdate').touched}"
+                        (click)="d.toggle()"
+                      >
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                    <div *ngIf="formDos.controls['birthdate'].errors?.required" class="invalid-feedback">
+                      Fecha de nacimiento erroneo
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label for="ufBirth">UF de nacimiento *</label>
+                    <input type="ufBirth" name="ufBirth" id="ufBirth" 
+                    class="form-control" 
+                    [ngClass]="{'is-invalid': !formDos.get('ufBirth').valid && 
+                    formDos.get('ufBirth').touched}"
+                    formControlName="ufBirth"
+                    >
+                    <div *ngIf="formDos.controls['ufBirth'].errors?.required" class="invalid-feedback">
+                      UF de nacimiento erroneo
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="municipalityBirth">Municipio de nacimiento *</label>
+                    <input type="text" name="municipalityBirth" id="municipalityBirth" 
+                    class="form-control" formControlName="municipalityBirth"
+                    [ngClass]="{'is-invalid': !formDos.get('municipalityBirth').valid && 
+                    formDos.get('municipalityBirth').touched}"
+                    formControlName="municipalityBirth"
+                    maxlength="20"
+                    >
+                    <div *ngIf="formDos.controls['municipalityBirth'].errors?.pattern" class="invalid-feedback">
+                      error
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label for="confirmPasword">Nacionalidad *</label>
+                    <input 
+                      type="text" name="nacionality" id="nacionality" class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !formDos.get('nacionality').valid && 
+                      formDos.get('nacionality').touched && formDos.get('nacionality') != formDos.get('nacionality')}"
+                      formControlName="nacionality"
                       maxlength="20"
-                      >
-                      <div *ngIf="formCuatro.controls['password'].errors?.pattern" class="invalid-feedback">
-                        <ul>
-                          <li>* Al menos una mayúscula</li>
-                          <li>* Al menos una minúscula</li>
-                          <li>* Al menos un número</li>
-                          <li>* un largo mínimo de 8 carácteres</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="form-group col">
-                      <label for="confirmPasword">Repetir clave *</label>
-                      <input 
-                        type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder=""
-                        [ngClass]="{'is-invalid': !formCuatro.get('confirmPassword').valid && 
-                        formCuatro.get('confirmPassword').touched && formCuatro.get('confirmPassword') != formCuatro.get('password')}"
-                        formControlName="confirmPassword"
-                        maxlength="20"
-                      >
-                      <div *ngIf="formCuatro.errors?.passwordNotMatch" class="invalid-feedback">
-                        pass erroneo
-                      </div>
+                    >  
+                    <div *ngIf="formDos.controls['nacionality'].errors?.required" class="invalid-feedback">
+                      Nacionalidad erroneo
+                    </div> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                      {{ 'steps.back' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary rounded-pill float-right"  
+                    matStepperNext  
+                    [disabled]="!formDos.valid">
+                    {{ 'steps.next' | transloco }}
+                  </button>
+                  </div>
+                </div> 
+              </form>
+            </mat-step><!-- /paso 2--> 
+
+            <!--paso 3-->
+            <mat-step [stepControl]="formTres">
+              <form [formGroup]="formTres">
+                <ng-template matStepLabel><h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4></ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="cep">CEP *</label>
+                    <input   
+                      type="text" 
+                      name="cep" 
+                      id="cep"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formTres.get('cep').valid && 
+                      formTres.get('cep').touched}"
+                      formControlName="cep"
+                    >
+                    <div *ngIf="formTres.controls['cep'].errors?.required" class="invalid-feedback">
+                      CEP es necesario
                     </div>
                   </div>
-                  <password-strength-meter [password]="formCuatro.value.password"></password-strength-meter>
-                  <div class="row">
-                    <div class="col">
-                      <div class="alert alert-warning" role="alert">
-                        <div class="row">
-                          <div class="col-2 text-center">
-                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
-                            </svg>
-                          </div>
-                          <div class="col-10 pl-0">
-                            Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga una Mayusculas y minisculas. 
-                          </div>
+                  <div class="col">
+                    <label for="uf">UF *</label>
+                    <input 
+                      [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
+                      formTres.get('uf').touched} "
+                      formControlName="uf"
+                      type="text" name="uf" 
+                      id="uf" class="form-control" placeholder=""
+                    >
+                    <div *ngIf="formTres.controls['uf'].errors?.required" class="invalid-feedback">
+                      UF es necesario
+                    </div>
+                  </div>
+                </div><!--/row-->
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="city">Ciudad *</label>
+                    <input   
+                      type="text" 
+                      name="city" 
+                      id="city"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formTres.get('city').valid && 
+                      formTres.get('city').touched}"
+                      formControlName="city"
+                    >
+                    <div *ngIf="formTres.controls['city'].errors?.required" class="invalid-feedback">
+                      ciudad necesario
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="neighborhood">Barrio *</label>
+                    <input   
+                      type="text" 
+                      name="neighborhood" 
+                      id="neighborhood"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formTres.get('neighborhood').valid && 
+                      formTres.get('neighborhood').touched}"
+                      formControlName="neighborhood"
+                    >
+                    <div *ngIf="formTres.controls['neighborhood'].errors?.required" class="invalid-feedback">
+                      Barrio es necesario
+                    </div>
+                  </div>
+                </div><!--/row-->
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="street">Calle</label>
+                    <input type="text" name="street" id="street" 
+                    class="form-control" placeholder=""
+                    [ngClass]="{'is-invalid': !formTres.get('street').valid && 
+                    formTres.get('street').touched}"
+                    formControlName="street"
+                    >
+                    <div *ngIf="formTres.controls['street'].errors?.required" class="invalid-feedback">
+                      calle es necesario
+                    </div>
+                  </div>
+                  
+                  <div class="form-group col">
+                    <label for="streetNumber">Número *</label>
+                    <input name="streetNumber" name="streetNumber" 
+                    id="streetNumber" type="number" class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !formTres.get('streetNumber').valid && 
+                      formTres.get('streetNumber').touched }"
+                      formControlName="streetNumber"
+                    >
+                    <div *ngIf="formTres.controls['streetNumber'].errors?.required" class="invalid-feedback">
+                      número es necesario
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button type="button" class="btn btn-light float-right" matStepperNext [disabled]="!formTres.valid">Siguente</button>
+                  </div>
+                </div>
+              </form>
+            </mat-step><!--/paso 3-->
+
+              <!--paso 4-->
+            <mat-step [stepControl]="formCuatro"> 
+              <form [formGroup]="formCuatro">
+                <ng-template matStepLabel><h4>{{'crear-cuenta.step4.subtitle' | transloco }}</h4></ng-template>
+                  <!--row-->
+                  <div class="form-row">
+                  <div class="form-group col">
+                    <label for="password">Genera una clave *</label>
+                    <input type="password" name="password" 
+                    id="password" 
+                    class="form-control"
+                    [ngClass]="{'is-invalid': !formCuatro.get('password').valid && 
+                    formCuatro.get('password').touched}"
+                    formControlName="password"
+                    maxlength="20"
+                    >
+                    <div *ngIf="formCuatro.controls['password'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>* Al menos una mayúscula</li>
+                        <li>* Al menos una minúscula</li>
+                        <li>* Al menos un número</li>
+                        <li>* un largo mínimo de 8 carácteres</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label for="confirmPasword">Repetir clave *</label>
+                    <input 
+                      type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder=""
+                      [ngClass]="{'is-invalid': !formCuatro.get('confirmPassword').valid && 
+                      formCuatro.get('confirmPassword').touched && formCuatro.get('confirmPassword') != formCuatro.get('password')}"
+                      formControlName="confirmPassword"
+                      maxlength="20"
+                    >
+                    <div *ngIf="formCuatro.errors?.passwordNotMatch" class="invalid-feedback">
+                      pass erroneo
+                    </div>
+                  </div>
+                </div>
+                <password-strength-meter [password]="formCuatro.value.password"></password-strength-meter>
+                <div class="row">
+                  <div class="col">
+                    <div class="alert alert-warning" role="alert">
+                      <div class="row">
+                        <div class="col-2 text-center">
+                          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"/>
+                          </svg>
+                        </div>
+                        <div class="col-10 pl-0">
+                          Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga una Mayusculas y minisculas. 
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-12 col-md-6">
-                      <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
-                      <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
-                    </div> 
-                    <div class="col-12 col-md-6">
-                      <button 
-                      (click)="submit()"
-                      [disabled]="!formCuatro.valid"
-                      type="submit" class="btn btn-primary float-right"  
-                      data-toggle="modal" data-target="#exampleModal"
-                      >Siguiente</button>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
+                    <button type="button" class="btn btn-light" matStepperPrevious>Atrás</button>
+                  </div> 
+                  <div class="col-12 col-md-6">
+                    <button 
+                    (click)="submit()"
+                    [disabled]="!formCuatro.valid"
+                    type="submit" class="btn btn-primary float-right"  
+                    data-toggle="modal" data-target="#exampleModal"
+                    >Siguiente</button>
                   </div>
-                <!--/row-->
-                </form>   
-              </mat-step><!--/paso 4-->
-            </mat-vertical-stepper>
+                </div>
+              <!--/row-->
+              </form>   
+            </mat-step><!--/paso 4-->
+          </mat-vertical-stepper>
+          <!--/stepper-->
           
-           
+          <div class="col">
+            <a href="javascript:history.back()" class="float-right volver"> 
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+              </svg>
+            </a>
           </div>
+          
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

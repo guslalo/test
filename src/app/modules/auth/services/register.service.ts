@@ -18,8 +18,11 @@ export class RegisterService {
         private router: Router) {  }
 
     // post registerUser
-    registerUser(username, password): Observable<any> {
-        return this.http.post<any>( environment.baseUrl + this.registerUrl , { username, password } );
+    registerUser(personalData, birthData, addressData, password): Observable<any> {
+        return this.http.post<any>( 
+            environment.baseUrl + this.registerUrl , { 
+            personalData, birthData, addressData, password
+        } );
     }
 
 }

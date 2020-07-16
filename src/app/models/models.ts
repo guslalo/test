@@ -13,7 +13,14 @@ export class UserLogin {
     public image:string
     ){
 
-  }
+}
+
+
+
+
+  // cliente
+
+
   /*
   id:number;
   type:string;
