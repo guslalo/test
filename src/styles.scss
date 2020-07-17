@@ -7,6 +7,21 @@
 .color-primary {
     color: $color-primary;
 }
+
+@include media-breakpoint-only(xs) {
+    .btn-block-xs-only {
+      display: block;
+      width: 100%;
+    }
+  }
+
+.modal-backdrop {
+    background-color: #ffffff;
+    &.show {
+        opacity: 0.85;
+    }
+}
+
  h3 {
     color:#505152;
  }
@@ -43,11 +58,19 @@ a {
     cursor: pointer;
 }
 
+.nav-tabs {
+    border-bottom: 1px solid #35A6F5;
+}
+
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #495057;
-    background-color: #fff;
+    background: none !important;
     border: none;
-    border-bottom:3px solid #999999;
+    border-bottom:4px solid #35A6F5;
+}
+
+.bg-white {
+    background: #ffffff;
 }
 
 

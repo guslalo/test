@@ -13,7 +13,7 @@
 
       <div class="row vertical-center h-100">
         <div class="col-12 col-md-9 col-lg-8 mx-auto p-3  align-self-center">
-          <img class=" d-md-none mb-5" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
+          <img class=" d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms"/>
           <div class="row">
             <div class="col ">
               <h2>{{'crear-cuenta.title' | transloco }}</h2> 
@@ -40,7 +40,7 @@
                 </div>
                 <!--row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="name">{{'crear-cuenta.step1.formGroup.name' | transloco }} *</label>
                     <input   
                       type="text" 
@@ -56,7 +56,7 @@
                       {{'crear-cuenta.step1.formGroup.name' | transloco }} es necesario
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-12 col-md-6">
                     <label for="lastName">{{'crear-cuenta.step1.formGroup.lastName' | transloco }} *</label>
                     <input 
                       [ngClass]="{'is-invalid': !formUno.get('lastName').valid && 
@@ -73,7 +73,7 @@
                 </div><!--/row-->
                 <!--row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="secondlastName">{{'crear-cuenta.step1.formGroup.secondLastName' | transloco }}</label>
                     <input   
                       type="text" 
@@ -84,7 +84,7 @@
                       formControlName="secondlastName"
                     >
                   </div>
-                  <div class="col">
+                  <div class="col-12 col-md-6">
                     <label for="gender">{{'crear-cuenta.step1.formGroup.gender' | transloco }} *</label>
                     <select 
                       formControlName="gender" name="gender" 
@@ -102,7 +102,7 @@
                   </div>
                 </div><!--/row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" 
                     class="form-control" placeholder="ejemplo@ejemplo.cl"
@@ -115,7 +115,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="confirmEmail">{{'crear-cuenta.step1.formGroup.confirmEmail' | transloco }}</label>
                     <input type="confirmEmail" name="confirmEmail" id="confirmEmail" 
                     class="form-control" placeholder="ejemplo@ejemplo.cl"
@@ -131,7 +131,7 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="phoneNumber">{{'crear-cuenta.step1.formGroup.phoneNumber' | transloco }} *</label>
-                    <input name="phoneNumber" name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder=""
+                    <input name="text" name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder=""
                       [ngClass]="{'is-invalid': !formUno.get('phoneNumber').valid && 
                       formUno.get('phoneNumber').touched }"
                       formControlName="phoneNumber"
@@ -144,7 +144,7 @@
                 <div>
                   <button 
                     type="button" 
-                    class="btn btn-primary rounded-pill float-right"  
+                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"  
                     matStepperNext  
                     [disabled]="!formUno.valid">
                     {{ 'steps.next' | transloco }}
@@ -160,7 +160,7 @@
                   <h4>{{'crear-cuenta.step2.subtitle' | transloco }}</h4>
                 </ng-template>
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="birthdate">
                       {{'crear-cuenta.step2.formGroup.birthdate' | transloco }} *
                     </label>
@@ -185,7 +185,7 @@
                       {{'crear-cuenta.step2.formGroup.birthdate' | transloco }} erroneo
                     </div>
                   </div>
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="ufBirth">{{'crear-cuenta.step2.formGroup.ufBirth' | transloco }} *</label>
                     <input type="ufBirth" name="ufBirth" id="ufBirth" 
                     class="form-control" 
@@ -199,7 +199,7 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="municipalityBirth">{{'crear-cuenta.step2.formGroup.municipalityBirth' | transloco }} *</label>
                     <input type="text" name="municipalityBirth" id="municipalityBirth" 
                     class="form-control" formControlName="municipalityBirth"
@@ -212,7 +212,7 @@
                       error
                     </div>
                   </div>
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="confirmPasword">{{'crear-cuenta.step2.formGroup.nacionality' | transloco }} *</label>
                     <input 
                       type="text" name="nacionality" id="nacionality" class="form-control" placeholder=""
@@ -228,14 +228,15 @@
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-6">
-                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                    <button type="button" class="btn  mb-3 mb-sm-0
+                    btn-outline-primary rounded-pill btn-block-xs-only" matStepperPrevious>
                       {{ 'steps.back' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
                     <button 
                     type="button" 
-                    class="btn btn-primary rounded-pill float-right"  
+                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"  
                     matStepperNext  
                     [disabled]="!formDos.valid">
                     {{ 'steps.next' | transloco }}
@@ -253,7 +254,7 @@
                 </ng-template>
                 <!--row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="cep">{{'crear-cuenta.step3.formGroup.cep' | transloco }} *</label>
                     <input   
                       type="text" 
@@ -269,7 +270,7 @@
                       {{'crear-cuenta.step3.formGroup.cep' | transloco }} es necesario
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-12 col-md-6">
                     <label for="uf">{{'crear-cuenta.step3.formGroup.uf' | transloco }} *</label>
                     <input 
                       [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
@@ -285,7 +286,7 @@
                 </div><!--/row-->
                 <!--row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="city">{{'crear-cuenta.step3.formGroup.city' | transloco }} *</label>
                     <input   
                       type="text" 
@@ -301,7 +302,7 @@
                       ciudad necesario
                     </div>
                   </div>
-                  <div class="col">
+                  <div class="col-12 col-md-6">
                     <label for="neighborhood">{{'crear-cuenta.step3.formGroup.neighborhood' | transloco }} *</label>
                     <input   
                       type="text" 
@@ -319,7 +320,7 @@
                   </div>
                 </div><!--/row-->
                 <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="street">{{'crear-cuenta.step3.formGroup.street' | transloco }}</label>
                     <input type="text" name="street" id="street" 
                     class="form-control" placeholder=""
@@ -332,7 +333,7 @@
                     </div>
                   </div>
                   
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="streetNumber">{{'crear-cuenta.step3.formGroup.streetNumber' | transloco }} *</label>
                     <input name="streetNumber" name="streetNumber" 
                     id="streetNumber" type="number" class="form-control" placeholder=""
@@ -348,14 +349,14 @@
               
                 <div class="row">
                   <div class="col-12 col-md-6">
-                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                    <button type="button" class="btn btn-block-xs-only btn-outline-primary rounded-pill" matStepperPrevious>
                       {{ 'steps.back' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
                     <button 
                     type="button" 
-                    class="btn btn-primary rounded-pill float-right"  
+                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"  
                     matStepperNext  
                     [disabled]="!formTres.valid">
                     {{ 'steps.next' | transloco }}
@@ -371,7 +372,7 @@
                 <ng-template matStepLabel><h4>{{'crear-cuenta.step4.subtitle' | transloco }}</h4></ng-template>
                   <!--row-->
                   <div class="form-row">
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="password">{{'crear-cuenta.step4.formGroup.password' | transloco }} *</label>
                     <input type="password" name="password" 
                     id="password" 
@@ -390,7 +391,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="form-group col">
+                  <div class="form-group col-12 col-md-6">
                     <label for="confirmPasword">{{'crear-cuenta.step4.formGroup.confirmPassword' | transloco }} *</label>
                     <input 
                       type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder=""
@@ -424,7 +425,10 @@
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
-                    <button type="button" class="btn btn-outline-primary rounded-pill" matStepperPrevious>
+                    <button type="button" 
+                    class="btn btn-block-xs-only 
+                    btn-outline-primary rounded-pill
+                    " matStepperPrevious>
                       {{ 'steps.back' | transloco }}
                     </button>
                   </div> 
@@ -432,7 +436,7 @@
                     <button
                       data-toggle="modal" data-target="#exampleModal"
                       type="submit" 
-                      class="btn btn-primary rounded-pill float-right"  
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"  
                       matStepperNext
                       (click)="submit()"  
                       [disabled]="!formCuatro.valid"
@@ -465,7 +469,7 @@
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>

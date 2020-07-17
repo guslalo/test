@@ -21,6 +21,8 @@ import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
+import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibilidad/mi-disponibilidad.component';
+
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
 const routes: Routes = [
@@ -45,7 +47,8 @@ const routes: Routes = [
     children: [
       { path: '', component:  InicioPComponent },
       { path: 'mi-agenda', component:  PacientesComponent },
-      { path: 'mis-pacientes', component:  PacientesComponent }
+      { path: 'mis-pacientes', component:  PacientesComponent },
+      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
   },

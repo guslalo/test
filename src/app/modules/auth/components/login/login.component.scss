@@ -101,12 +101,13 @@ button.calendar, button.calendar:active {
 }
 
 @media screen and (max-width: 767px) {
-  .globallanguage {
-    right: 5px;
-    top: 10px;
+  .boxIdioma {
+    right: 15px;
+    top: 15px;
   }
+
   #login {
-    background:#f8f9fa;
+    background: #ffffff;
   }
 }
 

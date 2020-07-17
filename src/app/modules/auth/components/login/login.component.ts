@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(user.username);
         console.log(data.data);
-         if(user.username === 'miguel@bluedott.tech'){
+         if(user.username === 'gustavo@bluedott.tech'){
           let userMedico = data.data.filter( data => data.email === 'eve.holt@reqres.in' );
           this.currentUser = new UserLogin (
             1, 
