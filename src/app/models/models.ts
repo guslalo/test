@@ -7,6 +7,7 @@ export class UserLogin {
   constructor(
     public id:number,
     public type:string,
+    public role:string,
     public username:string,
     public email:string,
     public name:string,

@@ -53,6 +53,16 @@ export class LoginComponent implements OnInit {
         if (localStorage.getItem('token')) {
           this.getUsers(this.user);
         }
+        this.currentUser = new UserLogin (
+          1, 
+          data.role, 
+          "test",
+          "test", 
+          "test", 
+          "test",
+          "test"
+        );
+        console.log(this.currentUser);
        
       },
       error => {
@@ -73,7 +83,8 @@ export class LoginComponent implements OnInit {
           this.currentUser = new UserLogin (
             1, 
             'profesional', 
-            userMedico[0].username, 
+            userMedico[0].username,
+            userMedico[0].role, 
             userMedico[0].email, 
             userMedico[0].first_name,
             userMedico[0].avatar
@@ -88,7 +99,8 @@ export class LoginComponent implements OnInit {
           this.currentUser = new UserLogin (
             2, 
             'paciente', 
-            userPaciente[0].username, 
+            userPaciente[0].username,
+            userPaciente[0].role,  
             userPaciente[0].email, 
             userPaciente[0].first_name,
             userPaciente[0].avatar
