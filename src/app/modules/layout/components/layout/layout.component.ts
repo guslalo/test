@@ -12,6 +12,7 @@ import { TourService } from 'ngx-tour-md-menu';
   styleUrls: ['./layout.component.scss'],
   //animations: [ slideInAnimation ]
 })
+
 export class LayoutComponent implements OnInit {
 
   public UserLogin: UserLogin;
@@ -22,16 +23,17 @@ export class LayoutComponent implements OnInit {
   public userCurrent:any;
 
   ngOnInit(): void {
-    //localStorage.removeItem('currentUser');
-    /*
-    console.log(this.currentUser);
-    this.userCurrent = this.currentUser.currentUser;
-    localStorage.setItem('currentUser', JSON.stringify(this.userCurrent));*/
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user  = new UserLogin(
+      JSON.parse(localStorage.getItem('currentUser')).id,
+      JSON.parse(localStorage.getItem('currentUser')).role,
+      JSON.parse(localStorage.getItem('currentUser')).email,
+      JSON.parse(localStorage.getItem('currentUser')).name,
+      JSON.parse(localStorage.getItem('currentUser')).lastName,
+      JSON.parse(localStorage.getItem('currentUser')).access_token,
+      JSON.parse(localStorage.getItem('currentUser')).expires_in
+    );
+    //this.user = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.user);
-    //this.OnboardingTour();
-    
-   
   }
 
   /*

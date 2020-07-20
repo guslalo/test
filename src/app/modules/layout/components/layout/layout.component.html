@@ -36,27 +36,34 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                <div class="col-7 align-self-center">
-                                    <button tourAnchor="agendar" 
-                                        type="button" class=" btn btn-primary rounded-pill float-right">
-                                        Realizar consulta
-                                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
-                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="col-5">
-                                    <div class="row">
-                                        <div class="col align-self-center">
-                                            <p class="align-middle m-0 text-right"><a routerLink="perfil">Olá, Guilherme!</a></p>
+                                
+                                <div class="col">
+                                    <div class="row justify-content-center align-self-center">
+                                        <div class="col align-self-center justify-content-center ">
+                                            <p class="m-0 text-right float-right">
+                                                <a routerLink="perfil" style="line-height: 42px;">Hola, {{user.name}}!</a>
+                                            </p>
+                                            <ng-container *ngIf="user.role === 'patient'">
+                                                <button tourAnchor="agendar" 
+                                                    type="button" class="btn btn-primary rounded-pill float-right mr-3">
+                                                    Realizar consulta
+                                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                                                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    </svg>
+                                                </button>
+                                            </ng-container>
                                         </div>
                                         
-                                        <div class="col-3" >
-                                            <div  *ngIf="user" class="imguser">
-                                                <img [src]="user.image">
-                                            </div>
+                                        <div class="col-1">
+                                            <ng-container *ngIf="user;">
+                                                <div  class="imguser">
+                                                    <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                    </svg>
+                                                </div>
+                                            </ng-container>
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +85,7 @@
                             <img [src]="user.image">
                         </div>
                     </div>
-                    <div class="row boxConsulta mt-4" *ngIf="user.type === 'paciente'">
+                    <div class="row boxConsulta mt-4" *ngIf="user.role === 'patient'">
                         <div class="col text-center">
                             <button class="btn btn-secondary align-self-center">
                                 <svg style="display:inline-block;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +99,7 @@
                     </div>
                     <nav class="nav flex-column mt-4">
                         <!--menu profesional-->
-                        <ng-container *ngIf="user.type === 'profesional'">
+                        <ng-container *ngIf="user.role === 'professional'">
                             
                             <a class="nav-link" routerLink="/app-profesional"  routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }">
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -130,10 +137,10 @@
                                 Historial de consultas
                             </a>
                             <a class="nav-link" style="display: none;" routerLink="/ficha-paciente">Ficha paciente</a>
-                        </ng-container>
+                        </ng-container><!--/menu profesional-->
         
                         <!--menu paciente-->
-                        <ng-container *ngIf="user.type === 'paciente'">
+                        <ng-container *ngIf="user.role === 'patient'">
                             <a class="nav-link" routerLink="/app-paciente"  routerLinkActive="active">
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
@@ -155,14 +162,15 @@
                                 </svg>
                                 Mis consultas
                             </a>
-                        </ng-container>
+                        </ng-container><!--/menu paciente-->
+
                         <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
                         <a class="ayuda nav-link" routerLink="ayuda"  routerLinkActive="active">
                             <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M33 22.333C33 17.5229 29.7587 13.3205 25.1883 12.054C24.9015 5.35863 19.3656 0 12.6006 0C5.65254 0 0 5.65254 0 12.6006C0 14.8648 0.602637 17.0698 1.74732 19.0053L0.0464063 25.1548L6.19588 23.4538C7.97543 24.5057 9.9825 25.0987 12.054 25.1883C13.3199 29.7587 17.5229 33 22.333 33C24.2531 33 26.1203 32.4889 27.7606 31.5169L32.9536 32.9536L31.5169 27.7606C32.4889 26.1203 33 24.2531 33 22.333ZM6.50074 21.363L2.81918 22.3813L3.83754 18.6998L3.60551 18.3369C2.51174 16.6257 1.93359 14.6418 1.93359 12.6006C1.93359 6.71859 6.71859 1.93359 12.6006 1.93359C18.4826 1.93359 23.2676 6.71859 23.2676 12.6006C23.2676 18.4826 18.4826 23.2676 12.6006 23.2676C10.5594 23.2676 8.57549 22.6894 6.86426 21.595L6.50074 21.363ZM30.1802 30.1802L27.4487 29.4241L27.0838 29.6613C25.6697 30.5804 24.0268 31.0664 22.333 31.0664C18.5522 31.0664 15.2303 28.6217 14.0534 25.1167C19.8425 24.449 24.4496 19.8425 25.1174 14.0527C28.6217 15.2303 31.0664 18.5522 31.0664 22.333C31.0664 24.0268 30.5804 25.6697 29.662 27.0838L29.4248 27.4487L30.1802 30.1802Z" fill="#DADADA"/>
                                 <path d="M14.5342 9.66797C14.5342 10.2171 14.3105 10.7237 13.9045 11.095L11.6338 13.1736V15.5332H13.5674V14.0256L15.2103 12.522C16.0095 11.7904 16.4678 10.7508 16.4678 9.66797C16.4678 7.53521 14.7333 5.80078 12.6006 5.80078C10.4678 5.80078 8.7334 7.53521 8.7334 9.66797H10.667C10.667 8.60191 11.5345 7.73438 12.6006 7.73438C13.6666 7.73438 14.5342 8.60191 14.5342 9.66797Z" fill="#DADADA"/>
                             </svg> 
-                            Ayuda
+                            Soporte
                         </a>
                     </nav>
                 </ng-container>

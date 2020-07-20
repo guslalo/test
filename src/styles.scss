@@ -1,11 +1,18 @@
 /* Bootstrap SCSS*/
 @import '~bootstrap/scss/bootstrap';
 
+
 @import './assets/scss/variables.scss';
 @import './assets/scss/forms.scss';
 
+
+
 .color-primary {
     color: $color-primary;
+}
+
+.modal-header{
+    border-bottom: none;
 }
 
 @include media-breakpoint-only(xs) {
@@ -57,13 +64,42 @@ a {
     display: inline-block;
     cursor: pointer;
 }
+.tableBox {
+    
+}
+.table {
+    thead {  
+        th {
+            padding-top: 0px;
+            border-top: none;
+            font-weight:bold;   
+        }
+        border-bottom: 5px $color-hover solid;
+    }
+    tbody {
+        tr{
+          
+            &:hover {
+                background-color: #ECF3FE;
+            }
+            td {
+                padding: 22px 20px;
+            }
+            &:last-child {
+                td {
+                    padding-bottom: 0px;
+                }
+            }
+        }
+    }
+}
 
 .nav-tabs {
     border-bottom: 1px solid #35A6F5;
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-    color: #495057;
+    color: #35A6F5;
     background: none !important;
     border: none;
     border-bottom:4px solid #35A6F5;

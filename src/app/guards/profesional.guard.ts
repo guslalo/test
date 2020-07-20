@@ -11,7 +11,7 @@ export class ProfesionalGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
    
-    if (JSON.parse(localStorage.getItem('currentUser')).type === 'profesional') {
+    if (JSON.parse(localStorage.getItem('currentUser')).role === 'professional') {
       return true;
     } else {
       this.router.navigate(['/'], {

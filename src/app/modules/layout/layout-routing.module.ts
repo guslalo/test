@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'app-paciente',
     component: LayoutComponent,
-    //canActivate: [GuardsGuard],
+    canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioComponent },
       { path: 'perfil', component:  PerfilComponent },
@@ -37,18 +37,19 @@ const routes: Routes = [
       { path: 'ayuda', component:  SoporteComponent },
       { path: 'mis-consultas', component:  MisConsultasComponent },
       { path: 'mi-salud', component:  MiSaludComponent },
-      { path: 'consulta/:appointmentId', component: ConsultaComponent },
-     
+      { path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
   },
   {
     path: 'app-profesional',
-    component: LayoutComponent, //    canActivate: [GuardsGuard]
+    component: LayoutComponent, 
+    canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioPComponent },
-      { path: 'mi-agenda', component:  PacientesComponent },
-      { path: 'mis-pacientes', component:  PacientesComponent },
-      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent }
+      { path: 'perfil', component:  PerfilComponent },
+      { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: 'mis-pacientes', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
   },

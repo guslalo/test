@@ -6,17 +6,15 @@ export class UsersLogin {
 export class UserLogin {
   constructor(
     public id:number,
-    public type:string,
     public role:string,
-    public username:string,
     public email:string,
     public name:string,
-    public image:string
+    public lastName:string,
+    public access_token:string,
+    public expires_in:string
     ){
 
 }
-
-
 
 
   // cliente
