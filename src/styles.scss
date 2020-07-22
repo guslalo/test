@@ -157,3 +157,37 @@ h4 a {
     }
 }
 
+//owl-carrusel
+
+.owl-theme .owl-nav {
+    position: relative;
+}
+.owl-nav {
+    * {
+        outline: none !important;
+    }
+   span {
+    font-size: 3em;
+   }
+    .owl-prev {
+        left: -30px !important;
+        position: absolute !important;
+        top: -87px !important;
+    }
+
+    .owl-next {
+        right: -30px;
+        position: absolute;
+        top: -87px !important;
+    }
+}
+
+
+.owl-theme .owl-nav [class*='owl-']:hover {
+    background:none !important;
+    color: #000000 !important;
+   
+    /*color: #FFF;
+    text-decoration: none;*/
+}
+

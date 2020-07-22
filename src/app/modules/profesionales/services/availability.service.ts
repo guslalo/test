@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 
 export class AvailabilityService {
   private availability = 'v1/availability';
+  private blocked = '/blocked';
   
   constructor(private http: HttpClient) {  }
 
@@ -34,5 +35,22 @@ export class AvailabilityService {
       dailyDetails
     });
   }
+
+  //availability/blocked
+  getAvailabilityBlocked( ): Observable<any> {
+    return this.http.get<any>(  environment.baseUrl + this.availability + this.blocked );
+  }
+
+  //availability/blocked
+  postAvailabilityBlocked( 
+    date,
+    start,
+    end ): Observable<any> {
+    return this.http.post<any>(  environment.baseUrl + this.availability + this.blocked , { 
+      date,
+      start,
+      end});
+  }
+
 
 }

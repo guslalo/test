@@ -46,3 +46,9 @@ height: 48px;
     background-color: $color-primary;
     border-color: $color-primary;
 }
+
+select.form-control {
+    option {
+        padding:10px 0 !important;
+    }
+}

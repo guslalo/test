@@ -11,8 +11,13 @@ import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+// Import your library
+import { OwlModule } from 'ngx-owl-carousel';
+
+
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -33,7 +38,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbDatepickerModule 
+    NgbDatepickerModule,
+    NgxMaterialTimepickerModule,
+    OwlModule
   ],
   exports:[
     FichaPacienteComponent,

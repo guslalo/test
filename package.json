@@ -31,6 +31,8 @@
     "angular-password-strength-meter": "^2.0.0",
     "bootstrap": "^4.4.0",
     "jquery": "^3.5.1",
+    "ngx-material-timepicker": "^5.5.3",
+    "ngx-owl-carousel": "^2.0.7",
     "ngx-spinner": "^9.0.2",
     "ngx-tour-core": "^4.1.1",
     "ngx-tour-md-menu": "^4.1.1",

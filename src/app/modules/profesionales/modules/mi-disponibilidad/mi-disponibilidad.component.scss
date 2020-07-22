@@ -1,0 +1,17 @@
+.daysBlocked {
+    //padding: 0 30px;
+    .day {
+        padding-top: 7px;
+        height: 65px;
+        width: 196px;
+        background: #FFFFFF;
+        border: 1px solid #FF5971;
+        box-sizing: border-box;
+        border-radius: 20px;
+        margin: 0 12px;
+        &:hover {
+            background: #FF5971;
+            color:#FFFFFF;
+        }
+    }
+}

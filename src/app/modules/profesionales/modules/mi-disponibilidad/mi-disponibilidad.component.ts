@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Input, Output, TemplateRef  } from '@angular/core';
+import { merge, Subject } from 'rxjs';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Element } from '@angular/compiler';
 import { SharedModule } from '../../../../shared/shared.module';
@@ -9,6 +10,10 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 
 
+//carrusel
+
+
+
 @Component({
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
@@ -16,11 +21,31 @@ import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } fro
 })
 
 export class MiDisponibilidadComponent implements OnInit {
+
+  public menu = [];
+
   options: any;
   calendar:boolean;
-  disponibilidad: any;
+  public disponibilidad: any;
+  public diasBloqueados: any;
   public createAvailability:FormGroup;
   public availabilityDays:FormGroup;
+  public availabilityBlocked:FormGroup;
+
+
+  timeUpdated = new Subject<string>();
+
+    @Input() cancelBtnTmpl: TemplateRef<Node>;
+    @Input() editableHintTmpl: TemplateRef<Node>;
+    @Input() confirmBtnTmpl: TemplateRef<Node>;
+    @Input('ESC') isEsc = true;
+    @Input() enableKeyboardInput: boolean;
+    @Input() preventOverlayClick: boolean;
+    @Input() disableAnimation: boolean;
+    @Input() appendToInput: boolean;
+    @Input() hoursOnly = false;
+    @Input() defaultTime: string;
+    @Input() timepickerClass: string;
 
    
   model: NgbDateStruct;
@@ -36,6 +61,28 @@ export class MiDisponibilidadComponent implements OnInit {
     { name: 'Sab', value: 'sabado' },
     { name: 'Dom', value: 'domingo' }
   ];
+
+  interval: Array<any> = [
+    { min: '5', value: '5' },
+    { min: '10', value: '10' },
+    { min: '15', value: '15' },
+    { min: '20', value: '20' },
+    { min: '25', value: '25' },
+    { min: '30', value: '30' },
+    { min: '35', value: '35' },
+    { min: '40', value: '40' },
+    { min: '45', value: '45' },
+    { min: '50', value: '50' },
+    { min: '55', value: '55' },
+    { min: '60', value: '60' }
+  ];
+
+  especialidades: Array<any> = [
+    { min: 'Medicina general', value: 'Medicina general' },
+    { min: 'Cardiología', value: 'Cardiología' },
+    { min: 'Neurología', value: 'Neurología' }
+  ];
+
 
   constructor(
     private elementRef:ElementRef,
@@ -79,6 +126,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAvailability();
+    this.getAvailabilityBlocked();
     this.calendar = false;
 
     this.createAvailability = this._formBuilder.group({
@@ -86,12 +134,19 @@ export class MiDisponibilidadComponent implements OnInit {
       specialty: [null, [Validators.required, Validators.minLength(2)]],
       appointmentDuration: [null, [Validators.required, Validators.minLength(2)]],
       endDate: [null, [Validators.required, Validators.minLength(2)]],
+      dailyDetails:this._formBuilder.array([], [Validators.required]),
+      horaStart:[null, [Validators.required, Validators.minLength(2)]],
+      horaEnd:[null, [Validators.required, Validators.minLength(2)]]
+    });
+
+    this.availabilityBlocked = this._formBuilder.group({
+      dateBlock: [null, [Validators.required, Validators.minLength(2)]],
+      specialty: [null, [Validators.required, Validators.minLength(2)]],
+      appointmentDuration: [null, [Validators.required, Validators.minLength(2)]],
+      endDate: [null, [Validators.required, Validators.minLength(2)]],
       dailyDetails:this._formBuilder.array([], [Validators.required])
     });
   
-
-    
-
   }
   
 
@@ -107,24 +162,37 @@ export class MiDisponibilidadComponent implements OnInit {
     )
   }
 
+
+  getAvailabilityBlocked(){
+    this.availabilityService.getAvailabilityBlocked().subscribe(
+      data => {
+        console.log(data);
+        this.diasBloqueados = data;
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
   crearAvailability(){
     console.log(this.createAvailability);
     const formObject = {
       objective:this.createAvailability.controls.objective.value,
       specialty:this.createAvailability.controls.specialty.value,
       appointmentDuration:this.createAvailability.controls.appointmentDuration.value,
-      endDate:{
+      endDate:this.createAvailability.controls.endDate.value/*{
         day:"2",
         month:4,
         year:"2021"
-      }, //this.createAvailability.controls.endDate.value
+      }*/, //this.createAvailability.controls.endDate.value
       dailyDetails: {
         days:this.createAvailability.controls.dailyDetails.value,
         dailyRanges:
           [
               {
-                start: "9:00",
-                end: "10:00"
+                start:this.createAvailability.controls.horaStart.value,
+                end: this.createAvailability.controls.horaEnd.value
               },
               {
                 start: "14:00",
