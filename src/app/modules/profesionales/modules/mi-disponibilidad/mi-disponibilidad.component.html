@@ -234,11 +234,11 @@
                         </div>
                       </div>
                       <div class="form-group col">
-                        <label for="appointmentDuration">Tiempo de Consulta (intervalo)</label>
+                        <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
                         <select class="form-control" id="appointmentDuration" 
                         formControlName="appointmentDuration">
                           <ng-container  *ngFor="let item of interval">
-                            <option>{{item.value}} min</option>
+                            <option>{{item.value}}</option>
                           </ng-container>
                         </select>
                       </div>
