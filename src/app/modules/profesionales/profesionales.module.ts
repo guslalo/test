@@ -10,6 +10,10 @@ import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routi
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   //interactionPlugin
@@ -26,7 +30,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   imports: [
     CommonModule,
     ProfesionalesRoutingModule,
-    FullCalendarModule 
+    FullCalendarModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgbDatepickerModule 
   ],
   exports:[
     FichaPacienteComponent,

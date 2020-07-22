@@ -5,7 +5,7 @@
         </div>
         <div class="col">
             <button type="button" 
-            class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar" data-toggle="modal" data-target="#exampleModal"> 
+            class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar" data-toggle="modal" data-target="#disponibilidad"> 
                 nueva disponibilidad
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
@@ -65,86 +65,33 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let item of disponibilidad" id="{{item.id}}">
                                             <td scope="row">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
                                                     <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
                                                 </svg>
-                                                Lunes - Martes - Miercoles
-                                                Jueves - Sábado
+                                                <ng-container >
+                                                    {{item.dailyDetails.days}}
+                                                </ng-container>
+                                                
                                             </td>
-                                            <td>Hasta el 30 de Febrero</td>
-                                            <td>14:00 hrs.</td>
-                                            <td>Control</td>
-                                            <td>Cardiología</td>
+                                            <td>Hasta el {{item.endDate.day}} de {{item.endDate.month}} del {{item.endDate.year}} </td>
+                                            <td>
+                                                <ng-container *ngFor="let range of item.dailyDetails.dailyRanges">
+                                                    {{range.start}} hrs - {{range.end}} hrs 
+                                                </ng-container>
+                                                 
+                                            </td>
+                                            <td>{{item.objective}}</td>
+                                            <td>{{item.specialty}}</td>
                                             <td>  
                                                 <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                                    <label class="custom-control-label" for="customSwitch1"></label>
-                                                </div>
-                                            </td>
-                                            <td>...</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                                                    <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                                                </svg>
-                                                Lunes - Martes - Miercoles
-                                                Jueves - Sábado
-                                            </td>
-                                            <td>Hasta el 30 de Febrero</td>
-                                            <td>14:00 hrs.</td>
-                                            <td>Control</td>
-                                            <td>Cardiología</td>
-                                            <td>  
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                                    <label class="custom-control-label" for="customSwitch2"></label>
-                                                </div>
-                                            </td>
-                                            <td>...</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                                                    <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                                                </svg>
-                                                Lunes - Martes - Miercoles
-                                                Jueves - Sábado
-                                            </td>
-                                            <td>Hasta el 30 de Febrero</td>
-                                            <td>14:00 hrs.</td>
-                                            <td>Control</td>
-                                            <td>Cardiología</td>
-                                            <td>  
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch3">
-                                                    <label class="custom-control-label" for="customSwitch3"></label>
-                                                </div>
-                                            </td>
-                                            <td>...</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                                                    <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"/>
-                                                </svg>
-                                                Lunes - Martes - Miercoles
-                                                Jueves - Sábado
-                                            </td>
-                                            <td>Hasta el 30 de Febrero</td>
-                                            <td>14:00 hrs.</td>
-                                            <td>Control</td>
-                                            <td>Cardiología</td>
-                                            <td>  
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="customSwitch6">
-                                                    <label class="custom-control-label" for="customSwitch6"></label>
+                                                    <input type="checkbox" 
+                                                    class="custom-control-input" 
+                                                    id="switch{{item.id}}" 
+                                                    [checked]="item.isActive">
+                                                    <label class="custom-control-label" for="switch{{item.id}}"></label>
                                                 </div>
                                             </td>
                                             <td>...</td>
@@ -227,8 +174,8 @@
 
 
   
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal disponibilidad-->
+  <div class="modal fade" id="disponibilidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
@@ -238,25 +185,47 @@
           </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form [formGroup]="createAvailability" novalidate="" >
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputEmail4">Objetivo</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="objective">Objetivo</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="objective"
+                        formControlName="objective"
+                        >
                       </div>
                       <div class="form-group col">
-                        <label for="inputEmail4">Especialidad</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="specialty">Especialidad</label>
+                        <input type="text" class="form-control" 
+                            id="specialty"
+                            formControlName="specialty"
+                        >
                       </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputEmail4">Selecciona la fecha</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="endDate">Selecciona la fecha</label>
+                        <div class="input-group">
+                            <input class="form-control"
+                            id="endDate" 
+                            type="text"
+                            placeholder="yyyy-mm-dd"
+                            name="endDate" 
+                            [(ngModel)]="model" 
+                            [minDate]="{year: 1940, month: 1, day: 1}"
+                            ngbDatepicker #d="ngbDatepicker"
+                            formControlName="endDate"
+                            (click)="d.toggle()"
+                            >
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                            </div>
+                        </div>
                       </div>
                       <div class="form-group col">
-                        <label for="inputEmail4">Tiempor de Consulta (intervalo)</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="appointmentDuration">Tiempor de Consulta (intervalo)</label>
+                        <input type="text" class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
                       </div>
                 </div>
                   <div class="row mt-2 mb-3">
@@ -265,52 +234,37 @@
                     </div>
                  
                       <div class="col">
-                        
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customChecklun">
-                            <label class="custom-control-label" for="customChecklun">Lun</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="mar">
-                            <label class="custom-control-label" for="mar">Mar</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="Mie">
-                            <label class="custom-control-label" for="Mie">Mie</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck4">
-                            <label class="custom-control-label" for="customCheck4">Jue</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck5">
-                            <label class="custom-control-label" for="customCheck5">Vie</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck6">
-                            <label class="custom-control-label" for="customCheck6">Sab</label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck7">
-                            <label class="custom-control-label" for="customCheck7">Dom</label>
-                        </div>
+                          <ng-container *ngFor="let data of days; let i=index">
+                        <div  class="custom-control custom-control-inline custom-checkbox pr-3">                      
+                                <input 
+                              id="{{data.name}}"
+                              class="custom-control-input" 
+                               type="checkbox" 
+                              [value]="data.value" 
+                              (change)="onCheckboxChange($event)" />
+                                <label class="custom-control-label" for="{{data.name}}">
+                                  {{data.name}}
+                                </label>         
+                          </div>
+                        </ng-container>
                       </div>
                   </div>
                   <div class="row">
                     <div class="form-group col">
-                        <label for="inputEmail4">Horario inicial</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="horaStart">Horario inicial</label>
+                   
+                        <input type="text" class="form-control" id="horaStart">
                       </div>
                       <div class="form-group col">
-                        <label for="inputEmail4">Horario final</label>
-                        <input type="email" class="form-control" id="inputEmail4">
+                        <label for="horaEnd">Horario final</label>
+                        <input type="text" class="form-control" id="horaEnd">
                       </div>
                 </div>
               </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary rounded-pill">Crear disponibilidad</button>
+          <button type="button" class="btn btn-primary rounded-pill" (click)="crearAvailability()">Crear disponibilidad</button>
         </div>
       </div>
     </div>

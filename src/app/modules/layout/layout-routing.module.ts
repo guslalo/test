@@ -23,6 +23,8 @@ import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
 import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibilidad/mi-disponibilidad.component';
 
+
+
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
 const routes: Routes = [
@@ -46,6 +48,7 @@ const routes: Routes = [
     canActivate: [GuardsGuard],
     children: [
       { path: '', component:  InicioPComponent },
+      { path: 'context', component:  InicioPComponent },
       { path: 'perfil', component:  PerfilComponent },
       { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
       { path: 'mis-pacientes', component:  PacientesComponent, canActivate: [ProfesionalGuard] },

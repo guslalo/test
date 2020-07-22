@@ -11,8 +11,6 @@ import { registerUser } from '../../../../models/registerUser';
   styleUrls: ['../login/login.component.scss']
 })
 
-
-
 export class CreateAccountComponent implements OnInit   {
 
   public userRegister: registerUser;
@@ -97,6 +95,7 @@ export class CreateAccountComponent implements OnInit   {
   mostrarForm(form){
     console.log(form.controls);
   }
+
   confirmEmail(formGroup: FormGroup) {
     const { value: email } = formGroup.get('password');
     const { value: confirmEmail } = formGroup.get('confirmPassword');

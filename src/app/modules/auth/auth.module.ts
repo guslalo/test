@@ -22,9 +22,10 @@ import { LeftColumnComponent } from './components/left-column/left-column.compon
 import { HttpClient } from '@angular/common/http';
 import { SharedModule } from './../../shared/shared.module';
 
-import  { MatStepperModule } from '@angular/material/stepper';
-import  { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { LangComponent } from './components/lang/lang.component';
+import { ChooseContextComponent } from './components/choose-context/choose-context.component';
 
 
 
@@ -35,7 +36,8 @@ import { LangComponent } from './components/lang/lang.component';
     CreateAccountComponent,
     BlockedAccountComponent,
     LeftColumnComponent,
-    LangComponent
+    LangComponent,
+    ChooseContextComponent
   ],
   imports: [
     CommonModule,

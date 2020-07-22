@@ -1,6 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 //Translation
 
@@ -19,22 +23,29 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     TranslocoRootModule,
     TourMatMenuModule.forRoot(),
     MatSnackBarModule,
     MatSliderModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule
     
   ],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
     OnboardingComponent,
     TranslocoRootModule,
     MatSnackBarModule,
     MatSliderModule,
     MatCardModule,
-    RouterModule
-    
+    RouterModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule
   ]
 })
 
