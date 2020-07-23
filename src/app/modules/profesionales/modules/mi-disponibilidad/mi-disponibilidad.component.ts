@@ -31,6 +31,7 @@ export class MiDisponibilidadComponent implements OnInit {
   public createAvailability:FormGroup;
   public availabilityDays:FormGroup;
   public availabilityBlocked:FormGroup;
+  idAvailability = {}
 
 
   timeUpdated = new Subject<string>();
@@ -49,6 +50,8 @@ export class MiDisponibilidadComponent implements OnInit {
 
    
   model: NgbDateStruct;
+  model2: NgbDateStruct;
+  model3: NgbDateStruct;
   date: {year: string, month: string};
   time = {hour: 13, minute: 30};
 
@@ -63,18 +66,18 @@ export class MiDisponibilidadComponent implements OnInit {
   ];
 
   interval: Array<any> = [
-    { min: '5', value: '5' },
-    { min: '10', value: '10' },
-    { min: '15', value: '15' },
-    { min: '20', value: '20' },
-    { min: '25', value: '25' },
-    { min: '30', value: '30' },
-    { min: '35', value: '35' },
-    { min: '40', value: '40' },
-    { min: '45', value: '45' },
-    { min: '50', value: '50' },
-    { min: '55', value: '55' },
-    { min: '60', value: '60' }
+    { min: '5', value: 5 },
+    { min: '10', value: 10 },
+    { min: '15', value: 15 },
+    { min: '20', value: 20 },
+    { min: '25', value: 25 },
+    { min: '30', value: 30 },
+    { min: '35', value: 35 },
+    { min: '40', value: 40 },
+    { min: '45', value: 45 },
+    { min: '50', value: 50 },
+    { min: '55', value: 55 },
+    { min: '60', value: 60 }
   ];
 
   especialidades: Array<any> = [
@@ -133,6 +136,7 @@ export class MiDisponibilidadComponent implements OnInit {
       objective: [null, [Validators.required, Validators.minLength(2)]],
       specialty: [null, [Validators.required, Validators.minLength(2)]],
       appointmentDuration: [null, [Validators.required, Validators.minLength(2)]],
+      starDate: [null, [Validators.required, Validators.minLength(2)]],
       endDate: [null, [Validators.required, Validators.minLength(2)]],
       dailyDetails:this._formBuilder.array([], [Validators.required]),
       horaStart:[null, [Validators.required, Validators.minLength(2)]],
@@ -141,10 +145,8 @@ export class MiDisponibilidadComponent implements OnInit {
 
     this.availabilityBlocked = this._formBuilder.group({
       dateBlock: [null, [Validators.required, Validators.minLength(2)]],
-      specialty: [null, [Validators.required, Validators.minLength(2)]],
-      appointmentDuration: [null, [Validators.required, Validators.minLength(2)]],
-      endDate: [null, [Validators.required, Validators.minLength(2)]],
-      dailyDetails:this._formBuilder.array([], [Validators.required])
+      startBlock: [null, [Validators.required, Validators.minLength(2)]],
+      endBlock: [null, [Validators.required, Validators.minLength(2)]]
     });
   
   }
@@ -181,6 +183,7 @@ export class MiDisponibilidadComponent implements OnInit {
       objective:this.createAvailability.controls.objective.value,
       specialty:this.createAvailability.controls.specialty.value,
       appointmentDuration:this.createAvailability.controls.appointmentDuration.value,
+      startDate:this.createAvailability.controls.endDate.value,
       endDate:this.createAvailability.controls.endDate.value/*{
         day:"2",
         month:4,
@@ -208,6 +211,7 @@ export class MiDisponibilidadComponent implements OnInit {
         formObject.objective,
         formObject.specialty,
         formObject.appointmentDuration,
+        formObject.startDate,
         formObject.endDate,
         formObject.dailyDetails
         ).subscribe(
@@ -221,5 +225,114 @@ export class MiDisponibilidadComponent implements OnInit {
       )
     }
   }
+
+  postAvailabilityBlocked(){
+    console.log(this.availabilityBlocked);
+    const formObject = {
+      date:this.availabilityBlocked.controls.dateBlock.value,
+      start:this.availabilityBlocked.controls.startBlock.value, 
+      end:this.availabilityBlocked.controls.endBlock.value    
+    }
+    console.log(formObject);
+ 
+    if (formObject) {
+      this.availabilityService.postAvailabilityBlocked(  
+        formObject.date,
+        formObject.start,
+        formObject.end
+        ).subscribe(
+        data => {
+          console.log(data);
+          this.getAvailability();
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
+  }
+
+  putAvailability2(){
+    console.log(this.createAvailability);
+    const formObject = {
+      objective:this.createAvailability.controls.objective.value,
+      specialty:this.createAvailability.controls.specialty.value,
+      appointmentDuration:this.createAvailability.controls.appointmentDuration.value,
+      startDate:this.createAvailability.controls.endDate.value,
+      endDate:this.createAvailability.controls.endDate.value/*{
+        day:"2",
+        month:4,
+        year:"2021"
+      }*/, //this.createAvailability.controls.endDate.value
+      dailyDetails: {
+        days:this.createAvailability.controls.dailyDetails.value,
+        dailyRanges:
+          [
+              {
+                start:this.createAvailability.controls.horaStart.value,
+                end: this.createAvailability.controls.horaEnd.value
+              },
+              {
+                start: "14:00",
+                end: "16:00"
+              }
+          ]
+      }     
+    }
+    console.log(formObject);
+ 
+    if (formObject) {
+      this.availabilityService.putAvailability(  
+        formObject.objective,
+        formObject.specialty,
+        formObject.appointmentDuration,
+        formObject.startDate,
+        formObject.endDate,
+        formObject.dailyDetails
+        ).subscribe(
+        data => {
+          console.log(data);
+          this.getAvailability();
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    }
+  }
+
+  putAvailability(id){
+    this.idAvailability = id;
+    this.availabilityService.getAvailability().subscribe(
+      data => {
+        console.log(data);
+        let array = data.filter(d => d.id === id);
+
+        this.idAvailability = array[0];
+        console.log(this.idAvailability)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+
+  }
+
+  deleteAvailability(id){
+    const formObject = {
+      id:id 
+    }
+    console.log(formObject)
+    this.availabilityService.deleteAvailability(formObject).subscribe(
+      data => {
+        console.log(data);
+        this.getAvailability();
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+  
 
 }

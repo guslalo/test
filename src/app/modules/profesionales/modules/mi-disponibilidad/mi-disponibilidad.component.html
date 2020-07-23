@@ -94,7 +94,20 @@
                                                     <label class="custom-control-label" for="switch{{item.id}}"></label>
                                                 </div>
                                             </td>
-                                            <td>...</td>
+                                            <td> <div class="btn-group">
+                                              <div >
+                                                ...
+                                              </div><!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                  <button class="dropdown-item" type="button" (click)="deleteAvailability(item.id)">
+                                                    Eliminar
+                                                  </button>
+                                                  <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button" (click)="putAvailability(item.id)">
+                                                    Editar
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -209,8 +222,32 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="form-group col">
+                    <label for="endDate">Fecha inicio</label>
+                    <div class="input-group">
+                      
+                        <input class="form-control"
+                         class="form-control"
+                          type="text"
+                          placeholder="yyyy-mm-dd"
+                          id="starDate"  
+                          name="starDate" 
+                          formControlName="starDate"
+                          [(ngModel)]="model2" 
+                          [minDate]="{year: 1940, month: 1, day: 1}"
+                          ngbDatepicker #d="ngbDatepicker"
+                         
+                          (click)="d.toggle()"
+                        ><!--
+                        <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
+                        <!--
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                        </div>-->
+                    </div>
+                  </div>
                     <div class="form-group col">
-                        <label for="endDate">Selecciona la fecha</label>
+                        <label for="endDate">Fecha de término</label>
                         <div class="input-group">
                           
                             <input class="form-control"
@@ -222,9 +259,9 @@
                               formControlName="endDate"
                               [(ngModel)]="model" 
                               [minDate]="{year: 1940, month: 1, day: 1}"
-                              ngbDatepicker #d="ngbDatepicker"
+                              ngbDatepicker #e="ngbDatepicker"
                              
-                              (click)="d.toggle()"
+                              (click)="e.toggle()"
                             ><!--
                             <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
                             <!--
@@ -233,15 +270,19 @@
                             </div>-->
                         </div>
                       </div>
-                      <div class="form-group col">
-                        <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
-                        <select class="form-control" id="appointmentDuration" 
-                        formControlName="appointmentDuration">
-                          <ng-container  *ngFor="let item of interval">
-                            <option>{{item.value}}</option>
-                          </ng-container>
-                        </select>
-                      </div>
+                    
+                     
+                </div>
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                    <select class="form-control" id="appointmentDuration" 
+                    formControlName="appointmentDuration">
+                      <ng-container  *ngFor="let item of interval">
+                        <option>{{item.value}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
                 </div>
                   <div class="row mt-2 mb-3">
                     <div class="col-12">   
@@ -250,16 +291,17 @@
                  
                       <div class="col">
                           <ng-container *ngFor="let data of days; let i=index">
-                        <div  class="custom-control custom-control-inline custom-checkbox pr-3">                      
-                                <input 
+                        <div class="custom-control custom-control-inline custom-checkbox pr-3">                      
+                            <input 
                               id="{{data.name}}"
                               class="custom-control-input" 
-                               type="checkbox" 
+                                type="checkbox" 
                               [value]="data.value" 
-                              (change)="onCheckboxChange($event)" />
-                                <label class="custom-control-label" for="{{data.name}}">
-                                  {{data.name}}
-                                </label>         
+                              (change)="onCheckboxChange($event)"
+                            />
+                              <label class="custom-control-label" for="{{data.name}}">
+                                {{data.name}}
+                              </label>         
                           </div>
                         </ng-container>
                       </div>
@@ -286,7 +328,7 @@
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary rounded-pill" (click)="crearAvailability()">Crear disponibilidad</button>
+          <button type="button" class="btn btn-primary rounded-pill" (click)="crearAvailability()" data-dismiss="modal">Crear disponibilidad</button>
         </div>
       </div>
     </div>
@@ -306,15 +348,34 @@
             <form [formGroup]="availabilityBlocked" novalidate="">
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputEmail4">Fecha</label>
-                        <input class="form-control" type="date" 
-                          id="dateBlock"  name="dateBlock" formControlName="dateBlock">
+                      
+                        <label for="dateBlock">Fechas</label>
+                        <div class="input-group">
+                          
+                          <input class="form-control"
+                           class="form-control"
+                            type="text"
+                            placeholder="yyyy-mm-dd"
+                            id="dateBlock"  
+                            name="dateBlock" 
+                            formControlName="dateBlock"
+                            [(ngModel)]="model3" 
+                            [minDate]="{year: 1940, month: 1, day: 1}"
+                            ngbDatepicker #a="ngbDatepicker"
+                           
+                            (click)="a.toggle()"
+                          ><!--
+                          <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
+                          <!--
+                          <div class="input-group-append">
+                              <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                          </div>-->
+                      </div>
                       </div>
                      
                 </div>
                 <div class="row mt-2 mb-3">
                       <div class="col">
-                        
                         <div class="custom-control custom-control-inline custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="customChecklun3">
                             <label class="custom-control-label" for="customChecklun3">Todo el Día</label>
@@ -325,21 +386,175 @@
                   
                   <div class="row">
                     <div class="form-group col">
-                        <label for="startDateBlock">Horario inicial</label>
-                        <input class="form-control" type="time" 
-                        id="startDateBlock" name="startDateBlock" min="07:00" max="20:00">
+                        <label for="startBlock">Horario inicial</label>
+                        <input type="time" 
+                        class="form-control" 
+                        id="startBlock"
+                        name="startBlock" min="07:00" max="20:00"
+                        formControlName="startBlock"
+                        >
                       </div>
                       <div class="form-group col">
-                        <label for="endtDateBlock">Horario final</label>
-                        <input class="form-control" type="time" 
-                        id="endtDateBlock" name="endtDateBlock" min="07:00" max="20:00">
+                        <label for="endBlock">Horario final</label>
+                        <input type="time" 
+                        class="form-control" 
+                        id="endBlock"
+                        name="endBlock" min="07:00" max="20:00"
+                        formControlName="endBlock"
+                        >
                       </div>
                 </div>
               </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary rounded-pill">Bloquear día</button>
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="postAvailabilityBlocked()">Bloquear día</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Modal editar-->
+   <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header text-center">
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar disponibilidad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="idAvailability.id">
+            <form [formGroup]="createAvailability" novalidate="">
+                <div class="row">
+                  <div class="form-group col">
+                      <label for="objective">Objetivo</label>
+                      <input type="text" 
+                      class="form-control" 
+                      id="objective"
+                      formControlName="objective"
+                      >
+                  </div>
+                  <div class="form-group col">
+                    <label for="specialty">Especialidad
+                    
+                    </label>
+                    <select class="form-control" id="specialty" 
+                    formControlName="specialty">
+                      <ng-container  *ngFor="let item of especialidades">
+                        <option>{{item.value}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="endDate">Fecha inicio</label>
+                    <div class="input-group">
+                      
+                        <input class="form-control"
+                         class="form-control"
+                          type="text"
+                          placeholder="yyyy-mm-dd"
+                          id="starDate"  
+                          name="starDate" 
+                          formControlName="starDate"
+                          [(ngModel)]="model2" 
+                          [minDate]="{year: 1940, month: 1, day: 1}"
+                          ngbDatepicker #d="ngbDatepicker"
+                          (click)="d.toggle()"
+                        ><!--
+                        <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
+                        <!--
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                        </div>-->
+                    </div>
+                  </div>
+                    <div class="form-group col">
+                        <label for="endDate">Fecha de término</label>
+                        <div class="input-group">
+                          
+                            <input class="form-control"
+                             class="form-control"
+                              type="text"
+                              placeholder="yyyy-mm-dd"
+                              id="endDate"  
+                              name="endDate" 
+                              formControlName="endDate"
+                              [(ngModel)]="model" 
+                              [minDate]="{year: 1940, month: 1, day: 1}"
+                              ngbDatepicker #e="ngbDatepicker"
+                             
+                              (click)="e.toggle()"
+                            ><!--
+                            <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
+                            <!--
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
+                            </div>-->
+                        </div>
+                      </div>
+                    
+                     
+                </div>
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                    <select class="form-control" id="appointmentDuration" 
+                    formControlName="appointmentDuration">
+                      <ng-container  *ngFor="let item of interval">
+                        <option>{{item.value}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                  <div class="row mt-2 mb-3">
+                    <div class="col-12">   
+                        <p>Disponibilidad Días</p>
+                    </div>
+                 
+                      <div class="col">
+                          <ng-container *ngFor="let data of days; let i=index">
+                        <div class="custom-control custom-control-inline custom-checkbox pr-3">                      
+                            <input 
+                              id="{{data.name}}"
+                              class="custom-control-input" 
+                                type="checkbox" 
+                              [value]="data.value" 
+                              (change)="onCheckboxChange($event)"
+                            />
+                              <label class="custom-control-label" for="{{data.name}}">
+                                {{data.name}}
+                              </label>         
+                          </div>
+                        </ng-container>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col">
+                        <label for="horaStart">Horario iniciala</label>
+                        <input type="time" 
+                        class="form-control" 
+                        id="horaStart"
+                        name="horaStart" min="07:00" max="20:00"
+                        formControlName="horaStart"
+                        >
+                      </div>
+                      <div class="form-group col">
+                        <label for="horaEnd">Horario final</label>
+                        <input type="time"  id="horaEnd" class="form-control"  
+                        name="horaEnd" id="horaEnd"
+                        formControlName="horaEnd"
+                        >
+                      </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-primary rounded-pill" (click)="putAvailability2()" data-dismiss="modal">Crear disponibilidad</button>
         </div>
       </div>
     </div>

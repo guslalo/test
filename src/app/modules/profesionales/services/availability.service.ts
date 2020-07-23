@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
@@ -23,6 +23,7 @@ export class AvailabilityService {
     objective,
     specialty,
     appointmentDuration,
+    starDate,
     endDate,
     dailyDetails
      ): Observable<any> {
@@ -31,10 +32,34 @@ export class AvailabilityService {
       objective,
       specialty,
       appointmentDuration,
+      starDate,
       endDate,
       dailyDetails
     });
   }
+
+  //postAvailability
+  putAvailability( 
+    objective,
+    specialty,
+    appointmentDuration,
+    starDate,
+    endDate,
+    dailyDetails
+     ): Observable<any> {
+  
+    return this.http.put<any>(  environment.baseUrl + this.availability, { 
+      objective,
+      specialty,
+      appointmentDuration,
+      starDate,
+      endDate,
+      dailyDetails
+    });
+  }
+
+
+
 
   //availability/blocked
   getAvailabilityBlocked( ): Observable<any> {
@@ -50,6 +75,16 @@ export class AvailabilityService {
       date,
       start,
       end});
+  }
+  
+   //availability/blocked
+   deleteAvailability(idDelete:any): Observable<any> {
+    let httpParams = new HttpParams().set('id', idDelete.id);
+    let options = { params: httpParams };
+
+    return this.http.delete<any>(environment.baseUrl + this.availability+'/' + idDelete.id, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
 
