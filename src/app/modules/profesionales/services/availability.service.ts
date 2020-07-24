@@ -9,13 +9,17 @@ import { environment } from '../../../../environments/environment';
 
 export class AvailabilityService {
   private availability = 'v1/availability';
-  private blocked = '/blocked';
+  private blocked = 'v1/blocked-day';
   
   constructor(private http: HttpClient) {  }
 
   //getAvailability
-  getAvailability( ): Observable<any> {
-    return this.http.get<any>(  environment.baseUrl + this.availability );
+  getAvailability(id?:any ): Observable<any> {
+    if(id) {
+      return this.http.get<any>(  environment.baseUrl + this.availability + `/${id}`);
+    } else {
+      return this.http.get<any>(  environment.baseUrl + this.availability);
+    }
   }
 
   //postAvailability
@@ -26,7 +30,7 @@ export class AvailabilityService {
     starDate,
     endDate,
     dailyDetails
-     ): Observable<any> {
+  ): Observable<any> {
   
     return this.http.post<any>(  environment.baseUrl + this.availability, { 
       objective,
@@ -38,8 +42,9 @@ export class AvailabilityService {
     });
   }
 
-  //postAvailability
+  //PÚT Availability
   putAvailability( 
+    id,
     objective,
     specialty,
     appointmentDuration,
@@ -49,6 +54,7 @@ export class AvailabilityService {
      ): Observable<any> {
   
     return this.http.put<any>(  environment.baseUrl + this.availability, { 
+      id,
       objective,
       specialty,
       appointmentDuration,
@@ -59,32 +65,33 @@ export class AvailabilityService {
   }
 
 
+  //post state Availability
 
-
-  //availability/blocked
+  //GET availability/blocked
   getAvailabilityBlocked( ): Observable<any> {
-    return this.http.get<any>(  environment.baseUrl + this.availability + this.blocked );
+    return this.http.get<any>(  environment.baseUrl + this.blocked );
   }
 
-  //availability/blocked
+  //POST availability/blocked
   postAvailabilityBlocked( 
     date,
     start,
     end ): Observable<any> {
-    return this.http.post<any>(  environment.baseUrl + this.availability + this.blocked , { 
+    return this.http.post<any>(  environment.baseUrl + this.blocked , { 
       date,
       start,
       end});
   }
   
-   //availability/blocked
-   deleteAvailability(idDelete:any): Observable<any> {
-    let httpParams = new HttpParams().set('id', idDelete.id);
-    let options = { params: httpParams };
+  //deleteAvailabilit
+  deleteAvailability(idDelete:any): Observable<any> {
+    return this.http.delete<any>(environment.baseUrl + this.availability + `/${idDelete.id}`)
+  }
 
-    return this.http.delete<any>(environment.baseUrl + this.availability+'/' + idDelete.id, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
+  //delete BLOCK
+  deleteBlock(id:any): Observable<any> {
+    console.log(id);
+    return this.http.delete<any>(environment.baseUrl + this.blocked + `/${id}`)
   }
 
 

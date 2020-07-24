@@ -31,22 +31,12 @@ export class MiDisponibilidadComponent implements OnInit {
   public createAvailability:FormGroup;
   public availabilityDays:FormGroup;
   public availabilityBlocked:FormGroup;
-  idAvailability = {}
+  idAvailability:any
 
 
   timeUpdated = new Subject<string>();
 
-    @Input() cancelBtnTmpl: TemplateRef<Node>;
-    @Input() editableHintTmpl: TemplateRef<Node>;
-    @Input() confirmBtnTmpl: TemplateRef<Node>;
-    @Input('ESC') isEsc = true;
-    @Input() enableKeyboardInput: boolean;
-    @Input() preventOverlayClick: boolean;
-    @Input() disableAnimation: boolean;
-    @Input() appendToInput: boolean;
-    @Input() hoursOnly = false;
-    @Input() defaultTime: string;
-    @Input() timepickerClass: string;
+  
 
    
   model: NgbDateStruct;
@@ -127,6 +117,10 @@ export class MiDisponibilidadComponent implements OnInit {
   
   }
 
+  get dailyRanges(){
+    return this.createAvailability.get('dailyRanges') as FormArray;
+  }
+
   ngOnInit(): void {
     this.getAvailability();
     this.getAvailabilityBlocked();
@@ -140,7 +134,8 @@ export class MiDisponibilidadComponent implements OnInit {
       endDate: [null, [Validators.required, Validators.minLength(2)]],
       dailyDetails:this._formBuilder.array([], [Validators.required]),
       horaStart:[null, [Validators.required, Validators.minLength(2)]],
-      horaEnd:[null, [Validators.required, Validators.minLength(2)]]
+      horaEnd:[null, [Validators.required, Validators.minLength(2)]],
+      dailyRanges:this._formBuilder.array([])
     });
 
     this.availabilityBlocked = this._formBuilder.group({
@@ -148,9 +143,17 @@ export class MiDisponibilidadComponent implements OnInit {
       startBlock: [null, [Validators.required, Validators.minLength(2)]],
       endBlock: [null, [Validators.required, Validators.minLength(2)]]
     });
-  
+    this.agregardailyRanges();
   }
-  
+
+  //controls reactivos
+  agregardailyRanges(){
+    const dailyRangeFormGroup  = this._formBuilder.group({
+      start: '',
+      end: ''
+    });
+    this.dailyRanges.push(dailyRangeFormGroup);
+  }
 
   getAvailability(){
     this.availabilityService.getAvailability().subscribe(
@@ -184,24 +187,10 @@ export class MiDisponibilidadComponent implements OnInit {
       specialty:this.createAvailability.controls.specialty.value,
       appointmentDuration:this.createAvailability.controls.appointmentDuration.value,
       startDate:this.createAvailability.controls.endDate.value,
-      endDate:this.createAvailability.controls.endDate.value/*{
-        day:"2",
-        month:4,
-        year:"2021"
-      }*/, //this.createAvailability.controls.endDate.value
+      endDate:this.createAvailability.controls.endDate.value,
       dailyDetails: {
         days:this.createAvailability.controls.dailyDetails.value,
-        dailyRanges:
-          [
-              {
-                start:this.createAvailability.controls.horaStart.value,
-                end: this.createAvailability.controls.horaEnd.value
-              },
-              {
-                start: "14:00",
-                end: "16:00"
-              }
-          ]
+        dailyRanges:this.createAvailability.controls.dailyRanges.value
       }     
     }
     console.log(formObject);
@@ -244,6 +233,7 @@ export class MiDisponibilidadComponent implements OnInit {
         data => {
           console.log(data);
           this.getAvailability();
+          this.getAvailabilityBlocked();
         },
         error => {
           console.log(error)
@@ -252,37 +242,25 @@ export class MiDisponibilidadComponent implements OnInit {
     }
   }
 
-  putAvailability2(){
+  putAvailability2(id){
     console.log(this.createAvailability);
     const formObject = {
+      id:id,
       objective:this.createAvailability.controls.objective.value,
       specialty:this.createAvailability.controls.specialty.value,
       appointmentDuration:this.createAvailability.controls.appointmentDuration.value,
       startDate:this.createAvailability.controls.endDate.value,
-      endDate:this.createAvailability.controls.endDate.value/*{
-        day:"2",
-        month:4,
-        year:"2021"
-      }*/, //this.createAvailability.controls.endDate.value
+      endDate:this.createAvailability.controls.endDate.value, 
       dailyDetails: {
         days:this.createAvailability.controls.dailyDetails.value,
-        dailyRanges:
-          [
-              {
-                start:this.createAvailability.controls.horaStart.value,
-                end: this.createAvailability.controls.horaEnd.value
-              },
-              {
-                start: "14:00",
-                end: "16:00"
-              }
-          ]
+        dailyRanges:this.createAvailability.controls.dailyRanges.value
       }     
     }
     console.log(formObject);
  
     if (formObject) {
       this.availabilityService.putAvailability(  
+        formObject.id,
         formObject.objective,
         formObject.specialty,
         formObject.appointmentDuration,
@@ -301,14 +279,26 @@ export class MiDisponibilidadComponent implements OnInit {
     }
   }
 
-  putAvailability(id){
-    this.idAvailability = id;
-    this.availabilityService.getAvailability().subscribe(
+
+  //deleteBlock
+  deleteBlock(id){
+    console.log(id);
+    this.availabilityService.deleteBlock(id).subscribe(
       data => {
         console.log(data);
-        let array = data.filter(d => d.id === id);
+        this.getAvailabilityBlocked();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
-        this.idAvailability = array[0];
+  putAvailability(id){
+    this.idAvailability = id;
+    this.availabilityService.getAvailability(id).subscribe(
+      data => {
+        this.idAvailability = data[0];
         console.log(this.idAvailability)
       },
       error => {
