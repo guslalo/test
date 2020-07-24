@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
     this.spinner.hide();
     console.log(navigator.language)
-    this.translocoService.setActiveLang(navigator.language);
+    this.setActiveLang(navigator.language);
   }
 
   setActiveLang(lang: string) {
