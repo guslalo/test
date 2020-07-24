@@ -101,6 +101,10 @@ a {
     }
 }
 
+.iconflecha {
+    position: absolute;
+}
+
 .nav-tabs {
     border-bottom: 1px solid #35A6F5;
 }
@@ -121,6 +125,7 @@ a {
 a {
     color: #7D7D7D;
 }
+
 table {
     tr {
         svg {
@@ -128,6 +133,7 @@ table {
         }
     }
 }
+
 .nav-tabs .nav-link {
     border: none;
 }
