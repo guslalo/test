@@ -34,16 +34,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.clear();
     this.spinner.hide();
-
     var lenguaje = navigator.language;
-    var lengiajeCorto = lenguaje.split('-');
-    console.log(lengiajeCorto[0])
-
-    this.translocoService.setDefaultLang(lengiajeCorto[0]);
-    this.setActiveLang(lengiajeCorto[0]);
-    alert(lengiajeCorto[0]);
-
-   
+    var lenguajeCorto = lenguaje.split('-');
+    console.log(lenguajeCorto[0])
+    this.translocoService.setDefaultLang(lenguajeCorto[0]);
   }
 
   setActiveLang(lang: string) {
