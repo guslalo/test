@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     var lenguajeCorto = lenguaje.split('-');
     console.log(lenguajeCorto[0])
     this.translocoService.setDefaultLang(lenguajeCorto[0]);
+    this.setActiveLang(lenguajeCorto[0]);
   }
 
   setActiveLang(lang: string) {
