@@ -32,11 +32,12 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    //sessionStorage.clear();
     localStorage.clear();
     this.spinner.hide();
-  
+    console.log(navigator.language)
+    this.translocoService.setActiveLang(navigator.language);
   }
+
   setActiveLang(lang: string) {
     this.translocoService.setActiveLang(lang);
   }
