@@ -22,6 +22,7 @@ import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
 import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibilidad/mi-disponibilidad.component';
+import { HistorialConsultasComponent } from '../profesionales/modules/historial-consultas/historial-consultas.component';
 
 
 
@@ -52,7 +53,8 @@ const routes: Routes = [
       { path: 'perfil', component:  PerfilComponent },
       { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
       { path: 'mis-pacientes', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
-      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] }
+      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
+      { path: 'historial-consultas', component:  HistorialConsultasComponent, canActivate: [ProfesionalGuard] }
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
     ]
   },

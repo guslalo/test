@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         console.log(this.currentUser);
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         if(this.currentUser.role === 'professional') {
-          this.router.navigate(['app-profesional']);
+          this.router.navigate(['context']);
         } else {
           this.router.navigate(['app-paciente']);
         }

@@ -4,17 +4,21 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // the main connecto
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 //import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+
+//
+import { OwlModule } from 'ngx-owl-carousel';
+
+//components
 import { FichaPacienteComponent } from './ficha-paciente/ficha-paciente.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routing.module';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-// Import your library
-import { OwlModule } from 'ngx-owl-carousel';
+import { HistorialConsultasComponent } from './modules/historial-consultas/historial-consultas.component';
 
 
 
@@ -30,7 +34,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FichaPacienteComponent,
     PacientesComponent,
     InicioPComponent,
-    MiDisponibilidadComponent
+    MiDisponibilidadComponent,
+    HistorialConsultasComponent
   ],
   imports: [
     CommonModule,

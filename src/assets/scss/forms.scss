@@ -14,6 +14,10 @@ height: 48px;
 .btn {
     height: 46px;
     padding: 0 40px;
+    &.btn-sm {
+        height: auto;
+        padding: 5px 20px;
+    }
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
@@ -45,6 +49,11 @@ height: 48px;
 .btn-primary {
     background-color: $color-primary;
     border-color: $color-primary;
+}
+
+.btn-secondary {
+    background-color: $color-hover;
+    border-color: $color-hover;
 }
 
 select.form-control {

@@ -68,6 +68,9 @@
         "remember":"Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula y minúscula."
       }
     }
+  },
+  "context":{
+    "title": "Seleccione su Acceso"
   }
   
 

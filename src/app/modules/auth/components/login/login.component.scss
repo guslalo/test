@@ -92,7 +92,37 @@ button.calendar, button.calendar:active {
   background-position: center;
  
 }
-
+.list-group {
+  &.access {
+    li {
+      border-radius: 10px;
+      position: relative;
+      .flecha {
+        position: absolute;
+        right: 2px;
+        top: 36.5%;
+      }
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        &:hover {
+          text-decoration: none;
+        }
+        img , svg{
+          margin-right: 18px;
+        }
+      }
+      background: #FFFFFF;
+      border: 1px solid #35A6F5;
+      &:hover {
+        background-color: #F7F7F7;
+      }
+    }
+   
+  }
+}
 .logo {
 
   /*
