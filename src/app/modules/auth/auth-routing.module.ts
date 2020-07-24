@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [ProfesionalGuard]
   },
   {
-    path: 'confirm-account',
+    path: 'confirm-account/:id',
     component: ConfirmAccountComponent
   },
   {

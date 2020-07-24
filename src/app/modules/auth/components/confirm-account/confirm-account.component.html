@@ -36,32 +36,19 @@
               </svg>
             </div>
             <div class="contenedor">
-              <h3 class="mb-4 d-none d-sm-block">{{ 'login.access' | transloco }}</h3>
+              <h3 class="mb-4 d-none d-sm-block">Confirmar cuenta</h3>
             </div>
             <form class="">
               <div class="form-group">
-                <input type="username" class="form-control" id="username" name="username" placeholder="username" ><!--[(ngModel)]="user.username-->
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="password">
-              </div>
-              <div class="row">
-                <div class="col">
-                  <p class="text-left">
-                    <a routerLink="/recovery-password" class="text-left">
-                      {{ 'login.forgotten' | transloco }}</a>
-                  </p>
-                </div>
+                <input type="username" class="form-control" id="code" name="code" 
+                placeholder="Ingrese codigo de verificación" 
+                [(ngModel)]="user.code"
+                ><!--[(ngModel)]="user.username-->
               </div>
               <div class="row">
                 <div class="col-12 col-md-12 mb-3 mb-nd-0">
-                  <button type="submit" class="btn btn-primary btn-block rounded-pill">
-                    {{ 'login.login' | transloco }}
-                  </button>
-                </div>
-                <div class="col-12 col-md-12">
-                  <button type="button" class="btn btn-outline-primary btn-block rounded-pill" routerLink="/create-account">
-                    {{ 'login.create' | transloco }}
+                  <button type="submit" class="btn btn-primary btn-block rounded-pill" (click)="confirmAccount(user.code)">
+                    Verificar
                   </button>
                 </div>
               </div>

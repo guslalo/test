@@ -46,8 +46,8 @@
     "step3": {
       "subtitle":"Dirección",
       "formGroup": {
-        "cep":"Fecha de nacimiento",
-        "uf":"UF de nacimiento",
+        "cep":"CEP",
+        "uf":"UF",
         "city":"Ciudad",
         "neighborhood":"Barrio",
         "street":"Calle",

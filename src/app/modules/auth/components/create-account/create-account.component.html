@@ -252,7 +252,38 @@
                 <ng-template matStepLabel>
                   <h4>{{'crear-cuenta.step3.subtitle' | transloco }}</h4>
                 </ng-template>
-          
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="cep">{{'crear-cuenta.step3.formGroup.cep' | transloco }} *</label>
+                    <input   
+                      type="text" 
+                      name="cep" 
+                      id="cep"
+                      class="form-control" 
+                      placeholder="" 
+                      [ngClass]="{'is-invalid': !formTres.get('cep').valid && 
+                      formTres.get('cep').touched}"
+                      formControlName="cep"
+                    >
+                    <div *ngIf="formTres.controls['cep'].errors?.required" class="invalid-feedback">
+                      {{'crear-cuenta.step3.formGroup.cep' | transloco }} es necesario
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="uf">{{'crear-cuenta.step3.formGroup.uf' | transloco }} *</label>
+                    <input 
+                      [ngClass]="{'is-invalid': !formTres.get('uf').valid && 
+                      formTres.get('uf').touched} "
+                      formControlName="uf"
+                      type="text" name="uf" 
+                      id="uf" class="form-control" placeholder=""
+                    >
+                    <div *ngIf="formTres.controls['uf'].errors?.required" class="invalid-feedback">
+                      {{'crear-cuenta.step3.formGroup.uf' | transloco }} es necesario
+                    </div>
+                  </div>
+                </div><!--/row-->
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
