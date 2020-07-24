@@ -58,8 +58,6 @@ export class CreateAccountComponent implements OnInit   {
       nacionality: ['', Validators.required]   
     });
     this.formTres = this._formBuilder.group({
-      cep: ['', Validators.required],
-      uf: ['', Validators.required],
       city: ['', Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
@@ -126,8 +124,6 @@ export class CreateAccountComponent implements OnInit   {
         nacionality:this.form[1].nacionality.value,
       },
       addressData:{
-        cep:this.form[2].cep.value,
-        uf:this.form[2].uf.value,
         city:this.form[2].city.value,
         neighborhood:this.form[2].neighborhood.value,
         street:this.form[2].street.value,

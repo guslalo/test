@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -12,6 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterService {
 
     private registerUrl = 'v1/account/register';
+    private confirmUrl = 'v1/account/confirm-email';
 
     constructor(
         private http: HttpClient,
@@ -24,5 +24,11 @@ export class RegisterService {
             personalData, birthData, addressData, password
         } );
     }
+
+    confirmAccount(idUser, code) {
+        return this.http.get<any>( environment.baseUrl + this.confirmUrl + `/${idUser}/${code}`);
+    }
+
+    //{{BASE_URL}}/api/v1/account/confirm-email/:userId/:code
 
 }

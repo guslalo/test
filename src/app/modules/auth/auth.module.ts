@@ -26,6 +26,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { LangComponent } from './components/lang/lang.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
+import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 
 
 
@@ -37,7 +38,8 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
     BlockedAccountComponent,
     LeftColumnComponent,
     LangComponent,
-    ChooseContextComponent
+    ChooseContextComponent,
+    ConfirmAccountComponent
   ],
   imports: [
     CommonModule,
