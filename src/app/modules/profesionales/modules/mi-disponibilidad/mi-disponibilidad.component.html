@@ -581,6 +581,11 @@
                       </ng-container>
                     </div>
                   </div>
+                  <div class="col-12">   
+                    <p class="pl-0">rango de horarios actual:<b><ng-container *ngFor="let range of idAvailability.dailyDetails.dailyRanges">
+                    {{range.start}} hrs - {{range.end}} hrs 
+                  </ng-container></b></p>
+                  </div>
                   <!--campos reactivos dinamicos-->
                 <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
 

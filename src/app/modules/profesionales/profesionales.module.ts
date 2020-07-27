@@ -23,6 +23,7 @@ import { HistorialConsultasComponent } from './modules/historial-consultas/histo
 import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
+import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 
 
 
@@ -40,7 +41,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InicioPComponent,
     MiDisponibilidadComponent,
     HistorialConsultasComponent,
-    FichaConsultaComponent
+    FichaConsultaComponent,
+    MisPacientesComponent
   ],
   imports: [
     CommonModule,
