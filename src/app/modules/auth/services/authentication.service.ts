@@ -30,8 +30,8 @@ export class AuthenticationService {
         return this.http.post<any>( environment.baseUrl + this.recoveryUrl , { email: data } );
     }
 
-    resetPassword(token, password): Observable<any> {
-        return this.http.post<any>( environment.baseUrl + this.recoveryUrl , { token, password } );
+    resetPassword(token, password, id): Observable<any> {
+        return this.http.post<any>( environment.baseUrl + this.recoveryUrl + `/id}`, { token, password } );
     }
  
     logout() {

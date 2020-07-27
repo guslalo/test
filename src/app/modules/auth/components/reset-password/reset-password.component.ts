@@ -25,7 +25,8 @@ export class ResetPasswordComponent implements OnInit {
   resetPass(pass){
     this.route.params.subscribe(params => {
       let token  = params.token
-      this.authenticationService.resetPassword(token, pass).subscribe(
+      let id  = params.id
+      this.authenticationService.resetPassword(token, pass, id).subscribe(
         data => { 
           console.log(data);
         },

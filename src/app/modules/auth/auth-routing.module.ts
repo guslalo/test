@@ -30,6 +30,10 @@ const routes: Routes = [
     component: ConfirmAccountComponent
   },
   {
+    path: recovery,
+    component: RecoveryComponent
+  },
+  {
     path: recovery+'/reset-password/:id/:token',
     component: ResetPasswordComponent
   }
