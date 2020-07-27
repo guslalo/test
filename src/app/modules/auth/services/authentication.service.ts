@@ -12,25 +12,31 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
     private loginUrl = 'v1/account/login';
+    private recoveryUrl = 'v1/account/generate-reset-password'
+    private logoutUrl = '/'
 
     constructor(
         private http: HttpClient,
-        private router: Router) {  }
+        private router: Router) { 
+           
+        }
 
-    // post loginUser
+    //post loginUser
     loginUser(username, password): Observable<any> {
-        /*const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'application': 'CORPORATE'
-            })
-        };*/
         return this.http.post<any>( environment.baseUrl + this.loginUrl , { username, password } );
     }
 
-    /*
+    recoveryPassword(data): Observable<any> {
+        return this.http.post<any>( environment.baseUrl + this.recoveryUrl , { email: data } );
+    }
+
+    resetPassword(token, password): Observable<any> {
+        return this.http.post<any>( environment.baseUrl + this.recoveryUrl , { token, password } );
+    }
+ 
     logout() {
         localStorage.clear();
+        sessionStorage.clear();
         document.location.href = this.logoutUrl;
-    }*/
+    }
 }

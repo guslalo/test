@@ -7,6 +7,10 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+
+const recovery = "recovery-password"
+
 const routes: Routes = [
   {
     path: '',
@@ -26,8 +30,8 @@ const routes: Routes = [
     component: ConfirmAccountComponent
   },
   {
-    path: 'recovery-password',
-    component: RecoveryComponent
+    path: recovery+'/reset-password/:id/:token',
+    component: ResetPasswordComponent
   }
 ];
 

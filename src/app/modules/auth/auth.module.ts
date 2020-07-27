@@ -27,6 +27,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { LangComponent } from './components/lang/lang.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 
@@ -39,7 +40,8 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
     LeftColumnComponent,
     LangComponent,
     ChooseContextComponent,
-    ConfirmAccountComponent
+    ConfirmAccountComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
