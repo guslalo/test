@@ -260,22 +260,20 @@
                           name="starDate" 
                           formControlName="starDate"
                           [(ngModel)]="model2" 
-                          [minDate]="{year: 1940, month: 1, day: 1}"
+                          [minDate]="minDate"
                           ngbDatepicker #d="ngbDatepicker"
-                         
                           (click)="d.toggle()"
-                        ><!--
-                        <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
-                        <!--
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
-                        </div>-->
+                          [ngClass]="{'is-invalid': !createAvailability.get('starDate').valid && 
+                          createAvailability.get('starDate').touched}">
+                  
+                        <div *ngIf="createAvailability.controls['starDate'].errors?.required" class="invalid-feedback">
+                          Fecha inicio es necesaria
+                        </div>
                     </div>
                   </div>
                     <div class="form-group col">
                         <label for="endDate">Fecha de término</label>
-                        <div class="input-group">
-                          
+                        <div class="input-group">      
                             <input class="form-control"
                              class="form-control"
                               type="text"
@@ -284,16 +282,12 @@
                               name="endDate" 
                               formControlName="endDate"
                               [(ngModel)]="model" 
-                              [minDate]="{year: 1940, month: 1, day: 1}"
-                              ngbDatepicker #e="ngbDatepicker"
-                             
+                              [minDate]="minDate"
+                              ngbDatepicker #e="ngbDatepicker"    
                               (click)="e.toggle()"
-                            ><!--
-                            <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
-                            <!--
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
-                            </div>-->
+                              [ngClass]="{'is-invalid': !createAvailability.get('endDate').valid && 
+                              createAvailability.get('endDate').touched}"
+                            >
                         </div>
                       </div>
                     
@@ -321,7 +315,7 @@
                             <input 
                               id="{{data.name}}"
                               class="custom-control-input" 
-                                type="checkbox" 
+                              type="checkbox" 
                               [value]="data.value" 
                               (change)="onCheckboxChange($event)"
                             />
@@ -339,11 +333,20 @@
                     <div class="row">
                       <div class="form-group col">
                         <label for="start' + i"  [attr.for]="'start' + i">Horario inicial</label>
-                        <input type="time"  [attr.id]="'start' + i" class="form-control" formControlName="start">
+                        <input type="time"  [attr.id]="'start' + i" 
+                        class="form-control" formControlName="start" 
+                        [ngClass]="{'is-invalid': !createAvailability.get('dailyRanges').valid && 
+                        createAvailability.get('dailyRanges').touched}"
+                        >
+                        <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
+                          Fecha inicio es necesaria
+                        </div>
                       </div>
                       <div class="form-group col">
                         <label for="'end' + i"  [attr.for]="'end' + i">Horario final</label>
-                        <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end">
+                        <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end"
+                        [ngClass]="{'is-invalid': !createAvailability.get('dailyRanges').valid && 
+                        createAvailability.get('dailyRanges').touched}">
                       </div>
                     </div>
                   </div>
@@ -364,7 +367,10 @@
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary rounded-pill" (click)="crearAvailability()" data-dismiss="modal">Crear disponibilidad</button>
+          <button type="button" class="btn btn-primary rounded-pill" 
+          (click)="crearAvailability()" 
+          [disabled]="!createAvailability.valid"
+          data-dismiss="modal">Crear disponibilidad</button>
         </div>
       </div>
     </div>
@@ -488,7 +494,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col">
-                    <label for="endDate">Fecha inicio</label>
+                    <label for="endDate">Fecha inicio </label>
                     <div class="input-group">
                       
                         <input class="form-control"
@@ -499,9 +505,11 @@
                           name="starDate" 
                           formControlName="starDate"
                           [(ngModel)]="model2" 
-                          [minDate]="{year: 1940, month: 1, day: 1}"
+                          [minDate]="minDate"
                           ngbDatepicker #d="ngbDatepicker"
                           (click)="d.toggle()"
+                          [ngClass]="{'is-invalid': !createAvailability.get('starDate').valid && 
+                          createAvailability.get('starDate').touched}"
                         ><!--
                         <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
                         <!--
@@ -521,10 +529,11 @@
                               id="endDate"  
                               name="endDate" 
                               formControlName="endDate"
-                              [(ngModel)]="model" 
-                              [minDate]="{year: 1940, month: 1, day: 1}"
+                              [(ngModel)]="model4" 
+                              [minDate]="minDate"
                               ngbDatepicker #e="ngbDatepicker"
-                             
+                              [ngClass]="{'is-invalid': !createAvailability.get('endDate').valid && 
+                          createAvailability.get('endDate').touched}"
                               (click)="e.toggle()"
                             ><!--
                             <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
@@ -542,6 +551,7 @@
                     <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
                     <select class="form-control" id="appointmentDuration" 
                     formControlName="appointmentDuration">
+                      <option selected="selected" value="0">{{idAvailability.appointmentDuration}}</option>
                       <ng-container  *ngFor="let item of interval">
                         <option>{{item.value}}</option>
                       </ng-container>
@@ -550,37 +560,43 @@
                 </div>
                   <div class="row mt-2 mb-3">
                     <div class="col-12">   
-                        <p>Disponibilidad Días</p>
+                        <p>Disponibilidad de días actual: <b>{{idAvailability.dailyDetails.days}}</b></p>
                     </div>
-                 
-                      <div class="col">
-                          <ng-container *ngFor="let data of days; let i=index">
-                        <div class="custom-control custom-control-inline custom-checkbox pr-3">                      
+                    <div class="col">
+                        <ng-container *ngFor="let data of days; let i=index">
+                          <div class="custom-control custom-control-inline custom-checkbox pr-3">   
                             <input 
                               id="put{{data.name}}"
                               class="custom-control-input" 
                                 type="checkbox" 
                               [value]="data.value" 
                               (change)="onCheckboxChange($event)"
+                              [checked]="false"
                             />
                               <label class="custom-control-label" for="put{{data.name}}">
                                 {{data.name}}
                               </label>         
                           </div>
-                        </ng-container>
-                      </div>
+                      
+                      </ng-container>
+                    </div>
                   </div>
                   <!--campos reactivos dinamicos-->
                 <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
+
                   <div [formGroupName]="i">
                     <div class="row">
                       <div class="form-group col">
                         <label for="start' + i"  [attr.for]="'start' + i">Horario inicial</label>
-                        <input type="time"  [attr.id]="'start' + i" class="form-control" formControlName="start">
+                        <input type="time"  [attr.id]="'start' + i" class="form-control" formControlName="start"  
+                        [ngClass]="{'is-invalid': !createAvailability.get('dailyRanges').valid && 
+                        createAvailability.get('dailyRanges').touched}">
                       </div>
                       <div class="form-group col">
                         <label for="'end' + i"  [attr.for]="'end' + i">Horario final</label>
-                        <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end">
+                        <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end" 
+                        [ngClass]="{'is-invalid': !createAvailability.get('dailyRanges').valid && 
+                        createAvailability.get('dailyRanges').touched}">
                       </div>
                     </div>
                   </div>
@@ -599,7 +615,8 @@
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary rounded-pill"  data-dismiss="modal" (click)="putAvailability2(idAvailability.id)">Crear disponibilidad</button>
+          <button type="button" class="btn btn-primary rounded-pill"  
+          data-dismiss="modal" (click)="putAvailability2(idAvailability.id)" [disabled]="!createAvailability.valid">Editar disponibilidad</button>
         </div>
       </div>
     </div>

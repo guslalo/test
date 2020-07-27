@@ -23,10 +23,13 @@ import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
 import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibilidad/mi-disponibilidad.component';
 import { HistorialConsultasComponent } from '../profesionales/modules/historial-consultas/historial-consultas.component';
+import { FichaConsultaComponent } from '../profesionales/modules/ficha-consulta/ficha-consulta.component';
 
 
 
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
+
+const historialConsulta = 'historial-consultas'
 
 const routes: Routes = [
   {
@@ -54,8 +57,12 @@ const routes: Routes = [
       { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
       { path: 'mis-pacientes', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
       { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
-      { path: 'historial-consultas', component:  HistorialConsultasComponent, canActivate: [ProfesionalGuard] }
-      //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
+      { path: historialConsulta, component:  HistorialConsultasComponent, canActivate: [ProfesionalGuard],
+        children: [ 
+          { path: 'ficha-consultas', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] } 
+        ] 
+      },
+      { path: historialConsulta + '/ficha-consulta', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] } 
     ]
   },
   { 

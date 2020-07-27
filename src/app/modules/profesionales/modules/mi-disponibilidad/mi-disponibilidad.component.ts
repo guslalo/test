@@ -7,13 +7,13 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
 import { AvailabilityService } from '../../services/availability.service';
 import { ValueTransformer } from '@angular/compiler/src/util';
 
-import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, 
+  NgbDateParserFormatter,
+  NgbDatepickerConfig,
+   NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 
 
 //carrusel
-
-
-
 @Component({
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
@@ -33,15 +33,13 @@ export class MiDisponibilidadComponent implements OnInit {
   public availabilityBlocked:FormGroup;
   idAvailability:any
 
-
   timeUpdated = new Subject<string>();
-
-  
 
    
   model: NgbDateStruct;
   model2: NgbDateStruct;
   model3: NgbDateStruct;
+ 
   date: {year: string, month: string};
   time = {hour: 13, minute: 30};
 
@@ -53,6 +51,19 @@ export class MiDisponibilidadComponent implements OnInit {
     { name: 'Vie', value: 'viernes' },
     { name: 'Sab', value: 'sabado' },
     { name: 'Dom', value: 'domingo' }
+  ];
+  days3: Array<any> = [
+    { name: 'Lun', value: 'lunes' },
+    { name: 'Mar', value: 'martes' },
+    { name: 'Mie', value: 'miercoles' },
+    { name: 'Jue', value: 'jueves' },
+    { name: 'Vie', value: 'viernes' },
+    { name: 'Sab', value: 'sabado' },
+    { name: 'Dom', value: 'domingo' }
+  ];
+
+  days2: Array<any> = [
+    'lunes','martes', 'miercoles','jueves','viernes','sabado','domingo'
   ];
 
   interval: Array<any> = [
@@ -75,14 +86,21 @@ export class MiDisponibilidadComponent implements OnInit {
     { min: 'Cardiología', value: 'Cardiología' },
     { min: 'Neurología', value: 'Neurología' }
   ];
-
-
+  minDate = undefined;
   constructor(
     private elementRef:ElementRef,
     private availabilityService:AvailabilityService,
     private _formBuilder: FormBuilder,
-    private calendario: NgbCalendar
-    ) { }
+    private calendario: NgbCalendar,
+    private config: NgbDatepickerConfig
+    ) { 
+      const current = new Date();
+      this.minDate = {
+        year: current.getFullYear(),
+        month: current.getMonth() + 1,
+        day: current.getDate()
+      };
+    }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -127,14 +145,14 @@ export class MiDisponibilidadComponent implements OnInit {
     this.calendar = false;
 
     this.createAvailability = this._formBuilder.group({
-      objective: [null, [Validators.required, Validators.minLength(2)]],
-      specialty: [null, [Validators.required, Validators.minLength(2)]],
-      appointmentDuration: [null, [Validators.required, Validators.minLength(2)]],
-      starDate: [null, [Validators.required, Validators.minLength(2)]],
-      endDate: [null, [Validators.required, Validators.minLength(2)]],
+      objective: [null],
+      specialty: [null],
+      appointmentDuration: [null, ], //[Validators.required, Validators.minLength(2)]
+      starDate: [null,[Validators.required]], // ]
+      endDate: [null, [Validators.required]],//[Validators.required, Validators.minLength(2)]
       dailyDetails:this._formBuilder.array([], [Validators.required]),
-      horaStart:[null, [Validators.required, Validators.minLength(2)]],
-      horaEnd:[null, [Validators.required, Validators.minLength(2)]],
+      /*horaStart:[null, [Validators.required, Validators.minLength(2)]],
+      horaEnd:[null, [Validators.required, Validators.minLength(2)]],*/
       dailyRanges:this._formBuilder.array([])
     });
 
@@ -143,14 +161,15 @@ export class MiDisponibilidadComponent implements OnInit {
       startBlock: [null, [Validators.required, Validators.minLength(2)]],
       endBlock: [null, [Validators.required, Validators.minLength(2)]]
     });
+
     this.agregardailyRanges();
   }
 
   //controls reactivos
   agregardailyRanges(){
     const dailyRangeFormGroup  = this._formBuilder.group({
-      start: '',
-      end: ''
+      start:['', [Validators.required]],
+      end: ['', [Validators.required]]
     });
     this.dailyRanges.push(dailyRangeFormGroup);
   }
@@ -293,13 +312,42 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     )
   }
-
+  
+  model4: NgbDateStruct;
   putAvailability(id){
+    
     this.idAvailability = id;
     this.availabilityService.getAvailability(id).subscribe(
       data => {
+       
         this.idAvailability = data[0];
-        console.log(this.idAvailability)
+        console.log( this.idAvailability );
+        this.model2 = {
+          year:this.idAvailability.startDate.year,
+          month:this.idAvailability.startDate.month,
+          day:this.idAvailability.startDate.day
+        }
+        this.model4 = {
+          year:this.idAvailability.endDate.year,
+          month:this.idAvailability.endDate.month,
+          day:this.idAvailability.endDate.day
+        }
+        let arrayDias = [];
+        let arraydays= [];
+        let arrayDaystotal= []
+        //console.log(this.days2);
+
+        for(let item2 of this.days2){  
+          //console.log(item2);
+          for(let item of this.idAvailability.dailyDetails.days) {
+            if(item )
+            if(item === item2)  {
+              var item3 = item2+'2'
+              //console.log(item3)
+            }
+          }
+        }
+        console.log(arrayDias)
       },
       error => {
         console.log(error)

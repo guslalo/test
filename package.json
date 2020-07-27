@@ -29,6 +29,7 @@
     "@ngneat/transloco": "^2.17.3",
     "@opentok/client": "^2.16.0",
     "angular-password-strength-meter": "^2.0.0",
+    "angular-vertical-timeline": "^0.6.0",
     "bootstrap": "^4.4.0",
     "jquery": "^3.5.1",
     "ngx-material-timepicker": "^5.5.3",

@@ -24,6 +24,8 @@ export class ConfirmAccountComponent implements OnInit {
 
   }
 
+  //todo: crear aviso registro exitoso
+
   confirmAccount(code){
     this.route.params.subscribe(params => {
       let id = params.id;
