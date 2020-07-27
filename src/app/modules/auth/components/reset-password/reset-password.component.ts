@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap'  
 
 @Component({
   selector: 'app-reset-password',
@@ -11,11 +11,13 @@ import { switchMap } from 'rxjs/operators';
 export class ResetPasswordComponent implements OnInit {
 
   public user: any = { };
+  @ViewChild('content') myModal : any;
 
   constructor(
     private authenticationService:AuthenticationService,
     private router:Router,
     private route: ActivatedRoute,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,8 @@ export class ResetPasswordComponent implements OnInit {
       this.authenticationService.resetPassword(token, pass, id).subscribe(
         data => { 
           console.log(data);
+          this.modalService.open(this.myModal,  { centered: true });
+
         },
         error => {
           console.log(error);
