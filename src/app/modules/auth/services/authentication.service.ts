@@ -31,7 +31,7 @@ export class AuthenticationService {
     }
 
     resetPassword(token, password, id): Observable<any> {
-        return this.http.post<any>( environment.baseUrl + this.recoveryUrl + `/id}`, { token, password } );
+        return this.http.post<any>( environment.baseUrl + this.recoveryUrl + `/${id}`, { token, password } );
     }
  
     logout() {
