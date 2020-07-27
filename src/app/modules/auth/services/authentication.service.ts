@@ -13,6 +13,7 @@ export class AuthenticationService {
 
     private loginUrl = 'v1/account/login';
     private recoveryUrl = 'v1/account/generate-reset-password'
+    private resetPassUrl = 'v1/account/reset-password'
     private logoutUrl = '/'
 
     constructor(
@@ -31,7 +32,7 @@ export class AuthenticationService {
     }
 
     resetPassword(token, password, id): Observable<any> {
-        return this.http.post<any>( environment.baseUrl + this.recoveryUrl + `/${id}`, { token, password } );
+        return this.http.post<any>( environment.baseUrl + this.resetPassUrl+ `/${id}`, { token, password } );
     }
  
     logout() {
