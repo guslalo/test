@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 //modules
 import { NgxSpinnerModule } from "ngx-spinner";
-import { PasswordStrengthMeterModule } from './components/create-account/lib/password-strength-meter.module';
+//import { PasswordStrengthMeterModule } from './components/create-account/lib/password-strength-meter.module';
 
 //routing
 import { AuthRoutingModule } from './auth-routing.module';
@@ -50,7 +50,6 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
-    PasswordStrengthMeterModule,
     SharedModule.forRoot(),
     NgbDatepickerModule,
     MatStepperModule
