@@ -8,13 +8,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { NgbDatepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 //
 import { OwlModule } from 'ngx-owl-carousel';
 
 //components
-import { FichaPacienteComponent } from './ficha-paciente/ficha-paciente.component';
+import { FichaPacienteComponent } from './modules/ficha-paciente/ficha-paciente.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routing.module';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
@@ -54,7 +54,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbTypeaheadModule,
     NgxMaterialTimepickerModule,
     OwlModule,
-    VerticalTimelineModule
+    VerticalTimelineModule,
+    NgbPaginationModule
   ],
   exports:[
     FichaPacienteComponent,

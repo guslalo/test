@@ -9,7 +9,6 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { GuardsGuard} from '../../guards/guards.guard'
 import { ProfesionalGuard } from '../../guards/profesional.guard'
 import { PacienteGuard } from '../../guards/paciente.guard'
-import { FichaPacienteComponent } from './ficha-paciente/ficha-paciente.component';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
 

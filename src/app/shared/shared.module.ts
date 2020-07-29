@@ -17,11 +17,14 @@ import { OnboardingComponent } from './onboarding/onboarding.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChangePassComponent } from './modules/change-pass/change-pass.component';
+import { PasswordStrengthMeterModule } from './modules/password-strength/password-strength-meter.module';
 
 @NgModule({
   declarations: [
     OnboardingComponent,
-    NgbdTimepickerBasic
+    NgbdTimepickerBasic,
+    ChangePassComponent
   ],
   imports: [
     CommonModule,
@@ -35,9 +38,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSliderModule,
     MatCardModule,
     RouterModule,
-    NgbTimepickerModule,
     NgbDatepickerModule,
-    NgbTimepickerModule
+    PasswordStrengthMeterModule
     
   ],
   exports: [
@@ -50,10 +52,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSliderModule,
     MatCardModule,
     RouterModule,
-    NgbTimepickerModule,
     NgbDatepickerModule,
-    NgbTimepickerModule,
-    NgbdTimepickerBasic
+    NgbdTimepickerBasic,
+    ChangePassComponent,
+    PasswordStrengthMeterModule
   ],
   bootstrap: [NgbdTimepickerBasic]
 })

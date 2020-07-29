@@ -15,7 +15,6 @@ import { PerfilComponent } from '../pacientes/perfil/perfil.component';
 import { GuardsGuard} from '../../guards/guards.guard'
 import { ProfesionalGuard } from '../../guards/profesional.guard'
 import { PacienteGuard } from '../../guards/paciente.guard'
-import { FichaPacienteComponent } from './../profesionales/ficha-paciente/ficha-paciente.component';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
@@ -25,11 +24,17 @@ import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibi
 import { HistorialConsultasComponent } from '../profesionales/modules/historial-consultas/historial-consultas.component';
 import { FichaConsultaComponent } from '../profesionales/modules/ficha-consulta/ficha-consulta.component';
 import { MisPacientesComponent } from '../profesionales/modules/mis-pacientes/mis-pacientes.component';
+import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
+
+import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
+
 
 
 
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
+
+//const profesional
 const historialConsulta = 'historial-consultas'
 const MisPacientes = 'mis-pacientes'
 
@@ -56,8 +61,10 @@ const routes: Routes = [
       { path: '', component:  InicioPComponent },
       { path: 'context', component:  InicioPComponent },
       { path: 'perfil', component:  PerfilComponent },
+      { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard]},
       { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
-      { path: 'mis-pacientes', component:  MisPacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: MisPacientes, component:  MisPacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: MisPacientes + '/ficha-paciente', component:  FichaPacienteComponent, canActivate: [ProfesionalGuard] },
       { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
       { path: historialConsulta, component:  HistorialConsultasComponent, canActivate: [ProfesionalGuard],
         children: [ 

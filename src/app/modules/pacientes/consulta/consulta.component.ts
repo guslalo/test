@@ -5,11 +5,13 @@ import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router
 import { switchMap } from 'rxjs/operators';
 import * as OT from '@opentok/client';
 declare var $: any;
+
 @Component({
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.scss']
 })
+
 export class ConsultaComponent implements OnInit {
 
 session: OT.Session;
