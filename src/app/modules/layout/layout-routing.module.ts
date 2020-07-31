@@ -27,6 +27,7 @@ import { MisPacientesComponent } from '../profesionales/modules/mis-pacientes/mi
 import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
 
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
+import { AgendaComponent } from '../profesionales/modules/agenda/agenda.component';
 
 
 
@@ -54,7 +55,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'app-profesional',
+    path: 'app-professional',
     component: LayoutComponent, 
     canActivate: [GuardsGuard],
     children: [
@@ -62,7 +63,7 @@ const routes: Routes = [
       { path: 'context', component:  InicioPComponent },
       { path: 'perfil', component:  PerfilComponent },
       { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard]},
-      { path: 'mi-agenda', component:  PacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: 'mi-agenda', component:  AgendaComponent, canActivate: [ProfesionalGuard] },
       { path: MisPacientes, component:  MisPacientesComponent, canActivate: [ProfesionalGuard] },
       { path: MisPacientes + '/ficha-paciente', component:  FichaPacienteComponent, canActivate: [ProfesionalGuard] },
       { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },

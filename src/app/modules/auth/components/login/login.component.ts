@@ -55,19 +55,33 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(data.access_token));
         this.currentUser = new UserLogin(
           data.id,
-          data.role,
           data.email,
           data.name,
           data.lastName,
           data.access_token,
-          data.expires_in
+          data.expires_in,
+          data.internalCode,
+          data.administrativeData
         );
-        console.log(this.currentUser);
+        localStorage.setItem('token', JSON.stringify(data.access_token));
+
+        localStorage.setItem('token2', JSON.stringify(this.currentUser.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        if(this.currentUser.role === 'professional') {
-          this.router.navigate(['context']);
-        } else {
-          this.router.navigate(['app-paciente']);
+        console.log(this.currentUser);
+
+        switch (this.currentUser.administrativeData[0].role) {
+          case 'professional':
+            if(data.internalCode === 5){
+              this.router.navigate(['app-professional']);
+            } else {
+              this.router.navigate(['context']);
+            }
+            break;
+          case 'patient':
+            this.router.navigate(['app-paciente']);
+            break;
+         /* default:
+            console.log();*/
         }
         this.spinner.hide();
       },

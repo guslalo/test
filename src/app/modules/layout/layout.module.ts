@@ -6,7 +6,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ProfesionalesModule } from '../profesionales/profesionales.module';
 import { PacientesModule } from '../pacientes/pacientes.module';
 
-//import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 //routing
@@ -28,8 +28,8 @@ import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
     LayoutRoutingModule,
     ProfesionalesModule,
     PacientesModule,
-    TourMatMenuModule.forRoot()
-    //SharedModule
+    TourMatMenuModule.forRoot(),
+    SharedModule
   ],
   exports:[
     //TourMatMenuModule.forRoot()

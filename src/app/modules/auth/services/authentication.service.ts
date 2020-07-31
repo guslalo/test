@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 export class AuthenticationService {
 
-    private loginUrl = 'v1/account/login';
+    private loginUrl = 'v1/access/login-web';
     private recoveryUrl = 'v1/account/generate-reset-password'
     private resetPassUrl = 'v1/account/reset-password'
     private changePass = 'v1/account/change-password'

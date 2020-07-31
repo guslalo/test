@@ -20,7 +20,7 @@ import { LeftColumnComponent } from './components/left-column/left-column.compon
 
 //Translation
 import { HttpClient } from '@angular/common/http';
-import { SharedModule } from './../../shared/shared.module';
+ import { SharedModule } from './../../shared/shared.module';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';

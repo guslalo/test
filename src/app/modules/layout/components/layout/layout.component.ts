@@ -25,12 +25,13 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.user  = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
-      JSON.parse(localStorage.getItem('currentUser')).role,
       JSON.parse(localStorage.getItem('currentUser')).email,
       JSON.parse(localStorage.getItem('currentUser')).name,
       JSON.parse(localStorage.getItem('currentUser')).lastName,
       JSON.parse(localStorage.getItem('currentUser')).access_token,
-      JSON.parse(localStorage.getItem('currentUser')).expires_in
+      JSON.parse(localStorage.getItem('currentUser')).expires_in,
+      JSON.parse(localStorage.getItem('currentUser')).internalCode,
+      JSON.parse(localStorage.getItem('currentUser')).administrativeData
     );
     //this.user = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.user);
