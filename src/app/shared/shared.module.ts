@@ -7,9 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
-
 //Translation
-
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslocoRootModule } from './../transloco-root.module';
 import { TourMatMenuModule } from 'ngx-tour-md-menu';
