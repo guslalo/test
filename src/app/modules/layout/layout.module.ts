@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 //modules
 import { LayoutComponent } from './components/layout/layout.component';
@@ -7,7 +8,6 @@ import { ProfesionalesModule } from '../profesionales/profesionales.module';
 import { PacientesModule } from '../pacientes/pacientes.module';
 
 import { SharedModule } from '../../shared/shared.module';
-import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 //routing
 import { LayoutRoutingModule } from './layout-routing.module';
@@ -25,10 +25,10 @@ import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     LayoutRoutingModule,
     ProfesionalesModule,
     PacientesModule,
-    TourMatMenuModule.forRoot(),
     SharedModule
   ],
   exports:[

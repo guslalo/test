@@ -98,7 +98,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)//, { useHash: true }
+    RouterModule.forChild(routes)//, { useHash: true }
   ],
   exports: [RouterModule]
 })

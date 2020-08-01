@@ -5,17 +5,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './modules/auth/auth.module';
+//import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './modules/layout/layout.module';
+import { AuthModule } from './modules/auth/auth.module';
+
 
 //routing
 import { AppRoutingModule } from './app-routing.module';
 
 //components
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -23,14 +22,13 @@ import { TranslocoRootModule } from './transloco-root.module';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    SharedModule.forRoot(),
-    AppRoutingModule,
     NgbModule,
-    AuthModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     LayoutModule,
-    HttpClientModule,
-    TranslocoRootModule
+    AuthModule
+ 
+    //SharedModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
