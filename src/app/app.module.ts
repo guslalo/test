@@ -5,13 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//routing
+import { AppRoutingModule } from './app-routing.module';
+
 //import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
 
-//routing
-import { AppRoutingModule } from './app-routing.module';
+
 
 //components
 import { AppComponent } from './app.component';
@@ -25,8 +27,9 @@ import { AppComponent } from './app.component';
     NgbModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    LayoutModule,
-    AuthModule
+    AuthModule,
+    LayoutModule
+  
  
     //SharedModule.forRoot()
   ],
