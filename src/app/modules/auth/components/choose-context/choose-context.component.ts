@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../../../../models/models';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+
 
 @Component({
   selector: 'app-choose-context',
@@ -11,7 +14,10 @@ export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = { };
 
-  constructor() { }
+  constructor(
+    private authenticationService:AuthenticationService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.user  = new UserLogin(
@@ -24,6 +30,24 @@ export class ChooseContextComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).expires_in,
       JSON.parse(localStorage.getItem('currentUser')).administrativeData
     );
+   
+  }
+
+  chooseContext(id){
+
+    this.authenticationService.accessWeb(id).subscribe(
+      data => { 
+        console.log(data.access_token);
+        if(data.access_token) {
+          localStorage.removeItem('token');
+          localStorage.setItem('token', JSON.stringify(data.access_token));
+          this.router.navigate(['app-professional']);
+        }
+      },
+      error =>  {
+        console.log(error)
+      }
+    )
   }
 
 }
