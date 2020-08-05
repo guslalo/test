@@ -17,7 +17,8 @@ export class UserLogin {
     public expires_in: string,
     public internalCode: number,
     public administrativeData: [AdministrativeData],
-    public administrativeDataContext: string
+    public administrativeDataContext: string,
+    public role?: string
   ) {}
 
   // cliente

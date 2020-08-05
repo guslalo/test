@@ -38,6 +38,12 @@ const MisPacientes = 'mis-pacientes';
 
 const routes: Routes = [
   {
+    path: 'app-admin',
+    component: LayoutComponent,
+    canActivate: [GuardsGuard],
+    children: [{ path: 'usuarios', component: InicioComponent }],
+  },
+  {
     path: 'app-paciente',
     component: LayoutComponent,
     canActivate: [GuardsGuard],
@@ -87,17 +93,6 @@ const routes: Routes = [
   {
     path: 'meet/:appointmentId',
     component: Consulta2Component,
-  },
-  {
-    path: 'app-admin',
-    component: LayoutComponent,
-    canActivate: [GuardsGuard],
-    children: [
-      { path: '', component: InicioComponent },
-      { path: 'ficha-pacientes', component: FichaPacienteComponent },
-      { path: 'mis-pacientes', component: PacientesComponent },
-      //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
-    ],
   },
 ];
 

@@ -29,7 +29,8 @@ export class LayoutComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).expires_in,
       JSON.parse(localStorage.getItem('currentUser')).internalCode,
       JSON.parse(localStorage.getItem('currentUser')).administrativeData,
-      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
+      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
+      JSON.parse(localStorage.getItem('currentUser')).role
     );
     console.log(this.user); /**/
   }
