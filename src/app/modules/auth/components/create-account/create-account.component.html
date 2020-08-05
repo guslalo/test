@@ -186,8 +186,10 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="birthdate"> {{ 'crear-cuenta.step2.formGroup.birthdate' | transloco }} * </label>
-                    <div class="input-group">
+                    <div class="input-group dateregister">
+                    
                       <input
+                        [placement]="placement"
                         class="form-control"
                         id="birthdate"
                         placeholder="yyyy-mm-dd"
@@ -269,7 +271,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mb-5 pb-5 ">
                   <div class="col-12 col-md-6">
                     <button
                       type="button"

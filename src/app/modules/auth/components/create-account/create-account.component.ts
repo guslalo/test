@@ -12,7 +12,7 @@ import { registerUser } from '../../../../models/registerUser';
 })
 export class CreateAccountComponent implements OnInit {
   public userRegister: registerUser;
-
+  public placement = 'bottom';
   model: NgbDateStruct;
   date: { year: number; month: number };
 
@@ -102,6 +102,7 @@ export class CreateAccountComponent implements OnInit {
   crearCuenta() {
     console.log(this.form);
     const formObject = {
+      clinicId: "5f236fc966fbb0054894b780",
       personalData: {
         name: this.form[0].name.value,
         lastName: this.form[0].lastName.value,
@@ -129,7 +130,7 @@ export class CreateAccountComponent implements OnInit {
 
     if (formObject) {
       this.registerUser
-        .registerUser(formObject.personalData, formObject.birthData, formObject.addressData, formObject.password)
+        .registerUser(formObject.clinicId, formObject.personalData, formObject.birthData, formObject.addressData, formObject.password)
         .subscribe(
           (data) => {
             console.log(data);

@@ -12,7 +12,7 @@ export class InicioPComponent implements OnInit {
   public userCurrent = {};
   currentRate = 4;
 
-  constructor(public currentUserService: CurrentUserService, config: NgbRatingConfig, config2: NgbRatingConfig) {
+  constructor(public currentUserService: CurrentUserService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
 
