@@ -2,32 +2,30 @@
 export class registerUser {
   constructor(
     public personalData: {
-      name:string,
-      lastName:string,
-      gender:string,
-      postalCode:string,
-      phoneNumber:string,
-      email:string
+      name: string;
+      lastName: string;
+      gender: string;
+      postalCode: string;
+      phoneNumber: string;
+      email: string;
     },
     public birthData: {
-      birthdate:string,
-      ufBirth:string,
-      municipalityBirth:string,
-      nacionality:string
+      birthdate: string;
+      ufBirth: string;
+      municipalityBirth: string;
+      nacionality: string;
     },
     public addressData: {
-      cep:string,
-      uf:string,
-      city:string,
-      neighborhood:string,
-      street:string,
-      streetNumber:string
+      cep: string;
+      uf: string;
+      city: string;
+      neighborhood: string;
+      street: string;
+      streetNumber: string;
     },
-    public password:string
-    ){
-
-}
-/*
+    public password: string
+  ) {}
+  /*
 {
   "personalData": {
       "name": "name",
@@ -55,9 +53,7 @@ export class registerUser {
 }
 */
 
-
   // cliente
-
 
   /*
   id:number;

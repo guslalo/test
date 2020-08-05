@@ -1,16 +1,16 @@
 .star {
-    font-size: 1.5rem;
-    color: #b0c4de;
-  }
-  .filled {
-    color: #FDBC20;
-  }
-  .bad {
-    color: #deb0b0;
-  }
-  .filled.bad {
-    color: #FDBC20;
-  }
-  :focus {
-    outline: none
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #fdbc20;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #fdbc20;
+}
+:focus {
+  outline: none;
 }

@@ -4,25 +4,22 @@ import { AppointmentsService } from '../../../services/appointments.service';
 @Component({
   selector: 'app-mis-consultas',
   templateUrl: './mis-consultas.component.html',
-  styleUrls: ['./mis-consultas.component.scss']
+  styleUrls: ['./mis-consultas.component.scss'],
 })
 export class MisConsultasComponent implements OnInit {
-  public consultas:any;
+  public consultas: any;
 
-  constructor(private appointmentsService: AppointmentsService) { }
+  constructor(private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
-
     this.appointmentsService.getAppointments().subscribe(
-      data => {
+      (data) => {
         this.consultas = data;
-        console.log(this.consultas)
+        console.log(this.consultas);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
-
 }
-

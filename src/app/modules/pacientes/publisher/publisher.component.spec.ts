@@ -8,21 +8,20 @@ describe('PublisherComponent', () => {
   let fixture: ComponentFixture<PublisherComponent>;
   const publisher = {};
   const OT = {
-    initPublisher() {}
+    initPublisher() {},
   };
   const opentokServiceStub = {
     getOT() {
       return OT;
-    }
+    },
   };
 
   beforeEach(async(() => {
     spyOn(OT, 'initPublisher').and.callFake(() => publisher);
     TestBed.configureTestingModule({
-      declarations: [ PublisherComponent ],
-      providers: [ { provide: OpentokService, useValue: opentokServiceStub }]
-    })
-    .compileComponents();
+      declarations: [PublisherComponent],
+      providers: [{ provide: OpentokService, useValue: opentokServiceStub }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -44,7 +43,7 @@ describe('PublisherComponent', () => {
   it('should call publish on the session when receiving sessionConnected', () => {
     expect(component.session.publish).not.toHaveBeenCalled();
     expect(component.session.on).toHaveBeenCalledWith('sessionConnected', jasmine.any(Function));
-    (component.session.on as any).calls.mostRecent().args[1]();  // Execute the event handler
+    (component.session.on as any).calls.mostRecent().args[1](); // Execute the event handler
     expect(component.session.publish).toHaveBeenCalledWith(publisher, jasmine.any(Function));
   });
 });

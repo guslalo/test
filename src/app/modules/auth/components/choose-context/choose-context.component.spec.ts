@@ -8,9 +8,8 @@ describe('ChooseContextComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChooseContextComponent ]
-    })
-    .compileComponents();
+      declarations: [ChooseContextComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

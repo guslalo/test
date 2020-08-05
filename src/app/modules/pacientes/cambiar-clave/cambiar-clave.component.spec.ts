@@ -8,9 +8,8 @@ describe('CambiarClaveComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CambiarClaveComponent ]
-    })
-    .compileComponents();
+      declarations: [CambiarClaveComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

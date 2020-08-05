@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 //modules
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 //shared
 import { SharedModule } from './../../shared/shared.module';
@@ -37,7 +37,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     LangComponent,
     ChooseContextComponent,
     ConfirmAccountComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -46,11 +46,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     SharedModule.forRoot(),
     NgbDatepickerModule,
     MatStepperModule,
-   //LayoutModule
+    //LayoutModule
   ],
-  exports:[
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-
-export class AuthModule { }
+export class AuthModule {}

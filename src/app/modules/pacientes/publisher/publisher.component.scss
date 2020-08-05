@@ -1,47 +1,46 @@
-
 .OT_mirrored {
-    //width: 100% !important;
-   //@include margin: 0px 0px 0px 0px !important;
+  //width: 100% !important;
+  //@include margin: 0px 0px 0px 0px !important;
 }
 
-.OT_publisher, .OT_subscriber {
-    //width: 100% !important;
-    //margin: 0px 0px 0px 0px !important;
-   /* position: relative;
+.OT_publisher,
+.OT_subscriber {
+  //width: 100% !important;
+  //margin: 0px 0px 0px 0px !important;
+  /* position: relative;
     min-width: 48px;
     min-height: 48px;*/
 }
 .boxControlspublishing {
-    position: absolute;
-    bottom: -121px;
-    height: 100px;
-    width: 100%;
-    left: -25px;
-    text-align: center;
-    .controles {
-        display: inline-block;
-        width:auto;
-        margin: 30px 0px 0px 0px;
-        .item {
-            cursor: pointer;
-            margin: 0px 10px 0px 10px;
-            display: inline-block;
-            background: white;
-            padding: 10px 10px;
-        }
+  position: absolute;
+  bottom: -121px;
+  height: 100px;
+  width: 100%;
+  left: -25px;
+  text-align: center;
+  .controles {
+    display: inline-block;
+    width: auto;
+    margin: 30px 0px 0px 0px;
+    .item {
+      cursor: pointer;
+      margin: 0px 10px 0px 10px;
+      display: inline-block;
+      background: white;
+      padding: 10px 10px;
     }
+  }
 
-    .finalizar {
-        //position:absolute;
-       // float: right;
-
-    }
+  .finalizar {
+    //position:absolute;
+    // float: right;
+  }
 }
 
 .controls {
-    height: 100px;
-    position:absolute;
-    background: #393939;
-    width: 100%;
-    bottom: 0px;
+  height: 100px;
+  position: absolute;
+  background: #393939;
+  width: 100%;
+  bottom: 0px;
 }

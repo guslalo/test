@@ -8,9 +8,8 @@ describe('ChangePassComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChangePassComponent ]
-    })
-    .compileComponents();
+      declarations: [ChangePassComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

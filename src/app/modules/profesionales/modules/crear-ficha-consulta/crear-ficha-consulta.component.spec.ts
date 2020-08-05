@@ -8,9 +8,8 @@ describe('CrearFichaConsultaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrearFichaConsultaComponent ]
-    })
-    .compileComponents();
+      declarations: [CrearFichaConsultaComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

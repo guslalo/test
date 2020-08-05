@@ -17,9 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
 
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
+  declarations: [LayoutComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -27,15 +25,17 @@ import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
     AdminModule,
     ProfesionalesModule,
     PacientesModule,
-    SharedModule
+    SharedModule,
   ],
-  exports:[
+  exports: [
     //TourMatMenuModule.forRoot()
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, 
-    useClass: AuthTokenInterceptor, 
-    multi: true
-  }]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
+  ],
 })
-export class LayoutModule { }
+export class LayoutModule {}

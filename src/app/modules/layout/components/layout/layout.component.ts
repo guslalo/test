@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentUserService } from '../../../../services/current-user.service'
+import { CurrentUserService } from '../../../../services/current-user.service';
 import { UserLogin } from '../../../../models/models';
-import { slideInAnimation } from '../../../../shared/animations';  
+import { slideInAnimation } from '../../../../shared/animations';
 import { SharedModule } from '../../../../shared/shared.module';
 
 @Component({
@@ -10,20 +10,17 @@ import { SharedModule } from '../../../../shared/shared.module';
   styleUrls: ['./layout.component.scss'],
   //animations: [ slideInAnimation ]
 })
-
 export class LayoutComponent implements OnInit {
-
   public UserLogin: UserLogin;
 
-  constructor(public currentUser: CurrentUserService) { }
-  public user:any; 
-  public userCurrent:any;
+  constructor(public currentUser: CurrentUserService) {}
+  public user: any;
+  public userCurrent: any;
 
   ngOnInit(): void {
-
     console.log(this.currentUser);
     //this.user = this.currentUser;
-    this.user  = new UserLogin(
+    this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
       JSON.parse(localStorage.getItem('currentUser')).name,
@@ -34,6 +31,6 @@ export class LayoutComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeData,
       JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
     );
-    console.log(this.user);/**/
+    console.log(this.user); /**/
   }
 }

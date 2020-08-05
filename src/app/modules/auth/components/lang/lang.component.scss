@@ -1,28 +1,50 @@
-
 @import '../../../../../assets/scss/variables.scss';
 .dropdown {
-    border: 1px solid #C2C2C2;
-    border-radius: 5px;
+  border: 1px solid #c2c2c2;
+  border-radius: 5px;
 }
 .dropdown .nav-link {
-    color:#B4B4B4; text-decoration: none;
-    
-    padding: 0px 5px;
+  color: #b4b4b4;
+  text-decoration: none;
+
+  padding: 0px 5px;
 }
 
-.dropdown .dropdown-menu a{ color: #B4B4B4; text-decoration: none; font-size: 14px; padding: 5px 10px;}
-.dropdown .dropdown-menu a:hover {
-    color: #ffffff;
-    background-color:  $color-hover;
+.dropdown .dropdown-menu a {
+  color: #b4b4b4;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 10px;
 }
-.dropdown .btn  {background: #ffffff; color:#B4B4B4; padding: 4px 10px; height: auto;}
-.dropdown .btn:hover { color:#B4B4B4; }
-.dropdown .btn:active { /*background: cyan;*/ color:#B4B4B4;}
-.dropdown .btn:focus { /*background: cyan;*/ color:#B4B4B4; }
-.dropdown-menu .dropdown-item {display: inline-block; width: 100%; padding: 5px 5px; text-align: right; }
-.container .dropdown .dropdown-menu a:hover
-{
-  color: #B4B4B4;
-  background-color:  $color-hover;
+.dropdown .dropdown-menu a:hover {
+  color: #ffffff;
+  background-color: $color-hover;
+}
+.dropdown .btn {
+  background: #ffffff;
+  color: #b4b4b4;
+  padding: 4px 10px;
+  height: auto;
+}
+.dropdown .btn:hover {
+  color: #b4b4b4;
+}
+.dropdown .btn:active {
+  /*background: cyan;*/
+  color: #b4b4b4;
+}
+.dropdown .btn:focus {
+  /*background: cyan;*/
+  color: #b4b4b4;
+}
+.dropdown-menu .dropdown-item {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 5px;
+  text-align: right;
+}
+.container .dropdown .dropdown-menu a:hover {
+  color: #b4b4b4;
+  background-color: $color-hover;
   border-color: #fff;
 }

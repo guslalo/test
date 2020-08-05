@@ -6,7 +6,6 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 //import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
-
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -28,14 +27,11 @@ import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.com
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
 
-
-
-
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
   dayGridPlugin,
   //interactionPlugin
 ]);
-
 
 @NgModule({
   declarations: [
@@ -47,7 +43,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FichaConsultaComponent,
     MisPacientesComponent,
     AgendaComponent,
-    CrearFichaConsultaComponent
+    CrearFichaConsultaComponent,
   ],
   imports: [
     CommonModule,
@@ -61,13 +57,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     OwlModule,
     VerticalTimelineModule,
     NgbPaginationModule,
-    NgbRatingModule
+    NgbRatingModule,
   ],
-  exports:[
-    FichaPacienteComponent,
-    InicioPComponent,
-    MiDisponibilidadComponent
-  ]
+  exports: [FichaPacienteComponent, InicioPComponent, MiDisponibilidadComponent],
 })
-
-export class ProfesionalesModule { }
+export class ProfesionalesModule {}

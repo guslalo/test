@@ -22,10 +22,7 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 
 @NgModule({
-  declarations: [
-    NgbdTimepickerBasic,
-    ChangePassComponent
-  ],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent],
   imports: [
     CommonModule,
     //HttpClientModule,
@@ -39,7 +36,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     RouterModule,
     NgbDatepickerModule,
     NgbRatingModule,
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -54,11 +51,10 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbdTimepickerBasic,
     NgbRatingModule,
     ChangePassComponent,
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
   ],
-  bootstrap: [NgbdTimepickerBasic]
+  bootstrap: [NgbdTimepickerBasic],
 })
-
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
@@ -66,4 +62,4 @@ export class SharedModule {
       //providers: []TranslocoRootModule
     };
   }
- }
+}

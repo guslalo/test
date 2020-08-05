@@ -1,23 +1,16 @@
-import {Injectable} from '@angular/core';
-import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest
-} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { } from 'rxjs';
+import {} from 'rxjs';
 import { catchError, retry } from 'rxjs/internal/operators';
 import { environment } from '../../../environments/environment';
 
 //import {ErrorService} from '../my-services/error.service';
 
-@Injectable(
-  
-)
+@Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
   constructor() {}
-/*
+  /*
   AuthHeader(request) {
     const token =  JSON.parse(localStorage.getItem('token'));
       if (
@@ -42,15 +35,15 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token =  JSON.parse(localStorage.getItem('token'));
+    const token = JSON.parse(localStorage.getItem('token'));
     req = req.clone({
       setHeaders: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     });
     return next.handle(req).pipe(
       retry(1),
-      catchError(error => {
+      catchError((error) => {
         let errorMessage = '';
         if (error instanceof ErrorEvent) {
           // client-side error
@@ -60,13 +53,13 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         } else {
           // backend error
           //document.location.href = '/';
-          if(error.status === 401) {
-           // document.location.href = '/'
+          if (error.status === 401) {
+            // document.location.href = '/'
           }
           console.log(error);
           errorMessage = `Server-side error: ${error.status} ${error.message}`;
         }
-        
+
         // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
         //this.errorService.show(errorMessage);
         console.log(errorMessage);
@@ -74,15 +67,13 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         return throwError(errorMessage);
       })
     );
-   
-      /*
+
+    /*
     if(req.url.indexOf(environment.baseUrl) === -1 ) {
    
      
     }   else {
       console.log('la peticion es externa')
     }*/
-  
-    
   }
 }

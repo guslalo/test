@@ -5,7 +5,7 @@ import { PasswordStrengthMeterService } from './password-strength-meter.service'
 describe('PasswordStrengthMeterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PasswordStrengthMeterService]
+      providers: [PasswordStrengthMeterService],
     });
   });
 

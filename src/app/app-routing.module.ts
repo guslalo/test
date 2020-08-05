@@ -5,7 +5,7 @@ import { SelectivePreloadingStrategyService } from './services/selective-preload
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   /*
   {
@@ -19,9 +19,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes ) //, { preloadingStrategy: SelectivePreloadingStrategyService }
+    RouterModule.forRoot(routes), //, { preloadingStrategy: SelectivePreloadingStrategyService }
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}

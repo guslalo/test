@@ -6,6 +6,6 @@ import { PasswordStrengthMeterComponent } from './password-strength-meter.compon
 @NgModule({
   imports: [CommonModule],
   declarations: [PasswordStrengthMeterComponent],
-  exports: [PasswordStrengthMeterComponent]
+  exports: [PasswordStrengthMeterComponent],
 })
 export class PasswordStrengthMeterModule {}

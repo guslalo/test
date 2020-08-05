@@ -1,20 +1,20 @@
 //core angular
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule,  } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 //components
 //import { LayoutComponent } from './components/layout/layout.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { MiSaludComponent } from './mi-salud/mi-salud.component';
 //guards
-import { GuardsGuard} from '../../guards/guards.guard'
-import { ProfesionalGuard } from '../../guards/profesional.guard'
-import { PacienteGuard } from '../../guards/paciente.guard'
+import { GuardsGuard } from '../../guards/guards.guard';
+import { ProfesionalGuard } from '../../guards/profesional.guard';
+import { PacienteGuard } from '../../guards/paciente.guard';
 import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
 
 //routing
 
-
-const routes: Routes = [/*
+const routes: Routes = [
+  /*
   {
     path: 'ficha-paciente',
     canActivate: [GuardsGuard],
@@ -25,10 +25,7 @@ const routes: Routes = [/*
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-
-export class PacientesRoutingModule { }
+export class PacientesRoutingModule {}

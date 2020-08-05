@@ -8,9 +8,8 @@ describe('HistorialConsultasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistorialConsultasComponent ]
-    })
-    .compileComponents();
+      declarations: [HistorialConsultasComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

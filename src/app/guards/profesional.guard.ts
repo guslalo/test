@@ -3,25 +3,23 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfesionalGuard implements CanActivate {
-  constructor( private router: Router) {}
+  constructor(private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-   
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (JSON.parse(localStorage.getItem('currentUser')).administrativeData[0].role === 'professional') {
       return true;
     } else {
       this.router.navigate(['/'], {
         queryParams: {
-          return: state.url
-        }
+          return: state.url,
+        },
       });
       return false;
     }
-
   }
-  
 }

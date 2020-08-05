@@ -9,38 +9,38 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
-const recovery = "recovery-password"
+const recovery = 'recovery-password';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'create-account',
-    component: CreateAccountComponent
+    component: CreateAccountComponent,
   },
   {
     path: 'context',
     component: ChooseContextComponent,
-    canActivate: [ProfesionalGuard]
+    canActivate: [ProfesionalGuard],
   },
   {
     path: 'confirm-account/:id',
-    component: ConfirmAccountComponent
+    component: ConfirmAccountComponent,
   },
   {
     path: recovery,
-    component: RecoveryComponent
+    component: RecoveryComponent,
   },
   {
-    path: recovery+'/reset-password/:id/:token',
-    component: ResetPasswordComponent
-  }
+    path: recovery + '/reset-password/:id/:token',
+    component: ResetPasswordComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

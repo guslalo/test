@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { UserLogin } from './../models/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CurrentUserService {
-
-  public currentUser:any = new UserLogin(
+  public currentUser: any = new UserLogin(
     JSON.parse(localStorage.getItem('currentUser')).id,
     JSON.parse(localStorage.getItem('currentUser')).email,
     JSON.parse(localStorage.getItem('currentUser')).name,
@@ -18,11 +17,10 @@ export class CurrentUserService {
     JSON.parse(localStorage.getItem('currentUser')).administrativeData,
     JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
   );
-  public user:any; 
- 
-  constructor() { 
-    
-      /*this.currentUser
+  public user: any;
+
+  constructor() {
+    /*this.currentUser
     return this.user;*/
   }
 }

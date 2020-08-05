@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { PasswordStrengthMeterService } from './password-strength-meter.service';
 
@@ -14,7 +6,7 @@ import { PasswordStrengthMeterService } from './password-strength-meter.service'
   selector: 'password-strength-meter',
   templateUrl: './password-strength-meter.component.html',
   styleUrls: ['./password-strength-meter.component.scss'],
-  providers: [PasswordStrengthMeterService]
+  providers: [PasswordStrengthMeterService],
 })
 export class PasswordStrengthMeterComponent implements OnInit, OnChanges {
   @Input() password: string;
@@ -33,17 +25,9 @@ export class PasswordStrengthMeterComponent implements OnInit, OnChanges {
 
   private prevPasswordStrength = null;
 
-  private defaultColours = [
-    'darkred',
-    'red',
-    'orangered',
-    'orange',
-    'yellowgreen'
-  ];
+  private defaultColours = ['darkred', 'red', 'orangered', 'orange', 'yellowgreen'];
 
-  constructor(
-    private passwordStrengthMeterService: PasswordStrengthMeterService
-  ) {}
+  constructor(private passwordStrengthMeterService: PasswordStrengthMeterService) {}
 
   ngOnInit() {}
 
@@ -61,15 +45,11 @@ export class PasswordStrengthMeterComponent implements OnInit, OnChanges {
       this.passwordStrength = 0;
     } else {
       if (this.enableFeedback) {
-        const result = this.passwordStrengthMeterService.scoreWithFeedback(
-          this.password
-        );
+        const result = this.passwordStrengthMeterService.scoreWithFeedback(this.password);
         this.passwordStrength = result.score;
         this.feedback = result.feedback;
       } else {
-        this.passwordStrength = this.passwordStrengthMeterService.score(
-          this.password
-        );
+        this.passwordStrength = this.passwordStrengthMeterService.score(this.password);
         this.feedback = null;
       }
     }
@@ -86,8 +66,6 @@ export class PasswordStrengthMeterComponent implements OnInit, OnChanges {
       return this.colors[0] ? this.colors[0] : this.defaultColours[0];
     }
 
-    return this.colors[strength]
-      ? this.colors[strength]
-      : this.defaultColours[strength];
+    return this.colors[strength] ? this.colors[strength] : this.defaultColours[strength];
   }
 }

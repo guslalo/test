@@ -1,6 +1,6 @@
 //core angular
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule,  } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 //components
 //import { LayoutComponent } from './components/layout/layout.component';
 
@@ -9,26 +9,21 @@ import { Routes, RouterModule,  } from '@angular/router';
 
 //import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 
-
 //routing
-
 
 const routes: Routes = [
   {
     path: '',
-   // component: LayoutComponent,
-     canActivate: [],
+    // component: LayoutComponent,
+    canActivate: [],
     children: [
-     // { path: '', component:  InicioPComponent }
-    ]
-  } 
+      // { path: '', component:  InicioPComponent }
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

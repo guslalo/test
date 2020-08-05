@@ -1,101 +1,95 @@
 .boxVideos {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    align-content: stretch;
-    align-items: center;
-    .c {
-        //height: 90vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        width: 400px;
-    }
-    
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-content: stretch;
+  align-items: center;
+  .c {
+    //height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 400px;
+  }
 }
 
 .bg-dark {
-    background: #C4C4C4 !important;
+  background: #c4c4c4 !important;
 }
 .publishing {
-    border:2px solid #ffffff;
+  border: 2px solid #ffffff;
 }
 
 .inter {
-    height: 95vh;
-    overflow-y: auto;
+  height: 95vh;
+  overflow-y: auto;
 }
-
 
 .flex-item:nth-child(1) {
-    
-    }
+}
 
 .subscriberBox {
-  
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-    width: 400px;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+  width: 400px;
 
-    #subscriber {
-        display: inline-block;
-        margin:0px 5px 5px 0px;
+  #subscriber {
+    display: inline-block;
+    margin: 0px 5px 5px 0px;
+  }
+
+  app-subscriber {
+    float: right;
+    &:first-child {
+      left: 0px;
+      top: 0px;
+      position: absolute;
+      width: 100%;
+      .OT_publisher,
+      .OT_subscriber {
+        width: 100% !important;
+      }
     }
-    
-    app-subscriber {
-        float: right;
-         &:first-child {
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            width: 100%; 
-            .OT_publisher, .OT_subscriber {
-               width: 100% !important;
-            }
-        }
-        div {
-            width: 100% !important;
-            display: inline-block;
-        }
-        .subscriber {
-            float: right;
-        }
+    div {
+      width: 100% !important;
+      display: inline-block;
     }
-   
+    .subscriber {
+      float: right;
+    }
+  }
 }
 .controls {
-    height: 100px;
-    position:absolute;
-    background: #393939;
-    width: 100%;
-    bottom: 0px;
+  height: 100px;
+  position: absolute;
+  background: #393939;
+  width: 100%;
+  bottom: 0px;
 }
 
-
 .publisherBox {
-    position: absolute;
-    z-index: 2;
-    left: 22px;
-    bottom: 121px;
-    //overflow-x: hidden;
-    width: 100%;
-    app-publisher {
-        video {
-            border: 2px solid #ffffff;
-         }
+  position: absolute;
+  z-index: 2;
+  left: 22px;
+  bottom: 121px;
+  //overflow-x: hidden;
+  width: 100%;
+  app-publisher {
+    video {
+      border: 2px solid #ffffff;
     }
-   
+  }
 }
 /*
 app-publisher {

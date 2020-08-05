@@ -5,42 +5,29 @@ import { RegisterService } from '../../services/register.service';
 @Component({
   selector: 'app-confirm-account',
   templateUrl: './confirm-account.component.html',
-  styleUrls: ['../login/login.component.scss']
+  styleUrls: ['../login/login.component.scss'],
 })
-
 export class ConfirmAccountComponent implements OnInit {
+  public user: any = {};
 
-  public user: any = { };
+  constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
 
-  constructor(
-    private route: ActivatedRoute,
-    private registerUser:RegisterService,
-    private router: Router, 
-    ) { }
-
-  ngOnInit(): void {
-
-    
-
-  }
+  ngOnInit(): void {}
 
   //todo: crear aviso registro exitoso
 
-  confirmAccount(code){
-    this.route.params.subscribe(params => {
+  confirmAccount(code) {
+    this.route.params.subscribe((params) => {
       let id = params.id;
       this.registerUser.confirmAccount(id, code).subscribe(
-        data => {
+        (data) => {
           console.log(data);
           this.router.navigate(['/']);
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      )
-     
-    }); 
-   
+      );
+    });
   }
-
 }

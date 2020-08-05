@@ -1,33 +1,26 @@
 export class UsersLogin {
-  users:[UserLogin];
+  users: [UserLogin];
 }
 
 export class AdministrativeData {
-  role:string;
+  role: string;
 }
 
 // cliente
 export class UserLogin {
   constructor(
-    public id:string,
-    public email:string,
-    public name:string,
-    public lastName:string,
-    public access_token:string,
-    public expires_in:string,
-    public internalCode:number,
-    public administrativeData:[AdministrativeData],
+    public id: string,
+    public email: string,
+    public name: string,
+    public lastName: string,
+    public access_token: string,
+    public expires_in: string,
+    public internalCode: number,
+    public administrativeData: [AdministrativeData],
     public administrativeDataContext: string
-    ){
-
-   
-
-}
-
-
+  ) {}
 
   // cliente
-
 
   /*
   id:number;

@@ -1,103 +1,103 @@
 html {
-    height: 100%;
-  }
-  
-  body {
-    height: 100%;
-    margin: 0;
-    font-family: Ubuntu;
-    background: linear-gradient(#b3ffab, #67fffc);
-  }
-  
-  #header {
-    position: relative;
-    z-index: 2;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    background: #FFFFFF;
-    color: #bbbbbb;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);
-  }
-  
-  #headerContent {
-    margin-left: 10px;
-  }
-
-  #page {
-    display: flex;
-    height: calc(100vh - 80px);
-    //height: calc( 100vh - 30px);
-    width: 100%;
-   
-    /* calculate the height. Header is 30px */
-  }
-  .img-fluid {
-    max-width: 106px;
-  }
-  .nav {
-    a {
-      color: #3F3F3F;
-      padding: 1rem 2rem;
-      &.active {
-        background: #F7F7F7;
-        border-left: 7px solid #3BC4CA;
-        color: #35A6F5;
-      }
-      &:hover{
-        background: rgba($color: #000000, $alpha: 0.1);
-      }
-    }
-  }
-  #sideBar {
-    position: relative;
-    background: #FFFFFF;
-    box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
-    min-height: 100vh; //calc(100vh - 80px);
-    width: 20%;
-    max-width: 250px;
-    min-width:200px;
-    //border-right:6px solid #012a62;
-    .topSidebar {
-      //height: 80px;
-      background:#FFFFFF;
-    }
-    .top {
-        text-align: center;
-        .img {
-            display: inline-block;
-            width: 95px;
-            height: 95px;
-            border:3px solid #f5f4f3;
-            overflow: hidden;
-            border-radius: 50%;
-            margin: 30px 0px 30px 0px;
-            img {
-              width: 100%;
-            }
-        }
-    }
-  }
-
-  .imguser {
-    display: inline-block;
-    width:45px;
-    height:45px;
-    border:3px solid #f5f4f3;
-    //overflow: hidden;
-    border-radius: 50%;
-    margin: 5px 0px 5px 0px;
-    img {
-      width: 100%;
-    }
+  height: 100%;
 }
-  
-  #content {
-    background: #f2f2f2;
-    flex: 1 0 auto;
-    width: 80%;
-    height: 100vh;
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Ubuntu;
+  background: linear-gradient(#b3ffab, #67fffc);
+}
+
+#header {
+  position: relative;
+  z-index: 2;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  color: #bbbbbb;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.09);
+}
+
+#headerContent {
+  margin-left: 10px;
+}
+
+#page {
+  display: flex;
+  height: calc(100vh - 80px);
+  //height: calc( 100vh - 30px);
+  width: 100%;
+
+  /* calculate the height. Header is 30px */
+}
+.img-fluid {
+  max-width: 106px;
+}
+.nav {
+  a {
+    color: #3f3f3f;
+    padding: 1rem 2rem;
+    &.active {
+      background: #f7f7f7;
+      border-left: 7px solid #3bc4ca;
+      color: #35a6f5;
+    }
+    &:hover {
+      background: rgba($color: #000000, $alpha: 0.1);
+    }
   }
+}
+#sideBar {
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
+  min-height: 100vh; //calc(100vh - 80px);
+  width: 20%;
+  max-width: 250px;
+  min-width: 200px;
+  //border-right:6px solid #012a62;
+  .topSidebar {
+    //height: 80px;
+    background: #ffffff;
+  }
+  .top {
+    text-align: center;
+    .img {
+      display: inline-block;
+      width: 95px;
+      height: 95px;
+      border: 3px solid #f5f4f3;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 30px 0px 30px 0px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.imguser {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border: 3px solid #f5f4f3;
+  //overflow: hidden;
+  border-radius: 50%;
+  margin: 5px 0px 5px 0px;
+  img {
+    width: 100%;
+  }
+}
+
+#content {
+  background: #f2f2f2;
+  flex: 1 0 auto;
+  width: 80%;
+  height: 100vh;
+}
 /*
   body,
 app-root,
@@ -108,45 +108,42 @@ app-layout {
     overflow-x: hidden;
 }*/
 
-
-  .wrap {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    //background: #e2eaf4;
-    height: 100vh;
-    header {
-      width: 100%;
-      height: 80px;
-      flex:	0 1 auto;
-    }
-
-    .boxSidebarMain {
-      flex:	0 1 auto;
-      width: 100%;
-      height: calc(100% - 80px);
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .sidebar{
-      position: relative;
-      background: #FFFFFF;
-      //flex: 0 1 auto;
-      box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
-      //min-height: 100%; //calc(100vh - 80px);
-      max-width: 250px;
-      min-width:200px;
-      //height: calc(100% - 80px);
-      width: 20%;
-      //align-items: stretch;
-    }
-
-    main {
-      background: #f2f2f2;
-      flex: 1 0 auto;
-      width: 80%;
-      //height: 100vh;
-    }
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  //background: #e2eaf4;
+  height: 100vh;
+  header {
+    width: 100%;
+    height: 80px;
+    flex: 0 1 auto;
   }
-  
-  
+
+  .boxSidebarMain {
+    flex: 0 1 auto;
+    width: 100%;
+    height: calc(100% - 80px);
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sidebar {
+    position: relative;
+    background: #ffffff;
+    //flex: 0 1 auto;
+    box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
+    //min-height: 100%; //calc(100vh - 80px);
+    max-width: 250px;
+    min-width: 200px;
+    //height: calc(100% - 80px);
+    width: 20%;
+    //align-items: stretch;
+  }
+
+  main {
+    background: #f2f2f2;
+    flex: 1 0 auto;
+    width: 80%;
+    //height: 100vh;
+  }
+}

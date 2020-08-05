@@ -5,23 +5,20 @@ import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UsersService {
+  private users = 'users/';
+  private users2 = 'https://reqres.in/api/';
 
-    private users = 'users/';
-    private users2 = 'https://reqres.in/api/';
-    
-    constructor(private http: HttpClient, private router: Router) {  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-    // get user
-    getusers( idUser?:any ): Observable<any> {
-        if(idUser) {
-            return this.http.get<any>( environment.baseUrl + this.users + idUser);
-        } else {
-            return this.http.get<any>( this.users2 + this.users);
-        }
+  // get user
+  getusers(idUser?: any): Observable<any> {
+    if (idUser) {
+      return this.http.get<any>(environment.baseUrl + this.users + idUser);
+    } else {
+      return this.http.get<any>(this.users2 + this.users);
     }
-
+  }
 }

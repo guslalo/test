@@ -5,13 +5,13 @@ import { UsersService } from '../../../services/users.service';
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
-  styleUrls: ['./pacientes.component.scss']
+  styleUrls: ['./pacientes.component.scss'],
 })
 export class PacientesComponent implements OnInit {
   public UserLogin: UserLogin;
-  public users:any;
-  
-  constructor(public usersService:UsersService) { }
+  public users: any;
+
+  constructor(public usersService: UsersService) {}
 
   ngOnInit(): void {
     //this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -19,16 +19,15 @@ export class PacientesComponent implements OnInit {
     this.getUsers();
   }
 
-   //getUsers
-   getUsers(){
+  //getUsers
+  getUsers() {
     this.usersService.getusers().subscribe(
-      data => {
+      (data) => {
         this.users = data.data;
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
-
 }

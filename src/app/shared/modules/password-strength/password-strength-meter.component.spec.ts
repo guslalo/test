@@ -14,7 +14,7 @@ describe('PasswordStrengthMeterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PasswordStrengthMeterComponent],
-      providers: []
+      providers: [],
     }).compileComponents();
   }));
 
@@ -33,7 +33,7 @@ describe('PasswordStrengthMeterComponent', () => {
     spyOn<any>(component, 'calculatePasswordStrength');
     component.password = '123456';
     component.ngOnChanges({
-      password: new SimpleChange(null, component.password, true)
+      password: new SimpleChange(null, component.password, true),
     });
     fixture.detectChanges();
     expect(component['calculatePasswordStrength']).toHaveBeenCalled();
@@ -89,8 +89,8 @@ describe('PasswordStrengthMeterComponent', () => {
       score: 2,
       feedback: {
         suggestions: ['Add another word or two', 'Uncommon words are better.'],
-        warning: 'This is a very common password'
-      }
+        warning: 'This is a very common password',
+      },
     });
 
     component.password = '123asd123';

@@ -1,63 +1,62 @@
 input {
-    border: 1px solid #35A6F5;
-box-sizing: border-box;
-border-radius: 6px;
-height: 48px;
+  border: 1px solid #35a6f5;
+  box-sizing: border-box;
+  border-radius: 6px;
+  height: 48px;
 }
-.form-control { 
-    border-radius: 6px;
-    border: 1px solid #35A6F5;
-    height: 48px;
-    padding: 0 18px;
-    //font-size:14px;
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #35a6f5;
+  height: 48px;
+  padding: 0 18px;
+  //font-size:14px;
 }
 .btn {
-    height: 46px;
-    padding: 0 40px;
-    &.btn-sm {
-        height: auto;
-        padding: 5px 20px;
-    }
+  height: 46px;
+  padding: 0 40px;
+  &.btn-sm {
+    height: auto;
+    padding: 5px 20px;
+  }
 }
 
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
-    background-color: $color-hover;
-    border-color: $color-hover;
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: $color-hover;
+  border-color: $color-hover;
 }
-
 
 .btn:disabled,
-.btn[disabled]{
-    opacity: 0.5;
+.btn[disabled] {
+  opacity: 0.5;
 
-    &:hover {
-        background-color: $color-primary;
-        border-color: $color-primary;
-    }
+  &:hover {
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
 }
 
 .btn-primary:hover {
-    background-color: $color-hover;
-    border-color: $color-hover;
+  background-color: $color-hover;
+  border-color: $color-hover;
 }
 
 .btn-outline-primary:hover {
-    background-color: $color-hover;
-    border-color: $color-hover;
+  background-color: $color-hover;
+  border-color: $color-hover;
 }
 
 .btn-primary {
-    background-color: $color-primary;
-    border-color: $color-primary;
+  background-color: $color-primary;
+  border-color: $color-primary;
 }
 
 .btn-secondary {
-    background-color: $color-hover;
-    border-color: $color-hover;
+  background-color: $color-hover;
+  border-color: $color-hover;
 }
 
 select.form-control {
-    option {
-        padding:10px 0 !important;
-    }
+  option {
+    padding: 10px 0 !important;
+  }
 }

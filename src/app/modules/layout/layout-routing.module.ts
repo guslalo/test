@@ -1,6 +1,6 @@
 //core angular
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule,  } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 //components
 import { LayoutComponent } from './components/layout/layout.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
@@ -12,9 +12,9 @@ import { Consulta2Component } from '../pacientes/consulta2/consulta2.component';
 import { PerfilComponent } from '../pacientes/perfil/perfil.component';
 
 //guards
-import { GuardsGuard} from '../../guards/guards.guard'
-import { ProfesionalGuard } from '../../guards/profesional.guard'
-import { PacienteGuard } from '../../guards/paciente.guard'
+import { GuardsGuard } from '../../guards/guards.guard';
+import { ProfesionalGuard } from '../../guards/profesional.guard';
+import { PacienteGuard } from '../../guards/paciente.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
@@ -30,15 +30,11 @@ import { CrearFichaConsultaComponent } from '../profesionales/modules/crear-fich
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
 import { AgendaComponent } from '../profesionales/modules/agenda/agenda.component';
 
-
-
-
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
-
 //const profesional
-const historialConsulta = 'historial-consultas'
-const MisPacientes = 'mis-pacientes'
+const historialConsulta = 'historial-consultas';
+const MisPacientes = 'mis-pacientes';
 
 const routes: Routes = [
   {
@@ -46,65 +42,69 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [GuardsGuard],
     children: [
-      { path: '', component:  InicioComponent },
-      { path: 'perfil', component:  PerfilComponent },
-      { path: 'cambiar-contrasena', component:  CambiarClaveComponent },
-      { path: 'ayuda', component:  SoporteComponent },
-      { path: 'mis-consultas', component:  MisConsultasComponent },
-      { path: 'mi-salud', component:  MiSaludComponent },
-      { path: 'consulta/:appointmentId', component: ConsultaComponent }
-    ]
+      { path: '', component: InicioComponent },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'cambiar-contrasena', component: CambiarClaveComponent },
+      { path: 'ayuda', component: SoporteComponent },
+      { path: 'mis-consultas', component: MisConsultasComponent },
+      { path: 'mi-salud', component: MiSaludComponent },
+      { path: 'consulta/:appointmentId', component: ConsultaComponent },
+    ],
   },
   {
     path: 'app-professional',
     //loadChildren: () => import('../../modules/auth/auth.module').then(m => m.AuthModule),
-    component: LayoutComponent, 
+    component: LayoutComponent,
     canActivate: [GuardsGuard],
     children: [
-      { path: '', component:  InicioPComponent },
-      { path: 'context', component:  InicioPComponent },
-      { path: 'perfil', component:  PerfilComponent },
-      { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard]},
-      { path: 'mi-agenda', component:  AgendaComponent, canActivate: [ProfesionalGuard] },
-      { path: MisPacientes, component:  MisPacientesComponent, canActivate: [ProfesionalGuard] },
-      { path: MisPacientes + '/ficha-paciente', component:  FichaPacienteComponent, canActivate: [ProfesionalGuard] },
-      { path: 'mi-disponibilidad', component:  MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
-      { path: historialConsulta, component:  HistorialConsultasComponent, canActivate: [ProfesionalGuard],
-        children: [ 
-          { path: 'ficha-consultas', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] } 
-        ] 
+      { path: '', component: InicioPComponent },
+      { path: 'context', component: InicioPComponent },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] },
+      { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
+      { path: MisPacientes, component: MisPacientesComponent, canActivate: [ProfesionalGuard] },
+      { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
+      { path: 'mi-disponibilidad', component: MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
+      {
+        path: historialConsulta,
+        component: HistorialConsultasComponent,
+        canActivate: [ProfesionalGuard],
+        children: [{ path: 'ficha-consultas', component: FichaConsultaComponent, canActivate: [ProfesionalGuard] }],
       },
-      { path: historialConsulta + '/ficha-consulta', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] },
-      { path: 'crear-ficha-consulta', component:  CrearFichaConsultaComponent, canActivate: [ProfesionalGuard] },
-      
-    ]
+      {
+        path: historialConsulta + '/ficha-consulta',
+        component: FichaConsultaComponent,
+        canActivate: [ProfesionalGuard],
+      },
+      { path: 'crear-ficha-consulta', component: CrearFichaConsultaComponent, canActivate: [ProfesionalGuard] },
+    ],
   },
-  { 
-    path: 'cita/:appointmentId', component: Consulta2Component,
-    canActivate: [GuardsGuard]
+  {
+    path: 'cita/:appointmentId',
+    component: Consulta2Component,
+    canActivate: [GuardsGuard],
   },
   {
     path: 'meet/:appointmentId',
-    component: Consulta2Component
+    component: Consulta2Component,
   },
   {
     path: 'app-admin',
     component: LayoutComponent,
     canActivate: [GuardsGuard],
     children: [
-      { path: '', component:  InicioComponent },
-      { path: 'ficha-pacientes', component:  FichaPacienteComponent },
-      { path: 'mis-pacientes', component:  PacientesComponent }
+      { path: '', component: InicioComponent },
+      { path: 'ficha-pacientes', component: FichaPacienteComponent },
+      { path: 'mis-pacientes', component: PacientesComponent },
       //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)//, { useHash: true }
+    RouterModule.forChild(routes), //, { useHash: true }
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class LayoutRoutingModule { }
+export class LayoutRoutingModule {}

@@ -1,33 +1,33 @@
 .daysBlocked {
-    //padding: 0 30px;
-    .day {
-        padding-top: 8px;
-        height: 65px;
-        width: 196px;
-        background: #FFFFFF;
-        border: 1px solid #FF5971;
-        box-sizing: border-box;
-        border-radius: 20px;
-        margin: 0 12px;
-        position: relative;
-        &:hover {
-            background: #FF5971;
-            color:#FFFFFF;
-            .cerrar {
-                display:block;
-            }
-        }
-        .cerrar {
-            display:none;
-            position: absolute;
-            top: 3px;
-            left: 11px;
-            color: #FFFFFF;
-            .close {
-                color: #ffffff;
-                opacity: 1;
-                text-shadow: none;
-            }
-        }
+  //padding: 0 30px;
+  .day {
+    padding-top: 8px;
+    height: 65px;
+    width: 196px;
+    background: #ffffff;
+    border: 1px solid #ff5971;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin: 0 12px;
+    position: relative;
+    &:hover {
+      background: #ff5971;
+      color: #ffffff;
+      .cerrar {
+        display: block;
+      }
     }
+    .cerrar {
+      display: none;
+      position: absolute;
+      top: 3px;
+      left: 11px;
+      color: #ffffff;
+      .close {
+        color: #ffffff;
+        opacity: 1;
+        text-shadow: none;
+      }
+    }
+  }
 }

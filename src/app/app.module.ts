@@ -1,5 +1,5 @@
 //core
-import { NgModule  } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,29 +12,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
-
-
-
 //components
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     NgbModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AuthModule,
-    LayoutModule
-  
- 
+    LayoutModule,
+
     //SharedModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

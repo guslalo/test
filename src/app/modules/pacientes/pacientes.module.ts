@@ -9,7 +9,6 @@ import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { Consulta2Component } from './consulta2/consulta2.component';
 
-
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from '../../services/opentok.service';
@@ -18,14 +17,13 @@ import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from './soporte/soporte.component';
 import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
-
-
 @NgModule({
   declarations: [
     PublisherComponent,
     SubscriberComponent,
-  
-    /*PacientesComponent, MiSaludComponent*/InicioComponent, MisConsultasComponent, 
+
+    /*PacientesComponent, MiSaludComponent*/ InicioComponent,
+    MisConsultasComponent,
     ConsultaComponent,
     Consulta2Component,
     PerfilComponent,
@@ -33,16 +31,8 @@ import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consulta
     SoporteComponent,
     MisConsultasFilterComponent,
   ],
-  imports: [
-    CommonModule,
-    PacientesRoutingModule,
-  
-  ],
-  exports: [
- 
-  ],
-  providers: [
-    OpentokService
-  ]
+  imports: [CommonModule, PacientesRoutingModule],
+  exports: [],
+  providers: [OpentokService],
 })
-export class PacientesModule { }
+export class PacientesModule {}
