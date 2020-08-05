@@ -95,6 +95,19 @@ ul {
 }
 @import "~angular-vertical-timeline/dist/vertical-timeline.css";
 
+.top-user {
+    a {
+        &.name {
+            line-height:18px;
+            color:#4a4a4a;
+            font-weight: 500;
+        }
+    }
+    p {
+        color: #949494;
+    }
+}
+
 .timeline-img {
     background: $color-hover !important
 }
@@ -153,19 +166,7 @@ ul {
     border-radius: 6px;
 }
 
-.collapseCustom {
-    min-height: 28px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
- 
-    margin-bottom:35px;
-    a {
-        display: inline-block;
-        width: 100%;
-        min-height: 28px;
-    }
-}
+
 
 
 .color-text-bold {
@@ -202,7 +203,7 @@ button.calendar, button.calendar:active {
 .modal-backdrop {
     background-color: #ffffff;
     &.show {
-        opacity: 0.85;
+        opacity: 0.87;
     }
 }
 
@@ -218,6 +219,10 @@ button.calendar, button.calendar:active {
     border-radius: $border-radius;
     border:none;
     min-height: 152px;
+    &.destacado {
+        background-color: $color-hover;
+        color: #ffffff;
+    }
 }
 
 .back {
@@ -278,6 +283,19 @@ a {
             }
         }
     }
+    &.dos {
+        tbody {
+            tr{
+                &:hover {
+                    background-color:inherit;
+                }
+                td {
+                    padding: 20px 20px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
 }
 p {
     font-size: 15px;
@@ -287,6 +305,15 @@ p {
     
 }
 
+.btnazulfondo {
+    background: #497DF9;
+    border: 1px solid #FFFFFF;
+    &:hover {
+        background:#497DF9 !important;
+        border: 1px solid #FFFFFF;
+    }
+}
+
 
 .iconflecha {
     position: absolute;
@@ -294,22 +321,51 @@ p {
 .tab-pane {
     width: 100%;
 }
-.nav-tabs {
-    border-bottom: 1px solid #35A6F5;
-}
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: $color-primary;
-    background: none !important;
+    background: none;
     border: none;
     border-bottom:4px solid $color-primary;
+}
+
+
+.tabconsultamodal .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: $color-primary;
+    
+    border: none;
+    border-bottom:4px solid $color-primary;
+}
+
+.tab-consulta {
+    background: #F8F8F8;
+    li {
+        border-right:1px solid #DDDDDD;
+        &:last-child {
+            border-right:none;
+        }
+    }
+}
+
+.nav-pills {
+    border:1px solid #969696;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #007bff !important;
+    border-bottom: none;
 }
 
 .bg-white {
     background: #ffffff;
 }
 
-
+.border-dark {
+    border: 1px solid #A7A7A7;
+}
 
 a {
     color: #7D7D7D;
@@ -390,4 +446,53 @@ h4 a {
     position: absolute;
     top: 11px;
     right: 30px;
+}
+
+.collapseCustom {
+    min-height: 28px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+ 
+    margin-bottom:35px;
+    &.primary {
+        background:$color-primary;
+       * {
+        color: #ffffff !important;
+       }
+    }
+    table {
+        tbody {
+            tr {
+                &:hover {
+                    background-color: none !important;
+                }
+            }
+        }
+    }
+    a {
+        display: inline-block;
+        width: 100%;
+        min-height: 28px;
+    }
+}
+
+.sintoma {
+    background: #FFFFFF;
+    border: 1px solid #0066FF;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    position: relative;
+    height: 50px;
+    padding: 0 15px;
+    .icon {
+        position: absolute;
+        left:15px;
+        top: 9px;
+    }
+    p {
+        line-height: 49px;
+        margin: 0px;
+    }
 }

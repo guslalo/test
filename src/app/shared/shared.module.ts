@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbTimepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //Translation
@@ -38,6 +38,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     MatCardModule,
     RouterModule,
     NgbDatepickerModule,
+    NgbRatingModule,
     PasswordStrengthMeterModule
   ],
   exports: [
@@ -51,6 +52,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     RouterModule,
     NgbDatepickerModule,
     NgbdTimepickerBasic,
+    NgbRatingModule,
     ChangePassComponent,
     PasswordStrengthMeterModule
   ],

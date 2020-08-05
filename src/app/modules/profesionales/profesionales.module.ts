@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 //import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 //
@@ -25,6 +26,7 @@ import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
+import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
 
 
 
@@ -44,7 +46,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     HistorialConsultasComponent,
     FichaConsultaComponent,
     MisPacientesComponent,
-    AgendaComponent
+    AgendaComponent,
+    CrearFichaConsultaComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +60,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgxMaterialTimepickerModule,
     OwlModule,
     VerticalTimelineModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgbRatingModule
   ],
   exports:[
     FichaPacienteComponent,

@@ -16,7 +16,8 @@ export class UserLogin {
     public access_token:string,
     public expires_in:string,
     public internalCode:number,
-    public administrativeData:[AdministrativeData]
+    public administrativeData:[AdministrativeData],
+    public administrativeDataContext: string
     ){
 
    

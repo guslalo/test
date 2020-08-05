@@ -25,6 +25,7 @@ import { HistorialConsultasComponent } from '../profesionales/modules/historial-
 import { FichaConsultaComponent } from '../profesionales/modules/ficha-consulta/ficha-consulta.component';
 import { MisPacientesComponent } from '../profesionales/modules/mis-pacientes/mis-pacientes.component';
 import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
+import { CrearFichaConsultaComponent } from '../profesionales/modules/crear-ficha-consulta/crear-ficha-consulta.component';
 
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
 import { AgendaComponent } from '../profesionales/modules/agenda/agenda.component';
@@ -56,6 +57,7 @@ const routes: Routes = [
   },
   {
     path: 'app-professional',
+    //loadChildren: () => import('../../modules/auth/auth.module').then(m => m.AuthModule),
     component: LayoutComponent, 
     canActivate: [GuardsGuard],
     children: [
@@ -72,7 +74,9 @@ const routes: Routes = [
           { path: 'ficha-consultas', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] } 
         ] 
       },
-      { path: historialConsulta + '/ficha-consulta', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] } 
+      { path: historialConsulta + '/ficha-consulta', component:  FichaConsultaComponent, canActivate: [ProfesionalGuard] },
+      { path: 'crear-ficha-consulta', component:  CrearFichaConsultaComponent, canActivate: [ProfesionalGuard] },
+      
     ]
   },
   { 

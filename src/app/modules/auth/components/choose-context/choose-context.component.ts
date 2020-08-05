@@ -28,19 +28,33 @@ export class ChooseContextComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).lastName,
       JSON.parse(localStorage.getItem('currentUser')).access_token,
       JSON.parse(localStorage.getItem('currentUser')).expires_in,
-      JSON.parse(localStorage.getItem('currentUser')).administrativeData
+      JSON.parse(localStorage.getItem('currentUser')).administrativeData,
+      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
     );
    
   }
 
   chooseContext(id){
-
+    console.log(id)
     this.authenticationService.accessWeb(id).subscribe(
       data => { 
         console.log(data.access_token);
         if(data.access_token) {
           localStorage.removeItem('token');
           localStorage.setItem('token', JSON.stringify(data.access_token));
+          this.user  = new UserLogin(
+            JSON.parse(localStorage.getItem('currentUser')).id,
+            JSON.parse(localStorage.getItem('currentUser')).email,
+            JSON.parse(localStorage.getItem('currentUser')).name, 
+            JSON.parse(localStorage.getItem('currentUser')).lastName,
+            JSON.parse(localStorage.getItem('currentUser')).access_token,
+            JSON.parse(localStorage.getItem('currentUser')).expires_in,
+            JSON.parse(localStorage.getItem('currentUser')).internalCode,  
+            JSON.parse(localStorage.getItem('currentUser')).administrativeData,
+            id
+          );
+          localStorage.removeItem('currentUser')
+          localStorage.setItem('currentUser', JSON.stringify(this.user))
           this.router.navigate(['app-professional']);
         }
       },

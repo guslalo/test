@@ -6,18 +6,15 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ProfesionalesModule } from '../profesionales/profesionales.module';
 import { PacientesModule } from '../pacientes/pacientes.module';
-
+import { AdminModule } from '../admin/admin.module';
 import { SharedModule } from '../../shared/shared.module';
 
 //routing
 import { LayoutRoutingModule } from './layout-routing.module';
 
-
 //inteceptores
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
-
-
 
 @NgModule({
   declarations: [
@@ -27,6 +24,7 @@ import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
     CommonModule,
     HttpClientModule,
     LayoutRoutingModule,
+    AdminModule,
     ProfesionalesModule,
     PacientesModule,
     SharedModule

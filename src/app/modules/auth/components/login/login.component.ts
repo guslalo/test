@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-import { CurrentUserService } from '../../../../services/current-user.service'
+//import { CurrentUserService } from '../../../../services/current-user.service'
 import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserLogin } from '../../../../models/models';
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private translocoService: TranslocoService,
     private spinner: NgxSpinnerService, 
     private authenticationService:AuthenticationService,
-    public currentUserService:CurrentUserService,
+    //public currentUserService:CurrentUserService,
     private UserService:UsersService, 
     private router: Router) { }
 
@@ -61,11 +61,11 @@ export class LoginComponent implements OnInit {
           data.access_token,
           data.expires_in,
           data.internalCode,
-          data.administrativeData
+          data.administrativeData,
+          data.administrativeDataContext
         );
         localStorage.setItem('token', JSON.stringify(data.access_token));
-
-        localStorage.setItem('token2', JSON.stringify(this.currentUser.access_token));
+        //localStorage.setItem('token2', JSON.stringify(this.currentUser.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         console.log(this.currentUser);
 

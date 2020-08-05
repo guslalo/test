@@ -42,15 +42,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    localStorage.getItem('token')
-    console.log(localStorage.getItem('token'))
-    //JSON.parse(localStorage.getItem('currentUser')).access_token
     const token =  JSON.parse(localStorage.getItem('token'));
-    if ( token === JSON.parse(localStorage.getItem('token'))) {
-      console.log('token no se actualizó')
-    } else {
-      console.log('token se actualizó')
-    }
     req = req.clone({
       setHeaders: {
         'Authorization': `Bearer ${token}`

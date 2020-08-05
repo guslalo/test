@@ -20,6 +20,9 @@ export class LayoutComponent implements OnInit {
   public userCurrent:any;
 
   ngOnInit(): void {
+
+    console.log(this.currentUser);
+    //this.user = this.currentUser;
     this.user  = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -28,8 +31,9 @@ export class LayoutComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).access_token,
       JSON.parse(localStorage.getItem('currentUser')).expires_in,
       JSON.parse(localStorage.getItem('currentUser')).internalCode,
-      JSON.parse(localStorage.getItem('currentUser')).administrativeData
+      JSON.parse(localStorage.getItem('currentUser')).administrativeData,
+      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
     );
-    console.log(this.user);
+    console.log(this.user);/**/
   }
 }
