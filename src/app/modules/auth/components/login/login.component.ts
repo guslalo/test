@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
           data.expires_in,
           data.internalCode,
           data.administrativeData,
-          data.administrativeDataContext
+          data.administrativeDataContext,
+          data.administrativeData[0].role
         );
         localStorage.setItem('token', JSON.stringify(data.access_token));
         //localStorage.setItem('token2', JSON.stringify(this.currentUser.access_token));

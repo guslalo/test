@@ -2,19 +2,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 //components
-//import { LayoutComponent } from './components/layout/layout.component';
-
-//import { MiSaludComponent } from './mi-salud/mi-salud.component';
-//guards
-
-//import { InicioPComponent } from '../profesionales/inicio/inicio.component';
-
-//routing
+import { LayoutComponent } from '../layout/components/layout/layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    // component: LayoutComponent,
+    component: LayoutComponent,
     canActivate: [],
     children: [
       // { path: '', component:  InicioPComponent }
