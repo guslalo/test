@@ -62,7 +62,7 @@ export class CreateAccountComponent implements OnInit {
     };
 
     this.formUno = this._formBuilder.group({
-      mayor: [null, [Validators.required]],
+      checkAge: [null, [Validators.requiredTrue]],
       name: [null, [Validators.required, Validators.minLength(2)]],
       lastName: [null, [Validators.required, Validators.minLength(2)]],
       secondlastName: [null],

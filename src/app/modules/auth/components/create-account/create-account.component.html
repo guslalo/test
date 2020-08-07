@@ -33,13 +33,12 @@
                 <div class="form-row">
                   <div class="form-group col">
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="mayor" />
-                      <label class="custom-control-label" for="customCheck1">
+                      <input type="checkbox" class="custom-control-input"
+                      name="checkAge"
+                      id="checkAge" formControlName="checkAge" />
+                      <label class="custom-control-label" for="checkAge">
                         {{ 'crear-cuenta.mayorEdad' | transloco }}
                       </label>
-                      <div *ngIf="formUno.controls['mayor'].errors?.required" class="invalid-feedback">
-                        {{ 'crear-cuenta.step1.formGroup.mayor' | transloco }} es necesario
-                      </div>
                     </div>
                   </div>
                 </div>
