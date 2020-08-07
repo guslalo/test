@@ -51,7 +51,7 @@ export class UsuariosComponent implements OnInit {
   getUsers() {
     this.adminService.getUsers('admins').subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.users = data;
       },
       (error) => {
@@ -63,7 +63,7 @@ export class UsuariosComponent implements OnInit {
   changeTab(userType: string) {
     this.adminService.getUsers(userType).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.users = data;
       },
       (error) => {

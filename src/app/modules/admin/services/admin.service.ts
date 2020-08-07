@@ -9,11 +9,27 @@ import { environment } from '../../../../environments/environment';
 export class AdminService {
   //end points
   private userEndpoint = 'v1/users';
+  private profileEndpoint = 'v1/administrative/profiles';
 
   constructor(private http: HttpClient) {}
 
   //GET availability/blocked
   getUsers(userType): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`);
+  }
+
+  getProfiles(): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}${this.profileEndpoint}`);
+  }
+
+  createUser(userType, userObject): Observable<any> {
+    return this.http.post<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`, {
+      identificationData: userObject.identificationData,
+      personalData: userObject.personalData,
+      waitingRooms: userObject.waitingRooms,
+      password: userObject.password,
+      confirmPassword: userObject.confirmPassword,
+      profiles: userObject.profiles,
+    });
   }
 }

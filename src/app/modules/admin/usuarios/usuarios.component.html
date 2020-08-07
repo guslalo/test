@@ -153,6 +153,8 @@
                 ng-reflect-tour-anchor="agendar"
                 data-toggle="modal"
                 data-target="#disponibilidad"
+                [routerLink]="['crear-usuario']"
+                [queryParams]="{ userType: 'admin' }"
               >
                 Nuevo Administrador
                 <svg
@@ -301,6 +303,8 @@
                 ng-reflect-tour-anchor="agendar"
                 data-toggle="modal"
                 data-target="#disponibilidad"
+                [routerLink]="['crear-usuario']"
+                [queryParams]="{ userType: 'professional' }"
               >
                 Nuevo Profesional
                 <svg
@@ -449,6 +453,8 @@
                 ng-reflect-tour-anchor="agendar"
                 data-toggle="modal"
                 data-target="#disponibilidad"
+                [routerLink]="['crear-usuario']"
+                [queryParams]="{ userType: 'coordinator' }"
               >
                 Nuevo Coordinador
                 <svg
@@ -597,6 +603,8 @@
                 ng-reflect-tour-anchor="agendar"
                 data-toggle="modal"
                 data-target="#disponibilidad"
+                [routerLink]="['crear-usuario']"
+                [queryParams]="{ userType: 'patient' }"
               >
                 Nuevo Paciente
                 <svg

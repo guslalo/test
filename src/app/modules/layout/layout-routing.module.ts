@@ -11,10 +11,11 @@ import { ConsultaComponent } from '../pacientes/consulta/consulta.component';
 import { Consulta2Component } from '../pacientes/consulta2/consulta2.component';
 import { PerfilComponent } from '../pacientes/perfil/perfil.component';
 
-//guards
+// GUARDS
 import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
+import { AdminGuard } from '../../guards/admin.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
@@ -32,6 +33,7 @@ import { AgendaComponent } from '../profesionales/modules/agenda/agenda.componen
 
 // ADMIN ROUTES
 import { UsuariosComponent } from '../admin/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from '../admin/modules/crear-usuario/crear-usuario.component';
 
 /*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
@@ -43,8 +45,16 @@ const routes: Routes = [
   {
     path: 'app-admin',
     component: LayoutComponent,
-    canActivate: [GuardsGuard],
-    children: [{ path: 'usuarios', component: UsuariosComponent }],
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'usuarios',
+        children: [
+          { path: '', component: UsuariosComponent, pathMatch: 'full' },
+          { path: 'crear-usuario', component: CrearUsuarioComponent },
+        ],
+      },
+    ],
   },
   {
     path: 'app-paciente',
