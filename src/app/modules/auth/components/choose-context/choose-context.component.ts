@@ -49,6 +49,7 @@ export class ChooseContextComponent implements OnInit {
     const profile = this.user.administrativeData.find((profile) => {
       if (profile.clinicProfileId === clinicId) return profile;
     });
+  
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -62,9 +63,10 @@ export class ChooseContextComponent implements OnInit {
       clinicId,
       profile.role
     );
-
     localStorage.removeItem('currentUser');
+    
     localStorage.setItem('currentUser', JSON.stringify(this.user));
+    console.log(this.user );
 
     switch (profile.role) {
       case 'admin':

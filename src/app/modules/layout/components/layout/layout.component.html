@@ -343,7 +343,9 @@
 
             <!--menu paciente-->
             <ng-container *ngIf="user.role === 'patient'">
-              <a class="nav-link" routerLink="/app-paciente" routerLinkActive="active">
+              <a class="nav-link" routerLink="/app-paciente"
+              [routerLinkActiveOptions]="{ exact: true }"
+               routerLinkActive="active">
                 <svg
                   width="1.5em"
                   height="1.5em"
@@ -403,7 +405,9 @@
 
             <!--menu admin-->
             <ng-container *ngIf="user.role === 'admin'">
-              <a class="nav-link" routerLink="/app-paciente" routerLinkActive="active">
+              <a class="nav-link" routerLink="/app-admin" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >
                 <svg
                   width="1.5em"
                   height="1.5em"
@@ -441,6 +445,10 @@
                   />
                 </svg>
                 Usuarios
+              </a>
+              <a class="nav-link" routerLink="gestion-perfil" routerLinkActive="active">
+                <img src="assets/img/icon-profiles-admin.svg">
+                Gestión de perfiles
               </a>
             </ng-container>
             <!--/menu admin-->

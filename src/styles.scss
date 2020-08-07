@@ -356,6 +356,23 @@ p {
   background-color: #007bff !important;
   border-bottom: none;
 }
+.boxTabSecondary {
+  ul  {
+    li {
+      border-color:#969696;
+      a {
+        border-radius: 0px !important;
+      }
+   
+    }
+  }
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color:$color-hover!important;
+    border-bottom: none;
+  }
+}
 
 .bg-white {
   background: #ffffff;
@@ -380,7 +397,16 @@ table {
 .nav-tabs .nav-link {
   border: none;
 }
+
+
+
+
 .nav-tabs {
+  .secondary {
+    .active { 
+     
+    }
+  }
   a {
     color: #7d7d7d;
     border: none;
@@ -500,4 +526,9 @@ h4 a {
     display: block;
     margin-top: -50px;
   }
+}
+
+.boxOptions {
+  position: relative;
+  right: 0px;
 }

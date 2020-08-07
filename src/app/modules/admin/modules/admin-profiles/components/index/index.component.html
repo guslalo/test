@@ -1,0 +1,142 @@
+<div class="container-fluid p-5">
+    <div class="row">
+      <div class="col mb-2">
+        <h2>Gestión de perfiles</h2>
+      </div>
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-primary rounded-pill float-right"
+          routerLink="crear-perfil"
+        >
+           Crear perfil
+          <svg
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 16 16"
+            class="bi bi-plus-circle"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+            />
+            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="row mt-2">
+          <div class="col-12 col-md-3">
+            <input
+              id="typeahead-basic"
+              type="text"
+              class="form-control"
+              [(ngModel)]="model"
+              [ngbTypeahead]="search"
+              placeholder="Busqueda"
+            />
+            <div class="searchBox">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-search"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Filtrar por</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!--consultas activas-->
+        <div class="row mt-1">
+          <div class="col-12">
+            <h5 style="display: none;">Mis consultas activas</h5>
+          </div>
+          <div class="col-12 mb-4">
+            
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Usuarios</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+                  <tr *ngFor="let item of profile">
+                    <td scope="row">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="{{item._id}}" />
+                        <label class="custom-control-label" for="{{item._id}}">
+                         {{item.profileName}} 
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      {{item.role}} 
+                    </td>
+                    
+                    <td>Descripción</td>
+                    <td>Usuarios</td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          ..
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button class="dropdown-item" type="button">
+                            Eliminar
+                          </button>
+                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                            Editar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <div class="row">
+          <div class="col-12 text-right">
+            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -3,9 +3,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { NgbDatepickerModule, NgbTimepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { 
+  NgbTypeaheadModule,
+  NgbDatepickerModule,
+   NgbTimepickerModule, 
+   NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //Translation
@@ -22,7 +27,9 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent],
+  declarations: [
+    NgbdTimepickerBasic, 
+    ChangePassComponent],
   imports: [
     CommonModule,
     //HttpClientModule,
@@ -34,6 +41,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     MatSliderModule,
     MatCardModule,
     RouterModule,
+    NgbTypeaheadModule,
     NgbDatepickerModule,
     NgbRatingModule,
     PasswordStrengthMeterModule,
@@ -47,6 +55,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     MatSliderModule,
     MatCardModule,
     RouterModule,
+    NgbTypeaheadModule,
     NgbDatepickerModule,
     NgbdTimepickerBasic,
     NgbRatingModule,

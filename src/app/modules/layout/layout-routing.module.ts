@@ -30,7 +30,6 @@ import { CrearFichaConsultaComponent } from '../profesionales/modules/crear-fich
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
 import { AgendaComponent } from '../profesionales/modules/agenda/agenda.component';
 
-/*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
 //const profesional
 const historialConsulta = 'historial-consultas';
@@ -41,7 +40,14 @@ const routes: Routes = [
     path: 'app-admin',
     component: LayoutComponent,
     canActivate: [GuardsGuard],
-    children: [{ path: 'usuarios', component: InicioComponent }],
+    children: [
+      { path: 'usuarios', component: InicioComponent },
+      { 
+        path: 'gestion-perfil', 
+        loadChildren: () => import('../admin/modules/admin-profiles/admin-profiles.module').then(m => m.AdminProfilesModule),
+        canActivate: []  
+      }
+    ],
   },
   {
     path: 'app-paciente',

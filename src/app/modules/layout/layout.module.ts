@@ -28,6 +28,7 @@ import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
     SharedModule,
   ],
   exports: [
+    SharedModule
     //TourMatMenuModule.forRoot()
   ],
   providers: [

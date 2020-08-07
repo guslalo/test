@@ -25,6 +25,12 @@ input {
   border-color: $color-hover;
 }
 
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: $color-hover;
+  background-color: $color-hover;
+}
+
 .btn:disabled,
 .btn[disabled] {
   opacity: 0.5;

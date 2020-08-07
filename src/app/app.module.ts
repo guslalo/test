@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //routing
 import { AppRoutingModule } from './app-routing.module';
 
-//import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -25,7 +25,11 @@ import { AppComponent } from './app.component';
     AuthModule,
     LayoutModule,
 
-    //SharedModule.forRoot()
+    SharedModule.forRoot()
+  ],
+  exports:[
+    SharedModule
+    //NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

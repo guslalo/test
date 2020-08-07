@@ -59,10 +59,10 @@ export class LoginComponent implements OnInit {
           data.expires_in,
           data.internalCode,
           data.administrativeData,
-          data.administrativeDataContext
+          data.administrativeDataContext,
+          data.administrativeData[0].role
         );
         localStorage.setItem('token', JSON.stringify(data.access_token));
-        //localStorage.setItem('token2', JSON.stringify(this.currentUser.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         console.log(this.currentUser);
 
@@ -89,49 +89,4 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  //getUsers
-  getUsers(user) {
-    this.UserService.getusers().subscribe(
-      (data) => {
-        console.log(user.name);
-        console.log(data.data);
-        if (user.email === 'gustavo@bluedott.tech') {
-          let userMedico = data.data.filter((data) => data.email === 'eve.holt@reqres.in');
-          /*this.currentUser = new UserLogin (
-            data.id,
-            data.role,
-            data.email,
-            data.name,
-            data.lastName,
-            data.access_token,
-            data.expires_in
-          );*/
-          //this.currentUserService.currentUser  = this.currentUser;
-          //localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-          // this.router.navigate(['app-profesional']);
-        } else {
-          let userPaciente = data.data.filter((data) => data.email === 'eve.holt@reqres.in');
-          //this.currentUserService.currentUser  = userPaciente;
-          /*this.currentUser = new UserLogin(
-            data.id,
-            data.role,
-            data.email,
-            data.name,
-            data.lastName,
-            data.access_token,
-            data.expires_in
-          )*/
-          console.log(this.currentUser);
-          //localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-
-          //this.currentUserService.currentUser  = this.currentUser;
-          // this.router.navigate(['app-paciente']);
-          this.spinner.hide();
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
 }
