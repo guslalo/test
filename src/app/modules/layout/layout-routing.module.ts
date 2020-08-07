@@ -46,7 +46,9 @@ const routes: Routes = [
         path: 'gestion-perfil', 
         loadChildren: () => import('../admin/modules/admin-profiles/admin-profiles.module').then(m => m.AdminProfilesModule),
         canActivate: []  
-      }
+      },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] }
     ],
   },
   {

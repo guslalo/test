@@ -54,7 +54,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
           // backend error
           //document.location.href = '/';
           if (error.status === 401) {
-            // document.location.href = '/'
+            document.location.href = '/'
           }
           console.log(error);
           errorMessage = `Server-side error: ${error.status} ${error.message}`;
