@@ -33,10 +33,13 @@
                 <div class="form-row">
                   <div class="form-group col">
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="mayor" />
                       <label class="custom-control-label" for="customCheck1">
                         {{ 'crear-cuenta.mayorEdad' | transloco }}
                       </label>
+                      <div *ngIf="formUno.controls['mayor'].errors?.required" class="invalid-feedback">
+                        {{ 'crear-cuenta.step1.formGroup.mayor' | transloco }} es necesario
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -185,17 +188,18 @@
                 </ng-template>
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="birthdate"> {{ 'crear-cuenta.step2.formGroup.birthdate' | transloco }} * </label>
+                    <label for="birthdate"> {{ 'crear-cuenta.step2.formGroup.birthdate' | transloco }} * w</label>
                     <div class="input-group dateregister">
-                    
+                    <!--[minDate]="minDate"-->
                       <input
                         [placement]="placement"
                         class="form-control"
                         id="birthdate"
+                        
+                        [maxDate]="maxDate"
                         placeholder="yyyy-mm-dd"
                         name="birthdate"
                         [(ngModel)]="model"
-                        [minDate]="{ year: 1940, month: 1, day: 1 }"
                         ngbDatepicker
                         #d="ngbDatepicker"
                         formControlName="birthdate"

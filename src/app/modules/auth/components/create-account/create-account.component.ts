@@ -2,7 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
-import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbDateStruct,
+  NgbCalendar,
+  NgbDateParserFormatter,
+  NgbDatepickerConfig,
+  NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { registerUser } from '../../../../models/registerUser';
 
 @Component({
@@ -29,16 +33,36 @@ export class CreateAccountComponent implements OnInit {
   formTres: FormGroup;
   formCuatro: FormGroup;
   form = [];
+  minDate = undefined;
+  maxDate = undefined;
 
   constructor(
     private router: Router,
     private registerUser: RegisterService,
-    private _formBuilder: FormBuilder,
-    private calendar: NgbCalendar
-  ) {}
+    private _formBuilder: FormBuilder, 
+    private calendar: NgbCalendar,
+    private config: NgbDatepickerConfig
+   
+  ) {
+    
+  }
 
   ngOnInit(): void {
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    };
+
+    this.maxDate = {
+      year: current.getFullYear() -18,
+      month: current.getMonth(),
+      day: current.getDate(),
+    };
+
     this.formUno = this._formBuilder.group({
+      mayor: [null, [Validators.required]],
       name: [null, [Validators.required, Validators.minLength(2)]],
       lastName: [null, [Validators.required, Validators.minLength(2)]],
       secondlastName: [null],
