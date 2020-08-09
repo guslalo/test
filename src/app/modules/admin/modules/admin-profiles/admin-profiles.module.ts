@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminProfileRoutingModule } from './admin-profile-routing.module';
-import { IndexComponent } from './components/index/index.component';
+import { IndexProfileComponent } from './components/indexProfile/indexProfile.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CrearPerfilComponent } from './components/crear-perfil/crear-perfil.component';
 
 
 @NgModule({
-  declarations: [IndexComponent, CrearPerfilComponent],
+  declarations: [
+    IndexProfileComponent, 
+    CrearPerfilComponent
+  ],
   imports: [
     CommonModule,
     AdminProfileRoutingModule,

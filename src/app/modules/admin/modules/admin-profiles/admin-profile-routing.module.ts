@@ -1,19 +1,17 @@
 //core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './components/index/index.component';
+import { IndexProfileComponent } from './components/indexProfile/indexProfile.component';
 import { CrearPerfilComponent } from './components/crear-perfil/crear-perfil.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
-    canActivate: []
+    component: IndexProfileComponent
   },
   {
     path: 'crear-perfil',
-    component: CrearPerfilComponent,
-    canActivate: []
+    component: CrearPerfilComponent
   }
 ];
 

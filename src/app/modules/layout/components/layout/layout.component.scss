@@ -38,11 +38,28 @@ body {
 .nav {
   a {
     color: #3f3f3f;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
+    min-width: 240px;
+    .icon {
+      margin-right: 5px;
+      width:30px;
+      display: inline-block;
+    }
+   
     &.active {
       background: #f7f7f7;
-      border-left: 7px solid #3bc4ca;
+      position: relative;
       color: #35a6f5;
+      &:after {
+        width:7px;
+        height:100%;
+        background: #3bc4ca;
+        position: absolute;
+        z-index: 1;
+        left: 0px;
+        top:0px;
+        content: ".";
+      }
     }
     &:hover {
       background: rgba($color: #000000, $alpha: 0.1);
@@ -130,15 +147,95 @@ app-layout {
   .sidebar {
     position: relative;
     background: #ffffff;
+    overflow: hidden;
     //flex: 0 1 auto;
     box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
     //min-height: 100%; //calc(100vh - 80px);
     max-width: 250px;
-    min-width: 200px;
+    min-width: 68px;
     //height: calc(100% - 80px);
     width: 20%;
+    transition: width 0.2s;
+    i {
+      &.text {
+        font-style: normal;
+        display: inline-block;
+      }
+    }
     //align-items: stretch;
+    &.open {
+      i {
+        &.text {
+          -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+          -moz-animation: fadein  0.5s; /* Firefox < 16 */
+           -ms-animation: fadein  0.5s; /* Internet Explorer */
+            -o-animation: fadein  0.5s; /* Opera < 12.1 */
+               animation: fadein  0.5s;
+               display:inline-block
+        }
+      }
+   
+    }
+    &.closed {
+      width: 68px;
+      i {
+        &.text {
+          -webkit-animation: fadeout 0.5s; /* Safari, Chrome and Opera > 12.1 */
+          -moz-animation: fadeout  0.5s; /* Firefox < 16 */
+           -ms-animation: fadeout  0.5s; /* Internet Explorer */
+            -o-animation: fadeout  0.5s; /* Opera < 12.1 */
+               animation: fadeout  0.5s;
+               display:none
+        }
+      }
+   
+    }
   }
+
+.notificationBox {
+  position: relative;
+  width: 20px;
+  .badge-danger {
+    position: absolute;
+    right: -7px;
+    top: -6px;
+    font-weight: lighter;
+  }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+  @keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
 
   main {
     background: #f2f2f2;

@@ -1,25 +1,18 @@
 //core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//components
-//import { LayoutComponent } from './components/layout/layout.component';
-
-//import { MiSaludComponent } from './mi-salud/mi-salud.component';
-//guards
-
-//import { InicioPComponent } from '../profesionales/inicio/inicio.component';
-
-//routing
 
 const routes: Routes = [
   {
-    path: '',
-    // component: LayoutComponent,
-    canActivate: [],
-    children: [
-      // { path: '', component:  InicioPComponent }
-    ],
-  },
+    path: 'gestion-perfil',
+    loadChildren: () => import('./modules/admin-profiles/admin-profiles.module').then(m => m.AdminProfilesModule),
+    canActivate: []  
+  },/**/
+  {
+    path: 'gestion-agenda',   
+    loadChildren: () => import('./modules/agenda/agenda.module').then(m => m.AgendaModule),
+    canActivate: []  
+  }/**/
 ];
 
 @NgModule({
@@ -27,3 +20,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AdminRoutingModule {}
+

@@ -350,6 +350,12 @@ p {
   margin: 0 auto;
 }
 
+.ngb-dp-arrow{
+  margin-top: -8px !important;
+}
+.ngb-dp-arrow:first-child button {
+  transform: rotate(180deg);
+}
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;

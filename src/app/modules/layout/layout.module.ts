@@ -15,9 +15,10 @@ import { LayoutRoutingModule } from './layout-routing.module';
 //inteceptores
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, HeaderComponent],
   imports: [
     CommonModule,
     HttpClientModule,

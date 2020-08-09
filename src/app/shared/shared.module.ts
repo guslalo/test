@@ -4,6 +4,19 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
+
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { 
@@ -45,6 +58,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbDatepickerModule,
     NgbRatingModule,
     PasswordStrengthMeterModule,
+    FullCalendarModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -61,6 +75,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbRatingModule,
     ChangePassComponent,
     PasswordStrengthMeterModule,
+    FullCalendarModule
   ],
   bootstrap: [NgbdTimepickerBasic],
 })
