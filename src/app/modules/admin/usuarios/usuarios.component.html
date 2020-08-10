@@ -111,7 +111,6 @@
                 id="typeahead-basic"
                 type="text"
                 class="form-control"
-                [(ngModel)]="model"
                 [ngbTypeahead]="search"
                 placeholder="Busqueda"
               />
@@ -261,7 +260,6 @@
                 id="typeahead-basic"
                 type="text"
                 class="form-control"
-                [(ngModel)]="model"
                 [ngbTypeahead]="search"
                 placeholder="Busqueda"
               />
@@ -411,7 +409,6 @@
                 id="typeahead-basic"
                 type="text"
                 class="form-control"
-                [(ngModel)]="model"
                 [ngbTypeahead]="search"
                 placeholder="Busqueda"
               />
@@ -561,7 +558,6 @@
                 id="typeahead-basic"
                 type="text"
                 class="form-control"
-                [(ngModel)]="model"
                 [ngbTypeahead]="search"
                 placeholder="Busqueda"
               />
@@ -603,8 +599,8 @@
                 ng-reflect-tour-anchor="agendar"
                 data-toggle="modal"
                 data-target="#disponibilidad"
-                [routerLink]="['crear-usuario']"
-                [queryParams]="{ userType: 'patient' }"
+                data-toggle="modal"
+                data-target="#patientModal"
               >
                 Nuevo Paciente
                 <svg
@@ -700,6 +696,132 @@
             <div class="col-12 text-right">
               <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
               </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center w-100 mt-1">Crear Paciente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body p-4">
+              <form [formGroup]="patientForm">
+                <div class="custom-control custom-switch mb-4">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="switchIsTutor"
+                    [checked]="false"
+                    formControlName="isTutor"
+                  />
+                  <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="name">Nombre</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      formControlName="name"
+                      [ngClass]="{
+                        'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="lastName">Apellido</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="lastName"
+                      formControlName="lastName"
+                      [ngClass]="{
+                        'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
+                      }"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="genre">Sexo</label>
+                    <select
+                      class="form-control"
+                      name="genre"
+                      formControlName="genre"
+                      [ngClass]="{
+                        'is-invalid': !patientForm.get('genre').valid && patientForm.get('genre').touched
+                      }"
+                    >
+                      <option value="masculino">Masculino</option>
+                      <option value="femenino">Femenino</option>
+                    </select>
+                  </div>
+                  <div class="form-group col">
+                    <label for="email">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      formControlName="email"
+                      [ngClass]="{
+                        'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
+                      }"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="phoneNumber">Telefono</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phoneNumber"
+                      formControlName="phoneNumber"
+                      [ngClass]="{
+                        'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="idDocumentNumber">Identificación</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="idDocumentNumber"
+                      formControlName="idDocumentNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !patientForm.get('idDocumentNumber').valid && patientForm.get('idDocumentNumber').touched
+                      }"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer text-center justify-content-center">
+              <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+                Cancelar
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary rounded-pill"
+                data-dismiss="modal"
+                (click)="createPatient()"
+                [disabled]="!patientForm.valid"
+              >
+                Crear Paciente
+              </button>
             </div>
           </div>
         </div>

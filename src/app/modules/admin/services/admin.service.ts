@@ -27,9 +27,17 @@ export class AdminService {
       identificationData: userObject.identificationData,
       personalData: userObject.personalData,
       waitingRooms: userObject.waitingRooms,
+      profileData: userObject.profileDataForm,
+      /* PROFESSIONAL ONLY */
+      specialities: userObject.specialities,
+      educationData: userObject.educationData,
+      /* PROFESSIONAL ONLY */
       password: userObject.password,
       confirmPassword: userObject.confirmPassword,
       profiles: userObject.profiles,
+      /* PATIENT ONLY */
+      isTutor: userObject.isTutor,
+      /* PATIENT ONLY */
     });
   }
 }

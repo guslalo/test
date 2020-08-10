@@ -13,12 +13,14 @@ import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CrearUsuarioComponent implements OnInit {
   personalData: FormGroup;
-  birthDate: NgbDateStruct;
   profileForm: FormGroup;
   waitingRoomForm: FormGroup;
-  educationForm: FormGroup;
+  profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
+  educationForm: FormGroup;
   passwordForm: FormGroup;
+
+  birthDate: NgbDateStruct;
   formUser: any = [];
   userObject: any = {};
 
@@ -91,6 +93,11 @@ export class CrearUsuarioComponent implements OnInit {
       speciality: [null, Validators.required],
     });
 
+    this.profileDataForm = this.formBuilder.group({
+      profileImg: [null],
+      biography: [null, Validators.required],
+    });
+
     this.educationForm = this.formBuilder.group({
       professionalTitle: [null, Validators.required],
       university: [null, Validators.required],
@@ -146,6 +153,11 @@ export class CrearUsuarioComponent implements OnInit {
       waitingRoom: [null, Validators.required],
     });
 
+    this.profileDataForm = this.formBuilder.group({
+      profileImg: [null],
+      biography: ['front_test', Validators.required],
+    });
+
     this.specialitiesForm = this.formBuilder.group({
       speciality: [null, Validators.required],
     });
@@ -174,6 +186,7 @@ export class CrearUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
+
     */
 
     this.formUser.push(this.personalData, this.profileForm, this.educationForm, this.passwordForm);
@@ -268,10 +281,18 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    if (this.formUser[0].valid && this.formUser[3].valid) {
-      return true;
+    if (this.userType !== 'professional') {
+      if (this.formUser[0].valid && this.formUser[3].valid) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[3].valid) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -334,6 +355,8 @@ export class CrearUsuarioComponent implements OnInit {
       password: this.formUser[3].value.password,
       confirmPassword: this.formUser[3].value.confirmPassword,
     };
+
+    console.log(this.formUser[0].value.birthdate);
 
     console.log(this.userObject);
 

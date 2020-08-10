@@ -533,7 +533,7 @@
             </div>
             <div class="col-10">
               <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <form [formGroup]="personalData">
+                <form [formGroup]="profileDataForm">
                   <div class="row">
                     <div class="form-group col-md-12">
                       <label for="cpf">Biografia Academica</label>
@@ -542,8 +542,12 @@
                         no-resize
                         type="text"
                         class="form-control"
-                        name="cpf"
-                        formControlName="cpf"
+                        name="biography"
+                        formControlName="biography"
+                        [ngClass]="{
+                          'is-invalid':
+                            !profileDataForm.get('biography').valid && profileDataForm.get('biography').touched
+                        }"
                       ></textarea>
                     </div>
                   </div>
@@ -605,15 +609,37 @@
                         class="form-control"
                         name="professionalTitle"
                         formControlName="professionalTitle"
+                        [ngClass]="{
+                          'is-invalid':
+                            !educationForm.get('professionalTitle').valid &&
+                            educationForm.get('professionalTitle').touched
+                        }"
                       />
                     </div>
                     <div class="form-group col-md-3">
                       <label for="university">Universidad</label>
-                      <input type="text" class="form-control" name="university" formControlName="university" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="university"
+                        formControlName="university"
+                        [ngClass]="{
+                          'is-invalid':
+                            !educationForm.get('university').valid && educationForm.get('university').touched
+                        }"
+                      />
                     </div>
                     <div class="form-group col-md-3">
                       <label for="course">Curso</label>
-                      <input type="text" class="form-control" name="course" formControlName="course" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="course"
+                        formControlName="course"
+                        [ngClass]="{
+                          'is-invalid': !educationForm.get('course').valid && educationForm.get('course').touched
+                        }"
+                      />
                     </div>
                     <div class="form-group col-md-3">
                       <label for="professionalRegistry">Registro Profesional</label>
@@ -622,19 +648,40 @@
                         class="form-control"
                         name="professionalRegistry"
                         formControlName="professionalRegistry"
+                        [ngClass]="{
+                          'is-invalid':
+                            !educationForm.get('professionalRegistry').valid &&
+                            educationForm.get('professionalRegistry').touched
+                        }"
                       />
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-md-3">
                       <label for="registryNumber">N° de Registro</label>
-                      <select class="form-control" name="registryNumber" formControlName="registryNumber">
+                      <select
+                        class="form-control"
+                        name="registryNumber"
+                        formControlName="registryNumber"
+                        [ngClass]="{
+                          'is-invalid':
+                            !educationForm.get('registryNumber').valid && educationForm.get('registryNumber').touched
+                        }"
+                      >
                         <option value="test">test</option>
                       </select>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="extraIdDocument">Otro Documento de Identificacion</label>
-                      <select class="form-control" name="extraIdDocument" formControlName="extraIdDocument">
+                      <select
+                        class="form-control"
+                        name="extraIdDocument"
+                        formControlName="extraIdDocument"
+                        [ngClass]="{
+                          'is-invalid':
+                            !educationForm.get('extraIdDocument').valid && educationForm.get('extraIdDocument').touched
+                        }"
+                      >
                         <option value="test">test</option>
                       </select>
                     </div>
