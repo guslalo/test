@@ -30,7 +30,6 @@ import { HeaderComponent } from './components/header/header.component';
   ],
   exports: [
     SharedModule
-    //TourMatMenuModule.forRoot()
   ],
   providers: [
     {

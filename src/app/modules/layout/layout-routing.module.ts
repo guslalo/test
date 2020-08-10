@@ -27,15 +27,10 @@ import { CrearFichaConsultaComponent } from '../profesionales/modules/crear-fich
 
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
 
-// ADMIN ROUTES
-import { UsuariosComponent } from '../admin/usuarios/usuarios.component';
-import { CrearUsuarioComponent } from '../admin/modules/crear-usuario/crear-usuario.component';
 
-/*if(JSON.parse(localStorage.getItem('currentUser')).type === 'paciente'){}*/
 
-//const profesional
-const historialConsulta = 'historial-consultas';
-const MisPacientes = 'mis-pacientes';
+
+
 
 const routes: Routes = [
   {
@@ -46,7 +41,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
-        canActivate: [],
+        canActivate: [AdminGuard],
       },
     ],
   },

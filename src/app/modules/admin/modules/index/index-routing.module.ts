@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './components/index/index.component';
 
 const routes: Routes = [
- {
+  {
     path: '',
     component: IndexComponent
   }
@@ -12,6 +12,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class IndexRoutingModule {}

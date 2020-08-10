@@ -8,26 +8,26 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgendaModule } from './modules/agenda/agenda.module';
 //import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
-import { UsuariosComponent } from './usuarios/usuarios.component';
+
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { CrearUsuarioComponent } from './modules/crear-usuario/crear-usuario.component';
+
 // SHARED
 import { SharedModule } from './../../shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [UsuariosComponent, CrearUsuarioComponent],
+  declarations: [],
   imports: [
     SharedModule.forRoot(),
     CommonModule,
     AgendaModule,
     AdminRoutingModule,
-    FormsModule,
+    FormsModule, //aca
     ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    MatDialogModule,
+    MatDialogModule, //aca
     AdminRoutingModule,
     NgxChartsModule,
     AgendaModule,

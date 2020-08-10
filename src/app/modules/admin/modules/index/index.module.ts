@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IndexComponent } from './components/index/index.component';
 import { IndexRoutingModule } from './index-routing.module';
+import { IndexComponent } from './components/index/index.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PieChartsComponent } from './components/pie-charts/pie-charts.component';
 
@@ -10,8 +10,8 @@ import { PieChartsComponent } from './components/pie-charts/pie-charts.component
   declarations: [IndexComponent, PieChartsComponent],
   imports: [
     CommonModule,
+    NgxChartsModule,
     IndexRoutingModule,
-    NgxChartsModule
   ]
 })
 export class IndexModule { }
