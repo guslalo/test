@@ -26,6 +26,7 @@ import { LangComponent } from './components/lang/lang.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     SharedModule.forRoot(),
     NgbDatepickerModule,
     MatStepperModule,
+    MatDialogModule,
     //LayoutModule
   ],
   exports: [],

@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {} from 'rxjs';
-import { catchError, retry } from 'rxjs/internal/operators';
+import { catchError, retry, map } from 'rxjs/internal/operators';
 import { environment } from '../../../environments/environment';
+import { ErrorDialogService } from './services/error-dialog/error-dialog.service';
 
 //import {ErrorService} from '../my-services/error.service';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(public errorDialogService: ErrorDialogService) {}
   /*
   AuthHeader(request) {
     const token =  JSON.parse(localStorage.getItem('token'));
@@ -43,35 +51,24 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     });
     return next.handle(req).pipe(
       retry(1),
-      catchError((error) => {
-        let errorMessage = '';
-        if (error instanceof ErrorEvent) {
-          // client-side error
-          errorMessage = `Client-side error: ${error.error.message}`;
-          console.log(error);
-          //document.location.href = '/';
-        } else {
-          // backend error
-          //document.location.href = '/';
-          if (error.status === 401) {
-            document.location.href = '/'
-          }
-          console.log(error);
-          errorMessage = `Server-side error: ${error.status} ${error.message}`;
+      catchError((error: HttpErrorResponse) => {
+        let data = {};
+        console.log(error);
+
+        if (error.status === 401) {
+          document.location.href = '/';
         }
 
-        // aquí podrías agregar código que muestre el error en alguna parte fija de la pantalla.
-        //this.errorService.show(errorMessage);
-        console.log(errorMessage);
-        //window.alert(errorMessage);
-        return throwError(errorMessage);
+        data = {
+          status: error.status,
+          reason: error && error.error && error.error.message ? error.error.message : '',
+        };
+        this.errorDialogService.openDialog(data);
+        return throwError(data);
       })
     );
-
     /*
     if(req.url.indexOf(environment.baseUrl) === -1 ) {
-   
-     
     }   else {
       console.log('la peticion es externa')
     }*/

@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'gestion-perfil',
-    loadChildren: () => import('./modules/admin-profiles/admin-profiles.module').then(m => m.AdminProfilesModule),
-    canActivate: []  
-  },/**/
+    loadChildren: () => import('./modules/admin-profiles/admin-profiles.module').then((m) => m.AdminProfilesModule),
+    canActivate: [],
+  } /**/,
   {
-    path: 'gestion-agenda',   
-    loadChildren: () => import('./modules/agenda/agenda.module').then(m => m.AgendaModule),
-    canActivate: []  
-  }/**/
+    path: 'gestion-agenda',
+    loadChildren: () => import('./modules/agenda/agenda.module').then((m) => m.AgendaModule),
+    canActivate: [],
+  } /**/,
 ];
 
 @NgModule({
@@ -20,4 +20,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AdminRoutingModule {}
-

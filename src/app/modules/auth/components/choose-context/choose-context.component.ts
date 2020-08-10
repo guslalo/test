@@ -70,7 +70,7 @@ export class ChooseContextComponent implements OnInit {
 
     switch (profile.role) {
       case 'admin':
-        this.router.navigate(['app-admin']);
+        this.router.navigate(['app-admin/usuarios']);
         break;
       case 'coordinator':
         this.router.navigate(['app-coordinator']);
