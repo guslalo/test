@@ -4,10 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () => import('./modules/index/index.module').then(m => m.IndexModule),
+    canActivate: []  
+  },
+  {
     path: 'gestion-perfil',
     loadChildren: () => import('./modules/admin-profiles/admin-profiles.module').then(m => m.AdminProfilesModule),
     canActivate: []  
-  },/**/
+  },
   {
     path: 'gestion-agenda',   
     loadChildren: () => import('./modules/agenda/agenda.module').then(m => m.AgendaModule),

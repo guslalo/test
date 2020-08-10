@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-//import { AdminProfilesModule} from './modules/admin-profiles/admin-profiles.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgendaModule } from './modules/agenda/agenda.module';
 //import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
@@ -15,11 +14,12 @@ import { AdminRoutingModule } from '../admin/admin-routing.module';
   imports: [
     CommonModule,
     AdminRoutingModule,
-
-    AgendaModule,
+    NgxChartsModule,
+    AgendaModule
     //SharedModule
   ],
   exports:[
+    NgxChartsModule
     //AgendaModule
     //SharedModule
   ],
