@@ -210,7 +210,19 @@
                         {{ user.email }}
                       </td>
                       <td>{{ user.phone }}</td>
-                      <td>{{ user.status }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-sm rounded-pill"
+                          [ngClass]="{
+                            'btn-primary': user.status === 'Activo',
+                            'btn-secondary ': user.status === 'Pendiente',
+                            'btn-default ': user.status === 'Inactivo'
+                          }"
+                        >
+                          {{ user.status }}
+                        </button>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
@@ -229,11 +241,11 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-user" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-user" type="button">
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
                               Editar
+                            </button>
+                            <button class="dropdown-item" type="button">
+                              Eliminar
                             </button>
                           </div>
                         </div>
@@ -359,7 +371,19 @@
                         {{ user.email }}
                       </td>
                       <td>{{ user.phone }}</td>
-                      <td>{{ user.status }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-sm rounded-pill"
+                          [ngClass]="{
+                            'btn-primary': user.status === 'Activo',
+                            'btn-secondary ': user.status === 'Pendiente',
+                            'btn-default ': user.status === 'Inactivo'
+                          }"
+                        >
+                          {{ user.status }}
+                        </button>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
@@ -378,11 +402,11 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-user" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-user" type="button">
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
                               Editar
+                            </button>
+                            <button class="dropdown-item" type="button">
+                              Eliminar
                             </button>
                           </div>
                         </div>
@@ -508,7 +532,19 @@
                         {{ user.email }}
                       </td>
                       <td>{{ user.phone }}</td>
-                      <td>{{ user.status }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-sm rounded-pill"
+                          [ngClass]="{
+                            'btn-primary': user.status === 'Activo',
+                            'btn-secondary ': user.status === 'Pendiente',
+                            'btn-default ': user.status === 'Inactivo'
+                          }"
+                        >
+                          {{ user.status }}
+                        </button>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
@@ -527,11 +563,11 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-user" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-user" type="button">
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
                               Editar
+                            </button>
+                            <button class="dropdown-item" type="button">
+                              Eliminar
                             </button>
                           </div>
                         </div>
@@ -657,7 +693,19 @@
                         {{ user.email }}
                       </td>
                       <td>{{ user.phone }}</td>
-                      <td>{{ user.status }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-sm rounded-pill"
+                          [ngClass]="{
+                            'btn-primary': user.status === 'Activo',
+                            'btn-secondary ': user.status === 'Pendiente',
+                            'btn-default ': user.status === 'Inactivo'
+                          }"
+                        >
+                          {{ user.status }}
+                        </button>
+                      </td>
                       <td>
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
@@ -676,11 +724,11 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-user" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-user" type="button">
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
                               Editar
+                            </button>
+                            <button class="dropdown-item" type="button">
+                              Eliminar
                             </button>
                           </div>
                         </div>
@@ -701,7 +749,7 @@
         </div>
       </div>
 
-      <!-- Modal -->
+      <!-- Patient Modal -->
       <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
