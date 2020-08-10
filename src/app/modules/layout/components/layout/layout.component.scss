@@ -244,3 +244,75 @@ app-layout {
     //height: 100vh;
   }
 }
+.logo {
+  display: inline-block;
+}
+
+.box-items {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .items {
+    //display: inline-block;
+    margin-left: 25px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #header{
+    z-index: 10;
+  }
+
+  .logo {
+    width:65%;
+    display: inline-block;
+    img, svg {
+      width: 100%;
+    }
+  }
+
+  a.ayuda {
+    position: relative;
+  }   
+
+ 
+  .wrap {
+    .sidebar{
+      min-width: 0;
+      width: 0;
+      position: absolute;
+      height: 100vh;
+      z-index: 9;
+      &.open {
+        i {
+          &.text {
+            -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein  0.5s; /* Firefox < 16 */
+             -ms-animation: fadein  0.5s; /* Internet Explorer */
+              -o-animation: fadein  0.5s; /* Opera < 12.1 */
+                 animation: fadein  0.5s;
+                 display:inline-block
+          }
+        }
+     
+      }
+      &.closed {
+        width: 100%;
+        max-width: 100%;
+        i {
+          &.text {
+            -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein  0.5s; /* Firefox < 16 */
+             -ms-animation: fadein  0.5s; /* Internet Explorer */
+              -o-animation: fadein  0.5s; /* Opera < 12.1 */
+                 animation: fadein  0.5s;
+                 display:inline-block
+          }
+        }
+     
+      }
+    }
+  }
+
+
+}

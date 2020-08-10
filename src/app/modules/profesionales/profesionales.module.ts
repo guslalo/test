@@ -7,7 +7,6 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 //import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 //
@@ -53,7 +52,6 @@ FullCalendarModule.registerPlugins([
     FormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
-    NgxMaterialTimepickerModule,
     OwlModule,
     VerticalTimelineModule,
     NgbPaginationModule,

@@ -302,16 +302,11 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
       </div>
       <div class="modal-body text-center" style="position: relative;">
-        <div *ngIf="session">
-          <app-publisher id="publisher" [session]="session"></app-publisher>
+        <div>
+
 
           <div id="boxCalls">
-            <app-subscriber
-              id="subscriber"
-              *ngFor="let stream of streams"
-              [stream]="stream"
-              [session]="session"
-            ></app-subscriber>
+           
           </div>
         </div>
       </div>
