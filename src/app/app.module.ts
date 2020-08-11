@@ -17,14 +17,13 @@ import { AuthModule } from './modules/auth/auth.module';
 //components
 import { AppComponent } from './app.component';
 import { ErrorDialogService } from './modules/auth/services/error-dialog/error-dialog.service';
-import { AuthTokenInterceptor } from './modules/auth/interceptor.service';
+
 import { ErrorDialogComponent } from './modules/auth/services/error-dialog/error-dialog.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
   imports: [
-    HttpClientModule,
     BrowserModule,
     NgbModule,
     BrowserAnimationsModule,

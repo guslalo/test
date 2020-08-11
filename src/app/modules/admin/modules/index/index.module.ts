@@ -11,7 +11,7 @@ import { PieChartsComponent } from './components/pie-charts/pie-charts.component
   imports: [
     CommonModule,
     NgxChartsModule,
-    IndexRoutingModule,
+    IndexRoutingModule
   ]
 })
 export class IndexModule { }

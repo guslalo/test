@@ -18,12 +18,13 @@ const routes: Routes = [
   {
     path: 'gestion-agenda',
     loadChildren: () => import('./modules/agenda/agenda.module').then((m) => m.AgendaModule),
-    canActivate: [],
+    canActivate: []
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AdminRoutingModule {}
+
+export class AdminRoutingModule { }

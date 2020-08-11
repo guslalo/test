@@ -16,20 +16,8 @@ import { AdminGuard } from '../../guards/admin.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
-import { InicioPComponent } from '../profesionales/inicio/inicio.component';
-
-import { MiDisponibilidadComponent } from '../profesionales/modules/mi-disponibilidad/mi-disponibilidad.component';
-import { HistorialConsultasComponent } from '../profesionales/modules/historial-consultas/historial-consultas.component';
-import { FichaConsultaComponent } from '../profesionales/modules/ficha-consulta/ficha-consulta.component';
-import { MisPacientesComponent } from '../profesionales/modules/mis-pacientes/mis-pacientes.component';
-import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
-import { CrearFichaConsultaComponent } from '../profesionales/modules/crear-ficha-consulta/crear-ficha-consulta.component';
 
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
-
-
-
-
 
 
 const routes: Routes = [

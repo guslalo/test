@@ -1,8 +1,8 @@
 //core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 
 const routes: Routes = [
 

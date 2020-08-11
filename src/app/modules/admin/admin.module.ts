@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //import { AdminProfilesModule} from './modules/admin-profiles/admin-profiles.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { AgendaModule } from './modules/agenda/agenda.module';
+//import { AgendaModule } from './modules/agenda/agenda.module';
 //import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 
@@ -20,17 +20,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     SharedModule.forRoot(),
     CommonModule,
-    AgendaModule,
-    AdminRoutingModule,
-    FormsModule, //aca
-    ReactiveFormsModule,
-    NgbDatepickerModule,
-    NgbTypeaheadModule,
-    NgbPaginationModule,
-    MatDialogModule, //aca
     AdminRoutingModule,
     NgxChartsModule,
-    AgendaModule,
     //SharedModule
   ],
   exports: [
