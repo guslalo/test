@@ -19,10 +19,27 @@ import { AppComponent } from './app.component';
 import { ErrorDialogService } from './modules/auth/services/error-dialog/error-dialog.service';
 
 import { ErrorDialogComponent } from './modules/auth/services/error-dialog/error-dialog.component';
+import { MessagingService } from './services/messaging.service';
 
+// Firebase library to be imported
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { AngularFireDatabaseModule  } from '@angular/fire/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from '@angular/fire/database-deprecated';
+
+
+import{ AngularFireMessagingModule } from'@angular/fire/messaging';
+import { AsyncPipe } from '@angular/common';
+import { environment } from './../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent, ErrorDialogComponent],
+  declarations: [
+    AppComponent, 
+    ErrorDialogComponent
+  ],
   imports: [
     BrowserModule,
     NgbModule,
@@ -31,10 +48,22 @@ import { ErrorDialogComponent } from './modules/auth/services/error-dialog/error
     AuthModule,
     LayoutModule,
     RouterModule,
+    AngularFireModule,
+    AngularFireMessagingModule,
     //SharedModule.forRoot()
     // EXTRAS
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,             // For FireStore
+    AngularFireStorageModule,	        // For Storage
+    AngularFireAuthModule,		// For Authentication
   ],
-  providers: [ErrorDialogService],
+  providers: [
+    AngularFireDatabaseModule,
+    ErrorDialogService,
+    MessagingService, 
+    AsyncPipe
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent],
 })

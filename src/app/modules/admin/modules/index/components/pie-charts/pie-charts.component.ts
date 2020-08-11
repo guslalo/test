@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pie-charts.component.html',
   styleUrls: ['./pie-charts.component.scss']
 })
+
 export class PieChartsComponent implements OnInit {
   //single: any[];
   view: any[] = ['400%', 'auto'];
