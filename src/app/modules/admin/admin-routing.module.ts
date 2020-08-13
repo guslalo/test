@@ -18,7 +18,10 @@ const routes: Routes = [
   {
     path: 'gestion-agenda',
     loadChildren: () => import('./modules/agenda/agenda.module').then((m) => m.AgendaModule),
-    canActivate: []
+  },
+  {
+    path: 'gestion-salas',
+    loadChildren: () => import('./modules/gestion-salas/gestion-salas.module').then((m) => m.GestionSalasModule)
   }
 ];
 

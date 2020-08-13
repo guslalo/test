@@ -21,15 +21,20 @@ import { OpentokService } from '../../services/opentok.service';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from './soporte/soporte.component';
-import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
-
-import { InicioComponent } from '../pacientes/inicio/inicio.component';
+//import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
 
 //routing
 
 const routes: Routes = [
-  { path: '', component: InicioComponent },
+  {
+    path: '',
+    loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
+  },
+  {
+    path: 'agendar-consulta',
+    loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
+  },
   { path: 'perfil', component: PerfilComponent },
   { path: 'cambiar-contrasena', component: CambiarClaveComponent },
   { path: 'ayuda', component: SoporteComponent },

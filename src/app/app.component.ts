@@ -12,9 +12,9 @@ export class AppComponent {
   constructor(private messagingService: MessagingService) { }
 
   ngOnInit() {
-    const userId = 'user001';
+    /*const userId = 'user001';
     this.messagingService.requestPermission(userId)
     this.messagingService.receiveMessage()
-    this.message = this.messagingService.currentMessage
+    this.message = this.messagingService.currentMessage*/
     }
 }

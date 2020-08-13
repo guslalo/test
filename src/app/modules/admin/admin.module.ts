@@ -22,10 +22,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     AdminRoutingModule,
     NgxChartsModule,
+    NgbTypeaheadModule
     //SharedModule
   ],
   exports: [
     NgxChartsModule,
+    NgbTypeaheadModule
     //AgendaModule
     //SharedModule
   ],
