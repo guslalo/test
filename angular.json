@@ -137,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "itmstl"
+  "defaultProject": "itmstl",
+  "cli": {
+    "analytics": false
+  }
 }

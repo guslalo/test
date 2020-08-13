@@ -40,4 +40,15 @@ export class AdminService {
       /* PATIENT ONLY */
     });
   }
+
+  getUserById(userType, userId): Observable<any> {
+    console.log(userType, userId);
+    return this.http.get<any>(`${environment.baseUrl}${this.userEndpoint}/?userType=${userType}&userId=${userId}`);
+  }
+
+  createProfile(profileObject): Observable<any> {
+    console.log(profileObject);
+
+    return this.http.post<any>(`${environment.baseUrl}${this.profileEndpoint}`, profileObject);
+  }
 }

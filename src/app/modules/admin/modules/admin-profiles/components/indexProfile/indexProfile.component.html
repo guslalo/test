@@ -1,15 +1,10 @@
-
 <div class="row">
   <div class="col mb-2">
     <h2>Gestión de perfiles</h2>
   </div>
   <div class="col">
-    <button
-      type="button"
-      class="btn btn-primary rounded-pill float-right"
-      routerLink="crear-perfil"
-    >
-        Crear perfil
+    <button type="button" class="btn btn-primary rounded-pill float-right" routerLink="crear-perfil">
+      Crear perfil
       <svg
         width="1.5em"
         height="1.5em"
@@ -79,7 +74,6 @@
         <h5 style="display: none;">Mis consultas activas</h5>
       </div>
       <div class="col-12 mb-4">
-        
         <div class="tableBox rounded p-4 bg-white">
           <table class="table">
             <thead class="">
@@ -93,21 +87,28 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let item of profile">
+              <tr *ngFor="let profile of profile">
                 <td scope="row">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="{{item._id}}" />
-                    <label class="custom-control-label" for="{{item._id}}">
-                      {{item.profileName}} 
+                    <input type="checkbox" class="custom-control-input" id="{{ profile._id }}" />
+                    <label class="custom-control-label" for="{{ profile._id }}">
+                      {{ profile.profileName }}
                     </label>
                   </div>
                 </td>
                 <td>
-                  {{item.role}} 
+                  {{ profile.role }}
                 </td>
-                
-                <td>Descripción</td>
-                <td>Usuarios</td>
+
+                <td>{{ profile.description || 'S/R' }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let item of profile.users | slice: 0:3">{{ item }}</li>
+                    <button type="button" class="btn btn-sm btn-outline-primary mt-2" *ngIf="profile.users.length > 3">
+                      Ver Mas
+                    </button>
+                  </ul>
+                </td>
                 <td>
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
@@ -138,5 +139,3 @@
     </div>
   </div>
 </div>
-
-  

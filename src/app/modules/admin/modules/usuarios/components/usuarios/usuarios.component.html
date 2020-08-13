@@ -1,879 +1,882 @@
-
-  <div class="row">
-    <div class="col mb-2">
-      <h2>Gestion de Usuarios</h2>
-    </div>
+<div class="row">
+  <div class="col mb-2">
+    <h2>Gestion de Usuarios</h2>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-12">
-      <!-- TABS -->
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link active"
-            id="home-tab"
-            data-toggle="tab"
-            href="#admins"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-            (click)="changeTab('admins')"
+<div class="row">
+  <div class="col-12">
+    <!-- TABS -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="home-tab"
+          data-toggle="tab"
+          href="#admins"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+          (click)="changeTab('admins')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-clipboard-data"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <i
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-clipboard-data"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            </i>
-            Administradores
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#professionals"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-            (click)="changeTab('professionals')"
+          </i>
+          Administradores
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="tab"
+          href="#professionals"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('professionals')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <i
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-calendar3-fill"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            </i>
-            Profesionales de Salud
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#coordinators"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-            (click)="changeTab('coordinators')"
+          </i>
+          Profesionales de Salud
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="tab"
+          href="#coordinators"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('coordinators')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <i
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-calendar3-fill"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            </i>
-            Coordinadores
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#patients"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-            (click)="changeTab('patients')"
+          </i>
+          Coordinadores
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="tab"
+          href="#patients"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('patients')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <i
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-calendar3-fill"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-            </i>
-            Pacientes
-          </a>
-        </li>
-      </ul>
-      <div class="tab-content pt-3" id="tab-content">
-        <div class="tab-pane fade show active" id="admins" role="tabpanel">
-          <!-- FILTERS -->
-          <div class="row mt-2">
-            <div class="col-12 col-md-3">
-              <input
-                id="typeahead-basic"
-                type="text"
-                class="form-control"
-                [ngbTypeahead]="search"
-                placeholder="Busqueda"
-              />
-              <div class="searchBox">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-search"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 float-right">
-              <button
-                type="button"
-                class="btn btn-secondary rounded-pill float-right"
-                ng-reflect-tour-anchor="agendar"
-                data-toggle="modal"
-                data-target="#disponibilidad"
-                [routerLink]="['crear-usuario']"
-                [queryParams]="{ userType: 'admin' }"
+          </i>
+          Pacientes
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content pt-3" id="tab-content">
+      <div class="tab-pane fade show active" id="admins" role="tabpanel">
+        <!-- FILTERS -->
+        <div class="row mt-2">
+          <div class="col-12 col-md-3">
+            <input
+              id="typeahead-basic"
+              type="text"
+              class="form-control"
+              [ngbTypeahead]="search"
+              placeholder="Busqueda"
+            />
+            <div class="searchBox">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-search"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Nuevo Administrador
-                <svg
-                  width="1.5em"
-                  height="1.5em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-              </button>
+                <path
+                  fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                />
+              </svg>
             </div>
           </div>
-          <!-- USERS TABLE -->
-          <div class="row mt-1">
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Telefono</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Filtrar por</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 float-right">
+            <button
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              ng-reflect-tour-anchor="agendar"
+              data-toggle="modal"
+              data-target="#disponibilidad"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'admin' }"
+            >
+              Nuevo Administrador
+              <svg
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 16 16"
+                class="bi bi-plus-circle"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                />
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- USERS TABLE -->
+        <div class="row mt-1">
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
 
-                  <tbody>
-                    <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                      <td scope="row">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                          <label class="custom-control-label" for="customCheck1">
-                            {{ user.nationalId }}
-                          </label>
+                <tbody>
+                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
+                    <td scope="row">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <label class="custom-control-label" for="customCheck1">
+                          {{ user.nationalId }}
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <a>
+                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                        {{ user.fullName }}
+                      </a>
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-sm rounded-pill"
+                        [ngClass]="{
+                          'btn-primary': user.status === 'Activo',
+                          'btn-secondary ': user.status === 'Pendiente',
+                          'btn-default ': user.status === 'Inactivo'
+                        }"
+                      >
+                        {{ user.status }}
+                      </button>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
                         </div>
-                      </td>
-                      <td>
-                        <a>
-                          <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                          {{ user.fullName }}
-                        </a>
-                      </td>
-                      <td>
-                        {{ user.email }}
-                      </td>
-                      <td>{{ user.phone }}</td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-sm rounded-pill"
-                          [ngClass]="{
-                            'btn-primary': user.status === 'Activo',
-                            'btn-secondary ': user.status === 'Pendiente',
-                            'btn-default ': user.status === 'Inactivo'
-                          }"
-                        >
-                          {{ user.status }}
-                        </button>
-                      </td>
-                      <td>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                          </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            [routerLink]="['editar-usuario']"
+                            [queryParams]="{ userType: 'admins', userId: user.id }"
+                          >
+                            Editar
+                          </button>
+                          <button class="dropdown-item" type="button">
+                            Eliminar
+                          </button>
                         </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!-- PAGINATION -->
-          <div class="row">
-            <div class="col-12 text-right">
-              <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
-              </ngb-pagination>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="tab-pane fade show" id="professionals" role="tabpanel">
-          <!-- FILTERS -->
-          <div class="row mt-2">
-            <div class="col-12 col-md-3">
-              <input
-                id="typeahead-basic"
-                type="text"
-                class="form-control"
-                [ngbTypeahead]="search"
-                placeholder="Busqueda"
-              />
-              <div class="searchBox">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-search"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 float-right">
-              <button
-                type="button"
-                class="btn btn-secondary rounded-pill float-right"
-                ng-reflect-tour-anchor="agendar"
-                data-toggle="modal"
-                data-target="#disponibilidad"
-                [routerLink]="['crear-usuario']"
-                [queryParams]="{ userType: 'professional' }"
-              >
-                Nuevo Profesional
-                <svg
-                  width="1.5em"
-                  height="1.5em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <!-- USERS TABLE -->
-          <div class="row mt-1">
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Telefono</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                      <td scope="row">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                          <label class="custom-control-label" for="customCheck1">
-                            {{ user.nationalId }}
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <a>
-                          <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                          {{ user.fullName }}
-                        </a>
-                      </td>
-                      <td>
-                        {{ user.email }}
-                      </td>
-                      <td>{{ user.phone }}</td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-sm rounded-pill"
-                          [ngClass]="{
-                            'btn-primary': user.status === 'Activo',
-                            'btn-secondary ': user.status === 'Pendiente',
-                            'btn-default ': user.status === 'Inactivo'
-                          }"
-                        >
-                          {{ user.status }}
-                        </button>
-                      </td>
-                      <td>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!-- PAGINATION -->
-          <div class="row">
-            <div class="col-12 text-right">
-              <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade show" id="coordinators" role="tabpanel">
-          <!-- FILTERS -->
-          <div class="row mt-2">
-            <div class="col-12 col-md-3">
-              <input
-                id="typeahead-basic"
-                type="text"
-                class="form-control"
-                [ngbTypeahead]="search"
-                placeholder="Busqueda"
-              />
-              <div class="searchBox">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-search"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 float-right">
-              <button
-                type="button"
-                class="btn btn-secondary rounded-pill float-right"
-                ng-reflect-tour-anchor="agendar"
-                data-toggle="modal"
-                data-target="#disponibilidad"
-                [routerLink]="['crear-usuario']"
-                [queryParams]="{ userType: 'coordinator' }"
-              >
-                Nuevo Coordinador
-                <svg
-                  width="1.5em"
-                  height="1.5em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <!-- USERS TABLE -->
-          <div class="row mt-1">
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Telefono</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                      <td scope="row">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                          <label class="custom-control-label" for="customCheck1">
-                            {{ user.nationalId }}
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <a>
-                          <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                          {{ user.fullName }}
-                        </a>
-                      </td>
-                      <td>
-                        {{ user.email }}
-                      </td>
-                      <td>{{ user.phone }}</td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-sm rounded-pill"
-                          [ngClass]="{
-                            'btn-primary': user.status === 'Activo',
-                            'btn-secondary ': user.status === 'Pendiente',
-                            'btn-default ': user.status === 'Inactivo'
-                          }"
-                        >
-                          {{ user.status }}
-                        </button>
-                      </td>
-                      <td>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!-- PAGINATION -->
-          <div class="row">
-            <div class="col-12 text-right">
-              <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
-              </ngb-pagination>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade show" id="patients" role="tabpanel">
-          <!-- FILTERS -->
-          <div class="row mt-2">
-            <div class="col-12 col-md-3">
-              <input
-                id="typeahead-basic"
-                type="text"
-                class="form-control"
-                [ngbTypeahead]="search"
-                placeholder="Busqueda"
-              />
-              <div class="searchBox">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-search"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="col-12 col-md-3">
-              <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 float-right">
-              <button
-                type="button"
-                class="btn btn-secondary rounded-pill float-right"
-                ng-reflect-tour-anchor="agendar"
-                data-toggle="modal"
-                data-target="#disponibilidad"
-                data-toggle="modal"
-                data-target="#patientModal"
-              >
-                Nuevo Paciente
-                <svg
-                  width="1.5em"
-                  height="1.5em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <!-- USERS TABLE -->
-          <div class="row mt-1">
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Telefono</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                      <td scope="row">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                          <label class="custom-control-label" for="customCheck1">
-                            {{ user.nationalId }}
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <a>
-                          <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                          {{ user.fullName }}
-                        </a>
-                      </td>
-                      <td>
-                        {{ user.email }}
-                      </td>
-                      <td>{{ user.phone }}</td>
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-sm rounded-pill"
-                          [ngClass]="{
-                            'btn-primary': user.status === 'Activo',
-                            'btn-secondary ': user.status === 'Pendiente',
-                            'btn-default ': user.status === 'Inactivo'
-                          }"
-                        >
-                          {{ user.status }}
-                        </button>
-                      </td>
-                      <td>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <!-- PAGINATION -->
-          <div class="row">
-            <div class="col-12 text-right">
-              <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
-              </ngb-pagination>
-            </div>
+        <!-- PAGINATION -->
+        <div class="row">
+          <div class="col-12 text-right">
+            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
           </div>
         </div>
       </div>
-
-      <!-- Patient Modal -->
-      <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-center w-100 mt-1">Crear Paciente</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+      <div class="tab-pane fade show" id="professionals" role="tabpanel">
+        <!-- FILTERS -->
+        <div class="row mt-2">
+          <div class="col-12 col-md-3">
+            <input
+              id="typeahead-basic"
+              type="text"
+              class="form-control"
+              [ngbTypeahead]="search"
+              placeholder="Busqueda"
+            />
+            <div class="searchBox">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-search"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                />
+              </svg>
             </div>
-            <div class="modal-body p-4">
-              <form [formGroup]="patientForm">
-                <div class="custom-control custom-switch mb-4">
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Filtrar por</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 float-right">
+            <button
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              ng-reflect-tour-anchor="agendar"
+              data-toggle="modal"
+              data-target="#disponibilidad"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'professional' }"
+            >
+              Nuevo Profesional
+              <svg
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 16 16"
+                class="bi bi-plus-circle"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                />
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- USERS TABLE -->
+        <div class="row mt-1">
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
+                    <td scope="row">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <label class="custom-control-label" for="customCheck1">
+                          {{ user.nationalId }}
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <a>
+                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                        {{ user.fullName }}
+                      </a>
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-sm rounded-pill"
+                        [ngClass]="{
+                          'btn-primary': user.status === 'Activo',
+                          'btn-secondary ': user.status === 'Pendiente',
+                          'btn-default ': user.status === 'Inactivo'
+                        }"
+                      >
+                        {{ user.status }}
+                      </button>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                            Editar
+                          </button>
+                          <button class="dropdown-item" type="button">
+                            Eliminar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- PAGINATION -->
+        <div class="row">
+          <div class="col-12 text-right">
+            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade show" id="coordinators" role="tabpanel">
+        <!-- FILTERS -->
+        <div class="row mt-2">
+          <div class="col-12 col-md-3">
+            <input
+              id="typeahead-basic"
+              type="text"
+              class="form-control"
+              [ngbTypeahead]="search"
+              placeholder="Busqueda"
+            />
+            <div class="searchBox">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-search"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Filtrar por</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 float-right">
+            <button
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              ng-reflect-tour-anchor="agendar"
+              data-toggle="modal"
+              data-target="#disponibilidad"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'coordinator' }"
+            >
+              Nuevo Coordinador
+              <svg
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 16 16"
+                class="bi bi-plus-circle"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                />
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- USERS TABLE -->
+        <div class="row mt-1">
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
+                    <td scope="row">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <label class="custom-control-label" for="customCheck1">
+                          {{ user.nationalId }}
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <a>
+                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                        {{ user.fullName }}
+                      </a>
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-sm rounded-pill"
+                        [ngClass]="{
+                          'btn-primary': user.status === 'Activo',
+                          'btn-secondary ': user.status === 'Pendiente',
+                          'btn-default ': user.status === 'Inactivo'
+                        }"
+                      >
+                        {{ user.status }}
+                      </button>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                            Editar
+                          </button>
+                          <button class="dropdown-item" type="button">
+                            Eliminar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- PAGINATION -->
+        <div class="row">
+          <div class="col-12 text-right">
+            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade show" id="patients" role="tabpanel">
+        <!-- FILTERS -->
+        <div class="row mt-2">
+          <div class="col-12 col-md-3">
+            <input
+              id="typeahead-basic"
+              type="text"
+              class="form-control"
+              [ngbTypeahead]="search"
+              placeholder="Busqueda"
+            />
+            <div class="searchBox">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-search"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Filtrar por</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 float-right">
+            <button
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              ng-reflect-tour-anchor="agendar"
+              data-toggle="modal"
+              data-target="#disponibilidad"
+              data-toggle="modal"
+              data-target="#patientModal"
+            >
+              Nuevo Paciente
+              <svg
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 16 16"
+                class="bi bi-plus-circle"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                />
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- USERS TABLE -->
+        <div class="row mt-1">
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
+                    <td scope="row">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <label class="custom-control-label" for="customCheck1">
+                          {{ user.nationalId }}
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <a>
+                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                        {{ user.fullName }}
+                      </a>
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-sm rounded-pill"
+                        [ngClass]="{
+                          'btn-primary': user.status === 'Activo',
+                          'btn-secondary ': user.status === 'Pendiente',
+                          'btn-default ': user.status === 'Inactivo'
+                        }"
+                      >
+                        {{ user.status }}
+                      </button>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                            Editar
+                          </button>
+                          <button class="dropdown-item" type="button">
+                            Eliminar
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- PAGINATION -->
+        <div class="row">
+          <div class="col-12 text-right">
+            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patient Modal -->
+    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100 mt-1">Crear Paciente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <form [formGroup]="patientForm">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="switchIsTutor"
+                  [checked]="false"
+                  formControlName="isTutor"
+                />
+                <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
+              </div>
+
+              <div class="row">
+                <div class="form-group col">
+                  <label for="name">Nombre</label>
                   <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="switchIsTutor"
-                    [checked]="false"
-                    formControlName="isTutor"
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
+                    }"
                   />
-                  <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
                 </div>
+                <div class="form-group col">
+                  <label for="lastName">Apellido</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="lastName"
+                    formControlName="lastName"
+                    [ngClass]="{
+                      'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
+                    }"
+                  />
+                </div>
+              </div>
 
-                <div class="row">
-                  <div class="form-group col">
-                    <label for="name">Nombre</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="name"
-                      formControlName="name"
-                      [ngClass]="{
-                        'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
-                      }"
-                    />
-                  </div>
-                  <div class="form-group col">
-                    <label for="lastName">Apellido</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="lastName"
-                      formControlName="lastName"
-                      [ngClass]="{
-                        'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
-                      }"
-                    />
-                  </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label for="genre">Sexo</label>
+                  <select
+                    class="form-control"
+                    name="genre"
+                    formControlName="genre"
+                    [ngClass]="{
+                      'is-invalid': !patientForm.get('genre').valid && patientForm.get('genre').touched
+                    }"
+                  >
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                  </select>
                 </div>
+                <div class="form-group col">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    formControlName="email"
+                    [ngClass]="{
+                      'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
+                    }"
+                  />
+                </div>
+              </div>
 
-                <div class="row">
-                  <div class="form-group col">
-                    <label for="genre">Sexo</label>
-                    <select
-                      class="form-control"
-                      name="genre"
-                      formControlName="genre"
-                      [ngClass]="{
-                        'is-invalid': !patientForm.get('genre').valid && patientForm.get('genre').touched
-                      }"
-                    >
-                      <option value="masculino">Masculino</option>
-                      <option value="femenino">Femenino</option>
-                    </select>
-                  </div>
-                  <div class="form-group col">
-                    <label for="email">Email</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      formControlName="email"
-                      [ngClass]="{
-                        'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
-                      }"
-                    />
-                  </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label for="phoneNumber">Telefono</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="phoneNumber"
+                    formControlName="phoneNumber"
+                    [ngClass]="{
+                      'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
+                    }"
+                  />
                 </div>
-
-                <div class="row">
-                  <div class="form-group col">
-                    <label for="phoneNumber">Telefono</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="phoneNumber"
-                      formControlName="phoneNumber"
-                      [ngClass]="{
-                        'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
-                      }"
-                    />
-                  </div>
-                  <div class="form-group col">
-                    <label for="idDocumentNumber">Identificación</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="idDocumentNumber"
-                      formControlName="idDocumentNumber"
-                      [ngClass]="{
-                        'is-invalid':
-                          !patientForm.get('idDocumentNumber').valid && patientForm.get('idDocumentNumber').touched
-                      }"
-                    />
-                  </div>
+                <div class="form-group col">
+                  <label for="idDocumentNumber">Identificación</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="idDocumentNumber"
+                    formControlName="idDocumentNumber"
+                    [ngClass]="{
+                      'is-invalid':
+                        !patientForm.get('idDocumentNumber').valid && patientForm.get('idDocumentNumber').touched
+                    }"
+                  />
                 </div>
-              </form>
-            </div>
-            <div class="modal-footer text-center justify-content-center">
-              <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
-                Cancelar
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary rounded-pill"
-                data-dismiss="modal"
-                (click)="createPatient()"
-                [disabled]="!patientForm.valid"
-              >
-                Crear Paciente
-              </button>
-            </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center justify-content-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="createPatient()"
+              [disabled]="!patientForm.valid"
+            >
+              Crear Paciente
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+</div>

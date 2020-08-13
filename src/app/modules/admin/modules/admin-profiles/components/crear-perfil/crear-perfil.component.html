@@ -1,635 +1,1206 @@
+<div class="row">
+  <div class="col mb-2">
+    <h3>Gestión de perfiles / Crear perfiles</h3>
+  </div>
+  <div class="col">
+    <button
+      (click)="crearUsuario()"
+      type="button"
+      class="btn btn-primary rounded-pill float-right"
+      routerLink="crear-perfil"
+    >
+      Crear perfil
+      <svg
+        width="1.5em"
+        height="1.5em"
+        viewBox="0 0 16 16"
+        class="bi bi-plus-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+        />
+        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+      </svg>
+    </button>
 
-    <div class="row">
-      <div class="col mb-2">
-        <h3>Gestión de perfiles / Crear perfiles</h3>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill float-right"
-          routerLink="crear-perfil"
-        >
-           Crear perfil
-          <svg
-            width="1.5em"
-            height="1.5em"
-            viewBox="0 0 16 16"
-            class="bi bi-plus-circle"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
+    <a href="javascript:history.back()" class="back float-right align-top mr-3">
+      <svg
+        width="2em"
+        height="2em"
+        viewBox="0 0 16 16"
+        class="bi bi-arrow-left-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+          fill-rule="evenodd"
+          d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
+        />
+        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 mt-4">
+    <div class="boxTabSecondary">
+      <ul class="nav nav-tabs nav-pills nav-justified tabchild tab-consulta w-100 secondary rounded" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link active"
+            id="admin-tab"
+            data-toggle="tab"
+            href="#administrador"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+            (click)="setRole('admin')"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-            />
-            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12 mt-4">
-        <div class="boxTabSecondary">
-          <ul class="nav nav-tabs nav-pills  nav-justified tabchild tab-consulta w-100 secondary rounded "  role="tablist">
+            Administrador
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="coordinator-tab"
+            data-toggle="tab"
+            href="#coordinador"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+            (click)="setRole('coordinator')"
+          >
+            Coordinador
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="professional-tab"
+            data-toggle="tab"
+            href="#profesional"
+            role="tab"
+            aria-controls="contact"
+            aria-selected="false"
+            (click)="setRole('professional')"
+          >
+            Profesionales de salud
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <!--tab child-->
+          <ul class="nav nav-tabs mt-4" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#administrador" role="tab" aria-controls="home" aria-selected="true">
-                Administrador
+              <a
+                class="nav-link active"
+                id="info-tab"
+                data-toggle="tab"
+                href="#info"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+              >
+                Información
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coordinador" role="tab" aria-controls="profile" aria-selected="false">
-                Coordinador
+              <a
+                class="nav-link"
+                id="users-tab"
+                data-toggle="tab"
+                href="#users"
+                role="tab"
+                aria-controls="users"
+                aria-selected="false"
+                *ngIf="profile.role === 'admin'"
+              >
+                Usuarios
               </a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#profesional" role="tab" aria-controls="contact" aria-selected="false">
-                Profesionales de salud 
+              <a
+                class="nav-link"
+                id="profile-tab"
+                data-toggle="tab"
+                href="#profile"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+                *ngIf="profile.role === 'admin'"
+              >
+                Perfiles
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="ficha-paciente-tab"
+                data-toggle="tab"
+                href="#ficha-paciente"
+                role="tab"
+                aria-controls="ficha-paciente"
+                aria-selected="false"
+                *ngIf="profile.role !== 'admin'"
+              >
+                Ficha Paciente
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="consultas-tab"
+                data-toggle="tab"
+                href="#consultas"
+                role="tab"
+                aria-controls="consultas"
+                aria-selected="false"
+              >
+                Consultas
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="disponibilidad-tab"
+                data-toggle="tab"
+                href="#disponibilidad"
+                role="tab"
+                aria-controls="disponibilidad"
+                aria-selected="false"
+              >
+                Disponibilidad
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="sale-tab"
+                data-toggle="tab"
+                href="#sale"
+                role="tab"
+                aria-controls="sale"
+                aria-selected="false"
+              >
+                Sala de espera
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="clinica-tab"
+                data-toggle="tab"
+                href="#clinica"
+                role="tab"
+                aria-controls="clinica"
+                aria-selected="false"
+                *ngIf="profile.role === 'admin'"
+              >
+                Configuración Clínica
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="reporte-tab"
+                data-toggle="tab"
+                href="#reporte"
+                role="tab"
+                aria-controls="reporte"
+                aria-selected="false"
+              >
+                Reporte
               </a>
             </li>
           </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <!--tab child-->
-              <ul class="nav nav-tabs mt-4" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="home" aria-selected="true">
-                    Información
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">
-                    Usuarios
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                    Perfiles
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">
-                    Consultas
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="disponibilidad-tab" data-toggle="tab" href="#disponibilidad" role="tab" aria-controls="disponibilidad" aria-selected="false">
-                    Disponibilidad
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="sale-tab" data-toggle="tab" href="#sale" role="tab" aria-controls="sale" aria-selected="false">
-                    Sala de espera
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="clinica-tab" data-toggle="tab" href="#clinica" role="tab" aria-controls="clinica" aria-selected="false">
-                    Clínica Reporte
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="reporte-tab" data-toggle="tab" href="#reporte" role="tab" aria-controls="reporte" aria-selected="false">
-                    Reporte
-                  </a>
-                </li>
-              </ul>
-              <!--pestañas-->
-              <div class="tab-content  rounded mt-4" id="myTabContent">
-                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-                  <div class="bg-white rounded">
-                    <form class="p-4">   
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="form-group">
-                            <label for="nameClinic">Nombre clínica</label>
-                            <input type="text" class="form-control" id="nameClinic">
-                          </div>
-                        </div>
-                        <div class="col-8">
-                          <div class="form-group">
-                            <label for="descripcion"> Descripción</label>
-                            <textarea class="form-control" id="descripcion" rows="5"></textarea>
-                          </div>
-                        </div>
+          <!--pestañas-->
+          <div class="tab-content rounded mt-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+              <div class="bg-white rounded">
+                <form class="p-4">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="nameClinic">Nombre Perfil</label>
+                        <input
+                          [(ngModel)]="profile.profileName"
+                          type="text"
+                          class="form-control"
+                          name="profileName"
+                          id="nameClinic"
+                        />
                       </div>
-                    </form>
+                    </div>
+                    <div class="col-8">
+                      <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea
+                          [(ngModel)]="profile.description"
+                          class="form-control"
+                          name="description"
+                          id="descripcion"
+                          rows="5"
+                        ></textarea>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de usuarios</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr id="item.id">
-                          <td scope="row" class="text-left">
-                            CREAR USUARIO
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr id="item.id2">
-                          <td scope="row" class="text-left">
-                            EDITAR USUARIO
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr id="item.id2">
-                          <td scope="row" class="text-left">
-                            DESHABILITAR USUARIO
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr id="item.id2">
-                          <td scope="row" class="text-left">
-                            ENVÍAR INVITACION AL PACIENTE
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch6">
-                              <label class="custom-control-label" for="customSwitch6"></label>
-                            </div>
-                          </td>
-                        </tr>
-                       
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de perfiles</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CREAR PERFIL
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR PERFIL
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            DESHABILITAR PERFIL
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de consultas</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            ACCESO A CALENDARIO
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            AGENDAR CONSULTA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR CONSULTAS
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CANCELAR CONSULTA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="disponibilidad" role="tabpanel" aria-labelledby="disponibilidad-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de disponibilidad</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CREAR DISPONIBILIDAD
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR DISPONIBILIDAD
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CANCELAR DISPONIBILIDAD
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                     
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de Sala de espera</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CREAR SALA DE ESPERA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR SALA DE ESPERA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            CANCELAR SALA DE ESPERA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            ASIGNAR SALA DE ESPERA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                     
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="clinica-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Configuración clínica</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR INFORMACIÓN
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR DISEÑO
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR NOTIFICACIONES
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR PROFESIONALES DE SALUD
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR ESPECIALIDAD
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            EDITAR OBJETIVO DE CONSULTA
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                              <label class="custom-control-label" for="customSwitch5"></label>
-                            </div>
-                          </td>
-                        </tr>
-                     
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-                <div class="tab-pane fade" id="reporte" role="tabpanel" aria-labelledby="reporte-tab">
-                  <div class="custom-control custom-switch mb-4">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Gestión de Reporte</label>
-                  </div>
-                  <div class="bg-white p-4 rounded">
-                    <table class="table mt-1">
-                      <thead class="">
-                        <tr>
-                          <th scope="col" class="text-left">Nombre de acceso</th>
-                          <th scope="col" class="text-center">Descripción</th>
-                          <th scope="col" class="text-right">Estado</th>
-                        </tr>
-                      </thead>
-    
-                      <tbody>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            GESTIÓN DE REPORTE
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                              <label class="custom-control-label" for="customSwitch2"></label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td scope="row" class="text-left">
-                            GESTIÓN DE LOGS
-                          </td>
-                          <td class="text-center">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
-                          </td>
-                          <td class="text-right"> 
-                            <div class="custom-control custom-switch mb-4">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                              <label class="custom-control-label" for="customSwitch4"></label>
-                            </div>
-                          </td>
-                        </tr>
-                      
-                     
-                      </tbody>
-                    </table>
-                   </div>
-                </div>
-              </div><!--/pestañas-->
+                </form>
+              </div>
+            </div>
+            <!-- USERS -->
+            <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllUserPolicies"
+                  (change)="checkAll('users')"
+                  id="usersPolicies"
+                  type="checkbox"
+                  class="custom-control-input"
+                />
+                <label class="custom-control-label" for="usersPolicies">Gestión de usuarios</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr id="item.id">
+                      <td scope="row" class="text-left">
+                        CREAR USUARIO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.userPolicies.create"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="userPoliciesCreate"
+                          />
+                          <label class="custom-control-label" for="userPoliciesCreate"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="item.id2">
+                      <td scope="row" class="text-left">
+                        EDITAR USUARIO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.userPolicies.update"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="userPoliciesUpdate"
+                          />
+                          <label class="custom-control-label" for="userPoliciesUpdate"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="item.id2">
+                      <td scope="row" class="text-left">
+                        DESHABILITAR USUARIO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.userPolicies.delete"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="userPoliciesDelete"
+                          />
+                          <label class="custom-control-label" for="userPoliciesDelete"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr id="item.id2">
+                      <td scope="row" class="text-left">
+                        ENVÍAR INVITACION AL PACIENTE
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.userPolicies.sendInvitation"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="userPoliciesSendInvitation"
+                          />
+                          <label class="custom-control-label" for="userPoliciesSendInvitation"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllProfilesPolicies"
+                  (click)="checkAll('profiles')"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="profiles"
+                />
+                <label class="custom-control-label" for="profiles">Gestión de perfiles</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CREAR PERFIL
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.profilePolicies.create"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="profilePoliciesCreate"
+                          />
+                          <label class="custom-control-label" for="profilePoliciesCreate"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR PERFIL
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.profilePolicies.update"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="profilePoliciesUpdate"
+                          />
+                          <label class="custom-control-label" for="profilePoliciesUpdate"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        DESHABILITAR PERFIL
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.profilePolicies.delete"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="profilePoliciesDelete"
+                          />
+                          <label class="custom-control-label" for="profilePoliciesDelete"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- FICHA PACIENTE -->
+            <div
+              class="tab-pane fade"
+              id="ficha-paciente"
+              role="tabpanel"
+              aria-labelledby="reporte-tab"
+              *ngIf="profile.role !== 'admin'"
+            >
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllMedicalRecords"
+                  (click)="checkAll('medicalRecords')"
+                  id="medicalRecords"
+                  type="checkbox"
+                  class="custom-control-input"
+                />
+                <label class="custom-control-label" for="medicalRecords">Gestión Ficha Paciente</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        VER FICHA PACIENTE
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.read"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesRead"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesRead"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        VER CONSULTAS
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.readAppointments"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesReadAppointments"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesReadAppointments"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR CONSULTAS
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.updateAppointments"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesUpdateAppointments"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesUpdateAppointments"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        VER ANTECEDENTES
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.readAntecedents"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesReadAntecedents"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesReadAntecedents"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR ANTECEDENTES
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.updateAppointments"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesUpdateAppointments"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesUpdateAppointments"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        VER EXAMENES
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.readExams"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesReadExams"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesReadExams"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        VER PRESCRIPCIÓN
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.viewPrescriptions"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesViewPrescriptions"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesViewPrescriptions"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        ADJUNTAR ARCHIVO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.attachFiles"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesAttachFiles"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesAttachFiles"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profile.role === 'professional'">
+                      <td scope="row" class="text-left">
+                        GENERAR RECETA MEDICA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.createPerscription"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordCreatePerscription"
+                          />
+                          <label class="custom-control-label" for="medicalRecordCreatePerscription"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profile.role === 'professional'">
+                      <td scope="row" class="text-left">
+                        GENERAR ORDEN DE EXAMEN
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.createExamOrders"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesCreateExamOrders"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesCreateExamOrders"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profile.role === 'professional'">
+                      <td scope="row" class="text-left">
+                        GENERAR LICENCIA MEDICA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.medicalRecordPolicies.createMedicalLicenses"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="medicalRecordPoliciesCreateMedicalLicenses"
+                          />
+                          <label class="custom-control-label" for="medicalRecordPoliciesCreateMedicalLicenses"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- CONSULTAS -->
+            <div class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllAppointmentsPolicies"
+                  (change)="checkAll('appointments')"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="appointments"
+                />
+                <label class="custom-control-label" for="appointments">Gestión de consultas</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        ACCESO A CALENDARIO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.appointmentPolicies.calendar"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch2"
+                          />
+                          <label class="custom-control-label" for="customSwitch2"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        AGENDAR CONSULTA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.appointmentPolicies.set"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch4"
+                          />
+                          <label class="custom-control-label" for="customSwitch4"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR CONSULTAS
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.appointmentPolicies.update"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch5"
+                          />
+                          <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CANCELAR CONSULTA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.appointmentPolicies.delete"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch5"
+                          />
+                          <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- DISPONIBILIDAD -->
+            <div class="tab-pane fade" id="disponibilidad" role="tabpanel" aria-labelledby="disponibilidad-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllAvailabilitiesPolicies"
+                  (change)="checkAll('availabilities')"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="availabilities"
+                />
+                <label class="custom-control-label" for="availabilities">Gestión de disponibilidad</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CREAR DISPONIBILIDAD
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.availabilitiesPolicies.create"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch2"
+                          />
+                          <label class="custom-control-label" for="customSwitch2"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR DISPONIBILIDAD
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.availabilitiesPolicies.update"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch4"
+                          />
+                          <label class="custom-control-label" for="customSwitch4"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CANCELAR DISPONIBILIDAD
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.availabilitiesPolicies.delete"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch5"
+                          />
+                          <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- SALA DE ESPERA -->
+            <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllWaitingRoomsPolicies"
+                  (change)="checkAll('waitingRooms')"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="waitingRooms"
+                />
+                <label class="custom-control-label" for="waitingRooms">Gestión de Sala de espera</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CREAR SALA DE ESPERA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.waitingRoomPolicies.create"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch2"
+                          />
+                          <label class="custom-control-label" for="customSwitch2"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR SALA DE ESPERA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.waitingRoomPolicies.update"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch4"
+                          />
+                          <label class="custom-control-label" for="customSwitch4"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        CANCELAR SALA DE ESPERA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.waitingRoomPolicies.delete"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch5"
+                          />
+                          <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        ASIGNAR SALA DE ESPERA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.waitingRoomPolicies.set"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="customSwitch5"
+                          />
+                          <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- CONFIGURACION CLINICA -->
+            <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllClinicsPolicies"
+                  (change)="checkAll('clinics')"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="clinics"
+                />
+                <label class="custom-control-label" for="clinics">Configuración clínica</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR INFORMACIÓN
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateInfo"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateInfo"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateInfo"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR DISEÑO
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateDesing"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateDesing"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateDesing"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR NOTIFICACIONES
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateNotifications"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateNotifications"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateNotifications"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR PROFESIONALES DE SALUD
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateProfessionals"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateProfessionals"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateProfessionals"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR ESPECIALIDAD
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateSpecialities"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateSpecialities"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateSpecialities"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR OBJETIVO DE CONSULTA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateAppointmentObjective"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateAppointmentObjective"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateAppointmentObjective"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        EDITAR MODALIDAD DE CONSULTA
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.clinicPolicies.updateAppointmentModality"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="clinicPoliciesUpdateAppointmentModality"
+                          />
+                          <label class="custom-control-label" for="clinicPoliciesUpdateAppointmentModality"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- REPORTES -->
+            <div class="tab-pane fade" id="reporte" role="tabpanel" aria-labelledby="reporte-tab">
+              <div class="custom-control custom-switch mb-4">
+                <input
+                  [(ngModel)]="checkAllReportsPolicies"
+                  (change)="checkAll('reports')"
+                  id="reports"
+                  type="checkbox"
+                  class="custom-control-input"
+                />
+                <label class="custom-control-label" for="reports">Gestión de Reporte</label>
+              </div>
+              <div class="bg-white p-4 rounded">
+                <table class="table mt-1">
+                  <thead class="">
+                    <tr>
+                      <th scope="col" class="text-left">Nombre de acceso</th>
+                      <th scope="col" class="text-center">Descripción</th>
+                      <th scope="col" class="text-right">Estado</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="text-left">
+                        GESTIÓN DE REPORTE
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.reportPolicies.reportManagement"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="reportPoliciesReportManagement"
+                          />
+                          <label class="custom-control-label" for="reportPoliciesReportManagement"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
+                      <td scope="row" class="text-left">
+                        GESTIÓN DE LOGS
+                      </td>
+                      <td class="text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                      </td>
+                      <td class="text-right">
+                        <div class="custom-control custom-switch mb-4">
+                          <input
+                            [(ngModel)]="profile.reportPolicies.reportLogs"
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="reportPoliciesReportLogs"
+                          />
+                          <label class="custom-control-label" for="reportPoliciesReportLogs"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          <!--/pestañas-->
         </div>
       </div>
     </div>
-  
-    </div>
+  </div>
+</div>
