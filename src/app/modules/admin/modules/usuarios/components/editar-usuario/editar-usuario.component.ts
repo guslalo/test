@@ -183,7 +183,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
 
-        this.waitingRoomsAssigned = user.waitingRooms;
+        this.waitingRoomsAssigned = user.waitingRooms || [];
 
         // PROFILES CRUD
         for (const item of result.profiles) {
@@ -311,7 +311,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.profilesAssigned);
+    console.log(this.waitingRoomsAssigned);
 
     const _profiles = this.profilesAssigned.map((map) => {
       return map.id;

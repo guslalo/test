@@ -66,6 +66,16 @@ export class AdminService {
     return this.http.put<any>(`${environment.baseUrl}${this.userEndpoint}/${role}`, userObject);
   }
 
+  deactivateUser(userId) {
+    // console.log(userId);
+    return this.http.delete<any>(`${environment.baseUrl}${this.userEndpoint}/${userId}`);
+  }
+
+  sendInvitationEmail(userId) {
+    console.log(userId);
+    return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/sendInvitation`, { userId: userId });
+  }
+
   createProfile(profileObject): Observable<any> {
     // console.log(profileObject);
     return this.http.post<any>(`${environment.baseUrl}${this.profileEndpoint}`, profileObject);

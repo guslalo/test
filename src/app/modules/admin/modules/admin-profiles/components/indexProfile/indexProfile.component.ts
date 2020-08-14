@@ -10,18 +10,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexProfileComponent implements OnInit {
-  public profiles: any;
-
-  public model: any;
-  model2: NgbDateStruct;
-  //model: any;
-  //ublic page = 4;
-
-  name = 'Angular';
   page = 1;
   pageSize = 7;
-  items = [];
-  edited = 'false';
+  profiles: any = [];
+  isEdit: boolean = false;
 
   public states = ['test', 'test3', 'test4'];
   tomorrow = new Date(2020, 9, 20, 14, 34);

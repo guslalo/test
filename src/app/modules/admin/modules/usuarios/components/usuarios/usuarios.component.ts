@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const states = ['1', '2', '3'];
 
@@ -20,16 +21,17 @@ export class UsuariosComponent implements OnInit {
   @ViewChild('patientModal') patientModal: ElementRef;
   patientForm: FormGroup;
 
-  name = 'Angular';
   page = 1;
   pageSize = 7;
-  users = [];
+  users: any = [];
   isEdit: boolean = false;
+  emailSent: boolean = false;
 
+  userId: string;
   patientId: string;
   patientObject: any = {};
 
-  constructor(private formBuilder: FormBuilder, public adminService: AdminService, private el: Renderer2) {}
+  constructor(private formBuilder: FormBuilder, public adminService: AdminService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     //this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -80,7 +82,7 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  openModal(action, userId = null) {
+  openPatientModal(action, userId = null) {
     if (action === 'create') {
       this.isEdit = false;
       this.patientForm.reset();
@@ -130,5 +132,25 @@ export class UsuariosComponent implements OnInit {
     setTimeout(() => {
       this.getUsers('patients');
     }, 1000);
+  }
+
+  openDeactivateUserModal(disableUserModal, userId: string) {
+    this.userId = userId;
+    this.modalService.open(disableUserModal);
+  }
+
+  openSendInvitationModal(sendInvitationModal, userId: string) {
+    this.userId = userId;
+    this.modalService.open(sendInvitationModal);
+  }
+
+  deactivateUser() {
+    this.adminService.deactivateUser(this.userId).subscribe();
+  }
+
+  sendInvitationEmail() {
+    this.adminService.sendInvitationEmail(this.userId).subscribe(() => {
+      this.emailSent = true;
+    });
   }
 }

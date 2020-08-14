@@ -4,6 +4,10 @@
   </div>
 </div>
 
+<ngb-toast *ngIf="emailSent" class="bg-success text-light" [delay]="5000" [autohide]="true" (hide)="emailSent = false">
+  <div>Correo Enviado Exitosamente</div>
+</ngb-toast>
+
 <div class="row">
   <div class="col-12">
     <!-- TABS -->
@@ -216,7 +220,7 @@
                         [ngClass]="{
                           'btn-primary': user.status === 'Activo',
                           'btn-secondary ': user.status === 'Pendiente',
-                          'btn-default ': user.status === 'Inactivo'
+                          'btn-light ': user.status === 'Deshabilitado'
                         }"
                       >
                         {{ user.status }}
@@ -248,8 +252,24 @@
                           >
                             Editar
                           </button>
-                          <button class="dropdown-item" type="button">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#disableUserModal"
+                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
+                            [disabled]="user.status !== 'Activo'"
+                          >
                             Eliminar
+                          </button>
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
+                          >
+                            Enviar Invitacion a Correo
                           </button>
                         </div>
                       </div>
@@ -263,7 +283,12 @@
         <!-- PAGINATION -->
         <div class="row">
           <div class="col-12 text-right">
-            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            <ngb-pagination
+              class="float-right"
+              [collectionSize]="users.length"
+              [(page)]="page"
+              aria-label="Default pagination"
+            >
             </ngb-pagination>
           </div>
         </div>
@@ -382,7 +407,7 @@
                         [ngClass]="{
                           'btn-primary': user.status === 'Activo',
                           'btn-secondary ': user.status === 'Pendiente',
-                          'btn-default ': user.status === 'Inactivo'
+                          'btn-light ': user.status === 'Deshabilitado'
                         }"
                       >
                         {{ user.status }}
@@ -416,8 +441,24 @@
                           >
                             Editar
                           </button>
-                          <button class="dropdown-item" type="button">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#disableUserModal"
+                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
+                            [disabled]="user.status !== 'Activo'"
+                          >
                             Eliminar
+                          </button>
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
+                          >
+                            Enviar Invitacion a Correo
                           </button>
                         </div>
                       </div>
@@ -431,7 +472,12 @@
         <!-- PAGINATION -->
         <div class="row">
           <div class="col-12 text-right">
-            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            <ngb-pagination
+              class="float-right"
+              [collectionSize]="users.length"
+              [(page)]="page"
+              aria-label="Default pagination"
+            >
             </ngb-pagination>
           </div>
         </div>
@@ -550,7 +596,7 @@
                         [ngClass]="{
                           'btn-primary': user.status === 'Activo',
                           'btn-secondary ': user.status === 'Pendiente',
-                          'btn-default ': user.status === 'Inactivo'
+                          'btn-light ': user.status === 'Deshabilitado'
                         }"
                       >
                         {{ user.status }}
@@ -584,8 +630,24 @@
                           >
                             Editar
                           </button>
-                          <button class="dropdown-item" type="button">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#disableUserModal"
+                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
+                            [disabled]="user.status !== 'Activo'"
+                          >
                             Eliminar
+                          </button>
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
+                          >
+                            Enviar Invitacion a Correo
                           </button>
                         </div>
                       </div>
@@ -599,7 +661,12 @@
         <!-- PAGINATION -->
         <div class="row">
           <div class="col-12 text-right">
-            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            <ngb-pagination
+              class="float-right"
+              [collectionSize]="users.length"
+              [(page)]="page"
+              aria-label="Default pagination"
+            >
             </ngb-pagination>
           </div>
         </div>
@@ -655,7 +722,7 @@
               data-target="#disponibilidad"
               data-toggle="modal"
               data-target="#patientModal"
-              (click)="openModal('create')"
+              (click)="openPatientModal('create')"
             >
               Nuevo Paciente
               <svg
@@ -719,7 +786,7 @@
                         [ngClass]="{
                           'btn-primary': user.status === 'Activo',
                           'btn-secondary ': user.status === 'Pendiente',
-                          'btn-default ': user.status === 'Inactivo'
+                          'btn-light ': user.status === 'Deshabilitado'
                         }"
                       >
                         {{ user.status }}
@@ -748,12 +815,28 @@
                             data-target="#editar"
                             class="dropdown-item"
                             type="button"
-                            (click)="openModal('update', user.id)"
+                            (click)="openPatientModal('update', user.id)"
                           >
                             Editar
                           </button>
-                          <button class="dropdown-item" type="button">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#disableUserModal"
+                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
+                            [disabled]="user.status !== 'Activo'"
+                          >
                             Eliminar
+                          </button>
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
+                          >
+                            Enviar Invitacion a Correo
                           </button>
                         </div>
                       </div>
@@ -767,14 +850,19 @@
         <!-- PAGINATION -->
         <div class="row">
           <div class="col-12 text-right">
-            <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+            <ngb-pagination
+              class="float-right"
+              [collectionSize]="users.length"
+              [(page)]="page"
+              aria-label="Default pagination"
+            >
             </ngb-pagination>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Patient Modal -->
+    <!-- PATIENT MODAL -->
     <div
       #patientModal
       class="modal fade"
@@ -787,9 +875,6 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title text-center w-100 mt-1">{{ !isEdit ? 'Crear' : 'Actualizar' }} Paciente</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body p-4">
             <form [formGroup]="patientForm">
@@ -895,6 +980,66 @@
               [disabled]="!patientForm.valid"
             >
               {{ !isEdit ? 'Crear' : 'Actualizar' }} Paciente
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISABLE USER MODAL -->
+    <div
+      #deactivateUserModal
+      class="modal fade"
+      id="disableUserModal"
+      tabindex="-1"
+      aria-labelledby="disableUserModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100 mt-1">Deshabilitar Usuario</h5>
+          </div>
+          <div class="modal-body p-4">
+            <p class="text-center">¿Estas seguro de que deseas deshabilitar a este usuario?</p>
+          </div>
+          <div class="modal-footer text-center justify-content-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="deactivateUser()">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEND INVITATION MODAL -->
+    <div
+      #sendInvitationModal
+      class="modal fade"
+      id="sendInvitationModal"
+      tabindex="-1"
+      aria-labelledby="sendInvitationModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100 mt-1">Enviar Correo de Confirmacion</h5>
+          </div>
+          <div class="modal-footer text-center justify-content-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="sendInvitationEmail()"
+            >
+              Confirmar
             </button>
           </div>
         </div>

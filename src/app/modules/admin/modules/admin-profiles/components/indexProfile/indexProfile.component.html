@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col mb-2">
-    <h2>Gestión de perfiles</h2>
+    <h2>Gestión de Perfiles</h2>
   </div>
   <div class="col">
     <button type="button" class="btn btn-primary rounded-pill float-right" routerLink="crear-perfil">
@@ -28,14 +28,7 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input
-          id="typeahead-basic"
-          type="text"
-          class="form-control"
-          [(ngModel)]="model"
-          [ngbTypeahead]="search"
-          placeholder="Busqueda"
-        />
+        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search" placeholder="Busqueda" />
         <div class="searchBox">
           <svg
             width="1em"
@@ -145,7 +138,12 @@
     <!---->
     <div class="row">
       <div class="col-12 text-right">
-        <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+        <ngb-pagination
+          class="float-right"
+          [collectionSize]="profiles.length"
+          [(page)]="page"
+          aria-label="Default pagination"
+        >
         </ngb-pagination>
       </div>
     </div>
