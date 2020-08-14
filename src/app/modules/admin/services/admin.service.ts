@@ -23,6 +23,7 @@ export class AdminService {
   }
 
   createUser(userType, userObject): Observable<any> {
+    // console.log(userType);
     return this.http.post<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`, {
       identificationData: userObject.identificationData,
       personalData: userObject.personalData,
@@ -39,5 +40,54 @@ export class AdminService {
       isTutor: userObject.isTutor,
       /* PATIENT ONLY */
     });
+  }
+
+  getUserById(userType, userId): Observable<any> {
+    // console.log(userType, userId);
+    return this.http.get<any>(`${environment.baseUrl}${this.userEndpoint}/?userType=${userType}&userId=${userId}`);
+  }
+
+  updateUser(userType, userObject): Observable<any> {
+    console.log(userType);
+    let role;
+    switch (userType) {
+      case 'admins':
+        role = 'admin';
+        break;
+      case 'coordinators':
+        role = 'coordinator';
+        break;
+      case 'professionals':
+        role = 'professional';
+        break;
+      case 'patients':
+        role = 'patient';
+    }
+    return this.http.put<any>(`${environment.baseUrl}${this.userEndpoint}/${role}`, userObject);
+  }
+
+  deactivateUser(userId) {
+    // console.log(userId);
+    return this.http.delete<any>(`${environment.baseUrl}${this.userEndpoint}/${userId}`);
+  }
+
+  sendInvitationEmail(userId) {
+    console.log(userId);
+    return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/sendInvitation`, { userId: userId });
+  }
+
+  createProfile(profileObject): Observable<any> {
+    // console.log(profileObject);
+    return this.http.post<any>(`${environment.baseUrl}${this.profileEndpoint}`, profileObject);
+  }
+
+  getProfileById(profileId): Observable<any> {
+    // console.log(profileId);
+    return this.http.get<any>(`${environment.baseUrl}${this.profileEndpoint}/${profileId}`);
+  }
+
+  updateProfile(profileObject, profileId): Observable<any> {
+    // console.log(profileObject);
+    return this.http.put<any>(`${environment.baseUrl}${this.profileEndpoint}/${profileId}`, profileObject);
   }
 }

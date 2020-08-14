@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Profile } from 'src/app/models/profile';
-import * as _ from 'lodash';
-import { AdminService } from '../../../../services/admin.service';
 import { Location } from '@angular/common';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit, Renderer2, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Profile } from 'src/app/models/profile';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/modules/admin/services/admin.service';
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-crear-perfil',
-  templateUrl: './crear-perfil.component.html',
-  styleUrls: ['./crear-perfil.component.scss'],
+  selector: 'app-editar-perfil',
+  templateUrl: './editar-perfil.component.html',
+  styleUrls: ['./editar-perfil.component.scss'],
 })
-export class CrearPerfilComponent implements OnInit {
+export class EditarPerfilComponent implements OnInit, AfterContentChecked {
+  profileId = this.routerAct.snapshot.queryParamMap.get('profileId');
+
   checkAllUserPolicies: boolean;
   checkAllProfilesPolicies: boolean;
   checkAllMedicalRecords: boolean;
@@ -20,22 +23,36 @@ export class CrearPerfilComponent implements OnInit {
   checkAllClinicsPolicies: boolean;
   checkAllReportsPolicies: boolean;
 
-  profile = new Profile();
+  profile: Profile;
+  profileModel = new Profile();
 
   formProfile: FormGroup;
 
-  constructor(private adminService: AdminService, private location: Location) {}
+  constructor(
+    private routerAct: ActivatedRoute,
+    private adminService: AdminService,
+    private location: Location,
+    private el: Renderer2,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    // console.log(this.profile);
-    this.profile.role = 'admin';
     this.formProfile = new FormGroup({
       profileName: new FormControl(null, { validators: Validators.required }),
       profileDescription: new FormControl(null),
     });
+
+    this.profile = this.profileModel;
+
+    this.getProfile(this.profileId);
+  }
+
+  ngAfterContentChecked() {
+    this.cd.detectChanges();
   }
 
   setRole(value) {
+    // console.log(this.profile);
     this.profile.role = value;
   }
 
@@ -98,10 +115,49 @@ export class CrearPerfilComponent implements OnInit {
     }
   }
 
-  crearPerfil() {
-    // console.log(this.profile);
+  getProfile(profileId) {
+    this.adminService.getProfileById(profileId).subscribe(
+      (profileData) => {
+        // console.log(profile);
+        const role = profileData.role;
+        this.profile = profileData;
+
+        switch (role) {
+          case 'admin':
+            this.profile.medicalRecordPolicies = this.profileModel.medicalRecordPolicies;
+            const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+            this.el.removeClass(tab_adm, 'active');
+            this.el.addClass(tab_adm, 'active');
+            break;
+
+          case 'coordinator':
+          case 'professional':
+            if (role === 'coordinator') {
+              const tab_coor = <HTMLInputElement>document.querySelector('#coordinator-tab');
+              this.el.removeClass(tab_coor, 'active');
+              this.el.addClass(tab_coor, 'active');
+            } else if (role === 'professional') {
+              const tab_pro = <HTMLInputElement>document.querySelector('#professional-tab');
+              this.el.removeClass(tab_pro, 'active');
+              this.el.addClass(tab_pro, 'active');
+            }
+            this.profile.userPolicies = this.profileModel.userPolicies;
+            this.profile.profilePolicies = this.profileModel.profilePolicies;
+            this.profile.clinicPolicies = this.profileModel.clinicPolicies;
+            break;
+        }
+
+        console.log(this.profile);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  actualizarPerfil() {
     if (this.profile.profileName !== null || this.profile.profileName !== '') {
-      this.adminService.createProfile(this.profile).subscribe(() => {
+      this.adminService.updateProfile(this.profile, this.profileId).subscribe(() => {
         // console.log(response);
         this.location.back();
       });
