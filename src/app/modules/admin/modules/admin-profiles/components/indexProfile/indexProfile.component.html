@@ -4,7 +4,7 @@
   </div>
   <div class="col">
     <button type="button" class="btn btn-primary rounded-pill float-right" routerLink="crear-perfil">
-      Crear perfil
+      Crear Perfil
       <svg
         width="1.5em"
         height="1.5em"
@@ -87,7 +87,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let profile of profile">
+              <tr *ngFor="let profile of profiles">
                 <td scope="row">
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="{{ profile._id }}" />
@@ -97,28 +97,40 @@
                   </div>
                 </td>
                 <td>
-                  {{ profile.role }}
+                  <span *ngIf="profile.role === 'admin'">Administrador</span>
+                  <span *ngIf="profile.role === 'coordinator'">Coordinador</span>
+                  <span *ngIf="profile.role === 'professional'">Profesional</span>
                 </td>
 
                 <td>{{ profile.description || 'S/R' }}</td>
                 <td>
-                  <ul>
+                  <ul *ngIf="profile.users.length; else noUsers">
                     <li *ngFor="let item of profile.users | slice: 0:3">{{ item }}</li>
                     <button type="button" class="btn btn-sm btn-outline-primary mt-2" *ngIf="profile.users.length > 3">
                       Ver Mas
                     </button>
                   </ul>
+                  <ng-template #noUsers>
+                    <span>Este perfil no tiene usuarios asociados</span>
+                  </ng-template>
                 </td>
                 <td>
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      ..
+                      ...
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
                       <button class="dropdown-item" type="button">
                         Eliminar
                       </button>
-                      <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        [routerLink]="['editar-perfil']"
+                        [queryParams]="{ profileId: profile.id }"
+                      >
                         Editar
                       </button>
                     </div>

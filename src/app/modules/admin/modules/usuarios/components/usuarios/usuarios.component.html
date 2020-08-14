@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col mb-2">
-    <h2>Gestion de Usuarios</h2>
+    <h2>Gestión de Usuarios</h2>
   </div>
 </div>
 
@@ -406,7 +406,14 @@
                           </svg>
                         </div>
                         <div class="dropdown-menu dropdown-menu-right">
-                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                          <button
+                            data-toggle="modal"
+                            data-target="#editar"
+                            class="dropdown-item"
+                            type="button"
+                            [routerLink]="['editar-usuario']"
+                            [queryParams]="{ userType: 'professionals', userId: user.id }"
+                          >
                             Editar
                           </button>
                           <button class="dropdown-item" type="button">
@@ -567,7 +574,14 @@
                           </svg>
                         </div>
                         <div class="dropdown-menu dropdown-menu-right">
-                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                          <button
+                            data-toggle="modal"
+                            data-target="#editar"
+                            class="dropdown-item"
+                            type="button"
+                            [routerLink]="['editar-usuario']"
+                            [queryParams]="{ userType: 'coordinators', userId: user.id }"
+                          >
                             Editar
                           </button>
                           <button class="dropdown-item" type="button">
@@ -641,6 +655,7 @@
               data-target="#disponibilidad"
               data-toggle="modal"
               data-target="#patientModal"
+              (click)="openModal('create')"
             >
               Nuevo Paciente
               <svg
@@ -728,7 +743,13 @@
                           </svg>
                         </div>
                         <div class="dropdown-menu dropdown-menu-right">
-                          <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                          <button
+                            data-toggle="modal"
+                            data-target="#editar"
+                            class="dropdown-item"
+                            type="button"
+                            (click)="openModal('update', user.id)"
+                          >
                             Editar
                           </button>
                           <button class="dropdown-item" type="button">
@@ -754,11 +775,18 @@
     </div>
 
     <!-- Patient Modal -->
-    <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      #patientModal
+      class="modal fade"
+      id="patientModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center w-100 mt-1">Crear Paciente</h5>
+            <h5 class="modal-title text-center w-100 mt-1">{{ !isEdit ? 'Crear' : 'Actualizar' }} Paciente</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -766,14 +794,8 @@
           <div class="modal-body p-4">
             <form [formGroup]="patientForm">
               <div class="custom-control custom-switch mb-4">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="switchIsTutor"
-                  [checked]="false"
-                  formControlName="isTutor"
-                />
-                <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
+                <input type="checkbox" class="custom-control-input" id="isTutor" formControlName="isTutor" />
+                <label class="custom-control-label" for="isTutor">Cuenta Tutor</label>
               </div>
 
               <div class="row">
@@ -814,8 +836,8 @@
                       'is-invalid': !patientForm.get('genre').valid && patientForm.get('genre').touched
                     }"
                   >
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
+                    <option value="male">Masculino</option>
+                    <option value="female">Femenino</option>
                   </select>
                 </div>
                 <div class="form-group col">
@@ -869,10 +891,10 @@
               type="button"
               class="btn btn-primary rounded-pill"
               data-dismiss="modal"
-              (click)="createPatient()"
+              (click)="savePatient()"
               [disabled]="!patientForm.valid"
             >
-              Crear Paciente
+              {{ !isEdit ? 'Crear' : 'Actualizar' }} Paciente
             </button>
           </div>
         </div>

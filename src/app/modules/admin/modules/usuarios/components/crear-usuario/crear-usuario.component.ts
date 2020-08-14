@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 // EXTRAS
 import { AdminService } from '../../../../services/admin.service';
@@ -50,7 +51,7 @@ export class CrearUsuarioComponent implements OnInit {
   public userType = this.routerAct.snapshot.queryParamMap.get('userType');
 
   constructor(
-    private router: Router,
+    private location: Location,
     private routerAct: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
@@ -363,7 +364,7 @@ export class CrearUsuarioComponent implements OnInit {
     if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
       this.adminService.createUser(this.userType, this.userObject).subscribe((response) => {
         // console.log(response);
-        this.router.navigate(['app-admin/usuarios']);
+        this.location.back();
       });
     } else {
       alert('Complete el formulario con todos los datos necesarios');

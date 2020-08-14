@@ -76,18 +76,18 @@ export class Profile implements profile {
   role: string;
   profileName?: string;
   description?: string;
-  userPolicies = {
+  userPolicies? = {
     create: true,
     update: true,
     delete: false,
     sendInvitation: false,
   };
-  profilePolicies = {
+  profilePolicies? = {
     create: true,
     update: true,
     delete: false,
   };
-  medicalRecordPolicies = {
+  medicalRecordPolicies? = {
     read: true,
     readAppointments: true,
     updateAppointments: false,
@@ -117,7 +117,7 @@ export class Profile implements profile {
     delete: false,
     set: false,
   };
-  clinicPolicies = {
+  clinicPolicies? = {
     updateInfo: true,
     updateDesing: true,
     updateNotifications: false,

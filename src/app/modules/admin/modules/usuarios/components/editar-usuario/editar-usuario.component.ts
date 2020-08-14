@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Subject, Observable } from 'rxjs';
+import { mergeMap, throwIfEmpty, map } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -30,6 +34,7 @@ export class EditarUsuarioComponent implements OnInit {
     { name: 'Coordinador', value: 'coordinator' },
     { name: 'Profesional', value: 'professional' },
   ];
+  profile: any = {};
   profiles: any = [];
   profilesAssigned: any = [];
 
@@ -48,11 +53,12 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesAssigned: any = [];
 
   constructor(
-    private router: Router,
+    private location: Location,
     private routerAct: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private cd: ChangeDetectorRef
   ) {
     this.personalData = this.formBuilder.group({
       cpf: [null, Validators.required],
@@ -126,13 +132,42 @@ export class EditarUsuarioComponent implements OnInit {
     this.birthDate = this.calendar.getToday();
   }
 
+  ngAfterContentChecked() {
+    this.cd.detectChanges();
+  }
+
   getUser(userType, userId) {
-    this.adminService.getUserById(userType, userId).subscribe(
-      (user) => {
-        // console.log(user);
+    const getUserAndProfiles = () => {
+      let profiles = [];
+      return this.adminService.getUserById(userType, userId).pipe(
+        map((user) => {
+          _.each(user.administrativeData, (p) => {
+            let profile;
+            profile = this.adminService.getProfileById(p.profile).pipe((data) => {
+              // console.log(data);
+              return data;
+            });
+            profiles.push(profile);
+          });
+          return { user, profiles };
+        })
+      );
+    };
+
+    getUserAndProfiles().subscribe(
+      (result) => {
+        // console.log(result);
+        const user = result.user;
+
+        // USER DATA
         this.personalData.get('cpf').setValue(user.identificationData.cpf);
         this.personalData.get('cns').setValue(user.identificationData.cns);
         this.personalData.get('passport').setValue(user.identificationData.passport);
+        this.personalData.get('rgRegistry').setValue(user.identificationData.rgRegistry);
+        this.personalData.get('issuingBody').setValue(user.identificationData.issuingBody);
+        this.personalData.get('extraIdDocument').setValue(user.identificationData.extraIdDocument);
+        this.personalData.get('idDocumentNumber').setValue(user.identificationData.idDocumentNumber);
+
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
         this.personalData.get('socialName').setValue(user.personalData.socialName);
@@ -143,6 +178,23 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth);
         this.personalData.get('genre').setValue(user.personalData.genre);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+
+        this.waitingRoomsAssigned = user.waitingRooms;
+
+        // PROFILES CRUD
+        for (const item of result.profiles) {
+          item.subscribe((p) => {
+            this.profilesAssigned.push({
+              id: p._id,
+              role: p.role,
+              name: p.profileName,
+            });
+          });
+        }
       },
       (error) => {
         console.log(error);
@@ -238,13 +290,13 @@ export class EditarUsuarioComponent implements OnInit {
 
   formUserValid() {
     if (this.userType !== 'professional') {
-      if (this.formUser[0].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid) {
         return true;
       } else {
         return false;
@@ -258,7 +310,7 @@ export class EditarUsuarioComponent implements OnInit {
     return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
-  createUser() {
+  updateUser() {
     console.log(this.profilesAssigned);
 
     const _profiles = this.profilesAssigned.map((map) => {
@@ -271,7 +323,10 @@ export class EditarUsuarioComponent implements OnInit {
       return map.id;
     });
 
+    console.log(_waitingRooms);
+
     this.userObject = {
+      id: this.userId,
       identificationData: {
         cpf: this.formUser[0].value.cpf,
         cns: this.formUser[0].value.cns,
@@ -312,14 +367,13 @@ export class EditarUsuarioComponent implements OnInit {
       confirmPassword: this.formUser[3].value.confirmPassword,
     };
 
-    console.log(this.formUser[0].value.birthdate);
-
+    // console.log(this.formUser[0].value.birthdate);
     console.log(this.userObject);
 
     if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
-      this.adminService.createUser(this.userType, this.userObject).subscribe((response) => {
+      this.adminService.updateUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
-        this.router.navigate(['app-admin/usuarios']);
+        this.location.back();
       });
     } else {
       alert('Complete el formulario con todos los datos necesarios');
