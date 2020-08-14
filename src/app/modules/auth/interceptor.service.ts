@@ -13,7 +13,7 @@ import { catchError, retry, map } from 'rxjs/internal/operators';
 import { environment } from '../../../environments/environment';
 import { ErrorDialogService } from './services/error-dialog/error-dialog.service';
 
-//import {ErrorService} from '../my-services/error.service';
+// import {ErrorService} from '../my-services/error.service';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
@@ -22,7 +22,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   AuthHeader(request) {
     const token =  JSON.parse(localStorage.getItem('token'));
       if (
-        request.url.search(environment.baseUrl + '/oauth2/token') === 0  
+        request.url.search(environment.baseUrl + '/oauth2/token') === 0
       ) {
 
       } else {
@@ -38,7 +38,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
           })
         });
       }
-    
+
     return request;
   }*/
 

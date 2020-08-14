@@ -15,37 +15,37 @@ FullCalendarModule.registerPlugins([
   timeGridPlugin,
   listPlugin,
   interactionPlugin
-])
+]);
 
-//import { HttpClientModule, HttpClient } from '@angular/common/http';
+// import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { 
+import {
   NgbTypeaheadModule,
   NgbDatepickerModule,
-   NgbTimepickerModule, 
+   NgbTimepickerModule,
    NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
-//Translation
+// Translation
 import { TranslocoRootModule } from './../transloco-root.module';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-//modulos terceros
+// modulos terceros
 import { PasswordStrengthMeterModule } from './modules/password-strength/password-strength-meter.module';
 
-//components
+// components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 
 @NgModule({
   declarations: [
-    NgbdTimepickerBasic, 
+    NgbdTimepickerBasic,
     ChangePassComponent],
   imports: [
     CommonModule,
-    //HttpClientModule,
+    // HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
@@ -83,7 +83,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      //providers: []TranslocoRootModule
+      // providers: []TranslocoRootModule
     };
   }
 }

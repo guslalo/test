@@ -55,13 +55,13 @@ const COUNTRIES: Country[] = [
 
 export class IndexProfileComponent implements OnInit {
 
-  public profile:any;
+  public profile: any;
 
   public model: any;
   model2: NgbDateStruct;
-  //model: any;
-  //ublic page = 4;
- 
+  // model: any;
+  // ublic page = 4;
+
 
   name = 'Angular';
   page = 1;
@@ -71,23 +71,23 @@ export class IndexProfileComponent implements OnInit {
 
   public states = ['test', 'test3', 'test4'];
   tomorrow = new Date(2020, 9, 20, 14, 34);
-  constructor(public adminService: AdminService) { 
+  constructor(public adminService: AdminService) {
 
-    
+
   }
 
- 
+
 
   ngOnInit(): void {
     this.adminService.getProfiles().subscribe(
       data => {
-        console.log(data)
+        console.log(data);
         this.profile = data;
       },
       error => {
-        console.log(error)
+        console.log(error);
       }
-    )
+    );
   }
   search = (text$: Observable<string>) =>
   text$.pipe(
@@ -96,7 +96,7 @@ export class IndexProfileComponent implements OnInit {
     map((term) =>
       term.length < 2 ? [] :  this.states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
     )
-  );
+  )
 
 
 }

@@ -14,11 +14,11 @@ export class ConfirmAccountComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //todo: crear aviso registro exitoso
+  // todo: crear aviso registro exitoso
 
   confirmAccount(code) {
     this.route.params.subscribe((params) => {
-      let id = params.id;
+      const id = params.id;
       this.registerUser.confirmAccount(id, code).subscribe(
         (data) => {
           console.log(data);

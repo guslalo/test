@@ -8,7 +8,7 @@ import { CrearPerfilComponent } from './components/crear-perfil/crear-perfil.com
 
 @NgModule({
   declarations: [
-    IndexProfileComponent, 
+    IndexProfileComponent,
     CrearPerfilComponent
   ],
   imports: [

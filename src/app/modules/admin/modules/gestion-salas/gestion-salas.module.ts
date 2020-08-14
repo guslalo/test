@@ -11,7 +11,7 @@ import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@n
   imports: [
     CommonModule,
     GestionSalasRountingModule,
-    NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule 
+    NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule
   ]
 })
 export class GestionSalasModule { }

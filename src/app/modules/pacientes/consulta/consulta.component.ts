@@ -29,7 +29,7 @@ export class ConsultaComponent implements OnInit {
   ) {
     this.changeDetectorRef = ref;
     router.events.forEach((event) => {
-   
+
       // NavigationEnd
       // NavigationCancel
       // NavigationError
@@ -40,17 +40,17 @@ export class ConsultaComponent implements OnInit {
   ngOnInit(): void {
  }
 
-   
-  
+
+
 
   initCall() {
     console.log(this.meet);
     if (this.meet) {
-      //this.getSessionCall2('5f049b9948ab2c55c1db33fa');
+      // this.getSessionCall2('5f049b9948ab2c55c1db33fa');
     } else {
       this.sub = this.route.params.subscribe((params) => {
-        //this.id = +params['id']; // (+)
-        //get getRutas
+        // this.id = +params['id']; // (+)
+        // get getRutas
         console.log(params);
         console.log(params.appointmentId);
         this.getSessionCall(params.appointmentId);
@@ -60,7 +60,7 @@ export class ConsultaComponent implements OnInit {
   getAppointments() {
     this.appointmentsService.getAppointments().subscribe(
       (data) => {
-        //this.consultas = data;
+        // this.consultas = data;
         console.log(data);
       },
       (error) => {
@@ -71,7 +71,7 @@ export class ConsultaComponent implements OnInit {
   getAppointments2(id) {
     this.appointmentsService.getAppointments2(id).subscribe(
       (data) => {
-        //this.consultas = data;
+        // this.consultas = data;
         console.log(data);
       },
       (error) => {
@@ -84,7 +84,7 @@ export class ConsultaComponent implements OnInit {
     let apiKey: any;
     let token: any;
     let sessionId: any;
-  
+
   }
 
   getSessionCall2(appointmentId) {
@@ -95,7 +95,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   closeCall() {
-   
+
     this.router.navigate(['/app-paciente/mis-consultas']);
   }
 }

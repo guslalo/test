@@ -15,6 +15,17 @@ import { registerUser } from '../../../../models/registerUser';
   styleUrls: ['../login/login.component.scss'],
 })
 export class CreateAccountComponent implements OnInit {
+
+  constructor(
+    private router: Router,
+    private registerUser: RegisterService,
+    private _formBuilder: FormBuilder,
+    private calendar: NgbCalendar,
+    private config: NgbDatepickerConfig
+
+  ) {
+
+  }
   public userRegister: registerUser;
   public placement = 'bottom';
   model: NgbDateStruct;
@@ -22,10 +33,6 @@ export class CreateAccountComponent implements OnInit {
 
   public password: any;
   public user: any = {};
-  //public form:any;
-  onClick(index: number): void {
-    //this.selectedIndex = index;
-  }
 
   isLinear = false;
   formUno: FormGroup;
@@ -35,16 +42,9 @@ export class CreateAccountComponent implements OnInit {
   form = [];
   minDate = undefined;
   maxDate = undefined;
-
-  constructor(
-    private router: Router,
-    private registerUser: RegisterService,
-    private _formBuilder: FormBuilder, 
-    private calendar: NgbCalendar,
-    private config: NgbDatepickerConfig
-   
-  ) {
-    
+  // public form:any;
+  onClick(index: number): void {
+    // this.selectedIndex = index;
   }
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class CreateAccountComponent implements OnInit {
     };
 
     this.maxDate = {
-      year: current.getFullYear() -18,
+      year: current.getFullYear() - 18,
       month: current.getMonth(),
       day: current.getDate(),
     };
@@ -126,7 +126,7 @@ export class CreateAccountComponent implements OnInit {
   crearCuenta() {
     console.log(this.form);
     const formObject = {
-      clinicId: "5f236fc966fbb0054894b780",
+      clinicId: '5f236fc966fbb0054894b780',
       personalData: {
         name: this.form[0].name.value,
         lastName: this.form[0].lastName.value,

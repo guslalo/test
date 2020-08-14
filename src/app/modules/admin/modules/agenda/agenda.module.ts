@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AgendaRoutingModule } from './agenda-routing.module';
 import { IndexAgendaComponent } from './components/index-agenda/index-agenda.component';
 import { SharedModule } from './../../../../shared/shared.module';
-//import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+// import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 
 
 
@@ -15,7 +15,7 @@ import { SharedModule } from './../../../../shared/shared.module';
     CommonModule,
     AgendaRoutingModule,
     SharedModule
- 
+
   ]
 })
 

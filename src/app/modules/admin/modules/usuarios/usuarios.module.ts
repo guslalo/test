@@ -21,12 +21,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     UsuariosRountingModule,
     SharedModule,
-    FormsModule, //aca
+    FormsModule, // aca
     ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    MatDialogModule, //aca
+    MatDialogModule, // aca
   ]
 })
 

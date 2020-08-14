@@ -20,8 +20,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes) // { enableTracing: true }
-    
-    //, { preloadingStrategy: SelectivePreloadingStrategyService }
+
+    // , { preloadingStrategy: SelectivePreloadingStrategyService }
   ],
   exports: [RouterModule],
 })

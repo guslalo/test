@@ -19,7 +19,7 @@ export class IndexAgendaComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'dayGridMonth',
-    //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
     selectable: true,
@@ -53,7 +53,7 @@ export class IndexAgendaComponent implements OnInit {
 
     if (title) {
       calendarApi.addEvent({
-        //id: createEventId(),
+        // id: createEventId(),
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,

@@ -15,7 +15,7 @@ export class PublisherComponent implements AfterViewInit {
 
   @Input() toggleVideo: any;
 
- 
+
   publishing: Boolean;
 
   video = false;
@@ -27,41 +27,41 @@ export class PublisherComponent implements AfterViewInit {
 
   lanzar() {
     if ((this.video = !this.video)) {
-      //this.publisher.publishVideo(true);
+      // this.publisher.publishVideo(true);
     } else {
-      //this.publisher.publishVideo(false);
+      // this.publisher.publishVideo(false);
     }
   }
 
   lanzarAudio() {
     if ((this.audio = !this.audio)) {
-   
+
     } else {
-     
+
     }
   }
   desconectar() {
-   
+
     window.close();
     // this.location.back();
-    //this.router.navigate(['app-paciente']);
+    // this.router.navigate(['app-paciente']);
   }
 
   ngAfterViewInit() {
-    var publisherOptions = {
+    const publisherOptions = {
       insertMode: 'append',
       width: 400,
       height: 300,
       showControls: true,
     };
-    //var publisher = OT.initPublisher('publisherContainerElementId', publisherOptions);
-    //.publish(publisher); //publisherOptions
+    // var publisher = OT.initPublisher('publisherContainerElementId', publisherOptions);
+    // .publish(publisher); //publisherOptions
 
- 
+
 
     /*, width:'100%', height:'90vh' */
 
-  
+
   }
 
 }

@@ -1,11 +1,11 @@
-//core angular
+// core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//components
+// components
 
-//import { PacientesComponent } from './pacientes/pacientes.component';
+// import { PacientesComponent } from './pacientes/pacientes.component';
 
-//guards
+// guards
 import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
@@ -23,15 +23,15 @@ import { AgendaComponent } from './modules/agenda/agenda.component';
 import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
 
 
-//const profesional
+// const profesional
 const historialConsulta = 'historial-consultas';
 const MisPacientes = 'mis-pacientes';
-//routing
+// routing
 
 const routes: Routes = [
   { path: '', component: InicioPComponent },
       { path: 'context', component: InicioPComponent },
-  
+
       { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
       { path: MisPacientes, component: MisPacientesComponent, canActivate: [ProfesionalGuard] },
       { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },

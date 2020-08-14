@@ -17,7 +17,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  //post loginUser
+  // post loginUser
   loginUser(username, password): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.loginUrl, { username, password });
   }
@@ -30,14 +30,14 @@ export class AuthenticationService {
     return this.http.post<any>(environment.baseUrl + this.resetPassUrl + `/${id}`, { token, password });
   }
 
-  //cambiar pass
+  // cambiar pass
   changePassword(password, newPassword): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.changePass, { password, newPassword });
   }
 
-  //ACCESs choose context
+  // ACCESs choose context
   accessWeb(clinicProfileId): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.accessWebUrl, { clinicProfileId: clinicProfileId });
+    return this.http.post<any>(environment.baseUrl + this.accessWebUrl, { clinicProfileId });
   }
 
   logout() {

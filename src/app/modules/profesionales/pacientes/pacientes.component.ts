@@ -14,12 +14,12 @@ export class PacientesComponent implements OnInit {
   constructor(public usersService: UsersService) {}
 
   ngOnInit(): void {
-    //this.user = JSON.parse(localStorage.getItem('currentUser'));
-    //console.log(this.UserLogin);
+    // this.user = JSON.parse(localStorage.getItem('currentUser'));
+    // console.log(this.UserLogin);
     this.getUsers();
   }
 
-  //getUsers
+  // getUsers
   getUsers() {
     this.usersService.getusers().subscribe(
       (data) => {

@@ -10,7 +10,7 @@ import {
   NgbPaginationConfig,
   NgbTimepicker,
 } from '@ng-bootstrap/ng-bootstrap';
-//import { NgbdPaginationBasic } from './pagination-basic';
+// import { NgbdPaginationBasic } from './pagination-basic';
 const states = ['test', 'test3', 'test4'];
 
 @Component({
@@ -21,7 +21,7 @@ const states = ['test', 'test3', 'test4'];
 export class MisPacientesComponent implements OnInit {
   model2: NgbDateStruct;
   model: any;
-  //ublic page = 4;
+  // ublic page = 4;
 
   name = 'Angular';
   page = 1;
@@ -45,7 +45,7 @@ config.boundaryLinks = true;*/
       map((term) =>
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
-    );
+    )
 
   ngOnInit(): void {}
 }

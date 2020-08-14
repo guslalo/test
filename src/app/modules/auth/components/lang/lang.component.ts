@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//translate
+// translate
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({

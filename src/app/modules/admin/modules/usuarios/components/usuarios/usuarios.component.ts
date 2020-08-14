@@ -28,8 +28,8 @@ export class UsuariosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, public adminService: AdminService) {}
 
   ngOnInit(): void {
-    //this.user = JSON.parse(localStorage.getItem('currentUser'));
-    //console.log(this.UserLogin);
+    // this.user = JSON.parse(localStorage.getItem('currentUser'));
+    // console.log(this.UserLogin);
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
       name: ['test', Validators.required],
@@ -73,7 +73,7 @@ export class UsuariosComponent implements OnInit {
       map((term) =>
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
-    );
+    )
 
   getUsers() {
     this.adminService.getUsers('admins').subscribe(

@@ -9,6 +9,11 @@ const sub = new Subject<boolean>();
 
 @Injectable()
 export class OpentokService {
+
+  constructor() {}
+
+  token: string;
+  public toggleVideo: boolean;
   // Tu funcion para solicitar el cambio
   mostrarComponentes(mostrar: boolean = true): void {
     sub.next(mostrar);
@@ -23,18 +28,13 @@ export class OpentokService {
     return (this.toggleVideo = false);
   } /**/
 
-  token: string;
-  public toggleVideo: boolean;
-
-  constructor() {}
-
 
 
   initSession(token, sessionId) {
- 
+
   }
 
   connect() {
-  
+
   }
 }

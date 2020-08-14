@@ -1,11 +1,11 @@
-//core angular
+// core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//components
-//import { LayoutComponent } from './components/layout/layout.component';
+// components
+// import { LayoutComponent } from './components/layout/layout.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { MiSaludComponent } from './mi-salud/mi-salud.component';
-//guards
+// guards
 import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
@@ -21,10 +21,10 @@ import { OpentokService } from '../../services/opentok.service';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from './soporte/soporte.component';
-//import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
+// import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
 
-//routing
+// routing
 
 const routes: Routes = [
   {

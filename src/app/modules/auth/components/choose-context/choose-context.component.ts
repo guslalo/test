@@ -47,9 +47,9 @@ export class ChooseContextComponent implements OnInit {
 
   getRouteForClinicAndRole(clinicId) {
     const profile = this.user.administrativeData.find((profile) => {
-      if (profile.clinicProfileId === clinicId) return profile;
+      if (profile.clinicProfileId === clinicId) { return profile; }
     });
-  
+
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -64,7 +64,7 @@ export class ChooseContextComponent implements OnInit {
       profile.role
     );
     localStorage.removeItem('currentUser');
-    
+
     localStorage.setItem('currentUser', JSON.stringify(this.user));
     console.log(this.user );
 

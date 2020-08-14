@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from '../../../../services/current-user.service';
 import { UserLogin } from '../../../../models/models';
-//import { slideInAnimation } from '../../../../shared/animations';
+// import { slideInAnimation } from '../../../../shared/animations';
 import { SharedModule } from '../../../../shared/shared.module';
 import { trigger, state, style, animate, transition} from '@angular/animations';
 
@@ -9,11 +9,11 @@ import { trigger, state, style, animate, transition} from '@angular/animations';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  animations: [ 
+  animations: [
     trigger ('sideBarAnimation', [
       state('open', style({
-        //backgroundColor: '#000000',
-        //transform: 'scale(1.5)'
+        // backgroundColor: '#000000',
+        // transform: 'scale(1.5)'
       })),
       state('closed', style({
         width: '68px',
@@ -24,8 +24,8 @@ import { trigger, state, style, animate, transition} from '@angular/animations';
     ]),
     trigger ('sideBarElements', [
       state('open', style({
-        //backgroundColor: '#000000',
-        //transform: 'scale(1.5)'
+        // backgroundColor: '#000000',
+        // transform: 'scale(1.5)'
       })),
       state('closed', style({
         display: 'none',
@@ -36,16 +36,18 @@ import { trigger, state, style, animate, transition} from '@angular/animations';
    ]
 })
 export class LayoutComponent implements OnInit {
-  public UserLogin: UserLogin;
 
   constructor(public currentUser: CurrentUserService) {}
+  public UserLogin: UserLogin;
   public user: any;
   public userCurrent: any;
-  public state:string = "open"
+  public state = 'open';
+
+  status = false;
 
   ngOnInit(): void {
     console.log(this.currentUser);
-    //this.user = this.currentUser;
+    // this.user = this.currentUser;
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -62,11 +64,9 @@ export class LayoutComponent implements OnInit {
   }
 
   sideBar(){
-    this.state = this.state === 'open' ? 'closed' :'open';
+    this.state = this.state === 'open' ? 'closed' : 'open';
   }
-  
-  status: boolean = false;
   sideBarMenu(){
-    this.status = !this.status;  
+    this.status = !this.status;
   }
 }

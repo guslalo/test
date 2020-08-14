@@ -17,7 +17,7 @@ export class AgendaComponent implements OnInit {
   constructor() {}
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    //dateClick: this.handleDateClick.bind(this), // bind is important!
+    // dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [
       { title: 'event 1', date: '2020-07-21' },
       { title: 'event 2', date: '2020-07-20' },
@@ -32,5 +32,5 @@ export class AgendaComponent implements OnInit {
       map((term) =>
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
-    );
+    )
 }

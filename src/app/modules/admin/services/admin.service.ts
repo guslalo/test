@@ -7,13 +7,13 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class AdminService {
-  //end points
+  // end points
   private userEndpoint = 'v1/users';
   private profileEndpoint = 'v1/administrative/profiles';
 
   constructor(private http: HttpClient) {}
 
-  //GET availability/blocked
+  // GET availability/blocked
   getUsers(userType): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`);
   }

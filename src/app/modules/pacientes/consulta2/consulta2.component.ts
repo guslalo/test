@@ -12,13 +12,13 @@ import { switchMap } from 'rxjs/operators';
 
 
 export class Consulta2Component implements OnInit {
- 
+
   changeDetectorRef: ChangeDetectorRef;
   selectedId: any;
   private sub: any;
   id: number;
   public meet: boolean;
-  public toggleVideo: boolean = false;
+  public toggleVideo = false;
 
   @ViewChild('iniciarLlamada') iniciarLlamada;
 
@@ -32,7 +32,7 @@ export class Consulta2Component implements OnInit {
     this.changeDetectorRef = ref;
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-     
+
       }
       // NavigationEnd
       // NavigationCancel
@@ -42,17 +42,17 @@ export class Consulta2Component implements OnInit {
   }
   @ViewChild('hardwareVideo') hardwareVideo: any;
 
-  _navigator = <any>navigator;
+  _navigator = navigator as any;
   localStream;
 
   ngOnInit(): void {
-  
+
 
     this.route.params.subscribe((params) => {
-      //this.id = +params['id']; // (+)
-      //get getRutas
+      // this.id = +params['id']; // (+)
+      // get getRutas
       /* */
-      //console.log(params.appointmentId);
+      // console.log(params.appointmentId);
       if (params.appointmentId === '5f049b9948ab2c55c1db33fa') {
         this.meet = true;
 
@@ -69,11 +69,11 @@ export class Consulta2Component implements OnInit {
   initCall() {
     console.log(this.meet);
     if (this.meet) {
-      //this.getSessionCall2('5f049b9948ab2c55c1db33fa');
+      // this.getSessionCall2('5f049b9948ab2c55c1db33fa');
     } else {
       this.sub = this.route.params.subscribe((params) => {
-        //this.id = +params['id']; // (+)
-        //get getRutas
+        // this.id = +params['id']; // (+)
+        // get getRutas
         console.log(params);
         console.log(params.appointmentId);
         this.getSessionCall(params.appointmentId);
@@ -83,7 +83,7 @@ export class Consulta2Component implements OnInit {
   getAppointments() {
     this.appointmentsService.getAppointments().subscribe(
       (data) => {
-        //this.consultas = data;
+        // this.consultas = data;
         console.log(data);
       },
       (error) => {
@@ -94,7 +94,7 @@ export class Consulta2Component implements OnInit {
   getAppointments2(id) {
     this.appointmentsService.getAppointments2(id).subscribe(
       (data) => {
-        //this.consultas = data;
+        // this.consultas = data;
         console.log(data);
       },
       (error) => {
@@ -107,7 +107,7 @@ export class Consulta2Component implements OnInit {
     let apiKey: any;
     let token: any;
     let sessionId: any;
- 
+
   }
 
   getSessionCall2(appointmentId) {
@@ -118,7 +118,7 @@ export class Consulta2Component implements OnInit {
   }
 
   closeCall() {
-    
+
     this.router.navigate(['/app-paciente/mis-consultas']);
   }
 }
