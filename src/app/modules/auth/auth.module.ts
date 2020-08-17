@@ -1,19 +1,19 @@
-//core
+// core
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-//modules
+// modules
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-//shared
+// shared
 import { SharedModule } from './../../shared/shared.module';
 
-//routing
+// routing
 import { AuthRoutingModule } from './auth-routing.module';
 
-//import { LayoutModule } from '../../modules/layout/layout.module';
+// import { LayoutModule } from '../../modules/layout/layout.module';
 
-//components
+// components
 import { LoginComponent } from './components/login/login.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
@@ -48,7 +48,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbDatepickerModule,
     MatStepperModule,
     MatDialogModule,
-    //LayoutModule
+    // LayoutModule
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InicioComponent } from './components/inicio/inicio.component'
+import { InicioComponent } from './components/inicio/inicio.component';
 import { IndexRoutingModule } from './index-routing.module';
 
 

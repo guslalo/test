@@ -3,10 +3,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-//import { AdminProfilesModule} from './modules/admin-profiles/admin-profiles.module';
+// import { AdminProfilesModule} from './modules/admin-profiles/admin-profiles.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-//import { AgendaModule } from './modules/agenda/agenda.module';
-//import { SharedModule } from './../../shared/shared.module';
+// import { AgendaModule } from './modules/agenda/agenda.module';
+// import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,13 +23,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminRoutingModule,
     NgxChartsModule,
     NgbTypeaheadModule
-    //SharedModule
+    // SharedModule
   ],
   exports: [
     NgxChartsModule,
     NgbTypeaheadModule
-    //AgendaModule
-    //SharedModule
+    // AgendaModule
+    // SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

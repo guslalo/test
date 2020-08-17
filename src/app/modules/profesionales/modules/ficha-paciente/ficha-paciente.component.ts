@@ -23,5 +23,5 @@ export class FichaPacienteComponent implements OnInit {
       map((term) =>
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
-    );
+    )
 }

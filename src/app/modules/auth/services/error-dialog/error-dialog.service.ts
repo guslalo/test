@@ -13,7 +13,7 @@ export class ErrorDialogService {
     this.isDialogOpen = true;
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '300px',
-      data: data,
+      data,
     });
 
     dialogRef.afterClosed().subscribe((result) => {

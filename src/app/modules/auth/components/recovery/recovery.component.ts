@@ -33,7 +33,7 @@ export class RecoveryComponent implements OnInit {
   }
 
   recoveryPass(user) {
-    let userEmail = {
+    const userEmail = {
       email: user,
     };
     console.log(userEmail);

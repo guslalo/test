@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FichaConsultaComponent implements OnInit {
   constructor() {}
+  tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {}
-  tomorrow = new Date(2020, 9, 20, 14, 34);
 }

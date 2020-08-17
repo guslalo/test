@@ -91,135 +91,160 @@
                   />
                 </svg>
               </div>
-            </div><!--/col-->
+            </div>
+            <!--/col-->
             <!--col row justify-content-center align-self-center-->
             <div class="col-6">
-              
-                
-                  <div class="box-items mr-2">
-                    <div class="items">
-                      <ng-container *ngIf="user.administrativeData[0].role === 'patient'">
-                        <button
-                          tourAnchor="agendar"
-                          type="button"
-                          data-toggle="modal" data-target="#agendarModal"
-                          class="btn btn-primary rounded-pill  mr-3"
-                        >
-                          Realizar consulta
-                          <svg
-                            width="1.5em"
-                            height="1.5em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-plus-circle"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                            />
-                            <path
-                              fill-rule="evenodd"
-                              d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-                            />
-                            <path
-                              fill-rule="evenodd"
-                              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                            />
-                          </svg>
-                        </button>
+              <div class="box-items mr-2">
+                <div class="items">
+                  <ng-container *ngIf="user.administrativeData[0].role === 'patient'">
+                    <button
+                      tourAnchor="agendar"
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#agendarModal"
+                      class="btn btn-primary rounded-pill mr-3"
+                    >
+                      Realizar consulta
+                      <svg
+                        width="1.5em"
+                        height="1.5em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-plus-circle"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                        />
+                      </svg>
+                    </button>
+                  </ng-container>
+                </div>
+                <!--items-->
+                <div class="items">
+                  <div class="m-0 text-right top-user">
+                    <a routerLink="perfil" class="name">Hola, {{ user.name }}!</a>
+                    <ng-container *ngIf="user.administrativeData.length > 1; else administrative">
+                      <ng-container *ngFor="let item of user.administrativeData">
+                        <p class="p-0 m-0" *ngIf="item.clinicProfileId === user.administrativeDataContext">
+                          {{ item.role | titlecase }} / {{ item.clinicName }}
+                        </p>
                       </ng-container>
-                    </div>
-                    <!--items-->
-                    <div class="items">
-                      <div class="m-0 text-right top-user">
-                        <a routerLink="perfil" class="name">Hola, {{ user.name }}!</a>
-                        <ng-container *ngIf="user.administrativeData.length > 1; else administrative">
-                          <ng-container *ngFor="let item of user.administrativeData">
-                            <p class="p-0 m-0" *ngIf="item.clinicProfileId === user.administrativeDataContext">
-                              {{ item.role | titlecase }} / {{ item.clinicName }}
-                            </p>
-                          </ng-container>
-                        </ng-container>
-                        <ng-template #administrative>
-                          <p class="p-0 m-0">{{ user.administrativeData[0].clinicName }}</p>
-                        </ng-template>
-                      </div>
-                 
-                    </div><!--/items-->
-                    <!--items-->
-                    <div class="items">
-                      <ng-container *ngIf="user">
-                        <div class="dropdown">
-                          <div
-                            class="imguser dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <svg
-                              width="2.5em"
-                              height="2.5em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-person-fill"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-                              />
-                            </svg>
-                          </div>
-                          <div
-                            class="dropdown-menu dropdown-menu-right text-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <a class="dropdown-item" routerLink="perfil">Perfil</a>
-                            <a class="dropdown-item" routerLink="change-password">Contraseña</a>
-                            <a class="dropdown-item" routerLink="/">Salir</a>
-                          </div>
-                        </div>
-                      </ng-container>
-                    </div><!--/items-->
-                    <!--items-->
-                    <div class="items">   
-                      <div class="notificationBox">
-                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <span class="badge badge-danger rounded-pill">9</span>
-                          <svg
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-bell"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
-                            <path
-                              fill-rule="evenodd"
-                              d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="javascript:;">Se creo una nueva cita para hoy</a>
-                          <a class="dropdown-item" href="javascript:;">notificacion ejemplo</a>
-                          <a class="dropdown-item" href="javascript:;">Se creo una nueva cita para hoy</a>
-                        </div>
-                      </div>
-                    </div><!--/items-->
+                    </ng-container>
+                    <ng-template #administrative>
+                      <p class="p-0 m-0">{{ user.administrativeData[0].clinicName }}</p>
+                    </ng-template>
                   </div>
-                
-              
-            </div><!--/col-->
+                </div>
+                <!--/items-->
+                <!--items-->
+                <div class="items">
+                  <ng-container *ngIf="user; else administrative">
+                    <div class="dropdown">
+                      <div
+                        class="imguser dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <svg
+                          width="2.5em"
+                          height="2.5em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-person-fill"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" routerLink="perfil">Perfil</a>
+                        <a class="dropdown-item" routerLink="change-password">Contraseña</a>
+                        <a class="dropdown-item" routerLink="/">Salir</a>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-template #administrative>
+                    <p class="p-0 m-0">{{ user.administrativeData[0].clinicName }}</p>
+                  </ng-template>
+                </div>
+                <ng-container *ngIf="user.administrativeData[0].role === 'patient'">
+                  <button tourAnchor="agendar" type="button" class="btn btn-primary rounded-pill mr-3">
+                    Realizar consulta
+                    <svg
+                      width="1.5em"
+                      height="1.5em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-plus-circle"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                      />
+                      <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                      />
+                    </svg>
+                  </button>
+                </ng-container>
+                <!-- notifications -->
+                <div class="items">
+                  <div class="notificationBox">
+                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="badge badge-danger rounded-pill">9</span>
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-bell"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="javascript:;">Se creo una nueva cita para hoy</a>
+                      <a class="dropdown-item" href="javascript:;">notificacion ejemplo</a>
+                      <a class="dropdown-item" href="javascript:;">Se creo una nueva cita para hoy</a>
+                    </div>
+                  </div>
+                </div>
+                <!--/notifications-->
+              </div>
+              <!--/items-->
+            </div>
           </div>
+          <!--/col-->
         </div>
       </div>
     </header>
-  <!--/header-->
+    <!--/header-->
     <!--boxSidebarMain-->
     <div class="boxSidebarMain">
       <!--sidebar-->
@@ -230,7 +255,7 @@
               <img [src]="user.image" />
             </div>
           </div>
-          <div class="row boxConsulta mt-4" *ngIf="user.role === 'patient'" style="display:none">
+          <div class="row boxConsulta mt-4" *ngIf="user.role === 'patient'" style="display: none;">
             <div class="col text-center">
               <button class="btn btn-secondary align-self-center">
                 <svg
@@ -302,7 +327,7 @@
                     />
                   </svg>
                 </div>
-               <i class="text">Mi agenda</i>
+                <i class="text">Mi agenda</i>
               </a>
               <a class="nav-link" routerLink="mi-disponibilidad" routerLinkActive="active">
                 <div class="icon">
@@ -372,9 +397,12 @@
 
             <!--menu paciente-->
             <ng-container *ngIf="user.role === 'patient'">
-              <a class="nav-link" routerLink="/app-paciente"
-              [routerLinkActiveOptions]="{ exact: true }"
-               routerLinkActive="active">
+              <a
+                class="nav-link"
+                routerLink="/app-paciente"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="active"
+              >
                 <div class="icon">
                   <svg
                     width="1.5em"
@@ -415,11 +443,11 @@
 
             <!--menu admin-->
             <ng-container *ngIf="user.role === 'admin'">
-              <a 
-              class="nav-link" 
-              routerLink="/app-admin" 
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
+              <a
+                class="nav-link"
+                routerLink="/app-admin"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
               >
                 <div class="icon">
                   <svg
@@ -447,37 +475,25 @@
               </a>
               <a class="nav-link" routerLink="gestion-usuarios" routerLinkActive="active">
                 <div class="icon">
-                  <svg
-                    width="1.5em"
-                    height="1.5em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-people-fill"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
-                    />
-                  </svg>
+                  <img src="assets/img/icon-users-admin.svg" />
                 </div>
                 <i class="text">Usuarios</i>
               </a>
               <a class="nav-link" routerLink="gestion-perfil" routerLinkActive="active">
                 <div class="icon">
-                  <img src="assets/img/icon-profiles-admin.svg">
+                  <img src="assets/img/icon-profiles-admin.svg" />
                 </div>
                 <i class="text">Gestión de perfiles</i>
               </a>
               <a class="nav-link" routerLink="gestion-agenda" routerLinkActive="active">
                 <div class="icon">
-                  <img src="assets/img/agenda.svg">
+                  <img src="assets/img/agenda.svg" />
                 </div>
                 <i class="text">Gestión de agenda</i>
               </a>
               <a class="nav-link" routerLink="gestion-salas" routerLinkActive="active">
                 <div class="icon">
-                  <img src="assets/img/gestion-salas.svg">
+                  <img src="assets/img/gestion-salas.svg" />
                 </div>
                 <i class="text">Gestión de salas</i>
               </a>
@@ -517,6 +533,3 @@
   <!--/wrap flexbox-->
 </div>
 <!--/container-fluid-->
-
-
-

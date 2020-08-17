@@ -1,8 +1,8 @@
-//core angular
+// core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-//components
+// components
 import { LayoutComponent } from './components/layout/layout.component';
 
 import { Consulta2Component } from '../pacientes/consulta2/consulta2.component';
@@ -72,7 +72,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes), //, { useHash: true }
+    RouterModule.forChild(routes), // , { useHash: true }
   ],
   exports: [RouterModule],
 })

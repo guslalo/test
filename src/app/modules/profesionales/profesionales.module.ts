@@ -4,7 +4,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // the main connecto
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
-//import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
+// import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@n
 //
 import { OwlModule } from 'ngx-owl-carousel';
 
-//components
+// components
 import { FichaPacienteComponent } from './modules/ficha-paciente/ficha-paciente.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routing.module';
@@ -29,7 +29,7 @@ import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crea
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
-  //interactionPlugin
+  // interactionPlugin
 ]);
 
 @NgModule({

@@ -10,23 +10,25 @@ import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@n
 // SHARED
 import { SharedModule } from '../../../../shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 
 
 @NgModule({
   declarations: [
     UsuariosComponent,
-    CrearUsuarioComponent
+    CrearUsuarioComponent,
+    EditarUsuarioComponent
   ],
   imports: [
     CommonModule,
     UsuariosRountingModule,
     SharedModule,
-    FormsModule, //aca
+    FormsModule, // aca
     ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    MatDialogModule, //aca
+    MatDialogModule, // aca
   ]
 })
 

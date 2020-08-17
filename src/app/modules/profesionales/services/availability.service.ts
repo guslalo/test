@@ -12,7 +12,7 @@ export class AvailabilityService {
 
   constructor(private http: HttpClient) {}
 
-  //getAvailability
+  // getAvailability
   getAvailability(id?: any): Observable<any> {
     if (id) {
       return this.http.get<any>(environment.baseUrl + this.availability + `/${id}`);
@@ -21,7 +21,7 @@ export class AvailabilityService {
     }
   }
 
-  //postAvailability
+  // postAvailability
   postAvailability(objective, specialty, appointmentDuration, starDate, endDate, dailyDetails): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.availability, {
       objective,
@@ -33,7 +33,7 @@ export class AvailabilityService {
     });
   }
 
-  //PÚT Availability
+  // PÚT Availability
   putAvailability(id, objective, specialty, appointmentDuration, starDate, endDate, dailyDetails): Observable<any> {
     return this.http.put<any>(environment.baseUrl + this.availability, {
       id,
@@ -46,14 +46,14 @@ export class AvailabilityService {
     });
   }
 
-  //post state Availability
+  // post state Availability
 
-  //GET availability/blocked
+  // GET availability/blocked
   getAvailabilityBlocked(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.blocked);
   }
 
-  //POST availability/blocked
+  // POST availability/blocked
   postAvailabilityBlocked(date, start, end): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.blocked, {
       date,
@@ -62,12 +62,12 @@ export class AvailabilityService {
     });
   }
 
-  //deleteAvailabilit
+  // deleteAvailabilit
   deleteAvailability(idDelete: any): Observable<any> {
     return this.http.delete<any>(environment.baseUrl + this.availability + `/${idDelete.id}`);
   }
 
-  //delete BLOCK
+  // delete BLOCK
   deleteBlock(id: any): Observable<any> {
     console.log(id);
     return this.http.delete<any>(environment.baseUrl + this.blocked + `/${id}`);

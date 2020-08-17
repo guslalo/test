@@ -1,15 +1,10 @@
-
 <div class="row">
   <div class="col mb-2">
-    <h2>Gestión de perfiles</h2>
+    <h2>Gestión de Perfiles</h2>
   </div>
   <div class="col">
-    <button
-      type="button"
-      class="btn btn-primary rounded-pill float-right"
-      routerLink="crear-perfil"
-    >
-        Crear perfil
+    <button type="button" class="btn btn-primary rounded-pill float-right" routerLink="crear-perfil">
+      Crear Perfil
       <svg
         width="1.5em"
         height="1.5em"
@@ -33,14 +28,7 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input
-          id="typeahead-basic"
-          type="text"
-          class="form-control"
-          [(ngModel)]="model"
-          [ngbTypeahead]="search"
-          placeholder="Busqueda"
-        />
+        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search" placeholder="Busqueda" />
         <div class="searchBox">
           <svg
             width="1em"
@@ -79,7 +67,6 @@
         <h5 style="display: none;">Mis consultas activas</h5>
       </div>
       <div class="col-12 mb-4">
-        
         <div class="tableBox rounded p-4 bg-white">
           <table class="table">
             <thead class="">
@@ -93,31 +80,50 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let item of profile">
+              <tr *ngFor="let profile of profiles">
                 <td scope="row">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="{{item._id}}" />
-                    <label class="custom-control-label" for="{{item._id}}">
-                      {{item.profileName}} 
+                    <input type="checkbox" class="custom-control-input" id="{{ profile._id }}" />
+                    <label class="custom-control-label" for="{{ profile._id }}">
+                      {{ profile.profileName }}
                     </label>
                   </div>
                 </td>
                 <td>
-                  {{item.role}} 
+                  <span *ngIf="profile.role === 'admin'">Administrador</span>
+                  <span *ngIf="profile.role === 'coordinator'">Coordinador</span>
+                  <span *ngIf="profile.role === 'professional'">Profesional</span>
                 </td>
-                
-                <td>Descripción</td>
-                <td>Usuarios</td>
+
+                <td>{{ profile.description || 'S/R' }}</td>
+                <td>
+                  <ul *ngIf="profile.users.length; else noUsers">
+                    <li *ngFor="let item of profile.users | slice: 0:3">{{ item }}</li>
+                    <button type="button" class="btn btn-sm btn-outline-primary mt-2" *ngIf="profile.users.length > 3">
+                      Ver Mas
+                    </button>
+                  </ul>
+                  <ng-template #noUsers>
+                    <span>Este perfil no tiene usuarios asociados</span>
+                  </ng-template>
+                </td>
                 <td>
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      ..
+                      ...
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
                       <button class="dropdown-item" type="button">
                         Eliminar
                       </button>
-                      <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        [routerLink]="['editar-perfil']"
+                        [queryParams]="{ profileId: profile.id }"
+                      >
                         Editar
                       </button>
                     </div>
@@ -132,11 +138,14 @@
     <!---->
     <div class="row">
       <div class="col-12 text-right">
-        <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
+        <ngb-pagination
+          class="float-right"
+          [collectionSize]="profiles.length"
+          [(page)]="page"
+          aria-label="Default pagination"
+        >
         </ngb-pagination>
       </div>
     </div>
   </div>
 </div>
-
-  

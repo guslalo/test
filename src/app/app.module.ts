@@ -1,20 +1,20 @@
-//core
+// core
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//modules
+// modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//routing
+// routing
 import { AppRoutingModule } from './app-routing.module';
 
 import { SharedModule } from './shared/shared.module';
-//import { SharedModule } from './shared/shared.module';
+// import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
-//components
+// components
 import { AppComponent } from './app.component';
 import { ErrorDialogService } from './modules/auth/services/error-dialog/error-dialog.service';
 
@@ -31,13 +31,13 @@ import { AngularFireDatabaseModule  } from '@angular/fire/database';
 import { AngularFireDatabase, FirebaseObjectObservable } from '@angular/fire/database-deprecated';
 
 
-import{ AngularFireMessagingModule } from'@angular/fire/messaging';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AsyncPipe } from '@angular/common';
 import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     ErrorDialogComponent
   ],
   imports: [
@@ -50,7 +50,7 @@ import { environment } from './../environments/environment';
     RouterModule,
     AngularFireModule,
     AngularFireMessagingModule,
-    //SharedModule.forRoot()
+    // SharedModule.forRoot()
     // EXTRAS
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -61,7 +61,7 @@ import { environment } from './../environments/environment';
   providers: [
     AngularFireDatabaseModule,
     ErrorDialogService,
-    MessagingService, 
+    MessagingService,
     AsyncPipe
   ],
   bootstrap: [AppComponent],

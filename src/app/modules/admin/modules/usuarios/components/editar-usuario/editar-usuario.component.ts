@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-
-// EXTRAS
-import { AdminService } from '../../../../services/admin.service';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { AdminService } from 'src/app/modules/admin/services/admin.service';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Subject, Observable } from 'rxjs';
+import { mergeMap, throwIfEmpty, map } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-crear-usuario',
-  templateUrl: './crear-usuario.component.html',
-  styleUrls: ['./crear-usuario.component.scss'],
+  selector: 'app-editar-usuario',
+  templateUrl: './editar-usuario.component.html',
+  styleUrls: ['./editar-usuario.component.scss'],
 })
-export class CrearUsuarioComponent implements OnInit {
+export class EditarUsuarioComponent implements OnInit {
+  userType = this.routerAct.snapshot.queryParamMap.get('userType');
+  userId = this.routerAct.snapshot.queryParamMap.get('userId');
+
   personalData: FormGroup;
   profileForm: FormGroup;
   waitingRoomForm: FormGroup;
@@ -30,6 +34,7 @@ export class CrearUsuarioComponent implements OnInit {
     { name: 'Coordinador', value: 'coordinator' },
     { name: 'Profesional', value: 'professional' },
   ];
+  profile: any = {};
   profiles: any = [];
   profilesAssigned: any = [];
 
@@ -47,20 +52,14 @@ export class CrearUsuarioComponent implements OnInit {
   ];
   specialitiesAssigned: any = [];
 
-  // FOR CUSTOM FORM
-  public userType = this.routerAct.snapshot.queryParamMap.get('userType');
-
   constructor(
     private location: Location,
     private routerAct: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
-    private calendar: NgbCalendar
-  ) {}
-
-  ngOnInit(): void {
-    this.getProfiles();
-
+    private calendar: NgbCalendar,
+    private cd: ChangeDetectorRef
+  ) {
     this.personalData = this.formBuilder.group({
       cpf: [null, Validators.required],
       cns: [null, Validators.required],
@@ -123,76 +122,84 @@ export class CrearUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
+  }
 
-    /*
-    this.personalData = this.formBuilder.group({
-      cpf: ['front_test', Validators.required],
-      cns: ['front_test', Validators.required],
-      passport: ['front_test', [Validators.required]],
-      rgRegistry: ['front_test', Validators.required],
-      issuingBody: ['front_test', Validators.required],
-      extraIdDocument: ['test', Validators.required],
-      idDocumentNumber: ['front_test', Validators.required],
-      name: ['front_test', Validators.required],
-      lastName: ['front_test', Validators.required],
-      socialName: ['front_test', Validators.required],
-      email: ['front_test@mail.com', [Validators.email, Validators.required]],
-      phoneNumber: ['front_test', Validators.required],
-      birthdate: ['', Validators.required],
-      ufBirth: ['front_test', Validators.required],
-      municipalityBirth: ['test', Validators.required],
-      genre: ['masculino', Validators.required],
-      nacionality: ['test', Validators.required],
-    });
-
-    this.profileForm = this.formBuilder.group({
-      role: [this.roles[0].value, Validators.required],
-      profile: [null, Validators.required],
-    });
-
-    this.waitingRoomForm = this.formBuilder.group({
-      waitingRoom: [null, Validators.required],
-    });
-
-    this.profileDataForm = this.formBuilder.group({
-      profileImg: [null],
-      biography: ['front_test', Validators.required],
-    });
-
-    this.specialitiesForm = this.formBuilder.group({
-      speciality: [null, Validators.required],
-    });
-
-    this.educationForm = this.formBuilder.group({
-      professionalTitle: ['front_test', Validators.required],
-      university: ['front_test', Validators.required],
-      course: ['front_test', Validators.required],
-      professionalRegistry: ['front_test', Validators.required],
-      registryNumber: ['test', Validators.required],
-      extraIdDocument: ['test', Validators.required],
-    });
-
-    this.passwordForm = new FormGroup(
-      {
-        password: new FormControl('Ab.123456', [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
-        ]),
-        confirmPassword: new FormControl(
-          'Ab.123456',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
-        ),
-      },
-      {
-        validators: this.confirmPass.bind(this),
-      }
-    );
-
-    */
+  ngOnInit(): void {
+    this.getUser(this.userType, this.userId);
 
     this.formUser.push(this.personalData, this.profileForm, this.educationForm, this.passwordForm);
 
     this.birthDate = this.calendar.getToday();
+  }
+
+  ngAfterContentChecked() {
+    this.cd.detectChanges();
+  }
+
+  getUser(userType, userId) {
+    const getUserAndProfiles = () => {
+      let profiles = [];
+      return this.adminService.getUserById(userType, userId).pipe(
+        map((user) => {
+          _.each(user.administrativeData, (p) => {
+            let profile;
+            profile = this.adminService.getProfileById(p.profile).pipe((data) => {
+              // console.log(data);
+              return data;
+            });
+            profiles.push(profile);
+          });
+          return { user, profiles };
+        })
+      );
+    };
+
+    getUserAndProfiles().subscribe(
+      (result) => {
+        // console.log(result);
+        const user = result.user;
+
+        // USER DATA
+        this.personalData.get('cpf').setValue(user.identificationData.cpf);
+        this.personalData.get('cns').setValue(user.identificationData.cns);
+        this.personalData.get('passport').setValue(user.identificationData.passport);
+        this.personalData.get('rgRegistry').setValue(user.identificationData.rgRegistry);
+        this.personalData.get('issuingBody').setValue(user.identificationData.issuingBody);
+        this.personalData.get('extraIdDocument').setValue(user.identificationData.extraIdDocument);
+        this.personalData.get('idDocumentNumber').setValue(user.identificationData.idDocumentNumber);
+
+        this.personalData.get('name').setValue(user.personalData.name);
+        this.personalData.get('lastName').setValue(user.personalData.lastName);
+        this.personalData.get('socialName').setValue(user.personalData.socialName);
+        this.personalData.get('email').setValue(user.personalData.email);
+        this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
+        this.personalData.get('birthdate').setValue(user.personalData.birthDate);
+        this.personalData.get('ufBirth').setValue(user.personalData.ufBirth);
+        this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth);
+        this.personalData.get('genre').setValue(user.personalData.genre);
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+
+        this.waitingRoomsAssigned = user.waitingRooms || [];
+
+        // PROFILES CRUD
+        for (const item of result.profiles) {
+          item.subscribe((p) => {
+            this.profilesAssigned.push({
+              id: p._id,
+              role: p.role,
+              name: p.profileName,
+            });
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getProfiles() {
@@ -200,7 +207,7 @@ export class CrearUsuarioComponent implements OnInit {
       (data) => {
         const role = this.profileForm.value.role;
         this.profiles = data.filter((profile) => {
-          if (profile.role !== 'patient' && role === profile.role) { return profile; }
+          if (profile.role !== 'patient' && role === profile.role) return profile;
         });
         // console.log(this.profiles);
       },
@@ -283,13 +290,13 @@ export class CrearUsuarioComponent implements OnInit {
 
   formUserValid() {
     if (this.userType !== 'professional') {
-      if (this.formUser[0].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid) {
         return true;
       } else {
         return false;
@@ -303,8 +310,8 @@ export class CrearUsuarioComponent implements OnInit {
     return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
-  createUser() {
-    console.log(this.profilesAssigned);
+  updateUser() {
+    console.log(this.waitingRoomsAssigned);
 
     const _profiles = this.profilesAssigned.map((map) => {
       return map.id;
@@ -316,7 +323,10 @@ export class CrearUsuarioComponent implements OnInit {
       return map.id;
     });
 
+    console.log(_waitingRooms);
+
     this.userObject = {
+      id: this.userId,
       identificationData: {
         cpf: this.formUser[0].value.cpf,
         cns: this.formUser[0].value.cns,
@@ -357,12 +367,11 @@ export class CrearUsuarioComponent implements OnInit {
       confirmPassword: this.formUser[3].value.confirmPassword,
     };
 
-    console.log(this.formUser[0].value.birthdate);
-
+    // console.log(this.formUser[0].value.birthdate);
     console.log(this.userObject);
 
     if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
-      this.adminService.createUser(this.userType, this.userObject).subscribe((response) => {
+      this.adminService.updateUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
         this.location.back();
       });

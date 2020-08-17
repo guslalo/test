@@ -28,7 +28,7 @@ describe('PublisherComponent', () => {
     fixture = TestBed.createComponent(PublisherComponent);
     component = fixture.componentInstance;
     component.session = jasmine.createSpyObj('OT.Session', ['on', 'publish']) as OT.Session;
-    component.session['isConnected'] = () => false;
+    component.session.isConnected = () => false;
     fixture.detectChanges();
   });
 

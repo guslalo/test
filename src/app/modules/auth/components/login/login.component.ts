@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-//import { CurrentUserService } from '../../../../services/current-user.service'
+// import { CurrentUserService } from '../../../../services/current-user.service'
 import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserLogin } from '../../../../models/models';
 
-//translate
+// translate
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private translocoService: TranslocoService,
     private spinner: NgxSpinnerService,
     private authenticationService: AuthenticationService,
-    //public currentUserService:CurrentUserService,
+    // public currentUserService:CurrentUserService,
     private UserService: UsersService,
     private router: Router
   ) {}
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.clear();
     this.spinner.hide();
-    var lenguaje = navigator.language;
-    var lenguajeCorto = lenguaje.split('-');
+    let lenguaje = navigator.language;
+    let lenguajeCorto = lenguaje.split('-');
     console.log(lenguajeCorto[0]);
     this.translocoService.setDefaultLang(lenguajeCorto[0]);
     this.setActiveLang(lenguajeCorto[0]);
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.translocoService.setActiveLang(lang);
   }
 
-  //subscribe post authentication service
+  // subscribe post authentication service
   loginUser() {
     this.spinner.show();
     this.authenticationService.loginUser(this.user.username, this.user.password).subscribe(

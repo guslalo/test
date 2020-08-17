@@ -8,7 +8,7 @@ import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPComponent implements OnInit {
-  //public userCurrent:any;
+  // public userCurrent:any;
   public userCurrent = {};
   currentRate = 4;
 

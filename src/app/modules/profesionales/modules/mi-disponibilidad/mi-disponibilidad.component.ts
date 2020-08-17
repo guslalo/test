@@ -15,13 +15,31 @@ import {
   NgbTimepicker,
 } from '@ng-bootstrap/ng-bootstrap';
 
-//carrusel
+// carrusel
 @Component({
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
   styleUrls: ['./mi-disponibilidad.component.scss'],
 })
 export class MiDisponibilidadComponent implements OnInit {
+  constructor(
+    private elementRef: ElementRef,
+    private availabilityService: AvailabilityService,
+    private _formBuilder: FormBuilder,
+    private calendario: NgbCalendar,
+    private config: NgbDatepickerConfig
+  ) {
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    };
+  }
+
+  get dailyRanges() {
+    return this.createAvailability.get('dailyRanges') as FormArray;
+  }
   public menu = [];
 
   options: any;
@@ -84,29 +102,17 @@ export class MiDisponibilidadComponent implements OnInit {
     { min: 'Neurología', value: 'Neurología' },
   ];
   minDate = undefined;
-  constructor(
-    private elementRef: ElementRef,
-    private availabilityService: AvailabilityService,
-    private _formBuilder: FormBuilder,
-    private calendario: NgbCalendar,
-    private config: NgbDatepickerConfig
-  ) {
-    const current = new Date();
-    this.minDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
-  }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    //dateClick: this.handleDateClick.bind(this), // bind is important!
+    // dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [
       { title: 'event 1', date: '2020-07-21' },
       { title: 'event 2', date: '2020-07-20' },
     ],
   };
+
+  model4: NgbDateStruct;
 
   onCheckboxChange(e) {
     const dailyDetails: FormArray = this.createAvailability.get('dailyDetails') as FormArray;
@@ -114,7 +120,7 @@ export class MiDisponibilidadComponent implements OnInit {
     if (e.target.checked) {
       dailyDetails.push(new FormControl(e.target.value));
     } else {
-      let i: number = 0;
+      let i = 0;
       dailyDetails.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           dailyDetails.removeAt(i);
@@ -131,10 +137,6 @@ export class MiDisponibilidadComponent implements OnInit {
     }, 200);
   }
 
-  get dailyRanges() {
-    return this.createAvailability.get('dailyRanges') as FormArray;
-  }
-
   ngOnInit(): void {
     this.getAvailability();
     this.getAvailabilityBlocked();
@@ -143,9 +145,9 @@ export class MiDisponibilidadComponent implements OnInit {
     this.createAvailability = this._formBuilder.group({
       objective: [null],
       specialty: [null],
-      appointmentDuration: [null], //[Validators.required, Validators.minLength(2)]
+      appointmentDuration: [null], // [Validators.required, Validators.minLength(2)]
       starDate: [null, [Validators.required]], // ]
-      endDate: [null, [Validators.required]], //[Validators.required, Validators.minLength(2)]
+      endDate: [null, [Validators.required]], // [Validators.required, Validators.minLength(2)]
       dailyDetails: this._formBuilder.array([], [Validators.required]),
       /*horaStart:[null, [Validators.required, Validators.minLength(2)]],
       horaEnd:[null, [Validators.required, Validators.minLength(2)]],*/
@@ -161,7 +163,7 @@ export class MiDisponibilidadComponent implements OnInit {
     this.agregardailyRanges();
   }
 
-  //controls reactivos
+  // controls reactivos
   agregardailyRanges() {
     const dailyRangeFormGroup = this._formBuilder.group({
       start: ['', [Validators.required]],
@@ -257,7 +259,7 @@ export class MiDisponibilidadComponent implements OnInit {
   putAvailability2(id) {
     console.log(this.createAvailability);
     const formObject = {
-      id: id,
+      id,
       objective: this.createAvailability.controls.objective.value,
       specialty: this.createAvailability.controls.specialty.value,
       appointmentDuration: this.createAvailability.controls.appointmentDuration.value,
@@ -293,7 +295,7 @@ export class MiDisponibilidadComponent implements OnInit {
     }
   }
 
-  //deleteBlock
+  // deleteBlock
   deleteBlock(id) {
     console.log(id);
     this.availabilityService.deleteBlock(id).subscribe(
@@ -306,8 +308,6 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     );
   }
-
-  model4: NgbDateStruct;
   putAvailability(id) {
     this.idAvailability = id;
     this.availabilityService.getAvailability(id).subscribe(
@@ -324,19 +324,20 @@ export class MiDisponibilidadComponent implements OnInit {
           month: this.idAvailability.endDate.month,
           day: this.idAvailability.endDate.day,
         };
-        let arrayDias = [];
-        let arraydays = [];
-        let arrayDaystotal = [];
-        //console.log(this.days2);
+        const arrayDias = [];
+        const arraydays = [];
+        const arrayDaystotal = [];
+        // console.log(this.days2);
 
-        for (let item2 of this.days2) {
-          //console.log(item2);
-          for (let item of this.idAvailability.dailyDetails.days) {
-            if (item)
+        for (const item2 of this.days2) {
+          // console.log(item2);
+          for (const item of this.idAvailability.dailyDetails.days) {
+            if (item) {
               if (item === item2) {
-                var item3 = item2 + '2';
-                //console.log(item3)
+                const item3 = item2 + '2';
+                // console.log(item3)
               }
+            }
           }
         }
         console.log(arrayDias);
@@ -349,7 +350,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   deleteAvailability(id) {
     const formObject = {
-      id: id,
+      id,
     };
     console.log(formObject);
     this.availabilityService.deleteAvailability(formObject).subscribe(

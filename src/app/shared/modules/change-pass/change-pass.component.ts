@@ -8,10 +8,12 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
   styleUrls: ['./change-pass.component.scss'],
 })
 export class ChangePassComponent implements OnInit {
-  public model: any = {};
-  public changePassForm: FormGroup;
 
   constructor(private authenticationService: AuthenticationService) {}
+  public model: any = {};
+  public changePassForm: FormGroup;
+  public passwordNotMatchs: boolean;
+  public errorPassCurrent: boolean;
 
   ngOnInit(): void {
     this.changePassForm = new FormGroup(
@@ -31,7 +33,6 @@ export class ChangePassComponent implements OnInit {
       }
     );
   }
-  public passwordNotMatchs: boolean;
   confirmPass(formGroup: FormGroup) {
     const { value: newPassword } = formGroup.get('newPassword');
     const { value: confirmPassword } = formGroup.get('confirmPassword');
@@ -40,7 +41,6 @@ export class ChangePassComponent implements OnInit {
     }
     return newPassword === confirmPassword ? null : { passwordNotMatch: true };
   }
-  public errorPassCurrent: boolean;
   changePass() {
     this.authenticationService
       .changePassword(this.changePassForm.value.password, this.changePassForm.value.confirmPassword)

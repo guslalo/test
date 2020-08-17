@@ -7,33 +7,33 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PieChartsComponent implements OnInit {
-  //single: any[];
+  // single: any[];
   view: any[] = ['400%', 'auto'];
   single = [
     {
-      "name": "Germany",
-      "value": 8940000
+      name: 'Germany',
+      value: 8940000
     },
     {
-      "name": "USA",
-      "value": 5000000
+      name: 'USA',
+      value: 5000000
     },
     {
-      "name": "France",
-      "value": 7200000
+      name: 'France',
+      value: 7200000
     },
       {
-      "name": "UK",
-      "value": 6200000
+      name: 'UK',
+      value: 6200000
     }
   ];
 
   // options
-  gradient: boolean = false;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
-  legendPosition: string = 'below';
+  gradient = false;
+  showLegend = true;
+  showLabels = true;
+  isDoughnut = false;
+  legendPosition = 'below';
 
   colorScheme = {
     domain: ['#3976ea', '#6fbfa7', '#7f62c4', '#7aa3e5', '#a8385d', '#aae3f5']
