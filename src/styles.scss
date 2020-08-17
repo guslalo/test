@@ -13,6 +13,16 @@ body {
   background: #f2f2f2;
 }
 .boxHorarios {
+  a {
+    margin:0px 0px 10px 10px;
+  }
+  a:focus {
+    span {
+      background-color: $color-hover;
+      color: #ffffff;
+    }
+  }
+   
   .badge {
     padding: 10px 20px;
     border: 1px solid #497DF9;
@@ -20,6 +30,7 @@ body {
     font-size: 13px;
     background: #ffffff;
     margin:0px 0px 10px 10px;
+   
     &:first-child {
       margin:0px 0px 0px 0px;
     }
