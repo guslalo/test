@@ -22,27 +22,25 @@ export class AvailabilityService {
   }
 
   // postAvailability
-  postAvailability(objective, specialty, appointmentDuration, starDate, endDate, dailyDetails): Observable<any> {
+  postAvailability(administrativeDetails, professionalDetails, dateDetails): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.availability, {
-      objective,
-      specialty,
-      appointmentDuration,
-      starDate,
-      endDate,
-      dailyDetails,
+      administrativeDetails,
+      professionalDetails,
+      dateDetails
     });
   }
 
   // PÚT Availability
-  putAvailability(id, objective, specialty, appointmentDuration, starDate, endDate, dailyDetails): Observable<any> {
+  putAvailability( 
+    id,
+    administrativeDetails,
+    professionalDetails,
+    dateDetails): Observable<any> {
     return this.http.put<any>(environment.baseUrl + this.availability, {
       id,
-      objective,
-      specialty,
-      appointmentDuration,
-      starDate,
-      endDate,
-      dailyDetails,
+      administrativeDetails,
+      professionalDetails,
+      dateDetails
     });
   }
 

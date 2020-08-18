@@ -10,6 +10,8 @@ export class AppointmentsService {
   private appointments = 'v1/appointments';
   private doctors = 'v1/doctors';
   private session = '/session';
+  private reserve = '/reserve'
+  private consolidate = '/consolidate'
 
   constructor(private http: HttpClient) {}
 
@@ -54,4 +56,16 @@ export class AppointmentsService {
     };
     return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { appointmentId });
   }
+
+  //reservar cita
+  postReserve(reserve): Observable<any> {
+   return this.http.post<any>(environment.baseUrl + this.appointments + this.reserve, reserve );
+  }
+
+  //consolidate appointments
+  postConsolidate(consolidate): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate );
+  }
+
+
 }

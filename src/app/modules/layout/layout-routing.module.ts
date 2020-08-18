@@ -13,6 +13,7 @@ import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
 import { AdminGuard } from '../../guards/admin.guard';
+import { CoordinatorGuard } from '../../guards/coordinator.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
@@ -57,6 +58,18 @@ const routes: Routes = [
       },
       { path: 'perfil', component: PerfilComponent },
       { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] },
+    ],
+  },
+  {
+    path: 'app-coordinator',
+    component: LayoutComponent,
+    canActivate: [GuardsGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('../coordinator/coordinator.module').then((m) => m.CoordinatorModule),
+        canActivate: [CoordinatorGuard],
+      },
     ],
   },
   {

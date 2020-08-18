@@ -48,10 +48,22 @@
                     <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
                         <form>
                             <div class="form-group">
-                                <label class="font-weight-bold text-left  w-100">Selecciona Especialidad</label>
-                                <select class="form-control custom-select" *ngFor="let item of specialties">
+                                <label class="font-weight-bold text-left  w-100">Selecciona Tipo de profesional</label>
+                                <select class="form-control custom-select"  (change)="onChangeTypeProfesional($event.target.value)">
                                     <option selected>Selecciona</option>
-                                    <option value="{{item._id}}">{{item.specialtyName}}</option>
+                                    <ng-container *ngFor="let item of medicalSpecialties">
+                                        <option value="{{item._id}}">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold text-left  w-100">Selecciona Especialidad</label>
+                                <select class="form-control custom-select" (change)="onChangeTypeSpecialtiesId($event.target.value)">
+                                    <option selected>Selecciona</option>
+                                    <ng-container *ngFor="let item of specialtiesId">
+                                        <option value="{{item._id}}">{{item.specialtyName}}</option>
+                                    </ng-container>
                                 </select>
                             </div>
                         </form>
@@ -122,7 +134,7 @@
         <ng-container *ngFor="let item of blocks">
             <div class="row mb-4" >
                 <div class="col">
-                    <div class="card-deck boxDisponibilidad">
+                    <div class="card-deck boxDisponibilidad" id="{{item.professionalDetails.userId}}">
                         <div class="card bg-light p-3">
                             <div class="row">
                                 <div class="col-6">
@@ -151,14 +163,14 @@
                                 </div>
                             </div>
                             <div class="row mt-4">
-                                <div class="col-1 pr-0 text-center">
+                                <div class="col-1 pr-0 text-center" style="display: none;">
                                     AM
                                 </div>
                                 <div class="col-11">
                                     <div class="boxHorarios"><!-- *ngFor="let item of blocks.lenght"-->
-                                        <ng-container *ngFor="let item of item.blocks">
-                                            <a href="javascript:;" (click)="blockSelected()"><span class="badge badge-pill badge-light"
-                                           >{{item}}</span></a>
+                                        <ng-container *ngFor="let item2 of item.blocks">
+                                            <a href="javascript:;" (click)="blockSelected(item, item2)"><span class="badge badge-pill badge-light"
+                                           >{{item2}}</span></a>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -178,7 +190,7 @@
                         </div>
                     </div>  
                 </div>
-            </div>
+            </div>            
         </ng-container><!--/blocks disponibles-->
     </div>
     
@@ -199,10 +211,10 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
-                                    <select class="form-control custom-select w-100"  (change)="onChange($event.target.value)">
+                                    <select class="form-control custom-select w-100"  (change)="onChange($event.target)">
                                         <option selected>Seleccione síntoma</option>
                                         <ng-container *ngFor="let item of symptoms">
-                                            <option value="{{item.name}}"
+                                            <option value="{{item._id}}"
                                             >{{item.name}}</option>
                                         </ng-container>
                                     </select>
@@ -228,23 +240,23 @@
                                     </svg>
                                     </div>
                                     <p class="text-right">
-                                    {{item}}
-                                    <svg
-                                        width="1em"
-                                        height="1em"
-                                        viewBox="0 0 16 16"
-                                        class="bi bi-trash"
-                                        fill="currentColor"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                                        />
-                                        <path
-                                        fill-rule="evenodd"
-                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                                        />
-                                    </svg>
+                                        {{item}}
+                                        <svg
+                                            width="1em"
+                                            height="1em"
+                                            viewBox="0 0 16 16"
+                                            class="bi bi-trash"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                                            />
+                                            <path
+                                            fill-rule="evenodd"
+                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                                            />
+                                        </svg>
                                     </p>
                                 </div>
                             </ng-container>
@@ -254,7 +266,7 @@
                         <div class="col">
                             <div class="form-group w-100">
                                 <label for="exampleInputEmail1">Describa Cómo se siente (opcional)</label>
-                                <textarea class="form-control" rows="5"></textarea>
+                                <textarea class="form-control" rows="5" [(ngModel)]="descripcionSintoma" [ngModelOptions]="{standalone: true}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -303,13 +315,18 @@
                         </div>
                         <div class="col-10 align-items-center">
                             <div class="box mr-3">
-                                <p class="m-0 font-weight-bold">DR. GUILLERMO FAUNDEZ </p>
-                                <p class="m-0">Especialidad Neurolgía</p>
+                                <p class="m-0 font-weight-bold">
+                                    {{blocks[0].professionalDetails.userDetails[0].name}} 
+                                    {{blocks[0].professionalDetails.userDetails[0].lastName}} 
+                                </p>
+                                <p class="m-0">Especialidad {{blocks[0].professionalDetails.userDetails[0].lastName}} </p>
                             </div>  
 
                             <div class="box boxSeparador pl-3">
                                 <p class="m-0 valor">VALOR CONSULTA: $32.000</p>
-                                <p class="m-0">27 julio 2020 | 8:00 AM</p>
+                                <p class="m-0">{{reserve.dateDetails.date.day}}-
+                                    {{reserve.dateDetails.date.month}}-{{reserve.dateDetails.date.year}} | 
+                                    {{reserve.dateDetails.start}}</p>
                             </div>
                         </div>
                     </div>
@@ -321,7 +338,7 @@
                         class="btn btn-outline-primary rounded-pill mr-3"> Volver</button>
                         <button 
                         type="button" data-dismiss="modal" 
-                        class="btn btn-primary rounded-pill " routerLink="resultado"> Pagar y agendar</button>
+                        class="btn btn-primary rounded-pill " (click)="agendar()"> Pagar y agendar</button>
                     </div>
                 </div>
             </div>

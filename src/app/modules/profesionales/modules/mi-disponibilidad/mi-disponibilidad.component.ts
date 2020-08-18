@@ -143,15 +143,28 @@ export class MiDisponibilidadComponent implements OnInit {
     this.calendar = false;
 
     this.createAvailability = this._formBuilder.group({
+      
       objective: [null],
+      appointmentDuration: [null], 
       specialty: [null],
-      appointmentDuration: [null], // [Validators.required, Validators.minLength(2)]
-      starDate: [null, [Validators.required]], // ]
-      endDate: [null, [Validators.required]], // [Validators.required, Validators.minLength(2)]
+      endDate: [null, [Validators.required]], 
+      starDate: [null, [Validators.required]],
       dailyDetails: this._formBuilder.array([], [Validators.required]),
-      /*horaStart:[null, [Validators.required, Validators.minLength(2)]],
-      horaEnd:[null, [Validators.required, Validators.minLength(2)]],*/
-      dailyRanges: this._formBuilder.array([]),
+      dailyRanges: this._formBuilder.array([])
+
+      /*/*
+      administrativeDetails: {
+        objective: this.createAvailability.controls.dailyDetails.value,
+        appointmentDuration: this.createAvailability.controls.dailyRanges.value,
+      },
+      professionalDetails:{
+        specialtyId: this.createAvailability.controls.specialty.value
+      },
+      dateDetails : {
+        endDate:this.createAvailability.controls.endDate.value,
+        days: this.createAvailability.controls.dailyDetails.value,
+        dailyRange: this.createAvailability.controls.dailyRanges.value
+      }*/
     });
 
     this.availabilityBlocked = this._formBuilder.group({
@@ -176,7 +189,7 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
         console.log(data);
-        this.disponibilidad = data;
+        this.disponibilidad = data.payload;
       },
       (error) => {
         console.log(error);
@@ -199,27 +212,30 @@ export class MiDisponibilidadComponent implements OnInit {
   crearAvailability() {
     console.log(this.createAvailability);
     const formObject = {
-      objective: this.createAvailability.controls.objective.value,
-      specialty: this.createAvailability.controls.specialty.value,
-      appointmentDuration: this.createAvailability.controls.appointmentDuration.value,
-      startDate: this.createAvailability.controls.endDate.value,
-      endDate: this.createAvailability.controls.endDate.value,
-      dailyDetails: {
+
+      administrativeDetails: {
+        objective: this.createAvailability.controls.objective.value,
+        appointmentDuration: +this.createAvailability.controls.appointmentDuration.value
+      },
+      professionalDetails:{
+        specialtyId:  this.createAvailability.controls.specialty.value,
+      },
+      dateDetails : {
+        startDate:this.createAvailability.controls.endDate.value,
+        endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
-      },
+      }
+     
     };
     console.log(formObject);
 
     if (formObject) {
       this.availabilityService
         .postAvailability(
-          formObject.objective,
-          formObject.specialty,
-          formObject.appointmentDuration,
-          formObject.startDate,
-          formObject.endDate,
-          formObject.dailyDetails
+          formObject.administrativeDetails,
+          formObject.professionalDetails,
+          formObject.dateDetails
         )
         .subscribe(
           (data) => {
@@ -260,15 +276,19 @@ export class MiDisponibilidadComponent implements OnInit {
     console.log(this.createAvailability);
     const formObject = {
       id,
-      objective: this.createAvailability.controls.objective.value,
-      specialty: this.createAvailability.controls.specialty.value,
-      appointmentDuration: this.createAvailability.controls.appointmentDuration.value,
-      startDate: this.createAvailability.controls.endDate.value,
-      endDate: this.createAvailability.controls.endDate.value,
-      dailyDetails: {
+      administrativeDetails: {
+        objective: this.createAvailability.controls.objective.value,
+        appointmentDuration: +this.createAvailability.controls.appointmentDuration.value
+      },
+      professionalDetails:{
+        specialtyId:  this.createAvailability.controls.specialty.value,
+      },
+      dateDetails : {
+        startDate:this.createAvailability.controls.endDate.value,
+        endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
-      },
+      }
     };
     console.log(formObject);
 
@@ -276,12 +296,9 @@ export class MiDisponibilidadComponent implements OnInit {
       this.availabilityService
         .putAvailability(
           formObject.id,
-          formObject.objective,
-          formObject.specialty,
-          formObject.appointmentDuration,
-          formObject.startDate,
-          formObject.endDate,
-          formObject.dailyDetails
+          formObject.administrativeDetails,
+          formObject.professionalDetails,
+          formObject.dateDetails
         )
         .subscribe(
           (data) => {
@@ -308,21 +325,22 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     );
   }
+  
   putAvailability(id) {
     this.idAvailability = id;
     this.availabilityService.getAvailability(id).subscribe(
       (data) => {
-        this.idAvailability = data[0];
+        this.idAvailability = data.payload[0];
         console.log(this.idAvailability);
         this.model2 = {
-          year: this.idAvailability.startDate.year,
-          month: this.idAvailability.startDate.month,
-          day: this.idAvailability.startDate.day,
+          year: this.idAvailability.dateDetails.startDate.year,
+          month: this.idAvailability.dateDetails.startDate.month,
+          day: this.idAvailability.dateDetails.startDate.day,
         };
         this.model4 = {
-          year: this.idAvailability.endDate.year,
-          month: this.idAvailability.endDate.month,
-          day: this.idAvailability.endDate.day,
+          year: this.idAvailability.dateDetails.endDate.year,
+          month: this.idAvailability.dateDetails.endDate.month,
+          day: this.idAvailability.dateDetails.endDate.day,
         };
         const arrayDias = [];
         const arraydays = [];
