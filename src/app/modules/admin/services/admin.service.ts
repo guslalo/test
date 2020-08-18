@@ -37,7 +37,7 @@ export class AdminService {
       confirmPassword: userObject.confirmPassword,
       profiles: userObject.profiles,
       /* PATIENT ONLY */
-      isTutor: userObject.isTutor,
+      isTutor: userObject.isTutor || false,
       /* PATIENT ONLY */
     });
   }

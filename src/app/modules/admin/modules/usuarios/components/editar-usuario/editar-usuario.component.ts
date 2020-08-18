@@ -223,7 +223,7 @@ export class EditarUsuarioComponent implements OnInit {
       alert(`El rol ${form.role} ya esta asignado al usuario`);
     } else {
       this.profilesAssigned.push({
-        id: form.profile._id,
+        id: form.profile.id,
         role: form.role,
         name: form.profile.profileName,
       });

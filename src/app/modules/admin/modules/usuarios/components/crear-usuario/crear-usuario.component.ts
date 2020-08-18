@@ -200,7 +200,9 @@ export class CrearUsuarioComponent implements OnInit {
       (data) => {
         const role = this.profileForm.value.role;
         this.profiles = data.filter((profile) => {
-          if (profile.role !== 'patient' && role === profile.role) { return profile; }
+          if (profile.role !== 'patient' && role === profile.role) {
+            return profile;
+          }
         });
         // console.log(this.profiles);
       },
@@ -211,12 +213,11 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   addProfile(form) {
-    // console.log(form);
     if (this.profilesAssigned.some((profile) => profile.role === form.role)) {
       alert(`El rol ${form.role} ya esta asignado al usuario`);
     } else {
       this.profilesAssigned.push({
-        id: form.profile._id,
+        id: form.profile.id,
         role: form.role,
         name: form.profile.profileName,
       });

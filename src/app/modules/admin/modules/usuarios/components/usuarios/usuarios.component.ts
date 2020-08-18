@@ -1,12 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
-
-const states = ['1', '2', '3'];
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { FileSaver } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 declare var $;
 
@@ -21,19 +19,13 @@ export class UsuariosComponent implements OnInit {
   @ViewChild('patientModal') patientModal: ElementRef;
   patientForm: FormGroup;
 
-  @ViewChild('table') set datatable(table: DatatableComponent) {
-    table.columnMode = ColumnMode.flex;
-  }
-
-  users = [];
-  temp = [];
-  profiles = [];
+  users: any[] = [];
+  temp: any[] = [];
   selected = [];
+  profiles: any[] = [];
+  profileSelected: string = null;
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
-
-  page = 1;
-  pageSize = 7;
 
   isEdit: boolean = false;
   emailSent: boolean = false;
@@ -57,11 +49,13 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
-    this.getUsers('patients');
-    this.getProfiles();
+    this.getUsers('admins');
+    this.getProfiles('admin');
   }
 
   getUsers(role) {
+    this.users = [];
+    this.selected = [];
     this.adminService.getUsers(role).subscribe(
       (data) => {
         // console.log(data);
@@ -74,11 +68,11 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  getProfiles() {
+  getProfiles(userType) {
     this.adminService.getProfiles().subscribe(
       (data) => {
         this.profiles = data.filter((profile) => {
-          if (profile.role !== 'patient') {
+          if (profile.role === userType) {
             return profile;
           }
         });
@@ -90,10 +84,14 @@ export class UsuariosComponent implements OnInit {
   }
 
   changeTab(userType: string) {
+    this.users = [];
+    this.selected = [];
     this.adminService.getUsers(userType).subscribe(
       (data) => {
         // console.log(data);
+        this.temp = [...data.reverse()];
         this.users = data.reverse();
+        this.getProfiles(userType.slice(0, -1));
       },
       (error) => {
         console.log(error);
@@ -182,12 +180,12 @@ export class UsuariosComponent implements OnInit {
   search(event) {
     const val = event.target.value.toLowerCase();
     // console.log(val);
-    const temp = this.temp.filter(function (d) {
+    const temp = this.temp.filter(function (u) {
       return (
-        d.nationalId.toLowerCase().indexOf(val) !== -1 ||
-        d.fullName.toLowerCase().indexOf(val) !== -1 ||
-        d.email.toLowerCase().indexOf(val) !== -1 ||
-        d.phone.toLowerCase().indexOf(val) !== -1 ||
+        u.nationalId.toLowerCase().indexOf(val) !== -1 ||
+        u.fullName.toLowerCase().indexOf(val) !== -1 ||
+        u.email.toLowerCase().indexOf(val) !== -1 ||
+        u.phone.toLowerCase().indexOf(val) !== -1 ||
         !val
       );
     });
@@ -195,6 +193,24 @@ export class UsuariosComponent implements OnInit {
   }
 
   filterByProfile() {
-    // console.log(val)
+    let value = this.profileSelected;
+
+    const temp = this.temp.filter(function (u) {
+      if (value) {
+        if (u.profiles.includes(value)) {
+          return u;
+        }
+      } else {
+        return u;
+      }
+    });
+    this.users = temp;
+  }
+
+  exportAsExcelFile() {
+    const workBook = XLSX.utils.book_new(); // create a new blank book
+    const workSheet = XLSX.utils.json_to_sheet(this.selected);
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'data'); // add the worksheet to the book
+    XLSX.writeFile(workBook, 'usuarios_planilla.xlsx'); // initiate a file download in browser
   }
 }

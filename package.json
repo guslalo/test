@@ -36,6 +36,7 @@
     "angular-password-strength-meter": "^2.0.0",
     "angular-vertical-timeline": "^0.6.0",
     "bootstrap": "^4.4.0",
+    "file-saver": "^2.0.2",
     "firebase": "^7.17.2",
     "ngx-owl-carousel": "^2.0.7",
     "ngx-spinner": "^9.0.2",
@@ -43,6 +44,7 @@
     "rxjs": "~6.5.4",
     "save": "^2.4.0",
     "tslib": "^1.10.0",
+    "xlsx": "^0.16.6",
     "zone.js": "~0.10.2",
     "zxcvbn": "^4.4.2"
   },
