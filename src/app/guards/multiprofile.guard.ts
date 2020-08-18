@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard implements CanActivate {
+export class MultiProfileGuard implements CanActivate {
   constructor(private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (JSON.parse(localStorage.getItem('currentUser')).administrativeData[0].role === 'admin') {
+    if (JSON.parse(localStorage.getItem('currentUser')).internalCode === 6) {
       return true;
     } else {
       this.router.navigate(['/'], {

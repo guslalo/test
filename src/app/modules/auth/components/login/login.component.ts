@@ -67,18 +67,31 @@ export class LoginComponent implements OnInit {
         console.log(this.currentUser);
 
         switch (this.currentUser.administrativeData[0].role) {
-          case 'professional':
-            if (data.internalCode === 5) {
-              this.router.navigate(['app-professional']);
-            } else {
+          case 'admin':
+            if (data.internalCode === 6) {
               this.router.navigate(['context']);
+            } else {
+              this.router.navigate(['app-admin']);
+            }
+            break;
+          case 'coordinator':
+            // MULTIPROFILE
+            if (data.internalCode === 6) {
+              this.router.navigate(['context']);
+            } else {
+              this.router.navigate(['app-coordinator']);
+            }
+            break;
+          case 'professional':
+            if (data.internalCode === 6) {
+              this.router.navigate(['context']);
+            } else {
+              this.router.navigate(['app-professional']);
             }
             break;
           case 'patient':
             this.router.navigate(['app-paciente']);
             break;
-          /* default:
-            console.log();*/
         }
         this.spinner.hide();
       },
@@ -88,5 +101,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }

@@ -4,10 +4,10 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
-import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { MultiProfileGuard } from 'src/app/guards/multiprofile.guard';
 
 const recovery = 'recovery-password';
 
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'context',
     component: ChooseContextComponent,
-    canActivate: [ProfesionalGuard],
+    canActivate: [MultiProfileGuard],
   },
   {
     path: 'confirm-account/:id',
