@@ -1,10 +1,10 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { NgbDateStruct, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
 
 const states = ['1', '2', '3'];
 
@@ -21,9 +21,20 @@ export class UsuariosComponent implements OnInit {
   @ViewChild('patientModal') patientModal: ElementRef;
   patientForm: FormGroup;
 
+  @ViewChild('table') set datatable(table: DatatableComponent) {
+    table.columnMode = ColumnMode.flex;
+  }
+
+  users = [];
+  temp = [];
+  profiles = [];
+  selected = [];
+  ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+
   page = 1;
   pageSize = 7;
-  users: any = [];
+
   isEdit: boolean = false;
   emailSent: boolean = false;
 
@@ -46,23 +57,31 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
-    this.getUsers('admins');
+    this.getUsers('patients');
+    this.getProfiles();
   }
-
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
-      )
-    )
 
   getUsers(role) {
     this.adminService.getUsers(role).subscribe(
       (data) => {
         // console.log(data);
+        this.temp = [...data.reverse()];
         this.users = data.reverse();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getProfiles() {
+    this.adminService.getProfiles().subscribe(
+      (data) => {
+        this.profiles = data.filter((profile) => {
+          if (profile.role !== 'patient') {
+            return profile;
+          }
+        });
       },
       (error) => {
         console.log(error);
@@ -152,5 +171,30 @@ export class UsuariosComponent implements OnInit {
     this.adminService.sendInvitationEmail(this.userId).subscribe(() => {
       this.emailSent = true;
     });
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  search(event) {
+    const val = event.target.value.toLowerCase();
+    // console.log(val);
+    const temp = this.temp.filter(function (d) {
+      return (
+        d.nationalId.toLowerCase().indexOf(val) !== -1 ||
+        d.fullName.toLowerCase().indexOf(val) !== -1 ||
+        d.email.toLowerCase().indexOf(val) !== -1 ||
+        d.phone.toLowerCase().indexOf(val) !== -1 ||
+        !val
+      );
+    });
+    this.users = temp;
+  }
+
+  filterByProfile() {
+    // console.log(val)
   }
 }

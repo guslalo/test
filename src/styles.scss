@@ -14,7 +14,7 @@ body {
 }
 .boxHorarios {
   a {
-    margin:0px 0px 10px 10px;
+    margin: 0px 0px 10px 10px;
   }
   a:focus {
     span {
@@ -22,17 +22,16 @@ body {
       color: #ffffff;
     }
   }
-   
+
   .badge {
     padding: 10px 20px;
-    border: 1px solid #497DF9;
+    border: 1px solid #497df9;
     font-weight: bold;
     font-size: 13px;
     background: #ffffff;
-    margin:0px 0px 10px 10px;
-   
+    margin: 0px 0px 10px 10px;
     &:first-child {
-      margin:0px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
     }
     &:hover {
       background-color: $color-hover;
@@ -48,16 +47,15 @@ body {
   width: 100%;
   height: 100px;
   background: #ffffff;
-  z-index:0;
+  z-index: 0;
 }
 
 p {
   &.valor {
-    color: #497DF9;
+    color: #497df9;
     font-weight: bold;
   }
 }
-
 
 ul {
   &.simple-list {
@@ -401,7 +399,7 @@ p {
   margin: 0 auto;
 }
 
-.ngb-dp-arrow{
+.ngb-dp-arrow {
   margin-top: -8px !important;
 }
 .ngb-dp-arrow:first-child button {
@@ -414,19 +412,18 @@ p {
   border-bottom: none;
 }
 .boxTabSecondary {
-  ul  {
+  ul {
     li {
-      border-color:#969696;
+      border-color: #969696;
       a {
         border-radius: 0px !important;
       }
-   
     }
   }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: #fff;
-    background-color:$color-hover!important;
+    background-color: $color-hover !important;
     border-bottom: none;
   }
 }
@@ -455,13 +452,9 @@ table {
   border: none;
 }
 
-
-
-
 .nav-tabs {
   .secondary {
-    .active { 
-     
+    .active {
     }
   }
   a {
@@ -577,7 +570,6 @@ h4 a {
   }
 }
 
-
 .dateregister {
   .dropdown-menu.show {
     display: block;
@@ -590,8 +582,7 @@ h4 a {
   right: 0px;
 }
 
-
-.bgAzul2{
+.bgAzul2 {
   background: $color-primary3;
   color: #ffffff;
 }
@@ -601,11 +592,11 @@ h4 a {
 }
 .btn-outline-white {
   border-color: white;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .boxItems {
-  padding-left:250px;
+  padding-left: 250px;
   .box {
     display: inline-block;
   }
@@ -613,4 +604,75 @@ h4 a {
 
 .boxSeparador {
   border-left: 1px solid #666666;
+}
+
+// DATATABLES
+
+.ngx-datatable.material {
+  box-shadow: none !important;
+  width: 100% !important;
+  display: block !important;
+
+  .datatable-header {
+    height: unset !important;
+
+    .datatable-header-cell {
+      color: #212429 !important;
+      padding: 0px 20px 20px 20px !important;
+      vertical-align: middle !important;
+      border-bottom: 5px #3bc4ca solid;
+      font-size: 16px !important;
+      font-weight: bold !important;
+      user-select: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+  }
+
+  .datatable-body {
+    .datatable-body-row {
+      border-top: 1px solid #d1d4d7;
+      .datatable-body-cell {
+        text-align: left;
+        vertical-align: middle !important;
+      }
+    }
+  }
+
+  .datatable-footer {
+    .datatable-pager {
+      display: inline-block !important;
+      ul {
+        margin-top: 20px;
+        li {
+          &:not(.disabled) {
+            &.active {
+              a {
+                color: #fff;
+                background-color: #0066ff;
+              }
+              &:hover {
+                a {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+        a {
+          height: 40px !important;
+          font-size: 16px !important;
+          color: black;
+          float: left;
+          padding: 8px 16px !important;
+          margin: 0px !important;
+          text-decoration: none;
+          border: 1px solid #ddd;
+          background-color: #fff;
+        }
+      }
+    }
+  }
 }

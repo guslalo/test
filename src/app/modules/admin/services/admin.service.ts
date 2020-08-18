@@ -72,7 +72,7 @@ export class AdminService {
   }
 
   sendInvitationEmail(userId) {
-    console.log(userId);
+    // console.log(userId);
     return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/sendInvitation`, { userId: userId });
   }
 

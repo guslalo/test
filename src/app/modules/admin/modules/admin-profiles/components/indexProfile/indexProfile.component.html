@@ -28,7 +28,7 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search" placeholder="Busqueda" />
+        <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" (keyup)="search($event)" />
         <div class="searchBox">
           <svg
             width="1em"
@@ -82,12 +82,7 @@
             <tbody>
               <tr *ngFor="let profile of profiles">
                 <td scope="row">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="{{ profile._id }}" />
-                    <label class="custom-control-label" for="{{ profile._id }}">
-                      {{ profile.profileName }}
-                    </label>
-                  </div>
+                  {{ profile.profileName }}
                 </td>
                 <td>
                   <span *ngIf="profile.role === 'admin'">Administrador</span>
@@ -97,25 +92,39 @@
 
                 <td>{{ profile.description || 'S/R' }}</td>
                 <td>
-                  <ul *ngIf="profile.users.length; else noUsers">
-                    <li *ngFor="let item of profile.users | slice: 0:3">{{ item }}</li>
-                    <button type="button" class="btn btn-sm btn-outline-primary mt-2" *ngIf="profile.users.length > 3">
-                      Ver Mas
+                  <div *ngIf="profile.users.length; else noUsers">
+                    <button
+                      class="btn btn-sm btn-outline-primary rounded-pill"
+                      [routerLink]="['../../gestion-usuarios']"
+                      [queryParams]="{ profile: profile.id }"
+                    >
+                      Ver Usuarios
                     </button>
-                  </ul>
+                  </div>
                   <ng-template #noUsers>
-                    <span>Este perfil no tiene usuarios asociados</span>
+                    <span class="text-secondary">Este perfil no tiene <b>usuarios</b> asociados</span>
                   </ng-template>
                 </td>
                 <td>
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      ...
+                      <button class="btn btn-light btn-sm rounded-pill">
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
+                        </svg>
+                      </button>
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">
-                        Eliminar
-                      </button>
                       <button
                         data-toggle="modal"
                         data-target="#editar"

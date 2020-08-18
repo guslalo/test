@@ -9,27 +9,25 @@ import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@n
 
 // SHARED
 import { SharedModule } from '../../../../shared/shared.module';
-import { MatDialogModule } from '@angular/material/dialog';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 
+// EXTRAS
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
-  declarations: [
-    UsuariosComponent,
-    CrearUsuarioComponent,
-    EditarUsuarioComponent
-  ],
+  declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent],
   imports: [
     CommonModule,
     UsuariosRountingModule,
     SharedModule,
-    FormsModule, // aca
+    FormsModule,
     ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    MatDialogModule, // aca
-  ]
+    MatDialogModule,
+    NgxDatatableModule,
+  ],
 })
-
-export class UsuariosModule { }
+export class UsuariosModule {}

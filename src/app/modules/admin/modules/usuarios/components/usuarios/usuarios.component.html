@@ -106,17 +106,11 @@
       </li>
     </ul>
     <div class="tab-content pt-3" id="tab-content">
-      <div class="tab-pane fade show active" id="admins" role="tabpanel">
+      <div class="tab-pane fade show" id="admins" role="tabpanel">
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input
-              id="typeahead-basic"
-              type="text"
-              class="form-control"
-              [ngbTypeahead]="search"
-              placeholder="Busqueda"
-            />
+            <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
             <div class="searchBox">
               <svg
                 width="1em"
@@ -140,11 +134,10 @@
           <div class="col-12 col-md-3">
             <div class="form-group">
               <select class="form-control" id="exampleFormControlSelect1">
-                <option>Filtrar por</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                <option [ngValue]="profile" *ngFor="let profile of profiles">
+                  {{ profile.role }} - {{ profile.profileName }}
+                </option>
               </select>
             </div>
           </div>
@@ -177,119 +170,154 @@
             </button>
           </div>
         </div>
-        <!-- USERS TABLE -->
+        <!-- ADMINS TABLE -->
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <table class="table">
-                <thead class="">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                    <td scope="row">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                        <label class="custom-control-label" for="customCheck1">
-                          {{ user.nationalId }}
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <a>
-                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{ user.fullName }}
-                      </a>
-                    </td>
-                    <td>
-                      {{ user.email }}
-                    </td>
-                    <td>{{ user.phone }}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-sm rounded-pill"
-                        [ngClass]="{
-                          'btn-primary': user.status === 'Activo',
-                          'btn-secondary ': user.status === 'Pendiente',
-                          'btn-light ': user.status === 'Deshabilitado'
-                        }"
-                      >
-                        {{ user.status }}
+              <ngx-datatable
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [limit]="7"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
+                <!-- MULTISELECT -->
+                <ngx-datatable-column [sortable]="false" [draggable]="false" [resizeable]="false">
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="all"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                      <label class="custom-control-label" for="all"></label>
+                    </div>
+                  </ng-template>
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="check-{{ row.id }}"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                      <label class="custom-control-label" for="check-{{ row.id }}"></label>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  prop="nationalId"
+                  name="ID"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.fullName }}
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  name="Correo"
+                ></ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  name="Telefono"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
+                        'btn-primary': row.status === 'Activo',
+                        'btn-secondary ': row.status === 'Pendiente',
+                        'btn-light ': row.status === 'Deshabilitado'
+                      }"
+                    >
+                      {{ row.status }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                      <button class="btn btn-light btn-sm rounded-pill">
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
+                        </svg>
                       </button>
-                    </td>
-                    <td>
-                      <div class="btn-group">
-                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                          <svg
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-three-dots"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'admins', userId: user.id }"
-                          >
-                            Editar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
-                            [disabled]="user.status !== 'Activo'"
-                          >
-                            Eliminar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
-                          >
-                            Enviar Invitacion a Correo
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        (click)="openPatientModal('update', row.id)"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#disableUserModal"
+                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        [disabled]="row.status !== 'Activo'"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#sendInvitationModal"
+                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                      >
+                        Enviar Invitacion a Correo
+                      </button>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
             </div>
-          </div>
-        </div>
-        <!-- PAGINATION -->
-        <div class="row">
-          <div class="col-12 text-right">
-            <ngb-pagination
-              class="float-right"
-              [collectionSize]="users.length"
-              [(page)]="page"
-              aria-label="Default pagination"
-            >
-            </ngb-pagination>
           </div>
         </div>
       </div>
@@ -297,13 +325,7 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input
-              id="typeahead-basic"
-              type="text"
-              class="form-control"
-              [ngbTypeahead]="search"
-              placeholder="Busqueda"
-            />
+            <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
             <div class="searchBox">
               <svg
                 width="1em"
@@ -364,121 +386,150 @@
             </button>
           </div>
         </div>
-        <!-- USERS TABLE -->
+        <!-- PROFESSIONALS TABLE -->
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <table class="table">
-                <thead class="">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                    <td scope="row">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                        <label class="custom-control-label" for="customCheck1">
-                          {{ user.nationalId }}
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <a>
-                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{ user.fullName }}
-                      </a>
-                    </td>
-                    <td>
-                      {{ user.email }}
-                    </td>
-                    <td>{{ user.phone }}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-sm rounded-pill"
-                        [ngClass]="{
-                          'btn-primary': user.status === 'Activo',
-                          'btn-secondary ': user.status === 'Pendiente',
-                          'btn-light ': user.status === 'Deshabilitado'
-                        }"
-                      >
-                        {{ user.status }}
+              <ngx-datatable
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="7"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
+                <!-- MULTISELECT -->
+                <ngx-datatable-column [sortable]="false" [draggable]="false" [resizeable]="false">
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="all"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                      <label class="custom-control-label" for="all"></label>
+                    </div>
+                  </ng-template>
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="check-{{ row.id }}"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                      <label class="custom-control-label" for="check-{{ row.id }}"></label>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="nationalId" name="ID"></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.fullName }}
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  name="Correo"
+                ></ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  name="Telefono"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
+                        'btn-primary': row.status === 'Activo',
+                        'btn-secondary ': row.status === 'Pendiente',
+                        'btn-light ': row.status === 'Deshabilitado'
+                      }"
+                    >
+                      {{ row.status }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                      <button class="btn btn-light btn-sm rounded-pill">
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
+                        </svg>
                       </button>
-                    </td>
-                    <td>
-                      <div class="btn-group">
-                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                          <svg
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-three-dots"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <button
-                            data-toggle="modal"
-                            data-target="#editar"
-                            class="dropdown-item"
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'professionals', userId: user.id }"
-                          >
-                            Editar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
-                            [disabled]="user.status !== 'Activo'"
-                          >
-                            Eliminar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
-                          >
-                            Enviar Invitacion a Correo
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        (click)="openPatientModal('update', row.id)"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#disableUserModal"
+                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        [disabled]="row.status !== 'Activo'"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#sendInvitationModal"
+                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                      >
+                        Enviar Invitacion a Correo
+                      </button>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
             </div>
-          </div>
-        </div>
-        <!-- PAGINATION -->
-        <div class="row">
-          <div class="col-12 text-right">
-            <ngb-pagination
-              class="float-right"
-              [collectionSize]="users.length"
-              [(page)]="page"
-              aria-label="Default pagination"
-            >
-            </ngb-pagination>
           </div>
         </div>
       </div>
@@ -486,13 +537,7 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input
-              id="typeahead-basic"
-              type="text"
-              class="form-control"
-              [ngbTypeahead]="search"
-              placeholder="Busqueda"
-            />
+            <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
             <div class="searchBox">
               <svg
                 width="1em"
@@ -553,125 +598,165 @@
             </button>
           </div>
         </div>
-        <!-- USERS TABLE -->
+        <!-- COORDINATORS TABLE -->
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <table class="table">
-                <thead class="">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                    <td scope="row">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                        <label class="custom-control-label" for="customCheck1">
-                          {{ user.nationalId }}
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <a>
-                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{ user.fullName }}
-                      </a>
-                    </td>
-                    <td>
-                      {{ user.email }}
-                    </td>
-                    <td>{{ user.phone }}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-sm rounded-pill"
-                        [ngClass]="{
-                          'btn-primary': user.status === 'Activo',
-                          'btn-secondary ': user.status === 'Pendiente',
-                          'btn-light ': user.status === 'Deshabilitado'
-                        }"
-                      >
-                        {{ user.status }}
+              <ngx-datatable
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="7"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
+                <!-- MULTISELECT -->
+                <ngx-datatable-column
+                  [width]="30"
+                  [sortable]="false"
+                  [canAutoResize]="false"
+                  [draggable]="false"
+                  [resizeable]="false"
+                >
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="all"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                      <label class="custom-control-label" for="all"></label>
+                    </div>
+                  </ng-template>
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="check-{{ row.id }}"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                      <label class="custom-control-label" for="check-{{ row.id }}"></label>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  prop="nationalId"
+                  name="ID"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.fullName }}
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  name="Correo"
+                ></ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  name="Telefono"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
+                        'btn-primary': row.status === 'Activo',
+                        'btn-secondary ': row.status === 'Pendiente',
+                        'btn-light ': row.status === 'Deshabilitado'
+                      }"
+                    >
+                      {{ row.status }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                      <button class="btn btn-light btn-sm rounded-pill">
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
+                        </svg>
                       </button>
-                    </td>
-                    <td>
-                      <div class="btn-group">
-                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                          <svg
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-three-dots"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <button
-                            data-toggle="modal"
-                            data-target="#editar"
-                            class="dropdown-item"
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'coordinators', userId: user.id }"
-                          >
-                            Editar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
-                            [disabled]="user.status !== 'Activo'"
-                          >
-                            Eliminar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
-                          >
-                            Enviar Invitacion a Correo
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        (click)="openPatientModal('update', row.id)"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#disableUserModal"
+                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        [disabled]="row.status !== 'Activo'"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#sendInvitationModal"
+                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                      >
+                        Enviar Invitacion a Correo
+                      </button>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
             </div>
           </div>
         </div>
-        <!-- PAGINATION -->
-        <div class="row">
-          <div class="col-12 text-right">
-            <ngb-pagination
-              class="float-right"
-              [collectionSize]="users.length"
-              [(page)]="page"
-              aria-label="Default pagination"
-            >
-            </ngb-pagination>
-          </div>
-        </div>
       </div>
-      <div class="tab-pane fade show" id="patients" role="tabpanel">
+      <div class="tab-pane fade show active" id="patients" role="tabpanel">
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
@@ -679,8 +764,8 @@
               id="typeahead-basic"
               type="text"
               class="form-control"
-              [ngbTypeahead]="search"
               placeholder="Busqueda"
+              (keyup)="search($event)"
             />
             <div class="searchBox">
               <svg
@@ -704,12 +789,11 @@
           </div>
           <div class="col-12 col-md-3">
             <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>Filtrar por</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select class="form-control" id="exampleFormControlSelect1" (change)="filterByProfile()">
+                <option [ngValue]="null" [disabled]="true">Filtro por Perfil</option>
+                <option [ngValue]="profile" *ngFor="let profile of profiles">
+                  {{ profile.role }} - {{ profile.profileName }}
+                </option>
               </select>
             </div>
           </div>
@@ -743,120 +827,161 @@
             </button>
           </div>
         </div>
-        <!-- USERS TABLE -->
-        <div class="row mt-1">
-          <div class="col-12 mb-4">
-            <div class="tableBox rounded p-4 bg-white">
-              <table class="table">
-                <thead class="">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr *ngFor="let user of users | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                    <td scope="row">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                        <label class="custom-control-label" for="customCheck1">
-                          {{ user.nationalId }}
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <a>
-                        <img id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{ user.fullName }}
-                      </a>
-                    </td>
-                    <td>
-                      {{ user.email }}
-                    </td>
-                    <td>{{ user.phone }}</td>
-                    <td>
-                      <button
-                        type="button"
-                        class="btn btn-sm rounded-pill"
-                        [ngClass]="{
-                          'btn-primary': user.status === 'Activo',
-                          'btn-secondary ': user.status === 'Pendiente',
-                          'btn-light ': user.status === 'Deshabilitado'
-                        }"
-                      >
-                        {{ user.status }}
-                      </button>
-                    </td>
-                    <td>
-                      <div class="btn-group">
-                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                          <svg
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-three-dots"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <button
-                            data-toggle="modal"
-                            data-target="#editar"
-                            class="dropdown-item"
-                            type="button"
-                            (click)="openPatientModal('update', user.id)"
-                          >
-                            Editar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, user.id)"
-                            [disabled]="user.status !== 'Activo'"
-                          >
-                            Eliminar
-                          </button>
-                          <button
-                            class="dropdown-item"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, user.id)"
-                          >
-                            Enviar Invitacion a Correo
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- PAGINATION -->
+        <!-- PATIENTS TABLE -->
         <div class="row">
-          <div class="col-12 text-right">
-            <ngb-pagination
-              class="float-right"
-              [collectionSize]="users.length"
-              [(page)]="page"
-              aria-label="Default pagination"
-            >
-            </ngb-pagination>
+          <div class="col-12">
+            <div class="tableBox rounded p-4 bg-white">
+              <ngx-datatable
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="7"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
+                <!-- MULTISELECT -->
+                <ngx-datatable-column
+                  [width]="30"
+                  [sortable]="false"
+                  [canAutoResize]="false"
+                  [draggable]="false"
+                  [resizeable]="false"
+                >
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="all"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                      <label class="custom-control-label" for="all"></label>
+                    </div>
+                  </ng-template>
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        id="check-{{ row.id }}"
+                        class="custom-control-input"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                      <label class="custom-control-label" for="check-{{ row.id }}"></label>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  prop="nationalId"
+                  name="ID"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.fullName }}
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  name="Correo"
+                ></ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  name="Telefono"
+                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
+                        'btn-primary': row.status === 'Activo',
+                        'btn-secondary ': row.status === 'Pendiente',
+                        'btn-light ': row.status === 'Deshabilitado'
+                      }"
+                    >
+                      {{ row.status }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                      <button class="btn btn-light btn-sm rounded-pill">
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editar"
+                        class="dropdown-item"
+                        type="button"
+                        (click)="openPatientModal('update', row.id)"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#disableUserModal"
+                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        [disabled]="row.status !== 'Activo'"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        class="dropdown-item"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#sendInvitationModal"
+                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                      >
+                        Enviar Invitacion a Correo
+                      </button>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
           </div>
         </div>
       </div>
