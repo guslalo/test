@@ -1,10 +1,12 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { FileSaver } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { ActivatedRoute } from '@angular/router';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $;
 
@@ -14,7 +16,8 @@ declare var $;
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  tab = 'admins';
+  role = this.routerAct.snapshot.queryParamMap.get('role');
+  profile = this.routerAct.snapshot.queryParamMap.get('profile');
 
   @ViewChild('patientModal') patientModal: ElementRef;
   patientForm: FormGroup;
@@ -23,6 +26,7 @@ export class UsuariosComponent implements OnInit {
   temp: any[] = [];
   selected = [];
   profiles: any[] = [];
+  searchTerm: string = '';
   profileSelected: string = null;
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
@@ -34,11 +38,15 @@ export class UsuariosComponent implements OnInit {
   patientId: string;
   patientObject: any = {};
 
-  constructor(private formBuilder: FormBuilder, public adminService: AdminService, private modalService: NgbModal) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private routerAct: ActivatedRoute,
+    public adminService: AdminService,
+    private modalService: NgbModal,
+    private el: Renderer2
+  ) {}
 
   ngOnInit(): void {
-    // this.user = JSON.parse(localStorage.getItem('currentUser'));
-    // console.log(this.UserLogin);
     this.patientForm = this.formBuilder.group({
       isTutor: [true],
       name: ['', Validators.required],
@@ -49,8 +57,43 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
-    this.getUsers('admins');
-    this.getProfiles('admin');
+    if (this.role && this.profile) {
+      this.profileSelected = this.profile;
+      switch (this.role) {
+        case 'admin':
+          const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+          this.el.removeClass(tab_adm, 'active');
+          this.el.addClass(tab_adm, 'active');
+          this.getUsers('admins');
+          this.getProfiles('admin');
+          break;
+
+        case 'coordinator':
+          const tab_coor = <HTMLInputElement>document.querySelector('#coordinator-tab');
+          this.el.removeClass(tab_coor, 'active');
+          this.el.addClass(tab_coor, 'active');
+          this.getUsers('coordinators');
+          this.getProfiles('coordinator');
+          break;
+
+        case 'professional':
+          const tab_pro = <HTMLInputElement>document.querySelector('#professional-tab');
+          this.el.removeClass(tab_pro, 'active');
+          this.el.addClass(tab_pro, 'active');
+          this.getUsers('professionals');
+          this.getProfiles('professional');
+          break;
+      }
+
+      setTimeout(() => {
+        this.applyFilters();
+      }, 500);
+    } else {
+      const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+      this.el.addClass(tab_adm, 'active');
+      this.getUsers('admins');
+      this.getProfiles('admin');
+    }
   }
 
   getUsers(role) {
@@ -177,40 +220,53 @@ export class UsuariosComponent implements OnInit {
     this.selected.push(...selected);
   }
 
-  search(event) {
-    const val = event.target.value.toLowerCase();
-    // console.log(val);
-    const temp = this.temp.filter(function (u) {
-      return (
-        u.nationalId.toLowerCase().indexOf(val) !== -1 ||
-        u.fullName.toLowerCase().indexOf(val) !== -1 ||
-        u.email.toLowerCase().indexOf(val) !== -1 ||
-        u.phone.toLowerCase().indexOf(val) !== -1 ||
-        !val
-      );
-    });
-    this.users = temp;
-  }
+  applyFilters() {
+    const profile = this.profileSelected;
+    const searchTerm = this.searchTerm.toLowerCase();
 
-  filterByProfile() {
-    let value = this.profileSelected;
-
-    const temp = this.temp.filter(function (u) {
-      if (value) {
-        if (u.profiles.includes(value)) {
-          return u;
+    const temp = this.temp
+      // PROFILE FILTER
+      .filter((user) => {
+        if (profile) {
+          if (user.profiles.includes(profile)) {
+            return user;
+          }
+        } else {
+          return user;
         }
-      } else {
-        return u;
-      }
-    });
+      })
+      // SEARCH FILTER
+      .filter((user) => {
+        return (
+          user.nationalId.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.fullName.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.email.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.phone.toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+
     this.users = temp;
   }
 
   exportAsExcelFile() {
-    const workBook = XLSX.utils.book_new(); // create a new blank book
-    const workSheet = XLSX.utils.json_to_sheet(this.selected);
-    XLSX.utils.book_append_sheet(workBook, workSheet, 'data'); // add the worksheet to the book
-    XLSX.writeFile(workBook, 'usuarios_planilla.xlsx'); // initiate a file download in browser
+    // FORMAT DATA
+    const xlsx_users = this.selected.map((user) => ({
+      ID: user.nationalId,
+      Nombre: user.fullName,
+      Correo: user.email,
+      Telefono: user.phone,
+      Estado: user.status,
+    }));
+    const workBook = XLSX.utils.book_new();
+    workBook.SheetNames.push('export_1');
+    const workSheet = XLSX.utils.json_to_sheet(xlsx_users);
+    // SET COLUMNS SIZE
+    var wscols = [{ wch: 10 }, { wch: 25 }, { wch: 25 }, { wch: 15 }, { wch: 10 }];
+    workSheet['!cols'] = wscols;
+    workBook.Sheets['export_1'] = workSheet;
+    // CREATE AND DOWNLOAD DOCUMENT
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'data');
+    XLSX.writeFile(workBook, 'usuarios_planilla.xlsx');
   }
 }
