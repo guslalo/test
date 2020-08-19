@@ -609,13 +609,11 @@ h4 a {
 // DATATABLES
 
 .ngx-datatable.material {
+  transform-style: preserve-3d !important;
   box-shadow: none !important;
   width: 100% !important;
-  display: block !important;
 
   .datatable-header {
-    height: unset !important;
-
     .datatable-header-cell {
       color: #212429 !important;
       padding: 0px 20px 20px 20px !important;
@@ -632,6 +630,9 @@ h4 a {
   }
 
   .datatable-body {
+    max-height: 720px;
+    overflow-y: auto;
+    overflow-x: hidden;
     .datatable-body-row {
       border-top: 1px solid #d1d4d7;
       .datatable-body-cell {
@@ -675,4 +676,20 @@ h4 a {
       }
     }
   }
+}
+
+button.custom-btn-1 {
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #0066ff;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0px;
+}
+button.custom-btn-1:hover {
+  background-color: #ddd;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }

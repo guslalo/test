@@ -66,14 +66,14 @@ export class AdminService {
     return this.http.put<any>(`${environment.baseUrl}${this.userEndpoint}/${role}`, userObject);
   }
 
-  deactivateUser(userId) {
+  changeUserStatus(userId, status) {
     // console.log(userId);
-    return this.http.delete<any>(`${environment.baseUrl}${this.userEndpoint}/${userId}`);
+    return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/${userId}/?status=${status}`, {});
   }
 
-  sendInvitationEmail(userId) {
+  sendInvitationEmail(usersIds) {
     // console.log(userId);
-    return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/sendInvitation`, { userId: userId });
+    return this.http.patch<any>(`${environment.baseUrl}${this.userEndpoint}/sendInvitation`, { users: usersIds });
   }
 
   createProfile(profileObject): Observable<any> {

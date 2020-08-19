@@ -28,35 +28,24 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" (keyup)="search($event)" />
+        <input
+          [(ngModel)]="searchTerm"
+          type="text"
+          class="form-control"
+          placeholder="Busqueda"
+          (keyup)="applyFilters()"
+        />
         <div class="searchBox">
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-search"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-            />
-          </svg>
+          <img src="assets/icons/icon-search.svg" />
         </div>
       </div>
       <div class="col-12 col-md-3">
         <div class="form-group">
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>Filtrar por</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select [(ngModel)]="roleSelected" class="form-control" (change)="applyFilters()">
+            <option [ngValue]="null">Filtro por Rol</option>
+            <option [ngValue]="'admin'">Administrador</option>
+            <option [ngValue]="'coordinator'">Coordinador</option>
+            <option [ngValue]="'professional'">Profesional</option>
           </select>
         </div>
       </div>

@@ -84,7 +84,7 @@
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
-          id="patients-tab"
+          id="patient-tab"
           data-toggle="tab"
           href="#patients"
           role="tab"
@@ -112,40 +112,18 @@
           <div class="col-12 col-md-3">
             <input
               [(ngModel)]="searchTerm"
-              id="typeahead-basic"
               type="text"
               class="form-control"
               placeholder="Busqueda"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
-              </svg>
+              <img src="assets/icons/icon-search.svg" />
             </div>
           </div>
           <div class="col-12 col-md-3">
             <div class="form-group">
-              <select
-                [(ngModel)]="profileSelected"
-                class="form-control"
-                id="exampleFormControlSelect1"
-                (change)="applyFilters()"
-              >
+              <select [(ngModel)]="profileSelected" class="form-control" (change)="applyFilters()">
                 <option [ngValue]="null">Filtro por Perfil</option>
                 <option [ngValue]="profile.id" *ngFor="let profile of profiles">
                   {{ profile.role }} - {{ profile.profileName }}
@@ -153,7 +131,17 @@
               </select>
             </div>
           </div>
-          <div class="col-12 col-md-6 float-right">
+          <div class="col-12 col-md-2">
+            <div class="form-group">
+              <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
+                <option [ngValue]="10">Registros por Página (10)</option>
+                <option [ngValue]="25">Registros por Página (25)</option>
+                <option [ngValue]="50">Registros por Página (50)</option>
+                <option [ngValue]="100">Registros por Página (100)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 float-right">
             <button
               type="button"
               class="btn btn-secondary rounded-pill float-right"
@@ -164,21 +152,7 @@
               [queryParams]="{ userType: 'admin' }"
             >
               Nuevo Administrador
-              <svg
-                width="1.5em"
-                height="1.5em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus-circle"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-              </svg>
+              <img src="assets/icons/icon-plus-circle.svg" />
             </button>
           </div>
         </div>
@@ -195,7 +169,7 @@
                 footerHeight="auto"
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
-                [limit]="7"
+                [limit]="pageSize"
                 [selected]="selected"
                 [selectionType]="SelectionType.checkbox"
                 [selectAllRowsOnPage]="true"
@@ -275,8 +249,8 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <button class="btn btn-light btn-sm rounded-pill">
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
                         <svg
                           width="1em"
                           height="1em"
@@ -291,37 +265,46 @@
                           />
                         </svg>
                       </button>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button
-                        data-toggle="modal"
-                        data-target="#editar"
-                        class="dropdown-item"
-                        type="button"
-                        [routerLink]="['editar-usuario']"
-                        [queryParams]="{ userType: 'admins', userId: row.id }"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#disableUserModal"
-                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                        [disabled]="row.status !== 'Activo'"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#sendInvitationModal"
-                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                      >
-                        Enviar Invitacion a Correo
-                      </button>
+                      <div ngbDropdownMenu>
+                        <button
+                          ngbDropdownItem
+                          data-toggle="modal"
+                          data-target="#editar"
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'admins', userId: row.id }"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Activo'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          Deshabilitar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'admins')"
+                        >
+                          Activar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          Enviar Invitacion a Correo
+                        </button>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-datatable-column>
@@ -335,41 +318,20 @@
         <div class="row mt-2">
           <div class="col-12 col-md-3">
             <input
-            [(ngModel)]="searchTerm"
-              id="typeahead-basic"
+              [(ngModel)]="searchTerm"
               type="text"
               class="form-control"
               placeholder="Busqueda"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
-              </svg>
+              <img src="assets/icons/icon-search.svg" />
             </div>
           </div>
+
           <div class="col-12 col-md-3">
             <div class="form-group">
-              <select
-                [(ngModel)]="profileSelected"
-                class="form-control"
-                id="exampleFormControlSelect1"
-                (change)="applyFilters()"
-              >
+              <select [(ngModel)]="profileSelected" class="form-control" (change)="applyFilters()">
                 <option [ngValue]="null">Filtro por Perfil</option>
                 <option [ngValue]="profile.id" *ngFor="let profile of profiles">
                   {{ profile.role }} - {{ profile.profileName }}
@@ -377,7 +339,17 @@
               </select>
             </div>
           </div>
-          <div class="col-12 col-md-6 float-right">
+          <div class="col-12 col-md-2">
+            <div class="form-group">
+              <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
+                <option [ngValue]="10">Registros por Página (10)</option>
+                <option [ngValue]="25">Registros por Página (25)</option>
+                <option [ngValue]="50">Registros por Página (50)</option>
+                <option [ngValue]="100">Registros por Página (100)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 float-right">
             <button
               type="button"
               class="btn btn-secondary rounded-pill float-right"
@@ -388,21 +360,7 @@
               [queryParams]="{ userType: 'professional' }"
             >
               Nuevo Profesional
-              <svg
-                width="1.5em"
-                height="1.5em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus-circle"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-              </svg>
+              <img src="assets/icons/icon-plus-circle.svg" />
             </button>
           </div>
         </div>
@@ -499,8 +457,8 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <button class="btn btn-light btn-sm rounded-pill">
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
                         <svg
                           width="1em"
                           height="1em"
@@ -515,37 +473,46 @@
                           />
                         </svg>
                       </button>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button
-                        data-toggle="modal"
-                        data-target="#editar"
-                        class="dropdown-item"
-                        type="button"
-                        [routerLink]="['editar-usuario']"
-                        [queryParams]="{ userType: 'professionals', userId: row.id }"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#disableUserModal"
-                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                        [disabled]="row.status !== 'Activo'"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#sendInvitationModal"
-                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                      >
-                        Enviar Invitacion a Correo
-                      </button>
+                      <div ngbDropdownMenu>
+                        <button
+                          ngbDropdownItem
+                          data-toggle="modal"
+                          data-target="#editar"
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'professionals', userId: row.id }"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Activo'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          Deshabilitar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'professionals')"
+                        >
+                          Activar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          Enviar Invitacion a Correo
+                        </button>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-datatable-column>
@@ -559,7 +526,7 @@
         <div class="row mt-2">
           <div class="col-12 col-md-3">
             <input
-            [(ngModel)]="searchTerm"
+              [(ngModel)]="searchTerm"
               id="typeahead-basic"
               type="text"
               class="form-control"
@@ -567,23 +534,7 @@
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
-              </svg>
+              <img src="assets/icons/icon-search.svg" />
             </div>
           </div>
           <div class="col-12 col-md-3">
@@ -601,7 +552,17 @@
               </select>
             </div>
           </div>
-          <div class="col-12 col-md-6 float-right">
+          <div class="col-12 col-md-2">
+            <div class="form-group">
+              <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
+                <option [ngValue]="10">Registros por Página (10)</option>
+                <option [ngValue]="25">Registros por Página (25)</option>
+                <option [ngValue]="50">Registros por Página (50)</option>
+                <option [ngValue]="100">Registros por Página (100)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 float-right">
             <button
               type="button"
               class="btn btn-secondary rounded-pill float-right"
@@ -612,21 +573,7 @@
               [queryParams]="{ userType: 'coordinator' }"
             >
               Nuevo Coordinador
-              <svg
-                width="1.5em"
-                height="1.5em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus-circle"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-              </svg>
+              <img src="assets/icons/icon-plus-circle.svg" />
             </button>
           </div>
         </div>
@@ -723,8 +670,8 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <button class="btn btn-light btn-sm rounded-pill">
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
                         <svg
                           width="1em"
                           height="1em"
@@ -739,37 +686,46 @@
                           />
                         </svg>
                       </button>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button
-                        data-toggle="modal"
-                        data-target="#editar"
-                        class="dropdown-item"
-                        type="button"
-                        [routerLink]="['editar-usuario']"
-                        [queryParams]="{ userType: 'coordinators', userId: row.id }"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#disableUserModal"
-                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                        [disabled]="row.status !== 'Activo'"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#sendInvitationModal"
-                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                      >
-                        Enviar Invitacion a Correo
-                      </button>
+                      <div ngbDropdownMenu>
+                        <button
+                          ngbDropdownItem
+                          data-toggle="modal"
+                          data-target="#editar"
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'coordinators', userId: row.id }"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Activo'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          Deshabilitar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
+                        >
+                          Activar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          Enviar Invitacion a Correo
+                        </button>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-datatable-column>
@@ -783,7 +739,7 @@
         <div class="row mt-2">
           <div class="col-12 col-md-3">
             <input
-            [(ngModel)]="searchTerm"
+              [(ngModel)]="searchTerm"
               id="typeahead-basic"
               type="text"
               class="form-control"
@@ -791,31 +747,38 @@
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
-              </svg>
+              <img src="assets/icons/icon-search.svg" />
             </div>
           </div>
-          <div class="col-12 col-md-1">
-            <button type="button" class="btn btn-light" (click)="exportAsExcelFile()" [disabled]="!selected.length">
-              <img src="assets/img/icon-export-excel.svg" />
+          <div class="col-12 col-md-2">
+            <div class="form-group">
+              <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
+                <option [ngValue]="10">Registros por Página (10)</option>
+                <option [ngValue]="25">Registros por Página (25)</option>
+                <option [ngValue]="50">Registros por Página (50)</option>
+                <option [ngValue]="100">Registros por Página (100)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-2">
+            <button
+              type="button"
+              class="btn custom-btn-1 mx-2"
+              (click)="exportAsExcelFile()"
+              [disabled]="!selected.length"
+            >
+              <img src="assets/icons/icon-export-excel.svg" />
+            </button>
+            <button
+              type="button"
+              class="btn custom-btn-1 mx-2"
+              (click)="sendInvitationEmail()"
+              [disabled]="!selected.length"
+            >
+              <img src="assets/icons/icon-email.svg" />
             </button>
           </div>
-          <div class="col-12 col-md-8 float-right">
+          <div class="col-12 col-md-5 float-right">
             <button
               type="button"
               class="btn btn-secondary rounded-pill float-right"
@@ -827,21 +790,7 @@
               (click)="openPatientModal('create')"
             >
               Nuevo Paciente
-              <svg
-                width="1.5em"
-                height="1.5em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus-circle"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-              </svg>
+              <img src="assets/icons/icon-plus-circle.svg" />
             </button>
           </div>
         </div>
@@ -938,8 +887,8 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <button class="btn btn-light btn-sm rounded-pill">
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
                         <svg
                           width="1em"
                           height="1em"
@@ -954,36 +903,45 @@
                           />
                         </svg>
                       </button>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button
-                        data-toggle="modal"
-                        data-target="#editar"
-                        class="dropdown-item"
-                        type="button"
-                        (click)="openPatientModal('update', row.id)"
-                      >
-                        Editar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#disableUserModal"
-                        (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                        [disabled]="row.status !== 'Activo'"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        class="dropdown-item"
-                        type="button"
-                        data-toggle="modal"
-                        data-target="#sendInvitationModal"
-                        (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                      >
-                        Enviar Invitacion a Correo
-                      </button>
+                      <div ngbDropdownMenu>
+                        <button
+                          ngbDropdownItem
+                          data-toggle="modal"
+                          data-target="#editar"
+                          type="button"
+                          (click)="openPatientModal('update', row.id)"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Activo'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          Deshabilitar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'patients')"
+                        >
+                          Activar
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente'"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          Enviar Invitacion a Correo
+                        </button>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-datatable-column>
@@ -1139,7 +1097,12 @@
             <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
               Cancelar
             </button>
-            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="deactivateUser()">
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="changeUserStatus(userId, 'deactivate', 'patients')"
+            >
               Confirmar
             </button>
           </div>

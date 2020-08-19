@@ -28,6 +28,7 @@ export class UsuariosComponent implements OnInit {
   profiles: any[] = [];
   searchTerm: string = '';
   profileSelected: string = null;
+  pageSize: number = 10;
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
 
@@ -103,6 +104,17 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         // console.log(data);
         this.temp = [...data.reverse()];
+        /*
+        for (var i = 0, t = 100; i < t; i++) {
+          this.users.push({
+            nationalId: 123,
+            fullName: 'test',
+            email: 'a@a.cl',
+            phone: '123',
+            status: 'Activo',
+          });
+        }
+        */
         this.users = data.reverse();
       },
       (error) => {
@@ -191,7 +203,7 @@ export class UsuariosComponent implements OnInit {
     }
     setTimeout(() => {
       this.getUsers('patients');
-    }, 1000);
+    }, 500);
   }
 
   openDeactivateUserModal(disableUserModal, userId: string) {
@@ -204,14 +216,55 @@ export class UsuariosComponent implements OnInit {
     this.modalService.open(sendInvitationModal);
   }
 
-  deactivateUser() {
-    this.adminService.deactivateUser(this.userId).subscribe();
+  changeUserStatus(userId, status, role) {
+    // console.log(userId, status, role);
+    this.adminService.changeUserStatus(userId, status).subscribe(() => {
+      switch (role) {
+        case 'admins':
+          this.getUsers('admins');
+          break;
+
+        case 'coordinators':
+          this.getUsers('coordinators');
+          break;
+
+        case 'professionals':
+          this.getUsers('professionals');
+          break;
+
+        case 'patients':
+          this.getUsers('patients');
+          break;
+      }
+    });
   }
 
   sendInvitationEmail() {
-    this.adminService.sendInvitationEmail(this.userId).subscribe(() => {
-      this.emailSent = true;
-    });
+    if (this.selected.length) {
+      const usersToInvite = this.users
+        .filter((u) => {
+          if (u.status === 'Pendiente') return u;
+        })
+        .map((u) => u.id);
+
+      const validUsers = [];
+      for (var i in usersToInvite) {
+        // MATCH ID
+        if (this.selected.map((u) => u.id).indexOf(usersToInvite[i]) !== -1) {
+          validUsers.push(usersToInvite[i]);
+        }
+      }
+
+      this.adminService.sendInvitationEmail(validUsers).subscribe(() => {
+        this.emailSent = true;
+      });
+    } else {
+      this.selected = [];
+      this.selected.push(this.userId);
+      this.adminService.sendInvitationEmail(this.selected).subscribe(() => {
+        this.emailSent = true;
+      });
+    }
   }
 
   onSelect({ selected }) {
