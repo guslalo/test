@@ -1,12 +1,12 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { NgbDateStruct, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-const states = ['1', '2', '3'];
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { FileSaver } from 'file-saver';
+import * as XLSX from 'xlsx';
+import { ActivatedRoute } from '@angular/router';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $;
 
@@ -16,14 +16,22 @@ declare var $;
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  tab = 'admins';
+  role = this.routerAct.snapshot.queryParamMap.get('role');
+  profile = this.routerAct.snapshot.queryParamMap.get('profile');
 
   @ViewChild('patientModal') patientModal: ElementRef;
   patientForm: FormGroup;
 
-  page = 1;
-  pageSize = 7;
-  users: any = [];
+  users: any[] = [];
+  temp: any[] = [];
+  selected = [];
+  profiles: any[] = [];
+  searchTerm: string = '';
+  profileSelected: string = null;
+  pageSize: number = 10;
+  ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+
   isEdit: boolean = false;
   emailSent: boolean = false;
 
@@ -31,11 +39,15 @@ export class UsuariosComponent implements OnInit {
   patientId: string;
   patientObject: any = {};
 
-  constructor(private formBuilder: FormBuilder, public adminService: AdminService, private modalService: NgbModal) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private routerAct: ActivatedRoute,
+    public adminService: AdminService,
+    private modalService: NgbModal,
+    private el: Renderer2
+  ) {}
 
   ngOnInit(): void {
-    // this.user = JSON.parse(localStorage.getItem('currentUser'));
-    // console.log(this.UserLogin);
     this.patientForm = this.formBuilder.group({
       isTutor: [true],
       name: ['', Validators.required],
@@ -46,22 +58,63 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
-    this.getUsers('admins');
+    if (this.role && this.profile) {
+      this.profileSelected = this.profile;
+      switch (this.role) {
+        case 'admin':
+          const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+          this.el.removeClass(tab_adm, 'active');
+          this.el.addClass(tab_adm, 'active');
+          this.getUsers('admins');
+          this.getProfiles('admin');
+          break;
+
+        case 'coordinator':
+          const tab_coor = <HTMLInputElement>document.querySelector('#coordinator-tab');
+          this.el.removeClass(tab_coor, 'active');
+          this.el.addClass(tab_coor, 'active');
+          this.getUsers('coordinators');
+          this.getProfiles('coordinator');
+          break;
+
+        case 'professional':
+          const tab_pro = <HTMLInputElement>document.querySelector('#professional-tab');
+          this.el.removeClass(tab_pro, 'active');
+          this.el.addClass(tab_pro, 'active');
+          this.getUsers('professionals');
+          this.getProfiles('professional');
+          break;
+      }
+
+      setTimeout(() => {
+        this.applyFilters();
+      }, 500);
+    } else {
+      const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+      this.el.addClass(tab_adm, 'active');
+      this.getUsers('admins');
+      this.getProfiles('admin');
+    }
   }
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
-      )
-    )
-
   getUsers(role) {
+    this.users = [];
+    this.selected = [];
     this.adminService.getUsers(role).subscribe(
       (data) => {
         // console.log(data);
+        this.temp = [...data.reverse()];
+        /*
+        for (var i = 0, t = 100; i < t; i++) {
+          this.users.push({
+            nationalId: 123,
+            fullName: 'test',
+            email: 'a@a.cl',
+            phone: '123',
+            status: 'Activo',
+          });
+        }
+        */
         this.users = data.reverse();
       },
       (error) => {
@@ -70,11 +123,30 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
+  getProfiles(userType) {
+    this.adminService.getProfiles().subscribe(
+      (data) => {
+        this.profiles = data.filter((profile) => {
+          if (profile.role === userType) {
+            return profile;
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   changeTab(userType: string) {
+    this.users = [];
+    this.selected = [];
     this.adminService.getUsers(userType).subscribe(
       (data) => {
         // console.log(data);
+        this.temp = [...data.reverse()];
         this.users = data.reverse();
+        this.getProfiles(userType.slice(0, -1));
       },
       (error) => {
         console.log(error);
@@ -131,7 +203,7 @@ export class UsuariosComponent implements OnInit {
     }
     setTimeout(() => {
       this.getUsers('patients');
-    }, 1000);
+    }, 500);
   }
 
   openDeactivateUserModal(disableUserModal, userId: string) {
@@ -144,13 +216,110 @@ export class UsuariosComponent implements OnInit {
     this.modalService.open(sendInvitationModal);
   }
 
-  deactivateUser() {
-    this.adminService.deactivateUser(this.userId).subscribe();
+  changeUserStatus(userId, status, role) {
+    // console.log(userId, status, role);
+    this.adminService.changeUserStatus(userId, status).subscribe(() => {
+      switch (role) {
+        case 'admins':
+          this.getUsers('admins');
+          break;
+
+        case 'coordinators':
+          this.getUsers('coordinators');
+          break;
+
+        case 'professionals':
+          this.getUsers('professionals');
+          break;
+
+        case 'patients':
+          this.getUsers('patients');
+          break;
+      }
+    });
   }
 
   sendInvitationEmail() {
-    this.adminService.sendInvitationEmail(this.userId).subscribe(() => {
-      this.emailSent = true;
-    });
+    if (this.selected.length) {
+      const usersToInvite = this.users
+        .filter((u) => {
+          if (u.status === 'Pendiente') return u;
+        })
+        .map((u) => u.id);
+
+      const validUsers = [];
+      for (var i in usersToInvite) {
+        // MATCH ID
+        if (this.selected.map((u) => u.id).indexOf(usersToInvite[i]) !== -1) {
+          validUsers.push(usersToInvite[i]);
+        }
+      }
+
+      this.adminService.sendInvitationEmail(validUsers).subscribe(() => {
+        this.emailSent = true;
+      });
+    } else {
+      this.selected = [];
+      this.selected.push(this.userId);
+      this.adminService.sendInvitationEmail(this.selected).subscribe(() => {
+        this.emailSent = true;
+      });
+    }
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  applyFilters() {
+    const profile = this.profileSelected;
+    const searchTerm = this.searchTerm.toLowerCase();
+
+    const temp = this.temp
+      // PROFILE FILTER
+      .filter((user) => {
+        if (profile) {
+          if (user.profiles.includes(profile)) {
+            return user;
+          }
+        } else {
+          return user;
+        }
+      })
+      // SEARCH FILTER
+      .filter((user) => {
+        return (
+          user.nationalId.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.fullName.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.email.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.phone.toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+
+    this.users = temp;
+  }
+
+  exportAsExcelFile() {
+    // FORMAT DATA
+    const xlsx_users = this.selected.map((user) => ({
+      ID: user.nationalId,
+      Nombre: user.fullName,
+      Correo: user.email,
+      Telefono: user.phone,
+      Estado: user.status,
+    }));
+    const workBook = XLSX.utils.book_new();
+    workBook.SheetNames.push('export_1');
+    const workSheet = XLSX.utils.json_to_sheet(xlsx_users);
+    // SET COLUMNS SIZE
+    var wscols = [{ wch: 10 }, { wch: 25 }, { wch: 25 }, { wch: 15 }, { wch: 10 }];
+    workSheet['!cols'] = wscols;
+    workBook.Sheets['export_1'] = workSheet;
+    // CREATE AND DOWNLOAD DOCUMENT
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'data');
+    XLSX.writeFile(workBook, 'usuarios_planilla.xlsx');
   }
 }

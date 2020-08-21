@@ -1,19 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-// import { AdminProfilesModule} from './modules/admin-profiles/admin-profiles.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-// import { AgendaModule } from './modules/agenda/agenda.module';
-// import { SharedModule } from './../../shared/shared.module';
+// ROUTES
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 
-import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+// EXTRAS
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 // SHARED
 import { SharedModule } from './../../shared/shared.module';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -21,16 +17,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule.forRoot(),
     CommonModule,
     AdminRoutingModule,
+    // EXTRAS
     NgxChartsModule,
-    NgbTypeaheadModule
-    // SharedModule
+    NgbTypeaheadModule,
   ],
-  exports: [
-    NgxChartsModule,
-    NgbTypeaheadModule
-    // AgendaModule
-    // SharedModule
-  ],
+  exports: [NgxChartsModule, NgbTypeaheadModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminModule {}
