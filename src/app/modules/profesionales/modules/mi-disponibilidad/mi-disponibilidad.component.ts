@@ -4,8 +4,13 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { Element } from '@angular/compiler';
 import { SharedModule } from '../../../../shared/shared.module';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
-import { AvailabilityService } from '../../services/availability.service';
+
 import { ValueTransformer } from '@angular/compiler/src/util';
+
+//services
+import { AvailabilityService } from '../../services/availability.service';
+import { ProfessionalService } from './../../../../services/professional.service';
+import { SpecialtiesService } from './../../../../services/specialties.service';
 
 import {
   NgbDateStruct,
@@ -27,7 +32,9 @@ export class MiDisponibilidadComponent implements OnInit {
     private availabilityService: AvailabilityService,
     private _formBuilder: FormBuilder,
     private calendario: NgbCalendar,
-    private config: NgbDatepickerConfig
+    private config: NgbDatepickerConfig,
+    private professionalService:ProfessionalService,
+    private specialtiesService:SpecialtiesService
   ) {
     const current = new Date();
     this.minDate = {
@@ -50,6 +57,11 @@ export class MiDisponibilidadComponent implements OnInit {
   public availabilityDays: FormGroup;
   public availabilityBlocked: FormGroup;
   idAvailability: any;
+  public specialties:string;
+  public specialtiesId:string;
+  public medicalSpecialties:any;
+  public state:any;
+
 
   timeUpdated = new Subject<string>();
 
@@ -147,6 +159,7 @@ export class MiDisponibilidadComponent implements OnInit {
       objective: [null],
       appointmentDuration: [null], 
       specialty: [null],
+      specialtyName: [null],
       endDate: [null, [Validators.required]], 
       starDate: [null, [Validators.required]],
       dailyDetails: this._formBuilder.array([], [Validators.required]),
@@ -174,6 +187,7 @@ export class MiDisponibilidadComponent implements OnInit {
     });
 
     this.agregardailyRanges();
+    this.getProfessionalSpecialties();
   }
 
   // controls reactivos
@@ -188,8 +202,9 @@ export class MiDisponibilidadComponent implements OnInit {
   getAvailability() {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
-        console.log(data);
+        
         this.disponibilidad = data.payload;
+        console.log(this.disponibilidad );
       },
       (error) => {
         console.log(error);
@@ -197,11 +212,30 @@ export class MiDisponibilidadComponent implements OnInit {
     );
   }
 
+  //GET mi especialidad
+  getProfessionalSpecialties(){
+    this.professionalService.getProfessionalSpecialties().subscribe(
+      data => {
+        this.medicalSpecialties = data.payload;
+        console.log( this.medicalSpecialties);
+        this.getSpecialtiesIdService(this.medicalSpecialties[0]._id);
+        /*
+        if(this.medicalSpecialties.lenght === 0){
+          console.log(this.medicalSpecialties[0]);
+          
+        }*/
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
   getAvailabilityBlocked() {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
         console.log(data);
-        this.diasBloqueados = data;
+        this.diasBloqueados = data; //data.payload
       },
       (error) => {
         console.log(error);
@@ -211,6 +245,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   crearAvailability() {
     console.log(this.createAvailability);
+    console.log( this.createAvailability.controls.specialty);
     const formObject = {
 
       administrativeDetails: {
@@ -219,6 +254,7 @@ export class MiDisponibilidadComponent implements OnInit {
       },
       professionalDetails:{
         specialtyId:  this.createAvailability.controls.specialty.value,
+        //specialtyName:  'test',
       },
       dateDetails : {
         startDate:this.createAvailability.controls.endDate.value,
@@ -231,6 +267,8 @@ export class MiDisponibilidadComponent implements OnInit {
     console.log(formObject);
 
     if (formObject) {
+
+     
       this.availabilityService
         .postAvailability(
           formObject.administrativeDetails,
@@ -246,7 +284,22 @@ export class MiDisponibilidadComponent implements OnInit {
             console.log(error);
           }
         );
+       /**/
     }
+  }
+
+
+  putState(item){
+    console.log(item);
+    this.availabilityService.updateState(item._id, item.administrativeDetails.isActive).subscribe(
+      (data) => {
+        console.log(data);
+        this.state = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   postAvailabilityBlocked() {
@@ -381,4 +434,19 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     );
   }
+
+  //GET sub especialidad
+  getSpecialtiesIdService(id){
+    this.specialtiesService.getSpecialtiesId(id).subscribe(
+      data => {
+        console.log(data);
+        this.specialtiesId = data.payload;
+       //this.bloquearSelect = false;
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
 }

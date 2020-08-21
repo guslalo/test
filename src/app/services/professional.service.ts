@@ -8,6 +8,7 @@ import { environment } from './../../environments/environment';
 })
 export class ProfessionalService {
   private professionals = 'v1/professionals';
+  private professionalSpecialties = 'v1/professionals/medical-specialties';
 
   constructor(private http: HttpClient) {}
 
@@ -20,4 +21,12 @@ export class ProfessionalService {
   createProfessionals(professional): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.professionals, { professional });
   }
+
+  //getProfessionals
+  getProfessionalSpecialties(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.professionalSpecialties);
+  }
+
+
+  
 }

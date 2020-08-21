@@ -130,7 +130,7 @@
                     </tbody>
                   </ng-container>
                   <tbody *ngIf="disponibilidad">
-                    <tr *ngFor="let item of disponibilidad" id="{{ item.id }}">
+                    <tr *ngFor="let item of disponibilidad" id="{{ item._id }}">
                       <td scope="row">
                         <svg
                           width="1em"
@@ -154,10 +154,12 @@
                         </ng-container>
                       </td>
                       <td><!--Hasta el -->
-                        {{item.dateDetails.startDate.day}} de {{item.dateDetails.startDate.month}}  
-                        del {{item.dateDetails.startDate.year}} - 
-                        {{item.dateDetails.endDate.day}} de {{item.dateDetails.endDate.month}}  
-                        del {{item.dateDetails.endDate.year}}
+                        {{item.dateDetails.startDate |  date: 'dd/MM/yyyy'}} 
+                        
+                        <ng-container *ngIf="item.dateDetails.endDate">
+                          - {{item.dateDetails.endDate |  date: 'dd/MM/yyyy'}}
+                        </ng-container>
+                       
                       </td>
                       <td>
                         <ng-container *ngFor="let range of item.dateDetails.dailyRanges"><!---->
@@ -165,16 +167,22 @@
                         </ng-container>
                       </td>
                       <td>{{ item.administrativeDetails.objective }}</td>
-                      <td>{{ item.professionalDetails.specialtyId }}</td>
+                      <td>
+                        <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
+                          {{ specialty.specialtyName }}
+                        </ng-container>
+                       
+                      </td>
                       <td>
                         <div class="custom-control custom-switch">
                           <input
                             type="checkbox"
                             class="custom-control-input"
-                            id="switch{{ item.id }}"
+                            id="switch{{ item._id }}"
                             [checked]="item.isActive"
+                            (click)="putState(item)"
                           />
-                          <label class="custom-control-label" for="switch{{ item.id }}"></label>
+                          <label class="custom-control-label" for="switch{{ item._id }}"></label>
                         </div>
                       </td>
                       <td>
@@ -195,7 +203,7 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" (click)="deleteAvailability(item.id)">
+                            <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
                               Eliminar
                             </button>
                             <button
@@ -203,7 +211,7 @@
                               data-target="#editar"
                               class="dropdown-item"
                               type="button"
-                              (click)="putAvailability(item.id)"
+                              (click)="putAvailability(item._id)"
                             >
                               Editar
                             </button>
@@ -250,12 +258,12 @@
                   [carouselClasses]="['owl-theme', 'sliding']"
                 >
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
-                    <div class="day text-center" id="{{ item.id }}">
+                    <div class="day text-center" id="{{ item._id }}">
                       <b>{{ item.date.day }} de {{ item.date.month }} del {{ item.date.year }}</b
                       ><br />
                       {{ item.start }} - {{ item.end }}
                       <div class="cerrar">
-                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item.id)">
+                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -331,9 +339,17 @@
             </div>
             <div class="form-group col">
               <label for="specialty">Especialidad</label>
+              <select class="form-control" id="specialty2">
+                <ng-container *ngFor="let item of medicalSpecialties">
+                  <option value="{{item._id}}">{{ item.name }}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="specialty">Sub especialidad</label>
               <select class="form-control" id="specialty" formControlName="specialty">
-                <ng-container *ngFor="let item of especialidades">
-                  <option>{{ item.value }}</option>
+                <ng-container *ngFor="let item of specialtiesId">
+                  <option value="{{item.medicalSpecialtyId}}">{{ item.specialtyName }}</option>
                 </ng-container>
               </select>
             </div>
@@ -601,7 +617,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div *ngIf="idAvailability" class="modal-body" id="idAvailability.id">
+      <div *ngIf="idAvailability" class="modal-body" id="{{idAvailability._id}}">
         <form [formGroup]="createAvailability" novalidate="">
           <div class="row">
             <div class="form-group col">
@@ -617,22 +633,27 @@
             <div class="form-group col">
               <label for="specialty">Especialidad </label>
               <select class="form-control" id="specialty" formControlName="specialty">
-                <option selected="selected" value="0">{{ idAvailability.professionalDetails.specialtyId}}</option>
-                <ng-container *ngFor="let item of especialidades">
-                  <option>{{ item.value }}</option>
+                <option selected="selected" value="0">
+                  <ng-container>
+                    <option value="" selected>
+                      {{idAvailability.professionalDetails.specialtyDetails[0].specialtyName}}</option>
+                  </ng-container>
+                </option>
+                <ng-container *ngFor="let item of specialtiesId">
+                  <option value="{{item.medicalSpecialtyId}}">{{ item.specialtyName}}</option>
                 </ng-container>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-group col">
-              <label for="endDate">Fecha inicio </label>
+              <label for="endDate">Fecha inicio actual: {{idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy'}}</label>
               <div class="input-group">
                 <input
                   class="form-control"
                   class="form-control"
                   type="text"
-                  placeholder="{{idAvailability.dateDetails.startDate.year}}-{{idAvailability.dateDetails.startDate.month}}-{{idAvailability.dateDetails.startDate.day}}"
+                  placeholder="{{idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy'}}"
                   id="starDate"
                   name="starDate"
                   formControlName="starDate"
@@ -660,7 +681,7 @@
                   class="form-control"
                   class="form-control"
                   type="text"
-                  placeholder=""
+                  placeholder="{{idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy'}}"
                   id="endDate"
                   name="endDate"
                   formControlName="endDate"
@@ -720,7 +741,7 @@
             <p class="pl-0">
               rango de horarios actual:<b
                 ><ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
-                  {{ range.start }} hrs - {{ range.end }} hrs
+                {{ range.start }} hrs - {{ range.end }} hrs
                 </ng-container></b
               >
             </p>
@@ -789,7 +810,7 @@
           type="button"
           class="btn btn-primary rounded-pill"
           data-dismiss="modal"
-          (click)="putAvailability2(idAvailability.id)"
+          (click)="putAvailability2(idAvailability._id)"
           [disabled]="!createAvailability.valid"
         >
           Editar disponibilidad
