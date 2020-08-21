@@ -134,29 +134,8 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   async getUser(userType, userId) {
-    const getUserAndProfiles = () => {
-      let profiles = [];
-      // GET USER
-      return this.adminService.getUserById(userType, userId).pipe(
-        map((user) => {
-          _.each(user.administrativeData, (p) => {
-            // GET DADA FROM PROFILES
-            let profile = this.adminService.getProfileById(p.profile).pipe((data) => {
-              // console.log(data);
-              return data;
-            });
-            profiles.push(profile);
-          });
-          return { user, profiles };
-        })
-      );
-    };
-
-    getUserAndProfiles().subscribe(
-      (result) => {
-        // console.log(result);
-        const user = result.user;
-
+    this.adminService.getUserById(userType, userId).subscribe(
+      (user) => {
         // USER DATA
         this.personalData.get('cpf').setValue(user.identificationData.cpf);
         this.personalData.get('cns').setValue(user.identificationData.cns);
@@ -188,22 +167,18 @@ export class EditarUsuarioComponent implements OnInit {
           this.getSpecialtyById(specialty);
         }
 
-        let i = 0;
         // PROFILES CRUD
-        for (const item of result.profiles) {
-          item.subscribe((p) => {
-            console.log(user.administrativeData[i].clinic);
+        for (const item of user.administrativeData) {
+          this.adminService.getProfileById(item.profile).subscribe((p) => {
             this.profilesAssigned.push({
-              clinic: user.administrativeData[i].clinic,
+              clinic: item.clinic,
               id: p._id,
               role: p.role,
               name: p.profileName,
             });
-            i++;
           });
         }
-
-        console.log(this.profilesAssigned);
+        // console.log(this.profilesAssigned);
       },
       (error) => {
         console.log(error);
