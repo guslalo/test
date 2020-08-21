@@ -14,10 +14,18 @@ export class AgendarService {
   constructor(private http: HttpClient) { }
 
   //postBlocks
-  postBlocks(date): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.blocks, {
-      date
-    });
+  postBlocks(date, specialtyId?): Observable<any> {
+    if(specialtyId) {
+      console.log(date,{specialtyId:specialtyId})
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date, specialtyId:specialtyId 
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date
+      });
+    }
+    
   }
 
 }

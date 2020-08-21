@@ -9,17 +9,31 @@ import { environment } from '../../../../environments/environment';
 export class AvailabilityService {
   private availability = 'v1/availability';
   private blocked = 'v1/blocked-day';
+  private availabilityState = 'v1/availability/state';
+
+  
 
   constructor(private http: HttpClient) {}
 
   // getAvailability
   getAvailability(id?: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('availabilityId', id);
     if (id) {
-      return this.http.get<any>(environment.baseUrl + this.availability + `/${id}`);
+      return this.http.get<any>(environment.baseUrl + this.availability,  {params: params});
     } else {
       return this.http.get<any>(environment.baseUrl + this.availability);
     }
   }
+
+  // updateState
+  updateState(id, state ): Observable<any> {
+    console.log( id, state)
+    return this.http.post<any>(environment.baseUrl + this.availabilityState, {
+      id: id, isActive: state
+    });
+  }
+
 
   // postAvailability
   postAvailability(administrativeDetails, professionalDetails, dateDetails): Observable<any> {

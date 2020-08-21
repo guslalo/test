@@ -8,6 +8,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MultiProfileGuard } from 'src/app/guards/multiprofile.guard';
+import { GuardsGuard } from '../../guards/guards.guard';
 
 const recovery = 'recovery-password';
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   {
     path: 'context',
     component: ChooseContextComponent,
-    canActivate: [MultiProfileGuard],
+    //canActivate: [GuardsGuard],
   },
   {
     path: 'confirm-account/:id',

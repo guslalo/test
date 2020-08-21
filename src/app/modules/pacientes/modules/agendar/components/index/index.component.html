@@ -49,7 +49,10 @@
                         <form>
                             <div class="form-group">
                                 <label class="font-weight-bold text-left  w-100">Selecciona Tipo de profesional</label>
-                                <select class="form-control custom-select"  (change)="onChangeTypeProfesional($event.target.value)">
+                                <select class="form-control custom-select" 
+                                (click)="bloquearSelect = true"
+                                (click)="bloquearFecha = true"
+                                 (change)="onChangeTypeProfesional($event.target.value)">
                                     <option selected>Selecciona</option>
                                     <ng-container *ngFor="let item of medicalSpecialties">
                                         <option value="{{item._id}}">{{item.name}}</option>
@@ -59,7 +62,11 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold text-left  w-100">Selecciona Especialidad</label>
-                                <select class="form-control custom-select" (change)="onChangeTypeSpecialtiesId($event.target.value)">
+                                <select class="form-control custom-select" 
+                                (change)="onChangeTypeSpecialtiesId($event.target.value)"
+                               
+                                [disabled]="bloquearSelect"
+                                >
                                     <option selected>Selecciona</option>
                                     <ng-container *ngFor="let item of specialtiesId">
                                         <option value="{{item._id}}">{{item.specialtyName}}</option>
@@ -72,7 +79,7 @@
                     <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
                         <div class="form-group">
                             <label class="font-weight-bold text-left  w-100">Selecciona Profesional</label>
-                            <select class="form-control custom-select" >
+                            <select class="form-control custom-select">
                                 <option selected>Selecciona</option>
                                 <ng-container *ngFor="let item of professional">
                                     <ng-container *ngFor="let item2 of item.personalData">
@@ -92,6 +99,7 @@
                     <div class="form-group">
                         <label class="font-weight-bold text-left w-100">Selecciona fecha</label>
                         <input
+                        [disabled]="bloquearFecha"
                         class="form-control"
                         id="birthdate"
                         [minDate]="minDate"
@@ -132,66 +140,87 @@
 
         <!--blocks disponibles *ngIf="blocks.blocks"-->
         <ng-container *ngFor="let item of blocks">
+            <ng-container  ><!--*ngIf="item !== ''; else sinProfesional-->
+                <div class="row mb-4" >
+                    <div class="col">
+                        <div class="card-deck boxDisponibilidad" id="{{item.professionalDetails.userId}}">
+                            <div class="card bg-light p-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-2 text-center">
+                                                <img src="assets/img/doctor-foto.svg">
+                                            </div>
+                                            <!--professional details-->
+                                            <div class="col-10" >
+                                                <ng-container *ngFor="let item of item.professionalDetails.userDetails">
+                                                    <p class="m-0 font-weight-bold">
+                                                        {{item.name}}
+                                                    </p>
+                                                </ng-container>
+                                                <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
+                                                <p class="m-0">
+                                                    {{item.specialtyName}}
+                                                </p>
+                                                </ng-container>
+                                            </div><!--/professional details-->
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="valor text-right">VALOR CONSULTA: {{item.appointmentPrice}}</p>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-1 pr-0 text-center" style="display: none;">
+                                        AM
+                                    </div>
+                                    <div class="col-11">
+                                        <div class="boxHorarios"><!-- *ngFor="let item of blocks.lenght"-->
+                                            <ng-container *ngFor="let item2 of item.blocks">
+                                                <a href="javascript:;" (click)="blockSelected(item, item2)"><span class="badge badge-pill badge-light"
+                                            >{{item2}}</span></a>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3" style="display: none;">
+                                    <div class="col-1 pr-0 text-center">
+                                        PM
+                                    </div>
+                                    <div class="col-11">
+                                        <div class="boxHorarios" >
+                                            <span class="badge badge-pill badge-light">8:00</span>
+                                            <span class="badge badge-pill badge-light">8:30</span>
+                                            <span class="badge badge-pill badge-light">9:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </ng-container>   
+                  
+        </ng-container><!--/blocks disponibles-->
+        <ng-container *ngIf="sinProfesionales === true">
             <div class="row mb-4" >
                 <div class="col">
-                    <div class="card-deck boxDisponibilidad" id="{{item.professionalDetails.userId}}">
+                    <div class="card-deck boxDisponibilidad">
                         <div class="card bg-light p-3">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-2 text-center">
-                                            <img src="assets/img/doctor-foto.svg">
-                                        </div>
-                                        <!--professional details-->
-                                        <div class="col-10" >
-                                            <ng-container *ngFor="let item of item.professionalDetails.userDetails">
-                                                <p class="m-0 font-weight-bold">
-                                                    {{item.name}}
-                                                </p>
-                                            </ng-container>
-                                            <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
-                                            <p class="m-0">
-                                                {{item.specialtyName}}
-                                            </p>
-                                            </ng-container>
-                                        </div><!--/professional details-->
-                                    </div>
-                                    
-                                </div>
-                                <div class="col-6">
-                                    <p class="valor text-right">VALOR CONSULTA: {{item.appointmentPrice}}</p>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-1 pr-0 text-center" style="display: none;">
-                                    AM
-                                </div>
-                                <div class="col-11">
-                                    <div class="boxHorarios"><!-- *ngFor="let item of blocks.lenght"-->
-                                        <ng-container *ngFor="let item2 of item.blocks">
-                                            <a href="javascript:;" (click)="blockSelected(item, item2)"><span class="badge badge-pill badge-light"
-                                           >{{item2}}</span></a>
-                                        </ng-container>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3" style="display: none;">
-                                <div class="col-1 pr-0 text-center">
-                                    PM
-                                </div>
-                                <div class="col-11">
-                                    <div class="boxHorarios" >
-                                        <span class="badge badge-pill badge-light">8:00</span>
-                                        <span class="badge badge-pill badge-light">8:30</span>
-                                        <span class="badge badge-pill badge-light">9:00</span>
+                                <div class="col-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        No hay profesionales disponibles
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>  
                 </div>
-            </div>            
-        </ng-container><!--/blocks disponibles-->
+            </div>
+          
+        </ng-container>  
     </div>
     
   </div>
@@ -211,11 +240,10 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
-                                    <select class="form-control custom-select w-100"  (change)="onChange($event.target)">
+                                    <select class="form-control custom-select w-100" (change)="onChange($event.target)">
                                         <option selected>Seleccione síntoma</option>
                                         <ng-container *ngFor="let item of symptoms">
-                                            <option value="{{item._id}}"
-                                            >{{item.name}}</option>
+                                            <option value="{{item._id}}">{{item.name}}</option>
                                         </ng-container>
                                     </select>
                                 </div>    
@@ -287,10 +315,13 @@
           <div class="card-body ">
               <h4 class="text-left mb-3">Documentos</h4>
                 <form>
-                    <div class="form-group">
+                    <div class="form-group"><!--(change)="fileChangeEvent($event)" -->
                         <label for="exampleInputEmail1">Subir documentos</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                            <input type="file" class="custom-file-input"
+                            accept="image/*,.pdf,.txt" 
+                            (change)="changeListener($event)"
+                            id="customFileLang" lang="es">
                             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                         </div>
                     </div>
@@ -319,7 +350,7 @@
                                     {{blocks[0].professionalDetails.userDetails[0].name}} 
                                     {{blocks[0].professionalDetails.userDetails[0].lastName}} 
                                 </p>
-                                <p class="m-0">Especialidad {{blocks[0].professionalDetails.userDetails[0].lastName}} </p>
+                                <p class="m-0">Especialidad {{blocks[0].professionalDetails.specialtyDetails[0].specialtyName}} </p>
                             </div>  
 
                             <div class="box boxSeparador pl-3">
@@ -335,7 +366,7 @@
                     <div class="float-right pr-3">
                         <button 
                         type="button" data-dismiss="modal" 
-                        class="btn btn-outline-primary rounded-pill mr-3"> Volver</button>
+                        class="btn btn-outline-primary rounded-pill mr-3" (click)="atras()"> Volver</button>
                         <button 
                         type="button" data-dismiss="modal" 
                         class="btn btn-primary rounded-pill " (click)="agendar()"> Pagar y agendar</button>
