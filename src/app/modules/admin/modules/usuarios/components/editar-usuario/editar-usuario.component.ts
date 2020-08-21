@@ -3,9 +3,9 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
+import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Subject, Observable } from 'rxjs';
-import { mergeMap, throwIfEmpty, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
@@ -14,6 +14,7 @@ import * as _ from 'lodash';
   styleUrls: ['./editar-usuario.component.scss'],
 })
 export class EditarUsuarioComponent implements OnInit {
+  clinicId: string;
   userType = this.routerAct.snapshot.queryParamMap.get('userType');
   userId = this.routerAct.snapshot.queryParamMap.get('userId');
 
@@ -45,11 +46,7 @@ export class EditarUsuarioComponent implements OnInit {
   ];
   waitingRoomsAssigned: any = [];
 
-  specialities: any = [
-    { id: '1', name: 'Especialidad 1', description: 'desc 1' },
-    { id: '2', name: 'Especialidad 2', description: 'desc 2' },
-    { id: '3', name: 'Especialidad 3', description: 'desc 3' },
-  ];
+  specialities: any = [];
   specialitiesAssigned: any = [];
 
   constructor(
@@ -58,7 +55,7 @@ export class EditarUsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private calendar: NgbCalendar,
-    private cd: ChangeDetectorRef
+    private specialtiesService: SpecialtiesService
   ) {
     this.personalData = this.formBuilder.group({
       cpf: [null, Validators.required],
@@ -126,24 +123,25 @@ export class EditarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser(this.userType, this.userId);
+    this.clinicId = localStorage.getItem('clinic');
+    console.log(this.clinicId);
 
     this.formUser.push(this.personalData, this.profileForm, this.educationForm, this.passwordForm);
 
     this.birthDate = this.calendar.getToday();
+
+    this.getSpecialties();
   }
 
-  ngAfterContentChecked() {
-    this.cd.detectChanges();
-  }
-
-  getUser(userType, userId) {
+  async getUser(userType, userId) {
     const getUserAndProfiles = () => {
       let profiles = [];
+      // GET USER
       return this.adminService.getUserById(userType, userId).pipe(
         map((user) => {
           _.each(user.administrativeData, (p) => {
-            let profile;
-            profile = this.adminService.getProfileById(p.profile).pipe((data) => {
+            // GET DADA FROM PROFILES
+            let profile = this.adminService.getProfileById(p.profile).pipe((data) => {
               // console.log(data);
               return data;
             });
@@ -184,17 +182,28 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
 
         this.waitingRoomsAssigned = user.waitingRooms || [];
+        this.specialitiesAssigned = user.specialities || [];
 
+        for (const specialty of this.specialitiesAssigned) {
+          this.getSpecialtyById(specialty);
+        }
+
+        let i = 0;
         // PROFILES CRUD
         for (const item of result.profiles) {
           item.subscribe((p) => {
+            console.log(user.administrativeData[i].clinic);
             this.profilesAssigned.push({
+              clinic: user.administrativeData[i].clinic,
               id: p._id,
               role: p.role,
               name: p.profileName,
             });
+            i++;
           });
         }
+
+        console.log(this.profilesAssigned);
       },
       (error) => {
         console.log(error);
@@ -224,10 +233,12 @@ export class EditarUsuarioComponent implements OnInit {
     } else {
       this.profilesAssigned.push({
         id: form.profile.id,
+        clinic: this.clinicId,
         role: form.role,
         name: form.profile.profileName,
       });
     }
+    // console.log(this.profilesAssigned);
     this.isProfessional();
   }
 
@@ -265,12 +276,14 @@ export class EditarUsuarioComponent implements OnInit {
 
   addSpeciality() {
     const data = this.specialitiesForm.value.speciality;
-    if (this.specialitiesAssigned.some((sp) => sp.name === data.name)) {
-      alert(`La especialidad ${data.name} ya esta asignada al usuario`);
+    console.log(data);
+
+    if (this.specialitiesAssigned.some((sp) => sp.specialtyName === data.specialtyName)) {
+      alert(`La especialidad ${data.specialtyName} ya esta asignada al usuario`);
     } else {
       this.specialitiesAssigned.push({
-        id: data.id,
-        name: data.name,
+        id: data._id,
+        specialtyName: data.specialtyName,
       });
     }
   }
@@ -314,7 +327,10 @@ export class EditarUsuarioComponent implements OnInit {
     console.log(this.waitingRoomsAssigned);
 
     const _profiles = this.profilesAssigned.map((map) => {
-      return map.id;
+      return {
+        clinic: map.clinic,
+        profile: map.id,
+      };
     });
     const _waitingRooms = this.waitingRoomsAssigned.map((map) => {
       return map.id;
@@ -378,5 +394,17 @@ export class EditarUsuarioComponent implements OnInit {
     } else {
       alert('Complete el formulario con todos los datos necesarios');
     }
+  }
+
+  getSpecialties() {
+    this.specialtiesService.getSpecialties().subscribe((data) => {
+      this.specialities = data;
+    });
+  }
+
+  getSpecialtyById(specialtyId) {
+    this.specialtiesService.getSpecialtiesId(specialtyId).subscribe((data) => {
+      console.log(data);
+    });
   }
 }
