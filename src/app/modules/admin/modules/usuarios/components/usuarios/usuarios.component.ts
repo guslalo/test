@@ -3,10 +3,8 @@ import { AdminService } from '../../../../services/admin.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
-import { FileSaver } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var $;
 
@@ -16,6 +14,7 @@ declare var $;
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
+  currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   role = this.routerAct.snapshot.queryParamMap.get('role');
   profile = this.routerAct.snapshot.queryParamMap.get('profile');
 

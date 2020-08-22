@@ -29,7 +29,6 @@ export class ChooseContextComponent implements OnInit {
   }
 
   chooseContext(clinicId) {
-    console.log(clinicId);
     this.authenticationService.accessWeb(clinicId).subscribe(
       (data) => {
         // console.log(data.access_token);
@@ -47,9 +46,11 @@ export class ChooseContextComponent implements OnInit {
 
   getRouteForClinicAndRole(clinicId) {
     const profile = this.user.administrativeData.find((profile) => {
-      if (profile.clinicProfileId === clinicId) { return profile; }
+      if (profile.clinicProfileId === clinicId) {
+        localStorage.setItem('clinic', profile.clinicId);
+        return profile;
+      }
     });
-
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -66,7 +67,7 @@ export class ChooseContextComponent implements OnInit {
     localStorage.removeItem('currentUser');
 
     localStorage.setItem('currentUser', JSON.stringify(this.user));
-    console.log(this.user );
+    console.log(this.user);
 
     switch (profile.role) {
       case 'admin':

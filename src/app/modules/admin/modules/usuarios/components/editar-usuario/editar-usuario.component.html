@@ -398,28 +398,29 @@
                     <th scope="col">Estado</th>
                   </tr>
                 </thead>
-
                 <tbody>
-                  <tr *ngFor="let profile of profilesAssigned; let i = index">
-                    <td>
-                      {{ profile.role }}
-                    </td>
-                    <td>
-                      {{ profile.name }}
-                    </td>
-                    <td>
-                      <div class="custom-control custom-switch">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id="switch{{ profile.id }}"
-                          [checked]="true"
-                          (change)="removeProfile(i)"
-                        />
-                        <label class="custom-control-label" for="switch{{ profile.id }}"></label>
-                      </div>
-                    </td>
-                  </tr>
+                  <ng-template ngFor let-profile [ngForOf]="profilesAssigned">
+                    <tr *ngIf="profile.clinic === clinicId">
+                      <td>
+                        {{ profile.role }}
+                      </td>
+                      <td>
+                        {{ profile.name }}
+                      </td>
+                      <td>
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="switch{{ profile.id }}"
+                            [checked]="true"
+                            (change)="removeProfile(profile.id)"
+                          />
+                          <label class="custom-control-label" for="switch{{ profile.id }}"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
                 </tbody>
               </table>
             </div>
@@ -550,7 +551,7 @@
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
-                        {{ speciality.name }}
+                        {{ speciality.specialtyName }}
                       </option>
                     </select>
                   </div>
@@ -569,9 +570,9 @@
                       role="alert"
                       *ngFor="let speciality of specialitiesAssigned; let i = index"
                     >
-                      <strong>{{ speciality.name }}</strong>
+                      <strong>{{ speciality.specialtyName }}</strong>
                       <button (click)="removeSpeciality(i)" type="button" class="close">
-                        <span aria-hidden="true">&times;</span>
+                        <small class="caption">Eliminar</small><span aria-hidden="true"> &times;</span>
                       </button>
                     </div>
                   </div>
