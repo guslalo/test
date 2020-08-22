@@ -277,7 +277,7 @@ export class MiDisponibilidadComponent implements OnInit {
         )
         .subscribe(
           (data) => {
-            console.log(data);
+            console.log('disponibilidad creada', data);
             this.getAvailability();
           },
           (error) => {

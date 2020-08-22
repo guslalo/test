@@ -179,7 +179,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             id="switch{{ item._id }}"
-                            [checked]="item.isActive"
+                            [checked]="item.administrativeDetails.isActive"
                             (click)="putState(item)"
                           />
                           <label class="custom-control-label" for="switch{{ item._id }}"></label>

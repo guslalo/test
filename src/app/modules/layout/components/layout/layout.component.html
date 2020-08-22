@@ -370,8 +370,8 @@
                 </div>
                 <i class="text">Historial de consultas</i>
               </a>
-              <a class="nav-link" style="display: none;" routerLink="/ficha-paciente">Ficha paciente</a> </ng-container
-            ><!--/menu profesional-->
+              <a class="nav-link" style="display: none;" routerLink="/ficha-paciente">Ficha paciente</a> 
+            </ng-container><!--/menu profesional-->
 
             <!--menu paciente-->
             <ng-container *ngIf="user.role === 'patient'">
@@ -570,3 +570,7 @@
   <!--/wrap flexbox-->
 </div>
 <!--/container-fluid-->
+
+
+<!--modal agendar-->
+<app-agendar></app-agendar><!--/ agendar-->

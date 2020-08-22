@@ -15,6 +15,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { SoporteComponent } from './soporte/soporte.component';
 import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
+import { AgendarComponent } from './components/modals/agendar/agendar.component';
 
 
 @NgModule({
@@ -27,10 +28,13 @@ import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consulta
     PerfilComponent,
     CambiarClaveComponent,
     SoporteComponent,
-    MisConsultasFilterComponent
+    MisConsultasFilterComponent,
+    AgendarComponent
   ],
   imports: [CommonModule, PacientesRoutingModule],
-  exports: [],
+  exports: [
+    AgendarComponent
+  ],
   providers: [OpentokService],
 })
 export class PacientesModule {}
