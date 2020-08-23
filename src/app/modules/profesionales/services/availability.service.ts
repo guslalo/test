@@ -91,7 +91,10 @@ export class AvailabilityService {
 
   // delete BLOCK
   deleteBlock(id: any): Observable<any> {
-    let params = this.idParams(id);
+    let params = new HttpParams();
+    params = params.append('blockedDayId', id);
+  
+ 
     console.log(id);
     return this.http.delete<any>(environment.baseUrl + this.blocked + `/`, {params: params});// `/`
   }
