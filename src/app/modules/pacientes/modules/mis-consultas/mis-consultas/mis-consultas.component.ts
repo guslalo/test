@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentsService } from '../../../services/appointments.service';
+import { AppointmentsService } from './../../../../../services/appointments.service';
+import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mis-consultas',
@@ -8,13 +9,17 @@ import { AppointmentsService } from '../../../services/appointments.service';
 })
 export class MisConsultasComponent implements OnInit {
   public consultas: any;
+   public model: any;
+
+  model2: NgbDateStruct;
 
   constructor(private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
-    this.appointmentsService.getAppointments().subscribe(
+    this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        this.consultas = data;
+        console.log(data);
+        this.consultas = data.payload;
         console.log(this.consultas);
       },
       (error) => {

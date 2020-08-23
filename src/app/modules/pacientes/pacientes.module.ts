@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 
 import { PacientesRoutingModule } from '../pacientes/pacientes-routing.module';
-import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
+
 import { ConsultaComponent } from './consulta/consulta.component';
 import { Consulta2Component } from './consulta2/consulta2.component';
 
@@ -18,12 +18,11 @@ import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consulta
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
 
 
+    //ConsultaComponent,
 @NgModule({
   declarations: [
     PublisherComponent,
     SubscriberComponent,
-    MisConsultasComponent,
-    ConsultaComponent,
     Consulta2Component,
     PerfilComponent,
     CambiarClaveComponent,

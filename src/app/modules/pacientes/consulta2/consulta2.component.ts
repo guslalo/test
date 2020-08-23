@@ -81,7 +81,7 @@ export class Consulta2Component implements OnInit {
     }
   }
   getAppointments() {
-    this.appointmentsService.getAppointments().subscribe(
+    this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         // this.consultas = data;
         console.log(data);

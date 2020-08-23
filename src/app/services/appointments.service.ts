@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 
@@ -16,15 +16,11 @@ export class AppointmentsService {
   constructor(private http: HttpClient) {}
 
   // getAppointments
-  getAppointments(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        // 'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
-        // 'Content-Type': 'application/json'
-      }),
-    };
+  getAppointments(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
 
-    return this.http.get<any>(environment.baseUrl + this.appointments, httpOptions);
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
   }
 
   // getAppointments

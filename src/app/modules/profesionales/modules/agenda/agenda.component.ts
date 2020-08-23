@@ -4,12 +4,14 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 const states = ['test', 'test3', 'test4'];
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss'],
 })
+
 export class AgendaComponent implements OnInit {
   public model: any;
 

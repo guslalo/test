@@ -16,6 +16,7 @@ export class ConsultaComponent implements OnInit {
   changeDetectorRef: ChangeDetectorRef;
   selectedId: any;
   private sub: any;
+  public consultas:any;
   id: number;
   public meet: boolean;
   public cita: any;
@@ -58,9 +59,9 @@ export class ConsultaComponent implements OnInit {
     }
   }
   getAppointments() {
-    this.appointmentsService.getAppointments().subscribe(
+    this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        // this.consultas = data;
+        this.consultas = data.payload;
         console.log(data);
       },
       (error) => {

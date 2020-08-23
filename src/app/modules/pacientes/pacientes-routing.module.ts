@@ -10,7 +10,6 @@ import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
 import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
 
-import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { Consulta2Component } from './consulta2/consulta2.component';
 
@@ -38,10 +37,14 @@ const routes: Routes = [
     path: 'mi-salud',
     loadChildren: () => import('./modules/mi-salud/mi-salud.module').then((m) => m.MiSaludModule),
   },
+  {
+    path: 'mis-consultas',
+    loadChildren: () => import('./modules/mis-consultas/mis-consultas.module').then((m) => m.MisConsultasModule),
+  },
   { path: 'perfil', component: PerfilComponent },
   { path: 'cambiar-contrasena', component: CambiarClaveComponent },
   { path: 'ayuda', component: SoporteComponent },
-  { path: 'mis-consultas', component: MisConsultasComponent },
+  //{ path: 'mis-consultas', component: MisConsultasComponent },
   { path: 'consulta/:appointmentId', component: ConsultaComponent }
 ];
 
