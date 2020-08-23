@@ -1,4 +1,4 @@
-
+<div class="container-fluid">
   <div class="row">
     <div class="col mb-2">
       <h2>Mi disponibilidad</h2>
@@ -45,7 +45,7 @@
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <a
-            class="nav-link active"
+            class="nav-link"
             id="home-tab"
             data-toggle="tab"
             href="#home"
@@ -71,7 +71,7 @@
         </li>
         <li class="nav-item" role="presentation" (click)="initCalendar()">
           <a
-            class="nav-link"
+            class="nav-link active"
             id="profile-tab"
             data-toggle="tab"
             href="#profile"
@@ -97,9 +97,10 @@
           </a>
         </li>
       </ul>
+
       <div class="tab-content pt-4" id="myTabContent">
-        <!--tab-->
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <!-- LISTADO DE DISPONIBILIDADES -->
+        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
           <!--consultas activas-->
           <div class="row mt-1">
             <div class="col-12">
@@ -150,18 +151,21 @@
                           />
                         </svg>
                         <ng-container>
-                         {{item.dateDetails.days}}
-                        </ng-container>
-                      </td>
-                      <td><!--Hasta el -->
-                        {{item.dateDetails.startDate |  date: 'dd/MM/yyyy'}} 
-                        <ng-container *ngIf="item.dateDetails.endDate">
-                          - {{item.dateDetails.endDate |  date: 'dd/MM/yyyy'}}
+                          {{ item.dateDetails.days }}
                         </ng-container>
                       </td>
                       <td>
-                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges"><!---->
-                        {{range.start}}  hrs -  {{range.end}}  hrs
+                        <!--Hasta el -->
+                        {{ item.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+
+                        <ng-container *ngIf="item.dateDetails.endDate">
+                          - {{ item.dateDetails.endDate | date: 'dd/MM/yyyy' }}
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges"
+                          ><!---->
+                          {{ range.start }} hrs - {{ range.end }} hrs
                         </ng-container>
                       </td>
                       <td>{{ item.administrativeDetails.objective }}</td>
@@ -258,7 +262,7 @@
                     <div class="day text-center" id="{{ item._id }}">
                       <b>{{ item.dateDetails.date | date: 'dd/MM/yyyy' }}</b
                       ><br />
-                      {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end}}
+                      {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end }}
                       <div class="cerrar">
                         <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
                           <span aria-hidden="true">&times;</span>
@@ -273,27 +277,19 @@
         </div>
         <!--/tab-->
 
-        <!--tab-->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row">
-            <div class="col-12 col-md-2" style="display: none;">
-              <select class="custom-select custom-select mb-3">
-                <option selected>Filtrar</option>
-                <option value="1">Filtro 1</option>
-                <option value="2">Filtro 2</option>
-                <option value="3">Filtro 3</option>
-              </select>
-            </div>
-            <div class="col-12 col-md-2" style="display: none;">
+        <!-- CALENDARIO -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="row pb-3">
+            <div class="col-12 col-md-2">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" />
                 <label class="custom-control-label" for="customCheck1">Disponibles</label>
               </div>
             </div>
-            <div class="col-12 col-md-2" style="display: none;">
+            <div class="col-12 col-md-3">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck2" />
-                <label class="custom-control-label" for="customCheck2">Días cancelados</label>
+                <label class="custom-control-label" for="customCheck2">Días Bloqueados</label>
               </div>
             </div>
           </div>
@@ -309,504 +305,523 @@
     </div>
   </div>
 
-
-<!-- Modal disponibilidad-->
-<div
-  class="modal fade"
-  id="disponibilidad"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content p-3">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Crear disponibilidad</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="createAvailability" novalidate="">
-          <div class="row">
-            <div class="form-group col">
-              <label for="objective">Objetivo</label>
-              <input type="text" class="form-control" id="objective" formControlName="objective" />
-            </div>
-            <div class="form-group col">
-              <label for="specialty">Especialidad</label>
-              <select class="form-control" id="specialty2">
-                <ng-container *ngFor="let item of medicalSpecialties">
-                  <option value="{{item._id}}">{{ item.name }}</option>
-                </ng-container>
-              </select>
-            </div>
-            <div class="form-group col">
-              <label for="specialty">Sub especialidad</label>
-              <select class="form-control" id="specialty" formControlName="specialty">
-                <ng-container *ngFor="let item of specialtiesId">
-                  <option value="{{item._id}}">{{ item.specialtyName }}</option>
-                </ng-container>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="endDate">Fecha inicio</label>
-              <div class="input-group">
-                <input
-                  class="form-control"
-                  class="form-control"
-                  type="text"
-                  placeholder="yyyy-mm-dd"
-                  id="starDate"
-                  name="starDate"
-                  formControlName="starDate"
-                  [(ngModel)]="model2"
-                  [minDate]="minDate"
-                  ngbDatepicker
-                  #d="ngbDatepicker"
-                  (click)="d.toggle()"
-                  [ngClass]="{
-                    'is-invalid':
-                      !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
-                  }"
-                />
-
-                <div *ngIf="createAvailability.controls['starDate'].errors?.required" class="invalid-feedback">
-                  Fecha inicio es necesaria
-                </div>
+  <!-- Modal disponibilidad-->
+  <div
+    class="modal fade"
+    id="disponibilidad"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content p-3">
+        <div class="modal-header text-center">
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Crear disponibilidad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="createAvailability" novalidate="">
+            <div class="row">
+              <div class="form-group col">
+                <label for="objective">Objetivo</label>
+                <input type="text" class="form-control" id="objective" formControlName="objective" />
+              </div>
+              <div class="form-group col">
+                <label for="specialty">Especialidad</label>
+                <select class="form-control" id="specialty2">
+                  <ng-container *ngFor="let item of medicalSpecialties">
+                    <option value="{{ item._id }}">{{ item.name }}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="form-group col">
+                <label for="specialty">Sub especialidad</label>
+                <select class="form-control" id="specialty" formControlName="specialty">
+                  <ng-container *ngFor="let item of specialtiesId">
+                    <option value="{{ item._id }}">{{ item.specialtyName }}</option>
+                  </ng-container>
+                </select>
               </div>
             </div>
-            <div class="form-group col">
-              <label for="endDate">Fecha de término</label>
-              <div class="input-group">
-                <input
-                  class="form-control"
-                  class="form-control"
-                  type="text"
-                  placeholder="yyyy-mm-dd"
-                  id="endDate"
-                  name="endDate"
-                  formControlName="endDate"
-                  [(ngModel)]="model"
-                  [minDate]="minDate"
-                  ngbDatepicker
-                  #e="ngbDatepicker"
-                  (click)="e.toggle()"
-                  [ngClass]="{
-                    'is-invalid': !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
-                  }"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
-              <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
-                <ng-container *ngFor="let item of interval">
-                  <option>{{ item.value }}</option>
-                </ng-container>
-              </select>
-            </div>
-          </div>
-          <div class="row mt-2 mb-3">
-            <div class="col-12">
-              <p>Disponibilidad Días</p>
-            </div>
-
-            <div class="col">
-              <ng-container *ngFor="let data of days; let i = index">
-                <div class="custom-control custom-control-inline custom-checkbox pr-3">
+            <div class="row">
+              <div class="form-group col">
+                <label for="endDate">Fecha inicio</label>
+                <div class="input-group">
                   <input
-                    id="{{ data.name }}"
-                    class="custom-control-input"
-                    type="checkbox"
-                    [value]="data.value"
-                    (change)="onCheckboxChange($event)"
-                  />
-                  <label class="custom-control-label" for="{{ data.name }}">
-                    {{ data.name }}
-                  </label>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-
-          <!--campos reactivos dinamicos-->
-          <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
-            <div [formGroupName]="i">
-              <div class="row">
-                <div class="form-group col">
-                  <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
-                  <input
-                    type="time"
-                    [attr.id]="'start' + i"
                     class="form-control"
-                    formControlName="start"
+                    class="form-control"
+                    type="text"
+                    placeholder="yyyy-mm-dd"
+                    id="starDate"
+                    name="starDate"
+                    formControlName="starDate"
+                    [(ngModel)]="model2"
+                    [minDate]="minDate"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
                     [ngClass]="{
                       'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                        !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
                     }"
                   />
-                  <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
+
+                  <div *ngIf="createAvailability.controls['starDate'].errors?.required" class="invalid-feedback">
                     Fecha inicio es necesaria
                   </div>
                 </div>
-                <div class="form-group col">
-                  <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+              </div>
+              <div class="form-group col">
+                <label for="endDate">Fecha de término</label>
+                <div class="input-group">
                   <input
-                    type="time"
-                    [attr.id]="'end' + i"
                     class="form-control"
-                    formControlName="end"
+                    class="form-control"
+                    type="text"
+                    placeholder="yyyy-mm-dd"
+                    id="endDate"
+                    name="endDate"
+                    formControlName="endDate"
+                    [(ngModel)]="model"
+                    [minDate]="minDate"
+                    ngbDatepicker
+                    #e="ngbDatepicker"
+                    (click)="e.toggle()"
                     [ngClass]="{
                       'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                        !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
                     }"
                   />
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div>
-              <a class="" (click)="agregardailyRanges()">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-                Nueva variación de disponibilidad</a
-              >
+            <div class="row">
+              <div class="form-group col">
+                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
+                  <ng-container *ngFor="let item of interval">
+                    <option>{{ item.value }}</option>
+                  </ng-container>
+                </select>
+              </div>
             </div>
-          </div>
-          <!--/ campos reactivos dinamicos-->
-        </form>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          (click)="crearAvailability()"
-          [disabled]="!createAvailability.valid"
-          data-dismiss="modal"
-        >
-          Crear disponibilidad
-        </button>
+            <div class="row mt-2 mb-3">
+              <div class="col-12">
+                <p>Disponibilidad Días</p>
+              </div>
+
+              <div class="col">
+                <ng-container *ngFor="let data of days; let i = index">
+                  <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                    <input
+                      id="{{ data.name }}"
+                      class="custom-control-input"
+                      type="checkbox"
+                      [value]="data.value"
+                      (change)="onCheckboxChange($event)"
+                    />
+                    <label class="custom-control-label" for="{{ data.name }}">
+                      {{ data.name }}
+                    </label>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <!--campos reactivos dinamicos-->
+            <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
+              <div [formGroupName]="i">
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <input
+                      type="time"
+                      [attr.id]="'start' + i"
+                      class="form-control"
+                      formControlName="start"
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }"
+                    />
+                    <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
+                      Fecha inicio es necesaria
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <input
+                      type="time"
+                      [attr.id]="'end' + i"
+                      class="form-control"
+                      formControlName="end"
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <a class="" (click)="agregardailyRanges()">
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-plus-circle"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                    />
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    />
+                  </svg>
+                  Nueva variación de disponibilidad</a
+                >
+              </div>
+            </div>
+            <!--/ campos reactivos dinamicos-->
+          </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            (click)="crearAvailability()"
+            [disabled]="!createAvailability.valid"
+            data-dismiss="modal"
+          >
+            Crear disponibilidad
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="bloquearDias"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content p-3">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="availabilityBlocked" novalidate="">
-          <div class="row">
-            <div class="form-group col">
-              <label for="dateBlock">Fechas</label>
-              <div class="input-group">
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="bloquearDias"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header text-center">
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="availabilityBlocked" novalidate="">
+            <div class="row">
+              <div class="form-group col">
+                <label for="dateBlock">Fechas</label>
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    class="form-control"
+                    type="text"
+                    placeholder="yyyy-mm-dd"
+                    id="dateBlock"
+                    name="dateBlock"
+                    formControlName="dateBlock"
+                    [(ngModel)]="model3"
+                    [minDate]="{ year: 1940, month: 1, day: 1 }"
+                    ngbDatepicker
+                    #a="ngbDatepicker"
+                    (click)="a.toggle()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2 mb-3">
+              <div class="col">
+                <div class="custom-control custom-control-inline custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customChecklun3" />
+                  <label class="custom-control-label" for="customChecklun3">Todo el Día</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col">
+                <label for="startBlock">Horario inicial</label>
                 <input
+                  type="time"
                   class="form-control"
+                  id="startBlock"
+                  name="startBlock"
+                  min="07:00"
+                  max="20:00"
+                  formControlName="startBlock"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="endBlock">Horario final</label>
+                <input
+                  type="time"
                   class="form-control"
-                  type="text"
-                  placeholder="yyyy-mm-dd"
-                  id="dateBlock"
-                  name="dateBlock"
-                  formControlName="dateBlock"
-                  [(ngModel)]="model3"
-                  [minDate]="{ year: 1940, month: 1, day: 1 }"
-                  ngbDatepicker
-                  #a="ngbDatepicker"
-                  (click)="a.toggle()"
+                  id="endBlock"
+                  name="endBlock"
+                  min="07:00"
+                  max="20:00"
+                  formControlName="endBlock"
                 />
               </div>
             </div>
-          </div>
-          <div class="row mt-2 mb-3">
-            <div class="col">
-              <div class="custom-control custom-control-inline custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customChecklun3" />
-                <label class="custom-control-label" for="customChecklun3">Todo el Día</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col">
-              <label for="startBlock">Horario inicial</label>
-              <input
-                type="time"
-                class="form-control"
-                id="startBlock"
-                name="startBlock"
-                min="07:00"
-                max="20:00"
-                formControlName="startBlock"
-              />
-            </div>
-            <div class="form-group col">
-              <label for="endBlock">Horario final</label>
-              <input
-                type="time"
-                class="form-control"
-                id="endBlock"
-                name="endBlock"
-                min="07:00"
-                max="20:00"
-                formControlName="endBlock"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          (click)="postAvailabilityBlocked()"
-        >
-          Bloquear día
-        </button>
+          </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-dismiss="modal"
+            (click)="postAvailabilityBlocked()"
+          >
+            Bloquear día
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal editar-->
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content p-3">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar disponibilidad</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div *ngIf="idAvailability" class="modal-body" id="{{idAvailability._id}}">
-        <form [formGroup]="createAvailability" novalidate="">
-          <div class="row">
-            <div class="form-group col" >
-              <label for="objective">Objetivo</label>
-              <input
-                *ngIf="idAvailability.administrativeDetails.objective"
-                type="text"
-                class="form-control"
-                id="objective"
-                placeholder="{{idAvailability.administrativeDetails.objective}}"
-                formControlName="objective"
-              />
-            </div>
-            <div class="form-group col">
-              <label for="specialty">Especialidad </label>
-              <select class="form-control" id="specialty" formControlName="specialty">
-                <option value="{{idAvailability.professionalDetails.specialtyDetails[0].specialtyId}} + TEST" >
-                  {{idAvailability.professionalDetails.specialtyDetails[0].specialtyName}} 
-                </option>
-                <ng-container *ngFor="let item of specialtiesId">
-                  <option value="{{item._id}}">{{ item.specialtyName}}</option>
-                </ng-container>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="endDate">Fecha inicio actual: {{idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy'}}</label>
-              <div class="input-group">
+  <!-- Modal editar-->
+  <div
+    class="modal fade"
+    id="editar"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content p-3">
+        <div class="modal-header text-center">
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar disponibilidad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div *ngIf="idAvailability" class="modal-body" id="{{ idAvailability._id }}">
+          <form [formGroup]="createAvailability" novalidate="">
+            <div class="row">
+              <div class="form-group col">
+                <label for="objective">Objetivo</label>
                 <input
-                  class="form-control"
-                  class="form-control"
+                  *ngIf="idAvailability.administrativeDetails.objective"
                   type="text"
-                  placeholder="{{idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy'}}"
-                  id="starDate"
-                  name="starDate"
-                  formControlName="starDate"
-                  [(ngModel)]="model2"
-                  [minDate]="minDate"
-                  ngbDatepicker
-                  #d="ngbDatepicker"
-                  (click)="d.toggle()"
-                  [ngClass]="{
-                    'is-invalid':
-                      !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
-                  }"
-                /><!--
+                  class="form-control"
+                  id="objective"
+                  placeholder="{{ idAvailability.administrativeDetails.objective }}"
+                  formControlName="objective"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="specialty">Especialidad </label>
+                <select class="form-control" id="specialty" formControlName="specialty">
+                  <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }} + TEST">
+                    {{ idAvailability.professionalDetails.specialtyDetails[0].specialtyName }}
+                  </option>
+                  <ng-container *ngFor="let item of specialtiesId">
+                    <option value="{{ item._id }}">{{ item.specialtyName }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col">
+                <label for="endDate"
+                  >Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}</label
+                >
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    class="form-control"
+                    type="text"
+                    placeholder="{{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}"
+                    id="starDate"
+                    name="starDate"
+                    formControlName="starDate"
+                    [(ngModel)]="model2"
+                    [minDate]="minDate"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
+                    }"
+                  /><!--
                         <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
-                <!--
+                  <!--
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
                         </div>-->
+                </div>
+              </div>
+              <div class="form-group col">
+                <label for="endDate">Fecha de término</label>
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    class="form-control"
+                    type="text"
+                    placeholder="{{ idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy' }}"
+                    id="endDate"
+                    name="endDate"
+                    formControlName="endDate"
+                    [(ngModel)]="model4"
+                    [minDate]="minDate"
+                    ngbDatepicker
+                    #e="ngbDatepicker"
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
+                    }"
+                    (click)="e.toggle()"
+                  />
+                </div>
               </div>
             </div>
-            <div class="form-group col">
-              <label for="endDate">Fecha de término</label>
-              <div class="input-group">
-                <input
-                  class="form-control"
-                  class="form-control"
-                  type="text"
-                  placeholder="{{idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy'}}"
-                  id="endDate"
-                  name="endDate"
-                  formControlName="endDate"
-                  [(ngModel)]="model4"
-                  [minDate]="minDate"
-                  ngbDatepicker
-                  #e="ngbDatepicker"
-                  [ngClass]="{
-                    'is-invalid': !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
-                  }"
-                  (click)="e.toggle()"
-                />
+            <div class="row">
+              <div class="form-group col">
+                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
+                  <option selected="selected" value="0">{{
+                    idAvailability.administrativeDetails.appointmentDuration
+                  }}</option>
+                  <ng-container *ngFor="let item of interval">
+                    <option>{{ item.value }}</option>
+                  </ng-container>
+                </select>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
-              <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
-                <option selected="selected" value="0">{{ idAvailability.administrativeDetails.appointmentDuration }}</option>
-                <ng-container *ngFor="let item of interval">
-                  <option>{{ item.value }}</option>
+            <div class="row mt-2 mb-3">
+              <div class="col-12">
+                <p>
+                  Disponibilidad de días actual: <b>{{ idAvailability.dateDetails.days }}</b>
+                </p>
+              </div>
+              <div class="col">
+                <ng-container *ngFor="let data of days; let i = index">
+                  <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                    <input
+                      id="put{{ data.name }}"
+                      class="custom-control-input"
+                      type="checkbox"
+                      [value]="data.value"
+                      (change)="onCheckboxChange($event)"
+                      [checked]="false"
+                    />
+                    <label class="custom-control-label" for="put{{ data.name }}">
+                      {{ data.name }}
+                    </label>
+                  </div>
                 </ng-container>
-              </select>
+              </div>
             </div>
-          </div>
-          <div class="row mt-2 mb-3">
             <div class="col-12">
-              <p>
-                Disponibilidad de días actual: <b>{{ idAvailability.dateDetails.days }}</b>
+              <p class="pl-0">
+                rango de horarios actual:<b
+                  ><ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
+                    {{ range.start }} hrs - {{ range.end }} hrs
+                  </ng-container></b
+                >
               </p>
             </div>
-            <div class="col">
-              <ng-container *ngFor="let data of days; let i = index">
-                <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                  <input
-                    id="put{{ data.name }}"
-                    class="custom-control-input"
-                    type="checkbox"
-                    [value]="data.value"
-                    (change)="onCheckboxChange($event)"
-                    [checked]="false"
-                  />
-                  <label class="custom-control-label" for="put{{ data.name }}">
-                    {{ data.name }}
-                  </label>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-          <div class="col-12">
-            <p class="pl-0">
-              rango de horarios actual:<b
-                ><ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
-                {{ range.start }} hrs - {{ range.end }} hrs
-                </ng-container></b
-              >
-            </p>
-          </div>
-          <!--campos reactivos dinamicos-->
-          <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
-            <div [formGroupName]="i">
-              <div class="row">
-                <div class="form-group col">
-                  <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
-                  <input
-                    type="time"
-                    [attr.id]="'start' + i"
-                    class="form-control"
-                    formControlName="start"
-                    [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }"
-                  />
-                </div>
-                <div class="form-group col">
-                  <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
-                  <input
-                    type="time"
-                    [attr.id]="'end' + i"
-                    class="form-control"
-                    formControlName="end"
-                    [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }"
-                  />
+            <!--campos reactivos dinamicos-->
+            <div formArrayName="dailyRanges" *ngFor="let item of dailyRanges.controls; let i = index">
+              <div [formGroupName]="i">
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <input
+                      type="time"
+                      [attr.id]="'start' + i"
+                      class="form-control"
+                      formControlName="start"
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <input
+                      type="time"
+                      [attr.id]="'end' + i"
+                      class="form-control"
+                      formControlName="end"
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div>
-              <a class="" (click)="agregardailyRanges()">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus-circle"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div class="form-group">
+              <div>
+                <a class="" (click)="agregardailyRanges()">
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-plus-circle"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                    />
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    />
+                  </svg>
+                  Nueva variación de disponibilidad</a
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-                Nueva variación de disponibilidad</a
-              >
+              </div>
             </div>
-          </div>
-          <!--/ campos reactivos dinamicos-->
-        </form>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          (click)="putAvailability2(idAvailability._id)"
-          [disabled]="!createAvailability.valid"
-        >
-          Editar disponibilidad
-        </button>
+            <!--/ campos reactivos dinamicos-->
+          </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-dismiss="modal"
+            (click)="putAvailability2(idAvailability._id)"
+            [disabled]="!createAvailability.valid"
+          >
+            Editar disponibilidad
+          </button>
+        </div>
       </div>
     </div>
   </div>
+  <!--(click)="putAvailability(id)"-->
 </div>
-<!--(click)="putAvailability(id)"-->
