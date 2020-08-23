@@ -13,12 +13,18 @@ export class AvailabilityService {
 
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+  
+  //http params availabilityId
+  idParams(id){
+    let params = new HttpParams();
+    params = params.append('availabilityId', id);
+    return params
+  }
 
   // getAvailability
   getAvailability(id?: any): Observable<any> {
-    let params = new HttpParams();
-    params = params.append('availabilityId', id);
+    let params = this.idParams(id);
     if (id) {
       return this.http.get<any>(environment.baseUrl + this.availability,  {params: params});
     } else {
@@ -28,10 +34,10 @@ export class AvailabilityService {
 
   // updateState
   updateState(id, state ): Observable<any> {
+    let params = this.idParams(id);
     console.log( id, state)
-    return this.http.post<any>(environment.baseUrl + this.availabilityState, {
-      id: id, isActive: state
-    });
+    return this.http.post<any>(environment.baseUrl + this.availabilityState, 
+      {id: id, isActive: state}, {params: params});
   }
 
 
@@ -50,12 +56,12 @@ export class AvailabilityService {
     administrativeDetails,
     professionalDetails,
     dateDetails): Observable<any> {
+    let params = this.idParams(id);
     return this.http.put<any>(environment.baseUrl + this.availability, {
-      id,
       administrativeDetails,
       professionalDetails,
       dateDetails
-    });
+    }, {params: params} );
   }
 
   // post state Availability
@@ -75,13 +81,15 @@ export class AvailabilityService {
   }
 
   // deleteAvailabilit
-  deleteAvailability(idDelete: any): Observable<any> {
-    return this.http.delete<any>(environment.baseUrl + this.availability + `/${idDelete.id}`);
+  deleteAvailability(id: any): Observable<any> {
+    let params = this.idParams(id.id);
+    return this.http.delete<any>(environment.baseUrl + this.availability, {params: params} );
   }
 
   // delete BLOCK
   deleteBlock(id: any): Observable<any> {
+    let params = this.idParams(id);
     console.log(id);
-    return this.http.delete<any>(environment.baseUrl + this.blocked + `/${id}`);
+    return this.http.delete<any>(environment.baseUrl + this.blocked + `/`, {params: params});// `/`
   }
 }

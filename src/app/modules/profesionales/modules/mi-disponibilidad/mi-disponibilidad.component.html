@@ -155,11 +155,9 @@
                       </td>
                       <td><!--Hasta el -->
                         {{item.dateDetails.startDate |  date: 'dd/MM/yyyy'}} 
-                        
                         <ng-container *ngIf="item.dateDetails.endDate">
                           - {{item.dateDetails.endDate |  date: 'dd/MM/yyyy'}}
                         </ng-container>
-                       
                       </td>
                       <td>
                         <ng-container *ngFor="let range of item.dateDetails.dailyRanges"><!---->
@@ -171,7 +169,6 @@
                         <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
                           {{ specialty.specialtyName }}
                         </ng-container>
-                       
                       </td>
                       <td>
                         <div class="custom-control custom-switch">
@@ -258,12 +255,12 @@
                   [carouselClasses]="['owl-theme', 'sliding']"
                 >
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
-                    <div class="day text-center" id="{{ item._id }}">
+                    <div class="day text-center" id="{{ item.id }}">
                       <b>{{ item.date.day }} de {{ item.date.month }} del {{ item.date.year }}</b
                       ><br />
                       {{ item.start }} - {{ item.end }}
                       <div class="cerrar">
-                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
+                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item.id)">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -349,7 +346,7 @@
               <label for="specialty">Sub especialidad</label>
               <select class="form-control" id="specialty" formControlName="specialty">
                 <ng-container *ngFor="let item of specialtiesId">
-                  <option value="{{item.medicalSpecialtyId}}">{{ item.specialtyName }}</option>
+                  <option value="{{item._id}}">{{ item.specialtyName }}</option>
                 </ng-container>
               </select>
             </div>
@@ -620,9 +617,10 @@
       <div *ngIf="idAvailability" class="modal-body" id="{{idAvailability._id}}">
         <form [formGroup]="createAvailability" novalidate="">
           <div class="row">
-            <div class="form-group col">
+            <div class="form-group col" >
               <label for="objective">Objetivo</label>
               <input
+                *ngIf="idAvailability.administrativeDetails.objective"
                 type="text"
                 class="form-control"
                 id="objective"
@@ -633,14 +631,11 @@
             <div class="form-group col">
               <label for="specialty">Especialidad </label>
               <select class="form-control" id="specialty" formControlName="specialty">
-                <option selected="selected" value="0">
-                  <ng-container>
-                    <option value="" selected>
-                      {{idAvailability.professionalDetails.specialtyDetails[0].specialtyName}}</option>
-                  </ng-container>
+                <option value="{{idAvailability.professionalDetails.specialtyDetails[0].specialtyId}} + TEST" >
+                  {{idAvailability.professionalDetails.specialtyDetails[0].specialtyName}} 
                 </option>
                 <ng-container *ngFor="let item of specialtiesId">
-                  <option value="{{item.medicalSpecialtyId}}">{{ item.specialtyName}}</option>
+                  <option value="{{item._id}}">{{ item.specialtyName}}</option>
                 </ng-container>
               </select>
             </div>
@@ -693,12 +688,7 @@
                     'is-invalid': !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
                   }"
                   (click)="e.toggle()"
-                /><!--
-                            <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
-                <!--
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
-                            </div>-->
+                />
               </div>
             </div>
           </div>

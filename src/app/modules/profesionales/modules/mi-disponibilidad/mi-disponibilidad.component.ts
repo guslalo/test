@@ -231,6 +231,7 @@ export class MiDisponibilidadComponent implements OnInit {
     )
   }
 
+  //get lista de dias bloqueados
   getAvailabilityBlocked() {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
@@ -247,14 +248,12 @@ export class MiDisponibilidadComponent implements OnInit {
     console.log(this.createAvailability);
     console.log( this.createAvailability.controls.specialty);
     const formObject = {
-
       administrativeDetails: {
         objective: this.createAvailability.controls.objective.value,
         appointmentDuration: +this.createAvailability.controls.appointmentDuration.value
       },
       professionalDetails:{
-        specialtyId:  this.createAvailability.controls.specialty.value,
-        //specialtyName:  'test',
+        specialtyId:  this.createAvailability.controls.specialty.value
       },
       dateDetails : {
         startDate:this.createAvailability.controls.endDate.value,
@@ -262,13 +261,10 @@ export class MiDisponibilidadComponent implements OnInit {
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
       }
-     
     };
     console.log(formObject);
 
-    if (formObject) {
-
-     
+    if (formObject) { 
       this.availabilityService
         .postAvailability(
           formObject.administrativeDetails,
@@ -284,10 +280,8 @@ export class MiDisponibilidadComponent implements OnInit {
             console.log(error);
           }
         );
-       /**/
     }
   }
-
 
   putState(item){
     console.log(item);
@@ -344,7 +338,7 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     };
     console.log(formObject);
-
+    
     if (formObject) {
       this.availabilityService
         .putAvailability(
@@ -353,16 +347,16 @@ export class MiDisponibilidadComponent implements OnInit {
           formObject.professionalDetails,
           formObject.dateDetails
         )
-        .subscribe(
-          (data) => {
-            console.log(data);
-            this.getAvailability();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    }
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getAvailability();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }/**/
   }
 
   // deleteBlock
@@ -395,23 +389,7 @@ export class MiDisponibilidadComponent implements OnInit {
           month: this.idAvailability.dateDetails.endDate.month,
           day: this.idAvailability.dateDetails.endDate.day,
         };
-        const arrayDias = [];
-        const arraydays = [];
-        const arrayDaystotal = [];
-        // console.log(this.days2);
 
-        for (const item2 of this.days2) {
-          // console.log(item2);
-          for (const item of this.idAvailability.dailyDetails.days) {
-            if (item) {
-              if (item === item2) {
-                const item3 = item2 + '2';
-                // console.log(item3)
-              }
-            }
-          }
-        }
-        console.log(arrayDias);
       },
       (error) => {
         console.log(error);

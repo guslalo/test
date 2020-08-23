@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { PacientesComponent } from './pacientes/pacientes.component';
-import { MiSaludComponent } from './mi-salud/mi-salud.component';
+
 
 import { PacientesRoutingModule } from '../pacientes/pacientes-routing.module';
 import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';

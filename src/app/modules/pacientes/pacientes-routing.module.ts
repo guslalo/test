@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 // components
 // import { LayoutComponent } from './components/layout/layout.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
-import { MiSaludComponent } from './mi-salud/mi-salud.component';
 // guards
 import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
@@ -35,12 +34,15 @@ const routes: Routes = [
     path: 'agendar-consulta',
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
   },
+  {
+    path: 'mi-salud',
+    loadChildren: () => import('./modules/mi-salud/mi-salud.module').then((m) => m.MiSaludModule),
+  },
   { path: 'perfil', component: PerfilComponent },
   { path: 'cambiar-contrasena', component: CambiarClaveComponent },
   { path: 'ayuda', component: SoporteComponent },
   { path: 'mis-consultas', component: MisConsultasComponent },
-  { path: 'mi-salud', component: MiSaludComponent },
-  { path: 'consulta/:appointmentId', component: ConsultaComponent },
+  { path: 'consulta/:appointmentId', component: ConsultaComponent }
 ];
 
 @NgModule({

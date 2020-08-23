@@ -74,6 +74,7 @@ export class IndexComponent implements OnInit {
     this.getProfessionalService();
     this.getsymptoms();
     
+    
   }
 
   //selecion sintoma
