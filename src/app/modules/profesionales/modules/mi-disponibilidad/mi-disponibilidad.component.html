@@ -255,12 +255,12 @@
                   [carouselClasses]="['owl-theme', 'sliding']"
                 >
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
-                    <div class="day text-center" id="{{ item.id }}">
-                      <b>{{ item.date.day }} de {{ item.date.month }} del {{ item.date.year }}</b
+                    <div class="day text-center" id="{{ item._id }}">
+                      <b>{{ item.dateDetails.date | date: 'dd/MM/yyyy' }}</b
                       ><br />
-                      {{ item.start }} - {{ item.end }}
+                      {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end}}
                       <div class="cerrar">
-                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item.id)">
+                        <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>

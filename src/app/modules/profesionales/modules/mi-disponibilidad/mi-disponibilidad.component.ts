@@ -236,7 +236,7 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
         console.log(data);
-        this.diasBloqueados = data; //data.payload
+        this.diasBloqueados = data.payload; //data.payload
       },
       (error) => {
         console.log(error);

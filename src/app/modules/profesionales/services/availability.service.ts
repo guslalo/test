@@ -75,8 +75,11 @@ export class AvailabilityService {
   postAvailabilityBlocked(date, start, end): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.blocked, {
       date,
-      start,
-      end,
+      range: {
+        start:start,
+        end:end
+      }
+   
     });
   }
 
