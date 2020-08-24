@@ -280,15 +280,27 @@
         <!-- CALENDARIO -->
         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <div class="row pb-3">
-            <div class="col-12 col-md-2">
+            <div class="col-auto">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                <label class="custom-control-label" for="customCheck1">Disponibles</label>
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customCheck1"
+                  [(ngModel)]="showActiveDays"
+                  (change)="fetchCalendar()"
+                />
+                <label class="custom-control-label" for="customCheck1">Días Habilitados</label>
               </div>
             </div>
-            <div class="col-12 col-md-3">
+            <div class="col-auto">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck2" />
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="customCheck2"
+                  [(ngModel)]="showBlockedDays"
+                  (change)="fetchCalendar()"
+                />
                 <label class="custom-control-label" for="customCheck2">Días Bloqueados</label>
               </div>
             </div>
@@ -348,16 +360,16 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">Fecha inicio</label>
+                <label for="startDate">Fecha inicio</label>
                 <div class="input-group">
                   <input
                     class="form-control"
                     class="form-control"
                     type="text"
                     placeholder="yyyy-mm-dd"
-                    id="starDate"
-                    name="starDate"
-                    formControlName="starDate"
+                    id="startDate"
+                    name="startDate"
+                    formControlName="startDate"
                     [(ngModel)]="model2"
                     [minDate]="minDate"
                     ngbDatepicker
@@ -365,11 +377,11 @@
                     (click)="d.toggle()"
                     [ngClass]="{
                       'is-invalid':
-                        !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
+                        !createAvailability.get('startDate').valid && createAvailability.get('startDate').touched
                     }"
                   />
 
-                  <div *ngIf="createAvailability.controls['starDate'].errors?.required" class="invalid-feedback">
+                  <div *ngIf="createAvailability.controls['startDate'].errors?.required" class="invalid-feedback">
                     Fecha inicio es necesaria
                   </div>
                 </div>
