@@ -32,7 +32,12 @@ export class MedicalRecordService {
 
   //putAddAntecedent
   putAddExamen(object): Observable<any> {
-    return this.http.put<any>(environment.baseUrl + this.addExamen, { object } );
+    return this.http.put<any>(environment.baseUrl + this.addExamen, { 
+      fileName:object.fileName, 
+      documentType:object.documentType,
+      madeBy:object.madeBy, 
+      file:object.file
+    } );
   }
 
   //putAddAntecedent
@@ -40,6 +45,11 @@ export class MedicalRecordService {
     let params = new HttpParams();
     params = params.append('antecedent', antecedent);
     return this.http.put<any>(environment.baseUrl + this.antecedent + antecedent, { value } );
+  }
+
+  //deleteAntecedent
+  deleteAntecedent(antecedent, id): Observable<any> {
+    return this.http.delete<any>(environment.baseUrl + this.antecedent + antecedent + '/' + id );
   }
 
 }

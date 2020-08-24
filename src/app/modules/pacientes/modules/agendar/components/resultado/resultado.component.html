@@ -16,10 +16,14 @@
                     </svg>
             <div>
                 <h3 class="mt-3 mb-3">Su cita médica ha sido agendada con éxito</h3>
-                <h5>DR. GUILLERMO FAUNDEZ</h5>
-                <p class="font-weight-bold">Neurología</p>
+                <h5>
+                    
+                    DR. {{reserva[0].professionalDetails.userDetails[0].name}}</h5>
+                <p class="font-weight-bold">
+                    {{reserva[0].professionalDetails.specialtyDetails[0].specialtyName}} 
+                </p>
                 <p class="valor">VALOR CONSULTA: $45.000</p>
-                <p class="font-weight-bold m-0">Su consulta sera realiza el 27 julio 2020 | 8:00 AM</p>
+                <p class="font-weight-bold m-0">Su consulta sera realiza el  {{reserva[0].date | date: 'dd/MM/yyyy'}} </p><!--| 8:00 AM-->
                 <p class="font-weight-bold  m-0">ID ATENCIÓN 356-57834</p>
             </div>
             <div class="text-center mt-5 mb-5">

@@ -18,7 +18,7 @@
             <div class="card-body text-center">
                 <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
                 <!--tabs child-->
-                <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3" id="myTab" role="tablist">
+                <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                     <a
                         class="nav-link active"
@@ -315,11 +315,11 @@
           <div class="card-body ">
               <h4 class="text-left mb-3">Documentos</h4>
                 <form>
-                    <div class="form-group"><!--(change)="fileChangeEvent($event)" -->
+                    <div class="form-group"><!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
                         <label for="exampleInputEmail1">Subir documentos</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input"
-                            accept="image/*,.pdf,.txt" 
+                           
                             (change)="changeListener($event)"
                             id="customFileLang" lang="es">
                             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>

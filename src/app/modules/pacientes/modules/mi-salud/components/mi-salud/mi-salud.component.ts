@@ -14,8 +14,12 @@ export class MiSaludComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any;
   public antecedentes:any;
+  public antecedentesGeneral:any;
+  public exams:any;
   public modelAntecedente:any = {}
   public addExamen: FormGroup;
+  public category:any;
+  public base64:any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -23,6 +27,7 @@ export class MiSaludComponent implements OnInit {
     private medicalRecord:MedicalRecordService) {}
 
   ngOnInit(): void {
+ 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -61,19 +66,32 @@ export class MiSaludComponent implements OnInit {
 
   }*/
 
-  add(antecedent){
-    console.log(antecedent);
+
+  categoryChangue(category?){
+    //console.log(category);
+    this.category = category;
+    //return category
+  }
+
+  add(category){
     console.log(this.modelAntecedente);
-    this.putAddAntecedent(antecedent, this.modelAntecedente);
+    this.putAddAntecedent(category, this.modelAntecedente);
   }
 
   addExamenPost(){
     console.log(this.addExamen);
-    this.putAddExamen(this.addExamen);
+    const formObject = {
+      fileName: this.addExamen.controls.fileName.value,
+      documentType: this.addExamen.controls.documentType.value,
+      madeBy: this.addExamen.controls.madeBy.value,
+      file: this.base64
+    };
+    this.putAddExamen(formObject);
   }
 
 
   putAddExamen(object){
+    
     this.medicalRecord.putAddExamen(object).subscribe(
       data => {
         console.log(data);
@@ -81,7 +99,7 @@ export class MiSaludComponent implements OnInit {
       error => {
         console.log(error)
       }
-    )
+    )/**/
   }
 
 
@@ -89,6 +107,7 @@ export class MiSaludComponent implements OnInit {
     this.medicalRecord.putAddAntecedent(antecedent, object).subscribe(
       data => {
         console.log(data);
+        this.category = '';
         this.getMedicalRecord();
       },
       error => {
@@ -97,9 +116,26 @@ export class MiSaludComponent implements OnInit {
     )
   }
 
+  delete(item, event){
+    let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(antecedent);
+    this.medicalRecord.deleteAntecedent(antecedent, item.id).subscribe(
+      data => { 
+        console.log(data);
+        this. getMedicalRecord();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   getMedicalRecord(){
     this.medicalRecord.getByUserId().subscribe(
       data => {
+        this.exams = data.exams;
+        console.log(this.exams )
+        this.antecedentesGeneral = data.antecedent;
         this.antecedentes = data.antecedent.sickness;
         console.log(data.antecedent)
       },
@@ -109,5 +145,17 @@ export class MiSaludComponent implements OnInit {
     )
   }
 
+
+  openFile(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result);
+      this.base64 = reader.result
+      console.log(this.base64);
+    };
+  }
+   
 
 }

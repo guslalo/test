@@ -114,6 +114,7 @@ ul {
       padding-right: 30px;
       margin-bottom: 10px;
       &:first-child {
+        position: relative;
         text-align: left;
         background: #ecf3fe;
       }
@@ -529,6 +530,12 @@ h4 a {
   border-radius: 10px;
   position: relative;
   margin-bottom: 35px;
+  .delete {
+    cursor: pointer;
+    position: absolute;
+    top:0;
+    right: 20px;
+  }
   .add {
     top: 25px;
     position: absolute;
@@ -536,6 +543,7 @@ h4 a {
   }
   &.primary {
     background: $color-primary;
+ 
     * {
       color: #ffffff !important;
     }
