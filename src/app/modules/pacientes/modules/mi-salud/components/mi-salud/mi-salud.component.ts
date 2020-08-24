@@ -16,7 +16,7 @@ export class MiSaludComponent implements OnInit {
   public antecedentes:any;
   public antecedentesGeneral:any;
   public exams:any;
-  public modelAntecedente:any = {}
+  public modelAntecedente:any;
   public addExamen: FormGroup;
   public category:any;
   public base64:any;

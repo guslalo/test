@@ -566,7 +566,7 @@
               <label for="dateBlock">Agregar item</label>   
               <input type="text" 
               placeholder="ingrese item"
-              class="form-control" name="test" id="test" [(ngModel)]="modelAntecedente"/>
+              class="form-control" name="modelAntecedente" id="test" [(ngModel)]="modelAntecedente" [ngModelOptions]="{standalone: true}"/>
             </div>
           </div>
         </form>
