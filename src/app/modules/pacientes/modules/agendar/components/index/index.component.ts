@@ -37,6 +37,7 @@ export class IndexComponent implements OnInit {
   public reserve: any;
   public date: { year: number; month: number };
   public file: any;
+  public base64:any;
 
   imageError: string;
   isImageSaved: boolean;
@@ -173,9 +174,10 @@ export class IndexComponent implements OnInit {
     console.log(consolidate);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       data => {
-        this.consolidate = data.payload;
+        this.consolidate = data.payload[0];
+        btoa(this.blocks);
         console.log(data);
-        this.router.navigate(['resultado'], {relativeTo: this.route});
+        this.router.navigate(['resultado/'+  btoa(this.blocks)], {relativeTo: this.route});
       },
       error => {
         console.log(error)
@@ -224,6 +226,8 @@ export class IndexComponent implements OnInit {
       ).subscribe(
         data => {
           this.blocks = data.payload;
+          localStorage.removeItem('reserva');
+          localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log( data)
           console.log(data.internalCode)
           if(data.internalCode === 103){
@@ -279,96 +283,56 @@ export class IndexComponent implements OnInit {
   }
 
 
-  fileChangeEvent(fileInput: any) {
-    this.imageError = null;
-    if (fileInput.target.files && fileInput.target.files[0]) {
-        // Size Filter Bytes
-        const max_size = 20971520;
-        const allowed_types = [
-          'application/msword',
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-          'image/jpg',
-          'image/jpeg',
-          'application/pdf',
-          'image/png',
-          'application/vnd.ms-excel',
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ];
-        const max_height = 15200;
-        const max_width = 25600;
 
-        if (fileInput.target.files[0].size > max_size) {
-            this.imageError =
-                'Maximum size allowed is ' + max_size / 1000 + 'Mb';
 
-            return false;
+changeListener(event) : void {
+  //this.readThis($event.target);
+  const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result);
+      this.base64 = reader.result
+      console.log(this.base64 );
+      //this.postDocumentService(this.base64);
+      const documentDetailsObject = {
+        name: "encodedPixel.png",
+        type: "exam",
+        data: reader.result
+      } 
+    
+      this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
         }
+      )
+    
+  };
+ 
 
-        if (!_.includes(allowed_types, fileInput.target.files[0].type)) {
-            this.imageError = 'Only Images are allowed ( JPG | PNG )';
-            return false;
-        }
-        const reader = new FileReader();
-        /*
-        reader.onload = (e: any) => {
-            const image = new Image();
-            image.src = e.target.result;
-            image.onload = rs => {
-                const img_height = rs.currentTarget['height'];
-                const img_width = rs.currentTarget['width'];
-
-                console.log(img_height, img_width);
-
-
-                if (img_height > max_height && img_width > max_width) {
-                    this.imageError =
-                        'Maximum dimentions allowed ' +
-                        max_height +
-                        '*' +
-                        max_width +
-                        'px';
-                    return false;
-                } else {
-                    const imgBase64Path = e.target.result;
-                    this.cardImageBase64 = imgBase64Path;
-                    this.isImageSaved = true;
-                    console.log(imgBase64Path);
-                    // this.previewImagePath = imgBase64Path;
-                }
-            };
-        };*/
-        console.log(reader.readAsDataURL(fileInput.target.files[0]));
-        reader.readAsDataURL(fileInput.target.files[0]);
-    }
-}
-
-removeImage() {
-    this.cardImageBase64 = null;
-    this.isImageSaved = false;
 }
 
 
-changeListener($event) : void {
-  this.readThis($event.target);
-  this.postDocumentService($event.target);
-}
-
-
-postDocumentService(documentDetails?, base64?){
-  console.log(documentDetails);
-  let documentDetailsObject: {
+postDocumentService(base64){
+  /*
+  console.log(base64);
+  const documentDetailsObject: {
     name: "encodedPixel.png",
     type: "exam",
-    data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
-  }  
-  this.documentService.postDocument(this.consolidate.id, documentDetails).subscribe(
+    data: this.base64 
+  }  */
+  /*
+  this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
     data => {
       console.log(data)
     },
     error => {
       console.log(error)
     }
-  )
+  )*/
 }
 
 readThis(inputValue: any): void {

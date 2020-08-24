@@ -27,6 +27,7 @@ export class AdminService {
     return this.http.post<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`, {
       identificationData: userObject.identificationData,
       personalData: userObject.personalData,
+      addressData: userObject.addressData,
       waitingRooms: userObject.waitingRooms,
       profileData: userObject.profileDataForm,
       /* PROFESSIONAL ONLY */

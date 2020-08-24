@@ -21,4 +21,36 @@ export class UsersService {
       return this.http.get<any>(this.users2 + this.users);
     }
   }
+
+  getCountries(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/countries');
+  }
+
+  getStates(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/states');
+  }
+
+  getCities(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/cities');
+  }
+
+  getBreeds(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/breeds');
+  }
+
+  getEducations(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/educations');
+  }
+
+  getFamiliarSituations(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/familiar-situations');
+  }
+
+  getIssuingEntities(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/issuing-entities');
+  }
+
+  educations(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + 'v1/educations');
+  }
 }

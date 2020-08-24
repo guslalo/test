@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MiSaludRoutingModule } from './mi-salud-routing.module';
 import { MiSaludComponent } from './components/mi-salud/mi-salud.component';
@@ -11,7 +12,9 @@ import { MiSaludComponent } from './components/mi-salud/mi-salud.component';
   ],
   imports: [
     CommonModule,
-    MiSaludRoutingModule
+    MiSaludRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class MiSaludModule { }

@@ -41,11 +41,15 @@ const routes: Routes = [
     path: 'mis-consultas',
     loadChildren: () => import('./modules/mis-consultas/mis-consultas.module').then((m) => m.MisConsultasModule),
   },
+  {
+    path: 'consulta/:appointmentId',
+    loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
+  },
   { path: 'perfil', component: PerfilComponent },
   { path: 'cambiar-contrasena', component: CambiarClaveComponent },
   { path: 'ayuda', component: SoporteComponent },
   //{ path: 'mis-consultas', component: MisConsultasComponent },
-  { path: 'consulta/:appointmentId', component: ConsultaComponent }
+  //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
 ];
 
 @NgModule({
