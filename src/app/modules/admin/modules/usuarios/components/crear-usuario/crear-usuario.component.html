@@ -1,780 +1,919 @@
-
-  <div class="row">
-    <div class="col mb-2">
-      <h2>Gestión de Usuarios / Creacion de Cuenta</h2>
-    </div>
-    <div class="col-3 col-md-3">
-      <button
-        (click)="createUser()"
-        type="button"
-        class="btn btn-secondary rounded-pill float-right"
-        [disabled]="!formUserValid()"
-      >
-        Crear Cuenta
-      </button>
-
-      <a href="javascript:history.back()" class="back float-right align-top mr-3">
-        <svg
-          width="2em"
-          height="2em"
-          viewBox="0 0 16 16"
-          class="bi bi-arrow-left-circle"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-          <path
-            fill-rule="evenodd"
-            d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
-          />
-          <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
-        </svg>
-      </a>
-    </div>
+<div class="row">
+  <div class="col mb-2">
+    <h2>Gestión de Usuarios / Creacion de Cuenta</h2>
   </div>
+  <div class="col-3 col-md-3">
+    <button
+      (click)="createUser()"
+      type="button"
+      class="btn btn-secondary rounded-pill float-right"
+      [disabled]="!formUserValid()"
+    >
+      Crear Cuenta
+    </button>
 
-  <div class="row">
-    <div class="col-12">
-      <!--nav-tabs-->
-      <div class="row">
-        <div class="col-12 mb-2">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="datos1" data-toggle="tab" href="#datos-personales-tab" role="tab">
-                Personales
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="datos2" data-toggle="tab" href="#datos-rol-tab" role="tab">
-                Rol
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="datos3"
-                data-toggle="tab"
-                href="#datos-salas-espera-tab"
-                role="tab"
-                aria-selected="false"
-              >
-                Sala de Espera (Modalidad)
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                *ngIf="isProfessional()"
-                class="nav-link"
-                id="datos4"
-                data-toggle="tab"
-                href="#datos-laborales-tab"
-                role="tab"
-                aria-selected="false"
-              >
-                Laborales
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="datos5"
-                data-toggle="tab"
-                href="#datos-clave-tab"
-                role="tab"
-                aria-selected="false"
-              >
-                Clave
-              </a>
-            </li>
-          </ul>
+    <a href="javascript:history.back()" class="back float-right align-top mr-3">
+      <svg
+        width="2em"
+        height="2em"
+        viewBox="0 0 16 16"
+        class="bi bi-arrow-left-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+          fill-rule="evenodd"
+          d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
+        />
+        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <!--nav-tabs-->
+    <div class="row">
+      <div class="col-12 mb-2">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="datos1" data-toggle="tab" href="#datos-personales-tab" role="tab">
+              Personales
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="datos2" data-toggle="tab" href="#datos-rol-tab" role="tab">
+              Rol
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="datos3"
+              data-toggle="tab"
+              href="#datos-salas-espera-tab"
+              role="tab"
+              aria-selected="false"
+            >
+              Sala de Espera (Modalidad)
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              *ngIf="isProfessional()"
+              class="nav-link"
+              id="datos4"
+              data-toggle="tab"
+              href="#datos-laborales-tab"
+              role="tab"
+              aria-selected="false"
+            >
+              Laborales
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="datos5" data-toggle="tab" href="#datos-clave-tab" role="tab" aria-selected="false">
+              Clave
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--/nav-tabs-->
+    <!--tabs-->
+    <div class="tab-content w-100 mt-3" id="tabcontent">
+      <!--tab-->
+      <div class="tab-pane fade show active pt-2" id="datos-personales-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="row">
+                <h4 class="pl-3 pb-2">Identificación</h4>
+                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
+                  <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign" />
+                  <label class="custom-control-label" for="isForeign">Extranjero</label>
+                </div>
+              </div>
+              <form [formGroup]="identificationData">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="document">Documento de Identificacion *</label>
+                    <select
+                      class="form-control"
+                      name="document"
+                      formControlName="document"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('document').valid && identificationData.get('document').touched
+                      }"
+                    >
+                      <option disabled [value]="null">- Seleccionar -</option>
+                      <option value="cpf">CPF</option>
+                      <option value="cns">CNS</option>
+                      <option value="rgRegistry">RG</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="idDocumentNumber">N° de Documento Seleccionado *</label>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="idDocumentNumber"
+                      formControlName="idDocumentNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('idDocumentNumber').valid &&
+                          identificationData.get('idDocumentNumber').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="issuingBody">Órgano Emisor</label>
+                    <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="passport">Pasaporte</label>
+                    <input
+                      [attr.disabled]="!isForeign ? '' : null"
+                      type="text"
+                      class="form-control"
+                      name="passport"
+                      formControlName="passport"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('passport').valid && identificationData.get('passport').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="document">Documentacion Secundaria</label>
+                    <select
+                      class="form-control"
+                      name="extraDocument"
+                      formControlName="extraDocument"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('extraDocument').valid &&
+                          identificationData.get('extraDocument').touched
+                      }"
+                    >
+                      <option disabled [value]="null">- Seleccionar -</option>
+                      <option value="cbo">CBO-R</option>
+                      <option value="pasep">PIS/PASEP</option>
+                      <option value="ctps">CTPS</option>
+                      <option value="idDocumentNumber">Numero de Identidad</option>
+                      <option value="titleVote">Titulo de Votante</option>
+                      <option value="professionalUfNumber">Registro Clase Profesional</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="idDocumentNumber">N° de Documento Seleccionado</label>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="extraIdDocument"
+                      formControlName="extraIdDocument"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('extraIdDocument').valid &&
+                          identificationData.get('extraIdDocument').touched
+                      }"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="row">
+                <h4 class="pl-3 pb-2">Personales</h4>
+                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
+                  <input type="checkbox" class="custom-control-input" id="isSchool" [(ngModel)]="isSchool" />
+                  <label class="custom-control-label" for="isSchool">Asistente a Escuela</label>
+                </div>
+              </div>
+              <form [formGroup]="personalData">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="name">Nombre *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      formControlName="name"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('name').valid && personalData.get('name').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="lastName">Apellido *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="lastName"
+                      formControlName="lastName"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="lastName">Nombres de la Madre *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="motherName"
+                      formControlName="motherName"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('motherName').valid && personalData.get('motherName').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="socialName">Nombre Social (Apodo)</label>
+                    <input type="text" class="form-control" name="socialName" formControlName="socialName" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="email">Email *</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      formControlName="email"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="phoneNumber">Telefono *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phoneNumber"
+                      formControlName="phoneNumber"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="gender">Sexo *</label>
+                    <select
+                      class="form-control"
+                      name="gender"
+                      formControlName="gender"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('gender').valid && personalData.get('gender').touched
+                      }"
+                    >
+                      <option value="male">Masculino</option>
+                      <option value="female">Femenino</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="birthdate">Fecha de Nacimiento *</label>
+                    <div class="input-group dateregister">
+                      <input
+                        [(ngModel)]="birthDate"
+                        [placement]="'bottom'"
+                        class="form-control"
+                        id="birthdate"
+                        placeholder="yyyy-mm-dd"
+                        name="birthdate"
+                        [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        ngbDatepicker
+                        #d="ngbDatepicker"
+                        formControlName="birthdate"
+                        [ngClass]="{
+                          'is-invalid': !personalData.get('birthdate').valid && personalData.get('birthdate').touched
+                        }"
+                        (click)="d.toggle()"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="ufBirth">UF de Nacimiento</label>
+                    <select class="form-control" name="ufBirth" formControlName="ufBirth">
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="municipalityBirth">Municipio de Nacimiento</label>
+                    <select class="form-control" name="municipalityBirth" formControlName="municipalityBirth">
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="nacionality">Nacionalidad *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nacionality"
+                      formControlName="nacionality"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('nacionality').valid && personalData.get('nacionality').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="originCountry">Pais de Origen</label>
+                    <select
+                      [attr.disabled]="!isForeign ? '' : null"
+                      class="form-control"
+                      name="originCountry"
+                      formControlName="originCountry"
+                    >
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="birthdate">Fecha de Entrada al Pais</label>
+                    <div class="input-group dateregister">
+                      <input
+                        disabled
+                        [attr.disabled]="!isForeign ? '' : null"
+                        [(ngModel)]="inmigrationDate"
+                        class="form-control"
+                        id="inmigrationDate"
+                        placeholder="yyyy-mm-dd"
+                        name="inmigrationDate"
+                        [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        ngbDatepicker
+                        #d="ngbDatepicker"
+                        formControlName="inmigrationDate"
+                        (click)="d.toggle()"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          [attr.disabled]="!isForeign ? '' : null"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="d.toggle()"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="breed">Raza/Color * </label>
+                    <select
+                      class="form-control"
+                      name="breed"
+                      formControlName="breed"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of breeds">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="education">Educacion</label>
+                    <select class="form-control" name="education" formControlName="education">
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of educations">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="familySituation">Situacion Familiar/Conyugal</label>
+                    <select class="form-control" name="familySituation" formControlName="familySituation">
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-2">
+                    <label for="cep">CEP *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cep"
+                      formControlName="cep"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('cep').valid && personalData.get('cep').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="uf">Estado (UF) *</label>
+                    <select
+                      class="form-control"
+                      name="uf"
+                      formControlName="uf"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('uf').valid && personalData.get('uf').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="city">Ciudad *</label>
+                    <select
+                      class="form-control"
+                      name="city"
+                      formControlName="city"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('city').valid && personalData.get('city').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="street">Calle *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="street"
+                      formControlName="street"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('street').valid && personalData.get('street').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="streetNumber">Numero *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="streetNumber"
+                      formControlName="streetNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !personalData.get('streetNumber').valid && personalData.get('streetNumber').touched
+                      }"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-      <!--/nav-tabs-->
-      <!--tabs-->
-      <div class="tab-content w-100 mt-3" id="tabcontent">
-        <!--tab-->
-        <div class="tab-pane fade show active pt-2" id="datos-personales-tab" role="tabpanel">
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Identificación</h4>
-                <form [formGroup]="personalData">
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="cpf">CPF</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="cpf"
-                        formControlName="cpf"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('cpf').valid && personalData.get('cpf').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="cns">CNS</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="cns"
-                        formControlName="cns"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('cns').valid && personalData.get('cns').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="passport">Pasaporte (extranjeros)</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="passport"
-                        formControlName="passport"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('passport').valid && personalData.get('passport').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="rgRegistry">RG Registro General</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="rgRegistry"
-                        formControlName="rgRegistry"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('rgRegistry').valid && personalData.get('rgRegistry').touched
-                        }"
-                      />
-                    </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-rol-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">Roles</h4>
+              <form [formGroup]="profileForm" (ngSubmit)="addProfile(profileForm.value)">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="role">Tipo de Usuario</label>
+                    <select
+                      type="text"
+                      class="form-control"
+                      name="role"
+                      formControlName="role"
+                      (change)="getProfiles()"
+                    >
+                      <option [ngValue]="role.value" *ngFor="let role of roles">{{ role.name }}</option>
+                    </select>
                   </div>
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="issuingBody">Órgano Emisor</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="issuingBody"
-                        formControlName="issuingBody"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('issuingBody').valid && personalData.get('issuingBody').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="extraIdDocument">Otro Documento de Identicación</label>
-                      <select
-                        class="form-control"
-                        name="extraIdDocument"
-                        formControlName="extraIdDocument"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('extraIdDocument').valid && personalData.get('extraIdDocument').touched
-                        }"
-                      >
-                        <option value="test">test</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="idDocumentNumber">N° de Documento Seleccionado</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="idDocumentNumber"
-                        formControlName="idDocumentNumber"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('extraIdDocument').valid && personalData.get('extraIdDocument').touched
-                        }"
-                      />
-                    </div>
+                  <div class="form-group col-md-3">
+                    <label for="profile">Perfil</label>
+                    <select
+                      class="form-control"
+                      name="profile"
+                      formControlName="profile"
+                      [ngClass]="{
+                        'is-invalid': !profileForm.get('profile').valid && profileForm.get('profile').touched
+                      }"
+                    >
+                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="profile" *ngFor="let profile of profiles">
+                        {{ profile.role }} - {{ profile.profileName }}
+                      </option>
+                    </select>
                   </div>
-                </form>
-              </div>
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Personales</h4>
-                <form [formGroup]="personalData">
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="name">Nombres</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        formControlName="name"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('name').valid && personalData.get('name').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="lastName">Apellidos</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="lastName"
-                        formControlName="lastName"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="socialName">Nombre de Usuario</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="socialName"
-                        formControlName="socialName"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('socialName').valid && personalData.get('socialName').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="email">Email</label>
-                      <input
-                        type="email"
-                        class="form-control"
-                        name="email"
-                        formControlName="email"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
-                        }"
-                      />
-                    </div>
+                  <div class="form-group col-md-3">
+                    <button
+                      type="submit"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!profileForm.valid"
+                    >
+                      Agregar
+                    </button>
                   </div>
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="phoneNumber">Telefono</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="phoneNumber"
-                        formControlName="phoneNumber"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="birthdate">Fecha de Nacimiento</label>
-                      <div class="input-group dateregister">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="mt-2 ml-4">Gestión de Perfiles</h4>
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Perfil</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let profile of profilesAssigned; let i = index">
+                    <td>
+                      {{ profile.role }}
+                    </td>
+                    <td>
+                      {{ profile.name }}
+                    </td>
+                    <td>
+                      <div class="custom-control custom-switch">
                         <input
-                          [(ngModel)]="birthDate"
-                          [placement]="'bottom'"
-                          class="form-control"
-                          id="birthdate"
-                          placeholder="yyyy-mm-dd"
-                          name="birthdate"
-                          [minDate]="{ year: 1940, month: 1, day: 1 }"
-                          ngbDatepicker
-                          #d="ngbDatepicker"
-                          formControlName="birthdate"
-                          [ngClass]="{
-                            'is-invalid': !personalData.get('birthdate').valid && personalData.get('birthdate').touched
-                          }"
-                          (click)="d.toggle()"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="switch{{ profile.id }}"
+                          [checked]="true"
+                          (change)="removeProfile(i)"
                         />
-                        <div class="input-group-append">
-                          <button
-                            class="btn btn-outline-secondary calendar"
-                            (click)="d.toggle()"
-                            type="button"
-                          ></button>
-                        </div>
+                        <label class="custom-control-label" for="switch{{ profile.id }}"></label>
                       </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="ufBirth">UF de Nacimiento</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="ufBirth"
-                        formControlName="ufBirth"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('ufBirth').valid && personalData.get('ufBirth').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="municipalityBirth">Municipio de Nacimiento</label>
-                      <select
-                        class="form-control"
-                        name="municipalityBirth"
-                        formControlName="municipalityBirth"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('municipalityBirth').valid &&
-                            personalData.get('municipalityBirth').touched
-                        }"
-                      >
-                        <option value="test">test</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="genre">Sexo</label>
-                      <select
-                        class="form-control"
-                        name="genre"
-                        formControlName="genre"
-                        [ngClass]="{
-                          'is-invalid': !personalData.get('genre').valid && personalData.get('genre').touched
-                        }"
-                      >
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="nacionality">Nacionalidad</label>
-                      <select
-                        class="form-control"
-                        name="nacionality"
-                        formControlName="nacionality"
-                        [ngClass]="{
-                          'is-invalid':
-                            !personalData.get('nacionality').valid && personalData.get('nacionality').touched
-                        }"
-                      >
-                        <option value="test">test</option>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <!--/tab-->
-        <!--tab-->
-        <div class="tab-pane fade show pt-2" id="datos-rol-tab" role="tabpanel">
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Roles</h4>
-                <form [formGroup]="profileForm" (ngSubmit)="addProfile(profileForm.value)">
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="role">Tipo de Usuario</label>
-                      <select
-                        type="text"
-                        class="form-control"
-                        name="role"
-                        formControlName="role"
-                        (change)="getProfiles()"
-                      >
-                        <option [ngValue]="role.value" *ngFor="let role of roles">{{ role.name }}</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="profile">Perfil</label>
-                      <select
-                        class="form-control"
-                        name="profile"
-                        formControlName="profile"
-                        [ngClass]="{
-                          'is-invalid': !profileForm.get('profile').valid && profileForm.get('profile').touched
-                        }"
-                      >
-                        <option [ngValue]="null" [disabled]="true">Seleccionar</option>
-                        <option [ngValue]="profile" *ngFor="let profile of profiles">
-                          {{ profile.role }} - {{ profile.profileName }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <button
-                        type="submit"
-                        class="btn btn-outline-primary rounded-pill mt-4"
-                        [disabled]="!profileForm.valid"
-                      >
-                        Agregar
-                      </button>
-                    </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-salas-espera-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">Salas de Espera</h4>
+              <form [formGroup]="waitingRoomForm">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="waitingRoom">Lista de Espera</label>
+                    <select class="form-control" name="waitingRoom" formControlName="waitingRoom">
+                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="item" *ngFor="let item of waitingRooms">
+                        {{ item.name }}
+                      </option>
+                    </select>
                   </div>
-                </form>
-              </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addWaitingRoom()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!waitingRoomForm.valid"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
+                      Agregar Todas
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="row">
-            <h4 class="mt-2 ml-4">Gestión de Perfiles</h4>
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">Rol</th>
-                      <th scope="col">Perfil</th>
-                      <th scope="col">Estado</th>
-                    </tr>
-                  </thead>
+        </div>
+        <div class="row">
+          <h4 class="mt-2 ml-4">Agregadas</h4>
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">Sala de Espera</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
 
-                  <tbody>
-                    <tr *ngFor="let profile of profilesAssigned; let i = index">
-                      <td>
-                        {{ profile.role }}
-                      </td>
-                      <td>
-                        {{ profile.name }}
-                      </td>
-                      <td>
-                        <div class="custom-control custom-switch">
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            id="switch{{ profile.id }}"
-                            [checked]="true"
-                            (change)="removeProfile(i)"
-                          />
-                          <label class="custom-control-label" for="switch{{ profile.id }}"></label>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                <tbody>
+                  <tr *ngFor="let waitingRoom of waitingRoomsAssigned; let i = index">
+                    <td>
+                      {{ waitingRoom.name }}
+                    </td>
+                    <td>
+                      {{ waitingRoom.description }}
+                    </td>
+                    <td>
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="switch{{ waitingRoom.id }}"
+                          [checked]="true"
+                          (change)="removeWaitingRoom(i)"
+                        />
+                        <label class="custom-control-label" for="switch{{ waitingRoom.id }}"></label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <!--/tab-->
-        <!--tab-->
-        <div class="tab-pane fade show pt-2" id="datos-salas-espera-tab" role="tabpanel">
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Salas de Espera</h4>
-                <form [formGroup]="waitingRoomForm">
-                  <div class="row">
-                    <div class="form-group col-md-4">
-                      <label for="waitingRoom">Lista de Espera</label>
-                      <select class="form-control" name="waitingRoom" formControlName="waitingRoom">
-                        <option [ngValue]="null" [disabled]="true">Seleccionar</option>
-                        <option [ngValue]="item" *ngFor="let item of waitingRooms">
-                          {{ item.name }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <button
-                        (click)="addWaitingRoom()"
-                        class="btn btn-outline-primary rounded-pill mt-4"
-                        [disabled]="!waitingRoomForm.valid"
-                      >
-                        Agregar
-                      </button>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
-                        Agregar Todas
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-laborales-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-2">
+            <div class="img text-center">
+              <img src="assets/perfil.png" style="border-radius: 50%;" />
             </div>
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill w-100 mt-2">
+              Cambiar Foto
+            </button>
           </div>
-          <div class="row">
-            <h4 class="mt-2 ml-4">Agregadas</h4>
-            <div class="col-12 mb-4">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">Sala de Espera</th>
-                      <th scope="col">Descripcion</th>
-                      <th scope="col">Estado</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr *ngFor="let waitingRoom of waitingRoomsAssigned; let i = index">
-                      <td>
-                        {{ waitingRoom.name }}
-                      </td>
-                      <td>
-                        {{ waitingRoom.description }}
-                      </td>
-                      <td>
-                        <div class="custom-control custom-switch">
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            id="switch{{ waitingRoom.id }}"
-                            [checked]="true"
-                            (change)="removeWaitingRoom(i)"
-                          />
-                          <label class="custom-control-label" for="switch{{ waitingRoom.id }}"></label>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <div class="col-10">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <form [formGroup]="profileDataForm">
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label for="cpf">Biografia Academica</label>
+                    <textarea
+                      rows="4"
+                      no-resize
+                      type="text"
+                      class="form-control"
+                      name="biography"
+                      formControlName="biography"
+                      [ngClass]="{
+                        'is-invalid':
+                          !profileDataForm.get('biography').valid && profileDataForm.get('biography').touched
+                      }"
+                    ></textarea>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <!--/tab-->
-        <!--tab-->
-        <div class="tab-pane fade show pt-2" id="datos-laborales-tab" role="tabpanel">
-          <div class="row">
-            <div class="col-2">
-              <div class="img text-center">
-                <img src="assets/perfil.png" style="border-radius: 50%;" />
-              </div>
-              <button type="button" class="btn btn-sm btn-outline-primary rounded-pill w-100 mt-2">
-                Cambiar Foto
-              </button>
-            </div>
-            <div class="col-10">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <form [formGroup]="profileDataForm">
-                  <div class="row">
-                    <div class="form-group col-md-12">
-                      <label for="cpf">Biografia Academica</label>
-                      <textarea
-                        rows="4"
-                        no-resize
-                        type="text"
-                        class="form-control"
-                        name="biography"
-                        formControlName="biography"
-                        [ngClass]="{
-                          'is-invalid':
-                            !profileDataForm.get('biography').valid && profileDataForm.get('biography').touched
-                        }"
-                      ></textarea>
-                    </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">Especialidades</h4>
+              <form [formGroup]="specialitiesForm">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="speciality">Nombre Especialidad</label>
+                    <select class="form-control" name="speciality" formControlName="speciality">
+                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="speciality" *ngFor="let speciality of specialities">
+                        {{ speciality.name }}
+                      </option>
+                    </select>
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Especialidades</h4>
-                <form [formGroup]="specialitiesForm">
-                  <div class="row">
-                    <div class="form-group col-md-4">
-                      <label for="speciality">Nombre Especialidad</label>
-                      <select class="form-control" name="speciality" formControlName="speciality">
-                        <option [ngValue]="null" [disabled]="true">Seleccionar</option>
-                        <option [ngValue]="speciality" *ngFor="let speciality of specialities">
-                          {{ speciality.name }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <button
-                        (click)="addSpeciality()"
-                        class="btn btn-outline-primary rounded-pill mt-4"
-                        [disabled]="!specialitiesForm.valid"
-                      >
-                        Agregar
-                      </button>
-                    </div>
-                    <div class="col-md-6">
-                      <div
-                        class="alert alert-primary alert-dismissible fade show"
-                        role="alert"
-                        *ngFor="let speciality of specialitiesAssigned; let i = index"
-                      >
-                        <strong>{{ speciality.name }}</strong>
-                        <button (click)="removeSpeciality(i)" type="button" class="close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                    </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addSpeciality()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!specialitiesForm.valid"
+                    >
+                      Agregar
+                    </button>
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <h4 class="pb-2">Educacion</h4>
-                <form [formGroup]="educationForm">
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="professionalTitle">Titulo Profesional</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="professionalTitle"
-                        formControlName="professionalTitle"
-                        [ngClass]="{
-                          'is-invalid':
-                            !educationForm.get('professionalTitle').valid &&
-                            educationForm.get('professionalTitle').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="university">Universidad</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="university"
-                        formControlName="university"
-                        [ngClass]="{
-                          'is-invalid':
-                            !educationForm.get('university').valid && educationForm.get('university').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="course">Curso</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="course"
-                        formControlName="course"
-                        [ngClass]="{
-                          'is-invalid': !educationForm.get('course').valid && educationForm.get('course').touched
-                        }"
-                      />
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="professionalRegistry">Registro Profesional</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="professionalRegistry"
-                        formControlName="professionalRegistry"
-                        [ngClass]="{
-                          'is-invalid':
-                            !educationForm.get('professionalRegistry').valid &&
-                            educationForm.get('professionalRegistry').touched
-                        }"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="registryNumber">N° de Registro</label>
-                      <select
-                        class="form-control"
-                        name="registryNumber"
-                        formControlName="registryNumber"
-                        [ngClass]="{
-                          'is-invalid':
-                            !educationForm.get('registryNumber').valid && educationForm.get('registryNumber').touched
-                        }"
-                      >
-                        <option value="test">test</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="extraIdDocument">Otro Documento de Identificacion</label>
-                      <select
-                        class="form-control"
-                        name="extraIdDocument"
-                        formControlName="extraIdDocument"
-                        [ngClass]="{
-                          'is-invalid':
-                            !educationForm.get('extraIdDocument').valid && educationForm.get('extraIdDocument').touched
-                        }"
-                      >
-                        <option value="test">test</option>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--/tab-->
-        <!--tab-->
-        <div class="tab-pane fade show pt-2" id="datos-clave-tab" role="tabpanel">
-          <div class="row">
-            <h4 class="pb-2">Generar Contraseña</h4>
-            <div class="col-md-12">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                <form [formGroup]="passwordForm">
-                  <div class="row">
-                    <div class="form-group col-12 col-md-6">
-                      <label for="password">Contraseña *</label>
-                      <input
-                        type="password"
-                        name="u_password"
-                        id="password"
-                        class="form-control"
-                        [ngClass]="{
-                          'is-invalid': !passwordForm.get('password').valid && passwordForm.get('password').touched
-                        }"
-                        formControlName="password"
-                        maxlength="20"
-                        autocomplete="off"
-                      />
-                      <div *ngIf="passwordForm.controls['password'].errors?.pattern" class="invalid-feedback">
-                        <ul>
-                          <li>* Al menos una mayúscula</li>
-                          <li>* Al menos una minúscula</li>
-                          <li>* Al menos un número</li>
-                          <li>* un largo mínimo de 8 carácteres</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="form-group col-12 col-md-6">
-                      <label for="confirmPasword">Confirmar Contraseña *</label>
-                      <input
-                        type="password"
-                        name="u_cpassword"
-                        id="confirmPassword"
-                        class="form-control"
-                        placeholder=""
-                        [ngClass]="{
-                          'is-invalid':
-                            !passwordForm.get('confirmPassword').valid &&
-                            passwordForm.get('confirmPassword').touched &&
-                            passwordForm.get('confirmPassword') != passwordForm.get('password')
-                        }"
-                        formControlName="confirmPassword"
-                        maxlength="20"
-                        autocomplete="off"
-                      />
-                      <div *ngIf="passwordForm.errors?.passwordNotMatch" class="invalid-feedback">
-                        Las contraseñas no coinciden
-                      </div>
-                    </div>
-                  </div>
-                </form>
-
-                <div class="row justify-content-center">
                   <div class="col-md-6">
-                    <div class="mt-2 mb-4">
-                      <password-strength-meter [password]="passwordForm.value.password"></password-strength-meter>
+                    <div
+                      class="alert alert-primary alert-dismissible fade show"
+                      role="alert"
+                      *ngFor="let speciality of specialitiesAssigned; let i = index"
+                    >
+                      <strong>{{ speciality.name }}</strong>
+                      <button (click)="removeSpeciality(i)" type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">Educacion</h4>
+              <form [formGroup]="educationForm">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="professionalTitle">Titulo Profesional</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="professionalTitle"
+                      formControlName="professionalTitle"
+                      [ngClass]="{
+                        'is-invalid':
+                          !educationForm.get('professionalTitle').valid &&
+                          educationForm.get('professionalTitle').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="university">Universidad</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="university"
+                      formControlName="university"
+                      [ngClass]="{
+                        'is-invalid': !educationForm.get('university').valid && educationForm.get('university').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="course">Curso</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="course"
+                      formControlName="course"
+                      [ngClass]="{
+                        'is-invalid': !educationForm.get('course').valid && educationForm.get('course').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="professionalRegistry">Registro Profesional</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="professionalRegistry"
+                      formControlName="professionalRegistry"
+                      [ngClass]="{
+                        'is-invalid':
+                          !educationForm.get('professionalRegistry').valid &&
+                          educationForm.get('professionalRegistry').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="registryNumber">N° de Registro</label>
+                    <select
+                      class="form-control"
+                      name="registryNumber"
+                      formControlName="registryNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !educationForm.get('registryNumber').valid && educationForm.get('registryNumber').touched
+                      }"
+                    >
+                      <option value="test">test</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="extraIdDocument">Otro Documento de Identificacion</label>
+                    <select
+                      class="form-control"
+                      name="extraIdDocument"
+                      formControlName="extraIdDocument"
+                      [ngClass]="{
+                        'is-invalid':
+                          !educationForm.get('extraIdDocument').valid && educationForm.get('extraIdDocument').touched
+                      }"
+                    >
+                      <option value="test">test</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-clave-tab" role="tabpanel">
+        <div class="row">
+          <h4 class="pb-2">Generar Contraseña</h4>
+          <div class="col-md-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <form [formGroup]="passwordForm">
+                <div class="row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="password">Contraseña *</label>
+                    <input
+                      type="password"
+                      name="u_password"
+                      id="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': !passwordForm.get('password').valid && passwordForm.get('password').touched
+                      }"
+                      formControlName="password"
+                      maxlength="20"
+                      autocomplete="off"
+                    />
+                    <div *ngIf="passwordForm.controls['password'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>* Al menos una mayúscula</li>
+                        <li>* Al menos una minúscula</li>
+                        <li>* Al menos un número</li>
+                        <li>* un largo mínimo de 8 carácteres</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="confirmPasword">Confirmar Contraseña *</label>
+                    <input
+                      type="password"
+                      name="u_cpassword"
+                      id="confirmPassword"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid':
+                          !passwordForm.get('confirmPassword').valid &&
+                          passwordForm.get('confirmPassword').touched &&
+                          passwordForm.get('confirmPassword') != passwordForm.get('password')
+                      }"
+                      formControlName="confirmPassword"
+                      maxlength="20"
+                      autocomplete="off"
+                    />
+                    <div *ngIf="passwordForm.errors?.passwordNotMatch" class="invalid-feedback">
+                      Las contraseñas no coinciden
+                    </div>
+                  </div>
+                </div>
+              </form>
 
-                    <div class="alert alert-secondary" role="alert">
-                      <div class="row">
-                        <div class="col-2 text-center">
-                          <svg
-                            width="3em"
-                            height="3em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-shield-lock-fill color-primary"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
-                            />
-                          </svg>
-                        </div>
-                        <div class="col-10 pl-0">
-                          Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al
-                          menos una mayúscula y minúscula.
-                        </div>
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="mt-2 mb-4">
+                    <password-strength-meter [password]="passwordForm.value.password"></password-strength-meter>
+                  </div>
+
+                  <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                      <div class="col-2 text-center">
+                        <svg
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-shield-lock-fill color-primary"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="col-10 pl-0">
+                        Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos
+                        una mayúscula y minúscula.
                       </div>
                     </div>
                   </div>
@@ -783,8 +922,8 @@
             </div>
           </div>
         </div>
-        <!--/tab-->
       </div>
+      <!--/tab-->
     </div>
   </div>
-
+</div>

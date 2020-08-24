@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, Form } from '@angular/forms';
 import { Location } from '@angular/common';
 
 // EXTRAS
 import { AdminService } from '../../../../services/admin.service';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -13,6 +14,9 @@ import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./crear-usuario.component.scss'],
 })
 export class CrearUsuarioComponent implements OnInit {
+  isForeign: boolean = false;
+  isSchool: boolean = false;
+  identificationData: FormGroup;
   personalData: FormGroup;
   profileForm: FormGroup;
   waitingRoomForm: FormGroup;
@@ -21,7 +25,16 @@ export class CrearUsuarioComponent implements OnInit {
   educationForm: FormGroup;
   passwordForm: FormGroup;
 
+  states: any = [];
+  cities: any = [];
+  countries: any = [];
+  breeds: any = [];
+  educations: any = [];
+  familiarSituations: any = [];
+  issuingEntities: any = [];
+
   birthDate: NgbDateStruct;
+  inmigrationDate: NgbDateStruct;
   formUser: any = [];
   userObject: any = {};
 
@@ -40,11 +53,7 @@ export class CrearUsuarioComponent implements OnInit {
   ];
   waitingRoomsAssigned: any = [];
 
-  specialities: any = [
-    { id: '1', name: 'Especialidad 1', description: 'desc 1' },
-    { id: '2', name: 'Especialidad 2', description: 'desc 2' },
-    { id: '3', name: 'Especialidad 3', description: 'desc 3' },
-  ];
+  specialities: any = [];
   specialitiesAssigned: any = [];
 
   // FOR CUSTOM FORM
@@ -55,12 +64,21 @@ export class CrearUsuarioComponent implements OnInit {
     private routerAct: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
+    private userService: UsersService,
     private calendar: NgbCalendar
   ) {}
 
   ngOnInit(): void {
     this.getProfiles();
+    this.getIssuingEntities();
+    this.getUfs();
+    this.getCities();
+    this.getCountries();
+    this.getBreeds();
+    this.getEducations();
+    this.getFamiliarSituations();
 
+    /*
     this.personalData = this.formBuilder.group({
       cpf: [null, Validators.required],
       cns: [null, Validators.required],
@@ -77,7 +95,7 @@ export class CrearUsuarioComponent implements OnInit {
       birthdate: [null, Validators.required],
       ufBirth: [null, Validators.required],
       municipalityBirth: [null, Validators.required],
-      genre: [null, Validators.required],
+      gender: [null, Validators.required],
       nacionality: [null, Validators.required],
     });
 
@@ -123,26 +141,41 @@ export class CrearUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
+    */
 
-    /*
-    this.personalData = this.formBuilder.group({
-      cpf: ['front_test', Validators.required],
-      cns: ['front_test', Validators.required],
+    this.identificationData = this.formBuilder.group({
+      document: [null, Validators.required],
+      idDocumentNumber: ['123', Validators.required],
       passport: ['front_test', [Validators.required]],
       rgRegistry: ['front_test', Validators.required],
-      issuingBody: ['front_test', Validators.required],
-      extraIdDocument: ['test', Validators.required],
-      idDocumentNumber: ['front_test', Validators.required],
+      issuingBody: [null, null],
+      extraDocument: [null, null],
+      extraIdDocument: [123, null],
+    });
+
+    this.personalData = this.formBuilder.group({
       name: ['front_test', Validators.required],
       lastName: ['front_test', Validators.required],
-      socialName: ['front_test', Validators.required],
+      motherName: ['front_test', Validators.required],
+      socialName: ['front_test', null],
       email: ['front_test@mail.com', [Validators.email, Validators.required]],
-      phoneNumber: ['front_test', Validators.required],
-      birthdate: ['', Validators.required],
-      ufBirth: ['front_test', Validators.required],
-      municipalityBirth: ['test', Validators.required],
-      genre: ['masculino', Validators.required],
+      phoneNumber: [123, Validators.required],
+      gender: ['male', Validators.required],
+      birthdate: [null, Validators.required],
+      ufBirth: [null, null],
+      municipalityBirth: [null, null],
       nacionality: ['test', Validators.required],
+      originCountry: [null, null],
+      inmigrationDate: ['', Validators.required],
+      breed: [null, Validators.required],
+      education: [null, null],
+      familySituation: [null, null],
+      cep: ['front_test', Validators.required],
+      uf: [null, Validators.required],
+      city: [null, Validators.required],
+      neighborhood: ['front_test', Validators.required],
+      street: ['front_test', Validators.required],
+      streetNumber: [123, Validators.required],
     });
 
     this.profileForm = this.formBuilder.group({
@@ -188,13 +221,28 @@ export class CrearUsuarioComponent implements OnInit {
       }
     );
 
-    */
-
-    this.formUser.push(this.personalData, this.profileForm, this.educationForm, this.passwordForm);
+    this.formUser.push(
+      this.identificationData,
+      this.personalData,
+      this.profileForm,
+      this.educationForm,
+      this.passwordForm
+    );
 
     this.birthDate = this.calendar.getToday();
-  }
+    this.inmigrationDate = this.calendar.getToday();
 
+    // REACTIVE FORM
+    this.identificationData.get('document').valueChanges.subscribe((val) => {
+      if (val === 'rgRegistry') this.identificationData.get('issuingBody').enable();
+      else this.identificationData.get('issuingBody').disable();
+      this.identificationData.get('idDocumentNumber').enable();
+    });
+
+    this.identificationData.get('extraDocument').valueChanges.subscribe((val) => {
+      this.identificationData.get('extraIdDocument').enable();
+    });
+  }
   getProfiles() {
     this.adminService.getProfiles().subscribe(
       (data) => {
@@ -319,46 +367,75 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.userObject = {
       identificationData: {
-        cpf: this.formUser[0].value.cpf,
-        cns: this.formUser[0].value.cns,
+        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || null }),
+        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || null }),
+        ...(this.formUser[0].value.document === 'rgRegistry' && {
+          rgRegistry: this.formUser[0].value.idDocumentNumber || null,
+        }),
         passport: this.formUser[0].value.passport,
-        rgRegistry: this.formUser[0].value.rgRegistry,
-        issuingBody: this.formUser[0].value.issuingBody,
-        extraIdDocument: this.formUser[0].value.extraIdDocument,
-        idDocumentNumber: this.formUser[0].value.idDocumentNumber,
+        issuingBody: this.formUser[0].value.issuingBody || '',
+        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || null }),
+        ...(this.formUser[0].value.extraDocument === 'pasep' && {
+          pasep: this.formUser[0].value.extraIdDocument || null,
+        }),
+        ...(this.formUser[0].value.extraDocument === 'ctps' && {
+          ctps: this.formUser[0].value.extraIdDocument || null,
+        }),
+        ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
+          idDocumentNumber: this.formUser[0].value.extraIdDocument || null,
+        }),
+        ...(this.formUser[0].value.extraDocument === 'titleVote' && {
+          titleVote: this.formUser[0].value.extraIdDocument || null,
+        }),
+        ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
+          professionalUfNumber: this.formUser[0].value.extraIdDocument || null,
+        }),
+        isForeign: this.isForeign,
       },
       personalData: {
-        name: this.formUser[0].value.name,
-        lastName: this.formUser[0].value.lastName,
-        socialName: this.formUser[0].value.socialName,
-        email: this.formUser[0].value.email,
-        phoneNumber: this.formUser[0].value.phoneNumber,
-        birthdate: this.formUser[0].value.birthdate.toString(),
-        ufBirth: this.formUser[0].value.ufBirth,
-        municipalityBirth: this.formUser[0].value.municipalityBirth,
-        genre: this.formUser[0].value.genre,
-        nacionality: this.formUser[0].value.nacionality,
+        name: this.formUser[1].value.name,
+        lastName: this.formUser[1].value.lastName,
+        motherName: this.formUser[1].value.motherName,
+        socialName: this.formUser[1].value.socialName,
+        email: this.formUser[1].value.email,
+        phoneNumber: this.formUser[1].value.phoneNumber,
+        birthdate: this.formUser[1].value.birthdate.toString(),
+        ufBirth: this.formUser[1].value.ufBirth,
+        municipalityBirth: this.formUser[1].value.municipalityBirth,
+        gender: this.formUser[1].value.gender,
+        nacionality: this.formUser[1].value.nacionality,
+        originCountry: this.formUser[1].value.originCountry || '',
+        inmigrationDate: this.formUser[1].value.inmigrationDate.toString() || '',
+        breed: this.formUser[1].value.breed,
+        education: this.formUser[1].value.education || '',
+        familySituation: this.formUser[1].value.familySituation || '',
+      },
+      addressData: {
+        cep: this.formUser[1].value.cep,
+        uf: this.formUser[1].value.uf,
+        city: this.formUser[1].value.city,
+        neighborhood: this.formUser[1].value.neighborhood,
+        street: this.formUser[1].value.street,
+        streetNumber: this.formUser[1].value.streetNumber,
       },
       profiles: _profiles,
       waitingRooms: _waitingRooms,
       profileData: {
         profileImg: '',
-        biography: this.formUser[1].value.biography,
+        biography: this.formUser[2].value.biography,
       },
       specialities: _specialities,
       educationData: {
-        professionalTitle: this.formUser[2].value.professionalTitle,
-        university: this.formUser[2].value.university,
-        course: this.formUser[2].value.course,
-        professionalRegistry: this.formUser[2].value.professionalRegistry,
-        registryNumber: this.formUser[2].value.registryNumber,
-        extraIdDocument: this.formUser[2].value.extraIdDocument,
+        professionalTitle: this.formUser[3].value.professionalTitle,
+        university: this.formUser[3].value.university,
+        course: this.formUser[3].value.course,
+        professionalRegistry: this.formUser[3].value.professionalRegistry,
+        registryNumber: this.formUser[3].value.registryNumber,
+        extraIdDocument: this.formUser[3].value.extraIdDocument,
       },
-      password: this.formUser[3].value.password,
-      confirmPassword: this.formUser[3].value.confirmPassword,
+      password: this.formUser[4].value.password,
+      confirmPassword: this.formUser[4].value.confirmPassword,
     };
-
-    console.log(this.formUser[0].value.birthdate);
 
     console.log(this.userObject);
 
@@ -370,5 +447,54 @@ export class CrearUsuarioComponent implements OnInit {
     } else {
       alert('Complete el formulario con todos los datos necesarios');
     }
+  }
+
+  getIssuingEntities() {
+    this.userService.getIssuingEntities().subscribe((data) => {
+      // console.log(data);
+      this.issuingEntities = data.payload;
+    });
+  }
+
+  getUfs() {
+    this.userService.getStates().subscribe((data) => {
+      // console.log(data);
+      this.states = data.payload;
+    });
+  }
+
+  getCities() {
+    this.userService.getCities().subscribe((data) => {
+      // console.log(data);
+      this.cities = data.payload;
+    });
+  }
+
+  getCountries() {
+    this.userService.getCountries().subscribe((data) => {
+      // console.log(data);
+      this.countries = data.payload;
+    });
+  }
+
+  getBreeds() {
+    this.userService.getBreeds().subscribe((data) => {
+      // console.log(data);
+      this.breeds = data.payload;
+    });
+  }
+
+  getEducations() {
+    this.userService.getEducations().subscribe((data) => {
+      // console.log(data);
+      this.educations = data.payload;
+    });
+  }
+
+  getFamiliarSituations() {
+    this.userService.getFamiliarSituations().subscribe((data) => {
+      // console.log(data);
+      this.familiarSituations = data.payload;
+    });
   }
 }
