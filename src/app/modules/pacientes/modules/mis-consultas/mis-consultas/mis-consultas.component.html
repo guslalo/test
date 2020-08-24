@@ -171,7 +171,7 @@
                   </svg>
                   16:00 Hrs.
                 </td>
-                <td id="{{item.professionalDetails.userDetails[0].userId}}">
+                <td id=""><!--{{item.professionalDetails.userDetails[0].userId}}-->
                   <svg
                     width="1em"
                     height="1em"
@@ -190,12 +190,14 @@
                     />
                   </svg>
                   {{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}
+                  <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                 </td>
-                <td id="{{item.professionalDetails.specialtyDetails[0].specialtyId}}">
-                  {{item.professionalDetails.specialtyDetails[0].specialtyName}}
+                <td id=""><!--{{item.professionalDetails.specialtyDetails[0].specialtyId}}-->
+                  <!--{{item.professionalDetails.specialtyDetails[0].specialtyName}}-->
                 </td>
                 <td>
-                  <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                  <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm" 
+                  routerLink="/consulta/{{item._id}}">
                     Ingresar
                   </button>
                 </td>
