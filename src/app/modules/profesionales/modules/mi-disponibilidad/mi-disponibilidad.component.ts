@@ -163,7 +163,6 @@ export class MiDisponibilidadComponent implements OnInit {
     this.getAvailability();
     this.getAvailabilityBlocked();
     this.calendar = true;
-    this.fetchCalendar();
 
     this.createAvailability = this._formBuilder.group({
       objective: [null],
@@ -213,8 +212,8 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
         this.disponibilidad = data.payload;
-        // this.fetchCalendar(data.payload);
-        console.log(this.disponibilidad);
+        this.fetchCalendar();
+        // console.log(this.disponibilidad);
       },
       (error) => {
         console.log(error);
@@ -245,8 +244,9 @@ export class MiDisponibilidadComponent implements OnInit {
   getAvailabilityBlocked() {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
-        console.log(data);
-        this.diasBloqueados = data.payload; //data.payload
+        // console.log(data);
+        this.diasBloqueados = data.payload;
+        this.fetchCalendar();
       },
       (error) => {
         console.log(error);
