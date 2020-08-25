@@ -39,12 +39,20 @@
             </a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="datos2" data-toggle="tab" href="#datos-rol-tab" role="tab">
+            <a
+              *ngIf="userType !== 'patient'"
+              class="nav-link"
+              id="datos2"
+              data-toggle="tab"
+              href="#datos-rol-tab"
+              role="tab"
+            >
               Rol
             </a>
           </li>
           <li class="nav-item" role="presentation">
             <a
+              *ngIf="userType !== 'patient'"
               class="nav-link"
               id="datos3"
               data-toggle="tab"
@@ -1004,3 +1012,7 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>

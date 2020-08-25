@@ -8,6 +8,7 @@ import { AdminService } from '../../../../services/admin.service';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -69,10 +70,12 @@ export class CrearUsuarioComponent implements OnInit {
     private adminService: AdminService,
     private userService: UsersService,
     private specialtiesService: SpecialtiesService,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.hide();
     this.getProfiles();
     this.getIssuingEntities();
     this.getUfs();
@@ -375,7 +378,8 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   createUser() {
-    console.log(this.profilesAssigned);
+    // console.log(this.profilesAssigned);]
+    this.spinner.show();
 
     const _profiles = this.profilesAssigned.map((map) => {
       return map.id;
@@ -460,13 +464,23 @@ export class CrearUsuarioComponent implements OnInit {
 
     console.log(this.userObject);
 
-    if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
-      this.adminService.createUser(this.userType, this.userObject).subscribe((response) => {
+    if (this.userType !== 'patient') {
+      if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
+        this.adminService.createUser(this.userType, this.userObject).subscribe(() => {
+          // console.log(response);
+          this.spinner.hide();
+          this.location.back();
+        });
+      } else {
+        this.spinner.hide();
+        alert('Complete el formulario con todos los datos necesarios');
+      }
+    } else {
+      this.adminService.createUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
+        this.spinner.hide();
         this.location.back();
       });
-    } else {
-      alert('Complete el formulario con todos los datos necesarios');
     }
   }
 

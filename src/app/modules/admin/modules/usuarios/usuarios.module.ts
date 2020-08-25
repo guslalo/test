@@ -14,6 +14,7 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 // EXTRAS
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent],
@@ -28,6 +29,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgbPaginationModule,
     MatDialogModule,
     NgxDatatableModule,
+    NgxSpinnerModule,
   ],
 })
 export class UsuariosModule {}
