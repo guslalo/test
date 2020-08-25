@@ -32,7 +32,7 @@ export class AdminService {
       profileData: userObject.profileDataForm,
       /* PROFESSIONAL ONLY */
       specialities: userObject.specialities,
-      educationData: userObject.educationData,
+      professionalData: userObject.professionalData,
       /* PROFESSIONAL ONLY */
       password: userObject.password,
       confirmPassword: userObject.confirmPassword,

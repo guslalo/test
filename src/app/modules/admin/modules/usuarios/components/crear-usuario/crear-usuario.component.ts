@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { AdminService } from '../../../../services/admin.service';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users.service';
+import { SpecialtiesService } from 'src/app/services/specialties.service';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -22,7 +23,7 @@ export class CrearUsuarioComponent implements OnInit {
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
-  educationForm: FormGroup;
+  professionalForm: FormGroup;
   passwordForm: FormGroup;
 
   states: any = [];
@@ -56,6 +57,8 @@ export class CrearUsuarioComponent implements OnInit {
   specialities: any = [];
   specialitiesAssigned: any = [];
 
+  professionalRegistry: any = [];
+
   // FOR CUSTOM FORM
   public userType = this.routerAct.snapshot.queryParamMap.get('userType');
 
@@ -65,6 +68,7 @@ export class CrearUsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private userService: UsersService,
+    private specialtiesService: SpecialtiesService,
     private calendar: NgbCalendar
   ) {}
 
@@ -77,26 +81,41 @@ export class CrearUsuarioComponent implements OnInit {
     this.getBreeds();
     this.getEducations();
     this.getFamiliarSituations();
+    this.getSpecialties();
 
-    /*
+    this.identificationData = this.formBuilder.group({
+      document: [null, Validators.required],
+      idDocumentNumber: ['', Validators.required],
+      passport: ['', null],
+      rgRegistry: ['', null],
+      issuingBody: [null, null],
+      extraDocument: [null, null],
+      extraIdDocument: ['', null],
+    });
+
     this.personalData = this.formBuilder.group({
-      cpf: [null, Validators.required],
-      cns: [null, Validators.required],
-      passport: [null, Validators.required],
-      rgRegistry: [null, Validators.required],
-      issuingBody: [null, Validators.required],
-      extraIdDocument: [null, Validators.required],
-      idDocumentNumber: [null, Validators.required],
-      name: [null, Validators.required],
-      lastName: [null, Validators.required],
-      socialName: [null, Validators.required],
-      email: [null, [Validators.email, Validators.required]],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      socialName: ['', null],
+      email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, Validators.required],
+      gender: ['male', Validators.required],
       birthdate: [null, Validators.required],
-      ufBirth: [null, Validators.required],
-      municipalityBirth: [null, Validators.required],
-      gender: [null, Validators.required],
-      nacionality: [null, Validators.required],
+      ufBirth: [null, null],
+      municipalityBirth: [null, null],
+      nacionality: ['', Validators.required],
+      originCountry: [null, null],
+      inmigrationDate: ['', null],
+      breed: [null, Validators.required],
+      education: [null, null],
+      familySituation: [null, null],
+      cep: ['', Validators.required],
+      uf: [null, Validators.required],
+      city: [null, Validators.required],
+      neighborhood: ['', Validators.required],
+      street: ['', Validators.required],
+      streetNumber: [0, Validators.required],
     });
 
     this.profileForm = this.formBuilder.group({
@@ -108,22 +127,23 @@ export class CrearUsuarioComponent implements OnInit {
       waitingRoom: [null, Validators.required],
     });
 
+    this.profileDataForm = this.formBuilder.group({
+      profileImg: [null],
+      biography: ['', Validators.required],
+    });
+
     this.specialitiesForm = this.formBuilder.group({
       speciality: [null, Validators.required],
     });
 
-    this.profileDataForm = this.formBuilder.group({
-      profileImg: [null],
-      biography: [null, Validators.required],
-    });
-
-    this.educationForm = this.formBuilder.group({
-      professionalTitle: [null, Validators.required],
-      university: [null, Validators.required],
-      course: [null, Validators.required],
-      professionalRegistry: [null, Validators.required],
-      registryNumber: [null, Validators.required],
-      extraIdDocument: [null, Validators.required],
+    this.professionalForm = this.formBuilder.group({
+      professionalTitle: ['', Validators.required],
+      university: ['', Validators.required],
+      course: ['', Validators.required],
+      ufRegistry: [null, Validators.required],
+      professionalRegistryType: [null, Validators.required],
+      professionalRegistry: ['', Validators.required],
+      ufProfessionalRegistry: [null, Validators.required],
     });
 
     this.passwordForm = new FormGroup(
@@ -141,8 +161,8 @@ export class CrearUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
-    */
 
+    /*
     this.identificationData = this.formBuilder.group({
       document: [null, Validators.required],
       idDocumentNumber: ['123', Validators.required],
@@ -150,7 +170,7 @@ export class CrearUsuarioComponent implements OnInit {
       rgRegistry: ['front_test', Validators.required],
       issuingBody: [null, null],
       extraDocument: [null, null],
-      extraIdDocument: [123, null],
+      extraIdDocument: ['123', null],
     });
 
     this.personalData = this.formBuilder.group({
@@ -196,13 +216,14 @@ export class CrearUsuarioComponent implements OnInit {
       speciality: [null, Validators.required],
     });
 
-    this.educationForm = this.formBuilder.group({
+    this.professionalForm = this.formBuilder.group({
       professionalTitle: ['front_test', Validators.required],
       university: ['front_test', Validators.required],
       course: ['front_test', Validators.required],
-      professionalRegistry: ['front_test', Validators.required],
-      registryNumber: ['test', Validators.required],
-      extraIdDocument: ['test', Validators.required],
+      ufRegistry: [null, Validators.required],
+      professionalRegistryType: [null, Validators.required],
+      professionalRegistry: ['123', Validators.required],
+      ufProfessionalRegistry: [null, Validators.required],
     });
 
     this.passwordForm = new FormGroup(
@@ -220,12 +241,13 @@ export class CrearUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
+    */
 
     this.formUser.push(
       this.identificationData,
       this.personalData,
       this.profileForm,
-      this.educationForm,
+      this.professionalForm,
       this.passwordForm
     );
 
@@ -307,12 +329,12 @@ export class CrearUsuarioComponent implements OnInit {
 
   addSpeciality() {
     const data = this.specialitiesForm.value.speciality;
-    if (this.specialitiesAssigned.some((sp) => sp.name === data.name)) {
-      alert(`La especialidad ${data.name} ya esta asignada al usuario`);
+    if (this.specialitiesAssigned.some((sp) => sp.specialtyName === data.specialtyName)) {
+      alert(`La especialidad ${data.specialtyName} ya esta asignada al usuario`);
     } else {
       this.specialitiesAssigned.push({
-        id: data.id,
-        name: data.name,
+        id: data._id,
+        specialtyName: data.specialtyName,
       });
     }
   }
@@ -332,13 +354,13 @@ export class CrearUsuarioComponent implements OnInit {
 
   formUserValid() {
     if (this.userType !== 'professional') {
-      if (this.formUser[0].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[3].valid) {
+      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid && this.formUser[4].valid) {
         return true;
       } else {
         return false;
@@ -367,28 +389,28 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.userObject = {
       identificationData: {
-        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || null }),
-        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || null }),
+        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
+        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
         ...(this.formUser[0].value.document === 'rgRegistry' && {
-          rgRegistry: this.formUser[0].value.idDocumentNumber || null,
+          rgRegistry: this.formUser[0].value.idDocumentNumber || '',
         }),
         passport: this.formUser[0].value.passport,
         issuingBody: this.formUser[0].value.issuingBody || '',
-        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || null }),
+        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
         ...(this.formUser[0].value.extraDocument === 'pasep' && {
-          pasep: this.formUser[0].value.extraIdDocument || null,
+          pasep: this.formUser[0].value.extraIdDocument || '',
         }),
         ...(this.formUser[0].value.extraDocument === 'ctps' && {
-          ctps: this.formUser[0].value.extraIdDocument || null,
+          ctps: this.formUser[0].value.extraIdDocument || '',
         }),
         ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
-          idDocumentNumber: this.formUser[0].value.extraIdDocument || null,
+          idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
         }),
         ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-          titleVote: this.formUser[0].value.extraIdDocument || null,
+          titleVote: this.formUser[0].value.extraIdDocument || '',
         }),
         ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-          professionalUfNumber: this.formUser[0].value.extraIdDocument || null,
+          professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
         }),
         isForeign: this.isForeign,
       },
@@ -398,10 +420,10 @@ export class CrearUsuarioComponent implements OnInit {
         motherName: this.formUser[1].value.motherName,
         socialName: this.formUser[1].value.socialName,
         email: this.formUser[1].value.email,
-        phoneNumber: this.formUser[1].value.phoneNumber,
+        phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
         birthdate: this.formUser[1].value.birthdate.toString(),
-        ufBirth: this.formUser[1].value.ufBirth,
-        municipalityBirth: this.formUser[1].value.municipalityBirth,
+        ufBirth: this.formUser[1].value.ufBirth || '',
+        municipalityBirth: this.formUser[1].value.municipalityBirth || '',
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
@@ -416,7 +438,7 @@ export class CrearUsuarioComponent implements OnInit {
         city: this.formUser[1].value.city,
         neighborhood: this.formUser[1].value.neighborhood,
         street: this.formUser[1].value.street,
-        streetNumber: this.formUser[1].value.streetNumber,
+        streetNumber: parseInt(this.formUser[1].value.streetNumber),
       },
       profiles: _profiles,
       waitingRooms: _waitingRooms,
@@ -425,13 +447,12 @@ export class CrearUsuarioComponent implements OnInit {
         biography: this.formUser[2].value.biography,
       },
       specialities: _specialities,
-      educationData: {
+      professionalData: {
         professionalTitle: this.formUser[3].value.professionalTitle,
         university: this.formUser[3].value.university,
         course: this.formUser[3].value.course,
-        professionalRegistry: this.formUser[3].value.professionalRegistry,
-        registryNumber: this.formUser[3].value.registryNumber,
-        extraIdDocument: this.formUser[3].value.extraIdDocument,
+        ufRegistry: this.formUser[3].value.ufRegistry,
+        professionalRegistry: this.professionalRegistry,
       },
       password: this.formUser[4].value.password,
       confirmPassword: this.formUser[4].value.confirmPassword,
@@ -496,5 +517,28 @@ export class CrearUsuarioComponent implements OnInit {
       // console.log(data);
       this.familiarSituations = data.payload;
     });
+  }
+
+  getSpecialties() {
+    this.specialtiesService.getSpecialties().subscribe((data) => {
+      // console.log(data);
+      this.specialities = data;
+    });
+  }
+
+  addProfessionalRegistry() {
+    if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
+      alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
+    } else {
+      this.professionalRegistry.push({
+        type: this.professionalForm.value.professionalRegistryType,
+        registry: this.professionalForm.value.professionalRegistry,
+        uf: this.professionalForm.value.ufProfessionalRegistry,
+      });
+    }
+  }
+
+  removeRegistry(index) {
+    this.professionalRegistry.splice(index, 1);
   }
 }

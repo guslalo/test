@@ -799,7 +799,8 @@
               data-target="#disponibilidad"
               data-toggle="modal"
               data-target="#patientModal"
-              (click)="openPatientModal('create')"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'patient' }"
             >
               Nuevo Paciente
               <img src="assets/icons/icon-plus-circle.svg" />

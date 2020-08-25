@@ -3,12 +3,7 @@
     <h2>Gestión de Usuarios / Creacion de Cuenta</h2>
   </div>
   <div class="col-3 col-md-3">
-    <button
-      (click)="createUser()"
-      type="button"
-      class="btn btn-secondary rounded-pill float-right"
-      [disabled]="!formUserValid()"
-    >
+    <button (click)="createUser()" type="button" class="btn btn-secondary rounded-pill float-right">
       Crear Cuenta
     </button>
 
@@ -429,7 +424,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <label for="uf">Estado (UF) *</label>
                     <select
                       class="form-control"
@@ -462,6 +457,19 @@
                     </select>
                   </div>
                   <div class="form-group col-md-2">
+                    <label for="street">Barrio *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="neighborhood"
+                      formControlName="neighborhood"
+                      [ngClass]="{
+                        'is-invalid':
+                          !personalData.get('neighborhood').valid && personalData.get('neighborhood').touched
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-2">
                     <label for="street">Calle *</label>
                     <input
                       type="text"
@@ -473,7 +481,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-1">
                     <label for="streetNumber">Numero *</label>
                     <input
                       type="text"
@@ -707,7 +715,7 @@
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
-                        {{ speciality.name }}
+                        {{ speciality.specialtyName }}
                       </option>
                     </select>
                   </div>
@@ -726,7 +734,7 @@
                       role="alert"
                       *ngFor="let speciality of specialitiesAssigned; let i = index"
                     >
-                      <strong>{{ speciality.name }}</strong>
+                      <strong>{{ speciality.specialtyName }}</strong>
                       <button (click)="removeSpeciality(i)" type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -741,7 +749,7 @@
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">Educacion</h4>
-              <form [formGroup]="educationForm">
+              <form [formGroup]="professionalForm">
                 <div class="row">
                   <div class="form-group col-md-3">
                     <label for="professionalTitle">Titulo Profesional</label>
@@ -752,8 +760,8 @@
                       formControlName="professionalTitle"
                       [ngClass]="{
                         'is-invalid':
-                          !educationForm.get('professionalTitle').valid &&
-                          educationForm.get('professionalTitle').touched
+                          !professionalForm.get('professionalTitle').valid &&
+                          professionalForm.get('professionalTitle').touched
                       }"
                     />
                   </div>
@@ -765,7 +773,8 @@
                       name="university"
                       formControlName="university"
                       [ngClass]="{
-                        'is-invalid': !educationForm.get('university').valid && educationForm.get('university').touched
+                        'is-invalid':
+                          !professionalForm.get('university').valid && professionalForm.get('university').touched
                       }"
                     />
                   </div>
@@ -777,54 +786,123 @@
                       name="course"
                       formControlName="course"
                       [ngClass]="{
-                        'is-invalid': !educationForm.get('course').valid && educationForm.get('course').touched
+                        'is-invalid': !professionalForm.get('course').valid && professionalForm.get('course').touched
                       }"
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="professionalRegistry">Registro Profesional</label>
+                    <label for="registryNumber">UF de Registro</label>
+                    <select
+                      class="form-control"
+                      name="ufRegistry"
+                      formControlName="ufRegistry"
+                      [ngClass]="{
+                        'is-invalid':
+                          !professionalForm.get('ufRegistry').valid && professionalForm.get('ufRegistry').touched
+                      }"
+                    >
+                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="state._id" *ngFor="let state of states">
+                        {{ state.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="professionalRegistryType">Registro Profesional</label>
+                    <select
+                      class="form-control"
+                      name="professionalRegistryType"
+                      formControlName="professionalRegistryType"
+                    >
+                      <option [value]="null" disabled>- Seleccionar -</option>
+                      <option value="CRM">CRM</option>
+                      <option value="COREM">COREN</option>
+                      <option value="CRO">CRO</option>
+                      <option value="CRN">CRN</option>
+                      <option value="CRP">CRP</option>
+                      <option value="CREFITO">CREFITO</option>
+                      <option value="CREFONO">CREFONO</option>
+                      <option value="Ñao definido">Ñao definido</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="professionalRegistryType">N° de Registro</label>
                     <input
+                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       type="text"
                       class="form-control"
                       name="professionalRegistry"
                       formControlName="professionalRegistry"
                       [ngClass]="{
                         'is-invalid':
-                          !educationForm.get('professionalRegistry').valid &&
-                          educationForm.get('professionalRegistry').touched
+                          !professionalForm.get('professionalRegistry').valid &&
+                          professionalForm.get('professionalRegistry').touched
                       }"
                     />
                   </div>
+                  <div class="col-md-3">
+                    <label for="ufProfessionalRegistry">Estado</label>
+                    <select
+                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
+                      class="form-control"
+                      name="ufProfessionalRegistry"
+                      formControlName="ufProfessionalRegistry"
+                    >
+                      <option [ngValue]="null" disabled>Seleccionar</option>
+                      <option [ngValue]="state" *ngFor="let state of states">
+                        {{ state.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addProfessionalRegistry()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!professionalForm.valid"
+                    >
+                      Agregar
+                    </button>
+                  </div>
                 </div>
-                <div class="row">
-                  <div class="form-group col-md-3">
-                    <label for="registryNumber">N° de Registro</label>
-                    <select
-                      class="form-control"
-                      name="registryNumber"
-                      formControlName="registryNumber"
-                      [ngClass]="{
-                        'is-invalid':
-                          !educationForm.get('registryNumber').valid && educationForm.get('registryNumber').touched
-                      }"
-                    >
-                      <option value="test">test</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="extraIdDocument">Otro Documento de Identificacion</label>
-                    <select
-                      class="form-control"
-                      name="extraIdDocument"
-                      formControlName="extraIdDocument"
-                      [ngClass]="{
-                        'is-invalid':
-                          !educationForm.get('extraIdDocument').valid && educationForm.get('extraIdDocument').touched
-                      }"
-                    >
-                      <option value="test">test</option>
-                    </select>
-                  </div>
+                <div class="row mx-2">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Tipo de Registro</th>
+                        <th scope="col">N° de Registro</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let registry of professionalRegistry; let i = index">
+                        <td>
+                          {{ registry.type }}
+                        </td>
+                        <td>
+                          {{ registry.registry }}
+                        </td>
+                        <td>
+                          {{ registry.uf.name }}
+                        </td>
+                        <td>
+                          <div class="custom-control custom-switch">
+                            <input
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="switch{{ registry.id }}"
+                              [checked]="true"
+                              (change)="removeRegistry(i)"
+                            />
+                            <label class="custom-control-label" for="switch{{ registry.id }}"></label>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </form>
             </div>
@@ -893,7 +971,6 @@
                   <div class="mt-2 mb-4">
                     <password-strength-meter [password]="passwordForm.value.password"></password-strength-meter>
                   </div>
-
                   <div class="alert alert-secondary" role="alert">
                     <div class="row">
                       <div class="col-2 text-center">
