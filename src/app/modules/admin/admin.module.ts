@@ -10,6 +10,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 // SHARED
 import { SharedModule } from './../../shared/shared.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],

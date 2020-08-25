@@ -7,6 +7,8 @@ import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { UsersService } from 'src/app/services/users.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -18,15 +20,27 @@ export class EditarUsuarioComponent implements OnInit {
   userType = this.routerAct.snapshot.queryParamMap.get('userType');
   userId = this.routerAct.snapshot.queryParamMap.get('userId');
 
+  isForeign: boolean = false;
+  isSchool: boolean = false;
+  identificationData: FormGroup;
   personalData: FormGroup;
   profileForm: FormGroup;
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
-  educationForm: FormGroup;
+  professionalForm: FormGroup;
   passwordForm: FormGroup;
 
+  states: any = [];
+  cities: any = [];
+  countries: any = [];
+  breeds: any = [];
+  educations: any = [];
+  familiarSituations: any = [];
+  issuingEntities: any = [];
+
   birthDate: NgbDateStruct;
+  inmigrationDate: NgbDateStruct;
   formUser: any = [];
   userObject: any = {};
 
@@ -49,32 +63,67 @@ export class EditarUsuarioComponent implements OnInit {
   specialities: any = [];
   specialitiesAssigned: any = [];
 
+  professionalRegistry: any = [];
+
   constructor(
     private location: Location,
     private routerAct: ActivatedRoute,
     private formBuilder: FormBuilder,
     private adminService: AdminService,
+    private userService: UsersService,
+    private specialtiesService: SpecialtiesService,
     private calendar: NgbCalendar,
-    private specialtiesService: SpecialtiesService
-  ) {
+    private spinner: NgxSpinnerService
+  ) {}
+
+  ngOnInit(): void {
+    this.getUser(this.userType, this.userId);
+    this.clinicId = localStorage.getItem('clinic');
+
+    this.spinner.hide();
+    this.getProfiles();
+    this.getIssuingEntities();
+    this.getUfs();
+    this.getCities();
+    this.getCountries();
+    this.getBreeds();
+    this.getEducations();
+    this.getFamiliarSituations();
+    this.getSpecialties();
+
+    this.identificationData = this.formBuilder.group({
+      document: [null, Validators.required],
+      idDocumentNumber: ['', Validators.required],
+      passport: ['', null],
+      rgRegistry: ['', null],
+      issuingBody: [null, null],
+      extraDocument: [null, null],
+      extraIdDocument: ['', null],
+    });
+
     this.personalData = this.formBuilder.group({
-      cpf: [null, Validators.required],
-      cns: [null, Validators.required],
-      passport: [null, Validators.required],
-      rgRegistry: [null, Validators.required],
-      issuingBody: [null, Validators.required],
-      extraIdDocument: [null, Validators.required],
-      idDocumentNumber: [null, Validators.required],
-      name: [null, Validators.required],
-      lastName: [null, Validators.required],
-      socialName: [null, Validators.required],
-      email: [null, [Validators.email, Validators.required]],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      socialName: ['', null],
+      email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, Validators.required],
+      gender: ['male', Validators.required],
       birthdate: [null, Validators.required],
-      ufBirth: [null, Validators.required],
-      municipalityBirth: [null, Validators.required],
-      genre: [null, Validators.required],
-      nacionality: [null, Validators.required],
+      ufBirth: [null, null],
+      municipalityBirth: [null, null],
+      nacionality: ['', Validators.required],
+      originCountry: [null, null],
+      inmigrationDate: ['', null],
+      breed: [null, Validators.required],
+      education: [null, null],
+      familySituation: [null, null],
+      cep: ['', Validators.required],
+      uf: [null, Validators.required],
+      city: [null, Validators.required],
+      neighborhood: ['', Validators.required],
+      street: ['', Validators.required],
+      streetNumber: [0, Validators.required],
     });
 
     this.profileForm = this.formBuilder.group({
@@ -86,22 +135,23 @@ export class EditarUsuarioComponent implements OnInit {
       waitingRoom: [null, Validators.required],
     });
 
+    this.profileDataForm = this.formBuilder.group({
+      profileImg: [null],
+      biography: ['', Validators.required],
+    });
+
     this.specialitiesForm = this.formBuilder.group({
       speciality: [null, Validators.required],
     });
 
-    this.profileDataForm = this.formBuilder.group({
-      profileImg: [null],
-      biography: [null, Validators.required],
-    });
-
-    this.educationForm = this.formBuilder.group({
-      professionalTitle: [null, Validators.required],
-      university: [null, Validators.required],
-      course: [null, Validators.required],
-      professionalRegistry: [null, Validators.required],
-      registryNumber: [null, Validators.required],
-      extraIdDocument: [null, Validators.required],
+    this.professionalForm = this.formBuilder.group({
+      professionalTitle: ['', Validators.required],
+      university: ['', Validators.required],
+      course: ['', Validators.required],
+      ufRegistry: [null, Validators.required],
+      professionalRegistryType: [null, Validators.required],
+      professionalRegistry: ['', Validators.required],
+      ufProfessionalRegistry: [null, Validators.required],
     });
 
     this.passwordForm = new FormGroup(
@@ -119,14 +169,28 @@ export class EditarUsuarioComponent implements OnInit {
         validators: this.confirmPass.bind(this),
       }
     );
-  }
 
-  ngOnInit(): void {
-    this.getUser(this.userType, this.userId);
-    this.clinicId = localStorage.getItem('clinic');
-    console.log(this.clinicId);
+    this.formUser.push(
+      this.identificationData,
+      this.personalData,
+      this.profileForm,
+      this.professionalForm,
+      this.passwordForm
+    );
 
-    this.formUser.push(this.personalData, this.profileForm, this.educationForm, this.passwordForm);
+    this.birthDate = this.calendar.getToday();
+    this.inmigrationDate = this.calendar.getToday();
+
+    // REACTIVE FORM
+    this.identificationData.get('document').valueChanges.subscribe((val) => {
+      if (val === 'rgRegistry') this.identificationData.get('issuingBody').enable();
+      else this.identificationData.get('issuingBody').disable();
+      this.identificationData.get('idDocumentNumber').enable();
+    });
+
+    this.identificationData.get('extraDocument').valueChanges.subscribe((val) => {
+      this.identificationData.get('extraIdDocument').enable();
+    });
 
     this.birthDate = this.calendar.getToday();
 
@@ -136,35 +200,74 @@ export class EditarUsuarioComponent implements OnInit {
   async getUser(userType, userId) {
     this.adminService.getUserById(userType, userId).subscribe(
       (user) => {
-        // USER DATA
-        this.personalData.get('cpf').setValue(user.identificationData.cpf);
-        this.personalData.get('cns').setValue(user.identificationData.cns);
-        this.personalData.get('passport').setValue(user.identificationData.passport);
-        this.personalData.get('rgRegistry').setValue(user.identificationData.rgRegistry);
-        this.personalData.get('issuingBody').setValue(user.identificationData.issuingBody);
-        this.personalData.get('extraIdDocument').setValue(user.identificationData.extraIdDocument);
-        this.personalData.get('idDocumentNumber').setValue(user.identificationData.idDocumentNumber);
+        // console.log(user);
 
+        // MAIN IDENTIFICATION
+        if (user.identificationData.cpf) this.identificationData.get('document').setValue('cpf');
+        if (user.identificationData.cns) this.identificationData.get('document').setValue('cns');
+        if (user.identificationData.rgRegistry) this.identificationData.get('document').setValue('rgRegistry');
+        // SECONDARY IDENTIFICATION
+        if (user.identificationData.cbo) this.identificationData.get('extraDocument').setValue('cpf');
+        if (user.identificationData.pasep) this.identificationData.get('extraDocument').setValue('pasep');
+        if (user.identificationData.ctps) this.identificationData.get('extraDocument').setValue('ctps');
+        if (user.identificationData.idDocumentNumber)
+          this.identificationData.get('extraDocument').setValue('idDocumentNumber');
+        if (user.identificationData.professionalUfNumber)
+          this.identificationData.get('extraDocument').setValue('professionalUfNumber');
+
+        // USER DATA
+        this.identificationData
+          .get('idDocumentNumber')
+          .setValue(user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
+
+        if (user.identificationData.rgRegistry)
+          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody);
+
+        this.isForeign = user.identificationData.isForeign;
+        if (user.identificationData.isForeign)
+          this.identificationData.get('passport').setValue(user.identificationData.passport);
+
+        this.identificationData
+          .get('extraIdDocument')
+          .setValue(
+            user.identificationData.cbo ||
+              user.identificationData.pasep ||
+              user.identificationData.ctps ||
+              user.identificationData.idDocumentNumber ||
+              user.identificationData.titleVote ||
+              user.identificationData.professionalUfNumber
+          );
+
+        this.isSchool = user.personalData.isSchool;
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
         this.personalData.get('socialName').setValue(user.personalData.socialName);
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
-        this.personalData.get('birthdate').setValue(user.personalData.birthDate);
+        this.personalData.get('gender').setValue(user.personalData.gender);
+        this.personalData.get('birthdate').setValue(user.personalData.birthdate);
         this.personalData.get('ufBirth').setValue(user.personalData.ufBirth);
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth);
-        this.personalData.get('genre').setValue(user.personalData.genre);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
-
-        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
-        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
-        this.personalData.get('nacionality').setValue(user.personalData.nacionality);
+        this.personalData.get('originCountry').setValue(user.personalData.originCountry);
+        this.personalData.get('inmigrationDate').setValue(user.personalData.inmigrationDate || '');
+        this.personalData.get('breed').setValue(user.personalData.breed);
+        this.personalData.get('education').setValue(user.personalData.education);
+        this.personalData.get('familySituation').setValue(user.personalData.familySituation);
+        this.personalData.get('motherName').setValue(user.personalData.motherName);
+        // this.personalData.get('isSchool').setValue(user.personalData.isSchool);
+        this.personalData.get('cep').setValue(user.addressData.cep);
+        this.personalData.get('uf').setValue(user.addressData.uf);
+        this.personalData.get('city').setValue(user.addressData.city);
+        this.personalData.get('neighborhood').setValue(user.addressData.neighborhood);
+        this.personalData.get('street').setValue(user.addressData.street);
+        this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
         this.waitingRoomsAssigned = user.waitingRooms || [];
         this.specialitiesAssigned = user.specialities || [];
 
         for (const specialty of this.specialitiesAssigned) {
-          this.getSpecialtyById(specialty);
+          // this.getSpecialtyById(specialty);
         }
 
         // PROFILES CRUD
@@ -299,87 +402,194 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.waitingRoomsAssigned);
+    //console.log(this.waitingRoomsAssigned);
+    this.spinner.show();
 
     const _profiles = this.profilesAssigned.map((map) => {
-      return {
-        clinic: map.clinic,
-        profile: map.id,
-      };
+      return map.id;
     });
+    /* TODO
     const _waitingRooms = this.waitingRoomsAssigned.map((map) => {
       return map.id;
     });
+    */
     const _specialities = this.specialitiesAssigned.map((map) => {
       return map.id;
     });
 
-    console.log(_waitingRooms);
+    // console.log(_waitingRooms);
 
     this.userObject = {
       id: this.userId,
       identificationData: {
-        cpf: this.formUser[0].value.cpf,
-        cns: this.formUser[0].value.cns,
+        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
+        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+        ...(this.formUser[0].value.document === 'rgRegistry' && {
+          rgRegistry: this.formUser[0].value.idDocumentNumber || '',
+        }),
         passport: this.formUser[0].value.passport,
-        rgRegistry: this.formUser[0].value.rgRegistry,
-        issuingBody: this.formUser[0].value.issuingBody,
-        extraIdDocument: this.formUser[0].value.extraIdDocument,
-        idDocumentNumber: this.formUser[0].value.idDocumentNumber,
+        issuingBody: this.formUser[0].value.issuingBody || '',
+        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
+        ...(this.formUser[0].value.extraDocument === 'pasep' && {
+          pasep: this.formUser[0].value.extraIdDocument || '',
+        }),
+        ...(this.formUser[0].value.extraDocument === 'ctps' && {
+          ctps: this.formUser[0].value.extraIdDocument || '',
+        }),
+        ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
+          idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
+        }),
+        ...(this.formUser[0].value.extraDocument === 'titleVote' && {
+          titleVote: this.formUser[0].value.extraIdDocument || '',
+        }),
+        ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
+          professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
+        }),
+        isForeign: this.isForeign,
       },
       personalData: {
-        name: this.formUser[0].value.name,
-        lastName: this.formUser[0].value.lastName,
-        socialName: this.formUser[0].value.socialName,
-        email: this.formUser[0].value.email,
-        phoneNumber: this.formUser[0].value.phoneNumber,
-        birthdate: this.formUser[0].value.birthdate.toString(),
-        ufBirth: this.formUser[0].value.ufBirth,
-        municipalityBirth: this.formUser[0].value.municipalityBirth,
-        genre: this.formUser[0].value.genre,
-        nacionality: this.formUser[0].value.nacionality,
+        isSchool: this.isSchool,
+        name: this.formUser[1].value.name,
+        lastName: this.formUser[1].value.lastName,
+        motherName: this.formUser[1].value.motherName,
+        socialName: this.formUser[1].value.socialName,
+        email: this.formUser[1].value.email,
+        phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
+        birthdate: this.formUser[1].value.birthdate.toString(),
+        ufBirth: this.formUser[1].value.ufBirth || '',
+        municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+        gender: this.formUser[1].value.gender,
+        nacionality: this.formUser[1].value.nacionality,
+        originCountry: this.formUser[1].value.originCountry || '',
+        inmigrationDate: this.formUser[1].value.inmigrationDate.toString() || '',
+        breed: this.formUser[1].value.breed,
+        education: this.formUser[1].value.education || '',
+        familySituation: this.formUser[1].value.familySituation || '',
+      },
+      addressData: {
+        cep: this.formUser[1].value.cep,
+        uf: this.formUser[1].value.uf,
+        city: this.formUser[1].value.city,
+        neighborhood: this.formUser[1].value.neighborhood,
+        street: this.formUser[1].value.street,
+        streetNumber: parseInt(this.formUser[1].value.streetNumber),
       },
       profiles: _profiles,
-      waitingRooms: _waitingRooms,
+      waitingRooms: this.waitingRoomsAssigned,
       profileData: {
         profileImg: '',
-        biography: this.formUser[1].value.biography,
+        biography: this.formUser[2].value.biography,
       },
       specialities: _specialities,
-      educationData: {
-        professionalTitle: this.formUser[2].value.professionalTitle,
-        university: this.formUser[2].value.university,
-        course: this.formUser[2].value.course,
-        professionalRegistry: this.formUser[2].value.professionalRegistry,
-        registryNumber: this.formUser[2].value.registryNumber,
-        extraIdDocument: this.formUser[2].value.extraIdDocument,
+      professionalData: {
+        professionalTitle: this.formUser[3].value.professionalTitle,
+        university: this.formUser[3].value.university,
+        course: this.formUser[3].value.course,
+        ufRegistry: this.formUser[3].value.ufRegistry,
+        professionalRegistry: this.professionalRegistry,
       },
-      password: this.formUser[3].value.password,
-      confirmPassword: this.formUser[3].value.confirmPassword,
+      password: this.formUser[4].value.password,
+      confirmPassword: this.formUser[4].value.confirmPassword,
     };
 
     // console.log(this.formUser[0].value.birthdate);
     console.log(this.userObject);
 
-    if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
+    if (this.userType !== 'patient') {
+      if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
+        this.adminService.updateUser(this.userType, this.userObject).subscribe(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            this.location.back();
+          }
+        );
+      } else {
+        this.spinner.hide();
+        alert('Complete el formulario con todos los datos necesarios');
+      }
+    } else {
       this.adminService.updateUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
+        this.spinner.hide();
         this.location.back();
       });
-    } else {
-      alert('Complete el formulario con todos los datos necesarios');
     }
+  }
+
+  getIssuingEntities() {
+    this.userService.getIssuingEntities().subscribe((data) => {
+      // console.log(data);
+      this.issuingEntities = data.payload;
+    });
+  }
+
+  getUfs() {
+    this.userService.getStates().subscribe((data) => {
+      // console.log(data);
+      this.states = data.payload;
+    });
+  }
+
+  getCities() {
+    this.userService.getCities().subscribe((data) => {
+      // console.log(data);
+      this.cities = data.payload;
+    });
+  }
+
+  getCountries() {
+    this.userService.getCountries().subscribe((data) => {
+      // console.log(data);
+      this.countries = data.payload;
+    });
+  }
+
+  getBreeds() {
+    this.userService.getBreeds().subscribe((data) => {
+      // console.log(data);
+      this.breeds = data.payload;
+    });
+  }
+
+  getEducations() {
+    this.userService.getEducations().subscribe((data) => {
+      // console.log(data);
+      this.educations = data.payload;
+    });
+  }
+
+  getFamiliarSituations() {
+    this.userService.getFamiliarSituations().subscribe((data) => {
+      // console.log(data);
+      this.familiarSituations = data.payload;
+    });
   }
 
   getSpecialties() {
     this.specialtiesService.getSpecialties().subscribe((data) => {
+      // console.log(data);
       this.specialities = data;
     });
   }
 
-  getSpecialtyById(specialtyId) {
-    this.specialtiesService.getSpecialtiesId(specialtyId).subscribe((data) => {
-      console.log(data);
-    });
+  addProfessionalRegistry() {
+    if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
+      alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
+    } else {
+      this.professionalRegistry.push({
+        type: this.professionalForm.value.professionalRegistryType,
+        registry: this.professionalForm.value.professionalRegistry,
+        uf: this.professionalForm.value.ufProfessionalRegistry._id,
+      });
+    }
+  }
+
+  removeRegistry(index) {
+    this.professionalRegistry.splice(index, 1);
   }
 }

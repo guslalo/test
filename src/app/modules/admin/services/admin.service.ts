@@ -27,11 +27,12 @@ export class AdminService {
     return this.http.post<any>(`${environment.baseUrl}${this.userEndpoint}/${userType}`, {
       identificationData: userObject.identificationData,
       personalData: userObject.personalData,
+      addressData: userObject.addressData,
       waitingRooms: userObject.waitingRooms,
       profileData: userObject.profileDataForm,
       /* PROFESSIONAL ONLY */
       specialities: userObject.specialities,
-      educationData: userObject.educationData,
+      professionalData: userObject.professionalData,
       /* PROFESSIONAL ONLY */
       password: userObject.password,
       confirmPassword: userObject.confirmPassword,
@@ -48,21 +49,8 @@ export class AdminService {
   }
 
   updateUser(userType, userObject): Observable<any> {
-    console.log(userType);
-    let role;
-    switch (userType) {
-      case 'admins':
-        role = 'admin';
-        break;
-      case 'coordinators':
-        role = 'coordinator';
-        break;
-      case 'professionals':
-        role = 'professional';
-        break;
-      case 'patients':
-        role = 'patient';
-    }
+    // admins -> admin
+    let role = userType.slice(0, -1);
     return this.http.put<any>(`${environment.baseUrl}${this.userEndpoint}/${role}`, userObject);
   }
 
