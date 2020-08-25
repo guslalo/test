@@ -28,6 +28,7 @@
                         role="tab"
                         aria-controls="home4"
                         aria-selected="true"
+                        (click)="!flujoProfesional"
                         >Especialidad</a
                     >
                     </li>
@@ -40,6 +41,7 @@
                         role="tab"
                         aria-controls="profile4"
                         aria-selected="false"
+                        (click)="!flujoProfesional"
                         >Profesional 
                     </a>
                     </li>
@@ -79,12 +81,10 @@
                     <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
                         <div class="form-group">
                             <label class="font-weight-bold text-left  w-100">Selecciona Profesional</label>
-                            <select class="form-control custom-select">
+                            <select class="form-control custom-select" (change)="escogerProfessional($event.target.value)">
                                 <option selected>Selecciona</option>
                                 <ng-container *ngFor="let item of professional">
-                                    <ng-container *ngFor="let item2 of item.personalData">
-                                        <option value="1">{{item2.name}}</option>
-                                    </ng-container>
+                                    <option value="{{item._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
                                 </ng-container>
                             </select>
                         </div>
@@ -316,13 +316,13 @@
               <h4 class="text-left mb-3">Documentos</h4>
                 <form>
                     <div class="form-group"><!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
-                        <label for="exampleInputEmail1">Subir documentos</label>
+                        <label for="exampleInputEmail1">Subir documentosa</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input"
                            
                             (change)="changeListener($event)"
                             id="customFileLang" lang="es">
-                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            <label class="custom-file-label" for="customFileLang">{{textInputFile}}</label>
                         </div>
                     </div>
                 </form>  

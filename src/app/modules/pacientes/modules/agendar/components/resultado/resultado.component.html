@@ -22,17 +22,17 @@
                 <p class="font-weight-bold">
                     {{reserva[0].professionalDetails.specialtyDetails[0].specialtyName}} 
                 </p>
-                <p class="valor">VALOR CONSULTA: $45.000</p>
+                <p class="valor">VALOR CONSULTA: $32.000</p>
                 <p class="font-weight-bold m-0">Su consulta sera realiza el  {{reserva[0].date | date: 'dd/MM/yyyy'}} </p><!--| 8:00 AM-->
                 <p class="font-weight-bold  m-0">ID ATENCIÓN 356-57834</p>
             </div>
             <div class="text-center mt-5 mb-5">
                 <button 
                 type="button" data-dismiss="modal" 
-                class="btn btn-outline-primary rounded-pill mr-3"> Volver</button>
+                class="btn btn-outline-primary rounded-pill mr-3" routerLink="/app-paciente"> Volver</button>
                 <button 
                 type="button" data-dismiss="modal" 
-                class="btn btn-primary rounded-pill "> Pagar y agendar</button>
+                class="btn btn-primary rounded-pill"  routerLink="/app-paciente/mis-consultas"> Pagar y agendar</button>
             </div>
             <p>
                 Recuerda  respetar la fecha acordad para reagendamientos y cancelaciones revisa
@@ -43,9 +43,54 @@
             <div class="text-center mb-3">
                 <button 
                 type="button" 
-                class="btn btn-outline-primary rounded-pill mr-3"> Ver condiciones</button>
+                class="btn btn-outline-primary rounded-pill mr-3" data-toggle="modal" data-target="#condiciones"> Ver condiciones</button>
             </div>
             </div>
             </div>
 
 </div></div></div>
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="condiciones"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut tellus sed sapien semper egestas et in nibh.
+        Duis cursus ipsum sagittis, laoreet velit in, rhoncus tellus. Orci varius natoque penatibus et magnis dis
+        parturient montes, nascetur ridiculus mus. Ut ur ornare. Pellentesque maximus erat ex, non pulvinar sapien
+        fermentum ut. Vestibulum fringilla ac urna at sagittis. Nullam tincidunt tellus quis aliquet sollicitudin. Nulla
+        eget fermentum urna. Aenean sit amet orci posuere, pellentesque risus ut, blandit risus. Nulla molestie pharetra
+        orci, ut ornare massa porttitor non. Suspendisse per. In hac habitasse platea dictumst. Cras consectetur luctus
+        nibh, nec bibendum justo facilisamet neque vel nisl iaculis porttitor. Integer purus ante, interdum sollicitudin
+        nibh faucibus, sollicitudin porta lorem. Maecenas quis nulla mattis justo laoreet viverra. Duis vitae lectus nec
+        nulla viverra congue in sit amet quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu
+        laoreet velit. In ac orci eget ort. Suspendisse potenti. Etiam ac rutrum nisl. Maecenas sed neque ex. Morbi
+        vitae nulla ut augue suscipit elementum. Quisque nulla arcu, mattis ut vehicula at, laoreet et est. Quisque
+        lobortis laoreet odio at pretium. In hac habitasse platea dictumst. Nulla aliquet, dolor non condimentum
+        aliquam, diam nibh scelerisque est, et sagittis sem eros eleifend erat. Quisque iaculis faucibus eros non
+        malesuada. Sed tellus quam, egestas nec leo in, hendrerit euismod sem. Curabitur aliquet tellus sed ante
+        lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" routerLink="app-paciente">Rechazar</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" routerLink="/app-paciente/mis-consultas">
+          Aceptar 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

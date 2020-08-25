@@ -707,3 +707,15 @@ button.custom-btn-1:hover {
 .dropdown-toggle::after {
   display: none;
 }
+
+.meetPatient {
+  height: 100vh !important;
+  overflow: hidden;
+  iframe {
+      height: 100vh !important;
+  }
+}
+
+.custom-file {
+  overflow: hidden;
+}

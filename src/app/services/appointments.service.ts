@@ -16,11 +16,18 @@ export class AppointmentsService {
   constructor(private http: HttpClient) {}
 
   // getAppointments
-  getAppointments(number): Observable<any> {
-    let params = new HttpParams();
-    params = params.append('page', number);
+  getAppointments(number, status?): Observable<any> {
+    if(status) {
+      const params = new HttpParams()
+      .set('page', number)
+      .set('status', status);
+      return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
+    } else {
+      let params = new HttpParams();
+      params = params.append('page', number);
+      return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
+    }
 
-    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
   }
 
   // getAppointments

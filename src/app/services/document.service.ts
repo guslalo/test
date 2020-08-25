@@ -10,8 +10,13 @@ import { environment } from './../../environments/environment';
 export class DocumentService {
   
   private uploadUrl = 'v1/documents/appointment/upload';
+  public urlDownload = 'v1/medical-record/download/';
 
   constructor(private http: HttpClient) {}
+
+  download(){
+    return  environment.baseUrl+this.urlDownload
+  }
 
   //specialties
   postDocument(appointmentId, documentDetails): Observable<any> {

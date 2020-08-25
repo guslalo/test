@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <h2>Mi salud</h2>
-      <p>Esta sera la información que vera los porfesionales para tus consultas</p>
+      <p>Esta sera la información que vera los profesionales para tus consultas</p>
     </div>
   </div>
 
@@ -115,7 +115,9 @@
                   <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
                     <ul class="antecedentes">
                       <li class="pl-5">{{item.value}}
-                        <div class="delete" (click)="delete(item, $event)">
+                        <div class="delete" 
+                         data-toggle="modal"
+                         data-target="#eliminar" (click)="preDelete(item, $event)"><!--(click)="delete(item, $event)" -->
                           <img src="assets/img/delete.svg">
                         </div>
                       </li>
@@ -166,7 +168,8 @@
                       <div  class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
                         <ul class="antecedentes">
                           <li class="pl-5">{{item.value}}
-                            <div class="delete" (click)="delete(item, $event)">
+                            <div class="delete"  data-toggle="modal"
+                            data-target="#eliminar" (click)="preDelete(item, $event)">
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
@@ -218,7 +221,8 @@
                         <ul class="antecedentes">
                           <li class="pl-5" id="{{item.id}}">
                             {{item.value}}
-                            <div class="delete" (click)="delete(item, $event)">
+                            <div class="delete"  data-toggle="modal"
+                            data-target="#eliminar" (click)="preDelete(item, $event)">
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
@@ -270,7 +274,8 @@
                         <ul class="antecedentes">
                           <li class="pl-5" id="{{item.id}}">
                             {{item.value}}
-                            <div class="delete" (click)="delete(item, $event)">
+                            <div class="delete"  data-toggle="modal"
+                            data-target="#eliminar" (click)="preDelete(item, $event)">
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
@@ -322,7 +327,8 @@
                         <ul class="antecedentes">
                           <li class="pl-5" id="{{item.id}}">
                             {{item.value}}
-                            <div class="delete" (click)="delete(item, $event)">
+                            <div class="delete"  data-toggle="modal"
+                            data-target="#eliminar"  (click)="preDelete(item, $event)">
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
@@ -363,9 +369,9 @@
                   </a>
                     <div 
                     class="add float-right" 
-                    data-toggle="modal"
+                    data-toggle="modal" data-target="#add"
                     (click)="categoryChangue('others')"
-                    data-target="#add">
+                    >
                       Agregar
                       <img src="assets/img/+.svg">
                     </div>
@@ -374,7 +380,8 @@
                         <ul class="antecedentes">
                           <li class="pl-5" id="{{item.id}}">
                             {{item.value}}
-                            <div class="delete" (click)="delete(item, $event)">
+                            <div class="delete"  data-toggle="modal"
+                            data-target="#eliminar" (click)="preDelete(item, $event)">
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
@@ -426,12 +433,15 @@
                         <td>{{item.type}}</td>
                         <td>{{item.uploadDate | date: 'dd/MM/yyyy'}}</td>
                         <td>{{item.madeBy}}</td>
-                        <td>
-                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
-                            <a href="javascript:;"> <!--{{item.path}}-->
+                        <td> 
+                          <a 
+                           href="{{downloadUrl}}{{item.path}}" download
+                          >
+                          <button 
+                          type="button" class="btn btn-outline-primary rounded-pill btn-sm">                        
                             Descargar
-                          </a>
                           </button>
+                          </a>
                         </td>
                       </tr>
                   
@@ -586,6 +596,47 @@
   </div>
 </div>
 
+<!-- Modal eliminar antecedente-->
+<div
+  class="modal fade"
+  id="eliminar"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">¿Deseas eliminar este elemento?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate=""> <!--[formGroup]="availabilityBlocked" -->
+          <div class="row">
+            <div class="form-group col">
+              <h5 class="text-center w-100">{{elemntoValue}}</h5>   
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button
+          type="button"
+          class="btn btn-danger rounded-pill"
+          data-dismiss="modal"
+          (click)="delete()"
+        >
+        Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal examen-->
 <div
@@ -608,13 +659,6 @@
         <form [formGroup]="addExamen" novalidate=""> <!-- -->
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">Nombre</label>   
-              <input type="text"
-              class="form-control" name="fileName" id="fileName"
-              formControlName="fileName"
-              />
-            </div>
-            <div class="form-group col">
               <label for="dateBlock">Tipo documento</label>   
               <input type="text"
               class="form-control" name="documentType" id="documentType"
@@ -636,9 +680,10 @@
                 <input type="file" class="custom-file-input" 
                 (change)="openFile($event)"
                 id="customFile"
+                style="overflow: hidden;"
                 formControlName="file"
                 >
-                <label class="custom-file-label" for="customFile">Choose file</label>
+                <label class="custom-file-label" for="customFile">{{textInputFile}}</label>
               </div>
             </div>
           </div>

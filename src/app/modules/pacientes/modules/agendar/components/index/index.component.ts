@@ -12,6 +12,8 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
 
+
+
 //datepicker
 import {  NgbDateStruct, NgbCalendar,NgbDateParserFormatter,NgbDatepickerConfig,NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { id } from '@swimlane/ngx-charts';
@@ -38,6 +40,8 @@ export class IndexComponent implements OnInit {
   public date: { year: number; month: number };
   public file: any;
   public base64:any;
+  public textInputFile:any;
+  public flujoProfesional:boolean = false;
 
   imageError: string;
   isImageSaved: boolean;
@@ -63,7 +67,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     const current = new Date();
-
+    this.textInputFile = 'Seleccione Archivo';
     this.minDate = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
@@ -87,6 +91,7 @@ export class IndexComponent implements OnInit {
   }
 
   onChangeTypeProfesional(id){
+    this.flujoProfesional = false;
     console.log(id);
     this.getSpecialtiesIdService(id);
 
@@ -198,10 +203,35 @@ export class IndexComponent implements OnInit {
     ) 
   } 
 
+
+  escogerProfessional(event){
+    this.flujoProfesional = true;
+    this.bloquearFecha = false;
+    console.log(event);
+    this.reserve = {
+      professionalDetails: {
+          userId: null,
+          specialtyId: event
+      },
+      dateDetails: {
+          date: {
+              year: null,
+              month: null,
+              day: null
+          },
+          start: null
+      }
+    }
+
+    //this.reserve.professionalDetails.specialtyId = event;
+  }
+
   getProfessionalService() {
     this.professionalService.getProfessionals().subscribe(
       data => {
-        this.professional = data.payload;
+        this.professional = data;
+        console.log(this.professional);
+        
       },
       error => {
         console.log(error)
@@ -211,18 +241,32 @@ export class IndexComponent implements OnInit {
  
 
   getPostBlocks(date) {
-    const object = {
+    if(this.flujoProfesional === true) {
+      const object = {
         month: date.month,
         year: date.year,
         day: date.day
-    }
+      }
 
+      this.reserve = {
+        professionalDetails: {
+            userId: null
+        },
+        dateDetails: {
+            date: {
+                year: object.year,
+                month: object.month,
+                day: object.day
+            },
+            start: null
+        }
+      }
   
-    this.reserve.dateDetails.date = object;
-    console.log(this.reserve.professionalDetails.specialtyId);
-    console.log(object)
+      //.reserve.dateDetails.date = object;
+      console.log(this.reserve.professionalDetails.specialtyId);
+      console.log('flujo profesional')
       this.agendarService.postBlocks(
-        object, this.reserve.professionalDetails.specialtyId //
+        object
       ).subscribe(
         data => {
           this.blocks = data.payload;
@@ -239,9 +283,66 @@ export class IndexComponent implements OnInit {
         error => {
           console.log(error)
         }
-      ) /* */
+      ) 
+    } else {
+      console.log(date);
+      const object = {
+        month: date.month,
+        year: date.year,
+        day: date.day
+      }
+
+      this.reserve.dateDetails.date = object;
+      console.log(this.reserve.professionalDetails.specialtyId);
+      console.log(object)
+      //.getServicesBlocks(object, this.reserve.professionalDetails.specialtyId)
+      this.agendarService.postBlocks(
+        object,  this.reserve.professionalDetails.specialtyId //
+      ).subscribe(
+        data => {
+          this.blocks = data.payload;
+          localStorage.removeItem('reserva');
+          localStorage.setItem('reserva', JSON.stringify(this.blocks));
+          console.log( data)
+          console.log(data.internalCode)
+          if(data.internalCode === 103){
+            this.sinProfesionales = true;
+          } else {
+            this.sinProfesionales = false;
+          }
+        },
+        error => {
+          console.log(error)
+        }
+      ) 
+    }
+   /* */
     
   } 
+
+  //trae lso bloques
+  getServicesBlocks(date, specialtyId?){
+    console.log(date, specialtyId);
+    this.agendarService.postBlocks(
+      date, specialtyId //
+    ).subscribe(
+      data => {
+        this.blocks = data.payload;
+        localStorage.removeItem('reserva');
+        localStorage.setItem('reserva', JSON.stringify(this.blocks));
+        console.log( data)
+        console.log(data.internalCode)
+        if(data.internalCode === 103){
+          this.sinProfesionales = true;
+        } else {
+          this.sinProfesionales = false;
+        }
+      },
+      error => {
+        console.log(error)
+      }
+    ) 
+  }
 
   getSpecialtiesService(){
     this.bloquearSelect = true;
@@ -287,6 +388,9 @@ export class IndexComponent implements OnInit {
 
 changeListener(event) : void {
   //this.readThis($event.target);
+  console.log(event.target.files[0]);
+  this.textInputFile = event.target.files[0].name;
+  console.log(this.textInputFile)
   const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -296,11 +400,11 @@ changeListener(event) : void {
       console.log(this.base64 );
       //this.postDocumentService(this.base64);
       const documentDetailsObject = {
-        name: "encodedPixel.png",
-        type: "exam",
-        data: reader.result
+        name: event.target.files[0].name,
+        type: "documento",
+        data: this.base64.split(',')[1]
       } 
-    
+      
       this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
         data => {
           console.log(data)
@@ -308,7 +412,7 @@ changeListener(event) : void {
         error => {
           console.log(error)
         }
-      )
+      )/**/
     
   };
  

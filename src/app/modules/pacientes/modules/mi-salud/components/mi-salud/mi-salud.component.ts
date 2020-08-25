@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
+import { DocumentService } from './../../../../../../services//document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
+
 
 @Component({
   selector: 'app-mi-salud',
@@ -20,14 +23,24 @@ export class MiSaludComponent implements OnInit {
   public addExamen: FormGroup;
   public category:any;
   public base64:any;
+  public nameFile:any;
+  public downloadUrl:any;
+  public elemento:string;
+  public booleanDelete:boolean;
+  public antecedente:string;
+  public elemntoId:string;
+  public elemntoValue:string;
+  public textInputFile:any;
 
   constructor(
+    private router: Router,
     private _formBuilder: FormBuilder,
+    private documentService:DocumentService,
     private currentUserService:CurrentUserService,
     private medicalRecord:MedicalRecordService) {}
 
   ngOnInit(): void {
- 
+    this.textInputFile = 'seleccionar archivo';
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -42,6 +55,7 @@ export class MiSaludComponent implements OnInit {
     );
     console.log(this.user.id);
     this.getMedicalRecord();
+  
 
     this.addExamen = this._formBuilder.group({
       fileName: [null, [Validators.required]],
@@ -49,23 +63,9 @@ export class MiSaludComponent implements OnInit {
       madeBy: [null, [Validators.required]],
       file: [null, [Validators.required]],
     });
-
+  
+    this.downloadUrl = this.documentService.download();
   }
-
-  /*
-  getUser(id){
-    this.currentUserService.currentUser(id).subscribe(
-      data => {
-        console.log(data)
-        this.getMedicalRecord(data.id);
-      },
-      error => {
-        console.log(error)
-      }
-    )
-
-  }*/
-
 
   categoryChangue(category?){
     //console.log(category);
@@ -81,20 +81,23 @@ export class MiSaludComponent implements OnInit {
   addExamenPost(){
     console.log(this.addExamen);
     const formObject = {
-      fileName: this.addExamen.controls.fileName.value,
+      fileName: this.nameFile,
       documentType: this.addExamen.controls.documentType.value,
       madeBy: this.addExamen.controls.madeBy.value,
-      file: this.base64
+      file: this.base64.split(',')[1]
     };
     this.putAddExamen(formObject);
+    
   }
 
+  
 
   putAddExamen(object){
     
     this.medicalRecord.putAddExamen(object).subscribe(
       data => {
         console.log(data);
+        this.getMedicalRecord();
       },
       error => {
         console.log(error)
@@ -116,10 +119,18 @@ export class MiSaludComponent implements OnInit {
     )
   }
 
-  delete(item, event){
+
+  //borrar antecedente
+  preDelete(item, event){
     let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
     console.log(antecedent);
-    this.medicalRecord.deleteAntecedent(antecedent, item.id).subscribe(
+    this.antecedente = antecedent ;
+    this.elemntoId = item.id;
+    this.elemntoValue = item.value;
+  }
+
+  delete(item?, item2?){
+    this.medicalRecord.deleteAntecedent(this.antecedente, this.elemntoId).subscribe(
       data => { 
         console.log(data);
         this. getMedicalRecord();
@@ -133,6 +144,7 @@ export class MiSaludComponent implements OnInit {
   getMedicalRecord(){
     this.medicalRecord.getByUserId().subscribe(
       data => {
+    
         this.exams = data.exams;
         console.log(this.exams )
         this.antecedentesGeneral = data.antecedent;
@@ -148,13 +160,20 @@ export class MiSaludComponent implements OnInit {
 
   openFile(event) {
     const file = event.target.files[0];
+    this.nameFile = event.target.files[0].name;
+    this.textInputFile = event.target.files[0].name;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       //console.log(reader.result);
       this.base64 = reader.result
-      console.log(this.base64);
+      this.base64.split(',')[1]
+      console.log(this.base64.split(',')[1]);
+     
     };
+
+
+     
   }
    
 
