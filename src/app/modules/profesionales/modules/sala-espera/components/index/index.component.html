@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col col-md-6 mb-2">
+      <h2>Sala de espera A1</h2>
+      <p style="display: none;">Sala creada el 20 de Septiembre por Manuel Fernandez           70 usuario en sala de espera             20 profesionales</p>
+    </div>
+    <div class="col col-md-6">
+        <button class="btn btn-outline-primary rounded-pill float-right" routerLink="/app-professional">
+            Abandonar sala
+        </button>
+    </div>
+</div>
+
+<div class="tableBox rounded p-4 bg-white">
+    <table class="table">
+      <thead class="">
+        <tr>
+          <th scope="col"> Nombre Pacientes</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Estado</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of consultas" id="{{item._id}}">
+          <td scope="row">
+            {{item.patientDetails.userDetails[0].name}}  {{item.patientDetails.userDetails[0].lastName}}
+          </td>
+          <td>
+            <a routerLink="../historial-consultas/ficha-consulta">
+           
+                {{item.dateDetails.date | date: 'dd/MM/yyyy'}} / {{item.dateDetails.start}}
+            </a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+              {{item.administrativeDetails.status}}
+            </button>
+          </td>
+          <td>
+            <button type="button" 
+            routerLink="/consulta/{{item._id}}"
+            class="btn btn-outline-secondary rounded-pill btn-sm">
+                atender
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

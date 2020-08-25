@@ -29,7 +29,16 @@ const MisPacientes = 'mis-pacientes';
 // routing
 
 const routes: Routes = [
-  { path: '', component: InicioPComponent },
+  {
+    path: 'sala-espera',
+    loadChildren: () => import('./modules/sala-espera/sala-espera.module').then((m) => m.SalaEsperaModule),
+  },
+  {
+    path: 'consulta/:appointmentId',
+    loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
+  },
+  { 
+    path: '', component: InicioPComponent },
       { path: 'context', component: InicioPComponent },
 
       { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
