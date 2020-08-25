@@ -165,87 +165,6 @@ export class CrearUsuarioComponent implements OnInit {
       }
     );
 
-    /*
-    this.identificationData = this.formBuilder.group({
-      document: [null, Validators.required],
-      idDocumentNumber: ['123', Validators.required],
-      passport: ['front_test', [Validators.required]],
-      rgRegistry: ['front_test', Validators.required],
-      issuingBody: [null, null],
-      extraDocument: [null, null],
-      extraIdDocument: ['123', null],
-    });
-
-    this.personalData = this.formBuilder.group({
-      name: ['front_test', Validators.required],
-      lastName: ['front_test', Validators.required],
-      motherName: ['front_test', Validators.required],
-      socialName: ['front_test', null],
-      email: ['front_test@mail.com', [Validators.email, Validators.required]],
-      phoneNumber: [123, Validators.required],
-      gender: ['male', Validators.required],
-      birthdate: [null, Validators.required],
-      ufBirth: [null, null],
-      municipalityBirth: [null, null],
-      nacionality: ['test', Validators.required],
-      originCountry: [null, null],
-      inmigrationDate: ['', Validators.required],
-      breed: [null, Validators.required],
-      education: [null, null],
-      familySituation: [null, null],
-      cep: ['front_test', Validators.required],
-      uf: [null, Validators.required],
-      city: [null, Validators.required],
-      neighborhood: ['front_test', Validators.required],
-      street: ['front_test', Validators.required],
-      streetNumber: [123, Validators.required],
-    });
-
-    this.profileForm = this.formBuilder.group({
-      role: [this.roles[0].value, Validators.required],
-      profile: [null, Validators.required],
-    });
-
-    this.waitingRoomForm = this.formBuilder.group({
-      waitingRoom: [null, Validators.required],
-    });
-
-    this.profileDataForm = this.formBuilder.group({
-      profileImg: [null],
-      biography: ['front_test', Validators.required],
-    });
-
-    this.specialitiesForm = this.formBuilder.group({
-      speciality: [null, Validators.required],
-    });
-
-    this.professionalForm = this.formBuilder.group({
-      professionalTitle: ['front_test', Validators.required],
-      university: ['front_test', Validators.required],
-      course: ['front_test', Validators.required],
-      ufRegistry: [null, Validators.required],
-      professionalRegistryType: [null, Validators.required],
-      professionalRegistry: ['123', Validators.required],
-      ufProfessionalRegistry: [null, Validators.required],
-    });
-
-    this.passwordForm = new FormGroup(
-      {
-        password: new FormControl('Ab.123456', [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
-        ]),
-        confirmPassword: new FormControl(
-          'Ab.123456',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
-        ),
-      },
-      {
-        validators: this.confirmPass.bind(this),
-      }
-    );
-    */
-
     this.formUser.push(
       this.identificationData,
       this.personalData,
@@ -547,7 +466,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry,
+        uf: this.professionalForm.value.ufProfessionalRegistry._id,
       });
     }
   }
@@ -556,3 +475,84 @@ export class CrearUsuarioComponent implements OnInit {
     this.professionalRegistry.splice(index, 1);
   }
 }
+
+/*
+    this.identificationData = this.formBuilder.group({
+      document: [null, Validators.required],
+      idDocumentNumber: ['123', Validators.required],
+      passport: ['front_test', [Validators.required]],
+      rgRegistry: ['front_test', Validators.required],
+      issuingBody: [null, null],
+      extraDocument: [null, null],
+      extraIdDocument: ['123', null],
+    });
+
+    this.personalData = this.formBuilder.group({
+      name: ['front_test', Validators.required],
+      lastName: ['front_test', Validators.required],
+      motherName: ['front_test', Validators.required],
+      socialName: ['front_test', null],
+      email: ['front_test@mail.com', [Validators.email, Validators.required]],
+      phoneNumber: [123, Validators.required],
+      gender: ['male', Validators.required],
+      birthdate: [null, Validators.required],
+      ufBirth: [null, null],
+      municipalityBirth: [null, null],
+      nacionality: ['test', Validators.required],
+      originCountry: [null, null],
+      inmigrationDate: ['', Validators.required],
+      breed: [null, Validators.required],
+      education: [null, null],
+      familySituation: [null, null],
+      cep: ['front_test', Validators.required],
+      uf: [null, Validators.required],
+      city: [null, Validators.required],
+      neighborhood: ['front_test', Validators.required],
+      street: ['front_test', Validators.required],
+      streetNumber: [123, Validators.required],
+    });
+
+    this.profileForm = this.formBuilder.group({
+      role: [this.roles[0].value, Validators.required],
+      profile: [null, Validators.required],
+    });
+
+    this.waitingRoomForm = this.formBuilder.group({
+      waitingRoom: [null, Validators.required],
+    });
+
+    this.profileDataForm = this.formBuilder.group({
+      profileImg: [null],
+      biography: ['front_test', Validators.required],
+    });
+
+    this.specialitiesForm = this.formBuilder.group({
+      speciality: [null, Validators.required],
+    });
+
+    this.professionalForm = this.formBuilder.group({
+      professionalTitle: ['front_test', Validators.required],
+      university: ['front_test', Validators.required],
+      course: ['front_test', Validators.required],
+      ufRegistry: [null, Validators.required],
+      professionalRegistryType: [null, Validators.required],
+      professionalRegistry: ['123', Validators.required],
+      ufProfessionalRegistry: [null, Validators.required],
+    });
+
+    this.passwordForm = new FormGroup(
+      {
+        password: new FormControl('Ab.123456', [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
+        ]),
+        confirmPassword: new FormControl(
+          'Ab.123456',
+          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+        ),
+      },
+      {
+        validators: this.confirmPass.bind(this),
+      }
+    );
+    */
