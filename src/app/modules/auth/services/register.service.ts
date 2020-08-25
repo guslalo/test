@@ -14,11 +14,11 @@ export class RegisterService {
   constructor(private http: HttpClient, private router: Router) {}
 
   // post registerUser
-  registerUser(clinicId, personalData, birthData, addressData, password): Observable<any> {
+  registerUser(clinicId, identificationData, personalData, addressData, password): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.registerUrl, {
       clinicId,
+      identificationData,
       personalData,
-      birthData,
       addressData,
       password,
     });
@@ -27,6 +27,4 @@ export class RegisterService {
   confirmAccount(idUser, code) {
     return this.http.get<any>(environment.baseUrl + this.confirmUrl + `/${idUser}/${code}`);
   }
-
-
 }

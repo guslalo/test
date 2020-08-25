@@ -21,40 +21,55 @@
   "crear-cuenta": {
     "title": "Create Account",
     "ingrese": "Enter your details to complete registration.",
-    "mayorEdad": "I am of age?",
+    "isAdult": "I am of age?",
+    "select": "- Select -",
     "step1": {
-      "subtitle": "Personal information",
+      "isForeign": "I am a Foreigner",
+      "subtitle": "Identification data",
       "formGroup": {
-        "name": "Name",
-        "lastName": "Last Name",
-        "secondLastName": "Last Name",
-        "gender": "Gender",
-        "email": "Email",
-        "confirmEmail": "Confirm email",
-        "phoneNumber": "Phone number"
+        "document": "Identification Document",
+        "idDocumentNumber": "Selected Document Number",
+        "passport": "Passport",
+        "issuingBody": "Issuing Body",
+        "extraDocument": "Secondary Documentation",
+        "extraIdDocument": "Selected Document Number"
       }
     },
     "step2": {
-      "subtitle": "Birth data",
+      "subtitle": "Personal data",
       "formGroup": {
-        "birthdate": "Birth date",
-        "ufBirth": "uf Birth",
-        "municipalityBirth": "municipality Birth",
-        "nacionality": "Nacionality"
+        "name": "Name",
+        "lastName": "Last Name",
+        "secondLastName": "Second Last Name",
+        "motherName": "Mother's Names",
+        "gender": "Gender",
+        "email": "Email",
+        "confirmEmail": "Confirm email",
+        "phoneNumber": "Phone number",
+        "breed": "Breed"
       }
     },
     "step3": {
-      "subtitle": "Adress",
+      "subtitle": "Birth data",
       "formGroup": {
-        "cep": "cep",
-        "uf": "uf",
+        "birthdate": "Birth date",
+        "ufBirth": "UF Birth",
+        "municipalityBirth": "Municipality Birth",
+        "nacionality": "Nacionality"
+      }
+    },
+    "step4": {
+      "subtitle": "Address",
+      "formGroup": {
+        "cep": "CEP",
+        "uf": "UF",
         "city": "City",
         "neighborhood": "Neighborhood",
         "street": "Street",
         "streetNumber": "Street number"
       }
     },
-    "step4": {
+    "step5": {
       "subtitle": "Password",
       "formGroup": {
         "password": "Password",

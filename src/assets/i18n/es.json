@@ -21,20 +21,35 @@
   "crear-cuenta": {
     "title": "Crear cuenta",
     "ingrese": "A continuación Ingrese sus datos para completar su registro.",
-    "mayorEdad": "¿Soy mayor de edad?",
+    "isAdult": "¿Soy mayor de edad?",
+    "select": "- Seleccionar -",
     "step1": {
+      "isForeign": "Soy Extranjero",
+      "subtitle": "Datos de identificacion",
+      "formGroup": {
+        "document": "Documento de Identificacion",
+        "idDocumentNumber": "N° de Documento Seleccionado",
+        "passport": "Pasaporte",
+        "issuingBody": "Órgano Emisor",
+        "extraDocument": "Documentacion Secundaria",
+        "extraIdDocument": "N° de Documento Seleccionado"
+      }
+    },
+    "step2": {
       "subtitle": "Datos personales",
       "formGroup": {
         "name": "Nombre",
         "lastName": "Apellido",
         "secondLastName": "Segundo Apellido",
+        "motherName": "Nombres de la Madre",
         "gender": "Genero",
         "email": "Email",
         "confirmEmail": "Confirmar email",
-        "phoneNumber": "Teléfono"
+        "phoneNumber": "Teléfono",
+        "breed": "Raza/Color"
       }
     },
-    "step2": {
+    "step3": {
       "subtitle": "Datos de nacimiento",
       "formGroup": {
         "birthdate": "Fecha de nacimiento",
@@ -43,7 +58,7 @@
         "nacionality": "Nacionalidad"
       }
     },
-    "step3": {
+    "step4": {
       "subtitle": "Dirección",
       "formGroup": {
         "cep": "CEP",
@@ -54,7 +69,7 @@
         "streetNumber": "Numeración"
       }
     },
-    "step4": {
+    "step5": {
       "subtitle": "Generación contraseña",
       "formGroup": {
         "password": "Genera una clave",
