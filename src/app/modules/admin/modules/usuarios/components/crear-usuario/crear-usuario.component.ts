@@ -187,6 +187,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.identificationData.get('extraIdDocument').enable();
     });
   }
+
   getProfiles() {
     this.adminService.getProfiles().subscribe(
       (data) => {
@@ -303,9 +304,11 @@ export class CrearUsuarioComponent implements OnInit {
     const _profiles = this.profilesAssigned.map((map) => {
       return map.id;
     });
+    /* TODO
     const _waitingRooms = this.waitingRoomsAssigned.map((map) => {
       return map.id;
     });
+    */
     const _specialities = this.specialitiesAssigned.map((map) => {
       return map.id;
     });
@@ -338,6 +341,7 @@ export class CrearUsuarioComponent implements OnInit {
         isForeign: this.isForeign,
       },
       personalData: {
+        isSchool: this.isSchool,
         name: this.formUser[1].value.name,
         lastName: this.formUser[1].value.lastName,
         motherName: this.formUser[1].value.motherName,
@@ -364,7 +368,7 @@ export class CrearUsuarioComponent implements OnInit {
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
       },
       profiles: _profiles,
-      waitingRooms: _waitingRooms,
+      waitingRooms: this.waitingRoomsAssigned,
       profileData: {
         profileImg: '',
         biography: this.formUser[2].value.biography,
@@ -385,11 +389,17 @@ export class CrearUsuarioComponent implements OnInit {
 
     if (this.userType !== 'patient') {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
-        this.adminService.createUser(this.userType, this.userObject).subscribe(() => {
-          // console.log(response);
-          this.spinner.hide();
-          this.location.back();
-        });
+        this.adminService.createUser(this.userType, this.userObject).subscribe(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            this.location.back();
+          }
+        );
       } else {
         this.spinner.hide();
         alert('Complete el formulario con todos los datos necesarios');

@@ -49,21 +49,8 @@ export class AdminService {
   }
 
   updateUser(userType, userObject): Observable<any> {
-    console.log(userType);
-    let role;
-    switch (userType) {
-      case 'admins':
-        role = 'admin';
-        break;
-      case 'coordinators':
-        role = 'coordinator';
-        break;
-      case 'professionals':
-        role = 'professional';
-        break;
-      case 'patients':
-        role = 'patient';
-    }
+    // admins -> admin
+    let role = userType.slice(0, -1);
     return this.http.put<any>(`${environment.baseUrl}${this.userEndpoint}/${role}`, userObject);
   }
 
