@@ -494,7 +494,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry._id,
+        uf: this.professionalForm.value.ufProfessionalRegistry.name,
       });
     }
   }

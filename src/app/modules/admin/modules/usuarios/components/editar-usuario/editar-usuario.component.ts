@@ -34,6 +34,7 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesForm: FormGroup;
   professionalForm: FormGroup;
   passwordForm: FormGroup;
+  professionalPhoto: any;
 
   states: any = [];
   cities: any = [];
@@ -42,6 +43,8 @@ export class EditarUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+
+  specialitiesData: any;
 
   maxDate = {
     year: current.getFullYear(),
@@ -154,7 +157,6 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.profileDataForm = this.formBuilder.group({
-      profileImg: [null],
       biography: ['', Validators.required],
     });
 
@@ -167,9 +169,9 @@ export class EditarUsuarioComponent implements OnInit {
       university: ['', Validators.required],
       course: ['', Validators.required],
       ufRegistry: [null, Validators.required],
-      professionalRegistryType: [null, Validators.required],
-      professionalRegistry: ['', Validators.required],
-      ufProfessionalRegistry: [null, Validators.required],
+      professionalRegistryType: [null, null],
+      professionalRegistry: [null, null],
+      ufProfessionalRegistry: [null, null],
     });
 
     this.passwordForm = new FormGroup(
@@ -246,7 +248,8 @@ export class EditarUsuarioComponent implements OnInit {
         if (user.identificationData.isForeign) {
           this.identificationData.get('passport').setValue(user.identificationData.passport);
           this.personalData.get('originCountry').setValue(user.personalData.originCountry);
-          this.inmigrationDate = this.dateAdapter.fromModel(user.personalData.inmigrationDate) || this.inmigrationDate;
+          this.inmigrationDate =
+            this.dateAdapter.fromModel(user.personalData.inmigrationDate) || this.calendar.getToday();
           this.personalData.get('inmigrationDate').setValue(this.inmigrationDate);
         }
 
@@ -277,7 +280,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('education').setValue(user.personalData.education);
         this.personalData.get('familySituation').setValue(user.personalData.familySituation);
         this.personalData.get('motherName').setValue(user.personalData.motherName);
-        // this.personalData.get('isSchool').setValue(user.personalData.isSchool);
+
         this.personalData.get('cep').setValue(user.addressData.cep);
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
@@ -285,11 +288,34 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
-        this.waitingRoomsAssigned = user.waitingRooms || [];
-        this.specialitiesAssigned = user.specialities || [];
+        this.professionalPhoto = user.professionalData.professionalPhoto || '';
+        this.profileDataForm.get('biography').setValue(user.professionalData.professionalPhoto || '');
+        this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
+        this.professionalForm.get('university').setValue(user.professionalData.university);
+        this.professionalForm.get('course').setValue(user.professionalData.course);
+        this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
 
-        for (const specialty of this.specialitiesAssigned) {
-          // this.getSpecialtyById(specialty);
+        this.waitingRoomsAssigned = user.waitingRooms || [];
+
+        this.specialitiesData = this.specialities.reduce((obj, value: any) => {
+          obj[value._id] = value;
+          return obj;
+        }, {});
+
+        for (const sp of user.specialities) {
+          this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
+            this.specialitiesAssigned.push(data.payload);
+          });
+        }
+
+        // console.log(this.specialitiesAssigned);
+
+        if (user.professionalData.professionalRegistry.length) {
+          for (const rg of user.professionalData.professionalRegistry) {
+            this.professionalRegistry.push(rg);
+          }
+        } else {
+          this.professionalRegistry = [];
         }
 
         // PROFILES CRUD
@@ -353,13 +379,9 @@ export class EditarUsuarioComponent implements OnInit {
     if (this.waitingRoomsAssigned.some((room) => room.name === data.name)) {
       alert(`La lista de espera ${data.name} ya esta asignada al usuario`);
     } else {
-      this.waitingRoomsAssigned.push({
-        id: data.id,
-        name: data.name,
-        description: data.description,
-      });
+      this.waitingRoomsAssigned.push(data);
     }
-    // console.log(this.waitingRoomsAssigned);
+    console.log(this.waitingRoomsAssigned);
   }
 
   addAllWaitingRooms() {
@@ -382,7 +404,7 @@ export class EditarUsuarioComponent implements OnInit {
       alert(`La especialidad ${data.specialtyName} ya esta asignada al usuario`);
     } else {
       this.specialitiesAssigned.push({
-        id: data._id,
+        _id: data._id,
         specialtyName: data.specialtyName,
       });
     }
@@ -402,7 +424,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    // console.log(this.formUser[1]);
+    // console.log(this.formUser[0], this.formUser[1], this.formUser[2], this.formUser[3]);
 
     switch (this.userType) {
       case 'admins':
@@ -413,13 +435,13 @@ export class EditarUsuarioComponent implements OnInit {
         }
 
       case 'professionals':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid) {
           return true;
         } else {
           return false;
         }
       case 'patients':
-        if (this.formUser[0].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid) {
           return true;
         } else {
           return false;
@@ -449,7 +471,7 @@ export class EditarUsuarioComponent implements OnInit {
     });
     */
     const _specialities = this.specialitiesAssigned.map((map) => {
-      return map.id;
+      return map._id;
     });
 
     this.userObject = {
@@ -509,12 +531,10 @@ export class EditarUsuarioComponent implements OnInit {
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
-      profileData: {
-        profileImg: '',
-        biography: this.formUser[2].value.biography,
-      },
       specialities: _specialities,
       professionalData: {
+        professionalPhoto: '',
+        biography: this.formUser[2].value.biography,
         professionalTitle: this.formUser[3].value.professionalTitle,
         university: this.formUser[3].value.university,
         course: this.formUser[3].value.course,
@@ -610,6 +630,19 @@ export class EditarUsuarioComponent implements OnInit {
     });
   }
 
+  validProfessionalRegistry() {
+    if (
+      this.professionalForm.value.professionalRegistryType !== null &&
+      this.professionalForm.value.professionalRegistry !== null &&
+      this.professionalForm.value.professionalRegistry.trim() !== '' &&
+      this.professionalForm.value.ufProfessionalRegistry !== null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   addProfessionalRegistry() {
     if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
       alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
@@ -617,7 +650,7 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry._id,
+        uf: this.professionalForm.value.ufProfessionalRegistry.name,
       });
     }
   }

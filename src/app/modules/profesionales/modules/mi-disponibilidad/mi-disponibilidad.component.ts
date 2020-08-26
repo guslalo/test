@@ -422,7 +422,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   //GET sub especialidad
   getSpecialtiesIdService(id) {
-    this.specialtiesService.getSpecialtiesId(id).subscribe(
+    this.specialtiesService.getMedicalSpecialtiesId(id).subscribe(
       (data) => {
         // console.log(data);
         this.specialtiesId = data.payload;
