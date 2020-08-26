@@ -288,47 +288,48 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
-        this.professionalPhoto = user.professionalData.professionalPhoto || '';
-        this.profileDataForm.get('biography').setValue(user.professionalData.professionalPhoto || '');
-        this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
-        this.professionalForm.get('university').setValue(user.professionalData.university);
-        this.professionalForm.get('course').setValue(user.professionalData.course);
-        this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
+        if (this.userType !== 'patients') {
+          this.professionalPhoto = user.professionalData.professionalPhoto || '';
+          this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
+          this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
+          this.professionalForm.get('university').setValue(user.professionalData.university);
+          this.professionalForm.get('course').setValue(user.professionalData.course);
+          this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
 
-        this.waitingRoomsAssigned = user.waitingRooms || [];
+          this.waitingRoomsAssigned = user.waitingRooms || [];
 
-        this.specialitiesData = this.specialities.reduce((obj, value: any) => {
-          obj[value._id] = value;
-          return obj;
-        }, {});
+          this.specialitiesData = this.specialities.reduce((obj, value: any) => {
+            obj[value._id] = value;
+            return obj;
+          }, {});
 
-        for (const sp of user.specialities) {
-          this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-            this.specialitiesAssigned.push(data.payload);
-          });
-        }
-
-        // console.log(this.specialitiesAssigned);
-
-        if (user.professionalData.professionalRegistry.length) {
-          for (const rg of user.professionalData.professionalRegistry) {
-            this.professionalRegistry.push(rg);
-          }
-        } else {
-          this.professionalRegistry = [];
-        }
-
-        // PROFILES CRUD
-        for (const item of user.administrativeData) {
-          this.adminService.getProfileById(item.profile).subscribe((p) => {
-            this.profilesAssigned.push({
-              clinic: item.clinic,
-              id: p._id,
-              role: p.role,
-              name: p.profileName,
+          for (const sp of user.specialities) {
+            this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
+              this.specialitiesAssigned.push(data.payload);
             });
-          });
+          }
+          // console.log(this.specialitiesAssigned);
+          if (user.professionalData.professionalRegistry.length) {
+            for (const rg of user.professionalData.professionalRegistry) {
+              this.professionalRegistry.push(rg);
+            }
+          } else {
+            this.professionalRegistry = [];
+          }
+
+          // PROFILES CRUD
+          for (const item of user.administrativeData) {
+            this.adminService.getProfileById(item.profile).subscribe((p) => {
+              this.profilesAssigned.push({
+                clinic: item.clinic,
+                id: p._id,
+                role: p.role,
+                name: p.profileName,
+              });
+            });
+          }
         }
+
         // console.log(this.profilesAssigned);
       },
       (error) => {
@@ -428,6 +429,7 @@ export class EditarUsuarioComponent implements OnInit {
 
     switch (this.userType) {
       case 'admins':
+      case 'coordinators':
         if (this.formUser[0].valid && this.formUser[1].valid) {
           return true;
         } else {
@@ -552,9 +554,11 @@ export class EditarUsuarioComponent implements OnInit {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.updateUser(this.userType, this.userObject).subscribe(
           (res) => {
+            this.spinner.hide();
             console.log(res);
           },
           (err) => {
+            this.spinner.hide();
             console.log(err);
           },
           () => {

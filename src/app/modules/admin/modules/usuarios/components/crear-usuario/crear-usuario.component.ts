@@ -9,6 +9,7 @@ import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CustomDateAdapter } from 'src/app/shared/utils';
 
 const current = new Date();
 
@@ -49,8 +50,10 @@ export class CrearUsuarioComponent implements OnInit {
     day: current.getDate(),
   };
 
+  dateAdapter = new CustomDateAdapter();
   birthDate: NgbDateStruct;
   inmigrationDate: NgbDateStruct;
+
   formUser: any = [];
   userObject: any = {};
 
@@ -118,12 +121,12 @@ export class CrearUsuarioComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: ['male', Validators.required],
-      birthdate: [null, Validators.required],
+      birthdate: [null, null],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: ['', Validators.required],
       originCountry: [null, null],
-      inmigrationDate: ['', null],
+      inmigrationDate: [null, null],
       breed: [null, Validators.required],
       education: [null, null],
       familySituation: [null, null],
@@ -191,7 +194,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.passwordForm
     );
 
-    this.birthDate = this.calendar.getToday();
+    this.birthDate = this.maxDate;
     this.inmigrationDate = this.calendar.getToday();
 
     // REACTIVE FORM
@@ -294,18 +297,32 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    if (this.userType !== 'professional') {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
-        return true;
-      } else {
+    // console.log(this.formUser[0], this.formUser[1], this.formUser[2], this.formUser[3]);
+
+    switch (this.userType) {
+      case 'admins':
+      case 'coordinator':
+        if (this.formUser[0].valid && this.formUser[1].valid) {
+          return true;
+        } else {
+          return false;
+        }
+
+      case 'professional':
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid) {
+          return true;
+        } else {
+          return false;
+        }
+      case 'patient':
+        if (this.formUser[0].valid && this.formUser[1].valid) {
+          return true;
+        } else {
+          return false;
+        }
+
+      default:
         return false;
-      }
-    } else {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid && this.formUser[4].valid) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 
@@ -361,18 +378,18 @@ export class CrearUsuarioComponent implements OnInit {
       personalData: {
         isSchool: this.isSchool,
         name: this.formUser[1].value.name,
-        lastName: this.formUser[1].value.lastName || '',
+        lastName: this.formUser[1].value.lastName,
         motherName: this.formUser[1].value.motherName,
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
-        birthdate: this.formUser[1].value.birthdate.toString(),
+        birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
         ufBirth: this.formUser[1].value.ufBirth || '',
         municipalityBirth: this.formUser[1].value.municipalityBirth || '',
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.formUser[1].value.inmigrationDate.toString() || '',
+        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate),
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',
@@ -387,12 +404,10 @@ export class CrearUsuarioComponent implements OnInit {
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
-      profileData: {
-        profileImg: '',
-        biography: this.formUser[2].value.biography,
-      },
       specialities: _specialities,
       professionalData: {
+        professionalPhoto: '',
+        biography: this.formUser[2].value.biography,
         professionalTitle: this.formUser[3].value.professionalTitle,
         university: this.formUser[3].value.university,
         course: this.formUser[3].value.course,
@@ -409,9 +424,11 @@ export class CrearUsuarioComponent implements OnInit {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.createUser(this.userType, this.userObject).subscribe(
           (res) => {
+            this.spinner.hide();
             console.log(res);
           },
           (err) => {
+            this.spinner.hide();
             console.log(err);
           },
           () => {
@@ -485,6 +502,19 @@ export class CrearUsuarioComponent implements OnInit {
       // console.log(data);
       this.specialities = data;
     });
+  }
+
+  validProfessionalRegistry() {
+    if (
+      this.professionalForm.value.professionalRegistryType !== null &&
+      this.professionalForm.value.professionalRegistry !== null &&
+      this.professionalForm.value.professionalRegistry.trim() !== '' &&
+      this.professionalForm.value.ufProfessionalRegistry !== null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   addProfessionalRegistry() {
