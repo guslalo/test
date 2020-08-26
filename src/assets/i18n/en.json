@@ -78,9 +78,10 @@
           "1": "* At least one capital letter",
           "2": "* At least one lowercase",
           "3": "* At least one number",
-          "4": "* Minimum length of 8 characters"
+          "4": "* At least one special character",
+          "5": "* un largo mínimo de 8 carácteres (max. 16)"
         },
-        "remember": "Remember that you must create a key that contains alphanumeric characters and that contains at least one Uppercase and lowercase."
+        "remember": "Remember that you must create a key that contains alphanumeric characters and that contains at least one uppercase, lowercase and one special character."
       }
     }
   },

@@ -10,6 +10,8 @@ import * as _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+const current = new Date();
+
 @Component({
   selector: 'app-editar-usuario',
   templateUrl: './editar-usuario.component.html',
@@ -38,6 +40,18 @@ export class EditarUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+
+  minDate = {
+    year: current.getFullYear(),
+    month: current.getMonth() + 1,
+    day: current.getDate(),
+  };
+
+  maxDate = {
+    year: current.getFullYear() - 18,
+    month: current.getMonth(),
+    day: current.getDate(),
+  };
 
   birthDate: NgbDateStruct;
   inmigrationDate: NgbDateStruct;
@@ -105,7 +119,7 @@ export class EditarUsuarioComponent implements OnInit {
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       motherName: ['', Validators.required],
-      socialName: ['', null],
+      secondLastName: ['', null],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, Validators.required],
       gender: ['male', Validators.required],
@@ -158,11 +172,15 @@ export class EditarUsuarioComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
+          Validators.pattern(/^(?=.*[A-Z])/),
+          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[0-9])/),
+          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])
         ),
       },
       {
@@ -241,7 +259,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.isSchool = user.personalData.isSchool;
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
-        this.personalData.get('socialName').setValue(user.personalData.socialName);
+        this.personalData.get('secondLastName').setValue(user.personalData.secondLastName);
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
@@ -452,7 +470,7 @@ export class EditarUsuarioComponent implements OnInit {
         name: this.formUser[1].value.name,
         lastName: this.formUser[1].value.lastName,
         motherName: this.formUser[1].value.motherName,
-        socialName: this.formUser[1].value.socialName,
+        secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
         birthdate: this.formUser[1].value.birthdate.toString(),
@@ -495,7 +513,7 @@ export class EditarUsuarioComponent implements OnInit {
     // console.log(this.formUser[0].value.birthdate);
     console.log(this.userObject);
 
-    if (this.userType !== 'patient') {
+    if (this.userType !== 'patients') {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.updateUser(this.userType, this.userObject).subscribe(
           (res) => {

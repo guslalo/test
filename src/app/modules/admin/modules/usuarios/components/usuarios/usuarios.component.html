@@ -919,10 +919,9 @@
                       <div ngbDropdownMenu>
                         <button
                           ngbDropdownItem
-                          data-toggle="modal"
-                          data-target="#editar"
                           type="button"
-                          (click)="openPatientModal('update', row.id)"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'patients', userId: row.id }"
                         >
                           Editar
                         </button>

@@ -44,12 +44,20 @@
             </a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="datos2" data-toggle="tab" href="#datos-rol-tab" role="tab">
+            <a
+              *ngIf="userType !== 'patients'"
+              class="nav-link"
+              id="datos2"
+              data-toggle="tab"
+              href="#datos-rol-tab"
+              role="tab"
+            >
               Rol
             </a>
           </li>
           <li class="nav-item" role="presentation">
             <a
+              *ngIf="userType !== 'patients'"
               class="nav-link"
               id="datos3"
               data-toggle="tab"
@@ -219,14 +227,19 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="lastName">Apellido *</label>
+                    <label for="lastName">Apellido</label>
+                    <input type="text" class="form-control" name="lastName" formControlName="lastName" />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="secondLastName">Segundo Apellido *</label>
                     <input
                       type="text"
                       class="form-control"
-                      name="lastName"
-                      formControlName="lastName"
+                      name="secondLastName"
+                      formControlName="secondLastName"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
+                        'is-invalid':
+                          !personalData.get('secondLastName').valid && personalData.get('secondLastName').touched
                       }"
                     />
                   </div>
@@ -241,10 +254,6 @@
                         'is-invalid': !personalData.get('motherName').valid && personalData.get('motherName').touched
                       }"
                     />
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="socialName">Nombre Social (Apodo)</label>
-                    <input type="text" class="form-control" name="socialName" formControlName="socialName" />
                   </div>
                 </div>
                 <div class="row">
@@ -294,6 +303,7 @@
                         [placement]="'bottom'"
                         class="form-control"
                         id="birthdate"
+                        [maxDate]="maxDate"
                         placeholder="yyyy-mm-dd"
                         name="birthdate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
@@ -937,7 +947,7 @@
                         'is-invalid': !passwordForm.get('password').valid && passwordForm.get('password').touched
                       }"
                       formControlName="password"
-                      maxlength="20"
+                      maxlength="16"
                       autocomplete="off"
                     />
                     <div *ngIf="passwordForm.controls['password'].errors?.pattern" class="invalid-feedback">
@@ -945,7 +955,8 @@
                         <li>* Al menos una mayúscula</li>
                         <li>* Al menos una minúscula</li>
                         <li>* Al menos un número</li>
-                        <li>* un largo mínimo de 8 carácteres</li>
+                        <li>* un largo mínimo de 8 carácteres (max. 16)</li>
+                        <li>* Al menos un carácter especial</li>
                       </ul>
                     </div>
                   </div>
@@ -999,7 +1010,7 @@
                       </div>
                       <div class="col-10 pl-0">
                         Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos
-                        una mayúscula y minúscula.
+                        una mayúscula, minúscula y un caracter especial.
                       </div>
                     </div>
                   </div>

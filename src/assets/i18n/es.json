@@ -78,9 +78,10 @@
           "1": "* Al menos una mayúscula",
           "2": "* Al menos una minúscula",
           "3": "* Al menos un número",
-          "4": "* un largo mínimo de 8 carácteres"
+          "4": "* Al menos un carácter especial",
+          "5": "* un largo mínimo de 8 carácteres"
         },
-        "remember": "Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula y minúscula."
+        "remember": "Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula, minúscula y un carácter especial."
       }
     }
   },

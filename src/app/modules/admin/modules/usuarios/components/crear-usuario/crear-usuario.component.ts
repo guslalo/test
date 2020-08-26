@@ -10,6 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+const current = new Date();
+
 @Component({
   selector: 'app-crear-usuario',
   templateUrl: './crear-usuario.component.html',
@@ -34,6 +36,18 @@ export class CrearUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+
+  minDate = {
+    year: current.getFullYear(),
+    month: current.getMonth() + 1,
+    day: current.getDate(),
+  };
+
+  maxDate = {
+    year: current.getFullYear() - 18,
+    month: current.getMonth(),
+    day: current.getDate(),
+  };
 
   birthDate: NgbDateStruct;
   inmigrationDate: NgbDateStruct;
@@ -98,9 +112,9 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.personalData = this.formBuilder.group({
       name: ['', Validators.required],
-      lastName: ['', Validators.required],
+      lastName: ['', null],
       motherName: ['', Validators.required],
-      socialName: ['', null],
+      secondLastName: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, Validators.required],
       gender: ['male', Validators.required],
@@ -153,11 +167,15 @@ export class CrearUsuarioComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
+          Validators.pattern(/^(?=.*[A-Z])/),
+          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[0-9])/),
+          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(16)])
         ),
       },
       {
@@ -343,9 +361,9 @@ export class CrearUsuarioComponent implements OnInit {
       personalData: {
         isSchool: this.isSchool,
         name: this.formUser[1].value.name,
-        lastName: this.formUser[1].value.lastName,
+        lastName: this.formUser[1].value.lastName || '',
         motherName: this.formUser[1].value.motherName,
-        socialName: this.formUser[1].value.socialName,
+        secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
         birthdate: this.formUser[1].value.birthdate.toString(),
@@ -501,7 +519,7 @@ export class CrearUsuarioComponent implements OnInit {
       name: ['front_test', Validators.required],
       lastName: ['front_test', Validators.required],
       motherName: ['front_test', Validators.required],
-      socialName: ['front_test', null],
+      secondLastName: ['front_test', null],
       email: ['front_test@mail.com', [Validators.email, Validators.required]],
       phoneNumber: [123, Validators.required],
       gender: ['male', Validators.required],

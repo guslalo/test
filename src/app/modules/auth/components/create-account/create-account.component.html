@@ -657,7 +657,7 @@
                         'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
                       }"
                       formControlName="password"
-                      maxlength="20"
+                      maxlength="16"
                     />
                     <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
                       <ul>
@@ -665,6 +665,7 @@
                         <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.2' | transloco }}</li>
                         <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.3' | transloco }}</li>
                         <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.4' | transloco }}</li>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.5' | transloco }}</li>
                       </ul>
                     </div>
                   </div>
