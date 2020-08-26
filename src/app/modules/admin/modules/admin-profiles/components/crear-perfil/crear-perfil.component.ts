@@ -99,6 +99,7 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   crearPerfil() {
+    this.profile.isActive = true;
     // console.log(this.profile);
     if (this.profile.profileName !== null || this.profile.profileName !== '') {
       this.adminService.createProfile(this.profile).subscribe(() => {

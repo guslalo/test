@@ -343,7 +343,9 @@ export class EditarUsuarioComponent implements OnInit {
       (data) => {
         const role = this.profileForm.value.role;
         this.profiles = data.filter((profile) => {
-          if (profile.role !== 'patient' && role === profile.role) return profile;
+          if (profile.role !== 'patient' && role === profile.role && profile.isActive) {
+            return profile;
+          }
         });
         // console.log(this.profiles);
       },

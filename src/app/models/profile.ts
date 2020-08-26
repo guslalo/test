@@ -74,6 +74,7 @@ export interface medicalRecordPolicies {
 
 export class Profile implements profile {
   role: string;
+  isActive: boolean;
   profileName?: string;
   description?: string;
   userPolicies? = {

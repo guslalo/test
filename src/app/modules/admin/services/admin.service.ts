@@ -78,4 +78,9 @@ export class AdminService {
     // console.log(profileObject);
     return this.http.put<any>(`${environment.baseUrl}${this.profileEndpoint}/${profileId}`, profileObject);
   }
+
+  deactivateProfile(profileId): Observable<any> {
+    // console.log(profileObject);
+    return this.http.delete<any>(`${environment.baseUrl}${this.profileEndpoint}/${profileId}`);
+  }
 }

@@ -214,7 +214,7 @@ export class CrearUsuarioComponent implements OnInit {
       (data) => {
         const role = this.profileForm.value.role;
         this.profiles = data.filter((profile) => {
-          if (profile.role !== 'patient' && role === profile.role) {
+          if (profile.role !== 'patient' && role === profile.role && profile.isActive) {
             return profile;
           }
         });

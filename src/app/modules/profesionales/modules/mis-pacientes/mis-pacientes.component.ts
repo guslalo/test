@@ -19,15 +19,12 @@ const states = ['test', 'test3', 'test4'];
   styleUrls: ['./mis-pacientes.component.scss'],
 })
 export class MisPacientesComponent implements OnInit {
-  model2: NgbDateStruct;
-  model: any;
-  // ublic page = 4;
+  patients: any[] = [];
+  temp: any[] = [];
+  searchTerm: string = '';
 
-  name = 'Angular';
   page = 1;
   pageSize = 7;
-  items = [];
-  edited = 'false';
 
   constructor(config: NgbPaginationConfig) {
     // customize default values of paginations used by this component tree
@@ -35,7 +32,7 @@ export class MisPacientesComponent implements OnInit {
 config.boundaryLinks = true;*/
 
     for (let i = 1; i <= 100; i++) {
-      this.items.push({ Name: 'Shop ' + i });
+      this.patients.push({ Name: 'Shop ' + i });
     }
   }
   search = (text$: Observable<string>) =>
@@ -45,7 +42,7 @@ config.boundaryLinks = true;*/
       map((term) =>
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
-    )
+    );
 
   ngOnInit(): void {}
 }
