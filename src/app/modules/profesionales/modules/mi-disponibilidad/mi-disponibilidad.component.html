@@ -39,7 +39,6 @@
       </button>
     </div>
   </div>
-
   <div class="row">
     <div class="col-12">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -637,7 +636,7 @@
               <div class="form-group col">
                 <label for="objective">Objetivo</label>
                 <input
-                  *ngIf="idAvailability.administrativeDetails.objective"
+                 
                   type="text"
                   class="form-control"
                   id="objective"
@@ -648,7 +647,7 @@
               <div class="form-group col">
                 <label for="specialty">Especialidad </label>
                 <select class="form-control" id="specialty" formControlName="specialty">
-                  <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }} + TEST">
+                  <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }}">
                     {{ idAvailability.professionalDetails.specialtyDetails[0].specialtyName }}
                   </option>
                   <ng-container *ngFor="let item of specialtiesId">

@@ -213,7 +213,7 @@ export class MiDisponibilidadComponent implements OnInit {
       (data) => {
         this.disponibilidad = data.payload;
         this.fetchCalendar();
-        // console.log(this.disponibilidad);
+        console.log(this.disponibilidad);
       },
       (error) => {
         console.log(error);
