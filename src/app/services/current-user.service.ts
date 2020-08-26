@@ -15,7 +15,9 @@ export class CurrentUserService {
     JSON.parse(localStorage.getItem('currentUser')).expires_in,
     JSON.parse(localStorage.getItem('currentUser')).internalCode,
     JSON.parse(localStorage.getItem('currentUser')).administrativeData,
-    JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
+    JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
+    JSON.parse(localStorage.getItem('currentUser')).role,
+    JSON.parse(localStorage.getItem('currentUser')).policies
   );
   public user: any;
 

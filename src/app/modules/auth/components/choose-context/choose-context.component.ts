@@ -52,6 +52,8 @@ export class ChooseContextComponent implements OnInit {
       }
     });
 
+    // console.log(profile);
+
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -62,10 +64,11 @@ export class ChooseContextComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).internalCode,
       JSON.parse(localStorage.getItem('currentUser')).administrativeData,
       clinicId,
-      profile.role
+      profile.role,
+      profile.policies
     );
-    localStorage.removeItem('currentUser');
 
+    localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(this.user));
     console.log(this.user);
 

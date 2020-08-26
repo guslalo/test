@@ -1,3 +1,14 @@
+import {
+  userPolicies,
+  profilePolicies,
+  appointmentPolicies,
+  availabilitiesPolicies,
+  waitingRoomPolicies,
+  clinicPolicies,
+  reportPolicies,
+  medicalRecordPolicies,
+} from 'src/app/models/profile';
+
 export class UsersLogin {
   users: [UserLogin];
 }
@@ -18,7 +29,17 @@ export class UserLogin {
     public internalCode: number,
     public administrativeData: [AdministrativeData],
     public administrativeDataContext: string,
-    public role?: string
+    public role?: string,
+    public policies?: {
+      userPolicies?: userPolicies;
+      profilePolicies?: profilePolicies;
+      appointmentPolicies?: appointmentPolicies;
+      availabilitiesPolicies?: availabilitiesPolicies;
+      waitingRoomPolicies?: waitingRoomPolicies;
+      clinicPolicies?: clinicPolicies;
+      reportPolicies?: reportPolicies;
+      medicalRecordPolicies?: medicalRecordPolicies;
+    }
   ) {}
 
   // cliente

@@ -57,6 +57,8 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
+    console.log(this.currentUser.policies.userPolicies);
+
     if (this.role && this.profile) {
       this.profileSelected = this.profile;
       switch (this.role) {

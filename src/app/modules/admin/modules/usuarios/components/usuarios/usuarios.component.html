@@ -143,11 +143,9 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
+              *ngIf="currentUser.policies.userPolicies.create"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              ng-reflect-tour-anchor="agendar"
-              data-toggle="modal"
-              data-target="#disponibilidad"
               [routerLink]="['crear-usuario']"
               [queryParams]="{ userType: 'admin' }"
             >
@@ -271,9 +269,8 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
+                          *ngIf="currentUser.policies.userPolicies.update"
                           ngbDropdownItem
-                          data-toggle="modal"
-                          data-target="#editar"
                           type="button"
                           [routerLink]="['editar-usuario']"
                           [queryParams]="{ userType: 'admins', userId: row.id }"
@@ -281,7 +278,7 @@
                           Editar
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo'"
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -299,7 +296,7 @@
                           Activar
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente'"
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -355,11 +352,9 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
+              *ngIf="currentUser.policies.userPolicies.create"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              ng-reflect-tour-anchor="agendar"
-              data-toggle="modal"
-              data-target="#disponibilidad"
               [routerLink]="['crear-usuario']"
               [queryParams]="{ userType: 'professional' }"
             >
@@ -483,9 +478,8 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
+                          *ngIf="currentUser.policies.userPolicies.update"
                           ngbDropdownItem
-                          data-toggle="modal"
-                          data-target="#editar"
                           type="button"
                           [routerLink]="['editar-usuario']"
                           [queryParams]="{ userType: 'professionals', userId: row.id }"
@@ -493,7 +487,7 @@
                           Editar
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo'"
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -511,7 +505,7 @@
                           Activar
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente'"
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -572,10 +566,9 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
+              *ngIf="currentUser.policies.userPolicies.create"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              ng-reflect-tour-anchor="agendar"
-              data-toggle="modal"
               data-target="#disponibilidad"
               [routerLink]="['crear-usuario']"
               [queryParams]="{ userType: 'coordinator' }"
@@ -700,9 +693,8 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
+                          *ngIf="currentUser.policies.userPolicies.update"
                           ngbDropdownItem
-                          data-toggle="modal"
-                          data-target="#editar"
                           type="button"
                           [routerLink]="['editar-usuario']"
                           [queryParams]="{ userType: 'coordinators', userId: row.id }"
@@ -710,7 +702,7 @@
                           Editar
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo'"
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -728,7 +720,7 @@
                           Activar
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente'"
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -792,13 +784,9 @@
           </div>
           <div class="col-12 col-md-5 float-right">
             <button
+              *ngIf="currentUser.policies.userPolicies.create"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              ng-reflect-tour-anchor="agendar"
-              data-toggle="modal"
-              data-target="#disponibilidad"
-              data-toggle="modal"
-              data-target="#patientModal"
               [routerLink]="['crear-usuario']"
               [queryParams]="{ userType: 'patient' }"
             >
@@ -918,6 +906,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
+                          *ngIf="currentUser.policies.userPolicies.update"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -926,7 +915,7 @@
                           Editar
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo'"
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -944,7 +933,7 @@
                           Activar
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente'"
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"

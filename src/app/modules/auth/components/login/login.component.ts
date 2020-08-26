@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this.authenticationService.loginUser(this.user.username, this.user.password).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         localStorage.setItem('token', JSON.stringify(data.access_token));
         this.currentUser = new UserLogin(
           data.id,
@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
           data.internalCode,
           data.administrativeData,
           data.administrativeDataContext,
-          data.administrativeData[0].role
+          data.administrativeData[0].role,
+          data.administrativeData[0].policies
         );
         localStorage.setItem('token', JSON.stringify(data.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
