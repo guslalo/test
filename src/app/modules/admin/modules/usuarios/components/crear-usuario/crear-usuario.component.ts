@@ -116,7 +116,7 @@ export class CrearUsuarioComponent implements OnInit {
       motherName: ['', Validators.required],
       secondLastName: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      phoneNumber: [null, Validators.required],
+      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: ['male', Validators.required],
       birthdate: [null, Validators.required],
       ufBirth: [null, null],
@@ -132,7 +132,7 @@ export class CrearUsuarioComponent implements OnInit {
       city: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
-      streetNumber: [0, Validators.required],
+      streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
 
     this.profileForm = this.formBuilder.group({

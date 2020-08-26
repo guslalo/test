@@ -91,7 +91,7 @@ export class CreateAccountComponent implements OnInit {
       email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
       confirmEmail: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
+      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       breed: [null, Validators.required],
     });
     this.birthData = this._formBuilder.group({
@@ -106,7 +106,7 @@ export class CreateAccountComponent implements OnInit {
       city: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
-      streetNumber: ['', Validators.required],
+      streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
     this.passwordData = new FormGroup(
       {

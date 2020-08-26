@@ -4,11 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
-import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as moment from 'moment';
+import { CustomDateAdapter } from 'src/app/shared/utils';
 
 const current = new Date();
 
@@ -41,20 +43,22 @@ export class EditarUsuarioComponent implements OnInit {
   familiarSituations: any = [];
   issuingEntities: any = [];
 
-  minDate = {
+  maxDate = {
     year: current.getFullYear(),
     month: current.getMonth() + 1,
     day: current.getDate(),
   };
 
-  maxDate = {
+  minDate = {
     year: current.getFullYear() - 18,
     month: current.getMonth(),
     day: current.getDate(),
   };
 
+  dateAdapter = new CustomDateAdapter();
   birthDate: NgbDateStruct;
   inmigrationDate: NgbDateStruct;
+
   formUser: any = [];
   userObject: any = {};
 
@@ -117,18 +121,18 @@ export class EditarUsuarioComponent implements OnInit {
 
     this.personalData = this.formBuilder.group({
       name: ['', Validators.required],
-      lastName: ['', Validators.required],
+      lastName: ['', null],
       motherName: ['', Validators.required],
-      secondLastName: ['', null],
+      secondLastName: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      phoneNumber: [null, Validators.required],
+      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: ['male', Validators.required],
-      birthdate: [null, Validators.required],
+      birthdate: [null, null],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: ['', Validators.required],
       originCountry: [null, null],
-      inmigrationDate: ['', null],
+      inmigrationDate: [null, null],
       breed: [null, Validators.required],
       education: [null, null],
       familySituation: [null, null],
@@ -137,7 +141,7 @@ export class EditarUsuarioComponent implements OnInit {
       city: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
-      streetNumber: [0, Validators.required],
+      streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
 
     this.profileForm = this.formBuilder.group({
@@ -196,7 +200,6 @@ export class EditarUsuarioComponent implements OnInit {
       this.passwordForm
     );
 
-    this.birthDate = this.calendar.getToday();
     this.inmigrationDate = this.calendar.getToday();
 
     // REACTIVE FORM
@@ -210,15 +213,13 @@ export class EditarUsuarioComponent implements OnInit {
       this.identificationData.get('extraIdDocument').enable();
     });
 
-    this.birthDate = this.calendar.getToday();
-
     this.getSpecialties();
   }
 
   async getUser(userType, userId) {
     this.adminService.getUserById(userType, userId).subscribe(
       (user) => {
-        // console.log(user);
+        console.log(user);
 
         // MAIN IDENTIFICATION
         if (user.identificationData.cpf) this.identificationData.get('document').setValue('cpf');
@@ -242,8 +243,12 @@ export class EditarUsuarioComponent implements OnInit {
           this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody);
 
         this.isForeign = user.identificationData.isForeign;
-        if (user.identificationData.isForeign)
+        if (user.identificationData.isForeign) {
           this.identificationData.get('passport').setValue(user.identificationData.passport);
+          this.personalData.get('originCountry').setValue(user.personalData.originCountry);
+          this.inmigrationDate = this.dateAdapter.fromModel(user.personalData.inmigrationDate) || this.inmigrationDate;
+          this.personalData.get('inmigrationDate').setValue(this.inmigrationDate);
+        }
 
         this.identificationData
           .get('extraIdDocument')
@@ -263,12 +268,11 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
-        this.personalData.get('birthdate').setValue(user.personalData.birthdate);
+        this.birthDate = this.dateAdapter.fromModel(user.personalData.birthdate);
+        this.personalData.get('birthdate').setValue(this.birthDate);
         this.personalData.get('ufBirth').setValue(user.personalData.ufBirth);
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
-        this.personalData.get('originCountry').setValue(user.personalData.originCountry);
-        this.personalData.get('inmigrationDate').setValue(user.personalData.inmigrationDate || '');
         this.personalData.get('breed').setValue(user.personalData.breed);
         this.personalData.get('education').setValue(user.personalData.education);
         this.personalData.get('familySituation').setValue(user.personalData.familySituation);
@@ -398,18 +402,31 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    if (this.userType !== 'professional') {
-      if (this.formUser[0].valid) {
-        return true;
-      } else {
+    // console.log(this.formUser[1]);
+
+    switch (this.userType) {
+      case 'admins':
+        if (this.formUser[0].valid && this.formUser[1].valid) {
+          return true;
+        } else {
+          return false;
+        }
+
+      case 'professionals':
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid) {
+          return true;
+        } else {
+          return false;
+        }
+      case 'patients':
+        if (this.formUser[0].valid) {
+          return true;
+        } else {
+          return false;
+        }
+
+      default:
         return false;
-      }
-    } else {
-      if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 
@@ -434,8 +451,6 @@ export class EditarUsuarioComponent implements OnInit {
     const _specialities = this.specialitiesAssigned.map((map) => {
       return map.id;
     });
-
-    // console.log(_waitingRooms);
 
     this.userObject = {
       id: this.userId,
@@ -473,13 +488,13 @@ export class EditarUsuarioComponent implements OnInit {
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
-        birthdate: this.formUser[1].value.birthdate.toString(),
+        birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
         ufBirth: this.formUser[1].value.ufBirth || '',
         municipalityBirth: this.formUser[1].value.municipalityBirth || '',
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.formUser[1].value.inmigrationDate.toString() || '',
+        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate),
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',

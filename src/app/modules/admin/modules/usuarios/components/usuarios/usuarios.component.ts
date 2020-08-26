@@ -57,8 +57,6 @@ export class UsuariosComponent implements OnInit {
       idDocumentNumber: ['', Validators.required],
     });
 
-    console.log(this.currentUser.policies.userPolicies);
-
     if (this.role && this.profile) {
       this.profileSelected = this.profile;
       switch (this.role) {
@@ -291,11 +289,13 @@ export class UsuariosComponent implements OnInit {
       })
       // SEARCH FILTER
       .filter((user) => {
+        console.log(user);
+
         return (
-          user.nationalId.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.nationalId.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
           user.fullName.toLowerCase().indexOf(searchTerm) !== -1 ||
           user.email.toLowerCase().indexOf(searchTerm) !== -1 ||
-          user.phone.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.phone.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
           !searchTerm
         );
       });
