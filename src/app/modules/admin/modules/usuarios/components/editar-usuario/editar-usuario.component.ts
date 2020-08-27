@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { map } from 'rxjs/operators';
+import { map, timeout } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -204,18 +204,44 @@ export class EditarUsuarioComponent implements OnInit {
 
     this.inmigrationDate = this.calendar.getToday();
 
-    // REACTIVE FORM
-    this.identificationData.get('document').valueChanges.subscribe((val) => {
-      if (val === 'rgRegistry') this.identificationData.get('issuingBody').enable();
-      else this.identificationData.get('issuingBody').disable();
+    setTimeout(() => {
+      this.validateForm();
+    }, 1000);
+  }
+
+  validateForm() {
+    this.identificationData.clearValidators();
+
+    if (this.identificationData.get('document').value === 'rgRegistry') {
       this.identificationData.get('idDocumentNumber').enable();
-    });
+      this.identificationData.get('issuingBody').enable();
+    } else {
+      this.identificationData.get('issuingBody').disable();
+    }
 
-    this.identificationData.get('extraDocument').valueChanges.subscribe((val) => {
+    if (this.isForeign) {
+      this.identificationData.get('idDocumentNumber').setValidators(null);
+      this.identificationData.get('document').disable();
+      this.identificationData.get('extraDocument').disable();
+      this.identificationData.get('idDocumentNumber').disable();
+      this.identificationData.get('extraIdDocument').disable();
+      this.identificationData.get('passport').setValidators(Validators.required);
+      this.identificationData.get('idDocumentNumber').reset();
+      this.identificationData.get('extraIdDocument').reset();
+      this.identificationData.get('document').reset();
+      this.identificationData.get('extraDocument').reset();
+    } else {
+      this.identificationData.get('passport').setValidators(null);
+      this.identificationData.get('document').enable();
+      this.identificationData.get('extraDocument').enable();
+      this.identificationData.get('document').setValidators([Validators.required]);
+      this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
-    });
+      this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
+      this.identificationData.get('passport').reset();
+    }
 
-    this.getSpecialties();
+    this.identificationData.updateValueAndValidity();
   }
 
   async getUser(userType, userId) {
@@ -288,46 +314,66 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
-        if (this.userType !== 'patients') {
-          this.professionalPhoto = user.professionalData.professionalPhoto || '';
-          this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
-          this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
-          this.professionalForm.get('university').setValue(user.professionalData.university);
-          this.professionalForm.get('course').setValue(user.professionalData.course);
-          this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
+        switch (this.userType) {
+          case 'admins':
+          case 'coordinators':
+            this.waitingRoomsAssigned = user.waitingRooms || [];
 
-          this.waitingRoomsAssigned = user.waitingRooms || [];
-
-          this.specialitiesData = this.specialities.reduce((obj, value: any) => {
-            obj[value._id] = value;
-            return obj;
-          }, {});
-
-          for (const sp of user.specialities) {
-            this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-              this.specialitiesAssigned.push(data.payload);
-            });
-          }
-          // console.log(this.specialitiesAssigned);
-          if (user.professionalData.professionalRegistry.length) {
-            for (const rg of user.professionalData.professionalRegistry) {
-              this.professionalRegistry.push(rg);
-            }
-          } else {
-            this.professionalRegistry = [];
-          }
-
-          // PROFILES CRUD
-          for (const item of user.administrativeData) {
-            this.adminService.getProfileById(item.profile).subscribe((p) => {
-              this.profilesAssigned.push({
-                clinic: item.clinic,
-                id: p._id,
-                role: p.role,
-                name: p.profileName,
+            // PROFILES
+            for (const item of user.administrativeData) {
+              this.adminService.getProfileById(item.profile).subscribe((p) => {
+                this.profilesAssigned.push({
+                  clinic: item.clinic,
+                  id: p._id,
+                  role: p.role,
+                  name: p.profileName,
+                });
               });
-            });
-          }
+            }
+            break;
+
+          case 'professionals':
+            this.professionalPhoto = this.professionalPhoto || '';
+            this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
+            this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
+            this.professionalForm.get('university').setValue(user.professionalData.university);
+            this.professionalForm.get('course').setValue(user.professionalData.course);
+            this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
+
+            this.specialitiesData = this.specialities.reduce((obj, value: any) => {
+              obj[value._id] = value;
+              return obj;
+            }, {});
+
+            for (const sp of user.specialities) {
+              this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
+                this.specialitiesAssigned.push(data.payload);
+              });
+            }
+            // console.log(this.specialitiesAssigned);
+            if (user.professionalData.professionalRegistry.length) {
+              for (const rg of user.professionalData.professionalRegistry) {
+                this.professionalRegistry.push(rg);
+              }
+            } else {
+              this.professionalRegistry = [];
+            }
+
+            // PROFILES
+            for (const item of user.administrativeData) {
+              this.adminService.getProfileById(item.profile).subscribe((p) => {
+                this.profilesAssigned.push({
+                  clinic: item.clinic,
+                  id: p._id,
+                  role: p.role,
+                  name: p.profileName,
+                });
+              });
+            }
+            break;
+
+          default:
+            break;
         }
 
         // console.log(this.profilesAssigned);
@@ -486,7 +532,7 @@ export class EditarUsuarioComponent implements OnInit {
         ...(this.formUser[0].value.document === 'rgRegistry' && {
           rgRegistry: this.formUser[0].value.idDocumentNumber || '',
         }),
-        passport: this.formUser[0].value.passport,
+        passport: this.formUser[0].value.passport || '',
         issuingBody: this.formUser[0].value.issuingBody || '',
         ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
         ...(this.formUser[0].value.extraDocument === 'pasep' && {
