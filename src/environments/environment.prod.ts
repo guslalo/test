@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.bdot.app/api/',
+  baseUrl: 'https://backend.homeclinic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
+  jitsi:'https://jitsi.homeclinic.telemedicina.com',//meet.bdot.app
   apiKey: '',
   clientSecret: '',
   firebase: {
@@ -15,3 +16,5 @@ export const environment = {
     measurementId: "G-FJ3Z5E7CRC" 
   }
 };
+
+

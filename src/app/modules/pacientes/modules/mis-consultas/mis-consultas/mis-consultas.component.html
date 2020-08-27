@@ -126,7 +126,7 @@
           </div>
         </div>
 
-        <ng-container *ngIf="consultas !== ''; else vacio">
+        <ng-container *ngIf="consultas.length > 0; else vacio">
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas">
             <div class="collapseCustom " id="{{item._id}}">

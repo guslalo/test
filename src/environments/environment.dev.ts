@@ -1,7 +1,8 @@
 export const environment = {
   production: false,
-  baseUrl: 'https://backend-itms.azurewebsites.net/api/',
+  baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
+  jitsi:'meet.bdot.app',//meet.bdot.app
   apiKey: '',
   clientSecret: '',
   firebase: {

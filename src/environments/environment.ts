@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   baseUrl: 'https://api.bdot.app/api/',
   client: 'itms',
+  jitsi:'meet.bdot.app',//meet.bdot.app
   apiKey: '',
   clientSecret: '',
   firebase: {

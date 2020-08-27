@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from './../../services/appointments.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from './../../../../../../../environments/environment';
 
 @Component({
   selector: 'app-index',
@@ -33,7 +34,7 @@ export class IndexComponent implements OnInit {
           parentNode: document.querySelector('#meet')
         };
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI('meet.bdot.app', options);
+        const jitsi = new (window as any).JitsiMeetExternalAPI(environment.jitsi, options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },

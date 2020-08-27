@@ -4,13 +4,15 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { Element } from '@angular/compiler';
 import { SharedModule } from '../../../../shared/shared.module';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
-
+//import { FormsModule } from '@angular/forms';
 import { ValueTransformer } from '@angular/compiler/src/util';
 
 //services
 import { AvailabilityService } from '../../services/availability.service';
 import { ProfessionalService } from './../../../../services/professional.service';
 import { SpecialtiesService } from './../../../../services/specialties.service';
+
+import * as moment from 'moment';
 
 import {
   NgbDateStruct,
@@ -19,14 +21,15 @@ import {
   NgbDatepickerConfig,
   NgbTimepicker,
 } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+
 
 // carrusel
 @Component({
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
-  styleUrls: ['./mi-disponibilidad.component.scss'],
+  styleUrls: ['./mi-disponibilidad.component.scss']
 })
+
 export class MiDisponibilidadComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
@@ -68,6 +71,8 @@ export class MiDisponibilidadComponent implements OnInit {
   model: NgbDateStruct;
   model2: NgbDateStruct;
   model3: NgbDateStruct;
+  model4: NgbDateStruct;
+  model5: NgbDateStruct;
 
   date: { year: string; month: string };
   time = { hour: 13, minute: 30 };
@@ -134,7 +139,7 @@ export class MiDisponibilidadComponent implements OnInit {
   showActiveDays: Boolean = false;
   showBlockedDays: Boolean = false;
 
-  model4: NgbDateStruct;
+
 
   onCheckboxChange(e) {
     const dailyDetails: FormArray = this.createAvailability.get('dailyDetails') as FormArray;
@@ -156,7 +161,7 @@ export class MiDisponibilidadComponent implements OnInit {
   initCalendar() {
     setTimeout(() => {
       this.calendar = true;
-    }, 200);
+    }, 250);
   }
 
   ngOnInit(): void {
@@ -165,14 +170,15 @@ export class MiDisponibilidadComponent implements OnInit {
     this.calendar = true;
 
     this.createAvailability = this._formBuilder.group({
-      objective: [null],
-      appointmentDuration: [null],
-      specialty: [null],
-      specialtyName: [null],
-      endDate: [null, [Validators.required]],
-      startDate: [null, [Validators.required]],
-      dailyDetails: this._formBuilder.array([], [Validators.required]),
+      objective: [null, [Validators.required]],//[Validators.required],
+      appointmentDuration: new FormControl(),
+      specialty:  new FormControl(),
+      specialtyName:  new FormControl(),
+      endDate:  [null, [Validators.required]],// [Validators.required]
+      startDate:  new FormControl(),//['', ],//[Validators.required]
+      dailyDetails: this._formBuilder.array([], ),//[Validators.required]
       dailyRanges: this._formBuilder.array([]),
+      
 
       /*/*
       administrativeDetails: {
@@ -196,7 +202,8 @@ export class MiDisponibilidadComponent implements OnInit {
     });
 
     this.agregardailyRanges();
-    this.getProfessionalSpecialties();
+    this. getSpecialtiesIdService();
+    //this.getProfessionalSpecialties();
   }
 
   // controls reactivos
@@ -227,7 +234,8 @@ export class MiDisponibilidadComponent implements OnInit {
       (data) => {
         this.medicalSpecialties = data.payload;
         console.log(this.medicalSpecialties);
-        this.getSpecialtiesIdService(this.medicalSpecialties[0]._id);
+        console.log(this.medicalSpecialties[0]._id);
+        //this.getSpecialtiesIdService(this.medicalSpecialties[0]._id);
         /*
         if(this.medicalSpecialties.lenght === 0){
           console.log(this.medicalSpecialties[0]);
@@ -267,7 +275,7 @@ export class MiDisponibilidadComponent implements OnInit {
         //specialtyName:  'test',
       },
       dateDetails: {
-        startDate: this.createAvailability.controls.endDate.value,
+        startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
@@ -328,6 +336,7 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   putAvailability2(id) {
+    //this.createAvailability = id;
     console.log(this.createAvailability);
     const formObject = {
       id,
@@ -339,7 +348,7 @@ export class MiDisponibilidadComponent implements OnInit {
         specialtyId: this.createAvailability.controls.specialty.value,
       },
       dateDetails: {
-        startDate: this.createAvailability.controls.endDate.value,
+        startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
@@ -382,7 +391,8 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   putAvailability(id) {
-    this.idAvailability = id;
+    //this.idAvailability = id;
+    //console.log(this.idAvailability)
     this.availabilityService.getAvailability(id).subscribe(
       (data) => {
         this.idAvailability = data.payload[0];
@@ -421,10 +431,10 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   //GET sub especialidad
-  getSpecialtiesIdService(id) {
-    this.specialtiesService.getSpecialtiesId(id).subscribe(
+  getSpecialtiesIdService() {
+    this.specialtiesService.getSpecialtiesId2().subscribe(
       (data) => {
-        // console.log(data);
+        console.log(data);
         this.specialtiesId = data.payload;
         //this.bloquearSelect = false;
       },

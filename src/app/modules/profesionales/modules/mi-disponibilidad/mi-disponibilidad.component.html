@@ -338,22 +338,16 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">Objetivo</label>
-                <input type="text" class="form-control" id="objective" formControlName="objective" />
+                <input type="text" class="form-control" id="objective" formControlName="objective" 
+                 [ngClass]="{
+                  'is-invalid':
+                    !createAvailability.get('objective').touched
+                }"/>
               </div>
               <div class="form-group col">
                 <label for="specialty">Especialidad</label>
-                <select class="form-control" id="specialty2">
-                  <ng-container *ngFor="let item of medicalSpecialties">
-                    <option value="{{ item._id }}">{{ item.name }}</option>
-                  </ng-container>
-                </select>
-              </div>
-              <div class="form-group col">
-                <label for="specialty">Sub especialidad</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
-                  <ng-container *ngFor="let item of specialtiesId">
-                    <option value="{{ item._id }}">{{ item.specialtyName }}</option>
-                  </ng-container>
+                  <option *ngFor="let item of specialtiesId" value="{{ item._id }}">{{ item.specialtyName }}</option>
                 </select>
               </div>
             </div>
@@ -368,7 +362,7 @@
                     id="startDate"
                     name="startDate"
                     formControlName="startDate"
-                    [(ngModel)]="model2"
+                    [(ngModel)]="model5"
                     [minDate]="minDate"
                     ngbDatepicker
                     #d="ngbDatepicker"
@@ -521,7 +515,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal bloquear -->
   <div
     class="modal fade"
     id="bloquearDias"
@@ -635,18 +629,22 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">Objetivo</label>
-                <input
-                 
+                <input            
                   type="text"
                   class="form-control"
                   id="objective"
-                  placeholder="{{ idAvailability.administrativeDetails.objective }}"
+                  name="objective"
                   formControlName="objective"
-                />
+                
+                  [ngClass]="{
+                    'is-invalid':
+                      !createAvailability.get('objective').valid && createAvailability.get('objective').touched
+                  }"
+                /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
                 <label for="specialty">Especialidad </label>
-                <select class="form-control" id="specialty" formControlName="specialty">
+                <select class="form-control" id="specialty" formControlName="specialty"><!---->
                   <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }}">
                     {{ idAvailability.professionalDetails.specialtyDetails[0].specialtyName }}
                   </option>
@@ -658,27 +656,30 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate"
-                  >Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}</label
-                >
-                <div class="input-group">
+                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+                  </label>
+                <div class="input-group"><!---->
                   <input
                     class="form-control"
                     type="text"
                     placeholder="{{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}"
-                    id="starDate"
-                    name="starDate"
-                    formControlName="starDate"
-                    [(ngModel)]="model2"
+                    id="startDate"
+                    name="startDate"
+                   
+                    [(ngModel)]="model5"
                     [minDate]="minDate"
                     ngbDatepicker
+                    formControlName="startDate"
                     #d="ngbDatepicker"
                     (click)="d.toggle()"
-                    [ngClass]="{
+                   
+                  /><!--
+ [ngModelOptions]="{standalone: true}"
+                    
+                     [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
                     }"
-                  /><!--
                         <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
                   <!--
                         <div class="input-group-append">
@@ -687,33 +688,39 @@
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label>
+                <label for="endDate">Fecha de término</label><!-- formControlName="endDate"-->
                 <div class="input-group">
                   <input
-                    class="form-control"
                     class="form-control"
                     type="text"
                     placeholder="{{ idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy' }}"
                     id="endDate"
                     name="endDate"
-                    formControlName="endDate"
+                   
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="model4"
                     [minDate]="minDate"
                     ngbDatepicker
                     #e="ngbDatepicker"
+                    (click)="e.toggle()"
                     [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
                     }"
-                    (click)="e.toggle()"
-                  />
+                  /> <!--
+                     [ngModelOptions]="{standalone: true}"
+                     formControlName="endDate"
+                     [ngClass]="{
+                    'is-invalid':
+                      !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
+                  }" -->
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row"><!-- formControlName="appointmentDuration"-->
               <div class="form-group col">
                 <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
-                <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
+                <select class="form-control" id="appointmentDuration">
                   <option selected="selected" value="0">{{
                     idAvailability.administrativeDetails.appointmentDuration
                   }}</option>
@@ -767,10 +774,7 @@
                       [attr.id]="'start' + i"
                       class="form-control"
                       formControlName="start"
-                      [ngClass]="{
-                        'is-invalid':
-                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
+                    
                     />
                   </div>
                   <div class="form-group col">
