@@ -201,8 +201,8 @@ export class IndexComponent implements OnInit {
     console.log(event);
     this.reserve = {
       professionalDetails: {
-        userId: null,
-        specialtyId: event,
+        userId: event,
+        specialtyId: null,
       },
       dateDetails: {
         date: {
@@ -213,7 +213,7 @@ export class IndexComponent implements OnInit {
         start: null,
       },
     };
-
+      console.log(this.reserve);
     //this.reserve.professionalDetails.specialtyId = event;
   }
 
@@ -239,8 +239,9 @@ export class IndexComponent implements OnInit {
 
       this.reserve = {
         professionalDetails: {
-          userId: null,
+          userId:this.reserve.professionalDetails.userId
         },
+        professionalId: this.reserve.professionalDetails.userId,
         dateDetails: {
           date: {
             year: object.year,
@@ -252,9 +253,9 @@ export class IndexComponent implements OnInit {
       };
 
       //.reserve.dateDetails.date = object;
-      console.log(this.reserve.professionalDetails.specialtyId);
+      console.log(this.reserve);
       console.log('flujo profesional');
-      this.agendarService.postBlocks(object).subscribe(
+      this.agendarService.postBlocksProfessionalId(object,  this.reserve.professionalId ).subscribe(
         (data) => {
           this.blocks = data.payload;
           localStorage.removeItem('reserva');
