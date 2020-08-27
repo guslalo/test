@@ -24,13 +24,15 @@ export class SpecialtiesService {
     return this.http.get<any>(environment.baseUrl + this.specialties + '/' + id);
   }
 
-    //specialties
-    getSpecialtiesId2(): Observable<any> {
-      return this.http.get<any>(environment.baseUrl + this.medicalSpecialties2);
-    }
-  
+  //specialties
+  getSpecialtiesId2(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.medicalSpecialties2);
+  }
 
-
+  //specialties
+  getSpecialtiesId(id): Observable<any> {
+    return this.http.patch<any>(environment.baseUrl + this.specialties + '/' + id, {});
+  }
 
   //specialties
   getMedicalSpecialties(): Observable<any> {
