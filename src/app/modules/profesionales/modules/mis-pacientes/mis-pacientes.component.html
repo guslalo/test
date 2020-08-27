@@ -21,14 +21,7 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input
-          id="typeahead-basic"
-          type="text"
-          class="form-control"
-          [(ngModel)]="searchTerm"
-          [ngbTypeahead]="search"
-          placeholder="Busqueda"
-        />
+        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Busqueda" />
         <div class="searchBox">
           <svg
             width="1em"
@@ -82,25 +75,20 @@
 
             <tbody>
               <tr *ngFor="let item of patients | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                <td scope="row">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                    <label class="custom-control-label" for="customCheck1">
-                      324565
-                    </label>
-                  </div>
+                <td>
+                  {{ item.identificationData.cpf || item.identificationData.cns || item.identificationData.rgRegistry }}
                 </td>
                 <td>
                   <a routerLink="../mis-pacientes/ficha-paciente">
                     <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                    Antonia Miranda Torres
+                    {{ item.personalData.name + ' ' + item.personalData.lastname }}
                   </a>
                 </td>
                 <td>
-                  34
+                  {{ item.personalData.birthdate }}
                 </td>
-                <td>Femenino</td>
-                <td>946729456</td>
+                <td>{{ item.personalData.gender }}</td>
+                <td>{{ item.personalData.phoneNumber }}</td>
                 <td>
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>

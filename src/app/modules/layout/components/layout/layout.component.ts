@@ -4,6 +4,7 @@ import { UserLogin } from '../../../../models/models';
 // import { slideInAnimation } from '../../../../shared/animations';
 import { SharedModule } from '../../../../shared/shared.module';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-layout',
@@ -49,13 +50,18 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class LayoutComponent implements OnInit {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+  status_date: any;
 
-  constructor() {}
+  constructor() {
+    moment().lang('es');
+  }
   public state = 'open';
 
   status = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.status_date = `${moment(new Date()).format('LLLL')}`;
+  }
 
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';

@@ -6,9 +6,9 @@
     <header>
       <div id="header">
         <div class="container-fluid">
-          <div class="row align-items-center">
+          <div class="row align-items-center d-flex w-100">
             <!--col-->
-            <div class="col-6">
+            <div class="col-md-2">
               <div class="iconMenu mr-4" (click)="sideBarMenu()">
                 <svg
                   width="1.5em"
@@ -93,8 +93,13 @@
               </div>
             </div>
             <!--/col-->
+
+            <div class="date-layout">
+              {{ status_date }}
+            </div>
+
             <!--col row justify-content-center align-self-center-->
-            <div class="col-6">
+            <div class="flex-grow-1">
               <div class="box-items mr-2">
                 <div class="items">
                   <ng-container *ngIf="currentUser.administrativeData[0].role === 'patient'">
@@ -130,6 +135,7 @@
                     </button>
                   </ng-container>
                 </div>
+
                 <!--items-->
                 <div class="items">
                   <div class="m-0 text-right top-currentUser">
