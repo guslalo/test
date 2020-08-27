@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexProfileComponent implements OnInit {
+  currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   searchTerm: string = '';
   roleSelected: string = null;
 
@@ -23,6 +24,10 @@ export class IndexProfileComponent implements OnInit {
   constructor(public adminService: AdminService) {}
 
   ngOnInit(): void {
+    this.fetchProfiles();
+  }
+
+  fetchProfiles() {
     this.adminService.getProfiles().subscribe(
       (data) => {
         // console.log(data);
@@ -57,5 +62,17 @@ export class IndexProfileComponent implements OnInit {
       });
 
     this.profiles = temp;
+  }
+
+  deactivateProfile(profileId) {
+    this.adminService.deactivateProfile(profileId).subscribe(
+      (data) => {
+        this.fetchProfiles();
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

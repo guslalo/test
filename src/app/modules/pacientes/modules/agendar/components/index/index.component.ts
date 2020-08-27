@@ -11,27 +11,29 @@ import { SymptomsService } from './../../../../../../services/symptoms.service';
 import { DocumentService } from './../../../../../../services/document.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
-
-
-
 //datepicker
-import {  NgbDateStruct, NgbCalendar,NgbDateParserFormatter,NgbDatepickerConfig,NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateStruct,
+  NgbCalendar,
+  NgbDateParserFormatter,
+  NgbDatepickerConfig,
+  NgbTimepicker,
+} from '@ng-bootstrap/ng-bootstrap';
 import { id } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-
-  public specialties:string;
-  public specialtiesId:string;
-  public medicalSpecialties:any;
-  public blocks:any;
-  public symptoms:any;
-  public consolidate:any;
-  public professional:string;
+  public specialties: string;
+  public specialtiesId: string;
+  public medicalSpecialties: any;
+  public blocks: any;
+  public symptoms: any;
+  public consolidate: any;
+  public professional: string;
   public sintomaSelected = [];
   public minDate = undefined;
   public model: NgbDateStruct;
@@ -39,31 +41,30 @@ export class IndexComponent implements OnInit {
   public reserve: any;
   public date: { year: number; month: number };
   public file: any;
-  public base64:any;
-  public textInputFile:any;
-  public flujoProfesional:boolean = false;
+  public base64: any;
+  public textInputFile: any;
+  public flujoProfesional: boolean = false;
 
   imageError: string;
   isImageSaved: boolean;
   cardImageBase64: string;
-  public sinProfesionales:boolean;
+  public sinProfesionales: boolean;
 
   public bloquearSelect = true;
   public bloquearFecha = true;
 
-
   constructor(
-    private agendarService:AgendarService,
-    private professionalService:ProfessionalService,
-    private specialtiesService:SpecialtiesService,
+    private agendarService: AgendarService,
+    private professionalService: ProfessionalService,
+    private specialtiesService: SpecialtiesService,
     private symptomsService: SymptomsService,
-    private appointmentsService:AppointmentsService,
-    private documentService:DocumentService,
+    private appointmentsService: AppointmentsService,
+    private documentService: DocumentService,
     private calendar: NgbCalendar,
     private config: NgbDatepickerConfig,
     private router: Router,
     private route: ActivatedRoute
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     const current = new Date();
@@ -75,11 +76,9 @@ export class IndexComponent implements OnInit {
     };
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
-  
+
     this.getProfessionalService();
     this.getsymptoms();
-    
-    
   }
 
   //selecion sintoma
@@ -87,18 +86,15 @@ export class IndexComponent implements OnInit {
     this.consolidate.patientDetails.symptoms.push(deviceValue.value);
     this.sintomaSelected.push(deviceValue.selectedOptions[0].innerText);
     console.log(this.consolidate); /**/
-    
   }
 
-  onChangeTypeProfesional(id){
+  onChangeTypeProfesional(id) {
     this.flujoProfesional = false;
     console.log(id);
     this.getSpecialtiesIdService(id);
-
   }
 
-  
-  onChangeTypeSpecialtiesId(value){
+  onChangeTypeSpecialtiesId(value) {
     console.log(value);
     this.bloquearFecha = false;
     /*
@@ -108,327 +104,314 @@ export class IndexComponent implements OnInit {
     )*/
     this.reserve = {
       professionalDetails: {
-          userId: null,
-          specialtyId: value
+        userId: null,
+        specialtyId: value,
       },
       dateDetails: {
-          date: {
-              year: null,
-              month: null,
-              day: null
-          },
-          start: null
-      }
-    }
-    
-    console.log(this.reserve)
+        date: {
+          year: null,
+          month: null,
+          day: null,
+        },
+        start: null,
+      },
+    };
+
+    console.log(this.reserve);
     /*this.reserve.id = id;
     ;*/
   }
 
-  agendar(){
+  agendar() {
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.postConsolidateService(this.consolidate);
   }
 
-  opcionSeleccionado:any;
+  opcionSeleccionado: any;
   verSeleccion: any;
-  value:any;
+  value: any;
 
   //;
 
   status: boolean = false;
-  selectedLevel:any;
-  seleccionSintoma(item){
-    
-    console.log(item)
+  selectedLevel: any;
+  seleccionSintoma(item) {
+    console.log(item);
   }
   selectSintoma = false;
 
-  blockSelected(item, item2){
+  blockSelected(item, item2) {
     console.log(item);
-    this.selectSintoma = true
+    this.selectSintoma = true;
     this.reserve.dateDetails.start = item2;
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.consolidate = {
           id: data.payload.id,
           patientDetails: {
-            symptoms: [ ],
-            description: null
-          }
-        }
+            symptoms: [],
+            description: null,
+          },
+        };
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-
-  atras(){
+  atras() {
     this.selectSintoma = false;
   }
 
-
   //consolidar cita
-  postConsolidateService(consolidate){
+  postConsolidateService(consolidate) {
     console.log(consolidate);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
-      data => {
+      (data) => {
         this.consolidate = data.payload[0];
         btoa(this.blocks);
         console.log(data);
-        this.router.navigate(['resultado/'+  btoa(this.blocks)], {relativeTo: this.route});
+        this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    ) 
+    );
   }
 
   getsymptoms() {
     this.symptomsService.getSymptoms().subscribe(
-      data => {
-        
+      (data) => {
         this.symptoms = data.payload;
-        console.log(this.symptoms)
+        console.log(this.symptoms);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    ) 
-  } 
+    );
+  }
 
-
-  escogerProfessional(event){
+  escogerProfessional(event) {
     this.flujoProfesional = true;
     this.bloquearFecha = false;
     console.log(event);
     this.reserve = {
       professionalDetails: {
-          userId: null,
-          specialtyId: event
+        userId: null,
+        specialtyId: event,
       },
       dateDetails: {
-          date: {
-              year: null,
-              month: null,
-              day: null
-          },
-          start: null
-      }
-    }
+        date: {
+          year: null,
+          month: null,
+          day: null,
+        },
+        start: null,
+      },
+    };
 
     //this.reserve.professionalDetails.specialtyId = event;
   }
 
   getProfessionalService() {
     this.professionalService.getProfessionals().subscribe(
-      data => {
+      (data) => {
         this.professional = data;
         console.log(this.professional);
-        
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    ) 
-  } 
- 
+    );
+  }
 
   getPostBlocks(date) {
-    if(this.flujoProfesional === true) {
+    if (this.flujoProfesional === true) {
       const object = {
         month: date.month,
         year: date.year,
-        day: date.day
-      }
+        day: date.day,
+      };
 
       this.reserve = {
         professionalDetails: {
-            userId: null
+          userId: null,
         },
         dateDetails: {
-            date: {
-                year: object.year,
-                month: object.month,
-                day: object.day
-            },
-            start: null
-        }
-      }
-  
+          date: {
+            year: object.year,
+            month: object.month,
+            day: object.day,
+          },
+          start: null,
+        },
+      };
+
       //.reserve.dateDetails.date = object;
       console.log(this.reserve.professionalDetails.specialtyId);
-      console.log('flujo profesional')
-      this.agendarService.postBlocks(
-        object
-      ).subscribe(
-        data => {
+      console.log('flujo profesional');
+      this.agendarService.postBlocks(object).subscribe(
+        (data) => {
           this.blocks = data.payload;
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
-          console.log( data)
-          console.log(data.internalCode)
-          if(data.internalCode === 103){
+          console.log(data);
+          console.log(data.internalCode);
+          if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
             this.sinProfesionales = false;
           }
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      ) 
+      );
     } else {
       console.log(date);
       const object = {
         month: date.month,
         year: date.year,
-        day: date.day
-      }
+        day: date.day,
+      };
 
       this.reserve.dateDetails.date = object;
       console.log(this.reserve.professionalDetails.specialtyId);
-      console.log(object)
+      console.log(object);
       //.getServicesBlocks(object, this.reserve.professionalDetails.specialtyId)
-      this.agendarService.postBlocks(
-        object,  this.reserve.professionalDetails.specialtyId //
-      ).subscribe(
-        data => {
+      this.agendarService
+        .postBlocks(
+          object,
+          this.reserve.professionalDetails.specialtyId //
+        )
+        .subscribe(
+          (data) => {
+            this.blocks = data.payload;
+            localStorage.removeItem('reserva');
+            localStorage.setItem('reserva', JSON.stringify(this.blocks));
+            console.log(data);
+            console.log(data.internalCode);
+            if (data.internalCode === 103) {
+              this.sinProfesionales = true;
+            } else {
+              this.sinProfesionales = false;
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+    /* */
+  }
+
+  //trae lso bloques
+  getServicesBlocks(date, specialtyId?) {
+    console.log(date, specialtyId);
+    this.agendarService
+      .postBlocks(
+        date,
+        specialtyId //
+      )
+      .subscribe(
+        (data) => {
           this.blocks = data.payload;
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
-          console.log( data)
-          console.log(data.internalCode)
-          if(data.internalCode === 103){
+          console.log(data);
+          console.log(data.internalCode);
+          if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
             this.sinProfesionales = false;
           }
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      ) 
-    }
-   /* */
-    
-  } 
-
-  //trae lso bloques
-  getServicesBlocks(date, specialtyId?){
-    console.log(date, specialtyId);
-    this.agendarService.postBlocks(
-      date, specialtyId //
-    ).subscribe(
-      data => {
-        this.blocks = data.payload;
-        localStorage.removeItem('reserva');
-        localStorage.setItem('reserva', JSON.stringify(this.blocks));
-        console.log( data)
-        console.log(data.internalCode)
-        if(data.internalCode === 103){
-          this.sinProfesionales = true;
-        } else {
-          this.sinProfesionales = false;
-        }
-      },
-      error => {
-        console.log(error)
-      }
-    ) 
+      );
   }
 
-  getSpecialtiesService(){
+  getSpecialtiesService() {
     this.bloquearSelect = true;
     this.specialtiesService.getSpecialties().subscribe(
-      data => {
+      (data) => {
         this.specialties = data.payload;
-        
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-  getSpecialtiesIdService(id){
-    this.specialtiesService.getSpecialtiesId(id).subscribe(
-      data => {
+  getSpecialtiesIdService(id) {
+    this.specialtiesService.getMedicalSpecialtiesId(id).subscribe(
+      (data) => {
         console.log(data);
         this.specialtiesId = data.payload;
         this.bloquearSelect = false;
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-  getMedicalSpecialties(){
+  getMedicalSpecialties() {
     this.specialtiesService.getMedicalSpecialties().subscribe(
-      data => {
+      (data) => {
         console.log('Specialties', data);
         this.medicalSpecialties = data.payload;
-       
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-
-
-
-changeListener(event) : void {
-  //this.readThis($event.target);
-  console.log(event.target.files[0]);
-  this.textInputFile = event.target.files[0].name;
-  console.log(this.textInputFile)
-  const file = event.target.files[0];
+  changeListener(event): void {
+    //this.readThis($event.target);
+    console.log(event.target.files[0]);
+    this.textInputFile = event.target.files[0].name;
+    console.log(this.textInputFile);
+    const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       //console.log(reader.result);
-      this.base64 = reader.result
-      console.log(this.base64 );
+      this.base64 = reader.result;
+      console.log(this.base64);
       //this.postDocumentService(this.base64);
       const documentDetailsObject = {
         name: event.target.files[0].name,
-        type: "documento",
-        data: this.base64.split(',')[1]
-      } 
-      
+        type: 'documento',
+        data: this.base64.split(',')[1],
+      };
+
       this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
-        data => {
-          console.log(data)
+        (data) => {
+          console.log(data);
         },
-        error => {
-          console.log(error)
+        (error) => {
+          console.log(error);
         }
-      )/**/
-    
-  };
- 
+      ); /**/
+    };
+  }
 
-}
-
-
-postDocumentService(base64){
-  /*
+  postDocumentService(base64) {
+    /*
   console.log(base64);
   const documentDetailsObject: {
     name: "encodedPixel.png",
     type: "exam",
     data: this.base64 
   }  */
-  /*
+    /*
   this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
     data => {
       console.log(data)
@@ -437,21 +420,18 @@ postDocumentService(base64){
       console.log(error)
     }
   )*/
-}
-
-readThis(inputValue: any): void {
-  var file:File = inputValue.files[0];
-  var myReader:FileReader = new FileReader();
-
-  myReader.onloadend = (e) => {
-    this.file = myReader.result;
-    console.log(this.file )
-    this.postDocumentService(myReader);
   }
 
-  myReader.readAsDataURL(file);
+  readThis(inputValue: any): void {
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
 
-}
+    myReader.onloadend = (e) => {
+      this.file = myReader.result;
+      console.log(this.file);
+      this.postDocumentService(myReader);
+    };
 
-
+    myReader.readAsDataURL(file);
+  }
 }

@@ -6,9 +6,9 @@
     <header>
       <div id="header">
         <div class="container-fluid">
-          <div class="row align-items-center">
+          <div class="row align-items-center d-flex w-100">
             <!--col-->
-            <div class="col-6">
+            <div class="col-md-2">
               <div class="iconMenu mr-4" (click)="sideBarMenu()">
                 <svg
                   width="1.5em"
@@ -93,11 +93,16 @@
               </div>
             </div>
             <!--/col-->
+
+            <div class="date-layout">
+              {{ status_date }}
+            </div>
+
             <!--col row justify-content-center align-self-center-->
-            <div class="col-6">
+            <div class="flex-grow-1">
               <div class="box-items mr-2">
                 <div class="items">
-                  <ng-container *ngIf="user.administrativeData[0].role === 'patient'">
+                  <ng-container *ngIf="currentUser.administrativeData[0].role === 'patient'">
                     <button
                       tourAnchor="agendar"
                       type="button"
@@ -130,26 +135,32 @@
                     </button>
                   </ng-container>
                 </div>
+
                 <!--items-->
                 <div class="items">
-                  <div class="m-0 text-right top-user">
-                    <a routerLink="perfil" class="name">Hola, {{ user.name }}!</a>
-                    <ng-container *ngIf="user.administrativeData.length > 1; else administrative">
-                      <ng-container *ngFor="let item of user.administrativeData">
-                        <p class="p-0 m-0" *ngIf="item.clinicProfileId === user.administrativeDataContext">
-                          {{ item.role | titlecase }} / {{ item.clinicName }}
-                        </p>
+                  <div class="m-0 text-right top-currentUser">
+                    <a routerLink="perfil" class="name">Hola, {{ currentUser.name }}!</a>
+                    <ng-container *ngIf="currentUser.administrativeData.length > 1; else administrative">
+                      <ng-container *ngFor="let item of currentUser.administrativeData">
+                        <div
+                          *ngIf="
+                            item.role === currentUser.role &&
+                            item.clinicProfileId === currentUser.administrativeDataContext
+                          "
+                        >
+                          {{ currentUser.role | titlecase }} / {{ item.clinicName }}
+                        </div>
                       </ng-container>
                     </ng-container>
                     <ng-template #administrative>
-                      <p class="p-0 m-0">{{ user.administrativeData[0].clinicName }}</p>
+                      <p class="p-0 m-0">{{ currentUser.administrativeData[0].clinicName }}</p>
                     </ng-template>
                   </div>
                 </div>
                 <!--/items-->
                 <!--items-->
                 <div class="items">
-                  <ng-container *ngIf="user; else administrative">
+                  <ng-container *ngIf="currentUser; else administrative">
                     <div class="dropdown">
                       <div
                         class="imguser dropdown-toggle"
@@ -182,7 +193,7 @@
                   </ng-container>
 
                   <ng-template #administrative>
-                    <p class="p-0 m-0">{{ user.administrativeData[0].clinicName }}</p>
+                    <p class="p-0 m-0">{{ currentUser.administrativeData[0].clinicName }}</p>
                   </ng-template>
                 </div>
 
@@ -227,13 +238,13 @@
     <div class="boxSidebarMain">
       <!--sidebar-->
       <div class="sidebar" [ngClass]="status ? 'closed' : 'open'">
-        <ng-container *ngIf="user">
+        <ng-container *ngIf="currentUser">
           <div class="top" style="display: none;">
             <div class="img">
-              <img [src]="user.image" />
+              <img [src]="currentUser.image" />
             </div>
           </div>
-          <div class="row boxConsulta mt-4" *ngIf="user.role === 'patient'" style="display: none;">
+          <div class="row boxConsulta mt-4" *ngIf="currentUser.role === 'patient'" style="display: none;">
             <div class="col text-center">
               <button class="btn btn-secondary align-self-center">
                 <svg
@@ -258,7 +269,7 @@
           </div>
           <nav class="nav flex-column mt-4">
             <!--menu profesional-->
-            <ng-container *ngIf="user.role === 'professional'">
+            <ng-container *ngIf="currentUser.role === 'professional'">
               <a
                 class="nav-link"
                 routerLink="/app-professional"
@@ -372,15 +383,15 @@
               </a>
               <a class="nav-link" routerLink="sala-espera" routerLinkActive="active">
                 <div class="icon">
-                  <img src="assets/img/mis-pacientes-icon.svg">
+                  <img src="assets/img/mis-pacientes-icon.svg" />
                 </div>
                 <i class="text">Sala de espera</i>
               </a>
-              <a class="nav-link" style="display: none;" routerLink="/sala-espera">Sala de espera</a> 
-            </ng-container><!--/menu profesional-->
+              <a class="nav-link" style="display: none;" routerLink="/sala-espera">Sala de espera</a> </ng-container
+            ><!--/menu profesional-->
 
             <!--menu paciente-->
-            <ng-container *ngIf="user.role === 'patient'">
+            <ng-container *ngIf="currentUser.role === 'patient'">
               <a
                 class="nav-link"
                 routerLink="/app-paciente"
@@ -426,7 +437,7 @@
             ><!--/menu paciente-->
 
             <!--menu admin-->
-            <ng-container *ngIf="user.role === 'admin'">
+            <ng-container *ngIf="currentUser.role === 'admin'">
               <a
                 class="nav-link"
                 routerLink="/app-admin"
@@ -485,7 +496,7 @@
             <!--/menu admin-->
 
             <!--menu coordinator-->
-            <ng-container *ngIf="user.role === 'coordinator'">
+            <ng-container *ngIf="currentUser.role === 'coordinator'">
               <a
                 class="nav-link"
                 routerLink="/app-coordinator"
@@ -577,6 +588,6 @@
 </div>
 <!--/container-fluid-->
 
-
 <!--modal agendar-->
-<app-agendar></app-agendar><!--/ agendar-->
+<app-agendar></app-agendar
+><!--/ agendar-->

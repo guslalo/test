@@ -90,7 +90,7 @@
               class="list-group-item mb-3 p-0"
               *ngFor="let item of user.administrativeData"
               id="{{ item.clinicProfileId }}"
-              (click)="chooseContext(item.clinicProfileId)"
+              (click)="chooseContext(item.clinicProfileId, item.role)"
             >
               <a href="javascript:;" class="p-4">
                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">

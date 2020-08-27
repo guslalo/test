@@ -43,7 +43,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
     });
 
     this.profile = this.profileModel;
-
     this.getProfile(this.profileId);
   }
 
@@ -146,8 +145,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
             this.profile.clinicPolicies = this.profileModel.clinicPolicies;
             break;
         }
-
-        console.log(this.profile);
+        // console.log(this.profile);
       },
       (error) => {
         console.log(error);
@@ -156,6 +154,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   }
 
   actualizarPerfil() {
+    this.profile.isActive = true;
     if (this.profile.profileName !== null || this.profile.profileName !== '') {
       this.adminService.updateProfile(this.profile, this.profileId).subscribe(() => {
         // console.log(response);

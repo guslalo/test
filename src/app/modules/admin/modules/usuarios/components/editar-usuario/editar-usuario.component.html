@@ -709,10 +709,6 @@
                       class="form-control"
                       name="biography"
                       formControlName="biography"
-                      [ngClass]="{
-                        'is-invalid':
-                          !profileDataForm.get('biography').valid && profileDataForm.get('biography').touched
-                      }"
                     ></textarea>
                   </div>
                 </div>
@@ -876,7 +872,7 @@
                     <button
                       (click)="addProfessionalRegistry()"
                       class="btn btn-outline-primary rounded-pill mt-4"
-                      [disabled]="!professionalForm.valid"
+                      [disabled]="validProfessionalRegistry()"
                     >
                       Agregar
                     </button>
@@ -902,7 +898,7 @@
                           {{ registry.registry }}
                         </td>
                         <td>
-                          {{ registry.uf.name }}
+                          {{ registry.uf }}
                         </td>
                         <td>
                           <div class="custom-control custom-switch">

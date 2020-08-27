@@ -6,7 +6,6 @@ import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
 export class SpecialtiesService {
   
   private medicalSpecialties = 'v1/medical-specialties';
@@ -20,11 +19,12 @@ export class SpecialtiesService {
     return this.http.get<any>(environment.baseUrl + this.specialties);
   }
 
-   //specialties
-   getSpecialtiesId(id): Observable<any> {
+  //specialties
+  getMedicalSpecialtiesId(id): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.specialties + '/' + id);
   }
 
+<<<<<<< HEAD
     //specialties
     getSpecialtiesId2(): Observable<any> {
       return this.http.get<any>(environment.baseUrl + this.medicalSpecialties2);
@@ -32,10 +32,15 @@ export class SpecialtiesService {
   
 
 
+=======
+  //specialties
+  getSpecialtiesId(id): Observable<any> {
+    return this.http.patch<any>(environment.baseUrl + this.specialties + '/' + id, {});
+  }
+>>>>>>> f6016dd994061f5b02c3bc3f02091b50c67a0760
 
   //specialties
   getMedicalSpecialties(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.medicalSpecialties);
   }
-
 }

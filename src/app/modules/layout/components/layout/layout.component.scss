@@ -42,23 +42,23 @@ body {
     min-width: 240px;
     .icon {
       margin-right: 5px;
-      width:30px;
+      width: 30px;
       display: inline-block;
     }
-   
+
     &.active {
       background: #f7f7f7;
       position: relative;
       color: #35a6f5;
       &:after {
-        width:7px;
-        height:100%;
+        width: 7px;
+        height: 100%;
         background: #3bc4ca;
         position: absolute;
         z-index: 1;
         left: 0px;
-        top:0px;
-        content: ".";
+        top: 0px;
+        content: '.';
       }
     }
     &:hover {
@@ -148,7 +148,7 @@ app-layout {
     position: relative;
     background: #ffffff;
     overflow: hidden;
-    z-index:2;
+    z-index: 2;
     //flex: 0 1 auto;
     box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
     //min-height: 100%; //calc(100vh - 80px);
@@ -168,75 +168,97 @@ app-layout {
       i {
         &.text {
           -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-          -moz-animation: fadein  0.5s; /* Firefox < 16 */
-           -ms-animation: fadein  0.5s; /* Internet Explorer */
-            -o-animation: fadein  0.5s; /* Opera < 12.1 */
-               animation: fadein  0.5s;
-               display:inline-block
+          -moz-animation: fadein 0.5s; /* Firefox < 16 */
+          -ms-animation: fadein 0.5s; /* Internet Explorer */
+          -o-animation: fadein 0.5s; /* Opera < 12.1 */
+          animation: fadein 0.5s;
+          display: inline-block;
         }
       }
-   
     }
     &.closed {
       width: 68px;
       i {
         &.text {
           -webkit-animation: fadeout 0.5s; /* Safari, Chrome and Opera > 12.1 */
-          -moz-animation: fadeout  0.5s; /* Firefox < 16 */
-           -ms-animation: fadeout  0.5s; /* Internet Explorer */
-            -o-animation: fadeout  0.5s; /* Opera < 12.1 */
-               animation: fadeout  0.5s;
-               display:none
+          -moz-animation: fadeout 0.5s; /* Firefox < 16 */
+          -ms-animation: fadeout 0.5s; /* Internet Explorer */
+          -o-animation: fadeout 0.5s; /* Opera < 12.1 */
+          animation: fadeout 0.5s;
+          display: none;
         }
       }
-   
     }
   }
 
-.notificationBox {
-  position: relative;
-  width: 20px;
-  .badge-danger {
-    position: absolute;
-    right: -7px;
-    top: -6px;
-    font-weight: lighter;
+  .notificationBox {
+    position: relative;
+    width: 20px;
+    .badge-danger {
+      position: absolute;
+      right: -7px;
+      top: -6px;
+      font-weight: lighter;
+    }
   }
-}
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
   @keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-/* Firefox < 16 */
-@-moz-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+  /* Firefox < 16 */
+  @-moz-keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+  /* Safari, Chrome and Opera > 12.1 */
+  @-webkit-keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-/* Internet Explorer */
-@-ms-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+  /* Internet Explorer */
+  @-ms-keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-/* Opera < 12.1 */
-@-o-keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-}
+  /* Opera < 12.1 */
+  @-o-keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
   main {
     background: #f2f2f2;
@@ -253,6 +275,7 @@ app-layout {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 100%;
   .items {
     //display: inline-block;
     margin-left: 25px;
@@ -260,25 +283,29 @@ app-layout {
 }
 
 @media only screen and (max-width: 600px) {
-  #header{
+  #header {
     z-index: 10;
   }
 
+  .date-layout {
+    display: none;
+  }
+
   .logo {
-    width:65%;
+    width: 65%;
     display: inline-block;
-    img, svg {
+    img,
+    svg {
       width: 100%;
     }
   }
 
   a.ayuda {
     position: relative;
-  }   
+  }
 
- 
   .wrap {
-    .sidebar{
+    .sidebar {
       min-width: 0;
       width: 0;
       position: absolute;
@@ -288,14 +315,13 @@ app-layout {
         i {
           &.text {
             -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-            -moz-animation: fadein  0.5s; /* Firefox < 16 */
-             -ms-animation: fadein  0.5s; /* Internet Explorer */
-              -o-animation: fadein  0.5s; /* Opera < 12.1 */
-                 animation: fadein  0.5s;
-                 display:inline-block
+            -moz-animation: fadein 0.5s; /* Firefox < 16 */
+            -ms-animation: fadein 0.5s; /* Internet Explorer */
+            -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+            display: inline-block;
           }
         }
-     
       }
       &.closed {
         width: 100%;
@@ -303,17 +329,14 @@ app-layout {
         i {
           &.text {
             -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-            -moz-animation: fadein  0.5s; /* Firefox < 16 */
-             -ms-animation: fadein  0.5s; /* Internet Explorer */
-              -o-animation: fadein  0.5s; /* Opera < 12.1 */
-                 animation: fadein  0.5s;
-                 display:inline-block
+            -moz-animation: fadein 0.5s; /* Firefox < 16 */
+            -ms-animation: fadein 0.5s; /* Internet Explorer */
+            -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+            display: inline-block;
           }
         }
-     
       }
     }
   }
-
-
 }

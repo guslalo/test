@@ -28,14 +28,14 @@ export class ChooseContextComponent implements OnInit {
     );
   }
 
-  chooseContext(clinicId) {
+  chooseContext(clinicId, role) {
     this.authenticationService.accessWeb(clinicId).subscribe(
       (data) => {
         // console.log(data.access_token);
         if (data.access_token) {
           localStorage.removeItem('token');
           localStorage.setItem('token', JSON.stringify(data.access_token));
-          this.getRouteForClinicAndRole(clinicId);
+          this.getRouteForClinicAndRole(clinicId, role);
         }
       },
       (error) => {
@@ -44,9 +44,9 @@ export class ChooseContextComponent implements OnInit {
     );
   }
 
-  getRouteForClinicAndRole(clinicId) {
+  getRouteForClinicAndRole(clinicId, role) {
     const profile = this.user.administrativeData.find((profile) => {
-      if (profile.clinicProfileId === clinicId) {
+      if (profile.clinicProfileId === clinicId && profile.role === role) {
         localStorage.setItem('clinic', profile.clinicId);
         return profile;
       }
@@ -68,6 +68,7 @@ export class ChooseContextComponent implements OnInit {
       profile.policies
     );
 
+    localStorage.removeItem('clinic');
     localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(this.user));
     console.log(this.user);
