@@ -315,12 +315,12 @@
                         name="birthdate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
                         ngbDatepicker
-                        #dp="ngbDatepicker"
+                        #d="ngbDatepicker"
                         formControlName="birthdate"
-                        (click)="dp.toggle()"
+                        (click)="d.toggle()"
                       />
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
@@ -383,16 +383,17 @@
                         placeholder="yyyy-mm-dd"
                         name="inmigrationDate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        [maxDate]="currentDate"
                         ngbDatepicker
-                        #dp="ngbDatepicker"
+                        #e="ngbDatepicker"
                         formControlName="inmigrationDate"
-                        (click)="dp.toggle()"
+                        (click)="e.toggle()"
                       />
                       <div class="input-group-append">
                         <button
                           [disabled]="!isForeign"
                           class="btn btn-outline-secondary calendar"
-                          (click)="dp.toggle()"
+                          (click)="e.toggle()"
                           type="button"
                         ></button>
                       </div>

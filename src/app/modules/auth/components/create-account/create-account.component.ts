@@ -75,7 +75,7 @@ export class CreateAccountComponent implements OnInit {
 
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
-      idDocumentNumber: ['', Validators.required],
+      idDocumentNumber: [null, Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
       issuingBody: [null, null],
@@ -128,17 +128,6 @@ export class CreateAccountComponent implements OnInit {
       }
     );
 
-    // REACTIVE FORM
-    this.identificationData.get('document').valueChanges.subscribe((val) => {
-      if (val === 'rgRegistry') this.identificationData.get('issuingBody').enable();
-      else this.identificationData.get('issuingBody').disable();
-      this.identificationData.get('idDocumentNumber').enable();
-    });
-
-    this.identificationData.get('extraDocument').valueChanges.subscribe((val) => {
-      this.identificationData.get('extraIdDocument').enable();
-    });
-
     this.getIssuingEntities();
     this.getUfs();
     this.getCities();
@@ -152,6 +141,44 @@ export class CreateAccountComponent implements OnInit {
       this.addressData.controls,
       this.passwordData.controls
     );
+  }
+
+  validateForm() {
+    console.log(console.log(this.form[0]));
+
+    this.identificationData.clearValidators();
+
+    if (this.identificationData.get('document').value === 'rgRegistry') {
+      this.identificationData.get('idDocumentNumber').enable();
+      this.identificationData.get('issuingBody').enable();
+    } else {
+      this.identificationData.get('issuingBody').disable();
+    }
+
+    if (this.isForeign) {
+      this.identificationData.get('passport').setValidators([Validators.required]);
+      this.identificationData.get('idDocumentNumber').setValidators(null);
+      this.identificationData.get('passport').enable();
+      this.identificationData.get('document').disable();
+      this.identificationData.get('extraDocument').disable();
+      this.identificationData.get('idDocumentNumber').disable();
+      this.identificationData.get('extraIdDocument').disable();
+      this.identificationData.get('idDocumentNumber').reset();
+      this.identificationData.get('extraIdDocument').reset();
+      this.identificationData.get('document').reset();
+      this.identificationData.get('extraDocument').reset();
+    } else {
+      this.identificationData.get('document').setValidators([Validators.required]);
+      this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
+      this.identificationData.get('passport').setValidators(null);
+      this.identificationData.get('document').enable();
+      this.identificationData.get('extraDocument').enable();
+      this.identificationData.get('idDocumentNumber').enable();
+      this.identificationData.get('extraIdDocument').enable();
+      this.identificationData.get('passport').reset();
+    }
+
+    this.identificationData.updateValueAndValidity();
   }
 
   selectToday() {

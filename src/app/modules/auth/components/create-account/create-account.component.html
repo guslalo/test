@@ -30,7 +30,13 @@
                 <h4>{{ 'crear-cuenta.step1.subtitle' | transloco }}</h4>
               </ng-template>
               <div class="custom-control custom-checkbox custom-control-inline mb-2">
-                <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign" />
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="isForeign"
+                  [(ngModel)]="isForeign"
+                  (change)="validateForm()"
+                />
                 <label class="custom-control-label" for="isForeign">{{
                   'crear-cuenta.step1.isForeign' | transloco
                 }}</label>
@@ -47,6 +53,7 @@
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
                       }"
+                      (change)="validateForm()"
                     >
                       <option disabled [value]="null">{{ 'crear-cuenta.select' | transloco }}</option>
                       <option value="cpf">CPF</option>
@@ -85,7 +92,7 @@
                   <div class="form-group col-md-6">
                     <label for="passport">{{ 'crear-cuenta.step1.formGroup.passport' | transloco }}</label>
                     <input
-                      [attr.disabled]="!isForeign ? '' : null"
+                      disabled
                       type="text"
                       class="form-control"
                       name="passport"

@@ -375,24 +375,25 @@
                     <label for="birthdate">Fecha de Entrada al Pais</label>
                     <div class="input-group dateregister">
                       <input
-                        disabled
-                        [attr.disabled]="!isForeign ? '' : null"
+                        [disabled]="!isForeign"
+                        [placement]="'bottom'"
                         [(ngModel)]="inmigrationDate"
                         class="form-control"
                         id="inmigrationDate"
                         placeholder="yyyy-mm-dd"
                         name="inmigrationDate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        [maxDate]="currentDate"
                         ngbDatepicker
-                        #d="ngbDatepicker"
+                        #e="ngbDatepicker"
                         formControlName="inmigrationDate"
-                        (click)="d.toggle()"
+                        (click)="e.toggle()"
                       />
                       <div class="input-group-append">
                         <button
-                          [attr.disabled]="!isForeign ? '' : null"
+                          [disabled]="!isForeign"
                           class="btn btn-outline-secondary calendar"
-                          (click)="d.toggle()"
+                          (click)="e.toggle()"
                           type="button"
                         ></button>
                       </div>

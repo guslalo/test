@@ -295,16 +295,6 @@
                         >
                           Activar
                         </button>
-                        <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
-                          ngbDropdownItem
-                          type="button"
-                          data-toggle="modal"
-                          data-target="#sendInvitationModal"
-                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                        >
-                          Enviar Invitacion a Correo
-                        </button>
                       </div>
                     </div>
                   </ng-template>
@@ -503,16 +493,6 @@
                           (click)="changeUserStatus(row.id, 'activate', 'professionals')"
                         >
                           Activar
-                        </button>
-                        <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
-                          ngbDropdownItem
-                          type="button"
-                          data-toggle="modal"
-                          data-target="#sendInvitationModal"
-                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                        >
-                          Enviar Invitacion a Correo
                         </button>
                       </div>
                     </div>
@@ -718,16 +698,6 @@
                           (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
                         >
                           Activar
-                        </button>
-                        <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
-                          ngbDropdownItem
-                          type="button"
-                          data-toggle="modal"
-                          data-target="#sendInvitationModal"
-                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                        >
-                          Enviar Invitacion a Correo
                         </button>
                       </div>
                     </div>
