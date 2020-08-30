@@ -45,6 +45,7 @@
         "gender": "Gender",
         "email": "Email",
         "confirmEmail": "Confirm email",
+        "emailsNotMatch": "Emails Not Match",
         "phoneNumber": "Phone number",
         "breed": "Breed"
       }
@@ -74,6 +75,7 @@
       "formGroup": {
         "password": "Password",
         "confirmPassword": "Confirm password",
+        "passwordNotMatch": "Password Not Match",
         "condicionPassword": {
           "1": "* At least one capital letter",
           "2": "* At least one lowercase",

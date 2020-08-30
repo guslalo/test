@@ -222,6 +222,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.identificationData.get('extraDocument').disable();
       this.identificationData.get('idDocumentNumber').disable();
       this.identificationData.get('extraIdDocument').disable();
+      this.identificationData.get('issuingBody').disable();
       this.identificationData.get('idDocumentNumber').reset();
       this.identificationData.get('extraIdDocument').reset();
       this.identificationData.get('document').reset();
@@ -234,6 +235,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.identificationData.get('extraDocument').enable();
       this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
+      this.identificationData.get('issuingBody').enable();
       this.identificationData.get('passport').reset();
     }
 

@@ -200,12 +200,12 @@
                   <div class="col-12 col-md-6">
                     <label for="lastName">{{ 'crear-cuenta.step2.formGroup.lastName' | transloco }}</label>
                     <input
-                      formControlName="lastName"
                       type="text"
                       name="lastName"
                       id="lastName"
                       class="form-control"
-                      placeholder=""
+                      placeholder="lastName"
+                      formControlName="lastName"
                     />
                   </div>
                 </div>
@@ -280,7 +280,7 @@
                       name="email"
                       id="email"
                       class="form-control"
-                      placeholder="ejemplo@ejemplo.cl"
+                      placeholder="usuario@mail.cl"
                       [ngClass]="{
                         'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
                       }"
@@ -298,15 +298,14 @@
                       name="confirmEmail"
                       id="confirmEmail"
                       class="form-control"
-                      placeholder="ejemplo@ejemplo.cl"
+                      placeholder="usuario@mail.cl"
                       [ngClass]="{
-                        'is-invalid':
-                          !personalData.get('confirmEmail').valid && personalData.get('confirmEmail').touched
+                        'is-invalid': personalData.get('confirmEmail').touched && personalData.errors?.emailsNotMatch
                       }"
                       formControlName="confirmEmail"
                     />
-                    <div *ngIf="personalData.controls['confirmEmail'].errors?.required" class="invalid-feedback">
-                      email erroneo
+                    <div *ngIf="personalData.errors?.emailsNotMatch" class="invalid-feedback">
+                      {{ 'crear-cuenta.step2.formGroup.emailsNotMatch' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -382,7 +381,7 @@
                 </ng-template>
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="birthdate"> {{ 'crear-cuenta.step3.formGroup.birthdate' | transloco }} * w</label>
+                    <label for="birthdate"> {{ 'crear-cuenta.step3.formGroup.birthdate' | transloco }} *</label>
                     <div class="input-group dateregister">
                       <!--[minDate]="minDate"-->
                       <input
@@ -688,15 +687,13 @@
                       placeholder=""
                       [ngClass]="{
                         'is-invalid':
-                          !passwordData.get('confirmPassword').valid &&
-                          passwordData.get('confirmPassword').touched &&
-                          passwordData.get('confirmPassword') != passwordData.get('password')
+                          passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
                       }"
                       formControlName="confirmPassword"
                       maxlength="20"
                     />
                     <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
-                      {{ 'crear-cuenta.step5.formGroup.confirmPassword' | transloco }}
+                      {{ 'crear-cuenta.step5.formGroup.passwordNotMatch' | transloco }}
                     </div>
                   </div>
                 </div>

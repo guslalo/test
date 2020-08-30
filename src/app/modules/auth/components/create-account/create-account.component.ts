@@ -82,18 +82,23 @@ export class CreateAccountComponent implements OnInit {
       extraDocument: [null, null],
       extraIdDocument: ['', null],
     });
-    this.personalData = this._formBuilder.group({
-      checkAge: [null, [Validators.requiredTrue]],
-      name: [null, [Validators.required, Validators.minLength(2)]],
-      lastName: [null, null],
-      secondLastName: [null, [Validators.required, Validators.minLength(2)]],
-      motherName: [null, [Validators.required, Validators.minLength(2)]],
-      email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
-      gender: [null, [Validators.required, Validators.minLength(2)]],
-      confirmEmail: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-      breed: [null, Validators.required],
-    });
+    this.personalData = this._formBuilder.group(
+      {
+        checkAge: [null, [Validators.requiredTrue]],
+        name: [null, [Validators.required, Validators.minLength(2)]],
+        lastName: [null, null],
+        secondLastName: [null, [Validators.required, Validators.minLength(2)]],
+        motherName: [null, [Validators.required, Validators.minLength(2)]],
+        email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
+        gender: [null, [Validators.required, Validators.minLength(2)]],
+        confirmEmail: ['', [Validators.required, Validators.minLength(2)]],
+        phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+        breed: [null, Validators.required],
+      },
+      {
+        validators: this.confirmEmail.bind(this),
+      }
+    );
     this.birthData = this._formBuilder.group({
       birthdate: ['', Validators.required],
       ufBirth: [null, Validators.required],
@@ -163,6 +168,7 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('extraDocument').disable();
       this.identificationData.get('idDocumentNumber').disable();
       this.identificationData.get('extraIdDocument').disable();
+      this.identificationData.get('issuingBody').disable();
       this.identificationData.get('idDocumentNumber').reset();
       this.identificationData.get('extraIdDocument').reset();
       this.identificationData.get('document').reset();
@@ -175,6 +181,7 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('extraDocument').enable();
       this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
+      this.identificationData.get('issuingBody').enable();
       this.identificationData.get('passport').reset();
     }
 
@@ -190,9 +197,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   confirmEmail(formGroup: FormGroup) {
-    const { value: email } = formGroup.get('password');
-    const { value: confirmEmail } = formGroup.get('confirmPassword');
-    return email === confirmEmail ? null : { passwordNotMatch: true };
+    const { value: email } = formGroup.get('email');
+    const { value: confirmEmail } = formGroup.get('confirmEmail');
+    return email === confirmEmail ? null : { emailsNotMatch: true };
   }
 
   confirmPass(formGroup: FormGroup) {
