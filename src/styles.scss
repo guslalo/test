@@ -238,12 +238,6 @@ button.calendar:active {
   border-bottom: none;
 }
 
-@include media-breakpoint-only(xs) {
-  .btn-block-xs-only {
-    display: block;
-    width: 100%;
-  }
-}
 
 .modal-backdrop {
   background-color: #ffffff;
@@ -369,6 +363,10 @@ p {
   width: 100%;
 }
 
+
+.nav-tabs {
+  border-bottom: 1px solid #0066ff;
+}
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: $color-primary;
@@ -718,4 +716,18 @@ button.custom-btn-1:hover {
 
 .custom-file {
   overflow: hidden;
+}
+
+.dots-mobile { 
+ position: absolute;
+ right: 20px;
+ top: 30%;
+}
+
+@include media-breakpoint-only(xs) {
+  .btn-block-xs-only {
+    display: block;
+    width: 100%;
+  }
+ 
 }

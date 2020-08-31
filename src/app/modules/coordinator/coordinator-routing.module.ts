@@ -6,8 +6,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+  },
+  {
+    path: 'ayuda',
+    loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
   }
-
 ];
 
 

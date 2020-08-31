@@ -312,18 +312,6 @@ app-layout {
       height: 100vh;
       z-index: 9;
       &.open {
-        i {
-          &.text {
-            -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-            -moz-animation: fadein 0.5s; /* Firefox < 16 */
-            -ms-animation: fadein 0.5s; /* Internet Explorer */
-            -o-animation: fadein 0.5s; /* Opera < 12.1 */
-            animation: fadein 0.5s;
-            display: inline-block;
-          }
-        }
-      }
-      &.closed {
         width: 100%;
         max-width: 100%;
         i {
@@ -337,6 +325,44 @@ app-layout {
           }
         }
       }
+      &.closed {
+        width: 0%;
+        max-width: 0%;
+        i {
+          &.text {
+            -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein 0.5s; /* Firefox < 16 */
+            -ms-animation: fadein 0.5s; /* Internet Explorer */
+            -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+            display: inline-block;
+          }
+        }
+      }
     }
   }
+
+  header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+
+    #header {
+     height: 70px;
+    }
+  }
+  .mt-mobile {
+    margin-top:70px;
+   
+  }
+  
+  .sidebar {
+    position: fixed !important;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+  }
+
+
 }

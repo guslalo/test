@@ -16,9 +16,10 @@ import { Consulta2Component } from './consulta2/consulta2.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from '../../services/opentok.service';
-import { PerfilComponent } from './perfil/perfil.component';
+
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
-import { SoporteComponent } from './soporte/soporte.component';
+
+
 // import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
 
@@ -45,11 +46,17 @@ const routes: Routes = [
     path: 'consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'cambiar-contrasena', component: CambiarClaveComponent },
-  { path: 'ayuda', component: SoporteComponent },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+  },
+  {
+    path: 'ayuda',
+    loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
+  },
+
+  { path: 'cambiar-contrasena', component: CambiarClaveComponent }
   //{ path: 'mis-consultas', component: MisConsultasComponent },
-  //{ path: 'consulta/:appointmentId', component: ConsultaComponent }
 ];
 
 @NgModule({

@@ -11,9 +11,8 @@ import { Consulta2Component } from './consulta2/consulta2.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from '../../services/opentok.service';
-import { PerfilComponent } from './perfil/perfil.component';
+
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
-import { SoporteComponent } from './soporte/soporte.component';
 import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
 
@@ -24,9 +23,7 @@ import { AgendarComponent } from './components/modals/agendar/agendar.component'
     PublisherComponent,
     SubscriberComponent,
     Consulta2Component,
-    PerfilComponent,
     CambiarClaveComponent,
-    SoporteComponent,
     MisConsultasFilterComponent,
     AgendarComponent
   ],

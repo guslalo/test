@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 
 import { Consulta2Component } from '../pacientes/consulta2/consulta2.component';
-import { PerfilComponent } from '../pacientes/perfil/perfil.component';
+
 
 // GUARDS
 import { GuardsGuard } from '../../guards/guards.guard';
@@ -15,7 +15,6 @@ import { PacienteGuard } from '../../guards/paciente.guard';
 import { AdminGuard } from '../../guards/admin.guard';
 import { CoordinatorGuard } from '../../guards/coordinator.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
-import { SoporteComponent } from '../pacientes/./soporte/soporte.component';
 
 
 import { ChangePassComponent } from '../../shared/modules/change-pass/change-pass.component';
@@ -56,19 +55,18 @@ const routes: Routes = [
         loadChildren: () => import('../profesionales/profesionales.module').then((m) => m.ProfesionalesModule),
         canActivate: [ProfesionalGuard],
       },
-      { path: 'perfil', component: PerfilComponent },
       { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] },
     ],
   },
   {
     path: 'app-coordinator',
     component: LayoutComponent,
-    canActivate: [GuardsGuard],
+    canActivate: [],//GuardsGuard
     children: [
       {
         path: '',
         loadChildren: () => import('../coordinator/coordinator.module').then((m) => m.CoordinatorModule),
-        canActivate: [CoordinatorGuard],
+        canActivate: [],//CoordinatorGuard
       },
     ],
   },
