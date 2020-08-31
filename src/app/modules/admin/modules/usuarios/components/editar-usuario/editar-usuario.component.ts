@@ -1,15 +1,13 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
-import { NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { map, timeout } from 'rxjs/operators';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import * as moment from 'moment';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 
 const current = new Date();
@@ -28,7 +26,7 @@ export class EditarUsuarioComponent implements OnInit {
   isSchool: boolean = false;
   identificationData: FormGroup;
   personalData: FormGroup;
-  profileForm: FormGroup;
+  profilesForm: FormGroup;
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
@@ -104,10 +102,12 @@ export class EditarUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
+
     this.getUser(this.userType, this.userId);
+
     this.clinicId = localStorage.getItem('clinic');
 
-    this.spinner.hide();
     this.getProfiles();
     this.getIssuingEntities();
     this.getUfs();
@@ -153,7 +153,7 @@ export class EditarUsuarioComponent implements OnInit {
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
 
-    this.profileForm = this.formBuilder.group({
+    this.profilesForm = this.formBuilder.group({
       role: [this.roles[0].value, Validators.required],
       profile: [null, Validators.required],
     });
@@ -163,6 +163,7 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.profileDataForm = this.formBuilder.group({
+      professionalPhoto: ['', null],
       biography: ['', Validators.required],
     });
 
@@ -203,7 +204,8 @@ export class EditarUsuarioComponent implements OnInit {
     this.formUser.push(
       this.identificationData,
       this.personalData,
-      this.profileForm,
+      this.profilesForm,
+      this.profileDataForm,
       this.professionalForm,
       this.passwordForm
     );
@@ -212,6 +214,7 @@ export class EditarUsuarioComponent implements OnInit {
 
     setTimeout(() => {
       this.validateForm();
+      this.spinner.hide();
     }, 1000);
   }
 
@@ -321,66 +324,46 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
-        switch (this.userType) {
-          case 'admins':
-          case 'coordinators':
-            this.waitingRoomsAssigned = user.waitingRooms || [];
+        this.waitingRoomsAssigned = user.waitingRooms || [];
 
-            // PROFILES
-            for (const item of user.administrativeData) {
-              this.adminService.getProfileById(item.profile).subscribe((p) => {
-                this.profilesAssigned.push({
-                  clinic: item.clinic,
-                  id: p._id,
-                  role: p.role,
-                  name: p.profileName,
-                });
+        // PROFILES
+        if (this.userType !== 'patients') {
+          for (const item of user.administrativeData) {
+            this.adminService.getProfileById(item.profile).subscribe((p) => {
+              this.profilesAssigned.push({
+                clinic: item.clinic,
+                id: p._id,
+                role: p.role,
+                name: p.profileName,
               });
-            }
-            break;
+            });
+          }
+        }
 
-          case 'professionals':
-            this.professionalPhoto = this.professionalPhoto || '';
-            this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
-            this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
-            this.professionalForm.get('university').setValue(user.professionalData.university);
-            this.professionalForm.get('course').setValue(user.professionalData.course);
-            this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
+        this.professionalPhoto = this.professionalPhoto || '';
+        this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
+        this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
+        this.professionalForm.get('university').setValue(user.professionalData.university);
+        this.professionalForm.get('course').setValue(user.professionalData.course);
+        this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
 
-            this.specialitiesData = this.specialities.reduce((obj, value: any) => {
-              obj[value._id] = value;
-              return obj;
-            }, {});
+        this.specialitiesData = this.specialities.reduce((obj, value: any) => {
+          obj[value._id] = value;
+          return obj;
+        }, {});
 
-            for (const sp of user.specialities) {
-              this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-                this.specialitiesAssigned.push(data.payload);
-              });
-            }
-            // console.log(this.specialitiesAssigned);
-            if (user.professionalData.professionalRegistry.length) {
-              for (const rg of user.professionalData.professionalRegistry) {
-                this.professionalRegistry.push(rg);
-              }
-            } else {
-              this.professionalRegistry = [];
-            }
-
-            // PROFILES
-            for (const item of user.administrativeData) {
-              this.adminService.getProfileById(item.profile).subscribe((p) => {
-                this.profilesAssigned.push({
-                  clinic: item.clinic,
-                  id: p._id,
-                  role: p.role,
-                  name: p.profileName,
-                });
-              });
-            }
-            break;
-
-          default:
-            break;
+        for (const sp of user.specialities) {
+          this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
+            this.specialitiesAssigned.push(data.payload);
+          });
+        }
+        // console.log(this.specialitiesAssigned);
+        if (user.professionalData.professionalRegistry.length) {
+          for (const rg of user.professionalData.professionalRegistry) {
+            this.professionalRegistry.push(rg);
+          }
+        } else {
+          this.professionalRegistry = [];
         }
 
         // console.log(this.profilesAssigned);
@@ -394,7 +377,7 @@ export class EditarUsuarioComponent implements OnInit {
   getProfiles() {
     this.adminService.getProfiles().subscribe(
       (data) => {
-        const role = this.profileForm.value.role;
+        const role = this.profilesForm.value.role;
         this.profiles = data.filter((profile) => {
           if (profile.role !== 'patient' && role === profile.role && profile.isActive) {
             return profile;
@@ -480,7 +463,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    // console.log(this.formUser[0], this.formUser[1], this.formUser[2], this.formUser[3]);
+    // console.log(this.formUser[1], this.formUser[2], this.formUser[3], this.formUser[4], this.formUser[5]);
 
     switch (this.userType) {
       case 'admins':
@@ -492,7 +475,12 @@ export class EditarUsuarioComponent implements OnInit {
         }
 
       case 'professionals':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid) {
+        if (
+          this.formUser[0].valid &&
+          this.formUser[1].valid &&
+          this.formUser[4].valid &&
+          this.professionalRegistry.length
+        ) {
           return true;
         } else {
           return false;
@@ -517,6 +505,8 @@ export class EditarUsuarioComponent implements OnInit {
 
   updateUser() {
     //console.log(this.waitingRoomsAssigned);
+    (<HTMLInputElement>document.getElementById('submit-button')).disabled = true;
+
     this.spinner.show();
 
     const _profiles = this.profilesAssigned.map((map) => {
@@ -530,6 +520,8 @@ export class EditarUsuarioComponent implements OnInit {
     const _specialities = this.specialitiesAssigned.map((map) => {
       return map._id;
     });
+
+    console.log(this.formUser[2]);
 
     this.userObject = {
       id: this.userId,
@@ -591,15 +583,15 @@ export class EditarUsuarioComponent implements OnInit {
       specialities: _specialities,
       professionalData: {
         professionalPhoto: '',
-        biography: this.formUser[2].value.biography,
-        professionalTitle: this.formUser[3].value.professionalTitle,
-        university: this.formUser[3].value.university,
-        course: this.formUser[3].value.course,
-        ufRegistry: this.formUser[3].value.ufRegistry,
+        biography: this.formUser[3].value.biography,
+        professionalTitle: this.formUser[4].value.professionalTitle,
+        university: this.formUser[4].value.university,
+        course: this.formUser[4].value.course,
+        ufRegistry: this.formUser[4].value.ufRegistry,
         professionalRegistry: this.professionalRegistry,
       },
-      password: this.formUser[4].value.password,
-      confirmPassword: this.formUser[4].value.confirmPassword,
+      password: this.formUser[5].value.password,
+      confirmPassword: this.formUser[5].value.confirmPassword,
     };
 
     // console.log(this.formUser[0].value.birthdate);
@@ -615,19 +607,23 @@ export class EditarUsuarioComponent implements OnInit {
           (err) => {
             this.spinner.hide();
             console.log(err);
+            (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
           },
           () => {
+            (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
             this.location.back();
           }
         );
       } else {
         this.spinner.hide();
+        (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
         alert('Complete el formulario con todos los datos necesarios');
       }
     } else {
       this.adminService.updateUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
         this.spinner.hide();
+        (<HTMLInputElement>document.getElementById('submit-button')).disabled = true;
         this.location.back();
       });
     }
