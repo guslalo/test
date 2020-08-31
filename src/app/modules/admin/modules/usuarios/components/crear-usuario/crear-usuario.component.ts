@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, Form } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
 // EXTRAS
@@ -23,7 +23,7 @@ export class CrearUsuarioComponent implements OnInit {
   isSchool: boolean = false;
   identificationData: FormGroup;
   personalData: FormGroup;
-  profileForm: FormGroup;
+  profilesForm: FormGroup;
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
@@ -98,7 +98,8 @@ export class CrearUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.spinner.hide();
+    this.spinner.show();
+
     this.getProfiles();
     this.getIssuingEntities();
     this.getUfs();
@@ -144,7 +145,7 @@ export class CrearUsuarioComponent implements OnInit {
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
 
-    this.profileForm = this.formBuilder.group({
+    this.profilesForm = this.formBuilder.group({
       role: [this.roles[0].value, Validators.required],
       profile: [null, Validators.required],
     });
@@ -195,13 +196,19 @@ export class CrearUsuarioComponent implements OnInit {
     this.formUser.push(
       this.identificationData,
       this.personalData,
-      this.profileForm,
+      this.profilesForm,
+      this.profileDataForm,
       this.professionalForm,
       this.passwordForm
     );
 
     this.birthDate = this.maxDate;
     this.inmigrationDate = this.calendar.getToday();
+
+    setTimeout(() => {
+      this.validateForm();
+      this.spinner.hide();
+    }, 1000);
   }
 
   validateForm() {
@@ -245,7 +252,7 @@ export class CrearUsuarioComponent implements OnInit {
   getProfiles() {
     this.adminService.getProfiles().subscribe(
       (data) => {
-        const role = this.profileForm.value.role;
+        const role = this.profilesForm.value.role;
         this.profiles = data.filter((profile) => {
           if (profile.role !== 'patient' && role === profile.role && profile.isActive) {
             return profile;
@@ -331,20 +338,20 @@ export class CrearUsuarioComponent implements OnInit {
     switch (this.userType) {
       case 'admin':
       case 'coordinator':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[5].valid) {
           return true;
         } else {
           return false;
         }
 
       case 'professional':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid && this.formUser[4].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid && this.formUser[5].valid) {
           return true;
         } else {
           return false;
         }
       case 'patient':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[5].valid) {
           return true;
         } else {
           return false;
@@ -363,6 +370,8 @@ export class CrearUsuarioComponent implements OnInit {
 
   createUser() {
     // console.log(this.profilesAssigned);]
+    (<HTMLInputElement>document.getElementById('submit-button')).disabled = true;
+
     this.spinner.show();
 
     const _profiles = this.profilesAssigned.map((map) => {
@@ -436,15 +445,15 @@ export class CrearUsuarioComponent implements OnInit {
       specialities: _specialities,
       professionalData: {
         professionalPhoto: '',
-        biography: this.formUser[2].value.biography,
-        professionalTitle: this.formUser[3].value.professionalTitle,
-        university: this.formUser[3].value.university,
-        course: this.formUser[3].value.course,
-        ufRegistry: this.formUser[3].value.ufRegistry,
+        biography: this.formUser[3].value.biography,
+        professionalTitle: this.formUser[4].value.professionalTitle,
+        university: this.formUser[4].value.university,
+        course: this.formUser[4].value.course,
+        ufRegistry: this.formUser[4].value.ufRegistry,
         professionalRegistry: this.professionalRegistry,
       },
-      password: this.formUser[4].value.password,
-      confirmPassword: this.formUser[4].value.confirmPassword,
+      password: this.formUser[5].value.password,
+      confirmPassword: this.formUser[5].value.confirmPassword,
     };
 
     console.log(this.userObject);
@@ -459,19 +468,23 @@ export class CrearUsuarioComponent implements OnInit {
           (err) => {
             this.spinner.hide();
             console.log(err);
+            (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
           },
           () => {
+            (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
             this.location.back();
           }
         );
       } else {
         this.spinner.hide();
+        (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
         alert('Complete el formulario con todos los datos necesarios');
       }
     } else {
       this.adminService.createUser(this.userType, this.userObject).subscribe(() => {
         // console.log(response);
         this.spinner.hide();
+        (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
         this.location.back();
       });
     }
@@ -599,7 +612,7 @@ export class CrearUsuarioComponent implements OnInit {
       streetNumber: [123, Validators.required],
     });
 
-    this.profileForm = this.formBuilder.group({
+    this.profilesForm = this.formBuilder.group({
       role: [this.roles[0].value, Validators.required],
       profile: [null, Validators.required],
     });

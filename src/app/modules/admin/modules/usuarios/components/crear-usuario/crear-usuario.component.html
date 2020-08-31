@@ -4,6 +4,7 @@
   </div>
   <div class="col-3 col-md-3">
     <button
+      id="#submit-button"
       (click)="createUser()"
       type="button"
       class="btn btn-secondary rounded-pill float-right"
@@ -530,7 +531,7 @@
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">Roles</h4>
-              <form [formGroup]="profileForm" (ngSubmit)="addProfile(profileForm.value)">
+              <form [formGroup]="profilesForm" (ngSubmit)="addProfile(profilesForm.value)">
                 <div class="row">
                   <div class="form-group col-md-3">
                     <label for="role">Tipo de Usuario</label>
@@ -551,7 +552,7 @@
                       name="profile"
                       formControlName="profile"
                       [ngClass]="{
-                        'is-invalid': !profileForm.get('profile').valid && profileForm.get('profile').touched
+                        'is-invalid': !profilesForm.get('profile').valid && profilesForm.get('profile').touched
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
@@ -564,7 +565,7 @@
                     <button
                       type="submit"
                       class="btn btn-outline-primary rounded-pill mt-4"
-                      [disabled]="!profileForm.valid"
+                      [disabled]="!profilesForm.valid"
                     >
                       Agregar
                     </button>
