@@ -389,6 +389,7 @@
                         class="form-control"
                         id="birthdate"
                         [maxDate]="maxDate"
+                        [minDate]="{ year: 1940, month: 1, day: 1 }"
                         placeholder="yyyy-mm-dd"
                         name="birthdate"
                         [(ngModel)]="model"

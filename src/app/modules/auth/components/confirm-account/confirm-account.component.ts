@@ -8,7 +8,9 @@ import { RegisterService } from '../../services/register.service';
   styleUrls: ['../login/login.component.scss'],
 })
 export class ConfirmAccountComponent implements OnInit {
-  public user: any = {};
+  public user: any = {
+    code: null,
+  };
 
   constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
 

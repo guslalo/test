@@ -21,7 +21,7 @@
   "crear-cuenta": {
     "title": "Create Account",
     "ingrese": "Enter your details to complete registration.",
-    "isAdult": "I am of age?",
+    "isAdult": "I confirm that I am of legal age",
     "select": "- Select -",
     "step1": {
       "isForeign": "I am a Foreigner",

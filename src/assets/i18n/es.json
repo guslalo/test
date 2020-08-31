@@ -21,7 +21,7 @@
   "crear-cuenta": {
     "title": "Crear cuenta",
     "ingrese": "A continuación Ingrese sus datos para completar su registro.",
-    "isAdult": "¿Soy mayor de edad?",
+    "isAdult": "Confirmo ser mayor de edad",
     "select": "- Seleccionar -",
     "step1": {
       "isForeign": "Soy Extranjero",

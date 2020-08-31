@@ -50,17 +50,19 @@ import * as moment from 'moment';
 })
 export class LayoutComponent implements OnInit {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
-  status_date: any;
 
-  constructor() {
-    moment().lang('es');
-  }
+  constructor() {}
+
   public state = 'open';
 
   status = false;
 
   ngOnInit(): void {
-    this.status_date = `${moment(new Date()).format('LLLL')}`;
+    var updateTime = function () {
+      document.getElementById('current_date').innerHTML =
+        moment().lang('es').format('LL') + ' | ' + moment().lang('es').format('h:mm:ss a');
+    };
+    setInterval(updateTime, 1000);
   }
 
   sideBar() {
