@@ -9,7 +9,9 @@ declare var $: any;
   styleUrls: ['./recovery.component.scss'],
 })
 export class RecoveryComponent implements OnInit {
-  public user: any = {};
+  public user: any = {
+    email: null,
+  };
   showModal: boolean;
   UserId: string;
   Firstname: string;

@@ -38,6 +38,12 @@ export class CrearUsuarioComponent implements OnInit {
   familiarSituations: any = [];
   issuingEntities: any = [];
 
+  currentDate = {
+    year: current.getFullYear(),
+    month: current.getMonth() + 1,
+    day: current.getDate() + 1,
+  };
+
   minDate = {
     year: current.getFullYear(),
     month: current.getMonth() + 1,
@@ -196,17 +202,44 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.birthDate = this.maxDate;
     this.inmigrationDate = this.calendar.getToday();
+  }
 
-    // REACTIVE FORM
-    this.identificationData.get('document').valueChanges.subscribe((val) => {
-      if (val === 'rgRegistry') this.identificationData.get('issuingBody').enable();
-      else this.identificationData.get('issuingBody').disable();
+  validateForm() {
+    this.identificationData.clearValidators();
+
+    if (this.identificationData.get('document').value === 'rgRegistry') {
       this.identificationData.get('idDocumentNumber').enable();
-    });
+      this.identificationData.get('issuingBody').enable();
+    } else {
+      this.identificationData.get('issuingBody').disable();
+    }
 
-    this.identificationData.get('extraDocument').valueChanges.subscribe((val) => {
+    if (this.isForeign) {
+      this.identificationData.get('passport').setValidators([Validators.required]);
+      this.identificationData.get('idDocumentNumber').setValidators(null);
+      this.identificationData.get('passport').enable();
+      this.identificationData.get('document').disable();
+      this.identificationData.get('extraDocument').disable();
+      this.identificationData.get('idDocumentNumber').disable();
+      this.identificationData.get('extraIdDocument').disable();
+      this.identificationData.get('issuingBody').disable();
+      this.identificationData.get('idDocumentNumber').reset();
+      this.identificationData.get('extraIdDocument').reset();
+      this.identificationData.get('document').reset();
+      this.identificationData.get('extraDocument').reset();
+    } else {
+      this.identificationData.get('document').setValidators([Validators.required]);
+      this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
+      this.identificationData.get('passport').setValidators(null);
+      this.identificationData.get('document').enable();
+      this.identificationData.get('extraDocument').enable();
+      this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
-    });
+      this.identificationData.get('issuingBody').enable();
+      this.identificationData.get('passport').reset();
+    }
+
+    this.identificationData.updateValueAndValidity();
   }
 
   getProfiles() {
@@ -250,11 +283,7 @@ export class CrearUsuarioComponent implements OnInit {
     if (this.waitingRoomsAssigned.some((room) => room.name === data.name)) {
       alert(`La lista de espera ${data.name} ya esta asignada al usuario`);
     } else {
-      this.waitingRoomsAssigned.push({
-        id: data.id,
-        name: data.name,
-        description: data.description,
-      });
+      this.waitingRoomsAssigned.push(data);
     }
     // console.log(this.waitingRoomsAssigned);
   }
@@ -300,22 +329,22 @@ export class CrearUsuarioComponent implements OnInit {
     // console.log(this.formUser[0], this.formUser[1], this.formUser[2], this.formUser[3]);
 
     switch (this.userType) {
-      case 'admins':
+      case 'admin':
       case 'coordinator':
-        if (this.formUser[0].valid && this.formUser[1].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
           return true;
         } else {
           return false;
         }
 
       case 'professional':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[3].valid && this.formUser[4].valid) {
           return true;
         } else {
           return false;
         }
       case 'patient':
-        if (this.formUser[0].valid && this.formUser[1].valid) {
+        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid) {
           return true;
         } else {
           return false;
@@ -355,7 +384,7 @@ export class CrearUsuarioComponent implements OnInit {
         ...(this.formUser[0].value.document === 'rgRegistry' && {
           rgRegistry: this.formUser[0].value.idDocumentNumber || '',
         }),
-        passport: this.formUser[0].value.passport,
+        passport: this.formUser[0].value.passport || '',
         issuingBody: this.formUser[0].value.issuingBody || '',
         ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
         ...(this.formUser[0].value.extraDocument === 'pasep' && {

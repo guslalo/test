@@ -61,7 +61,7 @@ const routes: Routes = [
   {
     path: 'app-coordinator',
     component: LayoutComponent,
-    canActivate: [],//GuardsGuard
+    canActivate: [],//GuardsGuar d
     children: [
       {
         path: '',

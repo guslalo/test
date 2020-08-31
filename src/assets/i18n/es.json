@@ -21,7 +21,7 @@
   "crear-cuenta": {
     "title": "Crear cuenta",
     "ingrese": "A continuación Ingrese sus datos para completar su registro.",
-    "isAdult": "¿Soy mayor de edad?",
+    "isAdult": "Confirmo ser mayor de edad",
     "select": "- Seleccionar -",
     "step1": {
       "isForeign": "Soy Extranjero",
@@ -45,6 +45,7 @@
         "gender": "Genero",
         "email": "Email",
         "confirmEmail": "Confirmar email",
+        "emailsNotMatch": "Emails no coinciden",
         "phoneNumber": "Teléfono",
         "breed": "Raza/Color"
       }
@@ -74,6 +75,7 @@
       "formGroup": {
         "password": "Genera una clave",
         "confirmPassword": "Repetir clave",
+        "passwordNotMatch": "Contaseñas no coinciden",
         "condicionPassword": {
           "1": "* Al menos una mayúscula",
           "2": "* Al menos una minúscula",

@@ -83,7 +83,7 @@
             </svg>
           </div>
           <div class="contenedor">
-            <h3 class="mb-4 d-none d-sm-block">Confirmar cuenta</h3>
+            <h3 class="mb-4 d-none d-sm-block">Confirmar Cuenta</h3>
           </div>
           <form class="">
             <div class="form-group">
@@ -101,6 +101,7 @@
                 <button
                   type="submit"
                   class="btn btn-primary btn-block rounded-pill"
+                  [disabled]="user.code === null || user.code === ''"
                   (click)="confirmAccount(user.code)"
                 >
                   Verificar

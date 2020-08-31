@@ -100,7 +100,13 @@
               <div class="row">
                 <h4 class="pl-3 pb-2">Identificación</h4>
                 <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
-                  <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign" />
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="isForeign"
+                    [(ngModel)]="isForeign"
+                    (change)="validateForm()"
+                  />
                   <label class="custom-control-label" for="isForeign">Extranjero</label>
                 </div>
               </div>
@@ -117,6 +123,7 @@
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
                       }"
+                      (change)="validateForm()"
                     >
                       <option disabled [value]="null">- Seleccionar -</option>
                       <option value="cpf">CPF</option>
@@ -142,7 +149,7 @@
                   <div class="form-group col-md-3">
                     <label for="issuingBody">Órgano Emisor</label>
                     <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
                         {{ item.name }}
                       </option>
@@ -177,7 +184,7 @@
                           identificationData.get('extraDocument').touched
                       }"
                     >
-                      <option disabled [value]="null">- Seleccionar -</option>
+                      <option [value]="null">- Seleccionar -</option>
                       <option value="cbo">CBO-R</option>
                       <option value="pasep">PIS/PASEP</option>
                       <option value="ctps">CTPS</option>
@@ -308,19 +315,19 @@
                         name="birthdate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
                         ngbDatepicker
-                        #dp="ngbDatepicker"
+                        #d="ngbDatepicker"
                         formControlName="birthdate"
-                        (click)="dp.toggle()"
+                        (click)="d.toggle()"
                       />
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="ufBirth">UF de Nacimiento</label>
                     <select class="form-control" name="ufBirth" formControlName="ufBirth">
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
@@ -329,7 +336,7 @@
                   <div class="form-group col-md-3">
                     <label for="municipalityBirth">Municipio de Nacimiento</label>
                     <select class="form-control" name="municipalityBirth" formControlName="municipalityBirth">
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
@@ -355,7 +362,7 @@
                       name="originCountry"
                       formControlName="originCountry"
                     >
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of countries">
                         {{ item.name }}
                       </option>
@@ -376,16 +383,17 @@
                         placeholder="yyyy-mm-dd"
                         name="inmigrationDate"
                         [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        [maxDate]="currentDate"
                         ngbDatepicker
-                        #dp="ngbDatepicker"
+                        #e="ngbDatepicker"
                         formControlName="inmigrationDate"
-                        (click)="dp.toggle()"
+                        (click)="e.toggle()"
                       />
                       <div class="input-group-append">
                         <button
                           [disabled]="!isForeign"
                           class="btn btn-outline-secondary calendar"
-                          (click)="dp.toggle()"
+                          (click)="e.toggle()"
                           type="button"
                         ></button>
                       </div>
@@ -401,7 +409,7 @@
                         'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
                       }"
                     >
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of breeds">
                         {{ item.name }}
                       </option>
@@ -410,7 +418,7 @@
                   <div class="form-group col-md-3">
                     <label for="education">Educacion</label>
                     <select class="form-control" name="education" formControlName="education">
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of educations">
                         {{ item.name }}
                       </option>
@@ -419,7 +427,7 @@
                   <div class="form-group col-md-3">
                     <label for="familySituation">Situacion Familiar/Conyugal</label>
                     <select class="form-control" name="familySituation" formControlName="familySituation">
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
                         {{ item.name }}
                       </option>
@@ -449,7 +457,7 @@
                         'is-invalid': !personalData.get('uf').valid && personalData.get('uf').touched
                       }"
                     >
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
@@ -465,7 +473,7 @@
                         'is-invalid': !personalData.get('city').valid && personalData.get('city').touched
                       }"
                     >
-                      <option disabled [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>

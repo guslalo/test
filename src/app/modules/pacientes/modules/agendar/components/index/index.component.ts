@@ -118,8 +118,7 @@ export class IndexComponent implements OnInit {
     };
 
     console.log(this.reserve);
-    /*this.reserve.id = id;
-    ;*/
+  
   }
 
   agendar() {

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,7 +10,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
-  public user: any = {};
   @ViewChild('content') myModal: any;
 
   constructor(
@@ -19,9 +19,38 @@ export class ResetPasswordComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
-  ngOnInit(): void {}
+  passwordData: FormGroup;
 
-  resetPass(pass) {
+  ngOnInit(): void {
+    this.passwordData = new FormGroup(
+      {
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^(?=.*[A-Z])/),
+          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[0-9])/),
+          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^.{8,16}$/),
+        ]),
+        confirmPassword: new FormControl(
+          '',
+          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])
+        ),
+      },
+      {
+        validators: this.confirmPass.bind(this),
+      }
+    );
+  }
+
+  confirmPass(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('password');
+    const { value: confirmPassword } = formGroup.get('confirmPassword');
+    return password === confirmPassword ? null : { passwordNotMatch: true };
+  }
+
+  resetPass() {
+    const pass = this.passwordData.get('password').value;
     this.route.params.subscribe((params) => {
       const token = params.token;
       const id = params.id;

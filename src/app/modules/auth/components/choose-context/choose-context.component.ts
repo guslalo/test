@@ -68,7 +68,6 @@ export class ChooseContextComponent implements OnInit {
       profile.policies
     );
 
-    localStorage.removeItem('clinic');
     localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(this.user));
     console.log(this.user);

@@ -51,19 +51,20 @@ import * as moment from 'moment';
 })
 export class LayoutComponent implements OnInit {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
-  status_date: any;
 
-  constructor(
-    public breakpointObserver: BreakpointObserver
-  ) {
-    moment().lang('es');
-  }
+  constructor(  public breakpointObserver: BreakpointObserver) {}
+
   public state = 'open';
 
   status = false;
 
   ngOnInit(): void {
-    this.status_date = `${moment(new Date()).format('LLLL')}`;
+    var updateTime = function () {
+      document.getElementById('current_date').innerHTML =
+        moment().lang('es').format('LL') + ' | ' + moment().lang('es').format('h:mm:ss a');
+    };
+    setInterval(updateTime, 1000);
+
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
