@@ -92,7 +92,7 @@
                   <div class="form-group col-md-6">
                     <label for="passport">{{ 'crear-cuenta.step1.formGroup.passport' | transloco }}</label>
                     <input
-                      disabled
+                      [attr.disabled]="!isForeign ? '' : null"
                       type="text"
                       class="form-control"
                       name="passport"
@@ -410,8 +410,9 @@
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
-                    <label for="ufBirth">{{ 'crear-cuenta.step3.formGroup.ufBirth' | transloco }} *</label>
+                    <label for="ufBirth">{{ 'crear-cuenta.step3.formGroup.ufBirth' | transloco }}</label>
                     <select
+                      [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
                       name="ufBirth"
                       formControlName="ufBirth"
@@ -431,10 +432,11 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="municipalityBirth"
-                      >{{ 'crear-cuenta.step3.formGroup.municipalityBirth' | transloco }} *</label
-                    >
+                    <label for="municipalityBirth">{{
+                      'crear-cuenta.step3.formGroup.municipalityBirth' | transloco
+                    }}</label>
                     <select
+                      [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
                       name="municipalityBirth"
                       formControlName="municipalityBirth"

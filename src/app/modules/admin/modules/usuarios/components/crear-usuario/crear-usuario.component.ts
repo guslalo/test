@@ -41,12 +41,6 @@ export class CrearUsuarioComponent implements OnInit {
   currentDate = {
     year: current.getFullYear(),
     month: current.getMonth() + 1,
-    day: current.getDate() + 1,
-  };
-
-  minDate = {
-    year: current.getFullYear(),
-    month: current.getMonth() + 1,
     day: current.getDate(),
   };
 

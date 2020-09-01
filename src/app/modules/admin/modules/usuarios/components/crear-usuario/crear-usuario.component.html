@@ -4,7 +4,7 @@
   </div>
   <div class="col-3 col-md-3">
     <button
-      id="#submit-button"
+      id="submit-button"
       (click)="createUser()"
       type="button"
       class="btn btn-secondary rounded-pill float-right"
@@ -120,8 +120,7 @@
                       name="document"
                       formControlName="document"
                       [ngClass]="{
-                        'is-invalid':
-                          !identificationData.get('document').valid && identificationData.get('document').touched
+                        'is-invalid': !identificationData.get('document').valid
                       }"
                       (change)="validateForm()"
                     >
@@ -140,9 +139,7 @@
                       name="idDocumentNumber"
                       formControlName="idDocumentNumber"
                       [ngClass]="{
-                        'is-invalid':
-                          !identificationData.get('idDocumentNumber').valid &&
-                          identificationData.get('idDocumentNumber').touched
+                        'is-invalid': !identificationData.get('idDocumentNumber').valid
                       }"
                     />
                   </div>
@@ -164,8 +161,7 @@
                       name="passport"
                       formControlName="passport"
                       [ngClass]="{
-                        'is-invalid':
-                          !identificationData.get('passport').valid && identificationData.get('passport').touched
+                        'is-invalid': !identificationData.get('passport').valid
                       }"
                     />
                   </div>
@@ -178,9 +174,7 @@
                       name="extraDocument"
                       formControlName="extraDocument"
                       [ngClass]="{
-                        'is-invalid':
-                          !identificationData.get('extraDocument').valid &&
-                          identificationData.get('extraDocument').touched
+                        'is-invalid': !identificationData.get('extraDocument').valid
                       }"
                     >
                       <option [value]="null">- Seleccionar -</option>
@@ -201,9 +195,7 @@
                       name="extraIdDocument"
                       formControlName="extraIdDocument"
                       [ngClass]="{
-                        'is-invalid':
-                          !identificationData.get('extraIdDocument').valid &&
-                          identificationData.get('extraIdDocument').touched
+                        'is-invalid': !identificationData.get('extraIdDocument').valid
                       }"
                     />
                   </div>
@@ -228,7 +220,7 @@
                       name="name"
                       formControlName="name"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('name').valid && personalData.get('name').touched
+                        'is-invalid': !personalData.get('name').valid
                       }"
                     />
                   </div>
@@ -244,8 +236,7 @@
                       name="secondLastName"
                       formControlName="secondLastName"
                       [ngClass]="{
-                        'is-invalid':
-                          !personalData.get('secondLastName').valid && personalData.get('secondLastName').touched
+                        'is-invalid': !personalData.get('secondLastName').valid
                       }"
                     />
                   </div>
@@ -257,7 +248,7 @@
                       name="motherName"
                       formControlName="motherName"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('motherName').valid && personalData.get('motherName').touched
+                        'is-invalid': !personalData.get('motherName').valid
                       }"
                     />
                   </div>
@@ -271,7 +262,7 @@
                       name="email"
                       formControlName="email"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
+                        'is-invalid': !personalData.get('email').valid
                       }"
                     />
                   </div>
@@ -283,7 +274,7 @@
                       name="phoneNumber"
                       formControlName="phoneNumber"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
+                        'is-invalid': !personalData.get('phoneNumber').valid
                       }"
                     />
                   </div>
@@ -294,7 +285,7 @@
                       name="gender"
                       formControlName="gender"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('gender').valid && personalData.get('gender').touched
+                        'is-invalid': !personalData.get('gender').valid
                       }"
                     >
                       <option value="male">Masculino</option>
@@ -312,12 +303,12 @@
                         [maxDate]="maxDate"
                         placeholder="yyyy-mm-dd"
                         name="birthdate"
-                        [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
                         ngbDatepicker
                         #d="ngbDatepicker"
                         formControlName="birthdate"
                         [ngClass]="{
-                          'is-invalid': !personalData.get('birthdate').valid && personalData.get('birthdate').touched
+                          'is-invalid': !personalData.get('birthdate').valid
                         }"
                         (click)="d.toggle()"
                       />
@@ -328,7 +319,12 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="ufBirth">UF de Nacimiento</label>
-                    <select class="form-control" name="ufBirth" formControlName="ufBirth">
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="ufBirth"
+                      formControlName="ufBirth"
+                    >
                       <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
@@ -337,7 +333,12 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="municipalityBirth">Municipio de Nacimiento</label>
-                    <select class="form-control" name="municipalityBirth" formControlName="municipalityBirth">
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="municipalityBirth"
+                      formControlName="municipalityBirth"
+                    >
                       <option [ngValue]="null">- Seleccionar -</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
@@ -352,7 +353,7 @@
                       name="nacionality"
                       formControlName="nacionality"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('nacionality').valid && personalData.get('nacionality').touched
+                        'is-invalid': !personalData.get('nacionality').valid
                       }"
                     />
                   </div>
@@ -383,7 +384,7 @@
                         id="inmigrationDate"
                         placeholder="yyyy-mm-dd"
                         name="inmigrationDate"
-                        [minDate]="{ year: 1940, month: 1, day: 1 }"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
                         [maxDate]="currentDate"
                         ngbDatepicker
                         #e="ngbDatepicker"
@@ -407,7 +408,7 @@
                       name="breed"
                       formControlName="breed"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
+                        'is-invalid': !personalData.get('breed').valid
                       }"
                     >
                       <option [ngValue]="null">- Seleccionar -</option>
@@ -444,7 +445,7 @@
                       name="cep"
                       formControlName="cep"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('cep').valid && personalData.get('cep').touched
+                        'is-invalid': !personalData.get('cep').valid
                       }"
                     />
                   </div>
@@ -455,7 +456,7 @@
                       name="uf"
                       formControlName="uf"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('uf').valid && personalData.get('uf').touched
+                        'is-invalid': !personalData.get('uf').valid
                       }"
                     >
                       <option [ngValue]="null">- Seleccionar -</option>
@@ -471,7 +472,7 @@
                       name="city"
                       formControlName="city"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('city').valid && personalData.get('city').touched
+                        'is-invalid': !personalData.get('city').valid
                       }"
                     >
                       <option [ngValue]="null">- Seleccionar -</option>
@@ -488,8 +489,7 @@
                       name="neighborhood"
                       formControlName="neighborhood"
                       [ngClass]="{
-                        'is-invalid':
-                          !personalData.get('neighborhood').valid && personalData.get('neighborhood').touched
+                        'is-invalid': !personalData.get('neighborhood').valid
                       }"
                     />
                   </div>
@@ -501,7 +501,7 @@
                       name="street"
                       formControlName="street"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('street').valid && personalData.get('street').touched
+                        'is-invalid': !personalData.get('street').valid
                       }"
                     />
                   </div>
@@ -513,8 +513,7 @@
                       name="streetNumber"
                       formControlName="streetNumber"
                       [ngClass]="{
-                        'is-invalid':
-                          !personalData.get('streetNumber').valid && personalData.get('streetNumber').touched
+                        'is-invalid': !personalData.get('streetNumber').valid
                       }"
                     />
                   </div>
@@ -779,9 +778,7 @@
                       name="professionalTitle"
                       formControlName="professionalTitle"
                       [ngClass]="{
-                        'is-invalid':
-                          !professionalForm.get('professionalTitle').valid &&
-                          professionalForm.get('professionalTitle').touched
+                        'is-invalid': !professionalForm.get('professionalTitle').valid
                       }"
                     />
                   </div>
@@ -793,8 +790,7 @@
                       name="university"
                       formControlName="university"
                       [ngClass]="{
-                        'is-invalid':
-                          !professionalForm.get('university').valid && professionalForm.get('university').touched
+                        'is-invalid': !professionalForm.get('university').valid
                       }"
                     />
                   </div>
@@ -806,7 +802,7 @@
                       name="course"
                       formControlName="course"
                       [ngClass]="{
-                        'is-invalid': !professionalForm.get('course').valid && professionalForm.get('course').touched
+                        'is-invalid': !professionalForm.get('course').valid
                       }"
                     />
                   </div>
@@ -817,8 +813,7 @@
                       name="ufRegistry"
                       formControlName="ufRegistry"
                       [ngClass]="{
-                        'is-invalid':
-                          !professionalForm.get('ufRegistry').valid && professionalForm.get('ufRegistry').touched
+                        'is-invalid': !professionalForm.get('ufRegistry').valid
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
@@ -856,9 +851,7 @@
                       name="professionalRegistry"
                       formControlName="professionalRegistry"
                       [ngClass]="{
-                        'is-invalid':
-                          !professionalForm.get('professionalRegistry').valid &&
-                          professionalForm.get('professionalRegistry').touched
+                        'is-invalid': !professionalForm.get('professionalRegistry').valid
                       }"
                     />
                   </div>
@@ -946,7 +939,7 @@
                       id="password"
                       class="form-control"
                       [ngClass]="{
-                        'is-invalid': !passwordForm.get('password').valid && passwordForm.get('password').touched
+                        'is-invalid': !passwordForm.get('password').valid
                       }"
                       formControlName="password"
                       maxlength="16"
@@ -973,7 +966,6 @@
                       [ngClass]="{
                         'is-invalid':
                           !passwordForm.get('confirmPassword').valid &&
-                          passwordForm.get('confirmPassword').touched &&
                           passwordForm.get('confirmPassword') != passwordForm.get('password')
                       }"
                       formControlName="confirmPassword"

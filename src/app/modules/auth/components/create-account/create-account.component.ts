@@ -101,7 +101,7 @@ export class CreateAccountComponent implements OnInit {
     );
     this.birthData = this._formBuilder.group({
       birthdate: ['', Validators.required],
-      ufBirth: [null, Validators.required],
+      ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: ['', Validators.required],
     });
@@ -149,16 +149,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   validateForm() {
-    console.log(console.log(this.form[0]));
+    // console.log(console.log(this.form[0]));
 
     this.identificationData.clearValidators();
-
-    if (this.identificationData.get('document').value === 'rgRegistry') {
-      this.identificationData.get('idDocumentNumber').enable();
-      this.identificationData.get('issuingBody').enable();
-    } else {
-      this.identificationData.get('issuingBody').disable();
-    }
 
     if (this.isForeign) {
       this.identificationData.get('passport').setValidators([Validators.required]);
@@ -168,11 +161,11 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('extraDocument').disable();
       this.identificationData.get('idDocumentNumber').disable();
       this.identificationData.get('extraIdDocument').disable();
-      this.identificationData.get('issuingBody').disable();
       this.identificationData.get('idDocumentNumber').reset();
       this.identificationData.get('extraIdDocument').reset();
       this.identificationData.get('document').reset();
       this.identificationData.get('extraDocument').reset();
+      this.identificationData.get('issuingBody').reset();
     } else {
       this.identificationData.get('document').setValidators([Validators.required]);
       this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
@@ -181,8 +174,14 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('extraDocument').enable();
       this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
+    }
+
+    if (this.identificationData.get('document').value === 'rgRegistry') {
+      this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('issuingBody').enable();
+    } else {
       this.identificationData.get('passport').reset();
+      this.identificationData.get('issuingBody').disable();
     }
 
     this.identificationData.updateValueAndValidity();
