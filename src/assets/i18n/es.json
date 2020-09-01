@@ -89,5 +89,8 @@
   },
   "context": {
     "title": "Seleccione su Acceso"
+  },
+  "mi-salud": {
+    "sickness": "Enfermedades"
   }
 }

@@ -564,7 +564,18 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">Agregar Antecedentes</h5>
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+          Agregar
+          <ng-container [ngSwitch]="category">
+            <ng-container *ngSwitchCase="'sickness'">enfermedades</ng-container>
+            <ng-container *ngSwitchCase="'familiarHistory'">antecedentes familiares</ng-container>
+            <ng-container *ngSwitchCase="'medicines'">medicamentos</ng-container>
+            <ng-container *ngSwitchCase="'healthHabits'">hábitos de salud</ng-container>
+            <ng-container *ngSwitchCase="'occupational'">ocupacionales</ng-container>
+            <ng-container *ngSwitchCase="'others'">otros</ng-container>
+            <ng-container *ngSwitchDefault>Antecedentes</ng-container>
+          </ng-container>
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -575,8 +586,12 @@
             <div class="form-group col">
               <label for="dateBlock">Agregar item</label>   
               <input type="text" 
-              placeholder="ingrese item"
-              class="form-control" name="modelAntecedente" id="test" [(ngModel)]="modelAntecedente" [ngModelOptions]="{standalone: true}"/>
+              value=" "
+              placeholder=" l"
+              class="form-control" name="modelAntecedente" id="test" 
+              [(ngModel)]="modelAntecedente"
+              (click)="clear()"
+              />
             </div>
           </div>
         </form>

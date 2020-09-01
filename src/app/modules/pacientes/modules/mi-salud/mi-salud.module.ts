@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MiSaludRoutingModule } from './mi-salud-routing.module';
 import { MiSaludComponent } from './components/mi-salud/mi-salud.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MiSaludComponent } from './components/mi-salud/mi-salud.component';
     CommonModule,
     MiSaludRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ]
 })
 export class MiSaludModule { }

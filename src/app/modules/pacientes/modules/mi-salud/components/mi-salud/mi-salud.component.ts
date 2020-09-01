@@ -4,6 +4,7 @@ import { DocumentService } from './../../../../../../services//document.service'
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 
@@ -36,6 +37,7 @@ export class MiSaludComponent implements OnInit {
     private router: Router,
     private _formBuilder: FormBuilder,
     private documentService:DocumentService,
+    private _snackBar: MatSnackBar,
     private currentUserService:CurrentUserService,
     private medicalRecord:MedicalRecordService) {}
 
@@ -67,7 +69,13 @@ export class MiSaludComponent implements OnInit {
     this.downloadUrl = this.documentService.download();
   }
 
-  categoryChangue(category?){
+  clear(){
+    this.modelAntecedente = ' '
+  }
+
+  categoryChangue(category?) {
+    console.log(category);
+    this.modelAntecedente = 'ingrese información'
     //console.log(category);
     this.category = category;
     //return category

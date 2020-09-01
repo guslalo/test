@@ -89,5 +89,8 @@
   },
   "context": {
     "title": "Select Access"
+  },
+  "mi-salud": {
+    "sickness": "sickness"
   }
 }
