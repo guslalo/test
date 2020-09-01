@@ -5,18 +5,17 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-
-  constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) { }
+  constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.initCall();
   }
 
   initCall(): void {
-     this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const id = params.id;
       this.getSession(id);
     });
@@ -25,15 +24,14 @@ export class IndexComponent implements OnInit {
   getSession(appointmentId: string) {
     this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
       (data) => {
-
         const options = {
           roomName: data.payload.sessionId,
           jwt: data.payload.sessionToken,
           height: 700,
-          parentNode: document.querySelector('#meet')
+          parentNode: document.querySelector('#meet'),
         };
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI('meet.bdot.app', options);
+        const jitsi = new (window as any).JitsiMeetExternalAPI(data.payload.urlRoom, options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },
@@ -42,5 +40,4 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-
 }
