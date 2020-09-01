@@ -32,6 +32,7 @@ export class MiSaludComponent implements OnInit {
   public elemntoId:string;
   public elemntoValue:string;
   public textInputFile:any;
+  public addValidator: boolean;
 
   constructor(
     private router: Router,
@@ -58,7 +59,7 @@ export class MiSaludComponent implements OnInit {
     console.log(this.user.id);
     this.getMedicalRecord();
   
-
+    this.addValidator = false;
     this.addExamen = this._formBuilder.group({
       fileName: [null, [Validators.required]],
       documentType: [null, [Validators.required]],
@@ -70,10 +71,12 @@ export class MiSaludComponent implements OnInit {
   }
 
   clear(){
+    this.addValidator = true;
     this.modelAntecedente = ' '
   }
 
   categoryChangue(category?) {
+    this.addValidator = false;
     console.log(category);
     this.modelAntecedente = 'ingrese información'
     //console.log(category);
