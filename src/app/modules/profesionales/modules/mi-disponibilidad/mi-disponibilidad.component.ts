@@ -260,8 +260,7 @@ export class MiDisponibilidadComponent implements OnInit {
         appointmentDuration: +this.createAvailability.controls.appointmentDuration.value,
       },
       professionalDetails: {
-        specialtyId: this.createAvailability.controls.specialty.value,
-        //specialtyName:  'test',
+        specialtyId: this.createAvailability.controls.specialty.value
       },
       dateDetails: {
         startDate: this.createAvailability.controls.startDate.value,
