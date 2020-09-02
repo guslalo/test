@@ -467,6 +467,13 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
                     />
+                    
+                  </div>
+                  <div *ngIf="i > 0" class="form-group col-auto ">
+                    <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
+                    <div class="btn btn-light btn-sm rounded-pill mt-2" (click)="removerDailyRanges(i)">
+                      Remover
+                    </div>
                   </div>
                 </div>
               </div>
@@ -673,18 +680,7 @@
                     #d="ngbDatepicker"
                     (click)="d.toggle()"
                    
-                  /><!--
- [ngModelOptions]="{standalone: true}"
-                    
-                     [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('starDate').valid && createAvailability.get('starDate').touched
-                    }"
-                        <input class="form-control" type="date"   id="endDate"  name="endDate" formControlName="endDate">-->
-                  <!--
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar " (click)="d.toggle()" type="button"></button>
-                        </div>-->
+                  />
                 </div>
               </div>
               <div class="form-group col">
@@ -790,6 +786,12 @@
                       }"
                     />
                   </div>
+                  <div *ngIf="i > 0" class="form-group col-auto ">
+                    <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
+                    <div class="btn btn-light btn-sm rounded-pill mt-2" (click)="removerDailyRanges(i)">
+                      Remover
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -828,8 +830,8 @@
             class="btn btn-primary rounded-pill"
             data-dismiss="modal"
             (click)="putAvailability2(idAvailability._id)"
-            [disabled]="!createAvailability.valid"
-          >
+            
+          ><!--[disabled]="!createAvailability.valid"-->
             Editar disponibilidad
           </button>
         </div>

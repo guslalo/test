@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <h2>Mi salud</h2>
-      <p>Esta sera la información que vera los profesionales para tus consultas</p>
+      <p>Esta información será vista por los profesionales.</p>
     </div>
   </div>
 
@@ -60,12 +60,12 @@
                 <div class="card-header" style="display: none;">
                   Mi Salud
                   <p>
-                    Completa tus datos medicos para una mejor atención
+                    Completa tus datos médicos para una mejor atención
                   </p>
                 </div>
                 <div class="card-body text-center">
                   <h5 class="card-title">Mi Salud</h5>
-                  <p class="card-text text-center">Completa tus datos medicos para una mejor atención</p>
+                  <p class="card-text text-center">Completa tus datos médicos para una mejor atención</p>
                   <img src="assets/img/corazon-azul.svg">
                   <div class="boxCompletData">
                     <img src="assets/img/porcentaje-temp.svg">
@@ -581,19 +581,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form novalidate=""> <!--[formGroup]="availabilityBlocked" -->
+        <form [formGroup]="agregarItem" novalidate=""> <!--[formGroup]="availabilityBlocked" -->
           <div class="row">
             <div class="form-group col">
               <label for="dateBlock">Agregar item</label>   
               <input type="text" 
-              value=" "
-              placeholder=" l"
-              class="form-control" name="modelAntecedente" id="test" 
+              value=""
+              placeholder=""
+              class="form-control" name="modelAntecedente" 
+              id="item"
               [(ngModel)]="modelAntecedente"
-              (click)="clear()"
+              formControlName="item"
+              (click)="clear(modelAntecedente)"
               />
             </div>
-          </div>
+          </div><!--      [(ngModel)]="modelAntecedente"
+            [ngModelOptions]="{standalone: true}"-->
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
@@ -602,7 +605,7 @@
           type="button"
           class="btn btn-primary rounded-pill"
           data-dismiss="modal"
-          [disabled]="!addValidator"
+          [disabled]="!agregarItem.valid"
           (click)="add(category)"
         >
           Agregar

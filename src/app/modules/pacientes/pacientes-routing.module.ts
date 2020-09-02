@@ -55,8 +55,8 @@ const routes: Routes = [
     loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
   },
 
-  { path: 'cambiar-contrasena', component: CambiarClaveComponent }
-  //{ path: 'mis-consultas', component: MisConsultasComponent },
+  { path: 'cambiar-contrasena', component: CambiarClaveComponent },
+  //{ path: 'mis-consultas', component: MisConsultasComponent }
 ];
 
 @NgModule({

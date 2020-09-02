@@ -175,24 +175,9 @@ export class MiDisponibilidadComponent implements OnInit {
       specialty:  new FormControl(),
       specialtyName:  new FormControl(),
       endDate:  [null, [Validators.required]],// [Validators.required]
-      startDate:  new FormControl(),//['', ],//[Validators.required]
+      startDate: [null],//new FormControl()
       dailyDetails: this._formBuilder.array([], ),//[Validators.required]
-      dailyRanges: this._formBuilder.array([]),
-      
-
-      /*/*
-      administrativeDetails: {
-        objective: this.createAvailability.controls.dailyDetails.value,
-        appointmentDuration: this.createAvailability.controls.dailyRanges.value,
-      },
-      professionalDetails:{
-        specialtyId: this.createAvailability.controls.specialty.value
-      },
-      dateDetails : {
-        endDate:this.createAvailability.controls.endDate.value,
-        days: this.createAvailability.controls.dailyDetails.value,
-        dailyRange: this.createAvailability.controls.dailyRanges.value
-      }*/
+      dailyRanges: this._formBuilder.array([])
     });
 
     this.availabilityBlocked = this._formBuilder.group({
@@ -213,6 +198,10 @@ export class MiDisponibilidadComponent implements OnInit {
       end: ['', [Validators.required]],
     });
     this.dailyRanges.push(dailyRangeFormGroup);
+  }
+
+  removerDailyRanges(indice: number) {
+    this.dailyRanges.removeAt(indice);
   }
 
   getAvailability() {
@@ -337,6 +326,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   putAvailability2(id) {
     //this.createAvailability = id;
+    console.log(id);
     console.log(this.createAvailability);
     const formObject = {
       id,
@@ -356,6 +346,10 @@ export class MiDisponibilidadComponent implements OnInit {
     };
     console.log(formObject);
 
+    if (formObject.dateDetails.endDate = ""){
+      
+    }
+
     if (formObject) {
       this.availabilityService
         .putAvailability(
@@ -374,6 +368,28 @@ export class MiDisponibilidadComponent implements OnInit {
           }
         );
     } /**/
+  }
+  putAvailability3(id) {
+    //this.createAvailability = id;
+    console.log(this.createAvailability);
+    const formObject = {
+      id,
+      administrativeDetails: {
+        objective: this.createAvailability.controls.objective.value,
+        appointmentDuration: +this.createAvailability.controls.appointmentDuration.value,
+      },
+      professionalDetails: {
+        specialtyId: this.createAvailability.controls.specialty.value,
+      },
+      dateDetails: {
+        startDate: this.createAvailability.controls.startDate.value,
+        endDate: this.createAvailability.controls.endDate.value,
+        days: this.createAvailability.controls.dailyDetails.value,
+        dailyRanges: this.createAvailability.controls.dailyRanges.value,
+      },
+    };
+    console.log(formObject);
+
   }
 
   // deleteBlock
