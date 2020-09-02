@@ -9,6 +9,7 @@ import { environment } from './../../../../../../../environments/environment';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
+  url:string;
   constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -31,8 +32,10 @@ export class IndexComponent implements OnInit {
           height: 700,
           parentNode: document.querySelector('#meet'),
         };
+        this.url = data.payload.urlRoom.split('//');
+        console.log(this.url[1]);
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI(data.payload.urlRoom, options);
+        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1], options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },
