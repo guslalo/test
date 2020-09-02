@@ -32,10 +32,12 @@ export class IndexComponent implements OnInit {
           height: 700,
           parentNode: document.querySelector('#meet'),
         };
+        
         this.url = data.payload.urlRoom.split('//');
-        console.log(this.url[1]);
+        console.log(this.url[1].replace('/', ''));
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1], options);
+
+        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },

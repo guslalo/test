@@ -33,12 +33,16 @@ export class IndexComponent implements OnInit {
           jwt: data.payload.sessionToken,
           height: 700,
           parentNode: document.querySelector('#meet'),
-        };
-        console.log(environment.jitsi);
+        };   
+        
         this.url = data.payload.urlRoom.split('//');
+        //console.log(environment.jitsi);
+        /*
+     
         console.log(this.url[1]);
+        console.log(data.payload.urlRoom);*/
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1], options);
+        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },
