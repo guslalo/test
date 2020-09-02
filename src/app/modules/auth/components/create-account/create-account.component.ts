@@ -218,7 +218,7 @@ export class CreateAccountComponent implements OnInit {
         ...(this.form[0].document.value === 'rgRegistry' && {
           rgRegistry: this.form[0].idDocumentNumber.value || '',
         }),
-        passport: this.form[0].passport.value,
+        passport: this.form[0].passport.value || '',
         issuingBody: this.form[0].issuingBody.value || '',
         ...(this.form[0].extraDocument.value === 'cbo' && { cbo: this.form[0].extraIdDocument.value || '' }),
         ...(this.form[0].extraDocument.value === 'pasep' && {
@@ -248,8 +248,8 @@ export class CreateAccountComponent implements OnInit {
         email: this.form[1].email.value,
         breed: this.form[1].breed.value,
         birthdate: this.form[2].birthdate.value.toString(),
-        ufBirth: this.form[2].ufBirth.value,
-        municipalityBirth: this.form[2].municipalityBirth.value,
+        ufBirth: this.form[2].ufBirth.value || '',
+        municipalityBirth: this.form[2].municipalityBirth.value || '',
         nacionality: this.form[2].nacionality.value,
       },
       addressData: {
