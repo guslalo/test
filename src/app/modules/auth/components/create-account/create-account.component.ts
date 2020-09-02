@@ -69,7 +69,7 @@ export class CreateAccountComponent implements OnInit {
 
     this.maxDate = {
       year: current.getFullYear() - 18,
-      month: current.getMonth(),
+      month: current.getMonth() + 1,
       day: current.getDate(),
     };
 

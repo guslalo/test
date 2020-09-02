@@ -58,7 +58,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   minDate = {
     year: current.getFullYear() - 18,
-    month: current.getMonth(),
+    month: current.getMonth() + 1,
     day: current.getDate(),
   };
 
