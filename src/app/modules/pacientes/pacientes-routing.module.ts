@@ -43,7 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/mis-consultas/mis-consultas.module').then((m) => m.MisConsultasModule),
   },
   {
-    path: 'consulta/:appointmentId',
+    path: 'patient/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
   {
