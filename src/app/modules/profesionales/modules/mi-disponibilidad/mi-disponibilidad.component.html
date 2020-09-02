@@ -692,8 +692,7 @@
                     placeholder="{{ idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy' }}"
                     id="endDate"
                     name="endDate"
-                   
-                    [ngModelOptions]="{standalone: true}"
+                    formControlName="endDate"
                     [(ngModel)]="model4"
                     [minDate]="minDate"
                     ngbDatepicker
