@@ -46,7 +46,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   maxDate = {
     year: current.getFullYear() - 18,
-    month: current.getMonth(),
+    month: current.getMonth() + 1,
     day: current.getDate(),
   };
 
