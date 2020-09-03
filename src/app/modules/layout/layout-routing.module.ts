@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'app-paciente',
     component: LayoutComponent,
-    canActivate: [GuardsGuard],
+    canActivate: [],//GuardsGuard
     children: [
       {
         path: '',
@@ -47,8 +47,8 @@ const routes: Routes = [
   },
   {
     path: 'app-professional',
-    component: LayoutComponent,
-    canActivate: [GuardsGuard],
+    component: LayoutComponent, 
+    canActivate: [],
     children: [
       {
         path: '',
