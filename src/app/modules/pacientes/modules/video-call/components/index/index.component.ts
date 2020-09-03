@@ -13,18 +13,23 @@ export class IndexComponent implements OnInit {
   constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.initCall();
+    //this.initCall();
+    this.route.params.subscribe((params) => {
+      const id = params.appointmentId;
+      console.log(params);
+      this.getSession(id);
+    });
   }
-
+  /*
   initCall(): void {
     this.route.params.subscribe((params) => {
       const id = params.id;
       this.getSession(id);
     });
-  }
+  }*/
 
-  getSession(appointmentId: string) {
-    this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
+  getSession(id: string) {
+    this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
         console.log(data);
         const options = {
