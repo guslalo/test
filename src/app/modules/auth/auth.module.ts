@@ -10,6 +10,7 @@ import { SharedModule } from './../../shared/shared.module';
 
 // routing
 import { AuthRoutingModule } from './auth-routing.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
@@ -49,11 +50,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule.forRoot(),
     NgbDatepickerModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
     
   ],
   exports: [
-    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

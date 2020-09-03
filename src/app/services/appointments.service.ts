@@ -6,6 +6,7 @@ import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AppointmentsService {
   private appointments = 'v1/appointments';
   private doctors = 'v1/doctors';
@@ -15,7 +16,7 @@ export class AppointmentsService {
 
   constructor(private http: HttpClient) {}
 
-  // getAppointments
+  //getAppointments
   getAppointments(number, status?): Observable<any> {
     if(status) {
       const params = new HttpParams()
@@ -27,15 +28,12 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
     }
-
   }
 
   // getAppointments
   getAppointments2(id): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/' + id);
   }
-
-  // api.bdot.app/api/v1/appointemnts/5f049b9948ab2c55c1db33fa
 
   // getDoctors
   getDoctors(): Observable<any> {
@@ -51,12 +49,6 @@ export class AppointmentsService {
 
   // get getAppointmentsSession
   getAppointmentsSession(appointmentId): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        // 'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))//,
-        // 'Content-Type': 'application/json'
-      }),
-    };
     return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { appointmentId });
   }
 
@@ -69,6 +61,5 @@ export class AppointmentsService {
   postConsolidate(consolidate): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate );
   }
-
 
 }

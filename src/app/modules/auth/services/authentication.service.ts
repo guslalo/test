@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn:'root'})
+
+
 export class AuthenticationService {
   private loginUrl = 'v1/access/login-web';
   private accessWebUrl = 'v1/access/access-web';
