@@ -17,6 +17,7 @@ FullCalendarModule.registerPlugins([
   interactionPlugin
 ]);
 
+// import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import {
   NgbTypeaheadModule,
@@ -25,12 +26,7 @@ import {
    NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
-//import { LayoutModule } from '../modules/layout/layout.module';
-
-
-
-//Translation
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+// Translation
 import { TranslocoRootModule } from './../transloco-root.module';
 
 import { MatSliderModule } from '@angular/material/slider';
@@ -60,9 +56,9 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     RouterModule,
     NgbTypeaheadModule,
     NgbDatepickerModule,
+    NgbRatingModule,
     PasswordStrengthMeterModule,
-    //LayoutModule
-    
+    FullCalendarModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -79,7 +75,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbRatingModule,
     ChangePassComponent,
     PasswordStrengthMeterModule,
-    
+    FullCalendarModule
   ],
   bootstrap: [NgbdTimepickerBasic],
 })

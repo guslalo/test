@@ -5,19 +5,13 @@ import { SelectivePreloadingStrategyService } from './services/selective-preload
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
-  }/*,
-  {
-    path: 'app-professional',
-    loadChildren: () => import('./modules/layout/layout.module').then(m => m.LayoutModule),
-    canActivate: []
-    //data: { preload: true }
-    //canLoad: [AuthGuard]
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
+  /*
   {
-    path: 'app-patient',
+    path: '',
     loadChildren: () => import('./modules/layout/layout.module').then(m => m.LayoutModule),
-    canActivate: []
+    canActivate: [GuardsGuard]
     //data: { preload: true }
     //canLoad: [AuthGuard]
   }*/

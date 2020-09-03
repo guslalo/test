@@ -11,7 +11,6 @@ export class IndexComponent implements OnInit {
   public consultas: any;
   public model: any;
 
- 
 
   constructor(private appointmentsService:AppointmentsService) { }
 

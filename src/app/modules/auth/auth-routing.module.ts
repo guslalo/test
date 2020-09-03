@@ -7,19 +7,12 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { LayoutModule } from '../../modules/layout/layout.module';
+import { MultiProfileGuard } from 'src/app/guards/multiprofile.guard';
+import { GuardsGuard } from '../../guards/guards.guard';
 
 const recovery = 'recovery-password';
 
 const routes: Routes = [
-  /*{
-    path: 'app-professional',
-    loadChildren: () => import('./../layout/layout.module').then(m => m.LayoutModule)
-  },
-  {
-    path: 'app-patient',
-    loadChildren: () => import('./../layout/layout.module').then(m => m.LayoutModule)
-  },*/
   {
     path: '',
     component: LoginComponent,
@@ -48,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class AuthRoutingModule {}

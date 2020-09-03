@@ -2,15 +2,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-
-
-//routing
-import { AppRoutingModule } from './app-routing.module';
 
 // modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // routing
+import { AppRoutingModule } from './app-routing.module';
 
 import { SharedModule } from './shared/shared.module';
 // import { SharedModule } from './shared/shared.module';
