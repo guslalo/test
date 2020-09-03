@@ -5,9 +5,6 @@ import { SelectivePreloadingStrategyService } from './services/selective-preload
 const routes: Routes = [
   {
     path: '',
-<<<<<<< Updated upstream
-    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
-=======
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   }/*,
   {
@@ -16,14 +13,9 @@ const routes: Routes = [
     canActivate: []
     //data: { preload: true }
     //canLoad: [AuthGuard]
->>>>>>> Stashed changes
   },
   {
-<<<<<<< Updated upstream
-    path: '',
-=======
     path: 'app-patient',
->>>>>>> Stashed changes
     loadChildren: () => import('./modules/layout/layout.module').then(m => m.LayoutModule),
     canActivate: []
     //data: { preload: true }
