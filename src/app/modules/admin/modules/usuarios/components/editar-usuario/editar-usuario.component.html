@@ -121,7 +121,7 @@
                       name="document"
                       formControlName="document"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('document').valid
+                        'is-invalid': !identificationData.get('document').valid && !isForeign
                       }"
                       (change)="validateForm()"
                     >
@@ -140,7 +140,7 @@
                       name="idDocumentNumber"
                       formControlName="idDocumentNumber"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('idDocumentNumber').valid
+                        'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
                       }"
                     />
                   </div>
@@ -181,7 +181,7 @@
                       name="extraDocument"
                       formControlName="extraDocument"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('extraDocument').valid
+                        'is-invalid': !identificationData.get('extraDocument').valid && !isForeign
                       }"
                     >
                       <option [value]="null">- Seleccionar -</option>
@@ -202,7 +202,7 @@
                       name="extraIdDocument"
                       formControlName="extraIdDocument"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('extraIdDocument').valid
+                        'is-invalid': !identificationData.get('extraIdDocument').valid && !isForeign
                       }"
                     />
                   </div>
