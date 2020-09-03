@@ -11,7 +11,7 @@ import { SharedModule } from './../../shared/shared.module';
 // routing
 import { AuthRoutingModule } from './auth-routing.module';
 
-// import { LayoutModule } from '../../modules/layout/layout.module';
+
 
 // components
 import { LoginComponent } from './components/login/login.component';
@@ -27,6 +27,8 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -47,10 +49,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule.forRoot(),
     NgbDatepickerModule,
     MatStepperModule,
-    MatDialogModule,
-    // LayoutModule
+    MatDialogModule
+    
   ],
-  exports: [],
+  exports: [
+    
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}

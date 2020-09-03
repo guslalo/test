@@ -43,6 +43,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
     const token = JSON.parse(localStorage.getItem('token'));
     req = req.clone({
       setHeaders: {
@@ -57,14 +58,14 @@ export class AuthTokenInterceptor implements HttpInterceptor {
 
         if (error.status === 401) {
           document.location.href = '/';
+        }else {
+          data = {
+            status: error.status,
+            reason: error && error.error && error.error.message ? error.error.message : '',
+          };
+          this.errorDialogService.openDialog(data);
+          return throwError(data);
         }
-
-        data = {
-          status: error.status,
-          reason: error && error.error && error.error.message ? error.error.message : '',
-        };
-        this.errorDialogService.openDialog(data);
-        return throwError(data);
       })
     );
     /*

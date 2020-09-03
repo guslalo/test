@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
@@ -14,8 +14,11 @@ export class AuthenticationService {
   private resetPassUrl = 'v1/account/reset-password';
   private changePass = 'v1/account/change-password';
   private logoutUrl = '/';
+  private httpClient: HttpClient;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, handler: HttpBackend, private router: Router) {
+    this.httpClient = new HttpClient(handler);
+  }
 
   // post loginUser
   loginUser(username, password): Observable<any> {
@@ -23,7 +26,8 @@ export class AuthenticationService {
   }
 
   recoveryPassword(data): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.recoveryUrl, { email: data });
+    const headers = new HttpHeaders().set('InterceptorSkipHeader', '');
+    return this.http.post<any>(environment.baseUrl + this.recoveryUrl, { email: data },  { headers });
   }
 
   resetPassword(token, password, id): Observable<any> {
