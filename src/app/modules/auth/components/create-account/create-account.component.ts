@@ -43,6 +43,7 @@ export class CreateAccountComponent implements OnInit {
 
   public password: any;
   public user: any = {};
+  public errorMsg: string;
 
   isLinear = false;
   isForeign: boolean = false;
@@ -280,9 +281,10 @@ export class CreateAccountComponent implements OnInit {
             this.spinner.hide();
             this.router.navigate(['confirm-account/' + data.id]);
           },
-          (error) => {
+          (err) => {
+            this.errorMsg = err.error.message;
             this.spinner.hide();
-            console.log(error);
+            console.log(err);
           }
         );
     }
