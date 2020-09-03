@@ -101,20 +101,10 @@ export class UsuariosComponent implements OnInit {
     this.selected = [];
     this.adminService.getUsers(role).subscribe(
       (data) => {
-        // console.log(data);
-        this.temp = [...data.reverse()];
-        /*
-        for (var i = 0, t = 100; i < t; i++) {
-          this.users.push({
-            nationalId: 123,
-            fullName: 'test',
-            email: 'a@a.cl',
-            phone: '123',
-            status: 'Activo',
-          });
-        }
-        */
-        this.users = data.reverse();
+        console.log(data);
+        this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
+        this.users = data.filter((user) => !user.isDeleted).reverse();
+        // console.log(this.users);
       },
       (error) => {
         console.log(error);
@@ -143,8 +133,8 @@ export class UsuariosComponent implements OnInit {
     this.adminService.getUsers(userType).subscribe(
       (data) => {
         // console.log(data);
-        this.temp = [...data.reverse()];
-        this.users = data.reverse();
+        this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
+        this.users = data.filter((user) => !user.isDeleted).reverse();
         this.getProfiles(userType.slice(0, -1));
       },
       (error) => {
@@ -177,6 +167,7 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  /*
   async savePatient() {
     console.log(this.patientForm.value);
 
@@ -204,6 +195,7 @@ export class UsuariosComponent implements OnInit {
       this.getUsers('patients');
     }, 500);
   }
+  */
 
   openDeactivateUserModal(disableUserModal, userId: string) {
     this.userId = userId;
