@@ -338,19 +338,19 @@ export class MiDisponibilidadComponent implements OnInit {
       },
       dateDetails: {
         startDate: this.createAvailability.controls.startDate.value,
-        endDate: this.createAvailability.controls.endDate.value,
+        endDate2: this.createAvailability.controls.endDate2.value,
         days: this.createAvailability.controls.dailyDetails.value,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
       },
     };
     console.log(formObject);
-    console.log(formObject.dateDetails.endDate);
-
+    console.log(formObject.dateDetails.endDate2);
+    /*
     if (formObject.dateDetails.endDate = ""){
       console.log("date vacio");
     }else {
       console.log("con data");
-    }
+    }*/
 
     if (formObject) {
       this.availabilityService

@@ -27,6 +27,7 @@ export class IndexComponent implements OnInit {
   getSession(appointmentId: string) {
     this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
       (data) => {
+        console.log(data);
         this.url = data.payload.urlRoom;
         const options = {
           roomName: data.payload.sessionId,
