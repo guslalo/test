@@ -8,6 +8,7 @@ import { environment } from './../../../../../../../environments/environment';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
+
 export class IndexComponent implements OnInit {
   constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
