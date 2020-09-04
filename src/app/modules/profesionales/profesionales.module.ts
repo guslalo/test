@@ -64,6 +64,7 @@ FullCalendarModule.registerPlugins([
     NgbPaginationModule,
     NgbRatingModule,
     NgbTimepickerModule,
+    NgxDatatableModule,
   ],
   exports: [
     NgbTimepickerModule,
