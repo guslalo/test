@@ -121,7 +121,7 @@
                       name="document"
                       formControlName="document"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('document').valid
+                        'is-invalid': !identificationData.get('document').valid && !isForeign
                       }"
                       (change)="validateForm()"
                     >
@@ -140,7 +140,7 @@
                       name="idDocumentNumber"
                       formControlName="idDocumentNumber"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('idDocumentNumber').valid
+                        'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
                       }"
                     />
                   </div>
@@ -181,7 +181,7 @@
                       name="extraDocument"
                       formControlName="extraDocument"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('extraDocument').valid
+                        'is-invalid': !identificationData.get('extraDocument').valid && !isForeign
                       }"
                     >
                       <option [value]="null">- Seleccionar -</option>
@@ -202,7 +202,7 @@
                       name="extraIdDocument"
                       formControlName="extraIdDocument"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('extraIdDocument').valid
+                        'is-invalid': !identificationData.get('extraIdDocument').valid && !isForeign
                       }"
                     />
                   </div>
@@ -351,15 +351,19 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nacionality">Nacionalidad *</label>
-                    <input
-                      type="text"
+                    <select
                       class="form-control"
                       name="nacionality"
                       formControlName="nacionality"
                       [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
                       }"
-                    />
+                    >
+                      <option [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="originCountry">Pais de Origen</label>

@@ -84,7 +84,12 @@ export class IndexComponent implements OnInit {
   //selecion sintoma
   onChange(deviceValue) {
     this.consolidate.patientDetails.symptoms.push(deviceValue.value);
-    this.sintomaSelected.push(deviceValue.selectedOptions[0].innerText);
+    let selectedSintoma = {
+      id:deviceValue.value,
+      text:deviceValue.selectedOptions[0].innerText
+    }
+    console.log(selectedSintoma);
+    this.sintomaSelected.push(selectedSintoma);
     console.log(this.consolidate); /**/
   }
 
@@ -221,6 +226,17 @@ export class IndexComponent implements OnInit {
       (data) => {
         this.professional = data;
         console.log(this.professional);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  eliminaSintoma(item){
+    this.symptomsService.deleteSymptoms(item, this.consolidate.id).subscribe(
+      (data) => {
+        console.log(data);
       },
       (error) => {
         console.log(error);

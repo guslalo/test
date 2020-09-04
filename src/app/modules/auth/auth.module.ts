@@ -10,8 +10,7 @@ import { SharedModule } from './../../shared/shared.module';
 
 // routing
 import { AuthRoutingModule } from './auth-routing.module';
-
-// import { LayoutModule } from '../../modules/layout/layout.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // components
 import { LoginComponent } from './components/login/login.component';
@@ -48,7 +47,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbDatepickerModule,
     MatStepperModule,
     MatDialogModule,
-    // LayoutModule
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -7,7 +7,7 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 // import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 //
 import { OwlModule } from 'ngx-owl-carousel';
@@ -56,7 +56,13 @@ FullCalendarModule.registerPlugins([
     VerticalTimelineModule,
     NgbPaginationModule,
     NgbRatingModule,
+    NgbTimepickerModule
   ],
-  exports: [FichaPacienteComponent, InicioPComponent, MiDisponibilidadComponent],
+  exports: [
+    NgbTimepickerModule,
+    FichaPacienteComponent, 
+    InicioPComponent,
+     MiDisponibilidadComponent
+  ],
 })
 export class ProfesionalesModule {}

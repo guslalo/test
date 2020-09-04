@@ -366,7 +366,7 @@
                 footerHeight="auto"
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
-                [limit]="7"
+                [limit]="pageSize"
                 [selected]="selected"
                 [selectionType]="SelectionType.checkbox"
                 [selectAllRowsOnPage]="true"
@@ -571,7 +571,7 @@
                 footerHeight="auto"
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
-                [limit]="7"
+                [limit]="pageSize"
                 [selected]="selected"
                 [selectionType]="SelectionType.checkbox"
                 [selectAllRowsOnPage]="true"
@@ -778,7 +778,7 @@
                 footerHeight="auto"
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
-                [limit]="7"
+                [limit]="pageSize"
                 [selected]="selected"
                 [selectionType]="SelectionType.checkbox"
                 [selectAllRowsOnPage]="true"
@@ -923,7 +923,74 @@
       </div>
     </div>
 
-    <!-- PATIENT MODAL -->
+    <!-- DISABLE USER MODAL -->
+    <div
+      #deactivateUserModal
+      class="modal fade"
+      id="disableUserModal"
+      tabindex="-1"
+      aria-labelledby="disableUserModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100 mt-1">Deshabilitar Usuario</h5>
+          </div>
+          <div class="modal-body p-4">
+            <p class="text-center">¿Estas seguro de que deseas deshabilitar a este usuario?</p>
+          </div>
+          <div class="modal-footer text-center justify-content-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="changeUserStatus(userId, 'deactivate', 'patients')"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEND INVITATION MODAL -->
+    <div
+      #sendInvitationModal
+      class="modal fade"
+      id="sendInvitationModal"
+      tabindex="-1"
+      aria-labelledby="sendInvitationModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center w-100 mt-1">Enviar Correo de Confirmacion</h5>
+          </div>
+          <div class="modal-footer text-center justify-content-center">
+            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="sendInvitationEmail()"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATIENT MODAL 
     <div
       #patientModal
       class="modal fade"
@@ -1046,70 +1113,4 @@
         </div>
       </div>
     </div>
-
-    <!-- DISABLE USER MODAL -->
-    <div
-      #deactivateUserModal
-      class="modal fade"
-      id="disableUserModal"
-      tabindex="-1"
-      aria-labelledby="disableUserModal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center w-100 mt-1">Deshabilitar Usuario</h5>
-          </div>
-          <div class="modal-body p-4">
-            <p class="text-center">¿Estas seguro de que deseas deshabilitar a este usuario?</p>
-          </div>
-          <div class="modal-footer text-center justify-content-center">
-            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary rounded-pill"
-              data-dismiss="modal"
-              (click)="changeUserStatus(userId, 'deactivate', 'patients')"
-            >
-              Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEND INVITATION MODAL -->
-    <div
-      #sendInvitationModal
-      class="modal fade"
-      id="sendInvitationModal"
-      tabindex="-1"
-      aria-labelledby="sendInvitationModal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center w-100 mt-1">Enviar Correo de Confirmacion</h5>
-          </div>
-          <div class="modal-footer text-center justify-content-center">
-            <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary rounded-pill"
-              data-dismiss="modal"
-              (click)="sendInvitationEmail()"
-            >
-              Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    -->

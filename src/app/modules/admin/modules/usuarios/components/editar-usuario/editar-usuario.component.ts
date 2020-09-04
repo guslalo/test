@@ -139,7 +139,7 @@ export class EditarUsuarioComponent implements OnInit {
       birthdate: [null, null],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
-      nacionality: ['', Validators.required],
+      nacionality: [null, Validators.required],
       originCountry: [null, null],
       inmigrationDate: [null, null],
       breed: [null, Validators.required],
@@ -278,7 +278,7 @@ export class EditarUsuarioComponent implements OnInit {
           .setValue(user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
 
         if (user.identificationData.rgRegistry)
-          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody);
+          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody || null);
 
         this.isForeign = user.identificationData.isForeign;
         if (user.identificationData.isForeign) {
@@ -309,12 +309,12 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('gender').setValue(user.personalData.gender);
         this.birthDate = this.dateAdapter.fromModel(user.personalData.birthdate);
         this.personalData.get('birthdate').setValue(this.birthDate);
-        this.personalData.get('ufBirth').setValue(user.personalData.ufBirth);
-        this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth);
+        this.personalData.get('ufBirth').setValue(user.personalData.ufBirth || null);
+        this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth || null);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
         this.personalData.get('breed').setValue(user.personalData.breed);
-        this.personalData.get('education').setValue(user.personalData.education);
-        this.personalData.get('familySituation').setValue(user.personalData.familySituation);
+        this.personalData.get('education').setValue(user.personalData.education || null);
+        this.personalData.get('familySituation').setValue(user.personalData.familySituation || null);
         this.personalData.get('motherName').setValue(user.personalData.motherName);
 
         this.personalData.get('cep').setValue(user.addressData.cep);

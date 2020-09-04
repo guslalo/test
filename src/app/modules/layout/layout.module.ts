@@ -14,7 +14,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 // inteceptores
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthTokenInterceptor } from './../../modules/auth/interceptor.service';
+import { InterceptorService } from '../../shared/interceptor.service';
 import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
@@ -28,13 +28,11 @@ import { HeaderComponent } from './components/header/header.component';
     PacientesModule,
     SharedModule,
   ],
-  exports: [
-    SharedModule
-  ],
+  exports: [SharedModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthTokenInterceptor,
+      useClass: InterceptorService,
       multi: true,
     },
   ],

@@ -43,7 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/mis-consultas/mis-consultas.module').then((m) => m.MisConsultasModule),
   },
   {
-    path: 'consulta/:appointmentId',
+    path: 'patient/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
   {
@@ -55,8 +55,8 @@ const routes: Routes = [
     loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
   },
 
-  { path: 'cambiar-contrasena', component: CambiarClaveComponent }
-  //{ path: 'mis-consultas', component: MisConsultasComponent },
+  { path: 'cambiar-contrasena', component: CambiarClaveComponent },
+  //{ path: 'mis-consultas', component: MisConsultasComponent }
 ];
 
 @NgModule({

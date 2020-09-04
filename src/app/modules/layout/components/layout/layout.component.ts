@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CurrentUserService } from '../../../../services/current-user.service';
 import { UserLogin } from '../../../../models/models';
 // import { slideInAnimation } from '../../../../shared/animations';
@@ -49,12 +49,13 @@ import * as moment from 'moment';
     ]),
   ],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
 
-  constructor(  public breakpointObserver: BreakpointObserver) {}
+  constructor(public breakpointObserver: BreakpointObserver) {}
 
   public state = 'open';
+  intervalCurrentTime: any;
 
   status = false;
 
@@ -63,19 +64,15 @@ export class LayoutComponent implements OnInit {
       document.getElementById('current_date').innerHTML =
         moment().lang('es').format('LL') + ' | ' + moment().lang('es').format('h:mm:ss a');
     };
-    setInterval(updateTime, 1000);
-
+    this.intervalCurrentTime = setInterval(updateTime, 1000);
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
         // desktop
-   
       } else {
         // mobile
-
       }
     });
-
   }
 
   sideBar() {
@@ -83,5 +80,9 @@ export class LayoutComponent implements OnInit {
   }
   sideBarMenu() {
     this.status = !this.status;
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalCurrentTime);
   }
 }

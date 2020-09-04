@@ -34,7 +34,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/sala-espera/sala-espera.module').then((m) => m.SalaEsperaModule),
   },
   {
-    path: 'consulta/:appointmentId',
+    path: 'professional/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
   { 

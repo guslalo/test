@@ -14,31 +14,42 @@ export class IndexComponent implements OnInit {
   constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.initCall();
-  }
-
-  initCall(): void {
+    //this.initCall();
     this.route.params.subscribe((params) => {
-      const id = params.id;
+      const id = params.appointmentId;
+      console.log(params);
       this.getSession(id);
     });
   }
+/*
+  initCall(): void {
+    this.route.params.subscribe((params) => {
+      const id = params.id;
+      console.log(id);
+      this.getSession(id);
+    });
+  }*/
 
-  getSession(appointmentId: string) {
-    this.appointmentsService.getAppointmentsSession(appointmentId).subscribe(
+  getSession(id: string) {
+    this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
+        console.log(data);
         this.url = data.payload.urlRoom;
         const options = {
           roomName: data.payload.sessionId,
           jwt: data.payload.sessionToken,
           height: 700,
           parentNode: document.querySelector('#meet'),
-        };
-        console.log(environment.jitsi);
+        };   
+        
         this.url = data.payload.urlRoom.split('//');
+        //console.log(environment.jitsi);
+        /*
+     
         console.log(this.url[1]);
+        console.log(data.payload.urlRoom);*/
 
-        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1], options);
+        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
       },

@@ -22,6 +22,7 @@ export class MiSaludComponent implements OnInit {
   public exams:any;
   public modelAntecedente:any;
   public addExamen: FormGroup;
+  public agregarItem: FormGroup;
   public category:any;
   public base64:any;
   public nameFile:any;
@@ -66,19 +67,34 @@ export class MiSaludComponent implements OnInit {
       madeBy: [null, [Validators.required]],
       file: [null, [Validators.required]],
     });
+
+    this.agregarItem = this._formBuilder.group({
+      item: [null, [Validators.required]]
+    });
+
+    
   
     this.downloadUrl = this.documentService.download();
   }
 
-  clear(){
-    this.addValidator = true;
-    this.modelAntecedente = ' '
+  clear(modelAntecedente){
+    this.modelAntecedente = ''
+   this.addValidator = true;
+   
+    this.agregarItem.controls.item.reset;
+    console.log(modelAntecedente);
+    this.modelAntecedente = this.agregarItem.controls.item.value;
+    /*
+    console.log(test);
+    if(this.agregarItem.controls.item.value.length > 3){
+      this.addValidator = true;
+    }*/
   }
 
   categoryChangue(category?) {
     this.addValidator = false;
     console.log(category);
-    this.modelAntecedente = 'ingrese información'
+    this.modelAntecedente = ''
     //console.log(category);
     this.category = category;
     //return category
