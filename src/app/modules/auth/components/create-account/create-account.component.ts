@@ -282,7 +282,7 @@ export class CreateAccountComponent implements OnInit {
             this.router.navigate(['confirm-account/' + data.id]);
           },
           (err) => {
-            this.errorMsg = err.error.message;
+            this.errorMsg = err.error.message || '';
             this.spinner.hide();
             console.log(err);
           }

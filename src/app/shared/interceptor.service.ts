@@ -13,10 +13,9 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log(req.url.toString());
-    let urlAccount = 'account'
-    let urlLogin = 'access'
-    if(req.url.indexOf(urlAccount) === -1 ) {
-
+    let urlAccount = 'account';
+    let urlLogin = 'access';
+    if (req.url.indexOf(urlAccount) === -1) {
       const token = JSON.parse(localStorage.getItem('token'));
       req = req.clone({
         setHeaders: {
@@ -53,6 +52,13 @@ export class InterceptorService implements HttpInterceptor {
             this.errorDialogService.openDialog(data);
             return throwError(data);
           }
+        })
+      );
+    } else {
+      return next.handle(req).pipe(
+        retry(1),
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
         })
       );
     }

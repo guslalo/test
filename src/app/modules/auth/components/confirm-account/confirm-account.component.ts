@@ -11,6 +11,7 @@ export class ConfirmAccountComponent implements OnInit {
   public user: any = {
     code: null,
   };
+  public errorMsg: string;
 
   constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
 
@@ -26,8 +27,9 @@ export class ConfirmAccountComponent implements OnInit {
           console.log(data);
           this.router.navigate(['/']);
         },
-        (error) => {
-          console.log(error);
+        (err) => {
+          this.errorMsg = err.error.message || err.error[0] || '';
+          console.log(err);
         }
       );
     });

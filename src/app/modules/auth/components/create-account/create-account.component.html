@@ -756,7 +756,7 @@
           </mat-vertical-stepper>
           <!--/stepper-->
 
-          <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg }}</p>
+          <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg.toUpperCase() }}</p>
 
           <div class="col">
             <a href="javascript:history.back()" class="float-right volver">
