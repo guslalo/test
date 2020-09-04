@@ -65,6 +65,7 @@ FullCalendarModule.registerPlugins([
     NgbRatingModule,
     NgbTimepickerModule,
     NgxDatatableModule,
+    NgxSpinnerModule,
   ],
   exports: [
     NgbTimepickerModule,
