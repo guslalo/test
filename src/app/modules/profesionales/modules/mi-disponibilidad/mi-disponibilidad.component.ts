@@ -6,6 +6,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 //import { FormsModule } from '@angular/forms';
 import { ValueTransformer } from '@angular/compiler/src/util';
+//import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
 import { AvailabilityService } from '../../services/availability.service';
@@ -20,23 +21,45 @@ import {
   NgbDateParserFormatter,
   NgbDatepickerConfig,
   NgbTimepicker,
+  NgbTimepickerConfig,
+  NgbTimeStruct, NgbTimeAdapter
 } from '@ng-bootstrap/ng-bootstrap';
-
+const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
 
 // carrusel
 @Component({
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
-  styleUrls: ['./mi-disponibilidad.component.scss']
+  styleUrls: ['./mi-disponibilidad.component.scss'],
+  providers: [{provide: NgbTimeAdapter, useClass: MiDisponibilidadComponent}]
 })
 
 export class MiDisponibilidadComponent implements OnInit {
+  fromModel(value: string| null): NgbTimeStruct | null {
+    if (!value) {
+      return null;
+    }
+    const split = value.split(':');
+    return {
+      hour: parseInt(split[0], 10),
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
+    };
+  }
+  time: '13:30:00';
+
+  toModel(time: NgbTimeStruct | null): string | null {
+    return time != null ? `${pad(time.hour)}:${pad(time.minute)}` : null;
+  }
+
+
   constructor(
     private elementRef: ElementRef,
     private availabilityService: AvailabilityService,
     private _formBuilder: FormBuilder,
     private calendario: NgbCalendar,
-    private config: NgbDatepickerConfig,
+    private config: NgbTimepickerConfig,
+    
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService
   ) {
@@ -45,6 +68,12 @@ export class MiDisponibilidadComponent implements OnInit {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
       day: current.getDate(),
+    };
+    
+    this.minDateTermino = {
+      year: this.minDate.year,
+      month: this.minDate.month,
+      day: this.minDate.day
     };
   }
 
@@ -75,7 +104,7 @@ export class MiDisponibilidadComponent implements OnInit {
   model5: NgbDateStruct;
 
   date: { year: string; month: string };
-  time = { hour: 13, minute: 30 };
+  //time = { hour: 13, minute: 30 };
 
   days: Array<any> = [
     { name: 'Lun', value: 'lunes' },
@@ -119,6 +148,7 @@ export class MiDisponibilidadComponent implements OnInit {
     { min: 'Neurología', value: 'Neurología' },
   ];
   minDate = undefined;
+  minDateTermino = undefined;
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -161,7 +191,7 @@ export class MiDisponibilidadComponent implements OnInit {
   initCalendar() {
     setTimeout(() => {
       this.calendar = true;
-    }, 250);
+    }, 260);
   }
 
   ngOnInit(): void {
@@ -197,6 +227,7 @@ export class MiDisponibilidadComponent implements OnInit {
       start: ['', [Validators.required]],
       end: ['', [Validators.required]],
     });
+    
     this.dailyRanges.push(dailyRangeFormGroup);
   }
 
@@ -254,6 +285,21 @@ export class MiDisponibilidadComponent implements OnInit {
   crearAvailability() {
     console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
+
+    /*
+    if(this.createAvailability.controls.dailyRanges.value[0].start.hour < 10 ){
+      const hours = `0${this.createAvailability.controls.dailyRanges.value[0].start.hour}`
+    }
+
+    if(this.createAvailability.controls.dailyRanges.value[0].start.minute < 10 ){
+      const minutes = `0${this.createAvailability.controls.dailyRanges.value[0].start.minute}`
+    }*/
+      /*
+    const hora = [{
+      start:`${this.createAvailability.controls.dailyRanges.value[0].start.hour}:${this.createAvailability.controls.dailyRanges.value[0].start.minute}`,
+      end:`${this.createAvailability.controls.dailyRanges.value[0].end.hour}:${this.createAvailability.controls.dailyRanges.value[0].end.minute}`
+    }]*/
+
     const formObject = {
       administrativeDetails: {
         objective: this.createAvailability.controls.objective.value,
@@ -266,8 +312,8 @@ export class MiDisponibilidadComponent implements OnInit {
         startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
-        dailyRanges: this.createAvailability.controls.dailyRanges.value,
-      },
+        dailyRanges: this.createAvailability.controls.dailyRanges.value
+      }
     };
     console.log(formObject);
 

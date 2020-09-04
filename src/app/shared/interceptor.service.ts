@@ -10,13 +10,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import {} from 'rxjs';
 import { catchError, retry, map } from 'rxjs/internal/operators';
-import { environment } from '../../../environments/environment';
-import { ErrorDialogService } from './services/error-dialog/error-dialog.service';
+import { environment } from '../../environments/environment';
+import { ErrorDialogService } from './error-dialog/error-dialog.service';
 
 // import {ErrorService} from '../my-services/error.service';
 
 @Injectable()
-export class AuthTokenInterceptor implements HttpInterceptor {
+export class InterceptorService implements HttpInterceptor {
   constructor(public errorDialogService: ErrorDialogService) {}
   /*
   AuthHeader(request) {
@@ -43,7 +43,6 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
     const token = JSON.parse(localStorage.getItem('token'));
     req = req.clone({
       setHeaders: {
@@ -54,11 +53,16 @@ export class AuthTokenInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         let data = {};
-        console.log(error);
+
+        // BREAK INTERCEPTOR FOR LOGIN | REGISTRATION
+        if (!req.url.includes('^.*(/api/v1/access/|/api/v1/account/).*$')) {
+          // Do nothing
+          return next.handle(req);
+        }
 
         if (error.status === 401) {
           document.location.href = '/';
-        }else {
+        } else {
           data = {
             status: error.status,
             reason: error && error.error && error.error.message ? error.error.message : '',

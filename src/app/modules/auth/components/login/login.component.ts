@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   public user: any = {};
   public users: any = [];
   public currentUser: any = {};
+  public errorMsg: string;
 
   constructor(
     private translocoService: TranslocoService,
@@ -96,9 +97,10 @@ export class LoginComponent implements OnInit {
         }
         this.spinner.hide();
       },
-      (error) => {
+      (err) => {
+        this.errorMsg = err.error.message;
         this.spinner.hide();
-        console.log(error);
+        console.log(err);
       }
     );
   }

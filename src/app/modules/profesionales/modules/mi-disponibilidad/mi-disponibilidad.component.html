@@ -390,7 +390,7 @@
                     name="endDate"
                     formControlName="endDate"
                     [(ngModel)]="model"
-                    [minDate]="minDate"
+                    [minDate]="minDateTermino"
                     ngbDatepicker
                     #e="ngbDatepicker"
                     (click)="e.toggle()"
@@ -415,6 +415,7 @@
             <div class="row mt-2 mb-3">
               <div class="col-12">
                 <p>Disponibilidad Días</p>
+               
               </div>
 
               <div class="col">
@@ -430,6 +431,7 @@
                     <label class="custom-control-label" for="{{ data.name }}">
                       {{ data.name }}
                     </label>
+                   
                   </div>
                 </ng-container>
               </div>
@@ -441,6 +443,17 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <ngb-timepicker 
+                    [attr.id]="'start' + i"
+                    formControlName="start"
+                    
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                    }" 
+                   >
+                  </ngb-timepicker>
+                    <!--    class="form-control" [ngModelOptions]="{standalone: true}"
                     <input
                       type="time"
                       [attr.id]="'start' + i"
@@ -450,13 +463,24 @@
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
-                    />
+                    />-->
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
                       Fecha inicio es necesaria
                     </div>
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <ngb-timepicker 
+                      [attr.id]="'end' + i"
+                      formControlName="end"
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }" 
+                    >
+                    </ngb-timepicker>
+
+                    <!-- [ngModelOptions]="{standalone: true}" class="form-control"
                     <input
                       type="time"
                       [attr.id]="'end' + i"
@@ -466,12 +490,12 @@
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
-                    />
+                    />-->
                     
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto ">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
-                    <div class="btn btn-light btn-sm rounded-pill mt-2" (click)="removerDailyRanges(i)">
+                    <div class="btn btn-light btn-sm rounded-pill mt-5" (click)="removerDailyRanges(i)">
                       Remover
                     </div>
                   </div>
@@ -574,27 +598,23 @@
             <div class="row">
               <div class="form-group col">
                 <label for="startBlock">Horario inicial</label>
-                <input
-                  type="time"
-                  class="form-control"
-                  id="startBlock"
-                  name="startBlock"
-                  min="07:00"
-                  max="20:00"
-                  formControlName="startBlock"
-                />
+                <ngb-timepicker 
+                id="startBlock"
+                formControlName="startBlock"
+                >
+               </ngb-timepicker>
+                
+            
+                
               </div>
               <div class="form-group col">
                 <label for="endBlock">Horario final</label>
-                <input
-                  type="time"
-                  class="form-control"
-                  id="endBlock"
-                  name="endBlock"
-                  min="07:00"
-                  max="20:00"
-                  formControlName="endBlock"
-                />
+                <ngb-timepicker 
+                id="endBlock"
+                formControlName="endBlock"
+                >
+               </ngb-timepicker>
+                
               </div>
             </div>
           </form>
@@ -763,26 +783,28 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
-                    <input
-                      type="time"
-                      [attr.id]="'start' + i"
-                      class="form-control"
-                      formControlName="start"
+                    <ngb-timepicker 
+                    [attr.id]="'start' + i"
+                    formControlName="start"
                     
-                    />
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                    }" 
+                   >
+                  </ngb-timepicker>
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
-                    <input
-                      type="time"
-                      [attr.id]="'end' + i"
-                      class="form-control"
-                      formControlName="end"
-                      [ngClass]="{
-                        'is-invalid':
-                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
+                    <ngb-timepicker 
+                    [attr.id]="'end' + i"
+                    formControlName="end"
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                    }" 
+                  >
+                  </ngb-timepicker>
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto ">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>

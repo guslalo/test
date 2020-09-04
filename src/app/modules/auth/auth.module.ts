@@ -12,8 +12,6 @@ import { SharedModule } from './../../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-
-
 // components
 import { LoginComponent } from './components/login/login.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
@@ -28,8 +26,6 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
 
 @NgModule({
   declarations: [
@@ -51,11 +47,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbDatepickerModule,
     MatStepperModule,
     MatDialogModule,
-    HttpClientModule
-    
   ],
-  exports: [
-  ],
+  exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {}
