@@ -122,7 +122,7 @@ export class CrearUsuarioComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: ['male', Validators.required],
-      birthdate: [null, null],
+      birthdate: [null, Validators.required],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: [null, Validators.required],
@@ -475,12 +475,21 @@ export class CrearUsuarioComponent implements OnInit {
         alert('Complete el formulario con todos los datos necesarios');
       }
     } else {
-      this.adminService.createUser(this.userType, this.userObject).subscribe(() => {
-        // console.log(response);
-        this.spinner.hide();
-        (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
-        this.location.back();
-      });
+      this.adminService.createUser(this.userType, this.userObject).subscribe(
+        (res) => {
+          this.spinner.hide();
+          console.log(res);
+        },
+        (err) => {
+          this.spinner.hide();
+          console.log(err);
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+        },
+        () => {
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+          this.location.back();
+        }
+      );
     }
   }
 
