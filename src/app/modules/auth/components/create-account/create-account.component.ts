@@ -104,7 +104,7 @@ export class CreateAccountComponent implements OnInit {
       birthdate: ['', Validators.required],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
-      nacionality: ['', Validators.required],
+      nacionality: [null, Validators.required],
     });
     this.addressData = this._formBuilder.group({
       cep: ['', Validators.required],
