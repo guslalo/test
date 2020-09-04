@@ -43,39 +43,34 @@ export class InterceptorService implements HttpInterceptor {
   }*/
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = JSON.parse(localStorage.getItem('token'));
-    req = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return next.handle(req).pipe(
-      retry(1),
-      catchError((error: HttpErrorResponse) => {
-        let data = {};
+    console.log(req.url.toString());
+    let urlAccount = 'account'
+    let urlLogin = 'access'
+    if(req.url.indexOf(urlAccount) === -1 ) {
 
-        // BREAK INTERCEPTOR FOR LOGIN | REGISTRATION
-        if (!req.url.includes('^.*(/api/v1/access/|/api/v1/account/).*$')) {
-          // Do nothing
-          return next.handle(req);
-        }
+      const token = JSON.parse(localStorage.getItem('token'));
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return next.handle(req).pipe(
+        retry(1),
+        catchError((error: HttpErrorResponse) => {
+          let data = {};
 
-        if (error.status === 401) {
-          document.location.href = '/';
-        } else {
-          data = {
-            status: error.status,
-            reason: error && error.error && error.error.message ? error.error.message : '',
-          };
-          this.errorDialogService.openDialog(data);
-          return throwError(data);
-        }
-      })
-    );
-    /*
-    if(req.url.indexOf(environment.baseUrl) === -1 ) {
-    }   else {
-      console.log('la peticion es externa')
-    }*/
+          if (error.status === 401) {
+            document.location.href = '/';
+          } else {
+            data = {
+              status: error.status,
+              reason: error && error.error && error.error.message ? error.error.message : '',
+            };
+            this.errorDialogService.openDialog(data);
+            return throwError(data);
+          }
+        })
+      );
+    }
   }
 }

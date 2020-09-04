@@ -286,19 +286,6 @@ export class MiDisponibilidadComponent implements OnInit {
     console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
-    /*
-    if(this.createAvailability.controls.dailyRanges.value[0].start.hour < 10 ){
-      const hours = `0${this.createAvailability.controls.dailyRanges.value[0].start.hour}`
-    }
-
-    if(this.createAvailability.controls.dailyRanges.value[0].start.minute < 10 ){
-      const minutes = `0${this.createAvailability.controls.dailyRanges.value[0].start.minute}`
-    }*/
-      /*
-    const hora = [{
-      start:`${this.createAvailability.controls.dailyRanges.value[0].start.hour}:${this.createAvailability.controls.dailyRanges.value[0].start.minute}`,
-      end:`${this.createAvailability.controls.dailyRanges.value[0].end.hour}:${this.createAvailability.controls.dailyRanges.value[0].end.minute}`
-    }]*/
 
     const formObject = {
       administrativeDetails: {

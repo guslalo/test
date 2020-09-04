@@ -98,8 +98,8 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
       },
       (err) => {
-        this.errorMsg = err.error.message;
         this.spinner.hide();
+        this.errorMsg = err.error.message;
         console.log(err);
       }
     );
