@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-const states = ['test', 'test3', 'test4'];
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { MedicalRecordService } from 'src/app/services/medicalRecord.service';
+import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -10,18 +12,69 @@ const states = ['test', 'test3', 'test4'];
   styleUrls: ['./ficha-paciente.component.scss'],
 })
 export class FichaPacienteComponent implements OnInit {
-  public model: any;
-  model2: NgbDateStruct;
-  constructor() {}
-  tomorrow = new Date(2020, 9, 20, 14, 34);
-  ngOnInit(): void {}
+  userId = this.routerAct.snapshot.queryParamMap.get('userId');
+  patientRecord: any = {};
+  identification: any = {};
+  ufMap: any = [];
+  cityMap: any = [];
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
-      )
-    )
+  // EXTRAS
+  moment: any = moment;
+
+  constructor(
+    private routerAct: ActivatedRoute,
+    private medicalRecordService: MedicalRecordService,
+    private userService: UsersService,
+    private spinner: NgxSpinnerService
+  ) {}
+  tomorrow = new Date(2020, 9, 20, 14, 34);
+
+  ngOnInit(): void {
+    this.getMedicalRecord(this.userId);
+  }
+
+  getMedicalRecord(userId) {
+    this.spinner.show();
+    this.medicalRecordService.getByUserId(userId).subscribe(
+      (data) => {
+        console.log(data);
+        this.patientRecord = data;
+
+        this.userService.getStates().subscribe((data) => {
+          // console.log(data);
+          this.ufMap = data.payload.reduce((obj, item) => {
+            obj[item._id] = item;
+            return obj;
+          }, {});
+        });
+
+        this.userService.getCities().subscribe((data) => {
+          // console.log(data);
+          this.cityMap = data.payload.reduce((obj, item) => {
+            obj[item._id] = item;
+            return obj;
+          }, {});
+        });
+
+        this.getIdentification(data.patientData.identificationData);
+        // console.log(this.patientRecord.patientData.identificationData);
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+      },
+      () => {
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getIdentification(data) {
+    for (const item of Object.keys(data)) {
+      if (data[item]) {
+        this.identification.type = item;
+        this.identification.value = data[item];
+      }
+    }
+  }
 }

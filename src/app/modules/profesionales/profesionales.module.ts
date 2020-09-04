@@ -7,7 +7,12 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 // import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbTypeaheadModule,
+  NgbPaginationModule,
+  NgbTimepickerModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 //
 import { OwlModule } from 'ngx-owl-carousel';
@@ -25,6 +30,8 @@ import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -56,13 +63,15 @@ FullCalendarModule.registerPlugins([
     VerticalTimelineModule,
     NgbPaginationModule,
     NgbRatingModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
   ],
   exports: [
     NgbTimepickerModule,
-    FichaPacienteComponent, 
+    FichaPacienteComponent,
     InicioPComponent,
-     MiDisponibilidadComponent
+    MiDisponibilidadComponent,
+    NgxDatatableModule,
+    NgxSpinnerModule,
   ],
 })
 export class ProfesionalesModule {}
