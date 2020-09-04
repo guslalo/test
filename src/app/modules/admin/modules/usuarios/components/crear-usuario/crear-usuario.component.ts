@@ -125,7 +125,7 @@ export class CrearUsuarioComponent implements OnInit {
       birthdate: [null, null],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
-      nacionality: ['', Validators.required],
+      nacionality: [null, Validators.required],
       originCountry: [null, null],
       inmigrationDate: [null, null],
       breed: [null, Validators.required],

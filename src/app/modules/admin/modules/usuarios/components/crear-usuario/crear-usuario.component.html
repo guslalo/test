@@ -347,15 +347,19 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nacionality">Nacionalidad *</label>
-                    <input
-                      type="text"
+                    <select
                       class="form-control"
                       name="nacionality"
                       formControlName="nacionality"
                       [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
                       }"
-                    />
+                    >
+                      <option [ngValue]="null">- Seleccionar -</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="originCountry">Pais de Origen</label>
