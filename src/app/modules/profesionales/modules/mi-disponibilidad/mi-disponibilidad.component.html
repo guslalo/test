@@ -443,7 +443,7 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
-                    <ngb-timepicker 
+                    <!--<ngb-timepicker 
                     [attr.id]="'start' + i"
                     formControlName="start"
                     
@@ -452,8 +452,9 @@
                         !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                     }" 
                    >
-                  </ngb-timepicker>
-                    <!--    class="form-control" [ngModelOptions]="{standalone: true}"
+                  </ngb-timepicker>-->
+
+                    <!--    class="form-control" [ngModelOptions]="{standalone: true}"-->
                     <input
                       type="time"
                       [attr.id]="'start' + i"
@@ -463,14 +464,14 @@
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
-                    />-->
+                    />
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
                       Fecha inicio es necesaria
                     </div>
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
-                    <ngb-timepicker 
+                    <!--<ngb-timepicker 
                       [attr.id]="'end' + i"
                       formControlName="end"
                       [ngClass]="{
@@ -478,9 +479,9 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }" 
                     >
-                    </ngb-timepicker>
+                    </ngb-timepicker>-->
 
-                    <!-- [ngModelOptions]="{standalone: true}" class="form-control"
+                    <!-- [ngModelOptions]="{standalone: true}" class="form-control"-->
                     <input
                       type="time"
                       [attr.id]="'end' + i"
@@ -490,12 +491,12 @@
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
-                    />-->
+                    />
                     
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto ">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
-                    <div class="btn btn-light btn-sm rounded-pill mt-5" (click)="removerDailyRanges(i)">
+                    <div class="btn btn-light btn-sm rounded-pill" (click)="removerDailyRanges(i)">
                       Remover
                     </div>
                   </div>
@@ -783,6 +784,18 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <input
+                      type="time"
+                      [attr.id]="'start' + i"
+                      class="form-control"
+                      formControlName="start"
+                      value=""
+                      [ngClass]="{
+                        'is-invalid':
+                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                      }"
+                    />
+                    <!--
                     <ngb-timepicker 
                     [attr.id]="'start' + i"
                     formControlName="start"
@@ -792,10 +805,22 @@
                         !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                     }" 
                    >
-                  </ngb-timepicker>
+                  </ngb-timepicker>-->
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <input
+                    type="time"
+                    [attr.id]="'end' + i"
+                    class="form-control"
+                    formControlName="end"
+                    value=""
+                    [ngClass]="{
+                      'is-invalid':
+                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
+                    }"
+                  />
+                    <!--
                     <ngb-timepicker 
                     [attr.id]="'end' + i"
                     formControlName="end"
@@ -804,11 +829,11 @@
                         !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                     }" 
                   >
-                  </ngb-timepicker>
+                  </ngb-timepicker>-->
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto ">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
-                    <div class="btn btn-light btn-sm rounded-pill mt-2" (click)="removerDailyRanges(i)">
+                    <div class="btn btn-light btn-sm rounded-pill" (click)="removerDailyRanges(i)">
                       Remover
                     </div>
                   </div>
