@@ -12,6 +12,7 @@ import {
 import { registerUser } from '../../../../models/registerUser';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CustomDateAdapter } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-create-account',
@@ -44,6 +45,8 @@ export class CreateAccountComponent implements OnInit {
   public password: any;
   public user: any = {};
   public errorMsg: string;
+
+  dateAdapter = new CustomDateAdapter();
 
   isLinear = false;
   isForeign: boolean = false;
@@ -248,7 +251,7 @@ export class CreateAccountComponent implements OnInit {
         phoneNumber: parseInt(this.form[1].phoneNumber.value),
         email: this.form[1].email.value,
         breed: this.form[1].breed.value,
-        birthdate: this.form[2].birthdate.value.toString(),
+        birthdate: this.dateAdapter.toModel(this.form[2].birthdate.value),
         ufBirth: this.form[2].ufBirth.value || '',
         municipalityBirth: this.form[2].municipalityBirth.value || '',
         nacionality: this.form[2].nacionality.value,
