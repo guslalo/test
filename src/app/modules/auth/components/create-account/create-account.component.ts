@@ -104,7 +104,7 @@ export class CreateAccountComponent implements OnInit {
       }
     );
     this.birthData = this._formBuilder.group({
-      birthdate: ['', Validators.required],
+      birthdate: [null, Validators.required],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: [null, Validators.required],
