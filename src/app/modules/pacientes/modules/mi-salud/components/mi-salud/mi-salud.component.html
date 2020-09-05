@@ -1,566 +1,535 @@
-
-  <div class="row">
-    <div class="col">
-      <h2>Mi salud</h2>
-      <p>Esta información será vista por los profesionales.</p>
-    </div>
+<div class="row">
+  <div class="col">
+    <h2>Mi salud</h2>
+    <p>Esta información será vista por los profesionales.</p>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col-12">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link active"
-            id="home-tab"
-            data-toggle="tab"
-            href="#home"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-          >
-            Mis antecedentes
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#profile"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >
-            Exámenes
-          </a>
-        </li>
-        <li class="nav-item" role="presentation" >
-          <a
-            class="nav-link disabled"
-            id="contact-tab"
-            data-toggle="tab"
-            href="#contact"
-            role="tab"
-            aria-controls="contact"
-            aria-selected="false"
-            disabled
-            tabindex="-1" aria-disabled="true"
-          >
-            Prescripciones
-          </a>
-        </li>
-      </ul>
-      <div class="tab-content pt-4" id="myTabContent">
-        <!--tab-->
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row">
-            <div class="col-4">
-              <div class="card bg-light pb-3">
-                <div class="card-header" style="display: none;">
-                  Mi Salud
-                  <p>
-                    Completa tus datos médicos para una mejor atención
-                  </p>
-                </div>
-                <div class="card-body text-center">
-                  <h5 class="card-title">Mi Salud</h5>
-                  <p class="card-text text-center">Completa tus datos médicos para una mejor atención</p>
-                  <img src="assets/img/corazon-azul.svg">
-                  <div class="boxCompletData">
-                    <img src="assets/img/porcentaje-temp.svg">
-                  </div>
+<div class="row">
+  <div class="col-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="home-tab"
+          data-toggle="tab"
+          href="#home"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+        >
+          Mis antecedentes
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="tab"
+          href="#profile"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+        >
+          Exámenes
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link disabled"
+          id="contact-tab"
+          data-toggle="tab"
+          href="#contact"
+          role="tab"
+          aria-controls="contact"
+          aria-selected="false"
+          disabled
+          tabindex="-1"
+          aria-disabled="true"
+        >
+          Prescripciones
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content pt-4" id="myTabContent">
+      <!--tab-->
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+          <div class="col-4">
+            <div class="card bg-light pb-3">
+              <div class="card-header" style="display: none;">
+                Mi Salud
+                <p>
+                  Completa tus datos médicos para una mejor atención
+                </p>
+              </div>
+              <div class="card-body text-center">
+                <h5 class="card-title">Mi Salud</h5>
+                <p class="card-text text-center">Completa tus datos médicos para una mejor atención</p>
+                <img src="assets/img/corazon-azul.svg" />
+                <div class="boxCompletData">
+                  <img src="assets/img/porcentaje-temp.svg" />
                 </div>
               </div>
             </div>
-            <div class="col-8">
-                <!-- colappsed-->
-                <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#sickness"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  
+          </div>
+          <div class="col-8">
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#sickness"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Enfermedades
+              </a>
+              <div class="add float-right" (click)="categoryChangue('sickness')" data-toggle="modal" data-target="#add">
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
 
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Enfermedades 
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    (click)="categoryChangue('sickness')"
-                    data-toggle="modal"
-                    data-target="#add">
-                      Agregar
-                      <img src="assets/img/+.svg">
+              <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                <ul class="antecedentes">
+                  <li class="pl-5">
+                    {{ item.value }}
+                    <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                      <!--(click)="delete(item, $event)" -->
+                      <img src="assets/img/delete.svg" />
                     </div>
-                 
-                  <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
-                    <ul class="antecedentes">
-                      <li class="pl-5">{{item.value}}
-                        <div class="delete" 
-                         data-toggle="modal"
-                         data-target="#eliminar" (click)="preDelete(item, $event)"><!--(click)="delete(item, $event)" -->
-                          <img src="assets/img/delete.svg">
-                        </div>
-                      </li>
-                      
-                      <li style="display: none;">A medicamentos tipo C</li>
-                    </ul>
-                  
-                  </div>
-                </div>
-                <!--/colappsed-->
+                  </li>
 
-                <!-- colappsed-->
-                <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#familiarHistory"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Antecedentes Familiares 
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    data-toggle="modal"
-                    (click)="categoryChangue('familiarHistory')"
-                    data-target="#add">
-                      Agregar
-                      <img src="assets/img/+.svg">
-                    </div>
-                    <ng-container *ngIf="antecedentesGeneral">
-                      <div  class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
-                        <ul class="antecedentes">
-                          <li class="pl-5">{{item.value}}
-                            <div class="delete"  data-toggle="modal"
-                            data-target="#eliminar" (click)="preDelete(item, $event)">
-                              <img src="assets/img/delete.svg">
-                            </div>
-                          </li>
-                          <li style="display: none;">A medicamentos tipo C</li>
-                        </ul>
-                      
-                      </div>
-                    </ng-container>
-                </div>
-                <!--/colappsed-->
-
-                <!-- colappsed-->
-                <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#healthHabits"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Hábitos de Salud
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    data-toggle="modal"
-                    (click)="categoryChangue('healthHabits')"
-                    data-target="#add">
-                      Agregar
-                      <img src="assets/img/+.svg">
-                    </div>
-                    <ng-container *ngIf="antecedentesGeneral">
-                      <div  class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
-                        <ul class="antecedentes">
-                          <li class="pl-5" id="{{item.id}}">
-                            {{item.value}}
-                            <div class="delete"  data-toggle="modal"
-                            data-target="#eliminar" (click)="preDelete(item, $event)">
-                              <img src="assets/img/delete.svg">
-                            </div>
-                          </li>
-                          <li style="display: none;">A medicamentos tipo C</li>
-                        </ul>
-                      
-                      </div>
-                    </ng-container>
-                </div>
-                <!--/colappsed-->
-
-                <!-- colappsed-->
-                <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#medicines"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Medicamentos
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    data-toggle="modal"
-                    (click)="categoryChangue('medicines')"
-                    data-target="#add">
-                      Agregar
-                      <img src="assets/img/+.svg">
-                    </div>
-                    <ng-container *ngIf="antecedentesGeneral">
-                      <div  class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
-                        <ul class="antecedentes">
-                          <li class="pl-5" id="{{item.id}}">
-                            {{item.value}}
-                            <div class="delete"  data-toggle="modal"
-                            data-target="#eliminar" (click)="preDelete(item, $event)">
-                              <img src="assets/img/delete.svg">
-                            </div>
-                          </li>
-                          <li style="display: none;">A medicamentos tipo C</li>
-                        </ul>
-                      
-                      </div>
-                    </ng-container>
-                </div>
-                <!--/colappsed-->
-
-                 <!-- colappsed-->
-                 <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#occupational"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Ocupacionales
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    data-toggle="modal"
-                    (click)="categoryChangue('occupational')"
-                    data-target="#add">
-                      Agregar
-                      <img src="assets/img/+.svg">
-                    </div>
-                    <ng-container *ngIf="antecedentesGeneral">
-                      <div  class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
-                        <ul class="antecedentes">
-                          <li class="pl-5" id="{{item.id}}">
-                            {{item.value}}
-                            <div class="delete"  data-toggle="modal"
-                            data-target="#eliminar"  (click)="preDelete(item, $event)">
-                              <img src="assets/img/delete.svg">
-                            </div>
-                          </li>
-                          <li style="display: none;">A medicamentos tipo C</li>
-                        </ul>
-                      
-                      </div>
-                    </ng-container>
-                </div>
-                <!--/colappsed-->
-
-                <!-- colappsed-->
-                <div class="collapseCustom">
-                  <a
-                    class="p-4"
-                    data-toggle="collapse"
-                    href="#others"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    <svg
-                      class="mr-2"
-                      width="15"
-                      height="9"
-                      viewBox="0 0 15 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                        fill="#7D7D7D"
-                      />
-                    </svg>
-                    Otros
-                  </a>
-                    <div 
-                    class="add float-right" 
-                    data-toggle="modal" data-target="#add"
-                    (click)="categoryChangue('others')"
-                    >
-                      Agregar
-                      <img src="assets/img/+.svg">
-                    </div>
-                    <ng-container *ngIf="antecedentesGeneral">
-                      <div  class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
-                        <ul class="antecedentes">
-                          <li class="pl-5" id="{{item.id}}">
-                            {{item.value}}
-                            <div class="delete"  data-toggle="modal"
-                            data-target="#eliminar" (click)="preDelete(item, $event)">
-                              <img src="assets/img/delete.svg">
-                            </div>
-                          </li>
-                          <li style="display: none;">A medicamentos tipo C</li>
-                        </ul>
-                      
-                      </div>
-                    </ng-container>
-                </div>
-                <!--/colappsed-->
-
-           
-              <!--/card-->
+                  <li style="display: none;">A medicamentos tipo C</li>
+                </ul>
+              </div>
             </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#familiarHistory"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Antecedentes Familiares
+              </a>
+              <div
+                class="add float-right"
+                data-toggle="modal"
+                (click)="categoryChangue('familiarHistory')"
+                data-target="#add"
+              >
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
+              <ng-container *ngIf="antecedentesGeneral">
+                <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
+                  <ul class="antecedentes">
+                    <li class="pl-5">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <img src="assets/img/delete.svg" />
+                      </div>
+                    </li>
+                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#healthHabits"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Hábitos de Salud
+              </a>
+              <div
+                class="add float-right"
+                data-toggle="modal"
+                (click)="categoryChangue('healthHabits')"
+                data-target="#add"
+              >
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
+              <ng-container *ngIf="antecedentesGeneral">
+                <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                  <ul class="antecedentes">
+                    <li class="pl-5" id="{{ item.id }}">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <img src="assets/img/delete.svg" />
+                      </div>
+                    </li>
+                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#medicines"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Medicamentos
+              </a>
+              <div
+                class="add float-right"
+                data-toggle="modal"
+                (click)="categoryChangue('medicines')"
+                data-target="#add"
+              >
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
+              <ng-container *ngIf="antecedentesGeneral">
+                <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                  <ul class="antecedentes">
+                    <li class="pl-5" id="{{ item.id }}">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <img src="assets/img/delete.svg" />
+                      </div>
+                    </li>
+                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#occupational"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Ocupacionales
+              </a>
+              <div
+                class="add float-right"
+                data-toggle="modal"
+                (click)="categoryChangue('occupational')"
+                data-target="#add"
+              >
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
+              <ng-container *ngIf="antecedentesGeneral">
+                <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                  <ul class="antecedentes">
+                    <li class="pl-5" id="{{ item.id }}">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <img src="assets/img/delete.svg" />
+                      </div>
+                    </li>
+                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <a
+                class="p-4"
+                data-toggle="collapse"
+                href="#others"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <svg
+                  class="mr-2"
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                    fill="#7D7D7D"
+                  />
+                </svg>
+                Otros
+              </a>
+              <div class="add float-right" data-toggle="modal" data-target="#add" (click)="categoryChangue('others')">
+                Agregar
+                <img src="assets/img/+.svg" />
+              </div>
+              <ng-container *ngIf="antecedentesGeneral">
+                <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                  <ul class="antecedentes">
+                    <li class="pl-5" id="{{ item.id }}">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <img src="assets/img/delete.svg" />
+                      </div>
+                    </li>
+                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!--/card-->
           </div>
         </div>
-        <!--/tab-->
+      </div>
+      <!--/tab-->
 
-        <!--tab-->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row mb-3">
-            <div class="col-12 col-md-6">Exámenes y Documentos</div>
-            <div class="col-12 col-md-6">
-              <button type="button" 
+      <!--tab-->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">Exámenes y Documentos</div>
+          <div class="col-12 col-md-6">
+            <button
+              type="button"
               class="btn btn-outline-primary rounded-pill float-right"
               data-toggle="modal"
-              data-target="#addExamen">
-                Agregar documento
-              </button>
-            </div>
+              data-target="#addExamen"
+            >
+              Agregar documento
+            </button>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table mt-3">
-                  <thead>
-                    <tr>
-                      <th scope="col">Nombre documento</th>
-                      <th scope="col">Tipo</th>
-                      <th scope="col">Fecha de subida</th>
-                      <th scope="col">Realizado por</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                 
-                      <tr *ngFor="let item of exams">
-                        <th scope="row">{{item.fileName}}</th>
-                        <td>{{item.type}}</td>
-                        <td>{{item.uploadDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{item.madeBy}}</td>
-                        <td> 
-                          <a 
-                           href="{{downloadUrl}}{{item.path}}" download
-                          >
-                          <button 
-                          type="button" class="btn btn-outline-primary rounded-pill btn-sm">                        
-                            Descargar
-                          </button>
-                          </a>
-                        </td>
-                      </tr>
-                  
-                  </tbody>
-                </table>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre Documento</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Fecha de subida</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of exams">
+                    <th scope="row">{{ item.name }}</th>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.uploadDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                      <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
+                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
+                          Descargar
+                        </button>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <!--/tab-->
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-          <div class="row mb-3">
-            <div class="col-12 col-md-6">Prescipciones</div>
-            <div class="col-12 col-md-6">
-            
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="tableBox rounded p-4 bg-white">
-                <table class="table mt-3">
-                  <thead >
-                    <tr>
-                      <th scope="col">Nombre documento</th>
-                      <th scope="col">Tipo</th>
-                      <th scope="col">Fecha de subida</th>
-                      <th scope="col">Realizado por</th>
-                      <th scope="col">Acción</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-file-earmark-ruled"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
-                          <path
-                            d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
-                          />
-                          <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
-                        </svg>
-                        Licencia medica
-                      </th>
-                      <td>Exámen</td>
-                      <td>23/04/2020</td>
-                      <td>DR. Alfonso Torres</td>
-                      <td><button type="button" class="btn btn-light">Ver documento</button></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-file-earmark-ruled"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
-                          <path
-                            d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
-                          />
-                          <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" /></svg>
-                          Licencia medica
-                      </th>
-                      <td>Exámen</td>
-                      <td>23/04/2020</td>
-                      <td>DR. Alfonso Torres</td>
-                      <td><button type="button" class="btn btn-light">Ver documento</button></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-file-earmark-ruled"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
-                          <path
-                            d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
-                          />
-                          <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
-                        </svg>
-                        Licencia medica
-                      </th>
-                      <td>Exámen</td>
-                      <td>23/04/2020</td>
-                      <td>DR. Alfonso Torres</td>
-                      <td><button type="button" class="btn btn-light">Ver documento</button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      </div>
+      <!--/tab-->
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">Prescipciones</div>
+          <div class="col-12 col-md-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre documento</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Fecha de subida</th>
+                    <th scope="col">Realizado por</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-file-earmark-ruled"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
+                        <path
+                          d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                        />
+                        <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
+                      </svg>
+                      Licencia medica
+                    </th>
+                    <td>Exámen</td>
+                    <td>23/04/2020</td>
+                    <td>DR. Alfonso Torres</td>
+                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-file-earmark-ruled"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
+                        <path
+                          d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                        />
+                        <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
+                      </svg>
+                      Licencia medica
+                    </th>
+                    <td>Exámen</td>
+                    <td>23/04/2020</td>
+                    <td>DR. Alfonso Torres</td>
+                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-file-earmark-ruled"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path fill-rule="evenodd" d="M5 9H3V8h10v1H6v2h7v1H6v2H5v-2H3v-1h2V9z" />
+                        <path
+                          d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"
+                        />
+                        <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
+                      </svg>
+                      Licencia medica
+                    </th>
+                    <td>Exámen</td>
+                    <td>23/04/2020</td>
+                    <td>DR. Alfonso Torres</td>
+                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-
-  <!-- Modal antecendetes-->
-<div
-  class="modal fade"
-  id="add"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  >
+<!-- Modal antecendetes-->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
@@ -581,21 +550,25 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="agregarItem" novalidate=""> <!--[formGroup]="availabilityBlocked" -->
+        <form [formGroup]="agregarItem" novalidate="">
+          <!--[formGroup]="availabilityBlocked" -->
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">Agregar item</label>   
-              <input type="text" 
-              value=""
-              placeholder=""
-              class="form-control" name="modelAntecedente" 
-              id="item"
-              [(ngModel)]="modelAntecedente"
-              formControlName="item"
-              (click)="clear(modelAntecedente)"
+              <label for="dateBlock">Agregar item</label>
+              <input
+                type="text"
+                value=""
+                placeholder=""
+                class="form-control"
+                name="modelAntecedente"
+                id="item"
+                [(ngModel)]="modelAntecedente"
+                formControlName="item"
+                (click)="clear(modelAntecedente)"
               />
             </div>
-          </div><!--      [(ngModel)]="modelAntecedente"
+          </div>
+          <!--      [(ngModel)]="modelAntecedente"
             [ngModelOptions]="{standalone: true}"-->
         </form>
       </div>
@@ -623,39 +596,36 @@
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  >
+>
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">¿Deseas eliminar este elemento?</h5>
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+          ¿Deseas eliminar este elemento?
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form novalidate=""> <!--[formGroup]="availabilityBlocked" -->
+        <form novalidate="">
+          <!--[formGroup]="availabilityBlocked" -->
           <div class="row">
             <div class="form-group col">
-              <h5 class="text-center w-100">{{elemntoValue}}</h5>   
+              <h5 class="text-center w-100">{{ elemntoValue }}</h5>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-danger rounded-pill"
-          data-dismiss="modal"
-          (click)="delete()"
-        >
-        Eliminar
+        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="delete()">
+          Eliminar
         </button>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- Modal examen-->
 <div
@@ -665,7 +635,7 @@
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  >
+>
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
@@ -675,34 +645,29 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="addExamen" novalidate=""> <!-- -->
+        <form [formGroup]="addExamen" novalidate="">
+          <!-- -->
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">Tipo documento</label>   
-              <input type="text"
-              class="form-control" name="documentType" id="documentType"
-              formControlName="documentType"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="dateBlock">Realizado por</label>   
-              <input type="text"
-              class="form-control" name="madeBy" id="madeBy" 
-              formControlName="madeBy"
-              />
+              <label for="type">Tipo</label>
+              <select class="form-control" name="type" id="type" formControlName="type">
+                <option [value]="null">- Seleccionar -</option>
+                <option value="exam">Examen</option>
+                <option value="document">Documento</option>
+              </select>
             </div>
             <div class="form-group col">
-              <label for="dateBlock">Cargar documento</label>   
+              <label for="dateBlock">Cargar documento</label>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" 
-                (change)="openFile($event)"
-                id="customFile"
-                style="overflow: hidden;"
-                formControlName="file"
-                >
-                <label class="custom-file-label" for="customFile">{{textInputFile}}</label>
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  (change)="openFile($event)"
+                  id="customFile"
+                  style="overflow: hidden;"
+                  formControlName="file"
+                />
+                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
               </div>
             </div>
           </div>
@@ -710,12 +675,7 @@
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          (click)="addExamenPost()"
-        >
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addExamenPost()">
           Agregar
         </button>
       </div>

@@ -26,10 +26,11 @@ export class MedicalRecordService {
   //putAddAntecedent
   putAddExamen(object): Observable<any> {
     return this.http.put<any>(environment.baseUrl + this.addExamen, {
-      fileName: object.fileName,
-      documentType: object.documentType,
-      madeBy: object.madeBy,
-      file: object.file,
+      documentDetails: {
+        name: object.name,
+        type: object.type,
+        data: object.file,
+      },
     });
   }
 

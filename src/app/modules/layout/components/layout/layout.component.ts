@@ -82,7 +82,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.status = !this.status;
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     clearInterval(this.intervalCurrentTime);
   }
 }
