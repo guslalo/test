@@ -6,50 +6,43 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
 export class MedicalRecordService {
-  
   private medicalRecord = 'v1/medical-record/';
-  private antecedent =  'v1/medical-record/antecedent/';
+  private antecedent = 'v1/medical-record/antecedent/';
   private addExamen = 'v1/medical-record/add-exam';
-  
-  
 
   constructor(private http: HttpClient) {}
 
   //getByUserId
-  getByUserId(id?): Observable<any> {
-    if(id) {
-      let params = new HttpParams();
-      params = params.append('userId', id);
-      return this.http.get<any>(environment.baseUrl + this.medicalRecord, { params: params} );
+  getByUserId(userId?): Observable<any> {
+    // console.log(userId);
+    if (userId) {
+      return this.http.get<any>(environment.baseUrl + this.medicalRecord + userId);
     } else {
-
-      return this.http.get<any>(environment.baseUrl + this.medicalRecord );
+      return this.http.get<any>(environment.baseUrl + this.medicalRecord);
     }
-
-  }  
+  }
 
   //putAddAntecedent
   putAddExamen(object): Observable<any> {
-    return this.http.put<any>(environment.baseUrl + this.addExamen, { 
-      fileName:object.fileName, 
-      documentType:object.documentType,
-      madeBy:object.madeBy, 
-      file:object.file
-    } );
+    return this.http.put<any>(environment.baseUrl + this.addExamen, {
+      documentDetails: {
+        name: object.name,
+        type: object.type,
+        data: object.file,
+      },
+    });
   }
 
   //putAddAntecedent
   putAddAntecedent(antecedent, value): Observable<any> {
     let params = new HttpParams();
     params = params.append('antecedent', antecedent);
-    return this.http.put<any>(environment.baseUrl + this.antecedent + antecedent, { value } );
+    return this.http.put<any>(environment.baseUrl + this.antecedent + antecedent, { value });
   }
 
   //deleteAntecedent
   deleteAntecedent(antecedent, id): Observable<any> {
-    return this.http.delete<any>(environment.baseUrl + this.antecedent + antecedent + '/' + id );
+    return this.http.delete<any>(environment.baseUrl + this.antecedent + antecedent + '/' + id);
   }
-
 }

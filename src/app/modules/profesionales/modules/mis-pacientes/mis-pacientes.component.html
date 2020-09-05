@@ -4,12 +4,10 @@
   </div>
   <div class="col">
     <button
-      [ngStyle]="{ display: 'none' }"
       type="button"
       class="btn btn-primary rounded-pill float-right"
-      ng-reflect-tour-anchor="agendar"
       data-toggle="modal"
-      data-target="#disponibilidad"
+      data-target="#patientModal"
     >
       Nuevo Paciente
       <img src="assets/icons/icon-plus-circle.svg" />
@@ -61,72 +59,195 @@
       </div>
       <div class="col-12 mb-4">
         <div class="tableBox rounded p-4 bg-white">
-          <table class="table">
-            <thead class="">
-              <tr>
-                <th scope="col">ID Paciente</th>
-                <th scope="col">Nombre Paciente</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Sexo</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Acción</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let item of patients | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
-                <td>
-                  {{ item.identificationData.cpf || item.identificationData.cns || item.identificationData.rgRegistry }}
-                </td>
-                <td>
-                  <a routerLink="../mis-pacientes/ficha-paciente">
-                    <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                    {{ item.personalData.name + ' ' + item.personalData.lastname }}
-                  </a>
-                </td>
-                <td>
-                  {{ item.personalData.birthdate }}
-                </td>
-                <td>{{ item.personalData.gender }}</td>
-                <td>{{ item.personalData.phoneNumber }}</td>
-                <td>
-                  <div class="btn-group">
-                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-three-dots"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                        />
-                      </svg>
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">
-                        Eliminar
-                      </button>
-                      <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                        Editar
-                      </button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <ngx-datatable
+            *ngIf="patients.length; else noData"
+            #table
+            class="material"
+            [rows]="patients"
+            headerHeight="auto"
+            footerHeight="auto"
+            rowHeight="70"
+            [columnMode]="ColumnMode.flex"
+            [limit]="pageSize"
+            [selectAllRowsOnPage]="true"
+          >
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span>{{
+                  row.identificationData.cpf ||
+                    row.identificationData.cns ||
+                    row.identificationData.rgRegistry ||
+                    row.identificationData.passport
+                }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
+                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  {{ row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName) }}
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Edad">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ moment().diff(row.personalData.birthdate, 'year') }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo"
+              ><ng-template let-row="row" ngx-datatable-cell-template>
+                {{
+                  row.personalData.gender === 'male'
+                    ? 'Masculino'
+                    : row.personalData.gender === 'female'
+                    ? 'Femenino'
+                    : 'S/R'
+                }}
+              </ng-template></ngx-datatable-column
+            >
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="personalData.phoneNumber" name="Telefono">
+            </ngx-datatable-column>
+          </ngx-datatable>
+          <ng-template #noData>
+            <h5 class="text-center text-primary">No se han encontrado pacientes asociados</h5>
+          </ng-template>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row">
-      <div class="col-12 text-right">
-        <ngb-pagination class="float-right" [collectionSize]="70" [(page)]="page" aria-label="Default pagination">
-        </ngb-pagination>
+<!-- Patient Modal -->
+<!-- Modal -->
+<div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1">{{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <form [formGroup]="patientForm">
+          <div class="custom-control custom-switch mb-4">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="switchIsTutor"
+              [checked]="false"
+              formControlName="isTutor"
+            />
+            <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label for="name">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
+                }"
+              />
+            </div>
+            <div class="form-group col">
+              <label for="lastName">Primer Apellido</label>
+              <input
+                type="email"
+                class="form-control"
+                name="lastName"
+                formControlName="lastName"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
+                }"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label for="secondLastName">Segundo Apellido *</label>
+              <input
+                type="email"
+                class="form-control"
+                name="secondLastName"
+                formControlName="secondLastName"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('secondLastName').valid && patientForm.get('secondLastName').touched
+                }"
+              />
+            </div>
+            <div class="form-group col">
+              <label for="gender">Sexo</label>
+              <select
+                class="form-control"
+                name="gender"
+                formControlName="gender"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('gender').valid && patientForm.get('gender').touched
+                }"
+              >
+                <option value="">- Seleccionar -</option>
+                <option value="male">Masculino</option>
+                <option value="female">Femenino</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-5">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
+                }"
+              />
+            </div>
+            <div class="form-group col-5">
+              <label for="phoneNumber">Telefono</label>
+              <input
+                type="text"
+                class="form-control"
+                name="phoneNumber"
+                formControlName="phoneNumber"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
+                }"
+              />
+            </div>
+            <div class="form-group col-2">
+              <label for="age">Edad</label>
+              <input
+                type="email"
+                class="form-control"
+                name="age"
+                formControlName="age"
+                [ngClass]="{
+                  'is-invalid': !patientForm.get('age').valid && patientForm.get('age').touched
+                }"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary rounded-pill"
+          data-dismiss="modal"
+          (click)="savePatient()"
+          [disabled]="!patientForm.valid"
+        >
+          {{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente
+        </button>
       </div>
     </div>
   </div>
