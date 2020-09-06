@@ -36,7 +36,7 @@ export class MisPacientesComponent implements OnInit {
     // console.log(this.currentUserService.currentUser);
 
     this.fetchPatients();
-    this.fetchPrePatients();
+    // this.fetchPrePatients();
 
     this.patientForm = this.formBuilder.group({
       isTutor: [false],

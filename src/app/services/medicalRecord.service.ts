@@ -10,6 +10,7 @@ export class MedicalRecordService {
   private medicalRecord = 'v1/medical-record/';
   private antecedent = 'v1/medical-record/antecedent/';
   private addExamen = 'v1/medical-record/add-exam';
+  private appointements = 'v1/appointments/';
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,10 @@ export class MedicalRecordService {
     } else {
       return this.http.get<any>(environment.baseUrl + this.medicalRecord);
     }
+  }
+
+  getTimeline(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointements + 'timeline');
   }
 
   //putAddAntecedent

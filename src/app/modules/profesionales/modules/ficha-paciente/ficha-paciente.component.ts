@@ -15,12 +15,12 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class FichaPacienteComponent implements OnInit {
   userId = this.routerAct.snapshot.queryParamMap.get('userId');
-  patientRecord: any = {};
-  appointmentsRecord: any = {};
-  antecedentsRecord: any = {};
-  examsRecord: any = {};
-  prescriptionsRecord: any = {};
-  timelineRecord: any = {};
+  patientRecord: any = [];
+  appointmentsRecord: any = [];
+  antecedentsRecord: any = [];
+  examsRecord: any = [];
+  prescriptionsRecord: any = [];
+  timelineRecord: any = [];
   identification: any = {};
   ufMap: any = [];
   cityMap: any = [];
@@ -74,6 +74,19 @@ export class FichaPacienteComponent implements OnInit {
 
         this.getIdentification(this.patientRecord.identificationData);
         // console.log(this.patientRecord.patientData.identificationData);
+      },
+      (error) => {
+        console.log(error);
+        this.spinner.hide();
+      },
+      () => {
+        this.spinner.hide();
+      }
+    );
+    this.medicalRecordService.getTimeline().subscribe(
+      (data) => {
+        this.timelineRecord = data.payload;
+        console.log(this.timelineRecord);
       },
       (error) => {
         console.log(error);
