@@ -13,9 +13,11 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 })
 export class MisPacientesComponent implements OnInit {
   patients: any[] = [];
+  prePatients: any[] = [];
   temp: any[] = [];
   searchTerm: string = '';
 
+  tab: any = 'patients';
   page = 1;
   pageSize = 7;
   moment: any = moment;
@@ -34,6 +36,7 @@ export class MisPacientesComponent implements OnInit {
     // console.log(this.currentUserService.currentUser);
 
     this.fetchPatients();
+    this.fetchPrePatients();
 
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
@@ -43,19 +46,38 @@ export class MisPacientesComponent implements OnInit {
       phoneNumber: [123, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       email: ['a@a.cl', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
-      age: [25, Validators.pattern(/^\d{2}$|^\d{3}$/)],
+      age: [25, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
     });
   }
 
   fetchPatients() {
     this.patientService.getPatientsForProfesional().subscribe(
       (data) => {
+        console.log(data);
         // NO PATIENTS FOUND
         if (!data.payload.length) {
           this.patients = [];
         } else {
           this.temp = [...data.payload];
           this.patients = data.payload;
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  fetchPrePatients() {
+    this.patientService.getPrePatientsForProfesional().subscribe(
+      (data) => {
+        console.log(data);
+        // NO PATIENTS FOUND
+        if (!data.length) {
+          this.prePatients = [];
+        } else {
+          this.temp = [...data];
+          this.prePatients = data;
         }
       },
       (error) => {
