@@ -83,11 +83,7 @@ export class MiSaludComponent implements OnInit {
     this.agregarItem.controls.item.reset;
     console.log(modelAntecedente);
     this.modelAntecedente = this.agregarItem.controls.item.value;
-    /*
-    console.log(test);
-    if(this.agregarItem.controls.item.value.length > 3){
-      this.addValidator = true;
-    }*/
+
   }
 
   categoryChangue(category?) {

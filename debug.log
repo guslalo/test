@@ -12,3 +12,9 @@
 [0902/185547.914:ERROR:minidumpwritedump_with_crashpad_info.cc(452)] Failed to call MiniDumpWriteDump: El archivo de paginación es demasiado pequeño para completar la operación. (0x800705AF)
 [0902/185548.049:ERROR:minidumpwritedump_with_crashpad_info.cc(661)] Failed to write minidump file
 [0902/185548.049:ERROR:crash_report_exception_handler.cc(132)] TryMiniDumpWriteDumpWithCrashpadInfo failed
+[0905/051133.085:ERROR:process_reader_win.cc(127)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0905/051133.085:ERROR:process_reader_win.cc(127)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0905/051133.085:ERROR:exception_snapshot_win.cc(100)] thread ID 14096 not found in process
+[0905/051133.085:ERROR:exception_snapshot_win.cc(100)] thread ID 17628 not found in process
+[0905/051133.085:ERROR:process_reader_win.cc(127)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0905/051133.085:ERROR:exception_snapshot_win.cc(100)] thread ID 18740 not found in process

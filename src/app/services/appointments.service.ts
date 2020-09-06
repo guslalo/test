@@ -35,6 +35,19 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/' + id);
   }
 
+  // getAppointmentsDetails
+  getAppointmentsDetails(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/details/', { params: params });
+  }
+
+  // getAppointmentsDetails
+  getAppointmentsTimeline(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/timeline');
+  }
+
+
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {
@@ -43,7 +56,6 @@ export class AppointmentsService {
         // 'Content-Type': 'application/json'
       }),
     };
-
     return this.http.get<any>(environment.baseUrl + this.doctors, httpOptions);
   }
 

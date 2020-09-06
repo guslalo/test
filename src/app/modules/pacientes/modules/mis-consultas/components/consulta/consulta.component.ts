@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AppointmentsService } from './../../../../../../services/appointments.service';
+import { DocumentService } from './../../../../../../services/document.service';
+import { CurrentUserService } from './../../../../../../services/current-user.service';
+import { UserLogin } from './../../../../../../models/models';
+import { error } from 'protractor';
+
 
 @Component({
   selector: 'app-consulta',
@@ -6,10 +13,79 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consulta.component.scss']
 })
 export class ConsultaComponent implements OnInit {
+  public appoimentDetail:any;
+  public access_token: any;
+  public downloadUrl:any;
+  public user: any;
+  public timeline: any;
+  public fecha:any;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private appointmentsService:AppointmentsService,
+    private documentService: DocumentService,
+  ) { }
 
   ngOnInit(): void {
+    this.user = new UserLogin(
+      JSON.parse(localStorage.getItem('currentUser')).id,
+      JSON.parse(localStorage.getItem('currentUser')).email,
+      JSON.parse(localStorage.getItem('currentUser')).name,
+      JSON.parse(localStorage.getItem('currentUser')).lastName,
+      JSON.parse(localStorage.getItem('currentUser')).access_token,
+      JSON.parse(localStorage.getItem('currentUser')).expires_in,
+      JSON.parse(localStorage.getItem('currentUser')).internalCode,
+      JSON.parse(localStorage.getItem('currentUser')).administrativeData,
+      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
+      JSON.parse(localStorage.getItem('currentUser')).role
+    );
+
+    this.route.params.subscribe((params) => {
+      const id = params.appointmentId
+      this.getAppointmentsDetails(id);
+    });
+    this.getAppointmentsTimeline();
+    this.getFecha();
+    
+  }
+
+  getFecha(){
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month
+    }
+
+    //console.log(currentMonth);
+  }
+
+  getAppointmentsTimeline(){
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      data => { 
+        this.timeline = data.payload;
+        console.log(this.timeline)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+
+  }
+
+  getAppointmentsDetails(id) {
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      (data) => {
+        
+        this.appoimentDetail = data.payload[0];
+        console.log(this.appoimentDetail );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }
