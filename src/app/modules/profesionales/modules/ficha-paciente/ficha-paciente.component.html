@@ -118,7 +118,12 @@
       <!--tabs-->
       <div class="tab-content w-100 mt-3" id="myTabContent">
         <!-- DATOS PACIENTE -->
-        <div class="tab-pane fade pt-2" id="datosPacienteTab" role="tabpanel" aria-labelledby="datosPaciente">
+        <div
+          class="tab-pane fade show active pt-2"
+          id="datosPacienteTab"
+          role="tabpanel"
+          aria-labelledby="datosPaciente"
+        >
           <div class="row">
             <!--bg-white rounded-lg-->
             <div class="col-12">
@@ -610,8 +615,12 @@
               <h5 class="mb-0">Examenes y Documentos</h5>
             </div>
             <div class="col-6">
-              <button class="btn btn-secondary rounded-pill float-right align-middle">
-                Subir documento
+              <button
+                class="btn btn-secondary rounded-pill float-right align-middle"
+                data-toggle="modal"
+                data-target="#uploadFile"
+              >
+                Subir Documento
               </button>
             </div>
           </div>
@@ -698,53 +707,109 @@
         <!--/tab-->
 
         <!--tab-->
-        <div class="tab-pane fade show active" id="timelineTab" role="tabpanel" aria-labelledby="timeline">
+        <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline">
           <div class="row">
             <div class="col-12">
               <div class="bg-white p-4 rounded-lg text-center" *ngIf="timelineRecord.length">
                 <h5 class="mb-0 text-left">Timeline de Consultas</h5>
-                <div class="timeLine" *ngFor="let item of timelineRecord">
-                  <div class="line bg-white">{{ moment(item.date).format('YYYY') }}</div>
+                <div class="timeLine">
+                  <div class="line bg-white">{{ moment().format('YYYY') }}</div>
                   <div class="line">
                     <button class="btn btn-secondary rounded-lg">
-                      {{ moment(item.date).format('MMMM') }}
+                      {{ moment().format('MMMM') }}
                     </button>
                   </div>
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <h3>{{ moment(item.date).format('DD') }}</h3>
-                        {{ item.startAt }} Hrs.
+                  <ng-container *ngFor="let item of timelineRecord">
+                    <div class="line">
+                      <div class="row align-items-center">
+                        <div class="col-5 text-right p-0">
+                          <h3>{{ moment(item.date).format('DD') }}</h3>
+                          {{ item.startAt }} Hrs.
+                        </div>
+                        <div class="col p-0">
+                          <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 15 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
+                          </svg>
+                        </div>
+                        <div class="col-5 text-left p-0">
+                          <button class="btn btn-primary dos rounded-lg">
+                            {{
+                              item.status === 'reserved'
+                                ? 'Reservada'
+                                : item.status === 'appointed'
+                                ? 'Agendada'
+                                : item.status === 'rescheduled'
+                                ? 'Re-Agendada'
+                                : item.status === 'active'
+                                ? 'Activa'
+                                : item.status === 'waitingInRoom'
+                                ? 'En Sala de Espera'
+                                : item.status === 'waitingInList'
+                                ? 'En Lista de Espera'
+                                : item.status === 'running'
+                                ? 'En Curso'
+                                : item.status === 'pending'
+                                ? 'Pendiente'
+                                : item.status === 'finished'
+                                ? 'Finalizada'
+                                : item.status === 'canceled'
+                                ? 'Cancelada'
+                                : 'S/R'
+                            }}
+                          </button>
+                        </div>
                       </div>
-                      <div class="col p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
-                        </svg>
-                      </div>
-                      <div class="col-5 text-left p-0">
-                        <div class="box">
-                          <div class="boxCont text-center">
-                            <div class="row">
-                              <div class="col-3">
-                                <div class="img text-center">
-                                  <img height="48px" src="assets/perfil.png" />
+                    </div>
+                    <div class="line">
+                      <div class="row align-items-center">
+                        <div class="col-5 text-right p-0">
+                          <div class="box">
+                            <div class="boxCont text-center">
+                              <div class="row">
+                                <div class="col-3">
+                                  <img src="assets/img/doctor-foto.svg" alt="img" />
                                 </div>
-                              </div>
-                              <div class="col-9 p-2">
-                                <p class="ml-2 mt-0 mb-0 text-left">Cita agendada con</p>
-                                <p class="ml-2 mt-0 text-left">
-                                  {{ item.professional.name + ' ' + item.professional.lastName }}
-                                </p>
-                                <div class="btn btn-primary btn-sm rounded-pill float-left">
-                                  {{ item.isActive ? 'Activa' : 'Desactiva' }}
+                                <div class="col-9">
+                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">
+                                    Dr. {{ item.professional.name }} {{ item.professional.lastName }}
+                                  </p>
+                                  <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
+                                    <ng-container *ngIf="item.isActive; else inactivo">
+                                      Activo
+                                    </ng-container>
+                                    <ng-template #inactivo>Inactivo</ng-template>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                        <div class="col-2 p-0">
+                          <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 15 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
+                          </svg>
+                        </div>
+                        <!--
+                        <div class="col-5 text-left p-0">
+                          <h3>24</h3>
+                          12:45 Hrs.
+                        </div>-->
                       </div>
                     </div>
-                  </div>
+                  </ng-container>
                 </div>
 
                 <!-- Add the timeline -->
@@ -776,6 +841,54 @@
         <!--/tab-->
       </div>
       <!--/tabs-->
+    </div>
+  </div>
+</div>
+
+<!-- Modal Documentos & Examenes -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFile" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">Cargar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="fileForm" novalidate="">
+          <!-- -->
+          <div class="row">
+            <div class="form-group col">
+              <label for="type">Tipo</label>
+              <select class="form-control" name="type" id="type" formControlName="type">
+                <option [value]="null">- Seleccionar -</option>
+                <option value="exam">Examen</option>
+                <option value="document">Documento</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="dateBlock">Documento</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  (change)="openFile($event)"
+                  id="customFile"
+                  style="overflow: hidden;"
+                />
+                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="uploadFile()">
+          Agregar
+        </button>
+      </div>
     </div>
   </div>
 </div>

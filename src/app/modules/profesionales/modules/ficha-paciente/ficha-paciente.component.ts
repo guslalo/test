@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersService } from 'src/app/services/users.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { DocumentService } from 'src/app/services/document.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -31,8 +32,14 @@ export class FichaPacienteComponent implements OnInit {
   downloadUrl: any;
   access_token: any;
 
+  public fileForm: FormGroup;
+  public base64: any;
+  public nameFile: any;
+  public textInputFile: any;
+
   constructor(
     private routerAct: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private medicalRecordService: MedicalRecordService,
     private userService: UsersService,
     private documentService: DocumentService,
@@ -44,6 +51,12 @@ export class FichaPacienteComponent implements OnInit {
     this.getMedicalRecord(this.userId);
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+
+    this.fileForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      data: [null, [Validators.required]],
+    });
   }
 
   getMedicalRecord(userId) {
@@ -51,10 +64,10 @@ export class FichaPacienteComponent implements OnInit {
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
         // console.log(data.payload[0].patientData);
-        this.patientRecord = data.payload[0].patientData;
-        this.appointmentsRecord = data.payload[0].appointments;
-        this.antecedentsRecord = data.payload[0].antecedent;
-        this.examsRecord = data.payload[0].exams;
+        this.patientRecord = data.payload.patientData;
+        this.appointmentsRecord = data.payload.appointments;
+        this.antecedentsRecord = data.payload.antecedent;
+        this.examsRecord = data.payload.exams;
 
         this.userService.getStates().subscribe((data) => {
           // console.log(data);
@@ -105,5 +118,37 @@ export class FichaPacienteComponent implements OnInit {
         this.identification.value = data[item];
       }
     }
+  }
+
+  openFile(event) {
+    const file = event.target.files[0];
+    this.nameFile = event.target.files[0].name;
+    this.textInputFile = event.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result);
+      this.base64 = reader.result;
+      this.base64.split(',')[1];
+      console.log(this.base64.split(',')[1]);
+    };
+  }
+
+  uploadFile() {
+    console.log(this.fileForm);
+    const formObject = {
+      name: this.nameFile,
+      type: this.fileForm.controls.type.value.toString(),
+      file: this.base64.split(',')[1],
+    };
+    this.medicalRecordService.putAddExamen(formObject).subscribe(
+      (data) => {
+        console.log(data);
+        this.getMedicalRecord(this.userId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
