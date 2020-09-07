@@ -591,7 +591,7 @@
 
         <!--tab-->
         <div class="tab-pane fade bg-white rounded-lg p-5" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
-          <div class="row">
+          <div class="row" *ngIf="professionalData">
             <div class="col-12 mb-3">
               <div class="row">
                 <div class="col">
@@ -607,7 +607,7 @@
                   Biografía Academica
                 </p>
                 
-                  <p>Sin información </p>           
+                  <p>{{professionalData.professionalData.biography}}</p>           
               </div>
               <div>
                 <p class="title  font-weight-bold">Especialidades</p>
@@ -620,35 +620,35 @@
 
             </div>
             <div class="col-6">
-              <div>
-                <p class="title  font-weight-bold">Universidad</p>
-               
-                Sin información 
-                  <hr>
-              
-              </div>
-              <div>
-                <p class="title  font-weight-bold">Título</p>
-               
-                Sin información 
-                  <hr>
-              
-              </div>
-              <div>
-                <p class="title  font-weight-bold">Número de registro</p>
-               
-                Sin información 
-                  <hr>
-              
-              </div>
-              <div>
-                <p class="title  font-weight-bold">Curso</p>
-               
-                Sin información 
-                  <hr>
-              
-              </div>
              
+                <div>
+                  <p class="title  font-weight-bold">Universidad</p>
+                
+                  {{professionalData.professionalData.university}}
+                    <hr>
+                
+                </div>
+                <div>
+                  <p class="title  font-weight-bold">Título</p>
+                
+                  {{professionalData.professionalData.professionalTitle}}
+                    <hr>
+                
+                </div>
+                <div>
+                  <p class="title  font-weight-bold">Número de registro</p>
+                  {{professionalData.professionalData.ufRegistry.name}}
+                  
+                    <hr>
+                
+                </div>
+                <div>
+                  <p class="title  font-weight-bold">Curso</p>
+                  {{professionalData.professionalData.course}}
+                    <hr>
+                
+                </div>
+           
             </div>
           </div>
         </div>

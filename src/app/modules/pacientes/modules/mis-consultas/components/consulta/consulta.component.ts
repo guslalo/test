@@ -19,6 +19,7 @@ export class ConsultaComponent implements OnInit {
   public user: any;
   public timeline: any;
   public fecha:any;
+  public professionalData:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +44,9 @@ export class ConsultaComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
       this.getAppointmentsDetails(id);
+      this.getAppointmentsProfessionalData(id);
     });
+
     this.getAppointmentsTimeline();
     this.getFecha();
     
@@ -72,7 +75,17 @@ export class ConsultaComponent implements OnInit {
         console.log(error)
       }
     )
-
+  }
+  getAppointmentsProfessionalData(id){
+    this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
+      data => { 
+        this.professionalData = data.payload;
+        console.log(this.professionalData)
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   getAppointmentsDetails(id) {

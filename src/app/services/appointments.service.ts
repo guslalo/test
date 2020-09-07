@@ -47,7 +47,6 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/timeline');
   }
 
-
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {
@@ -72,6 +71,13 @@ export class AppointmentsService {
   //consolidate appointments
   postConsolidate(consolidate): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate );
+  }
+
+  //get Appointment professional data
+  getAppointmentsProfessionalData(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
   }
 
 }

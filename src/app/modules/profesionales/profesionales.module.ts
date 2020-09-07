@@ -23,13 +23,12 @@ import { PacientesComponent } from '../profesionales/pacientes/pacientes.compone
 import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routing.module';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
-import { HistorialConsultasComponent } from './modules/historial-consultas/historial-consultas.component';
+
 import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
-import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -45,11 +44,9 @@ FullCalendarModule.registerPlugins([
     PacientesComponent,
     InicioPComponent,
     MiDisponibilidadComponent,
-    HistorialConsultasComponent,
     FichaConsultaComponent,
     MisPacientesComponent,
-    AgendaComponent,
-    CrearFichaConsultaComponent,
+    AgendaComponent
   ],
   imports: [
     CommonModule,
@@ -74,6 +71,7 @@ FullCalendarModule.registerPlugins([
     MiDisponibilidadComponent,
     NgxDatatableModule,
     NgxSpinnerModule,
-  ],
+    NgbDatepickerModule
+  ]
 })
 export class ProfesionalesModule {}
