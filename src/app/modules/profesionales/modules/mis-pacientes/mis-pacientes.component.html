@@ -114,7 +114,7 @@
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
                 <ngx-datatable
-                  *ngIf="patients.length; else noData"
+                  *ngIf="prePatients.length; else noData"
                   #table
                   class="material"
                   [rows]="prePatients"
@@ -203,7 +203,7 @@
                   </ngx-datatable-column>
                 </ngx-datatable>
                 <ng-template #noData>
-                  <h5 class="text-center text-primary">No se han encontrado pacientes asociados</h5>
+                  <h5 class="text-center text-primary">No existen pacientes ingresados</h5>
                 </ng-template>
               </div>
             </ng-template>

@@ -17,7 +17,7 @@ export class MisPacientesComponent implements OnInit {
   temp: any[] = [];
   searchTerm: string = '';
 
-  tab: any = 'pre-patients';
+  tab: any = 'patients';
   page = 1;
   pageSize = 7;
   moment: any = moment;
@@ -56,9 +56,7 @@ export class MisPacientesComponent implements OnInit {
       (data) => {
         // console.log(data);
         // NO PATIENTS FOUND
-        if (!data.payload.length) {
-          this.patients = [];
-        } else {
+        if (Array.isArray(data.payload)) {
           this.temp = [...data.payload];
           this.patients = data.payload;
         }
@@ -74,9 +72,7 @@ export class MisPacientesComponent implements OnInit {
       (data) => {
         console.log(data);
         // NO PATIENTS FOUND
-        if (!data.payload.length) {
-          this.prePatients = [];
-        } else {
+        if (Array.isArray(data.payload)) {
           this.temp = [...data.payload];
           this.prePatients = data.payload;
         }
