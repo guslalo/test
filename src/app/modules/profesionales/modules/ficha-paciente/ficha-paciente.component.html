@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-9 col-md-9">
-      <h2>Ficha paciente</h2>
+      <h2>Ficha Paciente</h2>
     </div>
     <div class="col-3 col-md-3">
       <button type="button" class="btn btn-primary rounded-pill float-right">
-        Nueva consulta
+        Nueva Consulta
       </button>
 
       <a href="javascript:history.back()" class="back float-right align-top mr-3">
@@ -107,7 +107,7 @@
                 aria-controls="timeline"
                 aria-selected="false"
               >
-                Timeline de consultas
+                Timeline de Consultas
               </a>
             </li>
           </ul>
@@ -117,7 +117,7 @@
 
       <!--tabs-->
       <div class="tab-content w-100 mt-3" id="myTabContent">
-        <!--tab-->
+        <!-- DATOS PACIENTE -->
         <div
           class="tab-pane fade show active pt-2"
           id="datosPacienteTab"
@@ -142,36 +142,36 @@
                   <img src="assets/perfil.png" />
                 </div>
                 <h4 class="text-center mt-2">
-                  {{ patientRecord.patientData?.personalData.name }} <br />
-                  {{ patientRecord.patientData?.personalData.lastName || '' }}
+                  {{ patientRecord.personalData?.name }} <br />
+                  {{ patientRecord.personalData?.lastName || '' }}
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
                     <i class="b">Sexo</i>
                     {{
-                      patientRecord.patientData?.personalData.gender === 'male'
+                      patientRecord.personalData?.gender === 'male'
                         ? 'Masculino'
-                        : patientRecord.patientData?.personalData.gender === 'female'
+                        : patientRecord.personalData?.gender === 'female'
                         ? 'Femenino'
                         : 'S/R'
                     }}
                   </li>
                   <li>
                     <i class="b">Edad</i>
-                    {{ moment().diff(patientRecord.patientData?.personalData.birthdate, 'year') }}
+                    {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}
                   </li>
                   <li>
                     <i class="b">Teléfono</i>
-                    {{ patientRecord.patientData?.personalData.phoneNumber || 'S/R' }}
+                    {{ patientRecord.personalData?.phoneNumber || 'S/R' }}
                   </li>
                   <li>
                     <i class="b">Email</i>
-                    {{ patientRecord.patientData?.personalData.email || 'S/R' }}
+                    {{ patientRecord.personalData?.email || 'S/R' }}
                   </li>
                   <li>
                     <i class="b">Estado</i>
                     <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
-                      {{ patientRecord.patientData?.status }}
+                      {{ patientRecord?.status }}
                     </button>
                   </li>
                 </ul>
@@ -193,15 +193,15 @@
                   </li>
                   <li>
                     <i>Municipio de Nacimiento</i>
-                    {{ cityMap[patientRecord.patientData?.personalData.municipalityBirth]?.name || 'S/R' }}
+                    {{ cityMap[patientRecord.personalData?.municipalityBirth]?.name || 'S/R' }}
                   </li>
                   <li>
                     <i>Nacionalidad</i>
-                    {{ patientRecord.patientData?.personalData.nacionality || 'S/R' }}
+                    {{ patientRecord.personalData?.nacionality || 'S/R' }}
                   </li>
                   <li>
                     <i>UF de nacimiento</i>
-                    {{ ufMap[patientRecord.patientData?.personalData.ufBirth]?.name || 'S/R' }}
+                    {{ ufMap[patientRecord.personalData?.ufBirth]?.name || 'S/R' }}
                   </li>
                 </ul>
               </div>
@@ -213,20 +213,20 @@
                 <ul class="datos">
                   <li>
                     <i>Estado</i>
-                    {{ ufMap[patientRecord.patientData?.addressData.uf]?.name || 'S/R' }}
+                    {{ ufMap[patientRecord.addressData?.uf]?.name || 'S/R' }}
                   </li>
                   <li>
                     <i>Ciudad</i>
-                    {{ cityMap[patientRecord.patientData?.addressData.city]?.name || 'S/R' }}
+                    {{ cityMap[patientRecord.addressData?.city]?.name || 'S/R' }}
                   </li>
                   <li>
                     <i>Dirección</i>
                     {{
-                      patientRecord.patientData?.addressData.neighborhood +
+                      patientRecord.addressData?.neighborhood +
                         ', ' +
-                        patientRecord.patientData?.addressData.street +
+                        patientRecord.addressData?.street +
                         ' #' +
-                        patientRecord.patientData?.addressData.streetNumber || 'S/R'
+                        patientRecord.addressData?.streetNumber || 'S/R'
                     }}
                   </li>
                 </ul>
@@ -236,7 +236,7 @@
         </div>
         <!--/tab-->
 
-        <!--tab-->
+        <!-- CONSULTAS -->
         <div class="tab-pane fade" id="consultasPacienteTab" role="tabpanel" aria-labelledby="consultasPaciente">
           <div class="row mt-2">
             <div class="col-12 col-md-3">
@@ -264,7 +264,7 @@
             <div class="col-12 col-md-3">
               <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por</option>
+                  <option>Filtrar por Estado</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
@@ -299,89 +299,98 @@
           </div>
 
           <div class="tableBox rounded p-4 bg-white">
-            <table class="table">
-              <thead class="">
-                <tr>
-                  <th scope="col">ID Paciente</th>
-                  <th scope="col">Nombre Paciente</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Hora</th>
-                  <th scope="col">Sala</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Acción</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr id="item.id">
-                  <td scope="row">
-                    <svg
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      class="bi bi-square"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-                      />
-                    </svg>
-                    <ng-container>
-                      456823
-                    </ng-container>
-                  </td>
-                  <td>
-                    <a routerLink="../historial-consultas/ficha-consulta">
-                      Antonia Miranda Torres
-                    </a>
-                  </td>
-                  <td>
-                    22/09/2020
-                  </td>
-                  <td>12:00</td>
-                  <td>Cardiología</td>
-                  <td>
-                    <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                      En curso
-                    </button>
-                  </td>
-                  <td>
-                    <div class="btn-group">
-                      <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-three-dots"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">
-                          Eliminar
-                        </button>
-                        <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                          Editar
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <ngx-datatable
+              *ngIf="appointmentsRecord.length"
+              class="material"
+              [rows]="appointmentsRecord"
+              headerHeight="auto"
+              footerHeight="auto"
+              rowHeight="70"
+              [columnMode]="ColumnMode.flex"
+              [limit]="10"
+              [selectAllRowsOnPage]="true"
+            >
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span>{{
+                    row.patientDetails.patientId[0].identificationData.cpf ||
+                      row.patientDetails.patientId[0].identificationData.cns ||
+                      row.patientDetails.patientId[0].identificationData.rgRegistry ||
+                      row.patientDetails.patientId[0].identificationData.passport
+                  }}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Paciente">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  {{
+                    row.patientDetails.userDetails[0].name +
+                      ' ' +
+                      (row.patientDetails.userDetails[0].secondLastName || row.patientDetails.userDetails[0].lastName)
+                  }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Profesional">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  {{
+                    row.professionalDetails.userDetails[0].name +
+                      ' ' +
+                      (row.professionalDetails.userDetails[0].secondLastName ||
+                        row.professionalDetails.userDetails[0].lastName)
+                  }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Fecha">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ moment(row.dateDetails.date).format('DD/MM/YYYY') }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Hora">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.dateDetails.start }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Especialidad">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.professionalDetails.specialtyDetails[0]?.specialtyName || 'S/R' }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Estado">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                    {{
+                      row.administrativeDetails.status === 'reserved'
+                        ? 'Reservada'
+                        : row.administrativeDetails.status === 'appointed'
+                        ? 'Agendada'
+                        : row.administrativeDetails.status === 'rescheduled'
+                        ? 'Re-Agendada'
+                        : row.administrativeDetails.status === 'active'
+                        ? 'Activa'
+                        : row.administrativeDetails.status === 'waitingInRoom'
+                        ? 'En Sala de Espera'
+                        : row.administrativeDetails.status === 'waitingInList'
+                        ? 'En Lista de Espera'
+                        : row.administrativeDetails.status === 'running'
+                        ? 'En Curso'
+                        : row.administrativeDetails.status === 'pending'
+                        ? 'Pendiente'
+                        : row.administrativeDetails.status === 'finished'
+                        ? 'Finalizada'
+                        : row.administrativeDetails.status === 'canceled'
+                        ? 'Cancelada'
+                        : 'S/R'
+                    }}
+                  </button>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
           </div>
         </div>
         <!--/tab-->
 
-        <!--tab-->
+        <!-- ANTECEDENTES -->
         <div class="tab-pane fade" id="antecedentesTab" role="tabpanel" aria-labelledby="examenesDocumentos">
           <div class="row">
             <div class="col-12">
@@ -413,14 +422,8 @@
                   Enfermedades
                 </a>
                 <div class="collapse" id="collapseExample1">
-                  <ul class="antecedentes">
-                    <li class="pl-5">Alergias</li>
-                    <li>A medicamentos tipo C</li>
-                    <li>Asma alérgica</li>
-                  </ul>
-                  <ul class="antecedentes">
-                    <li class="pl-5">Intervenciones Quirurjicas</li>
-                    <li>A medicamentos tipo C</li>
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.sickness">
+                    <li class="pl-5">item</li>
                   </ul>
                 </div>
               </div>
@@ -454,14 +457,8 @@
                   Antecedentes Familiares
                 </a>
                 <div class="collapse" id="collapseExample2">
-                  <ul class="antecedentes">
-                    <li class="pl-5">Alergias</li>
-                    <li>A medicamentos tipo C</li>
-                    <li>Asma alérgica</li>
-                  </ul>
-                  <ul class="antecedentes">
-                    <li class="pl-5">Intervenciones Quirurjicas</li>
-                    <li>A medicamentos tipo C</li>
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.familiarHistory">
+                    <li class="pl-5">item</li>
                   </ul>
                 </div>
               </div>
@@ -495,14 +492,8 @@
                   Medicamentos
                 </a>
                 <div class="collapse" id="collapseExample3">
-                  <ul class="antecedentes">
-                    <li class="pl-5">Alergias</li>
-                    <li>A medicamentos tipo C</li>
-                    <li>Asma alérgica</li>
-                  </ul>
-                  <ul class="antecedentes">
-                    <li class="pl-5">Intervenciones Quirurjicas</li>
-                    <li>A medicamentos tipo C</li>
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.medicines">
+                    <li class="pl-5">item</li>
                   </ul>
                 </div>
               </div>
@@ -536,14 +527,78 @@
                   Hábitos de Salud
                 </a>
                 <div class="collapse" id="collapseExample4">
-                  <ul class="antecedentes">
-                    <li class="pl-5">Alergias</li>
-                    <li>A medicamentos tipo C</li>
-                    <li>Asma alérgica</li>
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.healthHabits">
+                    <li class="pl-5">item</li>
                   </ul>
-                  <ul class="antecedentes">
-                    <li class="pl-5">Intervenciones Quirurjicas</li>
-                    <li>A medicamentos tipo C</li>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#collapseExample4"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  Ocupacionales
+                </a>
+                <div class="collapse" id="collapseExample4">
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.occupational">
+                    <li class="pl-5">item</li>
+                  </ul>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#collapseExample4"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  Otros
+                </a>
+                <div class="collapse" id="collapseExample4">
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.others">
+                    <li class="pl-5">item</li>
                   </ul>
                 </div>
               </div>
@@ -553,15 +608,19 @@
         </div>
         <!--/tab-->
 
-        <!--tab-->
+        <!-- EXAMENES Y DOCUMENTOS -->
         <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0">Prescripciones</h5>
+              <h5 class="mb-0">Examenes y Documentos</h5>
             </div>
             <div class="col-6">
-              <button class="btn btn-secondary rounded-pill float-right align-middle">
-                Subir documento
+              <button
+                class="btn btn-secondary rounded-pill float-right align-middle"
+                data-toggle="modal"
+                data-target="#uploadFile"
+              >
+                Subir Documento
               </button>
             </div>
           </div>
@@ -571,17 +630,16 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-center">Nombre Documento</th>
+                      <th scope="col">Nombre Documento</th>
                       <th scope="col" class="text-center">Tipo</th>
-                      <th scope="col" class="text-center">Fecha de subida</th>
-                      <th scope="col" class="text-center">Realizado por</th>
+                      <th scope="col" class="text-center">Fecha de Subida</th>
                       <th scope="col" class="text-center">Acción</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
+                    <tr id="item.id" *ngFor="let item of examsRecord">
+                      <td scope="row">
                         <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
@@ -589,141 +647,21 @@
                           />
                         </svg>
                         <ng-container>
-                          Exámen torso
+                          {{ item.name }}
                         </ng-container>
                       </td>
                       <td class="text-center">
-                        Exámen
-                      </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Ver documento
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-                        <ng-container>
-                          Exámen torso
-                        </ng-container>
+                        {{ item.type === 'exam' ? 'Examen' : item.type === 'document' ? 'Documento' : 'S/R' }}
                       </td>
                       <td class="text-center">
-                        Exámen
-                      </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Ver documento
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              class="mr-0"
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-                        <ng-container>
-                          Exámen torso
-                        </ng-container>
+                        {{ moment(item.uploadDate).format('DD/MM/YYYY') }}
                       </td>
                       <td class="text-center">
-                        Exámen
-                      </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Ver documento
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              class="mr-0"
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
+                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            Ver documento
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -740,11 +678,13 @@
             <div class="col-6">
               <h5 class="mb-0">Prescripciones</h5>
             </div>
+            <!--
             <div class="col-6">
               <button class="btn btn-secondary rounded-pill float-right align-middle">
                 Subir documento
               </button>
             </div>
+            -->
           </div>
           <div class="row">
             <div class="col-12">
@@ -758,213 +698,7 @@
                       <th scope="col" class="text-center">Acción</th>
                     </tr>
                   </thead>
-
-                  <tbody>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M22.5818 15.4167H19.2364V13.3333C19.2364 13.1031 19.0492 12.9167 18.8182 12.9167H17.5636V0.416667C17.5636 0.186458 17.3765 0 17.1455 0H2.92727C2.69623 0 2.50909 0.186458 2.50909 0.416667V11.6667H1.67273C1.56191 11.6667 1.45527 11.7104 1.37686 11.7885L0.122318 13.0385C0.0439091 13.1167 0 13.2229 0 13.3333V24.5833H0.000522727C0 24.8125 0.185568 24.9995 0.416091 25C0.416614 25 0.417659 25 0.418182 25H18.8182C18.9855 25 19.1365 24.9005 19.2024 24.7474L22.966 15.9974C23.057 15.7859 22.9587 15.5411 22.7465 15.4505C22.6947 15.4281 22.6383 15.4167 22.5818 15.4167ZM18.4 13.75V15.4167H17.5636V13.75H18.4ZM16.7273 0.833333V15.4167H4.18182C4.01455 15.4167 3.86348 15.5161 3.79761 15.6693L3.34545 16.7198V0.833333H16.7273ZM1.84575 12.5H2.50909V18.6646L0.836364 22.5536V13.5057L1.84575 12.5ZM18.5427 24.1667H1.05225L4.45729 16.25H21.9472L18.5427 24.1667Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M11.2912 5.41699H12.1276V6.25033C12.1276 6.48053 12.3147 6.66699 12.5458 6.66699H14.2185C14.4495 6.66699 14.6367 6.48053 14.6367 6.25033V5.41699H15.473C15.7041 5.41699 15.8912 5.23053 15.8912 5.00033V3.33366C15.8912 3.10345 15.7041 2.91699 15.473 2.91699H14.6367V2.08366C14.6367 1.85345 14.4495 1.66699 14.2185 1.66699H12.5458C12.3147 1.66699 12.1276 1.85345 12.1276 2.08366V2.91699H11.2912C11.0602 2.91699 10.873 3.10345 10.873 3.33366V5.00033C10.873 5.23053 11.0602 5.41699 11.2912 5.41699ZM11.7094 3.75033H12.5458C12.7768 3.75033 12.964 3.56387 12.964 3.33366V2.50033H13.8003V3.33366C13.8003 3.56387 13.9875 3.75033 14.2185 3.75033H15.0549V4.58366H14.2185C13.9875 4.58366 13.8003 4.77012 13.8003 5.00033V5.83366H12.964V5.00033C12.964 4.77012 12.7768 4.58366 12.5458 4.58366H11.7094V3.75033Z"
-                            fill="#A9A9A9"
-                          />
-                          <path d="M7.52734 7.91699H8.36371V8.75033H7.52734V7.91699Z" fill="#A9A9A9" />
-                          <path d="M9.2002 7.91699H15.0547V8.75033H9.2002V7.91699Z" fill="#A9A9A9" />
-                          <path d="M7.52734 10.833H12.5455V11.6663H7.52734V10.833Z" fill="#A9A9A9" />
-                          <path d="M13.3818 10.833H14.6364V11.6663H13.3818V10.833Z" fill="#A9A9A9" />
-                          <path d="M7.52734 12.5H10.8728V13.3333H7.52734V12.5Z" fill="#A9A9A9" />
-                          <path d="M11.709 12.5H15.4726V13.3333H11.709V12.5Z" fill="#A9A9A9" />
-                          <path
-                            d="M4.59982 9.58301H6.27255C6.5036 9.58301 6.69074 9.39655 6.69074 9.16634V7.49967C6.69074 7.26947 6.5036 7.08301 6.27255 7.08301H4.59982C4.36878 7.08301 4.18164 7.26947 4.18164 7.49967V9.16634C4.18164 9.39655 4.36878 9.58301 4.59982 9.58301ZM5.01801 7.91634H5.85437V8.74968H5.01801V7.91634Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M4.59982 13.333H6.27255C6.5036 13.333 6.69074 13.1465 6.69074 12.9163V11.2497C6.69074 11.0195 6.5036 10.833 6.27255 10.833H4.59982C4.36878 10.833 4.18164 11.0195 4.18164 11.2497V12.9163C4.18164 13.1465 4.36878 13.333 4.59982 13.333ZM5.01801 11.6663H5.85437V12.4997H5.01801V11.6663Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-
-                        <ng-container>
-                          Licencia médica
-                        </ng-container>
-                      </td>
-                      <td class="text-center">
-                        22/93/2020
-                      </td>
-                      <td class="text-center">
-                        Dr. Alfonso Torres
-                      </td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Descargar
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M22.5818 15.4167H19.2364V13.3333C19.2364 13.1031 19.0492 12.9167 18.8182 12.9167H17.5636V0.416667C17.5636 0.186458 17.3765 0 17.1455 0H2.92727C2.69623 0 2.50909 0.186458 2.50909 0.416667V11.6667H1.67273C1.56191 11.6667 1.45527 11.7104 1.37686 11.7885L0.122318 13.0385C0.0439091 13.1167 0 13.2229 0 13.3333V24.5833H0.000522727C0 24.8125 0.185568 24.9995 0.416091 25C0.416614 25 0.417659 25 0.418182 25H18.8182C18.9855 25 19.1365 24.9005 19.2024 24.7474L22.966 15.9974C23.057 15.7859 22.9587 15.5411 22.7465 15.4505C22.6947 15.4281 22.6383 15.4167 22.5818 15.4167ZM18.4 13.75V15.4167H17.5636V13.75H18.4ZM16.7273 0.833333V15.4167H4.18182C4.01455 15.4167 3.86348 15.5161 3.79761 15.6693L3.34545 16.7198V0.833333H16.7273ZM1.84575 12.5H2.50909V18.6646L0.836364 22.5536V13.5057L1.84575 12.5ZM18.5427 24.1667H1.05225L4.45729 16.25H21.9472L18.5427 24.1667Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M11.2912 5.41699H12.1276V6.25033C12.1276 6.48053 12.3147 6.66699 12.5458 6.66699H14.2185C14.4495 6.66699 14.6367 6.48053 14.6367 6.25033V5.41699H15.473C15.7041 5.41699 15.8912 5.23053 15.8912 5.00033V3.33366C15.8912 3.10345 15.7041 2.91699 15.473 2.91699H14.6367V2.08366C14.6367 1.85345 14.4495 1.66699 14.2185 1.66699H12.5458C12.3147 1.66699 12.1276 1.85345 12.1276 2.08366V2.91699H11.2912C11.0602 2.91699 10.873 3.10345 10.873 3.33366V5.00033C10.873 5.23053 11.0602 5.41699 11.2912 5.41699ZM11.7094 3.75033H12.5458C12.7768 3.75033 12.964 3.56387 12.964 3.33366V2.50033H13.8003V3.33366C13.8003 3.56387 13.9875 3.75033 14.2185 3.75033H15.0549V4.58366H14.2185C13.9875 4.58366 13.8003 4.77012 13.8003 5.00033V5.83366H12.964V5.00033C12.964 4.77012 12.7768 4.58366 12.5458 4.58366H11.7094V3.75033Z"
-                            fill="#A9A9A9"
-                          />
-                          <path d="M7.52734 7.91699H8.36371V8.75033H7.52734V7.91699Z" fill="#A9A9A9" />
-                          <path d="M9.2002 7.91699H15.0547V8.75033H9.2002V7.91699Z" fill="#A9A9A9" />
-                          <path d="M7.52734 10.833H12.5455V11.6663H7.52734V10.833Z" fill="#A9A9A9" />
-                          <path d="M13.3818 10.833H14.6364V11.6663H13.3818V10.833Z" fill="#A9A9A9" />
-                          <path d="M7.52734 12.5H10.8728V13.3333H7.52734V12.5Z" fill="#A9A9A9" />
-                          <path d="M11.709 12.5H15.4726V13.3333H11.709V12.5Z" fill="#A9A9A9" />
-                          <path
-                            d="M4.59982 9.58301H6.27255C6.5036 9.58301 6.69074 9.39655 6.69074 9.16634V7.49967C6.69074 7.26947 6.5036 7.08301 6.27255 7.08301H4.59982C4.36878 7.08301 4.18164 7.26947 4.18164 7.49967V9.16634C4.18164 9.39655 4.36878 9.58301 4.59982 9.58301ZM5.01801 7.91634H5.85437V8.74968H5.01801V7.91634Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M4.59982 13.333H6.27255C6.5036 13.333 6.69074 13.1465 6.69074 12.9163V11.2497C6.69074 11.0195 6.5036 10.833 6.27255 10.833H4.59982C4.36878 10.833 4.18164 11.0195 4.18164 11.2497V12.9163C4.18164 13.1465 4.36878 13.333 4.59982 13.333ZM5.01801 11.6663H5.85437V12.4997H5.01801V11.6663Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-
-                        <ng-container>
-                          Licencia médica
-                        </ng-container>
-                      </td>
-                      <td class="text-center">
-                        22/93/2020
-                      </td>
-                      <td class="text-center">
-                        Dr. Alfonso Torres
-                      </td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Descargar
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M22.5818 15.4167H19.2364V13.3333C19.2364 13.1031 19.0492 12.9167 18.8182 12.9167H17.5636V0.416667C17.5636 0.186458 17.3765 0 17.1455 0H2.92727C2.69623 0 2.50909 0.186458 2.50909 0.416667V11.6667H1.67273C1.56191 11.6667 1.45527 11.7104 1.37686 11.7885L0.122318 13.0385C0.0439091 13.1167 0 13.2229 0 13.3333V24.5833H0.000522727C0 24.8125 0.185568 24.9995 0.416091 25C0.416614 25 0.417659 25 0.418182 25H18.8182C18.9855 25 19.1365 24.9005 19.2024 24.7474L22.966 15.9974C23.057 15.7859 22.9587 15.5411 22.7465 15.4505C22.6947 15.4281 22.6383 15.4167 22.5818 15.4167ZM18.4 13.75V15.4167H17.5636V13.75H18.4ZM16.7273 0.833333V15.4167H4.18182C4.01455 15.4167 3.86348 15.5161 3.79761 15.6693L3.34545 16.7198V0.833333H16.7273ZM1.84575 12.5H2.50909V18.6646L0.836364 22.5536V13.5057L1.84575 12.5ZM18.5427 24.1667H1.05225L4.45729 16.25H21.9472L18.5427 24.1667Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M11.2912 5.41699H12.1276V6.25033C12.1276 6.48053 12.3147 6.66699 12.5458 6.66699H14.2185C14.4495 6.66699 14.6367 6.48053 14.6367 6.25033V5.41699H15.473C15.7041 5.41699 15.8912 5.23053 15.8912 5.00033V3.33366C15.8912 3.10345 15.7041 2.91699 15.473 2.91699H14.6367V2.08366C14.6367 1.85345 14.4495 1.66699 14.2185 1.66699H12.5458C12.3147 1.66699 12.1276 1.85345 12.1276 2.08366V2.91699H11.2912C11.0602 2.91699 10.873 3.10345 10.873 3.33366V5.00033C10.873 5.23053 11.0602 5.41699 11.2912 5.41699ZM11.7094 3.75033H12.5458C12.7768 3.75033 12.964 3.56387 12.964 3.33366V2.50033H13.8003V3.33366C13.8003 3.56387 13.9875 3.75033 14.2185 3.75033H15.0549V4.58366H14.2185C13.9875 4.58366 13.8003 4.77012 13.8003 5.00033V5.83366H12.964V5.00033C12.964 4.77012 12.7768 4.58366 12.5458 4.58366H11.7094V3.75033Z"
-                            fill="#A9A9A9"
-                          />
-                          <path d="M7.52734 7.91699H8.36371V8.75033H7.52734V7.91699Z" fill="#A9A9A9" />
-                          <path d="M9.2002 7.91699H15.0547V8.75033H9.2002V7.91699Z" fill="#A9A9A9" />
-                          <path d="M7.52734 10.833H12.5455V11.6663H7.52734V10.833Z" fill="#A9A9A9" />
-                          <path d="M13.3818 10.833H14.6364V11.6663H13.3818V10.833Z" fill="#A9A9A9" />
-                          <path d="M7.52734 12.5H10.8728V13.3333H7.52734V12.5Z" fill="#A9A9A9" />
-                          <path d="M11.709 12.5H15.4726V13.3333H11.709V12.5Z" fill="#A9A9A9" />
-                          <path
-                            d="M4.59982 9.58301H6.27255C6.5036 9.58301 6.69074 9.39655 6.69074 9.16634V7.49967C6.69074 7.26947 6.5036 7.08301 6.27255 7.08301H4.59982C4.36878 7.08301 4.18164 7.26947 4.18164 7.49967V9.16634C4.18164 9.39655 4.36878 9.58301 4.59982 9.58301ZM5.01801 7.91634H5.85437V8.74968H5.01801V7.91634Z"
-                            fill="#A9A9A9"
-                          />
-                          <path
-                            d="M4.59982 13.333H6.27255C6.5036 13.333 6.69074 13.1465 6.69074 12.9163V11.2497C6.69074 11.0195 6.5036 10.833 6.27255 10.833H4.59982C4.36878 10.833 4.18164 11.0195 4.18164 11.2497V12.9163C4.18164 13.1465 4.36878 13.333 4.59982 13.333ZM5.01801 11.6663H5.85437V12.4997H5.01801V11.6663Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-
-                        <ng-container>
-                          Licencia médica
-                        </ng-container>
-                      </td>
-                      <td class="text-center">
-                        22/93/2020
-                      </td>
-                      <td class="text-center">
-                        Dr. Alfonso Torres
-                      </td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Descargar
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                  <tbody></tbody>
                 </table>
               </div>
             </div>
@@ -976,91 +710,106 @@
         <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline">
           <div class="row">
             <div class="col-12">
-              <div class="bg-white p-5 rounded-lg text-center">
-                <h5 class="mb-0 text-left">Timeline de consultas</h5>
+              <div class="bg-white p-4 rounded-lg text-center" *ngIf="timelineRecord.length">
+                <h5 class="mb-0 text-left">Timeline de Consultas</h5>
                 <div class="timeLine">
-                  <div class="line bg-white">2020</div>
+                  <div class="line bg-white">{{ moment().format('YYYY') }}</div>
                   <div class="line">
                     <button class="btn btn-secondary rounded-lg">
-                      Agosto
+                      {{ moment().format('MMMM') }}
                     </button>
                   </div>
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <h3>11</h3>
-                        12:45 Hrs.
-                      </div>
-                      <div class="col p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
-                        </svg>
-                      </div>
-                      <div class="col-5 text-left p-0">
-                        <button class="btn btn-primary dos rounded-lg">
-                          Cuenta agendada
-                        </button>
+                  <ng-container *ngFor="let item of timelineRecord">
+                    <div class="line">
+                      <div class="row align-items-center">
+                        <div class="col-5 text-right p-0">
+                          <h3>{{ moment(item.date).format('DD') }}</h3>
+                          {{ item.startAt }} Hrs.
+                        </div>
+                        <div class="col p-0">
+                          <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 15 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
+                          </svg>
+                        </div>
+                        <div class="col-5 text-left p-0">
+                          <button class="btn btn-primary dos rounded-lg">
+                            {{
+                              item.status === 'reserved'
+                                ? 'Reservada'
+                                : item.status === 'appointed'
+                                ? 'Agendada'
+                                : item.status === 'rescheduled'
+                                ? 'Re-Agendada'
+                                : item.status === 'active'
+                                ? 'Activa'
+                                : item.status === 'waitingInRoom'
+                                ? 'En Sala de Espera'
+                                : item.status === 'waitingInList'
+                                ? 'En Lista de Espera'
+                                : item.status === 'running'
+                                ? 'En Curso'
+                                : item.status === 'pending'
+                                ? 'Pendiente'
+                                : item.status === 'finished'
+                                ? 'Finalizada'
+                                : item.status === 'canceled'
+                                ? 'Cancelada'
+                                : 'S/R'
+                            }}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <h3>23</h3>
-                        12:45 Hrs.
-                      </div>
-                      <div class="col-2 p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
-                        </svg>
-                      </div>
-                      <div class="col-5 text-left p-0">
-                        <div class="box">
-                          <div class="boxCont text-center">
-                            <div class="row">
-                              <div class="col-3"></div>
-                              <div class="col-9">
-                                <p class="m-0 text-left">Cita agendada con</p>
-                                <p class="m-0 text-left">Dr. Alberto Zuckernberg</p>
-                                <div class="btn btn-primary btn-sm rounded-pill float-left">
-                                  Activo
+                    <div class="line">
+                      <div class="row align-items-center">
+                        <div class="col-5 text-right p-0">
+                          <div class="box">
+                            <div class="boxCont text-center">
+                              <div class="row">
+                                <div class="col-3">
+                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                </div>
+                                <div class="col-9">
+                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">
+                                    Dr. {{ item.professional.name }} {{ item.professional.lastName }}
+                                  </p>
+                                  <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
+                                    <ng-container *ngIf="item.isActive; else inactivo">
+                                      Activo
+                                    </ng-container>
+                                    <ng-template #inactivo>Inactivo</ng-template>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <div class="box">
-                          <div class="boxCont text-center">
-                            <div class="row">
-                              <div class="col-3"></div>
-                              <div class="col-9">
-                                <p class="m-0 text-left">Cita agendada con</p>
-                                <p class="m-0 text-left">Dr. Alberto Zuckernberg</p>
-                                <div class="btn btn-primary btn-sm rounded-pill float-left">
-                                  Activo
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        <div class="col-2 p-0">
+                          <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 15 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
+                          </svg>
                         </div>
-                      </div>
-                      <div class="col-2 p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
-                        </svg>
-                      </div>
-                      <div class="col-5 text-left p-0">
-                        <h3>24</h3>
-                        12:45 Hrs.
+                        <!--
+                        <div class="col-5 text-left p-0">
+                          <h3>24</h3>
+                          12:45 Hrs.
+                        </div>-->
                       </div>
                     </div>
-                  </div>
+                  </ng-container>
                 </div>
 
                 <!-- Add the timeline -->
@@ -1092,6 +841,54 @@
         <!--/tab-->
       </div>
       <!--/tabs-->
+    </div>
+  </div>
+</div>
+
+<!-- Modal Documentos & Examenes -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFile" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">Cargar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="fileForm" novalidate="">
+          <!-- -->
+          <div class="row">
+            <div class="form-group col">
+              <label for="type">Tipo</label>
+              <select class="form-control" name="type" id="type" formControlName="type">
+                <option [value]="null">- Seleccionar -</option>
+                <option value="exam">Examen</option>
+                <option value="document">Documento</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="dateBlock">Documento</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  (change)="openFile($event)"
+                  id="customFile"
+                  style="overflow: hidden;"
+                />
+                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="uploadFile()">
+          Agregar
+        </button>
+      </div>
     </div>
   </div>
 </div>

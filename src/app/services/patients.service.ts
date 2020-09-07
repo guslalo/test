@@ -17,6 +17,10 @@ export class PatientsService {
     return this.http.get<any>(environment.baseUrl + this.professionals + '/patients');
   }
 
+  getPrePatientsForProfesional(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.professionals + '/prePatients');
+  }
+
   createPrePatient(patientObject): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.patients + '/prePatient', patientObject);
   }
