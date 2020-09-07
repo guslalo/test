@@ -7,6 +7,7 @@ import { environment } from './../../environments/environment';
   providedIn: 'root',
 })
 export class PatientsService {
+  private account = 'v1/account';
   private professionals = 'v1/professionals';
   private patients = 'v1/patient';
 
@@ -21,7 +22,15 @@ export class PatientsService {
     return this.http.get<any>(environment.baseUrl + this.professionals + '/prePatients');
   }
 
+  getPrePatient(prePatientId: string): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.account + '/finish-registration/' + prePatientId);
+  }
+
   createPrePatient(patientObject): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.patients + '/prePatient', patientObject);
+  }
+
+  sendInvitationEmail(patientId): Observable<any> {
+    return this.http.patch<any>(environment.baseUrl + this.professionals + '/sendInvitation/' + patientId, {});
   }
 }

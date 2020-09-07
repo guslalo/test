@@ -17,11 +17,12 @@ export class MisPacientesComponent implements OnInit {
   temp: any[] = [];
   searchTerm: string = '';
 
-  tab: any = 'patients';
+  tab: any = 'pre-patients';
   page = 1;
   pageSize = 7;
   moment: any = moment;
   patientIsEdit: boolean = false;
+  emailSent: boolean = false;
 
   ColumnMode = ColumnMode;
   patientForm: FormGroup;
@@ -36,7 +37,7 @@ export class MisPacientesComponent implements OnInit {
     // console.log(this.currentUserService.currentUser);
 
     this.fetchPatients();
-    // this.fetchPrePatients();
+    this.fetchPrePatients();
 
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
@@ -53,7 +54,7 @@ export class MisPacientesComponent implements OnInit {
   fetchPatients() {
     this.patientService.getPatientsForProfesional().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         // NO PATIENTS FOUND
         if (!data.payload.length) {
           this.patients = [];
@@ -73,11 +74,11 @@ export class MisPacientesComponent implements OnInit {
       (data) => {
         console.log(data);
         // NO PATIENTS FOUND
-        if (!data.length) {
+        if (!data.payload.length) {
           this.prePatients = [];
         } else {
-          this.temp = [...data];
-          this.prePatients = data;
+          this.temp = [...data.payload];
+          this.prePatients = data.payload;
         }
       },
       (error) => {
@@ -112,5 +113,19 @@ export class MisPacientesComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+
+    setTimeout(() => {
+      this.fetchPrePatients();
+    }, 1000);
+  }
+
+  sendInvitationEmail(patientId) {
+    this.emailSent = false;
+    this.patientService.sendInvitationEmail(patientId).subscribe(
+      () => {
+        this.emailSent = true;
+      },
+      (error) => console.log(error)
+    );
   }
 }

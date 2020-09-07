@@ -1,0 +1,740 @@
+<div class="container-fluid h-100 d-inline-block" id="login">
+  <div class="row h-100">
+    <!--columnleft-->
+    <div class="col-12 col-md-4 left d-none d-md-block">
+      <app-left-column></app-left-column>
+    </div>
+    <!--/columnleft-->
+
+    <div class="col-12 col-md-8 right">
+      <!--lang component-->
+      <div class="boxIdioma">
+        <app-lang></app-lang>
+      </div>
+      <!--/lang component-->
+
+      <div class="row vertical-center h-100">
+        <div class="col-12 col-md-9 col-lg-8 mx-auto p-3 align-self-center">
+          <img class="d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms" />
+          <div class="row">
+            <div class="col">
+              <h2>Completar Registro</h2>
+            </div>
+          </div>
+          <p>{{ 'crear-cuenta.ingrese' | transloco }}</p>
+          <!--stepper-->
+          <mat-vertical-stepper linear #stepper>
+            <!-- paso 1-->
+            <mat-step [stepControl]="identificationData">
+              <ng-template matStepLabel>
+                <h4>{{ 'crear-cuenta.step1.subtitle' | transloco }}</h4>
+              </ng-template>
+              <div class="custom-control custom-checkbox custom-control-inline mb-2">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="isForeign"
+                  [(ngModel)]="isForeign"
+                  (change)="validateForm()"
+                />
+                <label class="custom-control-label" for="isForeign">{{
+                  'crear-cuenta.step1.isForeign' | transloco
+                }}</label>
+              </div>
+              <form [formGroup]="identificationData">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="document">{{ 'crear-cuenta.step1.formGroup.document' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="document"
+                      formControlName="document"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('document').valid && identificationData.get('document').touched
+                      }"
+                      (change)="validateForm()"
+                    >
+                      <option disabled [value]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option value="cpf">CPF</option>
+                      <option value="cns">CNS</option>
+                      <option value="rgRegistry">RG</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="idDocumentNumber"
+                      >{{ 'crear-cuenta.step1.formGroup.idDocumentNumber' | transloco }} *</label
+                    >
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="idDocumentNumber"
+                      formControlName="idDocumentNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('idDocumentNumber').valid &&
+                          identificationData.get('idDocumentNumber').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="issuingBody">{{ 'crear-cuenta.step1.formGroup.issuingBody' | transloco }}</label>
+                    <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="passport">{{ 'crear-cuenta.step1.formGroup.passport' | transloco }}</label>
+                    <input
+                      [attr.disabled]="!isForeign ? '' : null"
+                      type="text"
+                      class="form-control"
+                      name="passport"
+                      formControlName="passport"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('passport').valid && identificationData.get('passport').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="document">{{ 'crear-cuenta.step1.formGroup.extraDocument' | transloco }}</label>
+                    <select
+                      class="form-control"
+                      name="extraDocument"
+                      formControlName="extraDocument"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('extraDocument').valid &&
+                          identificationData.get('extraDocument').touched
+                      }"
+                    >
+                      <option disabled [value]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option value="cbo">CBO-R</option>
+                      <option value="pasep">PIS/PASEP</option>
+                      <option value="ctps">CTPS</option>
+                      <option value="idDocumentNumber">Numero de Identidad</option>
+                      <option value="titleVote">Titulo de Votante</option>
+                      <option value="professionalUfNumber">Registro Clase Profesional</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="idDocumentNumber">{{
+                      'crear-cuenta.step1.formGroup.extraIdDocument' | transloco
+                    }}</label>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="extraIdDocument"
+                      formControlName="extraIdDocument"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('extraIdDocument').valid &&
+                          identificationData.get('extraIdDocument').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                    matStepperNext
+                    [disabled]="!identificationData.valid"
+                  >
+                    {{ 'steps.next' | transloco }}
+                  </button>
+                </div>
+              </form>
+            </mat-step>
+            <!-- /paso 1-->
+
+            <!-- paso 2-->
+            <mat-step [stepControl]="personalData">
+              <form [formGroup]="personalData" novalidate="" class="">
+                <ng-template matStepLabel>
+                  <h4>{{ 'crear-cuenta.step2.subtitle' | transloco }}</h4>
+                </ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="name">{{ 'crear-cuenta.step2.formGroup.name' | transloco }} *</label>
+                    <input disabled type="text" name="name" id="name" class="form-control" formControlName="name" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="lastName">{{ 'crear-cuenta.step2.formGroup.lastName' | transloco }}</label>
+                    <input
+                      disabled
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      class="form-control"
+                      formControlName="lastName"
+                    />
+                  </div>
+                </div>
+                <!--/row-->
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-4">
+                    <label for="motherName">{{ 'crear-cuenta.step2.formGroup.motherName' | transloco }} *</label>
+                    <input
+                      type="text"
+                      name="motherName"
+                      id="motherName"
+                      class="form-control"
+                      placeholder=""
+                      formControlName="motherName"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('motherName').valid && personalData.get('motherName').touched
+                      }"
+                    />
+                    <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step2.formGroup.motherName' | transloco }}
+                      es necesario
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-4">
+                    <label for="motherName">{{ 'crear-cuenta.step2.formGroup.secondLastName' | transloco }} *</label>
+                    <input
+                      disabled
+                      type="text"
+                      name="secondLastName"
+                      id="secondLastName"
+                      class="form-control"
+                      placeholder=""
+                      formControlName="secondLastName"
+                    />
+                    <div *ngIf="personalData.controls['secondLastName'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step2.formGroup.secondLastName' | transloco }}
+                      es necesario
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="gender">{{ 'crear-cuenta.step2.formGroup.gender' | transloco }} *</label>
+                    <select
+                      disabled
+                      formControlName="gender"
+                      name="gender"
+                      id="gender"
+                      class="form-control"
+                      placeholder=""
+                      class="form-control"
+                      id="gender"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('gender').valid && personalData.get('gender').touched
+                      }"
+                    >
+                      <option value="male">Masculino</option>
+                      <option value="female">Femenino</option>
+                    </select>
+                    <div *ngIf="personalData.controls['gender'].errors?.required" class="invalid-feedback">
+                      indique su sexo
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="email">Email *</label>
+                    <input disabled type="email" name="email" id="email" class="form-control" formControlName="email" />
+                  </div>
+                  <div class="form-group col-12 col-md-3">
+                    <label for="phoneNumber">{{ 'crear-cuenta.step2.formGroup.phoneNumber' | transloco }} *</label>
+                    <input
+                      disabled
+                      name="text"
+                      name="phoneNumber"
+                      id="phoneNumber"
+                      type="text"
+                      class="form-control"
+                      formControlName="phoneNumber"
+                    />
+                  </div>
+                  <div class="form-group col-12 col-md-3">
+                    <label for="breed">{{ 'crear-cuenta.step2.formGroup.breed' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="breed"
+                      formControlName="breed"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of breeds">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="personalData.controls['breed'].errors?.required" class="invalid-feedback">
+                      raza es necesaria
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-5 pb-5">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious
+                    >
+                      {{ 'steps.back' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!personalData.valid"
+                    >
+                      {{ 'steps.next' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form> </mat-step
+            ><!-- /paso 2-->
+
+            <!-- paso 2-->
+            <mat-step [stepControl]="birthData">
+              <form [formGroup]="birthData">
+                <ng-template matStepLabel>
+                  <h4>{{ 'crear-cuenta.step3.subtitle' | transloco }}</h4>
+                </ng-template>
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="birthdate"> {{ 'crear-cuenta.step3.formGroup.birthdate' | transloco }} *</label>
+                    <div class="input-group dateregister">
+                      <!--[minDate]="minDate"-->
+                      <input
+                        [placement]="placement"
+                        class="form-control"
+                        id="birthdate"
+                        [maxDate]="maxDate"
+                        [minDate]="minDate"
+                        placeholder="yyyy-mm-dd"
+                        name="birthdate"
+                        ngbDatepicker
+                        #d="ngbDatepicker"
+                        formControlName="birthdate"
+                        [ngClass]="{
+                          'is-invalid': !birthData.get('birthdate').valid && birthData.get('birthdate').touched
+                        }"
+                        (click)="d.toggle()"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                    <div *ngIf="birthData.controls['birthdate'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step3.formGroup.birthdate' | transloco }} erroneo
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="ufBirth">{{ 'crear-cuenta.step3.formGroup.ufBirth' | transloco }}</label>
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="ufBirth"
+                      formControlName="ufBirth"
+                      [ngClass]="{
+                        'is-invalid': !birthData.get('ufBirth').valid && birthData.get('ufBirth').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="birthData.controls['ufBirth'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step3.formGroup.ufBirth' | transloco }} erroneo
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="municipalityBirth">{{
+                      'crear-cuenta.step3.formGroup.municipalityBirth' | transloco
+                    }}</label>
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="municipalityBirth"
+                      formControlName="municipalityBirth"
+                      [ngClass]="{
+                        'is-invalid':
+                          !birthData.get('municipalityBirth').valid && birthData.get('municipalityBirth').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="birthData.controls['municipalityBirth'].errors?.pattern" class="invalid-feedback">
+                      error
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="confirmPasword">{{ 'crear-cuenta.step3.formGroup.nacionality' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="nacionality"
+                      formControlName="nacionality"
+                      [ngClass]="{
+                        'is-invalid': !birthData.get('nacionality').valid && birthData.get('nacionality').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="birthData.controls['nacionality'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step3.formGroup.nacionality' | transloco }} erroneo
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-5 pb-5">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious
+                    >
+                      {{ 'steps.back' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!birthData.valid"
+                    >
+                      {{ 'steps.next' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form> </mat-step
+            ><!-- /paso 2-->
+
+            <!--paso 3-->
+            <mat-step [stepControl]="addressData">
+              <form [formGroup]="addressData">
+                <ng-template matStepLabel>
+                  <h4>{{ 'crear-cuenta.step4.subtitle' | transloco }}</h4>
+                </ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="cep">{{ 'crear-cuenta.step4.formGroup.cep' | transloco }} *</label>
+                    <input
+                      type="text"
+                      name="cep"
+                      id="cep"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{ 'is-invalid': !addressData.get('cep').valid && addressData.get('cep').touched }"
+                      formControlName="cep"
+                    />
+                    <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step4.formGroup.cep' | transloco }} es necesario
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="uf">{{ 'crear-cuenta.step4.formGroup.uf' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="uf"
+                      formControlName="uf"
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="addressData.controls['uf'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step4.formGroup.uf' | transloco }} es necesario
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="city">{{ 'crear-cuenta.step4.formGroup.city' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="city"
+                      formControlName="city"
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('city').valid && addressData.get('city').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'crear-cuenta.select' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="addressData.controls['city'].errors?.required" class="invalid-feedback">
+                      ciudad necesario
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="neighborhood">{{ 'crear-cuenta.step4.formGroup.neighborhood' | transloco }} *</label>
+                    <input
+                      type="text"
+                      name="neighborhood"
+                      id="neighborhood"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('neighborhood').valid && addressData.get('neighborhood').touched
+                      }"
+                      formControlName="neighborhood"
+                    />
+                    <div *ngIf="addressData.controls['neighborhood'].errors?.required" class="invalid-feedback">
+                      Barrio es necesario
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="street">{{ 'crear-cuenta.step4.formGroup.street' | transloco }} *</label>
+                    <input
+                      type="text"
+                      name="street"
+                      id="street"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('street').valid && addressData.get('street').touched
+                      }"
+                      formControlName="street"
+                    />
+                    <div *ngIf="addressData.controls['street'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step4.formGroup.street' | transloco }} es necesario
+                    </div>
+                  </div>
+
+                  <div class="form-group col-12 col-md-6">
+                    <label for="streetNumber">{{ 'crear-cuenta.step4.formGroup.streetNumber' | transloco }} *</label>
+                    <input
+                      name="streetNumber"
+                      name="streetNumber"
+                      id="streetNumber"
+                      type="text"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('streetNumber').valid && addressData.get('streetNumber').touched
+                      }"
+                      formControlName="streetNumber"
+                    />
+                    <div *ngIf="addressData.controls['streetNumber'].errors?.required" class="invalid-feedback">
+                      {{ 'crear-cuenta.step4.formGroup.streetNumber' | transloco }} es necesario
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious
+                    >
+                      {{ 'steps.back' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!addressData.valid"
+                    >
+                      {{ 'steps.next' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form> </mat-step
+            ><!--/paso 3-->
+
+            <!--paso 4-->
+            <mat-step [stepControl]="passwordData">
+              <form [formGroup]="passwordData">
+                <ng-template matStepLabel
+                  ><h4>{{ 'crear-cuenta.step5.subtitle' | transloco }}</h4></ng-template
+                >
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="password">{{ 'crear-cuenta.step5.formGroup.password' | transloco }} *</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
+                      }"
+                      formControlName="password"
+                      maxlength="16"
+                    />
+                    <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.1' | transloco }}</li>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.2' | transloco }}</li>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.3' | transloco }}</li>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.4' | transloco }}</li>
+                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.5' | transloco }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="confirmPasword"
+                      >{{ 'crear-cuenta.step5.formGroup.confirmPassword' | transloco }} *</label
+                    >
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid':
+                          passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
+                      }"
+                      formControlName="confirmPassword"
+                      maxlength="20"
+                    />
+                    <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
+                      {{ 'crear-cuenta.step5.formGroup.passwordNotMatch' | transloco }}
+                    </div>
+                  </div>
+                </div>
+                <password-strength-meter [password]="passwordData.value.password"></password-strength-meter>
+                <div class="row">
+                  <div class="col">
+                    <div class="alert alert-secondary" role="alert">
+                      <div class="row">
+                        <div class="col-2 text-center">
+                          <svg
+                            width="3em"
+                            height="3em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-shield-lock-fill color-primary"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="col-10 pl-0">
+                          {{ 'crear-cuenta.step5.formGroup.remember' | transloco }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious
+                    >
+                      {{ 'steps.back' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      type="submit"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!passwordData.valid"
+                    >
+                      {{ 'steps.next' | transloco }}
+                    </button>
+                  </div>
+                </div>
+                <!--/row-->
+              </form> </mat-step
+            ><!--/paso 4-->
+          </mat-vertical-stepper>
+          <!--/stepper-->
+
+          <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg.toUpperCase() }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut tellus sed sapien semper egestas et in nibh.
+        Duis cursus ipsum sagittis, laoreet velit in, rhoncus tellus. Orci varius natoque penatibus et magnis dis
+        parturient montes, nascetur ridiculus mus. Ut ur ornare. Pellentesque maximus erat ex, non pulvinar sapien
+        fermentum ut. Vestibulum fringilla ac urna at sagittis. Nullam tincidunt tellus quis aliquet sollicitudin. Nulla
+        eget fermentum urna. Aenean sit amet orci posuere, pellentesque risus ut, blandit risus. Nulla molestie pharetra
+        orci, ut ornare massa porttitor non. Suspendisse per. In hac habitasse platea dictumst. Cras consectetur luctus
+        nibh, nec bibendum justo facilisamet neque vel nisl iaculis porttitor. Integer purus ante, interdum sollicitudin
+        nibh faucibus, sollicitudin porta lorem. Maecenas quis nulla mattis justo laoreet viverra. Duis vitae lectus nec
+        nulla viverra congue in sit amet quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu
+        laoreet velit. In ac orci eget ort. Suspendisse potenti. Etiam ac rutrum nisl. Maecenas sed neque ex. Morbi
+        vitae nulla ut augue suscipit elementum. Quisque nulla arcu, mattis ut vehicula at, laoreet et est. Quisque
+        lobortis laoreet odio at pretium. In hac habitasse platea dictumst. Nulla aliquet, dolor non condimentum
+        aliquam, diam nibh scelerisque est, et sagittis sem eros eleifend erat. Quisque iaculis faucibus eros non
+        malesuada. Sed tellus quam, egestas nec leo in, hendrerit euismod sem. Curabitur aliquet tellus sed ante
+        lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Rechazar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCuenta()">
+          Aceptar y crear cuenta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>

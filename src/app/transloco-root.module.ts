@@ -29,7 +29,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
         availableLangs: ['en', 'es'],
-        defaultLang: navigator.language,
+        defaultLang: navigator.language.toString().substr(0, 2),
         // Remove this option if your application doesn't support changing language in runtime.
 
         reRenderOnLangChange: true,

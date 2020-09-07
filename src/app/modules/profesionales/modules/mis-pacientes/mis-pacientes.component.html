@@ -79,7 +79,7 @@
                       </a>
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Edad">
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{ moment().diff(row.personalData.birthdate, 'year') }}
                     </ng-template>
@@ -125,48 +125,81 @@
                   [limit]="pageSize"
                   [selectAllRowsOnPage]="true"
                 >
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      <span>{{
-                        row.identificationData.cpf ||
-                          row.identificationData.cns ||
-                          row.identificationData.rgRegistry ||
-                          row.identificationData.passport
-                      }}</span>
-                    </ng-template>
-                  </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
-                        <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{
-                          row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName)
-                        }}
-                      </a>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Edad">
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="email" name="Correo">
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{ moment().diff(row.personalData.birthdate, 'year') }}
+                      {{ moment().diff(row.age, 'year') }}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo"
-                    ><ng-template let-row="row" ngx-datatable-cell-template>
-                      {{
-                        row.personalData.gender === 'male'
-                          ? 'Masculino'
-                          : row.personalData.gender === 'female'
-                          ? 'Femenino'
-                          : 'S/R'
-                      }}
-                    </ng-template></ngx-datatable-column
-                  >
-                  <ngx-datatable-column
-                    [resizeable]="false"
-                    [flexGrow]="2"
-                    prop="personalData.phoneNumber"
-                    name="Telefono"
-                  >
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.gender === 'male' ? 'Masculino' : row.gender === 'female' ? 'Femenino' : 'S/R' }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phoneNumber" name="Telefono">
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
+                        {{
+                          row.status === 'joined'
+                            ? 'Ingresado'
+                            : row.status === 'pending'
+                            ? 'Pendiente'
+                            : row.status === 'active'
+                            ? 'Activo'
+                            : 'S/R'
+                        }}
+                      </button>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div ngbDropdown container="body">
+                        <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </button>
+                        <div ngbDropdownMenu>
+                          <button
+                            ngbDropdownItem
+                            type="button"
+                            [routerLink]="['editar-usuario']"
+                            [queryParams]="{ userType: 'patients', userId: row._id }"
+                          >
+                            Editar
+                          </button>
+                          <button
+                            *ngIf="row.status === 'joined' || row.status == 'pending'"
+                            ngbDropdownItem
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="sendInvitationEmail(row._id)"
+                          >
+                            Enviar Invitacion a Correo
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>
                 <ng-template #noData>
@@ -182,7 +215,17 @@
     <div [ngbNavOutlet]="nav"></div>
   </div>
 
-  <!-- Patient Modal -->
+  <ngb-toast
+    *ngIf="emailSent"
+    class="bg-success text-light"
+    [delay]="5000"
+    [autohide]="true"
+    (hide)="emailSent = false"
+  >
+    <div>Correo Enviado Exitosamente</div>
+  </ngb-toast>
+
+  <!-- PATIENT MODAL -->
   <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
