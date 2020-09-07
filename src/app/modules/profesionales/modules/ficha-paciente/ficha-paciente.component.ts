@@ -32,6 +32,9 @@ export class FichaPacienteComponent implements OnInit {
   downloadUrl: any;
   access_token: any;
 
+  tempAppointments: any[] = [];
+  searchTerm: string = '';
+
   public fileForm: FormGroup;
   public base64: any;
   public nameFile: any;
@@ -66,6 +69,7 @@ export class FichaPacienteComponent implements OnInit {
         // console.log(data.payload[0].patientData);
         this.patientRecord = data.payload.patientData;
         this.appointmentsRecord = data.payload.appointments;
+        this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
 
@@ -150,5 +154,26 @@ export class FichaPacienteComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  applyFiltersAppointments() {
+    const searchTerm = this.searchTerm.toLowerCase();
+
+    const temp = this.tempAppointments
+      // SEARCH FILTER
+      .filter((item) => {
+        // console.log(patient);
+        return (
+          item.patientDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+          moment(item.dateDetails.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.dateDetails.start.toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.professionalDetails.specialtyDetails[0]?.specialtyName.toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+    this.appointmentsRecord = temp;
+
+    // console.log(temp);
   }
 }

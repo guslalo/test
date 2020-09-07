@@ -14,7 +14,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 export class MisPacientesComponent implements OnInit {
   patients: any[] = [];
   prePatients: any[] = [];
-  temp: any[] = [];
+  tempPatients: any[] = [];
+  tempPrePatients: any[] = [];
   searchTerm: string = '';
 
   tab: any = 'patients';
@@ -57,7 +58,7 @@ export class MisPacientesComponent implements OnInit {
         // console.log(data);
         // NO PATIENTS FOUND
         if (Array.isArray(data.payload)) {
-          this.temp = [...data.payload];
+          this.tempPatients = [...data.payload];
           this.patients = data.payload;
         }
       },
@@ -73,7 +74,7 @@ export class MisPacientesComponent implements OnInit {
         console.log(data);
         // NO PATIENTS FOUND
         if (Array.isArray(data.payload)) {
-          this.temp = [...data.payload];
+          this.tempPrePatients = [...data.payload];
           this.prePatients = data.payload;
         }
       },
@@ -123,5 +124,44 @@ export class MisPacientesComponent implements OnInit {
       },
       (error) => console.log(error)
     );
+  }
+
+  applyFilters(tab) {
+    const searchTerm = this.searchTerm.toLowerCase();
+    var temp = [];
+
+    if (tab === 'patients') {
+      temp = this.tempPatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          // console.log(patient);
+          return (
+            patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.patients = temp;
+    }
+
+    if (tab === 'pre-patients') {
+      temp = this.tempPrePatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          console.log(patient);
+          return (
+            patient.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.secondLastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.email.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.prePatients = temp;
+    }
+
+    // console.log(temp);
   }
 }
