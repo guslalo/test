@@ -123,6 +123,7 @@ export class FichaPacienteComponent implements OnInit {
         this.spinner.hide();
       }
     );
+    this.applyFiltersAppointments();
   }
 
   getIdentification(data) {
