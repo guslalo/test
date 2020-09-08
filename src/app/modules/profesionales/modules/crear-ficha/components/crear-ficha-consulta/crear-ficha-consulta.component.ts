@@ -27,6 +27,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
+  public userId:any;
 
   constructor( 
     private route: ActivatedRoute,
@@ -202,6 +203,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload[0];
+        this.userId = this.appointmentDetail.professionalDetails.userDetails[0].userId;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails[0].userId)
         console.log(this.appointmentDetail);
       },
