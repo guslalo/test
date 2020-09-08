@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
@@ -21,17 +21,20 @@ export class CrearFichaConsultaComponent implements OnInit {
   public timeline: any;
   public fecha:any;
   public professionalData:any;
+  public appointmentId:any;
 
   constructor( 
     private route: ActivatedRoute,
     private appointmentsService:AppointmentsService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-
+    
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
+      this.appointmentId = params.appointmentId;
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
@@ -80,6 +83,48 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     )
   }
+
+
+  runAppointment(appointmentId, event){
+    this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
+      data => {
+        console.log(data);
+        this.getAppointmentsDetails(appointmentId);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  endTeleconsultation(appointmentId, event){
+    this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
+      data => {
+        console.log(data);
+        this.getAppointmentsDetails(appointmentId);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+    }
+    
+    finish(appointmentId, event){
+      this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
+        data => {
+          console.log(data);
+          this.getAppointmentsDetails(appointmentId);
+          this.router.navigate(['/app-professional']);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+
+
+
+
   getAppointmentsProfessionalData(id){
     this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
       data => { 

@@ -398,7 +398,10 @@
                           </a>
                       </ng-container>
                       <ng-container 
-                        *ngIf="item.administrativeDetails.status === 'running' || item.administrativeDetails.status === 'active'">
+                        *ngIf="item.administrativeDetails.status === 'running' 
+                        || item.administrativeDetails.status === 'active' || 
+                        item.administrativeDetails.status === 'appointed' || 
+                        item.administrativeDetails.status === 'pending'">
                           <a routerLink="crear-ficha-consulta/{{item._id}}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                               atender

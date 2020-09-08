@@ -2,10 +2,30 @@
   <ng-container *ngIf="appointmentDetail">
   
   <div class="row mb-3">
-    <div class="col-9 col-md-9">
+    <div class="col-6 col-md-6">
       <h2>Ficha Consulta</h2>
     </div>
-    <div class="col-3 col-md-3">
+    <div class="col-6 col-md-6">
+      <button *ngIf="appointmentDetail.administrativeDetails.status === 'appointed'" 
+      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block"
+      (click)="runAppointment(appointmentDetail._id, 'run')"
+      >
+        Iniciar
+      </button>
+      <button 
+      *ngIf="appointmentDetail.administrativeDetails.status === 'running'"
+      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block ml-2"
+      (click)="endTeleconsultation(appointmentDetail._id, 'end-teleconsultation')"
+      >
+        Finalizar llamada
+      </button>
+      <button 
+      *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
+      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block ml-2"
+      (click)="finish(appointmentDetail._id, 'finish')"
+      >
+        Finalizar consulta
+      </button>
       <a href="javascript:history.back()" class="back float-right align-top">
         <svg
           width="2em"
