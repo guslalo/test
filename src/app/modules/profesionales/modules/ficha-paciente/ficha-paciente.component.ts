@@ -28,6 +28,7 @@ export class FichaPacienteComponent implements OnInit {
   identification: any = {};
   ufMap: any = [];
   cityMap: any = [];
+  countryMap: any = [];
 
   // EXTRAS
   moment: any = moment;
@@ -95,6 +96,14 @@ export class FichaPacienteComponent implements OnInit {
         this.userService.getCities().subscribe((data) => {
           // console.log(data);
           this.cityMap = data.payload.reduce((obj, item) => {
+            obj[item._id] = item;
+            return obj;
+          }, {});
+        });
+
+        this.userService.getCountries().subscribe((data) => {
+          // console.log(data);
+          this.countryMap = data.payload.reduce((obj, item) => {
             obj[item._id] = item;
             return obj;
           }, {});
@@ -176,6 +185,10 @@ export class FichaPacienteComponent implements OnInit {
       // SEARCH FILTER
       .filter((item) => {
         return (
+          (item.patientDetails.patientId[0].identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
+            item.patientDetails.patientId[0].identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
+            item.patientDetails.patientId[0].identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
+            item.patientDetails.patientId[0].identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
           item.patientDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
           item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
           moment(item.dateDetails.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
