@@ -8,6 +8,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { DocumentService } from 'src/app/services/document.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { CustomDateAdapter } from 'src/app/shared/utils';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -18,6 +20,7 @@ export class FichaPacienteComponent implements OnInit {
   userId = this.routerAct.snapshot.queryParamMap.get('userId');
   patientRecord: any = [];
   appointmentsRecord: any = [];
+
   antecedentsRecord: any = [];
   examsRecord: any = [];
   prescriptionsRecord: any = [];
@@ -32,8 +35,14 @@ export class FichaPacienteComponent implements OnInit {
   downloadUrl: any;
   access_token: any;
 
+  // FILTERS
   tempAppointments: any[] = [];
   searchTerm: string = '';
+  appointmentStatusSelected: any = null;
+  appointmentDateSelected: NgbDateStruct;
+  appointmentCheckBox = 'myAppointments';
+
+  dateAdapter = new CustomDateAdapter();
 
   public fileForm: FormGroup;
   public base64: any;
@@ -45,6 +54,7 @@ export class FichaPacienteComponent implements OnInit {
     private formBuilder: FormBuilder,
     private medicalRecordService: MedicalRecordService,
     private userService: UsersService,
+    private currentUserService: CurrentUserService,
     private documentService: DocumentService,
     private spinner: NgxSpinnerService
   ) {}
@@ -162,7 +172,6 @@ export class FichaPacienteComponent implements OnInit {
     const temp = this.tempAppointments
       // SEARCH FILTER
       .filter((item) => {
-        // console.log(patient);
         return (
           item.patientDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
           item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
@@ -171,9 +180,39 @@ export class FichaPacienteComponent implements OnInit {
           item.professionalDetails.specialtyDetails[0]?.specialtyName.toLowerCase().indexOf(searchTerm) !== -1 ||
           !searchTerm
         );
+      })
+      // STATUS APPOINTMENT FILTER
+      .filter((item) => {
+        if (this.appointmentStatusSelected) {
+          if (item.administrativeDetails.status === this.appointmentStatusSelected) {
+            return item;
+          }
+        } else {
+          return item;
+        }
+      })
+      // DATE APPOINTMENT FILTER
+      .filter((item) => {
+        if (this.appointmentDateSelected) {
+          const date = this.dateAdapter.toModel(this.appointmentDateSelected);
+          console.log(date, item.dateDetails.date);
+          if (moment(item.dateDetails.date).format('YYYY/MM/DD') === date) {
+            return item;
+          }
+        } else {
+          return item;
+        }
+      })
+      // CHECKBOX APPOINTMENTS FILTER
+      .filter((item) => {
+        // console.log(this.currentUserService.currentUser.id, item.professionalDetails.userDetails[0].userId);
+        if (this.appointmentCheckBox === 'allAppointments') return item;
+        if (this.appointmentCheckBox === 'myAppointments') {
+          if (item.professionalDetails.userDetails[0].userId === this.currentUserService.currentUser.id) return item;
+        }
       });
-    this.appointmentsRecord = temp;
 
+    this.appointmentsRecord = temp;
     // console.log(temp);
   }
 }
