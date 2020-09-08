@@ -656,15 +656,6 @@
             <div class="col-6">
               <h5 class="mb-0">Examenes y Documentos</h5>
             </div>
-            <div class="col-6">
-              <button
-                class="btn btn-secondary rounded-pill float-right align-middle"
-                data-toggle="modal"
-                data-target="#uploadFile"
-              >
-                Subir Documento
-              </button>
-            </div>
           </div>
           <div class="row">
             <div class="col-12">
@@ -883,54 +874,6 @@
         <!--/tab-->
       </div>
       <!--/tabs-->
-    </div>
-  </div>
-</div>
-
-<!-- Modal Documentos & Examenes -->
-<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFile" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content p-3">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">Cargar Documento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="fileForm" novalidate="">
-          <!-- -->
-          <div class="row">
-            <div class="form-group col">
-              <label for="type">Tipo</label>
-              <select class="form-control" name="type" id="type" formControlName="type">
-                <option [value]="null">- Seleccionar -</option>
-                <option value="exam">Examen</option>
-                <option value="document">Documento</option>
-              </select>
-            </div>
-            <div class="form-group col">
-              <label for="dateBlock">Documento</label>
-              <div class="custom-file">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  (change)="openFile($event)"
-                  id="customFile"
-                  style="overflow: hidden;"
-                />
-                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="uploadFile()">
-          Agregar
-        </button>
-      </div>
     </div>
   </div>
 </div>
