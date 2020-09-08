@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class PieChartsComponent implements OnInit {
   // single: any[];
-  view: any[] = ['400%', 'auto'];
+  view: any[] = ['250', '250'];
   single = [
     {
       name: 'Germany',

@@ -4,7 +4,7 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
-import { error } from 'protractor';
+
 
 
 @Component({
@@ -43,6 +43,7 @@ export class ConsultaComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
+      console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
     });
@@ -80,7 +81,7 @@ export class ConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
       data => { 
         this.professionalData = data.payload;
-        console.log(this.professionalData)
+        console.log(data)
       },
       error => {
         console.log(error)

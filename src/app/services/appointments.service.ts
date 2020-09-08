@@ -13,8 +13,15 @@ export class AppointmentsService {
   private session = '/session';
   private reserve = '/reserve'
   private consolidate = '/consolidate'
+  private reschedule = '/reschedule' 
 
   constructor(private http: HttpClient) {}
+
+  paramsId(id){
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return params;
+  }
 
   //getAppointments
   getAppointments(number, status?): Observable<any> {
@@ -78,6 +85,14 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
     return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
+  }
+
+
+  //events
+  postRunAppointment(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/reschedule', { params: params });
   }
 
 }

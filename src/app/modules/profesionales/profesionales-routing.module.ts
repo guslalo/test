@@ -36,7 +36,7 @@ const routes: Routes = [
     path: 'professional/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
-  {  path: '', component: InicioPComponent },
+  { path: '', component: InicioPComponent },
   { path: 'context', component: InicioPComponent },
 
   { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
@@ -49,11 +49,11 @@ const routes: Routes = [
     canActivate: [ProfesionalGuard],
   },
   {
-    path: historialConsulta, //historial-consultas
+    path: historialConsulta, 
     loadChildren: () => import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
   },
   {
-    path: 'crear-ficha-consulta',
+    path: 'crear-ficha-consulta/:appointmentId',
     loadChildren: () => import('./modules/crear-ficha/crear-ficha.module').then((m) => m.CrearFichaModule),
   }
 ];
