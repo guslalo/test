@@ -30,6 +30,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public signos: FormGroup;
+  public consultasForm: FormGroup;
+  public diagnostico: FormGroup;
+  public notes: FormGroup;
 
   constructor( 
     private route: ActivatedRoute,
@@ -70,17 +73,55 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.getFecha();
 
     this.signos = this._formBuilder.group({
-      PASS: ['',],
+      PAS: ['',],
+      PAD: ['',],
+      PAmedia: ['',],
+      FC: ['',],
+      FR: ['',],
+      Temp: ['',],
+      Sat: ['',]
       /*
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: [null, Validators.required],*/
     });
+
+    this.consultasForm = this._formBuilder.group({
+      objective: ['',],
+      anamnesis: ['',]
+    });
+
+    this.diagnostico = this._formBuilder.group({
+      diagnostic: ['',],
+      type: ['',],
+      comments: ['',]
+    });
+
+    this.notes = this._formBuilder.group({
+      notes: ['',]
+    });
   }
 
   //update appointmentDetails
   putAppointment(appointmentId){
-    let appointmentObject
+    console.log(this.signos);
+    let appointmentObject = {
+      patientDetails : {
+         vitalSigns: this.signos.value
+      },
+      appointmentDetails:{
+        diagnosticDetails:{
+          type: this.diagnostico.controls.type.value,
+          diagnostic: this.diagnostico.controls.diagnostic.value,
+          comments: this.diagnostico.controls.comments.value
+        },
+        objective:this.consultasForm.controls.objective.value,
+        anamnesis:this.consultasForm.controls.anamnesis.value, 
+        notes:this.notes.controls.notes.value
+        
+      }  
+    }
+    console.log(appointmentObject );
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
       data => {
         console.log(data);
