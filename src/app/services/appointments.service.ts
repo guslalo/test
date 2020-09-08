@@ -95,12 +95,18 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/reschedule', { params: params });
   }
 
+  //postRunAppointment(id): Observable<any> {
+  postEventAppointment(id, event): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.appointments + '/' + event,'', { params: params });
+  }
 
   //postRunAppointment(id): Observable<any> {
-    postEventAppointment(id, event): Observable<any> {
-      let params = new HttpParams();
-      params = params.append('appointmentId', id);
-      return this.http.post<any>(environment.baseUrl + this.appointments + '/' + event,'', { params: params });
-    }
+  putAppointment(id, appointmentDetails): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails , { params: params });
+  }
   
 }

@@ -4,6 +4,7 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
+import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 
 
 
@@ -22,9 +23,14 @@ export class CrearFichaConsultaComponent implements OnInit {
   public fecha:any;
   public professionalData:any;
   public appointmentId:any;
+  public url:string;
+  public antecedentes: any;
+  public antecedentesGeneral: any;
+  public exams: any;
 
   constructor( 
     private route: ActivatedRoute,
+    private medicalRecord: MedicalRecordService,
     private appointmentsService:AppointmentsService,
     private documentService: DocumentService,
     private router: Router
@@ -36,6 +42,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       const id = params.appointmentId
       this.appointmentId = params.appointmentId;
       console.log(params);
+      this.getSession(id);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
     });
@@ -59,6 +66,59 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.getFecha();
   }
 
+  //update appointmentDetails
+  putAppointment(appointmentId, appointmentObject){
+    this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+
+  getMedicalRecord(id) {
+    this.medicalRecord.getByUserId(id).subscribe(
+      (data) => {
+        console.log(data);
+        this.exams = data.payload.exams;
+        // console.log(this.exams);
+        this.antecedentesGeneral = data.payload.antecedent;
+        this.antecedentes = data.payload.antecedent.sickness;
+        // console.log(data.antecedent);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
+  getSession(id: string) {
+    this.appointmentsService.getAppointmentsSession(id).subscribe(
+      (data) => {
+        console.log(data);
+        this.url = data.payload.urlRoom;
+        const options = {
+          roomName: data.payload.sessionId,
+          jwt: data.payload.sessionToken,
+          height: 700,
+          parentNode: document.querySelector('#meet'),
+        };   
+        this.url = data.payload.urlRoom.split('//');
+        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
+        jitsi.executeCommand('subject', 'Consulta');
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getFecha(){
     const fecha = new Date();
     fecha.getFullYear();
@@ -76,6 +136,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsTimeline().subscribe(
       data => { 
         this.timeline = data.payload;
+     
         console.log(this.timeline)
       },
       error => {
@@ -141,6 +202,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload[0];
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails[0].userId)
         console.log(this.appointmentDetail);
       },
       (error) => {
