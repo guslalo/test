@@ -118,7 +118,12 @@
       <!--tabs-->
       <div class="tab-content w-100 mt-3" id="myTabContent">
         <!-- DATOS PACIENTE -->
-        <div class="tab-pane fade pt-2" id="datosPacienteTab" role="tabpanel" aria-labelledby="datosPaciente">
+        <div
+          class="tab-pane fade show active pt-2"
+          id="datosPacienteTab"
+          role="tabpanel"
+          aria-labelledby="datosPaciente"
+        >
           <div class="row">
             <!--bg-white rounded-lg-->
             <div class="col-12">
@@ -232,12 +237,7 @@
         <!--/tab-->
 
         <!-- CONSULTAS -->
-        <div
-          class="tab-pane fade show active"
-          id="consultasPacienteTab"
-          role="tabpanel"
-          aria-labelledby="consultasPaciente"
-        >
+        <div class="tab-pane fade" id="consultasPacienteTab" role="tabpanel" aria-labelledby="consultasPaciente">
           <div class="row mt-2">
             <div class="col-12 col-md-3">
               <input
@@ -457,7 +457,7 @@
                 </a>
                 <div class="collapse" id="collapseExample1">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.sickness">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -492,7 +492,7 @@
                 </a>
                 <div class="collapse" id="collapseExample2">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.familiarHistory">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -527,7 +527,7 @@
                 </a>
                 <div class="collapse" id="collapseExample3">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.medicines">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -562,7 +562,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.healthHabits">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -597,7 +597,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.occupational">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -632,7 +632,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.others">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -691,7 +691,7 @@
                         {{ moment(item.uploadDate).format('DD/MM/YYYY') }}
                       </td>
                       <td class="text-center">
-                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
+                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             Ver documento
                           </button>

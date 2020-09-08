@@ -24,13 +24,13 @@ export class MedicalRecordService {
     }
   }
 
-  getTimeline(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl + this.appointements + 'timeline');
+  getTimeline(userId?): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointements + 'timeline' + '?userId=' + userId);
   }
 
   //putAddAntecedent
-  putAddExamen(object): Observable<any> {
-    return this.http.put<any>(environment.baseUrl + this.addExamen, {
+  putAddExamen(object, userId?): Observable<any> {
+    return this.http.put<any>(environment.baseUrl + this.addExamen + '?userId=' + userId, {
       documentDetails: {
         name: object.name,
         type: object.type,

@@ -76,12 +76,13 @@ export class FichaPacienteComponent implements OnInit {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
-        // console.log(data.payload[0].patientData);
+        // console.log(data.payload.patientData);
         this.patientRecord = data.payload.patientData;
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+        console.log(data.payload.antecedent);
 
         this.userService.getStates().subscribe((data) => {
           // console.log(data);
@@ -101,6 +102,8 @@ export class FichaPacienteComponent implements OnInit {
 
         this.getIdentification(this.patientRecord.identificationData);
         // console.log(this.patientRecord.patientData.identificationData);
+
+        this.applyFiltersAppointments();
       },
       (error) => {
         console.log(error);
@@ -110,7 +113,7 @@ export class FichaPacienteComponent implements OnInit {
         this.spinner.hide();
       }
     );
-    this.medicalRecordService.getTimeline().subscribe(
+    this.medicalRecordService.getTimeline(this.userId).subscribe(
       (data) => {
         this.timelineRecord = data.payload;
         console.log(this.timelineRecord);
@@ -123,7 +126,6 @@ export class FichaPacienteComponent implements OnInit {
         this.spinner.hide();
       }
     );
-    this.applyFiltersAppointments();
   }
 
   getIdentification(data) {
@@ -156,7 +158,7 @@ export class FichaPacienteComponent implements OnInit {
       type: this.fileForm.controls.type.value.toString(),
       file: this.base64.split(',')[1],
     };
-    this.medicalRecordService.putAddExamen(formObject).subscribe(
+    this.medicalRecordService.putAddExamen(formObject, this.userId).subscribe(
       (data) => {
         console.log(data);
         this.getMedicalRecord(this.userId);
@@ -206,7 +208,7 @@ export class FichaPacienteComponent implements OnInit {
       })
       // CHECKBOX APPOINTMENTS FILTER
       .filter((item) => {
-        // console.log(this.currentUserService.currentUser.id, item.professionalDetails.userDetails[0].userId);
+        console.log(this.currentUserService.currentUser.id, item.professionalDetails.userDetails[0].userId);
         if (this.appointmentCheckBox === 'allAppointments') return item;
         if (this.appointmentCheckBox === 'myAppointments') {
           if (item.professionalDetails.userDetails[0].userId === this.currentUserService.currentUser.id) return item;
