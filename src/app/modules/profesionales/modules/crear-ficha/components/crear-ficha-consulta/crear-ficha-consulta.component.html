@@ -898,20 +898,21 @@
                               <div class="form-group col">
                                 <p>Tipo de Diagnostico</p>
                                 <select class="form-control" formControlName="type" id="type" name="type">
-                                  <option>CE10</option>
-                                  <option>Snomed</option>
+                                  <option value="ce10">ce10</option>
+                                  <option value="snomed">snomed</option>
                                 </select>
                               </div>
                             </div>
                             <div class="row">
                               <div class="form-group col">
                                 <label for="endBlock">Diagnostico</label>
-                                <input class="form-control" type="text" 
+                                <input class="form-control mb-3" type="text" 
                                 placeholder="Diagnostico"
                                 id="diagnostic"
                                  name="diagnostic"
                                  formControlName="diagnostic"
                                  >
+                                 <label for="endBlock">Comentarios</label>
                                 <textarea class="form-control" id="comments" name="comments" 
                                 formControlName="comments"
                                 rows="5"></textarea>
