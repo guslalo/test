@@ -20,6 +20,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public access_token: any;
   public downloadUrl:any;
   public user: any;
+  public userId: any;
   public timeline: any;
   public fecha:any;
   public professionalData:any;
