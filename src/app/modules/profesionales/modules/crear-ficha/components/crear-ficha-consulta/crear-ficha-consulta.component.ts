@@ -5,6 +5,7 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 
 
 
@@ -27,14 +28,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
-  public userId:any;
+  public signos: FormGroup;
 
   constructor( 
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
     private appointmentsService:AppointmentsService,
     private documentService: DocumentService,
-    private router: Router
+    private router: Router,
+    private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -65,10 +67,19 @@ export class CrearFichaConsultaComponent implements OnInit {
     
     this.getAppointmentsTimeline();
     this.getFecha();
+
+    this.signos = this._formBuilder.group({
+      PASS: ['',],
+      /*
+      ufBirth: [null, null],
+      municipalityBirth: [null, null],
+      nacionality: [null, Validators.required],*/
+    });
   }
 
   //update appointmentDetails
-  putAppointment(appointmentId, appointmentObject){
+  putAppointment(appointmentId){
+    let appointmentObject
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
       data => {
         console.log(data);

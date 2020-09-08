@@ -438,7 +438,7 @@
                             <div class="form-group col">
                               <label for="endBlock">Descripción de como se siente:</label>
                               <div>
-                                <p>{{appointmentDetail.patientDetails.description}}</p>
+                                <p>"{{appointmentDetail.patientDetails.description}}"</p>
                               </div>
                             </div>
                           </div>
@@ -734,7 +734,7 @@
                         Signos fisicos
                       </p>
 
-                      <form>
+                      <form [formGroup]="signos">
                         <div class="form-row">
                           <div class="form-group col-3">
                             <label for="inputEmail4">PAS</label>
@@ -742,9 +742,12 @@
                               class="form-control"
                               placeholder="mmhg"
                               type="number"
-                              name="quantity"
+                              name="PAS"
+                              id="PAS"
                               min="1"
                               max="60"
+                              name="document"
+                              formControlName="PAS"
                             />
                           </div>
                           <div class="form-group col-3">
@@ -977,7 +980,7 @@
 
                   <hr>
                   <div class="text-right">
-                    <button class="btn btn-secondary rounded-pill">
+                    <button class="btn btn-secondary rounded-pill" (click)="putAppointment(appointmentDetail._id)">
                       Guardar
                     </button>
                   </div>
