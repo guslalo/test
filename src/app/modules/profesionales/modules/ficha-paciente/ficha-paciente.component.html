@@ -4,7 +4,12 @@
       <h2>Ficha Paciente</h2>
     </div>
     <div class="col-3 col-md-3">
-      <button type="button" class="btn btn-primary rounded-pill float-right">
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill float-right"
+        data-toggle="modal"
+        data-target="#appointmentModal"
+      >
         Nueva Consulta
       </button>
 
@@ -197,7 +202,7 @@
                   </li>
                   <li>
                     <i>Nacionalidad</i>
-                    {{ patientRecord.personalData?.nacionality || 'S/R' }}
+                    {{ countryMap[patientRecord.personalData?.nacionality]?.name || 'S/R' }}
                   </li>
                   <li>
                     <i>UF de nacimiento</i>
@@ -334,7 +339,7 @@
 
           <div class="tableBox rounded p-4 bg-white">
             <ngx-datatable
-              *ngIf="appointmentsRecord.length"
+              *ngIf="appointmentsRecord.length; else noData"
               class="material"
               [rows]="appointmentsRecord"
               headerHeight="auto"
@@ -420,6 +425,9 @@
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
+            <ng-template #noData>
+              <h5 class="text-center text-primary">No existen coincidencias</h5>
+            </ng-template>
           </div>
         </div>
         <!--/tab-->
@@ -921,6 +929,124 @@
         <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="uploadFile()">
           Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nueva Consulta -->
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1">Crear Consulta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <ul class="nav nav-tabs nav-pills nav-fill tabconsultamodal rounded" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="home-tab"
+              data-toggle="tab"
+              href="#home2"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+              >Pacientes ingresados</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="profile-tab"
+              data-toggle="tab"
+              href="#profile2"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+              >Enviar correo a usuario nuevo</a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab">
+            <form class="mt-4">
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Nombre paciente o por ID</label>
+                  <input type="text" class="form-control" name="startBlock" />
+                </div>
+                <div class="form-group col">
+                  <label for="endBlock">Calendario</label>
+                  <input type="date" class="form-control" name="endBlock" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Horario</label>
+                  <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                </div>
+                <div class="form-group col">
+                  <label for="endBlock">Objetivo de consulta</label>
+                  <input type="text" class="form-control" name="endBlock" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
+            <form class="mt-4">
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Nombre paciente</label>
+                  <input type="text" class="form-control" />
+                </div>
+                <div class="form-group col">
+                  <label for="endBlock">Email</label>
+                  <input type="email" class="form-control" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Mensaje</label>
+                  <textarea class="form-control" rows="5"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Calendario</label>
+                  <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                </div>
+                <div class="form-group col">
+                  <label for="endBlock">Horario</label>
+                  <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label for="startBlock">Objetivo de Consulta</label>
+                  <input type="text" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button
+          type="button"
+          class="btn btn-primary rounded-pill"
+          data-dismiss="modal"
+          routerLink="crear-ficha-consulta"
+        >
+          Crear Consulta
         </button>
       </div>
     </div>

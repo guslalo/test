@@ -42,13 +42,13 @@ export class MisPacientesComponent implements OnInit {
 
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
-      name: ['test', Validators.required],
-      lastName: ['test', Validators.required],
-      secondLastName: ['test', Validators.required],
-      phoneNumber: [123, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-      email: ['a@a.cl', [Validators.email, Validators.required]],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      secondLastName: ['', Validators.required],
+      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
-      age: [25, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
+      age: [18, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
     });
   }
 
@@ -136,6 +136,10 @@ export class MisPacientesComponent implements OnInit {
         .filter((patient) => {
           // console.log(patient);
           return (
+            (patient.identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
             patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
