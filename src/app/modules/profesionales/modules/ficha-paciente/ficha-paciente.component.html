@@ -240,41 +240,42 @@
         <div class="tab-pane fade" id="consultasPacienteTab" role="tabpanel" aria-labelledby="consultasPaciente">
           <div class="row mt-2">
             <div class="col-12 col-md-3">
-              <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
+              <input
+                [(ngModel)]="searchTerm"
+                type="text"
+                class="form-control"
+                placeholder="Busqueda"
+                (keyup)="applyFiltersAppointments()"
+              />
               <div class="searchBox">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-search"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                  />
-                </svg>
+                <img src="assets/icons/icon-search.svg" />
               </div>
             </div>
             <div class="col-12 col-md-3">
               <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>Filtrar por Estado</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <select
+                  [(ngModel)]="appointmentStatusSelected"
+                  class="form-control"
+                  id="status"
+                  (change)="applyFiltersAppointments()"
+                >
+                  <option [ngValue]="null">Filtrar por Estado</option>
+                  <option ngValue="reserved">Reservada</option>
+                  <option ngValue="appointed">Agendada</option>
+                  <option ngValue="rescheduled">Re-Agendada</option>
+                  <option ngValue="active">Activa</option>
+                  <option ngValue="waitingInRoom">En Sala de Espera</option>
+                  <option ngValue="waitingInList">En Lista de Espera</option>
+                  <option ngValue="running">En Curso</option>
+                  <option ngValue="pending">Pendiente</option>
+                  <option ngValue="finished">Finalizada</option>
+                  <option ngValue="canceled">Cancelada</option>
                 </select>
               </div>
             </div>
             <div class="col-12 col-md-2">
               <input
-                class="form-control"
+                [(ngModel)]="appointmentDateSelected"
                 class="form-control"
                 type="text"
                 placeholder="yyyy-mm-dd"
@@ -284,16 +285,49 @@
                 ngbDatepicker
                 #e="ngbDatepicker"
                 (click)="e.toggle()"
+                (ngModelChange)="applyFiltersAppointments()"
+                [footerTemplate]="footerCalendar"
               />
+              <ng-template #footerCalendar>
+                <hr class="my-0" />
+                <button
+                  class="btn btn-primary btn-sm m-2"
+                  (click)="appointmentDateSelected = null; applyFiltersAppointments(); e.close()"
+                >
+                  Limpiar Filtro
+                </button>
+              </ng-template>
             </div>
             <div class="col-12 col-md-4">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input custom-control-inline" id="customCheck1" />
-                <label class="custom-control-label" for="customCheck1">Mis consultas</label>
+              <div class="form-check">
+                <input
+                  [(ngModel)]="appointmentCheckBox"
+                  class="form-check-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios1"
+                  value="myAppointments"
+                  (change)="applyFiltersAppointments()"
+                  [ngStyle]="{ height: 'auto' }"
+                />
+                <label class="form-check-label" for="exampleRadios1">
+                  Mis Consultas
+                </label>
               </div>
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="customCheckss2" />
-                <label class="custom-control-label" for="customCheckss2">Todas las consultas</label>
+              <div class="form-check">
+                <input
+                  [(ngModel)]="appointmentCheckBox"
+                  class="form-check-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios2"
+                  value="allAppointments"
+                  (change)="applyFiltersAppointments()"
+                  [ngStyle]="{ height: 'auto' }"
+                />
+                <label class="form-check-label" for="exampleRadios2">
+                  Todas Las Consultas
+                </label>
               </div>
             </div>
           </div>
@@ -423,7 +457,7 @@
                 </a>
                 <div class="collapse" id="collapseExample1">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.sickness">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -458,7 +492,7 @@
                 </a>
                 <div class="collapse" id="collapseExample2">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.familiarHistory">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -493,7 +527,7 @@
                 </a>
                 <div class="collapse" id="collapseExample3">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.medicines">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -528,7 +562,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.healthHabits">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -563,7 +597,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.occupational">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -598,7 +632,7 @@
                 </a>
                 <div class="collapse" id="collapseExample4">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.others">
-                    <li class="pl-5">item</li>
+                    <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
@@ -657,7 +691,7 @@
                         {{ moment(item.uploadDate).format('DD/MM/YYYY') }}
                       </td>
                       <td class="text-center">
-                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
+                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             Ver documento
                           </button>

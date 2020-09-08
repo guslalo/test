@@ -14,7 +14,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 export class MisPacientesComponent implements OnInit {
   patients: any[] = [];
   prePatients: any[] = [];
-  temp: any[] = [];
+  tempPatients: any[] = [];
+  tempPrePatients: any[] = [];
   searchTerm: string = '';
 
   tab: any = 'patients';
@@ -22,6 +23,7 @@ export class MisPacientesComponent implements OnInit {
   pageSize = 7;
   moment: any = moment;
   patientIsEdit: boolean = false;
+  emailSent: boolean = false;
 
   ColumnMode = ColumnMode;
   patientForm: FormGroup;
@@ -36,7 +38,7 @@ export class MisPacientesComponent implements OnInit {
     // console.log(this.currentUserService.currentUser);
 
     this.fetchPatients();
-    // this.fetchPrePatients();
+    this.fetchPrePatients();
 
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
@@ -53,12 +55,10 @@ export class MisPacientesComponent implements OnInit {
   fetchPatients() {
     this.patientService.getPatientsForProfesional().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         // NO PATIENTS FOUND
-        if (!data.payload.length) {
-          this.patients = [];
-        } else {
-          this.temp = [...data.payload];
+        if (Array.isArray(data.payload)) {
+          this.tempPatients = [...data.payload];
           this.patients = data.payload;
         }
       },
@@ -73,11 +73,9 @@ export class MisPacientesComponent implements OnInit {
       (data) => {
         console.log(data);
         // NO PATIENTS FOUND
-        if (!data.length) {
-          this.prePatients = [];
-        } else {
-          this.temp = [...data];
-          this.prePatients = data;
+        if (Array.isArray(data.payload)) {
+          this.tempPrePatients = [...data.payload];
+          this.prePatients = data.payload;
         }
       },
       (error) => {
@@ -112,5 +110,58 @@ export class MisPacientesComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+
+    setTimeout(() => {
+      this.fetchPrePatients();
+    }, 1000);
+  }
+
+  sendInvitationEmail(patientId) {
+    this.emailSent = false;
+    this.patientService.sendInvitationEmail(patientId).subscribe(
+      () => {
+        this.emailSent = true;
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  applyFilters(tab) {
+    const searchTerm = this.searchTerm.toLowerCase();
+    var temp = [];
+
+    if (tab === 'patients') {
+      temp = this.tempPatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          // console.log(patient);
+          return (
+            patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.patients = temp;
+    }
+
+    if (tab === 'pre-patients') {
+      temp = this.tempPrePatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          console.log(patient);
+          return (
+            patient.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.secondLastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.email.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.prePatients = temp;
+    }
+
+    // console.log(temp);
   }
 }

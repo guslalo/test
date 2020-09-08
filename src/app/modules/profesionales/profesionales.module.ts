@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import { NgbRatingModule, NgbTab } from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingModule, NgbTab, NgbDropdownModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
@@ -63,6 +63,8 @@ FullCalendarModule.registerPlugins([
     NgbRatingModule,
     NgbTimepickerModule,
     NgbNavModule,
+    NgbDropdownModule,
+    NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
   ],

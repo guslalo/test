@@ -47,16 +47,10 @@ export class EditarUsuarioComponent implements OnInit {
   currentDate = {
     year: current.getFullYear(),
     month: current.getMonth() + 1,
-    day: current.getDate() + 1,
-  };
-
-  maxDate = {
-    year: current.getFullYear(),
-    month: current.getMonth() + 1,
     day: current.getDate(),
   };
 
-  minDate = {
+  maxDate = {
     year: current.getFullYear() - 18,
     month: current.getMonth() + 1,
     day: current.getDate(),
@@ -463,7 +457,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    // console.log(this.formUser[1], this.formUser[2], this.formUser[3], this.formUser[4], this.formUser[5]);
+    // console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
 
     switch (this.userType) {
       case 'admins':
@@ -620,12 +614,22 @@ export class EditarUsuarioComponent implements OnInit {
         alert('Complete el formulario con todos los datos necesarios');
       }
     } else {
-      this.adminService.updateUser(this.userType, this.userObject).subscribe(() => {
-        // console.log(response);
-        this.spinner.hide();
-        (<HTMLInputElement>document.getElementById('submit-button')).disabled = true;
-        this.location.back();
-      });
+      this.adminService.updateUser(this.userType, this.userObject).subscribe(
+        (res) => {
+          // console.log(response);
+          this.spinner.hide();
+          console.log(res);
+        },
+        (err) => {
+          this.spinner.hide();
+          console.log(err);
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+        },
+        () => {
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+          this.location.back();
+        }
+      );
     }
   }
 
