@@ -174,7 +174,8 @@
                         {{item.patientDetails.userDetails[0].userId}}
                       </td>
                       <td scope="row">
-                        {{item.patientDetails.userDetails[0].name}}  {{item.patientDetails.userDetails[0].lastName}}
+                        {{item.patientDetails.userDetails[0].personalData.name}} 
+                        {{item.patientDetails.userDetails[0].personalData.secondLastName}}  
                       </td>
                       <td>
                         {{item.dateDetails.date | date: 'dd/MM/yyyy'}}
@@ -183,13 +184,16 @@
                         {{item.dateDetails.start}}
                       </td>
                       <td>
+                        sala
+                      </td>
+                      <td>
                         <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                           {{item.administrativeDetails.status}}
                         </button>
                       </td>
                       <td>
                         <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                          <a routerLink="app-professional/ficha-consulta/{{item._id}}">
+                          <a routerLink="/app-professional/ficha-consulta/{{item._id}}">
                             <button type="button" 
                            
                             class="btn btn-outline-secondary rounded-pill btn-sm">
