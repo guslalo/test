@@ -10,6 +10,7 @@ import { CurrentUserService } from './current-user.service';
 export class DocumentService {
   private uploadUrl = 'v1/documents/appointment/upload';
   public urlDownload = 'v1/medical-record/download/';
+  public urlUpload = 'v1/medical-record/add-exam?userId=';
 
   constructor(private http: HttpClient, private currentUserService: CurrentUserService) {}
 
@@ -19,9 +20,9 @@ export class DocumentService {
   }
 
   //specialties
-  postDocument(appointmentId, documentDetails): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.uploadUrl, {
-      appointmentId,
+  postDocument(id:string, documentDetails): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.urlUpload + id, {
+      id,
       documentDetails,
     });
   }

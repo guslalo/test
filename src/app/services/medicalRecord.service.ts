@@ -30,6 +30,7 @@ export class MedicalRecordService {
 
   //putAddAntecedent
   putAddExamen(object, userId?): Observable<any> {
+    console.log( userId);
     return this.http.put<any>(environment.baseUrl + this.addExamen + '?userId=' + userId, {
       documentDetails: {
         name: object.name,
