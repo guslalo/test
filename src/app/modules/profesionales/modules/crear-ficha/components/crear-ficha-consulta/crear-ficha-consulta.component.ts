@@ -257,7 +257,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.professionalDetails.userDetails[0].userId;
-        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails[0].userId)
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
       },
       (error) => {
