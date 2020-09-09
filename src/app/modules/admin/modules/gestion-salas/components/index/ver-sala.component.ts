@@ -17,6 +17,7 @@ export class VerSalaComponent implements OnInit {
   ColumnMode = ColumnMode;
 
   professionalsTotal: number;
+  roomName: string;
 
   constructor(private router: Router, private roomsService: RoomsService) {}
 
@@ -26,6 +27,7 @@ export class VerSalaComponent implements OnInit {
     this.roomsService.getWaitingRooms(this.roomId).subscribe((data) => {
       console.log(data.payload);
       this.appointments = data.payload.appointmentDetails;
+      this.roomName = data.payload.roomDetails.name;
       this.professionalsTotal = data.payload.personnelDetails.professionals.length;
     });
   }
