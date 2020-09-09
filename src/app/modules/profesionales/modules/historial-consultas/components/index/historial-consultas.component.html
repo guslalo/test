@@ -181,7 +181,7 @@
                         {{item.dateDetails.date | date: 'dd/MM/yyyy'}}
                       </td>
                       <td>
-                        {{item.dateDetails.start}}
+                        {{item.dateDetails.start}} hrs
                       </td>
                       <td>
                         sala
@@ -206,7 +206,7 @@
                           || item.administrativeDetails.status === 'active' || 
                           item.administrativeDetails.status === 'appointed' || 
                           item.administrativeDetails.status === 'pending'">
-                            <a routerLink="crear-ficha-consulta/{{item._id}}">
+                            <a routerLink="/app-professional/crear-ficha-consulta/{{item._id}}">
                             <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                                 atender
                             </button>
