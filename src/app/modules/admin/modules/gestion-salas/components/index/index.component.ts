@@ -13,12 +13,12 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class IndexComponent implements OnInit {
   waitingRooms: any[] = [];
+  tempWaitingRooms: any[] = [];
   professionals: any[] = [];
   professionalsData: any[] = [];
   coordinators: any[] = [];
   coordinatorsData: any[] = [];
   searchTerm: string = '';
-  profileSelected: string = null;
   pageSize: number = 10;
   ColumnMode = ColumnMode;
 
@@ -31,15 +31,15 @@ export class IndexComponent implements OnInit {
   @Input() value: any;
   @Output() valueChange = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {}
-
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {
     this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
-      appointmentPrice: ['', [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$"/)]],
+      appointmentPrice: ['', [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$/)]],
       description: ['', null],
     });
+  }
 
+  ngOnInit(): void {
     this.fetchRooms();
 
     this.roomsService.getProfessionals().subscribe((data) => {
@@ -96,8 +96,17 @@ export class IndexComponent implements OnInit {
   fetchRooms(): void {
     this.roomsService.getWaitingRooms().subscribe((data) => {
       console.log(data);
+      this.tempWaitingRooms = [...data.payload];
       this.waitingRooms = data.payload;
     });
+  }
+
+  validRoom() {
+    if (this.roomForm.valid && this.professionalsData.length && this.coordinatorsData.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   createWaitingRoom() {
@@ -128,5 +137,22 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  applyFilters() {
+    const searchTerm = this.searchTerm.toLowerCase();
+    const temp = this.tempWaitingRooms
+      // SEARCH FILTER
+      .filter((item) => {
+        console.log(item);
+        return (
+          item.roomDetails.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.roomDetails.description.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+    this.waitingRooms = temp;
+
+    // console.log(temp);
   }
 }
