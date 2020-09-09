@@ -77,7 +77,10 @@
                   </svg>
                 </div>
                 <div class="col-5">
-                  <p class="p-0 font-weight-bold">{{appointmentDetail.patientDetails.userDetails[0].name | uppercase}} {{appointmentDetail.patientDetails.userDetails[0].lastName | uppercase}}</p>
+                  <p class="p-0 font-weight-bold">
+                    {{appointmentDetail.patientDetails.userDetails.personalData.name | uppercase}} 
+                    {{appointmentDetail.patientDetails.userDetails.personalData.lastName | uppercase}} 
+                    {{appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase}}</p>
                   <!--font-weight-bold-->
                   <ul class="simple-list">
                     <li>Sexo: Masculino</li>

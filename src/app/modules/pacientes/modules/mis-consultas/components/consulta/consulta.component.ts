@@ -93,7 +93,7 @@ export class ConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         
-        this.appoimentDetail = data.payload[0];
+        this.appoimentDetail = data.payload;
         console.log(this.appoimentDetail );
       },
       (error) => {
