@@ -371,6 +371,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of consultas" id="{{item._id}}">
+                    <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row">
                       {{item.patientDetails.userDetails[0].personalData.name}}   
                         {{item.patientDetails.userDetails[0].personalData.lastName}} 
@@ -409,6 +410,7 @@
                         </a>
                       </ng-container>
                     </td>
+                  </ng-container>
                   </tr>
               
                 </tbody>
