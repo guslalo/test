@@ -1,135 +1,236 @@
+<div class="row">
+  <div class="col mb-2">
+    <h2>Gestión de Salas de Espera</h2>
+  </div>
+  <div class="col">
+    <button
+      type="button"
+      class="btn btn-primary rounded-pill float-right"
+      data-toggle="modal"
+      data-target="#waitingRoomForm"
+    >
+      Crear Sala de Espera
+      <img src="assets/icons/icon-plus-circle.svg" alt="img" />
+    </button>
+  </div>
+</div>
 
 <div class="row">
-    <div class="col mb-2">
-      <h2>Gestión de salas</h2>
+  <div class="col-12">
+    <div class="row mt-2">
+      <div class="col-12 col-md-3">
+        <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
+        <div class="searchBox">
+          <img src="assets/icons/icon-search.svg" alt="img" />
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="form-group">
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>Filtrar por</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill float-right"
-        routerLink="crear-perfil"
-      >
-          Crear perfil
-        <svg
-          width="1.5em"
-          height="1.5em"
-          viewBox="0 0 16 16"
-          class="bi bi-plus-circle"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-          />
-          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        </svg>
-      </button>
+    <!--consultas activas-->
+    <div class="row mt-1">
+      <div class="col-12">
+        <h5 style="display: none;">Mis consultas activas</h5>
+      </div>
+      <div class="col-12 mb-4">
+        <div class="tableBox rounded p-4 bg-white">
+          <ngx-datatable
+            *ngIf="waitingRooms.length"
+            #table
+            class="material"
+            [rows]="waitingRooms"
+            headerHeight="auto"
+            footerHeight="auto"
+            rowHeight="70"
+            [columnMode]="ColumnMode.flex"
+            [limit]="pageSize"
+            [selectAllRowsOnPage]="true"
+          >
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="id" name="ID"></ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="name" name="Sala de Espera">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="[row.id]">{{ row.name }}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="description" name="Descripcion">
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="url" name="Link">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a href="#">{{ row.url }}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="payments" name="Pagos">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="custom-control custom-switch mb-4">
+                  <input
+                    [(ngModel)]="row.payments"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="payments"
+                    disabled
+                  />
+                  <label class="custom-control-label" for="payments"></label>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Activa">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="custom-control custom-switch mb-4">
+                  <input [(ngModel)]="row.isActive" type="checkbox" class="custom-control-input" id="status" disabled />
+                  <label class="custom-control-label" for="status"></label>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div ngbDropdown container="body">
+                  <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-three-dots"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                      />
+                    </svg>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row.id]">
+                      Editar
+                    </button>
+                    <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
+                      Deshabilitar
+                    </button>
+                    <button ngbDropdownItem type="button">
+                      Activar
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
     </div>
+    <!---->
   </div>
-  
-  <div class="row">
-    <div class="col-12">
-      <div class="row mt-2">
-        <div class="col-12 col-md-3">
-          <input
-            id="typeahead-basic"
-            type="text"
-            class="form-control"
-            placeholder="Busqueda"
-          />
-          <div class="searchBox">
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-search"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-              />
-            </svg>
-          </div>
-        </div>
-        <div class="col-12 col-md-3">
-          <div class="form-group">
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Filtrar por</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <!--consultas activas-->
-      <div class="row mt-1">
-        <div class="col-12">
-          <h5 style="display: none;">Mis consultas activas</h5>
-        </div>
-        <div class="col-12 mb-4">
-          
-          <div class="tableBox rounded p-4 bg-white">
-            <table class="table">
-              <thead class="">
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Usuarios</th>
-                  <th scope="col">Acción</th>
-                </tr>
-              </thead>
-  
-              <tbody>
-                <tr>
-                  <td scope="row">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="item._id" />
-                      <label class="custom-control-label" for="item._id">
-                       asd
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    asd
-                  </td>
-                  
-                  <td>Descripción</td>
-                  <td>Usuarios</td>
-                  <td>
-                    <div class="btn-group">
-                      <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                        ..
-                      </div>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">
-                          Eliminar
-                        </button>
-                        <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                          Editar
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!---->
+</div>
 
+<!-- MODAL CREATE ROOM -->
+<div class="modal fade" id="waitingRoomForm" tabindex="-1" aria-labelledby="waitingRoomForm" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1">Nueva Sala de Espera</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="custom-control custom-switch mb-4">
+          <input [(ngModel)]="acceptPayments" type="checkbox" class="custom-control-input" id="payments" />
+          <label class="custom-control-label" for="payments">Con Pago Asignado</label>
+        </div>
+        <form class="mt-2">
+          <div class="row">
+            <div class="form-group col-12 col-md-8">
+              <label for="startBlock">Nombre Sala *</label>
+              <input type="text" class="form-control" name="name" placeholder="Sala" />
+            </div>
+            <div class="form-group col-12 col-md-4">
+              <label for="startBlock">Valor Consulta</label>
+              <input type="text" class="form-control" name="price" placeholder="$0" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <label for="startBlock">Descripción</label>
+              <textarea
+                type="time"
+                class="form-control"
+                name="description"
+                rows="6"
+                [ngStyle]="{ resize: 'none' }"
+                placeholder="Descripcion"
+              ></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-check">
+              <input
+                [(ngModel)]="role"
+                class="form-check-input mx-auto"
+                type="radio"
+                name="exampleRadios"
+                id="exampleRadios1"
+                value="professionals"
+                [ngStyle]="{ height: 'auto' }"
+              />
+              <label class="form-check-label pl-4" for="exampleRadios1">
+                Profesionales de Salud
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                [(ngModel)]="role"
+                class="form-check-input mx-auto"
+                type="radio"
+                name="exampleRadios"
+                id="exampleRadios2"
+                value="coordinators"
+                [ngStyle]="{ height: 'auto' }"
+              />
+              <label class="form-check-label pl-4" for="exampleRadios2">
+                Coordinadores
+              </label>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 mx-auto mt-2">
+              <input id="search-user" type="text" class="form-control" placeholder="Busqueda" />
+              <div class="searchBox">
+                <img src="assets/icons/icon-search.svg" alt="img" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <p class="font-weight-bold ml-4 mt-3">Pacientes y Coordinadores Asignados</p>
+          </div>
+          <div class="list-group list-group-flush">
+            <li class="list-group-item">
+              Name Lastname
+              <button type="button" class="btn btn-light btn-sm float-right">
+                Eliminar <img src="assets/img/delete.svg" />
+              </button>
+            </li>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
+        <button
+          type="button"
+          class="btn btn-primary rounded-pill"
+          data-dismiss="modal"
+          routerLink="crear-ficha-consulta"
+        >
+          Crear Sala
+        </button>
+      </div>
     </div>
   </div>
-  
-    
+</div>

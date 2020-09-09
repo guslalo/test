@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col mb-2">
+    <h2>Gestión de Salas de Espera</h2>
+  </div>
+  <div class="col-12 col-md-6">
+    <button
+      id="submit-button"
+      (click)="updateRoom()"
+      type="button"
+      class="btn btn-primary rounded-pill float-right"
+      [disabled]="!validRoom()"
+    >
+      Actualizar Sala
+    </button>
+    <button disabled id="submit-button" type="button" class="btn btn-outline-secondary rounded-pill float-right mr-3">
+      Eliminar Sala
+    </button>
+
+    <a href="javascript:history.back()" class="back float-right align-top mr-3">
+      <svg
+        width="2em"
+        height="2em"
+        viewBox="0 0 16 16"
+        class="bi bi-arrow-left-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+          fill-rule="evenodd"
+          d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
+        />
+        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <div class="tableBox rounded p-4 bg-white">
+      <h5>Datos Sala</h5>
+      <p>
+        <small>Sala creada el 01-01-1990 por...</small>
+      </p>
+      <form class="mt-2">
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <label for="startBlock">Nombre Sala *</label>
+            <input type="text" class="form-control" name="name" placeholder="Sala" />
+            <div class="custom-control custom-switch mb-4">
+              <input [(ngModel)]="acceptPayments" type="checkbox" class="custom-control-input" id="payments" />
+              <label class="custom-control-label mt-4" for="payments">Con Pago Asignado</label>
+            </div>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="startBlock">Descripción</label>
+            <textarea
+              type="time"
+              class="form-control"
+              name="description"
+              rows="5"
+              placeholder="Descripcion"
+              [ngStyle]="{ resize: 'none' }"
+            ></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="tableBox rounded p-4 bg-white">
+      <h5>Pacientes y Coordinadores Asignados</h5>
+      <p><small>X usuarios asignados</small></p>
+      <form class="mt-2">
+        <div class="row mt-2">
+          <div class="col-12 col-md-6">
+            <input id="search-user" type="text" class="form-control" placeholder="Busqueda" />
+            <div class="searchBox">
+              <img src="assets/icons/icon-search.svg" alt="img" />
+            </div>
+          </div>
+          <button id="submit-button" (click)="addUser()" type="button" class="btn btn-outline-primary rounded-pill">
+            Agregar
+          </button>
+        </div>
+        <div class="list-group list-group-flush mt-2">
+          <li class="list-group-item">
+            Name Lastname
+            <button type="button" class="btn btn-light btn-sm float-right">
+              Eliminar <img src="assets/img/delete.svg" />
+            </button>
+          </li>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
