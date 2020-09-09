@@ -19,9 +19,15 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
+        <input
+          [(ngModel)]="searchTerm"
+          type="text"
+          class="form-control"
+          placeholder="Busqueda"
+          (keyup)="applyFilters()"
+        />
         <div class="searchBox">
-          <img src="assets/icons/icon-search.svg" alt="img" />
+          <img src="assets/icons/icon-search.svg" />
         </div>
       </div>
       <div class="col-12 col-md-3">
@@ -44,7 +50,7 @@
       <div class="col-12 mb-4">
         <div class="tableBox rounded p-4 bg-white">
           <ngx-datatable
-            *ngIf="waitingRooms.length"
+            *ngIf="waitingRooms.length; else noData"
             #table
             class="material"
             [rows]="waitingRooms"
@@ -117,7 +123,7 @@
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row.id]">
+                    <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
                       Editar
                     </button>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
@@ -131,6 +137,9 @@
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
+          <ng-template #noData>
+            <h5 class="text-center text-primary">No existen salas de esperas con estos parametros</h5>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -171,11 +180,15 @@
             <div class="form-group col-12 col-md-4">
               <label for="startBlock">Valor Consulta</label>
               <input
+                [attr.disabled]="!requirePayment ? '' : null"
                 type="text"
                 class="form-control"
                 name="price"
                 placeholder="$0"
                 formControlName="appointmentPrice"
+                [ngClass]="{
+                  'is-invalid': !roomForm.get('appointmentPrice').valid && roomForm.get('appointmentPrice').touched
+                }"
               />
             </div>
           </div>
@@ -315,7 +328,13 @@
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="createWaitingRoom()">
+        <button
+          type="button"
+          class="btn btn-primary rounded-pill"
+          data-dismiss="modal"
+          (click)="createWaitingRoom()"
+          [disabled]="!validRoom()"
+        >
           Crear Sala
         </button>
       </div>
