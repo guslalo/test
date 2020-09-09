@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-index',
@@ -12,8 +13,10 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class IndexComponent implements OnInit {
   waitingRooms: any[] = [];
-  personnel: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
-  filteredPersonnel: Observable<string[]>;
+  professionals: any[] = [];
+  professionalsData: any[] = [];
+  coordinators: any[] = [];
+  coordinatorsData: any[] = [];
   searchTerm: string = '';
   profileSelected: string = null;
   pageSize: number = 10;
@@ -21,60 +24,105 @@ export class IndexComponent implements OnInit {
 
   // FORM
   roomForm: FormGroup;
-  acceptPayments: boolean = false;
+  requirePayment: Boolean = false;
   role: string = 'professionals';
+  professionalSelected = new FormControl();
+  coordinatorSelected = new FormControl();
+  @Input() value: any;
+  @Output() valueChange = new EventEmitter();
 
-  control = new FormControl();
-
-  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {
-    this.waitingRooms = [
-      {
-        id: 12345,
-        name: 'Sala de Espera 1',
-        description: 'desc 1',
-        url: 'www.crisaty.com',
-        payments: true,
-        isActive: true,
-      },
-    ];
-  }
+  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {}
 
   ngOnInit(): void {
     this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
-      appointmentPrice: [0, [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$"/)]],
+      appointmentPrice: ['', [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$"/)]],
       description: ['', null],
-      personnelName: ['', null],
     });
-    this.filteredPersonnel = this.control.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    );
+
+    this.fetchRooms();
+
+    this.roomsService.getProfessionals().subscribe((data) => {
+      // console.log(data);
+      this.professionals = data.payload;
+    });
+    this.roomsService.getCoordinators().subscribe((data) => {
+      // console.log(data);
+      this.coordinators = data.payload;
+    });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = this._normalizeValue(value);
-    return this.personnel.filter((street) => this._normalizeValue(street).includes(filterValue));
+  public getDisplayFn() {
+    return (val) => this.display(val);
   }
 
-  private _normalizeValue(value: string): string {
-    return value.toLowerCase().replace(/\s/g, '');
+  private display(user): string {
+    //access component "this" here
+    return user ? user.personalData.name : user;
+  }
+
+  public selected(user) {
+    this.value = user;
+    //send to parent or do whatever you want to do
+    this.valueChange.emit(user);
   }
 
   addPersonnel() {
-    console.log('test');
+    // console.log(this.professionalSelected.value);
+    if (this.role === 'professionals') {
+      if (this.professionalsData.some((pro) => pro.userId === this.professionalSelected.value.userId)) {
+        alert(`${this.professionalSelected.value.personalData.name} ya esta asignado a esta sala de espera`);
+      } else {
+        this.professionalsData.push(this.professionalSelected.value);
+      }
+    }
+    if (this.role === 'coordinators') {
+      if (this.coordinatorsData.some((pro) => pro.userId === this.coordinatorSelected.value.userId)) {
+        alert(`${this.coordinatorSelected.value.personalData.name} ya esta asignado a esta sala de espera`);
+      } else {
+        this.coordinatorsData.push(this.coordinatorSelected.value);
+      }
+    }
+  }
+
+  removeProfessional(index) {
+    this.professionalsData.splice(index, 1);
+  }
+
+  removeCoordinator(index) {
+    this.coordinatorsData.splice(index, 1);
+  }
+
+  fetchRooms(): void {
+    this.roomsService.getWaitingRooms().subscribe((data) => {
+      console.log(data);
+      this.waitingRooms = data.payload;
+    });
   }
 
   createWaitingRoom() {
+    const _professionals = this.professionalsData.map((map) => {
+      return map.userId;
+    });
+    const _coordinators = this.coordinatorsData.map((map) => {
+      return map.userId;
+    });
+
     const roomObject = {
       name: this.roomForm.get('name').value,
+      requirePayment: this.requirePayment,
       appointmentPrice: this.roomForm.get('appointmentPrice').value || 0,
       description: this.roomForm.get('description').value,
+      professionals: _professionals,
+      coordinators: _coordinators,
     };
 
     this.roomsService.createWaitingRoom(roomObject).subscribe(
       () => {
         console.log('room created');
+        setTimeout(() => {
+          this.fetchRooms();
+        }, 1000);
       },
       (error) => {
         console.log(error);

@@ -55,37 +55,45 @@
             [limit]="pageSize"
             [selectAllRowsOnPage]="true"
           >
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="id" name="ID"></ngx-datatable-column>
             <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="name" name="Sala de Espera">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a [routerLink]="[row.id]">{{ row.name }}</a>
+                <a [routerLink]="[row._id]">{{ row.roomDetails?.name }}</a>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="description" name="Descripcion">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.roomDetails?.description || 'S/R' }}
+              </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="url" name="Link">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <a href="#">{{ row.url }}</a>
+                <a href="#">{{ row.roomDetails?.url }}</a>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="payments" name="Pagos">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <div class="custom-control custom-switch mb-4">
                   <input
-                    [(ngModel)]="row.payments"
+                    disabled
                     type="checkbox"
                     class="custom-control-input"
-                    id="payments"
-                    disabled
+                    id="pay"
+                    [(ngModel)]="row.administrativeDetails.requirePayment"
                   />
-                  <label class="custom-control-label" for="payments"></label>
+                  <label class="custom-control-label" for="pay"></label>
                 </div>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Activa">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <div class="custom-control custom-switch mb-4">
-                  <input [(ngModel)]="row.isActive" type="checkbox" class="custom-control-input" id="status" disabled />
+                  <input
+                    [(ngModel)]="row.administrativeDetails.isActive"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="status"
+                    disabled
+                  />
                   <label class="custom-control-label" for="status"></label>
                 </div>
               </ng-template>
@@ -142,14 +150,23 @@
       </div>
       <div class="modal-body p-4">
         <div class="custom-control custom-switch mb-4">
-          <input [(ngModel)]="acceptPayments" type="checkbox" class="custom-control-input" id="payments" />
+          <input [(ngModel)]="requirePayment" type="checkbox" class="custom-control-input" id="payments" />
           <label class="custom-control-label" for="payments">Con Pago Asignado</label>
         </div>
         <form class="mt-2" [formGroup]="roomForm">
           <div class="row">
             <div class="form-group col-12 col-md-8">
               <label for="startBlock">Nombre Sala *</label>
-              <input type="text" class="form-control" name="name" placeholder="Sala" formControlName="name" />
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Sala"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': !roomForm.get('name').valid && roomForm.get('name').touched
+                }"
+              />
             </div>
             <div class="form-group col-12 col-md-4">
               <label for="startBlock">Valor Consulta</label>
@@ -208,46 +225,97 @@
               </label>
             </div>
           </div>
-          <div class="row mt-2">
-            <div class="col-12 col-md-8 mx-auto mt-2">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Buscar profesional o coordinador"
-                [matAutocomplete]="auto"
-                [formControl]="control"
-              />
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let item of filteredPersonnel | async" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-autocomplete>
-              <div class="searchBox">
-                <img src="assets/icons/icon-search.svg" alt="img" />
+          <!-- PROFESSIONALS -->
+          <div *ngIf="role === 'professionals'">
+            <div class="row mt-2">
+              <div class="col-12 col-md-8 mx-auto mt-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar Profesional"
+                  [matAutocomplete]="auto"
+                  [formControl]="professionalSelected"
+                />
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
+                  <mat-option *ngFor="let item of professionals" [value]="item">
+                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                  </mat-option>
+                </mat-autocomplete>
+                <div class="searchBox">
+                  <img src="assets/icons/icon-search.svg" alt="img" />
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary rounded-pill mt-1"
+                  (click)="addPersonnel()"
+                  [disabled]="!professionalSelected.value"
+                >
+                  Agregar
+                </button>
               </div>
             </div>
-            <div class="col-12 col-md-4">
-              <button type="button" class="btn btn-outline-primary rounded-pill mt-1" (click)="addPersonnel()">
-                Agregar
-              </button>
+            <div class="row" *ngIf="professionalsData.length">
+              <p class="font-weight-bold ml-4 mt-3">Profesionales Asignados</p>
+            </div>
+            <div class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of professionalsData; let i = index">
+                {{ item.personalData.name }}
+                <button type="button" class="btn btn-light btn-sm float-right" (click)="removeProfessional(i)">
+                  Eliminar <img src="assets/img/delete.svg" />
+                </button>
+              </li>
             </div>
           </div>
-          <div class="row">
-            <p class="font-weight-bold ml-4 mt-3">Pacientes y Coordinadores Asignados</p>
-          </div>
-          <div class="list-group list-group-flush">
-            <li class="list-group-item">
-              Name Lastname
-              <button type="button" class="btn btn-light btn-sm float-right">
-                Eliminar <img src="assets/img/delete.svg" />
-              </button>
-            </li>
+          <!-- COORDINATORS -->
+          <div *ngIf="role === 'coordinators'">
+            <div class="row mt-2">
+              <div class="col-12 col-md-8 mx-auto mt-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar Coordinador"
+                  [matAutocomplete]="auto"
+                  [formControl]="coordinatorSelected"
+                />
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
+                  <mat-option *ngFor="let item of coordinators" [value]="item">
+                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                  </mat-option>
+                </mat-autocomplete>
+                <div class="searchBox">
+                  <img src="assets/icons/icon-search.svg" alt="img" />
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary rounded-pill mt-1"
+                  (click)="addPersonnel()"
+                  [disabled]="!coordinatorSelected.value"
+                >
+                  Agregar
+                </button>
+              </div>
+            </div>
+            <div class="row" *ngIf="coordinatorsData.length">
+              <p class="font-weight-bold ml-4 mt-3">Coordinadores Asignados</p>
+            </div>
+            <div class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of coordinatorsData; let i = index">
+                {{ item.personalData.name }}
+                <button type="button" class="btn btn-light btn-sm float-right" (click)="removeCoordinator(i)">
+                  Eliminar <img src="assets/img/delete.svg" />
+                </button>
+              </li>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" (click)="createWaitingRoom()">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="createWaitingRoom()">
           Crear Sala
         </button>
       </div>

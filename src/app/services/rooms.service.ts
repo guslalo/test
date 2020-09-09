@@ -11,13 +11,16 @@ export class RoomsService {
 
   constructor(private http: HttpClient) {}
 
-  //specialties
+  getWaitingRooms(roomId?): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.waitingRooms);
+  }
+
   createWaitingRoom(roomObject): Observable<any> {
     console.log(roomObject);
 
     return this.http.post<any>(environment.baseUrl + this.waitingRooms, {
       administrativeDetails: {
-        requirePayment: roomObject.acceptPayment,
+        requirePayment: roomObject.requirePayment,
         appointmentPrice: roomObject.appointmentPrice,
       },
       roomDetails: {
@@ -29,5 +32,13 @@ export class RoomsService {
         coordinators: roomObject.coordinators,
       },
     });
+  }
+
+  getProfessionals(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.waitingRooms + '/professionals');
+  }
+
+  getCoordinators(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.waitingRooms + '/coordinators');
   }
 }
