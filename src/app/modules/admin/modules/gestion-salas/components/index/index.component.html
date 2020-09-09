@@ -145,15 +145,21 @@
           <input [(ngModel)]="acceptPayments" type="checkbox" class="custom-control-input" id="payments" />
           <label class="custom-control-label" for="payments">Con Pago Asignado</label>
         </div>
-        <form class="mt-2">
+        <form class="mt-2" [formGroup]="roomForm">
           <div class="row">
             <div class="form-group col-12 col-md-8">
               <label for="startBlock">Nombre Sala *</label>
-              <input type="text" class="form-control" name="name" placeholder="Sala" />
+              <input type="text" class="form-control" name="name" placeholder="Sala" formControlName="name" />
             </div>
             <div class="form-group col-12 col-md-4">
               <label for="startBlock">Valor Consulta</label>
-              <input type="text" class="form-control" name="price" placeholder="$0" />
+              <input
+                type="text"
+                class="form-control"
+                name="price"
+                placeholder="$0"
+                formControlName="appointmentPrice"
+              />
             </div>
           </div>
           <div class="row">
@@ -166,6 +172,7 @@
                 rows="6"
                 [ngStyle]="{ resize: 'none' }"
                 placeholder="Descripcion"
+                formControlName="description"
               ></textarea>
             </div>
           </div>
@@ -173,6 +180,7 @@
             <div class="form-check">
               <input
                 [(ngModel)]="role"
+                [ngModelOptions]="{ standalone: true }"
                 class="form-check-input mx-auto"
                 type="radio"
                 name="exampleRadios"
@@ -187,6 +195,7 @@
             <div class="form-check">
               <input
                 [(ngModel)]="role"
+                [ngModelOptions]="{ standalone: true }"
                 class="form-check-input mx-auto"
                 type="radio"
                 name="exampleRadios"
@@ -200,11 +209,27 @@
             </div>
           </div>
           <div class="row mt-2">
-            <div class="col-12 mx-auto mt-2">
-              <input id="search-user" type="text" class="form-control" placeholder="Busqueda" />
+            <div class="col-12 col-md-8 mx-auto mt-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar profesional o coordinador"
+                [matAutocomplete]="auto"
+                [formControl]="control"
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let item of filteredPersonnel | async" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-autocomplete>
               <div class="searchBox">
                 <img src="assets/icons/icon-search.svg" alt="img" />
               </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <button type="button" class="btn btn-outline-primary rounded-pill mt-1" (click)="addPersonnel()">
+                Agregar
+              </button>
             </div>
           </div>
           <div class="row">
@@ -222,12 +247,7 @@
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          routerLink="crear-ficha-consulta"
-        >
+        <button type="button" class="btn btn-primary rounded-pill" (click)="createWaitingRoom()">
           Crear Sala
         </button>
       </div>

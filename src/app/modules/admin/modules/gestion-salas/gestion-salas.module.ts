@@ -12,7 +12,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [IndexComponent, EditarSalaComponent, VerSalaComponent],
@@ -20,12 +21,14 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     GestionSalasRountingModule,
+    ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbDropdownModule,
     NgxDatatableModule,
     NgxSpinnerModule,
+    MatAutocompleteModule,
   ],
 })
 export class GestionSalasModule {}
