@@ -14,7 +14,7 @@ import { FichaPacienteComponent } from './modules/ficha-paciente/ficha-paciente.
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
-import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
+//import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
@@ -44,12 +44,11 @@ const routes: Routes = [
   { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
   { path: 'mi-disponibilidad', component: MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
   {
-    path: historialConsulta + '/ficha-consulta',
-    component: FichaConsultaComponent,
-    canActivate: [ProfesionalGuard],
+    path:  'ficha-consulta/:appointmentId', 
+    loadChildren: () => import('./modules/ficha-consulta/ficha-consulta.module').then((m) => m.FichaConsultaModule),
   },
   {
-    path: historialConsulta, 
+    path: 'historial-consultas', 
     loadChildren: () => import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
   },
   {

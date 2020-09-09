@@ -25,7 +25,6 @@ import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routi
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
 
-import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
@@ -45,7 +44,6 @@ FullCalendarModule.registerPlugins([
     PacientesComponent,
     InicioPComponent,
     MiDisponibilidadComponent,
-    FichaConsultaComponent,
     MisPacientesComponent,
     AgendaComponent
   ],
