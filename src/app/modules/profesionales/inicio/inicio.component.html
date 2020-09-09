@@ -372,7 +372,9 @@
                 <tbody>
                   <tr *ngFor="let item of consultas" id="{{item._id}}">
                     <td scope="row">
-                      {{item.patientDetails.userDetails[0].name}}  {{item.patientDetails.userDetails[0].lastName}}
+                      {{item.patientDetails.userDetails[0].personalData.name}}   
+                        {{item.patientDetails.userDetails[0].personalData.lastName}} 
+                        {{item.patientDetails.userDetails[0].personalData.secondLastName}}
                     </td>
                     <td>
                       {{item.dateDetails.date | date: 'dd/MM/yyyy'}}
