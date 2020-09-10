@@ -72,7 +72,7 @@ export class IndexComponent implements OnInit {
     this.minDate = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
-      day: current.getDate(),
+      day: current.getDate()
     };
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
@@ -234,7 +234,8 @@ export class IndexComponent implements OnInit {
   }
 
   eliminaSintoma(item){
-    this.symptomsService.deleteSymptoms(item, this.consolidate.id).subscribe(
+    console.log(this.consolidate);
+    this.symptomsService.deleteSymptoms(this.consolidate.id, item).subscribe(
       (data) => {
         console.log(data);
       },

@@ -21,8 +21,7 @@ export class SymptomsService {
 
   //delete specialties
   deleteSymptoms(appointmentId, symptom): Observable<any> {
-    //let symptom:symptom;
-
+    console.log(appointmentId, symptom)
     const params = new HttpParams()
     .set('appointmentId', appointmentId)
     .set('symptomId', symptom);
