@@ -87,7 +87,7 @@ export class IndexComponent implements OnInit {
       id:deviceValue.value,
       text:deviceValue.selectedOptions[0].innerText
     }
-    console.log(selectedSintoma);
+    //console.log(selectedSintoma);
     this.sintomaSelected.push(selectedSintoma);
     console.log(this.consolidate); /**/
   }
@@ -201,7 +201,7 @@ export class IndexComponent implements OnInit {
   escogerProfessional(event) {
     this.flujoProfesional = true;
     this.bloquearFecha = false;
-    console.log(event);
+    //console.log(event);
     this.reserve = {
       professionalDetails: {
         userId: event,
