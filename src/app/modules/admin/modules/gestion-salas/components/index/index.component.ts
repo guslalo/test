@@ -58,7 +58,7 @@ export class IndexComponent implements OnInit {
 
   private display(user): string {
     //access component "this" here
-    return user ? user.personalData.name : user;
+    return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
   public selected(user) {
@@ -102,7 +102,7 @@ export class IndexComponent implements OnInit {
   }
 
   validRoom() {
-    if (this.roomForm.valid && this.professionalsData.length && this.coordinatorsData.length) {
+    if (this.roomForm.valid) {
       return true;
     } else {
       return false;

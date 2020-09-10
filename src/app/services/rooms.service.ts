@@ -8,6 +8,8 @@ import { environment } from './../../environments/environment';
 })
 export class RoomsService {
   private waitingRooms = 'v1/waiting-rooms';
+  professionals = [];
+  coordinators = [];
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +22,9 @@ export class RoomsService {
   }
 
   createWaitingRoom(roomObject): Observable<any> {
-    console.log(roomObject);
+    let personnelDetails: any = {};
+    if (roomObject.professionals.length) personnelDetails.professionals = roomObject.professionals;
+    if (roomObject.coordinators.length) personnelDetails.coordinators = roomObject.coordinators;
 
     return this.http.post<any>(environment.baseUrl + this.waitingRooms, {
       administrativeDetails: {
@@ -31,15 +35,14 @@ export class RoomsService {
         name: roomObject.name,
         description: roomObject.description,
       },
-      personnelDetails: {
-        professionals: roomObject.professionals,
-        coordinators: roomObject.coordinators,
-      },
+      personnelDetails,
     });
   }
 
   updateWaitingRoom(roomObject, roomId: string): Observable<any> {
-    console.log(roomObject);
+    let personnelDetails: any = {};
+    if (roomObject.professionals.length) personnelDetails.professionals = roomObject.professionals;
+    if (roomObject.coordinators.length) personnelDetails.coordinators = roomObject.coordinators;
 
     return this.http.put<any>(environment.baseUrl + this.waitingRooms + '/?waitingRoomId=' + roomId, {
       administrativeDetails: {
@@ -50,10 +53,7 @@ export class RoomsService {
         name: roomObject.name,
         description: roomObject.description,
       },
-      personnelDetails: {
-        professionals: roomObject.professionals,
-        coordinators: roomObject.coordinators,
-      },
+      personnelDetails,
     });
   }
 

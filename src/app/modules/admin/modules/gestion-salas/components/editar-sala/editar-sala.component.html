@@ -178,7 +178,7 @@
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of professionalsData; let i = index">
-        {{ item.personalData.name }}
+        {{ item.personalData.name + ' ' + item.personalData.lastName }}
         <button type="button" class="btn btn-light btn-sm float-right" (click)="removeProfessional(i)">
           Eliminar <img src="assets/img/delete.svg" />
         </button>
@@ -221,7 +221,7 @@
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of coordinatorsData; let i = index">
-        {{ item.personalData.name }}
+        {{ item.personalData.name + ' ' + item.personalData.lastName }}
         <button type="button" class="btn btn-light btn-sm float-right" (click)="removeCoordinator(i)">
           Eliminar <img src="assets/img/delete.svg" />
         </button>
