@@ -81,10 +81,13 @@
                     <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
                         <div class="form-group">
                             <label class="font-weight-bold text-left  w-100">Selecciona Profesional</label>
-                            <select class="form-control custom-select" (change)="escogerProfessional($event.target.value)">
+                            <select *ngIf="professional" 
+                            class="form-control custom-select" 
+                            (change)="escogerProfessional($event.target.value)">
                                 <option selected>Selecciona</option>
+
                                 <ng-container *ngFor="let item of professional">
-                                    <option value="{{item._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
+                                    <option value="{{item.userData[0]._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
                                 </ng-container>
                             </select>
                         </div>

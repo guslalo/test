@@ -74,10 +74,9 @@ export class IndexComponent implements OnInit {
       month: current.getMonth() + 1,
       day: current.getDate()
     };
+    this.getProfessionalService();
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
-
-    this.getProfessionalService();
     this.getsymptoms();
   }
 
@@ -225,6 +224,7 @@ export class IndexComponent implements OnInit {
     this.professionalService.getProfessionals().subscribe(
       (data) => {
         this.professional = data;
+        debugger;
         console.log(this.professional);
       },
       (error) => {
@@ -286,11 +286,12 @@ export class IndexComponent implements OnInit {
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
           //console.log(data.internalCode);
+          /*
           if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
             this.sinProfesionales = false;
-          }
+          }*/
         },
         (error) => {
           console.log(error);
