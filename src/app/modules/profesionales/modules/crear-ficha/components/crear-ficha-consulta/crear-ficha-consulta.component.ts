@@ -54,7 +54,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAppointmentsProfessionalData(id);
 
       setTimeout(()=>{       
-        this.getSession(id);
+        //this.getSession(id);
       }, 250);
       
     });
@@ -267,6 +267,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         if(
           this.appointmentDetail.administrativeDetails.status === "running"
           ){
+            this.getSession(id);
           this.permisoGuardar = true;
         }
       },
