@@ -68,10 +68,10 @@
                                 (change)="onChangeTypeSpecialtiesId($event.target.value)"
                                
                                 [disabled]="bloquearSelect"
-                                >
+                                ><!--{{item.medicalSpecialtyId}}-->
                                     <option selected>Selecciona</option>
                                     <ng-container *ngFor="let item of specialtiesId">
-                                        <option value="{{item._id}}">{{item.specialtyName}}</option>
+                                        <option value="{{item._id}}">{{item.specialtyName}} </option>
                                     </ng-container>
                                 </select>
                             </div>
@@ -84,7 +84,7 @@
                             <select class="form-control custom-select" (change)="escogerProfessional($event.target.value)">
                                 <option selected>Selecciona</option>
                                 <ng-container *ngFor="let item of professional">
-                                    <option value="{{item.userData[0]._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
+                                    <option value="{{item._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
                                 </ng-container>
                             </select>
                         </div>
