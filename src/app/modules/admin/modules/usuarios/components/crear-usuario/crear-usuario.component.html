@@ -533,7 +533,7 @@
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">Roles</h4>
-              <form [formGroup]="profilesForm" (ngSubmit)="addProfile(profilesForm.value)">
+              <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
                 <div class="row">
                   <div class="form-group col-md-3">
                     <label for="role">Tipo de Usuario</label>
@@ -550,6 +550,7 @@
                   <div class="form-group col-md-3">
                     <label for="profile">Perfil</label>
                     <select
+                      [(ngModel)]="profileSelected"
                       class="form-control"
                       name="profile"
                       formControlName="profile"
