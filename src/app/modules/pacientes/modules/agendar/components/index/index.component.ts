@@ -408,8 +408,9 @@ export class IndexComponent implements OnInit {
         type: 'documento',
         data: this.base64.split(',')[1],
       };
-
-      this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
+      console.log(this.consolidate.id);
+      this.documentService.postDocumentAppointment(this.consolidate.id, documentDetailsObject).subscribe(
+       
         (data) => {
           console.log(data);
         },
