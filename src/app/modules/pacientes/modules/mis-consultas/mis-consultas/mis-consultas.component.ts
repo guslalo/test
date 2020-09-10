@@ -13,7 +13,7 @@ export class MisConsultasComponent implements OnInit {
   public consultas: any;
   public model: any;
   moment: any = moment;
-  page: number;
+  page: number = 1;
   totalPages: number;
 
   constructor(private appointmentsService: AppointmentsService) {}
@@ -27,37 +27,19 @@ export class MisConsultasComponent implements OnInit {
 
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        console.log(data);
+        console.log(data.payload);
+        this.consultas = data.payload;
+        /*
         this.consultas = data.payload.sort(function compare(a, b) {
           var dateA: any = new Date(a.dateDetails.date);
           var dateB: any = new Date(b.dateDetails.date);
           return dateB - dateA;
         });
+        */
       },
       (error) => {
         console.log(error);
       }
     );
-  }
-
-  pageChange(page) {
-    console.log(page);
-    this.page = page;
-
-    this.appointmentsService.getAppointments(page).subscribe(
-      (data) => {
-        console.log(data);
-        this.consultas = data.payload.sort(function compare(a, b) {
-          var dateA: any = new Date(a.dateDetails.date);
-          var dateB: any = new Date(b.dateDetails.date);
-          return dateB - dateA;
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    console.log(this.page);
   }
 }
