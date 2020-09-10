@@ -629,10 +629,15 @@
                 <div class="row">
                   <div class="form-group col-md-4">
                     <label for="waitingRoom">Lista de Espera</label>
-                    <select class="form-control" name="waitingRoom" formControlName="waitingRoom">
+                    <select
+                      [(ngModel)]="roomSelected"
+                      class="form-control"
+                      name="waitingRoom"
+                      formControlName="waitingRoom"
+                    >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="item" *ngFor="let item of waitingRooms">
-                        {{ item.name }}
+                        {{ item.roomDetails?.name }}
                       </option>
                     </select>
                   </div>
@@ -671,21 +676,21 @@
                 <tbody>
                   <tr *ngFor="let waitingRoom of waitingRoomsAssigned; let i = index">
                     <td>
-                      {{ waitingRoom.name }}
+                      {{ waitingRoom.roomDetails?.name }}
                     </td>
                     <td>
-                      {{ waitingRoom.description }}
+                      {{ waitingRoom.roomDetails?.description }}
                     </td>
                     <td>
                       <div class="custom-control custom-switch">
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id="switch{{ waitingRoom.id }}"
+                          id="switch{{ waitingRoom.roomDetails?._id }}"
                           [checked]="true"
                           (change)="removeWaitingRoom(i)"
                         />
-                        <label class="custom-control-label" for="switch{{ waitingRoom.id }}"></label>
+                        <label class="custom-control-label" for="switch{{ waitingRoom.roomDetails?._id }}"></label>
                       </div>
                     </td>
                   </tr>

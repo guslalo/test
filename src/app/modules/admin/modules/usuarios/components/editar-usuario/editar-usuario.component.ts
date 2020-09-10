@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
+import { RoomsService } from 'src/app/services/rooms.service';
 
 const current = new Date();
 
@@ -33,6 +34,9 @@ export class EditarUsuarioComponent implements OnInit {
   professionalForm: FormGroup;
   passwordForm: FormGroup;
   professionalPhoto: any;
+
+  profileSelected: any;
+  roomSelected: any;
 
   states: any = [];
   cities: any = [];
@@ -71,12 +75,7 @@ export class EditarUsuarioComponent implements OnInit {
   profile: any = {};
   profiles: any = [];
   profilesAssigned: any = [];
-
-  waitingRooms: any = [
-    { id: '1', name: 'Sala de Espera 1', description: 'desc 1' },
-    { id: '2', name: 'Sala de Espera 2', description: 'desc 2' },
-    { id: '3', name: 'Sala de Espera 3', description: 'desc 3' },
-  ];
+  waitingRooms: any = [];
   waitingRoomsAssigned: any = [];
 
   specialities: any = [];
@@ -91,6 +90,7 @@ export class EditarUsuarioComponent implements OnInit {
     private adminService: AdminService,
     private userService: UsersService,
     private specialtiesService: SpecialtiesService,
+    private roomsService: RoomsService,
     private calendar: NgbCalendar,
     private spinner: NgxSpinnerService
   ) {}
@@ -103,6 +103,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.clinicId = localStorage.getItem('clinic');
 
     this.getProfiles();
+    this.getRooms();
     this.getIssuingEntities();
     this.getUfs();
     this.getCities();
@@ -319,6 +320,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
 
         this.waitingRoomsAssigned = user.waitingRooms || [];
+        // console.log(this.waitingRoomsAssigned);
 
         // PROFILES
         if (this.userType !== 'patients') {
@@ -378,6 +380,7 @@ export class EditarUsuarioComponent implements OnInit {
           }
         });
         // console.log(this.profiles);
+        this.profileSelected = this.profiles[0];
       },
       (error) => {
         console.log(error);
@@ -385,16 +388,18 @@ export class EditarUsuarioComponent implements OnInit {
     );
   }
 
-  addProfile(form) {
+  addProfile() {
+    console.log(this.profileSelected);
+
     // console.log(form);
-    if (this.profilesAssigned.some((profile) => profile.role === form.role)) {
-      alert(`El rol ${form.role} ya esta asignado al usuario`);
+    if (this.profilesAssigned.some((profile) => profile.role === this.profileSelected.role)) {
+      alert(`El rol ${this.profileSelected.role} ya esta asignado al usuario`);
     } else {
       this.profilesAssigned.push({
-        id: form.profile.id,
+        id: this.profileSelected.id,
         clinic: this.clinicId,
-        role: form.role,
-        name: form.profile.profileName,
+        role: this.profileSelected.role,
+        name: this.profileSelected.profileName,
       });
     }
     // console.log(this.profilesAssigned);
@@ -408,9 +413,9 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   addWaitingRoom() {
-    const data = this.waitingRoomForm.value.waitingRoom;
-    if (this.waitingRoomsAssigned.some((room) => room.name === data.name)) {
-      alert(`La lista de espera ${data.name} ya esta asignada al usuario`);
+    const data = this.roomSelected;
+    if (this.waitingRoomsAssigned.some((room) => room._id === data._id)) {
+      alert(`La lista de espera ${data.roomDetails.name} ya esta asignada al usuario`);
     } else {
       this.waitingRoomsAssigned.push(data);
     }
@@ -631,6 +636,13 @@ export class EditarUsuarioComponent implements OnInit {
         }
       );
     }
+  }
+
+  getRooms() {
+    this.roomsService.getWaitingRooms().subscribe((data) => {
+      console.log(data);
+      this.waitingRooms = data.payload;
+    });
   }
 
   getIssuingEntities() {

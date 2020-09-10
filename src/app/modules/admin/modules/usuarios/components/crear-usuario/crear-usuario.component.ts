@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
+import { RoomsService } from 'src/app/services/rooms.service';
 
 const current = new Date();
 
@@ -37,7 +38,9 @@ export class CrearUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+
   profileSelected: any;
+  roomSelected: any;
 
   currentDate = {
     year: current.getFullYear(),
@@ -66,11 +69,7 @@ export class CrearUsuarioComponent implements OnInit {
   profiles: any = [];
   profilesAssigned: any = [];
 
-  waitingRooms: any = [
-    { id: '1', name: 'Sala de Espera 1', description: 'desc 1' },
-    { id: '2', name: 'Sala de Espera 2', description: 'desc 2' },
-    { id: '3', name: 'Sala de Espera 3', description: 'desc 3' },
-  ];
+  waitingRooms: any = [];
   waitingRoomsAssigned: any = [];
 
   specialities: any = [];
@@ -87,6 +86,7 @@ export class CrearUsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private userService: UsersService,
+    private roomsService: RoomsService,
     private specialtiesService: SpecialtiesService,
     private calendar: NgbCalendar,
     private spinner: NgxSpinnerService
@@ -96,6 +96,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.spinner.show();
 
     this.getProfiles();
+    this.getRooms();
     this.getIssuingEntities();
     this.getUfs();
     this.getCities();
@@ -286,9 +287,9 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   addWaitingRoom() {
-    const data = this.waitingRoomForm.value.waitingRoom;
-    if (this.waitingRoomsAssigned.some((room) => room.name === data.name)) {
-      alert(`La lista de espera ${data.name} ya esta asignada al usuario`);
+    const data = this.roomSelected;
+    if (this.waitingRoomsAssigned.some((room) => room._id === data._id)) {
+      alert(`La lista de espera ${data.roomDetails.name} ya esta asignada al usuario`);
     } else {
       this.waitingRoomsAssigned.push(data);
     }
@@ -497,6 +498,13 @@ export class CrearUsuarioComponent implements OnInit {
         }
       );
     }
+  }
+
+  getRooms() {
+    this.roomsService.getWaitingRooms().subscribe((data) => {
+      console.log(data);
+      this.waitingRooms = data.payload;
+    });
   }
 
   getIssuingEntities() {
