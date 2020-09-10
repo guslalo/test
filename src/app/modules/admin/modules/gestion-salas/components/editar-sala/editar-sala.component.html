@@ -41,7 +41,7 @@
     <div class="tableBox rounded p-4 bg-white">
       <h5>Datos Sala</h5>
       <p>
-        <small>Sala creada el 01-01-1990 por XXXX</small>
+        <small>Sala creada el {{ createdAt }} por {{ createdBy }}</small>
       </p>
       <form [formGroup]="roomForm" class="mt-2">
         <div class="row">

@@ -232,8 +232,16 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+  
+  removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+  }
 
   eliminaSintoma(item){
+    this.removeElement(item);
+    //let elemento = document.getElementById('5f5800f825152591e20ac381').outerHTML = "";
+    
     console.log(this.consolidate);
     this.symptomsService.deleteSymptoms(this.consolidate.id, item).subscribe(
       (data) => {
@@ -311,7 +319,7 @@ export class IndexComponent implements OnInit {
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
-            console.log(data.internalCode);
+           // console.log(data.internalCode);
             if (data.internalCode === 103) {
               this.sinProfesionales = true;
             } else {
@@ -408,8 +416,9 @@ export class IndexComponent implements OnInit {
         type: 'documento',
         data: this.base64.split(',')[1],
       };
-
-      this.documentService.postDocument(this.consolidate.id, documentDetailsObject).subscribe(
+      console.log(this.consolidate.id);
+      this.documentService.postDocumentAppointment(this.consolidate.id, documentDetailsObject).subscribe(
+       
         (data) => {
           console.log(data);
         },

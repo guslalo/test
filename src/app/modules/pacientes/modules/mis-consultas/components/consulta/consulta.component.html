@@ -1,5 +1,5 @@
 
-<ng-container *ngIf="appoimentDetail" id="appoimentDetail._id">
+<ng-container *ngIf="appoimentDetail">
   <div class="row mb-3">
     <div class="col-9 col-md-9">
       <h2>Ficha Consulta</h2>
@@ -62,7 +62,12 @@
                   </p>
                   <!--font-weight-bold-->
                   <ul class="simple-list">
-                    <li>Especialidad: {{appoimentDetail.professionalDetails.specialtyDetails[0].specialtyName}}</li>
+                    <li>Especialidad: 
+                      <ng-container *ngIf="appoimentDetail.professionalDetails.specialtyDetails.lenght > 0">
+                        {{appoimentDetail.professionalDetails.specialtyDetails[0].specialtyName}}
+                      </ng-container>
+                     
+                    </li>
                     <!--<li>Edad: 25</li>
                     <li>Nacionalidad: Chilena</li>-->
                   </ul>
