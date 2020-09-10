@@ -49,9 +49,13 @@ export class CrearFichaConsultaComponent implements OnInit {
       const id = params.appointmentId
       this.appointmentId = params.appointmentId;
       console.log(params);
-      this.getSession(id);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
+
+      setTimeout(()=>{       
+        this.getSession(id);
+      }, 250);
+      
     });
 
 
