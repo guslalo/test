@@ -98,7 +98,7 @@
         <ng-container
           ><!--*ngIf="consultas.length > 0; else vacio"-->
           <!-- colappsed-->
-          <ng-container *ngFor="let item of consultas">
+          <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0">
                 <tbody>
@@ -205,12 +205,7 @@
             </div>
           </ng-container>
 
-          <ngb-pagination
-            [(page)]="page"
-            [pageSize]="9"
-            [collectionSize]="totalPages"
-            (pageChange)="pageChange(page)"
-          ></ngb-pagination>
+          <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
         </ng-container>
 
         <ng-template #vacio>
