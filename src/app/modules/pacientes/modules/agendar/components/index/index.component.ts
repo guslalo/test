@@ -29,6 +29,7 @@ import { id } from '@swimlane/ngx-charts';
 export class IndexComponent implements OnInit {
   public specialties: string;
   public specialtiesId: string;
+  public specialtiesIdReserve: string;
   public medicalSpecialties: any;
   public blocks: any;
   public symptoms: any;
@@ -147,7 +148,9 @@ export class IndexComponent implements OnInit {
     console.log(item);
     this.selectSintoma = true;
     this.reserve.dateDetails.start = item2;
+    console.log(this.specialtiesIdReserve);
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
+    this.reserve.professionalDetails.specialtyId =  this.specialtiesIdReserve;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
@@ -224,7 +227,6 @@ export class IndexComponent implements OnInit {
     this.professionalService.getProfessionals().subscribe(
       (data) => {
         this.professional = data;
-        debugger;
         console.log(this.professional);
       },
       (error) => {
@@ -282,6 +284,10 @@ export class IndexComponent implements OnInit {
       this.agendarService.postBlocksProfessionalId(object,  this.reserve.professionalId ).subscribe(
         (data) => {
           this.blocks = data.payload;
+          //console.log();
+          this.specialtiesIdReserve = this.blocks[0].professionalDetails.specialtyId
+          console.log(this.specialtiesIdReserve );
+
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
