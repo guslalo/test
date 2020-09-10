@@ -33,6 +33,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public consultasForm: FormGroup;
   public diagnostico: FormGroup;
   public notes: FormGroup;
+  public permisoGuardar:boolean;
 
   constructor( 
     private route: ActivatedRoute,
@@ -44,7 +45,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+    this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
       this.appointmentId = params.appointmentId;
@@ -263,6 +264,11 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.userId = this.appointmentDetail.professionalDetails.userDetails[0].userId;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
+        if(
+          this.appointmentDetail.administrativeDetails.status === "running"
+          ){
+          this.permisoGuardar = true;
+        }
       },
       (error) => {
         console.log(error);

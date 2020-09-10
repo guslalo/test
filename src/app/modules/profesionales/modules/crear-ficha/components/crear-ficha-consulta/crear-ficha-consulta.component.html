@@ -949,7 +949,9 @@
                     
                   <hr>
                   <div class="text-right">
-                    <button class="btn btn-secondary rounded-pill" (click)="putAppointment(appointmentDetail._id)">
+                    <button class="btn btn-secondary rounded-pill" (click)="putAppointment(appointmentDetail._id)" [disabled]="!permisoGuardar || !diagnostico.valid"
+                    data-toggle="modal" data-target="#exampleModal"
+                    >
                       Guardar
                     </button>
                   </div>
@@ -1576,3 +1578,26 @@
     </div>
   </div>
 </ng-container>
+
+
+<div class="modal" tabindex="-1"  id="exampleModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Actualización de ficha</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>información guardada exitosamente</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
