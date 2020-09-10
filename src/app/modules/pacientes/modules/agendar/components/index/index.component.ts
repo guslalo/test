@@ -232,6 +232,7 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+  
   removeElement(id) {
     var elem = document.getElementById(id);
     return elem.parentNode.removeChild(elem);
@@ -318,7 +319,7 @@ export class IndexComponent implements OnInit {
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
-            console.log(data.internalCode);
+           // console.log(data.internalCode);
             if (data.internalCode === 103) {
               this.sinProfesionales = true;
             } else {
