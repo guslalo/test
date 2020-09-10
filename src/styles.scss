@@ -724,6 +724,12 @@ button.custom-btn-1:hover {
  top: 30%;
 }
 
+.scrollVertical {
+  overflow-x: hidden;
+  overflow-y:scroll;
+  height: 300px;
+}
+
 @include media-breakpoint-only(xs) {
   .btn-block-xs-only {
     display: block;

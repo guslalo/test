@@ -83,11 +83,7 @@ export class MiSaludComponent implements OnInit {
     this.agregarItem.controls.item.reset;
     console.log(modelAntecedente);
     this.modelAntecedente = this.agregarItem.controls.item.value;
-    /*
-    console.log(test);
-    if(this.agregarItem.controls.item.value.length > 3){
-      this.addValidator = true;
-    }*/
+
   }
 
   categoryChangue(category?) {
@@ -106,16 +102,18 @@ export class MiSaludComponent implements OnInit {
 
   addExamenPost() {
     console.log(this.addExamen);
+    console.log(this.user.id)
+    const id = this.user.id;
     const formObject = {
       name: this.nameFile,
       type: this.addExamen.controls.type.value,
       file: this.base64.split(',')[1],
     };
-    this.putAddExamen(formObject);
+    this.putAddExamen(formObject, this.user.id);
   }
 
-  putAddExamen(object) {
-    this.medicalRecord.putAddExamen(object).subscribe(
+  putAddExamen(object, id:string) {
+    this.medicalRecord.putAddExamen(object, id).subscribe(
       (data) => {
         console.log(data);
         this.getMedicalRecord();

@@ -74,3 +74,8 @@ select.form-control {
     padding: 10px 0 !important;
   }
 }
+
+.cdk-overlay-container,
+.cdk-overlay-pane {
+  z-index: 9999 !important;
+}

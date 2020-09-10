@@ -8,6 +8,7 @@
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
       data-target="#patientModal"
+      [disabled]="tab === 'patients'"
     >
       Nuevo Paciente
       <img src="assets/icons/icon-plus-circle.svg" />
@@ -17,237 +18,325 @@
 
 <div class="row">
   <div class="col-12">
-    <div class="row mt-2">
+    <div class="row">
       <div class="col-12 col-md-3">
-        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Busqueda" />
+        <input
+          [(ngModel)]="searchTerm"
+          type="text"
+          class="form-control"
+          placeholder="Busqueda"
+          (keyup)="applyFilters(tab)"
+        />
         <div class="searchBox">
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-search"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-            />
-          </svg>
+          <img src="assets/icons/icon-search.svg" />
         </div>
       </div>
-      <div class="col-12 col-md-3">
-        <div class="form-group">
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>Filtrar por</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
+      <div class="col-auto mb-4">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="tab" class="nav-tabs">
+          <li ngbNavItem="patients">
+            <a ngbNavLink>Pacientes Asociados</a>
+            <ng-template ngbNavContent>
+              <div class="tableBox rounded p-4 bg-white">
+                <ngx-datatable
+                  *ngIf="patients.length; else noData"
+                  #table
+                  class="material"
+                  [rows]="patients"
+                  headerHeight="auto"
+                  footerHeight="auto"
+                  rowHeight="70"
+                  [columnMode]="ColumnMode.flex"
+                  [limit]="pageSize"
+                  [selectAllRowsOnPage]="true"
+                >
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <span>{{
+                        row.identificationData.cpf ||
+                          row.identificationData.cns ||
+                          row.identificationData.rgRegistry ||
+                          row.identificationData.passport
+                      }}</span>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
+                        <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                        {{
+                          row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName)
+                        }}
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ moment().diff(row.personalData.birthdate, 'year') }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo"
+                    ><ng-template let-row="row" ngx-datatable-cell-template>
+                      {{
+                        row.personalData.gender === 'male'
+                          ? 'Masculino'
+                          : row.personalData.gender === 'female'
+                          ? 'Femenino'
+                          : 'S/R'
+                      }}
+                    </ng-template></ngx-datatable-column
+                  >
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [flexGrow]="2"
+                    prop="personalData.phoneNumber"
+                    name="Telefono"
+                  >
+                  </ngx-datatable-column>
+                </ngx-datatable>
+                <ng-template #noData>
+                  <h5 class="text-center text-primary">No se han encontrado pacientes asociados</h5>
+                </ng-template>
+              </div>
+            </ng-template>
+          </li>
+          <li ngbNavItem="pre-patients">
+            <a ngbNavLink>Pacientes Ingresados</a>
+            <ng-template ngbNavContent>
+              <div class="tableBox rounded p-4 bg-white">
+                <ngx-datatable
+                  *ngIf="prePatients.length; else noData"
+                  #table
+                  class="material"
+                  [rows]="prePatients"
+                  headerHeight="auto"
+                  footerHeight="auto"
+                  rowHeight="70"
+                  [columnMode]="ColumnMode.flex"
+                  [limit]="pageSize"
+                  [selectAllRowsOnPage]="true"
+                >
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                      {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="email" name="Correo">
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ moment().diff(row.age, 'year') }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.gender === 'male' ? 'Masculino' : row.gender === 'female' ? 'Femenino' : 'S/R' }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phoneNumber" name="Telefono">
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
+                        {{
+                          row.status === 'joined'
+                            ? 'Ingresado'
+                            : row.status === 'pending'
+                            ? 'Pendiente'
+                            : row.status === 'active'
+                            ? 'Activo'
+                            : 'S/R'
+                        }}
+                      </button>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div ngbDropdown container="body">
+                        <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </button>
+                        <div ngbDropdownMenu>
+                          <button
+                            *ngIf="row.status === 'joined' || row.status == 'pending'"
+                            ngbDropdownItem
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#sendInvitationModal"
+                            (click)="sendInvitationEmail(row._id)"
+                          >
+                            Enviar Invitacion a Correo
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+                <ng-template #noData>
+                  <h5 class="text-center text-primary">No existen pacientes ingresados</h5>
+                </ng-template>
+              </div>
+            </ng-template>
+          </li>
+        </ul>
       </div>
     </div>
-    <!--consultas activas-->
-    <div class="row mt-1">
-      <div class="col-12">
-        <h5 style="display: none;">Mis consultas activas</h5>
-      </div>
-      <div class="col-12 mb-4">
-        <div class="tableBox rounded p-4 bg-white">
-          <ngx-datatable
-            *ngIf="patients.length; else noData"
-            #table
-            class="material"
-            [rows]="patients"
-            headerHeight="auto"
-            footerHeight="auto"
-            rowHeight="70"
-            [columnMode]="ColumnMode.flex"
-            [limit]="pageSize"
-            [selectAllRowsOnPage]="true"
-          >
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                <span>{{
-                  row.identificationData.cpf ||
-                    row.identificationData.cns ||
-                    row.identificationData.rgRegistry ||
-                    row.identificationData.passport
-                }}</span>
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                  {{ row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName) }}
-                </a>
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Edad">
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ moment().diff(row.personalData.birthdate, 'year') }}
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo"
-              ><ng-template let-row="row" ngx-datatable-cell-template>
-                {{
-                  row.personalData.gender === 'male'
-                    ? 'Masculino'
-                    : row.personalData.gender === 'female'
-                    ? 'Femenino'
-                    : 'S/R'
-                }}
-              </ng-template></ngx-datatable-column
-            >
-            <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="personalData.phoneNumber" name="Telefono">
-            </ngx-datatable-column>
-          </ngx-datatable>
-          <ng-template #noData>
-            <h5 class="text-center text-primary">No se han encontrado pacientes asociados</h5>
-          </ng-template>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Patient Modal -->
-<!-- Modal -->
-<div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">{{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body p-4">
-        <form [formGroup]="patientForm">
-          <div class="custom-control custom-switch mb-4">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="switchIsTutor"
-              [checked]="false"
-              formControlName="isTutor"
-            />
-            <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="name">Nombre</label>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+
+  <ngb-toast
+    *ngIf="emailSent"
+    class="bg-success text-light"
+    [delay]="5000"
+    [autohide]="true"
+    (hide)="emailSent = false"
+  >
+    <div>Correo Enviado Exitosamente</div>
+  </ngb-toast>
+
+  <!-- PATIENT MODAL -->
+  <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center w-100 mt-1">{{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p-4">
+          <form [formGroup]="patientForm">
+            <div class="custom-control custom-switch mb-4">
               <input
-                type="text"
-                class="form-control"
-                name="name"
-                formControlName="name"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
-                }"
+                type="checkbox"
+                class="custom-control-input"
+                id="switchIsTutor"
+                [checked]="false"
+                formControlName="isTutor"
               />
+              <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
             </div>
-            <div class="form-group col">
-              <label for="lastName">Primer Apellido</label>
-              <input
-                type="email"
-                class="form-control"
-                name="lastName"
-                formControlName="lastName"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
-                }"
-              />
+            <div class="row">
+              <div class="form-group col">
+                <label for="name">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('name').valid && patientForm.get('name').touched
+                  }"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="lastName">Primer Apellido</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="lastName"
+                  formControlName="lastName"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('lastName').valid && patientForm.get('lastName').touched
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col">
-              <label for="secondLastName">Segundo Apellido *</label>
-              <input
-                type="email"
-                class="form-control"
-                name="secondLastName"
-                formControlName="secondLastName"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('secondLastName').valid && patientForm.get('secondLastName').touched
-                }"
-              />
+            <div class="row">
+              <div class="form-group col">
+                <label for="secondLastName">Segundo Apellido *</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="secondLastName"
+                  formControlName="secondLastName"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('secondLastName').valid && patientForm.get('secondLastName').touched
+                  }"
+                />
+              </div>
+              <div class="form-group col">
+                <label for="gender">Sexo</label>
+                <select
+                  class="form-control"
+                  name="gender"
+                  formControlName="gender"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('gender').valid && patientForm.get('gender').touched
+                  }"
+                >
+                  <option value="">- Seleccionar -</option>
+                  <option value="male">Masculino</option>
+                  <option value="female">Femenino</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group col">
-              <label for="gender">Sexo</label>
-              <select
-                class="form-control"
-                name="gender"
-                formControlName="gender"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('gender').valid && patientForm.get('gender').touched
-                }"
-              >
-                <option value="">- Seleccionar -</option>
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-              </select>
+            <div class="row">
+              <div class="form-group col-5">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
+                  }"
+                />
+              </div>
+              <div class="form-group col-5">
+                <label for="phoneNumber">Telefono</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phoneNumber"
+                  formControlName="phoneNumber"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
+                  }"
+                />
+              </div>
+              <div class="form-group col-2">
+                <label for="age">Edad</label>
+                <input
+                  class="form-control"
+                  name="age"
+                  formControlName="age"
+                  [ngClass]="{
+                    'is-invalid': !patientForm.get('age').valid && patientForm.get('age').touched
+                  }"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-5">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                name="email"
-                formControlName="email"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('email').valid && patientForm.get('email').touched
-                }"
-              />
-            </div>
-            <div class="form-group col-5">
-              <label for="phoneNumber">Telefono</label>
-              <input
-                type="text"
-                class="form-control"
-                name="phoneNumber"
-                formControlName="phoneNumber"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('phoneNumber').valid && patientForm.get('phoneNumber').touched
-                }"
-              />
-            </div>
-            <div class="form-group col-2">
-              <label for="age">Edad</label>
-              <input
-                type="email"
-                class="form-control"
-                name="age"
-                formControlName="age"
-                [ngClass]="{
-                  'is-invalid': !patientForm.get('age').valid && patientForm.get('age').touched
-                }"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
-          Cancelar
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          (click)="savePatient()"
-          [disabled]="!patientForm.valid"
-        >
-          {{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente
-        </button>
+          </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-dismiss="modal"
+            (click)="savePatient()"
+            [disabled]="!patientForm.valid"
+          >
+            {{ !patientIsEdit ? 'Crear' : 'Actualizar' }} Paciente
+          </button>
+        </div>
       </div>
     </div>
   </div>

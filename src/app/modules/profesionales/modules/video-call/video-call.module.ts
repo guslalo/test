@@ -10,6 +10,9 @@ import { IndexComponent } from './components/index/index.component';
   imports: [
     CommonModule,
     VideoCallRoutingModule
+  ],
+  exports: [
+    IndexComponent
   ]
 })
 export class VideoCallModule { }

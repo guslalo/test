@@ -16,7 +16,7 @@ export class MisConsultasComponent implements OnInit {
   constructor(private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
-    this.appointmentsService.getAppointments(1, 'appointed').subscribe(
+    this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data);
         this.consultas = data.payload;

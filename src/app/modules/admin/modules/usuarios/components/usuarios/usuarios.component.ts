@@ -167,36 +167,6 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  /*
-  async savePatient() {
-    console.log(this.patientForm.value);
-
-    this.patientObject = {
-      id: this.patientId,
-      personalData: {
-        name: this.patientForm.value.name,
-        lastName: this.patientForm.value.lastName,
-        phoneNumber: this.patientForm.value.phoneNumber,
-        email: this.patientForm.value.email,
-        genre: this.patientForm.value.genre,
-      },
-      identificationData: {
-        idDocumentNumber: this.patientForm.value.idDocumentNumber,
-      },
-      isTutor: this.patientForm.value.isTutor,
-    };
-
-    if (!this.isEdit) {
-      this.adminService.createUser('patient', this.patientObject).subscribe();
-    } else {
-      this.adminService.updateUser('patients', this.patientObject).subscribe();
-    }
-    setTimeout(() => {
-      this.getUsers('patients');
-    }, 500);
-  }
-  */
-
   openDeactivateUserModal(disableUserModal, userId: string) {
     this.userId = userId;
     this.modalService.open(disableUserModal);

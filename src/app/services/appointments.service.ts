@@ -13,8 +13,15 @@ export class AppointmentsService {
   private session = '/session';
   private reserve = '/reserve'
   private consolidate = '/consolidate'
+  private reschedule = '/reschedule' 
 
   constructor(private http: HttpClient) {}
+
+  paramsId(id){
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return params;
+  }
 
   //getAppointments
   getAppointments(number, status?): Observable<any> {
@@ -35,6 +42,18 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/' + id);
   }
 
+  // getAppointmentsDetails
+  getAppointmentsDetails(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/details/', { params: params });
+  }
+
+  // getAppointmentsDetails
+  getAppointmentsTimeline(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/timeline');
+  }
+
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {
@@ -43,7 +62,6 @@ export class AppointmentsService {
         // 'Content-Type': 'application/json'
       }),
     };
-
     return this.http.get<any>(environment.baseUrl + this.doctors, httpOptions);
   }
 
@@ -62,4 +80,33 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate );
   }
 
+  //get Appointment professional data
+  getAppointmentsProfessionalData(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
+  }
+
+
+  //events
+  postRunAppointment(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/reschedule', { params: params });
+  }
+
+  //postRunAppointment(id): Observable<any> {
+  postEventAppointment(id, event): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.appointments + '/' + event,'', { params: params });
+  }
+
+  //postRunAppointment(id): Observable<any> {
+  putAppointment(id, appointmentDetails): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails , { params: params });
+  }
+  
 }

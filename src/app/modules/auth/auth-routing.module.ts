@@ -9,6 +9,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MultiProfileGuard } from 'src/app/guards/multiprofile.guard';
 import { GuardsGuard } from '../../guards/guards.guard';
+import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 
 const recovery = 'recovery-password';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'create-account',
     component: CreateAccountComponent,
+  },
+  {
+    path: 'finish-registration',
+    component: FinishRegistrationComponent,
   },
   {
     path: 'context',

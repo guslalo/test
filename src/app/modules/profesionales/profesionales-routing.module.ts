@@ -14,13 +14,12 @@ import { FichaPacienteComponent } from './modules/ficha-paciente/ficha-paciente.
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
-import { HistorialConsultasComponent } from './modules/historial-consultas/historial-consultas.component';
-import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
+//import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
-import { CrearFichaConsultaComponent } from './modules/crear-ficha-consulta/crear-ficha-consulta.component';
+
 
 
 // const profesional
@@ -37,26 +36,25 @@ const routes: Routes = [
     path: 'professional/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
-  { 
-    path: '', component: InicioPComponent },
-      { path: 'context', component: InicioPComponent },
+  { path: '', component: InicioPComponent },
+  { path: 'context', component: InicioPComponent },
 
-      { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
-      { path: MisPacientes, component: MisPacientesComponent, canActivate: [ProfesionalGuard] },
-      { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
-      { path: 'mi-disponibilidad', component: MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
-      {
-        path: historialConsulta,
-        component: HistorialConsultasComponent,
-        canActivate: [ProfesionalGuard],
-        children: [{ path: 'ficha-consultas', component: FichaConsultaComponent, canActivate: [ProfesionalGuard] }],
-      },
-      {
-        path: historialConsulta + '/ficha-consulta',
-        component: FichaConsultaComponent,
-        canActivate: [ProfesionalGuard],
-      },
-      { path: 'crear-ficha-consulta', component: CrearFichaConsultaComponent, canActivate: [ProfesionalGuard] }
+  { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
+  { path: MisPacientes, component: MisPacientesComponent, canActivate: [ProfesionalGuard] },
+  { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
+  { path: 'mi-disponibilidad', component: MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
+  {
+    path:  'ficha-consulta/:appointmentId', 
+    loadChildren: () => import('./modules/ficha-consulta/ficha-consulta.module').then((m) => m.FichaConsultaModule),
+  },
+  {
+    path: 'historial-consultas', 
+    loadChildren: () => import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
+  },
+  {
+    path: 'crear-ficha-consulta/:appointmentId',
+    loadChildren: () => import('./modules/crear-ficha/crear-ficha.module').then((m) => m.CrearFichaModule),
+  }
 ];
 
 @NgModule({

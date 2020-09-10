@@ -103,14 +103,14 @@
           </div>
         </div>
 
-        <ng-container *ngIf="consultas.length > 0; else vacio">
+        <ng-container ><!--*ngIf="consultas.length > 0; else vacio"-->
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas">
             <div class="collapseCustom " id="{{item._id}}">
               <table class="table dos table-borderless mb-0">
                 <tbody>
                   <tr>
-                    <td>
+                    <td width="250" >
                       <svg
                         width="1em"
                         height="1em"
@@ -130,27 +130,7 @@
                       </svg>
                       {{item.dateDetails.date | date: 'dd/MM/yyyy'}} / {{item.dateDetails.start}}
                     </td>
-                    <td style="display: none;">
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-clock"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
-                        />
-                      </svg>
-                      16:00 Hrs.
-                    </td>
-                    <td id=""><!--{{item.professionalDetails.userDetails[0].userId}}-->
+                    <td class="text-center"><!--{{item.professionalDetails.userDetails[0].userId}}-->
                       <svg
                         width="1em"
                         height="1em"
@@ -171,19 +151,30 @@
                       {{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}
                       <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                     </td>
-                    <td id=""><!--{{item.professionalDetails.specialtyDetails[0].specialtyId}}-->
-                      <!--{{item.professionalDetails.specialtyDetails[0].specialtyName}}-->
-                    </td>
-                    <td>
-                      <a  target="_blank" routerLink="/patient/consulta/{{item._id}}">
+                    
+                    <td class="text-center" width="150">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm" 
                       >
-                        Ingresar
+                       {{item.administrativeDetails.status}}
                       </button>
-                    </a>
+                  
                     </td>
-                    <td>
-                      <div class="btn-group">
+                    <td width="150">
+                      <ng-container *ngIf=" 
+                      item.administrativeDetails.status === 'running' || item.administrativeDetails.status === 'active'
+                      || item.administrativeDetails.status === 'appointed' 
+                      || item.administrativeDetails.status === 'pending'   
+                      "
+                      >
+                        <a routerLink="/patient/consulta/{{item._id}}"  target="_blank" >
+                        <button 
+                        class="rounded-pill btn-sm btn btn-primary" 
+                        type="button" >
+                          Entrar
+                        </button>
+                        </a>
+                      
+                      <div class="btn-group" style="display: none;">
                         <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <svg
                             width="1em"
@@ -201,9 +192,12 @@
                         </div>
                       
                         <div class="dropdown-menu dropdown-menu-right">
-                          <button class="dropdown-item" type="button" routerLink="consulta/{{item._id}}">
-                            ver
-                          </button>
+                         
+                            <button class="dropdown-item" type="button" routerLink="consulta/{{item._id}}">
+                              Entrar
+                            </button>
+                         
+                          <!--
                             <button
                            
                             class="dropdown-item"
@@ -211,9 +205,19 @@
                            
                           >
                             Documentos
-                          </button><!---->
+                          </button>-->
                         </div>
                       </div>
+                    </ng-container>
+                    <ng-container 
+                    *ngIf="item.administrativeDetails.status === 'finished'">
+                    <a routerLink="consulta/{{item._id}}">
+                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm" 
+                      >
+                       Ver ficha
+                      </button>
+                    </a>
+                    </ng-container>
                     </td>
                   </tr>
                 </tbody>

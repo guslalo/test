@@ -12,7 +12,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(public errorDialogService: ErrorDialogService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req.url.toString());
+
     let urlAccount = 'account';
     let urlLogin = 'access';
     if (req.url.indexOf(urlAccount) === -1) {

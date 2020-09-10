@@ -26,12 +26,14 @@ import { ChooseContextComponent } from './components/choose-context/choose-conte
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RecoveryComponent,
     CreateAccountComponent,
+    FinishRegistrationComponent,
     BlockedAccountComponent,
     LeftColumnComponent,
     LangComponent,
