@@ -34,7 +34,7 @@ export class IndexComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {
     this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
-      appointmentPrice: ['', [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$/)]],
+      appointmentPrice: [null, [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$/)]],
       description: ['', null],
     });
   }
@@ -117,10 +117,14 @@ export class IndexComponent implements OnInit {
       return map.userId;
     });
 
+    let _appointmentPrice = '0';
+
+    if (this.requirePayment) _appointmentPrice = this.roomForm.get('appointmentPrice').value;
+
     const roomObject = {
       name: this.roomForm.get('name').value,
       requirePayment: this.requirePayment,
-      appointmentPrice: this.roomForm.get('appointmentPrice').value || 0,
+      appointmentPrice: _appointmentPrice,
       description: this.roomForm.get('description').value,
       professionals: _professionals,
       coordinators: _coordinators,

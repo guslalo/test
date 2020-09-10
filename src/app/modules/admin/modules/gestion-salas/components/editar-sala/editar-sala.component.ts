@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ThrowStmt } from '@angular/compiler';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editar-sala',
@@ -20,6 +20,8 @@ export class EditarSalaComponent implements OnInit {
   professionalsData: any[] = [];
   coordinators: any[] = [];
   coordinatorsData: any[] = [];
+  createdAt: any;
+  createdBy: any;
 
   professionalSelected = new FormControl();
   coordinatorSelected = new FormControl();
@@ -52,6 +54,13 @@ export class EditarSalaComponent implements OnInit {
 
       this.professionalsData = data.payload.personnelDetails?.professionals;
       this.coordinatorsData = data.payload.personnelDetails?.coordinators;
+      this.createdAt = moment(data.payload.administrativeDetails.createdAt).format('DD-MM-YYYY');
+      if (data.payload.administrativeDetails.createdBy.length)
+        this.createdBy =
+          data.payload.administrativeDetails.createdBy[0]?.personalData.name +
+          ' ' +
+          data.payload.administrativeDetails.createdBy[0]?.personalData.lastName;
+      else this.createdBy = 'S/R';
 
       this.roomsService.getProfessionals().subscribe((data) => {
         // console.log(data);
