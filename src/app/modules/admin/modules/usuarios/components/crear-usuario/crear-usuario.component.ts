@@ -37,6 +37,7 @@ export class CrearUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+  profileSelected: any;
 
   currentDate = {
     year: current.getFullYear(),
@@ -253,6 +254,7 @@ export class CrearUsuarioComponent implements OnInit {
           }
         });
         // console.log(this.profiles);
+        this.profileSelected = this.profiles[0];
       },
       (error) => {
         console.log(error);
@@ -260,17 +262,21 @@ export class CrearUsuarioComponent implements OnInit {
     );
   }
 
-  addProfile(form) {
-    if (this.profilesAssigned.some((profile) => profile.role === form.role)) {
-      alert(`El rol ${form.role} ya esta asignado al usuario`);
+  addProfile() {
+    console.log(this.profileSelected);
+
+    if (this.profilesAssigned.some((profile) => profile.role === this.profileSelected.role)) {
+      alert(`El rol ${this.profileSelected.role} ya esta asignado al usuario`);
     } else {
       this.profilesAssigned.push({
-        id: form.profile.id,
-        role: form.role,
-        name: form.profile.profileName,
+        id: this.profileSelected.id,
+        role: this.profileSelected.role,
+        name: this.profileSelected.profileName,
       });
     }
     this.isProfessional();
+
+    console.log(this.profilesAssigned);
   }
 
   removeProfile(index) {
