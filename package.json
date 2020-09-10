@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --configuration=production",
-    "build-dev": "ng build --prod --configuration=dev",
+    "build": "ng build --prod --configuration=production --output-hashing=all",
+    "build-dev": "ng build --prod --configuration=dev --output-hashing=all",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
