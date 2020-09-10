@@ -83,14 +83,14 @@
                     {{appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase}}</p>
                   <!--font-weight-bold-->
                   <ul class="simple-list">
-                    <li>Sexo: Masculino</li>
-                    <li>Edad: 25</li>
-                    <li>Nacionalidad: Chilena</li>
+                    <li>Sexo: {{appointmentDetail.patientDetails.userDetails.personalData.gender }}</li>
+                    <li>Edad: {{appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
+                    <li>Nacionalidad: {{appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}</li>
                   </ul>
                 </div>
                 <div class="col-5">
                   <p class="p-0">&#8205;</p>
-                  <ul class="simple-list">
+                  <ul class="simple-list d-none">
                     <li>ID Atención: 1364.58634</li>
                     <li>Teléfono: 45 3 6573922</li>
                   </ul>
