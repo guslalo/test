@@ -232,8 +232,15 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+  removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+  }
 
   eliminaSintoma(item){
+    this.removeElement(item);
+    //let elemento = document.getElementById('5f5800f825152591e20ac381').outerHTML = "";
+    
     console.log(this.consolidate);
     this.symptomsService.deleteSymptoms(this.consolidate.id, item).subscribe(
       (data) => {

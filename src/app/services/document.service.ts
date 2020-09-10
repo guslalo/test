@@ -27,13 +27,11 @@ export class DocumentService {
     });
   }
 
-
-  //postDocumentAppointment
-  postDocumentAppointment(appointmentId:string, documentDetails): Observable<any> {
+   //postDocumentAppointment
+   postDocumentAppointment(appointmentId:string, documentDetails): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.uploadUrl, {
       appointmentId,
       documentDetails,
     });
   }
-
 }
