@@ -6,6 +6,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 //import { FormsModule } from '@angular/forms';
 import { ValueTransformer } from '@angular/compiler/src/util';
+import { DatePipe } from '@angular/common';
 //import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
@@ -31,10 +32,12 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
   selector: 'app-mi-disponibilidad',
   templateUrl: './mi-disponibilidad.component.html',
   styleUrls: ['./mi-disponibilidad.component.scss'],
-  providers: [{provide: NgbTimeAdapter, useClass: MiDisponibilidadComponent}]
+  providers: [DatePipe, {provide: NgbTimeAdapter, useClass: MiDisponibilidadComponent}]
 })
 
 export class MiDisponibilidadComponent implements OnInit {
+  public datePipeString : string;
+
   fromModel(value: string| null): NgbTimeStruct | null {
     if (!value) {
       return null;
@@ -59,7 +62,7 @@ export class MiDisponibilidadComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private calendario: NgbCalendar,
     private config: NgbTimepickerConfig,
-    
+    private datePipe: DatePipe,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService
   ) {
@@ -503,6 +506,7 @@ export class MiDisponibilidadComponent implements OnInit {
         const blockedDays = data[1].payload; // this will contain user
 
         let events = [];
+        //this.datePipeEnd = datePipe.transform(Date.now(),'yyyy-MM-dd');
 
         for (const disp of availabilities) {
           // console.log(disp);
@@ -510,17 +514,17 @@ export class MiDisponibilidadComponent implements OnInit {
             {
               type: 'active',
               title: 'Dia Habilitado',
-              start: moment(disp.dateDetails.startDate).format('YYYY-MM-DD'),
-              end: moment(disp.dateDetails.endDate).format('YYYY-MM-DD'),
+              start: moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD'),
+              end: moment.utc(disp.dateDetails.endDate).format('YYYY-MM-DD'),
               color: '#6fc1f1',
             },
             {
               type: 'active',
               title: disp.administrativeDetails.objective,
-              start: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
+              start: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
                 disp.dateDetails.dailyRanges[0].start
               }`,
-              end: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].end}`,
+              end: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].end}`,
               color: '#6fc1f1',
             }
           );
@@ -532,13 +536,13 @@ export class MiDisponibilidadComponent implements OnInit {
             {
               type: 'blocked',
               title: 'Dia Bloqueado',
-              date: moment(block.dateDetails.date).format('YYYY-MM-DD'),
+              date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
               color: '#ff5971',
             },
             {
               type: 'blocked',
-              start: `${moment(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
-              end: `${moment(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
+              start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
+              end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
               color: '#ff5971',
             }
           );

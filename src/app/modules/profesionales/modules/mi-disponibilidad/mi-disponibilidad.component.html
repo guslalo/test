@@ -155,10 +155,10 @@
                       </td>
                       <td>
                         <!--Hasta el -->
-                        {{ item.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+                        {{ item.dateDetails.startDate | date:"dd/MM/yyyy":"+0000" }}
 
                         <ng-container *ngIf="item.dateDetails.endDate">
-                          - {{ item.dateDetails.endDate | date: 'dd/MM/yyyy' }}
+                          - {{ item.dateDetails.endDate | date:"dd/MM/yyyy":"+0000" }}
                         </ng-container>
                       </td>
                       <td>
@@ -259,7 +259,7 @@
                 >
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
                     <div class="day text-center" id="{{ item._id }}">
-                      <b>{{ item.dateDetails.date | date: 'dd/MM/yyyy' }}</b
+                      <b>{{ item.dateDetails.date | date:"dd/MM/yyyy":"+0000" }}</b
                       ><br />
                       {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end }}
                       <div class="cerrar">
@@ -683,13 +683,13 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
                   </label>
                 <div class="input-group"><!---->
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="{{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}"
+                    placeholder="{{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}"
                     id="startDate"
                     name="startDate"
                    
@@ -709,7 +709,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="{{ idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy' }}"
+                    placeholder="{{ idAvailability.dateDetails.endDate | date:'dd/MM/yyyy':'+0000' }}"
                     name="endDate"
                     formControlName="endDate"
                     [(ngModel)]="model4"
