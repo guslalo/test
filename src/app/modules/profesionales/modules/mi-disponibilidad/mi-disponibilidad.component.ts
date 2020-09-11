@@ -215,9 +215,9 @@ export class MiDisponibilidadComponent implements OnInit {
 
     this.availabilityBlocked = this._formBuilder.group({
       allDay: [null],
-      dateBlock: [null, [Validators.required, Validators.minLength(2)]],
-      startBlock: [null, [Validators.required, Validators.minLength(2)]],
-      endBlock: [null, [Validators.required, Validators.minLength(2)]],
+      dateBlock: [null, [Validators.required]],
+      startBlock: [null],
+      endBlock: [null],
     });
 
     this.agregardailyRanges();

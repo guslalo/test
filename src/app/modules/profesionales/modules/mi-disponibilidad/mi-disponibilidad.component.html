@@ -632,6 +632,7 @@
             type="button"
             class="btn btn-primary rounded-pill"
             data-dismiss="modal"
+            [disabled]="!availabilityBlocked.valid"
             (click)="postAvailabilityBlocked()"
           >
             Bloquear día
