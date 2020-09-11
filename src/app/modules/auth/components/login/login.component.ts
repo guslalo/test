@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         );
         localStorage.setItem('token', JSON.stringify(data.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        console.log(this.currentUser);
+        localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
 
         switch (this.currentUser.administrativeData[0].role) {
           case 'admin':
