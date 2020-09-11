@@ -72,15 +72,20 @@ export class AvailabilityService {
   }
 
   // POST availability/blocked
-  postAvailabilityBlocked(date, start, end): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.blocked, {
-      date,
-      range: {
-        start:start,
-        end:end
-      }
-   
-    });
+  postAvailabilityBlocked(date, start?, end?): Observable<any> {
+    if(start && end){
+      return this.http.post<any>(environment.baseUrl + this.blocked, {
+        date,
+        range: {
+          start:start,
+          end:end
+        }
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocked, {
+        date
+      });
+    }
   }
 
   // deleteAvailabilit

@@ -214,6 +214,7 @@ export class MiDisponibilidadComponent implements OnInit {
     });
 
     this.availabilityBlocked = this._formBuilder.group({
+      allDay: [null],
       dateBlock: [null, [Validators.required, Validators.minLength(2)]],
       startBlock: [null, [Validators.required, Validators.minLength(2)]],
       endBlock: [null, [Validators.required, Validators.minLength(2)]],
@@ -275,8 +276,8 @@ export class MiDisponibilidadComponent implements OnInit {
   getAvailabilityBlocked() {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
-        // console.log(data);
         this.diasBloqueados = data.payload;
+        //console.log(this.diasBloqueados);
         this.fetchCalendar();
       },
       (error) => {
@@ -335,15 +336,40 @@ export class MiDisponibilidadComponent implements OnInit {
       }
     );
   }
+  public allDayBoolean = false;
+  allDayBooleanState(){
+    this.allDayBoolean = !this.allDayBoolean;
+  }
+
 
   postAvailabilityBlocked() {
-    console.log(this.availabilityBlocked);
-    const formObject = {
-      date: this.availabilityBlocked.controls.dateBlock.value,
-      start: this.availabilityBlocked.controls.startBlock.value,
-      end: this.availabilityBlocked.controls.endBlock.value,
-    };
-    console.log(formObject);
+    console.log(this.availabilityBlocked.controls.allDay.value);
+    if(this.availabilityBlocked.controls.allDay.value === true) {
+      const formObject = {
+        date: this.availabilityBlocked.controls.dateBlock.value
+      };
+      console.log(formObject);
+
+    if (formObject) {
+      this.availabilityService.postAvailabilityBlocked(formObject.date).subscribe(
+        (data) => {
+          console.log(data);
+          this.getAvailability();
+          this.getAvailabilityBlocked();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    } else {
+      const formObject = {
+        date: this.availabilityBlocked.controls.dateBlock.value,
+        start: this.availabilityBlocked.controls.startBlock.value,
+        end: this.availabilityBlocked.controls.endBlock.value,
+      };
+
+      console.log(formObject);
 
     if (formObject) {
       this.availabilityService.postAvailabilityBlocked(formObject.date, formObject.start, formObject.end).subscribe(
@@ -357,7 +383,11 @@ export class MiDisponibilidadComponent implements OnInit {
         }
       );
     }
+    }
+  
+    
   }
+  
 
   putAvailability2(id) {
     //this.createAvailability = id;
@@ -531,21 +561,39 @@ export class MiDisponibilidadComponent implements OnInit {
         }
 
         for (const block of blockedDays) {
-          // console.log(block);
-          events.push(
-            {
-              type: 'blocked',
-              title: 'Dia Bloqueado',
-              date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
-              color: '#ff5971',
-            },
-            {
-              type: 'blocked',
-              start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
-              end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
-              color: '#ff5971',
-            }
-          );
+          if(block.dateDetails.range > 0 ) {
+             // console.log(block);
+              events.push(
+                {
+                  type: 'blocked',
+                  title: 'Dia Bloqueado',
+                  date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
+                  color: '#ff5971',
+                },
+                {
+                  type: 'blocked',
+                  start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
+                  end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
+                  color: '#ff5971',
+                }
+              );
+          } else {
+            events.push(
+              {
+                type: 'blocked',
+                title: 'Dia Bloqueado',
+                date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
+                color: '#ff5971',
+              },
+              {
+                type: 'blocked',
+                start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
+                end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
+                color: '#ff5971',
+              }
+            );
+          }
+         
         }
 
         if (this.showActiveDays && this.showBlockedDays) {
