@@ -60,10 +60,10 @@
                     {{appoimentDetail.professionalDetails.userDetails[0].name | uppercase}} 
                     {{appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase}}
                   </p>
-                  <!--font-weight-bold-->
+                  <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                   <ul class="simple-list">
                     <li>Especialidad: 
-                      <ng-container *ngIf="appoimentDetail.professionalDetails.specialtyDetails.lenght > 0">
+                      <ng-container>
                         {{appoimentDetail.professionalDetails.specialtyDetails[0].specialtyName}}
                       </ng-container>
                      
