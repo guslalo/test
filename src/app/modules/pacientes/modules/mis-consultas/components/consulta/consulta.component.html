@@ -555,7 +555,7 @@
                       <td class="text-center">
                         {{item.type}}
                       </td>
-                      <td class="text-center">{{item.uploadDate | date:'yyyy-MM-dd'}}</td>
+                      <td class="text-center">{{item.uploadDate | date:"dd/MM/yyyy":"+0000"}}</td>
                       <td class="text-center" *ngIf="item.issuerDetails[0]">
                         {{item.issuerDetails[0].name}}  
                         {{item.issuerDetails[0].lastName}}
@@ -685,7 +685,7 @@
                     <div class="line">
                       <div class="row align-items-center">
                         <div class="col-5 text-right p-0">
-                          <h3>{{item.date | date : 'shortDate'}}</h3>
+                          <h3>{{item.date | date : 'shortDate':"+0000"}}</h3>
                           {{item.startAt}}
                         </div>
                         <div class="col p-0">
