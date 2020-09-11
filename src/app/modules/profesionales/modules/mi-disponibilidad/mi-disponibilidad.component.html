@@ -155,10 +155,10 @@
                       </td>
                       <td>
                         <!--Hasta el -->
-                        {{ item.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+                        {{ item.dateDetails.startDate | date:"dd/MM/yyyy":"+0000" }}
 
                         <ng-container *ngIf="item.dateDetails.endDate">
-                          - {{ item.dateDetails.endDate | date: 'dd/MM/yyyy' }}
+                          - {{ item.dateDetails.endDate | date:"dd/MM/yyyy":"+0000" }}
                         </ng-container>
                       </td>
                       <td>
@@ -259,9 +259,15 @@
                 >
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
                     <div class="day text-center" id="{{ item._id }}">
-                      <b>{{ item.dateDetails.date | date: 'dd/MM/yyyy' }}</b
+                      <b>{{ item.dateDetails.date | date:"dd/MM/yyyy":"+0000" }}</b
                       ><br />
-                      {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end }}
+                      
+                      <ng-container *ngIf="item.dateDetails.fullDay === false; else allDay">
+                        {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end}}
+                      </ng-container> 
+                      <ng-template #allDay>
+                        Todo el día
+                      </ng-template>
                       <div class="cerrar">
                         <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
                           <span aria-hidden="true">&times;</span>
@@ -571,7 +577,6 @@
                 <div class="input-group">
                   <input
                     class="form-control"
-                    class="form-control"
                     type="text"
                     placeholder="yyyy-mm-dd"
                     id="dateBlock"
@@ -589,32 +594,34 @@
             <div class="row mt-2 mb-3">
               <div class="col">
                 <div class="custom-control custom-control-inline custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customChecklun3" />
-                  <label class="custom-control-label" for="customChecklun3">Todo el Día</label>
+                  <input type="checkbox" 
+                  class="custom-control-input" 
+                  id="allDay"
+                  name="allDay"
+                  formControlName="allDay"
+                  (click)="allDayBooleanState()"
+                   />
+                  <label class="custom-control-label" for="allDay">Todo el Día</label>
                 </div>
               </div>
             </div>
 
-            <div class="row">
-              <div class="form-group col">
-                <label for="startBlock">Horario inicial</label>
-                <ngb-timepicker 
-                id="startBlock"
-                formControlName="startBlock"
-                >
-               </ngb-timepicker>
-                
-            
-                
+            <div class="row" >
+              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
+                  <label for="startBlock">Horario inicial</label>
+                  <ngb-timepicker 
+                  id="startBlock"
+                  formControlName="startBlock"
+                  >
+                </ngb-timepicker>
               </div>
-              <div class="form-group col">
-                <label for="endBlock">Horario final</label>
-                <ngb-timepicker 
-                id="endBlock"
-                formControlName="endBlock"
-                >
-               </ngb-timepicker>
-                
+              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
+                  <label for="endBlock">Horario final</label>
+                  <ngb-timepicker 
+                  id="endBlock"
+                  formControlName="endBlock"
+                  >
+                  </ngb-timepicker>
               </div>
             </div>
           </form>
@@ -625,6 +632,7 @@
             type="button"
             class="btn btn-primary rounded-pill"
             data-dismiss="modal"
+            [disabled]="!availabilityBlocked.valid"
             (click)="postAvailabilityBlocked()"
           >
             Bloquear día
@@ -683,13 +691,13 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}
+                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
                   </label>
                 <div class="input-group"><!---->
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="{{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy' }}"
+                    placeholder="{{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}"
                     id="startDate"
                     name="startDate"
                    
@@ -709,7 +717,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    placeholder="{{ idAvailability.dateDetails.endDate | date: 'dd/MM/yyyy' }}"
+                    placeholder="{{ idAvailability.dateDetails.endDate | date:'dd/MM/yyyy':'+0000' }}"
                     name="endDate"
                     formControlName="endDate"
                     [(ngModel)]="model4"

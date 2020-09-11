@@ -88,7 +88,7 @@
           <div class="card bg-light shadow-sm">
             <div class="card-body text-center mt-4" >
               <p class="card-text text-center">
-                Realizada: {{appoimentDetail.dateDetails.date | date:'yyyy-MM-dd'}}
+                Realizada: {{appoimentDetail.dateDetails.date | date:"dd/MM/yyyy":"+0000"}}
               </p>
               <h5 class="card-title">
                 <svg
@@ -416,6 +416,15 @@
                 </ng-template>
               </div>
 
+
+              <div class="mb-2">
+                <p class="title font-weight-bold">
+                 Descripción de síntomas
+                </p>
+                <p>{{ appoimentDetail.patientDetails.description}}</p>
+              </div>
+
+
               <div>
                 <p class="title font-weight-bold">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -546,7 +555,7 @@
                       <td class="text-center">
                         {{item.type}}
                       </td>
-                      <td class="text-center">{{item.uploadDate | date:'yyyy-MM-dd'}}</td>
+                      <td class="text-center">{{item.uploadDate | date:"dd/MM/yyyy":"+0000"}}</td>
                       <td class="text-center" *ngIf="item.issuerDetails[0]">
                         {{item.issuerDetails[0].name}}  
                         {{item.issuerDetails[0].lastName}}
@@ -676,7 +685,7 @@
                     <div class="line">
                       <div class="row align-items-center">
                         <div class="col-5 text-right p-0">
-                          <h3>{{item.date | date : 'shortDate'}}</h3>
+                          <h3>{{item.date | date : 'shortDate':"+0000"}}</h3>
                           {{item.startAt}}
                         </div>
                         <div class="col p-0">
