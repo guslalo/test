@@ -24,7 +24,9 @@ export class RoomsService {
   createWaitingRoom(roomObject): Observable<any> {
     let personnelDetails: any = {};
     if (roomObject.professionals.length) personnelDetails.professionals = roomObject.professionals;
+    else personnelDetails.professionals = [];
     if (roomObject.coordinators.length) personnelDetails.coordinators = roomObject.coordinators;
+    else personnelDetails.coordinators = [];
 
     return this.http.post<any>(environment.baseUrl + this.waitingRooms, {
       administrativeDetails: {
@@ -42,7 +44,9 @@ export class RoomsService {
   updateWaitingRoom(roomObject, roomId: string): Observable<any> {
     let personnelDetails: any = {};
     if (roomObject.professionals.length) personnelDetails.professionals = roomObject.professionals;
+    else personnelDetails.professionals = [];
     if (roomObject.coordinators.length) personnelDetails.coordinators = roomObject.coordinators;
+    else personnelDetails.coordinators = [];
 
     return this.http.put<any>(environment.baseUrl + this.waitingRooms + '/?waitingRoomId=' + roomId, {
       administrativeDetails: {
