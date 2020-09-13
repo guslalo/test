@@ -170,7 +170,7 @@ ul {
     content: '';
     background: #c5cae9;
     width: 5px;
-    height: 90%;
+    height: 100%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -196,6 +196,37 @@ ul {
       border-radius: 10px;
       text-align: center;
       padding: 10px;
+    }
+    &:nth-child(2n) {
+      .row {
+        flex-flow: row-reverse;
+        .col-3 {
+          padding-left: 0px;
+        }
+      }
+      /*&:nth-child(2n) {
+        color: red;
+      }*/
+    }
+    
+    &:nth-child(3n + 1) {
+      .row {
+        flex-flow: row-reverse;
+        .text-right {
+          text-align: left !important;
+        }
+        .text-left {
+          text-align: right !important;
+        }
+      }
+    }
+    &:nth-child(4n) {
+      .row {
+        flex-flow: initial;
+        .col-3 {
+          padding-left: 15px;
+        }
+      }
     }
   }
 }
@@ -713,6 +744,8 @@ button.custom-btn-1:hover {
       height: 100vh !important;
   }
 }
+
+
 
 .custom-file {
   overflow: hidden;

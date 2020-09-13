@@ -14,6 +14,8 @@ export class InicioPComponent implements OnInit {
   public consultas: any;
   public currentUser: any = {};
   currentRate = 4;
+  public fecha:any;
+  public nextAppointed:any;
 
   constructor(
     private appointmentsService:AppointmentsService,
@@ -34,9 +36,21 @@ export class InicioPComponent implements OnInit {
   getAppointments(){
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        console.log(data);
         this.consultas = data.payload;
-        console.log(this.consultas);
+        /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
+        var latest = new Date(Math.max.apply(null,dates));
+        var earliest = new Date(Math.min.apply(null,dates));*/
+
+        let arrayForDate =   this.consultas.map(value => value.dateDetails.date);
+        var min = arrayForDate[0];
+        arrayForDate.forEach(numero => {
+          if(numero < min){  
+            (min=numero)   
+          }
+        });  
+        this.nextAppointed = data.payload.filter(now => now.dateDetails.date === min);
+        console.log(this.nextAppointed);
+        
       },
       (error) => {
         console.log(error);
