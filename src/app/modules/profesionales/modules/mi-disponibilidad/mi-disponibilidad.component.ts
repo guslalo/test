@@ -205,7 +205,7 @@ export class MiDisponibilidadComponent implements OnInit {
     this.createAvailability = this._formBuilder.group({
       objective: [null, [Validators.required]],//[Validators.required],
       appointmentDuration: new FormControl(),
-      specialty:  new FormControl(),
+      specialty: [null, [Validators.required]],
       specialtyName:  new FormControl(),
       endDate:  [null, [Validators.required]],// [Validators.required]
       startDate: [null],//new FormControl()
