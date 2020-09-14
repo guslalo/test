@@ -1,54 +1,63 @@
 <div class="row">
-    <div class="col col-md-6 mb-2">
-      <h2>Sala de espera A1</h2>
-      <p style="display: none;">Sala creada el 20 de Septiembre por Manuel Fernandez           70 usuario en sala de espera             20 profesionales</p>
-    </div>
-    <div class="col col-md-6">
-        <button class="btn btn-outline-primary rounded-pill float-right" routerLink="/app-professional">
-            Abandonar sala
-        </button>
-    </div>
+  <div class="col col-md-6 mb-2">
+    <h2>Salas de Espera Asociadas</h2>
+    <p style="display: none;">
+      Sala creada el 20 de Septiembre por Manuel Fernandez 70 usuario en sala de espera 20 profesionales
+    </p>
+  </div>
 </div>
 
 <div class="tableBox rounded p-4 bg-white">
-    <table class="table">
-      <thead class="">
-        <tr>
-          <th scope="col"> Nombre Pacientes</th>
-          <th scope="col">Hora</th>
-          <th scope="col">Estado</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
+  <table class="table" *ngIf="waitingRooms.length; else noData">
+    <thead class="">
+      <tr>
+        <th scope="col">Sala de Espera</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Link</th>
+        <th scope="col">Pagos</th>
+        <th scope="col">Activa</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr *ngFor="let item of consultas" id="{{item._id}}"> 
-          <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo1">
-            {{item.patientDetails.userDetails[0].personalData.name}}   
-              {{item.patientDetails.userDetails[0].personalData.lastName}} 
-              {{item.patientDetails.userDetails[0].personalData.secondLastName}}
-          </td>
-          <ng-template #sinInfo1>
-            <td scope="row">Sin Información</td>
-          </ng-template>
-          <td>
-            {{item.dateDetails.date | date: 'dd/MM/yyyy'}} / {{item.dateDetails.start}}
-          </td>
-          <td>
-            <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-              {{item.administrativeDetails.status}}
-            </button>
-          </td>
-          <td>
-            <a  routerLink="/app-professional/crear-ficha-consulta/{{item._id}}">
-            <button type="button" 
-           
-            class="btn btn-outline-secondary rounded-pill btn-sm">
-                atender
-              </button>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <tbody>
+      <tr *ngFor="let item of waitingRooms" id="{{ item._id }}">
+        <td scope="row">
+          <a [routerLink]="[item._id]">
+            {{ item.roomDetails?.name }}
+          </a>
+        </td>
+        <td scope="row">{{ item.roomDetails?.description }}</td>
+        <td>
+          <a href="#">{{ item.roomDetails?.url }}</a>
+        </td>
+        <td>
+          <div class="custom-control custom-switch mb-4">
+            <input
+              [(ngModel)]="item.administrativeDetails.requirePayment"
+              type="checkbox"
+              class="custom-control-input"
+              id="pay"
+              disabled
+            />
+            <label class="custom-control-label" for="pay"></label>
+          </div>
+        </td>
+        <td>
+          <div class="custom-control custom-switch mb-4">
+            <input
+              [(ngModel)]="item.administrativeDetails.isActive"
+              type="checkbox"
+              class="custom-control-input"
+              id="status"
+              disabled
+            />
+            <label class="custom-control-label" for="status"></label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noData>
+    <h5 class="text-center text-primary">No existen salas de espera asociadas</h5>
+  </ng-template>
+</div>

@@ -14,6 +14,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [IndexComponent, EditarSalaComponent, VerSalaComponent],
@@ -29,6 +30,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     NgxDatatableModule,
     NgxSpinnerModule,
     MatAutocompleteModule,
+    MatFormFieldModule,
   ],
 })
 export class GestionSalasModule {}
