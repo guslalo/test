@@ -15,8 +15,10 @@ export class IndexComponent implements OnInit {
   waitingRooms: any[] = [];
   tempWaitingRooms: any[] = [];
   professionals: any[] = [];
+  tempProfessionals: any[] = [];
   professionalsData: any[] = [];
   coordinators: any[] = [];
+  tempCoordinators: any[] = [];
   coordinatorsData: any[] = [];
   searchTerm: string = '';
   pageSize: number = 10;
@@ -28,8 +30,6 @@ export class IndexComponent implements OnInit {
   role: string = 'professionals';
   professionalSelected = new FormControl();
   coordinatorSelected = new FormControl();
-  @Input() value: any;
-  @Output() valueChange = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {
     this.roomForm = this.formBuilder.group({
@@ -44,11 +44,27 @@ export class IndexComponent implements OnInit {
 
     this.roomsService.getProfessionals().subscribe((data) => {
       // console.log(data);
+      this.tempProfessionals = [...data.payload];
       this.professionals = data.payload;
     });
     this.roomsService.getCoordinators().subscribe((data) => {
       // console.log(data);
+      this.tempCoordinators = [...data.payload];
       this.coordinators = data.payload;
+    });
+
+    this.professionalSelected.valueChanges.subscribe((newValue) => {
+      var search = '';
+      if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
+      else search = newValue;
+      this.professionals = this.filterAutocompleteProfessionals(search);
+    });
+
+    this.coordinatorSelected.valueChanges.subscribe((newValue) => {
+      var search = '';
+      if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
+      else search = newValue;
+      this.coordinators = this.filterAutocompleteCoordinators(search);
     });
   }
 
@@ -61,10 +77,20 @@ export class IndexComponent implements OnInit {
     return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
-  public selected(user) {
-    this.value = user;
-    //send to parent or do whatever you want to do
-    this.valueChange.emit(user);
+  filterAutocompleteProfessionals(search: string) {
+    return this.tempProfessionals.filter(
+      (value) =>
+        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+    );
+  }
+
+  filterAutocompleteCoordinators(search: string) {
+    return this.tempCoordinators.filter(
+      (value) =>
+        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+    );
   }
 
   addPersonnel() {

@@ -17,8 +17,10 @@ export class EditarSalaComponent implements OnInit {
   requirePayment: Boolean = false;
   role: string = 'professionals';
   professionals: any[] = [];
+  tempProfessionals: any[] = [];
   professionalsData: any[] = [];
   coordinators: any[] = [];
+  tempCoordinators: any[] = [];
   coordinatorsData: any[] = [];
   createdAt: any;
   createdBy: any;
@@ -64,11 +66,27 @@ export class EditarSalaComponent implements OnInit {
 
       this.roomsService.getProfessionals().subscribe((data) => {
         // console.log(data);
+        this.tempProfessionals = [...data.payload];
         this.professionals = data.payload;
       });
       this.roomsService.getCoordinators().subscribe((data) => {
         // console.log(data);
+        this.tempCoordinators = [...data.payload];
         this.coordinators = data.payload;
+      });
+
+      this.professionalSelected.valueChanges.subscribe((newValue) => {
+        var search = '';
+        if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
+        else search = newValue;
+        this.professionals = this.filterAutocompleteProfessionals(search);
+      });
+
+      this.coordinatorSelected.valueChanges.subscribe((newValue) => {
+        var search = '';
+        if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
+        else search = newValue;
+        this.coordinators = this.filterAutocompleteCoordinators(search);
       });
 
       // console.log(this.roomForm);
@@ -84,10 +102,20 @@ export class EditarSalaComponent implements OnInit {
     return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
-  public selected(user) {
-    this.value = user;
-    //send to parent or do whatever you want to do
-    this.valueChange.emit(user);
+  filterAutocompleteProfessionals(search: string) {
+    return this.tempProfessionals.filter(
+      (value) =>
+        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+    );
+  }
+
+  filterAutocompleteCoordinators(search: string) {
+    return this.tempCoordinators.filter(
+      (value) =>
+        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+    );
   }
 
   addPersonnel() {
