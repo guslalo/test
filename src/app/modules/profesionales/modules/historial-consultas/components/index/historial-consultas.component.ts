@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
+
 const states = ['test', 'test3', 'test4'];
 
 @Component({
@@ -15,6 +16,8 @@ export class HistorialConsultasComponent implements OnInit {
   public model: any;
   public consultas: any;
   model2: NgbDateStruct;
+  public timeline: any;
+  public fecha:any;
 
   constructor(private appointmentsService:AppointmentsService) {}
 
@@ -29,6 +32,20 @@ export class HistorialConsultasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAppointments();
+    this.getFecha();
+    this.getAppointmentsTimeline();
+  }
+
+  getFecha(){
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month
+    }
+
   }
 
   
@@ -44,4 +61,17 @@ export class HistorialConsultasComponent implements OnInit {
       }
     );
   }
+
+  getAppointmentsTimeline(){
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      data => { 
+        this.timeline = data.payload.filter(finished => finished.status === 'finished');
+        console.log(this.timeline)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
 }

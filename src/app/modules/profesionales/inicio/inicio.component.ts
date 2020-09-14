@@ -3,6 +3,7 @@ import { CurrentUserService } from './../../../services/current-user.service';
 import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
 
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -14,6 +15,9 @@ export class InicioPComponent implements OnInit {
   public consultas: any;
   public currentUser: any = {};
   currentRate = 4;
+  public fecha:any;
+  public nextAppointed:any;
+  public consultasFinalizadas:any;
 
   constructor(
     private appointmentsService:AppointmentsService,
@@ -33,10 +37,23 @@ export class InicioPComponent implements OnInit {
 
   getAppointments(){
     this.appointmentsService.getAppointments(1).subscribe(
-      (data) => {
-        console.log(data);
-        this.consultas = data.payload;
-        console.log(this.consultas);
+      (data) => {      
+        let arrayForDate =   data.payload.map(value => value.dateDetails.date);
+        var min = arrayForDate[0];
+        arrayForDate.forEach(numero => {
+          if(numero < min){  
+            (min=numero)   
+          }
+        });  
+        this.nextAppointed = data.payload.filter(now => now.dateDetails.date === min);
+        let finalizadas = data.payload.filter(finished => finished.administrativeDetails.status  === 'finished');
+        this.consultasFinalizadas = finalizadas.length;
+
+        this.consultas = data.payload; 
+        console.log(this.consultas );
+        /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
+        var latest = new Date(Math.max.apply(null,dates));
+        var earliest = new Date(Math.min.apply(null,dates));*/    
       },
       (error) => {
         console.log(error);

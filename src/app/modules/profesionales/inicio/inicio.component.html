@@ -121,7 +121,7 @@
                     d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
                   />
                 </svg>
-                325 Consultas hasta la fecha
+                {{consultasFinalizadas}} Consultas hasta la fecha
               </p>
             </div>
           </div>
@@ -176,7 +176,7 @@
           <div class="collapseCustom primary">
             <table class="table dos table-borderless mb-0">
               <tbody>
-                <tr>
+                <tr *ngIf="nextAppointed">
                   <td>
                     <svg
                       width="1em"
@@ -195,9 +195,9 @@
                         d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
                       />
                     </svg>
-                    22 de Julio del 2020 / 20:15 Hrs
+                    {{nextAppointed[0].dateDetails.date | date:"dd/MM/yyyy":"+0000" }}
                   </td>
-                  <td style="display: none;">
+                  <td >
                     <svg
                       width="1em"
                       height="1em"
@@ -215,9 +215,9 @@
                         d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
                       />
                     </svg>
-                    16:00 Hrs.
+                    {{nextAppointed[0].dateDetails.start }} Hrs.
                   </td>
-                  <td>
+                  <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
                     <svg
                       width="1em"
                       height="1em"
@@ -235,15 +235,18 @@
                         d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
                       />
                     </svg>
-                    Pacinte Vicente Muñoz
+                    {{nextAppointed[0].patientDetails.userDetails[0].personalData.name }} 
+                    {{nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }} 
+                  </td>
+                  <td class="d-none"  *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
+                    {{nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }} 
                   </td>
                   <td>
-                    Consulta tipo Control
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
-                      Ingresar
-                    </button>
+                    <a *ngIf="nextAppointed[0].patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{nextAppointed[0]._id}}">
+                      <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
+                        Ingresar
+                      </button>
+                    </a>
                   </td>
                   <td>
                     <svg
@@ -372,11 +375,15 @@
                 <tbody>
                   <tr *ngFor="let item of consultas" id="{{item._id}}">
                     <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
-                    <td scope="row">
+                    <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                       {{item.patientDetails.userDetails[0].personalData.name}}   
-                        {{item.patientDetails.userDetails[0].personalData.lastName}} 
-                        {{item.patientDetails.userDetails[0].personalData.secondLastName}}
+                      {{item.patientDetails.userDetails[0].personalData.lastName}} 
+                      {{item.patientDetails.userDetails[0].personalData.secondLastName}}
                     </td>
+                    
+                    <ng-template #sinInfo>
+                      <td scope="row">Sin información </td>
+                    </ng-template>
                     <td>
                       {{item.dateDetails.date | date:"dd/MM/yyyy":"+0000"}}
                     </td>
@@ -399,11 +406,13 @@
                           </a>
                       </ng-container>
                       <ng-container 
-                        *ngIf="item.administrativeDetails.status === 'running' 
+                        *ngIf="item.administrativeDetails.status === 'running'  
                         || item.administrativeDetails.status === 'active' || 
                         item.administrativeDetails.status === 'appointed' || 
+                        item.administrativeDetails.status === 'rescheduled' || 
                         item.administrativeDetails.status === 'pending'">
-                          <a routerLink="crear-ficha-consulta/{{item._id}}">
+                          <a *ngIf="item.patientDetails.userDetails[0]"
+                          routerLink="crear-ficha-consulta/{{item._id}}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                               atender
                           </button>
@@ -411,8 +420,7 @@
                       </ng-container>
                     </td>
                   </ng-container>
-                  </tr>
-              
+                  </tr>   
                 </tbody>
               </table>
             </div>
