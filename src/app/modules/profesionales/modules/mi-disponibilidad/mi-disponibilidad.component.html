@@ -353,7 +353,12 @@
               <div class="form-group col">
                 <label for="specialty">Especialidad</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
-                  <option *ngFor="let item of specialtiesId" value="{{ item._id }}">{{ item.specialtyName }}</option>
+                  
+                  <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}" >
+                    {{ item.specialtyName }}
+                  </option>
+
+                
                 </select>
               </div>
             </div>

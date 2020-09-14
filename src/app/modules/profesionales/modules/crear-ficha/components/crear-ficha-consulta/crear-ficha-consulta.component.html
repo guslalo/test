@@ -5,9 +5,11 @@
     <div class="col-6 col-md-6">
       <h2>Ficha Consulta</h2>
     </div>
+    <!--appointmentDetail.administrativeDetails.status === 'appointed' ||
+      appointmentDetail.administrativeDetails.status === 'rescheduled' ||-->
     <div class="col-6 col-md-6">
-      <button *ngIf="appointmentDetail.administrativeDetails.status === 'appointed' ||
-      appointmentDetail.administrativeDetails.status === 'rescheduled'
+      <button *ngIf="
+      appointmentDetail.administrativeDetails.status === 'active'
       " 
       class="btn btn-outline-primary btn-sm rounded-pill d-inline-block"
       (click)="runAppointment(appointmentDetail._id, 'run')"
