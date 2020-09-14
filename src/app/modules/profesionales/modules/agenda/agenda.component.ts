@@ -4,6 +4,7 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AppointmentsService } from './../../../../services/appointments.service';
 
 const states = ['test', 'test3', 'test4'];
 @Component({
@@ -14,10 +15,13 @@ const states = ['test', 'test3', 'test4'];
 
 export class AgendaComponent implements OnInit {
   public model: any;
+  public timeline: any;
+  public fecha:any;
 
   model2: NgbDateStruct;
 
-  constructor() {}
+  constructor(
+    private appointmentsService:AppointmentsService) {}
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -33,8 +37,37 @@ export class AgendaComponent implements OnInit {
       { title: 'event 2', date: '2020-08-26', test:'saddsaa'  },
     ],
   };
-  ngOnInit(): void {}
+  ngOnInit(): void {
 
+    this.getAppointmentsTimeline();
+    this.getFecha();
+  }
+
+  getFecha(){
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month
+    }
+
+    //console.log(currentMonth);
+  }
+
+  getAppointmentsTimeline(){
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      data => { 
+        this.timeline = data.payload;
+     
+        console.log(this.timeline)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -43,4 +76,8 @@ export class AgendaComponent implements OnInit {
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)
       )
     )
+
+
+   
+  
 }

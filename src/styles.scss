@@ -170,7 +170,7 @@ ul {
     content: '';
     background: #c5cae9;
     width: 5px;
-    height: 90%;
+    height: 100%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -197,6 +197,94 @@ ul {
       text-align: center;
       padding: 10px;
     }
+    &:nth-child(2n) {
+      .row {
+        flex-flow: row-reverse;
+        .col-3 {
+          padding-left: 0px;
+        }
+      }
+      /*&:nth-child(2n) {
+        color: red;
+      }*/
+    }
+    
+    &:nth-child(3n + 1) {
+      .row {
+        flex-flow: row-reverse;
+        .text-right {
+          text-align: left !important;
+        }
+        .text-left {
+          text-align: right !important;
+        }
+      }
+    }
+    &:nth-child(4n) {
+      .row {
+        flex-flow: initial;
+        .col-3 {
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+.timeLineMilestone {
+  width: 50%;
+  position: relative;
+  &:before {
+    content: '';
+    background: #c5cae9;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  display: inline-block;
+  .line {
+    .btn-primary {
+      &.dos {
+        background-color: $color-info2;
+        border-color: $color-info2;
+      }
+    }
+    position: relative;
+    margin-bottom: 30px;
+    z-index: 2;
+    .boxCont {
+      display: inline-block;
+    }
+    .box {
+      border: 1px solid #c7c7c7;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+    }
+    &:nth-child(2n) {
+      .row {
+        flex-flow: row-reverse;
+        .text-right{
+          text-align: left !important;
+        }
+        .text-left{
+          text-align: right !important;
+        }
+        .col-5 {
+          padding-left: 0px;
+          
+        }
+      }
+      /*&:nth-child(2n) {
+        color: red;
+      }*/
+    }
+    
+   
   }
 }
 
@@ -713,6 +801,8 @@ button.custom-btn-1:hover {
       height: 100vh !important;
   }
 }
+
+
 
 .custom-file {
   overflow: hidden;
