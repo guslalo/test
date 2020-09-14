@@ -52,7 +52,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
-
+      this.getAppointmentsTimeline(id);
       setTimeout(()=>{       
         //this.getSession(id);
       }, 250);
@@ -74,7 +74,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
 
     
-    this.getAppointmentsTimeline();
+    
     this.getFecha();
 
     this.signos = this._formBuilder.group({
@@ -191,8 +191,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     //console.log(currentMonth);
   }
 
-  getAppointmentsTimeline(){
-    this.appointmentsService.getAppointmentsTimeline().subscribe(
+  getAppointmentsTimeline(id){
+    this.appointmentsService.getAppointmentsTimelineMilestone(id).subscribe(
       data => { 
         this.timeline = data.payload;
      
