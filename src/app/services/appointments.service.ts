@@ -55,6 +55,14 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/timeline');
   }
 
+  // getAppointmentsDetails
+  getAppointmentsTimelineMilestone(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/milestone-timeline', { params: params });
+  }
+
+
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {

@@ -6,7 +6,6 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AppointmentsService } from './../../../../services/appointments.service';
 
-
 const states = ['test', 'test3', 'test4'];
 @Component({
   selector: 'app-agenda',
@@ -17,9 +16,12 @@ const states = ['test', 'test3', 'test4'];
 export class AgendaComponent implements OnInit {
   public model: any;
   public timeline: any;
-  public fecha:any;  model2: NgbDateStruct;
+  public fecha:any;
 
-  constructor(private appointmentsService:AppointmentsService) {}
+  model2: NgbDateStruct;
+
+  constructor(
+    private appointmentsService:AppointmentsService) {}
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -36,8 +38,9 @@ export class AgendaComponent implements OnInit {
     ],
   };
   ngOnInit(): void {
-    this.getFecha();
+
     this.getAppointmentsTimeline();
+    this.getFecha();
   }
 
   getFecha(){
@@ -50,9 +53,21 @@ export class AgendaComponent implements OnInit {
       month: month
     }
 
+    //console.log(currentMonth);
   }
 
-
+  getAppointmentsTimeline(){
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      data => { 
+        this.timeline = data.payload;
+     
+        console.log(this.timeline)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -63,16 +78,6 @@ export class AgendaComponent implements OnInit {
     )
 
 
-    getAppointmentsTimeline(){
-      this.appointmentsService.getAppointmentsTimeline().subscribe(
-        data => { 
-          this.timeline = data.payload
-          console.log(this.timeline)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    }
+   
   
 }
