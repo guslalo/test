@@ -170,13 +170,13 @@
 
                   <tbody>
                     <tr *ngFor="let item of consultas" id="{{item._id}}">
-                      <td scope="row" *ngIf="item.patientDetails.userDetails[0] > 0; else sinInfo1">
+                      <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo1">
                         {{item.patientDetails.userDetails[0].userId}}
                       </td>
                       <ng-template #sinInfo1>
                         <td scope="row">Sin Información</td>
                       </ng-template>
-                      <td scope="row"  *ngIf="item.patientDetails.userDetails[0] > 0; else sinInfo">
+                      <td scope="row"  *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                         {{item.patientDetails.userDetails[0].personalData.name}} 
                         {{item.patientDetails.userDetails[0].personalData.secondLastName}}  
                       </td>
