@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MiPerfilRoutingModule } from './mi-perfil-routing.module';
 import { IndexComponent } from './components/index/index.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,10 @@ import { PerfilComponent } from './components/perfil/perfil.component';
   ],
   imports: [
     CommonModule,
-    MiPerfilRoutingModule
+    MiPerfilRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
+    
   ]
 })
 export class MiPerfilModule { }

@@ -313,6 +313,7 @@ export class MiDisponibilidadComponent implements OnInit {
         .postAvailability(formObject.administrativeDetails, formObject.professionalDetails, formObject.dateDetails)
         .subscribe(
           (data) => {
+            this.createAvailability.reset();
             console.log('disponibilidad creada', data);
             this.getAvailability();
           },

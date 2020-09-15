@@ -70,112 +70,292 @@
     <div class="col-4">
       <div class=" ">
         <div class="card-body text-center">
-          <div class="boxImg">
-            <svg
-              class="rounded-circle"
-              width="9em"
-              height="9em"
-              viewBox="0 0 16 16"
-              class="bi bi-person-circle"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-              />
-              <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-            </svg>
+          <div class="boxImg" *ngIf="geFormData.photo">
+            <img src="{{geFormData.photo}}">
           </div>
-
-          <button type="button" class="btn btn-outline-primary mt-4 rounded-pill">Cambiar foto</button>
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              (change)="openFile($event)"
+              id="customFile"
+              style="overflow: hidden;"
+              
+            />
+            <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+          </div>
+          <!--<button type="button" class="btn btn-outline-primary mt-4 rounded-pill">Cambiar foto</button>-->
         </div>
       </div>
     </div>
     <div class="col-8">
-      <!--card-->
-      <div class="card bg-light mb-3 p-3">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <h4>
-                Datos Personales
-              </h4>
-            </div>
-          </div>
-          <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Nombres </label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Primer apellido </label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-          </div> 
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Segundo apellido (opcional)</label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Sexo </label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-          </div> 
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Email *</label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Teléfono</label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-          </div> 
-        </form>
+
+      <div class="bg-white rounded-lg">
+        <ul class="nav nav-pills nav-fill w-100 tab-consulta" id="myTab2" role="tablist" style="border: none;">
+        
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="profile-tab"
+              data-toggle="tab"
+              href="#profile"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="true"
+              >Datos de identificación
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="contact-tab"
+              data-toggle="tab"
+              href="#contact"
+              role="tab"
+              aria-controls="contact"
+              aria-selected="false"
+              >Datos personales
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="contact-tab2"
+              data-toggle="tab"
+              href="#contact2"
+              role="tab"
+              aria-controls="contact2"
+              aria-selected="false"
+              >Dirección
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content p-2" id="myTabContent">
          
-        </div>
-      </div>
-      <!--/card-->
+            <!--/tab info paciente-->
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <!--card-->
+              <div class="card bg-light mb-3 p-2">
+                <div class="card-body">
+                  <form  [formGroup]="identificationData">
+                   
+                  <div class="form-row" *ngIf="geFormData">
+                    <ng-container><!--geFormData.identificationData.isForeign === true-->
+                      <div class="form-group col-md-4">
+                        <label for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" 
+                        value="{{geFormData.identificationData.cpf}}"
+                        placeholder="{{geFormData.identificationData.cpf}}" disabled>
+                      </div>
+                    </ng-container>
+                    <div class="form-group col-md-4">
+                      <label for="issuingBody">Orgáno emisor</label>
+                      <input type="text" class="form-control" id="issuingBody"
+                      placeholder="{{geFormData.identificationData.issuingBody}}" disabled>
+                    </div>
+                    <ng-container ><!--*ngIf="geFormData.identificationData.isForeign === true"-->
+                      <div class="form-group col-md-4">
+                        <label for="passport">Passporte</label>
+                        <input type="text" class="form-control" id="passport"
+                        placeholder="{{geFormData.identificationData.passport}}" disabled>
+                      </div>
+                    </ng-container>
+                  </div> 
 
-      <!--card-->
-      <div class="card bg-light mb-3  p-3">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <h5>
-                Datos de Nacimiento
-              </h5>
+                  <!--
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Órgano Emisor </label>
+                      <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                   
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Documento Secundaria</label>
+                      <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Documento Secundaria</label>
+                      <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                  </div> -->
+                  
+                </form>
+                
+                </div>
+              </div>
+              <!--/card-->
             </div>
-          </div>
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="inputEmail4">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">UF de naciemiento</label>
-                <input type="email" class="form-control" id="inputEmail4">
-              </div>
-            </div> 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Municipio de nacimiento</label>
-                <input type="email" class="form-control" id="inputEmail4">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Nacionalidad</label>
-                <input type="email" class="form-control" id="inputEmail4">
-              </div>
-            </div> 
-          </form>
-        </div>
-      </div>
-      <!--/card-->
 
+
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <!--card-->
+              <div class="card bg-light mb-3 p-2" *ngIf="geFormData">
+                <div class="card-body">
+                  <form [formGroup]="personalData">
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="name">Nombre </label>
+                      <input type="text" class="form-control" id="name"
+                      placeholder="{{geFormData.personalData.name}}" disabled
+                      >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="lastName">Apellido</label>
+                      <input type="text" class="form-control" id="lastName"
+                      placeholder="{{geFormData.personalData.lastName}}" disabled
+                      >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="secondLastName">Segundo Apellido</label>
+                      <input type="text" class="form-control" id="secondLastName"
+                      placeholder="{{geFormData.personalData.secondLastName}}" disabled
+                      >
+                    </div>
+                  </div> 
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="motherName">Nombre de la madre</label>
+                      <input type="text" class="form-control" id="motherName"
+                      placeholder="{{geFormData.personalData.motherName}}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" id="email" disabled
+                      placeholder="{{geFormData.personalData.email}}">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="phoneNumber">Fono</label>
+                      <input type="text" class="form-control" id="phoneNumber"
+                      formControlName="phoneNumber"
+                      placeholder="{{geFormData.personalData.phoneNumber}}">
+                    </div>
+                  </div> 
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="gender">gender </label>
+                      <input type="text" class="form-control" id="gender"
+                      placeholder="{{geFormData.personalData.gender}}" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="nationality">nationality</label>
+                      <input type="text" class="form-control" id="nationality"
+                      placeholder="{{geFormData.personalData.nationality}}" disabled>
+                      
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="education">education </label>
+                      <!--<input type="text" class="form-control" id="education"
+                      placeholder="{{geFormData.personalData.education}}">-->
+
+                      <select class="form-control"  formControlName="education" id="education">                      
+                        <ng-container *ngFor="let item of educations">
+                          <option value="{{item._id}}" *ngIf="item._id === geFormData.personalData.education" selected>{{item.name}}</option>
+                        </ng-container>
+                        <ng-container *ngFor="let item of educations">
+                          <option value="{{item._id}}" *ngIf="item._id !== geFormData.personalData.education">{{item.name}}</option>
+                        </ng-container>       
+                      </select>
+                      
+                    </div>
+                  </div> 
+                  
+              
+                </form>
+                
+                </div>
+              </div>
+              <!--/card-->
+            </div>
+
+
+            
+            <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
+              <!--card-->
+              <div class="card bg-light mb-3  p-2" *ngIf="geFormData">
+                <div class="card-body">
+                  <form [formGroup]="addressData">
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="cep">cep</label>
+                        <input type="text" class="form-control" id="cep"
+                        formControlName="cep"
+                        placeholder="{{geFormData.addressData.cep}}">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="city">city</label>
+                        <select class="form-control"  formControlName="city">                      
+                          <ng-container *ngFor="let item of cities">
+                            <option value="{{item._id}}" *ngIf="item._id === geFormData.addressData.city" selected>{{item.name}}</option>
+                          </ng-container>
+                          <ng-container *ngFor="let item of cities">
+                            <option value="{{item._id}}" *ngIf="item._id !== geFormData.addressData.city">{{item.name}}</option>
+                          </ng-container>       
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="neighborhood">neighborhood</label>
+                        <input type="text" class="form-control" id="neighborhood"
+                        formControlName="neighborhood"
+                        placeholder="{{geFormData.addressData.neighborhood}}">
+                      </div>
+                    </div> 
+                 
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="street">street</label>
+                        <input type="text" class="form-control" id="street"
+                        formControlName="street"
+                        placeholder="{{geFormData.addressData.street}}">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="streetNumber">streetNumber</label>
+                        <input type="text" class="form-control" id="streetNumber"
+                        formControlName="streetNumber"
+                        placeholder="{{geFormData.addressData.streetNumber}}">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="cep">cep</label>
+                        <input type="text" class="form-control" id="cep"
+                        formControlName="cep"
+                        placeholder="{{geFormData.addressData.cep}}">
+                      </div>
+
+                      <!--
+                      <div class="form-group col-md-4">
+                        <label for="nationality">Nacionalidad</label>
+
+                        <select class="form-control">                      
+                          <option selected>{{geFormData.addressData.nationality}}</option>
+                          <ng-container *ngFor="let item of countries">
+                            <option *ngIf="item._id !== geFormData.addressData.nationality">{{item.name}}</option>
+                          </ng-container>       
+                        </select>
+                      </div>-->
+                    </div> 
+                  </form>
+                </div>
+              </div>
+              <!--/card-->
+            </div>
+            
+              <hr>
+              <div class="text-right">
+                <button class="btn btn-secondary rounded-pill" (click)="updateData()">
+                  Guardar
+                </button>
+              </div>
+        </div>
+       
+      </div>
+
+
+
+
+      
+
+      
+
+    
     </div>
   </div>
         
@@ -183,47 +363,7 @@
       </div>
       <!--/tab-->
 
-      <!--tab-->
-      <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline-tab">
-        <div class="tableBox rounded p-4 bg-white">
-          <table class="table mt-3">
-            <thead>
-              <tr>
-                <th scope="col">Documento</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Monto</th>
-              </tr>
-            </thead>
-            <tbody>
-           
-                <tr> 
-                  <th scope="row">Boleta</th>
-                  <td>22/93/2020</td>
-                  <td>Pagado</td>
-                  <td>$45.000</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm rounded-pill">
-                    Descargar
-                    </button>
-                  </td>
-                </tr>
-                <tr> 
-                  <th scope="row">Boleta</th>
-                  <td>22/93/2020</td>
-                  <td>Pagado</td>
-                  <td>$45.000</td>
-                  <td>
-                    <button class="btn btn-outline-primary btn-sm rounded-pill">
-                    Descargar
-                    </button>
-                  </td>
-                </tr>
-            
-            </tbody>
-          </table>
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>
