@@ -95,15 +95,27 @@
           </div>
         </div>
 
-        <ng-container
-          ><!--*ngIf="consultas.length > 0; else vacio"-->
+        <ng-container>
+          <!--*ngIf="consultas.length > 0; else vacio"-->
+          <div class="tableBox bg-white pt-3">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Fecha y Hora</th>
+                  <th style="width: 25%;">Profesional</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0">
                 <tbody>
                   <tr>
-                    <td width="250">
+                    <td style="width: 25%;" class="text-left">
                       <svg
                         width="1em"
                         height="1em"
@@ -121,9 +133,9 @@
                           d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
                         />
                       </svg>
-                      {{ item.dateDetails.date | date:"dd/MM/yyyy":"+0000" }} / {{ item.dateDetails.start }}
+                      {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }} / {{ item.dateDetails.start }}
                     </td>
-                    <td class="text-center">
+                    <td style="width: 25%;" class="text-left">
                       <!--{{item.professionalDetails.userDetails[0].userId}}-->
                       <svg
                         width="1em"
@@ -147,12 +159,12 @@
                       <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                     </td>
 
-                    <td class="text-center" width="150">
+                    <td style="width: 25%;" class="text-left">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{ item.administrativeDetails.status }}
                       </button>
                     </td>
-                    <td width="150">
+                    <td style="width: 25%;" class="text-left">
                       <ng-container
                         *ngIf="
                           item.administrativeDetails.status === 'running' ||
