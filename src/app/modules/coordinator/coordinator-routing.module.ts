@@ -8,6 +8,14 @@ const routes: Routes = [
     loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
   },
   {
+    path: 'historial-consultas',
+    loadChildren: () => import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
+  },
+  {
+    path: 'agenda',
+    loadChildren: () => import('./modules/agenda/agenda.module').then((m) => m.AgendaModule),
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
   },
