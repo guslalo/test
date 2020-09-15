@@ -8,28 +8,7 @@
     <!--appointmentDetail.administrativeDetails.status === 'appointed' ||
       appointmentDetail.administrativeDetails.status === 'rescheduled' ||-->
     <div class="col-6 col-md-6">
-      <button *ngIf="
-      appointmentDetail.administrativeDetails.status === 'active'
-      " 
-      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block"
-      (click)="runAppointment(appointmentDetail._id, 'run')"
-      >
-        Iniciar
-      </button>
-      <button 
-      *ngIf="appointmentDetail.administrativeDetails.status === 'running'"
-      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block ml-2"
-      (click)="endTeleconsultation(appointmentDetail._id, 'end-teleconsultation')"
-      >
-        Finalizar llamada
-      </button>
-      <button 
-      *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
-      class="btn btn-outline-primary btn-sm rounded-pill d-inline-block ml-2"
-      (click)="finish(appointmentDetail._id, 'finish')"
-      >
-        Finalizar consulta
-      </button>
+    
       <a href="javascript:history.back()" class="back float-right align-top">
         <svg
           width="2em"
@@ -132,6 +111,32 @@
           <div class="card bg-light shadow-sm">
             <div class="card-body text-center mt-3">
               <h5 class="card-title mb-1">Estado de consulta</h5>
+              <button *ngIf="
+              appointmentDetail.administrativeDetails.status === 'active'
+              " 
+              class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
+              (click)="runAppointment(appointmentDetail._id, 'run')"
+              >
+                Iniciar
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-camera-video" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175l3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z"/>
+                </svg>
+              </button>
+              <button 
+              *ngIf="appointmentDetail.administrativeDetails.status === 'running'"
+              class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
+              (click)="endTeleconsultation(appointmentDetail._id, 'end-teleconsultation')"
+              >
+                Finalizar llamada
+              </button>
+              <button 
+              *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
+              class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
+              (click)="finish(appointmentDetail._id, 'finish')"
+              >
+                Finalizar consulta
+              </button>
+
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
                 {{appointmentDetail.administrativeDetails.status}}
               </button>
@@ -325,7 +330,19 @@
           aria-labelledby="resumenConsulta"
         >
           <div class="row">
-            <div class="col-6">
+            <div class="col-6 bg-white rounded-lg pt-3 pb-2">
+
+              <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'active'">
+                <div class="text-center ">
+                  <p class="w-100 mt-5 title">Esperando iniciar consulta</p>
+                  <div class="w-100 mt-5 iconllamada">
+                <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-broadcast" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 0 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707z"/>
+                  <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                
+                </svg> </div> 
+              </div>
+              </ng-container>
               <div class="text-center">
                 <a routerLink="/professional/consulta/{{appointmentDetail._id}}" target="_blank">
                   <div  id="meet" class="meetPatient2"></div>
