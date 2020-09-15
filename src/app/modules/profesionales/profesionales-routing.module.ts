@@ -20,8 +20,6 @@ import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
 
-
-
 // const profesional
 const historialConsulta = 'historial-consultas';
 const MisPacientes = 'mis-pacientes';
@@ -37,6 +35,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
   { path: '', component: InicioPComponent },
+
+  {
+    path: 'perfil',
+    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+  },
+
   { path: 'context', component: InicioPComponent },
 
   { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
@@ -44,17 +48,18 @@ const routes: Routes = [
   { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
   { path: 'mi-disponibilidad', component: MiDisponibilidadComponent, canActivate: [ProfesionalGuard] },
   {
-    path:  'ficha-consulta/:appointmentId', 
+    path: 'ficha-consulta/:appointmentId',
     loadChildren: () => import('./modules/ficha-consulta/ficha-consulta.module').then((m) => m.FichaConsultaModule),
   },
   {
-    path: 'historial-consultas', 
-    loadChildren: () => import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
+    path: 'historial-consultas',
+    loadChildren: () =>
+      import('./modules/historial-consultas/historial-consultas.module').then((m) => m.HistorialConsultasModule),
   },
   {
     path: 'crear-ficha-consulta/:appointmentId',
     loadChildren: () => import('./modules/crear-ficha/crear-ficha.module').then((m) => m.CrearFichaModule),
-  }
+  },
 ];
 
 @NgModule({

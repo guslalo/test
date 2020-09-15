@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/usuarios/usuarios.module').then((m) => m.UsuariosModule),
   },
   {
+    path: 'perfil',
+    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+  },
+  {
     path: 'gestion-perfil',
     loadChildren: () => import('./modules/admin-profiles/admin-profiles.module').then((m) => m.AdminProfilesModule),
   },
@@ -21,13 +25,12 @@ const routes: Routes = [
   },
   {
     path: 'gestion-salas',
-    loadChildren: () => import('./modules/gestion-salas/gestion-salas.module').then((m) => m.GestionSalasModule)
-  }
+    loadChildren: () => import('./modules/gestion-salas/gestion-salas.module').then((m) => m.GestionSalasModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

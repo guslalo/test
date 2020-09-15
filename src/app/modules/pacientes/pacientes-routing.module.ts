@@ -19,9 +19,7 @@ import { OpentokService } from '../../services/opentok.service';
 
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 
-
 // import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
-
 
 // routing
 
