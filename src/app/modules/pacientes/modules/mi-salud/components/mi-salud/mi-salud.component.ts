@@ -3,10 +3,10 @@ import { MedicalRecordService } from './../../../../../../services/medicalRecord
 import { DocumentService } from './../../../../../../services//document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-mi-salud',
@@ -17,7 +17,6 @@ export class MiSaludComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any;
   public antecedentes: any;
-  public antecedentesGeneral: any;
   public exams: any;
   public modelAntecedente: any;
   public addExamen: FormGroup;
@@ -35,13 +34,17 @@ export class MiSaludComponent implements OnInit {
   public addValidator: boolean;
   public access_token: any;
 
+  sicknessIsCollapsed: boolean = false;
+  familiarHistoryIsCollapsed: boolean = false;
+  healthHabitsIsCollapsed: boolean = false;
+  medicinesIsCollapsed: boolean = false;
+  occupationalIsCollapsed: boolean = false;
+  othersIsCollapsed: boolean = false;
+
   constructor(
-    private router: Router,
     private _formBuilder: FormBuilder,
     private documentService: DocumentService,
-    private _snackBar: MatSnackBar,
-    private currentUserService: CurrentUserService,
-    private medicalRecord: MedicalRecordService
+    private medicalRecordService: MedicalRecordService
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +86,6 @@ export class MiSaludComponent implements OnInit {
     this.agregarItem.controls.item.reset;
     console.log(modelAntecedente);
     this.modelAntecedente = this.agregarItem.controls.item.value;
-
   }
 
   categoryChangue(category?) {
@@ -102,8 +104,6 @@ export class MiSaludComponent implements OnInit {
 
   addExamenPost() {
     console.log(this.addExamen);
-    console.log(this.user.id)
-    const id = this.user.id;
     const formObject = {
       name: this.nameFile,
       type: this.addExamen.controls.type.value,
@@ -112,8 +112,8 @@ export class MiSaludComponent implements OnInit {
     this.putAddExamen(formObject, this.user.id);
   }
 
-  putAddExamen(object, id:string) {
-    this.medicalRecord.putAddExamen(object, id).subscribe(
+  putAddExamen(object, id: string) {
+    this.medicalRecordService.putAddExamen(object, id).subscribe(
       (data) => {
         console.log(data);
         this.getMedicalRecord();
@@ -125,7 +125,7 @@ export class MiSaludComponent implements OnInit {
   }
 
   putAddAntecedent(antecedent, object) {
-    this.medicalRecord.putAddAntecedent(antecedent, object).subscribe(
+    this.medicalRecordService.putAddAntecedent(antecedent, object).subscribe(
       (data) => {
         console.log(data);
         this.category = '';
@@ -146,8 +146,8 @@ export class MiSaludComponent implements OnInit {
     this.elemntoValue = item.value;
   }
 
-  delete(item?, item2?) {
-    this.medicalRecord.deleteAntecedent(this.antecedente, this.elemntoId).subscribe(
+  delete() {
+    this.medicalRecordService.deleteAntecedent(this.antecedente, this.elemntoId).subscribe(
       (data) => {
         console.log(data);
         this.getMedicalRecord();
@@ -159,14 +159,27 @@ export class MiSaludComponent implements OnInit {
   }
 
   getMedicalRecord() {
-    this.medicalRecord.getByUserId().subscribe(
+    this.medicalRecordService.getByUserId().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.exams = data.payload.exams;
-        // console.log(this.exams);
-        this.antecedentesGeneral = data.payload.antecedent;
-        this.antecedentes = data.payload.antecedent.sickness;
-        // console.log(data.antecedent);
+        this.antecedentes = data.payload.antecedent;
+        // console.log(this.antecedentes);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  hasAntecedents(antecedent, boolean) {
+    this.medicalRecordService.hasAntecedents(antecedent, boolean).subscribe(
+      (data) => {
+        this.medicalRecordService.getByUserId().subscribe((data) => {
+          this.exams = data.payload.exams;
+          this.antecedentes = data.payload.antecedent;
+        });
+        console.log(data);
       },
       (error) => {
         console.log(error);
