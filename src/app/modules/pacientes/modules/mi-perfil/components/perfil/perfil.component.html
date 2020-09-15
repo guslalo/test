@@ -249,10 +249,10 @@
 
                       <select class="form-control"  formControlName="education" id="education">                      
                         <ng-container *ngFor="let item of educations">
-                          <option value="item._id" *ngIf="item._id === geFormData.personalData.education" selected>{{item.name}}</option>
+                          <option value="{{item._id}}" *ngIf="item._id === geFormData.personalData.education" selected>{{item.name}}</option>
                         </ng-container>
                         <ng-container *ngFor="let item of educations">
-                          <option value="item._id" *ngIf="item._id !== geFormData.personalData.education">{{item.name}}</option>
+                          <option value="{{item._id}}" *ngIf="item._id !== geFormData.personalData.education">{{item.name}}</option>
                         </ng-container>       
                       </select>
                       
@@ -285,10 +285,10 @@
                         <label for="city">city</label>
                         <select class="form-control"  formControlName="city">                      
                           <ng-container *ngFor="let item of cities">
-                            <option value="item._id" *ngIf="item._id === geFormData.addressData.city" selected>{{item.name}}</option>
+                            <option value="{{item._id}}" *ngIf="item._id === geFormData.addressData.city" selected>{{item.name}}</option>
                           </ng-container>
                           <ng-container *ngFor="let item of cities">
-                            <option value="item._id" *ngIf="item._id !== geFormData.addressData.city">{{item.name}}</option>
+                            <option value="{{item._id}}" *ngIf="item._id !== geFormData.addressData.city">{{item.name}}</option>
                           </ng-container>       
                         </select>
                       </div>
