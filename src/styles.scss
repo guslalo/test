@@ -174,7 +174,9 @@ ul {
 }
 
 .iconllamada {
-  svg {color: #3bc4ca; }
+  svg {
+    color: #3bc4ca;
+  }
 }
 
 .timeLine {
@@ -838,4 +840,8 @@ button.custom-btn-1:hover {
     display: block;
     width: 100%;
   }
+}
+
+.profile {
+  border-radius: 50%;
 }
