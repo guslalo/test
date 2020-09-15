@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './components/index/index.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilComponent } from './mi-perfil.component';
 
-
-const routes: Routes = [
-  { path: '', component: PerfilComponent }
-];
+const routes: Routes = [{ path: '', component: PerfilComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MiPerfilRoutingModule { }
+export class MiPerfilRoutingModule {}
