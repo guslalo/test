@@ -30,7 +30,7 @@ export class MedicalRecordService {
 
   //putAddAntecedent
   putAddExamen(object, userId?): Observable<any> {
-    console.log( userId);
+    console.log(userId);
     return this.http.put<any>(environment.baseUrl + this.addExamen + '?userId=' + userId, {
       documentDetails: {
         name: object.name,
@@ -50,5 +50,12 @@ export class MedicalRecordService {
   //deleteAntecedent
   deleteAntecedent(antecedent, id): Observable<any> {
     return this.http.delete<any>(environment.baseUrl + this.antecedent + antecedent + '/' + id);
+  }
+
+  hasAntecedents(antecedent, boolean): Observable<any> {
+    console.log(antecedent, boolean);
+    return this.http.put<any>(environment.baseUrl + this.medicalRecord + 'has-antecedent/' + antecedent, {
+      hasAntecedent: boolean,
+    });
   }
 }

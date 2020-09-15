@@ -76,98 +76,74 @@
           <div class="col-8">
             <!-- colappsed-->
             <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#sickness"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="sicknessIsCollapsed = !sicknessIsCollapsed"
+                    [attr.aria-expanded]="!sicknessIsCollapsed"
+                  >
+                    <img
+                      *ngIf="sicknessIsCollapsed && antecedentes?.hasSickness && antecedentes?.sickness.length"
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="!sicknessIsCollapsed && antecedentes?.hasSickness && antecedentes?.sickness.length"
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Enfermedades</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasSickness">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('sickness', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasSickness">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('sickness', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasSickness">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('sickness')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container *ngIf="antecedentes?.hasSickness">
+                <div
+                  class="collapse"
+                  id="sickness"
+                  *ngFor="let item of antecedentes.sickness"
+                  [ngbCollapse]="!sicknessIsCollapsed"
                 >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Enfermedades
-              </a>
-              <div class="add float-right" (click)="categoryChangue('sickness')" data-toggle="modal" data-target="#add">
-                Agregar
-                <img src="assets/img/+.svg" />
-              </div>
-
-              <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
-                <ul class="antecedentes">
-                  <li class="pl-5">
-                    {{ item.value }}
-                    <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                      <!--(click)="delete(item, $event)" -->
-                      <img src="assets/img/delete.svg" />
-                    </div>
-                  </li>
-
-                  <li style="display: none;">A medicamentos tipo C</li>
-                </ul>
-              </div>
-            </div>
-            <!--/colappsed-->
-
-            <!-- colappsed-->
-            <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#familiarHistory"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Antecedentes Familiares
-              </a>
-              <div
-                class="add float-right"
-                data-toggle="modal"
-                (click)="categoryChangue('familiarHistory')"
-                data-target="#add"
-              >
-                Agregar
-                <img src="assets/img/+.svg" />
-              </div>
-              <ng-container *ngIf="antecedentesGeneral">
-                <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
                   <ul class="antecedentes">
                     <li class="pl-5">
                       {{ item.value }}
                       <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                        <img src="assets/img/delete.svg" />
+                        <!--(click)="delete(item, $event)" -->
+                        <button type="button" class="btn btn-outline-light btn-sm px-2">
+                          <img src="assets/img/delete.svg" />
+                        </button>
                       </div>
                     </li>
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </ng-container>
@@ -176,50 +152,81 @@
 
             <!-- colappsed-->
             <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#healthHabits"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Hábitos de Salud
-              </a>
-              <div
-                class="add float-right"
-                data-toggle="modal"
-                (click)="categoryChangue('healthHabits')"
-                data-target="#add"
-              >
-                Agregar
-                <img src="assets/img/+.svg" />
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="familiarHistoryIsCollapsed = !familiarHistoryIsCollapsed"
+                    [attr.aria-expanded]="!familiarHistoryIsCollapsed"
+                  >
+                    <img
+                      *ngIf="
+                        familiarHistoryIsCollapsed &&
+                        antecedentes?.hasFamiliarHistory &&
+                        antecedentes?.familiarHistory.length
+                      "
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="
+                        !familiarHistoryIsCollapsed &&
+                        antecedentes?.hasFamiliarHistory &&
+                        antecedentes?.familiarHistory.length
+                      "
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Antecedentes Familiares</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasFamiliarHistory">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('familiarHistory', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasFamiliarHistory">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('familiarHistory', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasFamiliarHistory">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('familiarHistory')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <ng-container *ngIf="antecedentesGeneral">
-                <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+
+              <ng-container *ngIf="antecedentes?.hasFamiliarHistory">
+                <div
+                  class="collapse"
+                  id="familiarHistory"
+                  *ngFor="let item of antecedentes.familiarHistory"
+                  [ngbCollapse]="!familiarHistoryIsCollapsed"
+                >
                   <ul class="antecedentes">
-                    <li class="pl-5" id="{{ item.id }}">
+                    <li class="pl-5">
                       {{ item.value }}
                       <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                        <img src="assets/img/delete.svg" />
+                        <button type="button" class="btn btn-outline-light btn-sm px-2">
+                          <img src="assets/img/delete.svg" />
+                        </button>
                       </div>
                     </li>
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </ng-container>
@@ -228,50 +235,77 @@
 
             <!-- colappsed-->
             <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#medicines"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Medicamentos
-              </a>
-              <div
-                class="add float-right"
-                data-toggle="modal"
-                (click)="categoryChangue('medicines')"
-                data-target="#add"
-              >
-                Agregar
-                <img src="assets/img/+.svg" />
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="healthHabitsIsCollapsed = !healthHabitsIsCollapsed"
+                    [attr.aria-expanded]="!healthHabitsIsCollapsed"
+                  >
+                    <img
+                      *ngIf="
+                        healthHabitsIsCollapsed && antecedentes?.hasHealthHabits && antecedentes?.healthHabits.length
+                      "
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="
+                        !healthHabitsIsCollapsed && antecedentes?.hasHealthHabits && antecedentes?.healthHabits.length
+                      "
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Habitos de Salud</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasHealthHabits">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('healthHabits', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasHealthHabits">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('healthHabits', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasHealthHabits">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('healthHabits')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <ng-container *ngIf="antecedentesGeneral">
-                <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+
+              <ng-container *ngIf="antecedentes?.hasHealthHabits">
+                <div
+                  class="collapse"
+                  id="healthHabits"
+                  *ngFor="let item of antecedentes.healthHabits"
+                  [ngbCollapse]="!healthHabitsIsCollapsed"
+                >
                   <ul class="antecedentes">
                     <li class="pl-5" id="{{ item.id }}">
                       {{ item.value }}
                       <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                        <img src="assets/img/delete.svg" />
+                        <button type="button" class="btn btn-outline-light btn-sm px-2">
+                          <img src="assets/img/delete.svg" />
+                        </button>
                       </div>
                     </li>
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </ng-container>
@@ -280,50 +314,73 @@
 
             <!-- colappsed-->
             <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#occupational"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Ocupacionales
-              </a>
-              <div
-                class="add float-right"
-                data-toggle="modal"
-                (click)="categoryChangue('occupational')"
-                data-target="#add"
-              >
-                Agregar
-                <img src="assets/img/+.svg" />
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="medicinesIsCollapsed = !medicinesIsCollapsed"
+                    [attr.aria-expanded]="!medicinesIsCollapsed"
+                  >
+                    <img
+                      *ngIf="medicinesIsCollapsed && antecedentes?.hasMedicines && antecedentes?.medicines.length"
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="!medicinesIsCollapsed && antecedentes?.hasMedicines && antecedentes?.medicines.length"
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Medicamentos</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasMedicines">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('medicines', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasMedicines">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('medicines', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasMedicines">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('medicines')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <ng-container *ngIf="antecedentesGeneral">
-                <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+
+              <ng-container *ngIf="antecedentes?.hasMedicines">
+                <div
+                  class="collapse"
+                  id="medicines"
+                  *ngFor="let item of antecedentes.medicines"
+                  [ngbCollapse]="!medicinesIsCollapsed"
+                >
                   <ul class="antecedentes">
                     <li class="pl-5" id="{{ item.id }}">
                       {{ item.value }}
                       <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                        <img src="assets/img/delete.svg" />
+                        <button type="button" class="btn btn-outline-light btn-sm px-2">
+                          <img src="assets/img/delete.svg" />
+                        </button>
                       </div>
                     </li>
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </ng-container>
@@ -332,45 +389,159 @@
 
             <!-- colappsed-->
             <div class="collapseCustom">
-              <a
-                class="p-4"
-                data-toggle="collapse"
-                href="#others"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample"
-              >
-                <svg
-                  class="mr-2"
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                    fill="#7D7D7D"
-                  />
-                </svg>
-                Otros
-              </a>
-              <div class="add float-right" data-toggle="modal" data-target="#add" (click)="categoryChangue('others')">
-                Agregar
-                <img src="assets/img/+.svg" />
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="occupationalIsCollapsed = !occupationalIsCollapsed"
+                    [attr.aria-expanded]="!occupationalIsCollapsed"
+                  >
+                    <img
+                      *ngIf="
+                        occupationalIsCollapsed && antecedentes?.hasOccupational && antecedentes?.occupational.length
+                      "
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="
+                        !occupationalIsCollapsed && antecedentes?.hasOccupational && antecedentes?.occupational.length
+                      "
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Ocupacionales</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasOccupational">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('occupational', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasOccupational">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('occupational', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasOccupational">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('occupational')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <ng-container *ngIf="antecedentesGeneral">
-                <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+
+              <ng-container *ngIf="antecedentes?.occupational">
+                <div
+                  class="collapse"
+                  id="occupational"
+                  *ngFor="let item of antecedentes.occupational"
+                  [ngbCollapse]="!occupationalIsCollapsed"
+                >
                   <ul class="antecedentes">
                     <li class="pl-5" id="{{ item.id }}">
                       {{ item.value }}
                       <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
-                        <img src="assets/img/delete.svg" />
+                        <div
+                          class="delete"
+                          data-toggle="modal"
+                          data-target="#eliminar"
+                          (click)="preDelete(item, $event)"
+                        >
+                          <button type="button" class="btn btn-outline-light btn-sm px-2">
+                            <img src="assets/img/delete.svg" />
+                          </button>
+                        </div>
                       </div>
                     </li>
-                    <li style="display: none;">A medicamentos tipo C</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+            <!--/colappsed-->
+
+            <!-- colappsed-->
+            <div class="collapseCustom">
+              <div class="row">
+                <div class="col-8">
+                  <div
+                    class="p-4"
+                    role="button"
+                    (click)="othersIsCollapsed = !othersIsCollapsed"
+                    [attr.aria-expanded]="!othersIsCollapsed"
+                  >
+                    <img
+                      *ngIf="othersIsCollapsed && antecedentes?.hasOthers && antecedentes?.others.length"
+                      src="assets/icons/icon-arrow-down.svg"
+                      alt="img"
+                    />
+                    <img
+                      *ngIf="!othersIsCollapsed && antecedentes?.hasOthers && antecedentes?.others.length"
+                      src="assets/icons/icon-arrow-up.svg"
+                      alt="img"
+                    />
+                    <span class="pl-3">Ocupacionales</span>
+                  </div>
+                </div>
+                <div class="col-4" *ngIf="!antecedentes?.hasOthers">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('others', true)">
+                      Si, tengo
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasOthers">
+                  <div class="hasAntecedents color-success2">
+                    <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('others', false)">
+                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2" *ngIf="antecedentes?.hasOthers">
+                  <div class="add text-primary mr-4">
+                    <button
+                      type="button"
+                      class="btn btn-light px-2"
+                      (click)="categoryChangue('others')"
+                      data-toggle="modal"
+                      data-target="#add"
+                    >
+                      Agregar
+                      <img src="assets/img/+.svg" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container *ngIf="antecedentes?.others">
+                <div
+                  class="collapse"
+                  id="others"
+                  *ngFor="let item of antecedentes.others"
+                  [ngbCollapse]="!othersIsCollapsed"
+                >
+                  <ul class="antecedentes">
+                    <li class="pl-5" id="{{ item.id }}">
+                      {{ item.value }}
+                      <div class="delete" data-toggle="modal" data-target="#eliminar" (click)="preDelete(item, $event)">
+                        <button type="button" class="btn btn-outline-light btn-sm px-2">
+                          <img src="assets/img/delete.svg" />
+                        </button>
+                      </div>
+                    </li>
                   </ul>
                 </div>
               </ng-container>
@@ -662,7 +833,6 @@
                   (change)="openFile($event)"
                   id="customFile"
                   style="overflow: hidden;"
-                  formControlName="file"
                 />
                 <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
               </div>
