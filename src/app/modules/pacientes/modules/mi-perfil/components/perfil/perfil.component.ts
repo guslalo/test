@@ -152,10 +152,10 @@ export class PerfilComponent implements OnInit {
       this.foto = this.base64.split(',')[1];
       console.log(this.base64.split(',')[1]);
     };
-    this.putPhotos(this.foto);
+    //this.putPhotos(this.foto);
   }
 
-
+  /*
   putPhotos(foto){
     this.accountService.putPhoto(foto).subscribe(
       data => {
@@ -165,7 +165,7 @@ export class PerfilComponent implements OnInit {
         console.log(error)
       }
     )
-  }
+  }*/
 
   getIssuingEntities() {
     this.userService.getIssuingEntities().subscribe((data) => {
