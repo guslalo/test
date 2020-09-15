@@ -70,8 +70,8 @@
     <div class="col-4">
       <div class=" ">
         <div class="card-body text-center">
-          <div class="boxImg">
-            <!--<img src="{{geFormData.photo}}">-->
+          <div class="boxImg" *ngIf="geFormData.photo">
+            <img src="{{geFormData.photo}}">
           </div>
           <div class="custom-file">
             <input
