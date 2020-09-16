@@ -154,7 +154,23 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  /*
+  toggleFullScreen() {
+    const video = document.getElementById("meet");
 
+    this.fullscreen = (this.fullscreen == true) ? false : true;
+
+    if (video.requestFullscreen) {
+      switch (this.fullscreen) {
+        case true:
+          video.requestFullscreen();
+          break;
+        case false:
+          document.exitFullscreen();
+          break;
+      }
+    }
+  }*/
 
   getSession(id: string) {
     this.appointmentsService.getAppointmentsSession(id).subscribe(
