@@ -2,22 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MiPerfilRoutingModule } from './mi-perfil-routing.module';
-import { IndexComponent } from './components/index/index.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilComponent } from './mi-perfil.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    PerfilComponent
-  ],
-  imports: [
-    CommonModule,
-    MiPerfilRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
-    
-  ]
+  declarations: [PerfilComponent],
+  imports: [CommonModule, MiPerfilRoutingModule, ReactiveFormsModule, FormsModule, NgxSpinnerModule],
 })
-export class MiPerfilModule { }
+export class MiPerfilModule {}
