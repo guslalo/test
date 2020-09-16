@@ -84,7 +84,9 @@ export class CrearFichaConsultaComponent implements OnInit {
       FC: ['',],
       FR: ['',],
       Temp: ['',],
-      Sat: ['',]
+      Sat: ['',],
+      objective: ['',],
+      anamnesis: ['',]
       /*
       ufBirth: [null, null],
       municipalityBirth: [null, null],
@@ -120,8 +122,8 @@ export class CrearFichaConsultaComponent implements OnInit {
           diagnostic: this.diagnostico.controls.diagnostic.value,
           comments: this.diagnostico.controls.comments.value
         },
-        objective:this.consultasForm.controls.objective.value,
-        anamnesis:this.consultasForm.controls.anamnesis.value, 
+        objective:this.signos.controls.objective.value,
+        anamnesis:this.signos.controls.anamnesis.value, 
         notes:this.notes.controls.notes.value
         
       }  
