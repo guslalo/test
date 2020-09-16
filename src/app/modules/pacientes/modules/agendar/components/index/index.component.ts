@@ -213,11 +213,17 @@ export class IndexComponent implements OnInit {
         btoa(this.blocks);
         console.log(data);
         console.log(this.consolidate.paymentUrl);
+        if(this.consolidate.paymentUrl) {
+          $('#exampleModal').modal();
+        }else{
+          $('#sinPrecio').modal();
+        
+        }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
         //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
-        $('#exampleModal').modal();
+       
         
         setTimeout(() => {
           this.spinner.hide();
