@@ -164,7 +164,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         const options = {
           roomName: data.payload.sessionId,
           jwt: data.payload.sessionToken,
-          height: 700,
+          height: 500,
+          //width:'auto',
           parentNode: document.querySelector('#meet'),
         };   
         this.url = data.payload.urlRoom.split('//');
