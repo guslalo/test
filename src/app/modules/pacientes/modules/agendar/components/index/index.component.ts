@@ -54,6 +54,7 @@ export class IndexComponent implements OnInit {
   public flujoProfesional: boolean = false;
   public urlPago:any;
   public urlConfirmacion:any;
+  public estadoPagado:boolean = false;
 
   imageError: string;
   isImageSaved: boolean;
@@ -193,10 +194,12 @@ export class IndexComponent implements OnInit {
     console.log(consolidate);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
+        this.statusPago(consolidate.id);
         this.consolidate = data.payload;
         btoa(this.blocks);
         console.log(data);
-        console.log(this.consolidate.paymentUrl)
+        console.log(this.consolidate.paymentUrl);
+        console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
         //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
@@ -206,6 +209,30 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  statusPago(id){
+    let interval = 
+    setInterval(() => {
+      this.appointmentsService.getPaymentStatus(id).subscribe(
+        data => {
+          if(data.payload.isPaid === false){
+            console.log('no pagado')
+          } else {
+            $('#exampleModal').modal('hide');
+            this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+            this.estadoPagado = true;
+            console.log('pagado')
+            clearInterval(interval);
+          }
+        }, 
+        error => {
+          console.log(error)
+        }
+      )
+    }, 5000);  
+
+   
   }
 
   cerrarPago(){
