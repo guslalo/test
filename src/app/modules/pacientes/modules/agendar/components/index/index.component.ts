@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as _ from 'lodash';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -66,6 +67,7 @@ export class IndexComponent implements OnInit {
   public trustedUrl : SafeResourceUrl;
 
   constructor(
+    private spinner: NgxSpinnerService,
     private agendarService: AgendarService,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService,
@@ -81,6 +83,7 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+ 
     const current = new Date();
     this.textInputFile = 'Seleccione Archivo';
     this.minDate = {
@@ -151,6 +154,7 @@ export class IndexComponent implements OnInit {
   }
 
   agendar() {
+    this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.postConsolidateService(this.consolidate);
     //$('#exampleModal').modal();
@@ -214,6 +218,11 @@ export class IndexComponent implements OnInit {
         //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
         $('#exampleModal').modal();
+        
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 2000);
+
       },
       (error) => {
         console.log(error);
@@ -254,6 +263,7 @@ export class IndexComponent implements OnInit {
 
   pago(url){
     this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    
   }
 
   getsymptoms() {
