@@ -92,6 +92,14 @@ export class IndexComponent implements OnInit {
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
     this.getsymptoms();
+
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+      if(this.estadoPagado === false){
+        console.log(this.estadoPagado);
+      }
+      window.location.reload();
+      console.log('closed');
+    })
   }
 
   //selecion sintoma
@@ -145,7 +153,9 @@ export class IndexComponent implements OnInit {
   agendar() {
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.postConsolidateService(this.consolidate);
+    //$('#exampleModal').modal();
   }
+
   opcionSeleccionado: any;
   verSeleccion: any;
   value: any;
@@ -217,8 +227,10 @@ export class IndexComponent implements OnInit {
       this.appointmentsService.getPaymentStatus(id).subscribe(
         data => {
           if(data.payload.isPaid === false){
+            this.estadoPagado = false;
             console.log('no pagado')
           } else {
+            this.postConsolidateService(this.consolidate);
             $('#exampleModal').modal('hide');
             this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
             this.estadoPagado = true;
@@ -255,6 +267,8 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+
+  
 
   escogerProfessional(event) {
     this.flujoProfesional = true;
