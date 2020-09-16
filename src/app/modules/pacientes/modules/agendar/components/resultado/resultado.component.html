@@ -22,17 +22,15 @@
                 <p class="font-weight-bold">
                     {{reserva[0].professionalDetails.specialtyDetails[0].specialtyName}} 
                 </p>
-                <p class="valor">VALOR CONSULTA: $32.000</p>
+                <p class="valor">VALOR CONSULTA: ${{reserva[0].professionalDetails.specialtyDetails[0].price}}</p>
                 <p class="font-weight-bold m-0">Su consulta sera realizará el  {{reserva[0].date | date:"dd/MM/yyyy":"+0000"}} </p><!--| 8:00 AM-->
                <!--<p class="font-weight-bold  m-0">ID ATENCIÓN 356-57834</p>-->
             </div>
             <div class="text-center mt-5 mb-5">
                 <button 
                 type="button" data-dismiss="modal" 
-                class="btn btn-outline-primary rounded-pill mr-3" routerLink="/app-paciente"> Volver</button>
-                <button 
-                type="button" data-dismiss="modal" 
-                class="btn btn-primary rounded-pill"  routerLink="/app-paciente/mis-consultas"> Pagar y agendar</button>
+                class="btn btn-outline-primary rounded-pill mr-3" routerLink="/app-paciente"> Ir al inicio</button>
+             
             </div>
             <p>
                 Recuerda  respetar la fecha acordad para reagendamientos y cancelaciones revisa
