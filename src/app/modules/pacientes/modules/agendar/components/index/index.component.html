@@ -71,7 +71,7 @@
                                 ><!--{{item.medicalSpecialtyId}}-->
                                     <option selected>Selecciona</option>
                                     <ng-container *ngFor="let item of specialtiesId">
-                                        <option value="{{item._id}}">{{item.specialtyName}} </option>
+                                        <option value="{{item.medicalSpecialtyId}}">{{item.specialtyName}} </option>
                                     </ng-container>
                                 </select>
                             </div>
@@ -383,7 +383,7 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  (click)="atras()">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
