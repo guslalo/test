@@ -111,7 +111,7 @@ export class PerfilComponent implements OnInit {
         motherName: this.formData.personalData.motherName,
         email: this.formData.personalData.email,
         gender: this.formData.personalData.gender,
-        nationality: this.formData.personalData.nationality,
+        nacionality: this.formData.personalData.nacionality,
         education: this.personalData.controls.education.value || this.formData.personalData.education,
         phoneNumber: this.personalData.controls.phoneNumber.value || this.formData.personalData.phoneNumber,
       },
