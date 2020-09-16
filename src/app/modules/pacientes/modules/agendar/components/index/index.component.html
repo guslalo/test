@@ -229,7 +229,6 @@
   </div>
 
 <ng-container *ngIf="selectSintoma">
-
     <div class="row  mb-3">
       <div class="col">
         <div class="card-deck">
@@ -359,7 +358,7 @@
                             </div>  
 
                             <div class="box boxSeparador pl-3">
-                                <p class="m-0 valor">VALOR CONSULTA: $32.000</p>
+                                <p class="m-0 valor">VALOR CONSULTA: ${{reserve.professionalDetails.specialtyDetails.price}}</p>
                                 <p class="m-0">{{reserve.dateDetails.date.day}}-
                                 {{reserve.dateDetails.date.month}}-{{reserve.dateDetails.date.year}} | 
                                     {{reserve.dateDetails.start}}</p>
@@ -381,4 +380,25 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pagar consulta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="estadoPagado" type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="{{urlConfirmacion}}">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { reserve } from './../../../../../../models/reserve';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as _ from 'lodash';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+
+
 
 //services
 import { AgendarService } from './../../services/agendar.service';
@@ -10,6 +14,7 @@ import { SpecialtiesService } from './../../../../../../services/specialties.ser
 import { SymptomsService } from './../../../../../../services/symptoms.service';
 import { DocumentService } from './../../../../../../services/document.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
+import { SafePipe } from './../../../../../../shared/pipes/sanitizer.pipe';
 
 //datepicker
 import {
@@ -19,12 +24,14 @@ import {
   NgbDatepickerConfig,
   NgbTimepicker,
 } from '@ng-bootstrap/ng-bootstrap';
-import { id } from '@swimlane/ngx-charts';
+
+declare var $:any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
+  providers: [ SafePipe ]
 })
 export class IndexComponent implements OnInit {
   public specialties: string;
@@ -45,6 +52,9 @@ export class IndexComponent implements OnInit {
   public base64: any;
   public textInputFile: any;
   public flujoProfesional: boolean = false;
+  public urlPago:any;
+  public urlConfirmacion:any;
+  public estadoPagado:boolean = false;
 
   imageError: string;
   isImageSaved: boolean;
@@ -53,6 +63,7 @@ export class IndexComponent implements OnInit {
 
   public bloquearSelect = true;
   public bloquearFecha = true;
+  public trustedUrl : SafeResourceUrl;
 
   constructor(
     private agendarService: AgendarService,
@@ -64,7 +75,9 @@ export class IndexComponent implements OnInit {
     private calendar: NgbCalendar,
     private config: NgbDatepickerConfig,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private domSanitizer : DomSanitizer,
+    private safe: SafePipe
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +92,14 @@ export class IndexComponent implements OnInit {
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
     this.getsymptoms();
+
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+      if(this.estadoPagado === false){
+        console.log(this.estadoPagado);
+      }
+      window.location.reload();
+      console.log('closed');
+    })
   }
 
   //selecion sintoma
@@ -111,6 +132,9 @@ export class IndexComponent implements OnInit {
       professionalDetails: {
         userId: null,
         specialtyId: value,
+        specialtyDetails:{
+          price:0
+        },
       },
       dateDetails: {
         date: {
@@ -129,13 +153,12 @@ export class IndexComponent implements OnInit {
   agendar() {
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.postConsolidateService(this.consolidate);
+    //$('#exampleModal').modal();
   }
 
   opcionSeleccionado: any;
   verSeleccion: any;
   value: any;
-
-  //;
 
   status: boolean = false;
   selectedLevel: any;
@@ -146,11 +169,14 @@ export class IndexComponent implements OnInit {
 
   blockSelected(item, item2) {
     console.log(item);
+    //console.log( item.professionalDetails.specialtyDetails[0].price);
     this.selectSintoma = true;
     this.reserve.dateDetails.start = item2;
     console.log(this.specialtiesIdReserve);
+    console.log(this.reserve);
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
     this.reserve.professionalDetails.specialtyId =  this.specialtiesIdReserve;
+    this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
@@ -178,15 +204,56 @@ export class IndexComponent implements OnInit {
     console.log(consolidate);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
-        this.consolidate = data.payload[0];
+        this.statusPago(consolidate.id);
+        this.consolidate = data.payload;
         btoa(this.blocks);
         console.log(data);
-        this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+        console.log(this.consolidate.paymentUrl);
+        console.log(consolidate.id);
+        this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
+        //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+        this.pago(this.consolidate.paymentUrl);
+        $('#exampleModal').modal();
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  statusPago(id){
+    let interval = 
+    setInterval(() => {
+      this.appointmentsService.getPaymentStatus(id).subscribe(
+        data => {
+          if(data.payload.isPaid === false){
+            this.estadoPagado = false;
+            console.log('no pagado')
+          } else {
+            this.postConsolidateService(this.consolidate);
+            $('#exampleModal').modal('hide');
+            this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+            this.estadoPagado = true;
+            console.log('pagado')
+            clearInterval(interval);
+          }
+        }, 
+        error => {
+          console.log(error)
+        }
+      )
+    }, 5000);  
+
+   
+  }
+
+  cerrarPago(){
+    console.log('aca');
+    this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route })
+  }
+
+  pago(url){
+    this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   getsymptoms() {
@@ -201,6 +268,8 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  
+
   escogerProfessional(event) {
     this.flujoProfesional = true;
     this.bloquearFecha = false;
@@ -209,6 +278,9 @@ export class IndexComponent implements OnInit {
       professionalDetails: {
         userId: event,
         specialtyId: null,
+        specialtyDetails:{
+          price:null
+        }
       },
       dateDetails: {
         date: {
@@ -265,7 +337,10 @@ export class IndexComponent implements OnInit {
 
       this.reserve = {
         professionalDetails: {
-          userId:this.reserve.professionalDetails.userId
+          userId:this.reserve.professionalDetails.userId,
+          specialtyDetails:{
+            price:null
+          }
         },
         professionalId: this.reserve.professionalDetails.userId,
         dateDetails: {

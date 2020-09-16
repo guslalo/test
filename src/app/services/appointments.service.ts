@@ -13,6 +13,8 @@ export class AppointmentsService {
   private reserve = '/reserve';
   private consolidate = '/consolidate';
   private reschedule = '/reschedule';
+  private pagoStatus = 'v1/appointments/payment/status/';
+ 
 
   constructor(private http: HttpClient) {}
 
@@ -102,6 +104,15 @@ export class AppointmentsService {
     params = params.append('appointmentId', id);
     return this.http.get<any>(environment.baseUrl + this.appointments + '/reschedule', { params: params });
   }
+
+  //events
+  getPaymentStatus(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.pagoStatus, { params: params });
+  }
+
+
 
   //postRunAppointment(id): Observable<any> {
   postEventAppointment(id, event): Observable<any> {
