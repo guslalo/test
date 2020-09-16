@@ -6,6 +6,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResultadoComponent } from './components/resultado/resultado.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SafePipe } from './../../../../shared/pipes/sanitizer.pipe';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SafePipe } from './../../../../shared/pipes/sanitizer.pipe';
     AgendarRoutingModule,
     NgbDatepickerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   exports:[
     SafePipe
