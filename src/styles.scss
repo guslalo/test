@@ -157,6 +157,28 @@ ul {
   }
 }
 
+.videoCall {
+  position: relative;
+  .boxText {
+    position: absolute;
+    top: 20%;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+  }
+}
+
+
+.boxThumb {
+  width: 100%;
+  overflow: hidden;
+  img {
+    width: 100%;
+    filter: blur(4px);
+    -webkit-filter: blur(4px)
+  }
+}
 .imgProfile {
   width: 200px;
   height: 200px;
