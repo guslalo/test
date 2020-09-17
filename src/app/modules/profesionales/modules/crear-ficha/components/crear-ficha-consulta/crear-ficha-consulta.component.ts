@@ -30,9 +30,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public signos: FormGroup;
+  public otros: FormGroup;
   public consultasForm: FormGroup;
   public diagnostico: FormGroup;
   public notes: FormGroup;
+  public nutricion: FormGroup;
   public permisoGuardar:boolean;
 
   constructor( 
@@ -85,20 +87,21 @@ export class CrearFichaConsultaComponent implements OnInit {
       FR: ['',],
       Temp: ['',],
       Sat: ['',],
-      objective: ['',],
-      anamnesis: ['',],
-      weight: ['',],
-      height: ['',],
-      imc: ['',],
-      imcClassification: ['',],
+    });
+
+    this.otros = this._formBuilder.group({
       physicalExam: ['',],
       examHighlights: ['',],
       plan: ['',]
-      /*
-      ufBirth: [null, null],
-      municipalityBirth: [null, null],
-      nacionality: [null, Validators.required],*/
     });
+
+    this.nutricion = this._formBuilder.group({      
+      weight: ['',],
+      height: ['',],
+      imc: ['',],
+      imcClassification: ['',],  
+    });
+
 
     this.consultasForm = this._formBuilder.group({
       objective: ['',],
@@ -122,12 +125,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     let appointmentObject = {
       patientDetails : {
          vitalSigns: this.signos.value,
-         nutritionalState: {
-          weight: this.signos.controls.weight.value,
-          height: this.signos.controls.height.value,
-          imc:this.signos.controls.imc.value,
-          imcClassification: this.signos.controls.imcClassification.value
-         }
+         nutritionalState: this.nutricion.value,
       },
       appointmentDetails:{
         diagnosticDetails:{
@@ -135,12 +133,12 @@ export class CrearFichaConsultaComponent implements OnInit {
           diagnostic: this.diagnostico.controls.diagnostic.value,
           comments: this.diagnostico.controls.comments.value
         },
-        objective:this.signos.controls.objective.value,
-        anamnesis:this.signos.controls.anamnesis.value, 
+        objective:this.consultasForm.controls.objective.value,
+        anamnesis:this.consultasForm.controls.anamnesis.value, 
         notes:this.notes.controls.notes.value,
-        physicalExam: this.signos.controls.physicalExam.value,
-        examHighlights: this.signos.controls.examHighlights.value,
-        plan: this.signos.controls.plan.value,
+        physicalExam: this.otros.controls.physicalExam.value,
+        examHighlights: this.otros.controls.examHighlights.value,
+        plan: this.otros.controls.plan.value,
       }  
     }
     console.log(appointmentObject );

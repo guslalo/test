@@ -451,16 +451,17 @@
                         </div>
                       </div>
                     </form>
-                    <form [formGroup]="signos">
+
+                    <form [formGroup]="consultasForm">
                       <div class="row">
                         <div class="col-6">
-                              <label for="endBlock">Objetivo consulta</label>
-                              <input class="form-control" type="text" 
-                              id="objective"
-                              name="objective"
-                              formControlName="objective"
-                              >
-                            
+                            <label for="endBlock">Objetivo consulta</label>
+                            <input class="form-control" type="text" 
+                            id="objective"
+                            name="objective"
+                            formControlName="objective"
+                            >
+                          
                         </div>
                         <div class="col-6">
                           <ng-container *ngFor="let item of appointmentDetail.patientDetails.symptomsDetails">
@@ -486,34 +487,22 @@
                             </div>
                             <!--/sintoma-->
                           </ng-container>
-                         
-                          <!--
-                          <div class="row">
-                            <div class="form-group col">
-                              <label for="endBlock">Examen fisico</label>
-                              <select class="form-control">
-                                <option>control</option>
-                                <option>control 2</option>
-                              </select>
-                            </div>
-                          </div>-->
-                      
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-12 mb-4">
-                          
-                              <label for="endBlock">Anmnesis</label>
-                              <textarea class="form-control" rows="5" 
-                              id="anamnesis"
-                              name="anamnesis"
-                              formControlName="anamnesis"
-                              
-                              ></textarea>
-                            
-                          
+                        <div class="col-12 mb-4">                      
+                          <label for="endBlock">Anmnesis</label>
+                          <textarea class="form-control" rows="5" 
+                          id="anamnesis"
+                          name="anamnesis"
+                          formControlName="anamnesis"
+                          ></textarea>
                         </div>
                       </div> 
+                    </form>
+                    
+                    <form [formGroup]="signos">
+                      
                       <div class="row">
                         <div class="col-12">
                           <div>
@@ -616,6 +605,9 @@
                           </div>
                         </div>
                       </div>
+                    </form>
+
+                    <form [formGroup]="nutricion">
                       <div class="row mt-3">
                         <div class="col-12">
                           <div>
@@ -683,7 +675,9 @@
                           </div>
                         </div>
                       </div>
+                    </form>
 
+                    <form [formGroup]="otros">
                       <div class="row mt-3">
                         <div class="col-12">
                         <div class="form-row">
@@ -716,8 +710,8 @@
                         </div>
                       </div>
                       </div>
-                      
                     </form>
+                 
                     <div class="tab-content" id="myTabContent">
                     
 
