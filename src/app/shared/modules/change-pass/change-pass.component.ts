@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../modules/auth/services/authentication.service';
-import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-change-pass',
@@ -9,7 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./change-pass.component.scss'],
 })
 export class ChangePassComponent implements OnInit {
-  constructor(private authenticationService: AuthenticationService, private spinner: NgxSpinnerService) {}
+  constructor(private authenticationService: AuthenticationService) {}
   public model: any = {};
   public changePassForm: FormGroup;
   public passwordNotMatchs: boolean;
@@ -23,11 +22,22 @@ export class ChangePassComponent implements OnInit {
         password: new FormControl('', [Validators.required]),
         newPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/)])
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Z])/),
+            Validators.pattern(/^(?=.*[a-z])/),
+            Validators.pattern(/^(?=.*[0-9])/),
+            Validators.pattern(/^(?=.*[$@$!%*?&])/),
+            Validators.pattern(/^.{8,16}$/),
+          ])
         ),
         confirmPassword: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$/),
+          Validators.pattern(/^(?=.*[A-Z])/),
+          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[0-9])/),
+          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^.{8,16}$/),
         ]),
       },
       {

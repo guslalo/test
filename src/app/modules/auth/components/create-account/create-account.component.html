@@ -285,6 +285,7 @@
                         'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
                       }"
                       formControlName="email"
+                      onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="personalData.controls['email'].errors?.required" class="invalid-feedback">
                       email erroneo
@@ -303,6 +304,7 @@
                         'is-invalid': personalData.get('confirmEmail').touched && personalData.errors?.emailsNotMatch
                       }"
                       formControlName="confirmEmail"
+                      onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="personalData.errors?.emailsNotMatch" class="invalid-feedback">
                       {{ 'crear-cuenta.step2.formGroup.emailsNotMatch' | transloco }}
@@ -664,6 +666,7 @@
                       }"
                       formControlName="password"
                       maxlength="16"
+                      onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
                       <ul>
@@ -690,7 +693,8 @@
                           passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
                       }"
                       formControlName="confirmPassword"
-                      maxlength="20"
+                      maxlength="16"
+                      onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
                       {{ 'crear-cuenta.step5.formGroup.passwordNotMatch' | transloco }}
