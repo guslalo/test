@@ -67,7 +67,7 @@
                   </div>
                   <div *ngIf="changePassForm.controls['password'].errors" class="invalid-feedback">
                     <ul>
-                      <li>contraseña actual requerida</li>
+                      <li>Contraseña actual requerida</li>
                     </ul>
                   </div>
                   <div *ngIf="errorPassCurrent" class="invalid-feedback" style="display: block;">
@@ -98,15 +98,15 @@
                         <img src="assets/icons/icon-show-password.svg" alt="img" />
                       </button>
                     </div>
-                  </div>
-                  <div *ngIf="changePassForm.controls['newPassword'].errors?.pattern" class="invalid-feedback">
-                    <ul>
-                      <li>* Al menos una mayúscula</li>
-                      <li>* Al menos una minúscula</li>
-                      <li>* Al menos un número</li>
-                      <li>* un largo mínimo de 8 carácteres (max. 16)</li>
-                      <li>* Al menos un carácter especial</li>
-                    </ul>
+                    <div *ngIf="changePassForm.controls['newPassword'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>* Al menos una mayúscula</li>
+                        <li>* Al menos una minúscula</li>
+                        <li>* Al menos un número</li>
+                        <li>* Un largo mínimo de 8 carácteres (max. 16)</li>
+                        <li>* Al menos un carácter especial</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -132,11 +132,11 @@
                         <img src="assets/icons/icon-show-password.svg" alt="img" />
                       </button>
                     </div>
-                  </div>
-                  <div *ngIf="passwordNotMatchs" class="invalid-feedback">
-                    <ul>
-                      <li>Contraseña no coincide</li>
-                    </ul>
+                    <div *ngIf="passwordNotMatchs" class="invalid-feedback">
+                      <ul>
+                        <li>Contraseña no coincide</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group col-md-12">
