@@ -21,7 +21,6 @@ export class ResultadoComponent implements OnInit {
   initCall(): void {
     this.route.params.subscribe(params => {
      const id = params.id;
-      console.log(params)
    });
  }
 }

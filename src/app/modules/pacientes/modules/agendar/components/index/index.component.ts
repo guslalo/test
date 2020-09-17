@@ -35,6 +35,7 @@ export class IndexComponent implements OnInit {
   public symptoms: any;
   public consolidate: any;
   public professionals = [];
+  public tempProfessionals = [];
   public sintomaSelected = [];
   public minDate = undefined;
   public model: NgbDateStruct;
@@ -57,9 +58,9 @@ export class IndexComponent implements OnInit {
   public bloquearSelect = true;
   public bloquearFecha = true;
   public trustedUrl: SafeResourceUrl;
+  private interval: any;
 
   professionalSelected = new FormControl();
-  tempProfessionals: any[] = [];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -87,11 +88,10 @@ export class IndexComponent implements OnInit {
     this.getSpecialtiesService();
     this.getsymptoms();
 
-    $('#exampleModal').on('hidden.bs.modal', function () {
-      if (this.estadoPagado === false) {
-        console.log(this.estadoPagado);
-      }
-      window.location.reload();
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+      clearInterval(this.interval);
+      this.atras();
+      //window.location.reload();
       console.log('closed');
     });
 
@@ -259,19 +259,19 @@ export class IndexComponent implements OnInit {
             this.estadoPagado = false;
             console.log('no pagado');
           } else {
-            this.postConsolidateService(this.consolidate);
+            this.estadoPagado = true;
+            clearInterval(interval);
+            //this.postConsolidateService(this.consolidate);
             $('#exampleModal').modal('hide');
             this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
-            this.estadoPagado = true;
             console.log('pagado');
-            clearInterval(interval);
           }
         },
         (error) => {
           console.log(error);
         }
       );
-    }, 5000);
+    }, 4000);
   }
 
   cerrarPago() {
@@ -385,7 +385,7 @@ export class IndexComponent implements OnInit {
       this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
         (data) => {
           this.blocks = data.payload;
-          //console.log();
+          console.log(this.blocks);
           this.specialtiesIdReserve = this.blocks[0].professionalDetails.specialtyId;
           console.log(this.specialtiesIdReserve);
 
@@ -393,12 +393,12 @@ export class IndexComponent implements OnInit {
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
           //console.log(data.internalCode);
-          /*
+          /**/
           if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
             this.sinProfesionales = false;
-          }*/
+          }
         },
         (error) => {
           console.log(error);

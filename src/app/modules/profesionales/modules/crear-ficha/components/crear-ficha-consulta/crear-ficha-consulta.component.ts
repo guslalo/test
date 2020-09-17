@@ -86,7 +86,14 @@ export class CrearFichaConsultaComponent implements OnInit {
       Temp: ['',],
       Sat: ['',],
       objective: ['',],
-      anamnesis: ['',]
+      anamnesis: ['',],
+      weight: ['',],
+      height: ['',],
+      imc: ['',],
+      imcClassification: ['',],
+      physicalExam: ['',],
+      examHighlights: ['',],
+      plan: ['',]
       /*
       ufBirth: [null, null],
       municipalityBirth: [null, null],
@@ -114,7 +121,13 @@ export class CrearFichaConsultaComponent implements OnInit {
     console.log(this.signos);
     let appointmentObject = {
       patientDetails : {
-         vitalSigns: this.signos.value
+         vitalSigns: this.signos.value,
+         nutritionalState: {
+          weight: this.signos.controls.weight.value,
+          height: this.signos.controls.height.value,
+          imc:this.signos.controls.imc.value,
+          imcClassification: this.signos.controls.imcClassification.value
+         }
       },
       appointmentDetails:{
         diagnosticDetails:{
@@ -124,8 +137,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         },
         objective:this.signos.controls.objective.value,
         anamnesis:this.signos.controls.anamnesis.value, 
-        notes:this.notes.controls.notes.value
-        
+        notes:this.notes.controls.notes.value,
+        physicalExam: this.signos.controls.physicalExam.value,
+        examHighlights: this.signos.controls.examHighlights.value,
+        plan: this.signos.controls.plan.value,
       }  
     }
     console.log(appointmentObject );
