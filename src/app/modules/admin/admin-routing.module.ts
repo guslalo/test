@@ -1,6 +1,7 @@
 // core angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+    component: PerfilComponent,
   },
   {
     path: 'gestion-perfil',
