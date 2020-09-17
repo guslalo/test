@@ -19,6 +19,7 @@ import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-dispon
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
+import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
 
 // const profesional
 const historialConsulta = 'historial-consultas';
@@ -35,14 +36,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },
   { path: '', component: InicioPComponent },
-
   {
     path: 'perfil',
-    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+    component: PerfilComponent,
   },
-
   { path: 'context', component: InicioPComponent },
-
   { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },
   { path: MisPacientes, component: MisPacientesComponent, canActivate: [ProfesionalGuard] },
   { path: MisPacientes + '/ficha-paciente', component: FichaPacienteComponent, canActivate: [ProfesionalGuard] },
