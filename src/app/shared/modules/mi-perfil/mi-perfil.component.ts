@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountService } from 'src/app/services/account.service';
 import { UsersService } from 'src/app/services/users.service';
+import { CustomDateAdapter } from '../../utils';
+
+const current = new Date();
 
 @Component({
   selector: 'app-perfil',
@@ -13,6 +17,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class PerfilComponent implements OnInit {
   public identificationDataGet: any;
   isForeign: boolean = false;
+  isSchool: boolean = false;
   public identificationData: FormGroup;
   personalData: FormGroup;
   birthData: FormGroup;
@@ -38,11 +43,21 @@ export class PerfilComponent implements OnInit {
   issuingEntities: any = [];
   countryMap: any = [];
 
+  currentDate = {
+    year: current.getFullYear(),
+    month: current.getMonth() + 1,
+    day: current.getDate(),
+  };
+
+  dateAdapter = new CustomDateAdapter();
+  inmigrationDate: NgbDateStruct;
+
   constructor(
     private accountService: AccountService,
     private _formBuilder: FormBuilder,
     private userService: UsersService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private calendar: NgbCalendar
   ) {}
 
   ngOnInit(): void {
@@ -66,9 +81,11 @@ export class PerfilComponent implements OnInit {
       issuingBody: [null, null],
       extraDocument: [null, null],
       extraIdDocument: ['', null],
+      inmigrationDate: [null, null],
     });
 
     this.personalData = this._formBuilder.group({
+      isSchool: this.isSchool,
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       lastName: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
       motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
@@ -81,7 +98,6 @@ export class PerfilComponent implements OnInit {
       municipalityBirth: [null, null],
       nacionality: [null, Validators.required],
       originCountry: [null, null],
-      inmigrationDate: [null, null],
       breed: [null, Validators.required],
       education: [null, null],
       familySituation: [null, null],
@@ -94,6 +110,8 @@ export class PerfilComponent implements OnInit {
       street: [''],
       streetNumber: [, [Validators.pattern(/^(?=.*[0-9])/)]],
     });
+
+    this.inmigrationDate = this.calendar.getToday();
   }
 
   getUser() {
@@ -125,6 +143,9 @@ export class PerfilComponent implements OnInit {
         this.isForeign = user.identificationData.isForeign || false;
         if (user.identificationData.isForeign) {
           this.identificationData.get('passport').setValue(user.identificationData.passport);
+          this.inmigrationDate =
+            this.dateAdapter.fromModel(user.personalData.inmigrationDate) || this.calendar.getToday();
+          this.identificationData.get('inmigrationDate').setValue(this.inmigrationDate);
         } else {
           this.identificationData.get('passport').setValue('N/A');
         }
@@ -141,6 +162,8 @@ export class PerfilComponent implements OnInit {
           );
 
         this.formData = user;
+
+        this.isSchool = user.personalData.isSchool;
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
         this.personalData.get('secondLastName').setValue(user.personalData.secondLastName);
@@ -185,11 +208,9 @@ export class PerfilComponent implements OnInit {
     }
 
     if (this.isForeign) {
-      this.identificationData.get('passport').enable();
       this.identificationData.get('extraDocument').disable();
       this.identificationData.get('extraIdDocument').disable();
     } else {
-      this.identificationData.get('passport').setValidators(null);
       this.identificationData.get('extraDocument').enable();
       this.identificationData.get('extraIdDocument').enable();
     }
@@ -200,7 +221,6 @@ export class PerfilComponent implements OnInit {
   updateData() {
     const formObject = {
       identificationData: {
-        passport: this.identificationData.value.passport || '',
         issuingBody: this.identificationData.value.issuingBody || '',
         ...(this.identificationData.value.extraDocument === 'cbo' && {
           cbo: this.identificationData.value.extraIdDocument || '',
@@ -222,16 +242,16 @@ export class PerfilComponent implements OnInit {
         }),
       },
       personalData: {
+        isSchool: this.isSchool,
         name: this.personalData.value.name,
         lastName: this.personalData.value.lastName,
         secondLastName: this.personalData.value.secondLastName,
         motherName: this.personalData.value.motherName,
-        email: this.personalData?.value.email,
-        gender: this.personalData.value.gender,
         nacionality: this.personalData.value.nacionality,
         education: this.personalData.value.education,
         familySituation: this.personalData.value.familySituation,
         phoneNumber: this.personalData.value.phoneNumber,
+        inmigrationDate: this.dateAdapter.toModel(this.identificationData.value.inmigrationDate),
       },
       addressData: this.addressData.value,
     };
