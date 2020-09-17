@@ -138,7 +138,7 @@ export class PerfilComponent implements OnInit {
           .setValue(user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
 
         if (user.identificationData.rgRegistry)
-          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody || null);
+          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody);
 
         this.isForeign = user.identificationData.isForeign || false;
         if (user.identificationData.isForeign) {
@@ -201,12 +201,6 @@ export class PerfilComponent implements OnInit {
   validateForm() {
     this.identificationData.clearValidators();
 
-    if (this.identificationData.get('document').value === 'rgRegistry') {
-      this.identificationData.get('issuingBody').enable();
-    } else {
-      this.identificationData.get('issuingBody').disable();
-    }
-
     if (this.isForeign) {
       this.identificationData.get('extraDocument').disable();
       this.identificationData.get('extraIdDocument').disable();
@@ -221,7 +215,6 @@ export class PerfilComponent implements OnInit {
   updateData() {
     const formObject = {
       identificationData: {
-        issuingBody: this.identificationData.value.issuingBody || '',
         ...(this.identificationData.value.extraDocument === 'cbo' && {
           cbo: this.identificationData.value.extraIdDocument || '',
         }),
