@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
@@ -14,12 +14,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, i
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import {
-  NgbTypeaheadModule,
-  NgbDatepickerModule,
-  NgbTimepickerModule,
-  NgbRatingModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 // Translation
@@ -34,10 +29,11 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 
 // components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
+import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
