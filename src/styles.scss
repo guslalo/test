@@ -41,6 +41,11 @@ body {
   }
 }
 
+.addNote {
+  color: #0066FF;
+  cursor: pointer;
+}
+
 .pasosFixed {
   position: fixed;
   bottom: 0px;
@@ -74,7 +79,7 @@ ul {
     li {
       display: inline-block;
       list-style: none;
-      width: 130px;
+      width: 96px;
       margin: 0px 10px 20px 0px;
       color: #7a7a7a;
       i {
@@ -185,6 +190,11 @@ ul {
   border-radius: 50%;
   overflow: hidden;
   display: inline-block;
+  img {
+    height: 100%;
+    width: auto;
+    min-width: 100%;
+  }
 }
 
 .timeline-img {
@@ -334,6 +344,21 @@ ul {
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
   border-radius: 6px;
+}
+
+.boxNotas2 {
+  display: block;
+  width: 100%;
+  
+}
+.nota2 {
+  border: 1px solid #7a7a7a;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+border-radius: 6px;
+padding: 15px;
+display: inline-block;
+width: 100%;
 }
 
 .color-text-bold {
