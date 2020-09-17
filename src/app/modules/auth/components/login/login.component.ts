@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 // import { CurrentUserService } from '../../../../services/current-user.service'
@@ -8,6 +8,7 @@ import { UserLogin } from '../../../../models/models';
 
 // translate
 import { TranslocoService } from '@ngneat/transloco';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class LoginComponent implements OnInit {
   public UserLogin: UserLogin;
+  formLogin: FormGroup;
+
   public user: any = {};
   public users: any = [];
   public currentUser: any = {};
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private authenticationService: AuthenticationService,
     // public currentUserService:CurrentUserService,
+    private formBuilder: FormBuilder,
     private UserService: UsersService,
     private router: Router
   ) {}
@@ -39,6 +43,11 @@ export class LoginComponent implements OnInit {
     console.log(lenguajeCorto[0]);
     this.translocoService.setDefaultLang(lenguajeCorto[0]);
     this.setActiveLang(lenguajeCorto[0]);
+
+    this.formLogin = this.formBuilder.group({
+      username: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required]),
+    });
   }
 
   setActiveLang(lang: string) {

@@ -85,16 +85,22 @@
           <div class="contenedor">
             <h3 class="mb-4 d-none d-sm-block">{{ 'login.access' | transloco }}</h3>
           </div>
-          <form class="">
+          <form [formGroup]="formLogin">
             <div class="form-group">
               <input
-                type="username"
+                type="email"
                 class="form-control"
                 id="username"
                 name="username"
                 placeholder="username"
                 [(ngModel)]="user.username"
+                onkeypress="return event.charCode != 32"
+                formControlName="username"
+                [ngClass]="{ 'is-invalid': !formLogin.get('username').valid }"
               />
+              <div *ngIf="formLogin.get('username').errors?.email" class="invalid-feedback">
+                Invalid Email
+              </div>
             </div>
             <div class="form-group">
               <div class="input-group mb-3">
@@ -105,6 +111,9 @@
                   name="password"
                   placeholder="password"
                   [(ngModel)]="user.password"
+                  onkeypress="return event.charCode != 32"
+                  formControlName="password"
+                  [ngClass]="{ 'is-invalid': !formLogin.get('password').valid }"
                 />
                 <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
                   <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
@@ -125,7 +134,12 @@
             </div>
             <div class="row">
               <div class="col-12 col-md-12 mb-3 mb-nd-0">
-                <button type="submit" class="btn btn-primary btn-block rounded-pill" (click)="loginUser()">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block rounded-pill"
+                  (click)="loginUser()"
+                  [disabled]="!formLogin.valid"
+                >
                   {{ 'login.login' | transloco }}
                 </button>
               </div>

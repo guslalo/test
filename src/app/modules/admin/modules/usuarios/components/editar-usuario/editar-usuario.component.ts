@@ -33,6 +33,7 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesForm: FormGroup;
   professionalForm: FormGroup;
   passwordForm: FormGroup;
+  showPassword: boolean;
   professionalPhoto: any;
 
   profileSelected: any;
@@ -124,10 +125,10 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', Validators.required],
-      lastName: ['', null],
-      motherName: ['', Validators.required],
-      secondLastName: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+      lastName: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
+      motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+      secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: ['male', Validators.required],
@@ -557,7 +558,7 @@ export class EditarUsuarioComponent implements OnInit {
         motherName: this.formUser[1].value.motherName,
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
-        phoneNumber: parseInt(this.formUser[1].value.phoneNumber),
+        phoneNumber: this.formUser[1].value.phoneNumber,
         birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
         ufBirth: this.formUser[1].value.ufBirth || '',
         municipalityBirth: this.formUser[1].value.municipalityBirth || '',
