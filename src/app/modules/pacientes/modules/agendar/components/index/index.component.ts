@@ -95,16 +95,16 @@ export class IndexComponent implements OnInit {
       console.log('closed');
     });
 
-    this.professionalSelected.valueChanges.pipe(
-      startWith(''),
-      map((newValue) => {
-        // console.log(newValue);
-        var search = '';
-        if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
-        else search = newValue;
+    this.professionalSelected.valueChanges.subscribe((newValue) => {
+      console.log(newValue);
+      var search = '';
+      if (typeof newValue === 'object') {
+        search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
         this.professionals = this.filterAutocompleteProfessionals(search);
-      })
-    );
+      } else {
+        this.professionals = this.filterAutocompleteProfessionals(newValue);
+      }
+    });
   }
 
   //selecion sintoma
@@ -532,7 +532,7 @@ export class IndexComponent implements OnInit {
         (error) => {
           console.log(error);
         }
-      ); 
+      );
     };
   }
 
