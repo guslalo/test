@@ -156,12 +156,7 @@
                           </div>
                           <div class="form-group col-md-3" *ngIf="!isForeign">
                             <label for="issuingBody">Órgano Emisor</label>
-                            <select
-                              [attr.disabled]="isForeign ? '' : null"
-                              class="form-control"
-                              name="issuingBody"
-                              formControlName="issuingBody"
-                            >
+                            <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
                               <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
                                 {{ item.name }}
                               </option>
