@@ -527,7 +527,7 @@ export class IndexComponent implements OnInit {
         (error) => {
           console.log(error);
         }
-      ); /**/
+      ); 
     };
   }
 
