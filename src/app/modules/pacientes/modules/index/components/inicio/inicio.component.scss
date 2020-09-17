@@ -1,0 +1,16 @@
+::ng-deep .owl-theme .owl-nav {
+    position: absolute;
+    width: 100%;
+    top: 123px;
+    .owl-prev {
+        left: 10px;
+    }
+}
+::ng-deep {
+    .owl-carousel .owl-item { 
+        //display: table;
+        //float: none;
+        //display: flex;
+    }
+//.owl-stage{display:flex}
+}

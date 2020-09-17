@@ -7,7 +7,7 @@ import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 
-
+declare var $:any;
 
 @Component({
   selector: 'app-crear-ficha-consulta',
@@ -37,6 +37,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   public nutricion: FormGroup;
   public permisoGuardar:boolean;
   public fotoUser:any;
+  public notesArray:any;
+  public jitsiGlobal:any;
 
   constructor( 
     private route: ActivatedRoute,
@@ -131,7 +133,6 @@ export class CrearFichaConsultaComponent implements OnInit {
         },
         objective:this.consultasForm.controls.objective.value,
         anamnesis:this.consultasForm.controls.anamnesis.value, 
-        notes:this.notes.controls.notes.value,
         physicalExam: this.otros.controls.physicalExam.value,
         examHighlights: this.otros.controls.examHighlights.value,
         plan: this.otros.controls.plan.value,
@@ -141,6 +142,34 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
       data => {
         console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  //update appointmentDetails
+  putNotes(appointmentId){
+    console.log( this.notes.controls.notes.value);
+    let appointmentObject = {
+      appointmentDetails:{
+        notes:this.notes.controls.notes.value,
+      }  
+    }
+   // console.log(appointmentObject );
+    this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
+      data => {
+        console.log(data);
+        this.appointmentsService.getAppointmentsDetails(appointmentId).subscribe(
+          data=> {
+            console.log(data.payload.appointmentDetails.notes);
+            this.notesArray = data.payload.appointmentDetails.notes;
+          },
+          error => {
+            console.log(error);
+          }
+        );
       },
       error => {
         console.log(error);
@@ -175,8 +204,9 @@ export class CrearFichaConsultaComponent implements OnInit {
           parentNode: document.querySelector('#meet'),
         };   
         this.url = data.payload.urlRoom.split('//');
-        const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
-        jitsi.executeCommand('subject', 'Consulta');
+        this.jitsiGlobal = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
+        this.jitsiGlobal.executeCommand('subject', 'Consulta');
+      
         console.log(data);
       },
       (error) => {
@@ -184,6 +214,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
+
+
 
   getFecha(){
     const fecha = new Date();
@@ -224,6 +256,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   endTeleconsultation(appointmentId, event){
+    $("#meet").remove();
+    /*this.jitsiGlobal.excutecommnad( 'hangup');
+    this.jitsiGlobal.dispose();*/
+    //$("#meet").remove();
+
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
       data => {
         console.log(data);
@@ -266,11 +303,12 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
+        this.notesArray = data.payload.appointmentDetails.notes;
      
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
         if(
-          this.appointmentDetail.administrativeDetails.status === "running"
+          this.appointmentDetail.administrativeDetails.status === "running" ||  this.appointmentDetail.administrativeDetails.status === "pending"
           ){
             this.getSession(id);
           this.permisoGuardar = true;
@@ -280,6 +318,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getAppointmentsDetailsNotes(id) {
+    
   }
 
 

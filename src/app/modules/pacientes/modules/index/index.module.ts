@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { IndexRoutingModule } from './index-routing.module';
+import { OwlModule } from 'ngx-owl-carousel';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { IndexRoutingModule } from './index-routing.module';
   ],
   imports: [
     CommonModule,
-    IndexRoutingModule
+    IndexRoutingModule,
+    OwlModule
   ]
 })
 export class IndexModule { }

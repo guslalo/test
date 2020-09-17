@@ -115,7 +115,7 @@
                   formControlName="password"
                   [ngClass]="{ 'is-invalid': !formLogin.get('password').valid }"
                 />
-                <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
+                <div class="input-group-append btnVer" (click)="this.showPassword = !this.showPassword">
                   <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
                     <img src="assets/icons/icon-show-password.svg" alt="img" />
                   </button>

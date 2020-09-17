@@ -3,16 +3,17 @@
     <h2 class="mb-4">Bienvenido(a), {{ currentUser.name || 'Usuario' }}</h2>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12 col-md-8">
     <div class="card-deck">
       <div class="card bg-light mb-3 p-4">
         <!--<div class="card-header">Header</div>-->
         <div class="card-body text-center">
-          <p class="card-text">
-            <img src="assets/img/agendar-consulta-azul.svg" />
-          </p>
+          <div class="card-text">
+            <div class="">
+              <img src="assets/img/agendar-consulta-azul.svg" />
+            </div>
+          </div>
           <h5 class="card-title font-weight-bold">Agenda una cita médica</h5>
           <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
           <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
@@ -36,26 +37,49 @@
     </div>
     <div class="card-deck">
       <div class="card bg-light mt-3 p-4">
-        <div style="display: none;" class="card-header">Header</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 col-md-3">
-              <p class="card-text text-center">
-                <img src="assets/img/lavar-manos.svg" />
-              </p>
+
+        <ng-container *ngIf="tips"> 
+          <owl-carousel
+          [options]="{
+            items: 1,
+            center: false,
+            loop: false,
+            dots: false,
+            autoWidth: true,
+            nav: true,
+            mouseDrag: true,
+            autoplay: false,
+            responsive: {
+              '0': { items: 1, margin: 0, center: false, touchDrag: true, mouseDrag: false },
+              '480': { items: 1, margin: 0, center: false, touchDrag: true, mouseDrag: false },
+              '640': { items: 1, margin: 0, loop: false, center: false, mouseDrag: false }
+            }
+          }"
+          [items]="tips"
+          [carouselClasses]="['owl-theme', 'sliding']"
+        >
+          <ng-container *ngFor="let item of tips; let i = index">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2 col-md-2">
+                  
+                    <img src="assets/img/lavar-manos.svg" />
+                  
+                </div>
+                <div class="col-10 col-md-10">
+                  <h5 class="card-title font-weight-bold">{{item.title}}</h5>
+                  <p>
+                    {{item.shortDescription}}
+                  </p>
+                  <button type="button" class="btn btn-outline-primary rounded-pill text-center">
+                    Ver más
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="col-12 col-md-9">
-              <h5 class="card-title font-weight-bold">Consejo o mensaje de salud</h5>
-              <p>
-                Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                dummy text ever since.
-              </p>
-              <button type="button" class="btn btn-outline-primary rounded-pill text-center">
-                Ver más
-              </button>
-            </div>
-          </div>
-        </div>
+          </ng-container>
+          </owl-carousel> 
+        </ng-container>
       </div>
     </div>
   </div>

@@ -37,9 +37,18 @@
           <div class="card bg-white shadow-sm rounded overflow-hidden">
            
               <div class="row videoCall">
-                <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'active'">
+                <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'active' || 
+                appointmentDetail.administrativeDetails.status === 'pending'
+                ">
                   <div class="boxText">
-                    <p class="w-100 mt-5 title">Esperando iniciar Teleconsulta</p>
+                    <p class="w-100 mt-5 title">
+                      <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'pending'; else text">
+                        Teleconsulta finalizada
+                      </ng-container>
+                      <ng-template #text>
+                        Esperando iniciar Teleconsulta
+                      </ng-template>
+                    </p>
                     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-broadcast" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 0 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707z"/>
                       <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
@@ -1010,18 +1019,32 @@
                   </div>
                   <div class="tab-pane fade p-4" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
 
-                    <form [formGroup]="notes">
-                      <div class="row">
-                        <div class="form-group col">
-                          <label for="endBlock">Notas</label>
-                          <textarea class="form-control" rows="5"
-                          id="notes" name="notes"
-                          formControlName="notes"
-                          ></textarea>
-                        </div>
+                    Notas: 
+                    <div class="row mt-2">
+                      <ng-container *ngFor="let item of notesArray">
+                        <div class="col-6 mb-3">
+                       <div class="nota2">{{item}}
                       </div>
-                    </form>
-                  
+                        </div>
+                      </ng-container>
+                    </div>
+                    <ng-template #noNotes>
+                      <div class="alert alert-warning mt-2" role="alert">
+                        no hay notas ingresadas
+                      </div>
+                    </ng-template>
+                 
+                    <div class="row">
+                      <div class="col-12 text-right">
+                        <button type="button" class="btn btn-link p-0" [disabled]="!permisoGuardar"
+                        data-toggle="modal" data-target="#ingresarNota" 
+                        >
+                        <p class="text-right" >
+                          Nueva nota <img src="assets/icons/add.svg">
+                        </p></button>
+                      </div>
+                    </div>
+                    
                   </div>
                     
                   <hr>
@@ -1607,7 +1630,7 @@
 </ng-container>
 
 
-<div class="modal" tabindex="-1"  id="exampleModal">
+<div class="modal fade" tabindex="-1"  id="exampleModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -1621,6 +1644,36 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" id="ingresarNota">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ingresar nota</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="notes">
+          <div class="row">
+            <div class="form-group col">
+              <textarea class="form-control" rows="5"
+              id="notes" name="notes"
+              formControlName="notes"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+        <button type="button" class="btn btn-primary rounded-pill"  data-dismiss="modal" (click)="putNotes(appointmentDetail._id)">Ingresar</button>
       </div>
     </div>
   </div>

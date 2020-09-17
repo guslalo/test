@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-inicio',
@@ -10,8 +11,14 @@ import { UserLogin } from './../../../../../../models/models';
 export class InicioComponent implements OnInit {
   public currentUser: any = {};
   public user: any;
+  public tips:any;
 
-  constructor(public currentUserService: CurrentUserService) {}
+  constructor(
+    public currentUserService: CurrentUserService,
+    public homeService:HomeService
+    ) {
+
+    }
 
   ngOnInit(): void {
     this.currentUser = this.currentUserService.currentUser;
@@ -27,6 +34,14 @@ export class InicioComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
       JSON.parse(localStorage.getItem('currentUser')).role
     );
-
+    this.homeService.getTips().subscribe(
+      data => {
+        this.tips = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 }
