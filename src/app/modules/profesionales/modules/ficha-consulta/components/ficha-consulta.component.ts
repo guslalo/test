@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../services/appointments.service';
 import { MedicalRecordService } from './../../../../../services/medicalRecord.service';
+import { DocumentService } from './../../../../../services/document.service';
 
 @Component({
   selector: 'app-ficha-consulta',
@@ -23,16 +24,20 @@ export class FichaConsultaComponent implements OnInit {
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
+  public fotoUser:any;
 
 
   constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
-    private appointmentsService:AppointmentsService
+    private appointmentsService:AppointmentsService,
+    private documentService: DocumentService,
   ) {}
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    this.access_token = JSON.parse(localStorage.getItem('token'));
+    this.downloadUrl = this.documentService.download();
 
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
@@ -62,7 +67,8 @@ export class FichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.professionalDetails.userDetails[0].userId;
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
       },
