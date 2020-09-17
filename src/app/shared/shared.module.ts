@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,20 +10,16 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  timeGridPlugin,
-  listPlugin,
-  interactionPlugin
-]);
+FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]);
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import {
   NgbTypeaheadModule,
   NgbDatepickerModule,
-   NgbTimepickerModule,
-   NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+  NgbTimepickerModule,
+  NgbRatingModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 // Translation
@@ -38,11 +34,10 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 
 // components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [
-    NgbdTimepickerBasic,
-    ChangePassComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -58,7 +53,7 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbDatepickerModule,
     NgbRatingModule,
     PasswordStrengthMeterModule,
-    FullCalendarModule
+    FullCalendarModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -75,9 +70,11 @@ import { ChangePassComponent } from './modules/change-pass/change-pass.component
     NgbRatingModule,
     ChangePassComponent,
     PasswordStrengthMeterModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxSpinnerModule,
   ],
   bootstrap: [NgbdTimepickerBasic],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

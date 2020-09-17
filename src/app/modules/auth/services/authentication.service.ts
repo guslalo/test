@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 
-@Injectable({ providedIn:'root'})
-
-
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private loginUrl = 'v1/access/login-web';
   private accessWebUrl = 'v1/access/access-web';
@@ -27,7 +25,7 @@ export class AuthenticationService {
 
   recoveryPassword(data): Observable<any> {
     const headers = new HttpHeaders().set('InterceptorSkipHeader', '');
-    return this.http.post<any>(environment.baseUrl + this.recoveryUrl, { email: data },  { headers });
+    return this.http.post<any>(environment.baseUrl + this.recoveryUrl, { email: data }, { headers });
   }
 
   resetPassword(token, password, id): Observable<any> {
@@ -36,7 +34,13 @@ export class AuthenticationService {
 
   // cambiar pass
   changePassword(password, newPassword): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.changePass, { password, newPassword });
+    return this.http.post<any>(
+      environment.baseUrl + this.changePass,
+      { password, newPassword },
+      {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')) }),
+      }
+    );
   }
 
   // ACCESs choose context

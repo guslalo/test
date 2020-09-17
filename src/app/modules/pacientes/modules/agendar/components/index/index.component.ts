@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { reserve } from './../../../../../../models/reserve';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
-import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
-
-
 
 //services
 import { AgendarService } from './../../services/agendar.service';
-import { ProfessionalService } from './../../../../../../services/professional.service';
+import { ProfessionalService } from 'src/app/services/professional.service';
 import { SpecialtiesService } from './../../../../../../services/specialties.service';
 import { SymptomsService } from './../../../../../../services/symptoms.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -18,21 +14,17 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { SafePipe } from './../../../../../../shared/pipes/sanitizer.pipe';
 
 //datepicker
-import {
-  NgbDateStruct,
-  NgbCalendar,
-  NgbDateParserFormatter,
-  NgbDatepickerConfig,
-  NgbTimepicker,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-  providers: [ SafePipe ]
+  providers: [SafePipe],
 })
 export class IndexComponent implements OnInit {
   public specialties: string;
@@ -42,7 +34,8 @@ export class IndexComponent implements OnInit {
   public blocks: any;
   public symptoms: any;
   public consolidate: any;
-  public professional: string;
+  public professionals = [];
+  public tempProfessionals = [];
   public sintomaSelected = [];
   public minDate = undefined;
   public model: NgbDateStruct;
@@ -53,9 +46,9 @@ export class IndexComponent implements OnInit {
   public base64: any;
   public textInputFile: any;
   public flujoProfesional: boolean = false;
-  public urlPago:any;
-  public urlConfirmacion:any;
-  public estadoPagado:boolean = false;
+  public urlPago: any;
+  public urlConfirmacion: any;
+  public estadoPagado: boolean = false;
 
   imageError: string;
   isImageSaved: boolean;
@@ -64,7 +57,10 @@ export class IndexComponent implements OnInit {
 
   public bloquearSelect = true;
   public bloquearFecha = true;
-  public trustedUrl : SafeResourceUrl;
+  public trustedUrl: SafeResourceUrl;
+  private interval: any;
+
+  professionalSelected = new FormControl();
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -74,22 +70,18 @@ export class IndexComponent implements OnInit {
     private symptomsService: SymptomsService,
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
-    private calendar: NgbCalendar,
-    private config: NgbDatepickerConfig,
     private router: Router,
     private route: ActivatedRoute,
-    private domSanitizer : DomSanitizer,
-    private safe: SafePipe
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
- 
     const current = new Date();
     this.textInputFile = 'Seleccione Archivo';
     this.minDate = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
-      day: current.getDate()
+      day: current.getDate(),
     };
     this.getProfessionalService();
     this.getMedicalSpecialties();
@@ -97,21 +89,31 @@ export class IndexComponent implements OnInit {
     this.getsymptoms();
 
     $('#exampleModal').on('hidden.bs.modal', function (e) {
-      if(this.estadoPagado === false){
-        console.log(this.estadoPagado);
-      }
-      window.location.reload();
+      clearInterval(this.interval);
+      this.atras();
+      //window.location.reload();
       console.log('closed');
-    })
+    });
+
+    this.professionalSelected.valueChanges.pipe(
+      startWith(''),
+      map((newValue) => {
+        // console.log(newValue);
+        var search = '';
+        if (typeof newValue === 'object') search = `${newValue.personalData?.name} ${newValue.personalData?.lastName}`;
+        else search = newValue;
+        this.professionals = this.filterAutocompleteProfessionals(search);
+      })
+    );
   }
 
   //selecion sintoma
   onChange(deviceValue) {
     this.consolidate.patientDetails.symptoms.push(deviceValue.value);
     let selectedSintoma = {
-      id:deviceValue.value,
-      text:deviceValue.selectedOptions[0].innerText
-    }
+      id: deviceValue.value,
+      text: deviceValue.selectedOptions[0].innerText,
+    };
     //console.log(selectedSintoma);
     this.sintomaSelected.push(selectedSintoma);
     console.log(this.consolidate); /**/
@@ -121,6 +123,23 @@ export class IndexComponent implements OnInit {
     this.flujoProfesional = false;
     console.log(id);
     this.getSpecialtiesIdService(id);
+  }
+
+  public getDisplayFn() {
+    return (val) => this.display(val);
+  }
+
+  private display(user): string {
+    //access component "this" here
+    return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
+  }
+
+  filterAutocompleteProfessionals(search: string) {
+    return this.tempProfessionals.filter(
+      (value) =>
+        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+    );
   }
 
   onChangeTypeSpecialtiesId(value) {
@@ -135,8 +154,8 @@ export class IndexComponent implements OnInit {
       professionalDetails: {
         userId: null,
         specialtyId: value,
-        specialtyDetails:{
-          price:0
+        specialtyDetails: {
+          price: 0,
         },
       },
       dateDetails: {
@@ -150,7 +169,6 @@ export class IndexComponent implements OnInit {
     };
 
     console.log(this.reserve);
-  
   }
 
   agendar() {
@@ -179,7 +197,7 @@ export class IndexComponent implements OnInit {
     console.log(this.specialtiesIdReserve);
     console.log(this.reserve);
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
-    this.reserve.professionalDetails.specialtyId =  this.specialtiesIdReserve;
+    this.reserve.professionalDetails.specialtyId = this.specialtiesIdReserve;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
@@ -213,22 +231,19 @@ export class IndexComponent implements OnInit {
         btoa(this.blocks);
         console.log(data);
         console.log(this.consolidate.paymentUrl);
-        if(this.consolidate.paymentUrl) {
+        if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
-        }else{
+        } else {
           $('#sinPrecio').modal();
-        
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
         //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
-       
-        
+
         setTimeout(() => {
           this.spinner.hide();
         }, 2000);
-
       },
       (error) => {
         console.log(error);
@@ -236,40 +251,36 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  statusPago(id){
-    let interval = 
-    setInterval(() => {
+  statusPago(id) {
+    let interval = setInterval(() => {
       this.appointmentsService.getPaymentStatus(id).subscribe(
-        data => {
-          if(data.payload.isPaid === false){
+        (data) => {
+          if (data.payload.isPaid === false) {
             this.estadoPagado = false;
-            console.log('no pagado')
+            console.log('no pagado');
           } else {
-            this.postConsolidateService(this.consolidate);
+            this.estadoPagado = true;
+            clearInterval(interval);
+            //this.postConsolidateService(this.consolidate);
             $('#exampleModal').modal('hide');
             this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
-            this.estadoPagado = true;
-            console.log('pagado')
-            clearInterval(interval);
+            console.log('pagado');
           }
-        }, 
-        error => {
-          console.log(error)
+        },
+        (error) => {
+          console.log(error);
         }
-      )
-    }, 5000);  
-
-   
+      );
+    }, 4000);
   }
 
-  cerrarPago(){
+  cerrarPago() {
     console.log('aca');
-    this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route })
+    this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
   }
 
-  pago(url){
+  pago(url) {
     this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
-    
   }
 
   getsymptoms() {
@@ -284,19 +295,17 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  
-
-  escogerProfessional(event) {
+  escogerProfessional(professional) {
     this.flujoProfesional = true;
     this.bloquearFecha = false;
-    //console.log(event);
+    console.log(professional.userData[0]._id);
     this.reserve = {
       professionalDetails: {
-        userId: event,
+        userId: professional.userData[0]._id,
         specialtyId: null,
-        specialtyDetails:{
-          price:null
-        }
+        specialtyDetails: {
+          price: null,
+        },
       },
       dateDetails: {
         date: {
@@ -307,31 +316,32 @@ export class IndexComponent implements OnInit {
         start: null,
       },
     };
-      console.log(this.reserve);
+    console.log(this.reserve);
     //this.reserve.professionalDetails.specialtyId = event;
   }
 
   getProfessionalService() {
     this.professionalService.getProfessionals().subscribe(
       (data) => {
-        this.professional = data;
-        console.log(this.professional);
+        this.tempProfessionals = [...data];
+        this.professionals = data;
+        console.log(this.professionals);
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  
+
   removeElement(id) {
     var elem = document.getElementById(id);
     return elem.parentNode.removeChild(elem);
   }
 
-  eliminaSintoma(item){
+  eliminaSintoma(item) {
     this.removeElement(item);
     //let elemento = document.getElementById('5f5800f825152591e20ac381').outerHTML = "";
-    
+
     console.log(this.consolidate);
     this.symptomsService.deleteSymptoms(this.consolidate.id, item).subscribe(
       (data) => {
@@ -353,10 +363,10 @@ export class IndexComponent implements OnInit {
 
       this.reserve = {
         professionalDetails: {
-          userId:this.reserve.professionalDetails.userId,
-          specialtyDetails:{
-            price:null
-          }
+          userId: this.reserve.professionalDetails.userId,
+          specialtyDetails: {
+            price: null,
+          },
         },
         professionalId: this.reserve.professionalDetails.userId,
         dateDetails: {
@@ -372,23 +382,23 @@ export class IndexComponent implements OnInit {
       //.reserve.dateDetails.date = object;
       console.log(this.reserve);
       console.log('flujo profesional');
-      this.agendarService.postBlocksProfessionalId(object,  this.reserve.professionalId ).subscribe(
+      this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
         (data) => {
           this.blocks = data.payload;
-          //console.log();
-          this.specialtiesIdReserve = this.blocks[0].professionalDetails.specialtyId
-          console.log(this.specialtiesIdReserve );
+          console.log(this.blocks);
+          this.specialtiesIdReserve = this.blocks[0].professionalDetails.specialtyId;
+          console.log(this.specialtiesIdReserve);
 
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
           //console.log(data.internalCode);
-          /*
+          /**/
           if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
             this.sinProfesionales = false;
-          }*/
+          }
         },
         (error) => {
           console.log(error);
@@ -417,7 +427,7 @@ export class IndexComponent implements OnInit {
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
-           // console.log(data.internalCode);
+            // console.log(data.internalCode);
             if (data.internalCode === 103) {
               this.sinProfesionales = true;
             } else {
@@ -516,7 +526,6 @@ export class IndexComponent implements OnInit {
       };
       console.log(this.consolidate.id);
       this.documentService.postDocumentAppointment(this.consolidate.id, documentDetailsObject).subscribe(
-       
         (data) => {
           console.log(data);
         },
@@ -527,7 +536,7 @@ export class IndexComponent implements OnInit {
     };
   }
 
-  postDocumentService(base64) {
+  postDocumentService() {
     /*
   console.log(base64);
   const documentDetailsObject: {
@@ -550,10 +559,10 @@ export class IndexComponent implements OnInit {
     var file: File = inputValue.files[0];
     var myReader: FileReader = new FileReader();
 
-    myReader.onloadend = (e) => {
+    myReader.onloadend = () => {
       this.file = myReader.result;
       console.log(this.file);
-      this.postDocumentService(myReader);
+      this.postDocumentService();
     };
 
     myReader.readAsDataURL(file);

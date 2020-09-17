@@ -1,7 +1,7 @@
-<div class="container-fluid p-5">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
-      <h2>Cambiar clave</h2>
+      <h2>Cambiar Contraseña</h2>
       <p>Información de tu contraseña actual</p>
     </div>
   </div>
@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col-md-12">
               <h4 class="ml-1">
-                Cambiar contraseña
+                Cambiar Contraseña
               </h4>
             </div>
           </div>
@@ -42,18 +42,29 @@
             <form class="p-4" style="width: 100%;" [formGroup]="changePassForm">
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="inputEmail4">Contraseña actual</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    id="password"
-                    formControlName="password"
-                    [ngClass]="{
-                      'is-invalid': !changePassForm.get('password').valid && changePassForm.get('password').touched
-                    }"
-                    maxlength="20"
-                  />
+                  <label for="inputEmail4">Contraseña Actual</label>
+                  <div class="input-group mb-3">
+                    <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      id="password"
+                      formControlName="password"
+                      [ngClass]="{
+                        'is-invalid': !changePassForm.get('password').valid && changePassForm.get('password').touched
+                      }"
+                      maxlength="20"
+                    />
+                    <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
+                      <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                      <button *ngIf="this.fieldTextType" class="btn btn-outline-primary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                    </div>
+                  </div>
                   <div *ngIf="changePassForm.controls['password'].errors" class="invalid-feedback">
                     <ul>
                       <li>contraseña actual requerida</li>
@@ -65,41 +76,63 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label for="inputEmail4">Nueva Contraseña</label>
-                  <input
-                    type="password"
-                    id="newPassword"
-                    formControlName="newPassword"
-                    class="form-control"
-                    name="newPassword"
-                    [ngClass]="{
-                      'is-invalid':
-                        !changePassForm.get('newPassword').valid && changePassForm.get('newPassword').touched
-                    }"
-                    maxlength="20"
-                  />
+                  <div class="input-group mb-3">
+                    <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      type="password"
+                      id="newPassword"
+                      formControlName="newPassword"
+                      class="form-control"
+                      name="newPassword"
+                      [ngClass]="{
+                        'is-invalid':
+                          !changePassForm.get('newPassword').valid && changePassForm.get('newPassword').touched
+                      }"
+                      maxlength="20"
+                    />
+                    <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
+                      <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                      <button *ngIf="this.fieldTextType" class="btn btn-outline-primary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                    </div>
+                  </div>
                   <div *ngIf="changePassForm.controls['newPassword'].errors?.pattern" class="invalid-feedback">
                     <ul>
-                      <li>{{ 'crear-cuenta.step4.formGroup.condicionPassword.1' | transloco }}</li>
-                      <li>{{ 'crear-cuenta.step4.formGroup.condicionPassword.2' | transloco }}</li>
-                      <li>{{ 'crear-cuenta.step4.formGroup.condicionPassword.3' | transloco }}</li>
-                      <li>{{ 'crear-cuenta.step4.formGroup.condicionPassword.4' | transloco }}</li>
+                      <li>* Al menos una mayúscula</li>
+                      <li>* Al menos una minúscula</li>
+                      <li>* Al menos un número</li>
+                      <li>* un largo mínimo de 8 carácteres (max. 16)</li>
+                      <li>* Al menos un carácter especial</li>
                     </ul>
                   </div>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="confirmPassword">Repetir contraseña</label>
-                  <input
-                    type="password"
-                    formControlName="confirmPassword"
-                    class="form-control"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    [ngClass]="{
-                      'is-invalid':
-                        !changePassForm.get('confirmPassword').valid && changePassForm.get('confirmPassword').touched
-                    }"
-                    maxlength="20"
-                  />
+                  <div class="input-group mb-3">
+                    <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      formControlName="confirmPassword"
+                      class="form-control"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      [ngClass]="{
+                        'is-invalid':
+                          !changePassForm.get('confirmPassword').valid && changePassForm.get('confirmPassword').touched
+                      }"
+                      maxlength="20"
+                    />
+                    <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
+                      <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                      <button *ngIf="this.fieldTextType" class="btn btn-outline-primary px-3" type="button">
+                        <img src="assets/icons/icon-show-password.svg" alt="img" />
+                      </button>
+                    </div>
+                  </div>
                   <div *ngIf="passwordNotMatchs" class="invalid-feedback">
                     <ul>
                       <li>Contraseña no coincide</li>
@@ -131,9 +164,18 @@
                         </svg>
                       </div>
                       <div class="col-10 pl-0">
-                        {{ 'crear-cuenta.step4.formGroup.remember' | transloco }}
+                        Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos
+                        una mayúscula, minúscula y un caracter especial.
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  <div *ngIf="alertSuccess" class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Contraseña Actualizada!</h4>
+                    <p>Se ha enviado un correo electronico de confirmacion a la cuenta asociada.</p>
                   </div>
                 </div>
               </div>

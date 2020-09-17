@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   public users: any = [];
   public currentUser: any = {};
   public errorMsg: string;
+  public showPassword: boolean;
 
   constructor(
     private translocoService: TranslocoService,
