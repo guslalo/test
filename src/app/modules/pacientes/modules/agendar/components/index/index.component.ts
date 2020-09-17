@@ -178,8 +178,11 @@ export class IndexComponent implements OnInit {
     this.reserve.dateDetails.start = item2;
     console.log(this.specialtiesIdReserve);
     console.log(this.reserve);
+    console.log(item.professionalDetails.specialtyId);
+
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
-    this.reserve.professionalDetails.specialtyId =  this.specialtiesIdReserve;
+    //this.reserve.professionalDetails.specialtyId =  this.specialtiesIdReserve;
+    this.reserve.professionalDetails.specialtyId =  item.professionalDetails.specialtyId;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
