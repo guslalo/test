@@ -18,6 +18,7 @@ import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from '../../services/opentok.service';
 
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
+import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
 
 // import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 
@@ -46,15 +47,13 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./modules/mi-perfil/mi-perfil.module').then((m) => m.MiPerfilModule),
+    component: PerfilComponent,
   },
   {
     path: 'ayuda',
     loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
   },
-
   { path: 'cambiar-contrasena', component: CambiarClaveComponent },
-  //{ path: 'mis-consultas', component: MisConsultasComponent }
 ];
 
 @NgModule({

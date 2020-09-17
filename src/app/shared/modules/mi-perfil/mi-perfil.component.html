@@ -57,6 +57,13 @@
           <div class="col-4">
             <div class=" ">
               <div class="card-body text-center">
+                <div *ngIf="alertSuccess" class="alert alert-success" role="alert">
+                  <h4 class="alert-heading">Perfil Actualizado</h4>
+                </div>
+                <div *ngIf="alertError" class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">{{ messageError }}</h4>
+                </div>
+
                 <div class="boxImg imgProfile text-center">
                   <img src="{{ formData?.photo || '/assets/profile.jpg' }}" class="d-inline-block img-fluid" />
                 </div>
@@ -93,7 +100,7 @@
                     role="tab"
                     aria-controls="profile"
                     aria-selected="true"
-                    >Datos de identificación
+                    >Datos de Identificación
                   </a>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -105,7 +112,7 @@
                     role="tab"
                     aria-controls="contact"
                     aria-selected="false"
-                    >Datos personales
+                    >Datos Personales
                   </a>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -128,44 +135,81 @@
                   <div class="card bg-light mb-3 p-2">
                     <div class="card-body">
                       <form [formGroup]="identificationData">
-                        <div class="form-row" *ngIf="formData">
-                          <ng-container
-                            ><!--formData.identificationData.isForeign === true-->
-                            <div class="form-group col-md-4">
-                              <label for="cpf">CPF</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="cpf"
-                                value="{{ formData.identificationData.cpf }}"
-                                placeholder="{{ formData.identificationData.cpf }}"
-                                disabled
-                              />
-                            </div>
-                          </ng-container>
+                        <div class="form-row">
+                          <div class="form-group col-md-3" *ngIf="!isForeign">
+                            <label for="document">Tipo Identificacion</label>
+                            <select disabled class="form-control" name="document" formControlName="document">
+                              <option value="cpf">CPF</option>
+                              <option value="cns">CNS</option>
+                              <option value="rgRegistry">RG</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3" *ngIf="!isForeign">
+                            <label for="idDocumentNumber">N° de Documento</label>
+                            <input
+                              disabled
+                              type="text"
+                              class="form-control"
+                              name="idDocumentNumber"
+                              formControlName="idDocumentNumber"
+                            />
+                          </div>
+                          <div class="form-group col-md-3" *ngIf="!isForeign">
+                            <label for="issuingBody">Órgano Emisor</label>
+                            <select
+                              [attr.disabled]="isForeign ? '' : null"
+                              class="form-control"
+                              name="issuingBody"
+                              formControlName="issuingBody"
+                            >
+                              <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="passport">Pasaporte</label>
+                            <input
+                              [attr.disabled]="!isForeign ? '' : null"
+                              type="text"
+                              class="form-control"
+                              name="passport"
+                              formControlName="passport"
+                            />
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="!isForeign">
                           <div class="form-group col-md-4">
-                            <label for="issuingBody">Orgáno emisor</label>
+                            <label for="document">Identificacion Secundaria</label>
+                            <select
+                              class="form-control"
+                              name="extraDocument"
+                              formControlName="extraDocument"
+                              [ngClass]="{
+                                'is-invalid': !identificationData.get('extraDocument').valid && !isForeign
+                              }"
+                            >
+                              <option [value]="null">- Seleccionar -</option>
+                              <option value="cbo">CBO-R</option>
+                              <option value="pasep">PIS/PASEP</option>
+                              <option value="ctps">CTPS</option>
+                              <option value="idDocumentNumber">Numero de Identidad</option>
+                              <option value="titleVote">Titulo de Votante</option>
+                              <option value="professionalUfNumber">Registro Clase Profesional</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="idDocumentNumber">N° de Documento</label>
                             <input
                               type="text"
                               class="form-control"
-                              id="issuingBody"
-                              placeholder="{{ formData.identificationData.issuingBody || 'S/R' }}"
-                              disabled
+                              name="extraIdDocument"
+                              formControlName="extraIdDocument"
+                              [ngClass]="{
+                                'is-invalid': !identificationData.get('extraIdDocument').valid && !isForeign
+                              }"
                             />
                           </div>
-                          <ng-container
-                            ><!--*ngIf="formData.identificationData.isForeign === true"-->
-                            <div class="form-group col-md-4">
-                              <label for="passport">Passporte</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="passport"
-                                placeholder="{{ formData.identificationData.passport || 'S/R' }}"
-                                disabled
-                              />
-                            </div>
-                          </ng-container>
                         </div>
                       </form>
                     </div>
@@ -175,49 +219,37 @@
 
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                   <!--card-->
-                  <div class="card bg-light mb-3 p-2" *ngIf="formData">
+                  <div class="card bg-light mb-3 p-2">
                     <div class="card-body">
                       <form [formGroup]="personalData">
                         <div class="form-row">
                           <div class="form-group col-md-4">
                             <label for="name">Nombre </label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="name"
-                              placeholder="{{ formData.personalData?.name }}"
-                              disabled
-                            />
+                            <input type="text" class="form-control" id="name" formControlName="name" disabled />
                           </div>
                           <div class="form-group col-md-4">
-                            <label for="lastName">Apellido</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="lastName"
-                              placeholder="{{ formData.personalData?.lastName }}"
-                              disabled
-                            />
+                            <label for="lastName">Segundo Nombre</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName" disabled />
                           </div>
                           <div class="form-group col-md-4">
-                            <label for="secondLastName">Segundo Apellido</label>
+                            <label for="secondLastName">Apellido</label>
                             <input
                               type="text"
                               class="form-control"
                               id="secondLastName"
-                              placeholder="{{ formData.personalData?.secondLastName }}"
+                              formControlName="secondLastName"
                               disabled
                             />
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-4">
-                            <label for="motherName">Nombre de la madre</label>
+                            <label for="motherName">Nombre de la Madre</label>
                             <input
                               type="text"
                               class="form-control"
                               id="motherName"
-                              placeholder="{{ formData.personalData?.motherName }}"
+                              formControlName="motherName"
                               disabled
                             />
                           </div>
@@ -227,43 +259,102 @@
                               type="text"
                               class="form-control"
                               id="email"
-                              disabled
-                              placeholder="{{ formData.personalData?.email }}"
+                              placeholder="usuario@mail.com"
+                              formControlName="email"
+                              onkeypress="return event.charCode != 32"
                             />
                           </div>
                           <div class="form-group col-md-4">
-                            <label for="phoneNumber">Fono</label>
+                            <label for="phoneNumber">Telefono</label>
                             <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" />
                           </div>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-3">
                             <label for="gender">Sexo</label>
+                            <select class="form-control" name="gender" formControlName="gender">
+                              <option value="male">Masculino</option>
+                              <option value="female">Femenino</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="breed">Raza</label>
+                            <select
+                              disabled
+                              class="form-control"
+                              name="breed"
+                              formControlName="breed"
+                              [ngClass]="{
+                                'is-invalid': !personalData.get('breed').valid
+                              }"
+                            >
+                              <option [ngValue]="null">S/R</option>
+                              <option [ngValue]="item._id" *ngFor="let item of breeds">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="birthdate">Fecha de Nacimiento</label>
                             <input
+                              disabled
                               type="text"
                               class="form-control"
-                              id="gender"
-                              placeholder="{{
-                                formData.personalData?.gender === 'male'
-                                  ? 'Masculino'
-                                  : formData.personalData?.gender === 'female'
-                                  ? 'Femenino'
-                                  : 'S/R'
-                              }}"
-                              disabled
+                              id="phoneNumber"
+                              formControlName="birthdate"
                             />
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-3">
                             <label for="nacionality">Nacionalidad</label>
-                            <input
-                              type="text"
+                            <select
                               class="form-control"
-                              id="nacionality"
-                              placeholder="{{ countryMap[formData.personalData?.nacionality]?.name || 'S/R' }}"
-                              disabled
-                            />
+                              name="nacionality"
+                              formControlName="nacionality"
+                              [ngClass]="{
+                                'is-invalid': !personalData.get('nacionality').valid
+                              }"
+                            >
+                              <option [ngValue]="null">S/R</option>
+                              <option [ngValue]="item._id" *ngFor="let item of countries">
+                                {{ item.name }}
+                              </option>
+                            </select>
                           </div>
-                          <div class="form-group col-md-4">
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label for="ufBirth">UF de Nacimiento</label>
+                            <select disabled class="form-control" name="ufBirth" formControlName="ufBirth">
+                              <option [ngValue]="null">- Seleccionar -</option>
+                              <option [ngValue]="item._id" *ngFor="let item of states">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="municipalityBirth">Municipio de Nacimiento</label>
+                            <select
+                              disabled
+                              class="form-control"
+                              name="municipalityBirth"
+                              formControlName="municipalityBirth"
+                            >
+                              <option [ngValue]="null">- Seleccionar -</option>
+                              <option [ngValue]="item._id" *ngFor="let item of cities">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="familySituation">Situacion Familiar/Conyugal</label>
+                            <select class="form-control" name="familySituation" formControlName="familySituation">
+                              <option [ngValue]="null">- Seleccionar -</option>
+                              <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
                             <label for="education">Educacion</label>
                             <select class="form-control" formControlName="education" id="education">
                               <ng-container *ngFor="let item of educations">
