@@ -89,7 +89,7 @@ export class IndexComponent implements OnInit {
     this.getsymptoms();
 
     $('#exampleModal').on('hidden.bs.modal', function (e) {
-      clearInterval(this.interval);
+      //clearInterval(this.interval);
       this.atras();
       //window.location.reload();
       console.log('closed');
@@ -197,7 +197,8 @@ export class IndexComponent implements OnInit {
     console.log(this.specialtiesIdReserve);
     console.log(this.reserve);
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
-    this.reserve.professionalDetails.specialtyId = this.specialtiesIdReserve;
+  //this.reserve.professionalDetails.specialtyId = this.specialtiesIdReserve;
+    this.reserve.professionalDetails.specialtyId =  item.professionalDetails.specialtyId;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
@@ -259,9 +260,8 @@ export class IndexComponent implements OnInit {
             this.estadoPagado = false;
             console.log('no pagado');
           } else {
-            this.estadoPagado = true;
             clearInterval(interval);
-            //this.postConsolidateService(this.consolidate);
+            this.estadoPagado = true;
             $('#exampleModal').modal('hide');
             this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
             console.log('pagado');
@@ -275,7 +275,6 @@ export class IndexComponent implements OnInit {
   }
 
   cerrarPago() {
-    console.log('aca');
     this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
   }
 
