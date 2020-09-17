@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../modules/auth/services/authentication.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-change-pass',
@@ -8,12 +9,13 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
   styleUrls: ['./change-pass.component.scss'],
 })
 export class ChangePassComponent implements OnInit {
-
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService, private spinner: NgxSpinnerService) {}
   public model: any = {};
   public changePassForm: FormGroup;
   public passwordNotMatchs: boolean;
   public errorPassCurrent: boolean;
+  public fieldTextType: boolean;
+  public alertSuccess: boolean;
 
   ngOnInit(): void {
     this.changePassForm = new FormGroup(
@@ -46,6 +48,7 @@ export class ChangePassComponent implements OnInit {
       .changePassword(this.changePassForm.value.password, this.changePassForm.value.confirmPassword)
       .subscribe(
         (data) => {
+          this.alertSuccess = true;
           console.log(data);
         },
         (error) => {
@@ -53,5 +56,9 @@ export class ChangePassComponent implements OnInit {
           this.errorPassCurrent = true;
         }
       );
+
+    setTimeout(() => {
+      this.alertSuccess = false;
+    }, 5000);
   }
 }

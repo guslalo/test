@@ -1,389 +1,418 @@
 <div class="row">
-    <div class="col">
-      <h2>Agendar consulta médica</h2>
-      <p>Agende su cita médica</p>
-    </div>
+  <div class="col">
+    <h2>Agendar consulta médica</h2>
+    <p>Agende su cita médica</p>
+  </div>
 </div>
 
-  <div class="row mb-5 pb-5" *ngIf="!selectSintoma">
+<div class="row mb-5 pb-5" *ngIf="!selectSintoma">
+  <div class="col-4">
+    <div class="card bg-light">
+      <div class="card-header" style="display: none;">
+        Mi Salud
+        <p>
+          Completa tus datos medicos para una mejor atención
+        </p>
+      </div>
+      <div class="card-body text-center">
+        <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
+        <!--tabs child-->
+        <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="home-tab4"
+              data-toggle="tab"
+              href="#home4"
+              role="tab"
+              aria-controls="home4"
+              aria-selected="true"
+              (click)="(!flujoProfesional)"
+              >Especialidad</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="profile-tab4"
+              data-toggle="tab"
+              href="#profile4"
+              role="tab"
+              aria-controls="profile4"
+              aria-selected="false"
+              (click)="(!flujoProfesional)"
+              >Profesional
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
+            <form>
+              <div class="form-group">
+                <label class="font-weight-bold text-left w-100">Selecciona Tipo de profesional</label>
+                <select
+                  class="form-control custom-select"
+                  (click)="bloquearSelect = true"
+                  (click)="bloquearFecha = true"
+                  (change)="onChangeTypeProfesional($event.target.value)"
+                >
+                  <option selected>Selecciona</option>
+                  <ng-container *ngFor="let item of medicalSpecialties">
+                    <option value="{{ item._id }}">{{ item.name }}</option>
+                  </ng-container>
+                </select>
+              </div>
 
-    <div class="col-4">
-        <div class="card bg-light">
-            <div class="card-header" style="display: none;">
-                Mi Salud
-                <p>
-                Completa tus datos medicos para una mejor atención
-                </p>
+              <div class="form-group">
+                <label class="font-weight-bold text-left w-100">Selecciona Especialidad</label>
+                <select
+                  class="form-control custom-select"
+                  (change)="onChangeTypeSpecialtiesId($event.target.value)"
+                  [disabled]="bloquearSelect"
+                  ><!--{{item.medicalSpecialtyId}}-->
+                  <option selected>Selecciona</option>
+                  <ng-container *ngFor="let item of specialtiesId">
+                    <option value="{{ item.medicalSpecialtyId }}">{{ item.specialtyName }} </option>
+                  </ng-container>
+                </select>
+              </div>
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
+            <div class="form-group">
+              <label class="font-weight-bold text-left w-100">Profesional</label>
+              <input
+                *ngIf="professionals"
+                type="text"
+                class="form-control"
+                placeholder="Buscar Profesional"
+                [matAutocomplete]="auto"
+                [formControl]="professionalSelected"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                [displayWith]="getDisplayFn()"
+                (optionSelected)="escogerProfessional($event.option.value)"
+              >
+                <mat-option *ngFor="let item of professionals" [value]="item">
+                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                </mat-option>
+              </mat-autocomplete>
+              <div class="searchBox">
+                <img src="assets/icons/icon-search.svg" alt="img" />
+              </div>
             </div>
-            <div class="card-body text-center">
-                <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
-                <!--tabs child-->
-                <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link active"
-                        id="home-tab4"
-                        data-toggle="tab"
-                        href="#home4"
-                        role="tab"
-                        aria-controls="home4"
-                        aria-selected="true"
-                        (click)="!flujoProfesional"
-                        >Especialidad</a
-                    >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="profile-tab4"
-                        data-toggle="tab"
-                        href="#profile4"
-                        role="tab"
-                        aria-controls="profile4"
-                        aria-selected="false"
-                        (click)="!flujoProfesional"
-                        >Profesional 
-                    </a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
-                        <form>
-                            <div class="form-group">
-                                <label class="font-weight-bold text-left  w-100">Selecciona Tipo de profesional</label>
-                                <select class="form-control custom-select" 
-                                (click)="bloquearSelect = true"
-                                (click)="bloquearFecha = true"
-                                 (change)="onChangeTypeProfesional($event.target.value)">
-                                    <option selected>Selecciona</option>
-                                    <ng-container *ngFor="let item of medicalSpecialties">
-                                        <option value="{{item._id}}">{{item.name}}</option>
-                                    </ng-container>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-bold text-left  w-100">Selecciona Especialidad</label>
-                                <select class="form-control custom-select" 
-                                (change)="onChangeTypeSpecialtiesId($event.target.value)"
-                               
-                                [disabled]="bloquearSelect"
-                                ><!--{{item.medicalSpecialtyId}}-->
-                                    <option selected>Selecciona</option>
-                                    <ng-container *ngFor="let item of specialtiesId">
-                                        <option value="{{item.medicalSpecialtyId}}">{{item.specialtyName}} </option>
-                                    </ng-container>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
-                        <div class="form-group">
-                            <label class="font-weight-bold text-left  w-100">Selecciona Profesional</label>
-                            <select *ngIf="professional" 
-                            class="form-control custom-select" 
-                            (change)="escogerProfessional($event.target.value)">
-                                <option selected>Selecciona</option>
-
-                                <ng-container *ngFor="let item of professional">
-                                    <option value="{{item.userData[0]._id}}">{{item.personalData.name}} {{item.personalData.lastName}}</option>
-                                </ng-container>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-
-        <div class="card bg-light mt-3"> 
-            <div class="card-body text-center">
-                <form>
-                    <div class="form-group">
-                        <label class="font-weight-bold text-left w-100">Selecciona fecha</label>
-                        <input
-                        [disabled]="bloquearFecha"
-                        class="form-control"
-                        id="birthdate"
-                        [minDate]="minDate"
-                        placeholder="yyyy-mm-dd"
-                        name="birthdate"
-                        [(ngModel)]="model"
-                        ngbDatepicker
-                        #d="ngbDatepicker"
-                        (click)="d.toggle();"
-                        (dateSelect)="getPostBlocks(model)"
-                      />             
-                    </div>
-                </form>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div class="col-8">
-        <div class="row">
-            <div class="col">
-                <h5>Médicos disponibles</h5>
-                <p>Selecciona el profesional y horario</p>
-            </div>
-        </div>
-        <div class="card-deck">
-            <div class="card bg-light mb-3">
-            <!--<div class="card-header">Header</div>-->
-            <div class="card-body text-center">
-                <p class="card-text">
-                <img src="assets/img/doctora-icon.svg">
-                </p>
-                <h5 class="card-title">Selecciona la especialidad y la fecha para ver las horas
-                </h5>
-                <p>Selecciona especialidad y fecha para ofrecerte profesionales disponibles</p>
-            </div>
-            </div>
-        </div>
-
-        <!--blocks disponibles *ngIf="blocks.blocks"-->
-        <ng-container *ngFor="let item of blocks">
-            <ng-container  ><!--*ngIf="item !== ''; else sinProfesional-->
-                <div class="row mb-4" >
-                    <div class="col">
-                        <div class="card-deck boxDisponibilidad" id="{{item.professionalDetails.userId}}">
-                            <div class="card bg-light p-3">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-2 text-center">
-                                                <img src="assets/img/doctor-foto.svg">
-                                            </div>
-                                            <!--professional details-->
-                                            <div class="col-10" >
-                                                <ng-container *ngFor="let item of item.professionalDetails.userDetails">
-                                                    <p class="m-0 font-weight-bold">
-                                                        {{item.name}}
-                                                    </p>
-                                                </ng-container>
-                                                <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
-                                                <p class="m-0">
-                                                    {{item.specialtyName}}
-                                                </p>
-                                                </ng-container>
-                                            </div><!--/professional details-->
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-6">
-                                        <p class="valor text-right">VALOR CONSULTA: {{item.appointmentPrice}}</p>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-1 pr-0 text-center" style="display: none;">
-                                        AM
-                                    </div>
-                                    <div class="col-11">
-                                        <div class="boxHorarios"><!-- *ngFor="let item of blocks.lenght"-->
-                                            <ng-container *ngFor="let item2 of item.blocks">
-                                                <a href="javascript:;" (click)="blockSelected(item, item2)"><span class="badge badge-pill badge-light"
-                                            >{{item2}}</span></a>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" style="display: none;">
-                                    <div class="col-1 pr-0 text-center">
-                                        PM
-                                    </div>
-                                    <div class="col-11">
-                                        <div class="boxHorarios" >
-                                            <span class="badge badge-pill badge-light">8:00</span>
-                                            <span class="badge badge-pill badge-light">8:30</span>
-                                            <span class="badge badge-pill badge-light">9:00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-            </ng-container>   
-                  
-        </ng-container><!--/blocks disponibles-->
-        <ng-container *ngIf="sinProfesionales === true">
-            <div class="row mb-4" >
-                <div class="col">
-                    <div class="card-deck boxDisponibilidad">
-                        <div class="card bg-light p-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="alert alert-warning" role="alert">
-                                        No hay profesionales disponibles
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            </div>
-          
-        </ng-container>  
+    <div class="card bg-light mt-3">
+      <div class="card-body text-center">
+        <form>
+          <div class="form-group">
+            <label class="font-weight-bold text-left w-100">Selecciona fecha</label>
+            <input
+              [disabled]="bloquearFecha"
+              class="form-control"
+              id="birthdate"
+              [minDate]="minDate"
+              placeholder="yyyy-mm-dd"
+              name="birthdate"
+              [(ngModel)]="model"
+              ngbDatepicker
+              #d="ngbDatepicker"
+              (click)="d.toggle()"
+              (dateSelect)="getPostBlocks(model)"
+            />
+          </div>
+        </form>
+      </div>
     </div>
-    
   </div>
 
-<ng-container *ngIf="selectSintoma">
-    <div class="row  mb-3">
+  <div class="col-8">
+    <div class="row">
+      <div class="col">
+        <h5>Médicos disponibles</h5>
+        <p>Selecciona el profesional y horario</p>
+      </div>
+    </div>
+    <div class="card-deck">
+      <div class="card bg-light mb-3">
+        <!--<div class="card-header">Header</div>-->
+        <div class="card-body text-center">
+          <p class="card-text">
+            <img src="assets/img/doctora-icon.svg" />
+          </p>
+          <h5 class="card-title">Selecciona la especialidad y la fecha para ver las horas</h5>
+          <p>Selecciona especialidad y fecha para ofrecerte profesionales disponibles</p>
+        </div>
+      </div>
+    </div>
+
+    <!--blocks disponibles *ngIf="blocks.blocks"-->
+    <ng-container *ngFor="let item of blocks">
+      <ng-container
+        ><!--*ngIf="item !== ''; else sinProfesional-->
+        <div class="row mb-4">
+          <div class="col">
+            <div class="card-deck boxDisponibilidad" id="{{ item.professionalDetails.userId }}">
+              <div class="card bg-light p-3">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-2 text-center">
+                        <img src="assets/img/doctor-foto.svg" />
+                      </div>
+                      <!--professionals details-->
+                      <div class="col-10">
+                        <ng-container *ngFor="let item of item.professionalDetails.userDetails">
+                          <p class="m-0 font-weight-bold">
+                            {{ item.name }}
+                          </p>
+                        </ng-container>
+                        <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
+                          <p class="m-0">
+                            {{ item.specialtyName }}
+                          </p>
+                        </ng-container>
+                      </div>
+                      <!--/professionals details-->
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <p class="valor text-right">VALOR CONSULTA: {{ item.appointmentPrice }}</p>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-1 pr-0 text-center" style="display: none;">
+                    AM
+                  </div>
+                  <div class="col-11">
+                    <div class="boxHorarios">
+                      <!-- *ngFor="let item of blocks.lenght"-->
+                      <ng-container *ngFor="let item2 of item.blocks">
+                        <a href="javascript:;" (click)="blockSelected(item, item2)"
+                          ><span class="badge badge-pill badge-light">{{ item2 }}</span></a
+                        >
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3" style="display: none;">
+                  <div class="col-1 pr-0 text-center">
+                    PM
+                  </div>
+                  <div class="col-11">
+                    <div class="boxHorarios">
+                      <span class="badge badge-pill badge-light">8:00</span>
+                      <span class="badge badge-pill badge-light">8:30</span>
+                      <span class="badge badge-pill badge-light">9:00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container> </ng-container
+    ><!--/blocks disponibles-->
+    <ng-container *ngIf="sinProfesionales === true">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="card-deck boxDisponibilidad">
+            <div class="card bg-light p-3">
+              <div class="row">
+                <div class="col-12">
+                  <div class="alert alert-warning" role="alert">
+                    No hay profesionales disponibles
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="selectSintoma">
+    <div class="row mb-3">
       <div class="col">
         <div class="card-deck">
-            <div class="card p-4 bg-light mb-3">
-                <!--<div class="card-header">Header</div>-->
-                <div class="card-body ">
-                    <h5 class="text-left mb-3">Detalle consulta</h5>
-                    <form class="w-100">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
-                                    <select class="form-control custom-select w-100" (change)="onChange($event.target)">
-                                        <option selected>Seleccione síntoma</option>
-                                        <ng-container *ngFor="let item of symptoms">
-                                            <option value="{{item._id}}">{{item.name}}</option>
-                                        </ng-container>
-                                    </select>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <ng-container *ngFor="let item of sintomaSelected">
-                                <!--sintoma-->
-                                <div class="sintoma mt-4 mb-3" id="{{item.id}}">
-                                    <div class="icon">
-                                    <svg
-                                        width="25"
-                                        height="25"
-                                        viewBox="0 0 25 25"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                        d="M23.4375 0H14.2708C13.3854 0 12.7083 0.677083 12.7083 1.5625V8.4375C12.7083 9.32292 13.3854 10 14.2708 10H18.3333V20.7292C18.3333 21.1979 17.9167 21.6146 17.4479 21.6146H15.2083V19.0625C15.2083 17.3438 13.8542 15.7812 11.7188 15.1042C10.625 14.7396 9.89583 14.0104 9.89583 13.2292V12.7083C11.0938 11.5625 11.875 9.63542 11.875 7.8125C11.875 5.26042 10.2083 3.59375 7.60417 3.59375C5 3.59375 3.33333 5.26042 3.33333 7.8125C3.33333 9.63542 4.11458 11.5625 5.3125 12.7083V13.2292C5.3125 14.0104 4.58333 14.7396 3.48958 15.1042C1.35417 15.8333 0 17.3958 0 19.1146V24.4792C0 24.7917 0.208333 25 0.520833 25H14.6875C15 25 15.2083 24.7917 15.2083 24.4792V22.7083H17.4479C18.4896 22.7083 19.375 21.8229 19.375 20.7812V10H23.4375C24.3229 10 25 9.32292 25 8.4375V1.5625C25 0.729167 24.3229 0 23.4375 0ZM4.375 7.8125C4.375 5.83333 5.57292 4.63542 7.60417 4.63542C9.63542 4.63542 10.8333 5.83333 10.8333 7.8125C10.8333 9.84375 9.47917 12.6562 7.60417 12.6562C5.72917 12.7083 4.375 9.89583 4.375 7.8125ZM14.1667 21.6667H11.7708C11.4062 21.6667 11.1458 21.4583 10.9896 21.1979C11.6667 20.9375 12.1875 20.2604 12.1875 19.5312C12.1875 18.5417 11.3542 17.7083 10.3646 17.7083C9.375 17.7083 8.54167 18.5417 8.54167 19.5312C8.54167 20.3646 9.11458 21.0417 9.89583 21.25C10.1042 22.0833 10.8854 22.7083 11.7708 22.7083H14.1667V23.9583H1.04167V19.1146C1.04167 17.8646 2.08333 16.6667 3.80208 16.0938C5.3125 15.5729 6.25 14.5833 6.30208 13.3854C6.71875 13.5938 7.13542 13.6979 7.60417 13.6979C8.07292 13.6979 8.48958 13.5938 8.90625 13.3854C9.01042 14.5312 9.94792 15.5729 11.4062 16.0938C13.0729 16.6667 14.1667 17.8125 14.1667 19.1146V21.6667ZM10.3646 20.2604C9.94792 20.2604 9.58333 19.8958 9.58333 19.4792C9.58333 19.0625 9.94792 18.6979 10.3646 18.6979C10.7812 18.6979 11.1458 19.0625 11.1458 19.4792C11.1458 19.8958 10.7812 20.2604 10.3646 20.2604ZM23.9583 8.4375C23.9583 8.75 23.75 8.95833 23.4375 8.95833H14.2708C13.9583 8.95833 13.75 8.75 13.75 8.4375V5.36458H15.0521C15.2083 5.36458 15.3646 5.26042 15.4688 5.15625L16.1458 4.11458L16.9792 7.60417C17.0312 7.8125 17.1875 7.96875 17.3958 8.02083C17.4479 8.02083 17.4479 8.02083 17.5 8.02083C17.6562 8.02083 17.8125 7.91667 17.9167 7.8125L19.1146 6.04167L19.9479 7.13542C20.0521 7.29167 20.2083 7.34375 20.4167 7.34375C20.5729 7.34375 20.7292 7.23958 20.8333 7.08333L21.8229 5.15625H23.9583V8.4375ZM23.9583 4.11458H21.5104C21.3021 4.11458 21.1458 4.21875 21.0417 4.375L20.3125 5.88542L19.5312 4.89583C19.4271 4.73958 19.2708 4.6875 19.1146 4.6875C18.9583 4.6875 18.8021 4.79167 18.6979 4.89583L17.7083 6.25L16.875 2.70833C16.8229 2.5 16.6667 2.34375 16.4583 2.29167C16.25 2.23958 16.0417 2.34375 15.9375 2.5L14.7396 4.32292H13.75V1.5625C13.75 1.25 13.9583 1.04167 14.2708 1.04167H23.4375C23.75 1.04167 23.9583 1.25 23.9583 1.5625V4.11458Z"
-                                        fill="#497DF9"
-                                        />
-                                    </svg>
-                                    </div>
-                                    <p class="text-right">
-                                       {{item.text}}
-                                        <i (click)="eliminaSintoma(item.id)">
-                                            <svg
-                                                width="1em"
-                                                height="1em"
-                                                viewBox="0 0 16 16"
-                                                class="bi bi-trash"
-                                                fill="currentColor"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                                                />
-                                                <path
-                                                fill-rule="evenodd"
-                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                                                />
-                                            </svg>
-                                        </i>
-                                    </p>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                    <div class="row"> 
-                        <div class="col">
-                            <div class="form-group w-100">
-                                <label for="exampleInputEmail1">Describa Cómo se siente (opcional)</label>
-                                <textarea class="form-control" rows="5" [(ngModel)]="descripcionSintoma" [ngModelOptions]="{standalone: true}"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    </form>     
-                </div>
-            </div>
-        </div>
-        
-      </div>
-    </div>
-  
-    <div class="row  mb-5 pb-5">
-    <div class="col">
-      <div class="card-deck">
           <div class="card p-4 bg-light mb-3">
-          <!--<div class="card-header">Header</div>-->
-          <div class="card-body ">
-              <h4 class="text-left mb-3">Documentos</h4>
-                <form>
-                    <div class="form-group"><!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
-                        <label for="exampleInputEmail1">Subir documentos</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input"
-                           
-                            (change)="changeListener($event)"
-                            id="customFileLang" lang="es">
-                            <label class="custom-file-label" for="customFileLang">{{textInputFile}}</label>
-                        </div>
+            <!--<div class="card-header">Header</div>-->
+            <div class="card-body">
+              <h5 class="text-left mb-3">Detalle consulta</h5>
+              <form class="w-100">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
+                        <select class="form-control custom-select w-100" (change)="onChange($event.target)">
+                          <option selected>Seleccione síntoma</option>
+                          <ng-container *ngFor="let item of symptoms">
+                            <option value="{{ item._id }}">{{ item.name }}</option>
+                          </ng-container>
+                        </select>
+                      </div>
                     </div>
-                </form>  
+                  </div>
+                  <div class="col-8">
+                    <ng-container *ngFor="let item of sintomaSelected">
+                      <!--sintoma-->
+                      <div class="sintoma mt-4 mb-3" id="{{ item.id }}">
+                        <div class="icon">
+                          <svg
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M23.4375 0H14.2708C13.3854 0 12.7083 0.677083 12.7083 1.5625V8.4375C12.7083 9.32292 13.3854 10 14.2708 10H18.3333V20.7292C18.3333 21.1979 17.9167 21.6146 17.4479 21.6146H15.2083V19.0625C15.2083 17.3438 13.8542 15.7812 11.7188 15.1042C10.625 14.7396 9.89583 14.0104 9.89583 13.2292V12.7083C11.0938 11.5625 11.875 9.63542 11.875 7.8125C11.875 5.26042 10.2083 3.59375 7.60417 3.59375C5 3.59375 3.33333 5.26042 3.33333 7.8125C3.33333 9.63542 4.11458 11.5625 5.3125 12.7083V13.2292C5.3125 14.0104 4.58333 14.7396 3.48958 15.1042C1.35417 15.8333 0 17.3958 0 19.1146V24.4792C0 24.7917 0.208333 25 0.520833 25H14.6875C15 25 15.2083 24.7917 15.2083 24.4792V22.7083H17.4479C18.4896 22.7083 19.375 21.8229 19.375 20.7812V10H23.4375C24.3229 10 25 9.32292 25 8.4375V1.5625C25 0.729167 24.3229 0 23.4375 0ZM4.375 7.8125C4.375 5.83333 5.57292 4.63542 7.60417 4.63542C9.63542 4.63542 10.8333 5.83333 10.8333 7.8125C10.8333 9.84375 9.47917 12.6562 7.60417 12.6562C5.72917 12.7083 4.375 9.89583 4.375 7.8125ZM14.1667 21.6667H11.7708C11.4062 21.6667 11.1458 21.4583 10.9896 21.1979C11.6667 20.9375 12.1875 20.2604 12.1875 19.5312C12.1875 18.5417 11.3542 17.7083 10.3646 17.7083C9.375 17.7083 8.54167 18.5417 8.54167 19.5312C8.54167 20.3646 9.11458 21.0417 9.89583 21.25C10.1042 22.0833 10.8854 22.7083 11.7708 22.7083H14.1667V23.9583H1.04167V19.1146C1.04167 17.8646 2.08333 16.6667 3.80208 16.0938C5.3125 15.5729 6.25 14.5833 6.30208 13.3854C6.71875 13.5938 7.13542 13.6979 7.60417 13.6979C8.07292 13.6979 8.48958 13.5938 8.90625 13.3854C9.01042 14.5312 9.94792 15.5729 11.4062 16.0938C13.0729 16.6667 14.1667 17.8125 14.1667 19.1146V21.6667ZM10.3646 20.2604C9.94792 20.2604 9.58333 19.8958 9.58333 19.4792C9.58333 19.0625 9.94792 18.6979 10.3646 18.6979C10.7812 18.6979 11.1458 19.0625 11.1458 19.4792C11.1458 19.8958 10.7812 20.2604 10.3646 20.2604ZM23.9583 8.4375C23.9583 8.75 23.75 8.95833 23.4375 8.95833H14.2708C13.9583 8.95833 13.75 8.75 13.75 8.4375V5.36458H15.0521C15.2083 5.36458 15.3646 5.26042 15.4688 5.15625L16.1458 4.11458L16.9792 7.60417C17.0312 7.8125 17.1875 7.96875 17.3958 8.02083C17.4479 8.02083 17.4479 8.02083 17.5 8.02083C17.6562 8.02083 17.8125 7.91667 17.9167 7.8125L19.1146 6.04167L19.9479 7.13542C20.0521 7.29167 20.2083 7.34375 20.4167 7.34375C20.5729 7.34375 20.7292 7.23958 20.8333 7.08333L21.8229 5.15625H23.9583V8.4375ZM23.9583 4.11458H21.5104C21.3021 4.11458 21.1458 4.21875 21.0417 4.375L20.3125 5.88542L19.5312 4.89583C19.4271 4.73958 19.2708 4.6875 19.1146 4.6875C18.9583 4.6875 18.8021 4.79167 18.6979 4.89583L17.7083 6.25L16.875 2.70833C16.8229 2.5 16.6667 2.34375 16.4583 2.29167C16.25 2.23958 16.0417 2.34375 15.9375 2.5L14.7396 4.32292H13.75V1.5625C13.75 1.25 13.9583 1.04167 14.2708 1.04167H23.4375C23.75 1.04167 23.9583 1.25 23.9583 1.5625V4.11458Z"
+                              fill="#497DF9"
+                            />
+                          </svg>
+                        </div>
+                        <p class="text-right">
+                          {{ item.text }}
+                          <i (click)="eliminaSintoma(item.id)">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-trash"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                              />
+                            </svg>
+                          </i>
+                        </p>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group w-100">
+                      <label for="exampleInputEmail1">Describa Cómo se siente (opcional)</label>
+                      <textarea
+                        class="form-control"
+                        rows="5"
+                        [(ngModel)]="descripcionSintoma"
+                        [ngModelOptions]="{ standalone: true }"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-          </div>
+        </div>
       </div>
-      
     </div>
+
+    <div class="row mb-5 pb-5">
+      <div class="col">
+        <div class="card-deck">
+          <div class="card p-4 bg-light mb-3">
+            <!--<div class="card-header">Header</div>-->
+            <div class="card-body">
+              <h4 class="text-left mb-3">Documentos</h4>
+              <form>
+                <div class="form-group">
+                  <!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
+                  <label for="exampleInputEmail1">Subir documentos</label>
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      (change)="changeListener($event)"
+                      id="customFileLang"
+                      lang="es"
+                    />
+                    <label class="custom-file-label" for="customFileLang">{{ textInputFile }}</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</ng-container>
+  </ng-container>
 
   <!--barra fixedf *ngIf="next" -->
-<div *ngIf="selectSintoma" class="pasosFixed shadow ">
+  <div *ngIf="selectSintoma" class="pasosFixed shadow">
     <div class="boxItems h-100">
-        <div class="items h-100">
-            <div class="row align-items-center h-100">
-                <div class="col-6 align-items-center">
-                    <div class="row align-items-center">
-                        <div class="col-2 pr-0 text-center align-items-center">
-                            <img src="assets/img/doctor-foto.svg">
-                        </div>
-                        <div class="col-10 align-items-center">
-                            <div class="box mr-3">
-                                <p class="m-0 font-weight-bold">
-                                    {{blocks[0].professionalDetails.userDetails[0].name}} 
-                                    {{blocks[0].professionalDetails.userDetails[0].lastName}} 
-                                </p>
-                                <p class="m-0">Especialidad {{blocks[0].professionalDetails.specialtyDetails[0].specialtyName}} </p>
-                            </div>  
+      <div class="items h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-6 align-items-center">
+            <div class="row align-items-center">
+              <div class="col-2 pr-0 text-center align-items-center">
+                <img src="assets/img/doctor-foto.svg" />
+              </div>
+              <div class="col-10 align-items-center">
+                <div class="box mr-3">
+                  <p class="m-0 font-weight-bold">
+                    {{ blocks[0].professionalDetails.userDetails[0].name }}
+                    {{ blocks[0].professionalDetails.userDetails[0].lastName }}
+                  </p>
+                  <p class="m-0">Especialidad {{ blocks[0].professionalDetails.specialtyDetails[0].specialtyName }}</p>
+                </div>
 
-                            <div class="box boxSeparador pl-3">
-                                <p class="m-0 valor">VALOR CONSULTA: ${{reserve.professionalDetails.specialtyDetails.price}}</p>
-                                <p class="m-0">{{reserve.dateDetails.date.day}}-
-                                {{reserve.dateDetails.date.month}}-{{reserve.dateDetails.date.year}} | 
-                                    {{reserve.dateDetails.start}}</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="box boxSeparador pl-3">
+                  <p class="m-0 valor">VALOR CONSULTA: ${{ reserve.professionalDetails.specialtyDetails.price }}</p>
+                  <p class="m-0">
+                    {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
+                      reserve.dateDetails.date.year
+                    }}
+                    | {{ reserve.dateDetails.start }}
+                  </p>
                 </div>
-                <div class="col-6">
-                    <div class="float-right pr-3">
-                        <button 
-                        type="button" data-dismiss="modal" 
-                        class="btn btn-outline-primary rounded-pill mr-3" (click)="atras()"> Volver</button>
-                        <button 
-                        type="button" data-dismiss="modal" 
-                        class="btn btn-primary rounded-pill " (click)="agendar()"> Pagar y agendar</button>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="col-6">
+            <div class="float-right pr-3">
+              <button
+                type="button"
+                data-dismiss="modal"
+                class="btn btn-outline-primary rounded-pill mr-3"
+                (click)="atras()"
+              >
+                Volver
+              </button>
+              <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="agendar()">
+                Pagar y agendar
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  (click)="atras()">
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    (click)="atras()"
+  >
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -393,15 +422,22 @@
           </button>
         </div>
         <div class="modal-body">
-           <iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>
+          <iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>
         </div>
         <div class="modal-footer">
-          <button *ngIf="estadoPagado" type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="{{urlConfirmacion}}">Cerrar</button>
+          <button
+            *ngIf="estadoPagado"
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            routerLink="{{ urlConfirmacion }}"
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
   </div>
-
 
   <div class="modal fade" id="sinPrecio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -413,10 +449,18 @@
           </button>
         </div>
         <div class="modal-body">
-           <h2>Esta agenda no tiene precio asociado</h2>
+          <h2>Esta agenda no tiene precio asociado</h2>
         </div>
         <div class="modal-footer">
-          <button *ngIf="estadoPagado" type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="{{urlConfirmacion}}">Cerrar</button>
+          <button
+            *ngIf="estadoPagado"
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            routerLink="{{ urlConfirmacion }}"
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
@@ -425,5 +469,4 @@
   <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
     <!-- <p style="color: white" > cargando...</p> -->
   </ngx-spinner>
-  
-
+</div>
