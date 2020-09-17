@@ -5,63 +5,78 @@
   </div>
 </div>
 
-<div class="row mb-5 pb-5" *ngIf="!selectSintoma">
-  <div class="col-4">
-    <div class="card bg-light">
-      <div class="card-header" style="display: none;">
-        Mi Salud
-        <p>
-          Completa tus datos medicos para una mejor atención
-        </p>
-      </div>
-      <div class="card-body text-center">
-        <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
-        <!--tabs child-->
-        <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="home-tab4"
-              data-toggle="tab"
-              href="#home4"
-              role="tab"
-              aria-controls="home4"
-              aria-selected="true"
-              (click)="(!flujoProfesional)"
-              >Especialidad</a
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab4"
-              data-toggle="tab"
-              href="#profile4"
-              role="tab"
-              aria-controls="profile4"
-              aria-selected="false"
-              (click)="(!flujoProfesional)"
-              >Profesional
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
-            <form>
-              <div class="form-group">
-                <label class="font-weight-bold text-left w-100">Selecciona Tipo de profesional</label>
-                <select
-                  class="form-control custom-select"
-                  (click)="bloquearSelect = true"
-                  (click)="bloquearFecha = true"
-                  (change)="onChangeTypeProfesional($event.target.value)"
-                >
-                  <option selected>Selecciona</option>
-                  <ng-container *ngFor="let item of medicalSpecialties">
-                    <option value="{{ item._id }}">{{ item.name }}</option>
-                  </ng-container>
-                </select>
-              </div>
+  <div class="row mb-5 pb-5" *ngIf="!selectSintoma">
+
+    <div class="col-4">
+        <div class="card bg-light">
+            <div class="card-header" style="display: none;">
+                Mi Salud
+                <p>
+                Completa tus datos medicos para una mejor atención
+                </p>
+            </div>
+            <div class="card-body text-center">
+                <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
+                <!--tabs child-->
+                <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <a
+                        class="nav-link active"
+                        id="home-tab4"
+                        data-toggle="tab"
+                        href="#home4"
+                        role="tab"
+                        aria-controls="home4"
+                        aria-selected="true"
+                        (click)="!flujoProfesional"
+                        >Especialidad</a
+                    >
+                    </li>
+                    <li class="nav-item" role="presentation">
+                    <a
+                        class="nav-link"
+                        id="profile-tab4"
+                        data-toggle="tab"
+                        href="#profile4"
+                        role="tab"
+                        aria-controls="profile4"
+                        aria-selected="false"
+                        (click)="!flujoProfesional"
+                        >Profesional 
+                    </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
+                        <form>
+                            <div class="form-group">
+                                <label class="font-weight-bold text-left  w-100">Selecciona Tipo de profesional</label>
+                                <select class="form-control custom-select" 
+                                (click)="bloquearSelect = true"
+                                (click)="bloquearFecha = true"
+                                 (change)="onChangeTypeProfesional($event.target.value)">
+                                    <option selected>Selecciona</option>
+                                    <ng-container *ngFor="let item of medicalSpecialties">
+                                        <option value="{{item._id}}">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold text-left  w-100">Selecciona Especialidad</label>
+                                <select class="form-control custom-select" 
+                                (change)="onChangeTypeSpecialtiesId($event.target.value)"
+                               
+                                [disabled]="bloquearSelect"
+                                ><!--{{item.medicalSpecialtyId}}-->
+                                    <option selected>Selecciona</option>
+                                    <ng-container *ngFor="let item of specialtiesId">
+                                        <option value="{{item._id}}">{{item.specialtyName}} </option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
 
               <div class="form-group">
                 <label class="font-weight-bold text-left w-100">Selecciona Especialidad</label>
