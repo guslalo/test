@@ -264,7 +264,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
       data => {
         console.log(data);
-        this.getAppointmentsDetails(appointmentId);
+        this.getAppointmentsDetailsRefresh(appointmentId);
       },
       error => {
         console.log(error);
@@ -320,8 +320,20 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-  getAppointmentsDetailsNotes(id) {
-    
+  getAppointmentsDetailsRefresh(id) {
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      (data) => {
+        this.appointmentDetail = data.payload;
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
+        this.notesArray = data.payload.appointmentDetails.notes;
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
+        console.log(this.appointmentDetail);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 
