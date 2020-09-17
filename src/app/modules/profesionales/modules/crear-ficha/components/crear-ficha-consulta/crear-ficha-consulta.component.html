@@ -4,7 +4,7 @@
   <div class="row mb-3">
     <div class="col-6 col-md-6">
       <h2>Ficha Consulta</h2>
-      <p>Teleconsulta  25 - 06 - 2020 / 20:15 Hrs.</p>
+      <p>Teleconsulta {{appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}.</p>
     </div>
     <!--appointmentDetail.administrativeDetails.status === 'appointed' ||
       appointmentDetail.administrativeDetails.status === 'rescheduled' ||-->
@@ -47,9 +47,13 @@
                     
                   </div>
                   <div class="text-center boxThumb rounded">
-               
+                    <!--<ng-container *ngIf="fotoUser; else sinFoto">
+                      <img src="{{fotoUser}}">
+                    </ng-container>
+                    <ng-template #sinFoto>
+                      <img src="assets/img/thumb.jpg">
+                    </ng-template>-->
                     <img src="assets/img/thumb.jpg">
-                  
                 </div>
                 </ng-container>
                 <div class="text-center w-100">
@@ -144,7 +148,7 @@
                     ID consulta: {{appointmentDetail._id}}
                   </p>
                   <p class="card-text text-center">
-                    Realizada el {{appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy'}}
+                    Realizada el {{appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000'  }}
                   </p>
                   <h5 class="card-title">
                     <svg
@@ -214,7 +218,7 @@
                 Exámenes y Documentos
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item d-none" role="presentation">
               <a
                 class="nav-link"
                 id="profile-tab3"
@@ -417,7 +421,13 @@
                         <div class="form-group col">
                           <label for="endBlock">Motivo de consulta:</label>
                           <div class="w-100 border rounded p-3">
-                            <p>{{appointmentDetail.patientDetails.description}}</p>
+                            <ng-container *ngIf="appointmentDetail.patientDetails.description === null; else info">
+                              <p>Sin información</p>
+                            </ng-container>
+                            <ng-template #info>
+                               <p>{{appointmentDetail.patientDetails.description}}</p>
+                            </ng-template>
+                           
                           </div>
                         </div>
                       </div>
@@ -500,7 +510,7 @@
                         </div>
                       </div> 
                     </form>
-                    
+
                     <form [formGroup]="signos">
                       
                       <div class="row">
@@ -1015,12 +1025,16 @@
                   </div>
                     
                   <hr>
-                  <div class="text-right mb-4">
-                    <button class="btn btn-secondary rounded-pill" (click)="putAppointment(appointmentDetail._id)" [disabled]="!permisoGuardar || !diagnostico.valid"
-                    data-toggle="modal" data-target="#exampleModal"
-                    >
-                      Guardar
-                    </button>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="text-right mb-4 p-2">
+                        <button class="btn btn-secondary rounded-pill" (click)="putAppointment(appointmentDetail._id)" [disabled]="!permisoGuardar || !diagnostico.valid"
+                        data-toggle="modal" data-target="#exampleModal"
+                        >
+                          Guardar
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                
@@ -1308,7 +1322,7 @@
                     <tr *ngFor="let item of exams">
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
-                      <td>{{ item.uploadDate | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                       <td>       
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">

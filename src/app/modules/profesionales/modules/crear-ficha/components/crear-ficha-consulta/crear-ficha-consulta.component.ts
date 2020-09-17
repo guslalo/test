@@ -36,6 +36,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public notes: FormGroup;
   public nutricion: FormGroup;
   public permisoGuardar:boolean;
+  public fotoUser:any;
 
   constructor( 
     private route: ActivatedRoute,
@@ -47,6 +48,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
@@ -54,13 +56,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
-      this.getAppointmentsTimeline(id);
-      setTimeout(()=>{       
-        //this.getSession(id);
-      }, 250);
-      
+      this.getAppointmentsTimeline(id);  
     });
-
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -74,9 +71,9 @@ export class CrearFichaConsultaComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
       JSON.parse(localStorage.getItem('currentUser')).role
     );
-
-    
-    
+    this.access_token = JSON.parse(localStorage.getItem('token'));
+    this.downloadUrl = this.documentService.download();
+  
     this.getFecha();
 
     this.signos = this._formBuilder.group({
@@ -101,7 +98,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       imc: ['',],
       imcClassification: ['',],  
     });
-
 
     this.consultasForm = this._formBuilder.group({
       objective: ['',],
@@ -152,40 +148,19 @@ export class CrearFichaConsultaComponent implements OnInit {
     )
   }
 
-
   getMedicalRecord(id) {
     this.medicalRecord.getByUserId(id).subscribe(
       (data) => {
         console.log(data);
         this.exams = data.payload.exams;
-        // console.log(this.exams);
         this.antecedentesGeneral = data.payload.antecedent;
         this.antecedentes = data.payload.antecedent.sickness;
-        // console.log(data.antecedent);
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
-  /*
-  toggleFullScreen() {
-    const video = document.getElementById("meet");
-
-    this.fullscreen = (this.fullscreen == true) ? false : true;
-
-    if (video.requestFullscreen) {
-      switch (this.fullscreen) {
-        case true:
-          video.requestFullscreen();
-          break;
-        case false:
-          document.exitFullscreen();
-          break;
-      }
-    }
-  }*/
 
   getSession(id: string) {
     this.appointmentsService.getAppointmentsSession(id).subscribe(
@@ -236,7 +211,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     )
   }
 
-
   runAppointment(appointmentId, event){
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
       data => {
@@ -259,23 +233,20 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     )
-    }
+  }
     
-    finish(appointmentId, event){
-      this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
-        data => {
-          console.log(data);
-          this.getAppointmentsDetails(appointmentId);
-          this.router.navigate(['/app-professional']);
-        },
-        error => {
-          console.log(error);
-        }
-      )
-    }
-
-
-
+  finish(appointmentId, event){
+    this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
+      data => {
+        console.log(data);
+        this.getAppointmentsDetails(appointmentId);
+        this.router.navigate(['/app-professional']);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
   getAppointmentsProfessionalData(id){
     this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
@@ -293,7 +264,9 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.professionalDetails.userDetails[0].userId;
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
+     
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
         if(
