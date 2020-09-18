@@ -26,7 +26,7 @@ export class InicioComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.currentUser = this.currentUserService.currentUser;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -46,13 +46,13 @@ export class InicioComponent implements OnInit {
       this.inmediateAppointment = false;
     }
     this.homeService.getTips().subscribe(
-      data => {
+      (data) => {
         this.tips = data;
         console.log(data);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 }

@@ -35,7 +35,7 @@ export class MisPacientesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.currentUserService.currentUser);
+    // console.log(JSON.parse(localStorage.getItem('currentUser'));
 
     this.fetchPatients();
     this.fetchPrePatients();
@@ -97,7 +97,7 @@ export class MisPacientesComponent implements OnInit {
         phoneNumber: this.patientForm.value.phoneNumber,
         email: this.patientForm.value.email,
         age: this.patientForm.value.age,
-        professionalAssigned: this.currentUserService.currentUser.id,
+        professionalAssigned: JSON.parse(localStorage.getItem('currentUser')).id,
       };
       this.patientService.createPrePatient(patientObject).subscribe(
         (error) => {
