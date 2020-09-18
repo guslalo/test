@@ -75,7 +75,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.currentUserService.currentUser;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   onSelect(event) {
     console.log(event);
