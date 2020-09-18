@@ -15,6 +15,7 @@ export class UsersLogin {
 
 export class AdministrativeData {
   role: string;
+  isActive:boolean
 }
 
 // cliente

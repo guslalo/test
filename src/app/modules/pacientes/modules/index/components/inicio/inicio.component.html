@@ -21,7 +21,7 @@
           </button>
         </div>
       </div>
-      <div class="card bg-light mb-3 p-4">
+      <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
         <div style="display: none;" class="card-header">Header</div>
         <div class="card-body text-center">
           <p class="card-text">
@@ -29,7 +29,7 @@
           </p>
           <h5 class="card-title font-weight-bold">Entrar a consulta inmediata</h5>
           <p>Simply dummy text of the printing and typesetting industry.</p>
-          <button type="button" class="btn btn-outline-primary rounded-pill text-center">
+          <button type="button" class="btn btn-outline-primary rounded-pill text-center" routerLink="agendar-consulta-inmediata">
             Ingresar a sala
           </button>
         </div>

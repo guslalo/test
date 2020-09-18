@@ -406,7 +406,10 @@ button.calendar:active {
 h3 {
   color: #505152;
 }
-
+.bg-azul {
+  background-color: $color-primary;
+  color: #ffffff;
+}
 .bg-light {
   background-color: $color-light !important;
 }

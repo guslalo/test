@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 import { HomeService } from 'src/app/services/home.service';
+import { AppointmentsService } from './../../../../../../services/appointments.service';
+
+
 
 @Component({
   selector: 'app-inicio',
@@ -12,10 +15,12 @@ export class InicioComponent implements OnInit {
   public currentUser: any = {};
   public user: any;
   public tips:any;
+  public inmediateAppointment:boolean;
 
   constructor(
     public currentUserService: CurrentUserService,
-    public homeService:HomeService
+    public homeService:HomeService,
+    public appointmentsService:AppointmentsService
     ) {
 
     }
@@ -34,6 +39,12 @@ export class InicioComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
       JSON.parse(localStorage.getItem('currentUser')).role
     );
+
+    if(localStorage.getItem('inmediateAppointment') === 'true'){
+      this.inmediateAppointment = true;
+    } else {
+      this.inmediateAppointment = false;
+    }
     this.homeService.getTips().subscribe(
       data => {
         this.tips = data;

@@ -5,7 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 // import { LayoutComponent } from './components/layout/layout.component';
 import { PacientesComponent } from '../profesionales/pacientes/pacientes.component';
 // guards
-import { GuardsGuard } from '../../guards/guards.guard';
+import { InmediateAppointmentGuard } from './../../guards/inmediateAppointment.guard';
+
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
 import { FichaPacienteComponent } from '../profesionales/modules/ficha-paciente/ficha-paciente.component';
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'agendar-consulta',
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
+  },
+  {
+    path: 'agendar-consulta-inmediata', 
+    loadChildren: () => import('./modules/agendar-consulta-inmediata/agendar-consulta-inmediata.module').then((m) => m.AgendarConsultaInmediataModule),
+    canActivate: [InmediateAppointmentGuard]
   },
   {
     path: 'mi-salud',

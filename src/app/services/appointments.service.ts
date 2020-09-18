@@ -14,7 +14,12 @@ export class AppointmentsService {
   private consolidate = '/consolidate';
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
- 
+  private inmediateAppointment = 'v1/administrative/immediate/state';
+  private inmediate = 'v1/appointments/immediate/';
+  private immediateConsolidate = 'v1/appointments/immediate/consolidate';
+  private pagoStatusInmediate = 'v1/appointments/immediate/status';
+
+
 
   constructor(private http: HttpClient) {}
 
@@ -127,4 +132,30 @@ export class AppointmentsService {
     params = params.append('appointmentId', id);
     return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails, { params: params });
   }
+
+  
+
+  //Appointment Inmediate
+  getAppointmentInmediateState(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.inmediateAppointment);
+  }
+
+  AppointmentInmediate(): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.inmediate, { });
+  }
+  
+  postImmediateConsolidate(object): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object );
+  }
+  
+  getPaymentStatusAppointmentInmediate(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.pagoStatusInmediate, { params: params });
+  }
+
+
+
+
+
 }

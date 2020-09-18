@@ -5,7 +5,7 @@
   
       
           <div class="row">
-            <div class="col col-md-6 p-0"><!---->
+            <div class="col p-0"><!---->
              
                 <div class="p-5 bgAzul2 text-center h-100">
                     <img src="assets/img/agendar-consulta.svg">
@@ -21,14 +21,17 @@
                 </div>
               
             </div>
-            <div class="col col-md-6  p-0">
+            <div *ngIf="inmediateAppointment" class="col  p-0">
               <div class="p-5  bgVerde text-center h-100">
                 <img src="assets/img/agendar-consulta-inmediata.svg">
                 <div class="w-100 mt-4 mb-2">
                   <h5>Consulta inmediata</h5>
                   <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
                 </div>
-                <button class="btn btn-outline-primary rounded-pill btn-outline-white" >
+                <button class="btn btn-outline-primary rounded-pill btn-outline-white"
+                  data-dismiss="modal"
+                  routerLink="agendar-consulta-inmediata"
+                >
                   Ingresar a sala
                 </button>
               </div>

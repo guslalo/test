@@ -235,11 +235,11 @@ export class IndexComponent implements OnInit {
         if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
         } else {
+           //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
           $('#sinPrecio').modal();
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
-        //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
 
         setTimeout(() => {
@@ -271,7 +271,7 @@ export class IndexComponent implements OnInit {
           console.log(error);
         }
       );
-    }, 4000);
+    }, 3500);
   }
 
   cerrarPago() {

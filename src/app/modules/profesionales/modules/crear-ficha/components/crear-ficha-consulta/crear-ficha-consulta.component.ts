@@ -308,9 +308,12 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
         if(
-          this.appointmentDetail.administrativeDetails.status === "running" ||  this.appointmentDetail.administrativeDetails.status === "pending"
+          this.appointmentDetail.administrativeDetails.status === "running" 
           ){
             this.getSession(id);
+          this.permisoGuardar = true;
+        }
+        if(this.appointmentDetail.administrativeDetails.status === "pending"){
           this.permisoGuardar = true;
         }
       },
