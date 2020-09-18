@@ -221,10 +221,11 @@ export class FichaPacienteComponent implements OnInit {
       })
       // CHECKBOX APPOINTMENTS FILTER
       .filter((item) => {
-        console.log(this.currentUserService.currentUser.id, item.professionalDetails.userDetails[0].userId);
+        console.log(JSON.parse(localStorage.getItem('currentUser')).id, item.professionalDetails.userDetails[0].userId);
         if (this.appointmentCheckBox === 'allAppointments') return item;
         if (this.appointmentCheckBox === 'myAppointments') {
-          if (item.professionalDetails.userDetails[0].userId === this.currentUserService.currentUser.id) return item;
+          if (item.professionalDetails.userDetails[0].userId === JSON.parse(localStorage.getItem('currentUser')).id)
+            return item;
         }
       });
 

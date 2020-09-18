@@ -147,8 +147,10 @@
                   <img src="assets/perfil.png" />
                 </div>
                 <h4 class="text-center mt-2">
-                  {{ patientRecord.personalData?.name }} <br />
-                  {{ patientRecord.personalData?.lastName || '' }}
+                  {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
+                  <br />
+                  {{ patientRecord.personalData?.lastName || null }}
+                  {{ ' ' + patientRecord.personalData?.motherName || null }}
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
@@ -437,13 +439,13 @@
           <div class="row">
             <div class="col-12">
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasSickness; else noSickness">
                 <a
                   class="p-4"
                   data-toggle="collapse"
                   href="#sickness"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="sickness"
                 >
                   <svg
@@ -463,16 +465,22 @@
                   </svg>
                   Enfermedades
                 </a>
-                <div class="collapse" id="sickness">
+                <div class="collapse show" id="sickness">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.sickness">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noSickness>
+                <div class="collapseCustom p-4">
+                  Enfermedades: <span class="text-primary float-right">No Presenta</span>
+                </div>
+              </ng-template>
+
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasFamiliarHistory; else noFamiliarHistory">
                 <a
                   class="p-4"
                   data-toggle="collapse"
@@ -498,16 +506,21 @@
                   </svg>
                   Antecedentes Familiares
                 </a>
-                <div class="collapse" id="familiarHistory">
+                <div class="collapse show" id="familiarHistory">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.familiarHistory">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noFamiliarHistory>
+                <div class="collapseCustom p-4">
+                  Antecedentes Familiares <span class="text-primary float-right">No Presenta</span>
+                </div>
+              </ng-template>
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasMedicines; else noMedicines">
                 <a
                   class="p-4"
                   data-toggle="collapse"
@@ -533,16 +546,21 @@
                   </svg>
                   Medicamentos
                 </a>
-                <div class="collapse" id="medicines">
+                <div class="collapse show" id="medicines">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.medicines">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noMedicines>
+                <div class="collapseCustom p-4">
+                  Ocupacionales: <span class="text-primary float-right">No Presenta</span>
+                </div>
+              </ng-template>
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasHealthHabits; else noHealthHabits">
                 <a
                   class="p-4"
                   data-toggle="collapse"
@@ -568,16 +586,21 @@
                   </svg>
                   Hábitos de Salud
                 </a>
-                <div class="collapse" id="healthHabits">
+                <div class="collapse show" id="healthHabits">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.healthHabits">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noHealthHabits>
+                <div class="collapseCustom p-4">
+                  Hábitos de Salud: <span class="text-primary float-right">No Presenta</span>
+                </div>
+              </ng-template>
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasOccupational; else noOccupational">
                 <a
                   class="p-4"
                   data-toggle="collapse"
@@ -603,16 +626,21 @@
                   </svg>
                   Ocupacionales
                 </a>
-                <div class="collapse" id="occupational">
+                <div class="collapse show" id="occupational">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.occupational">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noOccupational>
+                <div class="collapseCustom p-4">
+                  Ocupacionales: <span class="text-primary float-right">No Presenta</span>
+                </div>
+              </ng-template>
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div class="collapseCustom">
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasOthers; else noOthers">
                 <a
                   class="p-4"
                   data-toggle="collapse"
@@ -638,12 +666,15 @@
                   </svg>
                   Otros
                 </a>
-                <div class="collapse" id="others">
+                <div class="collapse show" id="others">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.others">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
                 </div>
               </div>
+              <ng-template #noOthers>
+                <div class="collapseCustom p-4">Otros: <span class="text-primary float-right">No Presenta</span></div>
+              </ng-template>
               <!--/colappsed-->
             </div>
           </div>
@@ -811,7 +842,7 @@
                                 <div class="col-9">
                                   <p class="m-0 text-left">Cita agendada con</p>
                                   <p class="m-0 text-left">
-                                    Dr. {{ item.professional.name }} {{ item.professional.lastName }}
+                                    Dr. {{ item.professional?.name }} {{ item.professional?.lastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
                                     <ng-container *ngIf="item.isActive; else inactivo">
