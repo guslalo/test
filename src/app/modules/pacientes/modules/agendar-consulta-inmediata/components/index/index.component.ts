@@ -4,6 +4,7 @@ import { SymptomsService } from './../../../../../../services/symptoms.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DocumentService } from './../../../../../../services/document.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare var $: any;
 
@@ -12,6 +13,7 @@ declare var $: any;
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
+
 export class IndexComponent implements OnInit {
   public appointmentId:any;
   public reserve :any;
@@ -31,8 +33,9 @@ export class IndexComponent implements OnInit {
     private appointmentsService:AppointmentsService,
     private symptomsService: SymptomsService,
     private domSanitizer: DomSanitizer,
-    private documentService: DocumentService
-
+    private documentService: DocumentService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -71,12 +74,13 @@ export class IndexComponent implements OnInit {
           } else {
             clearInterval(interval);
             this.estadoPagado = true;
-            //$('#exampleModal').modal('hide');
-            //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
             console.log('pagado');
+            $('#exampleModal').modal('hide');         
+            //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });  
           }
         },
         (error) => {
+          this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
           console.log(error);
         }
       );

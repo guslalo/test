@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
 export class InmediateAppointmentGuard implements CanActivate {
   constructor(private router: Router) {}
   canActivate(
