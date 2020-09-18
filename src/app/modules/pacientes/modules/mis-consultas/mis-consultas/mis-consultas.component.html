@@ -154,14 +154,36 @@
                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
                         />
                       </svg>
-                      {{ item.professionalDetails.userDetails[0].name }}
-                      {{ item.professionalDetails.userDetails[0].lastName }}
+                      {{ item.professionalDetails.userDetails[0]?.name }}
+                      {{ item.professionalDetails.userDetails[0]?.lastName }}
                       <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                     </td>
 
                     <td style="width: 25%;" class="text-left">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
-                        {{ item.administrativeDetails.status }}
+                        {{
+                          item.administrativeDetails.status === 'reserved'
+                            ? 'Reservada'
+                            : item.administrativeDetails.status === 'appointed'
+                            ? 'Agendada'
+                            : item.administrativeDetails.status === 'rescheduled'
+                            ? 'Re-Agendada'
+                            : item.administrativeDetails.status === 'active'
+                            ? 'Activa'
+                            : item.administrativeDetails.status === 'waitingInRoom'
+                            ? 'En Sala de Espera'
+                            : item.administrativeDetails.status === 'waitingInList'
+                            ? 'En Lista de Espera'
+                            : item.administrativeDetails.status === 'running'
+                            ? 'En Curso'
+                            : item.administrativeDetails.status === 'pending'
+                            ? 'Pendiente'
+                            : item.administrativeDetails.status === 'finished'
+                            ? 'Finalizada'
+                            : item.administrativeDetails.status === 'canceled'
+                            ? 'Cancelada'
+                            : 'S/R'
+                        }}
                       </button>
                     </td>
                     <td style="width: 25%;" class="text-left">

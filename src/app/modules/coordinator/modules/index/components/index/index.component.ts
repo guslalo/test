@@ -12,6 +12,6 @@ export class IndexComponent implements OnInit {
   constructor(public currentUserService: CurrentUserService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.currentUserService.currentUser;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 }

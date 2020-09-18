@@ -34,12 +34,12 @@ export class MiSaludComponent implements OnInit {
   public addValidator: boolean;
   public access_token: any;
 
-  sicknessIsCollapsed: boolean = false;
-  familiarHistoryIsCollapsed: boolean = false;
-  healthHabitsIsCollapsed: boolean = false;
-  medicinesIsCollapsed: boolean = false;
-  occupationalIsCollapsed: boolean = false;
-  othersIsCollapsed: boolean = false;
+  sicknessIsCollapsed: boolean = true;
+  familiarHistoryIsCollapsed: boolean = true;
+  healthHabitsIsCollapsed: boolean = true;
+  medicinesIsCollapsed: boolean = true;
+  occupationalIsCollapsed: boolean = true;
+  othersIsCollapsed: boolean = true;
 
   constructor(
     private _formBuilder: FormBuilder,

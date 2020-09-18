@@ -15,20 +15,20 @@ export class DocumentService {
   constructor(private http: HttpClient, private currentUserService: CurrentUserService) {}
 
   download() {
-    // console.log(this.currentUserService.currentUser);
+    // console.log(JSON.parse(localStorage.getItem('currentUser'));
     return environment.baseUrl + this.urlDownload;
   }
 
   //specialties
-  postDocument(id:string, documentDetails): Observable<any> {
+  postDocument(id: string, documentDetails): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.urlUpload + id, {
       id,
       documentDetails,
     });
   }
 
-   //postDocumentAppointment
-   postDocumentAppointment(appointmentId:string, documentDetails): Observable<any> {
+  //postDocumentAppointment
+  postDocumentAppointment(appointmentId: string, documentDetails): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.uploadUrl, {
       appointmentId,
       documentDetails,

@@ -39,7 +39,8 @@ export class UserLogin {
       clinicPolicies?: clinicPolicies;
       reportPolicies?: reportPolicies;
       medicalRecordPolicies?: medicalRecordPolicies;
-    }
+    },
+    public photo?: string
   ) {}
 
   // cliente

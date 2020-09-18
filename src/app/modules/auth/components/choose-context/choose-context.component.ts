@@ -65,7 +65,8 @@ export class ChooseContextComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeData,
       clinicId,
       profile.role,
-      profile.policies
+      profile.policies,
+      JSON.parse(localStorage.getItem('currentUser')).photo
     );
 
     localStorage.removeItem('currentUser');
