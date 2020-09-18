@@ -85,12 +85,12 @@
                     [attr.aria-expanded]="!sicknessIsCollapsed"
                   >
                     <img
-                      *ngIf="sicknessIsCollapsed && antecedentes?.hasSickness && antecedentes?.sickness.length"
+                      *ngIf="sicknessIsCollapsed && antecedentes?.hasSickness"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="!sicknessIsCollapsed && antecedentes?.hasSickness && antecedentes?.sickness.length"
+                      *ngIf="!sicknessIsCollapsed && antecedentes?.hasSickness"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
@@ -161,20 +161,12 @@
                     [attr.aria-expanded]="!familiarHistoryIsCollapsed"
                   >
                     <img
-                      *ngIf="
-                        familiarHistoryIsCollapsed &&
-                        antecedentes?.hasFamiliarHistory &&
-                        antecedentes?.familiarHistory.length
-                      "
+                      *ngIf="familiarHistoryIsCollapsed && antecedentes?.hasFamiliarHistory"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="
-                        !familiarHistoryIsCollapsed &&
-                        antecedentes?.hasFamiliarHistory &&
-                        antecedentes?.familiarHistory.length
-                      "
+                      *ngIf="!familiarHistoryIsCollapsed && antecedentes?.hasFamiliarHistory"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
@@ -244,16 +236,12 @@
                     [attr.aria-expanded]="!healthHabitsIsCollapsed"
                   >
                     <img
-                      *ngIf="
-                        healthHabitsIsCollapsed && antecedentes?.hasHealthHabits && antecedentes?.healthHabits.length
-                      "
+                      *ngIf="healthHabitsIsCollapsed && antecedentes?.hasHealthHabits"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="
-                        !healthHabitsIsCollapsed && antecedentes?.hasHealthHabits && antecedentes?.healthHabits.length
-                      "
+                      *ngIf="!healthHabitsIsCollapsed && antecedentes?.hasHealthHabits"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
@@ -323,12 +311,12 @@
                     [attr.aria-expanded]="!medicinesIsCollapsed"
                   >
                     <img
-                      *ngIf="medicinesIsCollapsed && antecedentes?.hasMedicines && antecedentes?.medicines.length"
+                      *ngIf="medicinesIsCollapsed && antecedentes?.hasMedicines"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="!medicinesIsCollapsed && antecedentes?.hasMedicines && antecedentes?.medicines.length"
+                      *ngIf="!medicinesIsCollapsed && antecedentes?.hasMedicines"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
@@ -398,16 +386,12 @@
                     [attr.aria-expanded]="!occupationalIsCollapsed"
                   >
                     <img
-                      *ngIf="
-                        occupationalIsCollapsed && antecedentes?.hasOccupational && antecedentes?.occupational.length
-                      "
+                      *ngIf="occupationalIsCollapsed && antecedentes?.hasOccupational"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="
-                        !occupationalIsCollapsed && antecedentes?.hasOccupational && antecedentes?.occupational.length
-                      "
+                      *ngIf="!occupationalIsCollapsed && antecedentes?.hasOccupational"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
@@ -484,12 +468,12 @@
                     [attr.aria-expanded]="!othersIsCollapsed"
                   >
                     <img
-                      *ngIf="othersIsCollapsed && antecedentes?.hasOthers && antecedentes?.others.length"
+                      *ngIf="othersIsCollapsed && antecedentes?.hasOthers"
                       src="assets/icons/icon-arrow-down.svg"
                       alt="img"
                     />
                     <img
-                      *ngIf="!othersIsCollapsed && antecedentes?.hasOthers && antecedentes?.others.length"
+                      *ngIf="!othersIsCollapsed && antecedentes?.hasOthers"
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
