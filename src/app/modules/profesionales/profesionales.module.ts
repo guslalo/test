@@ -31,6 +31,7 @@ import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.com
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CalendarComponent } from './modules/mi-disponibilidad/components/calendar/calendar.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -45,7 +46,8 @@ FullCalendarModule.registerPlugins([
     InicioPComponent,
     MiDisponibilidadComponent,
     MisPacientesComponent,
-    AgendaComponent
+    AgendaComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,

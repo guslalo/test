@@ -177,7 +177,7 @@ export class MiDisponibilidadComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailability();
     this.getAvailabilityBlocked();
-    this.calendar = true;
+    //this.calendar = true;
 
     this.createAvailability = this._formBuilder.group({
       objective: [null, [Validators.required]], //[Validators.required],
@@ -264,6 +264,7 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   crearAvailability() {
+    this.createAvailability.reset();
     console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
