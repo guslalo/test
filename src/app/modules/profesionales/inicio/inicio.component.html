@@ -252,7 +252,29 @@
                     </td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{ item.administrativeDetails.status }}
+                        {{
+                          item.administrativeDetails.status === 'reserved'
+                            ? 'Reservada'
+                            : item.administrativeDetails.status === 'appointed'
+                            ? 'Agendada'
+                            : item.administrativeDetails.status === 'rescheduled'
+                            ? 'Re-Agendada'
+                            : item.administrativeDetails.status === 'active'
+                            ? 'Activa'
+                            : item.administrativeDetails.status === 'waitingInRoom'
+                            ? 'En Sala de Espera'
+                            : item.administrativeDetails.status === 'waitingInList'
+                            ? 'En Lista de Espera'
+                            : item.administrativeDetails.status === 'running'
+                            ? 'En Curso'
+                            : item.administrativeDetails.status === 'pending'
+                            ? 'Pendiente'
+                            : item.administrativeDetails.status === 'finished'
+                            ? 'Finalizada'
+                            : item.administrativeDetails.status === 'canceled'
+                            ? 'Cancelada'
+                            : 'S/R'
+                        }}
                       </button>
                     </td>
                     <td>
@@ -272,7 +294,7 @@
                       >
                         <a *ngIf="item.patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            atender
+                            Atender
                           </button>
                         </a>
                       </ng-container>
