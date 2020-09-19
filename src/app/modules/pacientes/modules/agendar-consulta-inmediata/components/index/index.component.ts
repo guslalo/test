@@ -43,7 +43,7 @@ export class IndexComponent implements OnInit {
     this.urlConfirmacion = 'resultado/';
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       //clearInterval(this.interval);
-      this.atras();
+      //this.atras();
       //window.location.reload();
       console.log('closed');
     });
@@ -76,11 +76,10 @@ export class IndexComponent implements OnInit {
             this.estadoPagado = true;
             console.log('pagado');
             $('#exampleModal').modal('hide');         
-            //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });  
+            this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
           }
         },
-        (error) => {
-          this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
+        (error) => { 
           console.log(error);
         }
       );

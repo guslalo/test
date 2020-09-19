@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/agenda/agenda.module').then((m) => m.AgendaModule),
   },
   {
+    path: 'pacientes',
+    loadChildren: () => import('./modules/pacientes/pacientes.module').then((m) => m.PacientesModule),
+  },
+  {
     path: 'perfil',
     component: PerfilComponent,
   },

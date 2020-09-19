@@ -58,8 +58,6 @@ export class FichaConsultaComponent implements OnInit {
       year: fecha.getFullYear(),
       month: month
     }
-
-    //console.log(currentMonth);
   }
 
 

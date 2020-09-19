@@ -12,9 +12,11 @@ import * as _ from 'lodash';
 export class MisConsultasComponent implements OnInit {
   public consultas: any;
   public model: any;
+  public timeline: any;
   moment: any = moment;
   page: number = 1;
   totalPages: number;
+  public fecha:any;
 
   constructor(private appointmentsService: AppointmentsService) {}
 
@@ -25,6 +27,8 @@ export class MisConsultasComponent implements OnInit {
       this.totalPages = data.payload.numberOfPages;
     });
 
+    
+  
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data.payload);
@@ -41,5 +45,32 @@ export class MisConsultasComponent implements OnInit {
         console.log(error);
       }
     );
+    this. getFecha();
+    this.getAppointmentsTimeline();
   }
+
+  getFecha(){
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month
+    }
+  }
+    
+  getAppointmentsTimeline(){
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      data => { 
+        this.timeline = data.payload;
+     
+        console.log(this.timeline)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
 }

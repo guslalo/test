@@ -47,7 +47,6 @@ export class InicioPComponent implements OnInit {
         this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
         let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
         this.consultasFinalizadas = finalizadas.length;
-
         this.consultas = data.payload;
         console.log(this.consultas);
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
@@ -59,4 +58,6 @@ export class InicioPComponent implements OnInit {
       }
     );
   }
+
+  
 }

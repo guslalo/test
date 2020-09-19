@@ -115,7 +115,7 @@ ul {
     padding: 0px 0px 10px 0px;
     margin-bottom: 0px !important;
     li {
-      padding: 0px 0px 10px 0px;
+      padding: 8px 0px 8px 0px;
       list-style: none;
       text-align: right;
       padding-right: 30px;
@@ -680,7 +680,14 @@ h4 a {
   top: 11px;
   right: 30px;
 }
-
+.boxImg {
+  width: 45px;
+  height: 45px;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
 .collapseCustom {
   min-height: 28px;
   background: #ffffff;
@@ -691,7 +698,7 @@ h4 a {
   .delete {
     cursor: pointer;
     position: absolute;
-    top: 0;
+    top: 3px;
     right: 20px;
   }
   .hasAntecedents {
