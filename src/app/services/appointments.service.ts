@@ -18,6 +18,9 @@ export class AppointmentsService {
   private inmediate = 'v1/appointments/immediate/';
   private immediateConsolidate = 'v1/appointments/immediate/consolidate';
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
+  private waitingForRooms = 'v1/waiting-rooms';
+  private waitingAppointmentsForRooms = this.inmediate;
+  
 
 
 
@@ -153,6 +156,17 @@ export class AppointmentsService {
     params = params.append('appointmentId', id);
     return this.http.get<any>(environment.baseUrl + this.pagoStatusInmediate, { params: params });
   }
+
+  getWaitingRooms(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.waitingForRooms);
+  }
+
+  getWaitingAppointmentForRoomsId(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('waitingRoomId', id);
+    return this.http.get<any>(environment.baseUrl + this.waitingAppointmentsForRooms, { params: params });
+  }
+
 
 
 

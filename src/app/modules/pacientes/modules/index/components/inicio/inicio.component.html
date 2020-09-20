@@ -9,10 +9,10 @@
       <div class="card bg-light mb-3 p-4">
         <!--<div class="card-header">Header</div>-->
         <div class="card-body text-center">
-          <div class="card-text">
-            <div class="">
+          <div class="card-text mb-2">
+            
               <img src="assets/img/agendar-consulta-azul.svg" />
-            </div>
+            
           </div>
           <h5 class="card-title font-weight-bold">Agenda una cita médica</h5>
           <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
@@ -22,11 +22,10 @@
         </div>
       </div>
       <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
-        <div style="display: none;" class="card-header">Header</div>
         <div class="card-body text-center">
-          <p class="card-text">
+          <div class="card-text mb-2">
             <img src="assets/img/agendar-consulta--inmediata-azul.svg" />
-          </p>
+          </div>
           <h5 class="card-title font-weight-bold">Entrar a consulta inmediata</h5>
           <p>Simply dummy text of the printing and typesetting industry.</p>
           <button
@@ -38,21 +37,16 @@
           </button>
         </div>
       </div>
-      <div class="card bg-light h-100 p-4">
-        <div class="card-header" style="display: none;">
-          Mi Salud
-          <p>
-            Completa tus datos medicos para una mejor atención
-          </p>
-        </div>
-        <div class="card-body text-center">
-          <img src="assets/img/corazon-azul.svg" />
-
+      <div class="card bg-light mb-3 p-4">
+        <div class="card-body text-center h-100">
+          <div class="card-text mb-2">
+            <img src="assets/img/corazon-azul.svg" />
+          </div>
           <h5 class="card-title font-weight-bold">Mi Salud</h5>
           <p class="card-text text-center">Completa tus datos medicos para una mejor atención</p>
           <!-- <img src="assets/img/porcentaje-temp.svg" /> -->
           <div class="row">
-            <div class="col mt-4">
+            <div class="col">
               <button type="button" class="btn btn-outline-primary rounded-pill text-center" routerLink="mi-salud">
                 <svg
                   width="1em"
@@ -79,7 +73,7 @@
       </div>
     </div>
     <div class="card-deck">
-      <div class="card bg-light mt-3 p-4">
+      <div class="card bg-light mt-3">
         <ng-container *ngIf="tips">
           <owl-carousel
             [options]="{
@@ -101,12 +95,12 @@
             [carouselClasses]="['owl-theme', 'sliding']"
           >
             <ng-container *ngFor="let item of tips; let i = index">
-              <div class="card-body">
-                <div class="row">
+              <div class="card-body p-5">
+                <div class="row p-5">
                   <div class="col-2 col-md-2">
                     <img src="assets/img/lavar-manos.svg" />
                   </div>
-                  <div class="col-10 col-md-10">
+                  <div class="col-5 col-md-5">
                     <h5 class="card-title font-weight-bold">{{ item.title }}</h5>
                     <p>
                       {{ item.shortDescription }}

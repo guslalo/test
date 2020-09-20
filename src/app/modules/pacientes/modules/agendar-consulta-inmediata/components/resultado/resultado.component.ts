@@ -34,9 +34,21 @@ export class ResultadoComponent implements OnInit {
       data => {
         this.appointment = data.payload;
         console.log(data);
+        this.getWaitingRoom();
       },
       error => {
+          console.log(error)
+      }
+    )
+  }
 
+  getWaitingRoom(){
+    this.appointmentsService.getWaitingRooms().subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
       }
     )
   }

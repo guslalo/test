@@ -194,30 +194,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of consultas" id="{{ item._id}}">
-                    <th scope="row">
-                      <a routerLink="../mis-pacientes/ficha-paciente">
-                        <div *ngIf="item.patientDetails.userDetails[0].photo" class="boxImg rounded-circle d-inline-block">
-                          <img src="{{photoUrlBase}}{{item.patientDetails.userDetails[0].photo}}" />
-                        </div>
-                        {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.lastName }}  
-                      </a>
-                    </th>
-                    <td>{{ item.patientDetails.userDetails[0].personalData.phoneNumber}}</td>
-                    <td>{{ item.dateDetails.date  | date: 'dd/MM/yyyy':'+0000' }}</td>
-                    <td>{{ item.dateDetails.start}} hrs.</td>
-                    <td>{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}} </td>
-                    <td class="d-none">Objetivo</td>
-                    <td>
-                      <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{item.administrativeDetails.status}}
-                      </button>
-                    </td>
-                    <td>
-                      ...
-                    </td>
-                  </tr>
+                  <ng-container *ngIf="consultas && consultas.length === 0; else data ">
+                    <div class="alert alert-warning mt-2" role="alert">
+                      Sin Información
+                    </div>
+                  </ng-container>
+                  <ng-template #data>
+                    <tr *ngFor="let item of consultas" id="{{ item._id}}">
+                      <th scope="row">
+                          <div *ngIf="item.patientDetails.userDetails[0].photo" class="boxImg rounded-circle d-inline-block">
+                            <img src="{{photoUrlBase}}{{item.patientDetails.userDetails[0].photo}}" />
+                          </div>
+                          <p class="p-0 mt-2 ml-2 d-inline-block align-top">{{ item.patientDetails.userDetails[0].personalData.name }} 
+                            {{ item.patientDetails.userDetails[0].personalData.lastName }}</p>
+                      </th>
+                      <td>{{ item.patientDetails.userDetails[0].personalData.phoneNumber}}</td>
+                      <td>{{ item.dateDetails.date  | date: 'dd/MM/yyyy':'+0000' }}</td>
+                      <td>{{ item.dateDetails.start}} hrs.</td>
+                      <td>{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}} </td>
+                      <td class="d-none">Objetivo</td>
+                      <td>
+                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                          {{item.administrativeDetails.status}}
+                        </button>
+                      </td>
+                      <td>
+                        ...
+                      </td>
+                    </tr>
+                  </ng-template>           
                 </tbody>
               </table>
             </div>

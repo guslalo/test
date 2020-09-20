@@ -104,35 +104,41 @@
                     <tr>
                       <th scope="col">ID Paciente</th>
                       <th scope="col">Nombre Paciente</th>
-                      <th scope="col">Fecha</th>
-                      <th scope="col">Hora</th>
-                      <th scope="col">Sala</th>
+                      <th scope="col">Edad</th>
+                      <th scope="col">Sexo</th>
+                      <th scope="col">Teléfono</th>
                       <th scope="col">Acción</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of patients" id="{{ item.userData[0]._id}}">
-                      <td scope="row">
-                        {{ item.userData[0]._id}}
-                      </td>         
-                      <td>
-                        {{item.personalData.name }}
-                      </td>
-                      <td>
-                        sala
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{item.administrativeDetails.status
-                        </button>
-                      </td>
-                      <td>
-                      fg
-                      </td>
-                      <td>
-                        fg
+                    <ng-container *ngIf="patients && patients.length === 0; else data">
+                      <div class="alert alert-warning mt-2" role="alert">
+                        Sin Información
+                      </div>
+                    </ng-container>
+                    <ng-template #data>
+                      <tr *ngFor="let item of patients" id="{{ item._id}}">
+                        <td scope="row">
+                          {{ item._id}}
+                        </td>         
+                        <td>
+                          {{item.name }}
                         </td>
-                    </tr>
+                        <td>
+                          {{item.age}}   
+                        </td>
+                        <td>
+                          {{item.gender}}
+                          
+                        </td>
+                        <td>
+                          {{item.phoneNumber}}
+                        </td>
+                        <td>
+                          ...
+                          </td>
+                      </tr>
+                    </ng-template>  
                   </tbody>
                 </table>
               </div>

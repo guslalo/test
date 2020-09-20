@@ -33,13 +33,6 @@ export class MisConsultasComponent implements OnInit {
       (data) => {
         console.log(data.payload);
         this.consultas = data.payload;
-        /*
-        this.consultas = data.payload.sort(function compare(a, b) {
-          var dateA: any = new Date(a.dateDetails.date);
-          var dateB: any = new Date(b.dateDetails.date);
-          return dateB - dateA;
-        });
-        */
       },
       (error) => {
         console.log(error);
