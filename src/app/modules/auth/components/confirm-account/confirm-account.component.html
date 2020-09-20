@@ -83,7 +83,7 @@
             </svg>
           </div>
           <div class="contenedor">
-            <h3 class="mb-4 d-none d-sm-block">Confirmar Cuenta</h3>
+            <h3 class="mb-4 d-none d-sm-block">{{ 'auth.confirmAccount.label' | transloco }}</h3>
           </div>
           <form class="">
             <div class="form-group">
@@ -104,7 +104,7 @@
                   [disabled]="user.code === null || user.code === ''"
                   (click)="confirmAccount(user.code)"
                 >
-                  Verificar
+                  {{ 'auth.verify.label' | transloco }}
                 </button>
               </div>
               <p class="text-danger mt-2" *ngIf="errorMsg">{{ errorMsg.toUpperCase() }}</p>

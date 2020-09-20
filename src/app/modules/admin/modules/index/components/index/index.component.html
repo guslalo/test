@@ -37,7 +37,7 @@
       <div class="col-md-4">
         <div class="card bg-light">
           <div class="card-body text-center">
-            <h5 class="card-title mt-4">Tiempo de espera promedio</h5>
+            <h5 class="card-title mt-4">{{ 'dashboard.home.avgTime.label' | transloco }}</h5>
             <p class="card-text text-center">
               <svg
                 width="1em"
@@ -61,7 +61,7 @@
       <div class="col-md-4">
         <div class="card bg-light">
           <div class="card-body text-center">
-            <h5 class="card-title mt-4">Nuevos pacientes</h5>
+            <h5 class="card-title mt-4">{{ 'dashboard.home.newPatients.label' | transloco }}</h5>
             <p class="card-text text-center">
               44 pacientes
             </p>
@@ -75,7 +75,7 @@
   <div class="col-12 col-md-8">
     <div class="card">
       <div class="card-body">
-        <h5 class="mb-5">Rendimiento</h5>
+        <h5 class="mb-5">{{ 'dashboard.home.performance.label' | transloco }}</h5>
         <ngx-charts-area-chart-stacked
           [view]="view"
           [scheme]="colorScheme"
@@ -97,7 +97,7 @@
   <div class="col-12 col-md-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="mb-5">Actividad</h5>
+        <h5 class="mb-5">{{ 'dashboard.home.activity.label' | transloco }}</h5>
         <div class="chart-wrapper text-center">
           <app-pie-charts></app-pie-charts>
         </div>

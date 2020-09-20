@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-9 col-md-9">
-      <h2>Ficha Paciente</h2>
+      <h2>{{ 'clinicalFile.medCardPatient.label' | transloco }}</h2>
     </div>
     <div class="col-3 col-md-3">
       <button
@@ -10,7 +10,7 @@
         data-toggle="modal"
         data-target="#appointmentModal"
       >
-        Nueva Consulta
+        {{ 'clinicalFile.newService.label' | transloco }}
       </button>
 
       <a href="javascript:history.back()" class="back float-right align-top mr-3">
@@ -48,7 +48,7 @@
                 role="tab"
                 aria-controls="datosPaciente"
               >
-                Datos Paciente
+                {{ 'clinicalFile.patientData.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -60,7 +60,7 @@
                 role="tab"
                 aria-controls="consultasPaciente"
               >
-                Consultas
+                {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -73,7 +73,7 @@
                 aria-controls="examenesDocumentos"
                 aria-selected="false"
               >
-                Antecedentes
+                {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -86,7 +86,7 @@
                 aria-controls="prescripaciones"
                 aria-selected="false"
               >
-                Exámenes y Documentos
+                {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -99,7 +99,7 @@
                 aria-controls="notas"
                 aria-selected="false"
               >
-                Prescripciones
+                {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -112,7 +112,7 @@
                 aria-controls="timeline"
                 aria-selected="false"
               >
-                Timeline de Consultas
+                Timeline de {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
           </ul>
@@ -135,7 +135,7 @@
               <div class="alert alert-primary" role="alert">
                 Los datos de este paciente están al 30%, envíale un correo recordatorio para que complete sus datos
                 <button class="btn btn-outline-secondary btn-sm rounded-pill">
-                  Enviar recordatorio
+                  {{ 'clinicalFile.sendRemainder.label' | transloco }}
                 </button>
               </div>
             </div>
@@ -172,7 +172,7 @@
                     {{ patientRecord.personalData?.phoneNumber || 'S/R' }}
                   </li>
                   <li>
-                    <i class="b">Email</i>
+                    <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</i>
                     {{ patientRecord.personalData?.email || 'S/R' }}
                   </li>
                   <li>
@@ -191,7 +191,7 @@
                 </h4>
                 <ul class="datos">
                   <li>
-                    <i>Tipo de documento</i>
+                    <i>{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }} de documento</i>
                     {{ identification.type?.toUpperCase() || 'S/R' }}
                   </li>
                   <li>
@@ -301,7 +301,7 @@
                   class="btn btn-primary btn-sm m-2"
                   (click)="appointmentDateSelected = null; applyFiltersAppointments(); e.close()"
                 >
-                  Limpiar Filtro
+                  {{ 'clinicalFile.clearFilter.label' | transloco }}
                 </button>
               </ng-template>
             </div>
@@ -318,7 +318,7 @@
                   [ngStyle]="{ height: 'auto' }"
                 />
                 <label class="form-check-label" for="exampleRadios1">
-                  Mis Consultas
+                  {{ 'dashboard.home.myServices.title' | transloco }}
                 </label>
               </div>
               <div class="form-check">
@@ -333,7 +333,7 @@
                   [ngStyle]="{ height: 'auto' }"
                 />
                 <label class="form-check-label" for="exampleRadios2">
-                  Todas Las Consultas
+                  Todas Las {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
                 </label>
               </div>
             </div>
@@ -428,7 +428,7 @@
               </ngx-datatable-column>
             </ngx-datatable>
             <ng-template #noData>
-              <h5 class="text-center text-primary">No existen coincidencias</h5>
+              <h5 class="text-center text-primary">{{ 'clinicalFile.noMatches.label' | transloco }}</h5>
             </ng-template>
           </div>
         </div>
@@ -463,7 +463,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Enfermedades
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}
                 </a>
                 <div class="collapse show" id="sickness">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.sickness">
@@ -473,7 +473,7 @@
               </div>
               <ng-template #noSickness>
                 <div class="collapseCustom p-4">
-                  Enfermedades: <span class="text-primary float-right">No Presenta</span>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}: <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
 
@@ -504,7 +504,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Antecedentes Familiares
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }} Familiares
                 </a>
                 <div class="collapse show" id="familiarHistory">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.familiarHistory">
@@ -514,7 +514,7 @@
               </div>
               <ng-template #noFamiliarHistory>
                 <div class="collapseCustom p-4">
-                  Antecedentes Familiares <span class="text-primary float-right">No Presenta</span>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }} Familiares <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
               <!--/colappsed-->
@@ -544,7 +544,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Medicamentos
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco }}
                 </a>
                 <div class="collapse show" id="medicines">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.medicines">
@@ -554,7 +554,7 @@
               </div>
               <ng-template #noMedicines>
                 <div class="collapseCustom p-4">
-                  Ocupacionales: <span class="text-primary float-right">No Presenta</span>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco }}: <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
               <!--/colappsed-->
@@ -584,7 +584,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Hábitos de Salud
+                  {{ 'clinicalFile.patientData.tabs.patientHistory.habits.label' | transloco }}
                 </a>
                 <div class="collapse show" id="healthHabits">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.healthHabits">
@@ -594,7 +594,7 @@
               </div>
               <ng-template #noHealthHabits>
                 <div class="collapseCustom p-4">
-                  Hábitos de Salud: <span class="text-primary float-right">No Presenta</span>
+                  {{ 'clinicalFile.patientData.tabs.patientHistory.habits.label' | transloco }}: <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
               <!--/colappsed-->
@@ -624,7 +624,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Ocupacionales
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco }}
                 </a>
                 <div class="collapse show" id="occupational">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.occupational">
@@ -634,7 +634,7 @@
               </div>
               <ng-template #noOccupational>
                 <div class="collapseCustom p-4">
-                  Ocupacionales: <span class="text-primary float-right">No Presenta</span>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco }}: <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
               <!--/colappsed-->
@@ -664,7 +664,7 @@
                       fill="#7D7D7D"
                     />
                   </svg>
-                  Otros
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco }}
                 </a>
                 <div class="collapse show" id="others">
                   <ul class="antecedentes" *ngFor="let item of antecedentsRecord.others">
@@ -673,7 +673,7 @@
                 </div>
               </div>
               <ng-template #noOthers>
-                <div class="collapseCustom p-4">Otros: <span class="text-primary float-right">No Presenta</span></div>
+                <div class="collapseCustom p-4">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco }}: <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span></div>
               </ng-template>
               <!--/colappsed-->
             </div>
@@ -694,10 +694,10 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col">Nombre Documento</th>
-                      <th scope="col" class="text-center">Tipo</th>
-                      <th scope="col" class="text-center">Fecha de Subida</th>
-                      <th scope="col" class="text-center">Acción</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'common.uploadDate.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -723,7 +723,7 @@
                       <td class="text-center">
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                            Ver documento
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
                           </button>
                         </a>
                       </td>
@@ -740,12 +740,12 @@
         <div class="tab-pane fade" id="notasTab" role="tabpanel" aria-labelledby="notas">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0">Prescripciones</h5>
+              <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}</h5>
             </div>
             <!--
             <div class="col-6">
               <button class="btn btn-secondary rounded-pill float-right align-middle">
-                Subir documento
+                {{ 'clinicalFile.patientData.tabs.exams.btnUpload.label' | transloco }}
               </button>
             </div>
             -->
@@ -756,10 +756,10 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-center">Tipo de Documento</th>
-                      <th scope="col" class="text-center">Fecha emitida</th>
-                      <th scope="col" class="text-center">Realizado por</th>
-                      <th scope="col" class="text-center">Acción</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }} de Documento</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.duedDate.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.by.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
@@ -775,7 +775,7 @@
           <div class="row">
             <div class="col-12">
               <div class="bg-white p-4 rounded-lg text-center" *ngIf="timelineRecord.length">
-                <h5 class="mb-0 text-left">Timeline de Consultas</h5>
+                <h5 class="mb-0 text-left">Timeline de {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}</h5>
                 <div class="timeLine">
                   <div class="line bg-white">{{ moment().format('YYYY') }}</div>
                   <div class="line">
@@ -840,7 +840,7 @@
                                   <img src="assets/img/doctor-foto.svg" alt="img" />
                                 </div>
                                 <div class="col-9">
-                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     Dr. {{ item.professional?.name }} {{ item.professional?.lastName }}
                                   </p>
@@ -909,12 +909,12 @@
   </div>
 </div>
 
-<!-- Modal Nueva Consulta -->
+<!-- Modal {{ 'clinicalFile.newService.label' | transloco }} -->
 <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">Crear Consulta</h5>
+        <h5 class="modal-title text-center w-100 mt-1">{{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -930,7 +930,7 @@
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >Pacientes ingresados</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a
             >
           </li>
           <li class="nav-item" role="presentation">
@@ -942,7 +942,7 @@
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >Enviar correo a usuario nuevo</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a
             >
           </li>
         </ul>
@@ -951,22 +951,22 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente o por ID</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Calendario</label>
+                  <label for="endBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
                   <input type="date" class="form-control" name="endBlock" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Horario</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Objetivo de consulta</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
                   <input type="text" class="form-control" name="endBlock" />
                 </div>
               </div>
@@ -976,29 +976,29 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
                   <input type="text" class="form-control" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Email</label>
+                  <label for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
                   <input type="email" class="form-control" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Mensaje</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
                   <textarea class="form-control" rows="5"></textarea>
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Calendario</label>
+                  <label for="startBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
                   <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Horario</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
                 </div>
               </div>
@@ -1013,14 +1013,14 @@
         </div>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
           data-dismiss="modal"
           routerLink="crear-ficha-consulta"
         >
-          Crear Consulta
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
       </div>
     </div>

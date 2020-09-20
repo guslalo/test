@@ -31,6 +31,7 @@ import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.com
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -65,6 +66,7 @@ FullCalendarModule.registerPlugins([
     NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
+    SharedModule.forRoot(),
   ],
   exports: [
     NgbTimepickerModule,
@@ -76,4 +78,4 @@ FullCalendarModule.registerPlugins([
     NgbDatepickerModule
   ]
 })
-export class ProfesionalesModule {}
+export class ProfesionalesModule { }

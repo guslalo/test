@@ -18,7 +18,7 @@
           <img class="d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms" />
           <div class="row">
             <div class="col">
-              <h2>Completar Registro</h2>
+              <h2>{{ 'account.completeRegister.label' | transloco }}</h2>
             </div>
           </div>
           <p>{{ 'crear-cuenta.ingrese' | transloco }}</p>
@@ -245,7 +245,7 @@
                 <!--/row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="email">Email *</label>
+                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
                     <input disabled type="email" name="email" id="email" class="form-control" formControlName="email" />
                   </div>
                   <div class="form-group col-12 col-md-3">
@@ -704,7 +704,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ 'account.createAccount.modal.termAndConditions.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -727,9 +727,9 @@
         lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Rechazar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'clinicalFile.decline.label' | transloco }}</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCuenta()">
-          Aceptar y crear cuenta
+          {{ 'auth.acceptAndCreate.label' | transloco }}
         </button>
       </div>
     </div>

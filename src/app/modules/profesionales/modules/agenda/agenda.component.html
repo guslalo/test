@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col mb-2">
-      <h2>Mi Agenda</h2>
+      <h2>{{ 'common.menu.schedule.label' | transloco }}</h2>
     </div>
     <div class="col">
       <button
@@ -58,7 +58,7 @@
                 d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
               />
             </svg>
-            Calendario
+            {{ 'disponibility.tabs.calendar.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation">
@@ -121,7 +121,7 @@
               </defs>
             </svg>
 
-            Timeline de consultas
+            {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
           </a>
         </li>
       </ul>
@@ -201,7 +201,7 @@
           <div class="row">
             <div class="col-12">
               <div class="boxtimeline bg-white p-5 rounded-lg text-center">
-                <h5 class="mb-0 text-left">Timeline de consultas</h5>
+                <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
                 <div class="timeLine">
                   <div class="line bg-white">{{fecha.year}}</div>
                   <div class="line">
@@ -258,7 +258,7 @@
                                   </svg>
                                 </div>
                                 <div class="col-9">
-                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">
@@ -306,15 +306,15 @@
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Crear disponibilidad</h5>
+        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'disponibility.modal.create.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body"></div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">Crear disponibilidad</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">{{ 'disponibility.modal.create.title' | transloco }}</button>
       </div>
     </div>
   </div>
@@ -332,15 +332,15 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.blockDays.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body"></div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill">Bloquear día</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-primary rounded-pill">{{ 'clinicalFile.blockDay.label' | transloco }}</button>
       </div>
     </div>
   </div>
@@ -351,15 +351,15 @@
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar disponibilidad</h5>
+        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.editDisponibility.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">Editar disponibilidad</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">{{ 'clinicalFile.editDisponibility.label' | transloco }}</button>
       </div>
     </div>
   </div>

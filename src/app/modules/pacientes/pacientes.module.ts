@@ -16,9 +16,10 @@ import { OpentokService } from '../../services/opentok.service';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
-    //ConsultaComponent,
+//ConsultaComponent,
 @NgModule({
   declarations: [
     PublisherComponent,
@@ -26,12 +27,12 @@ import { AgendarComponent } from './components/modals/agendar/agendar.component'
     Consulta2Component,
     CambiarClaveComponent,
     MisConsultasFilterComponent,
-    AgendarComponent
+    AgendarComponent,
   ],
-  imports: [CommonModule, PacientesRoutingModule],
+  imports: [CommonModule, PacientesRoutingModule, SharedModule.forRoot()],
   exports: [
     AgendarComponent
   ],
   providers: [OpentokService],
 })
-export class PacientesModule {}
+export class PacientesModule { }

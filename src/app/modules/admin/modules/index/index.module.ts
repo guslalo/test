@@ -4,6 +4,7 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './components/index/index.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PieChartsComponent } from './components/pie-charts/pie-charts.component';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { PieChartsComponent } from './components/pie-charts/pie-charts.component
   imports: [
     CommonModule,
     NgxChartsModule,
-    IndexRoutingModule
+    IndexRoutingModule,
+    TranslocoRootModule
   ]
 })
 export class IndexModule { }

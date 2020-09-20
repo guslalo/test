@@ -108,7 +108,7 @@
                 </td>
                 <td>
                   <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
-                    Ingresar
+                    {{ 'common.button.enter.label' | transloco }}
                   </button>
                 </td>
                 <td>
@@ -165,7 +165,7 @@
               aria-controls="home"
               aria-selected="false"
             >
-              Pacientes en sala de espera
+              {{ 'dashboard.home.tab.home.tab.onHold.title' | transloco }}
             </a>
           </li>
         </ul>
@@ -179,16 +179,16 @@
               <thead>
                 <tr>
                   <th scope="row">
-                    Paciente
+                    {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
-                  <th>Teléfono</th>
-                  <th>Fecha</th>
-                  <th>Hora</th>
-                  <th>Profesional</th>
-                  <th>Objetivo</th>
-                  <th>Estado</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.phone.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
+                  <th>{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   <th>
-                    Acción
+                    {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
                   </th>
                 </tr>
               </thead>
@@ -204,7 +204,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -225,7 +225,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -246,7 +246,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -267,7 +267,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -289,16 +289,16 @@
               <thead>
                 <tr>
                   <th scope="row">
-                    Paciente
+                    {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
-                  <th>Teléfono</th>
-                  <th>Fecha</th>
-                  <th>Hora</th>
-                  <th>Profesional</th>
-                  <th>Objetivo</th>
-                  <th>Estado</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.phone.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
+                  <th>{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   <th>
-                    Acción
+                    {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
                   </th>
                 </tr>
               </thead>
@@ -314,7 +314,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -335,7 +335,7 @@
                   <td>22/93/2020</td>
                   <td>12:14 Hrs.</td>
                   <td>Antonio rojas</td>
-                  <td>Objetivo</td>
+                  <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                   <td>
                     <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                       En curso
@@ -360,7 +360,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">Crear Consulta</h5>
+        <h5 class="modal-title text-center w-100 mt-1">{{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -376,7 +376,7 @@
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >Pacientes ingresados</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a
             >
           </li>
           <li class="nav-item" role="presentation">
@@ -388,7 +388,7 @@
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >Enviar correo a usuario nuevo</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a
             >
           </li>
         </ul>
@@ -397,18 +397,18 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente o por ID</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Calendario</label>
+                  <label for="endBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
                   <input type="date" class="form-control" name="endBlock" formControlName="endBlock" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Horario</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input
                     type="time"
                     class="form-control"
@@ -419,7 +419,7 @@
                   />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Objetivo de consulta</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
                   <input type="text" class="form-control" name="endBlock" />
                 </div>
               </div>
@@ -429,25 +429,25 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Email</label>
+                  <label for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
                   <input type="email" class="form-control" name="endBlock" formControlName="endBlock" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Mensaje</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
                   <textarea class="form-control" rows="5"></textarea>
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Calendario</label>
+                  <label for="startBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
                   <input
                     type="date"
                     class="form-control"
@@ -458,13 +458,13 @@
                   />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Horario</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Objetivo de Consulta</label>
+                  <label for="startBlock">{{ 'disponibility.modal.create.objetive.label' | transloco }} de Consulta</label>
                   <input
                     type="text"
                     class="form-control"
@@ -480,14 +480,14 @@
         </div>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
           data-dismiss="modal"
           routerLink="crear-ficha-consulta"
         >
-          Crear Consulta
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
       </div>
     </div>

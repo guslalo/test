@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col mb-2">
-    <h3>Gestión de Perfiles / Actualizar Perfil</h3>
+    <h3>Gestión de {{ 'profile.profiles.label' | transloco }} / Actualizar Perfil</h3>
   </div>
   <div class="col">
     <button
@@ -62,7 +62,7 @@
             aria-selected="true"
             (click)="setRole('admin')"
           >
-            Administrador
+            {{ 'common.roles.admin.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation">
@@ -76,7 +76,7 @@
             aria-selected="false"
             (click)="setRole('coordinator')"
           >
-            Coordinador
+            {{ 'tabs.coordinator.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation">
@@ -90,7 +90,7 @@
             aria-selected="false"
             (click)="setRole('professional')"
           >
-            Profesionales de salud
+            {{ 'dashboard.home.waitingRoomManagment.modal.create.healthProfessionals.label' | transloco }}
           </a>
         </li>
       </ul>
@@ -122,7 +122,7 @@
                 aria-selected="false"
                 *ngIf="profile.role === 'admin'"
               >
-                Usuarios
+                {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -136,7 +136,7 @@
                 aria-selected="false"
                 *ngIf="profile.role === 'admin'"
               >
-                Perfiles
+                {{ 'profile.profiles.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -150,7 +150,7 @@
                 aria-selected="false"
                 *ngIf="profile.role !== 'admin'"
               >
-                Ficha Paciente
+                {{ 'clinicalFile.medCardPatient.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -163,7 +163,7 @@
                 aria-controls="consultas"
                 aria-selected="false"
               >
-                Consultas
+                {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -176,7 +176,7 @@
                 aria-controls="disponibilidad"
                 aria-selected="false"
               >
-                Disponibilidad
+                {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -189,7 +189,7 @@
                 aria-controls="sale"
                 aria-selected="false"
               >
-                Sala de espera
+                {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -203,7 +203,7 @@
                 aria-selected="false"
                 *ngIf="profile.role === 'admin'"
               >
-                Configuración Clínica
+                {{ 'dashboard.home.config.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -216,7 +216,7 @@
                 aria-controls="reporte"
                 aria-selected="false"
               >
-                Reporte
+                {{ 'tabs.report.label' | transloco }}
               </a>
             </li>
           </ul>
@@ -228,7 +228,7 @@
                   <div class="row">
                     <div class="col-4">
                       <div class="form-group">
-                        <label for="nameClinic">Nombre Perfil</label>
+                        <label for="nameClinic">{{ 'profile.profileName.label' | transloco }}</label>
                         <input
                           [(ngModel)]="profile.profileName"
                           type="text"
@@ -245,7 +245,7 @@
                     </div>
                     <div class="col-8">
                       <div class="form-group">
-                        <label for="descripcion">Descripción</label>
+                        <label for="descripcion">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</label>
                         <textarea
                           [(ngModel)]="profile.description"
                           class="form-control"
@@ -277,9 +277,9 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -379,9 +379,9 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -463,15 +463,15 @@
                   type="checkbox"
                   class="custom-control-input"
                 />
-                <label class="custom-control-label" for="medicalRecords">Gestión Ficha Paciente</label>
+                <label class="custom-control-label" for="medicalRecords">Gestión {{ 'clinicalFile.medCardPatient.label' | transloco }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -699,15 +699,15 @@
                   class="custom-control-input"
                   id="appointments"
                 />
-                <label class="custom-control-label" for="appointments">Gestión de consultas</label>
+                <label class="custom-control-label" for="appointments">{{ 'dashboard.home.services.title' | transloco }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -808,9 +808,9 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -886,15 +886,15 @@
                   class="custom-control-input"
                   id="waitingRooms"
                 />
-                <label class="custom-control-label" for="waitingRooms">Gestión de Sala de espera</label>
+                <label class="custom-control-label" for="waitingRooms">Gestión de {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -995,9 +995,9 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -1149,15 +1149,15 @@
                   type="checkbox"
                   class="custom-control-input"
                 />
-                <label class="custom-control-label" for="reports">Gestión de Reporte</label>
+                <label class="custom-control-label" for="reports">Gestión de {{ 'tabs.report.label' | transloco }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-left">Nombre de acceso</th>
-                      <th scope="col" class="text-center">Descripción</th>
-                      <th scope="col" class="text-right">Estado</th>
+                      <th scope="col" class="text-left">{{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                      <th scope="col" class="text-right">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     </tr>
                   </thead>
 

@@ -9,7 +9,7 @@
       data-toggle="modal"
       data-target="#waitingRoomForm"
     >
-      Crear Sala de Espera
+      {{ 'dashboard.home.waitingRoomManagment.modal.create.createRoom.label' | transloco }} de Espera
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
     </button>
   </div>
@@ -34,7 +34,7 @@
     <!--consultas activas-->
     <div class="row mt-4">
       <div class="col-12">
-        <h5 style="display: none;">Mis consultas activas</h5>
+        <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
       </div>
       <div class="col-12 mb-4">
         <div class="tableBox rounded p-4 bg-white">
@@ -113,13 +113,13 @@
                   </button>
                   <div ngbDropdownMenu>
                     <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
-                      Editar
+                      {{ 'clinicalFile.edit.label' | transloco }}
                     </button>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
-                      Deshabilitar
+                      {{ 'common.disable.label' | transloco }}
                     </button>
                     <button ngbDropdownItem type="button">
-                      Activar
+                      {{ 'common.activate.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -127,7 +127,7 @@
             </ngx-datatable-column>
           </ngx-datatable>
           <ng-template #noData>
-            <h5 class="text-center text-primary">No existen salas de esperas con estos parametros</h5>
+            <h5 class="text-center text-primary">{{ 'waitingRoom.noWaitingRoomsWithThisParams.label' | transloco }}</h5>
           </ng-template>
         </div>
       </div>
@@ -154,7 +154,7 @@
         <form class="mt-2" [formGroup]="roomForm">
           <div class="row">
             <div class="form-group col-12 col-md-8">
-              <label for="startBlock">Nombre Sala *</label>
+              <label for="startBlock">{{ 'waitingRoom.roomName.label' | transloco }}*</label>
               <input
                 type="text"
                 class="form-control"
@@ -167,7 +167,7 @@
               />
             </div>
             <div class="form-group col-12 col-md-4">
-              <label for="startBlock">Valor Consulta</label>
+              <label for="startBlock">{{ 'waitingRoom.serviceFee.label' | transloco }}</label>
               <input
                 [attr.disabled]="!requirePayment ? '' : null"
                 type="text"
@@ -183,7 +183,7 @@
           </div>
           <div class="row">
             <div class="form-group col">
-              <label for="startBlock">Descripción</label>
+              <label for="startBlock">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</label>
               <textarea
                 type="time"
                 class="form-control"
@@ -223,7 +223,7 @@
                 [ngStyle]="{ height: 'auto' }"
               />
               <label class="form-check-label pl-4" for="exampleRadios2">
-                Coordinadores
+                {{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }}
               </label>
             </div>
           </div>
@@ -254,12 +254,12 @@
                   (click)="addPersonnel()"
                   [disabled]="!professionalSelected.value"
                 >
-                  Agregar
+                  {{ 'common.button.add.label' | transloco }}
                 </button>
               </div>
             </div>
             <div class="row" *ngIf="professionalsData.length">
-              <p class="font-weight-bold ml-4 mt-3">Profesionales Asignados</p>
+              <p class="font-weight-bold ml-4 mt-3">{{ 'waitingRoom.assignedProfessionals.label' | transloco }}</p>
             </div>
             <div class="list-group list-group-flush">
               <li class="list-group-item" *ngFor="let item of professionalsData; let i = index">
@@ -297,12 +297,12 @@
                   (click)="addPersonnel()"
                   [disabled]="!coordinatorSelected.value"
                 >
-                  Agregar
+                  {{ 'common.button.add.label' | transloco }}
                 </button>
               </div>
             </div>
             <div class="row" *ngIf="coordinatorsData.length">
-              <p class="font-weight-bold ml-4 mt-3">Coordinadores Asignados</p>
+              <p class="font-weight-bold ml-4 mt-3">{{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }} Asignados</p>
             </div>
             <div class="list-group list-group-flush">
               <li class="list-group-item" *ngFor="let item of coordinatorsData; let i = index">
@@ -316,7 +316,7 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
@@ -324,7 +324,7 @@
           (click)="createWaitingRoom()"
           [disabled]="!validRoom()"
         >
-          Crear Sala
+          {{ 'dashboard.home.waitingRoomManagment.modal.create.createRoom.label' | transloco }}
         </button>
       </div>
     </div>

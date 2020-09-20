@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col mb-2">
-    <h2>Gestión de Perfiles</h2>
+    <h2>{{ 'dashboard.home.userManagment.createAccount.tabs.role.profileManagment.title' | transloco }}</h2>
   </div>
   <div class="col">
     <button
@@ -33,10 +33,10 @@
       <div class="col-12 col-md-3">
         <div class="form-group">
           <select [(ngModel)]="roleSelected" class="form-control" (change)="applyFilters()">
-            <option [ngValue]="null">Filtro por Rol</option>
-            <option [ngValue]="'admin'">Administrador</option>
-            <option [ngValue]="'coordinator'">Coordinador</option>
-            <option [ngValue]="'professional'">Profesional</option>
+            <option [ngValue]="null">Filtro por {{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</option>
+            <option [ngValue]="'admin'">{{ 'common.roles.admin.label' | transloco }}</option>
+            <option [ngValue]="'coordinator'">{{ 'tabs.coordinator.label' | transloco }}</option>
+            <option [ngValue]="'professional'">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</option>
           </select>
         </div>
       </div>
@@ -44,19 +44,19 @@
     <!--consultas activas-->
     <div class="row mt-1">
       <div class="col-12">
-        <h5 style="display: none;">Mis consultas activas</h5>
+        <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
       </div>
       <div class="col-12 mb-4">
         <div class="tableBox rounded p-4 bg-white">
           <table class="table">
             <thead class="">
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Usuarios</th>
-                <th scope="col">Activo</th>
-                <th scope="col">Acción</th>
+                <th scope="col">{{ 'dashboard.home.config.tabs.reason.modalCreate.name.label' | transloco }}</th>
+                <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</th>
+                <th scope="col">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
+                <th scope="col">{{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}</th>
+                <th scope="col">{{ 'common.status.active.label' | transloco }}</th>
+                <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
               </tr>
             </thead>
 
@@ -66,9 +66,9 @@
                   {{ profile.profileName }}
                 </td>
                 <td>
-                  <span *ngIf="profile.role === 'admin'">Administrador</span>
-                  <span *ngIf="profile.role === 'coordinator'">Coordinador</span>
-                  <span *ngIf="profile.role === 'professional'">Profesional</span>
+                  <span *ngIf="profile.role === 'admin'">{{ 'common.roles.admin.label' | transloco }}</span>
+                  <span *ngIf="profile.role === 'coordinator'">{{ 'tabs.coordinator.label' | transloco }}</span>
+                  <span *ngIf="profile.role === 'professional'">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</span>
                 </td>
 
                 <td>{{ profile.description || 'S/R' }}</td>
@@ -79,7 +79,7 @@
                       [routerLink]="['../../gestion-usuarios']"
                       [queryParams]="{ role: profile.role, profile: profile.id }"
                     >
-                      Ver Usuarios
+                      Ver {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
                     </button>
                   </div>
                   <ng-template #noUsers>
@@ -125,7 +125,7 @@
                         [routerLink]="['editar-perfil']"
                         [queryParams]="{ profileId: profile.id }"
                       >
-                        Editar
+                        {{ 'clinicalFile.edit.label' | transloco }}
                       </button>
                       <button
                         *ngIf="currentUser.policies.profilePolicies.delete && profile.isActive"

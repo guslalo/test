@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col mb-2">
-      <h2>Historial de Consultas</h2>
+      <h2>{{ 'common.menu.history.label' | transloco }}</h2>
     </div>
     <div class="col">
       <button
@@ -57,7 +57,7 @@
                 d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"
               />
             </svg>
-            Últimas Consultas
+            {{ 'history.tabs.latest.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation">
@@ -84,7 +84,7 @@
                 d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
               />
             </svg>
-            Timeline de consultas
+            {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
           </a>
         </li>
       </ul>
@@ -154,20 +154,20 @@
           <!--consultas activas-->
           <div class="row mt-1">
             <div class="col-12">
-              <h5 style="display: none;">Mis consultas activas</h5>
+              <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
             </div>
             <div class="col-12 mb-4">
               <div class="tableBox rounded p-4 bg-white">
                 <table class="table">
                   <thead class="">
                     <tr>
-                      <th scope="col">ID Paciente</th>
-                      <th scope="col">Nombre Paciente</th>
-                      <th scope="col">Fecha</th>
-                      <th scope="col">Hora</th>
-                      <th scope="col">Sala</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.id.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.name.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.room.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -206,7 +206,7 @@
                             <button type="button" 
                            
                             class="btn btn-outline-secondary rounded-pill btn-sm">
-                                Ver Ficha
+                                {{ 'clinicalFile.viewMedCard.label' | transloco }}
                               </button>
                             </a>
                         </ng-container>
@@ -217,7 +217,7 @@
                           item.administrativeDetails.status === 'pending'">
                             <a routerLink="/app-professional/crear-ficha-consulta/{{item._id}}">
                             <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                                atender
+                                {{ 'clinicalFile.attend.label' | transloco }}
                             </button>
                           </a>
                         </ng-container>
@@ -236,7 +236,7 @@
           <div class="row">
             <div class="col-12 text-center bg-white">
               <div class="container bg-white p-5">
-                <h5 class="mb-0 text-left">Timeline de consultas</h5>
+                <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
                 <div class="timeLine">
                   <div class="line bg-white">{{fecha.year}}</div>
                   <div class="line">
@@ -293,7 +293,7 @@
                                   </svg>
                                 </div>
                                 <div class="col-9">
-                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">

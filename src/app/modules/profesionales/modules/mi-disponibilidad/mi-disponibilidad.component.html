@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col mb-2">
-      <h2>Mi disponibilidad</h2>
+      <h2>{{ 'disponibility.title' | transloco }}</h2>
     </div>
     <div class="col">
       <button
@@ -35,7 +35,7 @@
         class="btn btn-outline-primary rounded-pill float-right mr-3"
         ng-reflect-tour-anchor="agendar"
       >
-        Bloquear días
+        {{ 'disponibility.btnBlockDays.label' | transloco }}
       </button>
     </div>
   </div>
@@ -65,7 +65,7 @@
                 d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"
               />
             </svg>
-            Listado de Disponibilidades
+            {{ 'disponibility.tabs.list.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation" (click)="initCalendar()">
@@ -92,7 +92,7 @@
                 d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
               />
             </svg>
-            Calendario
+            {{ 'disponibility.tabs.calendar.label' | transloco }}
           </a>
         </li>
       </ul>
@@ -103,20 +103,20 @@
           <!--consultas activas-->
           <div class="row mt-1">
             <div class="col-12">
-              <h5 style="display: none;">Mis consultas activas</h5>
+              <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
             </div>
             <div class="col-12 mb-4">
               <div class="tableBox rounded p-4 bg-white">
                 <table class="table">
                   <thead class="">
                     <tr>
-                      <th scope="col">Días</th>
-                      <th scope="col">Fecha</th>
-                      <th scope="col">Hora</th>
-                      <th scope="col">Objetivo</th>
-                      <th scope="col">Especialidad</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
+                      <th scope="col">{{ 'table.patients.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
+                      <th scope="col">{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
+                      <th scope="col">{{ 'disponibility.modal.create.specialty.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -204,7 +204,7 @@
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
-                              Eliminar
+                              {{ 'common.button.delete.label' | transloco }}
                             </button>
                             <button
                               data-toggle="modal"
@@ -213,7 +213,7 @@
                               type="button"
                               (click)="putAvailability(item._id)"
                             >
-                              Editar
+                              {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
                           </div>
                         </div>
@@ -228,7 +228,7 @@
           <div class="row">
             <div class="col">
               <div class="daysBlocked rounded bg-white pl-5 pr-5 pt-4 pb-4">
-                <h5 class="mb-4">Días Bloqueados</h5>
+                <h5 class="mb-4">{{ 'disponibility.tabs.list.blockedDays.label' | transloco }}</h5>
                 <ng-container *ngIf="diasBloqueados?.length < 1">
                   <tbody>
                     <tr>
@@ -292,7 +292,7 @@
                   [(ngModel)]="showActiveDays"
                   (change)="fetchCalendar()"
                 />
-                <label class="custom-control-label" for="customCheck1">Días Habilitados</label>
+                <label class="custom-control-label" for="customCheck1">{{ 'disponibility.tabs.calendar.workDays.label' | transloco }}</label>
               </div>
             </div>
             <div class="col-auto">
@@ -304,7 +304,7 @@
                   [(ngModel)]="showBlockedDays"
                   (change)="fetchCalendar()"
                 />
-                <label class="custom-control-label" for="customCheck2">Días Bloqueados</label>
+                <label class="custom-control-label" for="customCheck2">{{ 'disponibility.tabs.list.blockedDays.label' | transloco }}</label>
               </div>
             </div>
           </div>
@@ -332,7 +332,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Crear disponibilidad</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'disponibility.modal.create.title' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -341,7 +341,7 @@
           <form [formGroup]="createAvailability" novalidate="">
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Objetivo</label>
+                <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
                 <input type="text" class="form-control" id="objective" formControlName="objective" 
                  [ngClass]="{
                   'is-invalid':
@@ -349,7 +349,7 @@
                 }"/>
               </div>
               <div class="form-group col">
-                <label for="specialty">Especialidad</label>
+                <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
                 <select class="form-control" id="specialty" formControlName="specialty">                
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}" >
                     {{ item.specialtyName }}
@@ -359,7 +359,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="startDate">Fecha inicio</label>
+                <label for="startDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio</label>
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -380,12 +380,12 @@
                   />
 
                   <div *ngIf="createAvailability.controls['startDate'].errors?.required" class="invalid-feedback">
-                    Fecha inicio es necesaria
+                    {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio es necesaria
                   </div>
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label>
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -420,7 +420,7 @@
             </div>
             <div class="row mt-2 mb-3">
               <div class="col-12">
-                <p>Disponibilidad Días</p>
+                <p>{{ 'disponibility.modal.create.aviability.label' | transloco }}</p>
                
               </div>
 
@@ -448,7 +448,7 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <label for="start' + i" [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
                     <!--<ngb-timepicker 
                     [attr.id]="'start' + i"
                     formControlName="start"
@@ -472,11 +472,11 @@
                       }"
                     />
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
-                      Fecha inicio es necesaria
+                      {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio es necesaria
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <label for="'end' + i" [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
                     <!--<ngb-timepicker 
                       [attr.id]="'end' + i"
                       formControlName="end"
@@ -529,7 +529,7 @@
                       d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
                     />
                   </svg>
-                  Nueva variación de disponibilidad</a
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
                 >
               </div>
             </div>
@@ -537,7 +537,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
           <button
             type="button"
             class="btn btn-primary rounded-pill"
@@ -545,7 +545,7 @@
             [disabled]="!createAvailability.valid"
             data-dismiss="modal"
           >
-            Crear disponibilidad
+            {{ 'disponibility.modal.create.title' | transloco }}
           </button>
         </div>
       </div>
@@ -564,7 +564,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.blockDays.label' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -573,7 +573,7 @@
           <form [formGroup]="availabilityBlocked" novalidate="">
             <div class="row">
               <div class="form-group col">
-                <label for="dateBlock">Fechas</label>
+                <label for="dateBlock">{{ 'common.dates.label' | transloco }}</label>
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -601,14 +601,14 @@
                   formControlName="allDay"
                   (click)="allDayBooleanState()"
                    />
-                  <label class="custom-control-label" for="allDay">Todo el Día</label>
+                  <label class="custom-control-label" for="allDay">{{ 'disponibility.modal.blockDays.allDay.label' | transloco }}</label>
                 </div>
               </div>
             </div>
 
             <div class="row" >
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                  <label for="startBlock">Horario inicial</label>
+                  <label for="startBlock">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
                   <ngb-timepicker 
                   id="startBlock"
                   formControlName="startBlock"
@@ -616,7 +616,7 @@
                 </ngb-timepicker>
               </div>
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                  <label for="endBlock">Horario final</label>
+                  <label for="endBlock">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
                   <ngb-timepicker 
                   id="endBlock"
                   formControlName="endBlock"
@@ -627,7 +627,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
           <button
             type="button"
             class="btn btn-primary rounded-pill"
@@ -635,7 +635,7 @@
             [disabled]="!availabilityBlocked.valid"
             (click)="postAvailabilityBlocked()"
           >
-            Bloquear día
+            {{ 'clinicalFile.blockDay.label' | transloco }}
           </button>
         </div>
       </div>
@@ -654,7 +654,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar disponibilidad</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.editDisponibility.label' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -663,7 +663,7 @@
           <form [formGroup]="createAvailability" novalidate="">
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Objetivo</label>
+                <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
                 <input            
                   type="text"
                   class="form-control"
@@ -678,7 +678,7 @@
                 /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
-                <label for="specialty">Especialidad </label>
+                <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }} </label>
                 <select class="form-control" id="specialty" formControlName="specialty"><!---->
                   <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }}">
                     {{ idAvailability.professionalDetails.specialtyDetails[0].specialtyName }}
@@ -691,7 +691,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
+                <label for="endDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
                   </label>
                 <div class="input-group"><!---->
                   <input
@@ -712,7 +712,7 @@
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label><!-- formControlName="endDate"   id="endDate2"-->
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label><!-- formControlName="endDate"   id="endDate2"-->
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -790,7 +790,7 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <label for="start' + i" [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
                     <input
                       type="time"
                       [attr.id]="'start' + i"
@@ -815,7 +815,7 @@
                   </ngb-timepicker>-->
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <label for="'end' + i" [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
                     <input
                     type="time"
                     [attr.id]="'end' + i"
@@ -868,7 +868,7 @@
                       d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
                     />
                   </svg>
-                  Nueva variación de disponibilidad</a
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
                 >
               </div>
             </div>
@@ -876,7 +876,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
           <button
             type="button"
             class="btn btn-primary rounded-pill"
@@ -884,7 +884,7 @@
             (click)="putAvailability2(idAvailability._id)"
             [disabled]="!createAvailability.valid"
           ><!--[disabled]="!createAvailability.valid"-->
-            Editar disponibilidad
+            {{ 'clinicalFile.editDisponibility.label' | transloco }}
           </button>
         </div>
       </div>

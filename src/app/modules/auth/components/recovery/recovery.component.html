@@ -11,8 +11,8 @@
               fill="#0066FF"
             />
           </svg>
-          <h4 class="mb-3">Recuperación de contraseña</h4>
-          <p>Ingrese su correo electronico asociado a su cuenta.</p>
+          <h4 class="mb-3">{{ 'profile.personal.changePassword.recover.label' | transloco }}</h4>
+          <p>{{ 'profile.personal.changePassword.emailAsociatedAccount.label' | transloco }}</p>
           <form class="">
             <div class="form-group">
               <input
@@ -45,7 +45,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header text-center">
-    <h4 class="modal-title" id="modal-basic-title">Recuperación de contraseña</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ 'profile.personal.changePassword.recover.label' | transloco }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -54,10 +54,10 @@
     <form>
       <div class="form-group">
         <ng-container *ngIf="mError; else correcto">
-          <label for="dateOfBirth">usuario no existe</label>
+          <label for="dateOfBirth">{{ 'common.userNotExists.label' | transloco }}</label>
         </ng-container>
         <ng-template #correcto>
-          <label for="dateOfBirth">Se ha enviado un email para reestablecer tu contraseña</label>
+          <label for="dateOfBirth">{{ 'profile.personal.changePassword.emailSendedResetPwd.label' | transloco }}</label>
         </ng-template>
       </div>
     </form>
@@ -73,7 +73,7 @@
       Cerrar
     </button>
     <button type="button" *ngIf="mError" class="btn btn-outline-dark" (click)="modal.close('Save click')">
-      Reintentar
+      {{ 'common.retry.label' | transloco }}
     </button>
   </div>
 </ng-template>

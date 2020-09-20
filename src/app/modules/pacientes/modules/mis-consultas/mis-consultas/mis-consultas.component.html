@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col mb-2">
-    <h2>Mis Consultas</h2>
-    <p>Información de tus consultas médicas</p>
+    <h2>{{ 'dashboard.home.myServices.title' | transloco }}</h2>
+    <p>{{ 'dashboard.home.myServices.title' | transloco }}</p>
   </div>
   <div class="col"></div>
 </div>
@@ -33,7 +33,7 @@
               d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
             />
           </svg>
-          Últimas Consultas
+          {{ 'history.tabs.latest.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
@@ -49,7 +49,7 @@
           tabindex="-1"
           aria-disabled="true"
         >
-          Timeline de consultas
+          {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
         </a>
       </li>
     </ul>
@@ -101,10 +101,10 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th style="width: 25%;">Fecha y Hora</th>
-                  <th style="width: 25%;">Profesional</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
+                  <th style="width: 25%;">{{ 'clinicalFile.hourDate.label' | transloco }}</th>
+                  <th style="width: 25%;">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                 </tr>
               </thead>
             </table>
@@ -197,7 +197,7 @@
                       >
                         <a routerLink="/patient/consulta/{{ item._id }}" target="_blank">
                           <button class="rounded-pill btn-sm btn btn-primary" type="button">
-                            Entrar
+                            {{ 'clinicalFile.enter.label' | transloco }}
                           </button>
                         </a>
 
@@ -220,7 +220,7 @@
 
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
-                              Entrar
+                              {{ 'clinicalFile.enter.label' | transloco }}
                             </button>
                           </div>
                         </div>
@@ -257,7 +257,7 @@
         <div class="row">
           <div class="col-12">
             <div class="boxtimeline bg-white p-5 rounded-lg text-center">
-              <h5 class="mb-0 text-left">Timeline de consultas</h5>
+              <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
               <div class="timeLine">
                 <div class="line bg-white">2020</div>
                 <div class="line">
@@ -278,7 +278,7 @@
                     </div>
                     <div class="col-5 text-left p-0">
                       <button class="btn btn-primary dos rounded-lg">
-                        Cuenta agendada
+                        {{ 'clinicalFile.accountScheduleded.label' | transloco }}
                       </button>
                     </div>
                   </div>
@@ -302,7 +302,7 @@
                               <img src="assets/icons/icon-profile-ux.svg" alt="" />
                             </div>
                             <div class="col-9">
-                              <p class="m-0 text-left">Cita agendada con</p>
+                              <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                               <p class="m-0 text-left">Dr. Alberto Zuckernberg</p>
                               <div class="btn btn-primary btn-sm rounded-pill float-left">
                                 Activo
@@ -322,7 +322,7 @@
                           <div class="row">
                             <div class="col-3"></div>
                             <div class="col-9">
-                              <p class="m-0 text-left">Cita agendada con</p>
+                              <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                               <p class="m-0 text-left">Dr. Alberto Zuckernberg</p>
                               <div class="btn btn-primary btn-sm rounded-pill float-left">
                                 Activo
@@ -364,15 +364,15 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.blockDays.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body"></div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill">Bloquear día</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-primary rounded-pill">{{ 'clinicalFile.blockDay.label' | transloco }}</button>
       </div>
     </div>
   </div>

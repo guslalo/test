@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoordinatorRoutingModule } from './coordinator-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    CoordinatorRoutingModule
+    CoordinatorRoutingModule,
+    SharedModule.forRoot(),
   ]
 })
 export class CoordinatorModule { }

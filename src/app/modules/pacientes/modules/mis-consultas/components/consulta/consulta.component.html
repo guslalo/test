@@ -2,7 +2,7 @@
 <ng-container *ngIf="appoimentDetail">
   <div class="row mb-3">
     <div class="col-9 col-md-9">
-      <h2>Ficha Consulta</h2>
+      <h2>{{ 'clinicalFile.title' | transloco }}</h2>
     </div>
     <div class="col-3 col-md-3">
       <a href="javascript:history.back()" class="back float-right align-top">
@@ -113,7 +113,7 @@
         <div class="col-md-3">
           <div class="card bg-light shadow-sm">
             <div class="card-body text-center mt-3">
-              <h5 class="card-title mb-1">Estado de consulta</h5>
+              <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
                 {{appoimentDetail.administrativeDetails.status}}
               </button>
@@ -138,7 +138,7 @@
                 role="tab"
                 aria-controls="resumenConsulta"
               >
-                Resumen Consulta
+                {{ 'clinicalFile.patientData.tabs.summary.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -151,7 +151,7 @@
                 aria-controls="examenesDocumentos"
                 aria-selected="false"
               >
-                Exámenes y Documentos
+                {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
               </a>
             </li>
             <!---->
@@ -165,7 +165,7 @@
                 aria-controls="prescripaciones"
                 aria-selected="false"
               >
-                Profesional
+                {{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -178,7 +178,7 @@
                 aria-controls="timeline"
                 aria-selected="false"
               >
-                Timeline de consultas
+                {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
               </a>
             </li>
           
@@ -200,7 +200,7 @@
             <div class="col-12 mb-3">
               <div class="row">
                 <div class="col">
-                  <h3>Resumen consulta</h3>
+                  <h3>{{ 'clinicalFile.serviceSummary.label' | transloco }}</h3>
                 </div>
               
               </div>
@@ -217,7 +217,7 @@
                   Diagnostico
                 </p>
                 <ng-container *ngIf="appoimentDetail.appointmentDetails.diagnosticDetails.diagnostic === null; else infoDiag">
-                  <p>Sin información </p>
+                  <p>{{ 'common.noInfo.label' | transloco }} </p>
                 </ng-container>
                 <ng-template #infoDiag>
                   <p>
@@ -227,9 +227,9 @@
                 
               </div>
               <div>
-                <p class="title  font-weight-bold">Indicaciones</p>
+                <p class="title  font-weight-bold">{{ 'clinicalFile.patientData.tabs.summary.indications.label' | transloco }}</p>
                 <ng-container *ngIf="appoimentDetail.appointmentDetails.diagnosticDetails.comments === null; else infoComm">
-                  <p>Sin información </p>
+                  <p>{{ 'common.noInfo.label' | transloco }} </p>
                 </ng-container>
                 <ng-template #infoComm>
                   <p>
@@ -240,10 +240,10 @@
 
               <div class="mt-4">
                 <p class="title font-weight-bold">
-                  Receta
+                  {{ 'clinicalFile.patientData.tabs.summary.medicalPrescription.label' | transloco }}
                 </p>
                 <ng-container *ngIf="appoimentDetail.appointmentDetails.plan === null; else infoPlan">
-                  <p>Sin información </p>
+                  <p>{{ 'common.noInfo.label' | transloco }} </p>
                 </ng-container>
                 <ng-template #infoPlan>
                   <p>
@@ -359,12 +359,12 @@
               </div>
               <div style="display:none">
                 <button class="btn btn-secondary rounded-pill" disabled>
-                  Descargar resumen
+                  {{ 'clinicalFile.patientData.tabs.summary.btnDownload.label' | transloco }}
                 </button>
               </div>
               <!--
               <div class="mt-4">
-                <p class="title">Prescripciones</p>
+                <p class="title">{{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}</p>
                 <p>
                   <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -388,7 +388,7 @@
                   Sintomas
                 </p>
                 <ng-container *ngIf="appoimentDetail.patientDetails.symptomsDetails === null; else infoSymp">
-                  <p>Sin información </p>
+                  <p>{{ 'common.noInfo.label' | transloco }} </p>
                 </ng-container>
                 <ng-template #infoSymp>
                   <ng-container *ngFor="let item of appoimentDetail.patientDetails.symptomsDetails">
@@ -419,7 +419,7 @@
 
               <div class="mb-2">
                 <p class="title font-weight-bold">
-                 Descripción de síntomas
+                 {{ 'clinicalFile.symptomsDescription.label' | transloco }}
                 </p>
                 <p>{{ appoimentDetail.patientDetails.description}}</p>
               </div>
@@ -433,7 +433,7 @@
                       fill="#497DF9"
                     />
                   </svg>
-                  Signos fisicos
+                  {{ 'clinicalFile.patientData.tabs.summary.vitalSigns.label' | transloco }}
                 </p>
                 <ng-container *ngIf="appoimentDetail.patientDetails">
                   <ul class="sintomas">                 
@@ -531,11 +531,11 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-center">Nombre Documento</th>
-                      <th scope="col" class="text-center">Tipo</th>
-                      <th scope="col" class="text-center">Fecha de subida</th>
-                      <th scope="col" class="text-center">Realizado por</th>
-                      <th scope="col" class="text-center">Acción</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.exams.table.by.label' | transloco }}</th>
+                      <th scope="col" class="text-center">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -563,7 +563,7 @@
                       <td class="text-center">
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
-                           Ver documento
+                           {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
                           </button>
                         </a>
                         <!--
@@ -585,10 +585,10 @@
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button">
-                              Eliminar
+                              {{ 'common.button.delete.label' | transloco }}
                             </button>
                             <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
+                              {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
                           </div>
                         </div>-->
@@ -609,7 +609,7 @@
             <div class="col-12 mb-3">
               <div class="row">
                 <div class="col">
-                  <h3>Profesional</h3>
+                  <h3>{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</h3>
                 </div>
                
               </div>
@@ -624,7 +624,7 @@
                   <p>{{professionalData.professionalData.biography}}</p>           
               </div>
               <div>
-                <p class="title  font-weight-bold">Especialidades</p>
+                <p class="title  font-weight-bold">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.specialty.label' | transloco }}</p>
                 <ng-container *ngFor="let item of appoimentDetail.professionalDetails.specialtyDetails">
                   <img src="assets/img/especialidad-icon.svg">
                   {{item.specialtyName}}
@@ -673,7 +673,7 @@
           <div class="row">
             <div class="col-12">
               <div class="bg-white p-5 rounded-lg text-center">
-                <h5 class="mb-0 text-left">Timeline de consultas</h5>
+                <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
                 <div class="timeLine">
                   <div class="line bg-white">{{fecha.year}}</div>
                   <div class="line">
@@ -730,7 +730,7 @@
                                   </svg>
                                 </div>
                                 <div class="col-9">
-                                  <p class="m-0 text-left">Cita agendada con</p>
+                                  <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">

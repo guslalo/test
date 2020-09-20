@@ -47,7 +47,7 @@
       <div class="col-md-4">
         <div class="card bg-light">
           <div class="card-body text-center">
-            <h5 class="card-title mt-4">Proxima consulta</h5>
+            <h5 class="card-title mt-4">{{ 'clinicalFile.nextService.label' | transloco }}</h5>
             <h4 class="card-text text-center">
               En 17 minutos
             </h4>
@@ -57,7 +57,7 @@
       <div class="col-md-4">
         <div class="card bg-light">
           <div class="card-body text-center">
-            <h5 class="card-title mt-4">Evaluación general pacientes</h5>
+            <h5 class="card-title mt-4">{{ 'dashboard.home.tab.home.ratings.label' | transloco }}</h5>
             <p class="card-text text-center">
               <ngb-rating [(rate)]="currentRate">
                 <ng-template let-fill="fill" let-index="index">
@@ -73,7 +73,7 @@
     <!--consultas activas-->
     <div class="row mt-4">
       <div class="col-12">
-        <h5 class="mb-3">Próxima Consulta</h5>
+        <h5 class="mb-3">{{ 'dashboard.home.nextService.title' | transloco }}</h5>
       </div>
       <div class="col-12">
         <!-- colappsed-->
@@ -151,7 +151,7 @@
                     routerLink="crear-ficha-consulta/{{ nextAppointed[0]._id }}"
                   >
                     <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
-                      Ingresar
+                      {{ 'common.button.enter.label' | transloco }}
                     </button>
                   </a>
                 </td>
@@ -207,7 +207,7 @@
               aria-controls="child2"
               aria-selected="false"
             >
-              Pacientes en sala de espera
+              {{ 'dashboard.home.tab.home.tab.onHold.title' | transloco }}
             </a>
           </li>
         </ul>
@@ -222,13 +222,13 @@
               <thead>
                 <tr>
                   <th scope="row">
-                    Paciente
+                    {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
-                  <th>Fecha agendada</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} agendada</th>
                   <th>Hora agendada</th>
-                  <th>Estado</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   <th>
-                    Acción
+                    {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
                   </th>
                 </tr>
               </thead>
@@ -259,7 +259,7 @@
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                         <a routerLink="ficha-consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            Ver Ficha
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -272,7 +272,7 @@
                       >
                         <a *ngIf="item.patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            atender
+                            {{ 'clinicalFile.attend.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -291,13 +291,13 @@
               <thead>
                 <tr>
                   <th scope="row">
-                    Pacienteasaas
+                    {{ 'videoChat.modalEnd.patient.label' | transloco }}asaas
                   </th>
-                  <th>Fecha agendada</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} agendada</th>
                   <th>Hora agendada</th>
-                  <th>Estado</th>
+                  <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   <th>
-                    Acción
+                    {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
                   </th>
                 </tr>
               </thead>
@@ -328,7 +328,7 @@
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                         <a routerLink="ficha-consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            Ver Ficha
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -341,7 +341,7 @@
                       >
                         <a *ngIf="item.patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            atender
+                            {{ 'clinicalFile.attend.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -364,7 +364,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">Crear Consulta</h5>
+        <h5 class="modal-title text-center w-100 mt-1">{{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -380,7 +380,7 @@
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >Pacientes ingresados</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a
             >
           </li>
           <li class="nav-item" role="presentation">
@@ -392,7 +392,7 @@
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >Enviar correo a usuario nuevo</a
+              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a
             >
           </li>
         </ul>
@@ -401,22 +401,22 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente o por ID</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Fecha</label>
+                  <label for="endBlock">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</label>
                   <input type="date" class="form-control" name="endBlock" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Horario</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Objetivo de consulta</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
                   <input type="text" class="form-control" name="endBlock" />
                 </div>
               </div>
@@ -426,29 +426,29 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Nombre paciente</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
                   <input type="text" class="form-control" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Email</label>
+                  <label for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
                   <input type="email" class="form-control" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Mensaje</label>
+                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
                   <textarea class="form-control" rows="5"></textarea>
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">Calendario</label>
+                  <label for="startBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
                   <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">Horario</label>
+                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
                 </div>
               </div>
@@ -463,14 +463,14 @@
         </div>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
           data-dismiss="modal"
           routerLink="crear-ficha-consulta"
         >
-          Crear Consulta
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
       </div>
     </div>

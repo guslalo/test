@@ -274,7 +274,7 @@
                 <!--/row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="email">Email *</label>
+                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
                     <input
                       type="email"
                       name="email"
@@ -798,7 +798,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ 'account.createAccount.modal.termAndConditions.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -821,9 +821,9 @@
         lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Rechazar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'clinicalFile.decline.label' | transloco }}</button>
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="crearCuenta()">
-          Aceptar y crear cuenta
+          {{ 'auth.acceptAndCreate.label' | transloco }}
         </button>
       </div>
     </div>

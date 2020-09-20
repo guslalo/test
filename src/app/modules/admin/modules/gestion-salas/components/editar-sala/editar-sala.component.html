@@ -10,10 +10,10 @@
       class="btn btn-primary rounded-pill float-right"
       [disabled]="!validRoom()"
     >
-      Actualizar Sala
+      {{ 'waitingRoom.updateRoom.label' | transloco }}
     </button>
     <button disabled id="submit-button" type="button" class="btn btn-outline-secondary rounded-pill float-right mr-3">
-      Eliminar Sala
+      {{ 'waitingRoom.deleteRoom.label' | transloco }}
     </button>
 
     <a href="javascript:history.back()" class="back float-right align-top mr-3">
@@ -46,7 +46,7 @@
       <form [formGroup]="roomForm" class="mt-2">
         <div class="row">
           <div class="form-group col-12 col-md-6">
-            <label for="name">Nombre Sala *</label>
+            <label for="name">{{ 'waitingRoom.roomName.label' | transloco }}*</label>
             <input
               type="text"
               class="form-control"
@@ -59,7 +59,7 @@
             />
             <div class="row">
               <div class="form-group col mt-2">
-                <label for="appointmentPrice">Valor Consulta</label>
+                <label for="appointmentPrice">{{ 'waitingRoom.serviceFee.label' | transloco }}</label>
                 <input
                   [attr.disabled]="!requirePayment ? '' : null"
                   type="text"
@@ -88,7 +88,7 @@
             </div>
           </div>
           <div class="form-group col-12 col-md-6">
-            <label for="startBlock">Descripción</label>
+            <label for="startBlock">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</label>
             <textarea
               type="text"
               class="form-control"
@@ -106,7 +106,7 @@
 </div>
 
 <div class="tableBox rounded p-4 bg-white mt-4">
-  <h5>Profesionales y Coordinadores Asignados</h5>
+  <h5>Profesionales y {{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }} Asignados</h5>
   <p>
     <small>{{ professionalsData.length + coordinatorsData.length }} usuarios asignados</small>
   </p>
@@ -138,7 +138,7 @@
         [ngStyle]="{ height: 'auto' }"
       />
       <label class="form-check-label pl-4" for="exampleRadios2">
-        Coordinadores
+        {{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }}
       </label>
     </div>
   </div>
@@ -169,12 +169,12 @@
           (click)="addPersonnel()"
           [disabled]="!professionalSelected.value"
         >
-          Agregar
+          {{ 'common.button.add.label' | transloco }}
         </button>
       </div>
     </div>
     <div class="row" *ngIf="professionalsData.length">
-      <p class="font-weight-bold ml-4 mt-3">Profesionales Asignados</p>
+      <p class="font-weight-bold ml-4 mt-3">{{ 'waitingRoom.assignedProfessionals.label' | transloco }}</p>
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of professionalsData; let i = index">
@@ -212,12 +212,12 @@
           (click)="addPersonnel()"
           [disabled]="!coordinatorSelected.value"
         >
-          Agregar
+          {{ 'common.button.add.label' | transloco }}
         </button>
       </div>
     </div>
     <div class="row" *ngIf="coordinatorsData.length">
-      <p class="font-weight-bold ml-4 mt-3">Coordinadores Asignados</p>
+      <p class="font-weight-bold ml-4 mt-3">{{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }} Asignados</p>
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of coordinatorsData; let i = index">

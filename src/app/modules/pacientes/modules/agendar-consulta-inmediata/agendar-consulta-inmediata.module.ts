@@ -5,6 +5,7 @@ import { AgendarConsultaInmediataRoutingModule } from './agendar-consulta-inmedi
 import { IndexComponent } from './components/index/index.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ResultadoComponent } from './components/resultado/resultado.component';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ResultadoComponent } from './components/resultado/resultado.component';
     CommonModule,
     AgendarConsultaInmediataRoutingModule,
     ReactiveFormsModule, FormsModule,
-    NgxSpinnerModule 
+    NgxSpinnerModule,
+    TranslocoRootModule
   ]
 })
 export class AgendarConsultaInmediataModule { }

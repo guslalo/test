@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col mb-2">
-    <h2>Mis Pacientes</h2>
+    <h2>{{ 'myPatients.title' | transloco }}</h2>
   </div>
   <div class="col">
     <button
@@ -34,7 +34,7 @@
       <div class="col-auto mb-4">
         <ul ngbNav #nav="ngbNav" [(activeId)]="tab" class="nav-tabs">
           <li ngbNavItem="patients">
-            <a ngbNavLink>Pacientes Asociados</a>
+            <a ngbNavLink>{{ 'clinicalFile.asociatedPatients.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
                 <ngx-datatable
@@ -94,7 +94,7 @@
                   </ngx-datatable-column>
                 </ngx-datatable>
                 <ng-template #noData>
-                  <h5 class="text-center text-primary">No se han encontrado pacientes asociados</h5>
+                  <h5 class="text-center text-primary">{{ 'clinicalFile.noAsociatedPatients.label' | transloco }}</h5>
                 </ng-template>
               </div>
             </ng-template>
@@ -177,7 +177,7 @@
                             data-target="#sendInvitationModal"
                             (click)="sendInvitationEmail(row._id)"
                           >
-                            Enviar Invitacion a Correo
+                            {{ 'clinicalFile.sendEmail.label' | transloco }}
                           </button>
                         </div>
                       </div>
@@ -185,7 +185,7 @@
                   </ngx-datatable-column>
                 </ngx-datatable>
                 <ng-template #noData>
-                  <h5 class="text-center text-primary">No existen pacientes ingresados</h5>
+                  <h5 class="text-center text-primary">{{ 'clinicalFile.noStoredPatients.label' | transloco }}</h5>
                 </ng-template>
               </div>
             </ng-template>
@@ -227,11 +227,11 @@
                 [checked]="false"
                 formControlName="isTutor"
               />
-              <label class="custom-control-label" for="switchIsTutor">Cuenta Tutor</label>
+              <label class="custom-control-label" for="switchIsTutor">{{ 'clinicalFile.tutorAcount.label' | transloco }}</label>
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="name">Nombre</label>
+                <label for="name">{{ 'dashboard.home.config.tabs.reason.modalCreate.name.label' | transloco }}</label>
                 <input
                   type="text"
                   class="form-control"
@@ -243,7 +243,7 @@
                 />
               </div>
               <div class="form-group col">
-                <label for="lastName">Primer Apellido</label>
+                <label for="lastName">{{ 'profile.personal.tabIdentification.personalData.firstSurname.label' | transloco }}</label>
                 <input
                   type="email"
                   class="form-control"
@@ -257,7 +257,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="secondLastName">Segundo Apellido *</label>
+                <label for="secondLastName">{{ 'clinicalFile.mandatorySurname.label' | transloco }}*</label>
                 <input
                   type="email"
                   class="form-control"
@@ -269,7 +269,7 @@
                 />
               </div>
               <div class="form-group col">
-                <label for="gender">Sexo</label>
+                <label for="gender">{{ 'clinicalFile.patientData.tabs.identification.info.grender.label' | transloco }}</label>
                 <select
                   class="form-control"
                   name="gender"
@@ -286,7 +286,7 @@
             </div>
             <div class="row">
               <div class="form-group col-5">
-                <label for="email">Email</label>
+                <label for="email">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
                 <input
                   type="email"
                   class="form-control"
@@ -310,7 +310,7 @@
                 />
               </div>
               <div class="form-group col-2">
-                <label for="age">Edad</label>
+                <label for="age">{{ 'clinicalFile.patientData.tabs.identification.info.age.label' | transloco }}</label>
                 <input
                   class="form-control"
                   name="age"
@@ -325,7 +325,7 @@
         </div>
         <div class="modal-footer text-center justify-content-center">
           <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
-            Cancelar
+            {{ 'common.button.cancel.label' | transloco }}
           </button>
           <button
             type="button"

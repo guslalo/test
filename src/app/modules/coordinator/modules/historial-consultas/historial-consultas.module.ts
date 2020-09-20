@@ -11,6 +11,7 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    TranslocoRootModule
   ],
   exports: [
     NgbDatepickerModule,

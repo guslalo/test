@@ -10,7 +10,7 @@
       class="btn btn-secondary rounded-pill float-right"
       [disabled]="!formUserValid()"
     >
-      Actualizar Cuenta
+      {{ 'account.updateAccount.label' | transloco }}
     </button>
 
     <a href="javascript:history.back()" class="back float-right align-top mr-3">
@@ -41,7 +41,7 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" id="datos1" data-toggle="tab" href="#datos-personales-tab" role="tab">
-              Personales
+              {{ 'dashboard.home.userManagment.createAccount.tabs.personal.personal.label' | transloco }}
             </a>
           </li>
           <li class="nav-item" role="presentation">
@@ -53,7 +53,7 @@
               href="#datos-rol-tab"
               role="tab"
             >
-              Rol
+              {{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}
             </a>
           </li>
           <li class="nav-item" role="presentation">
@@ -66,7 +66,7 @@
               role="tab"
               aria-selected="false"
             >
-              Sala de Espera (Modalidad)
+              {{ 'waitingRoom.name.label' | transloco }} (Modalidad)
             </a>
           </li>
           <li class="nav-item" role="presentation">
@@ -79,12 +79,12 @@
               role="tab"
               aria-selected="false"
             >
-              Laborales
+              {{ 'dashboard.home.userManagment.createAccount.tabs.academic.label' | transloco }}
             </a>
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link" id="datos5" data-toggle="tab" href="#datos-clave-tab" role="tab" aria-selected="false">
-              Clave
+              {{ 'dashboard.home.userManagment.createAccount.tabs.password.label' | transloco }}
             </a>
           </li>
         </ul>
@@ -99,7 +99,7 @@
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <div class="row">
-                <h4 class="pl-3 pb-2">Identificación</h4>
+                <h4 class="pl-3 pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.label' | transloco }}</h4>
                 <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
                   <input
                     type="checkbox"
@@ -114,7 +114,7 @@
               <form [formGroup]="identificationData">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="document">Documento de Identificacion *</label>
+                    <label for="document">{{ 'account.identificationDocumentReq.label' | transloco }}*</label>
                     <select
                       disabled
                       class="form-control"
@@ -132,7 +132,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="idDocumentNumber">N° de Documento Seleccionado *</label>
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}*</label>
                     <input
                       disabled
                       type="text"
@@ -174,7 +174,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="document">Documentacion Secundaria</label>
+                    <label for="document">{{ 'account.secondaryDoc.label' | transloco }}</label>
                     <select
                       disabled
                       class="form-control"
@@ -188,13 +188,13 @@
                       <option value="cbo">CBO-R</option>
                       <option value="pasep">PIS/PASEP</option>
                       <option value="ctps">CTPS</option>
-                      <option value="idDocumentNumber">Numero de Identidad</option>
+                      <option value="idDocumentNumber">{{ 'account.numberReq.label' | transloco }}de Identidad</option>
                       <option value="titleVote">Titulo de Votante</option>
                       <option value="professionalUfNumber">Registro Clase Profesional</option>
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="idDocumentNumber">N° de Documento Seleccionado</label>
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}</label>
                     <input
                       disabled
                       type="text"
@@ -211,16 +211,16 @@
             </div>
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <div class="row">
-                <h4 class="pl-3 pb-2">Personales</h4>
+                <h4 class="pl-3 pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.personal.personal.label' | transloco }}</h4>
                 <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
                   <input type="checkbox" class="custom-control-input" id="isSchool" [(ngModel)]="isSchool" />
-                  <label class="custom-control-label" for="isSchool">Asistente a Escuela</label>
+                  <label class="custom-control-label" for="isSchool">{{ 'account.schoolAsistant.label' | transloco }}</label>
                 </div>
               </div>
               <form [formGroup]="personalData">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="name">Nombre *</label>
+                    <label for="name">{{ 'account.nameReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -232,7 +232,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="lastName">Segundo Nombre</label>
+                    <label for="lastName">Segundo {{ 'account.nameReq.label' | transloco }}</label>
                     <input
                       type="text"
                       class="form-control"
@@ -244,7 +244,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="secondLastName">Apellido *</label>
+                    <label for="secondLastName">{{ 'account.surnameReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -256,7 +256,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="lastName">Nombres de la Madre *</label>
+                    <label for="lastName">{{ 'account.nameReq.label' | transloco }}s de la Madre *</label>
                     <input
                       type="text"
                       class="form-control"
@@ -270,7 +270,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="email">Email *</label>
+                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
                     <input
                       type="email"
                       class="form-control"
@@ -284,7 +284,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="phoneNumber">Telefono *</label>
+                    <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -297,7 +297,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="gender">Sexo *</label>
+                    <label for="gender">{{ 'account.grenderReq.label' | transloco }}*</label>
                     <select
                       class="form-control"
                       name="gender"
@@ -311,7 +311,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="birthdate">Fecha de Nacimiento *</label>
+                    <label for="birthdate">{{ 'account.dateOfBirthReq.label' | transloco }}*</label>
                     <div class="input-group dateregister">
                       <input
                         type="text"
@@ -347,7 +347,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="municipalityBirth">Municipio de Nacimiento</label>
+                    <label for="municipalityBirth">{{ 'clinicalFile.patientData.tabs.identification.birthData.minicipality.label' | transloco }}</label>
                     <select
                       [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
@@ -361,7 +361,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="nacionality">Nacionalidad *</label>
+                    <label for="nacionality">{{ 'account.nationalityReq.label' | transloco }}*</label>
                     <select
                       class="form-control"
                       name="nacionality"
@@ -377,7 +377,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="originCountry">Pais de Origen</label>
+                    <label for="originCountry">{{ 'account.country.label' | transloco }}</label>
                     <select
                       [attr.disabled]="!isForeign ? '' : null"
                       class="form-control"
@@ -393,7 +393,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="inmigrationDate">Fecha de Entrada al Pais</label>
+                    <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
                     <div class="input-group dateregister">
                       <input
                         [disabled]="!isForeign"
@@ -470,7 +470,7 @@
                     />
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="uf">Estado (UF) *</label>
+                    <label for="uf">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} (UF) *</label>
                     <select
                       class="form-control"
                       name="uf"
@@ -486,7 +486,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="city">Ciudad *</label>
+                    <label for="city">{{ 'account.cityReq.label' | transloco }}*</label>
                     <select
                       class="form-control"
                       name="city"
@@ -502,7 +502,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="street">Barrio *</label>
+                    <label for="street">{{ 'account.neighborhoodReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -514,7 +514,7 @@
                     />
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="street">Calle *</label>
+                    <label for="street">{{ 'account.streetReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -526,7 +526,7 @@
                     />
                   </div>
                   <div class="form-group col-md-1">
-                    <label for="streetNumber">Numero *</label>
+                    <label for="streetNumber">{{ 'account.numberReq.label' | transloco }}*</label>
                     <input
                       type="text"
                       class="form-control"
@@ -549,11 +549,11 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-              <h4 class="pb-2">Roles</h4>
+              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}es</h4>
               <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="role">Tipo de Usuario</label>
+                    <label for="role">{{ 'account.userType.label' | transloco }}</label>
                     <select
                       type="text"
                       class="form-control"
@@ -565,7 +565,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="profile">Perfil</label>
+                    <label for="profile">{{ 'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco }}</label>
                     <select
                       [(ngModel)]="profileSelected"
                       class="form-control"
@@ -587,7 +587,7 @@
                       class="btn btn-outline-primary rounded-pill mt-4"
                       [disabled]="!profilesForm.valid"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -596,15 +596,15 @@
           </div>
         </div>
         <div class="row">
-          <h4 class="mt-2 ml-4">Gestión de Perfiles</h4>
+          <h4 class="mt-2 ml-4">{{ 'dashboard.home.userManagment.createAccount.tabs.role.profileManagment.title' | transloco }}</h4>
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
               <table class="table">
                 <thead class="">
                   <tr>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Perfil</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</th>
+                    <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -642,7 +642,7 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-              <h4 class="pb-2">Salas de Espera</h4>
+              <h4 class="pb-2">{{ 'waitingRoom.titlePlural.label' | transloco }}</h4>
               <form [formGroup]="waitingRoomForm">
                 <div class="row">
                   <div class="form-group col-md-4">
@@ -665,12 +665,12 @@
                       class="btn btn-outline-primary rounded-pill mt-4"
                       [disabled]="!waitingRoomForm.valid"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                     </button>
                   </div>
                   <div class="form-group col-md-3">
                     <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
-                      Agregar Todas
+                      {{ 'common.button.add.label' | transloco }} Todas
                     </button>
                   </div>
                 </div>
@@ -685,9 +685,9 @@
               <table class="table">
                 <thead class="">
                   <tr>
-                    <th scope="col">Sala de Espera</th>
+                    <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                   </tr>
                 </thead>
 
@@ -727,7 +727,7 @@
               <img src="assets/perfil.png" style="border-radius: 50%;" />
             </div>
             <button type="button" class="btn btn-sm btn-outline-primary rounded-pill w-100 mt-2">
-              Cambiar Foto
+              {{ 'common.button.changePic.label' | transloco }}
             </button>
           </div>
           <div class="col-10">
@@ -753,11 +753,11 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-              <h4 class="pb-2">Especialidades</h4>
+              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.specialty.label' | transloco }}</h4>
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">Nombre Especialidad</label>
+                    <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
@@ -771,7 +771,7 @@
                       class="btn btn-outline-primary rounded-pill mt-4"
                       [disabled]="!specialitiesForm.valid"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                     </button>
                   </div>
                   <div class="col-md-6">
@@ -798,7 +798,7 @@
               <form [formGroup]="professionalForm">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="professionalTitle">Titulo Profesional</label>
+                    <label for="professionalTitle">{{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}</label>
                     <input
                       type="text"
                       class="form-control"
@@ -810,7 +810,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="university">Universidad</label>
+                    <label for="university">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco }}</label>
                     <input
                       type="text"
                       class="form-control"
@@ -822,7 +822,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="course">Curso</label>
+                    <label for="course">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}</label>
                     <input
                       type="text"
                       class="form-control"
@@ -834,7 +834,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="registryNumber">UF de Registro</label>
+                    <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
                     <select
                       class="form-control"
                       name="ufRegistry"
@@ -852,7 +852,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="professionalRegistryType">Registro Profesional</label>
+                    <label for="professionalRegistryType">{{ 'dashboard.home.uncategorized.professionalReg.label' | transloco }}</label>
                     <select
                       class="form-control"
                       name="professionalRegistryType"
@@ -870,7 +870,7 @@
                     </select>
                   </div>
                   <div class="col-md-3">
-                    <label for="professionalRegistryType">N° de Registro</label>
+                    <label for="professionalRegistryType">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</label>
                     <input
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       type="text"
@@ -883,7 +883,7 @@
                     />
                   </div>
                   <div class="col-md-3">
-                    <label for="ufProfessionalRegistry">Estado</label>
+                    <label for="ufProfessionalRegistry">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</label>
                     <select
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       class="form-control"
@@ -902,7 +902,7 @@
                       class="btn btn-outline-primary rounded-pill mt-4"
                       [disabled]="validProfessionalRegistry()"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -910,9 +910,9 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Tipo de Registro</th>
-                        <th scope="col">N° de Registro</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
+                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
+                        <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                         <th scope="col">Acciones</th>
                       </tr>
                     </thead>
@@ -953,7 +953,7 @@
       <!--tab-->
       <div class="tab-pane fade show pt-2" id="datos-clave-tab" role="tabpanel">
         <div class="row">
-          <h4 class="pb-2">Cambio de Contraseña</h4>
+          <h4 class="pb-2">{{ 'profile.personal.changePassword.pwdChange.label' | transloco }}</h4>
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <form [formGroup]="passwordForm">
@@ -993,7 +993,7 @@
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
-                    <label for="confirmPasword">Confirmar Contraseña *</label>
+                    <label for="confirmPasword">{{ 'account.confirmPassword.label' | transloco }}*</label>
                     <div class="input-group mb-3">
                       <input
                         [type]="showPassword ? 'text' : 'password'"
