@@ -196,6 +196,9 @@
                     <div *ngIf="personalData.controls['name'].errors?.required" class="invalid-feedback">
                       {{ 'crear-cuenta.step2.formGroup.name' | transloco }} es necesario
                     </div>
+                    <div *ngIf="personalData.controls['name'].errors?.pattern" class="invalid-feedback">
+                      Ingrese solo caracteres
+                    </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <label for="lastName">{{ 'crear-cuenta.step2.formGroup.lastName' | transloco }}</label>
@@ -204,9 +207,15 @@
                       name="lastName"
                       id="lastName"
                       class="form-control"
-                      placeholder="lastName"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
+                      }"
                       formControlName="lastName"
                     />
+                    <div *ngIf="personalData.controls['lastName'].errors?.pattern" class="invalid-feedback">
+                      Ingrese solo caracteres
+                    </div>
                   </div>
                 </div>
                 <!--/row-->
@@ -230,6 +239,9 @@
                       {{ 'crear-cuenta.step2.formGroup.secondLastName' | transloco }}
                       es necesario
                     </div>
+                    <div *ngIf="personalData.controls['secondLastName'].errors?.pattern" class="invalid-feedback">
+                      Ingrese solo caracteres
+                    </div>
                   </div>
                   <div class="form-group col-12 col-md-4">
                     <label for="motherName">{{ 'crear-cuenta.step2.formGroup.motherName' | transloco }} *</label>
@@ -247,6 +259,9 @@
                     <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
                       {{ 'crear-cuenta.step2.formGroup.motherName' | transloco }}
                       es necesario
+                    </div>
+                    <div *ngIf="personalData.controls['motherName'].errors?.pattern" class="invalid-feedback">
+                      Ingrese solo caracteres
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
@@ -320,7 +335,7 @@
                       id="phoneNumber"
                       type="text"
                       class="form-control"
-                      placeholder=""
+                      placeholder="#### o +(#)####-####"
                       [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
                       }"
@@ -656,48 +671,68 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="password">{{ 'crear-cuenta.step5.formGroup.password' | transloco }} *</label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      class="form-control"
-                      [ngClass]="{
-                        'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
-                      }"
-                      formControlName="password"
-                      maxlength="16"
-                      onkeypress="return event.charCode != 32"
-                    />
-                    <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
-                      <ul>
-                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.1' | transloco }}</li>
-                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.2' | transloco }}</li>
-                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.3' | transloco }}</li>
-                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.4' | transloco }}</li>
-                        <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.5' | transloco }}</li>
-                      </ul>
+                    <div class="input-group mb-3">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        [ngClass]="{
+                          'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
+                        }"
+                        formControlName="password"
+                        maxlength="16"
+                        onkeypress="return event.charCode != 32"
+                      />
+                      <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
+                        <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
+                          <img src="assets/icons/icon-show-password.svg" alt="img" />
+                        </button>
+                        <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
+                          <img src="assets/icons/icon-show-password.svg" alt="img" />
+                        </button>
+                      </div>
+                      <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
+                        <ul>
+                          <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.1' | transloco }}</li>
+                          <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.2' | transloco }}</li>
+                          <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.3' | transloco }}</li>
+                          <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.4' | transloco }}</li>
+                          <li>{{ 'crear-cuenta.step5.formGroup.condicionPassword.5' | transloco }}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
                     <label for="confirmPasword"
                       >{{ 'crear-cuenta.step5.formGroup.confirmPassword' | transloco }} *</label
                     >
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      class="form-control"
-                      placeholder=""
-                      [ngClass]="{
-                        'is-invalid':
-                          passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
-                      }"
-                      formControlName="confirmPassword"
-                      maxlength="16"
-                      onkeypress="return event.charCode != 32"
-                    />
-                    <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
-                      {{ 'crear-cuenta.step5.formGroup.passwordNotMatch' | transloco }}
+                    <div class="input-group mb-3">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        class="form-control"
+                        placeholder=""
+                        [ngClass]="{
+                          'is-invalid':
+                            passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
+                        }"
+                        formControlName="confirmPassword"
+                        maxlength="16"
+                        onkeypress="return event.charCode != 32"
+                      />
+                      <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
+                        <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
+                          <img src="assets/icons/icon-show-password.svg" alt="img" />
+                        </button>
+                        <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
+                          <img src="assets/icons/icon-show-password.svg" alt="img" />
+                        </button>
+                      </div>
+                      <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
+                        {{ 'crear-cuenta.step5.formGroup.passwordNotMatch' | transloco }}
+                      </div>
                     </div>
                   </div>
                 </div>

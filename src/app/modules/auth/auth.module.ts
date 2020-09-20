@@ -27,6 +27,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FinishRegistrationComponent } from './components/finish-registration/fi
     NgbDatepickerModule,
     MatStepperModule,
     MatDialogModule,
+    RouterModule,
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
