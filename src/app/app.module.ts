@@ -19,6 +19,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AppComponent } from './app.component';
 import { ErrorDialogService } from './shared/error-dialog/error-dialog.service';
 
+
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MessagingService } from './services/messaging.service';
 
@@ -58,5 +59,8 @@ import { environment } from './../environments/environment';
   providers: [AngularFireDatabaseModule, ErrorDialogService, MessagingService, AsyncPipe],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent],
+  exports: [
+   
+  ]
 })
 export class AppModule {}

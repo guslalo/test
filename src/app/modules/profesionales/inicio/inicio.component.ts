@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from './../../../services/current-user.service';
 import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 
 @Component({
   selector: 'app-inicio',
@@ -18,6 +21,7 @@ export class InicioPComponent implements OnInit {
   public consultasFinalizadas: any;
 
   constructor(
+    private spinner:NgxSpinnerService,
     private appointmentsService: AppointmentsService,
     public currentUserService: CurrentUserService,
     config: NgbRatingConfig
@@ -30,6 +34,7 @@ export class InicioPComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
   }
@@ -52,6 +57,7 @@ export class InicioPComponent implements OnInit {
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
         var earliest = new Date(Math.min.apply(null,dates));*/
+        this.spinner.hide();
       },
       (error) => {
         console.log(error);

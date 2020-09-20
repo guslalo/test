@@ -992,33 +992,29 @@
                         <div class="col-6">
                           <label>Tipo de Diagnostico</label>
                           <select class="form-control" formControlName="type" id="type" name="type">
-                            <option value="cei10">ce10</option>
+                            <option value="cei10">cei10</option>
                             <option value="snomed">snomed</option>
                           </select>
                         </div>
                         <div class="col-6">
-                            <label for="endBlock">Diagnostico</label>
-                            <input class="form-control mb-3" type="text" 
-                            placeholder="Diagnostico"
-                            id="diagnostic"
-                              name="diagnostic"
-                              formControlName="diagnostic"
-                              >
-                          
+                          <label for="endBlock">Diagnostico</label>
+                          <input class="form-control mb-3" type="text" 
+                          placeholder="Diagnostico"
+                          id="diagnostic"
+                          name="diagnostic"
+                          formControlName="diagnostic"
+                          >
                         </div>
                         <div class="col-12">
                           <label for="endBlock">Comentarios</label>
                           <textarea class="form-control" id="comments" name="comments" 
                           formControlName="comments"
                           rows="5"></textarea>
-                        </div>
-                      
+                        </div>                 
                       </div>
-                  
                     </form>
                   </div>
                   <div class="tab-pane fade p-4" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
-
                     Notas: 
                     <div class="row mt-2">
                       <ng-container *ngFor="let item of notesArray">
@@ -1629,7 +1625,6 @@
   </div>
 </ng-container>
 
-
 <div class="modal fade" tabindex="-1"  id="exampleModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1648,7 +1643,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="modal fade" tabindex="-1" id="ingresarNota">
   <div class="modal-dialog modal-dialog-centered">
@@ -1679,5 +1673,6 @@
   </div>
 </div>
 
-
-
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>

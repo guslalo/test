@@ -6,6 +6,7 @@ import { PatientsService } from './../../../../../../services/patients.service'
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
+
 export class IndexComponent implements OnInit {
 
   public patient:any;
