@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, forkJoin } from 'rxjs';
+import { Subject, forkJoin, of } from 'rxjs';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 //import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 //import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
+import { CoordinatorService } from './../../../../../../services/coordinator.service';
 import { AvailabilityService } from './../../../../../../services/availability.service';
 import { ProfessionalService } from './../../../../../../services/professional.service';
 import { SpecialtiesService } from './../../../../../../services/specialties.service';
@@ -50,6 +51,7 @@ export class IndexComponent implements OnInit {
 
   constructor(
     private availabilityService: AvailabilityService,
+    private coordinatorService:CoordinatorService,
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService
@@ -64,6 +66,9 @@ export class IndexComponent implements OnInit {
   options: any;
   calendar: boolean;
   public disponibilidad: any;
+  public disponibilidadObject = {};
+  public disponibilidadArray = [];
+  public especialidad:any;
   public diasBloqueados: any;
   public createAvailability: FormGroup;
   public availabilityDays: FormGroup;
@@ -160,7 +165,7 @@ export class IndexComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAvailability();
+    
     this.getAvailabilityBlocked();
     //this.calendar = true;
 
@@ -184,6 +189,7 @@ export class IndexComponent implements OnInit {
 
     this.agregardailyRanges();
     this.getSpecialtiesIdService();
+    this.getAvailability();
   }
 
   
@@ -202,11 +208,36 @@ export class IndexComponent implements OnInit {
   }
 
   getAvailability() {
-    this.availabilityService.getAvailability().subscribe(
+    this.coordinatorService.getAvailability().subscribe(
       (data) => {
-        this.disponibilidad = data.payload;
-        this.fetchCalendar();
-        console.log(this.disponibilidad);
+        console.log(data.payload);
+        for(let item of data.payload){
+          this.especialidad =  this.specialtiesService.getSpecialtiesId(item.professionalDetails.specialtyId).subscribe(
+            (data2) => {
+              this.especialidad = data2.payload.specialtyName;
+              this.disponibilidadObject = {
+                _id:item._id,
+                daysDetails:item.dateDetails.days,
+                dateStart:item.dateDetails.startDate,
+                dateEnd:item.dateDetails.endDate,
+                start:item.dateDetails.dailyRanges,
+                objective:item.administrativeDetails.objective,
+                specialty:this.especialidad,
+                professional:`${item.professionalName[0].personalData.name} ${item.professionalName[0].personalData.lastName}`,
+                status:item.administrativeDetails.isActive
+              }
+               this.disponibilidadArray.push(this.disponibilidadObject);
+
+            },
+            (error) => {
+              console.log(error);
+            }
+          ); 
+         
+        } 
+        console.log(this.disponibilidadArray);
+        //this.fetchCalendar();
+        console.log(data.payload);
       },
       (error) => {
         console.log(error);
@@ -289,7 +320,7 @@ export class IndexComponent implements OnInit {
 
   putState(item) {
     console.log(item);
-    this.availabilityService.updateState(item._id, item.administrativeDetails.isActive).subscribe(
+    this.availabilityService.updateState(item._id, item.status).subscribe(
       (data) => {
         console.log(data);
         this.state = data;
@@ -522,6 +553,8 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+
+
 
   //GET sub especialidad
   getSpecialtiesIdService() {

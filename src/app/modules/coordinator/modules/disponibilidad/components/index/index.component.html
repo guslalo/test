@@ -62,7 +62,7 @@
                   </tr>
                 </thead>
 
-                <ng-container *ngIf="disponibilidad?.length === 0">
+                <ng-container *ngIf="disponibilidadArray?.length === 0">
                   <tbody>
                     <tr>
                       <div class="alert alert-warning mt-3" role="alert">
@@ -71,54 +71,36 @@
                     </tr>
                   </tbody>
                 </ng-container>
-                <tbody *ngIf="disponibilidad">
-                  <tr *ngFor="let item of disponibilidad" id="{{ item._id }}">
+                <tbody *ngIf="disponibilidadArray">
+                  <tr *ngFor="let item of disponibilidadArray" id="{{item._id }}">
                     <td scope="row">
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-calendar"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                        />
-                      </svg>
                       <ng-container>
-                        {{ item.dateDetails.days }}
+                        <div style="width:360px; overflow: hidden;">
+                        {{ item.daysDetails }}
+                        </div>
                       </ng-container>
                     </td>
                     <td>
-                      <!--Hasta el -->
-                      {{ item.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }}
-
-                      <ng-container *ngIf="item.dateDetails.endDate">
-                        - {{ item.dateDetails.endDate | date: 'dd/MM/yyyy':'+0000' }}
-                      </ng-container>
+                      {{ item.dateStart | date: 'dd/MM/yyyy':'+0000' }} - {{ item.dateEnd | date: 'dd/MM/yyyy':'+0000' }}
                     </td>
                     <td>
-                      <ng-container *ngFor="let range of item.dateDetails.dailyRanges"
-                        ><!---->
-                        {{ range.start }} hrs - {{ range.end }} hrs
+                      <div style="width:100px">
+                      <ng-container *ngIf="item.start.length > 1; else oneElement">
+                        <ng-container *ngFor="let range of item.start">
+                         {{ range.start }} hrs. - {{ range.end }} hrs. 
+                        </ng-container> 
                       </ng-container>
+                      <ng-template #oneElement>
+                        {{ item.start[0].start }} hrs. - {{ item.start[0].end }} hrs.
+                      </ng-template>
+                      </div>
                     </td>
-                    <td>{{ item.administrativeDetails.objective }}</td>
+                    <td>{{ item.objective }}</td>
                     <td>
-                      <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
-                        {{ specialty.specialtyName }}
-                      </ng-container>
+                     {{item.specialty}}
                     </td>
                     <td>
-                      <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
-                        profesional
-                      </ng-container>
+                      {{item.professional}}
                     </td>
 
                     <td>
@@ -127,7 +109,7 @@
                           type="checkbox"
                           class="custom-control-input"
                           id="switch{{ item._id }}"
-                          [checked]="item.administrativeDetails.isActive"
+                          [checked]="item.status"
                           (click)="putState(item)"
                         />
                         <label class="custom-control-label" for="switch{{ item._id }}"></label>

@@ -8,9 +8,9 @@ import { environment } from './../../environments/environment';
 })
 
 export class CoordinatorService {
-  private availability = 'v1/availability';
+  private availability = 'v1/coordinator/availability';
   private blocked = 'v1/blocked-day';
-  private availabilityState = 'v1/availability/state';
+  private availabilityState = 'v1/coordinator/availability/state';
 
   
 
