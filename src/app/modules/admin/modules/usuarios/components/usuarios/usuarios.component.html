@@ -365,7 +365,7 @@
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
               <ngx-datatable
-                *ngIf="users.length"
+                *ngIf="users.length; else noUsers"
                 #table
                 class="material"
                 [rows]="users"
@@ -576,7 +576,7 @@
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
               <ngx-datatable
-                *ngIf="users.length"
+                *ngIf="users.length; else noUsers"
                 #table
                 class="material"
                 [rows]="users"
@@ -789,7 +789,7 @@
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
               <ngx-datatable
-                *ngIf="users.length"
+                *ngIf="users.length; else noUsers"
                 #table
                 class="material"
                 [rows]="users"
@@ -1015,3 +1015,11 @@
     </div>
   </div>
 </div>
+
+<ng-template #noUsers>
+  <h5 class="text-center text-primary">No se han encontrado registros</h5>
+</ng-template>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>

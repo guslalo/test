@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
+import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { MultiProfileGuard } from 'src/app/guards/multiprofile.guard';
-import { GuardsGuard } from '../../guards/guards.guard';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 
 const recovery = 'recovery-password';
 
@@ -36,12 +36,20 @@ const routes: Routes = [
     component: ConfirmAccountComponent,
   },
   {
-    path: recovery,
+    path: 'recovery-password',
     component: RecoveryComponent,
   },
   {
-    path: recovery + '/reset-password/:id/:token',
+    path: 'recovery-done',
+    component: RecoveryDoneComponent,
+  },
+  {
+    path: 'recovery-password/reset-password/:id/:token',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'blocked-account',
+    component: BlockedAccountComponent,
   },
 ];
 

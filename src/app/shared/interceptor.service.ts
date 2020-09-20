@@ -12,7 +12,6 @@ export class InterceptorService implements HttpInterceptor {
   constructor(public errorDialogService: ErrorDialogService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     let urlAccount = 'account';
     let urlLogin = 'access';
     if (req.url.indexOf(urlAccount) === -1) {
@@ -23,9 +22,11 @@ export class InterceptorService implements HttpInterceptor {
         },
       });
       return next.handle(req).pipe(
-        retry(1),
         catchError((error: HttpErrorResponse) => {
           let data = {};
+
+          console.log(error.error.internalCode);
+
           /*
           const url_error: string = error.url;
 
@@ -42,6 +43,12 @@ export class InterceptorService implements HttpInterceptor {
             this.errorDialogService.openDialog(data);
             return throwError(data);
           }*/
+          // USER BLOCKED BY MULTIPLE LOGIN FAILS
+          if (error.error.internalCode === 55) {
+            document.location.href = '/blocked-account';
+          }
+
+          // TOKEN EXPIRATION / NO AUTHORIZED
           if (error.status === 401) {
             document.location.href = '/';
           } else {

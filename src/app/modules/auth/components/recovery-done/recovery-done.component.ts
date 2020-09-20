@@ -1,28 +1,44 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../../services/authentication.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
+declare var $: any;
 
 @Component({
-  selector: 'app-blocked-account',
-  templateUrl: './blocked-account.component.html',
-  styleUrls: ['./blocked-account.component.scss'],
+  selector: 'app-recovery-done',
+  templateUrl: './recovery-done.component.html',
+  styleUrls: ['./recovery-done.component.scss'],
 })
-export class BlockedAccountComponent implements OnInit {
+export class RecoveryDoneComponent implements OnInit {
   public user: any = {
     email: null,
   };
+  showModal: boolean;
+  UserId: string;
+  Firstname: string;
+  Lastname: string;
+  Email: string;
+  closeResult = '';
   public mError: boolean;
+
+  email_format: string;
+
+  @ViewChild('content') myModal: any;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
+    private routerAct: ActivatedRoute,
     private modalService: NgbModal
   ) {}
 
-  @ViewChild('content') myModal: any;
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const email: string = this.routerAct.snapshot.params.email;
+    var splitEmail = email.split('@');
+    var domain = splitEmail[1];
+    var name = splitEmail[0];
+    this.email_format = name.substring(0, 3).concat('*********@').concat(domain);
+  }
 
   openModal(mError?) {
     if (this.mError) {

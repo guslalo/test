@@ -58,6 +58,7 @@ export class CreateAccountComponent implements OnInit {
   form = [];
   minDate = undefined;
   maxDate = undefined;
+  showPassword: boolean;
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
@@ -89,13 +90,13 @@ export class CreateAccountComponent implements OnInit {
     this.personalData = this._formBuilder.group(
       {
         checkAge: [null, [Validators.requiredTrue]],
-        name: [null, [Validators.required, Validators.minLength(2)]],
-        lastName: [null, null],
-        secondLastName: [null, [Validators.required, Validators.minLength(2)]],
-        motherName: [null, [Validators.required, Validators.minLength(2)]],
-        email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
-        gender: [null, [Validators.required, Validators.minLength(2)]],
-        confirmEmail: ['', [Validators.required, Validators.minLength(2)]],
+        name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+        lastName: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
+        motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+        secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+        email: [null, [Validators.email, Validators.required]],
+        gender: [null, [Validators.required]],
+        confirmEmail: ['', [Validators.required]],
         phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
         breed: [null, Validators.required],
       },
@@ -248,7 +249,7 @@ export class CreateAccountComponent implements OnInit {
         secondLastName: this.form[1].secondLastName.value,
         motherName: this.form[1].motherName.value,
         gender: this.form[1].gender.value,
-        phoneNumber: parseInt(this.form[1].phoneNumber.value),
+        phoneNumber: this.form[1].phoneNumber.value,
         email: this.form[1].email.value,
         breed: this.form[1].breed.value,
         birthdate: this.dateAdapter.toModel(this.form[2].birthdate.value),
@@ -282,7 +283,7 @@ export class CreateAccountComponent implements OnInit {
           (data) => {
             console.log(data);
             this.spinner.hide();
-            this.router.navigate(['confirm-account/' + data.id]);
+            this.router.navigate(['confirm-account/' + data.id, { email: formObject.personalData.email }]);
           },
           (err) => {
             this.errorMsg = err.error.message || '';

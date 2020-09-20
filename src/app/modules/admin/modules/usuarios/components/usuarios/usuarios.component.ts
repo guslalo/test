@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $;
 
@@ -43,10 +44,13 @@ export class UsuariosComponent implements OnInit {
     private routerAct: ActivatedRoute,
     public adminService: AdminService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
     private el: Renderer2
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
+
     this.patientForm = this.formBuilder.group({
       isTutor: [true],
       name: ['', Validators.required],
@@ -105,9 +109,11 @@ export class UsuariosComponent implements OnInit {
         this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
         this.users = data.filter((user) => !user.isDeleted).reverse();
         // console.log(this.users);
+        this.spinner.hide();
       },
       (error) => {
         console.log(error);
+        this.spinner.hide();
       }
     );
   }
@@ -132,10 +138,12 @@ export class UsuariosComponent implements OnInit {
     this.selected = [];
     this.adminService.getUsers(userType).subscribe(
       (data) => {
-        // console.log(data);
-        this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
-        this.users = data.filter((user) => !user.isDeleted).reverse();
-        this.getProfiles(userType.slice(0, -1));
+        console.log(data);
+        if (Array.isArray(data)) {
+          this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
+          this.users = data.filter((user) => !user.isDeleted).reverse();
+          this.getProfiles(userType.slice(0, -1));
+        }
       },
       (error) => {
         console.log(error);
