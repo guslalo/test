@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../services/appointments.service';
 import { MedicalRecordService } from './../../../../../services/medicalRecord.service';
 import { DocumentService } from './../../../../../services/document.service';
+import { environment } from './../../../../../../environments/environment'
 
 @Component({
   selector: 'app-ficha-consulta',
@@ -25,6 +26,7 @@ export class FichaConsultaComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public fotoUser:any;
+  public photoUrlBase = environment.photoUrlBase;
 
 
   constructor(

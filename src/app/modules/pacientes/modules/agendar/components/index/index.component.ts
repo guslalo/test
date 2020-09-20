@@ -241,10 +241,6 @@ export class IndexComponent implements OnInit {
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
         this.pago(this.consolidate.paymentUrl);
-
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 2000);
       },
       (error) => {
         console.log(error);
@@ -271,7 +267,7 @@ export class IndexComponent implements OnInit {
           console.log(error);
         }
       );
-    }, 3500);
+    }, 2500);
   }
 
   cerrarPago() {
@@ -280,6 +276,9 @@ export class IndexComponent implements OnInit {
 
   pago(url) {
     this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2500);
   }
 
   getsymptoms() {

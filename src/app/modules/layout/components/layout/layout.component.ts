@@ -82,7 +82,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       if (state.matches) {
         // desktop
       } else {
-        this.state = 'closed'
+        //this.state = 'closed'
         // mobile
       }
     });
