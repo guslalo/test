@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/pacientes/pacientes.module').then((m) => m.PacientesModule),
   },
   {
+    path: 'disponibilidad',
+    loadChildren: () => import('./modules/disponibilidad/disponibilidad.module').then((m) => m.DisponibilidadModule),
+  },
+  {
     path: 'perfil',
     component: PerfilComponent,
   },

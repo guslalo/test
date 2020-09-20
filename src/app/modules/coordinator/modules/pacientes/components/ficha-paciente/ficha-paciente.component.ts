@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MedicalRecordService } from 'src/app/services/medicalRecord.service';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,10 +14,11 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 @Component({
   selector: 'app-ficha-paciente',
   templateUrl: './ficha-paciente.component.html',
-  styleUrls: ['./ficha-paciente.component.scss'],
+  styleUrls: ['./ficha-paciente.component.scss']
 })
 export class FichaPacienteComponent implements OnInit {
-  userId = this.routerAct.snapshot.queryParamMap.get('userId');
+
+  id = this.routerAct.snapshot.queryParamMap.get('id');
   patientRecord: any = [];
   appointmentsRecord: any = [];
 
@@ -52,18 +53,23 @@ export class FichaPacienteComponent implements OnInit {
 
   constructor(
     private routerAct: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
     private medicalRecordService: MedicalRecordService,
     private userService: UsersService,
     private currentUserService: CurrentUserService,
     private documentService: DocumentService,
     private spinner: NgxSpinnerService
-  ) {}
-  tomorrow = new Date(2020, 9, 20, 14, 34);
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.userId)
-    this.getMedicalRecord(this.userId);
+    this.routerAct.params.subscribe((params) => {
+      //const id = params.id
+      this.id = params.id;
+      //console.log(params);
+      this.getMedicalRecord(this.id);
+    });
+   
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
 
@@ -74,11 +80,12 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
+  
   getMedicalRecord(userId) {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
-        // console.log(data.payload.patientData);
+        console.log(data.payload);
         this.patientRecord = data.payload.patientData;
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
@@ -123,7 +130,7 @@ export class FichaPacienteComponent implements OnInit {
         this.spinner.hide();
       }
     );
-    this.medicalRecordService.getTimeline(this.userId).subscribe(
+    this.medicalRecordService.getTimeline(this.id).subscribe(
       (data) => {
         this.timelineRecord = data.payload;
         console.log(this.timelineRecord);
@@ -168,10 +175,10 @@ export class FichaPacienteComponent implements OnInit {
       type: this.fileForm.controls.type.value.toString(),
       file: this.base64.split(',')[1],
     };
-    this.medicalRecordService.putAddExamen(formObject, this.userId).subscribe(
+    this.medicalRecordService.putAddExamen(formObject, this.id).subscribe(
       (data) => {
         console.log(data);
-        this.getMedicalRecord(this.userId);
+        this.getMedicalRecord(this.id);
       },
       (error) => {
         console.log(error);
@@ -233,4 +240,5 @@ export class FichaPacienteComponent implements OnInit {
     this.appointmentsRecord = temp;
     // console.log(temp);
   }
+
 }
