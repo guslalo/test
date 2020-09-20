@@ -109,15 +109,15 @@
             <div class="col-12 mb-4">
               <div class="tableBox rounded p-4 bg-white">
                 <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">Días</th>
-                      <th scope="col">Fecha</th>
-                      <th scope="col">Hora</th>
-                      <th scope="col">Objetivo</th>
-                      <th scope="col">Especialidad</th>
-                      <th scope="col">Estado</th>
-                      <th scope="col">Acción</th>
+                  <thead>
+                    <tr class="d-flex">
+                      <th class="col-2" scope="col">Días</th>
+                      <th class="col-2" scope="col">Fecha</th>
+                      <th class="col-2" scope="col">Hora</th>
+                      <th class="col-2" scope="col">Objetivo</th>
+                      <th class="col-2" scope="col">Especialidad</th>
+                      <th class="col-1" scope="col">Estado</th>
+                      <th class="col-1" scope="col">Acción</th>
                     </tr>
                   </thead>
 
@@ -131,8 +131,8 @@
                     </tbody>
                   </ng-container>
                   <tbody *ngIf="disponibilidad">
-                    <tr *ngFor="let item of disponibilidad" id="{{ item._id }}">
-                      <td scope="row">
+                    <tr class="d-flex" *ngFor="let item of disponibilidad" id="{{ item._id }}">
+                      <td class="col-2" scope="row">
                         <svg
                           width="1em"
                           height="1em"
@@ -151,10 +151,10 @@
                           />
                         </svg>
                         <ng-container>
-                          {{ item.dateDetails.days }}
+                          <span [ngStyle]="{ 'word-break': 'break-all' }">{{ item.dateDetails.days }}</span>
                         </ng-container>
                       </td>
-                      <td>
+                      <td class="col-2">
                         <!--Hasta el -->
                         {{ item.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }}
 
@@ -162,19 +162,19 @@
                           - {{ item.dateDetails.endDate | date: 'dd/MM/yyyy':'+0000' }}
                         </ng-container>
                       </td>
-                      <td>
+                      <td class="col-2">
                         <ng-container *ngFor="let range of item.dateDetails.dailyRanges"
                           ><!---->
                           {{ range.start }} hrs - {{ range.end }} hrs
                         </ng-container>
                       </td>
-                      <td>{{ item.administrativeDetails.objective }}</td>
-                      <td>
+                      <td class="col-2">{{ item.administrativeDetails.objective }}</td>
+                      <td class="col-2">
                         <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
                           {{ specialty.specialtyName }}
                         </ng-container>
                       </td>
-                      <td>
+                      <td class="col-1">
                         <div class="custom-control custom-switch">
                           <input
                             type="checkbox"
@@ -186,7 +186,7 @@
                           <label class="custom-control-label" for="switch{{ item._id }}"></label>
                         </div>
                       </td>
-                      <td>
+                      <td class="col-1">
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <svg

@@ -297,10 +297,7 @@ export class MiDisponibilidadComponent implements OnInit {
             console.log(error);
           }
         );
-      /**/
     }
-
-    this.createAvailability.reset();
   }
 
   putState(item) {
