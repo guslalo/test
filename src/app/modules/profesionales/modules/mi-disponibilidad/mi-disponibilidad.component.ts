@@ -264,7 +264,6 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   crearAvailability() {
-    this.createAvailability.reset;
     console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
@@ -300,6 +299,8 @@ export class MiDisponibilidadComponent implements OnInit {
         );
       /**/
     }
+
+    this.createAvailability.reset();
   }
 
   putState(item) {

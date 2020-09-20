@@ -97,7 +97,7 @@ ul {
     li {
       display: inline-block;
       list-style: none;
- 
+
       margin: 0px 10px 20px 0px;
       color: #7a7a7a;
       i {
@@ -578,10 +578,7 @@ p {
 }
 
 .ngb-dp-arrow {
-  margin-top: -8px !important;
-}
-.ngb-dp-arrow:first-child button {
-  transform: rotate(180deg);
+  margin-top: -10px !important;
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
@@ -704,7 +701,7 @@ h4 a {
   height: 100% !important;
 }*/
 
-.boxImg2 {
+.boxImg {
   width: 45px;
   height: 45px;
   overflow: hidden;
@@ -713,14 +710,13 @@ h4 a {
   }
 }
 .boxImgFicha {
-  width:75px;
-  height:75px;
+  width: 75px;
+  height: 75px;
   overflow: hidden;
   img {
     width: 100%;
   }
 }
-
 
 .collapseCustom {
   min-height: 28px;
@@ -948,11 +944,25 @@ button.custom-btn-1:hover {
     display: block;
     width: 100%;
   }
-  .sidebar  {
+  .sidebar {
     //display: none !important;
   }
 }
 
 .profile {
   border-radius: 50%;
+}
+
+ngb-timepicker .ngb-tp-input-container {
+  width: 4em;
+}
+ngb-timepicker .ngb-tp-input {
+  margin: 0;
+  height: 36px;
+}
+ngb-timepicker .ngb-tp-minute {
+  height: 64px;
+}
+ngb-timepicker .ngb-tp-hour {
+  height: 64px;
 }
