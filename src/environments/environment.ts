@@ -1,10 +1,10 @@
 export const environment = {
   production: false,
-  baseUrl: 'https://backend-dev.bdot.app/api/',//https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
-  jitsi:'meet.bdot.app',//meet.bdot.app
+  jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
-  photoUrlBase:'https://itms-dev.s3-sa-east-1.amazonaws.com/',
+  photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
   clientSecret: '',
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
@@ -14,7 +14,6 @@ export const environment = {
     storageBucket: 'itms-d242b.appspot.com',
     messagingSenderId: '976429325991',
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
-    measurementId: 'G-FJ3Z5E7CRC'
-  }
+    measurementId: 'G-FJ3Z5E7CRC',
+  },
 };
-

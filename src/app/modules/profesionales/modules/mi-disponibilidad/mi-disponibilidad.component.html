@@ -284,7 +284,6 @@
 
         <!-- CALENDARIO -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
           <div class="row pb-3">
             <div class="col-auto">
               <div class="custom-control custom-checkbox">
@@ -453,18 +452,19 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
-                    <!--<ngb-timepicker 
-                    [attr.id]="'start' + i"
-                    formControlName="start"
-                    
-                    [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }" 
-                   >
-                  </ngb-timepicker>-->
-
-                    <!--    class="form-control" [ngModelOptions]="{standalone: true}"-->
+                    <div class="d-flex justify-content-center">
+                      <ngb-timepicker
+                        [attr.id]="'start' + i"
+                        formControlName="start"
+                        [ngClass]="{
+                          'is-invalid':
+                            !createAvailability.get('dailyRanges').valid &&
+                            createAvailability.get('dailyRanges').touched
+                        }"
+                      >
+                      </ngb-timepicker>
+                    </div>
+                    <!-- class="form-control" [ngModelOptions]="{standalone: true}" 
                     <input
                       type="time"
                       [attr.id]="'start' + i"
@@ -475,22 +475,27 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
                     />
+                    -->
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
                       Fecha inicio es necesaria
                     </div>
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
-                    <!--<ngb-timepicker 
-                      [attr.id]="'end' + i"
-                      formControlName="end"
-                      [ngClass]="{
-                        'is-invalid':
-                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }" 
-                    >
-                    </ngb-timepicker>-->
+                    <div class="d-flex justify-content-center">
+                      <ngb-timepicker
+                        [attr.id]="'end' + i"
+                        formControlName="end"
+                        [ngClass]="{
+                          'is-invalid':
+                            !createAvailability.get('dailyRanges').valid &&
+                            createAvailability.get('dailyRanges').touched
+                        }"
+                      >
+                      </ngb-timepicker>
+                    </div>
                     <!-- [ngModelOptions]="{standalone: true}" class="form-control"-->
+                    <!--
                     <input
                       type="time"
                       [attr.id]="'end' + i"
@@ -501,6 +506,7 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
                     />
+                    -->
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
@@ -543,95 +549,12 @@
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
           <button
             type="button"
+            data-dismiss="modal"
             class="btn btn-primary rounded-pill"
             (click)="crearAvailability()"
             [disabled]="!createAvailability.valid"
-            data-dismiss="modal"
           >
             Crear disponibilidad
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL BLOQUEAR DIA -->
-  <div
-    class="modal fade"
-    id="bloquearDias"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="availabilityBlocked" novalidate="">
-            <div class="row">
-              <div class="form-group col">
-                <label for="dateBlock">Fechas</label>
-                <div class="input-group">
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="yyyy-mm-dd"
-                    id="dateBlock"
-                    name="dateBlock"
-                    formControlName="dateBlock"
-                    [(ngModel)]="model3"
-                    [minDate]="{ year: 1940, month: 1, day: 1 }"
-                    ngbDatepicker
-                    #a="ngbDatepicker"
-                    (click)="a.toggle()"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row mt-2 mb-3">
-              <div class="col">
-                <div class="custom-control custom-control-inline custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="allDay"
-                    name="allDay"
-                    formControlName="allDay"
-                    (click)="allDayBooleanState()"
-                  />
-                  <label class="custom-control-label" for="allDay">Todo el Día</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="startBlock">Horario inicial</label>
-                <ngb-timepicker id="startBlock" formControlName="startBlock"> </ngb-timepicker>
-              </div>
-              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="endBlock">Horario final</label>
-                <ngb-timepicker id="endBlock" formControlName="endBlock"> </ngb-timepicker>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill"
-            data-dismiss="modal"
-            [disabled]="!availabilityBlocked.valid"
-            (click)="postAvailabilityBlocked()"
-          >
-            Bloquear día
           </button>
         </div>
       </div>
@@ -780,6 +703,7 @@
                 <div class="row">
                   <div class="form-group col">
                     <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <!--
                     <input
                       type="time"
                       [attr.id]="'start' + i"
@@ -791,20 +715,23 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
                     />
-                    <!--
-                    <ngb-timepicker 
-                    [attr.id]="'start' + i"
-                    formControlName="start"
-                    
-                    [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }" 
-                   >
-                  </ngb-timepicker>-->
+                    -->
+                    <div class="d-flex justify-content-center">
+                      <ngb-timepicker
+                        [attr.id]="'start' + i"
+                        formControlName="start"
+                        [ngClass]="{
+                          'is-invalid':
+                            !createAvailability.get('dailyRanges').valid &&
+                            createAvailability.get('dailyRanges').touched
+                        }"
+                      >
+                      </ngb-timepicker>
+                    </div>
                   </div>
                   <div class="form-group col">
                     <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <!--
                     <input
                       type="time"
                       [attr.id]="'end' + i"
@@ -816,16 +743,19 @@
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
                       }"
                     />
-                    <!--
-                    <ngb-timepicker 
-                    [attr.id]="'end' + i"
-                    formControlName="end"
-                    [ngClass]="{
-                      'is-invalid':
-                        !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }" 
-                  >
-                  </ngb-timepicker>-->
+                    -->
+                    <div class="d-flex justify-content-center">
+                      <ngb-timepicker
+                        [attr.id]="'end' + i"
+                        formControlName="end"
+                        [ngClass]="{
+                          'is-invalid':
+                            !createAvailability.get('dailyRanges').valid &&
+                            createAvailability.get('dailyRanges').touched
+                        }"
+                      >
+                      </ngb-timepicker>
+                    </div>
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
@@ -881,4 +811,91 @@
     </div>
   </div>
   <!--(click)="putAvailability(id)"-->
+
+  <!-- MODAL BLOQUEAR DIA -->
+  <div
+    class="modal fade"
+    id="bloquearDias"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header text-center">
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="availabilityBlocked" novalidate="">
+            <div class="row">
+              <div class="form-group col">
+                <label for="dateBlock">Fechas</label>
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="yyyy-mm-dd"
+                    id="dateBlock"
+                    name="dateBlock"
+                    formControlName="dateBlock"
+                    [(ngModel)]="model3"
+                    [minDate]="{ year: 1940, month: 1, day: 1 }"
+                    ngbDatepicker
+                    #a="ngbDatepicker"
+                    (click)="a.toggle()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2 mb-3">
+              <div class="col">
+                <div class="custom-control custom-control-inline custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="allDay"
+                    name="allDay"
+                    formControlName="allDay"
+                    (click)="allDayBooleanState()"
+                  />
+                  <label class="custom-control-label" for="allDay">Todo el Día</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
+                <label for="startBlock">Horario inicial</label>
+                <div class="d-flex justify-content-center">
+                  <ngb-timepicker id="startBlock" formControlName="startBlock"> </ngb-timepicker>
+                </div>
+              </div>
+              <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
+                <label for="endBlock">Horario final</label>
+                <div class="d-flex justify-content-center">
+                  <ngb-timepicker id="endBlock" formControlName="endBlock"> </ngb-timepicker>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-dismiss="modal"
+            [disabled]="!availabilityBlocked.valid"
+            (click)="postAvailabilityBlocked()"
+          >
+            Bloquear día
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
