@@ -446,7 +446,6 @@ export class CrearUsuarioComponent implements OnInit {
       waitingRooms: this.waitingRoomsAssigned,
       specialities: _specialities,
       professionalData: {
-        professionalPhoto: '',
         biography: this.formUser[3].value.biography,
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,

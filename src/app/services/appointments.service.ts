@@ -44,6 +44,12 @@ export class AppointmentsService {
     }
   }
 
+  getAllAppointments(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
+  }
+
   getTotalPages(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.appointments + `/pages`);
   }
@@ -85,7 +91,7 @@ export class AppointmentsService {
 
   // get getAppointmentsSession
   getAppointmentsSession(id): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id:id });
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id: id });
   }
 
   //reservar cita
@@ -139,13 +145,13 @@ export class AppointmentsService {
   }
 
   AppointmentInmediate(): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.inmediate, { });
+    return this.http.post<any>(environment.baseUrl + this.inmediate, {});
   }
-  
+
   postImmediateConsolidate(object): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object );
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object);
   }
-  
+
   getPaymentStatusAppointmentInmediate(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
