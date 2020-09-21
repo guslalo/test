@@ -6,7 +6,6 @@ import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
 export class AppointmentsService {
   private appointments = 'v1/appointments';
   private doctors = 'v1/doctors';
@@ -21,9 +20,9 @@ export class AppointmentsService {
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
-  private appointmentInmediate =  'v1/appointments/immediate/attend';
-  private getSibrare = 'v1/appointments/sibrare-url'
-  
+  private appointmentInmediate = 'v1/appointments/immediate/attend';
+  private getSibrare = 'v1/appointments/sibrare-url';
+  private blocks = 'v1/blocks/query';
 
   constructor(private http: HttpClient) {}
 
@@ -175,7 +174,6 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, '', { params: params });
   }
 
-  
   getSibrareUrl(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
@@ -185,7 +183,31 @@ export class AppointmentsService {
 
   //?appointmentId=5f67ea72a5dbb11acdf34709&documentType=prescription
 
+  postBlocks(date, specialtyId?, professionalId?): Observable<any> {
+    if (specialtyId) {
+      console.log(date, { specialtyId: specialtyId });
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+        specialtyId: specialtyId,
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+      });
+    }
+  }
 
-
-
+  postBlocksProfessionalId(date, professionalId?): Observable<any> {
+    if (professionalId) {
+      console.log(date, { professionalId: professionalId });
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+        professionalId: professionalId,
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+      });
+    }
+  }
 }
