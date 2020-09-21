@@ -2713,6 +2713,14 @@
     },
     "SR": {
       "label": "S/R"
+    },
+    "lang": {
+      "spanish": {
+        "label": "español"
+      },
+      "english": {
+        "label": "inglés"
+      }
     }
   },
   "profile": {
