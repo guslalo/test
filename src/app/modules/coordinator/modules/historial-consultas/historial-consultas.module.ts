@@ -12,6 +12,7 @@ import {
   NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [IndexComponent],
@@ -25,6 +26,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgbPaginationModule,
     NgbTimepickerModule,
     NgxDatatableModule,
+    MatAutocompleteModule,
   ],
   exports: [NgbDatepickerModule],
 })
