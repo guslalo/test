@@ -5,6 +5,7 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
+declare var $:any;
 
 
 @Component({
@@ -44,9 +45,8 @@ export class IndexComponent implements OnInit {
       const id = params.appointmentId
       console.log(params);
       this.getAppointmentsDetails(params.appointmentId);
-      this.getSession(params.appointmentId);
-
-      
+     
+    
     });
     
     
@@ -97,6 +97,7 @@ export class IndexComponent implements OnInit {
         console.log(this.url[1].replace('/', ''));
         const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
+        $('.toolbox-icon').find('jitsi-icon').click();
         /*
         jitsi.on('readyToClose', () => {
           console.log ('cerrado');
@@ -136,6 +137,10 @@ export class IndexComponent implements OnInit {
   getAppointmentsDetails(id) {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+        setTimeout(() => {
+          this.getSession(id);
+          
+        }, 260);
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId
         if(data.payload.administrativeDetails.waitingRoomId === null ){
