@@ -660,6 +660,12 @@
     },
     "serviceSummary": {
       "label": "Resumen consulta"
+    },
+    "inmediateService": {
+      "label": "Atención Inmediata"
+    },
+    "scheduling": {
+      "label": "Agendamiento"
     }
   },
   "disponibility": {
