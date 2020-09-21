@@ -199,7 +199,6 @@ export class MiDisponibilidadComponent implements OnInit {
 
     this.agregardailyRanges();
     this.getSpecialtiesIdService();
-    //this.getProfessionalSpecialties();
   }
 
   // controls reactivos
@@ -236,12 +235,6 @@ export class MiDisponibilidadComponent implements OnInit {
         this.medicalSpecialties = data.payload;
         console.log(this.medicalSpecialties);
         console.log(this.medicalSpecialties[0]._id);
-        //this.getSpecialtiesIdService(this.medicalSpecialties[0]._id);
-        /*
-        if(this.medicalSpecialties.lenght === 0){
-          console.log(this.medicalSpecialties[0]);
-          
-        }*/
       },
       (error) => {
         console.log(error);
@@ -264,7 +257,6 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   crearAvailability() {
-    console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
     const formObject = {
@@ -630,29 +622,5 @@ export class MiDisponibilidadComponent implements OnInit {
         this.calendarOptions.events = events;
       }
     );
-
-    /*
-
-    // alert('test');
-    const events = [];
-    for (const disp of disponibilidad) {
-      // console.log(disp);
-      events.push(
-        {
-          title: 'Dia Habilitado',
-          date: moment(disp.dateDetails.startDate).format('YYYY-MM-DD'),
-          description: disp.professionalDetails.specialtyDetails[0].specialtyName,
-        },
-        {
-          title: disp.administrativeDetails.objective,
-          start: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].start}`,
-          end: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].end}`,
-        }
-      );
-    }
-
-    console.log(events);
-    this.calendarOptions.events = events;
-    */
   }
 }

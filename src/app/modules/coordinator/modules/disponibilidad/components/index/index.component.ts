@@ -55,7 +55,20 @@ export class IndexComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService
-  ) {}
+  ) {
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    };
+
+    this.minDateTermino = {
+      year: this.minDate.year,
+      month: this.minDate.month,
+      day: this.minDate.day,
+    };
+  }
 
   get dailyRanges() {
     return this.createAvailability.get('dailyRanges') as FormArray;
@@ -78,6 +91,14 @@ export class IndexComponent implements OnInit {
   public specialtiesId: string;
   public medicalSpecialties: any;
   public state: any;
+
+  public professionals = [];
+  public tempProfessionals = [];
+
+  medicalSpecialty: string;
+  specialtyMap = [];
+  professionalSelected: string;
+  specialtySelected: string;
 
   timeUpdated = new Subject<string>();
 
@@ -149,8 +170,6 @@ export class IndexComponent implements OnInit {
         i++;
       });
     }
-
-    console.log(dailyDetails);
   }
 
   initCalendar() {
@@ -160,14 +179,16 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAvailabilityBlocked();
-    //this.calendar = true;
+    this.getProfessionals();
+    this.getProfessionalSpecialties();
+    this.getAvailability();
 
     this.createAvailability = this._formBuilder.group({
-      objective: [null, [Validators.required]], //[Validators.required],
-      appointmentDuration: [5, null],
+      professional: [null, Validators.required],
       specialty: [null, [Validators.required]],
       specialtyName: new FormControl(),
+      objective: [null, [Validators.required]], //[Validators.required],
+      appointmentDuration: [5, null],
       endDate: [null, [Validators.required]], // [Validators.required]
       startDate: [null], //new FormControl()
       dailyDetails: this._formBuilder.array([]), //[Validators.required]
@@ -182,7 +203,15 @@ export class IndexComponent implements OnInit {
     });
 
     this.agregardailyRanges();
-    this.getAvailability();
+  }
+
+  public getDisplayFn() {
+    return (val) => this.display(val);
+  }
+
+  private display(user): string {
+    //access component "this" here
+    return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
   // controls reactivos
@@ -200,13 +229,17 @@ export class IndexComponent implements OnInit {
   }
 
   getAvailability() {
+    this.disponibilidadArray = [];
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
         console.log(data.payload);
-        for (let item of data.payload) {
+        let availabilities = data.payload.filter((item) => !item.isDeleted);
+        console.log(availabilities);
+
+        for (let item of availabilities) {
           this.especialidad = this.specialtiesService.getSpecialtiesId(item.professionalDetails.specialtyId).subscribe(
-            (data2) => {
-              this.especialidad = data2.payload.specialtyName;
+            (specialty) => {
+              this.especialidad = specialty.payload.specialtyName;
               this.disponibilidadObject = {
                 _id: item._id,
                 daysDetails: item.dateDetails.days,
@@ -225,9 +258,6 @@ export class IndexComponent implements OnInit {
             }
           );
         }
-        console.log(this.disponibilidadArray);
-        //this.fetchCalendar();
-        console.log(data.payload);
       },
       (error) => {
         console.log(error);
@@ -242,12 +272,10 @@ export class IndexComponent implements OnInit {
         this.medicalSpecialties = data.payload;
         console.log(this.medicalSpecialties);
         console.log(this.medicalSpecialties[0]._id);
-        //this.getSpecialtiesIdService(this.medicalSpecialties[0]._id);
-        /*
-        if(this.medicalSpecialties.lenght === 0){
-          console.log(this.medicalSpecialties[0]);
-          
-        }*/
+        this.specialtyMap = data.payload.reduce((obj, item) => {
+          obj[item._id] = item;
+          return obj;
+        }, {});
       },
       (error) => {
         console.log(error);
@@ -268,8 +296,6 @@ export class IndexComponent implements OnInit {
   }
 
   crearAvailability() {
-    this.createAvailability.reset();
-    console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
     const formObject = {
@@ -278,20 +304,30 @@ export class IndexComponent implements OnInit {
         appointmentDuration: parseInt(this.createAvailability.controls.appointmentDuration.value),
       },
       professionalDetails: {
+        userId: this.createAvailability.controls.professional.value.userData[0]._id,
         specialtyId: this.createAvailability.controls.specialty.value,
       },
       dateDetails: {
         startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
         days: this.createAvailability.controls.dailyDetails.value,
-        dailyRanges: this.createAvailability.controls.dailyRanges.value,
+        dailyRanges: [
+          {
+            start: this.toModel(this.createAvailability.controls.dailyRanges.value[0].start),
+            end: this.toModel(this.createAvailability.controls.dailyRanges.value[0].end),
+          },
+        ],
       },
     };
     console.log(formObject);
 
     if (formObject) {
       this.availabilityService
-        .postAvailability(formObject.administrativeDetails, formObject.professionalDetails, formObject.dateDetails)
+        .postAvailabilityCoordinator(
+          formObject.administrativeDetails,
+          formObject.professionalDetails,
+          formObject.dateDetails
+        )
         .subscribe(
           (data) => {
             this.createAvailability.reset();
@@ -302,13 +338,12 @@ export class IndexComponent implements OnInit {
             console.log(error);
           }
         );
-      /**/
     }
   }
 
   putState(item) {
     console.log(item);
-    this.availabilityService.updateState(item._id, item.status).subscribe(
+    this.availabilityService.updateStateCoordinator(item._id, item.status ? false : true).subscribe(
       (data) => {
         console.log(data);
         this.state = data;
@@ -321,50 +356,6 @@ export class IndexComponent implements OnInit {
   public allDayBoolean = false;
   allDayBooleanState() {
     this.allDayBoolean = !this.allDayBoolean;
-  }
-
-  postAvailabilityBlocked() {
-    console.log(this.availabilityBlocked.controls.allDay.value);
-    if (this.availabilityBlocked.controls.allDay.value === true) {
-      const formObject = {
-        date: this.availabilityBlocked.controls.dateBlock.value,
-      };
-      console.log(formObject);
-
-      if (formObject) {
-        this.availabilityService.postAvailabilityBlocked(formObject.date).subscribe(
-          (data) => {
-            console.log(data);
-            this.getAvailability();
-            this.getAvailabilityBlocked();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    } else {
-      const formObject = {
-        date: this.availabilityBlocked.controls.dateBlock.value,
-        start: this.availabilityBlocked.controls.startBlock.value,
-        end: this.availabilityBlocked.controls.endBlock.value,
-      };
-
-      console.log(formObject);
-
-      if (formObject) {
-        this.availabilityService.postAvailabilityBlocked(formObject.date, formObject.start, formObject.end).subscribe(
-          (data) => {
-            console.log(data);
-            this.getAvailability();
-            this.getAvailabilityBlocked();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    }
   }
 
   actualizarAvailability(id) {
@@ -389,21 +380,20 @@ export class IndexComponent implements OnInit {
         startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
         days: _days,
-        dailyRanges: this.createAvailability.controls.dailyRanges.value,
+        dailyRanges: [
+          {
+            start: this.toModel(this.createAvailability.controls.dailyRanges.value[0].start),
+            end: this.toModel(this.createAvailability.controls.dailyRanges.value[0].end),
+          },
+        ],
       },
     };
     console.log(formObject);
     console.log(formObject.dateDetails.endDate);
-    /*
-    if (formObject.dateDetails.endDate = ""){
-      console.log("date vacio");
-    }else {
-      console.log("con data");
-    }*/
 
     if (formObject) {
       this.availabilityService
-        .putAvailability(
+        .putAvailabilityCoordinator(
           formObject.id,
           formObject.administrativeDetails,
           formObject.professionalDetails,
@@ -421,49 +411,17 @@ export class IndexComponent implements OnInit {
     } /**/
   }
 
-  putAvailability3(id) {
-    //this.createAvailability = id;
-    console.log(this.createAvailability);
-    const formObject = {
-      id,
-      administrativeDetails: {
-        objective: this.createAvailability.controls.objective.value,
-        appointmentDuration: this.createAvailability.controls.appointmentDuration.value,
-      },
-      professionalDetails: {
-        specialtyId: this.createAvailability.controls.specialty.value,
-      },
-      dateDetails: {
-        startDate: this.createAvailability.controls.startDate.value,
-        endDate: this.createAvailability.controls.endDate.value,
-        days: this.createAvailability.controls.dailyDetails.value,
-        dailyRanges: this.createAvailability.controls.dailyRanges.value,
-      },
-    };
-    console.log(formObject);
-  }
-
-  // deleteBlock
-  deleteBlock(id) {
-    console.log(id);
-    this.availabilityService.deleteBlock(id).subscribe(
-      (data) => {
-        console.log(data);
-        this.getAvailabilityBlocked();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
   putAvailability(id) {
     //this.idAvailability = id;
     //console.log(this.idAvailability)
-    this.availabilityService.getAvailability(id).subscribe(
+    this.availabilityService.getAvailabilityCoordinator(id).subscribe(
       (data) => {
         this.idAvailability = data.payload[0];
         console.log(this.idAvailability);
+        this.createAvailability.get('professional').setValue(this.idAvailability.professionalDetails.professional[0]);
+        this.professionalSelected = this.idAvailability.professionalDetails.userId;
+        this.escogerProfessional(this.createAvailability.controls.professional.value);
+
         this.createAvailability.get('objective').setValue(this.idAvailability.administrativeDetails.objective);
         this.createAvailability
           .get('specialty')
@@ -480,8 +438,6 @@ export class IndexComponent implements OnInit {
           });
         }
 
-        console.log(daysSeletected);
-
         let filteredDays = this.days.filter((d, index) => {
           // console.log(d, index);
           if (daysSeletected.map((item) => item.value).indexOf(this.days[index].value) === -1) {
@@ -494,13 +450,12 @@ export class IndexComponent implements OnInit {
           return a.id - b.id;
         });
 
-        console.log(this.daysSelected);
+        // console.log(this.daysSelected);
 
         this.endDate = this.dateAdapter.fromModel(
           moment(this.idAvailability.dateDetails.endDate).add(1, 'days').format('YYYY/MM/DD')
         );
         this.createAvailability.get('endDate').setValue(this.endDate);
-        console.log(this.endDate);
 
         this.startDate = this.dateAdapter.fromModel(
           moment(this.idAvailability.dateDetails.startDate).add(1, 'days').format('YYYY/MM/DD')
@@ -513,8 +468,14 @@ export class IndexComponent implements OnInit {
 
         this.dailyRangeFormGroup.reset();
 
-        this.dailyRangeFormGroup.get('start').setValue(this.idAvailability.dateDetails.dailyRanges[0].start);
-        this.dailyRangeFormGroup.get('end').setValue(this.idAvailability.dateDetails.dailyRanges[0].end);
+        console.log(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].start));
+
+        this.dailyRangeFormGroup
+          .get('start')
+          .setValue(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].start));
+        this.dailyRangeFormGroup
+          .get('end')
+          .setValue(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].end));
       },
       (error) => {
         console.log(error);
@@ -531,7 +492,7 @@ export class IndexComponent implements OnInit {
       id,
     };
     console.log(formObject);
-    this.availabilityService.deleteAvailability(formObject).subscribe(
+    this.availabilityService.deleteAvailabilityCoordinator(formObject).subscribe(
       (data) => {
         console.log(data);
         this.getAvailability();
@@ -542,13 +503,27 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  //GET sub especialidad
-  getSpecialtiesForProfessional() {
-    this.specialtiesService.getSpecialtiesForProfessional().subscribe(
+  escogerProfessional(professional) {
+    let userId = this.professionalSelected || professional?.userData[0]?._id;
+    this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
+      (data) => {
+        this.specialtiesId = data.payload;
+        this.medicalSpecialty = data.payload[0].medicalSpecialtyId;
+        this.specialtySelected = data.payload[0].specialtyName;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getProfessionals() {
+    this.professionalService.getProfessionals().subscribe(
       (data) => {
         console.log(data);
-        this.specialtiesId = data.payload;
-        //this.bloquearSelect = false;
+        this.tempProfessionals = [...data];
+        this.professionals = data;
+        // console.log(this.professionals);
       },
       (error) => {
         console.log(error);

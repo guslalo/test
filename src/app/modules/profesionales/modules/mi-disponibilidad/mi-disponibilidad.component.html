@@ -163,8 +163,7 @@
                         </ng-container>
                       </td>
                       <td class="col-2">
-                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges"
-                          ><!---->
+                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges">
                           {{ range.start }} hrs - {{ range.end }} hrs
                         </ng-container>
                       </td>
@@ -464,18 +463,6 @@
                       >
                       </ngb-timepicker>
                     </div>
-                    <!-- class="form-control" [ngModelOptions]="{standalone: true}" 
-                    <input
-                      type="time"
-                      [attr.id]="'start' + i"
-                      class="form-control"
-                      formControlName="start"
-                      [ngClass]="{
-                        'is-invalid':
-                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
-                    -->
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
                       Fecha inicio es necesaria
                     </div>
@@ -494,19 +481,6 @@
                       >
                       </ngb-timepicker>
                     </div>
-                    <!-- [ngModelOptions]="{standalone: true}" class="form-control"-->
-                    <!--
-                    <input
-                      type="time"
-                      [attr.id]="'end' + i"
-                      class="form-control"
-                      formControlName="end"
-                      [ngClass]="{
-                        'is-invalid':
-                          !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
-                    -->
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
