@@ -225,6 +225,7 @@ export class IndexComponent implements OnInit {
   //consolidar cita
   postConsolidateService(consolidate) {
     console.log(consolidate);
+    localStorage.setItem('appointmentIdAgenda',consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
         this.statusPago(consolidate.id);
