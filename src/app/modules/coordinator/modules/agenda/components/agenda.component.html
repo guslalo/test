@@ -32,173 +32,59 @@
 
 <div class="row">
   <div class="col-12">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link active"
-          id="home-tab"
-          data-toggle="tab"
-          href="#home"
-          role="tab"
-          aria-controls="home"
-          aria-selected="true"
+    <div class="col-12 col-md-3 d-none">
+      <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
+      <div class="searchBox">
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-search"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-calendar3-fill"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
-            <path
-              fill-rule="evenodd"
-              d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-            />
-          </svg>
-          Calendario
-        </a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link"
-          id="timeline-tab"
-          data-toggle="tab"
-          href="#timelineTab"
-          role="tab"
-          aria-controls="profile"
-          aria-selected="false"
-        >
-          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0)">
-              <path
-                d="M7.04766 6.00052C7.04661 6.01931 7.04661 6.0381 7.04766 6.05637C7.06331 6.3419 7.30756 6.56114 7.59304 6.546H16.7272C16.746 6.54704 16.7648 6.54704 16.7831 6.546C17.0685 6.53034 17.2877 6.28657 17.2726 6.00052V0.546261C17.2736 0.52747 17.2736 0.508678 17.2726 0.490408C17.2569 0.204881 17.0127 -0.0143547 16.7272 0.000782983H7.59304C7.57425 -0.000260994 7.55546 -0.000260994 7.53719 0.000782983C7.25172 0.0164426 7.03252 0.260211 7.04766 0.546261V6.00052ZM8.13842 1.09174H16.1818V5.45504H8.13842V1.09174Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M19.999 14.7281V9.2738C20 9.25501 20 9.23622 19.999 9.21795C19.9833 8.93242 19.7391 8.71318 19.4536 8.72832H7.59304C7.57425 8.72728 7.55546 8.72728 7.53719 8.72832C7.25172 8.74398 7.03252 8.98827 7.04766 9.2738V14.7281C7.04661 14.7469 7.04661 14.7656 7.04766 14.7839C7.06331 15.0694 7.30756 15.2887 7.59304 15.2735H19.4536C19.4724 15.2746 19.4912 15.2746 19.5094 15.2735C19.7954 15.2579 20.0146 15.0136 19.999 14.7281ZM18.9082 14.1826H8.13842V9.81928H18.9082V14.1826Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M17.2726 18.0004C17.2736 17.9816 17.2736 17.9628 17.2726 17.9445C17.2569 17.659 17.0127 17.4397 16.7272 17.4549H7.59304C7.57425 17.4538 7.55546 17.4538 7.53719 17.4549C7.25172 17.4705 7.03252 17.7148 7.04766 18.0004V23.4546C7.04661 23.4734 7.04661 23.4922 7.04766 23.5105C7.06331 23.796 7.30756 24.0152 7.59304 24.0001H16.7272C16.746 24.0011 16.7648 24.0011 16.7831 24.0001C17.0685 23.9844 17.2877 23.7402 17.2726 23.4546V18.0004ZM16.1818 22.9091H8.13842V18.5458H16.1818V22.9091Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M4.75466 2.43015C4.46866 1.15128 3.19994 0.346898 1.92182 0.632948C0.838896 0.87515 0.0691027 1.83613 0.067537 2.94536C0.0398767 4.0478 0.792447 5.01713 1.86703 5.26351V9.68162C0.586821 9.96089 -0.224201 11.2251 0.0550116 12.5056C0.252809 13.4123 0.960497 14.1201 1.86703 14.3179V18.736C0.792447 18.9824 0.0398767 19.9518 0.067537 21.0542C0.0691027 22.3644 1.1322 23.4256 2.44267 23.424C3.75315 23.4225 4.81364 22.3592 4.81207 21.0485C4.81103 19.9387 4.04071 18.9782 2.95778 18.736V14.3179C4.03758 14.0736 4.79902 13.1069 4.78441 11.9998C4.79902 10.8926 4.03706 9.92644 2.95778 9.68162V5.26351C4.23642 4.97746 5.04066 3.70903 4.75466 2.43015ZM3.74845 21.0537C3.73384 21.7657 3.15193 22.3357 2.43954 22.3352C1.73186 22.3352 1.15777 21.7615 1.15777 21.0537C1.15777 20.3459 1.73133 19.7722 2.43954 19.7722C3.15193 19.7722 3.73384 20.3417 3.74845 21.0537ZM3.72183 11.9993C3.72236 12.7071 3.1488 13.2813 2.44111 13.2818C2.44059 13.2818 2.44006 13.2818 2.43954 13.2818C1.74229 13.2672 1.18491 12.6972 1.18543 12.0003C1.18543 11.3029 1.74282 10.7334 2.43954 10.7188C3.14775 10.7178 3.72183 11.2909 3.72183 11.9993ZM2.43954 4.22736C1.74282 4.21275 1.18543 3.64326 1.18543 2.94588C1.18543 2.2485 1.74282 1.67901 2.43954 1.66388C3.15193 1.66388 3.73332 2.23337 3.74845 2.94588C3.73384 3.65787 3.15193 4.22788 2.43954 4.22736Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M9.22897 3.00111H12.3645C12.6656 3.00111 12.9099 2.75682 12.9099 2.45563C12.9099 2.15445 12.6656 1.91016 12.3645 1.91016H9.22897C8.92784 1.91016 8.68359 2.15445 8.68359 2.45563C8.68359 2.75682 8.92784 3.00111 9.22897 3.00111Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M15.0914 3.5459H9.22897C8.92784 3.5459 8.68359 3.79019 8.68359 4.09138C8.68359 4.39256 8.92784 4.63685 9.22897 4.63685H15.0914C15.3925 4.63685 15.6368 4.39256 15.6368 4.09138C15.6368 3.79019 15.3925 3.5459 15.0914 3.5459Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M9.22897 11.7277H12.3645C12.6656 11.7277 12.9099 11.4834 12.9099 11.1822C12.9099 10.881 12.6656 10.6367 12.3645 10.6367H9.22897C8.92784 10.6367 8.68359 10.881 8.68359 11.1822C8.68359 11.4834 8.92784 11.7277 9.22897 11.7277Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M9.22897 13.3634H15.0914C15.3925 13.3634 15.6368 13.1191 15.6368 12.8179C15.6368 12.5168 15.3925 12.2725 15.0914 12.2725H9.22897C8.92784 12.2725 8.68359 12.5168 8.68359 12.8179C8.68359 13.1191 8.92784 13.3634 9.22897 13.3634Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M9.22897 20.4542H12.3645C12.6656 20.4542 12.9099 20.2099 12.9099 19.9088C12.9099 19.6076 12.6656 19.3633 12.3645 19.3633H9.22897C8.92784 19.3633 8.68359 19.6076 8.68359 19.9088C8.68359 20.2099 8.92784 20.4542 9.22897 20.4542Z"
-                fill="#3D3D3D"
-              />
-              <path
-                d="M9.22897 22.091H15.0914C15.3925 22.091 15.6368 21.8467 15.6368 21.5455C15.6368 21.2443 15.3925 21 15.0914 21H9.22897C8.92784 21 8.68359 21.2443 8.68359 21.5455C8.68359 21.8467 8.92784 22.091 9.22897 22.091Z"
-                fill="#3D3D3D"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0">
-                <rect width="20" height="24" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+          <path
+            fill-rule="evenodd"
+            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="col-12 col-md-3">
+      <div class="form-group d-none">
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>Filtrar por</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
 
-          Timeline de consultas
-        </a>
-      </li>
-    </ul>
-    <div class="tab-content pt-4" id="myTabContent">
-      <!--tab-->
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="row mt-2">
-          <div class="col-12 col-md-3 d-none">
-            <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
-            <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
-              </svg>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <div class="form-group d-none">
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>Filtrar por</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <!--
-              <input
-                class="form-control"
-                class="form-control"
-                type="text"
-                placeholder="yyyy-mm-dd"
-                id="endDate"
-                name="endDate"
-                [(ngModel)]="model2"
-                [minDate]="{ year: 1940, month: 1, day: 1 }"
-                ngbDatepicker
-                #e="ngbDatepicker"
-                (click)="e.toggle()"
-              />-->
-          </div>
-        </div>
-        <!--consultas activas-->
-        <div class="row mt-1">
-          <div class="col-12 mb-4">
-            <div class="bg-white p-4">
-              <full-calendar [options]="calendarOptions"></full-calendar>
-            </div>
-          </div>
+    <!--consultas activas-->
+    <div class="row mt-3">
+      <div class="col-12 mb-4">
+        <div class="bg-white p-4">
+          <full-calendar [options]="calendarOptions"></full-calendar>
         </div>
       </div>
-      <!--/tab-->
+    </div>
+  </div>
+</div>
+<!--/tab-->
 
-      <!--tab-->
-      <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline-tab">
-        <div class="row">
-          <div class="col-12">
-            <div class="boxtimeline bg-white p-5 rounded-lg text-center">
-              <h5 class="mb-0 text-left">Timeline de consultas</h5>
-              <div class="timeLine"></div>
-            </div>
-          </div>
-        </div>
+<!--tab-->
+<div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline-tab">
+  <div class="row">
+    <div class="col-12">
+      <div class="boxtimeline bg-white p-5 rounded-lg text-center">
+        <h5 class="mb-0 text-left">Timeline de consultas</h5>
+        <div class="timeLine"></div>
       </div>
     </div>
   </div>
