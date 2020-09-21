@@ -23,6 +23,10 @@ export class PatientsService {
     return this.http.get<any>(environment.baseUrl + this.professionals + '/prePatients');
   }
 
+  getAllPrePatients(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.coordinators + '/prePatients');
+  }
+
   getPrePatient(prePatientId: string): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.account + '/finish-registration/' + prePatientId);
   }

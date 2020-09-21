@@ -13,9 +13,9 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
   NgbNavModule,
+  NgbToastModule,
+  NgbDropdownModule,
 } from '@ng-bootstrap/ng-bootstrap';
-
-
 
 @NgModule({
   declarations: [IndexComponent, FichaPacienteComponent],
@@ -27,9 +27,12 @@ import {
     NgbPaginationModule,
     NgbTimepickerModule,
     NgbNavModule,
+    NgbToastModule,
+    NgbDropdownModule,
     NgxSpinnerModule,
     NgxDatatableModule,
-    ReactiveFormsModule, FormsModule
-  ]
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
-export class PacientesModule { }
+export class PacientesModule {}

@@ -8,22 +8,23 @@ import {
   NgbTypeaheadModule,
   NgbPaginationModule,
   NgbTimepickerModule,
-  NgbNavModule
+  NgbNavModule,
 } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [IndexComponent],
   imports: [
     CommonModule,
     DisponibilidadRoutingModule,
-    ReactiveFormsModule, FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbTimepickerModule,
     NgbNavModule,
-  ]
+    MatAutocompleteModule,
+  ],
 })
-export class DisponibilidadModule { }
+export class DisponibilidadModule {}

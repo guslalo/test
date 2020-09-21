@@ -47,7 +47,7 @@ export class AgendaComponent implements OnInit {
         // console.log(data.payload);
 
         for (const item of data.payload) {
-          console.log(item);
+          // console.log(item);
           events.push({
             type: 'appointment',
             title: `Consulta, Paciente ${item.patientDetails.userDetails[0].personalData.name} ${

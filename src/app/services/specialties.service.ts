@@ -30,8 +30,8 @@ export class SpecialtiesService {
   }
 
   //specialties
-  getSpecialtiesForProfessional(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl + this.medicalSpecialtiesCoordinator);
+  getSpecialtiesForProfessional(id): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.medicalSpecialtiesCoordinator + '/' + id);
   }
 
   //specialties
