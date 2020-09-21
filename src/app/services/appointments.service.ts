@@ -20,9 +20,6 @@ export class AppointmentsService {
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
-  
-
-
 
   constructor(private http: HttpClient) {}
 
@@ -42,6 +39,12 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
+  }
+
+  getAllAppointments(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
   }
 
   getTotalPages(): Observable<any> {
@@ -72,7 +75,6 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/milestone-timeline', { params: params });
   }
 
-
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {
@@ -86,7 +88,7 @@ export class AppointmentsService {
 
   // get getAppointmentsSession
   getAppointmentsSession(id): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id:id });
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id: id });
   }
 
   //reservar cita
@@ -120,8 +122,6 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.pagoStatus, { params: params });
   }
 
-
-
   //postRunAppointment(id): Observable<any> {
   postEventAppointment(id, event): Observable<any> {
     let params = new HttpParams();
@@ -136,21 +136,19 @@ export class AppointmentsService {
     return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails, { params: params });
   }
 
-  
-
   //Appointment Inmediate
   getAppointmentInmediateState(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.inmediateAppointment);
   }
 
   AppointmentInmediate(): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.inmediate, { });
+    return this.http.post<any>(environment.baseUrl + this.inmediate, {});
   }
-  
+
   postImmediateConsolidate(object): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object );
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object);
   }
-  
+
   getPaymentStatusAppointmentInmediate(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
@@ -166,10 +164,4 @@ export class AppointmentsService {
     params = params.append('waitingRoomId', id);
     return this.http.get<any>(environment.baseUrl + this.waitingAppointmentsForRooms, { params: params });
   }
-
-
-
-
-
-
 }

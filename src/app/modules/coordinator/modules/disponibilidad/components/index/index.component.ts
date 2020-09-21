@@ -21,7 +21,7 @@ const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
   public datePipeString: string;
@@ -51,12 +51,11 @@ export class IndexComponent implements OnInit {
 
   constructor(
     private availabilityService: AvailabilityService,
-    private coordinatorService:CoordinatorService,
+    private coordinatorService: CoordinatorService,
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService
-  ) { }
-  
+  ) {}
 
   get dailyRanges() {
     return this.createAvailability.get('dailyRanges') as FormArray;
@@ -68,7 +67,7 @@ export class IndexComponent implements OnInit {
   public disponibilidad: any;
   public disponibilidadObject = {};
   public disponibilidadArray = [];
-  public especialidad:any;
+  public especialidad: any;
   public diasBloqueados: any;
   public createAvailability: FormGroup;
   public availabilityDays: FormGroup;
@@ -113,7 +112,6 @@ export class IndexComponent implements OnInit {
     { min: '60', value: 60 },
   ];
 
-  
   minDate = undefined;
   minDateTermino = undefined;
 
@@ -161,11 +159,7 @@ export class IndexComponent implements OnInit {
     }, 260);
   }
 
-
-
-
   ngOnInit(): void {
-    
     this.getAvailabilityBlocked();
     //this.calendar = true;
 
@@ -188,11 +182,9 @@ export class IndexComponent implements OnInit {
     });
 
     this.agregardailyRanges();
-    this.getSpecialtiesIdService();
     this.getAvailability();
   }
 
-  
   // controls reactivos
   agregardailyRanges() {
     this.dailyRangeFormGroup = this._formBuilder.group({
@@ -211,30 +203,28 @@ export class IndexComponent implements OnInit {
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
         console.log(data.payload);
-        for(let item of data.payload){
-          this.especialidad =  this.specialtiesService.getSpecialtiesId(item.professionalDetails.specialtyId).subscribe(
+        for (let item of data.payload) {
+          this.especialidad = this.specialtiesService.getSpecialtiesId(item.professionalDetails.specialtyId).subscribe(
             (data2) => {
               this.especialidad = data2.payload.specialtyName;
               this.disponibilidadObject = {
-                _id:item._id,
-                daysDetails:item.dateDetails.days,
-                dateStart:item.dateDetails.startDate,
-                dateEnd:item.dateDetails.endDate,
-                start:item.dateDetails.dailyRanges,
-                objective:item.administrativeDetails.objective,
-                specialty:this.especialidad,
-                professional:`${item.professionalName[0].personalData.name} ${item.professionalName[0].personalData.lastName}`,
-                status:item.administrativeDetails.isActive
-              }
-               this.disponibilidadArray.push(this.disponibilidadObject);
-
+                _id: item._id,
+                daysDetails: item.dateDetails.days,
+                dateStart: item.dateDetails.startDate,
+                dateEnd: item.dateDetails.endDate,
+                start: item.dateDetails.dailyRanges,
+                objective: item.administrativeDetails.objective,
+                specialty: this.especialidad,
+                professional: `${item.professionalName[0].personalData.name} ${item.professionalName[0].personalData.lastName}`,
+                status: item.administrativeDetails.isActive,
+              };
+              this.disponibilidadArray.push(this.disponibilidadObject);
             },
             (error) => {
               console.log(error);
             }
-          ); 
-         
-        } 
+          );
+        }
         console.log(this.disponibilidadArray);
         //this.fetchCalendar();
         console.log(data.payload);
@@ -270,8 +260,6 @@ export class IndexComponent implements OnInit {
     this.availabilityService.getAvailabilityBlocked().subscribe(
       (data) => {
         this.diasBloqueados = data.payload;
-        //console.log(this.diasBloqueados);
-        this.fetchCalendar();
       },
       (error) => {
         console.log(error);
@@ -554,11 +542,9 @@ export class IndexComponent implements OnInit {
     );
   }
 
-
-
   //GET sub especialidad
-  getSpecialtiesIdService() {
-    this.specialtiesService.getSpecialtiesId2().subscribe(
+  getSpecialtiesForProfessional() {
+    this.specialtiesService.getSpecialtiesForProfessional().subscribe(
       (data) => {
         console.log(data);
         this.specialtiesId = data.payload;
@@ -569,111 +555,4 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-
-  fetchCalendar() {
-    forkJoin([this.availabilityService.getAvailability(), this.availabilityService.getAvailabilityBlocked()]).subscribe(
-      (data) => {
-        const availabilities = data[0].payload; // this will contain roleData
-        const blockedDays = data[1].payload; // this will contain user
-
-        let events = [];
-        //this.datePipeEnd = datePipe.transform(Date.now(),'yyyy-MM-dd');
-
-        for (const disp of availabilities) {
-          // console.log(disp);
-          events.push(
-            {
-              type: 'active',
-              title: 'Dia Habilitado',
-              start: moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD'),
-              end: moment.utc(disp.dateDetails.endDate).format('YYYY-MM-DD'),
-              color: '#6fc1f1',
-            },
-            {
-              type: 'active',
-              title: disp.administrativeDetails.objective,
-              start: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
-                disp.dateDetails.dailyRanges[0].start
-              }`,
-              end: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
-                disp.dateDetails.dailyRanges[0].end
-              }`,
-              color: '#6fc1f1',
-            }
-          );
-        }
-
-        for (const block of blockedDays) {
-          if (block.dateDetails.range > 0) {
-            // console.log(block);
-            events.push(
-              {
-                type: 'blocked',
-                title: 'Dia Bloqueado',
-                date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
-                color: '#ff5971',
-              },
-              {
-                type: 'blocked',
-                start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
-                end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
-                color: '#ff5971',
-              }
-            );
-          } else {
-            events.push(
-              {
-                type: 'blocked',
-                title: 'Dia Bloqueado',
-                date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
-                color: '#ff5971',
-              },
-              {
-                type: 'blocked',
-                start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
-                end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
-                color: '#ff5971',
-              }
-            );
-          }
-        }
-
-        if (this.showActiveDays && this.showBlockedDays) {
-          this.calendarOptions.events = events;
-        } else if (!this.showActiveDays && !this.showBlockedDays) {
-          this.calendarOptions.events = events;
-        } else {
-          if (this.showActiveDays) events = events.filter((item) => item.type === 'active');
-          if (this.showBlockedDays) events = events.filter((item) => item.type === 'blocked');
-        }
-
-        this.calendarOptions.events = events;
-      }
-    );
-
-    /*
-
-    // alert('test');
-    const events = [];
-    for (const disp of disponibilidad) {
-      // console.log(disp);
-      events.push(
-        {
-          title: 'Dia Habilitado',
-          date: moment(disp.dateDetails.startDate).format('YYYY-MM-DD'),
-          description: disp.professionalDetails.specialtyDetails[0].specialtyName,
-        },
-        {
-          title: disp.administrativeDetails.objective,
-          start: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].start}`,
-          end: `${moment(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${disp.dateDetails.dailyRanges[0].end}`,
-        }
-      );
-    }
-
-    console.log(events);
-    this.calendarOptions.events = events;
-    */
-  }
-
 }
