@@ -395,7 +395,9 @@
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
                           item.administrativeDetails.status === 'appointed' ||
-                          item.administrativeDetails.status === 'pending'
+                          item.administrativeDetails.status === 'pending' || 
+                          item.administrativeDetails.status === 'waitingInList'
+                          
                           
                         "
                       ><!--
@@ -422,20 +424,12 @@
                               />
                             </svg>
                           </div>
-                          <ng-container
-                          *ngIf="
-                            item.administrativeDetails.status === 'running' ||
-                            item.administrativeDetails.status === 'active' ||
-                            item.administrativeDetails.status === 'appointed' ||
-                            item.administrativeDetails.status === 'pending'
-                            
-                          ">
+
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
                               Entrar
                             </button>
                           </div>
-                        </ng-container>
                         </div>
                       </ng-container>
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
