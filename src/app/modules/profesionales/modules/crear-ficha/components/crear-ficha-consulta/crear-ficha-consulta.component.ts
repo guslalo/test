@@ -7,6 +7,7 @@ import { CurrentUserService } from './../../../../../../services/current-user.se
 import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var $:any;
 
@@ -41,6 +42,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public fotoUser:any;
   public notesArray:any;
   public jitsiGlobal:any;
+  public trustedUrl: SafeResourceUrl;
 
   constructor( 
     private route: ActivatedRoute,
@@ -49,7 +51,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private documentService: DocumentService,
     private router: Router,
     private _formBuilder: FormBuilder,
-    private spinner:NgxSpinnerService
+    private spinner:NgxSpinnerService,
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -175,6 +178,20 @@ export class CrearFichaConsultaComponent implements OnInit {
       },
       error => {
         console.log(error);
+      }
+    )
+  }
+
+
+  subirPrescripciones(){
+    
+    this.appointmentsService.getSibrareUrl(this.appointmentId).subscribe(
+      data => {
+        this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
+        console.log(data);
+      },
+      error => {
+        console.log(error)
       }
     )
   }

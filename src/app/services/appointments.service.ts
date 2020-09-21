@@ -22,6 +22,7 @@ export class AppointmentsService {
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
   private appointmentInmediate =  'v1/appointments/immediate/attend';
+  private getSibrare = 'v1/appointments/sibrare-url'
   
 
   constructor(private http: HttpClient) {}
@@ -174,6 +175,15 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, '', { params: params });
   }
 
+  
+  getSibrareUrl(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    params = params.append('documentType', 'prescription');
+    return this.http.get<any>(environment.baseUrl + this.getSibrare, { params: params });
+  }
+
+  //?appointmentId=5f67ea72a5dbb11acdf34709&documentType=prescription
 
 
 

@@ -227,7 +227,7 @@
                 Exámenes y Documentos
               </a>
             </li>
-            <li class="nav-item d-none" role="presentation">
+            <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
                 id="profile-tab3"
@@ -1365,7 +1365,8 @@
               <h5 class="mb-0">Prescripciones</h5>
             </div>
             <div class="col-6">
-              <button class="btn btn-secondary rounded-pill float-right align-middle">
+              <button class="btn btn-secondary rounded-pill float-right align-middle"
+              (click)="subirPrescripciones()" data-toggle="modal" data-target="#preescripcionesModal">
                 Subir documento
               </button>
             </div>
@@ -1671,6 +1672,39 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div
+class="modal fade"
+id="preescripcionesModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Preescripciones</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary rounded-pill"
+        data-dismiss="modal"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
 </div>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
