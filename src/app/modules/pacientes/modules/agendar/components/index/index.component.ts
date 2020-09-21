@@ -235,8 +235,8 @@ export class IndexComponent implements OnInit {
         if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
         } else {
-           //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
-          $('#sinPrecio').modal();
+          //$('#sinPrecio').modal();
+          this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);

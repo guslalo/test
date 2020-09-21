@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <ng-container>
+        <ng-container *ngIf="consultas && consultas.length > 0; else vacio">
           <!--*ngIf="consultas.length > 0; else vacio"-->
           <div class="tableBox bg-white pt-3">
             <table class="table">
@@ -335,7 +335,7 @@
             </table>
           </div>
           <!-- colappsed-->
-          <ng-container *ngFor="let item of consultasActivas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
+          <ng-container *ngFor="let item of consultasActivas "><!--| slice: (page - 1) * 10:(page - 1) * 10 + 10-->
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0">
                 <tbody>
@@ -395,11 +395,11 @@
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
                           item.administrativeDetails.status === 'appointed' ||
-                          item.administrativeDetails.status === 'pending' ||
-                          item.administrativeDetails.status === 'waitingInList'
+                          item.administrativeDetails.status === 'pending'
                           
                         "
-                      >
+                      ><!--
+                          item.administrativeDetails.status === 'waitingInList'-->
                         <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
                           <button class="rounded-pill btn-sm btn btn-primary" type="button">
                             Entrar
@@ -422,12 +422,20 @@
                               />
                             </svg>
                           </div>
-
+                          <ng-container
+                          *ngIf="
+                            item.administrativeDetails.status === 'running' ||
+                            item.administrativeDetails.status === 'active' ||
+                            item.administrativeDetails.status === 'appointed' ||
+                            item.administrativeDetails.status === 'pending'
+                            
+                          ">
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
                               Entrar
                             </button>
                           </div>
+                        </ng-container>
                         </div>
                       </ng-container>
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
@@ -520,7 +528,7 @@
                               </div>
                               <div class="col-9">
                                 <p class="m-0 text-left">Cita agendada con</p>
-                                <p class="m-0 text-left">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
+                                <p class="m-0 text-left" *ngIf="item.professional">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
                                 <div class="btn btn-primary btn-sm rounded-pill float-left">
                                   <ng-container *ngIf="item.isActive; else inactivo">
                                     Activo

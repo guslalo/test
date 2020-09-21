@@ -33,7 +33,10 @@ export class MisConsultasComponent implements OnInit {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data.payload);
-        this.consultas = data.payload.filter(lista => lista.administrativeDetails.status !=='waitingInList')
+        this.consultas = data.payload.filter(
+          lista => lista.administrativeDetails.status === 'active' || lista.administrativeDetails.status ==='running'
+          || lista.administrativeDetails.status ==='pending'  || lista.administrativeDetails.status ==='appointed'
+          )
         //this.consultas = data.payload;
       },
       (error) => {
@@ -41,10 +44,13 @@ export class MisConsultasComponent implements OnInit {
       }
     );
 
-    this.appointmentsService.getAppointments(1,'waitingInList').subscribe(
+    this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data.payload);
-        this.consultasActivas = data.payload;
+        this.consultasActivas = data.payload.filter(
+          lista => lista.administrativeDetails.status === 'created' || lista.administrativeDetails.status ==='waitingInList'
+          )
+        //this.consultasActivas = data.payload;
       },
       (error) => {
         console.log(error);
@@ -70,7 +76,7 @@ export class MisConsultasComponent implements OnInit {
       data => { 
         this.timeline = data.payload;
      
-        console.log(this.timeline)
+        //console.log(this.timeline)
       },
       error => {
         console.log(error)
