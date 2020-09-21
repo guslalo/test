@@ -79,12 +79,12 @@
             [options]="{
               items: 1,
               center: false,
-              loop: false,
+              loop: true,
               dots: false,
-              autoWidth: true,
-              nav: true,
+              autoWidth: false,
+              nav: false,
               mouseDrag: true,
-              autoplay: false,
+              autoplay: true,
               responsive: {
                 '0': { items: 1, margin: 0, center: false, touchDrag: true, mouseDrag: false },
                 '480': { items: 1, margin: 0, center: false, touchDrag: true, mouseDrag: false },
@@ -94,24 +94,29 @@
             [items]="tips"
             [carouselClasses]="['owl-theme', 'sliding']"
           >
-            <ng-container *ngFor="let item of tips; let i = index">
-              <div class="card-body p-5">
-                <div class="row p-5">
-                  <div class="col-2 col-md-2">
-                    <img src="assets/img/lavar-manos.svg" />
-                  </div>
-                  <div class="col-5 col-md-5">
-                    <h5 class="card-title font-weight-bold">{{ item.title }}</h5>
-                    <p>
-                      {{ item.shortDescription }}
-                    </p>
-                    <button type="button" class="btn btn-outline-primary rounded-pill text-center">
-                      Ver más
-                    </button>
+            <div *ngFor="let item of tips; let i = index">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card-body p-5" style="position: relative;">
+                    <div class="row p-5">
+                      <div class="col-3 col-md-3">
+                        <img src="assets/img/lavar-manos.svg" style="max-width: 200px;" />
+                      </div>
+                      <div class="col-9 col-md-9">
+                        <h5 class="card-title font-weight-bold">{{ item.title }}</h5>
+                        <p>
+                          {{ item.shortDescription }}
+                        </p>
+                        <button type="button" class="btn btn-outline-primary rounded-pill text-center">
+                          Ver más
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </ng-container>
+              
+            </div>
           </owl-carousel>
         </ng-container>
       </div>
