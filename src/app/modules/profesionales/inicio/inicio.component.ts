@@ -3,6 +3,7 @@ import { CurrentUserService } from './../../../services/current-user.service';
 import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 
@@ -26,7 +27,9 @@ export class InicioPComponent implements OnInit {
     private spinner:NgxSpinnerService,
     private appointmentsService: AppointmentsService,
     public currentUserService: CurrentUserService,
-    config: NgbRatingConfig
+    config: NgbRatingConfig,
+    private router: Router,
+    private route:ActivatedRoute
   ) {
     config.max = 5;
     config.readonly = true;
@@ -114,6 +117,7 @@ export class InicioPComponent implements OnInit {
     this.appointmentsService.attendAppointmentInmediate(item).subscribe(
       data => {
         console.log(data)
+        this.router.navigate(['crear-ficha-consulta/'+ item], {relativeTo: this.route});
         // routerLink="crear-ficha-consulta/{{ item._id }}
       },
       error => {

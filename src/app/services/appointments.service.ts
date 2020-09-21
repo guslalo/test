@@ -171,7 +171,7 @@ export class AppointmentsService {
   attendAppointmentInmediate(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
-    return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, { params: params });
+    return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, '', { params: params });
   }
 
 
