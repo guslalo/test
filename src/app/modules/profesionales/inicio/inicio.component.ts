@@ -19,6 +19,8 @@ export class InicioPComponent implements OnInit {
   public fecha: any;
   public nextAppointed: any;
   public consultasFinalizadas: any;
+  public consultasEsperas:any;
+  public salas:any;
 
   constructor(
     private spinner:NgxSpinnerService,
@@ -37,6 +39,8 @@ export class InicioPComponent implements OnInit {
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
+    this.getAppointments2();
+    this.getRooms();
   }
 
   getAppointments() {
@@ -63,6 +67,60 @@ export class InicioPComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getAppointments2() {
+    this.appointmentsService.getAppointments(1,'waitingInList').subscribe(
+      (data) => {
+        //let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+        //.consultasFinalizadas = finalizadas.length;
+       // this.consultasEsperas = data.payload;
+        console.log(this.consultasEsperas);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  onChange(value){
+    console.log(value)
+    this.appointmentsService.getWaitingAppointmentForRoomsId(value).subscribe(
+      data => {
+        console.log(data)
+        this.consultasEsperas = data.payload;
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  getRooms(){
+    this.appointmentsService.getWaitingRooms().subscribe(
+      data => {
+        console.log(data)
+        this.salas = data.payload
+        console.log(this.salas)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  atender(item){
+    console.log(item)
+    this.appointmentsService.attendAppointmentInmediate(item).subscribe(
+      data => {
+        console.log(data)
+        // routerLink="crear-ficha-consulta/{{ item._id }}
+      },
+      error => {
+        console.log(error)
+      }
+    )
+   
   }
 
   

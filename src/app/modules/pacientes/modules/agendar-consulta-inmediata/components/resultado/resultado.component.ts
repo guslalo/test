@@ -33,8 +33,10 @@ export class ResultadoComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       data => {
         this.appointment = data.payload;
+     
         console.log(data);
-        this.getWaitingRoom();
+        console.log(this.appointment.administrativeDetails.waitingRoomId)
+        this.getWaitingRoom(this.appointment.administrativeDetails.waitingRoomId);
       },
       error => {
           console.log(error)
@@ -42,8 +44,8 @@ export class ResultadoComponent implements OnInit {
     )
   }
 
-  getWaitingRoom(){
-    this.appointmentsService.getWaitingRooms().subscribe(
+  getWaitingRoom(id){
+    this.appointmentsService.getWaitingAppointmentForRoomsId(id).subscribe(
       data => {
         console.log(data)
       },

@@ -48,6 +48,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/mis-consultas/mis-consultas.module').then((m) => m.MisConsultasModule),
   },
   {
+    path: 'teleconsulta/:appointmentId',
+    loadChildren: () => import('./modules/teleconsulta/teleconsulta.module').then((m) => m.TeleconsultaModule),
+  },
+  {
     path: 'patient/consulta/:appointmentId',
     loadChildren: () => import('./modules/video-call/video-call.module').then((m) => m.VideoCallModule),
   },

@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 })
 export class MisConsultasComponent implements OnInit {
   public consultas: any;
+  public consultasActivas: any;
   public model: any;
   public timeline: any;
   moment: any = moment;
@@ -32,7 +33,18 @@ export class MisConsultasComponent implements OnInit {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data.payload);
-        this.consultas = data.payload;
+        this.consultas = data.payload.filter(lista => lista.administrativeDetails.status !=='waitingInList')
+        //this.consultas = data.payload;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.appointmentsService.getAppointments(1,'waitingInList').subscribe(
+      (data) => {
+        console.log(data.payload);
+        this.consultasActivas = data.payload;
       },
       (error) => {
         console.log(error);
