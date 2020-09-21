@@ -81,7 +81,7 @@
           "2": "* At least one lowercase",
           "3": "* At least one number",
           "4": "* At least one special character",
-          "5": "* un largo mínimo de 8 carácteres (max. 16)"
+          "5": "{{ 'common.eigthLengthMin.label' | transloco }}"
         },
         "remember": "Remember that you must create a key that contains alphanumeric characters and that contains at least one uppercase, lowercase and one special character."
       }

@@ -3,12 +3,8 @@
     <h2>{{ 'dashboard.home.userManagment.createAccount.tabs.role.profileManagment.title' | transloco }}</h2>
   </div>
   <div class="col">
-    <button
-      *ngIf="currentUser.policies.profilePolicies.create"
-      type="button"
-      class="btn btn-primary rounded-pill float-right"
-      routerLink="crear-perfil"
-    >
+    <button *ngIf="currentUser.policies.profilePolicies.create" type="button"
+      class="btn btn-primary rounded-pill float-right" routerLink="crear-perfil">
       Crear Perfil
       <img src="assets/icons/icon-plus-circle.svg" />
     </button>
@@ -19,13 +15,8 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-3">
-        <input
-          [(ngModel)]="searchTerm"
-          type="text"
-          class="form-control"
-          placeholder="Busqueda"
-          (keyup)="applyFilters()"
-        />
+        <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Busqueda"
+          (keyup)="applyFilters()" />
         <div class="searchBox">
           <img src="assets/icons/icon-search.svg" />
         </div>
@@ -33,7 +24,8 @@
       <div class="col-12 col-md-3">
         <div class="form-group">
           <select [(ngModel)]="roleSelected" class="form-control" (change)="applyFilters()">
-            <option [ngValue]="null">Filtro por {{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</option>
+            <option [ngValue]="null">{{ 'common.dropdown.filter.label' | transloco }}
+              {{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</option>
             <option [ngValue]="'admin'">{{ 'common.roles.admin.label' | transloco }}</option>
             <option [ngValue]="'coordinator'">{{ 'tabs.coordinator.label' | transloco }}</option>
             <option [ngValue]="'professional'">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</option>
@@ -53,8 +45,10 @@
               <tr>
                 <th scope="col">{{ 'dashboard.home.config.tabs.reason.modalCreate.name.label' | transloco }}</th>
                 <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</th>
-                <th scope="col">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}</th>
-                <th scope="col">{{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}</th>
+                <th scope="col">{{ 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco }}
+                </th>
+                <th scope="col">{{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
+                </th>
                 <th scope="col">{{ 'common.status.active.label' | transloco }}</th>
                 <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
               </tr>
@@ -68,17 +62,16 @@
                 <td>
                   <span *ngIf="profile.role === 'admin'">{{ 'common.roles.admin.label' | transloco }}</span>
                   <span *ngIf="profile.role === 'coordinator'">{{ 'tabs.coordinator.label' | transloco }}</span>
-                  <span *ngIf="profile.role === 'professional'">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</span>
+                  <span
+                    *ngIf="profile.role === 'professional'">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</span>
                 </td>
 
                 <td>{{ profile.description || 'S/R' }}</td>
                 <td>
                   <div *ngIf="profile.users.length; else noUsers">
-                    <button
-                      class="btn btn-sm btn-outline-primary rounded-pill"
+                    <button class="btn btn-sm btn-outline-primary rounded-pill"
                       [routerLink]="['../../gestion-usuarios']"
-                      [queryParams]="{ role: profile.role, profile: profile.id }"
-                    >
+                      [queryParams]="{ role: profile.role, profile: profile.id }">
                       Ver {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
                     </button>
                   </div>
@@ -88,13 +81,8 @@
                 </td>
                 <td>
                   <div class="custom-control custom-switch mb-4">
-                    <input
-                      disabled
-                      [(ngModel)]="profile.isActive"
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="userPoliciesCreate"
-                    />
+                    <input disabled [(ngModel)]="profile.isActive" type="checkbox" class="custom-control-input"
+                      id="userPoliciesCreate" />
                     <label class="custom-control-label" for="userPoliciesCreate"></label>
                   </div>
                 </td>
@@ -102,37 +90,20 @@
                   <div class="btn-group">
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                       <button class="btn btn-light btn-sm rounded-pill">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-three-dots"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                          />
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                         </svg>
                       </button>
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
-                      <button
-                        *ngIf="currentUser.policies.profilePolicies.update"
-                        class="dropdown-item"
-                        type="button"
-                        [routerLink]="['editar-perfil']"
-                        [queryParams]="{ profileId: profile.id }"
-                      >
+                      <button *ngIf="currentUser.policies.profilePolicies.update" class="dropdown-item" type="button"
+                        [routerLink]="['editar-perfil']" [queryParams]="{ profileId: profile.id }">
                         {{ 'clinicalFile.edit.label' | transloco }}
                       </button>
-                      <button
-                        *ngIf="currentUser.policies.profilePolicies.delete && profile.isActive"
-                        class="dropdown-item"
-                        type="button"
-                        (click)="deactivateProfile(profile.id)"
-                      >
+                      <button *ngIf="currentUser.policies.profilePolicies.delete && profile.isActive"
+                        class="dropdown-item" type="button" (click)="deactivateProfile(profile.id)">
                         Desactivar
                       </button>
                     </div>
@@ -147,12 +118,8 @@
     <!---->
     <div class="row">
       <div class="col-12 text-right">
-        <ngb-pagination
-          class="float-right"
-          [collectionSize]="profiles.length"
-          [(page)]="page"
-          aria-label="Default pagination"
-        >
+        <ngb-pagination class="float-right" [collectionSize]="profiles.length" [(page)]="page"
+          aria-label="Default pagination">
         </ngb-pagination>
       </div>
     </div>

@@ -4,37 +4,19 @@
       <h2>{{ 'disponibility.title' | transloco }}</h2>
     </div>
     <div class="col">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill float-right"
-        ng-reflect-tour-anchor="agendar"
-        data-toggle="modal"
-        data-target="#disponibilidad"
-      >
-        nueva disponibilidad
-        <svg
-          width="1.5em"
-          height="1.5em"
-          viewBox="0 0 16 16"
-          class="bi bi-plus-circle"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-          />
+      <button type="button" class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar"
+        data-toggle="modal" data-target="#disponibilidad">
+        {{ 'disponibility.btnNewDisponibility.label' | transloco }}
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
           <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         </svg>
       </button>
-      <button
-        type="button"
-        data-toggle="modal"
-        data-target="#bloquearDias"
-        class="btn btn-outline-primary rounded-pill float-right mr-3"
-        ng-reflect-tour-anchor="agendar"
-      >
+      <button type="button" data-toggle="modal" data-target="#bloquearDias"
+        class="btn btn-outline-primary rounded-pill float-right mr-3" ng-reflect-tour-anchor="agendar">
         {{ 'disponibility.btnBlockDays.label' | transloco }}
       </button>
     </div>
@@ -43,54 +25,24 @@
     <div class="col-12">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <a
-            class="nav-link"
-            id="home-tab"
-            data-toggle="tab"
-            href="#home"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-          >
-            <svg
-              width="1.5em"
-              height="1.5em"
-              viewBox="0 0 16 16"
-              class="bi bi-list-nested"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"
-              />
+          <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true">
+            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-list-nested" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z" />
             </svg>
             {{ 'disponibility.tabs.list.label' | transloco }}
           </a>
         </li>
         <li class="nav-item" role="presentation" (click)="initCalendar()">
-          <a
-            class="nav-link active"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#profile"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-calendar3-fill"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+            aria-controls="profile" aria-selected="false">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
               <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
-              <path
-                fill-rule="evenodd"
-                d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-              />
+              <path fill-rule="evenodd"
+                d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
             </svg>
             {{ 'disponibility.tabs.calendar.label' | transloco }}
           </a>
@@ -115,7 +67,8 @@
                       <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
                       <th scope="col">{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
                       <th scope="col">{{ 'disponibility.modal.create.specialty.label' | transloco }}</th>
-                      <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
+                      </th>
                       <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
@@ -124,7 +77,7 @@
                     <tbody>
                       <tr>
                         <div class="alert alert-warning mt-3" role="alert">
-                          No hay disponibilidades creadas
+                          {{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.noDisponibilities.label' | transloco }}
                         </div>
                       </tr>
                     </tbody>
@@ -132,22 +85,12 @@
                   <tbody *ngIf="disponibilidad">
                     <tr *ngFor="let item of disponibilidad" id="{{ item._id }}">
                       <td scope="row">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-calendar"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                          />
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd"
+                            d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
+                          <path fill-rule="evenodd"
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z" />
                         </svg>
                         <ng-container>
                           {{ item.dateDetails.days }}
@@ -162,8 +105,8 @@
                         </ng-container>
                       </td>
                       <td>
-                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges"
-                          ><!---->
+                        <ng-container *ngFor="let range of item.dateDetails.dailyRanges">
+                          <!---->
                           {{ range.start }} hrs - {{ range.end }} hrs
                         </ng-container>
                       </td>
@@ -175,44 +118,26 @@
                       </td>
                       <td>
                         <div class="custom-control custom-switch">
-                          <input
-                            type="checkbox"
-                            class="custom-control-input"
-                            id="switch{{ item._id }}"
-                            [checked]="item.administrativeDetails.isActive"
-                            (click)="putState(item)"
-                          />
+                          <input type="checkbox" class="custom-control-input" id="switch{{ item._id }}"
+                            [checked]="item.administrativeDetails.isActive" (click)="putState(item)" />
                           <label class="custom-control-label" for="switch{{ item._id }}"></label>
                         </div>
                       </td>
                       <td>
                         <div class="btn-group">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots"
+                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
                               {{ 'common.button.delete.label' | transloco }}
                             </button>
-                            <button
-                              data-toggle="modal"
-                              data-target="#editar"
-                              class="dropdown-item"
-                              type="button"
-                              (click)="putAvailability(item._id)"
-                            >
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button"
+                              (click)="putAvailability(item._id)">
                               {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
                           </div>
@@ -233,13 +158,12 @@
                   <tbody>
                     <tr>
                       <div class="alert alert-warning mt-3" role="alert">
-                        No existen días bloqueados
+                        {{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.noBlockedDays.label' | transloco }}
                       </div>
                     </tr>
                   </tbody>
                 </ng-container>
-                <owl-carousel
-                  [options]="{
+                <owl-carousel [options]="{
                     items: 6,
                     center: false,
                     loop: false,
@@ -253,18 +177,15 @@
                       '480': { items: 2, margin: 5, center: true, touchDrag: true, mouseDrag: false },
                       '640': { items: 6, margin: 0, loop: false, center: false, mouseDrag: true }
                     }
-                  }"
-                  [items]="diasBloqueados"
-                  [carouselClasses]="['owl-theme', 'sliding']"
-                >
+                  }" [items]="diasBloqueados" [carouselClasses]="['owl-theme', 'sliding']">
                   <ng-container *ngFor="let item of diasBloqueados; let i = index">
                     <div class="day text-center" id="{{ item._id }}">
-                      <b>{{ item.dateDetails.date | date:"dd/MM/yyyy":"+0000" }}</b><br />                
+                      <b>{{ item.dateDetails.date | date:"dd/MM/yyyy":"+0000" }}</b><br />
                       <ng-container *ngIf="item.dateDetails.fullDay === false; else allDay">
                         {{ item.dateDetails.range.start }} - {{ item.dateDetails.range.end}}
-                      </ng-container> 
+                      </ng-container>
                       <ng-template #allDay>
-                        Todo el día
+                        {{ 'disponibility.modal.blockDays.allDay.label' | transloco }}
                       </ng-template>
                       <div class="cerrar">
                         <button type="button" class="close" aria-label="Close" (click)="deleteBlock(item._id)">
@@ -285,26 +206,18 @@
           <div class="row pb-3">
             <div class="col-auto">
               <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customCheck1"
-                  [(ngModel)]="showActiveDays"
-                  (change)="fetchCalendar()"
-                />
-                <label class="custom-control-label" for="customCheck1">{{ 'disponibility.tabs.calendar.workDays.label' | transloco }}</label>
+                <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="showActiveDays"
+                  (change)="fetchCalendar()" />
+                <label class="custom-control-label"
+                  for="customCheck1">{{ 'disponibility.tabs.calendar.workDays.label' | transloco }}</label>
               </div>
             </div>
             <div class="col-auto">
               <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customCheck2"
-                  [(ngModel)]="showBlockedDays"
-                  (change)="fetchCalendar()"
-                />
-                <label class="custom-control-label" for="customCheck2">{{ 'disponibility.tabs.list.blockedDays.label' | transloco }}</label>
+                <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="showBlockedDays"
+                  (change)="fetchCalendar()" />
+                <label class="custom-control-label"
+                  for="customCheck2">{{ 'disponibility.tabs.list.blockedDays.label' | transloco }}</label>
               </div>
             </div>
           </div>
@@ -321,18 +234,13 @@
   </div>
 
   <!-- Modal disponibilidad-->
-  <div
-    class="modal fade"
-    id="disponibilidad"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="disponibilidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'disponibility.modal.create.title' | transloco }}</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+            {{ 'disponibility.modal.create.title' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -342,16 +250,15 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input type="text" class="form-control" id="objective" formControlName="objective" 
-                 [ngClass]="{
+                <input type="text" class="form-control" id="objective" formControlName="objective" [ngClass]="{
                   'is-invalid':
                     !createAvailability.get('objective').touched
-                }"/>
+                }" />
               </div>
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
-                <select class="form-control" id="specialty" formControlName="specialty">                
-                  <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}" >
+                <select class="form-control" id="specialty" formControlName="specialty">
+                  <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>
                 </select>
@@ -359,25 +266,15 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="startDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio</label>
+                <label for="startDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}
+                  inicio</label>
                 <div class="input-group">
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="yyyy-mm-dd"
-                    id="startDate"
-                    name="startDate"
-                    formControlName="startDate"
-                    [(ngModel)]="model5"
-                    [minDate]="minDate"
-                    ngbDatepicker
-                    #d="ngbDatepicker"
-                    (click)="d.toggle()"
-                    [ngClass]="{
+                  <input class="form-control" type="text" placeholder="yyyy-mm-dd" id="startDate" name="startDate"
+                    formControlName="startDate" [(ngModel)]="model5" [minDate]="minDate" ngbDatepicker
+                    #d="ngbDatepicker" (click)="d.toggle()" [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('startDate').valid && createAvailability.get('startDate').touched
-                    }"
-                  />
+                    }" />
 
                   <div *ngIf="createAvailability.controls['startDate'].errors?.required" class="invalid-feedback">
                     {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio es necesaria
@@ -387,30 +284,19 @@
               <div class="form-group col">
                 <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
                 <div class="input-group">
-                  <input
-                    class="form-control"
-                    class="form-control"
-                    type="text"
-                    placeholder="yyyy-mm-dd"
-                    id="endDate"
-                    name="endDate"
-                    formControlName="endDate"
-                    [(ngModel)]="model"
-                    [minDate]="minDateTermino"
-                    ngbDatepicker
-                    #e="ngbDatepicker"
-                    (click)="e.toggle()"
-                    [ngClass]="{
+                  <input class="form-control" class="form-control" type="text" placeholder="yyyy-mm-dd" id="endDate"
+                    name="endDate" formControlName="endDate" [(ngModel)]="model" [minDate]="minDateTermino"
+                    ngbDatepicker #e="ngbDatepicker" (click)="e.toggle()" [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
-                    }"
-                  />
+                    }" />
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <label
+                  for="appointmentDuration">{{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco }}</label>
                 <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
                   <ng-container *ngFor="let item of interval">
                     <option>{{ item.value }}</option>
@@ -421,23 +307,18 @@
             <div class="row mt-2 mb-3">
               <div class="col-12">
                 <p>{{ 'disponibility.modal.create.aviability.label' | transloco }}</p>
-               
+
               </div>
 
               <div class="col">
                 <ng-container *ngFor="let data of days; let i = index">
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input
-                      id="{{ data.name }}"
-                      class="custom-control-input"
-                      type="checkbox"
-                      [value]="data.value"
-                      (change)="onCheckboxChange($event)"
-                    />
+                    <input id="{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
+                      (change)="onCheckboxChange($event)" />
                     <label class="custom-control-label" for="{{ data.name }}">
                       {{ data.name }}
                     </label>
-                   
+
                   </div>
                 </ng-container>
               </div>
@@ -448,7 +329,8 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
+                    <label for="start' + i"
+                      [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
                     <!--<ngb-timepicker 
                     [attr.id]="'start' + i"
                     formControlName="start"
@@ -461,22 +343,17 @@
                   </ngb-timepicker>-->
 
                     <!--    class="form-control" [ngModelOptions]="{standalone: true}"-->
-                    <input
-                      type="time"
-                      [attr.id]="'start' + i"
-                      class="form-control"
-                      formControlName="start"
-                      [ngClass]="{
+                    <input type="time" [attr.id]="'start' + i" class="form-control" formControlName="start" [ngClass]="{
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
+                      }" />
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
                       {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio es necesaria
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
+                    <label for="'end' + i"
+                      [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
                     <!--<ngb-timepicker 
                       [attr.id]="'end' + i"
                       formControlName="end"
@@ -487,17 +364,11 @@
                     >
                     </ngb-timepicker>-->
                     <!-- [ngModelOptions]="{standalone: true}" class="form-control"-->
-                    <input
-                      type="time"
-                      [attr.id]="'end' + i"
-                      class="form-control"
-                      formControlName="end"
-                      [ngClass]="{
+                    <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end" [ngClass]="{
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
-                    
+                      }" />
+
                   </div>
                   <div *ngIf="i > 0" class="form-group col-auto ">
                     <label class="w-100" for="'end' + i" [attr.for]="'end' + i">&nbsp;</label>
@@ -511,40 +382,25 @@
             <div class="form-group">
               <div>
                 <a class="" (click)="agregardailyRanges()">
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-plus-circle"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                    />
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
                     <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                    />
+                    <path fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                   </svg>
-                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
-                >
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a>
               </div>
             </div>
             <!--/ campos reactivos dinamicos-->
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill"
-            (click)="crearAvailability()"
-            [disabled]="!createAvailability.valid"
-            data-dismiss="modal"
-          >
+          <button type="button" class="btn btn-secondary rounded-pill"
+            data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+          <button type="button" class="btn btn-primary rounded-pill" (click)="crearAvailability()"
+            [disabled]="!createAvailability.valid" data-dismiss="modal">
             {{ 'disponibility.modal.create.title' | transloco }}
           </button>
         </div>
@@ -553,18 +409,13 @@
   </div>
 
   <!-- Modal bloquear -->
-  <div
-    class="modal fade"
-    id="bloquearDias"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="bloquearDias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.blockDays.label' | transloco }}</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+            {{ 'clinicalFile.blockDays.label' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -575,66 +426,42 @@
               <div class="form-group col">
                 <label for="dateBlock">{{ 'common.dates.label' | transloco }}</label>
                 <div class="input-group">
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="yyyy-mm-dd"
-                    id="dateBlock"
-                    name="dateBlock"
-                    formControlName="dateBlock"
-                    [(ngModel)]="model3"
-                    [minDate]="{ year: 1940, month: 1, day: 1 }"
-                    ngbDatepicker
-                    #a="ngbDatepicker"
-                    (click)="a.toggle()"
-                  />
+                  <input class="form-control" type="text" placeholder="yyyy-mm-dd" id="dateBlock" name="dateBlock"
+                    formControlName="dateBlock" [(ngModel)]="model3" [minDate]="{ year: 1940, month: 1, day: 1 }"
+                    ngbDatepicker #a="ngbDatepicker" (click)="a.toggle()" />
                 </div>
               </div>
             </div>
             <div class="row mt-2 mb-3">
               <div class="col">
                 <div class="custom-control custom-control-inline custom-checkbox">
-                  <input type="checkbox" 
-                  class="custom-control-input" 
-                  id="allDay"
-                  name="allDay"
-                  formControlName="allDay"
-                  (click)="allDayBooleanState()"
-                   />
-                  <label class="custom-control-label" for="allDay">{{ 'disponibility.modal.blockDays.allDay.label' | transloco }}</label>
+                  <input type="checkbox" class="custom-control-input" id="allDay" name="allDay" formControlName="allDay"
+                    (click)="allDayBooleanState()" />
+                  <label class="custom-control-label"
+                    for="allDay">{{ 'disponibility.modal.blockDays.allDay.label' | transloco }}</label>
                 </div>
               </div>
             </div>
 
-            <div class="row" >
+            <div class="row">
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                  <label for="startBlock">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
-                  <ngb-timepicker 
-                  id="startBlock"
-                  formControlName="startBlock"
-                  >
+                <label for="startBlock">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
+                <ngb-timepicker id="startBlock" formControlName="startBlock">
                 </ngb-timepicker>
               </div>
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                  <label for="endBlock">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
-                  <ngb-timepicker 
-                  id="endBlock"
-                  formControlName="endBlock"
-                  >
-                  </ngb-timepicker>
+                <label for="endBlock">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
+                <ngb-timepicker id="endBlock" formControlName="endBlock">
+                </ngb-timepicker>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill"
-            data-dismiss="modal"
-            [disabled]="!availabilityBlocked.valid"
-            (click)="postAvailabilityBlocked()"
-          >
+          <button type="button" class="btn btn-secondary rounded-pill"
+            data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+            [disabled]="!availabilityBlocked.valid" (click)="postAvailabilityBlocked()">
             {{ 'clinicalFile.blockDay.label' | transloco }}
           </button>
         </div>
@@ -643,18 +470,13 @@
   </div>
 
   <!-- Modal editar-->
-  <div
-    class="modal fade"
-    id="editar"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.editDisponibility.label' | transloco }}</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+            {{ 'clinicalFile.editDisponibility.label' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -664,22 +486,16 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input            
-                  type="text"
-                  class="form-control"
-                  id="objective"
-                  name="objective"
-                  formControlName="objective"
-                
+                <input type="text" class="form-control" id="objective" name="objective" formControlName="objective"
                   [ngClass]="{
                     'is-invalid':
                       !createAvailability.get('objective').valid && createAvailability.get('objective').touched
-                  }"
-                /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
+                  }" /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }} </label>
-                <select class="form-control" id="specialty" formControlName="specialty"><!---->
+                <select class="form-control" id="specialty" formControlName="specialty">
+                  <!---->
                   <option value="{{ idAvailability.professionalDetails.specialtyDetails[0].specialtyId }}">
                     {{ idAvailability.professionalDetails.specialtyDetails[0].specialtyName }}
                   </option>
@@ -691,45 +507,29 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
-                  </label>
-                <div class="input-group"><!---->
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="{{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}"
-                    id="startDate"
-                    name="startDate"
-                   
-                    [(ngModel)]="model5"
-                    [minDate]="minDate"
-                    ngbDatepicker
-                    formControlName="startDate"
-                    #d="ngbDatepicker"
-                    (click)="d.toggle()"
-                   
-                  />
+                <label for="endDate">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} inicio
+                  actual: {{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}
+                </label>
+                <div class="input-group">
+                  <!---->
+                  <input class="form-control" type="text"
+                    placeholder="{{ idAvailability.dateDetails.startDate | date:'dd/MM/yyyy':'+0000' }}" id="startDate"
+                    name="startDate" [(ngModel)]="model5" [minDate]="minDate" ngbDatepicker formControlName="startDate"
+                    #d="ngbDatepicker" (click)="d.toggle()" />
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label><!-- formControlName="endDate"   id="endDate2"-->
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
+                <!-- formControlName="endDate"   id="endDate2"-->
                 <div class="input-group">
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="{{ idAvailability.dateDetails.endDate | date:'dd/MM/yyyy':'+0000' }}"
-                    name="endDate"
-                    formControlName="endDate"
-                    [(ngModel)]="model4"
-                    [minDate]="minDate"
-                    ngbDatepicker
-                    #e="ngbDatepicker"
-                    (click)="e.toggle()"
-                    [ngClass]="{
+                  <input class="form-control" type="text"
+                    placeholder="{{ idAvailability.dateDetails.endDate | date:'dd/MM/yyyy':'+0000' }}" name="endDate"
+                    formControlName="endDate" [(ngModel)]="model4" [minDate]="minDate" ngbDatepicker #e="ngbDatepicker"
+                    (click)="e.toggle()" [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('endDate').valid && createAvailability.get('endDate').touched
-                    }"
-                  /> <!--
+                    }" />
+                  <!--
                      [ngModelOptions]="{standalone: true}"
                      formControlName="endDate"
                      [ngClass]="{
@@ -739,9 +539,11 @@
                 </div>
               </div>
             </div>
-            <div class="row"><!-- formControlName="appointmentDuration"-->
+            <div class="row">
+              <!-- formControlName="appointmentDuration"-->
               <div class="form-group col">
-                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <label
+                  for="appointmentDuration">{{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco }}</label>
                 <select class="form-control" id="appointmentDuration">
                   <option selected="selected" value="0">{{
                     idAvailability.administrativeDetails.appointmentDuration
@@ -755,20 +557,14 @@
             <div class="row mt-2 mb-3">
               <div class="col-12">
                 <p>
-                  Disponibilidad de días actual: <b>{{ idAvailability.dateDetails.days }}</b>
+                  {{ 'common.aviabilityActualDays.label' | transloco }}: <b>{{ idAvailability.dateDetails.days }}</b>
                 </p>
               </div>
               <div class="col">
                 <ng-container *ngFor="let data of days; let i = index">
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input
-                      id="put{{ data.name }}"
-                      class="custom-control-input"
-                      type="checkbox"
-                      [value]="data.value"
-                      (change)="onCheckboxChange($event)"
-                      [checked]="false"
-                    />
+                    <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
+                      (change)="onCheckboxChange($event)" [checked]="false" />
                     <label class="custom-control-label" for="put{{ data.name }}">
                       {{ data.name }}
                     </label>
@@ -778,11 +574,11 @@
             </div>
             <div class="col-12">
               <p class="pl-0">
-                rango de horarios actual:<b
-                  ><ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
+                rango de horarios actual:<b>
+                  <ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
                     {{ range.start }} hrs - {{ range.end }} hrs
-                  </ng-container></b
-                >
+                  </ng-container>
+                </b>
               </p>
             </div>
             <!--campos reactivos dinamicos-->
@@ -790,18 +586,13 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
-                    <input
-                      type="time"
-                      [attr.id]="'start' + i"
-                      class="form-control"
-                      formControlName="start"
-                      value=""
+                    <label for="start' + i"
+                      [attr.for]="'start' + i">{{ 'disponibility.modal.create.initialDate.label' | transloco }}</label>
+                    <input type="time" [attr.id]="'start' + i" class="form-control" formControlName="start" value=""
                       [ngClass]="{
                         'is-invalid':
                           !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                      }"
-                    />
+                      }" />
                     <!--
                     <ngb-timepicker 
                     [attr.id]="'start' + i"
@@ -815,18 +606,13 @@
                   </ngb-timepicker>-->
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
-                    <input
-                    type="time"
-                    [attr.id]="'end' + i"
-                    class="form-control"
-                    formControlName="end"
-                    value=""
-                    [ngClass]="{
+                    <label for="'end' + i"
+                      [attr.for]="'end' + i">{{ 'disponibility.modal.create.finalDate.label' | transloco }}</label>
+                    <input type="time" [attr.id]="'end' + i" class="form-control" formControlName="end" value=""
+                      [ngClass]="{
                       'is-invalid':
                         !createAvailability.get('dailyRanges').valid && createAvailability.get('dailyRanges').touched
-                    }"
-                  />
+                    }" />
                     <!--
                     <ngb-timepicker 
                     [attr.id]="'end' + i"
@@ -850,40 +636,26 @@
             <div class="form-group">
               <div>
                 <a class="" (click)="agregardailyRanges()">
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-plus-circle"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                    />
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
                     <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                    />
+                    <path fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                   </svg>
-                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
-                >
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a>
               </div>
             </div>
             <!--/ campos reactivos dinamicos-->
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill"
-            data-dismiss="modal"
-            (click)="putAvailability2(idAvailability._id)"
-            [disabled]="!createAvailability.valid"
-          ><!--[disabled]="!createAvailability.valid"-->
+          <button type="button" class="btn btn-secondary rounded-pill"
+            data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+            (click)="putAvailability2(idAvailability._id)" [disabled]="!createAvailability.valid">
+            <!--[disabled]="!createAvailability.valid"-->
             {{ 'clinicalFile.editDisponibility.label' | transloco }}
           </button>
         </div>

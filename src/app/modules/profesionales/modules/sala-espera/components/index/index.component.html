@@ -12,7 +12,7 @@
     <thead class="">
       <tr>
         <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
-        <th scope="col">Descripcion</th>
+        <th scope="col">{{ 'common.description.label' | transloco }}</th>
         <th scope="col">{{ 'table.link.label' | transloco }}</th>
         <th scope="col">{{ 'waitingRoom.payments.label' | transloco }}</th>
         <th scope="col">{{ 'clinicalFile.active.label' | transloco }}</th>
@@ -32,25 +32,15 @@
         </td>
         <td>
           <div class="custom-control custom-switch mb-4">
-            <input
-              [(ngModel)]="item.administrativeDetails.requirePayment"
-              type="checkbox"
-              class="custom-control-input"
-              id="pay"
-              disabled
-            />
+            <input [(ngModel)]="item.administrativeDetails.requirePayment" type="checkbox" class="custom-control-input"
+              id="pay" disabled />
             <label class="custom-control-label" for="pay"></label>
           </div>
         </td>
         <td>
           <div class="custom-control custom-switch mb-4">
-            <input
-              [(ngModel)]="item.administrativeDetails.isActive"
-              type="checkbox"
-              class="custom-control-input"
-              id="status"
-              disabled
-            />
+            <input [(ngModel)]="item.administrativeDetails.isActive" type="checkbox" class="custom-control-input"
+              id="status" disabled />
             <label class="custom-control-label" for="status"></label>
           </div>
         </td>

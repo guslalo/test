@@ -1,29 +1,17 @@
 <div class="row">
   <div class="col">
-    <h2 class="mb-4">Bienvenido(a), {{ currentUser.name || 'Usuario' }}</h2>
+    <h2 class="mb-4">{{ 'clinicalFile.welcome.label' | transloco }}, {{ currentUser.name || 'Usuario' }}</h2>
   </div>
   <div class="col">
     <ng-container>
       <!-- *ngIf="userCurrent.lastName === 'professional'"-->
-      <button
-        data-toggle="modal"
-        data-target="#exampleModal"
-        type="button"
-        class="btn btn-primary rounded-pill float-right mr-3"
-      >
-        Nueva consulta
-        <svg
-          width="1.5em"
-          height="1.5em"
-          viewBox="0 0 16 16"
-          class="bi bi-plus-circle"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-          />
+      <button data-toggle="modal" data-target="#exampleModal" type="button"
+        class="btn btn-primary rounded-pill float-right mr-3">
+        {{ 'clinicalFile.newService.label' | transloco }}
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
           <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         </svg>
@@ -44,62 +32,33 @@
             <tbody>
               <tr>
                 <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-calendar"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                    />
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
+                    <path fill-rule="evenodd"
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z" />
                   </svg>
                   22 de Julio del 2020 / 20:15 Hrs
                 </td>
                 <td style="display: none;">
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-clock"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
-                    />
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+                    <path fill-rule="evenodd"
+                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
                   </svg>
                   16:00 Hrs.
                 </td>
                 <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-person-circle"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-                    />
+                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                     <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
-                    />
+                    <path fill-rule="evenodd"
+                      d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                   </svg>
                   Pacinte Vicente Muñoz
                 </td>
@@ -112,18 +71,10 @@
                   </button>
                 </td>
                 <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-three-dots-vertical"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                    />
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                   </svg>
                 </td>
               </tr>
@@ -143,28 +94,14 @@
       <div class="col-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="tab"
-              data-toggle="tab"
-              href="#child1"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-            >
-              Próximas consultas Agendadas
+            <a class="nav-link active" id="tab" data-toggle="tab" href="#child1" role="tab" aria-controls="home"
+              aria-selected="true">
+              {{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}
             </a>
           </li>
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#child2"
-              role="tab"
-              aria-controls="home"
-              aria-selected="false"
-            >
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#child2" role="tab" aria-controls="home"
+              aria-selected="false">
               {{ 'dashboard.home.tab.home.tab.onHold.title' | transloco }}
             </a>
           </li>
@@ -360,7 +297,8 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">{{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
+        <h5 class="modal-title text-center w-100 mt-1">
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -368,28 +306,12 @@
       <div class="modal-body p-4">
         <ul class="nav nav-tabs nav-pills nav-fill tabconsultamodal rounded" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#home2"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a
-            >
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home"
+              aria-selected="true">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#profile2"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a
-            >
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"
+              aria-selected="false">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -397,7 +319,8 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
+                  <label
+                    for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
@@ -408,18 +331,14 @@
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
-                  <input
-                    type="time"
-                    class="form-control"
-                    name="startBlock"
-                    min="07:00"
-                    max="20:00"
-                    formControlName="startBlock"
-                  />
+                  <label
+                    for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
+                  <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00"
+                    formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
+                  <label
+                    for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
                   <input type="text" class="form-control" name="endBlock" />
                 </div>
               </div>
@@ -429,18 +348,21 @@
             <form class="mt-4">
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
+                  <label
+                    for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
                   <input type="text" class="form-control" name="startBlock" formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
+                  <label
+                    for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
                   <input type="email" class="form-control" name="endBlock" formControlName="endBlock" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
+                  <label
+                    for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
                   <textarea class="form-control" rows="5"></textarea>
                 </div>
               </div>
@@ -448,31 +370,21 @@
               <div class="row">
                 <div class="form-group col">
                   <label for="startBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    name="startBlock"
-                    min="07:00"
-                    max="20:00"
-                    formControlName="startBlock"
-                  />
+                  <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00"
+                    formControlName="startBlock" />
                 </div>
                 <div class="form-group col">
-                  <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
+                  <label
+                    for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
                   <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col">
-                  <label for="startBlock">{{ 'disponibility.modal.create.objetive.label' | transloco }} de Consulta</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="startBlock"
-                    min="07:00"
-                    max="20:00"
-                    formControlName="startBlock"
-                  />
+                  <label for="startBlock">{{ 'disponibility.modal.create.objetive.label' | transloco }} de
+                    Consulta</label>
+                  <input type="text" class="form-control" name="startBlock" min="07:00" max="20:00"
+                    formControlName="startBlock" />
                 </div>
               </div>
             </form>
@@ -480,13 +392,10 @@
         </div>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          routerLink="crear-ficha-consulta"
-        >
+        <button type="button" class="btn btn-secondary rounded-pill"
+          data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+          routerLink="crear-ficha-consulta">
           {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
       </div>
