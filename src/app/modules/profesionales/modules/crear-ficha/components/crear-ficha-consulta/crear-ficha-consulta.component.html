@@ -1366,6 +1366,7 @@
             </div>
             <div class="col-6">
               <button class="btn btn-secondary rounded-pill float-right align-middle"
+              [disabled]="!permisoGuardar"
               (click)="subirPrescripciones()" data-toggle="modal" data-target="#preescripcionesModal">
                 Subir documento
               </button>

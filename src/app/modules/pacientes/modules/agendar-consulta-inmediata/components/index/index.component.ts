@@ -27,6 +27,7 @@ export class IndexComponent implements OnInit {
   public descripcionSintoma: any;
   public textInputFile: any;
   public base64: any;
+  public sinPrecio:boolean;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -192,7 +193,8 @@ export class IndexComponent implements OnInit {
           this.statusPago(consolidate.id);
           $('#exampleModal').modal();
         } else {
-           //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+          this.sinPrecio = true;
+          this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
           //$('#sinPrecio').modal();
           console.log('no tiene precio');
         }
