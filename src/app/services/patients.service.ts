@@ -8,6 +8,7 @@ import { environment } from './../../environments/environment';
 })
 export class PatientsService {
   private account = 'v1/account';
+  private coordinators = 'v1/coordinator';
   private professionals = 'v1/professionals';
   private patients = 'v1/patient';
 
@@ -32,6 +33,10 @@ export class PatientsService {
 
   getPatients(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.patients);
+  }
+
+  getAllPatients(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.coordinators + '/patients');
   }
 
   sendInvitationEmail(patientId): Observable<any> {

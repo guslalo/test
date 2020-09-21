@@ -11,22 +11,21 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [IndexComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule, FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
     HistorialConsultasRoutingModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    NgxDatatableModule,
   ],
-  exports: [
-    NgbDatepickerModule,
-
-  ]
+  exports: [NgbDatepickerModule],
 })
-export class HistorialConsultasModule { }
+export class HistorialConsultasModule {}
