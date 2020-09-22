@@ -21,7 +21,6 @@ import { LeftColumnComponent } from './components/left-column/left-column.compon
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { LangComponent } from './components/lang/lang.component';
 import { ChooseContextComponent } from './components/choose-context/choose-context.component';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -37,7 +36,6 @@ import { RouterModule } from '@angular/router';
     FinishRegistrationComponent,
     BlockedAccountComponent,
     LeftColumnComponent,
-    LangComponent,
     ChooseContextComponent,
     ConfirmAccountComponent,
     ResetPasswordComponent,
@@ -46,11 +44,12 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     AuthRoutingModule,
     NgxSpinnerModule,
-    SharedModule.forRoot(),
+    SharedModule,
     NgbDatepickerModule,
     MatStepperModule,
     MatDialogModule,
     RouterModule,
+    SharedModule,
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

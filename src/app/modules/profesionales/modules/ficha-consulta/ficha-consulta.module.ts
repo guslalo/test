@@ -4,15 +4,8 @@ import { FichaConsultaComponent } from './components/ficha-consulta.component';
 import { FichaConsultaRoutingModule } from './ficha-consulta-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    FichaConsultaComponent
-  ],
-  imports: [
-    CommonModule,
-    FichaConsultaRoutingModule,
-    SharedModule.forRoot(),
-  ]
+  declarations: [FichaConsultaComponent],
+  imports: [CommonModule, FichaConsultaRoutingModule, SharedModule],
 })
-export class FichaConsultaModule { }
+export class FichaConsultaModule {}

@@ -6,16 +6,8 @@ import { IndexComponent } from './components/index/index.component';
 import { SoporteComponent } from './components/soporte/soporte.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    IndexComponent,
-    SoporteComponent
-  ],
-  imports: [
-    CommonModule,
-    SoporteRoutingModule,
-    SharedModule.forRoot()
-  ]
+  declarations: [IndexComponent, SoporteComponent],
+  imports: [CommonModule, SoporteRoutingModule, SharedModule],
 })
-export class SoporteModule { }
+export class SoporteModule {}

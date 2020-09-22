@@ -1,0 +1,24 @@
+<div class="dropdown language">
+  <button
+    class="btn btn-light dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    {{ 'common.dropdown.language.label' | transloco }}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" id="es" href="javascript:;" (click)="setActiveLang('es')">
+      <img height="24" src="assets/icons/spain.svg" alt="img" class="mr-2" />{{
+        'common.lang.spanish.label' | transloco
+      }}
+    </a>
+    <a class="dropdown-item" id="pt" href="javascript:;" (click)="setActiveLang('pt')">
+      <img height="24" src="assets/icons/brasil.svg" alt="img" class="mr-2" />{{
+        'common.lang.portuguese.label' | transloco
+      }}
+    </a>
+  </div>
+</div>

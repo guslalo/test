@@ -11,11 +11,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    HistorialConsultasComponent
-  ],
+  declarations: [HistorialConsultasComponent],
   imports: [
     CommonModule,
     HistorialConsultasRoutingModule,
@@ -23,7 +20,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbTimepickerModule,
-    ReactiveFormsModule, FormsModule, SharedModule.forRoot(),
-  ]
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+  ],
 })
-export class HistorialConsultasModule { }
+export class HistorialConsultasModule {}

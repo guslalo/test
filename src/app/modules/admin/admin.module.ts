@@ -15,7 +15,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [],
   imports: [
-    SharedModule.forRoot(),
+    SharedModule,
     CommonModule,
     AdminRoutingModule,
     // EXTRAS

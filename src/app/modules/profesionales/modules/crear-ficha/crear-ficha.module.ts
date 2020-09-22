@@ -7,19 +7,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @NgModule({
-  declarations: [
-    CrearFichaConsultaComponent
-  ],
-  imports: [
-    CommonModule,
-    CrearFichaRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgxSpinnerModule,
-    SharedModule.forRoot(),
-  ]
+  declarations: [CrearFichaConsultaComponent],
+  imports: [CommonModule, CrearFichaRoutingModule, ReactiveFormsModule, FormsModule, NgxSpinnerModule, SharedModule],
 })
-export class CrearFichaModule { }
+export class CrearFichaModule {}

@@ -26,12 +26,8 @@ FullCalendarModule.registerPlugins([
   // interactionPlugin
 ]);
 
-
-
 @NgModule({
-  declarations: [
-    AgendaComponent
-  ],
+  declarations: [AgendaComponent],
   imports: [
     CommonModule,
     AgendaRoutingModule,
@@ -50,7 +46,7 @@ FullCalendarModule.registerPlugins([
     NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
-    SharedModule.forRoot(),
-  ]
+    SharedModule,
+  ],
 })
-export class AgendaModule { }
+export class AgendaModule {}
