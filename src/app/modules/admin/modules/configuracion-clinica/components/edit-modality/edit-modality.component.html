@@ -10,7 +10,7 @@
                     <label
                         for="name">{{ 'dashboard.home.config.tabs.modality.modalConfig.waitingRoom.label' | transloco }}</label>
                     <select class="form-control" id="waitingRoom" formControlName="waiting_room">
-                        <option *ngFor="let wr of waitingRooms" [value]="wr._id">{{wr.name}}</option>
+                        <option *ngFor="let wr of waitingRooms" [ngValue]="wr._id">{{wr.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

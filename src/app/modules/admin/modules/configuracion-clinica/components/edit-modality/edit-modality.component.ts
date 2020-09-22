@@ -36,7 +36,7 @@ export class EditModalityComponent implements OnInit {
     this.adminService.getImmediateData().subscribe(
       data => {
         this.immediateData = data.payload;
-        this.modalityForm.get('waiting_room').setValue(this.immediateData.moduleDetails.waitingRooms)
+        this.modalityForm.get('waiting_room').setValue(this.immediateData.moduleDetails.waitingRoom)
         this.modalityForm.get('description').setValue(this.immediateData.moduleDetails.description)
       },
       err => {
@@ -56,7 +56,7 @@ export class EditModalityComponent implements OnInit {
     }
     this.adminService.updateModalityItem(modalityData).subscribe(
       d => {
-
+        this.modalRef.hide();
       },
       err => {
 

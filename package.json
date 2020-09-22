@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^9.1.11",
+    "@angular/animations": "^9.1.12",
     "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.11",
     "@angular/compiler": "~9.1.11",
@@ -45,6 +45,7 @@
     "ngx-owl-carousel": "^2.0.7",
     "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^9.0.2",
+    "ngx-toastr": "^13.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "save": "^2.4.0",

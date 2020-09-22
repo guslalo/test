@@ -37,6 +37,11 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AsyncPipe } from '@angular/common';
 import { environment } from './../environments/environment';
 import { FileUtilsService } from './services/file-utils.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+
+const toastrConfig = { closeButton: true };
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -57,9 +62,23 @@ import { FileUtilsService } from './services/file-utils.service';
     AngularFirestoreModule, // For FireStore
     AngularFireStorageModule, // For Storage
     AngularFireAuthModule, // For Authentication
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ToastrModule.forRoot(toastrConfig),
   ],
-  providers: [AngularFireDatabaseModule, ErrorDialogService, MessagingService, AsyncPipe, FileUtilsService],
+  providers: [
+    AngularFireDatabaseModule,
+    ErrorDialogService,
+    MessagingService,
+    AsyncPipe,
+    FileUtilsService,
+    // INTERCEPTOR TOASTR
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpToastrInterceptor,
+      multi: true,
+    },
+    // INTERCEPTOR TOASTR
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent],
   exports: [
