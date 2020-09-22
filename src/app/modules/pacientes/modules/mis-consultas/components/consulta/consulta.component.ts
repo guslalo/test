@@ -5,27 +5,25 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 
-
-
 @Component({
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
-  styleUrls: ['./consulta.component.scss']
+  styleUrls: ['./consulta.component.scss'],
 })
 export class ConsultaComponent implements OnInit {
-  public appoimentDetail:any;
+  public appoimentDetail: any;
   public access_token: any;
-  public downloadUrl:any;
+  public downloadUrl: any;
   public user: any;
   public timeline: any;
-  public fecha:any;
-  public professionalData:any;
+  public fecha: any;
+  public professionalData: any;
 
   constructor(
     private route: ActivatedRoute,
-    private appointmentsService:AppointmentsService,
-    private documentService: DocumentService,
-  ) { }
+    private appointmentsService: AppointmentsService,
+    private documentService: DocumentService
+  ) {}
 
   ngOnInit(): void {
     this.user = new UserLogin(
@@ -42,7 +40,7 @@ export class ConsultaComponent implements OnInit {
     );
 
     this.route.params.subscribe((params) => {
-      const id = params.appointmentId
+      const id = params.appointmentId;
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
@@ -50,51 +48,37 @@ export class ConsultaComponent implements OnInit {
 
     this.getAppointmentsTimeline();
     this.getFecha();
-    
   }
 
-  getFecha(){
+  getFecha() {
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
 
     this.fecha = {
       year: fecha.getFullYear(),
-      month: month
-    }
+      month: month,
+    };
 
     //console.log(currentMonth);
   }
 
-  getAppointmentsTimeline(){
+  getAppointmentsTimeline() {
     this.appointmentsService.getAppointmentsTimeline().subscribe(
-      data => { 
-        this.timeline = data.payload;
-        console.log(this.timeline)
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }
-  getAppointmentsProfessionalData(id){
-    this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
-      data => { 
-        this.professionalData = data.payload;
-        console.log(data)
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }
-
-  getAppointmentsDetails(id) {
-    this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
-        
-        this.appoimentDetail = data.payload;
-        console.log(this.appoimentDetail );
+        this.timeline = data.payload;
+        console.log(this.timeline);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  getAppointmentsProfessionalData(id) {
+    this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
+      (data) => {
+        this.professionalData = data.payload;
+        console.log(data);
       },
       (error) => {
         console.log(error);
@@ -102,4 +86,15 @@ export class ConsultaComponent implements OnInit {
     );
   }
 
+  getAppointmentsDetails(id) {
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      (data) => {
+        this.appoimentDetail = data.payload;
+        console.log(this.appoimentDetail);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

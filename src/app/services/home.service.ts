@@ -10,7 +10,6 @@ export class HomeService {
   private home = 'v1/home';
   private tips = 'v1/tips';
 
-
   private patients = 'v1/patient';
   private photo = 'v1/account/profilePhoto';
 
@@ -18,7 +17,7 @@ export class HomeService {
 
   // get data
   getTips(): Observable<any> {
-    return this.http.get<any>(environment.baseUrl + this.tips )
+    return this.http.get<any>(environment.baseUrl + this.tips);
   }
 
   // get data
@@ -29,5 +28,4 @@ export class HomeService {
       headers: new HttpHeaders({ Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')) }),
     });
   }*/
-
 }

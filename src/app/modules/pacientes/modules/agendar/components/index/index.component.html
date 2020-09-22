@@ -49,7 +49,9 @@
           <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
             <form>
               <div class="form-group">
-                <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.profetional.label' | transloco }}</label>
+                <label class="font-weight-bold text-left w-100">{{
+                  'dashboard.home.newService.type.profetional.label' | transloco
+                }}</label>
                 <select
                   class="form-control custom-select"
                   (click)="bloquearSelect = true"
@@ -64,7 +66,9 @@
               </div>
 
               <div class="form-group">
-                <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.specialty.label' | transloco }}</label>
+                <label class="font-weight-bold text-left w-100">{{
+                  'dashboard.home.newService.type.specialty.label' | transloco
+                }}</label>
                 <select
                   class="form-control custom-select"
                   (change)="onChangeTypeSpecialtiesId($event.target.value)"
@@ -81,7 +85,9 @@
 
           <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
             <div class="form-group">
-              <label class="font-weight-bold text-left w-100">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
+              <label class="font-weight-bold text-left w-100">{{
+                'clinicalFile.patientData.tabs.doctor.label' | transloco
+              }}</label>
               <input
                 *ngIf="professionals"
                 type="text"
@@ -112,7 +118,9 @@
       <div class="card-body text-center">
         <form>
           <div class="form-group">
-            <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.date.label' | transloco }}</label>
+            <label class="font-weight-bold text-left w-100">{{
+              'dashboard.home.newService.type.date.label' | transloco
+            }}</label>
             <input
               [disabled]="bloquearFecha"
               class="form-control"
@@ -252,7 +260,9 @@
                 <div class="col-4">
                   <div class="form-row">
                     <div class="form-group">
-                      <label for="validationTooltip01" class="text-left w-100">{{ 'clinicalFile.selectSymptoms.label' | transloco }}</label>
+                      <label for="validationTooltip01" class="text-left w-100">{{
+                        'clinicalFile.selectSymptoms.label' | transloco
+                      }}</label>
                       <select class="form-control custom-select w-100" (change)="onChange($event.target)">
                         <option selected>Seleccione síntoma</option>
                         <ng-container *ngFor="let item of symptoms">
@@ -365,7 +375,10 @@
                   {{ blocks[0].professionalDetails.userDetails[0].name }}
                   {{ blocks[0].professionalDetails.userDetails[0].lastName }}
                 </p>
-                <p class="m-0">{{ 'disponibility.modal.create.specialty.label' | transloco }} {{ blocks[0].professionalDetails.specialtyDetails[0].specialtyName }}</p>
+                <p class="m-0">
+                  {{ 'disponibility.modal.create.specialty.label' | transloco }}
+                  {{ blocks[0].professionalDetails.specialtyDetails[0].specialtyName }}
+                </p>
               </div>
 
               <div class="box boxSeparador pl-3">

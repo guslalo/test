@@ -1,118 +1,196 @@
 <div class="row">
-    <div class="col mb-2">
-        <h2>{{ 'account.userManagmentAccountCreation.label' | transloco }}</h2>
-    </div>
-    <div class="col-3 col-md-3">
-        <button id="submit-button" (click)="createUser()" type="button" class="btn btn-secondary rounded-pill float-right" [disabled]="!formUserValid()">
+  <div class="col mb-2">
+    <h2>{{ 'account.userManagmentAccountCreation.label' | transloco }}</h2>
+  </div>
+  <div class="col-3 col-md-3">
+    <button
+      id="submit-button"
+      (click)="createUser()"
+      type="button"
+      class="btn btn-secondary rounded-pill float-right"
+      [disabled]="!formUserValid()"
+    >
       {{ 'dashboard.home.userManagment.createAccount.btnCreate.label' | transloco }}
     </button>
 
-        <a href="javascript:history.back()" class="back float-right align-top mr-3">
-            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <a href="javascript:history.back()" class="back float-right align-top mr-3">
+      <svg
+        width="2em"
+        height="2em"
+        viewBox="0 0 16 16"
+        class="bi bi-arrow-left-circle"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd"
-          d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+        <path
+          fill-rule="evenodd"
+          d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
+        />
         <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
       </svg>
-        </a>
-    </div>
+    </a>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-12">
-        <!--nav-tabs-->
-        <div class="row">
-            <div class="col-12 mb-2">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="datos1" data-toggle="tab" href="#datos-personales-tab" role="tab">
+  <div class="col-12">
+    <!--nav-tabs-->
+    <div class="row">
+      <div class="col-12 mb-2">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="datos1" data-toggle="tab" href="#datos-personales-tab" role="tab">
               {{ 'dashboard.home.userManagment.createAccount.tabs.personal.personal.label' | transloco }}
             </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a *ngIf="userType !== 'patient'" class="nav-link" id="datos2" data-toggle="tab" href="#datos-rol-tab" role="tab">
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              *ngIf="userType !== 'patient'"
+              class="nav-link"
+              id="datos2"
+              data-toggle="tab"
+              href="#datos-rol-tab"
+              role="tab"
+            >
               {{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}
             </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a *ngIf="userType !== 'patient'" class="nav-link" id="datos3" data-toggle="tab" href="#datos-salas-espera-tab" role="tab" aria-selected="false">
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              *ngIf="userType !== 'patient'"
+              class="nav-link"
+              id="datos3"
+              data-toggle="tab"
+              href="#datos-salas-espera-tab"
+              role="tab"
+              aria-selected="false"
+            >
               {{ 'waitingRoom.name.label' | transloco }} (Modalidad)
             </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a *ngIf="isProfessional()" class="nav-link" id="datos4" data-toggle="tab" href="#datos-laborales-tab" role="tab" aria-selected="false">
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              *ngIf="isProfessional()"
+              class="nav-link"
+              id="datos4"
+              data-toggle="tab"
+              href="#datos-laborales-tab"
+              role="tab"
+              aria-selected="false"
+            >
               {{ 'dashboard.home.userManagment.createAccount.tabs.academic.label' | transloco }}
             </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="datos5" data-toggle="tab" href="#datos-clave-tab" role="tab" aria-selected="false">
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="datos5" data-toggle="tab" href="#datos-clave-tab" role="tab" aria-selected="false">
               {{ 'dashboard.home.userManagment.createAccount.tabs.password.label' | transloco }}
             </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--/nav-tabs-->
-        <!--tabs-->
-        <div class="tab-content w-100 mt-3" id="tabcontent">
-            <!--tab-->
-            <div class="tab-pane fade show active pt-2" id="datos-personales-tab" role="tabpanel">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--/nav-tabs-->
+    <!--tabs-->
+    <div class="tab-content w-100 mt-3" id="tabcontent">
+      <!--tab-->
+      <div class="tab-pane fade show active pt-2" id="datos-personales-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="row">
+                <h4 class="pl-3 pb-2">
+                  {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.label' | transloco }}
+                </h4>
+                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="isForeign"
+                    [(ngModel)]="isForeign"
+                    (change)="validateForm()"
+                  />
+                  <label class="custom-control-label" for="isForeign">{{ 'common.foreign.label' | transloco }}</label>
+                </div>
+              </div>
+              <form [formGroup]="identificationData">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <div class="row">
-                                <h4 class="pl-3 pb-2">
-                                    {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.label' | transloco }}</h4>
-                                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
-                                    <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign" (change)="validateForm()" />
-                                    <label class="custom-control-label" for="isForeign">{{ 'common.foreign.label' | transloco }}</label>
-                                </div>
-                            </div>
-                            <form [formGroup]="identificationData">
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="document">{{ 'account.identificationDocumentReq.label' | transloco }}*</label>
-                                        <select class="form-control" name="document" formControlName="document" [ngClass]="{
+                  <div class="form-group col-md-3">
+                    <label for="document">{{ 'account.identificationDocumentReq.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="document"
+                      formControlName="document"
+                      [ngClass]="{
                         'is-invalid': !identificationData.get('document').valid && !isForeign
-                      }" (change)="validateForm()">
+                      }"
+                      (change)="validateForm()"
+                    >
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cpf">
-                        {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label' | transloco }}
+                        {{
+                          'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
+                            | transloco
+                        }}
                       </option>
                       <option value="cns">
-                        {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cns.label' | transloco }}
+                        {{
+                          'dashboard.home.userManagment.createAccount.tabs.personal.identification.cns.label'
+                            | transloco
+                        }}
                       </option>
                       <option value="rgRegistry">{{ 'auth.rg.label' | transloco }}</option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}*</label>
-                                        <input disabled type="text" class="form-control" name="idDocumentNumber" formControlName="idDocumentNumber" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}*</label>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="idDocumentNumber"
+                      formControlName="idDocumentNumber"
+                      [ngClass]="{
                         'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="issuingBody">{{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.issuer.label' | transloco }}</label>
-                                        <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="issuingBody">{{
+                      'dashboard.home.userManagment.createAccount.tabs.personal.identification.issuer.label' | transloco
+                    }}</label>
+                    <select disabled class="form-control" name="issuingBody" formControlName="issuingBody">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of issuingEntities">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="passport">{{ 'common.passport.label' | transloco }}</label>
-                                        <input [attr.disabled]="!isForeign ? '' : null" type="text" class="form-control" name="passport" formControlName="passport" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="passport">{{ 'common.passport.label' | transloco }}</label>
+                    <input
+                      [attr.disabled]="!isForeign ? '' : null"
+                      type="text"
+                      class="form-control"
+                      name="passport"
+                      formControlName="passport"
+                      [ngClass]="{
                         'is-invalid': !identificationData.get('passport').valid
-                      }" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="document">{{ 'account.secondaryDoc.label' | transloco }}</label>
-                                        <select class="form-control" name="extraDocument" formControlName="extraDocument" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="document">{{ 'account.secondaryDoc.label' | transloco }}</label>
+                    <select
+                      class="form-control"
+                      name="extraDocument"
+                      formControlName="extraDocument"
+                      [ngClass]="{
                         'is-invalid': !identificationData.get('extraDocument').valid && !isForeign
-                      }">
+                      }"
+                    >
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cbo">{{ 'auth.cbor.label' | transloco }}</option>
                       <option value="pasep">{{ 'auth.pispasep.label' | transloco }}</option>
@@ -121,460 +199,706 @@
                       <option value="titleVote">{{ 'account.votantTitle.label' | transloco }}</option>
                       <option value="professionalUfNumber">{{ 'auth.proClassReg.label' | transloco }}</option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="extraIdDocument">{{ 'account.selectedDocumentNumberReq.label' | transloco }}</label>
-                                        <input disabled type="text" class="form-control" name="extraIdDocument" formControlName="extraIdDocument" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="extraIdDocument">{{ 'account.selectedDocumentNumberReq.label' | transloco }}</label>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control"
+                      name="extraIdDocument"
+                      formControlName="extraIdDocument"
+                      [ngClass]="{
                         'is-invalid': !identificationData.get('extraIdDocument').valid && !isForeign
-                      }" />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <div class="row">
-                                <h4 class="pl-3 pb-2">
-                                    {{ 'dashboard.home.userManagment.createAccount.tabs.personal.personal.label' | transloco }}</h4>
-                                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
-                                    <input type="checkbox" class="custom-control-input" id="isSchool" [(ngModel)]="isSchool" />
-                                    <label class="custom-control-label" for="isSchool">{{ 'account.schoolAsistant.label' | transloco }}</label>
-                                </div>
-                            </div>
-                            <form [formGroup]="personalData">
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="name">{{ 'account.nameReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="name" formControlName="name" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="row">
+                <h4 class="pl-3 pb-2">
+                  {{ 'dashboard.home.userManagment.createAccount.tabs.personal.personal.label' | transloco }}
+                </h4>
+                <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
+                  <input type="checkbox" class="custom-control-input" id="isSchool" [(ngModel)]="isSchool" />
+                  <label class="custom-control-label" for="isSchool">{{
+                    'account.schoolAsistant.label' | transloco
+                  }}</label>
+                </div>
+              </div>
+              <form [formGroup]="personalData">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="name">{{ 'account.nameReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      formControlName="name"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('name').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="lastName" formControlName="lastName" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="lastName"
+                      formControlName="lastName"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('lastName').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="secondLastName">{{ 'account.surnameReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="secondLastName" formControlName="secondLastName" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="secondLastName">{{ 'account.surnameReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="secondLastName"
+                      formControlName="secondLastName"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('secondLastName').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="lastName">{{ 'account.nameReq.label' | transloco }}s de la Madre *</label>
-                                        <input type="text" class="form-control" name="motherName" formControlName="motherName" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="lastName">{{ 'account.nameReq.label' | transloco }}s de la Madre *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="motherName"
+                      formControlName="motherName"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('motherName').valid
-                      }" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
-                                        <input type="email" class="form-control" name="email" formControlName="email" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      formControlName="email"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('email').valid
-                      }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber" [ngClass]="{
+                      }"
+                      onkeypress="return event.charCode != 32"
+                      placeholder="usuario@mail.com"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phoneNumber"
+                      formControlName="phoneNumber"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid
-                      }" placeholder="#### o +(#)####-####" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="gender">{{ 'account.grenderReq.label' | transloco }}*</label>
-                                        <select class="form-control" name="gender" formControlName="gender" [ngClass]="{
+                      }"
+                      placeholder="#### o +(#)####-####"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="gender">{{ 'account.grenderReq.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="gender"
+                      formControlName="gender"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('gender').valid
-                      }">
+                      }"
+                    >
                       <option value="male">{{ 'clinicalFile.male.label' | transloco }}</option>
                       <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="birthdate">{{ 'account.dateOfBirthReq.label' | transloco }}*</label>
-                                        <div class="input-group dateregister">
-                                            <input [placement]="'bottom'" class="form-control" id="birthdate" [maxDate]="maxDate" placeholder="yyyy-mm-dd" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="birthdate">{{ 'account.dateOfBirthReq.label' | transloco }}*</label>
+                    <div class="input-group dateregister">
+                      <input
+                        [placement]="'bottom'"
+                        class="form-control"
+                        id="birthdate"
+                        [maxDate]="maxDate"
+                        placeholder="yyyy-mm-dd"
+                        name="birthdate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
+                        ngbDatepicker
+                        #d="ngbDatepicker"
+                        formControlName="birthdate"
+                        [ngClass]="{
                           'is-invalid': !personalData.get('birthdate').valid
-                        }" (click)="d.toggle()" />
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="ufBirth">{{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }}</label>
-                                        <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth" formControlName="ufBirth">
+                        }"
+                        (click)="d.toggle()"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="ufBirth">{{
+                      'profile.personal.tabIdentification.birthData.uf.label' | transloco
+                    }}</label>
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="ufBirth"
+                      formControlName="ufBirth"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="municipalityBirth">{{ 'clinicalFile.patientData.tabs.identification.birthData.minicipality.label' | transloco }}</label>
-                                        <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="municipalityBirth" formControlName="municipalityBirth">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="municipalityBirth">{{
+                      'clinicalFile.patientData.tabs.identification.birthData.minicipality.label' | transloco
+                    }}</label>
+                    <select
+                      [attr.disabled]="isForeign ? '' : null"
+                      class="form-control"
+                      name="municipalityBirth"
+                      formControlName="municipalityBirth"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="nacionality">{{ 'account.nationalityReq.label' | transloco }}*</label>
-                                        <select class="form-control" name="nacionality" formControlName="nacionality" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="nacionality">{{ 'account.nationalityReq.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="nacionality"
+                      formControlName="nacionality"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of countries">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="originCountry">{{ 'account.country.label' | transloco }}</label>
-                                        <select [attr.disabled]="!isForeign ? '' : null" class="form-control" name="originCountry" formControlName="originCountry">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="originCountry">{{ 'account.country.label' | transloco }}</label>
+                    <select
+                      [attr.disabled]="!isForeign ? '' : null"
+                      class="form-control"
+                      name="originCountry"
+                      formControlName="originCountry"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of countries">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
-                                        <div class="input-group dateregister">
-                                            <input [disabled]="!isForeign" [placement]="'bottom'" [(ngModel)]="inmigrationDate" class="form-control" id="inmigrationDate" placeholder="yyyy-mm-dd" name="inmigrationDate" [minDate]="{ year: 1900, month: 1, day: 1 }" [maxDate]="currentDate" ngbDatepicker
-                                                #e="ngbDatepicker" formControlName="inmigrationDate" (click)="e.toggle()" />
-                                            <div class="input-group-append">
-                                                <button [disabled]="!isForeign" class="btn btn-outline-secondary calendar" (click)="e.toggle()" type="button"></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="breed">{{ 'account.raceColor.label' | transloco }} </label>
-                                        <select class="form-control" name="breed" formControlName="breed" [ngClass]="{
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
+                    <div class="input-group dateregister">
+                      <input
+                        [disabled]="!isForeign"
+                        [placement]="'bottom'"
+                        [(ngModel)]="inmigrationDate"
+                        class="form-control"
+                        id="inmigrationDate"
+                        placeholder="yyyy-mm-dd"
+                        name="inmigrationDate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
+                        [maxDate]="currentDate"
+                        ngbDatepicker
+                        #e="ngbDatepicker"
+                        formControlName="inmigrationDate"
+                        (click)="e.toggle()"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          [disabled]="!isForeign"
+                          class="btn btn-outline-secondary calendar"
+                          (click)="e.toggle()"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="breed">{{ 'account.raceColor.label' | transloco }} </label>
+                    <select
+                      class="form-control"
+                      name="breed"
+                      formControlName="breed"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('breed').valid
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of breeds">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="education">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco }}</label>
-                                        <select class="form-control" name="education" formControlName="education">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="education">{{
+                      'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
+                    }}</label>
+                    <select class="form-control" name="education" formControlName="education">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of educations">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
-                                        <select class="form-control" name="familySituation" formControlName="familySituation">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
+                    <select class="form-control" name="familySituation" formControlName="familySituation">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-2">
-                                        <label for="cep">CEP *</label>
-                                        <input type="text" class="form-control" name="cep" formControlName="cep" [ngClass]="{
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-2">
+                    <label for="cep">CEP *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cep"
+                      formControlName="cep"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('cep').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="uf">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                      (UF) *</label>
-                                        <select class="form-control" name="uf" formControlName="uf" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="uf"
+                      >{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} (UF) *</label
+                    >
+                    <select
+                      class="form-control"
+                      name="uf"
+                      formControlName="uf"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('uf').valid
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="city">{{ 'account.cityReq.label' | transloco }}*</label>
-                                        <select class="form-control" name="city" formControlName="city" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="city">{{ 'account.cityReq.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="city"
+                      formControlName="city"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('city').valid
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="street">{{ 'account.neighborhoodReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="neighborhood" formControlName="neighborhood" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="street">{{ 'account.neighborhoodReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="neighborhood"
+                      formControlName="neighborhood"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('neighborhood').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="street">{{ 'account.streetReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="street" formControlName="street" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="street">{{ 'account.streetReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="street"
+                      formControlName="street"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('street').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="streetNumber">{{ 'account.numberReq.label' | transloco }}*</label>
-                                        <input type="text" class="form-control" name="streetNumber" formControlName="streetNumber" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-1">
+                    <label for="streetNumber">{{ 'account.numberReq.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="streetNumber"
+                      formControlName="streetNumber"
+                      [ngClass]="{
                         'is-invalid': !personalData.get('streetNumber').valid
-                      }" />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                      }"
+                    />
+                  </div>
                 </div>
+              </form>
             </div>
-            <!--/tab-->
-            <!--tab-->
-            <div class="tab-pane fade show pt-2" id="datos-rol-tab" role="tabpanel">
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-rol-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}es</h4>
+              <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}es</h4>
-                            <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="role">{{ 'account.userType.label' | transloco }}</label>
-                                        <select type="text" class="form-control" name="role" formControlName="role" (change)="getProfiles()">
+                  <div class="form-group col-md-3">
+                    <label for="role">{{ 'account.userType.label' | transloco }}</label>
+                    <select
+                      type="text"
+                      class="form-control"
+                      name="role"
+                      formControlName="role"
+                      (change)="getProfiles()"
+                    >
                       <option [ngValue]="role.value" *ngFor="let role of roles">{{ role.name }}</option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="profile">{{ 'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco }}</label>
-                                        <select [(ngModel)]="profileSelected" class="form-control" name="profile" formControlName="profile" [ngClass]="{
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="profile">{{
+                      'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco
+                    }}</label>
+                    <select
+                      [(ngModel)]="profileSelected"
+                      class="form-control"
+                      name="profile"
+                      formControlName="profile"
+                      [ngClass]="{
                         'is-invalid': !profilesForm.get('profile').valid && profilesForm.get('profile').touched
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="profile" *ngFor="let profile of profiles">
                         {{ profile.role }} - {{ profile.profileName }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <button type="submit" class="btn btn-outline-primary rounded-pill mt-4" [disabled]="!profilesForm.valid">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <button
+                      type="submit"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!profilesForm.valid"
+                    >
                       {{ 'common.button.add.label' | transloco }}
                     </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <h4 class="mt-2 ml-4">
-                        {{ 'dashboard.home.userManagment.createAccount.tabs.role.profileManagment.title' | transloco }}</h4>
-                    <div class="col-12 mb-4">
-                        <div class="tableBox rounded p-4 bg-white">
-                            <table class="table">
-                                <thead class="">
-                                    <tr>
-                                        <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</th>
-                                        <th scope="col">
-                                            {{ 'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco }}
-                                        </th>
-                                        <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                                        </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr *ngFor="let profile of profilesAssigned; let i = index">
-                                        <td>
-                                            {{ profile.role }}
-                                        </td>
-                                        <td>
-                                            {{ profile.name }}
-                                        </td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="switch{{ profile.id }}" [checked]="true" (change)="removeProfile(i)" />
-                                                <label class="custom-control-label" for="switch{{ profile.id }}"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+              </form>
             </div>
-            <!--/tab-->
-            <!--tab-->
-            <div class="tab-pane fade show pt-2" id="datos-salas-espera-tab" role="tabpanel">
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="mt-2 ml-4">
+            {{ 'dashboard.home.userManagment.createAccount.tabs.role.profileManagment.title' | transloco }}
+          </h4>
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</th>
+                    <th scope="col">
+                      {{
+                        'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label' | transloco
+                      }}
+                    </th>
+                    <th scope="col">
+                      {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let profile of profilesAssigned; let i = index">
+                    <td>
+                      {{ profile.role }}
+                    </td>
+                    <td>
+                      {{ profile.name }}
+                    </td>
+                    <td>
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="switch{{ profile.id }}"
+                          [checked]="true"
+                          (change)="removeProfile(i)"
+                        />
+                        <label class="custom-control-label" for="switch{{ profile.id }}"></label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-salas-espera-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">{{ 'waitingRoom.titlePlural.label' | transloco }}</h4>
+              <form [formGroup]="waitingRoomForm">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <h4 class="pb-2">{{ 'waitingRoom.titlePlural.label' | transloco }}</h4>
-                            <form [formGroup]="waitingRoomForm">
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <label for="waitingRoom">Lista de Espera</label>
-                                        <select [(ngModel)]="roomSelected" class="form-control" name="waitingRoom" formControlName="waitingRoom">
+                  <div class="form-group col-md-4">
+                    <label for="waitingRoom">Lista de Espera</label>
+                    <select
+                      [(ngModel)]="roomSelected"
+                      class="form-control"
+                      name="waitingRoom"
+                      formControlName="waitingRoom"
+                    >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="item" *ngFor="let item of waitingRooms">
                         {{ item.roomDetails?.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <button (click)="addWaitingRoom()" class="btn btn-outline-primary rounded-pill mt-4" [disabled]="!waitingRoomForm.valid">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addWaitingRoom()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!waitingRoomForm.valid"
+                    >
                       {{ 'common.button.add.label' | transloco }}
                     </button>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
                       {{ 'common.button.add.label' | transloco }} Todas
                     </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <h4 class="mt-2 ml-4">{{ 'common.added.label' | transloco }}</h4>
-                    <div class="col-12 mb-4">
-                        <div class="tableBox rounded p-4 bg-white">
-                            <table class="table">
-                                <thead class="">
-                                    <tr>
-                                        <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
-                                        <th scope="col">Descripcion</th>
-                                        <th scope="col">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                                        </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr *ngFor="let waitingRoom of waitingRoomsAssigned; let i = index">
-                                        <td>
-                                            {{ waitingRoom.roomDetails?.name }}
-                                        </td>
-                                        <td>
-                                            {{ waitingRoom.roomDetails?.description }}
-                                        </td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="switch{{ waitingRoom.roomDetails?._id }}" [checked]="true" (change)="removeWaitingRoom(i)" />
-                                                <label class="custom-control-label" for="switch{{ waitingRoom.roomDetails?._id }}"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+              </form>
             </div>
-            <!--/tab-->
-            <!--tab-->
-            <div class="tab-pane fade show pt-2" id="datos-laborales-tab" role="tabpanel">
-                <div class="row">
-                    <div class="col-2">
-                        <div class="img text-center">
-                            <img src="assets/profile.jpg" style="border-radius: 50%;" />
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill w-100 mt-2">
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="mt-2 ml-4">{{ 'common.added.label' | transloco }}</h4>
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">
+                      {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let waitingRoom of waitingRoomsAssigned; let i = index">
+                    <td>
+                      {{ waitingRoom.roomDetails?.name }}
+                    </td>
+                    <td>
+                      {{ waitingRoom.roomDetails?.description }}
+                    </td>
+                    <td>
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="switch{{ waitingRoom.roomDetails?._id }}"
+                          [checked]="true"
+                          (change)="removeWaitingRoom(i)"
+                        />
+                        <label class="custom-control-label" for="switch{{ waitingRoom.roomDetails?._id }}"></label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-laborales-tab" role="tabpanel">
+        <div class="row">
+          <div class="col-2">
+            <div class="img text-center">
+              <img src="assets/profile.jpg" style="border-radius: 50%;" />
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary rounded-pill w-100 mt-2">
               {{ 'common.button.changePic.label' | transloco }}
             </button>
-                    </div>
-                    <div class="col-10">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <form [formGroup]="profileDataForm">
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <label for="cpf">Biografia Academica</label>
-                                        <textarea rows="4" no-resize type="text" class="form-control" name="biography" formControlName="biography"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-10">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <form [formGroup]="profileDataForm">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <h4 class="pb-2">
-                                {{ 'dashboard.home.userManagment.createAccount.tabs.academic.specialty.label' | transloco }}</h4>
-                            <form [formGroup]="specialitiesForm">
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
-                                        <select class="form-control" name="speciality" formControlName="speciality">
+                  <div class="form-group col-md-12">
+                    <label for="cpf">Biografia Academica</label>
+                    <textarea
+                      rows="4"
+                      no-resize
+                      type="text"
+                      class="form-control"
+                      name="biography"
+                      formControlName="biography"
+                    ></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">
+                {{ 'dashboard.home.userManagment.createAccount.tabs.academic.specialty.label' | transloco }}
+              </h4>
+              <form [formGroup]="specialitiesForm">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
+                    <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
                         {{ speciality.specialtyName }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <button (click)="addSpeciality()" class="btn btn-outline-primary rounded-pill mt-4" [disabled]="!specialitiesForm.valid">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addSpeciality()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="!specialitiesForm.valid"
+                    >
                       {{ 'common.button.add.label' | transloco }}
                     </button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="alert alert-primary alert-dismissible fade show" role="alert" *ngFor="let speciality of specialitiesAssigned; let i = index">
-                                            <strong>{{ speciality.specialtyName }}</strong>
-                                            <button (click)="removeSpeciality(i)" type="button" class="close">
+                  </div>
+                  <div class="col-md-6">
+                    <div
+                      class="alert alert-primary alert-dismissible fade show"
+                      role="alert"
+                      *ngFor="let speciality of specialitiesAssigned; let i = index"
+                    >
+                      <strong>{{ speciality.specialtyName }}</strong>
+                      <button (click)="removeSpeciality(i)" type="button" class="close">
                         <span aria-hidden="true">&times;</span>
                       </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
+                  </div>
                 </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">Educacion</h4>
+              <form [formGroup]="professionalForm">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <h4 class="pb-2">Educacion</h4>
-                            <form [formGroup]="professionalForm">
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label for="professionalTitle">{{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="professionalTitle" formControlName="professionalTitle" [ngClass]="{
+                  <div class="form-group col-md-3">
+                    <label for="professionalTitle">{{
+                      'dashboard.home.uncategorized.professionalDegree.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="professionalTitle"
+                      formControlName="professionalTitle"
+                      [ngClass]="{
                         'is-invalid': !professionalForm.get('professionalTitle').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="university">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="university" formControlName="university" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="university">{{
+                      'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="university"
+                      formControlName="university"
+                      [ngClass]="{
                         'is-invalid': !professionalForm.get('university').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="course">{{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="course" formControlName="course" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="course">{{
+                      'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="course"
+                      formControlName="course"
+                      [ngClass]="{
                         'is-invalid': !professionalForm.get('course').valid
-                      }" />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
-                                        <select class="form-control" name="ufRegistry" formControlName="ufRegistry" [ngClass]="{
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
+                    <select
+                      class="form-control"
+                      name="ufRegistry"
+                      formControlName="ufRegistry"
+                      [ngClass]="{
                         'is-invalid': !professionalForm.get('ufRegistry').valid
-                      }">
+                      }"
+                    >
                       <option [ngValue]="null" [disabled]="true">Seleccionar</option>
                       <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <label for="professionalRegistryType">{{ 'dashboard.home.uncategorized.professionalReg.label' | transloco }}</label>
-                                        <select class="form-control" name="professionalRegistryType" formControlName="professionalRegistryType">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="professionalRegistryType">{{
+                      'dashboard.home.uncategorized.professionalReg.label' | transloco
+                    }}</label>
+                    <select
+                      class="form-control"
+                      name="professionalRegistryType"
+                      formControlName="professionalRegistryType"
+                    >
                       <option [value]="null" disabled>{{ 'common.select.label' | transloco }}</option>
                       <option value="CRM">{{ 'dashboard.home.uncategorized.CRM.label' | transloco }}</option>
                       <option value="COREM">{{ 'dashboard.home.uncategorized.COREN.label' | transloco }}</option>
@@ -585,153 +909,212 @@
                       <option value="CREFONO">{{ 'dashboard.home.uncategorized.CREFONO.label' | transloco }}</option>
                       <option value="Ñao definido">Ñao definido</option>
                     </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="professionalRegistryType">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</label>
-                                        <input [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true" type="text" class="form-control" name="professionalRegistry" formControlName="professionalRegistry" [ngClass]="{
+                  </div>
+                  <div class="col-md-3">
+                    <label for="professionalRegistryType">{{
+                      'dashboard.home.uncategorized.regNumber.label' | transloco
+                    }}</label>
+                    <input
+                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
+                      type="text"
+                      class="form-control"
+                      name="professionalRegistry"
+                      formControlName="professionalRegistry"
+                      [ngClass]="{
                         'is-invalid': !professionalForm.get('professionalRegistry').valid
-                      }" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="ufProfessionalRegistry">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</label>
-                                        <select [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true" class="form-control" name="ufProfessionalRegistry" formControlName="ufProfessionalRegistry">
+                      }"
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="ufProfessionalRegistry">{{
+                      'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
+                    }}</label>
+                    <select
+                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
+                      class="form-control"
+                      name="ufProfessionalRegistry"
+                      formControlName="ufProfessionalRegistry"
+                    >
                       <option [ngValue]="null" disabled>Seleccionar</option>
                       <option [ngValue]="state" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <button (click)="addProfessionalRegistry()" class="btn btn-outline-primary rounded-pill mt-4" [disabled]="validProfessionalRegistry()">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button
+                      (click)="addProfessionalRegistry()"
+                      class="btn btn-outline-primary rounded-pill mt-4"
+                      [disabled]="validProfessionalRegistry()"
+                    >
                       {{ 'common.button.add.label' | transloco }}
                     </button>
-                                    </div>
-                                </div>
-                                <div class="row mx-2">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                                                <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
-                                                <th scope="col">
-                                                    {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
-                                                <th scope="col">Acciones</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <tr *ngFor="let registry of professionalRegistry; let i = index">
-                                                <td>
-                                                    {{ registry.type }}
-                                                </td>
-                                                <td>
-                                                    {{ registry.registry }}
-                                                </td>
-                                                <td>
-                                                    {{ registry.uf }}
-                                                </td>
-                                                <td>
-                                                    <div class="custom-control custom-switch">
-                                                        <input type="checkbox" class="custom-control-input" id="switch{{ registry.id }}" [checked]="true" (change)="removeRegistry(i)" />
-                                                        <label class="custom-control-label" for="switch{{ registry.id }}"></label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+                <div class="row mx-2">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
+                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
+                        <th scope="col">
+                          {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
+                        </th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let registry of professionalRegistry; let i = index">
+                        <td>
+                          {{ registry.type }}
+                        </td>
+                        <td>
+                          {{ registry.registry }}
+                        </td>
+                        <td>
+                          {{ registry.uf }}
+                        </td>
+                        <td>
+                          <div class="custom-control custom-switch">
+                            <input
+                              type="checkbox"
+                              class="custom-control-input"
+                              id="switch{{ registry.id }}"
+                              [checked]="true"
+                              (change)="removeRegistry(i)"
+                            />
+                            <label class="custom-control-label" for="switch{{ registry.id }}"></label>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
             </div>
-            <!--/tab-->
-            <!--tab-->
-            <div class="tab-pane fade show pt-2" id="datos-clave-tab" role="tabpanel">
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+      <!--tab-->
+      <div class="tab-pane fade show pt-2" id="datos-clave-tab" role="tabpanel">
+        <div class="row">
+          <h4 class="pb-2">{{ 'account.genPassword.label' | transloco }}</h4>
+          <div class="col-md-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <form [formGroup]="passwordForm">
                 <div class="row">
-                    <h4 class="pb-2">{{ 'account.genPassword.label' | transloco }}</h4>
-                    <div class="col-md-12">
-                        <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-                            <form [formGroup]="passwordForm">
-                                <div class="row">
-                                    <div class="form-group col-12 col-md-6">
-                                        <label for="password">{{ 'common.input.password.label' | transloco }} *</label>
-                                        <div class="input-group mb-3">
-                                            <input [type]="showPassword ? 'text' : 'password'" type="password" name="u_password" id="password" class="form-control" [ngClass]="{
+                  <div class="form-group col-12 col-md-6">
+                    <label for="password">{{ 'common.input.password.label' | transloco }} *</label>
+                    <div class="input-group mb-3">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        type="password"
+                        name="u_password"
+                        id="password"
+                        class="form-control"
+                        [ngClass]="{
                           'is-invalid': !passwordForm.get('password').valid
-                        }" formControlName="password" maxlength="16" autocomplete="off" onkeypress="return event.charCode != 32" />
-                                            <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
-                                                <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
+                        }"
+                        formControlName="password"
+                        maxlength="16"
+                        autocomplete="off"
+                        onkeypress="return event.charCode != 32"
+                      />
+                      <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
+                        <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
                         </button>
-                                                <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
+                        <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
                         </button>
-                                            </div>
-                                            <div *ngIf="passwordForm.controls['password'].errors?.pattern" class="invalid-feedback">
-                                                <ul>
-                                                    <li>{{ 'common.oneCap.label' | transloco }}</li>
-                                                    <li>{{ 'common.oneLower.label' | transloco }}</li>
-                                                    <li>{{ 'common.oneNumber.label' | transloco }}</li>
-                                                    <li>{{ 'common.oneSpecialChar.label' | transloco }}</li>
-                                                    <li>{{ 'common.eigthLengthMin.label' | transloco }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-12 col-md-6">
-                                        <label for="confirmPasword">{{ 'account.confirmPassword.label' | transloco }}*</label>
-                                        <div class="input-group mb-3">
-                                            <input [type]="showPassword ? 'text' : 'password'" type="password" name="u_cpassword" id="confirmPassword" class="form-control" placeholder="" [ngClass]="{
+                      </div>
+                      <div *ngIf="passwordForm.controls['password'].errors?.pattern" class="invalid-feedback">
+                        <ul>
+                          <li>{{ 'common.oneCap.label' | transloco }}</li>
+                          <li>{{ 'common.oneLower.label' | transloco }}</li>
+                          <li>{{ 'common.oneNumber.label' | transloco }}</li>
+                          <li>{{ 'common.oneSpecialChar.label' | transloco }}</li>
+                          <li>{{ 'common.eigthLengthMin.label' | transloco }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="confirmPasword">{{ 'account.confirmPassword.label' | transloco }}*</label>
+                    <div class="input-group mb-3">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        type="password"
+                        name="u_cpassword"
+                        id="confirmPassword"
+                        class="form-control"
+                        placeholder=""
+                        [ngClass]="{
                           'is-invalid':
                             !passwordForm.get('confirmPassword').valid &&
                             passwordForm.get('confirmPassword') != passwordForm.get('password')
-                        }" formControlName="confirmPassword" maxlength="20" autocomplete="off" onkeypress="return event.charCode != 32" />
-                                            <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
-                                                <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
+                        }"
+                        formControlName="confirmPassword"
+                        maxlength="20"
+                        autocomplete="off"
+                        onkeypress="return event.charCode != 32"
+                      />
+                      <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
+                        <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
                         </button>
-                                                <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
+                        <button *ngIf="this.showPassword" class="btn btn-outline-primary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
                         </button>
-                                            </div>
-                                            <div *ngIf="passwordForm.errors?.passwordNotMatch" class="invalid-feedback">
-                                                {{ 'account.passwordsNotMatch.label' | transloco }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="mt-2 mb-4">
-                                        <password-strength-meter [password]="passwordForm.value.password"></password-strength-meter>
-                                    </div>
-                                    <div class="alert alert-secondary" role="alert">
-                                        <div class="row">
-                                            <div class="col-2 text-center">
-                                                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill color-primary" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                            d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z" />
-                        </svg>
-                                            </div>
-                                            <div class="col-10 pl-0">
-                                                {{ 'account.passwordHint.label' | transloco }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      </div>
+                      <div *ngIf="passwordForm.errors?.passwordNotMatch" class="invalid-feedback">
+                        {{ 'account.passwordsNotMatch.label' | transloco }}
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </form>
+
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="mt-2 mb-4">
+                    <password-strength-meter [password]="passwordForm.value.password"></password-strength-meter>
+                  </div>
+                  <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                      <div class="col-2 text-center">
+                        <svg
+                          width="3em"
+                          height="3em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-shield-lock-fill color-primary"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="col-10 pl-0">
+                        {{ 'account.passwordHint.label' | transloco }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!--/tab-->
+          </div>
         </div>
+      </div>
+      <!--/tab-->
     </div>
+  </div>
 </div>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
-    <!-- <p style="color: white" > cargando...</p> -->
+  <!-- <p style="color: white" > cargando...</p> -->
 </ngx-spinner>

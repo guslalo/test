@@ -35,9 +35,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
   },
   {
-    path: 'agendar-consulta-inmediata', 
-    loadChildren: () => import('./modules/agendar-consulta-inmediata/agendar-consulta-inmediata.module').then((m) => m.AgendarConsultaInmediataModule),
-    canActivate: [InmediateAppointmentGuard]
+    path: 'agendar-consulta-inmediata',
+    loadChildren: () =>
+      import('./modules/agendar-consulta-inmediata/agendar-consulta-inmediata.module').then(
+        (m) => m.AgendarConsultaInmediataModule
+      ),
+    canActivate: [InmediateAppointmentGuard],
   },
   {
     path: 'mi-salud',

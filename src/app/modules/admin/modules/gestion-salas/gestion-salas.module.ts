@@ -32,7 +32,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgxSpinnerModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
 })
-export class GestionSalasModule { }
+export class GestionSalasModule {}

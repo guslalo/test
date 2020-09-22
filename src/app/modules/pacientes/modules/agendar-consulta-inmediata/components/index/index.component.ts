@@ -11,12 +11,11 @@ declare var $: any;
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
-
 export class IndexComponent implements OnInit {
-  public appointmentId:any;
-  public reserve :any;
+  public appointmentId: any;
+  public reserve: any;
   public symptoms: any;
   public urlConfirmacion: any;
   public estadoPagado: boolean = false;
@@ -27,17 +26,17 @@ export class IndexComponent implements OnInit {
   public descripcionSintoma: any;
   public textInputFile: any;
   public base64: any;
-  public sinPrecio:boolean;
+  public sinPrecio: boolean;
 
   constructor(
     private spinner: NgxSpinnerService,
-    private appointmentsService:AppointmentsService,
+    private appointmentsService: AppointmentsService,
     private symptomsService: SymptomsService,
     private domSanitizer: DomSanitizer,
     private documentService: DocumentService,
     private router: Router,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.textInputFile = 'Seleccione Archivo';
@@ -49,21 +48,19 @@ export class IndexComponent implements OnInit {
       console.log('closed');
     });
 
-
     this.appointmentsService.AppointmentInmediate().subscribe(
-      data => {
+      (data) => {
         console.log(data);
-        this.appointmentId = data.payload._id
-      }, 
-      error => {
-        console.log(error)
+        this.appointmentId = data.payload._id;
+      },
+      (error) => {
+        console.log(error);
       }
-    )
+    );
     this.getsymptoms();
   }
 
-
-  statusPago(id) { 
+  statusPago(id) {
     let interval = setInterval(() => {
       this.spinner.hide();
       this.appointmentsService.getPaymentStatusAppointmentInmediate(id).subscribe(
@@ -76,11 +73,11 @@ export class IndexComponent implements OnInit {
             clearInterval(interval);
             this.estadoPagado = true;
             console.log('pagado');
-            $('#exampleModal').modal('hide');         
-            this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
+            $('#exampleModal').modal('hide');
+            this.router.navigate(['resultado-cita/' + this.appointmentId], { relativeTo: this.route });
           }
         },
-        (error) => { 
+        (error) => {
           console.log(error);
         }
       );
@@ -130,11 +127,10 @@ export class IndexComponent implements OnInit {
     );
   }
 
-
   agendar() {
     this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
-    console.log(this.consolidate)
+    console.log(this.consolidate);
     this.postImmediateConsolidate(this.consolidate);
   }
 
@@ -185,25 +181,24 @@ export class IndexComponent implements OnInit {
     this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  postImmediateConsolidate(consolidate){
+  postImmediateConsolidate(consolidate) {
     this.appointmentsService.postImmediateConsolidate(consolidate).subscribe(
-      data => {
+      (data) => {
         if (data.payload.paymentUrl) {
           this.pago(data.payload.paymentUrl);
           this.statusPago(consolidate.id);
           $('#exampleModal').modal();
         } else {
           this.sinPrecio = true;
-          this.router.navigate(['resultado-cita/' + this.appointmentId],{relativeTo: this.route}); 
+          this.router.navigate(['resultado-cita/' + this.appointmentId], { relativeTo: this.route });
           //$('#sinPrecio').modal();
           console.log('no tiene precio');
         }
         console.log(data);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
-
 }

@@ -9,26 +9,24 @@ import { MedicalRecordService } from './../../../../../../services/medicalRecord
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-crear-ficha-consulta',
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
-
 export class CrearFichaConsultaComponent implements OnInit {
-
-  public appointmentDetail:any;
+  public appointmentDetail: any;
   public access_token: any;
-  public downloadUrl:any;
+  public downloadUrl: any;
   public user: any;
   public userId: any;
   public timeline: any;
-  public fecha:any;
-  public professionalData:any;
-  public appointmentId:any;
-  public url:string;
+  public fecha: any;
+  public professionalData: any;
+  public appointmentId: any;
+  public url: string;
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
@@ -38,23 +36,23 @@ export class CrearFichaConsultaComponent implements OnInit {
   public diagnostico: FormGroup;
   public notes: FormGroup;
   public nutricion: FormGroup;
-  public permisoGuardar:boolean;
-  public fotoUser:any;
-  public notesArray:any;
-  public jitsiGlobal:any;
+  public permisoGuardar: boolean;
+  public fotoUser: any;
+  public notesArray: any;
+  public jitsiGlobal: any;
   public trustedUrl: SafeResourceUrl;
-  public sibrareDocumentId:any;
-  public arrayDocuments:any;
-  public urlSibrare:any;
+  public sibrareDocumentId: any;
+  public arrayDocuments: any;
+  public urlSibrare: any;
 
-  constructor( 
+  constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
-    private appointmentsService:AppointmentsService,
+    private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
     private router: Router,
     private _formBuilder: FormBuilder,
-    private spinner:NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer
   ) {}
 
@@ -62,13 +60,12 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
-      const id = params.appointmentId
+      const id = params.appointmentId;
       this.appointmentId = params.appointmentId;
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
-      this.getAppointmentsTimeline(id);  
-      
+      this.getAppointmentsTimeline(id);
     });
 
     this.user = new UserLogin(
@@ -89,203 +86,194 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.getFecha();
 
     this.signos = this._formBuilder.group({
-      PAS: ['',],
-      PAD: ['',],
-      PAmedia: ['',],
-      FC: ['',],
-      FR: ['',],
-      Temp: ['',],
-      Sat: ['',],
+      PAS: [''],
+      PAD: [''],
+      PAmedia: [''],
+      FC: [''],
+      FR: [''],
+      Temp: [''],
+      Sat: [''],
     });
 
     this.otros = this._formBuilder.group({
-      physicalExam: ['',],
-      examHighlights: ['',],
-      plan: ['',]
+      physicalExam: [''],
+      examHighlights: [''],
+      plan: [''],
     });
 
-    this.nutricion = this._formBuilder.group({      
-      weight: ['',],
-      height: ['',],
-      imc: ['',],
-      imcClassification: ['',],  
+    this.nutricion = this._formBuilder.group({
+      weight: [''],
+      height: [''],
+      imc: [''],
+      imcClassification: [''],
     });
 
     this.consultasForm = this._formBuilder.group({
-      objective: ['',],
-      anamnesis: ['',]
+      objective: [''],
+      anamnesis: [''],
     });
 
     this.diagnostico = this._formBuilder.group({
       diagnostic: ['', Validators.required],
       type: ['', Validators.required],
-      comments: ['', Validators.required]
+      comments: ['', Validators.required],
     });
 
     this.notes = this._formBuilder.group({
-      notes: ['',]
+      notes: [''],
     });
   }
 
   //update appointmentDetails
-  putAppointment(appointmentId){
+  putAppointment(appointmentId) {
     console.log(this.signos);
     let appointmentObject = {
-      patientDetails : {
-         vitalSigns: this.signos.value,
-         nutritionalState: this.nutricion.value,
+      patientDetails: {
+        vitalSigns: this.signos.value,
+        nutritionalState: this.nutricion.value,
       },
-      appointmentDetails:{
-        diagnosticDetails:{
+      appointmentDetails: {
+        diagnosticDetails: {
           type: this.diagnostico.controls.type.value,
           diagnostic: this.diagnostico.controls.diagnostic.value,
-          comments: this.diagnostico.controls.comments.value
+          comments: this.diagnostico.controls.comments.value,
         },
-        objective:this.consultasForm.controls.objective.value,
-        anamnesis:this.consultasForm.controls.anamnesis.value, 
+        objective: this.consultasForm.controls.objective.value,
+        anamnesis: this.consultasForm.controls.anamnesis.value,
         physicalExam: this.otros.controls.physicalExam.value,
         examHighlights: this.otros.controls.examHighlights.value,
         plan: this.otros.controls.plan.value,
-      }  
-    }
-    console.log(appointmentObject );
+      },
+    };
+    console.log(appointmentObject);
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
-      data => {
+      (data) => {
         console.log(data);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
   //update appointmentDetails
-  putNotes(appointmentId){
-    console.log( this.notes.controls.notes.value);
+  putNotes(appointmentId) {
+    console.log(this.notes.controls.notes.value);
     let appointmentObject = {
-      appointmentDetails:{
-        notes:this.notes.controls.notes.value,
-      }  
-    }
+      appointmentDetails: {
+        notes: this.notes.controls.notes.value,
+      },
+    };
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.appointmentsService.getAppointmentsDetails(appointmentId).subscribe(
-          data=> {
+          (data) => {
             console.log(data.payload.appointmentDetails.notes);
             this.notesArray = data.payload.appointmentDetails.notes;
           },
-          error => {
+          (error) => {
             console.log(error);
           }
         );
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
-
-  subirPrescripciones(type){
+  subirPrescripciones(type) {
     this.spinner.show();
     this.trustedUrl = '';
 
     //verificar estado documento
-  
-      this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
-        data => {
-          this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
-          console.log(data);
-          //console.log(this.appointmentId);
-          setTimeout(()=>{                           //<<<---using ()=> syntax
-            this.spinner.hide();
-          }, 3000); 
-          this.sibrareDocumentId = data.payload.documentId;
-          console.log(this.sibrareDocumentId );
-          console.log(this.appointmentId);
-          let interval = setInterval(() => {
-            this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
-              data => {
-               
-                if(data.payload.isVerified === true){
-                  console.log(data)
-                  clearInterval(interval);
-                  this.getVerifiedSibrareDocuments(this.appointmentId);
-            
-                }else {
-                  console.log(data)
-                  //clearInterval(interval);
-                  console.log('no verificado sin documentos')
-                }
 
-              
-              },
-              error => {
-                //clearInterval(interval);
-                console.log(error)
-              }
-            )/**/
-           
-          }, 3500);
-        },
-        error => {
+    this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
+      (data) => {
+        this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
+        console.log(data);
+        //console.log(this.appointmentId);
+        setTimeout(() => {
+          //<<<---using ()=> syntax
           this.spinner.hide();
-          console.log(error)
-        }
-      )
-      
- 
-
-    
+        }, 3000);
+        this.sibrareDocumentId = data.payload.documentId;
+        console.log(this.sibrareDocumentId);
+        console.log(this.appointmentId);
+        let interval = setInterval(() => {
+          this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
+            (data) => {
+              if (data.payload.isVerified === true) {
+                console.log(data);
+                clearInterval(interval);
+                this.getVerifiedSibrareDocuments(this.appointmentId);
+              } else {
+                console.log(data);
+                //clearInterval(interval);
+                console.log('no verificado sin documentos');
+              }
+            },
+            (error) => {
+              //clearInterval(interval);
+              console.log(error);
+            }
+          ); /**/
+        }, 3500);
+      },
+      (error) => {
+        this.spinner.hide();
+        console.log(error);
+      }
+    );
   }
 
   //getVerifiedSibrareDocuments
-  getVerifiedSibrareDocuments(appointmentId){
+  getVerifiedSibrareDocuments(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
-      data => { 
+      (data) => {
         console.log(data);
         this.arrayDocuments = data.payload;
         this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
-      },  
-      error => {
-        console.log(error)
+      },
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
   //getVerifiedSibrareDocuments
-  getVerifiedSibrareDocuments2(appointmentId){
+  getVerifiedSibrareDocuments2(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
-      data => { 
+      (data) => {
         console.log(data);
         this.arrayDocuments = data.payload;
         //this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
-      },  
-      error => {
-        console.log(error)
+      },
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-  downloadSibrare(documentId){
-    console.log(documentId)
+  downloadSibrare(documentId) {
+    console.log(documentId);
     this.getSibrareDocuments(this.appointmentId, documentId);
   }
 
   // get documents sibrare
-  getSibrareDocuments(id, documentId){
+  getSibrareDocuments(id, documentId) {
     this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
-      data => {
-        this.urlSibrare = data.payload[0].documento
-        window.open(this.urlSibrare); 
+      (data) => {
+        this.urlSibrare = data.payload[0].documento;
+        window.open(this.urlSibrare);
         //window.location.href= this.urlSibrare ;
         console.log(this.urlSibrare);
-        console.log(data)
+        console.log(data);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
   getMedicalRecord(id) {
@@ -313,7 +301,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           height: 500,
           //width:'auto',
           parentNode: document.querySelector('#meet'),
-        };   
+        };
         this.url = data.payload.urlRoom.split('//');
         this.jitsiGlobal = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         this.jitsiGlobal.executeCommand('subject', 'Consulta');
@@ -325,79 +313,79 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-  getFecha(){
+  getFecha() {
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
     this.fecha = {
       year: fecha.getFullYear(),
-      month: month
-    }
+      month: month,
+    };
   }
 
-  getAppointmentsTimeline(id){
+  getAppointmentsTimeline(id) {
     this.appointmentsService.getAppointmentsTimelineMilestone(id).subscribe(
-      data => { 
-        this.timeline = data.payload; 
-        console.log(this.timeline)
+      (data) => {
+        this.timeline = data.payload;
+        console.log(this.timeline);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
-  runAppointment(appointmentId, event){
+  runAppointment(appointmentId, event) {
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.getAppointmentsDetails(appointmentId);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
-  endTeleconsultation(appointmentId, event){
-    $("#meet").remove();
+  endTeleconsultation(appointmentId, event) {
+    $('#meet').remove();
     /*this.jitsiGlobal.excutecommnad( 'hangup');
     this.jitsiGlobal.dispose();*/
     //$("#meet").remove();
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.getAppointmentsDetailsRefresh(appointmentId);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
-    
-  finish(appointmentId, event){
+
+  finish(appointmentId, event) {
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.getAppointmentsDetails(appointmentId);
         this.router.navigate(['/app-professional']);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
-  getAppointmentsProfessionalData(id){
+  getAppointmentsProfessionalData(id) {
     this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
-      data => { 
+      (data) => {
         this.professionalData = data.payload;
-        console.log(data)
+        console.log(data);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
   getAppointmentsDetails(id) {
@@ -405,18 +393,16 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
-        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.notesArray = data.payload.appointmentDetails.notes;
-        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
         console.log(this.appointmentDetail);
-        if(
-          this.appointmentDetail.administrativeDetails.status === "running" 
-          ){
-            this.getSession(id);
+        if (this.appointmentDetail.administrativeDetails.status === 'running') {
+          this.getSession(id);
           this.permisoGuardar = true;
         }
-        if(this.appointmentDetail.administrativeDetails.status === "pending"){
+        if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
         }
         this.spinner.hide();
@@ -431,10 +417,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
-        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.notesArray = data.payload.appointmentDetails.notes;
-        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
         console.log(this.appointmentDetail);
       },
       (error) => {
@@ -442,7 +428,4 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
-
-
-
 }

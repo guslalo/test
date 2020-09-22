@@ -14,10 +14,9 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 @Component({
   selector: 'app-ficha-paciente',
   templateUrl: './ficha-paciente.component.html',
-  styleUrls: ['./ficha-paciente.component.scss']
+  styleUrls: ['./ficha-paciente.component.scss'],
 })
 export class FichaPacienteComponent implements OnInit {
-
   id = this.routerAct.snapshot.queryParamMap.get('id');
   patientRecord: any = [];
   appointmentsRecord: any = [];
@@ -60,7 +59,7 @@ export class FichaPacienteComponent implements OnInit {
     private currentUserService: CurrentUserService,
     private documentService: DocumentService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.routerAct.params.subscribe((params) => {
@@ -69,7 +68,7 @@ export class FichaPacienteComponent implements OnInit {
       //console.log(params);
       this.getMedicalRecord(this.id);
     });
-   
+
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
 
@@ -80,7 +79,6 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
-  
   getMedicalRecord(userId) {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
@@ -240,5 +238,4 @@ export class FichaPacienteComponent implements OnInit {
     this.appointmentsRecord = temp;
     // console.log(temp);
   }
-
 }

@@ -5,18 +5,17 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
 @Component({
   selector: 'app-index-agenda',
   templateUrl: './index-agenda.component.html',
-  styleUrls: ['./index-agenda.component.scss']
+  styleUrls: ['./index-agenda.component.scss'],
 })
 export class IndexAgendaComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
     // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -27,7 +26,7 @@ export class IndexAgendaComponent implements OnInit {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
@@ -57,7 +56,7 @@ export class IndexAgendaComponent implements OnInit {
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        allDay: selectInfo.allDay
+        allDay: selectInfo.allDay,
       });
     }
   }
@@ -71,7 +70,5 @@ export class IndexAgendaComponent implements OnInit {
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -9,8 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-
-  url:string;
+  url: string;
   constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -21,7 +20,7 @@ export class IndexComponent implements OnInit {
       this.getSession(id);
     });
   }
-/*
+  /*
   initCall(): void {
     this.route.params.subscribe((params) => {
       const id = params.id;
@@ -40,8 +39,8 @@ export class IndexComponent implements OnInit {
           jwt: data.payload.sessionToken,
           height: 700,
           parentNode: document.querySelector('#meet'),
-        };   
-        
+        };
+
         this.url = data.payload.urlRoom.split('//');
         //console.log(environment.jitsi);
         /*

@@ -1,325 +1,377 @@
 <div class="row">
-    <div class="col mb-2">
-        <h2>{{ 'dashboard.home.config.title' | transloco }}</h2>
-    </div>
+  <div class="col mb-2">
+    <h2>{{ 'dashboard.home.config.title' | transloco }}</h2>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-12">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
-                    aria-selected="true">
-                    {{ 'tabs.information.label' | transloco }}
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="mod-tab" data-toggle="tab" href="#mod" role="mod" aria-controls="mod"
-                    aria-selected="false">
-                    {{ 'dashboard.home.config.tabs.modality.label' | transloco }}
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="docs-tab" data-toggle="tab" href="#docs" role="docs" aria-controls="docs"
-                    aria-selected="true">
-                    {{ 'dashboard.home.config.tabs.docs.label' | transloco }}
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content pt-4" id="myTabContent">
-            <!--tab-->
-            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
-                <form [formGroup]="infoForm">
-
-                    <div class="row">
-                        <div class="col mb-2">
-                            <h5>{{ 'tabs.information.label' | transloco }}</h5>
-                        </div>
-                        <div class="col mb-2">
-                            <button type="button" class="btn btn-sm btn-info rounded-pill float-right"
-                                (click)="updateClinicInfo()">
-                                {{ 'common.button.save.label' | transloco }}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col-12 mb-3">
-                            <div class="tableBox rounded p-4 bg-white">
-                                <div class="row">
-                                    <div class="form-group col-12 col-md-4">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="name" placeholder=""
-                                            formControlName="name" />
-
-                                    </div>
-                                    <div class="form-group col-12 col-md-8">
-                                        <label
-                                            for="startBlock">{{ 'dashboard.home.config.tabs.information.description.label' | transloco }}</label>
-                                        <textarea type="text" class="form-control" name="description" rows="6"
-                                            placeholder="" formControlName="description"
-                                            [ngStyle]="{ resize: 'none' }"></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <div class="tableBox rounded p-4 bg-white">
-                                <div class="row">
-                                    <div class="form-group col">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.clinicPhone.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="clinicPhone" placeholder=""
-                                            formControlName="clinicPhone" />
-
-                                    </div>
-                                    <div class="form-group col">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.sipportPhone.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="supportPhone" placeholder=""
-                                            formControlName="supportPhone" />
-
-                                    </div>
-                                    <div class="form-group col">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.workingDays.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="workingDays" placeholder=""
-                                            formControlName="workingDays" />
-
-                                    </div>
-                                    <div class="form-group col">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.address.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="address" placeholder=""
-                                            formControlName="address" />
-
-                                    </div>
-                                    <div class="form-group col">
-                                        <label
-                                            for="name">{{ 'dashboard.home.config.tabs.information.email.label' | transloco }}</label>
-                                        <input type="text" class="form-control" name="email" placeholder=""
-                                            formControlName="email" />
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-
+  <div class="col-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="info-tab"
+          data-toggle="tab"
+          href="#info"
+          role="tab"
+          aria-controls="info"
+          aria-selected="true"
+        >
+          {{ 'tabs.information.label' | transloco }}
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="mod-tab"
+          data-toggle="tab"
+          href="#mod"
+          role="mod"
+          aria-controls="mod"
+          aria-selected="false"
+        >
+          {{ 'dashboard.home.config.tabs.modality.label' | transloco }}
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="docs-tab"
+          data-toggle="tab"
+          href="#docs"
+          role="docs"
+          aria-controls="docs"
+          aria-selected="true"
+        >
+          {{ 'dashboard.home.config.tabs.docs.label' | transloco }}
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content pt-4" id="myTabContent">
+      <!--tab-->
+      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+        <form [formGroup]="infoForm">
+          <div class="row">
+            <div class="col mb-2">
+              <h5>{{ 'tabs.information.label' | transloco }}</h5>
             </div>
-            <!--/tab-->
-
-            <!--tab-->
-            <div class="tab-pane fade" id="mod" role="tabpanel" aria-labelledby="mod">
-                <div class="row mt-1">
-                    <div class="col-12 mb-2">
-                        <h5>{{ 'dashboard.home.config.tabs.modality.label' | transloco }}</h5>
-                    </div>
-
-                    <div class="col-12 mb-4">
-                        <div class="tableBox rounded p-4 bg-white">
-                            <table class="table">
-                                <thead class="">
-                                    <tr>
-                                        <th scope="col">
-                                            {{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}
-                                        </th>
-                                        <th scope="col">
-                                            {{ 'dashboard.home.config.tabs.modality.table.description.label' | transloco }}
-                                        </th>
-                                        <th scope="col">
-                                            {{ 'dashboard.home.config.tabs.modality.table.status.label' | transloco }}
-                                        </th>
-                                        <th scope="col">
-                                            {{ 'dashboard.home.config.tabs.modality.table.action.label' | transloco }}
-                                        </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td scope="row">
-                                            {{ 'clinicalFile.inmediateService.label' | transloco }}
-                                        </td>
-
-                                        <td>{{ 'dashboard.home.config.clinic.inmediateAtention.label' | transloco }}
-                                        </td>
-                                        <td>
-                                            <div class="custom-control custom-switch mb-4">
-                                                <input [(ngModel)]="immediateCB" type="checkbox"
-                                                    class="custom-control-input" id="userPoliciesCreate"
-                                                    (change)="immediateOnChange(immediateCB)" />
-                                                <label class="custom-control-label" for="userPoliciesCreate"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    disabled>
-                                                    <button class="btn btn-light btn-sm rounded-pill">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                            class="bi bi-three-dots" fill="currentColor"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <button class="dropdown-item" type="button"
-                                                        [routerLink]="['editar-perfil']"
-                                                        [queryParams]="{ profileId: modality.id }">
-                                                        Editar
-                                                    </button>
-                                                    <button class="dropdown-item" type="button">
-                                                        Desactivar
-                                                    </button> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">
-                                            {{ 'clinicalFile.scheduling.label' | transloco }}
-                                        </td>
-
-                                        <td>{{ 'dashboard.home.config.clinic.scheduling.label' | transloco }}</td>
-                                        <td>
-                                            <div class="custom-control custom-switch mb-4">
-                                                <input [(ngModel)]="scheduleCB" type="checkbox"
-                                                    class="custom-control-input" id="schedule"
-                                                    (change)="scheduleOnChange(scheduleCB)" />
-                                                <label class="custom-control-label" for="schedule"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    disabled>
-                                                    <button class="btn btn-light btn-sm rounded-pill">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                            class="bi bi-three-dots" fill="currentColor"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <button class="dropdown-item" type="button"
-                                                        [routerLink]="['editar-perfil']"
-                                                        [queryParams]="{ profileId: modality.id }">
-                                                        Editar
-                                                    </button>
-                                                    <button class="dropdown-item" type="button">
-                                                        Desactivar
-                                                    </button> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">
-                                            {{ 'waitingRoom.payments.label' | transloco }}
-                                        </td>
-
-                                        <td>{{ 'dashboard.home.config.clinic.payments.label' | transloco }}</td>
-                                        <td>
-                                            <div class="custom-control custom-switch mb-4">
-                                                <input [(ngModel)]="paymentCB" type="checkbox"
-                                                    class="custom-control-input" id="payment"
-                                                    (change)="lastItemOnChange(paymentCB)" />
-                                                <label class="custom-control-label" for="payment"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    disabled>
-                                                    <button class="btn btn-light btn-sm rounded-pill">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                            class="bi bi-three-dots" fill="currentColor"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <button class="dropdown-item" type="button"
-                                                        [routerLink]="['editar-perfil']"
-                                                        [queryParams]="{ profileId: modality.id }">
-                                                        Editar
-                                                    </button>
-                                                    <button class="dropdown-item" type="button">
-                                                        Desactivar
-                                                    </button> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="col mb-2">
+              <button type="button" class="btn btn-sm btn-info rounded-pill float-right" (click)="updateClinicInfo()">
+                {{ 'common.button.save.label' | transloco }}
+              </button>
             </div>
-            <!--/tab-->
+          </div>
 
-            <!--tab-->
-            <div class="tab-pane fade" id="docs" role="tabpanel" aria-labelledby="docs">
+          <div class="row mt-2">
+            <div class="col-12 mb-3">
+              <div class="tableBox rounded p-4 bg-white">
                 <div class="row">
-                    <div class="col-12 mb-2">
-                        <h5>{{ 'dashboard.home.config.tabs.docs.label' | transloco }}</h5>
-                    </div>
-                    <div class="col-12">
-                        <div class="tableBox rounded p-4 bg-white">
-                            <div class="row">
-
-                                <div class="col col-lg-4 col-md-4 col-sm-12">
-                                    <h5>{{ 'dashboard.home.config.tabs.docs.terms.label' | transloco }}</h5>
-                                    <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill"
-                                        (click)="termsUploader.click()">
-                                        {{ 'common.button.uploadFile.label' | transloco }}
-                                    </button>
-                                    <input hidden type="file" #termsUploader (change)="uploadTerms($event)" />
-                                </div>
-
-                                <div class="col col-lg-4 col-md-4 col-sm-12">
-                                    <h5>{{ 'dashboard.home.config.tabs.docs.privacy.label' | transloco }}</h5>
-                                    <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill"
-                                        (click)="privacyUploader.click()">
-                                        {{ 'common.button.uploadFile.label' | transloco }}
-                                    </button>
-                                    <input hidden type="file" #privacyUploader (change)="uploadPrivacy($event)" />
-                                </div>
-
-                                <div class="col col-lg-4 col-md-4 col-sm-12">
-                                    <h5>{{ 'dashboard.home.config.tabs.docs.agreement.label' | transloco }}</h5>
-                                    <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
-                                    <button class="btn btn-sm btn-outline-primary rounded-pill"
-                                        (click)="agreementUploader.click()">
-                                        {{ 'common.button.uploadFile.label' | transloco }}
-                                    </button>
-                                    <input hidden type="file" #agreementUploader (change)="uploadAgreement($event)" />
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                  <div class="form-group col-12 col-md-4">
+                    <label for="name">{{ 'dashboard.home.config.tabs.information.label' | transloco }}</label>
+                    <input type="text" class="form-control" name="name" placeholder="" formControlName="name" />
+                  </div>
+                  <div class="form-group col-12 col-md-8">
+                    <label for="startBlock">{{
+                      'dashboard.home.config.tabs.information.description.label' | transloco
+                    }}</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      name="description"
+                      rows="6"
+                      placeholder=""
+                      formControlName="description"
+                      [ngStyle]="{ resize: 'none' }"
+                    ></textarea>
+                  </div>
                 </div>
+              </div>
             </div>
-            <!--/tab-->
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12">
+              <div class="tableBox rounded p-4 bg-white">
+                <div class="row">
+                  <div class="form-group col">
+                    <label for="name">{{
+                      'dashboard.home.config.tabs.information.clinicPhone.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="clinicPhone"
+                      placeholder=""
+                      formControlName="clinicPhone"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="name">{{
+                      'dashboard.home.config.tabs.information.sipportPhone.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="supportPhone"
+                      placeholder=""
+                      formControlName="supportPhone"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="name">{{
+                      'dashboard.home.config.tabs.information.workingDays.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workingDays"
+                      placeholder=""
+                      formControlName="workingDays"
+                    />
+                  </div>
+                  <div class="form-group col">
+                    <label for="name">{{ 'dashboard.home.config.tabs.information.address.label' | transloco }}</label>
+                    <input type="text" class="form-control" name="address" placeholder="" formControlName="address" />
+                  </div>
+                  <div class="form-group col">
+                    <label for="name">{{ 'dashboard.home.config.tabs.information.email.label' | transloco }}</label>
+                    <input type="text" class="form-control" name="email" placeholder="" formControlName="email" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--/tab-->
+
+      <!--tab-->
+      <div class="tab-pane fade" id="mod" role="tabpanel" aria-labelledby="mod">
+        <div class="row mt-1">
+          <div class="col-12 mb-2">
+            <h5>{{ 'dashboard.home.config.tabs.modality.label' | transloco }}</h5>
+          </div>
+
+          <div class="col-12 mb-4">
+            <div class="tableBox rounded p-4 bg-white">
+              <table class="table">
+                <thead class="">
+                  <tr>
+                    <th scope="col">
+                      {{ 'dashboard.home.config.tabs.modality.table.name.label' | transloco }}
+                    </th>
+                    <th scope="col">
+                      {{ 'dashboard.home.config.tabs.modality.table.description.label' | transloco }}
+                    </th>
+                    <th scope="col">
+                      {{ 'dashboard.home.config.tabs.modality.table.status.label' | transloco }}
+                    </th>
+                    <th scope="col">
+                      {{ 'dashboard.home.config.tabs.modality.table.action.label' | transloco }}
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td scope="row">
+                      {{ 'clinicalFile.inmediateService.label' | transloco }}
+                    </td>
+
+                    <td>{{ 'dashboard.home.config.clinic.inmediateAtention.label' | transloco }}</td>
+                    <td>
+                      <div class="custom-control custom-switch mb-4">
+                        <input
+                          [(ngModel)]="immediateCB"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="userPoliciesCreate"
+                          (change)="immediateOnChange(immediateCB)"
+                        />
+                        <label class="custom-control-label" for="userPoliciesCreate"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <button class="btn btn-light btn-sm rounded-pill">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- <button class="dropdown-item" type="button"
+                                                        [routerLink]="['editar-perfil']"
+                                                        [queryParams]="{ profileId: modality.id }">
+                                                        Editar
+                                                    </button>
+                                                    <button class="dropdown-item" type="button">
+                                                        Desactivar
+                                                    </button> -->
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row">
+                      {{ 'clinicalFile.scheduling.label' | transloco }}
+                    </td>
+
+                    <td>{{ 'dashboard.home.config.clinic.scheduling.label' | transloco }}</td>
+                    <td>
+                      <div class="custom-control custom-switch mb-4">
+                        <input
+                          [(ngModel)]="scheduleCB"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="schedule"
+                          (change)="scheduleOnChange(scheduleCB)"
+                        />
+                        <label class="custom-control-label" for="schedule"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <button class="btn btn-light btn-sm rounded-pill">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- <button class="dropdown-item" type="button"
+                                                        [routerLink]="['editar-perfil']"
+                                                        [queryParams]="{ profileId: modality.id }">
+                                                        Editar
+                                                    </button>
+                                                    <button class="dropdown-item" type="button">
+                                                        Desactivar
+                                                    </button> -->
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row">
+                      {{ 'waitingRoom.payments.label' | transloco }}
+                    </td>
+
+                    <td>{{ 'dashboard.home.config.clinic.payments.label' | transloco }}</td>
+                    <td>
+                      <div class="custom-control custom-switch mb-4">
+                        <input
+                          [(ngModel)]="paymentCB"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="payment"
+                          (change)="lastItemOnChange(paymentCB)"
+                        />
+                        <label class="custom-control-label" for="payment"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                          <button class="btn btn-light btn-sm rounded-pill">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <!-- <button class="dropdown-item" type="button"
+                                                        [routerLink]="['editar-perfil']"
+                                                        [queryParams]="{ profileId: modality.id }">
+                                                        Editar
+                                                    </button>
+                                                    <button class="dropdown-item" type="button">
+                                                        Desactivar
+                                                    </button> -->
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+      </div>
+      <!--/tab-->
+
+      <!--tab-->
+      <div class="tab-pane fade" id="docs" role="tabpanel" aria-labelledby="docs">
+        <div class="row">
+          <div class="col-12 mb-2">
+            <h5>{{ 'dashboard.home.config.tabs.docs.label' | transloco }}</h5>
+          </div>
+          <div class="col-12">
+            <div class="tableBox rounded p-4 bg-white">
+              <div class="row">
+                <div class="col col-lg-4 col-md-4 col-sm-12">
+                  <h5>{{ 'dashboard.home.config.tabs.docs.terms.label' | transloco }}</h5>
+                  <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
+                  <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="termsUploader.click()">
+                    {{ 'common.button.uploadFile.label' | transloco }}
+                  </button>
+                  <input hidden type="file" #termsUploader (change)="uploadTerms($event)" />
+                </div>
+
+                <div class="col col-lg-4 col-md-4 col-sm-12">
+                  <h5>{{ 'dashboard.home.config.tabs.docs.privacy.label' | transloco }}</h5>
+                  <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
+                  <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="privacyUploader.click()">
+                    {{ 'common.button.uploadFile.label' | transloco }}
+                  </button>
+                  <input hidden type="file" #privacyUploader (change)="uploadPrivacy($event)" />
+                </div>
+
+                <div class="col col-lg-4 col-md-4 col-sm-12">
+                  <h5>{{ 'dashboard.home.config.tabs.docs.agreement.label' | transloco }}</h5>
+                  <p>{{ 'dashboard.home.config.tabs.docs.hint.label' | transloco }}</p>
+                  <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="agreementUploader.click()">
+                    {{ 'common.button.uploadFile.label' | transloco }}
+                  </button>
+                  <input hidden type="file" #agreementUploader (change)="uploadAgreement($event)" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
     </div>
+  </div>
 </div>

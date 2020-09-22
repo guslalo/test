@@ -30,12 +30,13 @@ const routes: Routes = [
   },
   {
     path: 'configuracion-clinica',
-    loadChildren: () => import('./modules/configuracion-clinica/configuracion-clinica.module').then(m => m.ConfiguracionClinicaModule)
-  }
+    loadChildren: () =>
+      import('./modules/configuracion-clinica/configuracion-clinica.module').then((m) => m.ConfiguracionClinicaModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

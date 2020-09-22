@@ -197,8 +197,8 @@ export class IndexComponent implements OnInit {
     console.log(this.specialtiesIdReserve);
     console.log(this.reserve);
     this.reserve.professionalDetails.userId = item.professionalDetails.userId;
-  //this.reserve.professionalDetails.specialtyId = this.specialtiesIdReserve;
-    this.reserve.professionalDetails.specialtyId =  item.professionalDetails.specialtyId;
+    //this.reserve.professionalDetails.specialtyId = this.specialtiesIdReserve;
+    this.reserve.professionalDetails.specialtyId = item.professionalDetails.specialtyId;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
     this.appointmentsService.postReserve(this.reserve).subscribe(
@@ -225,7 +225,7 @@ export class IndexComponent implements OnInit {
   //consolidar cita
   postConsolidateService(consolidate) {
     console.log(consolidate);
-    localStorage.setItem('appointmentIdAgenda',consolidate.id);
+    localStorage.setItem('appointmentIdAgenda', consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
         this.statusPago(consolidate.id);

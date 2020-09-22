@@ -5,51 +5,43 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
-declare var $:any;
-
+declare var $: any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-  public appointmentDetail:any;
+  public appointmentDetail: any;
   public access_token: any;
-  public downloadUrl:any;
+  public downloadUrl: any;
   public user: any;
   public timeline: any;
-  public fecha:any;
-  public professionalData:any;
-  public salaEspera:boolean;
-  url:string;
+  public fecha: any;
+  public professionalData: any;
+  public salaEspera: boolean;
+  url: string;
 
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
-  public userId:any;
-
-
+  public userId: any;
 
   constructor(
     private route: ActivatedRoute,
-    private appointmentsService:AppointmentsService,
+    private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
-    private medicalRecord: MedicalRecordService,
-  ) { }
+    private medicalRecord: MedicalRecordService
+  ) {}
 
   ngOnInit(): void {
-    
-
     this.route.params.subscribe((params) => {
-      const id = params.appointmentId
+      const id = params.appointmentId;
       console.log(params);
       this.getAppointmentsDetails(params.appointmentId);
-     
-    
     });
-    
-    
+
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -67,18 +59,17 @@ export class IndexComponent implements OnInit {
     this.getFecha();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
-
   }
 
-  getFecha(){
+  getFecha() {
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
 
     this.fecha = {
       year: fecha.getFullYear(),
-      month: month
-    }
+      month: month,
+    };
 
     //console.log(currentMonth);
   }
@@ -92,7 +83,7 @@ export class IndexComponent implements OnInit {
           jwt: data.payload.sessionToken,
           height: 700,
           parentNode: document.querySelector('#meet3'),
-        };  
+        };
         this.url = data.payload.urlRoom.split('//');
         console.log(this.url[1].replace('/', ''));
         const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
@@ -110,28 +101,28 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  getAppointmentsTimeline(){
+  getAppointmentsTimeline() {
     this.appointmentsService.getAppointmentsTimeline().subscribe(
-      data => { 
+      (data) => {
         this.timeline = data.payload;
-        console.log(this.timeline)
+        console.log(this.timeline);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
-  
-  getAppointmentsProfessionalData(id){
+
+  getAppointmentsProfessionalData(id) {
     this.appointmentsService.getAppointmentsProfessionalData(id).subscribe(
-      data => { 
+      (data) => {
         this.professionalData = data.payload;
-        console.log(data)
+        console.log(data);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 
   getAppointmentsDetails(id) {
@@ -139,11 +130,10 @@ export class IndexComponent implements OnInit {
       (data) => {
         setTimeout(() => {
           this.getSession(id);
-          
         }, 260);
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
-        if(data.payload.administrativeDetails.waitingRoomId === null ){
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        if (data.payload.administrativeDetails.waitingRoomId === null) {
           this.salaEspera = false;
           this.getAppointmentsProfessionalData(id);
         } else {
@@ -151,8 +141,8 @@ export class IndexComponent implements OnInit {
         }
         //console.log(this.appointmentDetail.professionalDetails.userDetails[0].userId)
         //this.getAppointmentsProfessionalData(this.appointmentDetail.professionalDetails.userDetails[0].userId);
-        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
-        console.log(this.appointmentDetail );
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+        console.log(this.appointmentDetail);
       },
       (error) => {
         console.log(error);
@@ -173,7 +163,4 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-
-
-
 }

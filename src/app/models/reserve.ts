@@ -1,5 +1,5 @@
 // reserve
-export class date { 
+export class date {
   month: any;
   year: any;
   day: any;
@@ -12,9 +12,8 @@ export class reserve {
       specialtyId: string;
     },
     public dateDetails: {
-      date:date;
-      start:any;
+      date: date;
+      start: any;
     }
   ) {}
- 
 }

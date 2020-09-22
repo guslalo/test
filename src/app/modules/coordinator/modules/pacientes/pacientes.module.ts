@@ -35,7 +35,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgxDatatableModule,
     ReactiveFormsModule,
     FormsModule,
-    TranslocoRootModule
-  ]
+    TranslocoRootModule,
+  ],
 })
 export class PacientesModule {}

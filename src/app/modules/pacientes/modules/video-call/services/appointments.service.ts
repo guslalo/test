@@ -10,8 +10,7 @@ export class AppointmentsService {
   private appointments = 'v1/appointments';
   private doctors = 'v1/doctors';
   private session = '/session';
-  private reserve = '/reserve'
-
+  private reserve = '/reserve';
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +19,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('page', number);
 
-    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params } );
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
   }
 
   // getAppointments
@@ -30,13 +29,8 @@ export class AppointmentsService {
 
   // api.bdot.app/api/v1/appointemnts/5f049b9948ab2c55c1db33fa
 
- 
   // get getAppointmentsSession
   getAppointmentsSession(id): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id:id });
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id: id });
   }
-
- 
-
-
 }

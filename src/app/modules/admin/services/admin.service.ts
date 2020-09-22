@@ -13,9 +13,9 @@ export class AdminService {
   private userEndpoint = 'v1/users';
   private profileEndpoint = 'v1/administrative/profiles';
   private clinicEndpoint = 'v1/clinic';
-  private waitingRoomsEndpoint = 'v1/waiting-rooms'
+  private waitingRoomsEndpoint = 'v1/waiting-rooms';
 
-  constructor(private http: HttpClient, private fileUtils: FileUtilsService) { }
+  constructor(private http: HttpClient, private fileUtils: FileUtilsService) {}
 
   // GET availability/blocked
   getUsers(userType): Observable<any> {
@@ -96,7 +96,7 @@ export class AdminService {
   }
 
   updateModalityItem(modalityData: any) {
-    console.log('Modality Item', modalityData)
+    console.log('Modality Item', modalityData);
     return this.http.put<any>(`${environment.baseUrl}${this.clinicEndpoint}/update-immediate-module`, modalityData);
   }
 
@@ -105,36 +105,45 @@ export class AdminService {
   }
 
   async uploadTerms(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file)
-    return this.http.post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
-      term: "use-term",
-      document: {
-        data: base64,
-        name: file.name
-      }
-    }).pipe(take(1)).toPromise();
+    let base64 = await this.fileUtils.getBase64(file);
+    return this.http
+      .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
+        term: 'use-term',
+        document: {
+          data: base64,
+          name: file.name,
+        },
+      })
+      .pipe(take(1))
+      .toPromise();
   }
 
   async uploadPrivacy(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file)
-    return this.http.post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
-      term: "privacy-term",
-      document: {
-        data: base64,
-        name: file.name
-      }
-    }).pipe(take(1)).toPromise();
+    let base64 = await this.fileUtils.getBase64(file);
+    return this.http
+      .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
+        term: 'privacy-term',
+        document: {
+          data: base64,
+          name: file.name,
+        },
+      })
+      .pipe(take(1))
+      .toPromise();
   }
 
   async uploadAgreement(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file)
-    return this.http.post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
-      term: "telemedicine-consent",
-      document: {
-        data: base64,
-        name: file.name
-      }
-    }).pipe(take(1)).toPromise();
+    let base64 = await this.fileUtils.getBase64(file);
+    return this.http
+      .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
+        term: 'telemedicine-consent',
+        document: {
+          data: base64,
+          name: file.name,
+        },
+      })
+      .pipe(take(1))
+      .toPromise();
   }
 
   getImmediateData() {
@@ -146,6 +155,9 @@ export class AdminService {
   }
 
   updateAccesMode(clinicId: string, mode: string, enabled: boolean) {
-    return this.http.put<any>(`${environment.baseUrl}${this.clinicEndpoint}/update-access-mode/${clinicId}`, { mode, enabled });
+    return this.http.put<any>(`${environment.baseUrl}${this.clinicEndpoint}/update-access-mode/${clinicId}`, {
+      mode,
+      enabled,
+    });
   }
 }

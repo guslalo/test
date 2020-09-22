@@ -8,10 +8,9 @@ import { AdminService } from 'src/app/modules/admin/services/admin.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-
   infoForm: FormGroup;
   modalRef: BsModalRef;
   modalities: Array<any>;
@@ -42,27 +41,27 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.clinicId = this.currentUser.administrativeData.find((e) => e.clinicProfileId == this.currentUser.administrativeDataContext).clinicId;
-    console.log('currentuser', this.currentUser)
+    this.clinicId = this.currentUser.administrativeData.find(
+      (e) => e.clinicProfileId == this.currentUser.administrativeDataContext
+    ).clinicId;
+    console.log('currentuser', this.currentUser);
     this.adminService.getClinic(this.clinicId).subscribe(
-      data => {
+      (data) => {
         let clinicData = data.payload;
         this.clinicData = clinicData;
         this.paymentCB = clinicData.accessMode.payment;
         this.scheduleCB = clinicData.accessMode.schedule;
         this.immediateCB = clinicData.accessMode.immediate;
-        this.infoForm.get('name').setValue(clinicData.clinicName)
-        this.infoForm.get('description').setValue(clinicData.description)
-        this.infoForm.get('clinicPhone').setValue(clinicData.phone)
-        this.infoForm.get('supportPhone').setValue(clinicData.supportPhone)
-        this.infoForm.get('workingDays').setValue(clinicData.horary)
-        this.infoForm.get('address').setValue(clinicData.address)
-        this.infoForm.get('email').setValue(clinicData.email)
+        this.infoForm.get('name').setValue(clinicData.clinicName);
+        this.infoForm.get('description').setValue(clinicData.description);
+        this.infoForm.get('clinicPhone').setValue(clinicData.phone);
+        this.infoForm.get('supportPhone').setValue(clinicData.supportPhone);
+        this.infoForm.get('workingDays').setValue(clinicData.horary);
+        this.infoForm.get('address').setValue(clinicData.address);
+        this.infoForm.get('email').setValue(clinicData.email);
       },
-      err => {
-
-      }
-    )
+      (err) => {}
+    );
   }
 
   updateClinicInfo() {
@@ -74,19 +73,19 @@ export class IndexComponent implements OnInit {
       horary: this.infoForm.get('workingDays').value,
       address: this.infoForm.get('address').value,
       email: this.infoForm.get('email').value,
-    }
+    };
     this.adminService.updateClinicInfo(this.clinicId, { ...this.clinicData, ...clinicData }).subscribe(
       (d) => {
-        console.log('Clínica actualizada', d)
+        console.log('Clínica actualizada', d);
       },
       (err) => {
-        console.log('Error al actualizar la clinica', err)
+        console.log('Error al actualizar la clinica', err);
       }
-    )
+    );
   }
 
   uploadTerms($event) {
-    console.log('Terms file', $event.target.files[0])
+    console.log('Terms file', $event.target.files[0]);
     this.adminService.uploadTerms($event.target.files[0], this.clinicId);
   }
 
@@ -105,35 +104,22 @@ export class IndexComponent implements OnInit {
       });
     }
     this.adminService.updateAccesMode(this.clinicId, 'immediate', value).subscribe(
-      data => {
-
-      },
-      err => {
-
-      }
-    )
+      (data) => {},
+      (err) => {}
+    );
   }
 
   scheduleOnChange(value: boolean) {
     this.adminService.updateAccesMode(this.clinicId, 'schedule', value).subscribe(
-      data => {
-
-      },
-      err => {
-
-      }
-    )
+      (data) => {},
+      (err) => {}
+    );
   }
 
   lastItemOnChange(value: boolean) {
     this.adminService.updateAccesMode(this.clinicId, 'payment', value).subscribe(
-      data => {
-
-      },
-      err => {
-
-      }
-    )
+      (data) => {},
+      (err) => {}
+    );
   }
-
 }
