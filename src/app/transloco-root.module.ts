@@ -17,9 +17,6 @@ export class TranslocoHttpLoader implements TranslocoLoader {
   getTranslation(lang: string) {
     return this.http.get<Translation>(`/assets/i18n/${lang}.json`);
   }
-  /* public setActiveLang(lang: string) {
-    this.translocoService.setActiveLang(lang);
-  }*/
 }
 
 @NgModule({
@@ -28,10 +25,10 @@ export class TranslocoHttpLoader implements TranslocoLoader {
     {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
-        availableLangs: ['en', 'es'],
-        defaultLang: navigator.language.toString().substr(0, 2),
+        availableLangs: ['es', 'pt'],
+        defaultLang: 'pt',
+        // defaultLang: navigator.language.toString().substr(0, 2),
         // Remove this option if your application doesn't support changing language in runtime.
-
         reRenderOnLangChange: true,
         prodMode: environment.production,
       }),

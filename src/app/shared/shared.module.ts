@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -30,11 +30,11 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 // components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoaderComponent } from './loaders/loader.component';
+import { LangComponent } from './lang/lang.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -53,6 +53,7 @@ import { LoaderComponent } from './loaders/loader.component';
     FullCalendarModule,
   ],
   exports: [
+    // MODULES TO RE-USE
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
@@ -63,21 +64,15 @@ import { LoaderComponent } from './loaders/loader.component';
     RouterModule,
     NgbTypeaheadModule,
     NgbDatepickerModule,
-    NgbdTimepickerBasic,
     NgbRatingModule,
-    ChangePassComponent,
     PasswordStrengthMeterModule,
     FullCalendarModule,
-    NgxSpinnerModule,
+    // COMPONENTS TO RE-USE
+    NgbdTimepickerBasic,
+    ChangePassComponent,
+    LangComponent,
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      // providers: []TranslocoRootModule
-    };
-  }
-}
+export class SharedModule {}

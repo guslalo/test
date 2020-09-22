@@ -6,13 +6,8 @@ import { IndexComponent } from './components/index/index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EditModalityComponent } from './components/edit-modality/edit-modality.component';
 
-
 @NgModule({
   declarations: [IndexComponent, EditModalityComponent],
-  imports: [
-    CommonModule,
-    ConfiguracionClinicaRoutingModule,
-    SharedModule.forRoot(),
-  ]
+  imports: [CommonModule, ConfiguracionClinicaRoutingModule, SharedModule],
 })
-export class ConfiguracionClinicaModule { }
+export class ConfiguracionClinicaModule {}

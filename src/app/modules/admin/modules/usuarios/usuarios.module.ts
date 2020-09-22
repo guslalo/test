@@ -31,7 +31,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     MatDialogModule,
     NgxDatatableModule,
     NgxSpinnerModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
 })
-export class UsuariosModule { }
+export class UsuariosModule {}

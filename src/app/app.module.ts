@@ -48,7 +48,7 @@ const toastrConfig = { closeButton: true };
     RouterModule,
     AngularFireModule,
     AngularFireMessagingModule,
-    // SharedModule.forRoot()
+    // SharedModule
     // EXTRAS
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),

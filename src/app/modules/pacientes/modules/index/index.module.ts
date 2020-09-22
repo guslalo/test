@@ -5,16 +5,8 @@ import { IndexRoutingModule } from './index-routing.module';
 import { OwlModule } from 'ngx-owl-carousel';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    InicioComponent
-  ],
-  imports: [
-    CommonModule,
-    IndexRoutingModule,
-    OwlModule,
-    SharedModule.forRoot()
-  ]
+  declarations: [InicioComponent],
+  imports: [CommonModule, IndexRoutingModule, OwlModule, SharedModule],
 })
-export class IndexModule { }
+export class IndexModule {}

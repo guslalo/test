@@ -10,6 +10,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [IndexComponent, VerSalaComponent],
-  imports: [CommonModule, FormsModule, SalaEsperaRoutingModule, NgxDatatableModule, SharedModule.forRoot(),],
+  imports: [CommonModule, FormsModule, SalaEsperaRoutingModule, NgxDatatableModule, SharedModule],
 })
-export class SalaEsperaModule { }
+export class SalaEsperaModule {}

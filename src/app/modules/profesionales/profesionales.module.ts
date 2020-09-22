@@ -25,7 +25,6 @@ import { ProfesionalesRoutingModule } from '../profesionales/profesionales-routi
 import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
 
-
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
@@ -49,7 +48,7 @@ FullCalendarModule.registerPlugins([
     MiDisponibilidadComponent,
     MisPacientesComponent,
     AgendaComponent,
-    CalendarComponent
+    CalendarComponent,
   ],
   imports: [
     CommonModule,
@@ -69,7 +68,7 @@ FullCalendarModule.registerPlugins([
     NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
-    SharedModule.forRoot(),
+    SharedModule,
   ],
   exports: [
     NgbTimepickerModule,
@@ -78,7 +77,7 @@ FullCalendarModule.registerPlugins([
     MiDisponibilidadComponent,
     NgxDatatableModule,
     NgxSpinnerModule,
-    NgbDatepickerModule
-  ]
+    NgbDatepickerModule,
+  ],
 })
-export class ProfesionalesModule { }
+export class ProfesionalesModule {}

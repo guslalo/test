@@ -52,18 +52,17 @@ import * as moment from 'moment';
 export class LayoutComponent implements OnInit, OnDestroy {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   intervalCurrentTime: any;
-  public inmediateAppointment:boolean;
+  public inmediateAppointment: boolean;
 
   constructor(public breakpointObserver: BreakpointObserver) {}
 
   public state = 'open';
-  public inmediateAppointmentPadre:boolean;
+  public inmediateAppointmentPadre: boolean;
 
   status = false;
 
   ngOnInit(): void {
-    
-    if(localStorage.getItem('inmediateAppointment') === 'true'){
+    if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;
       this.inmediateAppointment = true;
     } else {

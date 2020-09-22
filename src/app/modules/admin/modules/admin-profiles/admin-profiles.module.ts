@@ -9,11 +9,6 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   declarations: [IndexProfileComponent, CrearPerfilComponent, EditarPerfilComponent],
-  imports: [
-    CommonModule,
-    AdminProfileRoutingModule,
-    SharedModule,
-    TranslocoRootModule
-  ],
+  imports: [CommonModule, AdminProfileRoutingModule, SharedModule, TranslocoRootModule],
 })
-export class AdminProfilesModule { }
+export class AdminProfilesModule {}

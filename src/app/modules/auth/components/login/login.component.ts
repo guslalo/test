@@ -34,17 +34,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private UserService: UsersService,
     private router: Router,
-    private appointmentsService:AppointmentsService
+    private appointmentsService: AppointmentsService
   ) {}
 
   ngOnInit(): void {
     localStorage.clear();
     this.spinner.hide();
-    let lenguaje = navigator.language;
-    let lenguajeCorto = lenguaje.split('-');
-    console.log(lenguajeCorto[0]);
-    this.translocoService.setDefaultLang(lenguajeCorto[0]);
-    this.setActiveLang(lenguajeCorto[0]);
 
     this.formLogin = this.formBuilder.group({
       username: new FormControl(null, [Validators.required, Validators.email]),
@@ -106,15 +101,15 @@ export class LoginComponent implements OnInit {
             break;
           case 'patient':
             this.appointmentsService.getAppointmentInmediateState().subscribe(
-              data => {
+              (data) => {
                 localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
                 console.log(data);
                 this.router.navigate(['app-paciente']);
               },
-              error => {
-                console.log(error)
+              (error) => {
+                console.log(error);
               }
-            )
+            );
             break;
         }
         this.spinner.hide();

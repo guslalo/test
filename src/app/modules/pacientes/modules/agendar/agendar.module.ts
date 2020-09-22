@@ -22,8 +22,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgxSpinnerModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    SharedModule.forRoot()
+    SharedModule,
   ],
   exports: [SafePipe],
 })
-export class AgendarModule { }
+export class AgendarModule {}
