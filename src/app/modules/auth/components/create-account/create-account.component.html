@@ -18,16 +18,16 @@
           <img class="d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms" />
           <div class="row">
             <div class="col">
-              <h2>{{ 'crear-cuenta.title' | transloco }}</h2>
+              <h2>{{ 'account.createAccount.title' | transloco }}</h2>
             </div>
           </div>
-          <p>{{ 'crear-cuenta.ingrese' | transloco }}</p>
+          <p>{{ 'account.createAccount.label' | transloco }}</p>
           <!--stepper-->
           <mat-vertical-stepper linear #stepper>
             <!-- paso 1-->
             <mat-step [stepControl]="identificationData">
               <ng-template matStepLabel>
-                <h4>{{ 'crear-cuenta.step1.subtitle' | transloco }}</h4>
+                <h4>{{ 'account.createAccount.identificationData.label' | transloco }}</h4>
               </ng-template>
               <div class="custom-control custom-checkbox custom-control-inline mb-2">
                 <input
@@ -38,7 +38,7 @@
                   (change)="validateForm()"
                 />
                 <label class="custom-control-label" for="isForeign">{{
-                  'crear-cuenta.step1.isForeign' | transloco
+                  'account.createAccount.isForeign' | transloco
                 }}</label>
               </div>
               <form [formGroup]="identificationData">
@@ -127,9 +127,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="idDocumentNumber">{{
-                      'crear-cuenta.step1.formGroup.extraIdDocument' | transloco
-                    }}</label>
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}</label>
                     <input
                       disabled
                       type="text"
@@ -175,7 +173,7 @@
                         formControlName="checkAge"
                       />
                       <label class="custom-control-label" for="checkAge">
-                        {{ 'crear-cuenta.isAdult' | transloco }}
+                        {{ 'account.createAccount.majorAge.label' | transloco }}
                       </label>
                     </div>
                   </div>
@@ -247,7 +245,7 @@
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-4">
-                    <label for="motherName">{{ 'crear-cuenta.step2.formGroup.motherName' | transloco }} *</label>
+                    <label for="motherName">{{ 'account.motherNameReq.label' | transloco }} *</label>
                     <input
                       type="text"
                       name="motherName"
@@ -260,14 +258,14 @@
                       }"
                     />
                     <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
-                      {{ 'crear-cuenta.step2.formGroup.motherName' | transloco }} es necesario
+                      {{ 'account.motherNameReq.label' | transloco }} es necesario
                     </div>
                     <div *ngIf="personalData.controls['motherName'].errors?.pattern" class="invalid-feedback">
                       Ingrese solo caracteres
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <label for="gender">{{ 'crear-cuenta.step2.formGroup.gender' | transloco }} *</label>
+                    <label for="gender">{{ 'account.grenderReq.label' | transloco }} *</label>
                     <select
                       formControlName="gender"
                       name="gender"
@@ -310,7 +308,7 @@
                   </div>
 
                   <div class="form-group col-12 col-md-6">
-                    <label for="confirmEmail">{{ 'crear-cuenta.step2.formGroup.confirmEmail' | transloco }} *</label>
+                    <label for="confirmEmail">{{ 'account.confirmEmailReq.label' | transloco }} *</label>
                     <input
                       type="confirmEmail"
                       name="confirmEmail"
@@ -324,13 +322,13 @@
                       onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="personalData.errors?.emailsNotMatch" class="invalid-feedback">
-                      {{ 'crear-cuenta.step2.formGroup.emailsNotMatch' | transloco }}
+                      {{ 'account.confirmEmailReq.label' | transloco }}
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="phoneNumber">{{ 'crear-cuenta.step2.formGroup.phoneNumber' | transloco }} *</label>
+                    <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }} *</label>
                     <input
                       name="text"
                       name="phoneNumber"
@@ -348,7 +346,7 @@
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
-                    <label for="breed">{{ 'crear-cuenta.step2.formGroup.breed' | transloco }} *</label>
+                    <label for="breed">{{ 'account.breedReq.label' | transloco }} *</label>
                     <select
                       class="form-control"
                       name="breed"
@@ -393,11 +391,11 @@
             </mat-step>
             <!-- /paso 2-->
 
-            <!-- paso 2-->
+            <!-- paso 3-->
             <mat-step [stepControl]="birthData">
               <form [formGroup]="birthData">
                 <ng-template matStepLabel>
-                  <h4>{{ 'crear-cuenta.step3.subtitle' | transloco }}</h4>
+                  <h4>{{ 'account.createAccount.birthData.label' | transloco }}</h4>
                 </ng-template>
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
@@ -528,7 +526,7 @@
             <mat-step [stepControl]="addressData">
               <form [formGroup]="addressData">
                 <ng-template matStepLabel>
-                  <h4>{{ 'account.createAccount.address.title' | transloco }}</h4>
+                  <h4>{{ 'account.createAccount.address.label' | transloco }}</h4>
                 </ng-template>
                 <!--row-->
                 <div class="form-row">
@@ -683,7 +681,7 @@
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="password">{{ 'crear-cuenta.step5.formGroup.password' | transloco }} *</label>
+                    <label for="password">{{ 'account.password.label' | transloco }} *</label>
                     <div class="input-group mb-3">
                       <input
                         [type]="showPassword ? 'text' : 'password'"

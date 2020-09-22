@@ -2978,6 +2978,10 @@
     "createAccount": {
       "title": "Criar conta",
       "label": "Em seguida, insira seus dados para concluir seu registro.",
+      "isForeign": "Eu sou um estrangeiro",
+      "identificationData": {
+        "label": "Dados de identificação"
+      },
       "personalData": {
         "label": "Dados pessoais"
       },
@@ -2985,10 +2989,10 @@
         "label": "Tenho mais de 18 anos?"
       },
       "birthData": {
-        "title": "Dados de nascimento"
+        "label": "Dados de nascimento"
       },
       "address": {
-        "title": "Endereço"
+        "label": "Endereço"
       },
       "generatePassword": {
         "title": "Gerar senha"
@@ -3056,8 +3060,14 @@
     "emailReq": {
       "label": "o email *"
     },
+    "confirmEmailReq": {
+      "label": "Confirmar e-mail"
+    },
     "phoneReq": {
       "label": "Telefone *"
+    },
+    "breedReq": {
+      "label": "Raça"
     },
     "grenderReq": {
       "label": "sexo *"
@@ -3116,6 +3126,9 @@
     "atLeastOneSpecialChar": {
       "label": "* A um carácter menos especial"
     },
+    "password": {
+      "label": "Contraseña"
+    },
     "confirmPassword": {
       "label": "Confirmar senha *"
     },
@@ -3150,7 +3163,7 @@
       "label": "Numeração"
     },
     "uf": {
-      "label": "PHEW"
+      "label": "UF"
     },
     "numerationReq": {
       "label": "A numeração é necessária"
