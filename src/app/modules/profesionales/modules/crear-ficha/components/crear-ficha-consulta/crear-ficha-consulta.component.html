@@ -1362,14 +1362,34 @@
         <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0">Prescripciones</h5>
+              <h5 class="mb-0 d-none">Prescripciones</h5>
             </div>
             <div class="col-6">
+              <!--
               <button class="btn btn-secondary rounded-pill float-right align-middle"
               [disabled]="!permisoGuardar"
               (click)="subirPrescripciones()" data-toggle="modal" data-target="#preescripcionesModal">
-                Subir documento
-              </button>
+                Generar documentos  data-toggle="modal" data-target="#preescripcionesModal"
+              </button>-->
+
+              <div class="dropdown">
+                <button 
+                [disabled]="!permisoGuardar"
+                class="btn btn-secondary rounded-pill float-right align-middle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Generar documentos
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" 
+                  data-toggle="modal" data-target="#preescripcionesModal"
+                  href="javascript:;" (click)="subirPrescripciones('prescription')">Preescripciones</a>
+                  <a class="dropdown-item" 
+                  data-toggle="modal" data-target="#preescripcionesModal"
+                  (click)="subirPrescripciones('exam-order')" href="javascript:;">Orden de exámen</a>
+                  <a class="dropdown-item" 
+                  data-toggle="modal" data-target="#preescripcionesModal"
+                  (click)="subirPrescripciones('report')" href="javascript:;">Licencia médica</a>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
