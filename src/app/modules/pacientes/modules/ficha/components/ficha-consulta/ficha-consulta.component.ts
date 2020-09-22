@@ -12,7 +12,7 @@ export class FichaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = params
+      const id = params;
       console.log(params);
     });
   }

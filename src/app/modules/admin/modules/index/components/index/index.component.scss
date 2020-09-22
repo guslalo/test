@@ -1,10 +1,10 @@
 //.chart-wrapper { display: flex; overflow: hidden; }
 
 .chart-wrapper {
-    width: 100%;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  * {
     display: inline-block;
-    text-align: center;
-    * {
-        display: inline-block;
-    }
+  }
 }

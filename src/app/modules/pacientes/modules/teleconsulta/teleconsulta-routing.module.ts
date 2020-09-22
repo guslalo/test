@@ -4,12 +4,13 @@ import { IndexComponent } from './components/index/index.component';
 
 const routes: Routes = [
   {
-    path:'', component:IndexComponent
-  }
+    path: '',
+    component: IndexComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TeleconsultaRoutingModule { }
+export class TeleconsultaRoutingModule {}

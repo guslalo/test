@@ -25,9 +25,8 @@ export class AppointmentsService {
   private getSibrare = 'v1/appointments/sibrare-url';
   private blocks = 'v1/blocks/query';
   private sibrareStatus = 'v1/appointments/sibrare/status';
-  private sibrareStatusVerifiedSibrareDocuments = 'v1/appointments/sibrare/documents'
-  private sibrareDocumentUrl = 'v1/appointments/sibrare/document-url'
-  
+  private sibrareStatusVerifiedSibrareDocuments = 'v1/appointments/sibrare/documents';
+  private sibrareDocumentUrl = 'v1/appointments/sibrare/document-url';
 
   constructor(private http: HttpClient) {}
 

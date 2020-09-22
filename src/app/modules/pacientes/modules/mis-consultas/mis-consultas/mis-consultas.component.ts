@@ -17,7 +17,7 @@ export class MisConsultasComponent implements OnInit {
   moment: any = moment;
   page: number = 1;
   totalPages: number;
-  public fecha:any;
+  public fecha: any;
 
   constructor(private appointmentsService: AppointmentsService) {}
 
@@ -28,15 +28,16 @@ export class MisConsultasComponent implements OnInit {
       this.totalPages = data.payload.numberOfPages;
     });
 
-    
-  
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data.payload);
         this.consultas = data.payload.filter(
-          lista => lista.administrativeDetails.status === 'active' || lista.administrativeDetails.status ==='running'
-          || lista.administrativeDetails.status ==='pending'  || lista.administrativeDetails.status ==='appointed'
-          )
+          (lista) =>
+            lista.administrativeDetails.status === 'active' ||
+            lista.administrativeDetails.status === 'running' ||
+            lista.administrativeDetails.status === 'pending' ||
+            lista.administrativeDetails.status === 'appointed'
+        );
         //this.consultas = data.payload;
       },
       (error) => {
@@ -48,40 +49,40 @@ export class MisConsultasComponent implements OnInit {
       (data) => {
         console.log(data.payload);
         this.consultasActivas = data.payload.filter(
-          lista => lista.administrativeDetails.status === 'created' || lista.administrativeDetails.status ==='waitingInList'
-          )
+          (lista) =>
+            lista.administrativeDetails.status === 'created' || lista.administrativeDetails.status === 'waitingInList'
+        );
         //this.consultasActivas = data.payload;
       },
       (error) => {
         console.log(error);
       }
     );
-    this. getFecha();
+    this.getFecha();
     this.getAppointmentsTimeline();
   }
 
-  getFecha(){
+  getFecha() {
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
 
     this.fecha = {
       year: fecha.getFullYear(),
-      month: month
-    }
-  }
-    
-  getAppointmentsTimeline(){
-    this.appointmentsService.getAppointmentsTimeline().subscribe(
-      data => { 
-        this.timeline = data.payload;
-     
-        //console.log(this.timeline)
-      },
-      error => {
-        console.log(error)
-      }
-    )
+      month: month,
+    };
   }
 
+  getAppointmentsTimeline() {
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
+      (data) => {
+        this.timeline = data.payload;
+
+        //console.log(this.timeline)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

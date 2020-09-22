@@ -7,8 +7,8 @@ import { IndexAgendaComponent } from './components/index-agenda/index-agenda.com
 const routes: Routes = [
   {
     path: '',
-    component: IndexAgendaComponent
-  }
+    component: IndexAgendaComponent,
+  },
 ];
 
 @NgModule({

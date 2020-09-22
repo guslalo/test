@@ -1,26 +1,45 @@
 <div class="row">
-    <div class="col mb-3">
-        <h2>{{ 'common.menu.history.label' | transloco }}</h2>
-    </div>
-    <div class="col">
-        <button #newAppointment id="newAppointment" type="button" class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar" data-toggle="modal" data-target="#modalAppointment">
+  <div class="col mb-3">
+    <h2>{{ 'common.menu.history.label' | transloco }}</h2>
+  </div>
+  <div class="col">
+    <button
+      #newAppointment
+      id="newAppointment"
+      type="button"
+      class="btn btn-primary rounded-pill float-right"
+      ng-reflect-tour-anchor="agendar"
+      data-toggle="modal"
+      data-target="#modalAppointment"
+    >
       Nueva Consulta
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
     </button>
-    </div>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-3">
-        <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Busqueda" (keyup)="applyFiltersAppointments()" />
-        <div class="searchBox">
-            <img src="assets/icons/icon-search.svg" />
-        </div>
+  <div class="col-3">
+    <input
+      [(ngModel)]="searchTerm"
+      type="text"
+      class="form-control"
+      placeholder="Busqueda"
+      (keyup)="applyFiltersAppointments()"
+    />
+    <div class="searchBox">
+      <img src="assets/icons/icon-search.svg" />
     </div>
+  </div>
 
-    <div class="col-3">
-        <div class="form-group">
-            <select [(ngModel)]="appointmentStatusSelected" class="form-control" id="status" (change)="applyFiltersAppointments()">
+  <div class="col-3">
+    <div class="form-group">
+      <select
+        [(ngModel)]="appointmentStatusSelected"
+        class="form-control"
+        id="status"
+        (change)="applyFiltersAppointments()"
+      >
         <option [ngValue]="null">Filtrar por Estado</option>
         <option ngValue="reserved">Reservada</option>
         <option ngValue="appointed">Agendada</option>
@@ -33,69 +52,117 @@
         <option ngValue="finished">Finalizada</option>
         <option ngValue="canceled">Cancelada</option>
       </select>
-        </div>
     </div>
+  </div>
 
-    <button type="button" class="btn custom-btn-1 mx-2" (click)="exportAsExcelFile()" [disabled]="!selected.length">
+  <button type="button" class="btn custom-btn-1 mx-2" (click)="exportAsExcelFile()" [disabled]="!selected.length">
     <img src="assets/icons/icon-export-excel.svg" />
   </button>
 </div>
 
 <!--appointments activas-->
 <div class="row mt-1">
-    <div class="col-12 mb-4">
-        <div class="tableBox rounded p-4 bg-white">
-            <ngx-datatable *ngIf="appointments?.length; else noData" class="material" [rows]="appointments" headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="10" [selected]="selected" [selectionType]="SelectionType.checkbox"
-                [selectAllRowsOnPage]="true" (select)="onSelect($event)">
-                <!-- MULTISELECT -->
-                <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                    <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-                        <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
-                    </ng-template>
-                    <ng-template ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                        <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID Paciente">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <span>{{
+  <div class="col-12 mb-4">
+    <div class="tableBox rounded p-4 bg-white">
+      <ngx-datatable
+        *ngIf="appointments?.length; else noData"
+        class="material"
+        [rows]="appointments"
+        headerHeight="auto"
+        footerHeight="auto"
+        rowHeight="70"
+        [columnMode]="ColumnMode.flex"
+        [limit]="10"
+        [selected]="selected"
+        [selectionType]="SelectionType.checkbox"
+        [selectAllRowsOnPage]="true"
+        (select)="onSelect($event)"
+      >
+        <!-- MULTISELECT -->
+        <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
+          <ng-template
+            ngx-datatable-header-template
+            let-value="value"
+            let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn"
+          >
+            <input
+              class="mb-n2"
+              [ngStyle]="{ height: '24px' }"
+              type="checkbox"
+              [checked]="allRowsSelected"
+              (change)="selectFn(!allRowsSelected)"
+            />
+          </ng-template>
+          <ng-template
+            ngx-datatable-cell-template
+            let-row="row"
+            let-isSelected="isSelected"
+            let-onCheckboxChangeFn="onCheckboxChangeFn"
+          >
+            <input
+              class="mb-n2"
+              [ngStyle]="{ height: '24px' }"
+              type="checkbox"
+              [checked]="isSelected"
+              (change)="onCheckboxChangeFn($event)"
+            />
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID Paciente">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{
               row.patientDetails.userDetails[0]?.identificationData.cpf ||
                 row.patientDetails.userDetails[0]?.identificationData.cns ||
                 row.patientDetails.userDetails[0]?.identificationData.rgRegistry ||
                 row.patientDetails.userDetails[0]?.identificationData.passport
             }}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Nombre Paciente">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <img *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto" class="profile mr-2" id="image0" width="38" height="38" [src]="photoUrlBase + (row.patientDetails?.userDetails)[0]?.photo" alt="img" />
-                        <ng-template #noPhoto>
-                            <img class="profile mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
-                        </ng-template>
-                        {{ row.patientDetails.userDetails[0]?.personalData.name || 'S/R' }} {{ row.patientDetails.userDetails[0]?.personalData.secondLastName }}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row.dateDetails.date | date: 'dd/MM/yyyy':'+0000' || 'S/R' }}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Hora">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row.dateDetails.start + ' hrs' }}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Sala">
-                    <ng-template let-row="row" ngx-datatable-cell-template>S/R</ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Profesional">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        {{ row.professionalDetails.userDetails[0]?.name || 'S/R' }} {{ row.professionalDetails.userDetails[0]?.lastName }}
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <button *ngIf="row.administrativeDetails.status !== 'created'; else invalidStatus" type="button" class="btn btn-secondary rounded-pill btn-sm">
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Nombre Paciente">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <img
+              *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
+              class="profile mr-2"
+              id="image0"
+              width="38"
+              height="38"
+              [src]="photoUrlBase + (row.patientDetails?.userDetails)[0]?.photo"
+              alt="img"
+            />
+            <ng-template #noPhoto>
+              <img class="profile mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
+            </ng-template>
+            {{ row.patientDetails.userDetails[0]?.personalData.name || 'S/R' }}
+            {{ row.patientDetails.userDetails[0]?.personalData.secondLastName }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.dateDetails.date | date: 'dd/MM/yyyy':'+0000' || 'S/R' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Hora">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.dateDetails.start + ' hrs' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Sala">
+          <ng-template let-row="row" ngx-datatable-cell-template>S/R</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Profesional">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row.professionalDetails.userDetails[0]?.name || 'S/R' }}
+            {{ row.professionalDetails.userDetails[0]?.lastName }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button
+              *ngIf="row.administrativeDetails.status !== 'created'; else invalidStatus"
+              type="button"
+              class="btn btn-secondary rounded-pill btn-sm"
+            >
               {{
                 row.administrativeDetails.status === 'reserved'
                   ? 'Reservada'
@@ -120,138 +187,183 @@
                   : null
               }}
             </button>
-                        <ng-template #invalidStatus>N/A</ng-template>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Accion">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                        <ng-container *ngIf="row.administrativeDetails.status === 'finished'">
-                            <a routerLink="/app-professional/ficha-consulta/{{ row._id }}">
-                                <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+            <ng-template #invalidStatus>N/A</ng-template>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Accion">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ng-container *ngIf="row.administrativeDetails.status === 'finished'">
+              <a routerLink="/app-professional/ficha-consulta/{{ row._id }}">
+                <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                   Ver Ficha
                 </button>
-                            </a>
-                        </ng-container>
-                        <ng-container *ngIf="
+              </a>
+            </ng-container>
+            <ng-container
+              *ngIf="
                 row.administrativeDetails.status === 'running' ||
                 row.administrativeDetails.status === 'active' ||
                 row.administrativeDetails.status === 'appointed' ||
                 row.administrativeDetails.status === 'pending'
-              ">
-                            <a routerLink="/app-professional/crear-ficha-consulta/{{ row._id }}">
-                                <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+              "
+            >
+              <a routerLink="/app-professional/crear-ficha-consulta/{{ row._id }}">
+                <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                   Atender
                 </button>
-                            </a>
-                        </ng-container>
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-            <ng-template #noData>
-                <h5 class="text-center text-primary">No existen coincidencias</h5>
-            </ng-template>
-            <!--/tab-->
-        </div>
+              </a>
+            </ng-container>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <ng-template #noData>
+        <h5 class="text-center text-primary">No existen coincidencias</h5>
+      </ng-template>
+      <!--/tab-->
     </div>
+  </div>
 </div>
 
 <!-- APPOINTMENT MODAL -->
 <div class="modal fade" id="modalAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center w-100 mt-1">Reservar Consulta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1">Reservar Consulta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div class="modal-body p-4">
+        <form [formGroup]="appointmentForm" class="mt-4">
+          <div class="row">
+            <div class="form-group col">
+              <label for="startBlock">Nombre Paciente o por ID</label>
+              <input
+                *ngIf="patients"
+                type="text"
+                class="form-control"
+                placeholder="Buscar Paciente"
+                [matAutocomplete]="autoPatients"
+                formControlName="patient"
+              />
+              <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                <img src="assets/icons/icon-search.svg" />
+              </div>
+              <mat-autocomplete
+                #autoPatients="matAutocomplete"
+                [displayWith]="getDisplayFn()"
+                (optionSelected)="setPatient($event.option.value)"
+              >
+                <mat-option *ngFor="let item of patients" [value]="item">
+                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                </mat-option>
+              </mat-autocomplete>
             </div>
-            <div class="modal-body p-4">
-                <form [formGroup]="appointmentForm" class="mt-4">
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="startBlock">Nombre Paciente o por ID</label>
-                            <input *ngIf="patients" type="text" class="form-control" placeholder="Buscar Paciente" [matAutocomplete]="autoPatients" formControlName="patient" />
-                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
-                                <img src="assets/icons/icon-search.svg" />
-                            </div>
-                            <mat-autocomplete #autoPatients="matAutocomplete" [displayWith]="getDisplayFn()" (optionSelected)="setPatient($event.option.value)">
-                                <mat-option *ngFor="let item of patients" [value]="item">
-                                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </div>
-                        <div class="form-group col">
-                            <label for="startDate">Fecha</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="yyyy-mm-dd" id="date" name="date" formControlName="date" [(ngModel)]="appoinmentDate" [minDate]="minDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [ngClass]="{
+            <div class="form-group col">
+              <label for="startDate">Fecha</label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="yyyy-mm-dd"
+                  id="date"
+                  name="date"
+                  formControlName="date"
+                  [(ngModel)]="appoinmentDate"
+                  [minDate]="minDate"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  (click)="d.toggle()"
+                  [ngClass]="{
                     'is-invalid': !appointmentForm.get('date').valid && appointmentForm.get('date').touched
-                  }" [(ngModel)]="currentDate" (ngModelChange)="getBlocks()" />
-                                <div *ngIf="appointmentForm.controls['date'].errors?.required" class="invalid-feedback">
-                                    Fecha es Obligatoria
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  }"
+                  [(ngModel)]="currentDate"
+                  (ngModelChange)="getBlocks()"
+                />
+                <div *ngIf="appointmentForm.controls['date'].errors?.required" class="invalid-feedback">
+                  Fecha es Obligatoria
+                </div>
+              </div>
+            </div>
+          </div>
 
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="startBlock">Horas Disponibles</label>
-                            <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
+          <div class="row">
+            <div class="form-group col">
+              <label for="startBlock">Horas Disponibles</label>
+              <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
                 <ng-container *ngFor="let item of blocks">
                   <option value="{{ item }}">{{ item }}</option>
                 </ng-container>
               </select>
-                            <ng-container *ngIf="!blocks.length">
-                                <p class="text-primary">No existen horas disponibles.</p>
-                            </ng-container>
-                        </div>
-                        <div class="form-group col">
-                            <label for="objective">Objetivo de consulta</label>
-                            <input type="text" class="form-control" name="objective" formControlName="objective" />
-                        </div>
-                    </div>
+              <ng-container *ngIf="!blocks.length">
+                <p class="text-primary">No existen horas disponibles.</p>
+              </ng-container>
+            </div>
+            <div class="form-group col">
+              <label for="objective">Objetivo de consulta</label>
+              <input type="text" class="form-control" name="objective" formControlName="objective" />
+            </div>
+          </div>
 
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="professional">Profesional</label>
-                            <input *ngIf="professionals" type="text" class="form-control" placeholder="Buscar Profesional" [matAutocomplete]="autoProfessionals" formControlName="professional" />
-                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
-                                <img src="assets/icons/icon-search.svg" />
-                            </div>
-                            <mat-autocomplete #autoProfessionals="matAutocomplete" [displayWith]="getDisplayFn()" (optionSelected)="getSpecialties($event.option.value)">
-                                <mat-option *ngFor="let item of professionals" [value]="item">
-                                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </div>
-                        <div class="form-group col">
-                            <label for="specialty">Especialidad</label>
-                            <select class="form-control custom-select" (change)="getBlocks()" formControlName="specialty">
+          <div class="row">
+            <div class="form-group col">
+              <label for="professional">Profesional</label>
+              <input
+                *ngIf="professionals"
+                type="text"
+                class="form-control"
+                placeholder="Buscar Profesional"
+                [matAutocomplete]="autoProfessionals"
+                formControlName="professional"
+              />
+              <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                <img src="assets/icons/icon-search.svg" />
+              </div>
+              <mat-autocomplete
+                #autoProfessionals="matAutocomplete"
+                [displayWith]="getDisplayFn()"
+                (optionSelected)="getSpecialties($event.option.value)"
+              >
+                <mat-option *ngFor="let item of professionals" [value]="item">
+                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+            <div class="form-group col">
+              <label for="specialty">Especialidad</label>
+              <select class="form-control custom-select" (change)="getBlocks()" formControlName="specialty">
                 <option selected>Selecciona</option>
                 <ng-container *ngFor="let item of specialties">
                   <option value="{{ item._id }}">{{ item.specialtyName }} </option>
                 </ng-container>
               </select>
-                        </div>
-                    </div>
+            </div>
+          </div>
 
-                    <div class="row">
-                        <div class="modal-footer text-center justify-content-center">
-                            <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="createAppointment()" [disabled]="!appointmentForm.valid">
+          <div class="row">
+            <div class="modal-footer text-center justify-content-center">
+              <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
+              <button
+                type="button"
+                class="btn btn-primary rounded-pill"
+                data-dismiss="modal"
+                (click)="createAppointment()"
+                [disabled]="!appointmentForm.valid"
+              >
                 <!--[disabled]="!createAvailability.valid"-->
                 Reservar Consulta
               </button>
-                        </div>
-                    </div>
-                </form>
             </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" routerLink="crear-ficha-consulta">
+  </div>
+  <div class="modal-footer text-center justify-content-center">
+    <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+    <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" routerLink="crear-ficha-consulta">
       Crear Consulta
     </button>
-    </div>
+  </div>
 </div>

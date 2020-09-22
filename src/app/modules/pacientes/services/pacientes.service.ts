@@ -22,5 +22,4 @@ export class PacientesService {
   getAppointmentsSession(appointmentId): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { appointmentId });
   }
-  
 }

@@ -9,10 +9,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './consulta2.component.html',
   styleUrls: ['./consulta2.component.scss'],
 })
-
-
 export class Consulta2Component implements OnInit {
-
   changeDetectorRef: ChangeDetectorRef;
   selectedId: any;
   private sub: any;
@@ -32,7 +29,6 @@ export class Consulta2Component implements OnInit {
     this.changeDetectorRef = ref;
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-
       }
       // NavigationEnd
       // NavigationCancel
@@ -46,8 +42,6 @@ export class Consulta2Component implements OnInit {
   localStream;
 
   ngOnInit(): void {
-
-
     this.route.params.subscribe((params) => {
       // this.id = +params['id']; // (+)
       // get getRutas
@@ -107,18 +101,15 @@ export class Consulta2Component implements OnInit {
     let apiKey: any;
     let token: any;
     let sessionId: any;
-
   }
 
   getSessionCall2(appointmentId) {
     let apiKey: any;
     let token: any;
     let sessionId: any;
-
   }
 
   closeCall() {
-
     this.router.navigate(['/app-paciente/mis-consultas']);
   }
 }

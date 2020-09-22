@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
-
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -13,17 +12,13 @@ export class IndexComponent implements OnInit {
   public currentUser: any = {};
   public nextAppointed: any;
   public consultasFinalizadas: any;
-  public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/'
+  public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/';
 
-  constructor(
-    public currentUserService: CurrentUserService,
-    public appointmentsService:AppointmentsService
-    ) {}
+  constructor(public currentUserService: CurrentUserService, public appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
-
   }
 
   getAppointments() {

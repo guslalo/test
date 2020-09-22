@@ -8,7 +8,6 @@ import { AuthenticationService } from '../../services/authentication.service';
   templateUrl: './choose-context.component.html',
   styleUrls: ['../login/login.component.scss'],
 })
-
 export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};

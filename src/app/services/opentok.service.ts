@@ -2,14 +2,12 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-
 import config from '../../config';
 
 const sub = new Subject<boolean>();
 
 @Injectable()
 export class OpentokService {
-
   constructor() {}
 
   token: string;
@@ -28,13 +26,7 @@ export class OpentokService {
     return (this.toggleVideo = false);
   } /**/
 
+  initSession(token, sessionId) {}
 
-
-  initSession(token, sessionId) {
-
-  }
-
-  connect() {
-
-  }
+  connect() {}
 }

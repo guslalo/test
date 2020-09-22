@@ -12,11 +12,10 @@ declare var $: any;
   styleUrls: ['./consulta.component.scss'],
 })
 export class ConsultaComponent implements OnInit {
-
   changeDetectorRef: ChangeDetectorRef;
   selectedId: any;
   private sub: any;
-  public consultas:any;
+  public consultas: any;
   id: number;
   public meet: boolean;
   public cita: any;
@@ -30,7 +29,6 @@ export class ConsultaComponent implements OnInit {
   ) {
     this.changeDetectorRef = ref;
     router.events.forEach((event) => {
-
       // NavigationEnd
       // NavigationCancel
       // NavigationError
@@ -38,11 +36,7 @@ export class ConsultaComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
- }
-
-
-
+  ngOnInit(): void {}
 
   initCall() {
     console.log(this.meet);
@@ -85,18 +79,15 @@ export class ConsultaComponent implements OnInit {
     let apiKey: any;
     let token: any;
     let sessionId: any;
-
   }
 
   getSessionCall2(appointmentId) {
     let apiKey: any;
     let token: any;
     let sessionId: any;
-
   }
 
   closeCall() {
-
     this.router.navigate(['/app-paciente/mis-consultas']);
   }
 }

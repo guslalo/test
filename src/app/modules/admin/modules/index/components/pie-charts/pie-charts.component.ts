@@ -3,29 +3,28 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-pie-charts',
   templateUrl: './pie-charts.component.html',
-  styleUrls: ['./pie-charts.component.scss']
+  styleUrls: ['./pie-charts.component.scss'],
 })
-
 export class PieChartsComponent implements OnInit {
   // single: any[];
   view: any[] = ['250', '250'];
   single = [
     {
       name: 'Germany',
-      value: 8940000
+      value: 8940000,
     },
     {
       name: 'USA',
-      value: 5000000
+      value: 5000000,
     },
     {
       name: 'France',
-      value: 7200000
+      value: 7200000,
     },
-      {
+    {
       name: 'UK',
-      value: 6200000
-    }
+      value: 6200000,
+    },
   ];
 
   // options
@@ -36,15 +35,13 @@ export class PieChartsComponent implements OnInit {
   legendPosition = 'below';
 
   colorScheme = {
-    domain: ['#3976ea', '#6fbfa7', '#7f62c4', '#7aa3e5', '#a8385d', '#aae3f5']
+    domain: ['#3976ea', '#6fbfa7', '#7f62c4', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
   constructor() {
-    Object.assign(this.single );
+    Object.assign(this.single);
   }
-  ngOnInit(){
-
-  }
+  ngOnInit() {}
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
@@ -57,5 +54,4 @@ export class PieChartsComponent implements OnInit {
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
 }

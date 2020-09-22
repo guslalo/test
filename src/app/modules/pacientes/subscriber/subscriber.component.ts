@@ -10,10 +10,7 @@ declare var $: any;
 export class SubscriberComponent implements AfterViewInit {
   @ViewChild('subscriberDiv') subscriberDiv: ElementRef;
 
-
   constructor() {}
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 }

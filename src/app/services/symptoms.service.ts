@@ -6,9 +6,7 @@ import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
 export class SymptomsService {
-  
   private symptoms = 'v1/symptoms';
   private symptom = 'v1/appointments/symptom/';
 
@@ -21,12 +19,9 @@ export class SymptomsService {
 
   //delete specialties
   deleteSymptoms(appointmentId, symptom): Observable<any> {
-    console.log(appointmentId, symptom)
-    const params = new HttpParams()
-    .set('appointmentId', appointmentId)
-    .set('symptomId', symptom);
+    console.log(appointmentId, symptom);
+    const params = new HttpParams().set('appointmentId', appointmentId).set('symptomId', symptom);
 
-    return this.http.delete<any>(environment.baseUrl + this.symptom, { params: params } );
+    return this.http.delete<any>(environment.baseUrl + this.symptom, { params: params });
   }
-
 }

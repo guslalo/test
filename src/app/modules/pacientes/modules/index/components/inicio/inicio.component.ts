@@ -4,8 +4,6 @@ import { UserLogin } from './../../../../../../models/models';
 import { HomeService } from 'src/app/services/home.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
-
-
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -14,16 +12,14 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 export class InicioComponent implements OnInit {
   public currentUser: any = {};
   public user: any;
-  public tips:any;
-  public inmediateAppointment:boolean;
+  public tips: any;
+  public inmediateAppointment: boolean;
 
   constructor(
     public currentUserService: CurrentUserService,
-    public homeService:HomeService,
-    public appointmentsService:AppointmentsService
-    ) {
-
-    }
+    public homeService: HomeService,
+    public appointmentsService: AppointmentsService
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -40,7 +36,7 @@ export class InicioComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).role
     );
 
-    if(localStorage.getItem('inmediateAppointment') === 'true'){
+    if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointment = true;
     } else {
       this.inmediateAppointment = false;

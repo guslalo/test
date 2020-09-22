@@ -94,7 +94,9 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}</span>
+                    <span class="pl-3">{{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasSickness">
@@ -170,7 +172,9 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco }}</span>
+                    <span class="pl-3">{{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasFamiliarHistory">
@@ -320,7 +324,9 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco }}</span>
+                    <span class="pl-3">{{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasMedicines">
@@ -395,7 +401,9 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco }}</span>
+                    <span class="pl-3">{{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasOccupational">
@@ -477,7 +485,9 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco }}</span>
+                    <span class="pl-3">{{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasOthers">
@@ -625,7 +635,11 @@
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
+                    <td>
+                      <button type="button" class="btn btn-light">
+                        {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                      </button>
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -648,7 +662,11 @@
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
+                    <td>
+                      <button type="button" class="btn btn-light">
+                        {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                      </button>
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -671,7 +689,11 @@
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
+                    <td>
+                      <button type="button" class="btn btn-light">
+                        {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -725,7 +747,9 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          {{ 'common.button.cancel.label' | transloco }}
+        </button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
@@ -770,7 +794,9 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">
+          {{ 'common.button.cancel.label' | transloco }}
+        </button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="delete()">
           {{ 'common.button.delete.label' | transloco }}
         </button>
@@ -791,7 +817,9 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">{{ 'common.button.add.label' | transloco }} Exámen</h5>
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+          {{ 'common.button.add.label' | transloco }} Exámen
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -825,7 +853,9 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          {{ 'common.button.cancel.label' | transloco }}
+        </button>
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addExamenPost()">
           {{ 'common.button.add.label' | transloco }}
         </button>

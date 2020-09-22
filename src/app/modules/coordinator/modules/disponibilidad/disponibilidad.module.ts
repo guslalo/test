@@ -27,7 +27,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgbTimepickerModule,
     NgbNavModule,
     MatAutocompleteModule,
-    TranslocoRootModule
-  ]
+    TranslocoRootModule,
+  ],
 })
 export class DisponibilidadModule {}

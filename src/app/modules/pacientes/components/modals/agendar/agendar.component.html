@@ -1,45 +1,44 @@
 <!-- Modal -->
 <div class="modal fade" id="agendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog p-0 modal-lg modal-dialog-centered">
-      <div class="modal-content overflow-hidden rounded">
-  
-      
-          <div class="row">
-            <div class="col p-0"><!---->
-             
-                <div class="p-5 bgAzul2 text-center h-100">
-                    <img src="assets/img/agendar-consulta.svg">
-                  <div class="w-100 mt-4 mb-2">
-                    <h5>{{ 'clinicalFile.scheduleService.label' | transloco }}</h5>
-                    <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
-                  </div>
-                  <button class="btn btn-outline-primary rounded-pill btn-outline-white" 
-                  data-dismiss="modal"
-                  routerLink="agendar-consulta">
-                    {{ 'clinicalFile.scheduleApointment.label' | transloco }}
-                  </button>
-                </div>
-              
+  <div class="modal-dialog p-0 modal-lg modal-dialog-centered">
+    <div class="modal-content overflow-hidden rounded">
+      <div class="row">
+        <div class="col p-0">
+          <!---->
+
+          <div class="p-5 bgAzul2 text-center h-100">
+            <img src="assets/img/agendar-consulta.svg" />
+            <div class="w-100 mt-4 mb-2">
+              <h5>{{ 'clinicalFile.scheduleService.label' | transloco }}</h5>
+              <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
             </div>
-            <div *ngIf="inmediateAppointment" class="col  p-0">
-              <div class="p-5  bgVerde text-center h-100">
-                <img src="assets/img/agendar-consulta-inmediata.svg">
-                <div class="w-100 mt-4 mb-2">
-                  <h5>{{ 'dashboard.home.inmediateService.title' | transloco }}</h5>
-                  <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
-                </div>
-                <button class="btn btn-outline-primary rounded-pill btn-outline-white"
-                  data-dismiss="modal"
-                  routerLink="agendar-consulta-inmediata"
-                >
-                  {{ 'dashboard.home.inmediateService.btnCreate.label' | transloco }}
-                </button>
-              </div>
-            </div>
+            <button
+              class="btn btn-outline-primary rounded-pill btn-outline-white"
+              data-dismiss="modal"
+              routerLink="agendar-consulta"
+            >
+              {{ 'clinicalFile.scheduleApointment.label' | transloco }}
+            </button>
           </div>
-         
-      
+        </div>
+        <div *ngIf="inmediateAppointment" class="col p-0">
+          <div class="p-5 bgVerde text-center h-100">
+            <img src="assets/img/agendar-consulta-inmediata.svg" />
+            <div class="w-100 mt-4 mb-2">
+              <h5>{{ 'dashboard.home.inmediateService.title' | transloco }}</h5>
+              <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
+            </div>
+            <button
+              class="btn btn-outline-primary rounded-pill btn-outline-white"
+              data-dismiss="modal"
+              routerLink="agendar-consulta-inmediata"
+            >
+              {{ 'dashboard.home.inmediateService.btnCreate.label' | transloco }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!--        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>-->
+</div>
+<!--        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>-->

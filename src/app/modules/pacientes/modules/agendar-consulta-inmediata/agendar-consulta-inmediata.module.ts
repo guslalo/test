@@ -7,15 +7,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ResultadoComponent } from './components/resultado/resultado.component';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
-
 @NgModule({
   declarations: [IndexComponent, ResultadoComponent],
   imports: [
     CommonModule,
     AgendarConsultaInmediataRoutingModule,
-    ReactiveFormsModule, FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgxSpinnerModule,
-    TranslocoRootModule
-  ]
+    TranslocoRootModule,
+  ],
 })
-export class AgendarConsultaInmediataModule { }
+export class AgendarConsultaInmediataModule {}

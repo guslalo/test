@@ -28,7 +28,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgbTimepickerModule,
     NgxDatatableModule,
     MatAutocompleteModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   exports: [NgbDatepickerModule],
 })
