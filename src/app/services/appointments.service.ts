@@ -180,10 +180,10 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, '', { params: params });
   }
 
-  getSibrareUrl(id): Observable<any> {
+  getSibrareUrl(id, type): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
-    params = params.append('documentType', 'prescription');
+    params = params.append('documentType', type);
     return this.http.get<any>(environment.baseUrl + this.getSibrare, { params: params });
   }
 

@@ -183,14 +183,19 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
 
-  subirPrescripciones(){
-    
-    this.appointmentsService.getSibrareUrl(this.appointmentId).subscribe(
+  subirPrescripciones(type){
+    this.spinner.show();
+    this.trustedUrl = '';
+    this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
       data => {
         this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
         console.log(data);
+        setTimeout(()=>{                           //<<<---using ()=> syntax
+          this.spinner.hide();
+        }, 3000); 
       },
       error => {
+        this.spinner.hide();
         console.log(error)
       }
     )

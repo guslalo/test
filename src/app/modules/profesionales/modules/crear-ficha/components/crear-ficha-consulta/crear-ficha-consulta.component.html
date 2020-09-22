@@ -27,7 +27,7 @@
                     <div class="card bg-white shadow-sm rounded overflow-hidden">
 
                         <div class="row videoCall">
-                            <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'active' || 
+                            <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'active' ||
                 appointmentDetail.administrativeDetails.status === 'pending'
                 ">
                                 <div class="boxText">
@@ -187,7 +187,7 @@
               <div class="boxOptions">
                 <div class="dropdown float-right">
                   <div  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    
+
                     <svg width="50" height="49" viewBox="0 0 50 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g filter="url(#filter0_d)">
                       <rect x="4" width="42" height="41" rx="7" fill="white"/>
@@ -224,8 +224,8 @@
                 </div>
                 <div class="dropdown float-right">
                   <div  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    
-                    
+
+
                     <svg width="50" height="49" viewBox="0 0 50 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g filter="url(#filter0_d)">
                       <rect x="4" width="42" height="41" rx="7" fill="white"/>
@@ -266,8 +266,8 @@
                   </div>
                 </div>
               </div>
-            
-                
+
+
             </li> -->
                     </ul>
                 </div>
@@ -900,19 +900,30 @@
                         </div>
                     </div>
                 </div>
-                <!--/tab-->
-
                 <!--tab-->
                 <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
                     <div class="row mb-4 align-items-center">
                         <div class="col-6">
-                            <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}</h5>
+                            <h5 class="mb-0 d-none">Prescripciones</h5>
                         </div>
                         <div class="col-6">
-                            <button class="btn btn-secondary rounded-pill float-right align-middle" [disabled]="!permisoGuardar" (click)="subirPrescripciones()" data-toggle="modal" data-target="#preescripcionesModal">
-                {{ 'clinicalFile.patientData.tabs.exams.btnUpload.label' | transloco }}
+                            <!--
+              <button class="btn btn-secondary rounded-pill float-right align-middle"
+              [disabled]="!permisoGuardar"
+              (click)="subirPrescripciones()" data-toggle="modal" data-target="#preescripcionesModal">
+                Generar documentos  data-toggle="modal" data-target="#preescripcionesModal"
+              </button>-->
 
-              </button>
+                            <div class="dropdown">
+                                <button [disabled]="!permisoGuardar" class="btn btn-secondary rounded-pill float-right align-middle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Generar documentos
+                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;" (click)="subirPrescripciones('prescription')">Preescripciones</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')" href="javascript:;">Orden de exámen</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')" href="javascript:;">Licencia médica</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -1192,16 +1203,16 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Preescripciones</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+          <span aria-hidden="true">&times;</span>
+        </button>
             </div>
             <div class="modal-body">
                 <iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
-        Cerrar
-      </button>
+          Cerrar
+        </button>
             </div>
         </div>
     </div>
