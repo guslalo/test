@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-12">
         <!--consultas activas-->
-        <div class="row mt-2">
+        <div class="row mt-2 d-none">
             <div class="col-12">
                 <!-- colappsed-->
                 <div class="collapseCustom primary">
@@ -41,22 +41,18 @@
                             <tr>
                                 <td>
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
-                    <path fill-rule="evenodd"
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
+                    />
                   </svg> 22 de Julio del 2020 / 20:15 Hrs
                                 </td>
                                 <td style="display: none;">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
-                    <path fill-rule="evenodd"
-                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
-                  </svg> 16:00 Hrs.
-                                </td>
-                                <td>
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                     <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -108,7 +104,6 @@
             </div>
 
             <div class="col-12">
-
                 <div class="tab-content pt-4" id="myTabContent">
                     <!--tab-->
                     <div class="tab-pane fade active show" id="child1" role="tabpanel" aria-labelledby="home-tab2">
@@ -131,29 +126,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ng-container *ngIf="consultas && consultas.length === 0; else data ">
+                                    <ng-container *ngIf="consultas && consultas.length === 0; else data">
                                         <div class="alert alert-warning mt-2" role="alert">
                                             Sin Información
                                         </div>
                                     </ng-container>
                                     <ng-template #data>
-                                        <tr *ngFor="let item of consultas" id="{{ item._id}}">
+                                        <tr *ngFor="let item of consultas" id="{{ item._id }}">
                                             <th scope="row">
                                                 <div *ngIf="item.patientDetails.userDetails[0].photo" class="boxImg2 rounded-circle d-inline-block">
-                                                    <img src="{{photoUrlBase}}{{item.patientDetails.userDetails[0].photo}}" />
+                                                    <img src="{{ photoUrlBase }}{{ item.patientDetails.userDetails[0].photo }}" />
                                                 </div>
                                                 <p class="p-0 mt-2 ml-2 d-inline-block align-top">
                                                     {{ item.patientDetails.userDetails[0].personalData.name }} {{ item.patientDetails.userDetails[0].personalData.lastName }}
                                                 </p>
                                             </th>
-                                            <td>{{ item.patientDetails.userDetails[0].personalData.phoneNumber}}</td>
+                                            <td>{{ item.patientDetails.userDetails[0].personalData.phoneNumber }}</td>
                                             <td>{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}</td>
-                                            <td>{{ item.dateDetails.start}} hrs.</td>
-                                            <td>{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}} </td>
-                                            <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
+                                            <td>{{ item.dateDetails.start }} hrs.</td>
+                                            <td>
+                                                {{ item.professionalDetails.userDetails[0].name }} {{ item.professionalDetails.userDetails[0].lastName }}
+                                            </td>
+                                            <td class="d-none">Objetivo</td>
                                             <td>
                                                 <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{item.administrativeDetails.status}}
+                          {{ item.administrativeDetails.status }}
                         </button>
                                             </td>
                                             <td>
@@ -197,7 +194,7 @@
                                         <td>22/93/2020</td>
                                         <td>12:14 Hrs.</td>
                                         <td>Antonio rojas</td>
-                                        <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
+                                        <td>Objetivo</td>
                                         <td>
                                             <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                         En curso

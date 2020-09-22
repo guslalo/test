@@ -35,24 +35,11 @@
       </select>
         </div>
     </div>
-    <div class="col">
-        <button type="button" class="btn btn-primary rounded-pill float-right d-none" ng-reflect-tour-anchor="agendar" data-toggle="modal" data-target="#disponibilidad">
-      {{ 'clinicalFile.newService.label' | transloco }}
-      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-      </svg>
-    </button>
-    </div>
-</div>
 
-<button type="button" class="btn custom-btn-1 mx-2" (click)="exportAsExcelFile()" [disabled]="!selected.length">
+    <button type="button" class="btn custom-btn-1 mx-2" (click)="exportAsExcelFile()" [disabled]="!selected.length">
     <img src="assets/icons/icon-export-excel.svg" />
   </button>
-
+</div>
 
 <!--appointments activas-->
 <div class="row mt-1">
@@ -187,7 +174,7 @@
                             <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
                                 <img src="assets/icons/icon-search.svg" />
                             </div>
-                            <mat-autocomplete #autoPatients="matAutocomplete" [displayWith]="getDisplayFn()">
+                            <mat-autocomplete #autoPatients="matAutocomplete" [displayWith]="getDisplayFn()" (optionSelected)="setPatient($event.option.value)">
                                 <mat-option *ngFor="let item of patients" [value]="item">
                                     {{ item.personalData.name + ' ' + item.personalData.lastName }}
                                 </mat-option>
