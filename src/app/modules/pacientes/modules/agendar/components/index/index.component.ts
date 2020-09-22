@@ -297,10 +297,10 @@ export class IndexComponent implements OnInit {
   escogerProfessional(professional) {
     this.flujoProfesional = true;
     this.bloquearFecha = false;
-    console.log(professional.userData[0]._id);
+    // console.log(professional.userData[0]._id);
     this.reserve = {
       professionalDetails: {
-        userId: professional.userData[0]._id,
+        userId: professional.userData[0]?._id,
         specialtyId: null,
         specialtyDetails: {
           price: null,

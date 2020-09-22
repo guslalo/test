@@ -102,7 +102,7 @@
                 (optionSelected)="escogerProfessional($event.option.value)"
               >
                 <mat-option *ngFor="let item of professionals" [value]="item">
-                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                  {{ item.personalData?.name + ' ' + item.personalData?.lastName }}
                 </mat-option>
               </mat-autocomplete>
               <div class="searchBox">

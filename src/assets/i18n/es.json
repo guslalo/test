@@ -2978,6 +2978,10 @@
     "createAccount": {
       "title": "Crear cuenta",
       "label": "A continuación Ingrese sus datos para completar su registro.",
+      "isForeign": "Soy extranjero",
+      "identificationData": {
+        "label": "Datos de identificacion"
+      },
       "personalData": {
         "label": "Datos personales"
       },
@@ -2985,10 +2989,10 @@
         "label": "¿Tengo más de 18 años?"
       },
       "birthData": {
-        "title": "Datos de nacimiento"
+        "label": "Datos de nacimiento"
       },
       "address": {
-        "title": "Dirección"
+        "label": "Dirección"
       },
       "generatePassword": {
         "title": "Generar clave"
@@ -3056,8 +3060,14 @@
     "emailReq": {
       "label": "Email *"
     },
+    "confirmEmailReq": {
+      "label": "Confirmar email"
+    },
     "phoneReq": {
       "label": "Telefono *"
+    },
+    "breedReq": {
+      "label": "Raza"
     },
     "grenderReq": {
       "label": "Sexo *"
@@ -3115,6 +3125,9 @@
     },
     "atLeastOneSpecialChar": {
       "label": "* Al menos un carácter especial"
+    },
+    "password": {
+      "label": "Contraseña"
     },
     "confirmPassword": {
       "label": "Confirmar Contraseña *"
