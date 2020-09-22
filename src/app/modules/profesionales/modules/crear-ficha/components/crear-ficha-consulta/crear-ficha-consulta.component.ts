@@ -43,6 +43,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   public notesArray:any;
   public jitsiGlobal:any;
   public trustedUrl: SafeResourceUrl;
+  public sibrareDocumentId:any;
+  public arrayDocuments:any;
+  public urlSibrare:any;
 
   constructor( 
     private route: ActivatedRoute,
@@ -65,6 +68,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAppointmentsTimeline(id);  
+      
     });
 
     this.user = new UserLogin(
@@ -186,16 +190,99 @@ export class CrearFichaConsultaComponent implements OnInit {
   subirPrescripciones(type){
     this.spinner.show();
     this.trustedUrl = '';
-    this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
-      data => {
-        this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
-        console.log(data);
-        setTimeout(()=>{                           //<<<---using ()=> syntax
+
+    //verificar estado documento
+  
+      this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
+        data => {
+          this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
+          console.log(data);
+          //console.log(this.appointmentId);
+          setTimeout(()=>{                           //<<<---using ()=> syntax
+            this.spinner.hide();
+          }, 3000); 
+          this.sibrareDocumentId = data.payload.documentId;
+          console.log(this.sibrareDocumentId );
+          console.log(this.appointmentId);
+          let interval = setInterval(() => {
+            this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
+              data => {
+               
+                if(data.payload.isVerified === true){
+                  console.log(data)
+                  clearInterval(interval);
+                  this.getVerifiedSibrareDocuments(this.appointmentId);
+            
+                }else {
+                  console.log(data)
+                  //clearInterval(interval);
+                  console.log('no verificado sin documentos')
+                }
+
+              
+              },
+              error => {
+                //clearInterval(interval);
+                console.log(error)
+              }
+            )/**/
+           
+          }, 3500);
+        },
+        error => {
           this.spinner.hide();
-        }, 3000); 
+          console.log(error)
+        }
+      )
+      
+ 
+
+    
+  }
+
+  //getVerifiedSibrareDocuments
+  getVerifiedSibrareDocuments(appointmentId){
+    this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
+      data => { 
+        console.log(data);
+        this.arrayDocuments = data.payload;
+        this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
+      },  
+      error => {
+        console.log(error)
+      }
+    )
+  }
+  //getVerifiedSibrareDocuments
+  getVerifiedSibrareDocuments2(appointmentId){
+    this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
+      data => { 
+        console.log(data);
+        this.arrayDocuments = data.payload;
+        //this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
+      },  
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  downloadSibrare(documentId){
+    console.log(documentId)
+    this.getSibrareDocuments(this.appointmentId, documentId);
+  }
+
+  // get documents sibrare
+  getSibrareDocuments(id, documentId){
+    this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
+      data => {
+        this.urlSibrare = data.payload[0].documento
+        window.open(this.urlSibrare); 
+        //window.location.href= this.urlSibrare ;
+        console.log(this.urlSibrare);
+        console.log(data)
       },
       error => {
-        this.spinner.hide();
         console.log(error)
       }
     )
@@ -316,6 +403,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   getAppointmentsDetails(id) {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+        this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
