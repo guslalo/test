@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 // routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -35,6 +36,7 @@ import { AngularFireDatabase, FirebaseObjectObservable } from '@angular/fire/dat
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AsyncPipe } from '@angular/common';
 import { environment } from './../environments/environment';
+import { FileUtilsService } from './services/file-utils.service';
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -55,12 +57,13 @@ import { environment } from './../environments/environment';
     AngularFirestoreModule, // For FireStore
     AngularFireStorageModule, // For Storage
     AngularFireAuthModule, // For Authentication
+    ModalModule.forRoot()
   ],
-  providers: [AngularFireDatabaseModule, ErrorDialogService, MessagingService, AsyncPipe],
+  providers: [AngularFireDatabaseModule, ErrorDialogService, MessagingService, AsyncPipe, FileUtilsService],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent],
   exports: [
    
   ]
 })
-export class AppModule {}
+export class AppModule { }

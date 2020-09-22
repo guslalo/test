@@ -17,6 +17,8 @@ import {
   NgbDropdownModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
+
 @NgModule({
   declarations: [IndexComponent, FichaPacienteComponent],
   imports: [
@@ -33,6 +35,7 @@ import {
     NgxDatatableModule,
     ReactiveFormsModule,
     FormsModule,
-  ],
+    TranslocoRootModule
+  ]
 })
 export class PacientesModule {}

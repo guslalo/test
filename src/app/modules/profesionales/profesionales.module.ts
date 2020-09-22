@@ -33,6 +33,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CalendarComponent } from './modules/mi-disponibilidad/components/calendar/calendar.component';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -67,6 +69,7 @@ FullCalendarModule.registerPlugins([
     NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
+    SharedModule.forRoot(),
   ],
   exports: [
     NgbTimepickerModule,
@@ -78,4 +81,4 @@ FullCalendarModule.registerPlugins([
     NgbDatepickerModule
   ]
 })
-export class ProfesionalesModule {}
+export class ProfesionalesModule { }

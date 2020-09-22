@@ -5,16 +5,21 @@ import { CrearFichaRoutingModule } from './crear-ficha-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+
+
 
 @NgModule({
   declarations: [
     CrearFichaConsultaComponent
   ],
   imports: [
-    CommonModule ,
+    CommonModule,
     CrearFichaRoutingModule,
-    ReactiveFormsModule, FormsModule,
-    NgxSpinnerModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgxSpinnerModule,
+    SharedModule.forRoot(),
   ]
 })
 export class CrearFichaModule { }

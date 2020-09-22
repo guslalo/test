@@ -13,6 +13,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   declarations: [IndexComponent],
@@ -27,6 +28,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     NgbTimepickerModule,
     NgxDatatableModule,
     MatAutocompleteModule,
+    TranslocoRootModule
   ],
   exports: [NgbDatepickerModule],
 })

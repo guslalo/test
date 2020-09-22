@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col mt-5">
-      <h2>Mis pacientes</h2>
+      <h2>{{ 'myPatients.title' | transloco }}</h2>
     </div>
   </div>
 </div>
@@ -18,7 +18,8 @@
             This is a longer card with supporting text below as a natural lead-in to additional content. This content is
             a little bit longer.
           </p>
-          <button class="btn btn-primary"><a routerLink="/ficha-paciente">Ver Ficha</a></button>
+          <button class="btn btn-primary"><a
+              routerLink="/ficha-paciente">{{ 'clinicalFile.viewMedCard.label' | transloco }}</a></button>
         </div>
       </div>
     </div>

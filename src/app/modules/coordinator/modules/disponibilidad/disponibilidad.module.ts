@@ -12,6 +12,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
+
 @NgModule({
   declarations: [IndexComponent],
   imports: [
@@ -25,6 +27,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     NgbTimepickerModule,
     NgbNavModule,
     MatAutocompleteModule,
-  ],
+    TranslocoRootModule
+  ]
 })
 export class DisponibilidadModule {}

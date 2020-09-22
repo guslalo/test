@@ -1,192 +1,115 @@
 <div class="row">
-  <div class="col mb-2">
-    <h2>Mis Consultas</h2>
-    <p>Información de tus consultas médicas</p>
-  </div>
-  <div class="col"></div>
+    <div class="col mb-2">
+        <h2>{{ 'dashboard.home.myServices.title' | transloco }}</h2>
+        <p>{{ 'dashboard.home.myServices.title' | transloco }}</p>
+    </div>
+    <div class="col"></div>
 </div>
 
 <div class="row">
-  <div class="col-12">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link active"
-          id="home-tab"
-          data-toggle="tab"
-          href="#home"
-          role="tab"
-          aria-controls="home"
-          aria-selected="true"
-        >
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-calendar3-fill"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+    <div class="col-12">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
+            <path fill-rule="evenodd"
+              d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+          </svg> {{ 'history.tabs.latest.label' | transloco }}
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="sala-tab" data-toggle="tab" href="#salaEspera" role="tab" aria-controls="home" aria-selected="false">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
             <path
               fill-rule="evenodd"
               d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
             />
-          </svg>
-          Últimas Consultas
+          </svg> Sala de espera
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="timeline-tab" data-toggle="tab" href="#timelineTab" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1" aria-disabled="false">
+          {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
+
         </a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link"
-          id="sala-tab"
-          data-toggle="tab"
-          href="#salaEspera"
-          role="tab"
-          aria-controls="home"
-          aria-selected="false"
-        >
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-calendar3-fill"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
-            <path
-              fill-rule="evenodd"
-              d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-            />
-          </svg>
-          Sala de espera
-        </a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link"
-          id="timeline-tab"
-          data-toggle="tab"
-          href="#timelineTab"
-          role="tab"
-          aria-controls="profile"
-          aria-selected="false"
-          tabindex="-1"
-          aria-disabled="false"
-        >
-          Timeline de consultas
-        </a>
-      </li>
-    </ul>
-    <div class="tab-content pt-4" id="myTabContent">
-      <!--tab-->
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="row mt-2" style="display: none;">
-          <div class="col-12 col-md-3">
-            <input id="typeahead-basic" type="text" />
-            <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                />
+            </li>
+        </ul>
+        <div class="tab-content pt-4" id="myTabContent">
+            <!--tab-->
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row mt-2" style="display: none;">
+                    <div class="col-12 col-md-3">
+                        <input id="typeahead-basic" type="text" />
+                        <div class="searchBox">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                <path fill-rule="evenodd"
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
               </svg>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>Filtrar por</option>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                <option>{{ 'common.dropdown.filter.label' | transloco }}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <input class="form-control" type="text" />
-          </div>
-        </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
 
-        <ng-container *ngIf="consultas && consultas.length > 0; else vacio">
-          <!--*ngIf="consultas.length > 0; else vacio"-->
-          <div class="tableBox bg-white pt-3">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th style="width: 25%;">Fecha y Hora</th>
-                  <th style="width: 25%;">Profesional</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-          <!-- colappsed-->
-          <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
-            <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0">
-                <tbody>
-                  <tr>
-                    <td style="width: 25%;" class="text-left">
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-calendar"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                <ng-container *ngIf="consultas && consultas.length > 0; else vacio">
+                    <!--*ngIf="consultas.length > 0; else vacio"-->
+                    <div class="tableBox bg-white pt-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">{{ 'clinicalFile.hourDate.label' | transloco }}</th>
+                                    <th style="width: 25%;">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
+                                    <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                                    <th>{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- colappsed-->
+                    <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
+                        <div class="collapseCustom" id="{{ item._id }}">
+                            <table class="table dos table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 25%;" class="text-left">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
+                        <path fill-rule="evenodd"
+                          d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z" />
+                      </svg> {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }} / {{ item.dateDetails.start }}
+                                        </td>
+                                        <td style="width: 25%;" class="text-left">
+                                            <!--{{item.professionalDetails.userDetails[0].userId}}  *ngIf="item.professionalDetails.userDetails[0].length"-->
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
                         <path
-                          fill-rule="evenodd"
-                          d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                        />
-                      </svg>
-                      {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }} / {{ item.dateDetails.start }}
-                    </td>
-                    <td style="width: 25%;" class="text-left">
-                      <!--{{item.professionalDetails.userDetails[0].userId}}  *ngIf="item.professionalDetails.userDetails[0].length"-->
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-person-circle"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-                        />
+                          d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                         <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        <path
-                          fill-rule="evenodd"
-                          d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
-                        />
-                      </svg>
-                      {{ item.professionalDetails.userDetails[0]?.name }}
-                      {{ item.professionalDetails.userDetails[0]?.lastName }}
-                      <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
-                    </td>
+                        <path fill-rule="evenodd"
+                          d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                      </svg> {{ item.professionalDetails.userDetails[0]?.name }} {{ item.professionalDetails.userDetails[0]?.lastName }}
+                                            <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
+                                        </td>
 
-                    <td style="width: 25%;" class="text-left">
-                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                                        <td style="width: 25%;" class="text-left">
+                                            <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
                           item.administrativeDetails.status === 'reserved'
                             ? 'Reservada'
@@ -211,89 +134,73 @@
                             : 'S/R'
                         }}
                       </button>
-                    </td>
-                    <td style="width: 25%;" class="text-left">
-                      <ng-container
-                        *ngIf="
+                                        </td>
+                                        <td style="width: 25%;" class="text-left">
+                                            <ng-container *ngIf="
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
                           item.administrativeDetails.status === 'appointed' ||
                           item.administrativeDetails.status === 'pending' ||
                           item.administrativeDetails.status === 'waitingInList'
-                          
-                        "
-                      >
-                        <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
-                          <button class="rounded-pill btn-sm btn btn-primary" type="button">
+
+                        ">
+                                                <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
+                                                    <button class="rounded-pill btn-sm btn btn-primary" type="button">
                             Entrar
                           </button>
-                        </a>
+                                                </a>
 
-                        <div class="btn-group" style="display: none;">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
+                                                <div class="btn-group" style="display: none;">
+                                                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path
                                 fill-rule="evenodd"
                                 d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
                               />
                             </svg>
-                          </div>
+                                                    </div>
 
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
                               Entrar
                             </button>
-                          </div>
-                        </div>
-                      </ng-container>
-                      <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                        <a routerLink="consulta/{{ item._id }}">
-                          <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                                                <a routerLink="consulta/{{ item._id }}">
+                                                    <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                             Ver ficha
                           </button>
-                        </a>
-                      </ng-container>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                                                </a>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-container>
+
+                    <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
+                </ng-container>
+
+                <ng-template #vacio>
+                    <div class="collapseCustom p-3">
+                        <div class="alert alert-warning" role="alert">
+                            Sin información
+                        </div>
+                    </div>
+                </ng-template>
             </div>
-          </ng-container>
+            <!--/tab-->
 
-          <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
-        </ng-container>
-
-        <ng-template #vacio>
-          <div class="collapseCustom p-3">
-            <div class="alert alert-warning" role="alert">
-              Sin información
-            </div>
-          </div>
-        </ng-template>
-      </div>
-      <!--/tab-->
-
-      <!--tab-->
-      <div class="tab-pane fade" id="salaEspera" role="tabpanel" aria-labelledby="sala-tab">
-        <div class="row mt-2" style="display: none;">
-          <div class="col-12 col-md-3">
-            <input id="typeahead-basic" type="text" />
-            <div class="searchBox">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-search"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+            <!--tab-->
+            <div class="tab-pane fade" id="salaEspera" role="tabpanel" aria-labelledby="sala-tab">
+                <div class="row mt-2" style="display: none;">
+                    <div class="col-12 col-md-3">
+                        <input id="typeahead-basic" type="text" />
+                        <div class="searchBox">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
                   d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
@@ -303,52 +210,46 @@
                   d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
                 />
               </svg>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect1">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1">
                 <option>Filtrar por</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </select>
-            </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <input class="form-control" type="text" />
-          </div>
-        </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
 
-        <ng-container>
-          <!--*ngIf="consultas.length > 0; else vacio"-->
-          <div class="tableBox bg-white pt-3">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th >Fecha creación</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-          <!-- colappsed-->
-          <ng-container *ngFor="let item of consultasActivas "><!--| slice: (page - 1) * 10:(page - 1) * 10 + 10-->
-            <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0">
-                <tbody>
-                  <tr>
-                    <td style="width: 25%;" class="text-left">
-                      <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-calendar"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                <ng-container>
+                    <!--*ngIf="consultas.length > 0; else vacio"-->
+                    <div class="tableBox bg-white pt-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- colappsed-->
+                    <ng-container *ngFor="let item of consultasActivas ">
+                        <!--| slice: (page - 1) * 10:(page - 1) * 10 + 10-->
+                        <div class="collapseCustom" id="{{ item._id }}">
+                            <table class="table dos table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 25%;" class="text-left">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path
                           fill-rule="evenodd"
                           d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
@@ -357,13 +258,12 @@
                           fill-rule="evenodd"
                           d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
                         />
-                      </svg>
-                      {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
-                    </td>
-                   
+                      </svg> {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
+                                        </td>
 
-                    <td style="width: 25%;" class="text-left">
-                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+
+                                        <td style="width: 25%;" class="text-left">
+                                            <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
                           item.administrativeDetails.status === 'reserved'
                             ? 'Reservada'
@@ -388,124 +288,107 @@
                             : 'S/R'
                         }}
                       </button>
-                    </td>
-                    <td style="width: 25%;" class="text-left">
-                      <ng-container
-                        *ngIf="
+                                        </td>
+                                        <td style="width: 25%;" class="text-left">
+                                            <ng-container *ngIf="
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
                           item.administrativeDetails.status === 'appointed' ||
-                          item.administrativeDetails.status === 'pending' || 
+                          item.administrativeDetails.status === 'pending' ||
                           item.administrativeDetails.status === 'waitingInList'
-                          
-                          
-                        "
-                      ><!--
+
+
+                        ">
+                                                <!--
                           item.administrativeDetails.status === 'waitingInList'-->
-                        <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
-                          <button class="rounded-pill btn-sm btn btn-primary" type="button">
-                            Entrar
+                                                <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
+                                                    <button class="rounded-pill btn-sm btn btn-primary" type="button">
+                            {{ 'clinicalFile.enter.label' | transloco }}
                           </button>
-                        </a>
+                                                </a>
 
-                        <div class="btn-group" style="display: none;">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
+                                                <div class="btn-group" style="display: none;">
+                                                    <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                             </svg>
-                          </div>
+                                                    </div>
 
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
-                              Entrar
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
+                              {{ 'clinicalFile.enter.label' | transloco }}
                             </button>
-                          </div>
-                        </div>
-                      </ng-container>
-                      <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                        <a routerLink="consulta/{{ item._id }}">
-                          <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                                                <a routerLink="consulta/{{ item._id }}">
+                                                    <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                             Ver ficha
                           </button>
-                        </a>
-                      </ng-container>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                                                </a>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-container>
+
+                    <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
+                </ng-container>
+
+                <ng-template #vacio>
+                    <div class="collapseCustom p-3">
+                        <div class="alert alert-warning" role="alert">
+                            {{ 'common.noInfo.label' | transloco }}
+                        </div>
+                    </div>
+                </ng-template>
             </div>
-          </ng-container>
+            <!--/tab-->
 
-          <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
-        </ng-container>
-
-        <ng-template #vacio>
-          <div class="collapseCustom p-3">
-            <div class="alert alert-warning" role="alert">
-              Sin información
-            </div>
-          </div>
-        </ng-template>
-      </div>
-      <!--/tab-->
-
-      <!--tab-->
-      <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline-tab">
-        <div class="row">
-          <div class="col-12">
-            <div class="bg-white p-5 rounded-lg text-center">
-              <h5 class="mb-0 text-left">Timeline de consultas</h5>
-              <div class="timeLine">
-                <div class="line bg-white">{{fecha.year}}</div>
-                <div class="line">
-                  <button class="btn btn-secondary rounded-lg">
+            <!--tab-->
+            <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="boxtimeline bg-white p-5 rounded-lg text-center">
+                            <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
+                            <div class="timeLine">
+                                <div class="line bg-white">{{fecha.year}}</div>
+                                <div class="line">
+                                    <button class="btn btn-secondary rounded-lg">
                     {{fecha.month}}
                   </button>
-                </div>
-                <ng-container *ngFor="let item of timeline">
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <h3>{{item.date | date: 'dd'}} </h3>
-                        {{item.startAt}} hrs.
-                      </div>
-                      <div class="col p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                </div>
+                                <ng-container *ngFor="let item of timeline">
+                                    <div class="line">
+                                        <div class="row align-items-center">
+                                            <div class="col-5 text-right p-0">
+                                                <h3>{{item.date | date: 'dd'}} </h3>
+                                                {{item.startAt}} hrs.
+                                            </div>
+                                            <div class="col p-0">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                         </svg>
-                      </div>
-                      <div class="col-5 text-left p-0">
-                        <button class="btn btn-primary dos rounded-lg">
+                                            </div>
+                                            <div class="col-5 text-left p-0">
+                                                <button class="btn btn-primary dos rounded-lg">
                           {{item.status}}
                         </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="line">
-                    <div class="row align-items-center">
-                      <div class="col-5 text-right p-0">
-                        <div class="box">
-                          <div class="boxCont text-center">
-                            <div class="row">
-                              <div class="col-3">
-                                <svg
-                                  width="42"
-                                  height="42"
-                                  viewBox="0 0 42 42"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="row align-items-center">
+                                            <div class="col-5 text-right p-0">
+                                                <div class="box">
+                                                    <div class="boxCont text-center">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <rect width="42" height="42" fill="url(#pattern0)" />
                                   <defs>
                                     <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -519,65 +402,61 @@
                                     />
                                   </defs>
                                 </svg>
-                              </div>
-                              <div class="col-9">
-                                <p class="m-0 text-left">Cita agendada con</p>
-                                <p class="m-0 text-left" *ngIf="item.professional">Dr. {{item.professional.name}} {{item.professional.lastName}}</p>
-                                <div class="btn btn-primary btn-sm rounded-pill float-left">
-                                  <ng-container *ngIf="item.isActive; else inactivo">
-                                    Activo
-                                  </ng-container>
-                                  <ng-template #inactivo>Inactivo</ng-template>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-2 p-0">
-                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            </div>
+                                                            <div class="col-9">
+                                                                <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
+                                                                <p class="m-0 text-left" *ngIf="item.professional">
+                                                                    {{ 'clinicalFile.dr.label' | transloco }} {{item.professional.name}} {{item.professional.lastName}}
+                                                                </p>
+                                                                <div class="btn btn-primary btn-sm rounded-pill float-left">
+                                                                    <ng-container *ngIf="item.isActive; else inactivo">
+                                                                        Activo
+                                                                    </ng-container>
+                                                                    <ng-template #inactivo>Inactivo</ng-template>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 p-0">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                         </svg>
-                      </div>
-                      <!--
+                                            </div>
+                                            <!--
                       <div class="col-5 text-left p-0">
                         <h3>24</h3>
                         12:45 Hrs.
                       </div>-->
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </ng-container>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="bloquearDias"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content p-3">
-      <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal fade" id="bloquearDias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content p-3">
+            <div class="modal-header text-center">
+                <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+                    {{ 'clinicalFile.blockDays.label' | transloco }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button type="button" class="btn btn-primary rounded-pill">Bloquear día</button>
-      </div>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer text-center justify-content-center">
+                <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+                <button type="button" class="btn btn-primary rounded-pill">{{ 'clinicalFile.blockDay.label' | transloco }}</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

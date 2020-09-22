@@ -18,6 +18,7 @@ import {
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -48,7 +49,8 @@ FullCalendarModule.registerPlugins([
     NgbDropdownModule,
     NgbToastModule,
     NgxDatatableModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule.forRoot(),
   ]
 })
 export class AgendaModule { }

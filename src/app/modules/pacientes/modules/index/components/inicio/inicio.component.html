@@ -1,53 +1,46 @@
 <div class="row">
-  <div class="col">
-    <h2 class="mb-4">Bienvenido(a), {{ currentUser.name || 'Usuario' }}</h2>
-  </div>
+    <div class="col">
+        <h2 class="mb-4">{{ 'clinicalFile.welcome.label' | transloco }}, {{ currentUser.name || 'Usuario' }}</h2>
+    </div>
 </div>
 <div class="row">
-  <div class="col-12">
-    <div class="card-deck">
-      <div class="card bg-light mb-3 p-4">
-        <!--<div class="card-header">Header</div>-->
-        <div class="card-body text-center">
-          <div class="card-text mb-2">
-            
-              <img src="assets/img/agendar-consulta-azul.svg" />
-            
-          </div>
-          <h5 class="card-title font-weight-bold">Agenda una cita médica</h5>
-          <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
-          <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
-            Agendar una cita
+    <div class="col-12">
+        <div class="card-deck">
+            <div class="card bg-light mb-3 p-4">
+                <!--<div class="card-header">Header</div>-->
+                <div class="card-body text-center">
+                    <div class="card-text mb-2">
+                        <img src="assets/img/agendar-consulta-azul.svg" />
+                    </div>
+                    <h5 class="card-title font-weight-bold">Agenda una cita médica</h5>
+                    <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
+                    <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
+            {{ 'dashboard.home.newService.btnCreate.label' | transloco }}
           </button>
-        </div>
-      </div>
-      <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
-        <div class="card-body text-center">
-          <div class="card-text mb-2">
-            <img src="assets/img/agendar-consulta--inmediata-azul.svg" />
-          </div>
-          <h5 class="card-title font-weight-bold">Entrar a consulta inmediata</h5>
-          <p>Simply dummy text of the printing and typesetting industry.</p>
-          <button
-            type="button"
-            class="btn btn-outline-primary rounded-pill text-center"
-            routerLink="agendar-consulta-inmediata"
-          >
-            Ingresar a sala
+                </div>
+            </div>
+            <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
+                <div class="card-body text-center">
+                    <div class="card-text mb-2">
+                        <img src="assets/img/agendar-consulta--inmediata-azul.svg" />
+                        <h5 class="card-title font-weight-bold"></h5>
+                        <p>Simply dummy text of the printing and typesetting industry.</p>
+                        <button type="button" class="btn btn-outline-primary rounded-pill text-center" routerLink="agendar-consulta-inmediata">
+            {{ 'dashboard.home.inmediateService.btnCreate.label' | transloco }}
           </button>
-        </div>
-      </div>
-      <div class="card bg-light mb-3 p-4">
-        <div class="card-body text-center h-100">
-          <div class="card-text mb-2">
-            <img src="assets/img/corazon-azul.svg" />
-          </div>
-          <h5 class="card-title font-weight-bold">Mi Salud</h5>
-          <p class="card-text text-center">Completa tus datos medicos para una mejor atención</p>
-          <!-- <img src="assets/img/porcentaje-temp.svg" /> -->
-          <div class="row">
-            <div class="col">
-              <button type="button" class="btn btn-outline-primary rounded-pill text-center" routerLink="mi-salud">
+                    </div>
+                </div>
+                <div class="card bg-light mb-3 p-4">
+                    <div class="card-body text-center h-100">
+                        <div class="card-text mb-2">
+                            <img src="assets/img/corazon-azul.svg" />
+                        </div>
+                        <h5 class="card-title font-weight-bold">Mi Salud</h5>
+                        <p class="card-text text-center">Completa tus datos medicos para una mejor atención</p>
+                        <!-- <img src="assets/img/porcentaje-temp.svg" /> -->
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-primary rounded-pill text-center" routerLink="mi-salud">
                 <svg
                   width="1em"
                   height="1em"
@@ -67,16 +60,15 @@
                 </svg>
                 Completar Datos
               </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-deck">
-      <div class="card bg-light mt-3">
-        <ng-container *ngIf="tips">
-          <owl-carousel
-            [options]="{
+            <div class="card-deck">
+                <div class="card bg-light mt-3">
+                    <ng-container *ngIf="tips">
+                        <owl-carousel [options]="{
               items: 1,
               center: false,
               loop: true,
@@ -90,37 +82,34 @@
                 '480': { items: 1, margin: 0, center: false, touchDrag: true, mouseDrag: false },
                 '640': { items: 1, margin: 0, loop: false, center: false, mouseDrag: false }
               }
-            }"
-            [items]="tips"
-            [carouselClasses]="['owl-theme', 'sliding']"
-          >
-            <div *ngFor="let item of tips; let i = index">
-              <div class="row">
-                <div class="col-12">
-                  <div class="card-body p-5" style="position: relative;">
-                    <div class="row p-5">
-                      <div class="col-3 col-md-3">
-                        <img src="assets/img/lavar-manos.svg" style="max-width: 200px;" />
-                      </div>
-                      <div class="col-9 col-md-9">
-                        <h5 class="card-title font-weight-bold">{{ item.title }}</h5>
-                        <p>
-                          {{ item.shortDescription }}
-                        </p>
-                        <button type="button" class="btn btn-outline-primary rounded-pill text-center">
-                          Ver más
+            }" [items]="tips" [carouselClasses]="['owl-theme', 'sliding']">
+                            <div *ngFor="let item of tips; let i = index">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-body p-5" style="position: relative;">
+                                            <div class="row p-5">
+                                                <div class="col-3 col-md-3">
+                                                    <img src="assets/img/lavar-manos.svg" style="max-width: 200px;" />
+                                                </div>
+                                                <div class="col-9 col-md-9">
+                                                    <h5 class="card-title font-weight-bold">{{ item.title }}</h5>
+                                                    <p>
+                                                        {{ item.shortDescription }}
+                                                    </p>
+                                                    <button type="button" class="btn btn-outline-primary rounded-pill text-center">
+                          {{ 'common.button.viewMore.label' | transloco }}
                         </button>
-                      </div>
-                    </div>
-                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </owl-carousel>
+                    </ng-container>
                 </div>
-              </div>
-              
             </div>
-          </owl-carousel>
-        </ng-container>
-      </div>
+        </div>
+        <div class="col-12 col-md-4"></div>
     </div>
-  </div>
-  <div class="col-12 col-md-4"></div>
-</div>

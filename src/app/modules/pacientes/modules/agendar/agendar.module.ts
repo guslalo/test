@@ -9,6 +9,7 @@ import { SafePipe } from './../../../../shared/pipes/sanitizer.pipe';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [IndexComponent, ResultadoComponent, SafePipe],
@@ -21,7 +22,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NgxSpinnerModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    SharedModule.forRoot()
   ],
   exports: [SafePipe],
 })
-export class AgendarModule {}
+export class AgendarModule { }

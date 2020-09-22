@@ -26,7 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
     AdminModule,
     ProfesionalesModule,
     PacientesModule,
-    SharedModule,
+    SharedModule.forRoot(),
   ],
   exports: [SharedModule],
   providers: [
@@ -37,4 +37,4 @@ import { HeaderComponent } from './components/header/header.component';
     },
   ],
 })
-export class LayoutModule {}
+export class LayoutModule { }

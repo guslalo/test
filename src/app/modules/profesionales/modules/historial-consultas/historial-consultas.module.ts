@@ -9,6 +9,7 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import {
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbTimepickerModule,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule, SharedModule.forRoot(),
   ]
 })
 export class HistorialConsultasModule { }

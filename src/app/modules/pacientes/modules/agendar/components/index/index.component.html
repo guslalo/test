@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col">
-    <h2>Agendar consulta médica</h2>
-    <p>Agende su cita médica</p>
+    <h2>{{ 'dashboard.home.newService.title' | transloco }}</h2>
+    <p>{{ 'dashboard.home.newService.title' | transloco }}</p>
   </div>
 </div>
 
@@ -11,11 +11,11 @@
       <div class="card-header" style="display: none;">
         Mi Salud
         <p>
-          Completa tus datos medicos para una mejor atención
+          {{ 'dashboard.home.myHealth.hint.label' | transloco }}
         </p>
       </div>
       <div class="card-body text-center">
-        <p class="font-weight-bold text-left">¿Que quieres buscar?</p>
+        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -28,7 +28,7 @@
               aria-controls="home4"
               aria-selected="true"
               (click)="(!flujoProfesional)"
-              >Especialidad</a
+              >{{ 'disponibility.modal.create.specialty.label' | transloco }}</a
             >
           </li>
           <li class="nav-item" role="presentation">
@@ -41,7 +41,7 @@
               aria-controls="profile4"
               aria-selected="false"
               (click)="(!flujoProfesional)"
-              >Profesional
+              >{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}
             </a>
           </li>
         </ul>
@@ -49,7 +49,7 @@
           <div class="tab-pane fade show active" id="home4" role="tabpanel" aria-labelledby="home-tab4">
             <form>
               <div class="form-group">
-                <label class="font-weight-bold text-left w-100">Selecciona Tipo de profesional</label>
+                <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.profetional.label' | transloco }}</label>
                 <select
                   class="form-control custom-select"
                   (click)="bloquearSelect = true"
@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group">
-                <label class="font-weight-bold text-left w-100">Selecciona Especialidad</label>
+                <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.specialty.label' | transloco }}</label>
                 <select
                   class="form-control custom-select"
                   (change)="onChangeTypeSpecialtiesId($event.target.value)"
@@ -81,7 +81,7 @@
 
           <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
             <div class="form-group">
-              <label class="font-weight-bold text-left w-100">Profesional</label>
+              <label class="font-weight-bold text-left w-100">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
               <input
                 *ngIf="professionals"
                 type="text"
@@ -112,7 +112,7 @@
       <div class="card-body text-center">
         <form>
           <div class="form-group">
-            <label class="font-weight-bold text-left w-100">Selecciona fecha</label>
+            <label class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.date.label' | transloco }}</label>
             <input
               [disabled]="bloquearFecha"
               class="form-control"
@@ -135,8 +135,8 @@
   <div class="col-8">
     <div class="row">
       <div class="col">
-        <h5>Médicos disponibles</h5>
-        <p>Selecciona el profesional y horario</p>
+        <h5>{{ 'dashboard.home.newService.type.availableDoctor.label' | transloco }}</h5>
+        <p>{{ 'clinicalFile.selectDoctorAndSchedule.label' | transloco }}</p>
       </div>
     </div>
     <div class="card-deck">
@@ -146,8 +146,8 @@
           <p class="card-text">
             <img src="assets/img/doctora-icon.svg" />
           </p>
-          <h5 class="card-title">Selecciona la especialidad y la fecha para ver las horas</h5>
-          <p>Selecciona especialidad y fecha para ofrecerte profesionales disponibles</p>
+          <h5 class="card-title">{{ 'dashboard.home.newService.unselected.title' | transloco }}</h5>
+          <p>{{ 'dashboard.home.newService.unselected.title' | transloco }}</p>
         </div>
       </div>
     </div>
@@ -246,13 +246,13 @@
         <div class="card p-4 bg-light mb-3">
           <!--<div class="card-header">Header</div>-->
           <div class="card-body">
-            <h5 class="text-left mb-3">Detalle consulta</h5>
+            <h5 class="text-left mb-3">{{ 'dashboard.home.newService.synptoms.title' | transloco }}</h5>
             <form class="w-100">
               <div class="row">
                 <div class="col-4">
                   <div class="form-row">
                     <div class="form-group">
-                      <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
+                      <label for="validationTooltip01" class="text-left w-100">{{ 'clinicalFile.selectSymptoms.label' | transloco }}</label>
                       <select class="form-control custom-select w-100" (change)="onChange($event.target)">
                         <option selected>Seleccione síntoma</option>
                         <ng-container *ngFor="let item of symptoms">
@@ -325,11 +325,11 @@
         <div class="card p-4 bg-light mb-3">
           <!--<div class="card-header">Header</div>-->
           <div class="card-body">
-            <h4 class="text-left mb-3">Documentos</h4>
+            <h4 class="text-left mb-3">{{ 'dashboard.home.newService.synptoms.documents.title' | transloco }}</h4>
             <form>
               <div class="form-group">
                 <!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
-                <label for="exampleInputEmail1">Subir documentos</label>
+                <label for="exampleInputEmail1">{{ 'dashboard.home.newService.btnUpload.label' | transloco }}</label>
                 <div class="custom-file">
                   <input
                     type="file"
@@ -365,7 +365,7 @@
                   {{ blocks[0].professionalDetails.userDetails[0].name }}
                   {{ blocks[0].professionalDetails.userDetails[0].lastName }}
                 </p>
-                <p class="m-0">Especialidad {{ blocks[0].professionalDetails.specialtyDetails[0].specialtyName }}</p>
+                <p class="m-0">{{ 'disponibility.modal.create.specialty.label' | transloco }} {{ blocks[0].professionalDetails.specialtyDetails[0].specialtyName }}</p>
               </div>
 
               <div class="box boxSeparador pl-3">
@@ -388,10 +388,10 @@
               class="btn btn-outline-primary rounded-pill mr-3"
               (click)="atras()"
             >
-              Volver
+              {{ 'clinicalFile.back.label' | transloco }}
             </button>
             <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="agendar()">
-              Pagar y agendar
+              {{ 'dashboard.home.newService.btnCheckout.label' | transloco }}
             </button>
           </div>
         </div>
@@ -411,7 +411,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pagar consulta</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ 'clinicalFile.payService.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -438,7 +438,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pagar consulta</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ 'clinicalFile.payService.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

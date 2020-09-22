@@ -14,11 +14,11 @@
                 <div class="col-7">
                   <p>Usted ingresara en una lista de espera, hasta que un profesional de salud 
                   pueda atenderlo, si no deseas esperar haz click en el botón Deseo Agendar.</p>
-                  <h5>El tiempo de espera es de 15 minutos aprox.</h5>
+                  <h5>{{ 'waitingRoom.waitingTime.label' | transloco }}</h5>
                 </div>
                 <div class="col-3 text-center">
                   <button class="btn btn-outline-primary btnazulfondo rounded-pill" routerLink="../../agendar-consulta">
-                    Deseo agendar mejor
+                    {{ 'waitingRoom.iWantSchedule.label' | transloco }}
                   </button>
                 </div>
             </div>
@@ -34,13 +34,13 @@
           <div class="card p-4 bg-light mb-3">
             <!--<div class="card-header">Header</div>-->
             <div class="card-body">
-              <h5 class="text-left mb-3">Detalle consulta</h5>
+              <h5 class="text-left mb-3">{{ 'dashboard.home.newService.synptoms.title' | transloco }}</h5>
               <form class="w-100">
                 <div class="row">
                   <div class="col-4">
                     <div class="form-row">
                       <div class="form-group">
-                        <label for="validationTooltip01" class="text-left w-100">Seleccione sus síntomas</label>
+                        <label for="validationTooltip01" class="text-left w-100">{{ 'clinicalFile.selectSymptoms.label' | transloco }}</label>
                         <select class="form-control custom-select w-100" (change)="onChange($event.target)">
                           <option selected>Seleccione síntoma</option>
                           <ng-container *ngFor="let item of symptoms"><!---->
@@ -113,11 +113,11 @@
           <div class="card p-4 bg-light mb-3">
             <!--<div class="card-header">Header</div>-->
             <div class="card-body">
-              <h4 class="text-left mb-3">Documentos</h4>
+              <h4 class="text-left mb-3">{{ 'dashboard.home.newService.synptoms.documents.title' | transloco }}</h4>
               <form>
                 <div class="form-group">
                   <!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
-                  <label for="exampleInputEmail1">Subir documentos</label>
+                  <label for="exampleInputEmail1">{{ 'dashboard.home.newService.btnUpload.label' | transloco }}</label>
                   <div class="custom-file">
                     <input
                       type="file"
@@ -167,10 +167,10 @@
                 data-dismiss="modal"
                 class="btn btn-outline-primary rounded-pill mr-3"
               >
-                Volver
+                {{ 'clinicalFile.back.label' | transloco }}
               </button>
               <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill"  (click)="agendar()">
-                Pagar y agendar
+                {{ 'dashboard.home.newService.btnCheckout.label' | transloco }}
               </button>
             </div>
           </div>
@@ -190,7 +190,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pagar consulta</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ 'clinicalFile.payService.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
