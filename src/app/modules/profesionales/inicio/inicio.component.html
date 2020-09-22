@@ -1,15 +1,11 @@
 <div class="row">
-    <<<<<<< HEAD <div class="col-12 col-md">
-        <h2>Bienvenido(a), {{ currentUser.name || 'Usuario' }}</h2>
-        =======
-        <div class="col">
-            <h2>{{ 'clinicalFile.welcome.label' | transloco }}, {{ currentUser.name || 'Usuario' }}</h2>
-            >>>>>>> 11cd1e04c5fcc24fb12bc0aca2d9d82a6489651c
-        </div>
-        <div class="col-12 col-md">
-            <ng-container>
-                <!-- *ngIf="userCurrent.lastName === 'professional'"-->
-                <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary rounded-pill float-right mr-0 mr-md-3 d-none">
+    <div class="col-12 col-md">
+        <h2>{{ 'clinicalFile.welcome.label' | transloco }}, {{ currentUser.name || 'Usuario' }}</h2>
+    </div>
+    <div class="col-12 col-md">
+        <ng-container>
+            <!-- *ngIf="userCurrent.lastName === 'professional'"-->
+            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary rounded-pill float-right mr-0 mr-md-3 d-none">
         {{ 'clinicalFile.newService.label' | transloco }}
         <svg
           width="1.5em"
@@ -28,9 +24,9 @@
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         </svg>
       </button>
-            </ng-container>
-            <!---->
-        </div>
+        </ng-container>
+        <!---->
+    </div>
 </div>
 
 <div class="row mt-4">
