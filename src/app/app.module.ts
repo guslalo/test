@@ -3,25 +3,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 // modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 // routing
 import { AppRoutingModule } from './app-routing.module';
 
-import { SharedModule } from './shared/shared.module';
-// import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
 // components
 import { AppComponent } from './app.component';
-import { ErrorDialogService } from './shared/error-dialog/error-dialog.service';
-
-
-import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MessagingService } from './services/messaging.service';
 
 // Firebase library to be imported
@@ -44,7 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
 const toastrConfig = { closeButton: true };
 
 @NgModule({
-  declarations: [AppComponent, ErrorDialogComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     NgbModule,
@@ -67,7 +60,6 @@ const toastrConfig = { closeButton: true };
   ],
   providers: [
     AngularFireDatabaseModule,
-    ErrorDialogService,
     MessagingService,
     AsyncPipe,
     FileUtilsService,
@@ -80,9 +72,6 @@ const toastrConfig = { closeButton: true };
     // INTERCEPTOR TOASTR
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorDialogComponent],
-  exports: [
-   
-  ]
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}
