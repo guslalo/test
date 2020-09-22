@@ -17,7 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     MatSnackBarModule,
     NgbCollapseModule,
-    SharedModule.forRoot()
+    SharedModule,
   ],
 })
-export class MiSaludModule { }
+export class MiSaludModule {}

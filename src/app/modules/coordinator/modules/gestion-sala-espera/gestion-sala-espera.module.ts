@@ -5,13 +5,8 @@ import { GestionSalaEsperaRoutingModule } from './gestion-sala-espera-routing.mo
 import { IndexComponent } from './components/index/index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
   declarations: [IndexComponent],
-  imports: [
-    CommonModule,
-    GestionSalaEsperaRoutingModule,
-    SharedModule.forRoot(),
-  ]
+  imports: [CommonModule, GestionSalaEsperaRoutingModule, SharedModule],
 })
-export class GestionSalaEsperaModule { }
+export class GestionSalaEsperaModule {}

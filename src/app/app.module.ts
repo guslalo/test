@@ -34,7 +34,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
-const toastrConfig = { closeButton: true };
+const toastrConfig = { 
+  closeButton: true ,
+  positionClass: 'toast-bottom-right',
+  preventDuplicates: true
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,7 +52,7 @@ const toastrConfig = { closeButton: true };
     RouterModule,
     AngularFireModule,
     AngularFireMessagingModule,
-    // SharedModule.forRoot()
+    // SharedModule
     // EXTRAS
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),

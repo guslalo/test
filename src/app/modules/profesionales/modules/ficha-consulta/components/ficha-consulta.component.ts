@@ -10,6 +10,7 @@ import { environment } from './../../../../../../environments/environment';
   templateUrl: './ficha-consulta.component.html',
   styleUrls: ['./ficha-consulta.component.scss'],
 })
+
 export class FichaConsultaComponent implements OnInit {
   public appointmentDetail: any;
   public access_token: any;
@@ -26,6 +27,8 @@ export class FichaConsultaComponent implements OnInit {
   public exams: any;
   public fotoUser: any;
   public photoUrlBase = environment.photoUrlBase;
+  public arrayDocuments:any;
+  public urlSibrare:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,6 +65,7 @@ export class FichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
+    
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
@@ -101,4 +105,40 @@ export class FichaConsultaComponent implements OnInit {
       }
     );
   }
+
+  //getVerifiedSibrareDocuments
+  getVerifiedSibrareDocuments2(appointmentId){
+    this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
+      data => { 
+        console.log(data);
+        this.arrayDocuments = data.payload;
+      },  
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  downloadSibrare(documentId){
+    console.log(documentId)
+    this.getSibrareDocuments(this.appointmentId, documentId);
+  }
+
+  // get documents sibrare
+  getSibrareDocuments(id, documentId){
+    this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
+      data => {
+        this.urlSibrare = data.payload[0].documento
+        window.open(this.urlSibrare); 
+        //window.location.href= this.urlSibrare ;
+        console.log(this.urlSibrare);
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+
 }

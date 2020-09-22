@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 // import { PacientesComponent } from './pacientes/pacientes.component';
 
-
 import { PacientesRoutingModule } from '../pacientes/pacientes-routing.module';
 
 import { ConsultaComponent } from './consulta/consulta.component';
@@ -18,7 +17,6 @@ import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consulta
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 //ConsultaComponent,
 @NgModule({
   declarations: [
@@ -29,10 +27,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MisConsultasFilterComponent,
     AgendarComponent,
   ],
-  imports: [CommonModule, PacientesRoutingModule, SharedModule.forRoot()],
-  exports: [
-    AgendarComponent
-  ],
+  imports: [CommonModule, PacientesRoutingModule, SharedModule],
+  exports: [AgendarComponent],
   providers: [OpentokService],
 })
-export class PacientesModule { }
+export class PacientesModule {}

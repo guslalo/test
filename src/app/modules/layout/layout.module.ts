@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -26,7 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
     AdminModule,
     ProfesionalesModule,
     PacientesModule,
-    SharedModule.forRoot(),
+    SharedModule,
   ],
   exports: [SharedModule],
   providers: [
@@ -36,5 +36,6 @@ import { HeaderComponent } from './components/header/header.component';
       multi: true,
     },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class LayoutModule { }
+export class LayoutModule {}

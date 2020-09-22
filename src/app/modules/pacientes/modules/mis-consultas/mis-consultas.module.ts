@@ -9,7 +9,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
-
 @NgModule({
   declarations: [MisConsultasComponent, ConsultaComponent],
   imports: [
@@ -18,7 +17,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     MisConsultasRoutingModule,
     NgbPaginationModule,
     NgxPaginationModule,
-    SharedModule.forRoot()
+    SharedModule,
   ],
 })
-export class MisConsultasModule { }
+export class MisConsultasModule {}

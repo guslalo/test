@@ -5,13 +5,8 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './components/index/index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
   declarations: [IndexComponent],
-  imports: [
-    CommonModule,
-    IndexRoutingModule,
-    SharedModule.forRoot(),
-  ]
+  imports: [CommonModule, IndexRoutingModule, SharedModule],
 })
-export class IndexModule { }
+export class IndexModule {}

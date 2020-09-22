@@ -6,18 +6,8 @@ import { SharedModule } from './../../../../shared/shared.module';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 // import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 
-
-
 @NgModule({
-  declarations: [
-    IndexAgendaComponent
-  ],
-  imports: [
-    CommonModule,
-    AgendaRoutingModule,
-    SharedModule,
-    TranslocoRootModule
-  ]
+  declarations: [IndexAgendaComponent],
+  imports: [CommonModule, AgendaRoutingModule, SharedModule, TranslocoRootModule],
 })
-
-export class AgendaModule { }
+export class AgendaModule {}
