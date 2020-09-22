@@ -6,9 +6,19 @@ import { MisConsultasComponent } from './mis-consultas/mis-consultas.component';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
+
 
 @NgModule({
   declarations: [MisConsultasComponent, ConsultaComponent],
-  imports: [CommonModule, MisConsultasRoutingModule, NgbPaginationModule, NgxPaginationModule],
+  imports: [
+    TranslocoRootModule,
+    CommonModule,
+    MisConsultasRoutingModule,
+    NgbPaginationModule,
+    NgxPaginationModule,
+    SharedModule.forRoot()
+  ],
 })
-export class MisConsultasModule {}
+export class MisConsultasModule { }

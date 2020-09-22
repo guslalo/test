@@ -15,6 +15,7 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent],
@@ -30,6 +31,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatDialogModule,
     NgxDatatableModule,
     NgxSpinnerModule,
+    TranslocoRootModule
   ],
 })
-export class UsuariosModule {}
+export class UsuariosModule { }

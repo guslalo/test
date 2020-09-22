@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var $:any;
 
@@ -14,6 +16,7 @@ declare var $:any;
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
+
 export class CrearFichaConsultaComponent implements OnInit {
 
   public appointmentDetail:any;
@@ -39,6 +42,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public fotoUser:any;
   public notesArray:any;
   public jitsiGlobal:any;
+  public trustedUrl: SafeResourceUrl;
 
   constructor( 
     private route: ActivatedRoute,
@@ -46,11 +50,13 @@ export class CrearFichaConsultaComponent implements OnInit {
     private appointmentsService:AppointmentsService,
     private documentService: DocumentService,
     private router: Router,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private spinner:NgxSpinnerService,
+    private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-    
+    this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
       const id = params.appointmentId
@@ -73,9 +79,9 @@ export class CrearFichaConsultaComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
       JSON.parse(localStorage.getItem('currentUser')).role
     );
+
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
-  
     this.getFecha();
 
     this.signos = this._formBuilder.group({
@@ -157,7 +163,6 @@ export class CrearFichaConsultaComponent implements OnInit {
         notes:this.notes.controls.notes.value,
       }  
     }
-   // console.log(appointmentObject );
     this.appointmentsService.putAppointment(appointmentId, appointmentObject).subscribe(
       data => {
         console.log(data);
@@ -173,6 +178,25 @@ export class CrearFichaConsultaComponent implements OnInit {
       },
       error => {
         console.log(error);
+      }
+    )
+  }
+
+
+  subirPrescripciones(type){
+    this.spinner.show();
+    this.trustedUrl = '';
+    this.appointmentsService.getSibrareUrl(this.appointmentId, type).subscribe(
+      data => {
+        this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
+        console.log(data);
+        setTimeout(()=>{                           //<<<---using ()=> syntax
+          this.spinner.hide();
+        }, 3000); 
+      },
+      error => {
+        this.spinner.hide();
+        console.log(error)
       }
     )
   }
@@ -206,7 +230,6 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.url = data.payload.urlRoom.split('//');
         this.jitsiGlobal = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         this.jitsiGlobal.executeCommand('subject', 'Consulta');
-      
         console.log(data);
       },
       (error) => {
@@ -215,26 +238,20 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-
-
   getFecha(){
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
-
     this.fecha = {
       year: fecha.getFullYear(),
       month: month
     }
-
-    //console.log(currentMonth);
   }
 
   getAppointmentsTimeline(id){
     this.appointmentsService.getAppointmentsTimelineMilestone(id).subscribe(
       data => { 
-        this.timeline = data.payload;
-     
+        this.timeline = data.payload; 
         console.log(this.timeline)
       },
       error => {
@@ -260,7 +277,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     /*this.jitsiGlobal.excutecommnad( 'hangup');
     this.jitsiGlobal.dispose();*/
     //$("#meet").remove();
-
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
       data => {
         console.log(data);
@@ -304,15 +320,18 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
         this.notesArray = data.payload.appointmentDetails.notes;
-     
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
         console.log(this.appointmentDetail);
         if(
-          this.appointmentDetail.administrativeDetails.status === "running" ||  this.appointmentDetail.administrativeDetails.status === "pending"
+          this.appointmentDetail.administrativeDetails.status === "running" 
           ){
             this.getSession(id);
           this.permisoGuardar = true;
         }
+        if(this.appointmentDetail.administrativeDetails.status === "pending"){
+          this.permisoGuardar = true;
+        }
+        this.spinner.hide();
       },
       (error) => {
         console.log(error);

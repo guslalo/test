@@ -1,0 +1,36 @@
+<form [formGroup]="modalityForm">
+    <div class="modal-content">
+        <div class="row">
+
+            <div class="col-lg-12 text-center">
+                <h5>{{ 'dashboard.home.config.tabs.modality.modalConfig.title' | transloco }}</h5>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label
+                        for="name">{{ 'dashboard.home.config.tabs.modality.modalConfig.waitingRoom.label' | transloco }}</label>
+                    <select class="form-control" id="waitingRoom" formControlName="waiting_room">
+                        <option *ngFor="let wr of waitingRooms" [ngValue]="wr._id">{{wr.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label
+                        for="startBlock">{{ 'dashboard.home.config.tabs.modality.modalConfig.description.label' | transloco }}</label>
+                    <textarea type="text" class="form-control" name="description" rows="6" placeholder=""
+                        formControlName="description" [ngStyle]="{ resize: 'none' }"></textarea>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <button class="btn btn-sm btn-block btn-outline-primary rounded-pill" (click)="closeModal()">
+                    {{ 'common.button.cancel.label' | transloco }}
+                </button>
+            </div>
+            <div class="col-lg-6 text-center">
+                <button type="button" class="btn btn-sm btn-block btn-primary rounded-pill" (click)="updateModality()">
+                    {{ 'common.button.apply.label' | transloco }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</form>

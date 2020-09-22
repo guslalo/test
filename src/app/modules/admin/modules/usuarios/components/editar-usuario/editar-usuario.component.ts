@@ -159,7 +159,6 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.profileDataForm = this.formBuilder.group({
-      professionalPhoto: ['', null],
       biography: ['', Validators.required],
     });
 
@@ -337,25 +336,28 @@ export class EditarUsuarioComponent implements OnInit {
           }
         }
 
-        this.professionalPhoto = this.professionalPhoto || '';
-        this.profileDataForm.get('biography').setValue(user.professionalData.biography || '');
-        this.professionalForm.get('professionalTitle').setValue(user.professionalData.professionalTitle);
-        this.professionalForm.get('university').setValue(user.professionalData.university);
-        this.professionalForm.get('course').setValue(user.professionalData.course);
-        this.professionalForm.get('ufRegistry').setValue(user.professionalData.ufRegistry);
+        this.professionalPhoto = user.photo;
+        this.profileDataForm.get('biography').setValue(user.professionalData?.biography || '');
+        this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
+        this.professionalForm.get('university').setValue(user.professionalData?.university);
+        this.professionalForm.get('course').setValue(user.professionalData?.course);
+        this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);
 
-        this.specialitiesData = this.specialities.reduce((obj, value: any) => {
+        this.specialitiesData = this.specialities?.reduce((obj, value: any) => {
           obj[value._id] = value;
           return obj;
         }, {});
 
-        for (const sp of user.specialities) {
-          this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-            this.specialitiesAssigned.push(data.payload);
-          });
+        if (user.specialities?.length) {
+          for (const sp of user.specialities) {
+            this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
+              this.specialitiesAssigned.push(data.payload);
+            });
+          }
         }
+
         // console.log(this.specialitiesAssigned);
-        if (user.professionalData.professionalRegistry.length) {
+        if (user.professionalData?.professionalRegistry.length) {
           for (const rg of user.professionalData.professionalRegistry) {
             this.professionalRegistry.push(rg);
           }
@@ -582,7 +584,6 @@ export class EditarUsuarioComponent implements OnInit {
       waitingRooms: this.waitingRoomsAssigned,
       specialities: _specialities,
       professionalData: {
-        professionalPhoto: '',
         biography: this.formUser[3].value.biography,
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <h1>Cambiar clave</h1>
-      <p>Información básica, como el nombre y la foto, seguridad, que utilizas en el sistema de videoconsultas.</p>
+      <p>{{ 'profile.personal.changePassword.hintSecutity.label' | transloco }}</p>
     </div>
   </div>
 
@@ -14,14 +14,14 @@
           <div class="row">
             <div class="col-md-12">
               <h4 class="ml-1">
-                Contraseña actual
+                {{ 'profile.personal.changePassword.current.title' | transloco }}
               </h4>
             </div>
           </div>
           <div class="row">
             <div class="col-6">Última modificación el 17 de marzo del 2020</div>
             <div class="col-6">
-              <button type="button" class="btn btn-outline-secondary float-right">Cambiar Contraseña</button>
+              <button type="button" class="btn btn-outline-secondary float-right">{{ 'common.button.changePassword.label' | transloco }}</button>
             </div>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col-md-12">
               <h4 class="ml-1">
-                Cambiar contraseña
+                {{ 'profile.personal.changePassword.change.title' | transloco }}
               </h4>
             </div>
           </div>
@@ -42,7 +42,7 @@
             <form class="p-3" style="width: 100%;">
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="inputEmail4">Contraseña actual</label>
+                  <label for="inputEmail4">{{ 'profile.personal.changePassword.current.title' | transloco }}</label>
                   <input type="email" class="form-control" id="inputEmail4" />
                 </div>
                 <div class="form-group col-md-4">
@@ -50,13 +50,13 @@
                   <input type="email" class="form-control" id="inputEmail4" />
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="inputPassword4">Repetir contraseña</label>
+                  <label for="inputPassword4">{{ 'profile.personal.changePassword.change.repeat.label' | transloco }}</label>
                   <input type="password" class="form-control" id="inputPassword4" />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-12">
-                  <button type="button" class="btn btn-outline-secondary float-right">Cambiar Contraseña</button>
+                  <button type="button" class="btn btn-outline-secondary float-right">{{ 'common.button.changePassword.label' | transloco }}</button>
                 </div>
               </div>
             </form>

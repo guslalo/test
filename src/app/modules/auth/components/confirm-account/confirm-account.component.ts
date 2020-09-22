@@ -13,12 +13,25 @@ export class ConfirmAccountComponent implements OnInit {
   };
   public errorMsg: string;
 
-  constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
+  email_format: string;
 
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private registerUser: RegisterService,
+    private router: Router,
+    private routerAct: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    const email: string = this.routerAct.snapshot.params.email;
+    var splitEmail = email.split('@');
+    var domain = splitEmail[1];
+    var name = splitEmail[0];
+    this.email_format = name.substring(0, 3).concat('*********@').concat(domain);
+    // console.log(this.email_format);
+  }
 
   // todo: crear aviso registro exitoso
-
   confirmAccount(code) {
     this.route.params.subscribe((params) => {
       const id = params.id;

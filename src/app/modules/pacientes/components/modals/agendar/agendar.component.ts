@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-agendar',
@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./agendar.component.scss']
 })
 export class AgendarComponent implements OnInit {
+  @Input() inmediateAppointmentHijo:boolean;
+  public inmediateAppointment:boolean;
 
-  constructor() { }
+
+  constructor() {
+   
+   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('inmediateAppointment') === 'true'){
+      this.inmediateAppointment = true;
+    } else {
+      this.inmediateAppointment = false;
+    }
   }
 
 }

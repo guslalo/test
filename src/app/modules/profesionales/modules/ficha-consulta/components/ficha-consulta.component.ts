@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../services/appointments.service';
 import { MedicalRecordService } from './../../../../../services/medicalRecord.service';
 import { DocumentService } from './../../../../../services/document.service';
+import { environment } from './../../../../../../environments/environment';
 
 @Component({
   selector: 'app-ficha-consulta',
@@ -10,28 +11,27 @@ import { DocumentService } from './../../../../../services/document.service';
   styleUrls: ['./ficha-consulta.component.scss'],
 })
 export class FichaConsultaComponent implements OnInit {
-
-  public appointmentDetail:any;
+  public appointmentDetail: any;
   public access_token: any;
-  public downloadUrl:any;
+  public downloadUrl: any;
   public user: any;
   public userId: any;
   public timeline: any;
-  public fecha:any;
-  public professionalData:any;
-  public appointmentId:any;
-  public url:string;
+  public fecha: any;
+  public professionalData: any;
+  public appointmentId: any;
+  public url: string;
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
-  public fotoUser:any;
-
+  public fotoUser: any;
+  public photoUrlBase = environment.photoUrlBase;
 
   constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
-    private appointmentsService:AppointmentsService,
-    private documentService: DocumentService,
+    private appointmentsService: AppointmentsService,
+    private documentService: DocumentService
   ) {}
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
@@ -40,36 +40,31 @@ export class FichaConsultaComponent implements OnInit {
     this.downloadUrl = this.documentService.download();
 
     this.route.params.subscribe((params) => {
-      const id = params.appointmentId
+      const id = params.appointmentId;
       console.log(params);
       this.getAppointmentsDetails(id);
-
     });
     this.getAppointmentsTimeline();
-    this. getFecha();
-
+    this.getFecha();
   }
-  getFecha(){
+  getFecha() {
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
 
     this.fecha = {
       year: fecha.getFullYear(),
-      month: month
-    }
-
-    //console.log(currentMonth);
+      month: month,
+    };
   }
-
 
   getAppointmentsDetails(id) {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
-        this.userId = this.appointmentDetail.patientDetails.userDetails.userId
-        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo
-        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId)
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
         console.log(this.appointmentDetail);
       },
       (error) => {
@@ -94,20 +89,16 @@ export class FichaConsultaComponent implements OnInit {
     );
   }
 
-  getAppointmentsTimeline(){
+  getAppointmentsTimeline() {
     this.appointmentsService.getAppointmentsTimeline().subscribe(
-      data => { 
+      (data) => {
         this.timeline = data.payload;
-     
-        console.log(this.timeline)
+
+        console.log(this.timeline);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
-
-
-
-  
 }

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserLogin } from '../../../../models/models';
+import { AppointmentsService } from './../../../../services/appointments.service';
 
 // translate
 import { TranslocoService } from '@ngneat/transloco';
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     // public currentUserService:CurrentUserService,
     private formBuilder: FormBuilder,
     private UserService: UsersService,
-    private router: Router
+    private router: Router,
+    private appointmentsService:AppointmentsService
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +105,16 @@ export class LoginComponent implements OnInit {
             }
             break;
           case 'patient':
-            this.router.navigate(['app-paciente']);
+            this.appointmentsService.getAppointmentInmediateState().subscribe(
+              data => {
+                localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
+                console.log(data);
+                this.router.navigate(['app-paciente']);
+              },
+              error => {
+                console.log(error)
+              }
+            )
             break;
         }
         this.spinner.hide();

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 // routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -18,6 +19,7 @@ import { AuthModule } from './modules/auth/auth.module';
 // components
 import { AppComponent } from './app.component';
 import { ErrorDialogService } from './shared/error-dialog/error-dialog.service';
+
 
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MessagingService } from './services/messaging.service';
@@ -34,6 +36,12 @@ import { AngularFireDatabase, FirebaseObjectObservable } from '@angular/fire/dat
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AsyncPipe } from '@angular/common';
 import { environment } from './../environments/environment';
+import { FileUtilsService } from './services/file-utils.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+
+const toastrConfig = { closeButton: true };
 
 @NgModule({
   declarations: [AppComponent, ErrorDialogComponent],
@@ -54,9 +62,27 @@ import { environment } from './../environments/environment';
     AngularFirestoreModule, // For FireStore
     AngularFireStorageModule, // For Storage
     AngularFireAuthModule, // For Authentication
+    ModalModule.forRoot(),
+    ToastrModule.forRoot(toastrConfig),
   ],
-  providers: [AngularFireDatabaseModule, ErrorDialogService, MessagingService, AsyncPipe],
+  providers: [
+    AngularFireDatabaseModule,
+    ErrorDialogService,
+    MessagingService,
+    AsyncPipe,
+    FileUtilsService,
+    // INTERCEPTOR TOASTR
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpToastrInterceptor,
+      multi: true,
+    },
+    // INTERCEPTOR TOASTR
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent],
+  exports: [
+   
+  ]
 })
-export class AppModule {}
+export class AppModule { }

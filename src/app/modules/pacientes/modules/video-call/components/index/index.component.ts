@@ -42,9 +42,15 @@ export class IndexComponent implements OnInit {
         this.url = data.payload.urlRoom.split('//');
         console.log(this.url[1].replace('/', ''));
 
+     
+
 
         const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
+        /*
+        jitsi.on('readyToClose', () => {
+          console.log ('cerrado');
+        });*/
         console.log(data);
       },
       (error) => {

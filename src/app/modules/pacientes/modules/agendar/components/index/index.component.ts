@@ -225,6 +225,7 @@ export class IndexComponent implements OnInit {
   //consolidar cita
   postConsolidateService(consolidate) {
     console.log(consolidate);
+    localStorage.setItem('appointmentIdAgenda',consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
         this.statusPago(consolidate.id);
@@ -235,16 +236,12 @@ export class IndexComponent implements OnInit {
         if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
         } else {
-          $('#sinPrecio').modal();
+          //$('#sinPrecio').modal();
+          this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
-        //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         this.pago(this.consolidate.paymentUrl);
-
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 2000);
       },
       (error) => {
         console.log(error);
@@ -271,7 +268,7 @@ export class IndexComponent implements OnInit {
           console.log(error);
         }
       );
-    }, 4000);
+    }, 2500);
   }
 
   cerrarPago() {
@@ -280,6 +277,9 @@ export class IndexComponent implements OnInit {
 
   pago(url) {
     this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2500);
   }
 
   getsymptoms() {

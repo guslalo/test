@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col col-md-6 mb-2">
-    <h2>Salas de Espera Asociadas</h2>
+    <h2>{{ 'waitingRoom.joined.label' | transloco }}</h2>
     <p style="display: none;">
       Sala creada el 20 de Septiembre por Manuel Fernandez 70 usuario en sala de espera 20 profesionales
     </p>
@@ -11,11 +11,11 @@
   <table class="table" *ngIf="waitingRooms.length; else noData">
     <thead class="">
       <tr>
-        <th scope="col">Sala de Espera</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Link</th>
-        <th scope="col">Pagos</th>
-        <th scope="col">Activa</th>
+        <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
+        <th scope="col">{{ 'common.description.label' | transloco }}</th>
+        <th scope="col">{{ 'table.link.label' | transloco }}</th>
+        <th scope="col">{{ 'waitingRoom.payments.label' | transloco }}</th>
+        <th scope="col">{{ 'clinicalFile.active.label' | transloco }}</th>
       </tr>
     </thead>
 
@@ -32,25 +32,15 @@
         </td>
         <td>
           <div class="custom-control custom-switch mb-4">
-            <input
-              [(ngModel)]="item.administrativeDetails.requirePayment"
-              type="checkbox"
-              class="custom-control-input"
-              id="pay"
-              disabled
-            />
+            <input [(ngModel)]="item.administrativeDetails.requirePayment" type="checkbox" class="custom-control-input"
+              id="pay" disabled />
             <label class="custom-control-label" for="pay"></label>
           </div>
         </td>
         <td>
           <div class="custom-control custom-switch mb-4">
-            <input
-              [(ngModel)]="item.administrativeDetails.isActive"
-              type="checkbox"
-              class="custom-control-input"
-              id="status"
-              disabled
-            />
+            <input [(ngModel)]="item.administrativeDetails.isActive" type="checkbox" class="custom-control-input"
+              id="status" disabled />
             <label class="custom-control-label" for="status"></label>
           </div>
         </td>
@@ -58,6 +48,6 @@
     </tbody>
   </table>
   <ng-template #noData>
-    <h5 class="text-center text-primary">No existen salas de espera asociadas</h5>
+    <h5 class="text-center text-primary">{{ 'waitingRoom.notExists.label' | transloco }}</h5>
   </ng-template>
 </div>

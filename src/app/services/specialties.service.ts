@@ -7,9 +7,9 @@ import { environment } from './../../environments/environment';
   providedIn: 'root',
 })
 export class SpecialtiesService {
-  
   private medicalSpecialties = 'v1/medical-specialties';
-  private medicalSpecialties2 = 'v1/professionals/specialties';   
+  private medicalSpecialties2 = 'v1/professionals/specialties';
+  private medicalSpecialtiesCoordinator = 'v1/coordinator/specialties';
   private specialties = 'v1/administrative/specialties';
 
   constructor(private http: HttpClient) {}
@@ -27,6 +27,11 @@ export class SpecialtiesService {
   //specialties
   getSpecialtiesId2(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.medicalSpecialties2);
+  }
+
+  //specialties
+  getSpecialtiesForProfessional(id): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.medicalSpecialtiesCoordinator + '/' + id);
   }
 
   //specialties

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -22,7 +23,11 @@ export class RecoveryComponent implements OnInit {
 
   @ViewChild('content') myModal: any;
 
-  constructor(private authenticationService: AuthenticationService, private modalService: NgbModal) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {}
 
@@ -42,7 +47,8 @@ export class RecoveryComponent implements OnInit {
     this.authenticationService.recoveryPassword(user).subscribe(
       (data) => {
         this.mError = false;
-        this.openModal(this.mError);
+        this.router.navigate(['recovery-done', { email: userEmail.email }]);
+        // this.openModal(this.mError);
       },
       (error) => {
         this.mError = true;

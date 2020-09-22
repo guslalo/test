@@ -14,3 +14,18 @@
     }
 //.owl-stage{display:flex}
 }
+.owl-carousel .owl-item {
+    &:last-child {
+        display: none
+    }
+}
+.owl-theme .owl-nav .owl-prev {
+    left: 50px !important;
+}
+
+/*
+.boxTips{
+    .tip{
+
+    }
+}*/

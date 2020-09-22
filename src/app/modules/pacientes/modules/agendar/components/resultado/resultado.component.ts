@@ -8,11 +8,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ResultadoComponent implements OnInit {
   public reserva:any;
+  appointmentId:any;
 
   constructor( private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initCall();
+    this.appointmentId =  localStorage.getItem('appointmentIdAgenda');
+    console.log(this.appointmentId);
+
     console.log(JSON.parse(localStorage.getItem('reserva')));
     this.reserva =  JSON.parse(localStorage.getItem('reserva'));
   }

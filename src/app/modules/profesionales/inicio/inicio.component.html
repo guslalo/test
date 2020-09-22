@@ -1,17 +1,12 @@
 <div class="row">
-  <div class="col">
-    <h2>Bienvenido(a), {{ currentUser.name || 'Usuario' }}</h2>
-  </div>
-  <div class="col">
-    <ng-container>
-      <!-- *ngIf="userCurrent.lastName === 'professional'"-->
-      <button
-        data-toggle="modal"
-        data-target="#exampleModal"
-        type="button"
-        class="btn btn-primary rounded-pill float-right mr-3"
-      >
-        Nueva consulta
+    <div class="col-12 col-md">
+        <h2>{{ 'clinicalFile.welcome.label' | transloco }}, {{ currentUser.name || 'Usuario' }}</h2>
+    </div>
+    <div class="col-12 col-md">
+        <ng-container>
+            <!-- *ngIf="userCurrent.lastName === 'professional'"-->
+            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary rounded-pill float-right mr-0 mr-md-3 d-none">
+        {{ 'clinicalFile.newService.label' | transloco }}
         <svg
           width="1.5em"
           height="1.5em"
@@ -24,382 +19,398 @@
             fill-rule="evenodd"
             d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
           />
+
           <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
         </svg>
       </button>
-    </ng-container>
-    <!---->
-  </div>
+        </ng-container>
+        <!---->
+    </div>
 </div>
 
 <div class="row mt-4">
-  <div class="col-12">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card destacado">
-          <div class="card-body text-center">
-            <h5 class="card-title mt-4">Nº de consultas mensuales</h5>
-            <h4 class="card-text text-center">{{ consultasFinalizadas }} Consultas</h4>
-          </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card destacado">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mt-4">Nº de consultas mensuales</h5>
+                        <h4 class="card-text text-center">{{ consultasFinalizadas }} Consultas</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mt-4">{{ 'clinicalFile.nextService.label' | transloco }}</h5>
+                        <h4 class="card-text text-center">
+                            En 17 minutos
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mt-4">{{ 'dashboard.home.tab.home.ratings.label' | transloco }}</h5>
+                        <p class="card-text text-center">
+                            <ngb-rating [(rate)]="currentRate">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card bg-light">
-          <div class="card-body text-center">
-            <h5 class="card-title mt-4">Proxima consulta</h5>
-            <h4 class="card-text text-center">
-              En 17 minutos
-            </h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card bg-light">
-          <div class="card-body text-center">
-            <h5 class="card-title mt-4">Evaluación general pacientes</h5>
-            <p class="card-text text-center">
-              <ngb-rating [(rate)]="currentRate">
-                <ng-template let-fill="fill" let-index="index">
-                  <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-                </ng-template>
-              </ngb-rating>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!--consultas activas-->
-    <div class="row mt-4">
-      <div class="col-12">
-        <h5 class="mb-3">Próxima Consulta</h5>
-      </div>
-      <div class="col-12">
-        <!-- colappsed-->
-        <div class="collapseCustom primary">
-          <table class="table dos table-borderless mb-0">
-            <tbody>
-              <tr *ngIf="nextAppointed">
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-calendar"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+        <!--consultas activas-->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h5 class="mb-3">{{ 'dashboard.home.nextService.title' | transloco }}</h5>
+            </div>
+            <div class="col-12">
+                <!-- colappsed-->
+                <div class="collapseCustom primary">
+                    <table class="table dos table-borderless mb-0">
+                        <tbody>
+                            <tr *ngIf="nextAppointed">
+                                <td>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
+                    <path fill-rule="evenodd"
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z" />
+                  </svg> {{ nextAppointed[0].dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                                </td>
+                                <td>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+                    <path fill-rule="evenodd"
+                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
+                  </svg> {{ nextAppointed[0].dateDetails.start }} Hrs.
+                                </td>
+                                <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      fill-rule="evenodd"
-                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                </td>
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-clock"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].dateDetails.start }} Hrs.
-                </td>
-                <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-person-circle"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-                    />
+                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
                     <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }}
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
-                </td>
-                <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
-                </td>
-                <td>
-                  <a
-                    *ngIf="nextAppointed[0].patientDetails.userDetails[0]"
-                    routerLink="crear-ficha-consulta/{{ nextAppointed[0]._id }}"
-                  >
-                    <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
-                      Ingresar
+                    <path fill-rule="evenodd"
+                      d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                  </svg> {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }} {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                                </td>
+                                <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
+                                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                                </td>
+                                <td>
+                                    <a *ngIf="nextAppointed[0].patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ nextAppointed[0]._id }}">
+                                        <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
+                      {{ 'common.button.enter.label' | transloco }}
                     </button>
-                  </a>
-                </td>
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-three-dots-vertical"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                    />
+                                    </a>
+                                </td>
+                                <td>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                   </svg>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--/colappsed-->
+            </div>
         </div>
-        <!--/colappsed-->
-      </div>
-    </div>
 
-    <!--tabs hijos-->
-    <div class="row">
-      <div class="col-12">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#child1"
-              role="tab"
-              aria-controls="child1"
-              aria-selected="true"
-            >
-              Próximas consultas Agendadas
+        <!--tabs hijos-->
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#child1" role="tab" aria-controls="child" aria-selected="true">
+              {{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}
             </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#child2"
-              role="tab"
-              aria-controls="child2"
-              aria-selected="false"
-            >
-              Pacientes en sala de espera
+                    </li>
+                    <li class="nav-item" role="presentation">
+
+
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#child2" role="tab" aria-controls="child2" aria-selected="false">
+              {{ 'dashboard.home.tab.home.tab.onHold.title' | transloco }}
             </a>
-          </li>
-        </ul>
-      </div>
+                    </li>
+                </ul>
+            </div>
 
-      <div class="col-12">
-        <!--tab-->
-        <div class="tab-pane fade show" id="child1" role="tabpanel" aria-labelledby="home-tab2">
-          <div class="tableBox p-4 bg-white mt-3">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="row">
-                    Paciente
-                  </th>
-                  <th>Fecha agendada</th>
-                  <th>Hora agendada</th>
-                  <th>Estado</th>
-                  <th>
-                    Acción
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of consultas" id="{{ item._id }}">
-                  <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
-                    <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
-                      {{ item.patientDetails.userDetails[0].personalData.name }}
-                      {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                      {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                    </td>
-
-                    <ng-template #sinInfo>
-                      <td scope="row">Sin información</td>
-                    </ng-template>
-                    <td>
-                      {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                    </td>
-                    <td>
-                      {{ item.dateDetails.start }}
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{ item.administrativeDetails.status }}
+            <div class="col-12">
+                <div class="tab-content pt-4" id="myTabContent">
+                    <!--tab-->
+                    <div class="tab-pane fade show active" id="child1" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tableBox p-4 bg-white mt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="row">
+                                            {{ 'videoChat.modalEnd.patient.label' | transloco }}
+                                        </th>
+                                        <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} agendada</th>
+                                        <th>Hora agendada</th>
+                                        <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
+                                        <th>
+                                            {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of consultas" id="{{ item._id }}">
+                                        <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
+                                            <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
+                                                {{ item.patientDetails.userDetails[0].personalData.name }} {{ item.patientDetails.userDetails[0].personalData.lastName }} {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                                            </td>
+                                            <ng-template #sinInfo>
+                                                <td scope="row">Sin información</td>
+                                            </ng-template>
+                                            <td>
+                                                {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                                            </td>
+                                            <td>
+                                                {{ item.dateDetails.start }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                        {{
+                          item.administrativeDetails.status === 'reserved'
+                            ? 'Reservada'
+                            : item.administrativeDetails.status === 'appointed'
+                            ? 'Agendada'
+                            : item.administrativeDetails.status === 'rescheduled'
+                            ? 'Re-Agendada'
+                            : item.administrativeDetails.status === 'active'
+                            ? 'Activa'
+                            : item.administrativeDetails.status === 'waitingInRoom'
+                            ? 'En Sala de Espera'
+                            : item.administrativeDetails.status === 'waitingInList'
+                            ? 'En Lista de Espera'
+                            : item.administrativeDetails.status === 'running'
+                            ? 'En Curso'
+                            : item.administrativeDetails.status === 'pending'
+                            ? 'Pendiente'
+                            : item.administrativeDetails.status === 'finished'
+                            ? 'Finalizada'
+                            : item.administrativeDetails.status === 'canceled'
+                            ? 'Cancelada'
+                            : 'S/R'
+                        }}
                       </button>
-                    </td>
-                    <td>
-                      <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                        <a routerLink="ficha-consulta/{{ item._id }}">
-                          <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                                            </td>
+                                            <td>
+                                                <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                                                    <a routerLink="ficha-consulta/{{ item._id }}">
+                                                        <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                             Ver Ficha
                           </button>
-                        </a>
-                      </ng-container>
-                      <ng-container
-                        *ngIf="
+                                                    </a>
+                                                </ng-container>
+                                                <ng-container *ngIf="
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
                           item.administrativeDetails.status === 'pending'
-                        "
-                      >
-                        <a *ngIf="item.patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ item._id }}">
-                          <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                            atender
+                        ">
+                                                    <a *ngIf="item.patientDetails.userDetails[0]" routerLink="crear-ficha-consulta/{{ item._id }}">
+                                                        <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                            Atender
                           </button>
-                        </a>
-                      </ng-container>
-                    </td>
-                  </ng-container>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!--/tab-->
-      </div>
-    </div>
-  </div>
-</div>
+                                                    </a>
+                                                </ng-container>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/tab-->
+                    <!--tab-->
+                    <div class="tab-pane fade" id="child2" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Escoger sala espera</label>
+                                    <select class="form-control" (change)="onChange($event.target.value)">
+                <option>Escoger</option>
+                <ng-container *ngFor="let item of salas">
+                  <option value="{{item._id}}">{{item.roomDetails.name}}</option>
+                </ng-container>
+              </select>
+                                </div>
+                            </div>
+                        </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">Crear Consulta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <div class="tableBox p-4 bg-white mt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="row">
+                                            Paciente
+                                        </th>
+                                        <th>Fecha agendada</th>
+                                        <th class="d-none">Hora agendada</th>
+                                        <th>Estado</th>
+                                        <th>
+                                            Acción
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
+                                        <ng-container>
+                                            <td scope="row">
+                                                {{ item.patientDetails.userDetails[0].personalData.name }} {{ item.patientDetails.userDetails[0].personalData.lastName }} {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                                            </td>
+
+                                            <ng-template #sinInfo>
+                                                <td scope="row">Sin información</td>
+                                            </ng-template>
+                                            <td>
+                                                {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                        {{ item.administrativeDetails.status }}
+                      </button>
+                                            </td>
+                                            <td>
+                                                <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                                                    <a routerLink="ficha-consulta/{{ item._id }}">
+                                                        <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                          </button>
+                                                    </a>
+                                                </ng-container>
+                                                <ng-container *ngIf="
+                          item.administrativeDetails.status === 'running' ||
+                          item.administrativeDetails.status === 'active' ||
+                          item.administrativeDetails.status === 'pending'||
+                          item.administrativeDetails.status === 'waitingInList'
+                        ">
+                                                    <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
+                                                        <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                            {{ 'clinicalFile.attend.label' | transloco }}
+                          </button>
+                                                    </a>
+                                                </ng-container>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/tab-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center w-100 mt-1">
+                        {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body p-4">
-        <ul class="nav nav-tabs nav-pills nav-fill tabconsultamodal rounded" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#home2"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              >Pacientes ingresados</a
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#profile2"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-              >Enviar correo a usuario nuevo</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab">
-            <form class="mt-4">
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Nombre paciente o por ID</label>
-                  <input type="text" class="form-control" name="startBlock" />
                 </div>
-                <div class="form-group col">
-                  <label for="endBlock">Fecha</label>
-                  <input type="date" class="form-control" name="endBlock" />
-                </div>
-              </div>
+                <div class="modal-body p-4">
+                    <ul class="nav nav-tabs nav-pills nav-fill tabconsultamodal rounded" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home" aria-selected="true">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile" aria-selected="false">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab">
+                            <form class="mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco }}</label>
+                                        <input type="text" class="form-control" name="startBlock" />
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="endBlock">{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</label>
+                                        <input type="date" class="form-control" name="endBlock" />
+                                    </div>
+                                </div>
 
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Horario</label>
-                  <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00" />
-                </div>
-                <div class="form-group col">
-                  <label for="endBlock">Objetivo de consulta</label>
-                  <input type="text" class="form-control" name="endBlock" />
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
-            <form class="mt-4">
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Nombre paciente</label>
-                  <input type="text" class="form-control" />
-                </div>
-                <div class="form-group col">
-                  <label for="endBlock">Email</label>
-                  <input type="email" class="form-control" />
-                </div>
-              </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
+                                        <input type="time" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.objetive.label' | transloco }}</label>
+                                        <input type="text" class="form-control" name="endBlock" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
+                            <form class="mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.name.label' | transloco }}</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="endBlock">{{ 'clinicalFile.patientData.tabs.identification.info.email.label' | transloco }}</label>
+                                        <input type="email" class="form-control" />
+                                    </div>
+                                </div>
 
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Mensaje</label>
-                  <textarea class="form-control" rows="5"></textarea>
-                </div>
-              </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.message.label' | transloco }}</label>
+                                        <textarea class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
 
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Calendario</label>
-                  <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">{{ 'disponibility.tabs.calendar.label' | transloco }}</label>
+                                        <input type="date" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="endBlock">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.schedule.label' | transloco }}</label>
+                                        <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="startBlock">Objetivo de Consulta</label>
+                                        <input type="text" class="form-control" name="startBlock" min="07:00" max="20:00" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group col">
-                  <label for="endBlock">Horario</label>
-                  <input type="time" class="form-control" min="07:00" max="20:00" name="endBlock" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col">
-                  <label for="startBlock">Objetivo de Consulta</label>
-                  <input type="text" class="form-control" name="startBlock" min="07:00" max="20:00" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          routerLink="crear-ficha-consulta"
-        >
-          Crear Consulta
+                <div class="modal-footer text-center justify-content-center">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
+                    <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" routerLink="crear-ficha-consulta">
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <!--
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+
+</ngx-spinner>-->

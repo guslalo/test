@@ -3,6 +3,7 @@ export const environment = {
   baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi:'meet.bdot.app',//meet.bdot.app
+  photoUrlBase:'https://itms-dev.s3-sa-east-1.amazonaws.com/',
   apiKey: '',
   clientSecret: '',
   firebase: {

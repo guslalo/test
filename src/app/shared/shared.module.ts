@@ -31,9 +31,10 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoaderComponent } from './loaders/loader.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent],
   imports: [
     CommonModule,
     // HttpClientModule,

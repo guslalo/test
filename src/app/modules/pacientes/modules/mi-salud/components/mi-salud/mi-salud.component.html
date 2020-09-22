@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col">
     <h2>Mi salud</h2>
-    <p>Esta información será vista por los profesionales.</p>
+    <p>{{ 'clinicalFile.thisInfoViewPro.label' | transloco }}</p>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
           aria-controls="home"
           aria-selected="true"
         >
-          Mis antecedentes
+          {{ 'clinicalFile.myBackgrounds.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
@@ -31,7 +31,7 @@
           aria-controls="profile"
           aria-selected="false"
         >
-          Exámenes
+          {{ 'clinicalFile.exams.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
@@ -47,7 +47,7 @@
           tabindex="-1"
           aria-disabled="true"
         >
-          Prescripciones
+          {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
         </a>
       </li>
     </ul>
@@ -58,14 +58,14 @@
           <div class="col-4">
             <div class="card bg-light pb-3">
               <div class="card-header" style="display: none;">
-                Mi Salud
+                {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                 <p>
-                  Completa tus datos médicos para una mejor atención
+                  {{ 'clinicalFile.completeThisForBetterService.label' | transloco }}
                 </p>
               </div>
               <div class="card-body text-center">
-                <h5 class="card-title">Mi Salud</h5>
-                <p class="card-text text-center">Completa tus datos médicos para una mejor atención</p>
+                <h5 class="card-title">{{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}</h5>
+                <p class="card-text text-center">{{ 'clinicalFile.completeThisForBetterService.label' | transloco }}</p>
                 <img src="assets/img/corazon-azul.svg" />
                 <div class="boxCompletData">
                   <img src="assets/img/porcentaje-temp.svg" />
@@ -94,13 +94,13 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Enfermedades</span>
+                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasSickness">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('sickness', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -120,7 +120,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -170,13 +170,13 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Antecedentes Familiares</span>
+                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasFamiliarHistory">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('familiarHistory', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -196,7 +196,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -251,7 +251,7 @@
                 <div class="col-4" *ngIf="!antecedentes?.hasHealthHabits">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('healthHabits', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -271,7 +271,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -320,13 +320,13 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Medicamentos</span>
+                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasMedicines">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('medicines', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -346,7 +346,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -395,13 +395,13 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Ocupacionales</span>
+                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasOccupational">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('occupational', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -421,7 +421,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -477,13 +477,13 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Otros</span>
+                    <span class="pl-3">{{ 'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasOthers">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('others', true)">
-                      Si, tengo
+                      {{ 'clinicalFile.iHave.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -503,7 +503,7 @@
                       data-toggle="modal"
                       data-target="#add"
                     >
-                      Agregar
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg" />
                     </button>
                   </div>
@@ -541,7 +541,7 @@
       <!--tab-->
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="row mb-3">
-          <div class="col-12 col-md-6">Exámenes y Documentos</div>
+          <div class="col-12 col-md-6">{{ 'clinicalFile.exams.label' | transloco }} y Documentos</div>
           <div class="col-12 col-md-6">
             <button
               type="button"
@@ -549,7 +549,7 @@
               data-toggle="modal"
               data-target="#addExamen"
             >
-              Agregar documento
+              {{ 'common.button.add.label' | transloco }} documento
             </button>
           </div>
         </div>
@@ -559,21 +559,21 @@
               <table class="table mt-3">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre Documento</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Fecha de subida</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of exams">
                     <th scope="row">{{ item.name }}</th>
                     <td>{{ item.type }}</td>
-                    <td>{{ item.uploadDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                     <td>
                       <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
                         <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
-                          Descargar
+                          {{ 'clinicalFile.patientData.tabs.prescriptions.table.btnDownload.label' | transloco }}
                         </button>
                       </a>
                     </td>
@@ -597,10 +597,10 @@
                 <thead>
                   <tr>
                     <th scope="col">Nombre documento</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Fecha de subida</th>
-                    <th scope="col">Realizado por</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.by.label' | transloco }}</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -620,12 +620,12 @@
                         />
                         <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
                       </svg>
-                      Licencia medica
+                      {{ 'clinicalFile.medLicense.label' | transloco }}
                     </th>
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -643,12 +643,12 @@
                         />
                         <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
                       </svg>
-                      Licencia medica
+                      {{ 'clinicalFile.medLicense.label' | transloco }}
                     </th>
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
                   </tr>
                   <tr>
                     <th scope="row">
@@ -666,12 +666,12 @@
                         />
                         <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
                       </svg>
-                      Licencia medica
+                      {{ 'clinicalFile.medLicense.label' | transloco }}
                     </th>
                     <td>Exámen</td>
                     <td>23/04/2020</td>
                     <td>DR. Alfonso Torres</td>
-                    <td><button type="button" class="btn btn-light">Ver documento</button></td>
+                    <td><button type="button" class="btn btn-light">{{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -689,7 +689,7 @@
     <div class="modal-content p-3">
       <div class="modal-header text-center">
         <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
-          Agregar
+          {{ 'common.button.add.label' | transloco }}
           <ng-container [ngSwitch]="category">
             <ng-container *ngSwitchCase="'sickness'">enfermedades</ng-container>
             <ng-container *ngSwitchCase="'familiarHistory'">antecedentes familiares</ng-container>
@@ -708,7 +708,7 @@
         <form [formGroup]="agregarItem" novalidate="">
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">Agregar item</label>
+              <label for="dateBlock">{{ 'common.button.add.label' | transloco }} item</label>
               <input
                 type="text"
                 value=""
@@ -725,7 +725,7 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button
           type="button"
           class="btn btn-primary rounded-pill"
@@ -733,7 +733,7 @@
           [disabled]="!agregarItem.valid"
           (click)="add(category)"
         >
-          Agregar
+          {{ 'common.button.add.label' | transloco }}
         </button>
       </div>
     </div>
@@ -753,7 +753,7 @@
     <div class="modal-content p-3">
       <div class="modal-header text-center">
         <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
-          ¿Deseas eliminar este elemento?
+          {{ 'dashboard.home.myHealth.modal.deleteItem.title' | transloco }}?
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -770,9 +770,9 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="delete()">
-          Eliminar
+          {{ 'common.button.delete.label' | transloco }}
         </button>
       </div>
     </div>
@@ -791,7 +791,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">Agregar Exámen</h5>
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">{{ 'common.button.add.label' | transloco }} Exámen</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -801,7 +801,7 @@
           <!-- -->
           <div class="row">
             <div class="form-group col">
-              <label for="type">Tipo</label>
+              <label for="type">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</label>
               <select class="form-control" name="type" id="type" formControlName="type">
                 <option [value]="null">- Seleccionar -</option>
                 <option value="exam">Examen</option>
@@ -809,7 +809,7 @@
               </select>
             </div>
             <div class="form-group col">
-              <label for="dateBlock">Cargar documento</label>
+              <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
               <div class="custom-file">
                 <input
                   type="file"
@@ -825,9 +825,9 @@
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">{{ 'common.button.cancel.label' | transloco }}</button>
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addExamenPost()">
-          Agregar
+          {{ 'common.button.add.label' | transloco }}
         </button>
       </div>
     </div>

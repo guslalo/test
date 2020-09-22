@@ -11,22 +11,25 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   declarations: [IndexComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule, FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
     HistorialConsultasRoutingModule,
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    NgxDatatableModule,
+    MatAutocompleteModule,
+    TranslocoRootModule
   ],
-  exports: [
-    NgbDatepickerModule,
-
-  ]
+  exports: [NgbDatepickerModule],
 })
-export class HistorialConsultasModule { }
+export class HistorialConsultasModule {}

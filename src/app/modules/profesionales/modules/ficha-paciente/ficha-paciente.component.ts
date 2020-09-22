@@ -62,6 +62,7 @@ export class FichaPacienteComponent implements OnInit {
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    console.log(this.userId)
     this.getMedicalRecord(this.userId);
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();

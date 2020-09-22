@@ -11,10 +11,19 @@ export class AppointmentsService {
   private doctors = 'v1/doctors';
   private session = '/session';
   private reserve = '/reserve';
+  private coordinators = 'v1/coordinator';
   private consolidate = '/consolidate';
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
- 
+  private inmediateAppointment = 'v1/administrative/immediate/state';
+  private inmediate = 'v1/appointments/immediate/';
+  private immediateConsolidate = 'v1/appointments/immediate/consolidate';
+  private pagoStatusInmediate = 'v1/appointments/immediate/status';
+  private waitingForRooms = 'v1/waiting-rooms';
+  private waitingAppointmentsForRooms = this.inmediate;
+  private appointmentInmediate = 'v1/appointments/immediate/attend';
+  private getSibrare = 'v1/appointments/sibrare-url';
+  private blocks = 'v1/blocks/query';
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +43,12 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
+  }
+
+  getAllAppointments(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
   }
 
   getTotalPages(): Observable<any> {
@@ -64,7 +79,6 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/milestone-timeline', { params: params });
   }
 
-
   // getDoctors
   getDoctors(): Observable<any> {
     const httpOptions = {
@@ -78,12 +92,17 @@ export class AppointmentsService {
 
   // get getAppointmentsSession
   getAppointmentsSession(id): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id:id });
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.session, { id: id });
   }
 
   //reservar cita
   postReserve(reserve): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.reserve, reserve);
+  }
+
+  //reservar cita
+  postReserveCustomPatient(reserve): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.coordinators + '/appointment/reserve', reserve);
   }
 
   //consolidate appointments
@@ -112,8 +131,6 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.pagoStatus, { params: params });
   }
 
-
-
   //postRunAppointment(id): Observable<any> {
   postEventAppointment(id, event): Observable<any> {
     let params = new HttpParams();
@@ -126,5 +143,77 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
     return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails, { params: params });
+  }
+
+  //Appointment Inmediate
+  getAppointmentInmediateState(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.inmediateAppointment);
+  }
+
+  AppointmentInmediate(): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.inmediate, {});
+  }
+
+  postImmediateConsolidate(object): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object);
+  }
+
+  getPaymentStatusAppointmentInmediate(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.get<any>(environment.baseUrl + this.pagoStatusInmediate, { params: params });
+  }
+
+  getWaitingRooms(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.waitingForRooms);
+  }
+
+  getWaitingAppointmentForRoomsId(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('waitingRoomId', id);
+    return this.http.get<any>(environment.baseUrl + this.waitingAppointmentsForRooms, { params: params });
+  }
+
+  attendAppointmentInmediate(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.appointmentInmediate, '', { params: params });
+  }
+
+  getSibrareUrl(id, type): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    params = params.append('documentType', type);
+    return this.http.get<any>(environment.baseUrl + this.getSibrare, { params: params });
+  }
+
+  //?appointmentId=5f67ea72a5dbb11acdf34709&documentType=prescription
+
+  postBlocks(date, specialtyId?, professionalId?): Observable<any> {
+    if (specialtyId) {
+      console.log(date, { specialtyId: specialtyId });
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+        specialtyId: specialtyId,
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+      });
+    }
+  }
+
+  postBlocksProfessionalId(date, professionalId?): Observable<any> {
+    if (professionalId) {
+      console.log(date, { professionalId: professionalId });
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+        professionalId: professionalId,
+      });
+    } else {
+      return this.http.post<any>(environment.baseUrl + this.blocks, {
+        date,
+      });
+    }
   }
 }

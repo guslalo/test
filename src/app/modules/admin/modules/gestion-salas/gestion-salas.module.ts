@@ -15,6 +15,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 @NgModule({
   declarations: [IndexComponent, EditarSalaComponent, VerSalaComponent],
@@ -31,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NgxSpinnerModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    TranslocoRootModule
   ],
 })
-export class GestionSalasModule {}
+export class GestionSalasModule { }
