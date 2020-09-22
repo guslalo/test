@@ -11,6 +11,7 @@ export class AppointmentsService {
   private doctors = 'v1/doctors';
   private session = '/session';
   private reserve = '/reserve';
+  private coordinators = 'v1/coordinator';
   private consolidate = '/consolidate';
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
@@ -97,6 +98,11 @@ export class AppointmentsService {
   //reservar cita
   postReserve(reserve): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.appointments + this.reserve, reserve);
+  }
+
+  //reservar cita
+  postReserveCustomPatient(reserve): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.coordinators + '/appointment/reserve', reserve);
   }
 
   //consolidate appointments

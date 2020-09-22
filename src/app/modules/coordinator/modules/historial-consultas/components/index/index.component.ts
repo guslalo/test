@@ -39,6 +39,7 @@ export class IndexComponent implements OnInit {
   appointmentStatusSelected: any = null;
   appointmentDateSelected: NgbDateStruct;
   professionalSelected: string;
+  patientSelected: string;
   selected = [];
 
   minDate = {
@@ -156,6 +157,11 @@ export class IndexComponent implements OnInit {
       );
   }
 
+  setPatient(patient) {
+    console.log(patient);
+    this.patientSelected = patient.userId;
+  }
+
   getSpecialties(professional) {
     this.professionalSelected = professional.userData[0]._id;
     let userId = professional.userData[0]._id;
@@ -187,6 +193,9 @@ export class IndexComponent implements OnInit {
 
   createAppointment() {
     const reserve = {
+      patientDetails: {
+        userId: this.patientSelected,
+      },
       professionalDetails: {
         userId: this.professionalSelected,
         specialtyId: this.appointmentForm.controls.specialty.value,
@@ -204,7 +213,7 @@ export class IndexComponent implements OnInit {
     //.reserve.dateDetails.date = object;
     console.log(reserve);
 
-    this.appointmentsService.postReserve(reserve).subscribe(
+    this.appointmentsService.postReserveCustomPatient(reserve).subscribe(
       (data) => {
         this.getAppointments();
         console.log(data);
