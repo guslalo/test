@@ -1398,7 +1398,7 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-center">Nombre Documento</th>
+                      <th scope="col" class="text-center d-none">Nombre Documento</th>
                       <th scope="col" class="text-center">Tipo</th>
                       <th scope="col" class="text-center">Fecha de subida</th>
                       <th scope="col" class="text-center">Realizado por</th>
@@ -1407,8 +1407,8 @@
                   </thead>
 
                   <tbody>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
+                    <tr *ngFor="let item of arrayDocuments" id="{{item.documentId}}">
+                      <td scope="row" class="text-center d-none">
                         <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
@@ -1416,35 +1416,29 @@
                           />
                         </svg>
                         <ng-container>
-                          Exámen torso
+                          {{item.documentType}} tipo
                         </ng-container>
                       </td>
                       <td class="text-center">
-                        Exámen
+                        {{item.documentType}}
                       </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
                       <td class="text-center">
+                        {{item.uploadDate  | date: 'dd/MM/yyyy':'+0000'}}
+                      </td>
+                      <td class="text-center">
+                        {{item.issuerDetails.fullName}}
+                      </td>
+                      <td class="text-center">
+                        <a (click)="downloadSibrare(item.documentId)" ><!-- routerLink="{{urlSibrare}}" target="_blank-->
                         <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                           Ver documento
                         </button>
-                        <div class="btn-group">
+                        </a>
+                        <div class="btn-group d-none">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
+                          
                           </div>
-                          <div class="dropdown-menu dropdown-menu-right">
+                          <div class="dropdown-menu dropdown-menu-right d-none">
                             <button class="dropdown-item" type="button">
                               Eliminar
                             </button>
@@ -1455,104 +1449,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-                        <ng-container>
-                          Exámen torso
-                        </ng-container>
-                      </td>
-                      <td class="text-center">
-                        Exámen
-                      </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Ver documento
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              class="mr-0"
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="item.id">
-                      <td scope="row" class="text-center">
-                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                            fill="#A9A9A9"
-                          />
-                        </svg>
-                        <ng-container>
-                          Exámen torso
-                        </ng-container>
-                      </td>
-                      <td class="text-center">
-                        Exámen
-                      </td>
-                      <td class="text-center">22/93/2020</td>
-                      <td class="text-center">Hernan Rivera</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                          Ver documento
-                        </button>
-                        <div class="btn-group">
-                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                            <svg
-                              class="mr-0"
-                              width="1em"
-                              height="1em"
-                              viewBox="0 0 16 16"
-                              class="bi bi-three-dots"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                              />
-                            </svg>
-                          </div>
-                          <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">
-                              Eliminar
-                            </button>
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                              Editar
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                  
                   </tbody>
                 </table>
               </div>
