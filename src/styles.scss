@@ -975,3 +975,20 @@ ngb-timepicker .ngb-tp-minute {
 ngb-timepicker .ngb-tp-hour {
   height: 64px;
 }
+
+.toast-container {
+  opacity: 0.7;
+  .ngx-toastr {
+    background-size: 20px;
+    font-size: 14px;
+    padding: 5px 15px 5px 50px !important;
+    &:hover {
+      box-shadow: 0 0 7px #999999 !important;
+      cursor: pointer;
+    }
+  }
+  .toast-close-button {
+    font-size: 20px;
+    font-weight: normal;
+  }
+}
