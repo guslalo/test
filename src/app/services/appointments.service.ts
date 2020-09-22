@@ -24,6 +24,10 @@ export class AppointmentsService {
   private appointmentInmediate = 'v1/appointments/immediate/attend';
   private getSibrare = 'v1/appointments/sibrare-url';
   private blocks = 'v1/blocks/query';
+  private sibrareStatus = 'v1/appointments/sibrare/status';
+  private sibrareStatusVerifiedSibrareDocuments = 'v1/appointments/sibrare/documents'
+  private sibrareDocumentUrl = 'v1/appointments/sibrare/document-url'
+  
 
   constructor(private http: HttpClient) {}
 
@@ -185,6 +189,27 @@ export class AppointmentsService {
     params = params.append('appointmentId', id);
     params = params.append('documentType', type);
     return this.http.get<any>(environment.baseUrl + this.getSibrare, { params: params });
+  }
+
+  getSibrareStatus(id, documentId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    params = params.append('documentId', documentId);
+    return this.http.get<any>(environment.baseUrl + this.sibrareStatus, { params: params });
+  }
+
+  getVerifiedSibrareDocuments(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    //params = params.append('documentId', documentId);
+    return this.http.get<any>(environment.baseUrl + this.sibrareStatusVerifiedSibrareDocuments, { params: params });
+  }
+
+  getSibrareDocumentUrl(id, documentId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    params = params.append('documentId', documentId);
+    return this.http.get<any>(environment.baseUrl + this.sibrareDocumentUrl, { params: params });
   }
 
   //?appointmentId=5f67ea72a5dbb11acdf34709&documentType=prescription
