@@ -49,12 +49,10 @@
               [columnMode]="ColumnMode.flex"
               [limit]="10"
             >
-              <ngx-datatable-column
-                [resizeable]="false"
-                [flexGrow]="2"
-                prop="dateDetails.days"
-                [name]="'table.days.label' | transloco"
-              >
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" [name]="'table.days.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span [ngStyle]="{ 'word-break': 'break-all' }">{{ row.dateDetails.days }}</span>
+                </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.date.label' | transloco">
                 <ng-template let-row="row" ngx-datatable-cell-template>
