@@ -9,10 +9,12 @@ import {
   NgbPaginationModule,
   NgbTimepickerModule,
   NgbNavModule,
+  NgbDropdownModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [IndexComponent],
@@ -25,7 +27,9 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbTimepickerModule,
+    NgbDropdownModule,
     NgbNavModule,
+    NgxDatatableModule,
     MatAutocompleteModule,
     TranslocoRootModule,
   ],

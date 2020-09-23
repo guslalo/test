@@ -39,110 +39,113 @@
         </div>
         <div class="col-12 mb-4">
           <div class="tableBox rounded p-4 bg-white">
-            <table class="table">
-              <thead>
-                <tr class="d-flex">
-                  <th class="col-2" scope="col">Días</th>
-                  <th class="col-2" scope="col">Fecha</th>
-                  <th class="col-1" scope="col">Hora</th>
-                  <th class="col-1" scope="col">Objetivo</th>
-                  <th class="col-2" scope="col">Especialidad</th>
-                  <th class="col-2" scope="col">profesional</th>
-                  <th class="col-1" scope="col">Estado</th>
-                  <th class="col-1" scope="col">Acción</th>
-                </tr>
-              </thead>
-
-              <ng-container *ngIf="disponibilidadArray?.length === 0">
-                <tbody>
-                  <tr>
-                    <div class="alert alert-warning mt-3" role="alert">
-                      No hay disponibilidades creadas
-                    </div>
-                  </tr>
-                </tbody>
-              </ng-container>
-
-              <tbody *ngIf="disponibilidadArray">
-                <tr class="d-flex" *ngFor="let item of disponibilidadArray" id="{{ item._id }}">
-                  <td class="col-2" scope="row">
-                    <ng-container>
-                      <div [ngStyle]="{ 'word-break': 'break-all' }">
-                        {{ item.daysDetails }}
-                      </div>
-                    </ng-container>
-                  </td>
-                  <td class="col-2">
-                    {{ item.dateStart | date: 'dd/MM/yyyy':'+0000' }} - {{ item.dateEnd | date: 'dd/MM/yyyy':'+0000' }}
-                  </td>
-                  <td class="col-1">
-                    <div style="width: 100px;">
-                      <ng-container *ngIf="item.start.length > 1; else oneElement">
-                        <ng-container *ngFor="let range of item.start">
-                          {{ range.start }} hrs. - {{ range.end }} hrs.
-                        </ng-container>
+            <ngx-datatable
+              *ngIf="disponibilidadArray.length; else noData"
+              class="material"
+              [rows]="disponibilidadArray"
+              headerHeight="auto"
+              footerHeight="auto"
+              rowHeight="70"
+              [columnMode]="ColumnMode.flex"
+              [limit]="10"
+            >
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                prop="dateDetails.days"
+                [name]="'table.days.label' | transloco"
+              >
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.date.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }} -
+                  {{ row.dateDetails.endDate | date: 'dd/MM/yyyy':'+0000' }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.time.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div style="width: 100px;">
+                    <ng-container *ngIf="row.dateDetails.dailyRanges.length > 1; else oneElement">
+                      <ng-container *ngFor="let range of row.dateDetails.dailyRanges">
+                        {{ range.start }} hrs. - {{ range.end }} hrs.
                       </ng-container>
-                      <ng-template #oneElement>
-                        {{ item.start[0].start }} hrs. - {{ item.start[0].end }} hrs.
-                      </ng-template>
+                    </ng-container>
+                    <ng-template #oneElement>
+                      {{ row.dateDetails.dailyRanges[0].start }} hrs. - {{ row.dateDetails.dailyRanges[0].end }} hrs.
+                    </ng-template>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                prop="administrativeDetails.objective"
+                [name]="'table.objetive.label' | transloco"
+              >
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.specialty.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ AllSpecialtyMap[row.professionalDetails?.specialtyId]?.specialtyName }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.doctor.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.professionalName[0].personalData.name + ' ' + row.professionalName[0].personalData.lastName }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.time.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="custom-control custom-switch">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="switch{{ row._id }}"
+                      [checked]="row.administrativeDetails.isActive"
+                      (click)="putState(row)"
+                    />
+                    <label class="custom-control-label" for="switch{{ row._id }}"></label>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.state.label' | transloco">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div ngbDropdown container="body">
+                    <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-three-dots"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                        />
+                      </svg>
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button
+                        ngbDropdownItem
+                        data-toggle="modal"
+                        data-target="#editar"
+                        type="button"
+                        (click)="putAvailability(row._id)"
+                      >
+                        Editar
+                      </button>
+                      <button ngbDropdownItem type="button" (click)="deleteAvailability(row._id)">
+                        Eliminar
+                      </button>
                     </div>
-                  </td>
-                  <td class="col-1">{{ item.objective }}</td>
-                  <td class="col-2">
-                    {{ item.specialty }}
-                  </td>
-                  <td class="col-2">
-                    {{ item.professional }}
-                  </td>
-
-                  <td class="col-1">
-                    <div class="custom-control custom-switch">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        id="switch{{ item._id }}"
-                        [checked]="item.status"
-                        (click)="putState(item)"
-                      />
-                      <label class="custom-control-label" for="switch{{ item._id }}"></label>
-                    </div>
-                  </td>
-                  <td class="col-1">
-                    <div class="btn-group">
-                      <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-three-dots"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
-                          Eliminar
-                        </button>
-                        <button
-                          data-toggle="modal"
-                          data-target="#editar"
-                          class="dropdown-item"
-                          type="button"
-                          (click)="putAvailability(item._id)"
-                        >
-                          Editar
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+            <ng-template #noData>
+              <h5 class="text-center text-primary">No existen coincidencias</h5>
+            </ng-template>
           </div>
         </div>
       </div>
