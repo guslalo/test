@@ -172,7 +172,7 @@ export class MiSaludComponent implements OnInit {
     );
   }
 
-  resetValue(){
+  resetValue() {
     this.textInputFile = 'seleccionar archivo';
   }
 

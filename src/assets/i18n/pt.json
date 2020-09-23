@@ -666,6 +666,30 @@
     },
     "scheduling": {
       "label": "agendamento"
+    },
+    "reserveService": {
+      "label": "livro de consulta"
+    },
+    "hoursAvailable": {
+      "label": "horas disponíveis"
+    },
+    "noHoursAvailable": {
+      "label": "Não há horas disponíveis."
+    },
+    "allServices": {
+      "label": "Todos os inquéritos"
+    },
+    "patientsInSystem": {
+      "label": "Sistema de paciente"
+    },
+    "medAtentionCard": {
+      "label": "guia Medical Care"
+    },
+    "diagnosisType": {
+      "label": "Tipo de diagnóstico"
+    },
+    "generateDocs": {
+      "label": "gerar documentos"
     }
   },
   "disponibility": {
@@ -851,7 +875,9 @@
   "auth": {
     "blockAccount": {
       "title": "Sua conta foi bloqueada.",
-      "label": "Por motivos de segurança, esta conta foi bloqueada devido a repetidas tentativas malsucedidas, digite seu e-mail para enviar as instruções de reativação."
+      "secHint": {
+        "label": "Por motivos de segurança, esta conta foi bloqueada devido a repetidas tentativas malsucedidas, digite seu e-mail para enviar as instruções de reativação."
+      }
     },
     "login": {
       "welcome": {
@@ -922,6 +948,47 @@
     },
     "btnCreateAccunt": {
       "label": "Criar uma conta"
+    },
+    "email": {
+      "sendTo": {
+        "label": "Ele enviou um email para"
+      },
+      "codeSent": {
+        "label": "com um código de verificação, verifique a sua caixa de entrada."
+      },
+      "followInstructions": {
+        "label": "Siga as instruções na mensagem para redefinir sua senha."
+      }
+    },
+    "verificationCode": {
+      "label": "Digite o código de verificação"
+    },
+    "surnameReq": {
+      "label": "Segundo o sobrenome é necessária"
+    },
+    "loginAgain": {
+      "label": "acesso novamente"
+    },
+    "currentPwdInfo": {
+      "label": "Informações sobre a sua senha atual"
+    },
+    "currentPwdReq": {
+      "label": "password corrente necessária"
+    },
+    "currentPwdIncorrect": {
+      "label": "A senha atual está incorreto"
+    },
+    "pwdNotMatch": {
+      "label": "Senha não corresponde"
+    },
+    "pwdUpdated": {
+      "label": "Senha atualizada!"
+    },
+    "emailSendedToAsociatedAccount": {
+      "label": "Ele enviou um email de confirmação para a conta associada."
+    },
+    "personalBasicinfo": {
+      "label": "Informações básicas de dados pessoais"
     }
   },
   "access": {
@@ -2318,6 +2385,15 @@
     },
     "createRoom": {
       "label": "Criar Sala de Espera"
+    },
+    "managment": {
+      "label": "Gestão de salas de espera"
+    },
+    "coordinatorsAssigned": {
+      "label": "coordenadores alocados"
+    },
+    "select": {
+      "label": "Escolhendo sala de espera"
     }
   },
   "calendar": {
@@ -2343,6 +2419,39 @@
     },
     "timeline": {
       "label": "Linha do tempo"
+    },
+    "noAssociatedPrice": {
+      "label": "Esta agenda não tem preço associado"
+    },
+    "inmediateAtentionRoomAccess": {
+      "label": "Imediato Cuidados quarto / Acesso"
+    },
+    "joinWaitingListHint": {
+      "label": "Você vai entrar numa lista de espera até que um profissional de saúde pode ajudá-lo, se você não quiser esperar botão Agendar clique Desejo."
+    },
+    "scheduleService": {
+      "label": "Marque uma consulta"
+    },
+    "healthHabits": {
+      "label": "Hábitos de saúde"
+    },
+    "anamnesis": {
+      "label": "anamnese"
+    },
+    "phisicalExam": {
+      "label": "Exame físico"
+    },
+    "nutrition": {
+      "label": "Nutrição"
+    },
+    "serviceRoom": {
+      "label": "sala médica"
+    },
+    "ATW": {
+      "label": "tempo de espera aproximado"
+    },
+    "videoService": {
+      "label": "veja o vídeo"
     }
   },
   "support": {
@@ -2433,6 +2542,12 @@
       },
       "next": {
         "label": "Segue"
+      },
+      "create": {
+        "label": "Crio"
+      },
+      "update": {
+        "label": "Atualizar"
       }
     },
     "dropdown": {
@@ -2571,6 +2686,9 @@
       },
       "filter": {
         "label": "Filtrar por"
+      },
+      "searchCoordinator": {
+        "label": "pesquisa Coordenador"
       }
     },
     "deleteAll": {
@@ -2605,6 +2723,12 @@
           },
           "age": {
             "label": "Idade"
+          },
+          "motherName": {
+            "label": "Nome da mãe"
+          },
+          "race": {
+            "label": "Raça"
           }
         }
       }
@@ -2729,9 +2853,125 @@
       "spanish": {
         "label": "espanhol"
       },
+      "english": {
+        "label": "Inglês"
+      },
       "portuguese": {
         "label": "português"
       }
+    },
+    "viewUsers": {
+      "label": "vista dos usuários"
+    },
+    "associated": {
+      "label": "associado"
+    },
+    "thisProfileDoesntHave": {
+      "label": "Esta página não tem"
+    },
+    "by": {
+      "label": "de"
+    },
+    "placeholders": {
+      "searchProfessional": {
+        "label": "procurar profissional"
+      },
+      "mmhg": {
+        "label": "mmHg"
+      },
+      "latMin": {
+        "label": "batimentos / minuto"
+      },
+      "resMin": {
+        "label": "res / min"
+      },
+      "celFar": {
+        "label": "° - ° F"
+      },
+      "kgLb": {
+        "label": "Kg - Lb"
+      },
+      "mFt": {
+        "label": "m ou pés"
+      },
+      "searchPatient": {
+        "label": "Find Patient"
+      }
+    },
+    "motherNames": {
+      "label": "Mãe Nome"
+    },
+    "motherNamesReq": {
+      "label": "Mãe Nome é necessária"
+    },
+    "actions": {
+      "label": "Ações"
+    },
+    "noDefined": {
+      "label": "Indefinido"
+    },
+    "recordPerPage": {
+      "label": "Registros por página"
+    },
+    "noRecordsFound": {
+      "label": "sem registros encontrados"
+    },
+    "onlyChars": {
+      "label": "Introduzir apenas caracteres"
+    },
+    "itsNecesesary": {
+      "label": "é necessário"
+    },
+    "currentStartDate": {
+      "label": "data de início atual"
+    },
+    "currentDateRange": {
+      "label": "gama de tempos atuais"
+    },
+    "notAll": {
+      "label": "N / D"
+    },
+    "professionalsOnline": {
+      "label": "profissional online"
+    },
+    "minutes": {
+      "label": "minutos"
+    },
+    "choose": {
+      "label": "Escolher"
+    },
+    "current": {
+      "label": "Atual"
+    },
+    "currentInvoicing": {
+      "label": "Faturamento"
+    },
+    "profileUpdated": {
+      "label": "perfil atualizado"
+    },
+    "updatePic": {
+      "label": "atualização Foto"
+    },
+    "identificationData": {
+      "label": "Os dados de identificação"
+    },
+    "identificationType": {
+      "label": "tipo de identificação"
+    },
+    "ufState": {
+      "label": "Estado (UF)"
+    },
+    "number": {
+      "label": "Número"
+    },
+    "enterService": {
+      "label": "Digite consulta"
+    },
+    "createdAt": {
+      "label": "Data de criação"
+    },
+    "disabled": {
+      "label": "Desativado"
     }
   },
   "profile": {
@@ -2972,16 +3212,21 @@
     },
     "cep": {
       "label": "CEP *"
+    },
+    "managmentDisponibility": {
+      "label": "gerenciamento de disponibilidade"
+    },
+    "updateProfile": {
+      "label": "Atualizar perfil"
+    },
+    "secondaryIdentification": {
+      "label": "identificação secundário"
     }
   },
   "account": {
     "createAccount": {
       "title": "Criar conta",
       "label": "Em seguida, insira seus dados para concluir seu registro.",
-      "isForeign": "Eu sou um estrangeiro",
-      "identificationData": {
-        "label": "Dados de identificação"
-      },
       "personalData": {
         "label": "Dados pessoais"
       },
@@ -2989,10 +3234,10 @@
         "label": "Tenho mais de 18 anos?"
       },
       "birthData": {
-        "label": "Dados de nascimento"
+        "title": "Dados de nascimento"
       },
       "address": {
-        "label": "Endereço"
+        "title": "Endereço"
       },
       "generatePassword": {
         "title": "Gerar senha"
@@ -3060,14 +3305,8 @@
     "emailReq": {
       "label": "o email *"
     },
-    "confirmEmailReq": {
-      "label": "Confirmar e-mail"
-    },
     "phoneReq": {
       "label": "Telefone *"
-    },
-    "breedReq": {
-      "label": "Raça"
     },
     "grenderReq": {
       "label": "sexo *"
@@ -3126,9 +3365,6 @@
     "atLeastOneSpecialChar": {
       "label": "* A um carácter menos especial"
     },
-    "password": {
-      "label": "Contraseña"
-    },
     "confirmPassword": {
       "label": "Confirmar senha *"
     },
@@ -3173,6 +3409,9 @@
     },
     "lengthMinEightChars": {
       "label": "* Um mínimo de 8 caracteres"
+    },
+    "academicBio": {
+      "label": "Academica biografia"
     }
   }
 }

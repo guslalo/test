@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col">
-    <h2>Atención inmediata / Acceso a Sala</h2>
-    <p>Aquí podras acceder a una consulta inmediata</p>
+    <h2>{{ 'calendar.inmediateAtentionRoomAccess.label' | transloco }}</h2>
+    <p>{{ 'dashboard.home.newService.inmediateCare.label' | transloco }}</p>
   </div>
 </div>
 <div class="row">
@@ -13,8 +13,7 @@
         </div>
         <div class="col-7">
           <p>
-            Usted ingresara en una lista de espera, hasta que un profesional de salud pueda atenderlo, si no deseas
-            esperar haz click en el botón Deseo Agendar.
+            {{ 'calendar.joinWaitingListHint.label' | transloco }}
           </p>
           <h5>{{ 'waitingRoom.waitingTime.label' | transloco }}</h5>
         </div>
@@ -45,8 +44,8 @@
                     }}</label>
                     <select class="form-control custom-select w-100" (change)="onChange($event.target)">
                       <option selected>Seleccione síntoma</option>
-                      <ng-container *ngFor="let item of symptoms"
-                        ><!---->
+                      <ng-container *ngFor="let item of symptoms">
+                        <!---->
                         <option value="{{ item._id }}">{{ item.name }} </option>
                       </ng-container>
                     </select>
@@ -93,7 +92,9 @@
             <div class="row">
               <div class="col">
                 <div class="form-group w-100">
-                  <label for="exampleInputEmail1">Describa Cómo se siente (opcional)</label>
+                  <label for="exampleInputEmail1">{{
+                    'dashboard.home.newService.synptoms.description.label' | transloco
+                  }}</label>
                   <textarea
                     class="form-control"
                     rows="5"

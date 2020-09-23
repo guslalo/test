@@ -1,8 +1,8 @@
 <ng-container *ngIf="appointmentDetail">
   <div class="row mb-3">
     <div class="col-9 col-md-9">
-      <h2>Ficha Consulta</h2>
-      <p>Sala médica</p>
+      <h2>{{ 'clinicalFile.title' | transloco }}</h2>
+      <p>{{ 'calendar.serviceRoom.label' | transloco }}</p>
     </div>
     <div class="col-3 col-md-3">
       <a href="javascript:history.back()" class="back float-right align-top">
@@ -68,7 +68,7 @@
                     <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                     <ul class="simple-list">
                       <li>
-                        Especialidad:
+                        {{ 'table.specialty.label' | transloco }}:
                         <ng-container>
                           {{ appointmentDetail.professionalDetails.specialtyDetails[0].specialtyName }}
                         </ng-container>
@@ -89,7 +89,7 @@
                 <ng-template #salaEspera>
                   <div class="col-12 text-center mt-4">
                     <img src="assets/icons/icon-online.svg" />
-                    <b class="ml-3">4 profesionales online</b>
+                    <b class="ml-3">4 {{ 'common.professionalsOnline.label' | transloco }}</b>
                   </div>
                 </ng-template>
               </div>
@@ -130,7 +130,8 @@
             <div class="card bg-light shadow-sm">
               <div class="card-body text-center mt-4">
                 <p class="card-text text-center">
-                  Tiempo aproximado de espera<!--{{appoimentDetail.dateDetails.date | date:"dd/MM/yyyy":"+0000"}}-->
+                  {{ 'calendar.ATW.label' | transloco }}
+                  <!--{{appoimentDetail.dateDetails.date | date:"dd/MM/yyyy":"+0000"}}-->
                 </p>
                 <h5 class="card-title">
                   <svg
@@ -163,26 +164,26 @@
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
                 {{
                   appointmentDetail.administrativeDetails.status === 'reserved'
-                    ? 'Reservada'
+                    ? 'clinicalFile.reserved.label'
                     : appointmentDetail.administrativeDetails.status === 'appointed'
-                    ? 'Agendada'
+                    ? 'clinicalFile.scheduled.label'
                     : appointmentDetail.administrativeDetails.status === 'rescheduled'
-                    ? 'Re-Agendada'
+                    ? 'clinicalFile.reScheduled.label'
                     : appointmentDetail.administrativeDetails.status === 'active'
-                    ? 'Activa'
+                    ? 'clinicalFile.active.label'
                     : appointmentDetail.administrativeDetails.status === 'waitingInRoom'
-                    ? 'En Sala de Espera'
+                    ? 'clinicalFile.inWaitingRoom.label'
                     : appointmentDetail.administrativeDetails.status === 'waitingInList'
-                    ? 'En Lista de Espera'
+                    ? 'clinicalFile.inWaitingList.label'
                     : appointmentDetail.administrativeDetails.status === 'running'
-                    ? 'En Curso'
+                    ? 'common.status.inProgress.label'
                     : appointmentDetail.administrativeDetails.status === 'pending'
-                    ? 'Pendiente'
+                    ? 'clinicalFile.pending.label'
                     : appointmentDetail.administrativeDetails.status === 'finished'
-                    ? 'Finalizada'
+                    ? 'clinicalFile.ended.label'
                     : appointmentDetail.administrativeDetails.status === 'canceled'
-                    ? 'Cancelada'
-                    : 'S/R'
+                    ? 'clinicalFile.canceled.label'
+                    : ('S/R' | transloco)
                 }}
               </button>
               <p class="card-text text-center mt-1">ID consulta: {{ appointmentDetail._id }}</p>
@@ -205,7 +206,7 @@
                   role="tab"
                   aria-controls="resumenConsulta"
                 >
-                  Video consulta
+                  {{ 'calendar.videoService.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -218,7 +219,7 @@
                   aria-controls="examenesDocumentos"
                   aria-selected="false"
                 >
-                  Síntomas
+                  {{ 'clinicalFile.patientData.tabs.summary.synptoms.label' | transloco }}
                 </a>
               </li>
               <!---->
@@ -232,7 +233,7 @@
                   aria-controls="prescripaciones"
                   aria-selected="false"
                 >
-                  Mi salud
+                  {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -245,7 +246,7 @@
                   aria-controls="documentos"
                   aria-selected="false"
                 >
-                  Exámenes y documentos
+                  {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -258,7 +259,7 @@
                   aria-controls="pro"
                   aria-selected="false"
                 >
-                  Profesional
+                  {{ 'table.doctor.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -271,7 +272,7 @@
                   aria-controls="timeline"
                   aria-selected="false"
                 >
-                  Timeline de consultas
+                  {{ 'tabs.timeline.label' | transloco }}
                 </a>
               </li>
             </ul>
@@ -305,7 +306,9 @@
                 <div class="bg-white p-4 rounded-lg">
                   <div class="row">
                     <div class="col-12">
-                      <p class="title font-weight-bold">Síntomas</p>
+                      <p class="title font-weight-bold">
+                        {{ 'clinicalFile.patientData.tabs.summary.synptoms.label' | transloco }}
+                      </p>
                     </div>
 
                     <ng-container *ngFor="let item of appointmentDetail.patientDetails.symptomsDetails">
@@ -336,7 +339,7 @@
                   </div>
                   <div class="row mt-3">
                     <div class="col-12">
-                      <h6 class="font-weight-bold">Descripción</h6>
+                      <h6 class="font-weight-bold">{{ 'table.description.label' | transloco }}</h6>
                       <div class="" *ngIf="appointmentDetail.patientDetails.description">
                         {{ appointmentDetail.patientDetails.description }}
                       </div>
@@ -356,10 +359,16 @@
                   <table class="table mt-1">
                     <thead class="">
                       <tr>
-                        <th scope="col" class="text-center">Nombre Documento</th>
-                        <th scope="col" class="text-center">Tipo</th>
-                        <th scope="col" class="text-center">Fecha de subida</th>
-                        <th scope="col" class="text-center">Acción</th>
+                        <th scope="col" class="text-center">
+                          {{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}
+                        </th>
+                        <th scope="col" class="text-center">
+                          {{ 'clinicalFile.patientData.tabs.prescriptions.table.type.label' | transloco }}
+                        </th>
+                        <th scope="col" class="text-center">
+                          {{ 'clinicalFile.patientData.tabs.prescriptions.table.date.label' | transloco }}
+                        </th>
+                        <th scope="col" class="text-center">{{ 'table.action.label' | transloco }}</th>
                       </tr>
                     </thead>
 
@@ -371,7 +380,7 @@
                         <td>
                           <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                             <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
-                              Descargar
+                              {{ 'common.button.download.label' | transloco }}
                             </button>
                           </a>
                         </td>
@@ -395,7 +404,7 @@
               <div class="col-12">
                 <div>
                   <p class="title font-weight-bold">
-                    Mi salud
+                    {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                   </p>
                 </div>
                 <!-- colappsed-->
@@ -423,7 +432,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Enfermedades
+                    {{ 'dashboard.home.myHealth.deceases.label' | transloco }}
                   </a>
 
                   <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
@@ -463,7 +472,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Antecedentes Familiares
+                    {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                   </a>
                   <ng-container *ngIf="antecedentesGeneral">
                     <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
@@ -503,7 +512,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Hábitos de Salud
+                    {{ 'dashboard.home.myHealth.healthHabits.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -544,7 +553,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Medicamentos
+                    {{ 'dashboard.home.myHealth.meds.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -585,7 +594,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Ocupacionales
+                    {{ 'dashboard.home.myHealth.occupationals.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -625,7 +634,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Otros
+                    {{ 'dashboard.home.myHealth.others.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -650,14 +659,14 @@
               <div class="col-12 mb-3">
                 <div class="row">
                   <div class="col">
-                    <h3>Profesional</h3>
+                    <h3>{{ 'table.doctor.label' | transloco }}</h3>
                   </div>
                 </div>
               </div>
               <div class="col-6">
                 <div>
                   <p class="title font-weight-bold">
-                    Biografía Academica <!-- {{ 'teleconsultation.tabProfessional.biografia' | transloco }}-->
+                    {{ 'dashboard.home.userManagment.createAccount.tabs.academic.bio.label' | transloco }}
                   </p>
 
                   <p>{{ professionalData.professionalData.biography }}</p>
@@ -673,25 +682,31 @@
               </div>
               <div class="col-6">
                 <div>
-                  <p class="title font-weight-bold">Universidad</p>
+                  <p class="title font-weight-bold">
+                    {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }
+                  </p>
 
                   {{ professionalData.professionalData.university }}
                   <hr />
                 </div>
                 <div>
-                  <p class="title font-weight-bold">Título</p>
+                  <p class="title font-weight-bold">
+                    {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
+                  </p>
 
                   {{ professionalData.professionalData.professionalTitle }}
                   <hr />
                 </div>
                 <div>
-                  <p class="title font-weight-bold">Número de registro</p>
+                  <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
                   {{ professionalData.professionalData.ufRegistry.name }}
 
                   <hr />
                 </div>
                 <div>
-                  <p class="title font-weight-bold">Curso</p>
+                  <p class="title font-weight-bold">
+                    {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
+                  </p>
                   {{ professionalData.professionalData.course }}
                   <hr />
                 </div>
@@ -705,7 +720,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="bg-white p-5 rounded-lg text-center">
-                  <h5 class="mb-0 text-left">Timeline de consultas</h5>
+                  <h5 class="mb-0 text-left">{{ 'tabs.timeline.label' | transloco }}</h5>
                   <div class="timeLine">
                     <div class="line bg-white">{{ fecha.year }}</div>
                     <div class="line">
@@ -773,16 +788,20 @@
                                     </svg>
                                   </div>
                                   <div class="col-9">
-                                    <p class="m-0 text-left">Cita agendada con</p>
+                                    <p class="m-0 text-left">
+                                      {{ 'clinicalFile.accountSchedulededWith.label' | transloco }}
+                                    </p>
                                     <p class="m-0 text-left">
                                       Dr.
                                       <!--{{item.professional.name}} {{item.professional.lastName}}-->
                                     </p>
                                     <div class="btn btn-primary btn-sm rounded-pill float-left">
                                       <ng-container *ngIf="item.isActive; else inactivo">
-                                        Activo
+                                        {{ 'common.status.active.label' | transloco }}
                                       </ng-container>
-                                      <ng-template #inactivo>Inactivo</ng-template>
+                                      <ng-template #inactivo
+                                        >{{ 'clinicalFile.inactive.label' | transloco }}
+                                      </ng-template>
                                     </div>
                                   </div>
                                 </div>
@@ -832,7 +851,7 @@
                   role="tab"
                   aria-controls="resumenConsulta"
                 >
-                  Videoconsulta
+                  {{ 'calendar.videoService.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -845,7 +864,7 @@
                   aria-controls="examenesDocumentos"
                   aria-selected="false"
                 >
-                  Síntomas
+                  {{ 'clinicalFile.patientData.tabs.summary.synptoms.label' | transloco }}
                 </a>
               </li>
               <!---->
@@ -859,7 +878,7 @@
                   aria-controls="prescripaciones"
                   aria-selected="false"
                 >
-                  Mi salud
+                  {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                 </a>
               </li>
               <li class="nav-item" role="presentation">
@@ -872,7 +891,7 @@
                   aria-controls="timeline"
                   aria-selected="false"
                 >
-                  Exámenes y documentos
+                  {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
                 </a>
               </li>
             </ul>
@@ -904,7 +923,9 @@
                 <div class="bg-white p-4 rounded-lg">
                   <div class="row">
                     <div class="col-12">
-                      <p class="title font-weight-bold">Síntomas</p>
+                      <p class="title font-weight-bold">
+                        {{ 'clinicalFile.patientData.tabs.summary.synptoms.label' | transloco }}
+                      </p>
                     </div>
 
                     <ng-container *ngFor="let item of appointmentDetail.patientDetails.symptomsDetails">
@@ -935,7 +956,7 @@
                   </div>
                   <div class="row mt-3">
                     <div class="col-12">
-                      <h6 class="font-weight-bold">Descripción</h6>
+                      <h6 class="font-weight-bold">{{ 'table.description.label' | transloco }}</h6>
                       <div class="" *ngIf="appointmentDetail.patientDetails.description">
                         {{ appointmentDetail.patientDetails.description }}
                       </div>
@@ -958,7 +979,7 @@
               <div class="col-12">
                 <div>
                   <p class="title font-weight-bold">
-                    Mi salud
+                    {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                   </p>
                 </div>
                 <!-- colappsed-->
@@ -986,7 +1007,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Enfermedades
+                    {{ 'dashboard.home.myHealth.deceases.label' | transloco }}
                   </a>
 
                   <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
@@ -1026,7 +1047,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Antecedentes Familiares
+                    {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                   </a>
                   <ng-container *ngIf="antecedentesGeneral">
                     <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
@@ -1066,7 +1087,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Hábitos de Salud
+                    {{ 'dashboard.home.myHealth.healthHabits.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -1107,7 +1128,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Medicamentos
+                    {{ 'dashboard.home.myHealth.meds.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -1148,7 +1169,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Ocupacionales
+                    {{ 'dashboard.home.myHealth.occupationals.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -1188,7 +1209,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Otros
+                    {{ 'dashboard.home.myHealth.others.label' | transloco }}
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
@@ -1215,10 +1236,14 @@
                   <table class="table mt-1">
                     <thead class="">
                       <tr>
-                        <th scope="col" class="text-center">Nombre Documento</th>
-                        <th scope="col" class="text-center">Tipo</th>
-                        <th scope="col" class="text-center">Fecha de subida</th>
-                        <th scope="col" class="text-center">Acción</th>
+                        <th scope="col" class="text-center">
+                          {{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}
+                        </th>
+                        <th scope="col" class="text-center">
+                          {{ 'dashboard.home.config.tabs.specialty.table.type.label' | transloco }}
+                        </th>
+                        <th scope="col" class="text-center">{{ 'common.uploadDate.label' | transloco }}</th>
+                        <th scope="col" class="text-center">{{ 'table.action.label' | transloco }}</th>
                       </tr>
                     </thead>
 
@@ -1230,7 +1255,7 @@
                         <td>
                           <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                             <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
-                              Descargar
+                              {{ 'common.button.download.label' | transloco }}
                             </button>
                           </a>
                         </td>

@@ -60,7 +60,7 @@
               d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
             />
           </svg>
-          Sala de espera
+          {{ 'waitingRoom.name.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
@@ -189,26 +189,26 @@
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
                           item.administrativeDetails.status === 'reserved'
-                            ? 'Reservada'
+                            ? 'clinicalFile.reserved.label'
                             : item.administrativeDetails.status === 'appointed'
-                            ? 'Agendada'
+                            ? 'clinicalFile.scheduled.label'
                             : item.administrativeDetails.status === 'rescheduled'
-                            ? 'Re-Agendada'
+                            ? 'clinicalFile.reScheduled.label'
                             : item.administrativeDetails.status === 'active'
-                            ? 'Activa'
+                            ? 'clinicalFile.active.label'
                             : item.administrativeDetails.status === 'waitingInRoom'
-                            ? 'En Sala de Espera'
+                            ? 'clinicalFile.inWaitingRoom.label'
                             : item.administrativeDetails.status === 'waitingInList'
-                            ? 'En Lista de Espera'
+                            ? 'clinicalFile.inWaitingList.label'
                             : item.administrativeDetails.status === 'running'
-                            ? 'En Curso'
+                            ? 'common.status.inProgress.label'
                             : item.administrativeDetails.status === 'pending'
-                            ? 'Pendiente'
+                            ? 'clinicalFile.pending.label'
                             : item.administrativeDetails.status === 'finished'
-                            ? 'Finalizada'
+                            ? 'clinicalFile.ended.label'
                             : item.administrativeDetails.status === 'canceled'
-                            ? 'Cancelada'
-                            : 'S/R'
+                            ? 'clinicalFile.canceled.label'
+                            : ('S/R' | transloco)
                         }}
                       </button>
                     </td>
@@ -224,7 +224,7 @@
                       >
                         <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
                           <button class="rounded-pill btn-sm btn btn-primary" type="button">
-                            Entrar
+                            {{ 'clinicalFile.enter.label' | transloco }}
                           </button>
                         </a>
 
@@ -247,7 +247,7 @@
 
                           <div class="dropdown-menu dropdown-menu-right">
                             <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
-                              Entrar
+                              {{ 'clinicalFile.enter.label' | transloco }}
                             </button>
                           </div>
                         </div>
@@ -255,7 +255,7 @@
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                         <a routerLink="consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
-                            Ver ficha
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -272,7 +272,7 @@
         <ng-template #vacio>
           <div class="collapseCustom p-3">
             <div class="alert alert-warning" role="alert">
-              Sin información
+              {{ 'common.noInfo.label' | transloco }}
             </div>
           </div>
         </ng-template>
@@ -307,7 +307,7 @@
           <div class="col-12 col-md-3">
             <div class="form-group">
               <select class="form-control" id="exampleFormControlSelect1">
-                <option>Filtrar por</option>
+                <option>{{ 'common.dropdown.filter.label' | transloco }}</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
@@ -326,9 +326,9 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Fecha creación</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
+                  <th>{{ 'common.createdAt.label' | transloco }}</th>
+                  <th>{{ 'table.status.label' | transloco }}</th>
+                  <th>{{ 'table.action.label' | transloco }}</th>
                 </tr>
               </thead>
             </table>
@@ -365,26 +365,26 @@
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
                           item.administrativeDetails.status === 'reserved'
-                            ? 'Reservada'
+                            ? 'clinicalFile.reserved.label'
                             : item.administrativeDetails.status === 'appointed'
-                            ? 'Agendada'
+                            ? 'clinicalFile.scheduled.label'
                             : item.administrativeDetails.status === 'rescheduled'
-                            ? 'Re-Agendada'
+                            ? 'clinicalFile.reScheduled.label'
                             : item.administrativeDetails.status === 'active'
-                            ? 'Activa'
+                            ? 'clinicalFile.active.label'
                             : item.administrativeDetails.status === 'waitingInRoom'
-                            ? 'En Sala de Espera'
+                            ? 'clinicalFile.inWaitingRoom.label'
                             : item.administrativeDetails.status === 'waitingInList'
-                            ? 'En Lista de Espera'
+                            ? 'clinicalFile.inWaitingList.label'
                             : item.administrativeDetails.status === 'running'
-                            ? 'En Curso'
+                            ? 'common.status.inProgress.label'
                             : item.administrativeDetails.status === 'pending'
-                            ? 'Pendiente'
+                            ? 'clinicalFile.pending.label'
                             : item.administrativeDetails.status === 'finished'
-                            ? 'Finalizada'
+                            ? 'clinicalFile.ended.label'
                             : item.administrativeDetails.status === 'canceled'
-                            ? 'Cancelada'
-                            : 'S/R'
+                            ? 'clinicalFile.canceled.label'
+                            : ('S/R' | transloco)
                         }}
                       </button>
                     </td>
@@ -433,7 +433,7 @@
                       <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                         <a routerLink="consulta/{{ item._id }}">
                           <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
-                            Ver ficha
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
                           </button>
                         </a>
                       </ng-container>
@@ -526,9 +526,9 @@
                                 </p>
                                 <div class="btn btn-primary btn-sm rounded-pill float-left">
                                   <ng-container *ngIf="item.isActive; else inactivo">
-                                    Activo
+                                    {{ 'common.status.active.label' | transloco }}
                                   </ng-container>
-                                  <ng-template #inactivo>Inactivo</ng-template>
+                                  <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
                                 </div>
                               </div>
                             </div>

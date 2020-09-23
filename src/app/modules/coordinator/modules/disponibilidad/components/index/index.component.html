@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col mb-2">
-      <h2>Gestión de Disponibilidad</h2>
+      <h2>{{ 'profile.managmentDisponibility.label' | transloco }}</h2>
     </div>
     <div class="col mb-2">
       <button
@@ -11,7 +11,7 @@
         data-toggle="modal"
         data-target="#disponibilidad"
       >
-        Nueva Disponibilidad
+        {{ 'disponibility.btnNewDisponibility.label' | transloco }}
         <svg
           width="1.5em"
           height="1.5em"
@@ -35,7 +35,7 @@
       <!--consultas activas-->
       <div class="row mt-1">
         <div class="col-12">
-          <h5 style="display: none;">Mis consultas activas</h5>
+          <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
         </div>
         <div class="col-12 mb-4">
           <div class="tableBox rounded p-4 bg-white">
@@ -164,7 +164,9 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Crear disponibilidad</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+            {{ 'disponibility.modal.create.title' | transloco }}
+          </h5>
           <button
             type="button"
             class="close"
@@ -179,12 +181,12 @@
           <form [formGroup]="createAvailability">
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Profesional</label>
+                <label for="objective">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
                 <input
                   *ngIf="professionals"
                   type="text"
                   class="form-control"
-                  placeholder="Buscar Profesional"
+                  placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                   [matAutocomplete]="auto"
                   formControlName="professional"
                 />
@@ -202,7 +204,9 @@
                 </mat-autocomplete>
               </div>
               <div class="form-group col">
-                <label for="specialty">Tipo Profesional</label>
+                <label for="specialty">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.type.label' | transloco
+                }}</label>
                 <input
                   readonly
                   class="form-control"
@@ -214,7 +218,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Objetivo</label>
+                <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
                 <input
                   type="text"
                   class="form-control"
@@ -226,7 +230,9 @@
                 />
               </div>
               <div class="form-group col">
-                <label for="specialty">Especialidad</label>
+                <label for="specialty">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.specialty.label' | transloco
+                }}</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
@@ -236,7 +242,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="startDate">Fecha inicio</label>
+                <label for="startDate">{{ 'common.startDate.label' | transloco }}</label>
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -257,12 +263,12 @@
                   />
 
                   <div *ngIf="createAvailability.controls['startDate'].errors?.required" class="invalid-feedback">
-                    Fecha inicio es necesaria
+                    {{ 'common.startDateReq.label' | transloco }}
                   </div>
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label>
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -286,7 +292,9 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <label for="appointmentDuration">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco
+                }}</label>
                 <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
                   <ng-container *ngFor="let item of interval">
                     <option value="{{ item.value }}">{{ item.min }}</option>
@@ -296,7 +304,7 @@
             </div>
             <div class="row mt-2 mb-3">
               <div class="col-12">
-                <p>Disponibilidad Días</p>
+                <p>{{ 'disponibility.modal.create.aviability.label' | transloco }}</p>
               </div>
 
               <div class="col">
@@ -322,7 +330,9 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <label for="start' + i" [attr.for]="'start' + i">{{
+                      'disponibility.modal.create.initialDate.label' | transloco
+                    }}</label>
                     <div class="d-flex justify-content-center">
                       <ngb-timepicker
                         [attr.id]="'start' + i"
@@ -336,11 +346,13 @@
                       </ngb-timepicker>
                     </div>
                     <div *ngIf="createAvailability.controls['dailyRanges'].errors?.required" class="invalid-feedback">
-                      Fecha inicio es necesaria
+                      {{ 'common.startDateReq.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <label for="'end' + i" [attr.for]="'end' + i">{{
+                      'disponibility.modal.create.finalDate.label' | transloco
+                    }}</label>
                     <div class="d-flex justify-content-center">
                       <ngb-timepicker
                         [attr.id]="'end' + i"
@@ -384,7 +396,7 @@
                       d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
                     />
                   </svg>
-                  Nueva variación de disponibilidad</a
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
                 >
               </div>
             </div>
@@ -392,7 +404,9 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+            {{ 'common.button.cancel.label' | transloco }}
+          </button>
           <button
             type="button"
             class="btn btn-primary rounded-pill"
@@ -400,7 +414,7 @@
             [disabled]="!createAvailability.valid"
             data-dismiss="modal"
           >
-            Crear Disponibilidad
+            {{ 'disponibility.modal.create.btnCreate.label' | transloco }}
           </button>
         </div>
       </div>
@@ -421,7 +435,9 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Editar Disponibilidad</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
+            {{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.editDisponibility.label' | transloco }}
+          </h5>
           <button
             type="button"
             class="close"
@@ -436,12 +452,14 @@
           <form [formGroup]="createAvailability" novalidate="">
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Profesional</label>
+                <label for="objective">{{
+                  'dashboard.home.config.tabs.prices.table.profetional.label' | transloco
+                }}</label>
                 <input
                   *ngIf="professionals"
                   type="text"
                   class="form-control"
-                  placeholder="Buscar Profesional"
+                  placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                   [matAutocomplete]="auto"
                   formControlName="professional"
                 />
@@ -459,7 +477,9 @@
                 </mat-autocomplete>
               </div>
               <div class="form-group col">
-                <label for="specialty">Tipo Profesional</label>
+                <label for="specialty">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.type.label' | transloco
+                }}</label>
                 <input
                   readonly
                   class="form-control"
@@ -470,7 +490,7 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="objective">Objetivo</label>
+                <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
                 <input
                   type="text"
                   class="form-control"
@@ -484,7 +504,9 @@
                 /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
-                <label for="specialty">Especialidad </label>
+                <label for="specialty"
+                  >{{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.specialty.label' | transloco }}
+                </label>
                 <select class="form-control" id="specialty" formControlName="specialty">
                   <ng-container *ngFor="let item of specialtiesId">
                     <option value="{{ item._id }}">{{ item.specialtyName }}</option>
@@ -495,7 +517,8 @@
             <div class="row">
               <div class="form-group col">
                 <label for="endDate"
-                  >Fecha inicio actual: {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }}
+                  >{{ 'common.currentStartDate.label' | transloco }}:
+                  {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }}
                 </label>
                 <div class="input-group">
                   <!---->
@@ -513,8 +536,8 @@
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label
-                ><!-- formControlName="endDate"   id="endDate2"-->
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
+                <!-- formControlName="endDate"   id="endDate2"-->
                 <div class="input-group">
                   <input
                     class="form-control"
@@ -544,7 +567,9 @@
             <div class="row">
               <!-- formControlName="appointmentDuration"-->
               <div class="form-group col">
-                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <label for="appointmentDuration">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco
+                }}</label>
                 <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
                   <ng-container *ngFor="let item of interval">
                     <option value="{{ item.value }}">{{ item.value }}</option>
@@ -555,7 +580,8 @@
             <div class="row mt-2 mb-3">
               <div class="col-12">
                 <p>
-                  Disponibilidad de días actual: <b>{{ idAvailability.dateDetails.days }}</b>
+                  {{ 'common.aviabilityActualDays.label' | transloco }}:
+                  <b>{{ idAvailability.dateDetails.days }}</b>
                 </p>
               </div>
               <div class="col">
@@ -578,7 +604,7 @@
             </div>
             <div class="col-12">
               <p class="pl-0">
-                rango de horarios actual:<b>
+                {{ 'common.currentDateRange.label' | transloco }}:<b>
                   <ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
                     {{ range.start }} hrs - {{ range.end }} hrs
                   </ng-container>
@@ -590,7 +616,9 @@
               <div [formGroupName]="i">
                 <div class="row">
                   <div class="form-group col">
-                    <label for="start' + i" [attr.for]="'start' + i">Horario inicial</label>
+                    <label for="start' + i" [attr.for]="'start' + i">{{
+                      'disponibility.modal.create.initialDate.label' | transloco
+                    }}</label>
                     <div class="d-flex justify-content-center">
                       <ngb-timepicker
                         [attr.id]="'start' + i"
@@ -605,7 +633,9 @@
                     </div>
                   </div>
                   <div class="form-group col">
-                    <label for="'end' + i" [attr.for]="'end' + i">Horario final</label>
+                    <label for="'end' + i" [attr.for]="'end' + i">{{
+                      'disponibility.modal.create.finalDate.label' | transloco
+                    }}</label>
                     <div class="d-flex justify-content-center">
                       <ngb-timepicker
                         [attr.id]="'end' + i"
@@ -649,7 +679,7 @@
                       d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
                     />
                   </svg>
-                  Nueva variación de disponibilidad</a
+                  {{ 'disponibility.modal.create.newVariation.label' | transloco }}</a
                 >
               </div>
             </div>
@@ -657,7 +687,9 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+            {{ 'common.button.cancel.label' | transloco }}
+          </button>
           <button
             type="button"
             class="btn btn-primary rounded-pill"
@@ -666,7 +698,7 @@
             [disabled]="!createAvailability.valid"
           >
             <!--[disabled]="!createAvailability.valid"-->
-            Editar Disponibilidad
+            {{ 'clinicalFile.editDisponibility.label' | transloco }}
           </button>
         </div>
       </div>

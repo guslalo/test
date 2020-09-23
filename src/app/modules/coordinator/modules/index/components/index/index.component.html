@@ -177,7 +177,7 @@
                 <tbody *ngIf="consultas">
                   <ng-container *ngIf="consultas && consultas.length === 0; else data">
                     <div class="alert alert-warning mt-2" role="alert">
-                      Sin Información
+                      {{ 'common.noInfo.label' | transloco }}
                     </div>
                   </ng-container>
                   <ng-template #data>
@@ -201,7 +201,7 @@
                         {{ item.professionalDetails.userDetails[0].name }}
                         {{ item.professionalDetails.userDetails[0].lastName }}
                       </td>
-                      <td class="d-none">Objetivo</td>
+                      <td class="d-none">{{ 'table.objetive.label' | transloco }}</td>
                       <td>
                         <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                           {{ item.administrativeDetails.status }}
@@ -248,10 +248,10 @@
                     <td>22/93/2020</td>
                     <td>12:14 Hrs.</td>
                     <td>Antonio rojas</td>
-                    <td>Objetivo</td>
+                    <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        En curso
+                        {{ 'common.status.inProgress.label' | transloco }}
                       </button>
                     </td>
                     <td>
@@ -271,7 +271,7 @@
                     <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        En curso
+                        {{ 'common.status.inProgress.label' | transloco }}
                       </button>
                     </td>
                     <td>

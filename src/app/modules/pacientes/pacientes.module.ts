@@ -16,6 +16,7 @@ import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
 //ConsultaComponent,
 @NgModule({
@@ -26,8 +27,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CambiarClaveComponent,
     MisConsultasFilterComponent,
     AgendarComponent,
+    ConsultaComponent,
   ],
-  imports: [CommonModule, PacientesRoutingModule, SharedModule],
+  imports: [CommonModule, PacientesRoutingModule, SharedModule, TranslocoRootModule],
   exports: [AgendarComponent],
   providers: [OpentokService],
 })

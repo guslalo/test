@@ -12,7 +12,7 @@
       data-toggle="modal"
       data-target="#modalAppointment"
     >
-      Nueva Consulta
+      {{ 'clinicalFile.newService.label' | transloco }}
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
     </button>
   </div>
@@ -24,7 +24,7 @@
       [(ngModel)]="searchTerm"
       type="text"
       class="form-control"
-      placeholder="Busqueda"
+      placeholder="{{ 'common.placeholder.search.label' | transloco }}"
       (keyup)="applyFiltersAppointments()"
     />
     <div class="searchBox">
@@ -40,17 +40,17 @@
         id="status"
         (change)="applyFiltersAppointments()"
       >
-        <option [ngValue]="null">Filtrar por Estado</option>
-        <option ngValue="reserved">Reservada</option>
-        <option ngValue="appointed">Agendada</option>
-        <option ngValue="rescheduled">Re-Agendada</option>
-        <option ngValue="active">Activa</option>
-        <option ngValue="waitingInRoom">En Sala de Espera</option>
-        <option ngValue="waitingInList">En Lista de Espera</option>
-        <option ngValue="running">En Curso</option>
-        <option ngValue="pending">Pendiente</option>
-        <option ngValue="finished">Finalizada</option>
-        <option ngValue="canceled">Cancelada</option>
+        <option [ngValue]="null">{{ 'clinicalFile.filterByState.label' | transloco }}</option>
+        <option ngValue="reserved">{{ 'clinicalFile.reserved.label' | transloco }}</option>
+        <option ngValue="appointed">{{ 'clinicalFile.scheduled.label' | transloco }}</option>
+        <option ngValue="rescheduled">{{ 'clinicalFile.reScheduled.label' | transloco }}</option>
+        <option ngValue="active">{{ 'clinicalFile.active.label' | transloco }}</option>
+        <option ngValue="waitingInRoom">{{ 'clinicalFile.inWaitingRoom.label' | transloco }}</option>
+        <option ngValue="waitingInList">{{ 'clinicalFile.inWaitingList.label' | transloco }}</option>
+        <option ngValue="running">{{ 'common.status.inProgress.label' | transloco }}</option>
+        <option ngValue="pending">{{ 'clinicalFile.pending.label' | transloco }}</option>
+        <option ngValue="finished">{{ 'clinicalFile.ended.label' | transloco }}</option>
+        <option ngValue="canceled">{{ 'clinicalFile.canceled.label' | transloco }}</option>
       </select>
     </div>
   </div>
@@ -165,29 +165,29 @@
             >
               {{
                 row.administrativeDetails.status === 'reserved'
-                  ? 'Reservada'
+                  ? 'clinicalFile.reserved.label'
                   : row.administrativeDetails.status === 'appointed'
-                  ? 'Agendada'
+                  ? 'clinicalFile.scheduled.label'
                   : row.administrativeDetails.status === 'rescheduled'
-                  ? 'Re-Agendada'
+                  ? 'clinicalFile.reScheduled.label'
                   : row.administrativeDetails.status === 'active'
-                  ? 'Activa'
+                  ? 'clinicalFile.active.label'
                   : row.administrativeDetails.status === 'waitingInRoom'
-                  ? 'En Sala de Espera'
+                  ? 'clinicalFile.inWaitingRoom.label'
                   : row.administrativeDetails.status === 'waitingInList'
-                  ? 'En Lista de Espera'
+                  ? 'clinicalFile.inWaitingList.label'
                   : row.administrativeDetails.status === 'running'
-                  ? 'En Curso'
+                  ? 'common.status.inProgress.label'
                   : row.administrativeDetails.status === 'pending'
-                  ? 'Pendiente'
+                  ? 'clinicalFile.pending.label'
                   : row.administrativeDetails.status === 'finished'
-                  ? 'Finalizada'
+                  ? 'clinicalFile.ended.label'
                   : row.administrativeDetails.status === 'canceled'
-                  ? 'Cancelada'
-                  : null
+                  ? 'clinicalFile.canceled.label'
+                  : (null | transloco)
               }}
             </button>
-            <ng-template #invalidStatus>N/A</ng-template>
+            <ng-template #invalidStatus>{{ 'common.notAll.label' | transloco }}</ng-template>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Accion">
@@ -195,7 +195,7 @@
             <ng-container *ngIf="row.administrativeDetails.status === 'finished'">
               <a routerLink="/app-professional/ficha-consulta/{{ row._id }}">
                 <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                  Ver Ficha
+                  {{ 'clinicalFile.viewMedCard.label' | transloco }}
                 </button>
               </a>
             </ng-container>
@@ -209,7 +209,7 @@
             >
               <a routerLink="/app-professional/crear-ficha-consulta/{{ row._id }}">
                 <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                  Atender
+                  {{ 'clinicalFile.attend.label' | transloco }}
                 </button>
               </a>
             </ng-container>
@@ -217,7 +217,7 @@
         </ngx-datatable-column>
       </ngx-datatable>
       <ng-template #noData>
-        <h5 class="text-center text-primary">No existen coincidencias</h5>
+        <h5 class="text-center text-primary">{{ 'clinicalFile.noMatches.label' | transloco }}</h5>
       </ng-template>
       <!--/tab-->
     </div>
@@ -229,7 +229,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 mt-1">Reservar Consulta</h5>
+        <h5 class="modal-title text-center w-100 mt-1">{{ 'clinicalFile.reserveService.label' | transloco }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -238,12 +238,14 @@
         <form [formGroup]="appointmentForm" class="mt-4">
           <div class="row">
             <div class="form-group col">
-              <label for="startBlock">Nombre Paciente o por ID</label>
+              <label for="startBlock">{{
+                'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco
+              }}</label>
               <input
                 *ngIf="patients"
                 type="text"
                 class="form-control"
-                placeholder="Buscar Paciente"
+                placeholder="{{ 'common.placeholders.searchPatient.label' | transloco }}"
                 [matAutocomplete]="autoPatients"
                 formControlName="patient"
               />
@@ -290,30 +292,32 @@
 
           <div class="row">
             <div class="form-group col">
-              <label for="startBlock">Horas Disponibles</label>
+              <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
               <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
                 <ng-container *ngFor="let item of blocks">
                   <option value="{{ item }}">{{ item }}</option>
                 </ng-container>
               </select>
               <ng-container *ngIf="!blocks.length">
-                <p class="text-primary">No existen horas disponibles.</p>
+                <p class="text-primary">{{ 'clinicalFile.noHoursAvailable.label' | transloco }}</p>
               </ng-container>
             </div>
             <div class="form-group col">
-              <label for="objective">Objetivo de consulta</label>
+              <label for="objective">{{
+                'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
+              }}</label>
               <input type="text" class="form-control" name="objective" formControlName="objective" />
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col">
-              <label for="professional">Profesional</label>
+              <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
               <input
                 *ngIf="professionals"
                 type="text"
                 class="form-control"
-                placeholder="Buscar Profesional"
+                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                 [matAutocomplete]="autoProfessionals"
                 formControlName="professional"
               />
@@ -331,9 +335,11 @@
               </mat-autocomplete>
             </div>
             <div class="form-group col">
-              <label for="specialty">Especialidad</label>
+              <label for="specialty">{{
+                'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.specialty.label' | transloco
+              }}</label>
               <select class="form-control custom-select" (change)="getBlocks()" formControlName="specialty">
-                <option selected>Selecciona</option>
+                <option selected>{{ 'common.select.label' | transloco }}</option>
                 <ng-container *ngFor="let item of specialties">
                   <option value="{{ item._id }}">{{ item.specialtyName }} </option>
                 </ng-container>
@@ -352,7 +358,7 @@
                 [disabled]="!appointmentForm.valid"
               >
                 <!--[disabled]="!createAvailability.valid"-->
-                Reservar Consulta
+                {{ 'clinicalFile.reserveService.label' | transloco }}
               </button>
             </div>
           </div>
@@ -363,7 +369,7 @@
   <div class="modal-footer text-center justify-content-center">
     <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
     <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" routerLink="crear-ficha-consulta">
-      Crear Consulta
+      {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
     </button>
   </div>
 </div>

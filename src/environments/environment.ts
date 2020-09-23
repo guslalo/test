@@ -5,6 +5,7 @@ export const environment = {
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
+  sessionTime: 600,
   clientSecret: '',
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',

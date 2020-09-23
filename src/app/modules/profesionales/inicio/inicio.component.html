@@ -40,8 +40,8 @@
       <div class="col-md-4">
         <div class="card destacado">
           <div class="card-body text-center">
-            <h5 class="card-title mt-4">Nº de consultas mensuales</h5>
-            <h4 class="card-text text-center">{{ consultasFinalizadas }} Consultas</h4>
+            <h5 class="card-title mt-4">{{ 'clinicalFile.numberOfServices.label' | transloco }}</h5>
+            <h4 class="card-text text-center">{{ consultasFinalizadas }} {{ 'tabs.services.label' | transloco }}</h4>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
           <div class="card-body text-center">
             <h5 class="card-title mt-4">{{ 'clinicalFile.nextService.label' | transloco }}</h5>
             <h4 class="card-text text-center">
-              En 17 minutos
+              {{ 'common.in.label' | transloco }} 17 {{ 'common.minutes.label' | transloco }}
             </h4>
           </div>
         </div>
@@ -232,7 +232,10 @@
                     <th scope="row">
                       {{ 'videoChat.modalEnd.patient.label' | transloco }}
                     </th>
-                    <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }} agendada</th>
+                    <th>
+                      {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}
+                      {{ 'clinicalFile.scheduled.label' | transloco }}
+                    </th>
                     <th>Hora agendada</th>
                     <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
                     <th>
@@ -241,85 +244,76 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngIf="consultas && consultas.length == 0; else consultasData">
-                    <tr>
-                      <div class="alert alert-warning mt-2" role="alert">
-                        No existen consultas
-                      </div>
-                    </tr>
-                  </ng-container>
-                  <ng-template #consultasData>
-                    <tr *ngFor="let item of consultas" id="{{ item._id }}">
-                      <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
-                        <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
-                          {{ item.patientDetails.userDetails[0].personalData.name }}
-                          {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                          {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                        </td>
-                        <ng-template #sinInfo>
-                          <td scope="row">Sin información</td>
-                        </ng-template>
-                        <td>
-                          {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                        </td>
-                        <td>
-                          {{ item.dateDetails.start }}
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                            {{
-                              item.administrativeDetails.status === 'reserved'
-                                ? 'Reservada'
-                                : item.administrativeDetails.status === 'appointed'
-                                ? 'Agendada'
-                                : item.administrativeDetails.status === 'rescheduled'
-                                ? 'Re-Agendada'
-                                : item.administrativeDetails.status === 'active'
-                                ? 'Activa'
-                                : item.administrativeDetails.status === 'waitingInRoom'
-                                ? 'En Sala de Espera'
-                                : item.administrativeDetails.status === 'waitingInList'
-                                ? 'En Lista de Espera'
-                                : item.administrativeDetails.status === 'running'
-                                ? 'En Curso'
-                                : item.administrativeDetails.status === 'pending'
-                                ? 'Pendiente'
-                                : item.administrativeDetails.status === 'finished'
-                                ? 'Finalizada'
-                                : item.administrativeDetails.status === 'canceled'
-                                ? 'Cancelada'
-                                : 'S/R'
-                            }}
-                          </button>
-                        </td>
-                        <td>
-                          <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                            <a routerLink="ficha-consulta/{{ item._id }}">
-                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                                Ver Ficha
-                              </button>
-                            </a>
-                          </ng-container>
-                          <ng-container
-                            *ngIf="
-                              item.administrativeDetails.status === 'running' ||
-                              item.administrativeDetails.status === 'active' ||
-                              item.administrativeDetails.status === 'pending'
-                            "
+                  <tr *ngFor="let item of consultas" id="{{ item._id }}">
+                    <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
+                      <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
+                        {{ item.patientDetails.userDetails[0].personalData.name }}
+                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                      </td>
+                      <ng-template #sinInfo>
+                        <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
+                      </ng-template>
+                      <td>
+                        {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+                      <td>
+                        {{ item.dateDetails.start }}
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                          {{
+                            item.administrativeDetails.status === 'reserved'
+                              ? 'clinicalFile.reserved.label'
+                              : item.administrativeDetails.status === 'appointed'
+                              ? 'clinicalFile.scheduled.label'
+                              : item.administrativeDetails.status === 'rescheduled'
+                              ? 'clinicalFile.reScheduled.label'
+                              : item.administrativeDetails.status === 'active'
+                              ? 'clinicalFile.active.label'
+                              : item.administrativeDetails.status === 'waitingInRoom'
+                              ? 'clinicalFile.inWaitingRoom.label'
+                              : item.administrativeDetails.status === 'waitingInList'
+                              ? 'clinicalFile.inWaitingList.label'
+                              : item.administrativeDetails.status === 'running'
+                              ? 'common.status.inProgress.label'
+                              : item.administrativeDetails.status === 'pending'
+                              ? 'clinicalFile.pending.label'
+                              : item.administrativeDetails.status === 'finished'
+                              ? 'clinicalFile.ended.label'
+                              : item.administrativeDetails.status === 'canceled'
+                              ? 'clinicalFile.canceled.label'
+                              : ('common.SR.label' | transloco)
+                          }}
+                        </button>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                          <a routerLink="ficha-consulta/{{ item._id }}">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                              {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                            </button>
+                          </a>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="
+                            item.administrativeDetails.status === 'running' ||
+                            item.administrativeDetails.status === 'active' ||
+                            item.administrativeDetails.status === 'pending'
+                          "
+                        >
+                          <a
+                            *ngIf="item.patientDetails.userDetails[0]"
+                            routerLink="crear-ficha-consulta/{{ item._id }}"
                           >
-                            <a
-                              *ngIf="item.patientDetails.userDetails[0]"
-                              routerLink="crear-ficha-consulta/{{ item._id }}"
-                            >
-                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                                Atender
-                              </button>
-                            </a>
-                          </ng-container>
-                        </td>
-                      </ng-container>
-                    </tr>
-                  </ng-template>    
+                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                              {{ 'clinicalFile.attend.label' | transloco }}
+                            </button>
+                          </a>
+                        </ng-container>
+                      </td>
+                    </ng-container>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -330,12 +324,12 @@
             <div class="row">
               <div class="col-4">
                 <div class="form-group">
-                  <label>Escoger sala espera</label>
+                  <label>{{ 'waitingRoom.select.label' | transloco }}</label>
                   <select class="form-control" (change)="onChange($event.target.value)">
-                    <option>Escoger</option>
-                   
-                      <option *ngFor="let item of salas" value="{{ item._id }}">{{ item.roomDetails.name }}</option>
-                   
+                    <option>{{ 'common.choose.label' | transloco }}</option>
+                    <ng-container *ngFor="let item of salas">
+                      <option value="{{ item._id }}">{{ item.roomDetails.name }}</option>
+                    </ng-container>
                   </select>
                 </div>
               </div>
@@ -346,63 +340,56 @@
                 <thead>
                   <tr>
                     <th scope="row">
-                      Paciente
+                      {{ 'table.patient.label' | transloco }}
                     </th>
-                    <th>Fecha agendada</th>
-                    <th class="d-none">Hora agendada</th>
-                    <th>Estado</th>
+                    <th>{{ 'dashboard.home.tab.home.tab.nextServices.table.date.label' | transloco }}</th>
+                    <th class="d-none">
+                      {{ 'dashboard.home.tab.home.tab.nextServices.table.time.label' | transloco }}
+                    </th>
+                    <th>{{ 'dashboard.home.tab.home.tab.nextServices.table.status.label' | transloco }}</th>
                     <th>
-                      Acción
+                      {{ 'dashboard.home.tab.home.tab.nextServices.table.action.label' | transloco }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngIf="consultasEsperas">
-                    <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
-                      <ng-container>
-                        <td scope="row">
-                          {{ item.patientDetails.userDetails[0].personalData.name }}
-                          {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                          {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                        </td>
-  
-                       
-                        <td>
-                          {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                            {{ item.administrativeDetails.status }}
-                          </button>
-                        </td>
-                        <td>
-                          <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                            <a routerLink="ficha-consulta/{{ item._id }}">
-                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                                {{ 'clinicalFile.viewMedCard.label' | transloco }}
-                              </button>
-                            </a>
-                          </ng-container>
-                          <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'">
-                            <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
-                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                                {{ 'clinicalFile.attend.label' | transloco }}
-                              </button>
-                            </a>
-                          </ng-container>
-                        </td>
-                      </ng-container>
-                    </tr>
-                  </ng-container>
-                  <!--
-                  <ng-template #DataconsultasEsperas>
-                    <tr>
-                      <div class="alert alert-warning mt-2" role="alert">
-                        No existen consultas
-                      </div>
-                    </tr>
-                  </ng-template>-->
-                  
+                  <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
+                    <ng-container>
+                      <td scope="row">
+                        {{ item.patientDetails.userDetails[0].personalData.name }}
+                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                      </td>
+
+                      <ng-template #sinInfo>
+                        <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
+                      </ng-template>
+                      <td>
+                        {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                          {{ item.administrativeDetails.status }}
+                        </button>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                          <a routerLink="ficha-consulta/{{ item._id }}">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                              {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                            </button>
+                          </a>
+                        </ng-container>
+                        <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'">
+                          <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                              {{ 'clinicalFile.attend.label' | transloco }}
+                            </button>
+                          </a>
+                        </ng-container>
+                      </td>
+                    </ng-container>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -526,7 +513,9 @@
                 </div>
                 <div class="row">
                   <div class="form-group col">
-                    <label for="startBlock">Objetivo de Consulta</label>
+                    <label for="startBlock">{{
+                      'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
+                    }}</label>
                     <input type="text" class="form-control" name="startBlock" min="07:00" max="20:00" />
                   </div>
                 </div>

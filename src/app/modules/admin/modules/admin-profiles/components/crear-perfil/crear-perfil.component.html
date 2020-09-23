@@ -296,7 +296,7 @@
                   <tbody>
                     <tr id="item.id">
                       <td scope="row" class="text-left">
-                        CREAR USUARIO
+                        {{ 'dashboard.home.uncategorized.createUser.label' | transloco }}
                       </td>
                       <td class="text-center">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
@@ -836,7 +836,9 @@
                   class="custom-control-input"
                   id="availabilities"
                 />
-                <label class="custom-control-label" for="availabilities">Gestión de disponibilidad</label>
+                <label class="custom-control-label" for="availabilities">{{
+                  'profile.managmentDisponibility.label' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
@@ -926,12 +928,9 @@
                   class="custom-control-input"
                   id="waitingRooms"
                 />
-                <label class="custom-control-label" for="waitingRooms"
-                  >Gestión de
-                  {{
-                    'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco
-                  }}</label
-                >
+                <label class="custom-control-label" for="waitingRooms">{{
+                  'waitingRoom.managment.label' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
@@ -1040,7 +1039,9 @@
                   class="custom-control-input"
                   id="clinics"
                 />
-                <label class="custom-control-label" for="clinics">Configuración clínica</label>
+                <label class="custom-control-label" for="clinics">{{
+                  'dashboard.home.config.title' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">

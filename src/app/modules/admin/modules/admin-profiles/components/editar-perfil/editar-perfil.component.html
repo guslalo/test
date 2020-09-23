@@ -9,7 +9,7 @@
       class="btn btn-primary rounded-pill float-right"
       [disabled]="!formProfile.valid"
     >
-      Actualizar Perfil
+      {{ 'profile.updateProfile.label' | transloco }}
       <svg
         width="1.5em"
         height="1.5em"
@@ -108,7 +108,7 @@
                 aria-controls="home"
                 aria-selected="true"
               >
-                Información
+                {{ 'tabs.information.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -834,7 +834,9 @@
                   class="custom-control-input"
                   id="availabilities"
                 />
-                <label class="custom-control-label" for="availabilities">Gestión de disponibilidad</label>
+                <label class="custom-control-label" for="availabilities">{{
+                  'profile.managmentDisponibility.label' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
@@ -924,12 +926,9 @@
                   class="custom-control-input"
                   id="waitingRooms"
                 />
-                <label class="custom-control-label" for="waitingRooms"
-                  >Gestión de
-                  {{
-                    'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco
-                  }}</label
-                >
+                <label class="custom-control-label" for="waitingRooms">{{
+                  'waitingRoom.managment.label' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
@@ -1038,7 +1037,9 @@
                   class="custom-control-input"
                   id="clinics"
                 />
-                <label class="custom-control-label" for="clinics">Configuración clínica</label>
+                <label class="custom-control-label" for="clinics">{{
+                  'dashboard.home.config.title' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">
@@ -1204,9 +1205,9 @@
                   type="checkbox"
                   class="custom-control-input"
                 />
-                <label class="custom-control-label" for="reports"
-                  >Gestión de {{ 'tabs.report.label' | transloco }}</label
-                >
+                <label class="custom-control-label" for="reports">{{
+                  'dashboard.home.reports.title' | transloco
+                }}</label>
               </div>
               <div class="bg-white p-4 rounded">
                 <table class="table mt-1">

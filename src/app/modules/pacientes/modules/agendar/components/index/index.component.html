@@ -9,7 +9,7 @@
   <div class="col-4">
     <div class="card bg-light">
       <div class="card-header" style="display: none;">
-        Mi Salud
+        {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
         <p>
           {{ 'dashboard.home.myHealth.hint.label' | transloco }}
         </p>
@@ -73,8 +73,9 @@
                   class="form-control custom-select"
                   (change)="onChangeTypeSpecialtiesId($event.target.value)"
                   [disabled]="bloquearSelect"
-                  ><!--{{item.medicalSpecialtyId}}-->
-                  <option selected>Selecciona</option>
+                >
+                  <!--{{item.medicalSpecialtyId}}-->
+                  <option selected>{{ 'common.select.label' | transloco }}</option>
                   <ng-container *ngFor="let item of specialtiesId">
                     <option value="{{ item._id }}">{{ item.specialtyName }} </option>
                   </ng-container>
@@ -89,17 +90,15 @@
                 'clinicalFile.patientData.tabs.doctor.label' | transloco
               }}</label>
               <input
-                *ngIf="professionals"               
-                (click)="refreshSearch()"
+                *ngIf="professionals"
                 type="text"
                 class="form-control"
-                placeholder="Buscar Profesional"
+                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                 [matAutocomplete]="auto"
                 [formControl]="professionalSelected"
               />
               <mat-autocomplete
                 #auto="matAutocomplete"
-                
                 [displayWith]="getDisplayFn()"
                 (optionSelected)="escogerProfessional($event.option.value)"
               >
@@ -164,8 +163,8 @@
 
     <!--blocks disponibles *ngIf="blocks.blocks"-->
     <ng-container *ngFor="let item of blocks">
-      <ng-container
-        ><!--*ngIf="item !== ''; else sinProfesional-->
+      <ng-container>
+        <!--*ngIf="item !== ''; else sinProfesional-->
         <div class="row mb-4">
           <div class="col">
             <div class="card-deck boxDisponibilidad" id="{{ item.professionalDetails.userId }}">
@@ -193,12 +192,14 @@
                     </div>
                   </div>
                   <div class="col-6">
-                    <p class="valor text-right">VALOR CONSULTA: {{ item.appointmentPrice }}</p>
+                    <p class="valor text-right">
+                      {{ 'waitingRoom.serviceFee.label' | transloco }}: {{ item.appointmentPrice }}
+                    </p>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-1 pr-0 text-center" style="display: none;">
-                    AM
+                    {{ 'clinicalFile.AM.label' | transloco }}
                   </div>
                   <div class="col-11">
                     <div class="boxHorarios">
@@ -213,7 +214,7 @@
                 </div>
                 <div class="row mt-3" style="display: none;">
                   <div class="col-1 pr-0 text-center">
-                    PM
+                    {{ 'clinicalFile.PM.label' | transloco }}
                   </div>
                   <div class="col-11">
                     <div class="boxHorarios">
@@ -227,8 +228,9 @@
             </div>
           </div>
         </div>
-      </ng-container> </ng-container
-    ><!--/blocks disponibles-->
+      </ng-container>
+    </ng-container>
+    <!--/blocks disponibles-->
     <ng-container *ngIf="sinProfesionales === true">
       <div class="row mb-4">
         <div class="col">
@@ -237,7 +239,7 @@
               <div class="row">
                 <div class="col-12">
                   <div class="alert alert-warning" role="alert">
-                    No hay profesionales disponibles
+                    {{ 'clinicalFile.noDoctorsAvailable.label' | transloco }}
                   </div>
                 </div>
               </div>
@@ -314,7 +316,9 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group w-100">
-                    <label for="exampleInputEmail1">Describa Cómo se siente (opcional)</label>
+                    <label for="exampleInputEmail1">{{
+                      'dashboard.home.newService.synptoms.description.label' | transloco
+                    }}</label>
                     <textarea
                       class="form-control"
                       rows="5"
@@ -384,7 +388,11 @@
               </div>
 
               <div class="box boxSeparador pl-3">
-                <p class="m-0 valor">VALOR CONSULTA: ${{ reserve.professionalDetails.specialtyDetails.price }}</p>
+                <p class="m-0 valor">
+                  {{ 'waitingRoom.serviceFee.label' | transloco }}: ${{
+                    reserve.professionalDetails.specialtyDetails.price
+                  }}
+                </p>
                 <p class="m-0">
                   {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
                     reserve.dateDetails.date.year
@@ -459,7 +467,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <h2>Esta agenda no tiene precio asociado</h2>
+        <h2>{{ 'calendar.noAssociatedPrice.label' | transloco }}</h2>
       </div>
       <div class="modal-footer">
         <button

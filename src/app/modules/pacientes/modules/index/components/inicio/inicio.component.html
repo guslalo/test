@@ -12,7 +12,7 @@
           <div class="card-text mb-2">
             <img src="assets/img/agendar-consulta-azul.svg" />
           </div>
-          <h5 class="card-title font-weight-bold">Agenda una cita médica</h5>
+          <h5 class="card-title font-weight-bold">{{ 'calendar.scheduleService.label' | transloco }}</h5>
           <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
           <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
             {{ 'dashboard.home.newService.btnCreate.label' | transloco }}
@@ -40,8 +40,8 @@
           <div class="card-text mb-2">
             <img src="assets/img/corazon-azul.svg" />
           </div>
-          <h5 class="card-title font-weight-bold">Mi Salud</h5>
-          <p class="card-text text-center">Completa tus datos medicos para una mejor atención</p>
+          <h5 class="card-title font-weight-bold">{{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}</h5>
+          <p class="card-text text-center">{{ 'dashboard.home.myHealth.hint.label' | transloco }}</p>
           <!-- <img src="assets/img/porcentaje-temp.svg" /> -->
           <div class="row">
             <div class="col">
@@ -63,7 +63,7 @@
                     d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
                   />
                 </svg>
-                Completar Datos
+                {{ 'dashboard.home.myHealth.btnComplete.label' | transloco }}
               </button>
             </div>
           </div>

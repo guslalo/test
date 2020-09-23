@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <h2>Mi salud</h2>
+    <h2>{{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}</h2>
     <p>{{ 'clinicalFile.thisInfoViewPro.label' | transloco }}</p>
   </div>
 </div>
@@ -109,7 +109,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasSickness">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('sickness', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -187,7 +187,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasFamiliarHistory">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('familiarHistory', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -249,7 +249,7 @@
                       src="assets/icons/icon-arrow-up.svg"
                       alt="img"
                     />
-                    <span class="pl-3">Habitos de Salud</span>
+                    <span class="pl-3">{{ 'calendar.healthHabits.label' | transloco }}</span>
                   </div>
                 </div>
                 <div class="col-4" *ngIf="!antecedentes?.hasHealthHabits">
@@ -262,7 +262,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasHealthHabits">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('healthHabits', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -339,7 +339,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasMedicines">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('medicines', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -416,7 +416,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasOccupational">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('occupational', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -500,7 +500,7 @@
                 <div class="col-2" *ngIf="antecedentes?.hasOthers">
                   <div class="hasAntecedents color-success2">
                     <button type="button" class="btn btn-light px-2" (click)="hasAntecedents('others', false)">
-                      No tengo <img src="assets/icons/icon-double-check.svg" />
+                      {{ 'clinicalFile.dontHave.label' | transloco }} <img src="assets/icons/icon-double-check.svg" />
                     </button>
                   </div>
                 </div>
@@ -551,7 +551,7 @@
       <!--tab-->
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="row mb-3">
-          <div class="col-12 col-md-6">{{ 'clinicalFile.exams.label' | transloco }} y Documentos</div>
+          <div class="col-12 col-md-6">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</div>
           <div class="col-12 col-md-6">
             <button
               type="button"
@@ -598,7 +598,7 @@
       <!--/tab-->
       <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         <div class="row mb-3">
-          <div class="col-12 col-md-6">Prescipciones</div>
+          <div class="col-12 col-md-6">{{ 'clinicalFile.prescriptions.label' | transloco }}</div>
           <div class="col-12 col-md-6"></div>
         </div>
         <div class="row">
@@ -607,7 +607,7 @@
               <table class="table mt-3">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre documento</th>
+                    <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
                     <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
                     <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}</th>
                     <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.by.label' | transloco }}</th>
@@ -714,13 +714,27 @@
         <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
           {{ 'common.button.add.label' | transloco }}
           <ng-container [ngSwitch]="category">
-            <ng-container *ngSwitchCase="'sickness'">enfermedades</ng-container>
-            <ng-container *ngSwitchCase="'familiarHistory'">antecedentes familiares</ng-container>
-            <ng-container *ngSwitchCase="'medicines'">medicamentos</ng-container>
-            <ng-container *ngSwitchCase="'healthHabits'">hábitos de salud</ng-container>
-            <ng-container *ngSwitchCase="'occupational'">ocupacionales</ng-container>
-            <ng-container *ngSwitchCase="'others'">otros</ng-container>
-            <ng-container *ngSwitchDefault>Antecedentes</ng-container>
+            <ng-container *ngSwitchCase="'sickness'"
+              >{{ 'dashboard.home.myHealth.deceases.label' | transloco }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'familiarHistory'">
+              {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}</ng-container
+            >
+            <ng-container *ngSwitchCase="'medicines'"
+              >{{ 'dashboard.home.myHealth.meds.label' | transloco }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'healthHabits'"
+              >{{ 'dashboard.home.myHealth.healthHabits.label' | transloco }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'occupational'"
+              >{{ 'dashboard.home.myHealth.occupationals.label' | transloco }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'others'"
+              >{{ 'dashboard.home.myHealth.others.label' | transloco }}
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }}</ng-container
+            >
           </ng-container>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

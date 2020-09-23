@@ -1,7 +1,7 @@
 <div class="container-fluid p-5">
   <div class="row">
     <div class="col">
-      <h1>Ficha atencíon médica</h1>
+      <h1>{{ 'clinicalFile.medAtentionCard.label' | transloco }}</h1>
     </div>
   </div>
 
@@ -56,9 +56,9 @@
                   <p>17: 35</p>
                 </div>
                 <div class="col-6 text-center">
-                  <h5 class="card-title">Estado de consulta</h5>
+                  <h5 class="card-title">{{ 'clinicalFile.status.label' | transloco }}</h5>
                   <button type="button" class="btn btn-outline-dark rounded-pill text-center">
-                    Consulta activa
+                    {{ 'clinicalFile.currentService.label' | transloco }}
                   </button>
                 </div>
               </div>
@@ -203,7 +203,7 @@
               </td>
               <td>
                 <button type="button" class="btn btn-outline-dark rounded-pill text-center">
-                  Ingresar a consulta
+                  {{ 'common.enterService.label' | transloco }}
                 </button>
               </td>
               <td>
@@ -252,10 +252,12 @@
           <table class="table table-borderless mb-0">
             <thead>
               <tr>
-                <th scope="col">ID Consulta:</th>
-                <th scope="col">Doctores asociados</th>
-                <th scope="col">Documentos asociados</th>
-                <th scope="col">Estado</th>
+                <th scope="col">{{ 'table.idService.label' | transloco }}:</th>
+                <th scope="col">{{ 'clinicalFile.asociatedDoctors.label' | transloco }}</th>
+                <th scope="col">
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.patient.document.label' | transloco }}
+                </th>
+                <th scope="col">{{ 'table.status.label' | transloco }}</th>
               </tr>
             </thead>
             <tbody>

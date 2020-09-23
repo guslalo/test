@@ -66,7 +66,7 @@
               role="tab"
               aria-selected="false"
             >
-              {{ 'waitingRoom.name.label' | transloco }} (Modalidad)
+              {{ 'waitingRoom.name.label' | transloco }} ({{ 'table.mod.label' | transloco }})
             </a>
           </li>
           <li class="nav-item" role="presentation">
@@ -110,7 +110,7 @@
                     [(ngModel)]="isForeign"
                     (change)="validateForm()"
                   />
-                  <label class="custom-control-label" for="isForeign">Extranjero</label>
+                  <label class="custom-control-label" for="isForeign">{{ 'common.foreign.label' | transloco }}</label>
                 </div>
               </div>
               <form [formGroup]="identificationData">
@@ -201,7 +201,7 @@
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cbo">{{ 'auth.cbor.label' | transloco }}</option>
                       <option value="pasep">{{ 'auth.pispasep.label' | transloco }}</option>
-                      <option value="ctps">CTPS</option>
+                      <option value="ctps">{{ 'auth.ctps.label' | transloco }}</option>
                       <option value="idDocumentNumber">{{ 'auth.identityNumber.label' | transloco }}</option>
                       <option value="titleVote">{{ 'account.votantTitle.label' | transloco }}</option>
                       <option value="professionalUfNumber">{{ 'auth.proClassReg.label' | transloco }}</option>
@@ -351,7 +351,9 @@
                     </div>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="ufBirth">UF de Nacimiento</label>
+                    <label for="ufBirth">{{
+                      'profile.personal.tabIdentification.birthData.uf.label' | transloco
+                    }}</label>
                     <select
                       [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
@@ -599,7 +601,7 @@
                         'is-invalid': !profilesForm.get('profile').valid && profilesForm.get('profile').touched
                       }"
                     >
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="profile" *ngFor="let profile of profiles">
                         {{ profile.role }} - {{ profile.profileName }}
                       </option>
@@ -678,14 +680,17 @@
               <form [formGroup]="waitingRoomForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="waitingRoom">Lista de Espera</label>
+                    <label for="waitingRoom">{{
+                      'dashboard.home.userManagment.createAccount.tabs.waitingRoom.identification.waitingList.label'
+                        | transloco
+                    }}</label>
                     <select
                       [(ngModel)]="roomSelected"
                       class="form-control"
                       name="waitingRoom"
                       formControlName="waitingRoom"
                     >
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item" *ngFor="let item of waitingRooms">
                         {{ item.roomDetails?.name }}
                       </option>
@@ -769,7 +774,7 @@
               <form [formGroup]="profileDataForm">
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <label for="cpf">Biografia Academica</label>
+                    <label for="cpf">{{ 'account.academicBio.label' | transloco }}</label>
                     <textarea
                       rows="4"
                       no-resize
@@ -795,7 +800,7 @@
                   <div class="form-group col-md-4">
                     <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
                         {{ speciality.specialtyName }}
                       </option>
@@ -912,7 +917,7 @@
                       <option value="CRP">{{ 'dashboard.home.uncategorized.CRP.label' | transloco }}</option>
                       <option value="CREFITO">{{ 'dashboard.home.uncategorized.CREFITO.label' | transloco }}</option>
                       <option value="CREFONO">{{ 'dashboard.home.uncategorized.CREFONO.label' | transloco }}</option>
-                      <option value="Ñao definido">Ñao definido</option>
+                      <option value="Ñao definido">{{ 'common.noDefined.label' | transloco }}</option>
                     </select>
                   </div>
                   <div class="col-md-3">
@@ -940,7 +945,7 @@
                       name="ufProfessionalRegistry"
                       formControlName="ufProfessionalRegistry"
                     >
-                      <option [ngValue]="null" disabled>Seleccionar</option>
+                      <option [ngValue]="null" disabled>{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="state" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
@@ -1011,7 +1016,7 @@
               <form [formGroup]="passwordForm">
                 <div class="row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="password">Contraseña *</label>
+                    <label for="password">{{ 'common.input.password.label' | transloco }} *</label>
                     <div class="input-group mb-3">
                       <input
                         [type]="showPassword ? 'text' : 'password'"

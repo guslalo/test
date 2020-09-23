@@ -85,8 +85,8 @@
           <div class="contenedor">
             <h3 class="mb-4 d-none d-sm-block">{{ 'auth.confirmAccount.label' | transloco }}</h3>
             <p>
-              Se ha enviado un correo electronico a <b>{{ email_format }}</b> con un codigo de verificacion, por favor
-              revisa tu bandeja de entrada.
+              {{ 'auth.email.sendTo.label' | transloco }} <b>{{ email_format }}</b>
+              {{ 'auth.email.codeSent.label' | transloco }}
             </p>
           </div>
           <form class="">
@@ -96,7 +96,7 @@
                 class="form-control"
                 id="code"
                 name="code"
-                placeholder="Ingrese codigo de verificación"
+                placeholder="{{ 'auth.verificationCode.label' | transloco }}"
                 [(ngModel)]="user.code"
               />
               <!--[(ngModel)]="user.username-->

@@ -33,6 +33,7 @@ import { FileUtilsService } from './services/file-utils.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 const toastrConfig = {
   closeButton: true,
@@ -73,7 +74,8 @@ const toastrConfig = {
       useClass: HttpToastrInterceptor,
       multi: true,
     },
-    // INTERCEPTOR TOASTR
+    // INTERCEPTOR SESSION IDDLE TIME
+    BnNgIdleService,
   ],
   bootstrap: [AppComponent],
   exports: [],

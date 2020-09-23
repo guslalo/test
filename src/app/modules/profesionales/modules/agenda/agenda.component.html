@@ -134,7 +134,7 @@
               class="form-control"
               [(ngModel)]="model"
               [ngbTypeahead]="search"
-              placeholder="Busqueda"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
             />
             <div class="searchBox">
               <svg
@@ -263,9 +263,9 @@
                                 </p>
                                 <div class="btn btn-primary btn-sm rounded-pill float-left">
                                   <ng-container *ngIf="item.isActive; else inactivo">
-                                    Activo
+                                    {{ 'common.status.active.label' | transloco }}
                                   </ng-container>
-                                  <ng-template #inactivo>Inactivo</ng-template>
+                                  <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
                                 </div>
                               </div>
                             </div>

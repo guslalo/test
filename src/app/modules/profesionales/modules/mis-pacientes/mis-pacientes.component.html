@@ -24,7 +24,7 @@
           [(ngModel)]="searchTerm"
           type="text"
           class="form-control"
-          placeholder="Busqueda"
+          placeholder="{{ 'common.placeholder.search.label' | transloco }}"
           (keyup)="applyFilters(tab)"
         />
         <div class="searchBox">
@@ -213,7 +213,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-center w-100 mt-1">
-            {{ !patientIsEdit ? 'Crear' : 'Actualizar' }} {{ 'common.patient.label' | transloco }}
+            {{ !patientIsEdit ? 'common.button.create.label' : ('common.button.update.label' | transloco) }}
+            {{ 'common.patient.label' | transloco }}
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -344,7 +345,8 @@
             (click)="savePatient()"
             [disabled]="!patientForm.valid"
           >
-            {{ !patientIsEdit ? 'Crear' : 'Actualizar' }} {{ 'common.patient.label' | transloco }}
+            {{ !patientIsEdit ? 'common.button.create.label' : ('common.button.update.label' | transloco) }}
+            {{ 'common.patient.label' | transloco }}
           </button>
         </div>
       </div>

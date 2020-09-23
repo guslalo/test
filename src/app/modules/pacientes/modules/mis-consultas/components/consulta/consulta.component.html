@@ -62,7 +62,9 @@
                   <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                   <ul class="simple-list">
                     <li>
-                      Especialidad:
+                      {{
+                        'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
+                      }}:
                       <ng-container>
                         {{ appoimentDetail.professionalDetails.specialtyDetails[0].specialtyName }}
                       </ng-container>
@@ -210,7 +212,7 @@
                       fill="#497DF9"
                     />
                   </svg>
-                  Diagnóstico
+                  {{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}
                 </p>
                 <div>
                   <p class="font-weight-bold title mb-0">
@@ -225,7 +227,7 @@
               <!--objetivo-->
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Objetivo
+                  {{ 'disponibility.tabs.list.table.objetive.label' | transloco }}
                 </p>
                 <div>
                   <p class="title">{{ appoimentDetail.appointmentDetails.objective }}</p>
@@ -236,7 +238,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Anamnesis
+                  {{ 'calendar.anamnesis.label' | transloco }}
                 </p>
                 <div>
                   <p class="title">{{ appoimentDetail.appointmentDetails.anamnesis }}</p>
@@ -247,7 +249,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Exámen físico
+                  {{ 'calendar.phisicalExam.label' | transloco }}
                 </p>
                 <div>
                   <p class="title">{{ appoimentDetail.appointmentDetails.physicalExam }}</p>
@@ -258,7 +260,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Aspectos destacados de laboratorio
+                  {{ 'clinicalFile.labAspects.label' | transloco }}
                 </p>
                 <div>
                   <p class="title">{{ appoimentDetail.appointmentDetails.examHighlights }}</p>
@@ -269,7 +271,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Plan
+                  {{ 'clinicalFile.plan.label' | transloco }}
                 </p>
                 <div>
                   <p class="title">{{ appoimentDetail.appointmentDetails.plan }}</p>
@@ -305,7 +307,7 @@
                       fill="#497DF9"
                     />
                   </svg>
-                  Sintomas
+                  {{ 'clinicalFile.patientData.tabs.summary.synptoms.label' | transloco }}
                 </p>
                 <ng-container *ngIf="appoimentDetail.patientDetails.symptomsDetails === null; else infoSymp">
                   <p>{{ 'common.noInfo.label' | transloco }}</p>
@@ -337,7 +339,9 @@
               </div>
 
               <div>
-                <p class="title font-weight-bold"><img src="assets/icons/icon-nutricion.svg" /> Nutrición</p>
+                <p class="title font-weight-bold">
+                  <img src="assets/icons/icon-nutricion.svg" /> {{ 'calendar.nutrition.label' | transloco }}
+                </p>
 
                 <ul class="nutricion">
                   <li><i class="b">Peso</i> {{ appoimentDetail.patientDetails.nutritionalState.weight }}</li>
@@ -372,7 +376,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">FR</i>
+                      <i class="b">{{ 'clinicalFile.patientData.tabs.summary.vitalSigns.fr.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.FR === null; else infofr">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -381,7 +385,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">PAD</i>
+                      <i class="b">{{ 'clinicalFile.patientData.tabs.summary.vitalSigns.pad.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.PAD === null; else infoPAD">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -390,7 +394,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">PAS</i>
+                      <i class="b">{{ 'clinicalFile.patientData.tabs.summary.vitalSigns.pas.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.PAD === null; else PAS">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -399,7 +403,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">PAmedia</i>
+                      <i class="b">{{ 'clinicalFile.avgPA.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.PAD === null; else PAmedia">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -408,7 +412,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">Sat</i>
+                      <i class="b">{{ 'clinicalFile.sat.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.PAD === null; else Sat">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -417,7 +421,7 @@
                       </ng-template>
                     </li>
                     <li>
-                      <i class="b">Temp</i>
+                      <i class="b">{{ 'clinicalFile.temp.label' | transloco }}</i>
                       <ng-container *ngIf="appoimentDetail.patientDetails.vitalSigns.PAD === null; else Temp">
                         {{ 'common.noInfo.label' | transloco }}
                       </ng-container>
@@ -437,7 +441,7 @@
         <div class="tab-pane fade" id="examenesDocumentosTab" role="tabpanel" aria-labelledby="examenesDocumentos">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0">Exámenes y documentos</h5>
+              <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>
             </div>
             <div class="col-6">
               <!--
@@ -556,7 +560,7 @@
             <div class="col-6">
               <div>
                 <p class="title font-weight-bold">
-                  Biografía Academica
+                  {{ 'dashboard.home.userManagment.createAccount.tabs.academic.bio.label' | transloco }}
                 </p>
 
                 <p>{{ professionalData.professionalData.biography }}</p>
@@ -573,25 +577,31 @@
             </div>
             <div class="col-6">
               <div>
-                <p class="title font-weight-bold">Universidad</p>
+                <p class="title font-weight-bold">
+                  {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
+                </p>
 
                 {{ professionalData.professionalData.university }}
                 <hr />
               </div>
               <div>
-                <p class="title font-weight-bold">Título</p>
+                <p class="title font-weight-bold">
+                  {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
+                </p>
 
                 {{ professionalData.professionalData.professionalTitle }}
                 <hr />
               </div>
               <div>
-                <p class="title font-weight-bold">Número de registro</p>
+                <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
                 {{ professionalData.professionalData.ufRegistry.name }}
 
                 <hr />
               </div>
               <div>
-                <p class="title font-weight-bold">Curso</p>
+                <p class="title font-weight-bold">
+                  {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
+                </p>
                 {{ professionalData.professionalData.course }}
                 <hr />
               </div>
@@ -680,9 +690,9 @@
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">
-                                      Activo
+                                      {{ 'common.status.active.label' | transloco }}
                                     </ng-container>
-                                    <ng-template #inactivo>Inactivo</ng-template>
+                                    <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
                                   </div>
                                 </div>
                               </div>

@@ -4,10 +4,9 @@
       <div class="row vertical-center h-100">
         <div class="col-12 col-md-6 col-lg-3 mx-auto w-75 p-3 text-center align-self-center">
           <img class="mb-4" src="/assets/img/blocked-account.svg" alt="img" />
-          <h4 class="mb-3">Tu cuenta ha sido bloqueada</h4>
+          <h4 class="mb-3">{{ 'auth.blockAccount.title' | transloco }}</h4>
           <p>
-            Por motivos de segurirdad esta cuenta ha sido bloqueada por reinterados intentos fallidos, por favor ingresa
-            tu correo para mandarte las instrucciones de reactivación.
+            {{ 'auth.blockAccount.secHint.label' | transloco }}
           </p>
           <form>
             <div class="form-group">
@@ -16,7 +15,7 @@
                 class="form-control"
                 id="email"
                 name="email"
-                placeholder="ingrese su email"
+                placeholder="{{ 'common.input.email.label' | transloco }}"
                 [(ngModel)]="user.email"
               />
             </div>
@@ -60,7 +59,9 @@
 
 <ng-template #content let-modal>
   <div class="modal-header text-center">
-    <h4 class="modal-title" id="modal-basic-title">Recuperación de contraseña</h4>
+    <h4 class="modal-title" id="modal-basic-title">
+      {{ 'profile.personal.changePassword.recover.label' | transloco }}
+    </h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -69,10 +70,10 @@
     <form>
       <div class="form-group">
         <ng-container *ngIf="mError; else correcto">
-          <label for="dateOfBirth">usuario no existe</label>
+          <label for="dateOfBirth">{{ 'common.userNotExists.label' | transloco }}</label>
         </ng-container>
         <ng-template #correcto>
-          <label for="dateOfBirth">Se ha enviado un email para reestablecer tu contraseña</label>
+          <label for="dateOfBirth">{{ 'profile.personal.changePassword.emailSendedResetPwd.label' | transloco }}</label>
         </ng-template>
       </div>
     </form>
@@ -85,10 +86,10 @@
       routerLink="/"
       (click)="modal.close('Save click')"
     >
-      Cerrar
+      {{ 'clinicalFile.close.label' | transloco }}
     </button>
     <button type="button" *ngIf="mError" class="btn btn-outline-dark" (click)="modal.close('Save click')">
-      Reintentar
+      {{ 'common.retry.label' | transloco }}
     </button>
   </div>
 </ng-template>

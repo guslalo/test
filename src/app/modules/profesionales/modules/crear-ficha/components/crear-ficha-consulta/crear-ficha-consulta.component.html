@@ -2,7 +2,10 @@
   <div class="row mb-3">
     <div class="col-6 col-md-6">
       <h2>{{ 'clinicalFile.title' | transloco }}</h2>
-      <p>Teleconsulta {{ appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}.</p>
+      <p>
+        {{ 'common.teleconsult.label' | transloco }}
+        {{ appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}.
+      </p>
     </div>
     <!--appointmentDetail.administrativeDetails.status === 'appointed' ||
       appointmentDetail.administrativeDetails.status === 'rescheduled' ||-->
@@ -42,10 +45,10 @@
                 <div class="boxText">
                   <p class="w-100 mt-5 title">
                     <ng-container *ngIf="appointmentDetail.administrativeDetails.status === 'pending'; else text">
-                      Teleconsulta finalizada
+                      {{ 'clinicalFile.callEnded.label' | transloco }}
                     </ng-container>
                     <ng-template #text>
-                      Esperando iniciar Teleconsulta
+                      {{ 'clinicalFile.waitingStartCall.label' | transloco }}
                     </ng-template>
                   </p>
                   <svg
@@ -117,14 +120,18 @@
                     </p>
                     <!--font-weight-bold-->
                     <ul class="simple-list">
-                      <li><b>Sexo:</b> {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}</li>
+                      <li>
+                        <b>{{ 'common.forms.user.identification.grender.label' | transloco }}:</b>
+                        {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}
+                      </li>
                       <li><b>Edad:</b> {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                       <li>
-                        <b>Nacionalidad:</b>
+                        <b>{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}:</b>
                         {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
                       </li>
                       <li>
-                        <b>Teléfono:</b> {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}
+                        <b>{{ 'common.forms.user.identification.phone.label' | transloco }}:</b>
+                        {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}
                       </li>
                     </ul>
                   </div>
@@ -138,7 +145,7 @@
                     class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
                     (click)="runAppointment(appointmentDetail._id, 'run')"
                   >
-                    Iniciar
+                    {{ 'clinicalFile.start.label' | transloco }}
                     <svg
                       width="1em"
                       height="1em"
@@ -173,7 +180,8 @@
                   </button>
                   <p class="card-text text-center mt-3 mb-2">ID consulta: {{ appointmentDetail._id }}</p>
                   <p class="card-text text-center">
-                    Realizada el {{ appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                    {{ 'clinicalFile.madeAt.label' | transloco }}
+                    {{ appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
                   </p>
                   <h5 class="card-title">
                     <svg
@@ -215,7 +223,7 @@
                 role="tab"
                 aria-controls="resumenConsulta"
               >
-                {{ 'clinicalFile.service.label' | transloco }} Actual
+                {{ 'clinicalFile.service.label' | transloco }} {{ 'common.current.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -580,7 +588,7 @@
                                 }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="mmhg"
+                                  placeholder="{{ 'common.placeholders.mmhg.label' | transloco }}"
                                   type="text"
                                   name="PAD"
                                   id="PAD"
@@ -593,7 +601,7 @@
                                 <label for="inputEmail4">{{ 'clinicalFile.avgPA.label' | transloco }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="mmhg"
+                                  placeholder="{{ 'common.placeholders.mmhg.label' | transloco }}"
                                   type="text"
                                   name="PAmedia"
                                   id="PAmedia"
@@ -606,7 +614,7 @@
                                 }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="lat/min"
+                                  placeholder="{{ 'common.placeholders.latMin.label' | transloco }}"
                                   type="text"
                                   name="FC"
                                   id="FC"
@@ -621,7 +629,7 @@
                                 }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="res/min"
+                                  placeholder="{{ 'common.placeholders.resMin.label' | transloco }}"
                                   type="text"
                                   name="FR"
                                   id="FR"
@@ -632,7 +640,7 @@
                                 <label for="inputEmail4">{{ 'clinicalFile.temperature.label' | transloco }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="ºC - ºF"
+                                  placeholder="{{ 'common.placeholders.celFar.label' | transloco }}"
                                   type="text"
                                   name="Temp"
                                   id="Temp"
@@ -682,7 +690,7 @@
                                 }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="Kg - Lb"
+                                  placeholder="{{ 'common.placeholders.kgLb.label' | transloco }}"
                                   type="text"
                                   name="weight"
                                   id="weight"
@@ -698,7 +706,7 @@
                                 }}</label>
                                 <input
                                   class="form-control"
-                                  placeholder="m o ft"
+                                  placeholder="{{ 'common.placeholders.mFt.label' | transloco }}"
                                   type="text"
                                   name="height"
                                   id="height"
@@ -1061,21 +1069,20 @@
                     <form [formGroup]="diagnostico">
                       <div class="row">
                         <div class="col-6">
-                          <label
-                            >{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }} de
-                            Diagnostico</label
-                          >
+                          <label>{{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
                           <select class="form-control" formControlName="type" id="type" name="type">
                             <option value="cei10">cei10</option>
                             <option value="snomed">snomed</option>
                           </select>
                         </div>
                         <div class="col-6">
-                          <label for="endBlock">Diagnostico</label>
+                          <label for="endBlock">{{
+                            'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
+                          }}</label>
                           <input
                             class="form-control mb-3"
                             type="text"
-                            placeholder="Diagnostico"
+                            placeholder="{{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}"
                             id="diagnostic"
                             name="diagnostic"
                             formControlName="diagnostic"
@@ -1106,7 +1113,7 @@
                     </div>
                     <ng-template #noNotes>
                       <div class="alert alert-warning mt-2" role="alert">
-                        no hay notas ingresadas
+                        {{ 'clinicalFile.noStoredNotes.label' | transloco }}
                       </div>
                     </ng-template>
 
@@ -1119,7 +1126,9 @@
                           data-toggle="modal"
                           data-target="#ingresarNota"
                         >
-                          <p class="text-right">Nueva nota <img src="assets/icons/add.svg" /></p>
+                          <p class="text-right">
+                            {{ 'clinicalFile.newNote.label' | transloco }} <img src="assets/icons/add.svg" />
+                          </p>
                         </button>
                       </div>
                     </div>
@@ -1218,7 +1227,7 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }} Familiares
+                    {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                   </a>
                   <ng-container *ngIf="antecedentesGeneral">
                     <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
@@ -1404,7 +1413,7 @@
         <div class="tab-pane fade" id="examenesDocumentosTab" role="tabpanel" aria-labelledby="examenesDocumentos">
           <div class="row mb-4 align-items-center">
             <div class="col-12">
-              <h5 class="mb-0">Exámenes y documentos</h5>
+              <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>
             </div>
           </div>
           <div class="row">
@@ -1451,7 +1460,7 @@
         <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0 d-none">Prescripciones</h5>
+              <h5 class="mb-0 d-none">{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</h5>
             </div>
             <div class="col-6">
               <!--
@@ -1471,7 +1480,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Generar documentos
+                  {{ 'clinicalFile.generateDocs.label' | transloco }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a
@@ -1480,7 +1489,7 @@
                     data-target="#preescripcionesModal"
                     href="javascript:;"
                     (click)="subirPrescripciones('prescription')"
-                    >Preescripciones</a
+                    >{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a
                   >
                   <a
                     class="dropdown-item"
@@ -1488,7 +1497,7 @@
                     data-target="#preescripcionesModal"
                     (click)="subirPrescripciones('exam-order')"
                     href="javascript:;"
-                    >Orden de exámen</a
+                    >{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a
                   >
                   <a
                     class="dropdown-item"
@@ -1496,7 +1505,7 @@
                     data-target="#preescripcionesModal"
                     (click)="subirPrescripciones('report')"
                     href="javascript:;"
-                    >Licencia médica</a
+                    >{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a
                   >
                 </div>
               </div>
@@ -1508,11 +1517,17 @@
                 <table class="table mt-1">
                   <thead class="">
                     <tr>
-                      <th scope="col" class="text-center d-none">Nombre Documento</th>
-                      <th scope="col" class="text-center">Tipo</th>
-                      <th scope="col" class="text-center">Fecha de subida</th>
-                      <th scope="col" class="text-center">Realizado por</th>
-                      <th scope="col" class="text-center">Acción</th>
+                      <th scope="col" class="text-center d-none">
+                        {{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}
+                      </th>
+                      <th scope="col" class="text-center">
+                        {{ 'dashboard.home.config.tabs.specialty.table.type.label' | transloco }}
+                      </th>
+                      <th scope="col" class="text-center">{{ 'common.uploadDate.label' | transloco }}</th>
+                      <th scope="col" class="text-center">
+                        {{ 'clinicalFile.patientData.tabs.prescriptions.table.by.label' | transloco }}
+                      </th>
+                      <th scope="col" class="text-center">{{ 'table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
 
@@ -1537,17 +1552,17 @@
                         {{ item.issuerDetails.fullName }}
                       </td>
                       <td class="text-center">
-                        <a (click)="downloadSibrare(item.documentId)"
-                          ><!-- routerLink="{{urlSibrare}}" target="_blank-->
+                        <a (click)="downloadSibrare(item.documentId)">
+                          <!-- routerLink="{{urlSibrare}}" target="_blank-->
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                            Ver documento
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
                           </button>
                         </a>
                         <div class="btn-group d-none">
                           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled></div>
                           <div class="dropdown-menu dropdown-menu-right d-none">
                             <button class="dropdown-item" type="button">
-                              Eliminar
+                              {{ 'common.button.delete.label' | transloco }}
                             </button>
                             <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
                               {{ 'clinicalFile.edit.label' | transloco }}

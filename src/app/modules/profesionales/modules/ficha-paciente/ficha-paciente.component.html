@@ -156,10 +156,10 @@
                     <i class="b">Sexo</i>
                     {{
                       patientRecord.personalData?.gender === 'male'
-                        ? 'Masculino'
+                        ? 'clinicalFile.male.label'
                         : patientRecord.personalData?.gender === 'female'
-                        ? 'Femenino'
-                        : 'S/R'
+                        ? 'clinicalFile.female.label'
+                        : ('S/R' | transloco)
                     }}
                   </li>
                   <li>
@@ -175,7 +175,7 @@
                     {{ patientRecord.personalData?.email || 'S/R' }}
                   </li>
                   <li>
-                    <i class="b">Estado</i>
+                    <i class="b">{{ 'table.status.label' | transloco }}</i>
                     <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
                       {{ patientRecord?.status }}
                     </button>
@@ -186,7 +186,7 @@
             <div class="col-8">
               <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
                 <h4 class="title mb-3">
-                  Datos de Nacimiento
+                  {{ 'account.createAccount.birthData.title' | transloco }}
                 </h4>
                 <ul class="datos">
                   <li>
@@ -194,19 +194,21 @@
                     {{ identification.type?.toUpperCase() || 'S/R' }}
                   </li>
                   <li>
-                    <i>Nº de documento</i>
+                    <i>{{
+                      'clinicalFile.patientData.tabs.identification.birthData.documentNumber.label' | transloco
+                    }}</i>
                     {{ identification?.value || 'S/R' }}
                   </li>
                   <li>
-                    <i>Municipio de Nacimiento</i>
+                    <i>{{ 'profile.personal.tabIdentification.birthData.municipality.label' | transloco }}</i>
                     {{ cityMap[patientRecord.personalData?.municipalityBirth]?.name || 'S/R' }}
                   </li>
                   <li>
-                    <i>Nacionalidad</i>
+                    <i>{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}</i>
                     {{ countryMap[patientRecord.personalData?.nacionality]?.name || 'S/R' }}
                   </li>
                   <li>
-                    <i>UF de nacimiento</i>
+                    <i>{{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }}</i>
                     {{ ufMap[patientRecord.personalData?.ufBirth]?.name || 'S/R' }}
                   </li>
                 </ul>
@@ -214,19 +216,19 @@
 
               <div class="bg-white rounded-lg p-4 shadow-sm">
                 <h4 class="title mb-3">
-                  Datos de Dirección
+                  {{ 'clinicalFile.patientData.tabs.identification.addressData.title' | transloco }}
                 </h4>
                 <ul class="datos">
                   <li>
-                    <i>Estado</i>
+                    <i>{{ 'table.status.label' | transloco }}</i>
                     {{ ufMap[patientRecord.addressData?.uf]?.name || 'S/R' }}
                   </li>
                   <li>
-                    <i>Ciudad</i>
+                    <i>{{ 'clinicalFile.patientData.tabs.identification.addressData.city.label' | transloco }}</i>
                     {{ cityMap[patientRecord.addressData?.city]?.name || 'S/R' }}
                   </li>
                   <li>
-                    <i>Dirección</i>
+                    <i>{{ 'account.createAccount.address.title' | transloco }}</i>
                     {{
                       patientRecord.addressData?.neighborhood +
                         ', ' +
@@ -250,7 +252,7 @@
                 [(ngModel)]="searchTerm"
                 type="text"
                 class="form-control"
-                placeholder="Busqueda"
+                placeholder="{{ 'common.placeholder.search.label' | transloco }}"
                 (keyup)="applyFiltersAppointments()"
               />
               <div class="searchBox">
@@ -265,17 +267,19 @@
                   id="status"
                   (change)="applyFiltersAppointments()"
                 >
-                  <option [ngValue]="null">{{ 'common.dropdown.filter.label' | transloco }} Estado</option>
-                  <option ngValue="reserved">Reservada</option>
+                  <option [ngValue]="null"
+                    >{{ 'common.dropdown.filter.label' | transloco }} {{ 'table.status.label' | transloco }}</option
+                  >
+                  <option ngValue="reserved">{{ 'clinicalFile.reserved.label' | transloco }}</option>
                   <option ngValue="appointed">Agendada</option>
-                  <option ngValue="rescheduled">Re-Agendada</option>
-                  <option ngValue="active">Activa</option>
-                  <option ngValue="waitingInRoom">En Sala de Espera</option>
-                  <option ngValue="waitingInList">En Lista de Espera</option>
-                  <option ngValue="running">En Curso</option>
-                  <option ngValue="pending">Pendiente</option>
-                  <option ngValue="finished">Finalizada</option>
-                  <option ngValue="canceled">Cancelada</option>
+                  <option ngValue="rescheduled">{{ 'clinicalFile.reScheduled.label' | transloco }}</option>
+                  <option ngValue="active">{{ 'waitingRoom.current.label' | transloco }}</option>
+                  <option ngValue="waitingInRoom">{{ 'waitingRoom.inRoom.label' | transloco }}</option>
+                  <option ngValue="waitingInList">{{ 'clinicalFile.inWaitingList.label' | transloco }}</option>
+                  <option ngValue="running">{{ 'common.status.inProgress.label' | transloco }}</option>
+                  <option ngValue="pending">{{ 'clinicalFile.pending.label' | transloco }}</option>
+                  <option ngValue="finished">{{ 'clinicalFile.ended.label' | transloco }}</option>
+                  <option ngValue="canceled">{{ 'clinicalFile.canceled.label' | transloco }}</option>
                 </select>
               </div>
             </div>
@@ -332,7 +336,8 @@
                   [ngStyle]="{ height: 'auto' }"
                 />
                 <label class="form-check-label" for="exampleRadios2">
-                  Todas Las {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
+                  {{ 'common.allAs.label' | transloco }}
+                  {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
                 </label>
               </div>
             </div>
@@ -401,26 +406,26 @@
                   <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                     {{
                       row.administrativeDetails.status === 'reserved'
-                        ? 'Reservada'
+                        ? 'clinicalFile.reserved.label'
                         : row.administrativeDetails.status === 'appointed'
-                        ? 'Agendada'
+                        ? 'clinicalFile.scheduled.label'
                         : row.administrativeDetails.status === 'rescheduled'
-                        ? 'Re-Agendada'
+                        ? 'clinicalFile.reScheduled.label'
                         : row.administrativeDetails.status === 'active'
-                        ? 'Activa'
+                        ? 'clinicalFile.active.label'
                         : row.administrativeDetails.status === 'waitingInRoom'
-                        ? 'En Sala de Espera'
+                        ? 'clinicalFile.inWaitingRoom.label'
                         : row.administrativeDetails.status === 'waitingInList'
-                        ? 'En Lista de Espera'
+                        ? 'clinicalFile.inWaitingList.label'
                         : row.administrativeDetails.status === 'running'
-                        ? 'En Curso'
+                        ? 'common.status.inProgress.label'
                         : row.administrativeDetails.status === 'pending'
-                        ? 'Pendiente'
+                        ? 'clinicalFile.pending.label'
                         : row.administrativeDetails.status === 'finished'
-                        ? 'Finalizada'
+                        ? 'clinicalFile.ended.label'
                         : row.administrativeDetails.status === 'canceled'
-                        ? 'Cancelada'
-                        : 'S/R'
+                        ? 'clinicalFile.canceled.label'
+                        : ('S/R' | transloco)
                     }}
                   </button>
                 </ng-template>
@@ -514,7 +519,7 @@
               </div>
               <ng-template #noFamiliarHistory>
                 <div class="collapseCustom p-4">
-                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }} Familiares
+                  {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                   <span class="text-primary float-right">{{ 'clinicalFile.notPresent.label' | transloco }}</span>
                 </div>
               </ng-template>
@@ -692,7 +697,7 @@
         <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
           <div class="row mb-4 align-items-center">
             <div class="col-6">
-              <h5 class="mb-0">Examenes y Documentos</h5>
+              <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>
             </div>
           </div>
           <div class="row">
@@ -793,7 +798,7 @@
             <div class="col-12">
               <div class="bg-white p-4 rounded-lg text-center" *ngIf="timelineRecord.length">
                 <h5 class="mb-0 text-left">
-                  Timeline de {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
+                  {{ 'dashboard.home.myServices.tabs.timeline.label' | transloco }}
                 </h5>
                 <div class="timeLine">
                   <div class="line bg-white">{{ moment().format('YYYY') }}</div>
@@ -824,26 +829,26 @@
                           <button class="btn btn-primary dos rounded-lg">
                             {{
                               item.status === 'reserved'
-                                ? 'Reservada'
+                                ? 'clinicalFile.reserved.label'
                                 : item.status === 'appointed'
-                                ? 'Agendada'
+                                ? 'clinicalFile.scheduled.label'
                                 : item.status === 'rescheduled'
-                                ? 'Re-Agendada'
+                                ? 'clinicalFile.reScheduled.label'
                                 : item.status === 'active'
-                                ? 'Activa'
+                                ? 'clinicalFile.active.label'
                                 : item.status === 'waitingInRoom'
-                                ? 'En Sala de Espera'
+                                ? 'clinicalFile.inWaitingRoom.label'
                                 : item.status === 'waitingInList'
-                                ? 'En Lista de Espera'
+                                ? 'clinicalFile.inWaitingList.label'
                                 : item.status === 'running'
-                                ? 'En Curso'
+                                ? 'common.status.inProgress.label'
                                 : item.status === 'pending'
-                                ? 'Pendiente'
+                                ? 'clinicalFile.pending.label'
                                 : item.status === 'finished'
-                                ? 'Finalizada'
+                                ? 'clinicalFile.ended.label'
                                 : item.status === 'canceled'
-                                ? 'Cancelada'
-                                : 'S/R'
+                                ? 'clinicalFile.canceled.label'
+                                : ('S/R' | transloco)
                             }}
                           </button>
                         </div>
@@ -866,9 +871,9 @@
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
                                     <ng-container *ngIf="item.isActive; else inactivo">
-                                      Activo
+                                      {{ 'common.status.active.label' | transloco }}
                                     </ng-container>
-                                    <ng-template #inactivo>Inactivo</ng-template>
+                                    <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
                                   </div>
                                 </div>
                               </div>

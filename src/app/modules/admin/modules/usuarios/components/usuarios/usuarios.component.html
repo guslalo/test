@@ -55,7 +55,7 @@
             xmlns="http://www.w3.org/2000/svg"
           >
           </i>
-          Profesionales de Salud
+          {{ 'dashboard.home.waitingRoomManagment.modal.create.healthProfessionals.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
@@ -114,7 +114,7 @@
               [(ngModel)]="searchTerm"
               type="text"
               class="form-control"
-              placeholder="Busqueda"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
@@ -134,10 +134,10 @@
           <div class="col-12 col-md-2">
             <div class="form-group">
               <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
-                <option [ngValue]="10">Registros por Página (10)</option>
-                <option [ngValue]="25">Registros por Página (25)</option>
-                <option [ngValue]="50">Registros por Página (50)</option>
-                <option [ngValue]="100">Registros por Página (100)</option>
+                <option [ngValue]="10">{{ 'common.recordPerPage.label' | transloco }} (10)</option>
+                <option [ngValue]="25">{{ 'common.recordPerPage.label' | transloco }} (25)</option>
+                <option [ngValue]="50">{{ 'common.recordPerPage.label' | transloco }} (50)</option>
+                <option [ngValue]="100">{{ 'common.recordPerPage.label' | transloco }} (100)</option>
               </select>
             </div>
           </div>
@@ -204,12 +204,8 @@
                     />
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column
-                  [resizeable]="false"
-                  [flexGrow]="2"
-                  prop="nationalId"
-                  name="ID"
-                ></ngx-datatable-column>
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="nationalId" name="ID">
+                </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
@@ -311,7 +307,7 @@
               [(ngModel)]="searchTerm"
               type="text"
               class="form-control"
-              placeholder="Busqueda"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
@@ -322,7 +318,7 @@
           <div class="col-12 col-md-3">
             <div class="form-group">
               <select [(ngModel)]="profileSelected" class="form-control" (change)="applyFilters()">
-                <option [ngValue]="null">Filtro por Perfil</option>
+                <option [ngValue]="null">{{ 'common.profileFilter.label' | transloco }}</option>
                 <option [ngValue]="profile.id" *ngFor="let profile of profiles">
                   {{ profile.role }} - {{ profile.profileName }}
                 </option>
@@ -332,10 +328,10 @@
           <div class="col-12 col-md-2">
             <div class="form-group">
               <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
-                <option [ngValue]="10">Registros por Página (10)</option>
-                <option [ngValue]="25">Registros por Página (25)</option>
-                <option [ngValue]="50">Registros por Página (50)</option>
-                <option [ngValue]="100">Registros por Página (100)</option>
+                <option [ngValue]="10">{{ 'common.recordPerPage.label' | transloco }} (10)</option>
+                <option [ngValue]="25">{{ 'common.recordPerPage.label' | transloco }} (25)</option>
+                <option [ngValue]="50">{{ 'common.recordPerPage.label' | transloco }} (50)</option>
+                <option [ngValue]="100">{{ 'common.recordPerPage.label' | transloco }} (100)</option>
               </select>
             </div>
           </div>
@@ -505,7 +501,7 @@
               [(ngModel)]="searchTerm"
               type="text"
               class="form-control"
-              placeholder="Busqueda"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
@@ -520,7 +516,7 @@
                 id="exampleFormControlSelect1"
                 (change)="applyFilters()"
               >
-                <option [ngValue]="null">Filtro por Perfil</option>
+                <option [ngValue]="null">{{ 'common.profileFilter.label' | transloco }}</option>
                 <option [ngValue]="profile.id" *ngFor="let profile of profiles">
                   {{ profile.role }} - {{ profile.profileName }}
                 </option>
@@ -530,10 +526,10 @@
           <div class="col-12 col-md-2">
             <div class="form-group">
               <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
-                <option [ngValue]="10">Registros por Página (10)</option>
-                <option [ngValue]="25">Registros por Página (25)</option>
-                <option [ngValue]="50">Registros por Página (50)</option>
-                <option [ngValue]="100">Registros por Página (100)</option>
+                <option [ngValue]="10">{{ 'common.recordPerPage.label' | transloco }} (10)</option>
+                <option [ngValue]="25">{{ 'common.recordPerPage.label' | transloco }} (25)</option>
+                <option [ngValue]="50">{{ 'common.recordPerPage.label' | transloco }} (50)</option>
+                <option [ngValue]="100">{{ 'common.recordPerPage.label' | transloco }} (100)</option>
               </select>
             </div>
           </div>
@@ -704,7 +700,7 @@
               [(ngModel)]="searchTerm"
               type="text"
               class="form-control"
-              placeholder="Busqueda"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
               (keyup)="applyFilters()"
             />
             <div class="searchBox">
@@ -714,10 +710,10 @@
           <div class="col-12 col-md-2">
             <div class="form-group">
               <select [ngStyle]="{ 'font-size': '12px' }" [(ngModel)]="pageSize" class="form-control">
-                <option [ngValue]="10">Registros por Página (10)</option>
-                <option [ngValue]="25">Registros por Página (25)</option>
-                <option [ngValue]="50">Registros por Página (50)</option>
-                <option [ngValue]="100">Registros por Página (100)</option>
+                <option [ngValue]="10">{{ 'common.recordPerPage.label' | transloco }} (10)</option>
+                <option [ngValue]="25">{{ 'common.recordPerPage.label' | transloco }} (25)</option>
+                <option [ngValue]="50">{{ 'common.recordPerPage.label' | transloco }} (50)</option>
+                <option [ngValue]="100">{{ 'common.recordPerPage.label' | transloco }} (100)</option>
               </select>
             </div>
           </div>
@@ -973,7 +969,7 @@
 </div>
 
 <ng-template #noUsers>
-  <h5 class="text-center text-primary">No se han encontrado registros</h5>
+  <h5 class="text-center text-primary">{{ 'common.noRecordsFound.label' | transloco }}</h5>
 </ng-template>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">

@@ -267,7 +267,7 @@
                     />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="lastName">{{ 'account.nameReq.label' | transloco }}s de la Madre *</label>
+                    <label for="lastName">{{ 'common.motherNames.label' | transloco }} *</label>
                     <input
                       type="text"
                       class="form-control"
@@ -476,7 +476,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-2">
-                    <label for="cep">CEP *</label>
+                    <label for="cep">{{ 'account.cep.label' | transloco }} *</label>
                     <input
                       type="text"
                       class="form-control"
@@ -489,7 +489,9 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label for="uf"
-                      >{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} (UF) *</label
+                      >{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} ({{
+                        'account.uf.label' | transloco
+                      }}) *</label
                     >
                     <select
                       class="form-control"
@@ -597,7 +599,7 @@
                         'is-invalid': !profilesForm.get('profile').valid && profilesForm.get('profile').touched
                       }"
                     >
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="profile" *ngFor="let profile of profiles">
                         {{ profile.role }} - {{ profile.profileName }}
                       </option>
@@ -675,14 +677,17 @@
               <form [formGroup]="waitingRoomForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="waitingRoom">Lista de Espera</label>
+                    <label for="waitingRoom">{{
+                      'dashboard.home.userManagment.createAccount.tabs.waitingRoom.identification.waitingList.label'
+                        | transloco
+                    }}</label>
                     <select
                       [(ngModel)]="roomSelected"
                       class="form-control"
                       name="waitingRoom"
                       formControlName="waitingRoom"
                     >
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item" *ngFor="let item of waitingRooms">
                         {{ item.roomDetails?.name }}
                       </option>
@@ -699,7 +704,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <button (click)="addAllWaitingRooms()" class="btn btn-outline-primary rounded-pill mt-4">
-                      {{ 'common.button.add.label' | transloco }} Todas
+                      {{ 'common.button.addAll.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -715,7 +720,7 @@
                 <thead class="">
                   <tr>
                     <th scope="col">{{ 'waitingRoom.name.label' | transloco }}</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">{{ 'common.description.label' | transloco }}</th>
                     <th scope="col">
                       {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                     </th>
@@ -766,7 +771,7 @@
               <form [formGroup]="profileDataForm">
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <label for="cpf">Biografia Academica</label>
+                    <label for="cpf">{{ 'account.academicBio.label' | transloco }}</label>
                     <textarea
                       rows="4"
                       no-resize
@@ -792,7 +797,7 @@
                   <div class="form-group col-md-4">
                     <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
                         {{ speciality.specialtyName }}
                       </option>
@@ -882,7 +887,7 @@
                         'is-invalid': !professionalForm.get('ufRegistry').valid
                       }"
                     >
-                      <option [ngValue]="null" [disabled]="true">Seleccionar</option>
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
@@ -935,7 +940,7 @@
                       name="ufProfessionalRegistry"
                       formControlName="ufProfessionalRegistry"
                     >
-                      <option [ngValue]="null" disabled>Seleccionar</option>
+                      <option [ngValue]="null" disabled>{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="state" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
@@ -960,7 +965,7 @@
                         <th scope="col">
                           {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                         </th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">{{ 'common.actions.label' | transloco }}</th>
                       </tr>
                     </thead>
 

@@ -217,8 +217,8 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-  refreshSearch(){
-    this.blocks = []
+  refreshSearch() {
+    this.blocks = [];
   }
   atras() {
     this.selectSintoma = false;
@@ -385,19 +385,18 @@ export class IndexComponent implements OnInit {
       console.log('flujo profesional');
       this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
         (data) => {
-          this.blocks = data.payload;
-          console.log(this.blocks);
-          this.specialtiesIdReserve = this.blocks[0].professionalDetails.specialtyId;
-          console.log(this.specialtiesIdReserve);
-
-          localStorage.removeItem('reserva');
-          localStorage.setItem('reserva', JSON.stringify(this.blocks));
-          console.log(data);
-          //console.log(data.internalCode);
-          /**/
+          // console.log(data);
           if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
+            this.blocks = data.payload;
+            this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
+            console.log(this.specialtiesIdReserve);
+            localStorage.removeItem('reserva');
+            localStorage.setItem('reserva', JSON.stringify(this.blocks));
+            console.log(data);
+            //console.log(data.internalCode);
+            /**/
             this.sinProfesionales = false;
           }
         },

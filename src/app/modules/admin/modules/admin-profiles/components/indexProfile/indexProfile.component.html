@@ -23,7 +23,7 @@
           [(ngModel)]="searchTerm"
           type="text"
           class="form-control"
-          placeholder="Busqueda"
+          placeholder="{{ 'common.placeholder.search.label' | transloco }}"
           (keyup)="applyFilters()"
         />
         <div class="searchBox">
@@ -88,11 +88,14 @@
                       [routerLink]="['../../gestion-usuarios']"
                       [queryParams]="{ role: profile.role, profile: profile.id }"
                     >
-                      Ver {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
+                      {{ 'common.viewUsers.label' | transloco }}
                     </button>
                   </div>
                   <ng-template #noUsers>
-                    <span class="text-secondary">Este perfil no tiene <b>usuarios</b> asociados</span>
+                    <span class="text-secondary"
+                      >{{ 'common.thisProfileDoesntHave.label' | transloco }}
+                      <b>{{ 'tabs.users.label' | transloco }}</b> {{ 'common.associated.label' | transloco }}</span
+                    >
                   </ng-template>
                 </td>
                 <td>

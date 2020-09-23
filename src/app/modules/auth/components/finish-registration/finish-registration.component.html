@@ -202,7 +202,7 @@
                     />
                     <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
                       {{ 'crear-cuenta.step2.formGroup.motherName' | transloco }}
-                      es necesario
+                      {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-4">
@@ -220,7 +220,7 @@
                     />
                     <div *ngIf="personalData.controls['secondLastName'].errors?.required" class="invalid-feedback">
                       {{ 'common.forms.user.identification.secondSurname.label' | transloco }}
-                      es necesario
+                      {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
@@ -342,7 +342,8 @@
                       </div>
                     </div>
                     <div *ngIf="birthData.controls['birthdate'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
@@ -364,7 +365,8 @@
                       </option>
                     </select>
                     <div *ngIf="birthData.controls['ufBirth'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -410,7 +412,8 @@
                       </option>
                     </select>
                     <div *ngIf="birthData.controls['nacionality'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -458,7 +461,7 @@
                       formControlName="cep"
                     />
                     <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
-                      {{ 'account.cep.label' | transloco }} es necesario
+                      {{ 'account.cep.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
@@ -477,7 +480,7 @@
                       </option>
                     </select>
                     <div *ngIf="addressData.controls['uf'].errors?.required" class="invalid-feedback">
-                      {{ 'account.uf.label' | transloco }} es necesario
+                      {{ 'account.uf.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -519,7 +522,7 @@
                       formControlName="neighborhood"
                     />
                     <div *ngIf="addressData.controls['neighborhood'].errors?.required" class="invalid-feedback">
-                      Barrio es necesario
+                      Barrio {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -539,7 +542,7 @@
                       formControlName="street"
                     />
                     <div *ngIf="addressData.controls['street'].errors?.required" class="invalid-feedback">
-                      {{ 'account.street.label' | transloco }} es necesario
+                      {{ 'account.street.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
 
@@ -558,7 +561,7 @@
                       formControlName="streetNumber"
                     />
                     <div *ngIf="addressData.controls['streetNumber'].errors?.required" class="invalid-feedback">
-                      {{ 'account.numeration.label' | transloco }} es necesario
+                      {{ 'account.numeration.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                 </div>

@@ -7,9 +7,9 @@ import { MessagingService } from './services/messaging.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  message;
+  message: string;
   title = 'itmstl';
-  constructor(private messagingService: MessagingService) {}
+  constructor() {}
 
   ngOnInit() {
     /*const userId = 'user001';

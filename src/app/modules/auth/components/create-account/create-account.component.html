@@ -56,9 +56,19 @@
                       (change)="validateForm()"
                     >
                       <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option value="cpf">CPF</option>
-                      <option value="cns">CNS</option>
-                      <option value="rgRegistry">RG</option>
+                      <option value="cpf">
+                        {{
+                          'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
+                            | transloco
+                        }}
+                      </option>
+                      <option value="cns">
+                        {{
+                          'dashboard.home.userManagment.createAccount.tabs.personal.identification.cns.label'
+                            | transloco
+                        }}
+                      </option>
+                      <option value="rgRegistry">{{ 'auth.rg.label' | transloco }}</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
@@ -195,7 +205,7 @@
                       {{ 'common.forms.user.identification.name.label' | transloco }} *
                     </div>
                     <div *ngIf="personalData.controls['name'].errors?.pattern" class="invalid-feedback">
-                      Ingrese solo caracteres
+                      {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
@@ -214,7 +224,7 @@
                       formControlName="lastName"
                     />
                     <div *ngIf="personalData.controls['lastName'].errors?.pattern" class="invalid-feedback">
-                      Ingrese solo caracteres
+                      {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -238,10 +248,10 @@
                       }"
                     />
                     <div *ngIf="personalData.controls['secondLastName'].errors?.required" class="invalid-feedback">
-                      {{ 'common.forms.user.identification.secondSurname.label' | transloco }} es necesario
+                      {{ 'auth.surnameReq.label' | transloco }}
                     </div>
                     <div *ngIf="personalData.controls['secondLastName'].errors?.pattern" class="invalid-feedback">
-                      Ingrese solo caracteres
+                      {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-4">
@@ -258,10 +268,10 @@
                       }"
                     />
                     <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
-                      {{ 'account.motherNameReq.label' | transloco }} es necesario
+                      {{ 'common.motherNamesReq.label' | transloco }}
                     </div>
                     <div *ngIf="personalData.controls['motherName'].errors?.pattern" class="invalid-feedback">
-                      Ingrese solo caracteres
+                      {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
@@ -303,7 +313,7 @@
                       onkeypress="return event.charCode != 32"
                     />
                     <div *ngIf="personalData.controls['email'].errors?.required" class="invalid-feedback">
-                      email erroneo
+                      email {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
 
@@ -342,7 +352,7 @@
                       formControlName="phoneNumber"
                     />
                     <div *ngIf="personalData.controls['phoneNumber'].errors?.required" class="invalid-feedback">
-                      telefono es necesario
+                      telefono {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
@@ -425,7 +435,8 @@
                       </div>
                     </div>
                     <div *ngIf="birthData.controls['birthdate'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
@@ -447,7 +458,8 @@
                       </option>
                     </select>
                     <div *ngIf="birthData.controls['ufBirth'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.uf.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -493,7 +505,8 @@
                       </option>
                     </select>
                     <div *ngIf="birthData.controls['nacionality'].errors?.required" class="invalid-feedback">
-                      {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }} erroneo
+                      {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
                 </div>
@@ -542,7 +555,7 @@
                       formControlName="cep"
                     />
                     <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
-                      {{ 'account.cep.label' | transloco }} es necesario
+                      {{ 'account.cep.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
