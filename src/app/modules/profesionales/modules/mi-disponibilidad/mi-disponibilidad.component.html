@@ -112,22 +112,24 @@
                   <thead>
                     <tr class="d-flex">
                       <th class="col-2" scope="col">
-                        {{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}
+                        {{ 'table.days.label' | transloco }}
                       </th>
                       <th class="col-2" scope="col">
-                        {{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}
+                        {{ 'table.date.label' | transloco }}
                       </th>
-                      <th class="col-2" scope="col">{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
-                      <th class="col-2" scope="col">{{ 'disponibility.modal.create.specialty.label' | transloco }}</th>
-                      <th class="col-1" scope="col">
-                        {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
+                      <th class="col-2" scope="col">{{ 'table.hour.label' | transloco }}</th>
+                      <th class="col-2" scope="col">{{ 'table.objetive.label' | transloco }}</th>
+                      <th class="col-2" scope="col">
+                        {{ 'table.specialty.label' | transloco }}
                       </th>
                       <th class="col-1" scope="col">
-                        {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
+                        {{ 'table.status.label' | transloco }}
+                      </th>
+                      <th class="col-1" scope="col">
+                        {{ 'table.action.label' | transloco }}
                       </th>
                     </tr>
                   </thead>
-
                   <ng-container *ngIf="disponibilidad?.length === 0">
                     <tbody>
                       <tr>
@@ -189,7 +191,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             id="switch{{ item._id }}"
-                            [checked]="item.administrativeDetails.isActive === true"
+                            [checked]="item.administrativeDetails.isActive"
                             (click)="putState(item)"
                           />
                           <label class="custom-control-label" for="switch{{ item._id }}"></label>
