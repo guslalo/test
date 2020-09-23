@@ -40,29 +40,33 @@ export class InicioPComponent implements OnInit {
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
-    this.getAppointments2();
+    //this.getAppointments2();
     this.getRooms();
   }
 
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        let arrayForDate = data.payload.map((value) => value.dateDetails.date);
-        var min = arrayForDate[0];
-        arrayForDate.forEach((numero) => {
-          if (numero < min) {
-            min = numero;
-          }
-        });
-        this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
-        let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
-        this.consultasFinalizadas = finalizadas.length;
+        console.log(data)
         this.consultas = data.payload;
-        console.log(this.consultas);
-        /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
-        var latest = new Date(Math.max.apply(null,dates));
-        var earliest = new Date(Math.min.apply(null,dates));*/
-        this.spinner.hide();
+        if(data.payload.length > 0){
+          let arrayForDate = data.payload.map((value) => value.dateDetails.date);
+          var min = arrayForDate[0];
+          arrayForDate.forEach((numero) => {
+            if (numero < min) {
+              min = numero;
+            }
+          });
+          this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
+          let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+          this.consultasFinalizadas = finalizadas.length;
+          
+          console.log(this.consultas);
+          /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
+          var latest = new Date(Math.max.apply(null,dates));
+          var earliest = new Date(Math.min.apply(null,dates));*/
+          this.spinner.hide();
+        }  
       },
       (error) => {
         console.log(error);
@@ -75,8 +79,8 @@ export class InicioPComponent implements OnInit {
       (data) => {
         //let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
         //.consultasFinalizadas = finalizadas.length;
-        // this.consultasEsperas = data.payload;
-        console.log(this.consultasEsperas);
+       // this.consultasEsperas = data.payload;
+        //console.log(this.consultasEsperas);
       },
       (error) => {
         console.log(error);
@@ -90,6 +94,7 @@ export class InicioPComponent implements OnInit {
       (data) => {
         console.log(data);
         this.consultasEsperas = data.payload;
+        console.log(this.consultasEsperas)
       },
       (error) => {
         console.log(error);
