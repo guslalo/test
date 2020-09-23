@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <h2>Cambiar Contraseña</h2>
-      <p>Información de tu contraseña actual</p>
+      <h2>{{ 'profile.personal.changePassword.change.title' | transloco }}</h2>
+      <p>{{ 'auth.currentPwdInfo.label' | transloco }}</p>
     </div>
   </div>
 
@@ -14,14 +14,16 @@
           <div class="row">
             <div class="col-md-12">
               <h4 class="ml-1">
-                Contraseña actual
+                {{ 'profile.personal.changePassword.current.title' | transloco }}
               </h4>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">Última modificación el 17 de marzo del 2020</div>
+            <div class="col-6">{{ 'profile.personal.changePassword.current.lastModification.label' | transloco }} 17 de
+              marzo del 2020</div>
             <div class="col-6">
-              <button type="button" class="btn btn-outline-secondary float-right">Cambiar Contraseña</button>
+              <button type="button"
+                class="btn btn-outline-secondary float-right">{{ 'common.button.changePassword.label' | transloco }}</button>
             </div>
           </div>
         </div>
@@ -34,7 +36,7 @@
           <div class="row">
             <div class="col-md-12">
               <h4 class="ml-1">
-                Cambiar Contraseña
+                {{ 'profile.personal.changePassword.change.title' | transloco }}
               </h4>
             </div>
           </div>
@@ -42,20 +44,13 @@
             <form class="p-4" style="width: 100%;" [formGroup]="changePassForm">
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="inputEmail4">Contraseña Actual</label>
+                  <label
+                    for="inputEmail4">{{ 'profile.personal.changePassword.change.current.label' | transloco }}</label>
                   <div class="input-group mb-3">
-                    <input
-                      [type]="fieldTextType ? 'text' : 'password'"
-                      type="password"
-                      class="form-control"
-                      name="password"
-                      id="password"
-                      formControlName="password"
-                      [ngClass]="{
+                    <input [type]="fieldTextType ? 'text' : 'password'" type="password" class="form-control"
+                      name="password" id="password" formControlName="password" [ngClass]="{
                         'is-invalid': !changePassForm.get('password').valid && changePassForm.get('password').touched
-                      }"
-                      maxlength="20"
-                    />
+                      }" maxlength="20" />
                     <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
                       <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
                         <img src="assets/icons/icon-show-password.svg" alt="img" />
@@ -67,29 +62,21 @@
                   </div>
                   <div *ngIf="changePassForm.controls['password'].errors" class="invalid-feedback">
                     <ul>
-                      <li>Contraseña actual requerida</li>
+                      <li>{{ 'auth.currentPwdReq.label' | transloco }}</li>
                     </ul>
                   </div>
                   <div *ngIf="errorPassCurrent" class="invalid-feedback" style="display: block;">
-                    La contraseña actual es incorrecta
+                    {{ 'auth.currentPwdIncorrect.label' | transloco }}
                   </div>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="inputEmail4">Nueva Contraseña</label>
+                  <label for="inputEmail4">{{ 'profile.personal.changePassword.change.new.label' | transloco }}</label>
                   <div class="input-group mb-3">
-                    <input
-                      [type]="fieldTextType ? 'text' : 'password'"
-                      type="password"
-                      id="newPassword"
-                      formControlName="newPassword"
-                      class="form-control"
-                      name="newPassword"
-                      [ngClass]="{
+                    <input [type]="fieldTextType ? 'text' : 'password'" type="password" id="newPassword"
+                      formControlName="newPassword" class="form-control" name="newPassword" [ngClass]="{
                         'is-invalid':
                           !changePassForm.get('newPassword').valid && changePassForm.get('newPassword').touched
-                      }"
-                      maxlength="20"
-                    />
+                      }" maxlength="20" />
                     <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
                       <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
                         <img src="assets/icons/icon-show-password.svg" alt="img" />
@@ -104,26 +91,20 @@
                         <li>{{ 'common.oneLower.label' | transloco }}</li>
                         <li>{{ 'common.oneNumber.label' | transloco }}</li>
                         <li>{{ 'common.eigthLengthMin.label' | transloco }}</li>
-                        <li>* Al menos un carácter especial</li>
+                        <li>{{ 'account.atLeastOneSpecialChar.label' | transloco }}</li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="confirmPassword">Repetir contraseña</label>
+                  <label
+                    for="confirmPassword">{{ 'profile.personal.changePassword.change.repeat.label' | transloco }}</label>
                   <div class="input-group mb-3">
-                    <input
-                      [type]="fieldTextType ? 'text' : 'password'"
-                      formControlName="confirmPassword"
-                      class="form-control"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      [ngClass]="{
+                    <input [type]="fieldTextType ? 'text' : 'password'" formControlName="confirmPassword"
+                      class="form-control" id="confirmPassword" name="confirmPassword" [ngClass]="{
                         'is-invalid':
                           !changePassForm.get('confirmPassword').valid && changePassForm.get('confirmPassword').touched
-                      }"
-                      maxlength="20"
-                    />
+                      }" maxlength="20" />
                     <div class="input-group-append" (click)="this.fieldTextType = !this.fieldTextType">
                       <button *ngIf="!this.fieldTextType" class="btn btn-outline-secondary px-3" type="button">
                         <img src="assets/icons/icon-show-password.svg" alt="img" />
@@ -134,7 +115,7 @@
                     </div>
                     <div *ngIf="passwordNotMatchs" class="invalid-feedback">
                       <ul>
-                        <li>Contraseña no coincide</li>
+                        <li>{{ 'auth.pwdNotMatch.label' | transloco }}</li>
                       </ul>
                     </div>
                   </div>
@@ -149,23 +130,14 @@
                   <div class="alert alert-secondary" role="alert">
                     <div class="row">
                       <div class="col-2 text-center">
-                        <svg
-                          width="3em"
-                          height="3em"
-                          viewBox="0 0 16 16"
-                          class="bi bi-shield-lock-fill color-primary"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
-                          />
+                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill color-primary"
+                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd"
+                            d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z" />
                         </svg>
                       </div>
                       <div class="col-10 pl-0">
-                        Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos
-                        una mayúscula, minúscula y un caracter especial.
+                        {{ 'account.passwordHint.label' | transloco }}
                       </div>
                     </div>
                   </div>
@@ -175,7 +147,7 @@
                 <div class="col-12">
                   <div *ngIf="alertSuccess" class="alert alert-success" role="alert">
                     <h4 class="alert-heading">Contraseña Actualizada!</h4>
-                    <p>Se ha enviado un correo electronico de confirmacion a la cuenta asociada.</p>
+                    <p>{{ 'auth.emailSendedToAsociatedAccount.label' | transloco }}</p>
                   </div>
                 </div>
               </div>
@@ -186,13 +158,9 @@
       <!--/card-->
       <div class="form-row">
         <div class="col-12">
-          <button
-            type="button"
-            class="btn btn-secondary float-right rounded-pill"
-            [disabled]="!changePassForm.valid"
-            (click)="changePass()"
-          >
-            Cambiar Contraseña
+          <button type="button" class="btn btn-secondary float-right rounded-pill" [disabled]="!changePassForm.valid"
+            (click)="changePass()">
+            {{ 'common.button.changePassword.label' | transloco }}
           </button>
         </div>
       </div>

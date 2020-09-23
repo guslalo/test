@@ -27,6 +27,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { MatDialogModule } from '@angular/material/dialog';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { RouterModule } from '@angular/router';
+import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { RouterModule } from '@angular/router';
     ChooseContextComponent,
     ConfirmAccountComponent,
     ResetPasswordComponent,
+    RecoveryDoneComponent
   ],
   imports: [
     CommonModule,
@@ -50,8 +53,9 @@ import { RouterModule } from '@angular/router';
     MatDialogModule,
     RouterModule,
     SharedModule,
+    TranslocoRootModule
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AuthModule {}
+export class AuthModule { }

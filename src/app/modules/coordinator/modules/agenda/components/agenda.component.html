@@ -3,27 +3,14 @@
     <h2>{{ 'common.menu.schedule.label' | transloco }}</h2>
   </div>
   <div class="col">
-    <button
-      type="button"
-      class="btn btn-primary rounded-pill float-right"
-      ng-reflect-tour-anchor="agendar"
-      data-toggle="modal"
-      data-target="#disponibilidad"
-    >
+    <button type="button" class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar"
+      data-toggle="modal" data-target="#disponibilidad">
       {{ 'clinicalFile.newService.label' | transloco }}
 
-      <svg
-        width="1.5em"
-        height="1.5em"
-        viewBox="0 0 16 16"
-        class="bi bi-plus-circle"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-        />
+      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
         <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
       </svg>
@@ -34,24 +21,15 @@
 <div class="row">
   <div class="col-12">
     <div class="col-12 col-md-3 d-none">
-      <input id="typeahead-basic" type="text" class="form-control" placeholder="Busqueda" />
+      <input id="typeahead-basic" type="text" class="form-control"
+        placeholder="{{ 'common.placeholder.search.label' | transloco }}" />
       <div class="searchBox">
-        <svg
-          width="1em"
-          height="1em"
-          viewBox="0 0 16 16"
-          class="bi bi-search"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-          />
-          <path
-            fill-rule="evenodd"
-            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-          />
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+          <path fill-rule="evenodd"
+            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
         </svg>
       </div>
     </div>
@@ -91,14 +69,8 @@
   </div>
 </div>
 <!-- Modal disponibilidad-->
-<div
-  class="modal fade"
-  id="disponibilidad"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="disponibilidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
@@ -123,14 +95,8 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="bloquearDias"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="bloquearDias" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
