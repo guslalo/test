@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import { NgbRatingModule, NgbTab, NgbDropdownModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingModule, NgbDropdownModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import interactionPlugin from '@fullcalendar/angular/fullcalendar-angular'; // a plugin
 
@@ -30,7 +30,6 @@ import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.com
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { CalendarComponent } from './modules/mi-disponibilidad/components/calendar/calendar.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -48,7 +47,6 @@ FullCalendarModule.registerPlugins([
     MiDisponibilidadComponent,
     MisPacientesComponent,
     AgendaComponent,
-    CalendarComponent,
   ],
   imports: [
     CommonModule,

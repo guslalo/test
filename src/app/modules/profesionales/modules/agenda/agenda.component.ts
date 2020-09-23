@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
-import { INITIAL_EVENTS, createEventId } from './events-utils';
-import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarOptions } from '@fullcalendar/angular';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AppointmentsService } from './../../../../services/appointments.service';
+import esLocale from '@fullcalendar/core/locales/es';
+import ptLocale from '@fullcalendar/core/locales/pt';
+import { TranslocoService } from '@ngneat/transloco';
 
 const states = ['test', 'test3', 'test4'];
 @Component({
@@ -19,7 +21,7 @@ export class AgendaComponent implements OnInit {
 
   model2: NgbDateStruct;
 
-  constructor(private appointmentsService: AppointmentsService) {}
+  constructor(private appointmentsService: AppointmentsService, private translocoService: TranslocoService) {}
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -28,12 +30,9 @@ export class AgendaComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     // dateClick: this.handleDateClick.bind(this), // bind is important!
-    events: [
-      { title: 'event 1', date: '2020-08-23', days: 3 },
-      { title: 'event 5', date: '2020-08-23', test: 'sadsdsda' },
-      { title: 'event 6', date: '2020-08-23', test: '685684' },
-      { title: 'event 2', date: '2020-08-26', test: 'saddsaa' },
-    ],
+    events: [{ title: 'event 1', date: '2020-08-23', days: 3 }],
+    locales: [esLocale, ptLocale],
+    locale: this.translocoService.getActiveLang(),
   };
   ngOnInit(): void {
     this.getAppointmentsTimeline();
@@ -49,7 +48,6 @@ export class AgendaComponent implements OnInit {
       year: fecha.getFullYear(),
       month: month,
     };
-
     //console.log(currentMonth);
   }
 

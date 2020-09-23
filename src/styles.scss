@@ -831,7 +831,6 @@ table {
 }
 
 // DATATABLES
-
 .ngx-datatable.material {
   transform-style: preserve-3d !important;
   box-shadow: none !important;
@@ -855,6 +854,7 @@ table {
 
   .datatable-body {
     max-height: 720px;
+    min-height: 720px;
     overflow-y: auto;
     overflow-x: hidden;
     .datatable-body-row {
@@ -883,11 +883,7 @@ table {
               a {
                 color: #fff;
                 background-color: #0066ff;
-              }
-              &:hover {
-                a {
-                  font-weight: bold;
-                }
+                border-radius: 50%;
               }
             }
           }
@@ -898,10 +894,14 @@ table {
           color: black;
           float: left;
           padding: 8px 16px !important;
-          margin: 0px !important;
+          margin: 3px !important;
           text-decoration: none;
-          border: 1px solid #ddd;
+          border: none;
           background-color: #fff;
+          &:hover {
+            font-weight: bold;
+            border-radius: 50%;
+          }
         }
       }
     }

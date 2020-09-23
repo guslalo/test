@@ -10,11 +10,13 @@ import { DatePipe } from '@angular/common';
 import { AvailabilityService } from '../../services/availability.service';
 import { ProfessionalService } from './../../../../services/professional.service';
 import { SpecialtiesService } from './../../../../services/specialties.service';
-
 import * as moment from 'moment';
-
 import { NgbDateStruct, NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from 'src/app/shared/utils';
+import esLocale from '@fullcalendar/core/locales/es';
+import ptLocale from '@fullcalendar/core/locales/pt';
+import { TranslocoService } from '@ngneat/transloco';
+
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 // carrusel
@@ -54,7 +56,8 @@ export class MiDisponibilidadComponent implements OnInit {
     private availabilityService: AvailabilityService,
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
-    private specialtiesService: SpecialtiesService
+    private specialtiesService: SpecialtiesService,
+    private translocoService: TranslocoService
   ) {
     const current = new Date();
     this.minDate = {
@@ -144,7 +147,9 @@ export class MiDisponibilidadComponent implements OnInit {
     dayMaxEvents: true,
     // select: this.handleDateSelect.bind(this),
     // eventClick: this.handleEventClick.bind(this),
-    // eventsSet: this.handleEvents.bind(this)
+    // eventsSet: this.handleEvents.bind(this),
+    locales: [esLocale, ptLocale],
+    locale: this.translocoService.getActiveLang(),
   };
   showActiveDays: Boolean = false;
   showBlockedDays: Boolean = false;
