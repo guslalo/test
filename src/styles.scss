@@ -992,3 +992,28 @@ ngb-timepicker .ngb-tp-hour {
     font-weight: normal;
   }
 }
+
+.vistaFixed {
+  border-radius: 10px;
+  &.fixed {
+    background: white;
+    position: fixed;
+    padding: 20px 11%;
+    box-shadow: 0 1.125rem 1.25rem rgba(0, 0, 0, 0.075) !important;
+    z-index: 2;
+    .leftwatermark {
+      display: none !important;
+    }
+    .card {
+      box-shadow: none !important;
+    }
+    //width: 100%;
+    top:20px;
+    .meetPatient2 {
+      width: 100% !important;
+      height: 250px !important;
+
+
+    }
+  }
+}

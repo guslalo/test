@@ -36,7 +36,8 @@ export class MisConsultasComponent implements OnInit {
             lista.administrativeDetails.status === 'active' ||
             lista.administrativeDetails.status === 'running' ||
             lista.administrativeDetails.status === 'pending' ||
-            lista.administrativeDetails.status === 'appointed'
+            lista.administrativeDetails.status === 'appointed' ||
+            lista.administrativeDetails.status === 'finished'
         );
         //this.consultas = data.payload;
       },

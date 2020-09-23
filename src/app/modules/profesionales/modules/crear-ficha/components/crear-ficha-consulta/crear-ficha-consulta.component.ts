@@ -57,6 +57,26 @@ export class CrearFichaConsultaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    $(window).bind('scroll', function () {
+      if ($(window).scrollTop() > 200) {
+         $('.vistaFixed').addClass('fixed');
+         //$('.toolbox-icon').click();
+         //$('#meet').contents().find('.toolbox-icon').click();
+         $(".mtfixed").css('margin-top',400);
+         $(".vistaFixed .card").css('box-shadow','none !important');
+        
+      } else {
+        $('.toolbox-icon').click();
+        console.log('no fixed')
+        $(".mtfixed").css('margin-top',0);
+        $('.vistaFixed').removeClass('fixed');
+        //$('#meet').contents().find('.toolbox-icon').click();
+       
+      }
+    });
+
+
     this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
@@ -298,7 +318,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         const options = {
           roomName: data.payload.sessionId,
           jwt: data.payload.sessionToken,
-          height: 500,
+          //height: 500,
           //width:'auto',
           parentNode: document.querySelector('#meet'),
         };
