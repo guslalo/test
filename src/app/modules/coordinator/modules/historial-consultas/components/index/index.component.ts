@@ -101,7 +101,7 @@ export class IndexComponent implements OnInit {
   getPatients() {
     this.patientService.getAllPatients().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.tempPatients = [...data];
         this.patients = data;
       },
@@ -114,10 +114,9 @@ export class IndexComponent implements OnInit {
   getProfessionals() {
     this.professionalService.getProfessionals().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.tempProfessionals = [...data];
         this.professionals = data;
-        // console.log(this.professionals);
       },
       (error) => {
         console.log(error);
@@ -148,7 +147,7 @@ export class IndexComponent implements OnInit {
             }
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
-            console.log(data.payload);
+            // console.log(data.payload);
           }
         },
         (error) => {
@@ -169,7 +168,7 @@ export class IndexComponent implements OnInit {
 
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.specialties = data.payload;
       },
       (error) => {
@@ -183,7 +182,7 @@ export class IndexComponent implements OnInit {
       (data) => {
         this.tempAppointments = [...data.payload];
         this.appointments = data.payload;
-        console.log(this.appointments);
+        // console.log(this.appointments);
       },
       (error) => {
         console.log(error);

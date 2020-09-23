@@ -21,7 +21,7 @@ export class IndexComponent implements OnInit {
   ColumnMode = ColumnMode;
   patientForm: FormGroup;
 
-  tab: any = 'pre-patients';
+  tab: any = 'patients';
 
   searchTerm: string = '';
 
@@ -49,7 +49,7 @@ export class IndexComponent implements OnInit {
   getPatients() {
     this.patientService.getAllPatients().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.tempPatients = [...data];
         this.patients = data;
       },
@@ -96,8 +96,7 @@ export class IndexComponent implements OnInit {
   fetchPrePatients() {
     this.patientService.getAllPrePatients().subscribe(
       (data) => {
-        console.log(data);
-        // NO PATIENTS FOUND
+        // console.log(data);
         if (Array.isArray(data)) {
           this.tempPrePatients = [...data];
           this.prePatients = data;

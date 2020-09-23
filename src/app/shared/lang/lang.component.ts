@@ -13,7 +13,6 @@ export class LangComponent implements OnInit {
   ngOnInit(): void {}
   setActiveLang(lang: string) {
     console.log(lang);
-
     this.translocoService.setActiveLang(lang);
   }
 }

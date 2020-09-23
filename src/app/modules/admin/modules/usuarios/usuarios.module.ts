@@ -5,7 +5,13 @@ import { UsuariosRountingModule } from '../usuarios/usuarios-routing.module';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbDatepickerModule, NgbTypeaheadModule, NgbPaginationModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbTypeaheadModule,
+  NgbPaginationModule,
+  NgbDropdown,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 // SHARED
 import { SharedModule } from '../../../../shared/shared.module';
@@ -28,6 +34,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgbDatepickerModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
+    NgbDropdownModule,
     MatDialogModule,
     NgxDatatableModule,
     NgxSpinnerModule,

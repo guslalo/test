@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, forkJoin, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-//import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-//import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
 import { CoordinatorService } from './../../../../../../services/coordinator.service';
@@ -14,8 +11,9 @@ import { SpecialtiesService } from './../../../../../../services/specialties.ser
 
 import * as moment from 'moment';
 
-import { NgbDateStruct, NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from 'src/app/shared/utils';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 @Component({
@@ -26,6 +24,8 @@ const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 export class IndexComponent implements OnInit {
   public datePipeString: string;
   dateAdapter = new CustomDateAdapter();
+  moment: any = moment;
+  ColumnMode = ColumnMode;
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -97,6 +97,7 @@ export class IndexComponent implements OnInit {
 
   medicalSpecialty: string;
   specialtyMap = [];
+  AllSpecialtyMap = [];
   professionalSelected: string;
   specialtySelected: string;
 
@@ -181,6 +182,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.getProfessionals();
     this.getProfessionalSpecialties();
+    this.getSpecialties();
     this.getAvailability();
 
     this.createAvailability = this._formBuilder.group({
@@ -232,32 +234,9 @@ export class IndexComponent implements OnInit {
     this.disponibilidadArray = [];
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
-        console.log(data.payload);
+        // console.log(data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
-        console.log(availabilities);
-
-        for (let item of availabilities) {
-          this.especialidad = this.specialtiesService.getSpecialtiesId(item.professionalDetails.specialtyId).subscribe(
-            (specialty) => {
-              this.especialidad = specialty.payload.specialtyName;
-              this.disponibilidadObject = {
-                _id: item._id,
-                daysDetails: item.dateDetails.days,
-                dateStart: item.dateDetails.startDate,
-                dateEnd: item.dateDetails.endDate,
-                start: item.dateDetails.dailyRanges,
-                objective: item.administrativeDetails.objective,
-                specialty: this.especialidad,
-                professional: `${item.professionalName[0].personalData.name} ${item.professionalName[0].personalData.lastName}`,
-                status: item.administrativeDetails.isActive,
-              };
-              this.disponibilidadArray.push(this.disponibilidadObject);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-        }
+        this.disponibilidadArray = availabilities;
       },
       (error) => {
         console.log(error);
@@ -270,8 +249,7 @@ export class IndexComponent implements OnInit {
     this.professionalService.getProfessionalSpecialties().subscribe(
       (data) => {
         this.medicalSpecialties = data.payload;
-        console.log(this.medicalSpecialties);
-        console.log(this.medicalSpecialties[0]._id);
+        // console.log(this.medicalSpecialties[0]._id);
         this.specialtyMap = data.payload.reduce((obj, item) => {
           obj[item._id] = item;
           return obj;
@@ -281,6 +259,16 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getSpecialties() {
+    this.specialtiesService.getSpecialties().subscribe((data) => {
+      // console.log(data);
+      this.AllSpecialtyMap = data.reduce((obj, item) => {
+        obj[item._id] = item;
+        return obj;
+      }, {});
+    });
   }
 
   //get lista de dias bloqueados
@@ -343,15 +331,17 @@ export class IndexComponent implements OnInit {
 
   putState(item) {
     console.log(item);
-    this.availabilityService.updateStateCoordinator(item._id, item.status ? false : true).subscribe(
-      (data) => {
-        console.log(data);
-        this.state = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.availabilityService
+      .updateStateCoordinator(item._id, item.administrativeDetails.isActive ? false : true)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.state = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
   public allDayBoolean = false;
   allDayBooleanState() {
@@ -520,7 +510,7 @@ export class IndexComponent implements OnInit {
   getProfessionals() {
     this.professionalService.getProfessionals().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.tempProfessionals = [...data];
         this.professionals = data;
         // console.log(this.professionals);
