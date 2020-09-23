@@ -16,6 +16,22 @@ textarea.form-control {
   padding: 10px;
 }
 
+.custom-file-label {
+  border-radius: 6px;
+  border: 1px solid #35a6f5;
+  height: 48px;
+  padding: 0 18px;
+  line-height: 46px;
+}
+.custom-file {
+  height: 50px;
+  overflow: hidden;
+}
+.custom-file-label::after {
+  line-height: 34px;
+    height: 46px !important;
+}
+
 .custom-file-input {
   border-radius: 6px;
   border: 1px solid #35a6f5;

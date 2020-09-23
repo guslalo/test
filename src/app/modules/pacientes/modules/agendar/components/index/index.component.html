@@ -18,7 +18,7 @@
         <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
+          <li class="nav-item" role="presentation" (click)="refreshSearch()">
             <a
               class="nav-link active"
               id="home-tab4"
@@ -31,7 +31,7 @@
               >{{ 'disponibility.modal.create.specialty.label' | transloco }}</a
             >
           </li>
-          <li class="nav-item" role="presentation">
+          <li class="nav-item" role="presentation" (click)="refreshSearch()">
             <a
               class="nav-link"
               id="profile-tab4"
@@ -60,7 +60,7 @@
                 >
                   <option selected>Selecciona</option>
                   <ng-container *ngFor="let item of medicalSpecialties">
-                    <option value="{{ item._id }}">{{ item.name }}</option>
+                    <option value="{{ item._id }}" (click)="refreshSearch()">{{ item.name }}</option>
                   </ng-container>
                 </select>
               </div>
@@ -89,7 +89,8 @@
                 'clinicalFile.patientData.tabs.doctor.label' | transloco
               }}</label>
               <input
-                *ngIf="professionals"
+                *ngIf="professionals"               
+                (click)="refreshSearch()"
                 type="text"
                 class="form-control"
                 placeholder="Buscar Profesional"
@@ -98,6 +99,7 @@
               />
               <mat-autocomplete
                 #auto="matAutocomplete"
+                
                 [displayWith]="getDisplayFn()"
                 (optionSelected)="escogerProfessional($event.option.value)"
               >

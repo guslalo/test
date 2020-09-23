@@ -172,6 +172,10 @@ export class MiSaludComponent implements OnInit {
     );
   }
 
+  resetValue(){
+    this.textInputFile = 'seleccionar archivo';
+  }
+
   hasAntecedents(antecedent, boolean) {
     this.medicalRecordService.hasAntecedents(antecedent, boolean).subscribe(
       (data) => {

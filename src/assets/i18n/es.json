@@ -3174,5 +3174,16 @@
     "lengthMinEightChars": {
       "label": "* un largo mínimo de 8 carácteres"
     }
+  },
+  "teleconsultation":{
+    "tabProfessional": {
+      "title":"Profesional",
+      "biografia":"Biografía Academica",
+      "especialidades":"Especialidades",
+      "universidad":"Universidad",
+      "titulo":"Título",
+      "registro":"Número de registro",
+      "curso":"Curso"
+    }
   }
 }

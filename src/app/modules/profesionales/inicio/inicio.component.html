@@ -81,97 +81,106 @@
         <div class="collapseCustom primary">
           <table class="table dos table-borderless mb-0">
             <tbody>
-              <tr *ngIf="nextAppointed">
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-calendar"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                </td>
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-clock"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].dateDetails.start }} Hrs.
-                </td>
-                <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-person-circle"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-                    />
-                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
-                    />
-                  </svg>
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }}
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
-                </td>
-                <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
-                  {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
-                </td>
-                <td>
-                  <a
-                    *ngIf="nextAppointed[0].patientDetails.userDetails[0]"
-                    routerLink="crear-ficha-consulta/{{ nextAppointed[0]._id }}"
-                  >
-                    <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
-                      {{ 'common.button.enter.label' | transloco }}
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <svg
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 16 16"
-                    class="bi bi-three-dots-vertical"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                    />
-                  </svg>
-                </td>
-              </tr>
+              <ng-container *ngIf="nextAppointed; else noNextAppointed">
+                <tr *ngIf="nextAppointed">
+                  <td>
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-calendar"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
+                      />
+                    </svg>
+                    {{ nextAppointed[0].dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                  </td>
+                  <td>
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-clock"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
+                      />
+                    </svg>
+                    {{ nextAppointed[0].dateDetails.start }} Hrs.
+                  </td>
+                  <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-person-circle"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
+                      />
+                      <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
+                      />
+                    </svg>
+                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }}
+                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                  </td>
+                  <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
+                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                  </td>
+                  <td>
+                    <a
+                      *ngIf="nextAppointed[0].patientDetails.userDetails[0]"
+                      routerLink="crear-ficha-consulta/{{ nextAppointed[0]._id }}"
+                    >
+                      <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
+                        {{ 'common.button.enter.label' | transloco }}
+                      </button>
+                    </a>
+                  </td>
+                  <td>
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-three-dots-vertical"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                      />
+                    </svg>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-template #noNextAppointed>
+                <div class="row">
+                  <div class="col-12">
+                    <p class="pl-3 pt-3">sin información</p>
+                  </div>
+                </div>
+              </ng-template>
             </tbody>
           </table>
         </div>
@@ -232,76 +241,85 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of consultas" id="{{ item._id }}">
-                    <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
-                      <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
-                        {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                      </td>
-                      <ng-template #sinInfo>
-                        <td scope="row">Sin información</td>
-                      </ng-template>
-                      <td>
-                        {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                      </td>
-                      <td>
-                        {{ item.dateDetails.start }}
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{
-                            item.administrativeDetails.status === 'reserved'
-                              ? 'Reservada'
-                              : item.administrativeDetails.status === 'appointed'
-                              ? 'Agendada'
-                              : item.administrativeDetails.status === 'rescheduled'
-                              ? 'Re-Agendada'
-                              : item.administrativeDetails.status === 'active'
-                              ? 'Activa'
-                              : item.administrativeDetails.status === 'waitingInRoom'
-                              ? 'En Sala de Espera'
-                              : item.administrativeDetails.status === 'waitingInList'
-                              ? 'En Lista de Espera'
-                              : item.administrativeDetails.status === 'running'
-                              ? 'En Curso'
-                              : item.administrativeDetails.status === 'pending'
-                              ? 'Pendiente'
-                              : item.administrativeDetails.status === 'finished'
-                              ? 'Finalizada'
-                              : item.administrativeDetails.status === 'canceled'
-                              ? 'Cancelada'
-                              : 'S/R'
-                          }}
-                        </button>
-                      </td>
-                      <td>
-                        <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                          <a routerLink="ficha-consulta/{{ item._id }}">
-                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                              Ver Ficha
-                            </button>
-                          </a>
-                        </ng-container>
-                        <ng-container
-                          *ngIf="
-                            item.administrativeDetails.status === 'running' ||
-                            item.administrativeDetails.status === 'active' ||
-                            item.administrativeDetails.status === 'pending'
-                          "
-                        >
-                          <a
-                            *ngIf="item.patientDetails.userDetails[0]"
-                            routerLink="crear-ficha-consulta/{{ item._id }}"
+                  <ng-container *ngIf="consultas && consultas.length == 0; else consultasData">
+                    <tr>
+                      <div class="alert alert-warning mt-2" role="alert">
+                        No existen consultas
+                      </div>
+                    </tr>
+                  </ng-container>
+                  <ng-template #consultasData>
+                    <tr *ngFor="let item of consultas" id="{{ item._id }}">
+                      <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
+                        <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
+                          {{ item.patientDetails.userDetails[0].personalData.name }}
+                          {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                          {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                        </td>
+                        <ng-template #sinInfo>
+                          <td scope="row">Sin información</td>
+                        </ng-template>
+                        <td>
+                          {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                        </td>
+                        <td>
+                          {{ item.dateDetails.start }}
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                            {{
+                              item.administrativeDetails.status === 'reserved'
+                                ? 'Reservada'
+                                : item.administrativeDetails.status === 'appointed'
+                                ? 'Agendada'
+                                : item.administrativeDetails.status === 'rescheduled'
+                                ? 'Re-Agendada'
+                                : item.administrativeDetails.status === 'active'
+                                ? 'Activa'
+                                : item.administrativeDetails.status === 'waitingInRoom'
+                                ? 'En Sala de Espera'
+                                : item.administrativeDetails.status === 'waitingInList'
+                                ? 'En Lista de Espera'
+                                : item.administrativeDetails.status === 'running'
+                                ? 'En Curso'
+                                : item.administrativeDetails.status === 'pending'
+                                ? 'Pendiente'
+                                : item.administrativeDetails.status === 'finished'
+                                ? 'Finalizada'
+                                : item.administrativeDetails.status === 'canceled'
+                                ? 'Cancelada'
+                                : 'S/R'
+                            }}
+                          </button>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                            <a routerLink="ficha-consulta/{{ item._id }}">
+                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                                Ver Ficha
+                              </button>
+                            </a>
+                          </ng-container>
+                          <ng-container
+                            *ngIf="
+                              item.administrativeDetails.status === 'running' ||
+                              item.administrativeDetails.status === 'active' ||
+                              item.administrativeDetails.status === 'pending'
+                            "
                           >
-                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                              Atender
-                            </button>
-                          </a>
-                        </ng-container>
-                      </td>
-                    </ng-container>
-                  </tr>
+                            <a
+                              *ngIf="item.patientDetails.userDetails[0]"
+                              routerLink="crear-ficha-consulta/{{ item._id }}"
+                            >
+                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                                Atender
+                              </button>
+                            </a>
+                          </ng-container>
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </ng-template>    
                 </tbody>
               </table>
             </div>
@@ -315,9 +333,9 @@
                   <label>Escoger sala espera</label>
                   <select class="form-control" (change)="onChange($event.target.value)">
                     <option>Escoger</option>
-                    <ng-container *ngFor="let item of salas">
-                      <option value="{{ item._id }}">{{ item.roomDetails.name }}</option>
-                    </ng-container>
+                   
+                      <option *ngFor="let item of salas" value="{{ item._id }}">{{ item.roomDetails.name }}</option>
+                   
                   </select>
                 </div>
               </div>
@@ -339,43 +357,52 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
-                    <ng-container>
-                      <td scope="row">
-                        {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                      </td>
-
-                      <ng-template #sinInfo>
-                        <td scope="row">Sin información</td>
-                      </ng-template>
-                      <td>
-                        {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{ item.administrativeDetails.status }}
-                        </button>
-                      </td>
-                      <td>
-                        <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                          <a routerLink="ficha-consulta/{{ item._id }}">
-                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                              {{ 'clinicalFile.viewMedCard.label' | transloco }}
-                            </button>
-                          </a>
-                        </ng-container>
-                        <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'">
-                          <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
-                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
-                              {{ 'clinicalFile.attend.label' | transloco }}
-                            </button>
-                          </a>
-                        </ng-container>
-                      </td>
-                    </ng-container>
-                  </tr>
+                  <ng-container *ngIf="consultasEsperas">
+                    <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
+                      <ng-container>
+                        <td scope="row">
+                          {{ item.patientDetails.userDetails[0].personalData.name }}
+                          {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                          {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                        </td>
+  
+                       
+                        <td>
+                          {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                            {{ item.administrativeDetails.status }}
+                          </button>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                            <a routerLink="ficha-consulta/{{ item._id }}">
+                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                                {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                              </button>
+                            </a>
+                          </ng-container>
+                          <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'">
+                            <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
+                              <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                                {{ 'clinicalFile.attend.label' | transloco }}
+                              </button>
+                            </a>
+                          </ng-container>
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </ng-container>
+                  <!--
+                  <ng-template #DataconsultasEsperas>
+                    <tr>
+                      <div class="alert alert-warning mt-2" role="alert">
+                        No existen consultas
+                      </div>
+                    </tr>
+                  </ng-template>-->
+                  
                 </tbody>
               </table>
             </div>

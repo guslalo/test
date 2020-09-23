@@ -189,7 +189,7 @@
                             type="checkbox"
                             class="custom-control-input"
                             id="switch{{ item._id }}"
-                            [checked]="item.administrativeDetails.isActive"
+                            [checked]="item.administrativeDetails.isActive === true"
                             (click)="putState(item)"
                           />
                           <label class="custom-control-label" for="switch{{ item._id }}"></label>
@@ -852,7 +852,7 @@
                     name="dateBlock"
                     formControlName="dateBlock"
                     [(ngModel)]="model3"
-                    [minDate]="{ year: 1940, month: 1, day: 1 }"
+                    [minDate]="minDate"
                     ngbDatepicker
                     #a="ngbDatepicker"
                     (click)="a.toggle()"

@@ -29,19 +29,25 @@ export class ChooseContextComponent implements OnInit {
   }
 
   chooseContext(clinicId, role) {
-    this.authenticationService.accessWeb(clinicId).subscribe(
-      (data) => {
-        // console.log(data.access_token);
-        if (data.access_token) {
-          localStorage.removeItem('token');
-          localStorage.setItem('token', JSON.stringify(data.access_token));
-          this.getRouteForClinicAndRole(clinicId, role);
+    /*
+    if(localStorage.getItem('token')){
+      this.getRouteForClinicAndRole(clinicId, role);
+    } else {}*/
+      this.authenticationService.accessWeb(clinicId).subscribe(
+        (data) => {
+          // console.log(data.access_token);
+          if (data.access_token) {
+            localStorage.removeItem('token');
+            localStorage.setItem('token', JSON.stringify(data.access_token));
+            this.getRouteForClinicAndRole(clinicId, role);
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      );
+    
+    
   }
 
   getRouteForClinicAndRole(clinicId, role) {
