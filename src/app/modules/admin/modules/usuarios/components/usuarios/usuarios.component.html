@@ -13,37 +13,93 @@
     <!-- TABS -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="admin-tab" data-toggle="tab" href="#admins" role="tab" aria-controls="home"
-          aria-selected="true" (click)="changeTab('admins')">
-          <i width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
+        <a
+          class="nav-link"
+          id="admin-tab"
+          data-toggle="tab"
+          href="#admins"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+          (click)="changeTab('admins')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-clipboard-data"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
           </i>
           {{ 'dashboard.home.userManagment.tabs.admins.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="professional-tab" data-toggle="tab" href="#professionals" role="tab"
-          aria-controls="profile" aria-selected="false" (click)="changeTab('professionals')">
-          <i width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
+        <a
+          class="nav-link"
+          id="professional-tab"
+          data-toggle="tab"
+          href="#professionals"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('professionals')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
           </i>
           {{ 'dashboard.home.waitingRoomManagment.modal.create.healthProfessionals.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="coordinator-tab" data-toggle="tab" href="#coordinators" role="tab"
-          aria-controls="profile" aria-selected="false" (click)="changeTab('coordinators')">
-          <i width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
+        <a
+          class="nav-link"
+          id="coordinator-tab"
+          data-toggle="tab"
+          href="#coordinators"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('coordinators')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
           </i>
           {{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="patient-tab" data-toggle="tab" href="#patients" role="tab" aria-controls="profile"
-          aria-selected="false" (click)="changeTab('patients')">
-          <i width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3-fill" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
+        <a
+          class="nav-link"
+          id="patient-tab"
+          data-toggle="tab"
+          href="#patients"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          (click)="changeTab('patients')"
+        >
+          <i
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
           </i>
           {{ 'dashboard.home.tab.home.tab.nextServices.table.patients.label' | transloco }}
         </a>
@@ -54,8 +110,13 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input [(ngModel)]="searchTerm" type="text" class="form-control"
-              placeholder="{{ 'common.placeholder.search.label' | transloco }}" (keyup)="applyFilters()" />
+            <input
+              [(ngModel)]="searchTerm"
+              type="text"
+              class="form-control"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
+              (keyup)="applyFilters()"
+            />
             <div class="searchBox">
               <img src="assets/icons/icon-search.svg" />
             </div>
@@ -81,9 +142,13 @@
             </div>
           </div>
           <div class="col-12 col-md-4 float-right">
-            <button *ngIf="currentUser.policies.userPolicies.create" type="button"
-              class="btn btn-secondary rounded-pill float-right" [routerLink]="['crear-usuario']"
-              [queryParams]="{ userType: 'admin' }">
+            <button
+              *ngIf="currentUser.policies.userPolicies.create"
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'admin' }"
+            >
               {{ 'dashboard.home.uncategorized.newAdmin.label' | transloco }}
               <img src="assets/icons/icon-plus-circle.svg" />
             </button>
@@ -93,21 +158,50 @@
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <ngx-datatable *ngIf="users.length" #table class="material" [rows]="users" headerHeight="auto"
-                footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize"
-                [selected]="selected" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)">
+              <ngx-datatable
+                *ngIf="users.length"
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="pageSize"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
                 <!-- MULTISELECT -->
                 <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn">
-                    <input class="mb-n2 px-0" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)" />
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <input
+                      class="mb-n2 px-0"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="allRowsSelected"
+                      (change)="selectFn(!allRowsSelected)"
+                    />
                   </ng-template>
-                  <ng-template ngx-datatable-cell-template let-row="row" let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)" />
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="isSelected"
+                      (change)="onCheckboxChangeFn($event)"
+                    />
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="nationalId" name="ID">
@@ -115,8 +209,14 @@
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
-                      <img class="profile mr-2" id="image0" width="38" height="38"
-                        [src]="row.photo || '/assets/profile.jpg'" alt="img" />
+                      <img
+                        class="profile mr-2"
+                        id="image0"
+                        width="38"
+                        height="38"
+                        [src]="row.photo || '/assets/profile.jpg'"
+                        alt="img"
+                      />
                       {{ row.fullName }}
                     </a>
                   </ng-template>
@@ -127,11 +227,15 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-sm rounded-pill" [ngClass]="{
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
                         'btn-primary': row.status === 'Activo',
                         'btn-secondary ': row.status === 'Pendiente',
                         'btn-light ': row.status === 'Deshabilitado'
-                      }">
+                      }"
+                    >
                       {{ row.status }}
                     </button>
                   </ng-template>
@@ -139,26 +243,51 @@
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
-                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle
-                        [disabled]="currentUser.id === row.id">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      <button
+                        class="btn btn-light btn-sm rounded-pill"
+                        ngbDropdownToggle
+                        [disabled]="currentUser.id === row.id"
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <button *ngIf="currentUser.policies.userPolicies.update" ngbDropdownItem type="button"
-                          [routerLink]="['editar-usuario']" [queryParams]="{ userType: 'admins', userId: row.id }">
+                        <button
+                          *ngIf="currentUser.policies.userPolicies.update"
+                          ngbDropdownItem
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'admins', userId: row.id }"
+                        >
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
-                          ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal"
-                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)">
+                        <button
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
                           {{ 'common.disable.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem type="button"
-                          (click)="changeUserStatus(row.id, 'activate', 'admins')">
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'admins')"
+                        >
                           {{ 'common.activate.label' | transloco }}
                         </button>
                       </div>
@@ -174,8 +303,13 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input [(ngModel)]="searchTerm" type="text" class="form-control"
-              placeholder="{{ 'common.placeholder.search.label' | transloco }}" (keyup)="applyFilters()" />
+            <input
+              [(ngModel)]="searchTerm"
+              type="text"
+              class="form-control"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
+              (keyup)="applyFilters()"
+            />
             <div class="searchBox">
               <img src="assets/icons/icon-search.svg" />
             </div>
@@ -202,9 +336,13 @@
             </div>
           </div>
           <div class="col-12 col-md-4 float-right">
-            <button *ngIf="currentUser.policies.userPolicies.create" type="button"
-              class="btn btn-secondary rounded-pill float-right" [routerLink]="['crear-usuario']"
-              [queryParams]="{ userType: 'professional' }">
+            <button
+              *ngIf="currentUser.policies.userPolicies.create"
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'professional' }"
+            >
               {{ 'dashboard.home.userManagment.btnCreateDoctor.label' | transloco }}
               <img src="assets/icons/icon-plus-circle.svg" />
             </button>
@@ -214,21 +352,50 @@
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <ngx-datatable *ngIf="users.length; else noUsers" #table class="material" [rows]="users"
-                headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize"
-                [selected]="selected" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)">
+              <ngx-datatable
+                *ngIf="users.length; else noUsers"
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="pageSize"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
                 <!-- MULTISELECT -->
                 <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)" />
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="allRowsSelected"
+                      (change)="selectFn(!allRowsSelected)"
+                    />
                   </ng-template>
-                  <ng-template ngx-datatable-cell-template let-row="row" let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)" />
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="isSelected"
+                      (change)="onCheckboxChangeFn($event)"
+                    />
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
@@ -236,8 +403,14 @@
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
-                      <img class="profile mr-2" id="image0" width="38" height="38"
-                        [src]="row.photo || '/assets/profile.jpg'" alt="img" />
+                      <img
+                        class="profile mr-2"
+                        id="image0"
+                        width="38"
+                        height="38"
+                        [src]="row.photo || '/assets/profile.jpg'"
+                        alt="img"
+                      />
                       {{ row.fullName }}
                     </a>
                   </ng-template>
@@ -248,11 +421,15 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-sm rounded-pill" [ngClass]="{
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
                         'btn-primary': row.status === 'Activo',
                         'btn-secondary ': row.status === 'Pendiente',
                         'btn-light ': row.status === 'Deshabilitado'
-                      }">
+                      }"
+                    >
                       {{ row.status }}
                     </button>
                   </ng-template>
@@ -260,27 +437,51 @@
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
-                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle
-                        [disabled]="currentUser.id === row.id">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      <button
+                        class="btn btn-light btn-sm rounded-pill"
+                        ngbDropdownToggle
+                        [disabled]="currentUser.id === row.id"
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <button *ngIf="currentUser.policies.userPolicies.update" ngbDropdownItem type="button"
+                        <button
+                          *ngIf="currentUser.policies.userPolicies.update"
+                          ngbDropdownItem
+                          type="button"
                           [routerLink]="['editar-usuario']"
-                          [queryParams]="{ userType: 'professionals', userId: row.id }">
+                          [queryParams]="{ userType: 'professionals', userId: row.id }"
+                        >
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
-                          ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal"
-                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)">
+                        <button
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
                           {{ 'common.disable.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem type="button"
-                          (click)="changeUserStatus(row.id, 'activate', 'professionals')">
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'professionals')"
+                        >
                           {{ 'common.activate.label' | transloco }}
                         </button>
                       </div>
@@ -296,16 +497,25 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input [(ngModel)]="searchTerm" type="text" class="form-control"
-              placeholder="{{ 'common.placeholder.search.label' | transloco }}" (keyup)="applyFilters()" />
+            <input
+              [(ngModel)]="searchTerm"
+              type="text"
+              class="form-control"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
+              (keyup)="applyFilters()"
+            />
             <div class="searchBox">
               <img src="assets/icons/icon-search.svg" />
             </div>
           </div>
           <div class="col-12 col-md-3">
             <div class="form-group">
-              <select [(ngModel)]="profileSelected" class="form-control" id="exampleFormControlSelect1"
-                (change)="applyFilters()">
+              <select
+                [(ngModel)]="profileSelected"
+                class="form-control"
+                id="exampleFormControlSelect1"
+                (change)="applyFilters()"
+              >
                 <option [ngValue]="null">{{ 'common.profileFilter.label' | transloco }}</option>
                 <option [ngValue]="profile.id" *ngFor="let profile of profiles">
                   {{ profile.role }} - {{ profile.profileName }}
@@ -324,9 +534,14 @@
             </div>
           </div>
           <div class="col-12 col-md-4 float-right">
-            <button *ngIf="currentUser.policies.userPolicies.create" type="button"
-              class="btn btn-secondary rounded-pill float-right" data-target="#disponibilidad"
-              [routerLink]="['crear-usuario']" [queryParams]="{ userType: 'coordinator' }">
+            <button
+              *ngIf="currentUser.policies.userPolicies.create"
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              data-target="#disponibilidad"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'coordinator' }"
+            >
               {{ 'dashboard.home.uncategorized.newCoordinator.label' | transloco }}
               <img src="assets/icons/icon-plus-circle.svg" />
             </button>
@@ -336,21 +551,50 @@
         <div class="row mt-1">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <ngx-datatable *ngIf="users.length; else noUsers" #table class="material" [rows]="users"
-                headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize"
-                [selected]="selected" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)">
+              <ngx-datatable
+                *ngIf="users.length; else noUsers"
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="pageSize"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
                 <!-- MULTISELECT -->
                 <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)" />
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="allRowsSelected"
+                      (change)="selectFn(!allRowsSelected)"
+                    />
                   </ng-template>
-                  <ng-template ngx-datatable-cell-template let-row="row" let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)" />
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="isSelected"
+                      (change)="onCheckboxChangeFn($event)"
+                    />
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
@@ -358,8 +602,14 @@
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
-                      <img class="profile mr-2" id="image0" width="38" height="38"
-                        [src]="row.photo || '/assets/profile.jpg'" alt="img" />
+                      <img
+                        class="profile mr-2"
+                        id="image0"
+                        width="38"
+                        height="38"
+                        [src]="row.photo || '/assets/profile.jpg'"
+                        alt="img"
+                      />
                       {{ row.fullName }}
                     </a>
                   </ng-template>
@@ -370,11 +620,15 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-sm rounded-pill" [ngClass]="{
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
                         'btn-primary': row.status === 'Activo',
                         'btn-secondary ': row.status === 'Pendiente',
                         'btn-light ': row.status === 'Deshabilitado'
-                      }">
+                      }"
+                    >
                       {{ row.status }}
                     </button>
                   </ng-template>
@@ -382,27 +636,51 @@
                 <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
-                      <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle
-                        [disabled]="currentUser.id === row.id">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      <button
+                        class="btn btn-light btn-sm rounded-pill"
+                        ngbDropdownToggle
+                        [disabled]="currentUser.id === row.id"
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <button *ngIf="currentUser.policies.userPolicies.update" ngbDropdownItem type="button"
+                        <button
+                          *ngIf="currentUser.policies.userPolicies.update"
+                          ngbDropdownItem
+                          type="button"
                           [routerLink]="['editar-usuario']"
-                          [queryParams]="{ userType: 'coordinators', userId: row.id }">
+                          [queryParams]="{ userType: 'coordinators', userId: row.id }"
+                        >
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
-                          ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal"
-                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)">
+                        <button
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
                           {{ 'common.disable.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem type="button"
-                          (click)="changeUserStatus(row.id, 'activate', 'coordinators')">
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
+                        >
                           {{ 'common.activate.label' | transloco }}
                         </button>
                       </div>
@@ -418,8 +696,13 @@
         <!-- FILTERS -->
         <div class="row mt-2">
           <div class="col-12 col-md-3">
-            <input [(ngModel)]="searchTerm" type="text" class="form-control"
-              placeholder="{{ 'common.placeholder.search.label' | transloco }}" (keyup)="applyFilters()" />
+            <input
+              [(ngModel)]="searchTerm"
+              type="text"
+              class="form-control"
+              placeholder="{{ 'common.placeholder.search.label' | transloco }}"
+              (keyup)="applyFilters()"
+            />
             <div class="searchBox">
               <img src="assets/icons/icon-search.svg" />
             </div>
@@ -435,19 +718,31 @@
             </div>
           </div>
           <div class="col-12 col-md-2">
-            <button type="button" class="btn custom-btn-1 mx-2" (click)="exportAsExcelFile()"
-              [disabled]="!selected.length">
+            <button
+              type="button"
+              class="btn custom-btn-1 mx-2"
+              (click)="exportAsExcelFile()"
+              [disabled]="!selected.length"
+            >
               <img src="assets/icons/icon-export-excel.svg" />
             </button>
-            <button type="button" class="btn custom-btn-1 mx-2" (click)="sendInvitationEmail()"
-              [disabled]="!selected.length">
+            <button
+              type="button"
+              class="btn custom-btn-1 mx-2"
+              (click)="sendInvitationEmail()"
+              [disabled]="!selected.length"
+            >
               <img src="assets/icons/icon-email.svg" />
             </button>
           </div>
           <div class="col-12 col-md-5 float-right">
-            <button *ngIf="currentUser.policies.userPolicies.create" type="button"
-              class="btn btn-secondary rounded-pill float-right" [routerLink]="['crear-usuario']"
-              [queryParams]="{ userType: 'patient' }">
+            <button
+              *ngIf="currentUser.policies.userPolicies.create"
+              type="button"
+              class="btn btn-secondary rounded-pill float-right"
+              [routerLink]="['crear-usuario']"
+              [queryParams]="{ userType: 'patient' }"
+            >
               {{ 'myPatients.btnCreate.label' | transloco }}
               <img src="assets/icons/icon-plus-circle.svg" />
             </button>
@@ -457,21 +752,50 @@
         <div class="row mt-3">
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
-              <ngx-datatable *ngIf="users.length; else noUsers" #table class="material" [rows]="users"
-                headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize"
-                [selected]="selected" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)">
+              <ngx-datatable
+                *ngIf="users.length; else noUsers"
+                #table
+                class="material"
+                [rows]="users"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="pageSize"
+                [selected]="selected"
+                [selectionType]="SelectionType.checkbox"
+                [selectAllRowsOnPage]="true"
+                (select)="onSelect($event)"
+              >
                 <!-- MULTISELECT -->
                 <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)" />
+                  <ng-template
+                    ngx-datatable-header-template
+                    let-value="value"
+                    let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="allRowsSelected"
+                      (change)="selectFn(!allRowsSelected)"
+                    />
                   </ng-template>
-                  <ng-template ngx-datatable-cell-template let-row="row" let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn">
-                    <input class="mb-n2" [ngStyle]="{ height: '24px' }" type="checkbox" [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)" />
+                  <ng-template
+                    ngx-datatable-cell-template
+                    let-row="row"
+                    let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn"
+                  >
+                    <input
+                      class="mb-n2"
+                      [ngStyle]="{ height: '24px' }"
+                      type="checkbox"
+                      [checked]="isSelected"
+                      (change)="onCheckboxChangeFn($event)"
+                    />
                   </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
@@ -479,8 +803,14 @@
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
-                      <img class="profile mr-2" id="image0" width="38" height="38"
-                        [src]="row.photo || '/assets/profile.jpg'" alt="img" />
+                      <img
+                        class="profile mr-2"
+                        id="image0"
+                        width="38"
+                        height="38"
+                        [src]="row.photo || '/assets/profile.jpg'"
+                        alt="img"
+                      />
                       {{ row.fullName }}
                     </a>
                   </ng-template>
@@ -491,11 +821,15 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-sm rounded-pill" [ngClass]="{
+                    <button
+                      type="button"
+                      class="btn btn-sm rounded-pill"
+                      [ngClass]="{
                         'btn-primary': row.status === 'Activo',
                         'btn-secondary ': row.status === 'Pendiente',
                         'btn-light ': row.status === 'Deshabilitado'
-                      }">
+                      }"
+                    >
                       {{ row.status }}
                     </button>
                   </ng-template>
@@ -504,29 +838,56 @@
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
                       <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd"
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 16 16"
+                          class="bi bi-three-dots"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                          />
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <button *ngIf="currentUser.policies.userPolicies.update" ngbDropdownItem type="button"
-                          [routerLink]="['editar-usuario']" [queryParams]="{ userType: 'patients', userId: row.id }">
+                        <button
+                          *ngIf="currentUser.policies.userPolicies.update"
+                          ngbDropdownItem
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'patients', userId: row.id }"
+                        >
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
-                          ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal"
-                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)">
+                        <button
+                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
                           {{ 'common.disable.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem type="button"
-                          (click)="changeUserStatus(row.id, 'activate', 'patients')">
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'patients')"
+                        >
                           {{ 'common.activate.label' | transloco }}
                         </button>
-                        <button *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
-                          ngbDropdownItem type="button" data-toggle="modal" data-target="#sendInvitationModal"
-                          (click)="openSendInvitationModal(sendInvitationModal, row.id)">
+                        <button
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
                           {{ 'clinicalFile.sendEmail.label' | transloco }}
                         </button>
                       </div>
@@ -541,8 +902,14 @@
     </div>
 
     <!-- DISABLE USER MODAL -->
-    <div #deactivateUserModal class="modal fade" id="disableUserModal" tabindex="-1" aria-labelledby="disableUserModal"
-      aria-hidden="true">
+    <div
+      #deactivateUserModal
+      class="modal fade"
+      id="disableUserModal"
+      tabindex="-1"
+      aria-labelledby="disableUserModal"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -555,8 +922,12 @@
             <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
               {{ 'common.button.cancel.label' | transloco }}
             </button>
-            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
-              (click)="changeUserStatus(userId, 'deactivate', 'patients')">
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="changeUserStatus(userId, 'deactivate', 'patients')"
+            >
               {{ 'common.confirm.label' | transloco }}
             </button>
           </div>
@@ -565,8 +936,14 @@
     </div>
 
     <!-- SEND INVITATION MODAL -->
-    <div #sendInvitationModal class="modal fade" id="sendInvitationModal" tabindex="-1"
-      aria-labelledby="sendInvitationModal" aria-hidden="true">
+    <div
+      #sendInvitationModal
+      class="modal fade"
+      id="sendInvitationModal"
+      tabindex="-1"
+      aria-labelledby="sendInvitationModal"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -576,8 +953,12 @@
             <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
               {{ 'common.button.cancel.label' | transloco }}
             </button>
-            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
-              (click)="sendInvitationEmail()">
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill"
+              data-dismiss="modal"
+              (click)="sendInvitationEmail()"
+            >
               {{ 'common.confirm.label' | transloco }}
             </button>
           </div>

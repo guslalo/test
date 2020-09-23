@@ -9,4 +9,4 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
   declarations: [IndexComponent],
   imports: [CommonModule, TeleconsultaRoutingModule, TranslocoRootModule],
 })
-export class TeleconsultaModule { }
+export class TeleconsultaModule {}

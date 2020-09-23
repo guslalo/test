@@ -217,8 +217,8 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-  refreshSearch(){
-    this.blocks = []
+  refreshSearch() {
+    this.blocks = [];
   }
   atras() {
     this.selectSintoma = false;

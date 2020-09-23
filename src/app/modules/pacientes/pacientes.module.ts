@@ -33,4 +33,4 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
   exports: [AgendarComponent],
   providers: [OpentokService],
 })
-export class PacientesModule { }
+export class PacientesModule {}

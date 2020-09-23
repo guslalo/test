@@ -41,7 +41,7 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     ChooseContextComponent,
     ConfirmAccountComponent,
     ResetPasswordComponent,
-    RecoveryDoneComponent
+    RecoveryDoneComponent,
   ],
   imports: [
     CommonModule,
@@ -53,9 +53,9 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     MatDialogModule,
     RouterModule,
     SharedModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AuthModule { }
+export class AuthModule {}
