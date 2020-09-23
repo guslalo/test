@@ -65,7 +65,7 @@
                       {{
                         'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
                       }}:
-                      <ng-container>
+                      <ng-container *ngIf="appoimentDetail.professionalDetails">
                         {{ appoimentDetail.professionalDetails.specialtyDetails[0].specialtyName }}
                       </ng-container>
                     </li>
@@ -684,8 +684,9 @@
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
-                                  <p class="m-0 text-left">
-                                    {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
+                                  <p class="m-0 text-left" *ngIf="item.professional">
+                                    {{ 'clinicalFile.dr.label' | transloco }} 
+                                    {{ item.professional.name }}
                                     {{ item.professional.lastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
