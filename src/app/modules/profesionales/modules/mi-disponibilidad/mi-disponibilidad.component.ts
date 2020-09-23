@@ -299,7 +299,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
   putState(item) {
     console.log(item);
-    this.availabilityService.updateState(item._id, item.administrativeDetails.isActive).subscribe(
+    this.availabilityService.updateState(item._id, item.administrativeDetails.isActive ? false : true).subscribe(
       (data) => {
         console.log(data);
         this.state = data;
