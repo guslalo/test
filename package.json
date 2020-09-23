@@ -36,6 +36,7 @@
     "@swimlane/ngx-datatable": "^17.1.0",
     "angular-password-strength-meter": "^2.0.0",
     "angular-vertical-timeline": "^0.6.0",
+    "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.4.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.17.2",

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { CurrentUserService } from '../../../../services/current-user.service';
-import { UserLogin } from '../../../../models/models';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 // import { slideInAnimation } from '../../../../shared/animations';
-import { SharedModule } from '../../../../shared/shared.module';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import * as moment from 'moment';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-layout',
@@ -54,7 +54,23 @@ export class LayoutComponent implements OnInit, OnDestroy {
   intervalCurrentTime: any;
   public inmediateAppointment: boolean;
 
-  constructor(public breakpointObserver: BreakpointObserver) {}
+  constructor(
+    public breakpointObserver: BreakpointObserver,
+    private bnIdle: BnNgIdleService,
+    private toastr: ToastrService
+  ) {
+    // 10 MINUTES DEFAULT
+    this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
+      if (res) {
+        console.log('session expired');
+        this.toastr.info('Session Expired');
+
+        setTimeout(() => {
+          document.location.href = '/';
+        }, 3000);
+      }
+    });
+  }
 
   public state = 'open';
   public inmediateAppointmentPadre: boolean;
