@@ -57,7 +57,6 @@ export class ChooseContextComponent implements OnInit {
       }
     });
 
-    // console.log(profile);
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
