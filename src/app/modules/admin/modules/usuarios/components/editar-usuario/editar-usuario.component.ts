@@ -69,9 +69,9 @@ export class EditarUsuarioComponent implements OnInit {
   userObject: any = {};
 
   roles: any = [
-    { name: 'Administrador', value: 'admin' },
-    { name: 'Coordinador', value: 'coordinator' },
-    { name: 'Profesional', value: 'professional' },
+    { name: 'common.roles.admin.label', value: 'admin' },
+    { name: 'common.roles.coordinator.label', value: 'coordinator' },
+    { name: 'common.roles.doctor.label', value: 'professional' },
   ];
   profile: any = {};
   profiles: any = [];
@@ -131,7 +131,7 @@ export class EditarUsuarioComponent implements OnInit {
       secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-      gender: ['male', Validators.required],
+      gender: [null, Validators.required],
       birthdate: [null, null],
       ufBirth: [null, null],
       municipalityBirth: [null, null],

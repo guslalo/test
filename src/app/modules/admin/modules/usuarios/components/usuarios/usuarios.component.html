@@ -206,7 +206,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="nationalId" name="ID">
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre">
+                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" [name]="'table.name.label' | transloco">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
                       <img
@@ -221,11 +221,26 @@
                     </a>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Correo">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  [name]="'table.email.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phone" name="Telefono">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  [name]="'table.phone.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="status"
+                  [name]="'table.status.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <button
                       type="button"
@@ -240,7 +255,7 @@
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" [name]="'table.action.label' | transloco">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
                       <button
@@ -400,7 +415,12 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="fullName"
+                  [name]="'table.name.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
                       <img
@@ -415,11 +435,26 @@
                     </a>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Correo">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  [name]="'table.email.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phone" name="Telefono">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  [name]="'table.phone.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="status"
+                  [name]="'table.status.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <button
                       type="button"
@@ -434,7 +469,7 @@
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" [name]="'table.action.label' | transloco">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
                       <button
@@ -599,7 +634,12 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="fullName"
+                  [name]="'table.name.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
                       <img
@@ -614,11 +654,26 @@
                     </a>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Correo">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  [name]="'table.email.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phone" name="Telefono">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  [name]="'table.phone.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="status"
+                  [name]="'table.status.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <button
                       type="button"
@@ -633,7 +688,7 @@
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [sortable]="false" [flexGrow]="2" name="Acciones">
+                <ngx-datatable-column [sortable]="false" [flexGrow]="2" [name]="'table.action.label' | transloco">
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
                       <button
@@ -800,7 +855,12 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="fullName" name="Nombre">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="fullName"
+                  [name]="'table.name.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
                       <img
@@ -815,11 +875,26 @@
                     </a>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="email" name="Correo">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  prop="email"
+                  [name]="'table.email.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phone" name="Telefono">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="phone"
+                  [name]="'table.phone.label' | transloco"
+                >
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  prop="status"
+                  [name]="'table.status.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <button
                       type="button"
@@ -834,7 +909,12 @@
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [sortable]="false"
+                  [flexGrow]="2"
+                  [name]="'table.action.label' | transloco"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body">
                       <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>

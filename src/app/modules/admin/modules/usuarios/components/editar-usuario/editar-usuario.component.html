@@ -324,6 +324,7 @@
                         'is-invalid': !personalData.get('gender').valid
                       }"
                     >
+                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="male">{{ 'clinicalFile.male.label' | transloco }}</option>
                       <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
                     </select>
@@ -585,7 +586,7 @@
                       formControlName="role"
                       (change)="getProfiles()"
                     >
-                      <option [ngValue]="role.value" *ngFor="let role of roles">{{ role.name }}</option>
+                      <option [ngValue]="role.value" *ngFor="let role of roles">{{ role.name | transloco }}</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">

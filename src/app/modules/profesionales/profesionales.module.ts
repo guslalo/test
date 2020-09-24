@@ -32,6 +32,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -66,6 +67,7 @@ FullCalendarModule.registerPlugins([
     NgbToastModule,
     NgxDatatableModule,
     NgxSpinnerModule,
+    ToastrModule,
     SharedModule,
   ],
   exports: [

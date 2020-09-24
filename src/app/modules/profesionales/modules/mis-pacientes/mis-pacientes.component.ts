@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientsService } from 'src/app/services/patients.service';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import * as moment from 'moment';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { ToastrService } from 'ngx-toastr';
 // import { NgbdPaginationBasic } from './pagination-basic';
 
 @Component({
@@ -18,7 +19,7 @@ export class MisPacientesComponent implements OnInit {
   tempPrePatients: any[] = [];
   searchTerm: string = '';
 
-  tab: any = 'patients';
+  tab: any = 'pre-patients';
   page = 1;
   pageSize = 7;
   moment: any = moment;
@@ -26,12 +27,15 @@ export class MisPacientesComponent implements OnInit {
   emailSent: boolean = false;
 
   ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+  selectedPrePatients = [];
   patientForm: FormGroup;
 
   constructor(
     private patientService: PatientsService,
     private formBuilder: FormBuilder,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
+    private toastService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -116,14 +120,40 @@ export class MisPacientesComponent implements OnInit {
     }, 1000);
   }
 
-  sendInvitationEmail(patientId) {
-    this.emailSent = false;
-    this.patientService.sendInvitationEmail(patientId).subscribe(
-      () => {
-        this.emailSent = true;
-      },
-      (error) => console.log(error)
-    );
+  sendInvitationEmail(userId?: string) {
+    if (this.selectedPrePatients.length) {
+      const usersToInvite = this.prePatients
+        .filter((u) => {
+          if (u.status === 'joined') return u;
+        })
+        .map((u) => u._id);
+
+      const validUsers = [];
+      for (var i in usersToInvite) {
+        // MATCH ID
+        if (this.selectedPrePatients.map((u) => u._id).indexOf(usersToInvite[i]) !== -1) {
+          validUsers.push(usersToInvite[i]);
+        }
+      }
+
+      console.log(validUsers);
+
+      this.patientService.sendInvitationEmail(validUsers).subscribe(() => {
+        this.toastService.success('Invitations Sent');
+      });
+    } else {
+      this.selectedPrePatients = [];
+      this.selectedPrePatients.push(userId);
+      this.patientService.sendInvitationEmail(this.selectedPrePatients).subscribe(() => {
+        this.toastService.success('Invitation Sent');
+      });
+    }
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selectedPrePatients);
+    this.selectedPrePatients.splice(0, this.selectedPrePatients.length);
+    this.selectedPrePatients.push(...selected);
   }
 
   applyFilters(tab) {

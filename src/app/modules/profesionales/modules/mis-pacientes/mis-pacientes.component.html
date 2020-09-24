@@ -118,8 +118,42 @@
                   rowHeight="70"
                   [columnMode]="ColumnMode.flex"
                   [limit]="pageSize"
+                  [selected]="selectedPrePatients"
+                  [selectionType]="SelectionType.checkbox"
                   [selectAllRowsOnPage]="true"
+                  (select)="onSelect($event)"
                 >
+                  <!-- MULTISELECT -->
+                  <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
+                    <ng-template
+                      ngx-datatable-header-template
+                      let-value="value"
+                      let-allRowsSelected="allRowsSelected"
+                      let-selectFn="selectFn"
+                    >
+                      <input
+                        class="mb-n2"
+                        [ngStyle]="{ height: '24px' }"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                    </ng-template>
+                    <ng-template
+                      ngx-datatable-cell-template
+                      let-row="row"
+                      let-isSelected="isSelected"
+                      let-onCheckboxChangeFn="onCheckboxChangeFn"
+                    >
+                      <input
+                        class="mb-n2"
+                        [ngStyle]="{ height: '24px' }"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column
                     [resizeable]="false"
                     [flexGrow]="3"
@@ -216,6 +250,16 @@
             </ng-template>
           </li>
         </ul>
+      </div>
+      <div class="col-auto">
+        <button
+          type="button"
+          class="btn custom-btn-1 mx-2"
+          (click)="sendInvitationEmail()"
+          [disabled]="!selectedPrePatients.length"
+        >
+          <img src="assets/icons/icon-email.svg" />
+        </button>
       </div>
     </div>
 
@@ -372,6 +416,37 @@
           >
             {{ !patientIsEdit ? 'common.button.create.label' : ('common.button.update.label' | transloco) }}
             {{ 'common.patient.label' | transloco }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEND INVITATION MODAL -->
+  <div
+    #sendInvitationModal
+    class="modal fade"
+    id="sendInvitationModal"
+    tabindex="-1"
+    aria-labelledby="sendInvitationModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center w-100 mt-1">{{ 'account.sendConfirmationEmail.label' | transloco }}</h5>
+        </div>
+        <div class="modal-footer text-center justify-content-center">
+          <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
+            {{ 'common.button.cancel.label' | transloco }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-dismiss="modal"
+            (click)="sendInvitationEmail()"
+          >
+            {{ 'common.confirm.label' | transloco }}
           </button>
         </div>
       </div>

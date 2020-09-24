@@ -43,7 +43,9 @@ export class PatientsService {
     return this.http.get<any>(environment.baseUrl + this.coordinators + '/patients');
   }
 
-  sendInvitationEmail(patientId): Observable<any> {
-    return this.http.patch<any>(environment.baseUrl + this.professionals + '/sendInvitation/' + patientId, {});
+  sendInvitationEmail(patientsIds): Observable<any> {
+    return this.http.patch<any>(environment.baseUrl + this.professionals + '/sendInvitation', {
+      patients: patientsIds,
+    });
   }
 }
