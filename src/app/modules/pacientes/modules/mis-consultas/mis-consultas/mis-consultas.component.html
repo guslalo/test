@@ -188,7 +188,7 @@
                     <td style="width: 25%;" class="text-left">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
-                          item.administrativeDetails.status === 'reserved'
+                          (item.administrativeDetails.status === 'reserved'
                             ? 'clinicalFile.reserved.label'
                             : item.administrativeDetails.status === 'appointed'
                             ? 'clinicalFile.scheduled.label'
@@ -208,7 +208,8 @@
                             ? 'clinicalFile.ended.label'
                             : item.administrativeDetails.status === 'canceled'
                             ? 'clinicalFile.canceled.label'
-                            : ('S/R' | transloco)
+                            : 'S/R'
+                          ) | transloco
                         }}
                       </button>
                     </td>
@@ -364,7 +365,7 @@
                     <td style="width: 25%;" class="text-left">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
-                          item.administrativeDetails.status === 'reserved'
+                          (item.administrativeDetails.status === 'reserved'
                             ? 'clinicalFile.reserved.label'
                             : item.administrativeDetails.status === 'appointed'
                             ? 'clinicalFile.scheduled.label'
@@ -384,7 +385,8 @@
                             ? 'clinicalFile.ended.label'
                             : item.administrativeDetails.status === 'canceled'
                             ? 'clinicalFile.canceled.label'
-                            : ('S/R' | transloco)
+                            : 'S/R'
+                          ) | transloco
                         }}
                       </button>
                     </td>

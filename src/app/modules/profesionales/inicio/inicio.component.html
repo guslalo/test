@@ -263,7 +263,7 @@
                       <td>
                         <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                           {{
-                            item.administrativeDetails.status === 'reserved'
+                            (item.administrativeDetails.status === 'reserved'
                               ? 'clinicalFile.reserved.label'
                               : item.administrativeDetails.status === 'appointed'
                               ? 'clinicalFile.scheduled.label'
@@ -283,7 +283,8 @@
                               ? 'clinicalFile.ended.label'
                               : item.administrativeDetails.status === 'canceled'
                               ? 'clinicalFile.canceled.label'
-                              : ('common.SR.label' | transloco)
+                              : 'S/R'
+                            ) | transloco
                           }}
                         </button>
                       </td>

@@ -181,6 +181,7 @@ export class MiDisponibilidadComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailability();
     this.getAvailabilityBlocked();
+    this.fetchCalendar();
     //this.calendar = true;
 
     this.createAvailability = this._formBuilder.group({
@@ -222,7 +223,6 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
         this.disponibilidad = data.payload;
-        this.fetchCalendar();
         console.log(this.disponibilidad);
       },
       (error) => {
@@ -285,9 +285,7 @@ export class MiDisponibilidadComponent implements OnInit {
         .subscribe(
           (data) => {
             this.createAvailability.reset();
-            for (var i = 0; i < this.days.length; i++) {
-              this.days[i].checked = false;
-            }
+            this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
           },
@@ -327,8 +325,8 @@ export class MiDisponibilidadComponent implements OnInit {
         this.availabilityService.postAvailabilityBlocked(formObject.date).subscribe(
           (data) => {
             console.log(data);
-            this.getAvailability();
             this.getAvailabilityBlocked();
+            this.fetchCalendar();
           },
           (error) => {
             console.log(error);
@@ -348,8 +346,8 @@ export class MiDisponibilidadComponent implements OnInit {
         this.availabilityService.postAvailabilityBlocked(formObject.date, formObject.start, formObject.end).subscribe(
           (data) => {
             console.log(data);
-            this.getAvailability();
             this.getAvailabilityBlocked();
+            this.fetchCalendar();
           },
           (error) => {
             console.log(error);
@@ -386,12 +384,6 @@ export class MiDisponibilidadComponent implements OnInit {
     };
     console.log(formObject);
     console.log(formObject.dateDetails.endDate);
-    /*
-    if (formObject.dateDetails.endDate = ""){
-      console.log("date vacio");
-    }else {
-      console.log("con data");
-    }*/
 
     if (formObject) {
       this.availabilityService
@@ -403,36 +395,15 @@ export class MiDisponibilidadComponent implements OnInit {
         )
         .subscribe(
           (data) => {
-            console.log(data);
+            this.daysSelected = [];
             this.getAvailability();
+            this.fetchCalendar();
           },
           (error) => {
             console.log(error);
           }
         );
     } /**/
-  }
-
-  putAvailability3(id) {
-    //this.createAvailability = id;
-    console.log(this.createAvailability);
-    const formObject = {
-      id,
-      administrativeDetails: {
-        objective: this.createAvailability.controls.objective.value,
-        appointmentDuration: this.createAvailability.controls.appointmentDuration.value,
-      },
-      professionalDetails: {
-        specialtyId: this.createAvailability.controls.specialty.value,
-      },
-      dateDetails: {
-        startDate: this.createAvailability.controls.startDate.value,
-        endDate: this.createAvailability.controls.endDate.value,
-        days: this.createAvailability.controls.dailyDetails.value,
-        dailyRanges: this.createAvailability.controls.dailyRanges.value,
-      },
-    };
-    console.log(formObject);
   }
 
   // deleteBlock
@@ -442,6 +413,7 @@ export class MiDisponibilidadComponent implements OnInit {
       (data) => {
         console.log(data);
         this.getAvailabilityBlocked();
+        this.fetchCalendar();
       },
       (error) => {
         console.log(error);
@@ -527,6 +499,7 @@ export class MiDisponibilidadComponent implements OnInit {
       (data) => {
         console.log(data);
         this.getAvailability();
+        this.fetchCalendar();
       },
       (error) => {
         console.log(error);
@@ -549,70 +522,56 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   fetchCalendar() {
-    forkJoin([this.availabilityService.getAvailability(), this.availabilityService.getAvailabilityBlocked()]).subscribe(
-      (data) => {
-        const availabilities = data[0].payload; // this will contain roleData
-        const blockedDays = data[1].payload; // this will contain user
+    setTimeout(() => {
+      let events = [];
+      forkJoin([
+        this.availabilityService.getAvailabilitiesForCalendar(),
+        this.availabilityService.getAvailabilityBlocked(),
+      ]).subscribe((data) => {
+        // console.log(data[0].payload);
+        const availabilities = data[0].payload;
+        const blockedDays = data[1].payload;
 
-        let events = [];
-        //this.datePipeEnd = datePipe.transform(Date.now(),'yyyy-MM-dd');
-
-        for (const disp of availabilities) {
-          // console.log(disp);
-          events.push(
-            {
-              type: 'active',
-              title: 'Dia Habilitado',
-              start: moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD'),
-              end: moment.utc(disp.dateDetails.endDate).format('YYYY-MM-DD'),
-              color: '#6fc1f1',
-            },
-            {
-              type: 'active',
-              title: disp.administrativeDetails.objective,
-              start: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
-                disp.dateDetails.dailyRanges[0].start
-              }`,
-              end: `${moment.utc(disp.dateDetails.startDate).format('YYYY-MM-DD')}T${
-                disp.dateDetails.dailyRanges[0].end
-              }`,
-              color: '#6fc1f1',
-            }
-          );
-        }
+        Object.values(availabilities).forEach((disp: any) => {
+          for (const item of disp) {
+            events.push(
+              /*
+              {
+                type: 'active',
+                title: 'Dia Habilitado',
+                date: moment.utc(disp[0].date).format('YYYY-MM-DD'),
+                color: '#6fc1f1',
+              },
+              */
+              {
+                type: 'active',
+                title: `${item.administrativeDetails?.objective}: ${item.professionalDetails.specialtyDetails[0].specialtyName}`,
+                start: `${moment.utc(item.date).format('YYYY-MM-DD')}T${item.dailyRange[0].start}`,
+                end: `${moment.utc(item.date).format('YYYY-MM-DD')}T${item.dailyRange[0].end}`,
+                color: '#6fc1f1',
+              }
+            );
+          }
+        });
 
         for (const block of blockedDays) {
-          if (block.dateDetails.range > 0) {
+          // console.log(block);
+          if (block.dateDetails.range) {
             // console.log(block);
-            events.push(
-              {
-                type: 'blocked',
-                title: 'Dia Bloqueado',
-                date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
-                color: '#ff5971',
-              },
-              {
-                type: 'blocked',
-                start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
-                end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
-                color: '#ff5971',
-              }
-            );
+            events.push({
+              type: 'blocked',
+              title: this.translocoService.translate('disponibility.tabs.calendar.blockedDay.label'),
+              start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.start}`,
+              end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}T${block.dateDetails.range.end}`,
+              color: '#ff5971',
+            });
           } else {
-            events.push(
-              {
-                type: 'blocked',
-                title: 'Dia Bloqueado',
-                date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
-                color: '#ff5971',
-              },
-              {
-                type: 'blocked',
-                start: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
-                end: `${moment.utc(block.dateDetails.date).format('YYYY-MM-DD')}`,
-                color: '#ff5971',
-              }
-            );
+            events.push({
+              type: 'blocked',
+              title: this.translocoService.translate('disponibility.tabs.calendar.blockedTime.label'),
+              date: moment.utc(block.dateDetails.date).format('YYYY-MM-DD'),
+              color: '#ff5971',
+            });
           }
         }
 
@@ -624,9 +583,9 @@ export class MiDisponibilidadComponent implements OnInit {
           if (this.showActiveDays) events = events.filter((item) => item.type === 'active');
           if (this.showBlockedDays) events = events.filter((item) => item.type === 'blocked');
         }
+      });
 
-        this.calendarOptions.events = events;
-      }
-    );
+      this.calendarOptions.events = events;
+    }, 2000);
   }
 }

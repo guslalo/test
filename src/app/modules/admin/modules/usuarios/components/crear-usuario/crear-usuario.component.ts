@@ -211,13 +211,6 @@ export class CrearUsuarioComponent implements OnInit {
   validateForm() {
     this.identificationData.clearValidators();
 
-    if (this.identificationData.get('document').value === 'rgRegistry') {
-      this.identificationData.get('idDocumentNumber').enable();
-      this.identificationData.get('issuingBody').enable();
-    } else {
-      this.identificationData.get('issuingBody').disable();
-    }
-
     if (this.isForeign) {
       this.identificationData.get('passport').setValidators([Validators.required]);
       this.identificationData.get('idDocumentNumber').setValidators(null);
@@ -241,6 +234,14 @@ export class CrearUsuarioComponent implements OnInit {
       this.identificationData.get('extraIdDocument').enable();
       this.identificationData.get('issuingBody').enable();
       this.identificationData.get('passport').reset();
+    }
+
+    if (this.identificationData.get('document').value === 'rgRegistry') {
+      this.identificationData.get('idDocumentNumber').enable();
+      this.identificationData.get('issuingBody').enable();
+    } else {
+      this.identificationData.get('passport').reset();
+      this.identificationData.get('issuingBody').disable();
     }
 
     this.identificationData.updateValueAndValidity();

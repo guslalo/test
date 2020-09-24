@@ -9,6 +9,7 @@ import { PatientsService } from 'src/app/services/patients.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { ProfessionalService } from 'src/app/services/professional.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-index',
@@ -64,7 +65,8 @@ export class IndexComponent implements OnInit {
     private patientService: PatientsService,
     private specialtiesService: SpecialtiesService,
     private professionalService: ProfessionalService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private translationService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -288,25 +290,25 @@ export class IndexComponent implements OnInit {
         item.professionalDetails.userDetails[0]?.name + ' ' + item.professionalDetails.userDetails[0]?.lastName,
       Estado:
         item.administrativeDetails.status === 'reserved'
-          ? 'Reservada'
+          ? this.translationService.translate('clinicalFile.reserved.label')
           : item.administrativeDetails.status === 'appointed'
-          ? 'Agendada'
+          ? this.translationService.translate('clinicalFile.scheduled.label')
           : item.administrativeDetails.status === 'rescheduled'
-          ? 'Re-Agendada'
+          ? this.translationService.translate('clinicalFile.reScheduled.label')
           : item.administrativeDetails.status === 'active'
-          ? 'Activa'
+          ? this.translationService.translate('clinicalFile.active.label')
           : item.administrativeDetails.status === 'waitingInRoom'
-          ? 'En Sala de Espera'
+          ? this.translationService.translate('clinicalFile.inWaitingRoom.label')
           : item.administrativeDetails.status === 'waitingInList'
-          ? 'En Lista de Espera'
+          ? this.translationService.translate('clinicalFile.inProgress.label')
           : item.administrativeDetails.status === 'running'
-          ? 'En Curso'
+          ? this.translationService.translate('clinicalFile.inProgress.label')
           : item.administrativeDetails.status === 'pending'
-          ? 'Pendiente'
+          ? this.translationService.translate('clinicalFile.pending.label')
           : item.administrativeDetails.status === 'finished'
-          ? 'Finalizada'
+          ? this.translationService.translate('clinicalFile.ended.label')
           : item.administrativeDetails.status === 'canceled'
-          ? 'Cancelada'
+          ? this.translationService.translate('clinicalFile.canceled.label')
           : null,
     }));
     const workBook = XLSX.utils.book_new();

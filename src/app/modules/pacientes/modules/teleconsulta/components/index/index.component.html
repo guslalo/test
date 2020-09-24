@@ -166,7 +166,7 @@
               <h6 class="card-title mb-1">Estado de consulta</h6>
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
                 {{
-                  appointmentDetail.administrativeDetails.status === 'reserved'
+                  (appointmentDetail.administrativeDetails.status === 'reserved'
                     ? 'clinicalFile.reserved.label'
                     : appointmentDetail.administrativeDetails.status === 'appointed'
                     ? 'clinicalFile.scheduled.label'
@@ -186,7 +186,8 @@
                     ? 'clinicalFile.ended.label'
                     : appointmentDetail.administrativeDetails.status === 'canceled'
                     ? 'clinicalFile.canceled.label'
-                    : ('S/R' | transloco)
+                    : 'S/R'
+                  ) | transloco
                 }}
               </button>
               <p class="card-text text-center mt-1">ID consulta: {{ appointmentDetail._id }}</p>

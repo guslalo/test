@@ -331,7 +331,7 @@
           <div class="row">
             <div class="col-12 text-center bg-white">
               <div class="container bg-white p-5" *ngIf="calendar">
-                <full-calendar [options]="calendarOptions"></full-calendar>
+                <full-calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
               </div>
             </div>
           </div>
