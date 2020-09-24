@@ -215,9 +215,6 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
-                              {{ 'common.button.delete.label' | transloco }}
-                            </button>
                             <button
                               data-toggle="modal"
                               data-target="#editar"
@@ -226,6 +223,9 @@
                               (click)="putAvailability(item._id)"
                             >
                               {{ 'clinicalFile.edit.label' | transloco }}
+                            </button>
+                            <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
+                              {{ 'common.button.delete.label' | transloco }}
                             </button>
                           </div>
                         </div>
@@ -377,6 +377,7 @@
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
+                  <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>
@@ -441,6 +442,7 @@
                   'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco
                 }}</label>
                 <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
+                  <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                   <ng-container *ngFor="let item of interval">
                     <option value="{{ item.value }}">{{ item.min }}</option>
                   </ng-container>
@@ -453,13 +455,13 @@
               </div>
 
               <div class="col">
-                <ng-container *ngFor="let data of days; let i = index">
+                <ng-container *ngFor="let data of days">
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
                     <input
                       id="{{ data.name }}"
-                      class="custom-control-input"
                       type="checkbox"
-                      [value]="data.value"
+                      class="custom-control-input"
+                      value="{{ data.value }}"
                       (change)="onCheckboxChange($event)"
                     />
                     <label class="custom-control-label" for="{{ data.name }}">
@@ -557,7 +559,7 @@
             data-dismiss="modal"
             class="btn btn-primary rounded-pill"
             (click)="crearAvailability()"
-            [disabled]="!createAvailability.valid"
+            [disabled]="!createAvailability.valid && !this.daysSelected.length"
           >
             Crear disponibilidad
           </button>
@@ -812,7 +814,7 @@
             class="btn btn-primary rounded-pill"
             data-dismiss="modal"
             (click)="actualizarAvailability(idAvailability._id)"
-            [disabled]="!createAvailability.valid"
+            [disabled]="!createAvailability.valid && !this.daysSelected.length"
           >
             <!--[disabled]="!createAvailability.valid"-->
             {{ 'clinicalFile.editDisponibility.label' | transloco }}

@@ -51,6 +51,9 @@ export class MiDisponibilidadComponent implements OnInit {
   model3: NgbDateStruct;
   endDate: NgbDateStruct;
   startDate: NgbDateStruct;
+  dailyDetailsSelected: FormArray;
+  checked: boolean;
+  days: any;
 
   constructor(
     private availabilityService: AvailabilityService,
@@ -71,6 +74,18 @@ export class MiDisponibilidadComponent implements OnInit {
       month: this.minDate.month,
       day: this.minDate.day,
     };
+
+    this.checked = false;
+
+    this.days = [
+      { id: 1, checked: false, name: 'Lun', value: 'lunes' },
+      { id: 2, checked: false, name: 'Mar', value: 'martes' },
+      { id: 3, checked: false, name: 'Mie', value: 'miercoles' },
+      { id: 4, checked: false, name: 'Jue', value: 'jueves' },
+      { id: 5, checked: false, name: 'Vie', value: 'viernes' },
+      { id: 6, checked: false, name: 'Sab', value: 'sabado' },
+      { id: 7, checked: false, name: 'Dom', value: 'domingo' },
+    ];
   }
 
   get dailyRanges() {
@@ -97,18 +112,7 @@ export class MiDisponibilidadComponent implements OnInit {
   date: { year: string; month: string };
   //time = { hour: 13, minute: 30 };
 
-  days: Array<any> = [
-    { id: 1, checked: false, name: 'Lun', value: 'lunes' },
-    { id: 2, checked: false, name: 'Mar', value: 'martes' },
-    { id: 3, checked: false, name: 'Mie', value: 'miercoles' },
-    { id: 4, checked: false, name: 'Jue', value: 'jueves' },
-    { id: 5, checked: false, name: 'Vie', value: 'viernes' },
-    { id: 6, checked: false, name: 'Sab', value: 'sabado' },
-    { id: 7, checked: false, name: 'Dom', value: 'domingo' },
-  ];
-  daysSelected: Array<any> = [];
-
-  days2: Array<any> = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+  daysSelected = [];
 
   interval: Array<any> = [
     { min: '5', value: 5 },
@@ -155,22 +159,17 @@ export class MiDisponibilidadComponent implements OnInit {
   showBlockedDays: Boolean = false;
 
   onCheckboxChange(e) {
-    const dailyDetails: FormArray = this.createAvailability.get('dailyDetails') as FormArray;
-
-    if (e.target.checked) {
-      dailyDetails.push(new FormControl(e.target.value));
+    // console.log(e.target.checked, value);
+    if (e.target.checked === true) {
+      this.daysSelected.push(e.target.value);
     } else {
-      let i = 0;
-      dailyDetails.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
-          dailyDetails.removeAt(i);
-          return;
+      for (var i = 0; i < this.daysSelected.length; i++) {
+        if (this.daysSelected[i] === e.target.value) {
+          this.daysSelected.splice(i, 1);
         }
-        i++;
-      });
+      }
     }
-
-    console.log(dailyDetails);
+    console.log(this.daysSelected);
   }
 
   initCalendar() {
@@ -185,13 +184,12 @@ export class MiDisponibilidadComponent implements OnInit {
     //this.calendar = true;
 
     this.createAvailability = this._formBuilder.group({
-      objective: [null, [Validators.required]], //[Validators.required],
-      appointmentDuration: [5, null],
-      specialty: [null, [Validators.required]],
+      objective: [null, Validators.required], //[Validators.required],
+      appointmentDuration: [null, Validators.required],
+      specialty: [null, Validators.required],
       specialtyName: new FormControl(),
       endDate: [null, [Validators.required]], // [Validators.required]
       startDate: [null], //new FormControl()
-      dailyDetails: this._formBuilder.array([]), //[Validators.required]
       dailyRanges: this._formBuilder.array([]),
     });
 
@@ -275,7 +273,7 @@ export class MiDisponibilidadComponent implements OnInit {
       dateDetails: {
         startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
-        days: this.createAvailability.controls.dailyDetails.value,
+        days: this.daysSelected,
         dailyRanges: this.createAvailability.controls.dailyRanges.value,
       },
     };
@@ -287,7 +285,10 @@ export class MiDisponibilidadComponent implements OnInit {
         .subscribe(
           (data) => {
             this.createAvailability.reset();
-            console.log('disponibilidad creada', data);
+            for (var i = 0; i < this.days.length; i++) {
+              this.days[i].checked = false;
+            }
+            // console.log(this.days);
             this.getAvailability();
           },
           (error) => {
