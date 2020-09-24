@@ -53,6 +53,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   intervalCurrentTime: any;
   public inmediateAppointment: boolean;
+ // public firstAccess:boolean;
 
   constructor(
     public breakpointObserver: BreakpointObserver,
@@ -78,6 +79,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   status = false;
 
   ngOnInit(): void {
+    //this.firstAccess = true;
+
     if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;
       this.inmediateAppointment = true;
