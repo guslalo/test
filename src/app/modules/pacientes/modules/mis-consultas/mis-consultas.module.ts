@@ -8,6 +8,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [MisConsultasComponent, ConsultaComponent],
@@ -18,6 +20,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgbPaginationModule,
     NgxPaginationModule,
     SharedModule,
+    NgxSpinnerModule
   ],
 })
 export class MisConsultasModule {}

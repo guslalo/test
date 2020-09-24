@@ -44,6 +44,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   public sibrareDocumentId: any;
   public arrayDocuments: any;
   public urlSibrare: any;
+  public videoCall:boolean;
+  public descargar:boolean
 
   constructor(
     private route: ActivatedRoute,
@@ -57,26 +59,6 @@ export class CrearFichaConsultaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    $(window).bind('scroll', function () {
-      if ($(window).scrollTop() > 200) {
-         $('.vistaFixed').addClass('fixed');
-         //$('.toolbox-icon').click();
-         //$('#meet').contents().find('.toolbox-icon').click();
-         $(".mtfixed").css('margin-top',400);
-         $(".vistaFixed .card").css('box-shadow','none !important');
-        
-      } else {
-        $('.toolbox-icon').click();
-        console.log('no fixed')
-        $(".mtfixed").css('margin-top',0);
-        $('.vistaFixed').removeClass('fixed');
-        //$('#meet').contents().find('.toolbox-icon').click();
-       
-      }
-    });
-
-
     this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
@@ -225,6 +207,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
             (data) => {
               if (data.payload.isVerified === true) {
+                this.descargar = false;
                 console.log(data);
                 clearInterval(interval);
                 this.getVerifiedSibrareDocuments(this.appointmentId);
@@ -252,6 +235,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   getVerifiedSibrareDocuments(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
       (data) => {
+        this.descargar = false;
         console.log(data);
         this.arrayDocuments = data.payload;
         this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
@@ -267,7 +251,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         this.arrayDocuments = data.payload;
-        //this.getSibrareDocuments(this.appointmentId, this.sibrareDocumentId);
       },
       (error) => {
         console.log(error);
@@ -276,6 +259,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   downloadSibrare(documentId) {
+    this.descargar = true;
+    this.spinner.show();
     console.log(documentId);
     this.getSibrareDocuments(this.appointmentId, documentId);
   }
@@ -285,10 +270,15 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
       (data) => {
         this.urlSibrare = data.payload[0].documento;
-        window.open(this.urlSibrare);
         //window.location.href= this.urlSibrare ;
         console.log(this.urlSibrare);
         console.log(data);
+        this.spinner.hide();
+        if(this.descargar === true){     
+          return  window.open(this.urlSibrare);
+        }else{
+          console.log(this.urlSibrare);
+        }
       },
       (error) => {
         console.log(error);
@@ -358,6 +348,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   runAppointment(appointmentId, event) {
     this.appointmentsService.postEventAppointment(appointmentId, event).subscribe(
       (data) => {
+        this.videoCall = true;
         console.log(data);
         this.getAppointmentsDetails(appointmentId);
       },
@@ -368,6 +359,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   endTeleconsultation(appointmentId, event) {
+    this.videoCall = false
     $('#meet').remove();
     /*this.jitsiGlobal.excutecommnad( 'hangup');
     this.jitsiGlobal.dispose();*/
@@ -421,6 +413,22 @@ export class CrearFichaConsultaComponent implements OnInit {
         if (this.appointmentDetail.administrativeDetails.status === 'running') {
           this.getSession(id);
           this.permisoGuardar = true;
+          this.videoCall = true;
+
+          //modo flotante video call
+          $(window).bind('scroll', function () {
+            if ($(window).scrollTop() > 200) {
+               $('.vistaFixed').addClass('fixed');
+               $(".mtfixed").css('margin-top',400);
+               $(".vistaFixed .card").css('box-shadow','none !important');
+              
+            } else {
+              $('.toolbox-icon').click();
+              console.log('no fixed')
+              $(".mtfixed").css('margin-top',0);
+              $('.vistaFixed').removeClass('fixed');
+            }
+          });
         }
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;

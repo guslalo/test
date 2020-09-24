@@ -4,6 +4,7 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-consulta',
@@ -18,11 +19,17 @@ export class ConsultaComponent implements OnInit {
   public timeline: any;
   public fecha: any;
   public professionalData: any;
+  public inmediate:boolean;
+  public arrayDocuments: any;
+  public urlSibrare: any;
+  public appointmentId:any;
+  public descargar:boolean
 
   constructor(
     private route: ActivatedRoute,
     private appointmentsService: AppointmentsService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +48,11 @@ export class ConsultaComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
+      this.appointmentId = id;
       console.log(params);
-      this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
+      this.getAppointmentsDetails(id);
+      this.getVerifiedSibrareDocuments2(id);
     });
 
     this.getAppointmentsTimeline();
@@ -91,10 +100,62 @@ export class ConsultaComponent implements OnInit {
       (data) => {
         this.appoimentDetail = data.payload;
         console.log(this.appoimentDetail);
+
+        if(this.appoimentDetail.administrativeDetails.waitingRoomId === null){
+          this.inmediate = false
+          this.getAppointmentsProfessionalData(id);
+        }else{
+         this.inmediate = true;
+        }
+       
       },
       (error) => {
         console.log(error);
       }
     );
   }
+
+
+   //getVerifiedSibrareDocuments
+   getVerifiedSibrareDocuments2(appointmentId) {
+    this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
+      (data) => {
+        console.log(data);
+        this.arrayDocuments = data.payload;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  downloadSibrare(documentId) {
+    this.spinner.show();
+    this.descargar = true;
+    console.log(documentId);
+    this.getSibrareDocuments(this.appointmentId, documentId);
+  }
+
+  // get documents sibrare
+  getSibrareDocuments(id, documentId) {
+    this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
+      (data) => {
+        this.urlSibrare = data.payload[0].documento;
+        this.spinner.hide();
+        if(this.descargar === true){     
+          return  window.open(this.urlSibrare);
+        }else{
+          console.log(this.urlSibrare);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
+
+
 }

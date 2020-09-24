@@ -4,6 +4,7 @@ import { AppointmentsService } from './../../../../../services/appointments.serv
 import { MedicalRecordService } from './../../../../../services/medicalRecord.service';
 import { DocumentService } from './../../../../../services/document.service';
 import { environment } from './../../../../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-ficha-consulta',
@@ -28,12 +29,14 @@ export class FichaConsultaComponent implements OnInit {
   public photoUrlBase = environment.photoUrlBase;
   public arrayDocuments: any;
   public urlSibrare: any;
+  public descargar:any;
 
   constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
     private appointmentsService: AppointmentsService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private spinner: NgxSpinnerService
   ) {}
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
@@ -43,8 +46,10 @@ export class FichaConsultaComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
+      this.appointmentId = id;
       console.log(params);
       this.getAppointmentsDetails(id);
+      this.getVerifiedSibrareDocuments2(id);
     });
     this.getAppointmentsTimeline();
     this.getFecha();
@@ -107,7 +112,7 @@ export class FichaConsultaComponent implements OnInit {
 
   //getVerifiedSibrareDocuments
   getVerifiedSibrareDocuments2(appointmentId) {
-    this.appointmentsService.getVerifiedSibrareDocuments(this.appointmentId).subscribe(
+    this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
       (data) => {
         console.log(data);
         this.arrayDocuments = data.payload;
@@ -119,6 +124,8 @@ export class FichaConsultaComponent implements OnInit {
   }
 
   downloadSibrare(documentId) {
+    this.spinner.show();
+    this.descargar = true;
     console.log(documentId);
     this.getSibrareDocuments(this.appointmentId, documentId);
   }
@@ -128,14 +135,18 @@ export class FichaConsultaComponent implements OnInit {
     this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
       (data) => {
         this.urlSibrare = data.payload[0].documento;
-        window.open(this.urlSibrare);
-        //window.location.href= this.urlSibrare ;
-        console.log(this.urlSibrare);
-        console.log(data);
+        this.spinner.hide();
+        if(this.descargar === true){     
+          return  window.open(this.urlSibrare);
+        }else{
+          console.log(this.urlSibrare);
+        }
       },
       (error) => {
         console.log(error);
       }
     );
   }
+
+  
 }
