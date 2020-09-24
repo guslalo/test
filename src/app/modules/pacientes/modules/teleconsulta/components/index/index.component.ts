@@ -81,7 +81,6 @@ export class IndexComponent implements OnInit {
         const options = {
           roomName: data.payload.sessionId,
           jwt: data.payload.sessionToken,
-          height: 700,
           parentNode: document.querySelector('#meet3'),
         };
         this.url = data.payload.urlRoom.split('//');

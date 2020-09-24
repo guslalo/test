@@ -182,6 +182,21 @@ ul {
 
 .videoCall {
   position: relative;
+  width: 100%;
+  //height: 304px;
+  .boxText {
+    position: absolute;
+    top: 20%;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+  }
+}
+
+.videoCall2 {
+  position: relative;
+  //height: 304px;
   .boxText {
     position: absolute;
     top: 20%;
@@ -208,6 +223,7 @@ ul {
     -webkit-transition: all 1s;
   }
   img {
+    height: auto;
     width: 100%;
     filter: blur(4px);
     -webkit-filter: blur(4px);
@@ -993,27 +1009,29 @@ ngb-timepicker .ngb-tp-hour {
   }
 }
 
+//modo flotante veideo call
 .vistaFixed {
-  border-radius: 10px;
+  border-radius: 8px;
   &.fixed {
+    left: calc(50% + 135px);
+    transform: translateX(-50%);
     background: white;
     position: fixed;
     padding: 20px 11%;
+    width:calc(96% - 225px);
     box-shadow: 0 1.125rem 1.25rem rgba(0, 0, 0, 0.075) !important;
     z-index: 2;
     .leftwatermark {
       display: none !important;
     }
     .card {
+      padding: 10px 6px 0px 6px;
       box-shadow: none !important;
     }
-    //width: 100%;
-    top:20px;
+    top:10px;
     .meetPatient2 {
       width: 100% !important;
       height: 250px !important;
-
-
     }
   }
 }
