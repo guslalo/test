@@ -323,7 +323,7 @@
       "label": "conta tutor"
     },
     "mandatorySurname": {
-      "label": "Segundo sobrenome *"
+      "label": "Segundo sobrenome"
     },
     "select": {
       "label": "Escolher"
@@ -923,7 +923,7 @@
       "label": "indicar o seu sexo"
     },
     "emailReq": {
-      "label": "o email *"
+      "label": "o email"
     },
     "raceReq": {
       "label": "Raça é necessário"
@@ -2375,7 +2375,7 @@
       "label": "Há quartos sem espera com estes parâmetros"
     },
     "roomName": {
-      "label": "Nome da sala *"
+      "label": "Nome da sala"
     },
     "serviceFee": {
       "label": "valor Consulta"
@@ -3220,7 +3220,7 @@
       "label": "Perfil Gestão / Atualização"
     },
     "cep": {
-      "label": "CEP *"
+      "label": "CEP"
     },
     "managmentDisponibility": {
       "label": "gerenciamento de disponibilidade"
@@ -3233,9 +3233,16 @@
     }
   },
   "account": {
+    "completeRegister": {
+      "label": "Registro completo"
+    },
     "createAccount": {
       "title": "Criar conta",
       "label": "Em seguida, insira seus dados para concluir seu registro.",
+      "isForeign": "eu sou um estrangeiro",
+      "identificationData": {
+        "label": "Dados de identificação"
+      },
       "personalData": {
         "label": "Dados pessoais"
       },
@@ -3243,10 +3250,10 @@
         "label": "Tenho mais de 18 anos?"
       },
       "birthData": {
-        "title": "Dados de nascimento"
+        "label": "Dados de nascimento"
       },
       "address": {
-        "title": "Endereço"
+        "label": "Endereço"
       },
       "generatePassword": {
         "title": "Gerar senha"
@@ -3282,10 +3289,10 @@
       "label": "Documento de identificação"
     },
     "identificationDocumentReq": {
-      "label": "Documento de identificação *"
+      "label": "Documento de identificação"
     },
     "selectedDocumentNumberReq": {
-      "label": "Selecionado Documento No. *"
+      "label": "Selecionado Documento No."
     },
     "secondaryDoc": {
       "label": "documentação secundário"
@@ -3300,31 +3307,37 @@
       "label": "Escola Assistant"
     },
     "nameReq": {
-      "label": "Nome *"
+      "label": "Nome"
     },
     "lastName": {
       "label": "Nome do meio"
     },
     "surnameReq": {
-      "label": "Sobrenome *"
+      "label": "Sobrenome"
     },
     "motherNameReq": {
-      "label": "Mãe Nome *"
+      "label": "Mãe Nome"
     },
     "emailReq": {
-      "label": "o email *"
+      "label": "o email"
+    },
+    "confirmEmailReq": {
+      "label": "Confirmar e-mail"
     },
     "phoneReq": {
-      "label": "Telefone *"
+      "label": "Telefone"
+    },
+    "breed": {
+      "label": "Raça"
     },
     "grenderReq": {
-      "label": "sexo *"
+      "label": "sexo"
     },
     "dateOfBirthReq": {
-      "label": "Data de nascimento *"
+      "label": "Data de nascimento"
     },
     "nationalityReq": {
-      "label": "nacionalidade *"
+      "label": "nacionalidade"
     },
     "country": {
       "label": "País de origem"
@@ -3332,29 +3345,26 @@
     "countryEntrance": {
       "label": "Data de entrada para o País"
     },
-    "completeRegister": {
-      "label": "registro completo"
-    },
     "erroneous": {
       "label": "errado"
     },
     "raceColor": {
-      "label": "Raça / cor *"
+      "label": "Raça / cor"
     },
     "familyStatus": {
       "label": "situação familiar / conjugal"
     },
     "cityReq": {
-      "label": "Cidade *"
+      "label": "Cidade"
     },
     "neighborhoodReq": {
-      "label": "Barrio *"
+      "label": "Barrio"
     },
     "streetReq": {
       "label": "Rua é necessária"
     },
     "numberReq": {
-      "label": "número *"
+      "label": "número"
     },
     "userType": {
       "label": "Tipo de usuário"
@@ -3374,8 +3384,11 @@
     "atLeastOneSpecialChar": {
       "label": "* A um carácter menos especial"
     },
+    "password": {
+      "label": "Senha"
+    },
     "confirmPassword": {
-      "label": "Confirmar senha *"
+      "label": "Confirmar senha"
     },
     "passwordsNotMatch": {
       "label": "As senhas não correspondem"
