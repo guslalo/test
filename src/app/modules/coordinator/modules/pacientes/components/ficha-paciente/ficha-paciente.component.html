@@ -403,7 +403,7 @@
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <button type="button" class="btn btn-secondary rounded-pill btn-sm">
                     {{
-                      row.administrativeDetails.status === 'reserved'
+                      (row.administrativeDetails.status === 'reserved'
                         ? 'clinicalFile.reserved.label'
                         : row.administrativeDetails.status === 'appointed'
                         ? 'clinicalFile.scheduled.label'
@@ -423,7 +423,8 @@
                         ? 'clinicalFile.ended.label'
                         : row.administrativeDetails.status === 'canceled'
                         ? 'clinicalFile.canceled.label'
-                        : (null | transloco)
+                        : null
+                      ) | transloco
                     }}
                   </button>
                 </ng-template>
@@ -842,7 +843,7 @@
                         <div class="col-5 text-left p-0">
                           <button class="btn btn-primary dos rounded-lg">
                             {{
-                              item.status === 'reserved'
+                              (item.status === 'reserved'
                                 ? 'clinicalFile.reserved.label'
                                 : item.status === 'appointed'
                                 ? 'clinicalFile.scheduled.label'
@@ -862,7 +863,8 @@
                                 ? 'clinicalFile.ended.label'
                                 : item.status === 'canceled'
                                 ? 'clinicalFile.canceled.label'
-                                : (null | transloco)
+                                : null
+                              ) | transloco
                             }}
                           </button>
                         </div>

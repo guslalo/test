@@ -139,13 +139,14 @@
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
                         {{
-                          row.status === 'joined'
+                          (row.status === 'joined'
                             ? 'common.ingresed.label'
                             : row.status === 'pending'
                             ? 'clinicalFile.pending.label'
                             : row.status === 'active'
                             ? 'common.status.active.label'
-                            : ('common.SR.label' | transloco)
+                            : 'S/R'
+                          ) | transloco
                         }}
                       </button>
                     </ng-template>

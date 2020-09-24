@@ -164,7 +164,7 @@
               class="btn btn-secondary rounded-pill btn-sm"
             >
               {{
-                row.administrativeDetails.status === 'reserved'
+                (row.administrativeDetails.status === 'reserved'
                   ? 'clinicalFile.reserved.label'
                   : row.administrativeDetails.status === 'appointed'
                   ? 'clinicalFile.scheduled.label'
@@ -184,7 +184,8 @@
                   ? 'clinicalFile.ended.label'
                   : row.administrativeDetails.status === 'canceled'
                   ? 'clinicalFile.canceled.label'
-                  : (null | transloco)
+                  : null
+                ) | transloco
               }}
             </button>
             <ng-template #invalidStatus>{{ 'common.notAll.label' | transloco }}</ng-template>
