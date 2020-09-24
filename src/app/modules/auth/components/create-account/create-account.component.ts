@@ -90,10 +90,10 @@ export class CreateAccountComponent implements OnInit {
     this.personalData = this._formBuilder.group(
       {
         checkAge: [null, [Validators.requiredTrue]],
-        name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
-        lastName: ['', Validators.pattern(/^[a-zA-Z\s]*$/)],
-        motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
-        secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+        name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+        lastName: ['', Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)],
+        motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+        secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
         email: [null, [Validators.email, Validators.required]],
         gender: [null, [Validators.required]],
         confirmEmail: ['', [Validators.required]],

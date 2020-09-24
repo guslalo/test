@@ -59,7 +59,11 @@
                       }}</span>
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [flexGrow]="3"
+                    name="{{ 'table.namePatient.label' | transloco }}"
+                  >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
                         <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
@@ -69,7 +73,7 @@
                       </a>
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{ moment().diff(row.personalData.birthdate, 'year') }}
                     </ng-template>
@@ -77,11 +81,12 @@
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{
-                        row.personalData.gender === 'male'
+                        (row.personalData.gender === 'male'
                           ? 'clinicalFile.male.label'
                           : row.personalData.gender === 'female'
                           ? 'clinicalFile.female.label'
-                          : ('S/R' | transloco)
+                          : 'S/R'
+                        ) | transloco
                       }}
                     </ng-template>
                   </ngx-datatable-column>
@@ -89,7 +94,7 @@
                     [resizeable]="false"
                     [flexGrow]="2"
                     prop="personalData.phoneNumber"
-                    name="Telefono"
+                    name="{{ 'table.phone.label' | transloco }}"
                   >
                   </ngx-datatable-column>
                 </ngx-datatable>
@@ -115,7 +120,11 @@
                   [limit]="pageSize"
                   [selectAllRowsOnPage]="true"
                 >
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Nombre Paciente">
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [flexGrow]="3"
+                    name="{{ 'table.namePatient.label' | transloco }}"
+                  >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
                       {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
@@ -123,7 +132,7 @@
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="email" name="Correo">
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Edad">
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       {{ moment().diff(row.age, 'year') }}
                     </ng-template>
@@ -133,9 +142,19 @@
                       {{ row.gender === 'male' ? 'Masculino' : row.gender === 'female' ? 'Femenino' : 'S/R' }}
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="phoneNumber" name="Telefono">
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [flexGrow]="2"
+                    prop="phoneNumber"
+                    name="{{ 'table.phone.label' | transloco }}"
+                  >
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Estado">
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [flexGrow]="2"
+                    prop="status"
+                    name="{{ 'table.status.label' | transloco }}"
+                  >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <button type="button" class="btn btn-primary mt-1 rounded-pill btn-sm">
                         {{
@@ -151,7 +170,12 @@
                       </button>
                     </ng-template>
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [sortable]="false" [flexGrow]="2" name="Acciones">
+                  <ngx-datatable-column
+                    [resizeable]="false"
+                    [sortable]="false"
+                    [flexGrow]="2"
+                    name="{{ 'table.action.label' | transloco }}"
+                  >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <div ngbDropdown container="body">
                         <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>

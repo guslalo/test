@@ -2141,6 +2141,9 @@
     "namePatient": {
       "label": "Nombre Paciente"
     },
+    "age": {
+      "label": "Edad"
+    },
     "hourCreate": {
       "label": "Hora creación cita médica"
     },
