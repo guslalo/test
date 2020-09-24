@@ -102,4 +102,8 @@ export class AvailabilityService {
     console.log(id);
     return this.http.delete<any>(environment.baseUrl + this.blocked + `/`, { params: params }); // `/`
   }
+
+  getAvailabilitiesForCalendar() {
+    return this.http.get<any>(environment.baseUrl + this.availability + '/calendar');
+  }
 }

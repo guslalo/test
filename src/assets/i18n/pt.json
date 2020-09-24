@@ -731,6 +731,12 @@
         },
         "blockedDays": {
           "label": "Dias bloqueados"
+        },
+        "blockedDay": {
+          "label": "Dia bloqueado"
+        },
+        "blockedTime": {
+          "label": "Cronograma bloqueado"
         }
       }
     },
