@@ -323,7 +323,7 @@
       "label": "Cuenta Tutor"
     },
     "mandatorySurname": {
-      "label": "Segundo Apellido *"
+      "label": "Segundo Apellido"
     },
     "select": {
       "label": "Selecciona"
@@ -923,7 +923,7 @@
       "label": "indique su sexo"
     },
     "emailReq": {
-      "label": "Email *"
+      "label": "Email"
     },
     "raceReq": {
       "label": "raza es necesaria"
@@ -2375,7 +2375,7 @@
       "label": "No existen salas de esperas con estos parametros"
     },
     "roomName": {
-      "label": "Nombre Sala *"
+      "label": "Nombre Sala"
     },
     "serviceFee": {
       "label": "Valor Consulta"
@@ -3220,7 +3220,7 @@
       "label": "Gestión de Perfiles / Actualizar Perfil"
     },
     "cep": {
-      "label": "CEP *"
+      "label": "CEP"
     },
     "managmentDisponibility": {
       "label": "Gestión de disponibilidad"
@@ -3233,195 +3233,211 @@
     }
   },
   "account": {
+    "completeRegister": {
+      "label": "Completar registro"
+    },
     "createAccount": {
       "title": "Crear cuenta",
       "label": "A continuación Ingrese sus datos para completar su registro.",
-      "personalData": {
-        "label": "Datos personales"
+      "isForeign": "Soy extranjero"
+    },
+    "identificationData": {
+      "label": "Datos de identificación"
+    },
+    "personalData": {
+      "label": "Datos personales"
+    },
+    "majorAge": {
+      "label": "¿Tengo más de 18 años?"
+    },
+    "birthData": {
+      "label": "Datos de nacimiento"
+    },
+    "address": {
+      "label": "Dirección"
+    },
+    "generatePassword": {
+      "title": "Generar clave"
+    },
+    "modal": {
+      "fail": {
+        "title": "¿Tienes más de 18 años?",
+        "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
       },
-      "majorAge": {
-        "label": "¿Tengo más de 18 años?"
-      },
-      "birthData": {
-        "title": "Datos de nacimiento"
-      },
-      "address": {
-        "title": "Dirección"
-      },
-      "generatePassword": {
-        "title": "Generar clave"
-      },
-      "modal": {
-        "fail": {
-          "title": "¿Tienes más de 18 años?",
-          "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
-        },
-        "termAndConditions": {
-          "title": "Terminos y condiciones",
-          "btnCreate": "Crear cuenta",
-          "btnCancel": "Cancelar"
-        }
-      },
-      "hint": {
-        "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
+      "termAndConditions": {
+        "title": "Terminos y condiciones",
+        "btnCreate": "Crear cuenta",
+        "btnCancel": "Cancelar"
       }
     },
-    "hintDisableUser": {
-      "label": "Estas seguro de que deseas deshabilitar a este usuario?"
-    },
-    "disableUser": {
-      "label": "Deshabilitar Usuario"
-    },
-    "sendConfirmationEmail": {
-      "label": "Enviar Correo de Confirmacion"
-    },
-    "updateAccount": {
-      "label": "Actualizar Cuenta"
-    },
-    "identificationDocument": {
-      "label": "Documento de Identificacion"
-    },
-    "identificationDocumentReq": {
-      "label": "Documento de Identificacion *"
-    },
-    "selectedDocumentNumberReq": {
-      "label": "N° de Documento Seleccionado *"
-    },
-    "secondaryDoc": {
-      "label": "Documentacion Secundaria"
-    },
-    "votantTitle": {
-      "label": "Titulo de Votante"
-    },
-    "selectedDocumentNumber": {
-      "label": "N° de Documento Seleccionado"
-    },
-    "schoolAsistant": {
-      "label": "Asistente a Escuela"
-    },
-    "nameReq": {
-      "label": "Nombre *"
-    },
-    "lastName": {
-      "label": "Segundo Nombre"
-    },
-    "surnameReq": {
-      "label": "Apellido *"
-    },
-    "motherNameReq": {
-      "label": "Nombres de la Madre *"
-    },
-    "emailReq": {
-      "label": "Email *"
-    },
-    "phoneReq": {
-      "label": "Telefono *"
-    },
-    "grenderReq": {
-      "label": "Sexo *"
-    },
-    "dateOfBirthReq": {
-      "label": "Fecha de Nacimiento *"
-    },
-    "nationalityReq": {
-      "label": "Nacionalidad *"
-    },
-    "country": {
-      "label": "Pais de Origen"
-    },
-    "countryEntrance": {
-      "label": "Fecha de Entrada al Pais"
-    },
-    "completeRegister": {
-      "label": "Completar Registro"
-    },
-    "erroneous": {
-      "label": "erroneo"
-    },
-    "raceColor": {
-      "label": "Raza/Color *"
-    },
-    "familyStatus": {
-      "label": "Situacion Familiar/Conyugal"
-    },
-    "cityReq": {
-      "label": "Ciudad *"
-    },
-    "neighborhoodReq": {
-      "label": "Barrio *"
-    },
-    "streetReq": {
-      "label": "Calle es necesario"
-    },
-    "numberReq": {
-      "label": "Numero *"
-    },
-    "userType": {
-      "label": "Tipo de Usuario"
-    },
-    "atLeastOneUpper": {
-      "label": "* Al menos una mayúscula"
-    },
-    "atLeastOneLower": {
-      "label": "* Al menos una minúscula"
-    },
-    "atLeastOneNumber": {
-      "label": "* Al menos un número"
-    },
-    "lengthMinEigthCharsMaxSixTeen": {
-      "label": "* un largo mínimo de 8 carácteres (max. 16)"
-    },
-    "atLeastOneSpecialChar": {
-      "label": "* Al menos un carácter especial"
-    },
-    "confirmPassword": {
-      "label": "Confirmar Contraseña *"
-    },
-    "passwordsNotMatch": {
-      "label": "Las contraseñas no coinciden"
-    },
-    "passwordHint": {
-      "label": "Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula, minúscula y un caracter especial."
-    },
-    "upperAndSpecialChar": {
-      "label": "minúscula y un caracter especial."
-    },
-    "userManagmentAccountCreation": {
-      "label": "Gestión de Usuarios / Creacion de Cuenta"
-    },
-    "genPassword": {
-      "label": "Generar Contraseña"
-    },
-    "disableUserHint": {
-      "label": "¿Estas seguro de que deseas deshabilitar a este usuario?"
-    },
-    "cep": {
-      "label": "CEP"
-    },
-    "neightberhood": {
-      "label": "Barrio"
-    },
-    "street": {
-      "label": "Calle"
-    },
-    "numeration": {
-      "label": "Numeración"
-    },
-    "uf": {
-      "label": "UF"
-    },
-    "numerationReq": {
-      "label": "Numeración es necesario"
-    },
-    "passwordGeneration": {
-      "label": "Generación contraseña"
-    },
-    "lengthMinEightChars": {
-      "label": "* un largo mínimo de 8 carácteres"
-    },
-    "academicBio": {
-      "label": "Biografia Academica"
+    "hint": {
+      "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
     }
+  },
+  "hintDisableUser": {
+    "label": "Estas seguro de que deseas deshabilitar a este usuario?"
+  },
+  "disableUser": {
+    "label": "Deshabilitar Usuario"
+  },
+  "sendConfirmationEmail": {
+    "label": "Enviar Correo de Confirmacion"
+  },
+  "updateAccount": {
+    "label": "Actualizar Cuenta"
+  },
+  "identificationDocument": {
+    "label": "Documento de Identificacion"
+  },
+  "identificationDocumentReq": {
+    "label": "Documento de Identificacion"
+  },
+  "selectedDocumentNumberReq": {
+    "label": "N° de Documento Seleccionado"
+  },
+  "secondaryDoc": {
+    "label": "Documentacion Secundaria"
+  },
+  "votantTitle": {
+    "label": "Titulo de Votante"
+  },
+  "selectedDocumentNumber": {
+    "label": "N° de Documento Seleccionado"
+  },
+  "schoolAsistant": {
+    "label": "Asistente a Escuela"
+  },
+  "nameReq": {
+    "label": "Nombre"
+  },
+  "lastName": {
+    "label": "Segundo Nombre"
+  },
+  "surnameReq": {
+    "label": "Apellido"
+  },
+  "motherNameReq": {
+    "label": "Nombres de la Madre"
+  },
+  "emailReq": {
+    "label": "Email"
+  },
+  "confirmEmailReq": {
+    "label": "Confirmar email"
+  },
+  "phoneReq": {
+    "label": "Telefono"
+  },
+  "breed": {
+    "label": "Raza"
+  },
+  "grenderReq": {
+    "label": "Sexo"
+  },
+  "dateOfBirthReq": {
+    "label": "Fecha de Nacimiento"
+  },
+  "nationalityReq": {
+    "label": "Nacionalidad"
+  },
+  "country": {
+    "label": "Pais de Origen"
+  },
+  "countryEntrance": {
+    "label": "Fecha de Entrada al Pais"
+  },
+  "completeRegister": {
+    "label": "Completar Registro"
+  },
+  "erroneous": {
+    "label": "erroneo"
+  },
+  "raceColor": {
+    "label": "Raza/Color"
+  },
+  "familyStatus": {
+    "label": "Situacion Familiar/Conyugal"
+  },
+  "cityReq": {
+    "label": "Ciudad"
+  },
+  "neighborhoodReq": {
+    "label": "Barrio"
+  },
+  "streetReq": {
+    "label": "Calle es necesario"
+  },
+  "numberReq": {
+    "label": "Numero"
+  },
+  "userType": {
+    "label": "Tipo de Usuario"
+  },
+  "atLeastOneUpper": {
+    "label": "* Al menos una mayúscula"
+  },
+  "atLeastOneLower": {
+    "label": "* Al menos una minúscula"
+  },
+  "atLeastOneNumber": {
+    "label": "* Al menos un número"
+  },
+  "lengthMinEigthCharsMaxSixTeen": {
+    "label": "* un largo mínimo de 8 carácteres (max. 16)"
+  },
+  "atLeastOneSpecialChar": {
+    "label": "* Al menos un carácter especial"
+  },
+  "password": {
+    "label": "Contraseña"
+  },
+  "confirmPassword": {
+    "label": "Confirmar Contraseña"
+  },
+  "passwordsNotMatch": {
+    "label": "Las contraseñas no coinciden"
+  },
+  "passwordHint": {
+    "label": "Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula, minúscula y un caracter especial."
+  },
+  "upperAndSpecialChar": {
+    "label": "minúscula y un caracter especial."
+  },
+  "userManagmentAccountCreation": {
+    "label": "Gestión de Usuarios / Creacion de Cuenta"
+  },
+  "genPassword": {
+    "label": "Generar Contraseña"
+  },
+  "disableUserHint": {
+    "label": "¿Estas seguro de que deseas deshabilitar a este usuario?"
+  },
+  "cep": {
+    "label": "CEP"
+  },
+  "neightberhood": {
+    "label": "Barrio"
+  },
+  "street": {
+    "label": "Calle"
+  },
+  "numeration": {
+    "label": "Numeración"
+  },
+  "uf": {
+    "label": "UF"
+  },
+  "numerationReq": {
+    "label": "Numeración es necesario"
+  },
+  "passwordGeneration": {
+    "label": "Generación contraseña"
+  },
+  "lengthMinEightChars": {
+    "label": "* un largo mínimo de 8 carácteres"
+  },
+  "academicBio": {
+    "label": "Biografia Academica"
   },
   "teleconsultation": {
     "tabProfessional": {

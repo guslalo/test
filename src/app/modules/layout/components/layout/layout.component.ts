@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-layout',
@@ -58,7 +59,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   constructor(
     public breakpointObserver: BreakpointObserver,
     private bnIdle: BnNgIdleService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translateService: TranslocoService
   ) {
     // 10 MINUTES DEFAULT
     this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
@@ -75,7 +77,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   public state = 'open';
   public inmediateAppointmentPadre: boolean;
-
+  currentLang: string;
   status = false;
 
   ngOnInit(): void {
@@ -89,12 +91,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.inmediateAppointment = false;
     }
 
-    //if( )
-    var updateTime = function () {
+    this.currentLang = this.translateService.getActiveLang();
+
+    // console.log(this.currentLang);
+    setTimeout(() => {
       document.getElementById('current_date').innerHTML =
-        moment().lang('es').format('LL') + ' | ' + moment().lang('es').format('h:mm:ss a');
-    };
-    this.intervalCurrentTime = setInterval(updateTime, 1000);
+        moment().locale(this.currentLang).format('LL') + ' | ' + moment().format('h:mm:ss a');
+    }, 1000);
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
