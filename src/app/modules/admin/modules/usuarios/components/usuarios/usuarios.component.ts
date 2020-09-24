@@ -138,7 +138,7 @@ export class UsuariosComponent implements OnInit {
     this.selected = [];
     this.adminService.getUsers(userType).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         if (Array.isArray(data)) {
           this.temp = [...data.filter((user) => !user.isDeleted).reverse()];
           this.users = data.filter((user) => !user.isDeleted).reverse();
@@ -259,8 +259,7 @@ export class UsuariosComponent implements OnInit {
       })
       // SEARCH FILTER
       .filter((user) => {
-        console.log(user);
-
+        // console.log(user);
         return (
           user.nationalId.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
           user.fullName.toLowerCase().indexOf(searchTerm) !== -1 ||

@@ -259,7 +259,7 @@ export class EditarUsuarioComponent implements OnInit {
         if (user.identificationData.cns) this.identificationData.get('document').setValue('cns');
         if (user.identificationData.rgRegistry) this.identificationData.get('document').setValue('rgRegistry');
         // SECONDARY IDENTIFICATION
-        if (user.identificationData.cbo) this.identificationData.get('extraDocument').setValue('cpf');
+        if (user.identificationData.cbo) this.identificationData.get('extraDocument').setValue('cbo');
         if (user.identificationData.pasep) this.identificationData.get('extraDocument').setValue('pasep');
         if (user.identificationData.ctps) this.identificationData.get('extraDocument').setValue('ctps');
         if (user.identificationData.idDocumentNumber)

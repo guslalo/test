@@ -384,12 +384,6 @@ export class MiDisponibilidadComponent implements OnInit {
     };
     console.log(formObject);
     console.log(formObject.dateDetails.endDate);
-    /*
-    if (formObject.dateDetails.endDate = ""){
-      console.log("date vacio");
-    }else {
-      console.log("con data");
-    }*/
 
     if (formObject) {
       this.availabilityService
