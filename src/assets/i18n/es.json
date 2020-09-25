@@ -3262,39 +3262,39 @@
     "createAccount": {
       "title": "Crear cuenta",
       "label": "A continuación Ingrese sus datos para completar su registro.",
-      "isForeign": "Soy extranjero"
-    },
-    "identificationData": {
-      "label": "Datos de identificación"
-    },
-    "personalData": {
-      "label": "Datos personales"
-    },
-    "majorAge": {
-      "label": "¿Tengo más de 18 años?"
-    },
-    "birthData": {
-      "label": "Datos de nacimiento"
-    },
-    "address": {
-      "label": "Dirección"
-    },
-    "generatePassword": {
-      "title": "Generar clave"
-    },
-    "modal": {
-      "fail": {
-        "title": "¿Tienes más de 18 años?",
-        "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
+      "isForeign": "Soy extranjero",
+      "identificationData": {
+        "label": "Datos de identificación"
       },
-      "termAndConditions": {
-        "title": "Terminos y condiciones",
-        "btnCreate": "Crear cuenta",
-        "btnCancel": "Cancelar"
+      "personalData": {
+        "label": "Datos personales"
+      },
+      "majorAge": {
+        "label": "¿Tengo más de 18 años?"
+      },
+      "birthData": {
+        "label": "Datos de nacimiento"
+      },
+      "address": {
+        "label": "Dirección"
+      },
+      "generatePassword": {
+        "title": "Generar clave"
+      },
+      "modal": {
+        "fail": {
+          "title": "¿Tienes más de 18 años?",
+          "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
+        },
+        "termAndConditions": {
+          "title": "Terminos y condiciones",
+          "btnCreate": "Crear cuenta",
+          "btnCancel": "Cancelar"
+        }
+      },
+      "hint": {
+        "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
       }
-    },
-    "hint": {
-      "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
     },
     "hintDisableUser": {
       "label": "Estas seguro de que deseas deshabilitar a este usuario?"
