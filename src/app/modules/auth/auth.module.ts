@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 // modules
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 // shared
 import { SharedModule } from './../../shared/shared.module';
@@ -54,6 +55,8 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     RouterModule,
     SharedModule,
     TranslocoRootModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

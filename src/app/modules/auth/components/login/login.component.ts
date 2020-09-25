@@ -17,6 +17,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
   public UserLogin: UserLogin;
   formLogin: FormGroup;
 
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.formBuilder.group({
       username: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
+      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }
 
