@@ -223,6 +223,7 @@ export class IndexComponent implements OnInit {
     this.blocks = [];
   }
   atras() {
+    this.blocks = [];
     this.selectSintoma = false;
   }
 
