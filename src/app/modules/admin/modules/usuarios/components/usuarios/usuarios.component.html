@@ -778,17 +778,20 @@
               class="btn custom-btn-1 mx-2"
               (click)="exportAsExcelFile()"
               [disabled]="!selected.length"
+              data-toggle="tooltip"
+              data-placement="top"
+              [title]="'dashboard.home.userManagment.tooltips.downloadXls.label' | transloco"
             >
               <img src="assets/icons/icon-export-excel.svg" />
             </button>
             <button
-              data-toggle="tooltip"
-              data-placement="top"
-              [title]="'userManagment.tooltips.sendInvitation.label' | transloco"
               type="button"
               class="btn custom-btn-1 mx-2"
               (click)="sendInvitationEmail()"
               [disabled]="!selected.length"
+              data-toggle="tooltip"
+              data-placement="top"
+              [title]="'dashboard.home.userManagment.tooltips.sendInvitation.label' | transloco"
             >
               <img src="assets/icons/icon-email.svg" />
             </button>
