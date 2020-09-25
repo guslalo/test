@@ -77,8 +77,8 @@ pipelines:
             AWS_ACCESS_KEY_ID: AKIAT7JGNEGM5C5PE6P5
             AWS_SECRET_ACCESS_KEY: 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
             AWS_DEFAULT_REGION: us-east-1
-            APPLICATION_NAME: TCRegional-FrontEnd-Piloto
-            ENVIRONMENT_NAME: TCRegional-FrontEnd-Piloto-env
+            APPLICATION_NAME: TCRegional-FrontEnd-Piloto1
+            ENVIRONMENT_NAME: TcregionalFrontendPiloto1-env
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: elasticbeanstalk-us-east-1-273347846553
             WAIT: 'true'
