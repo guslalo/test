@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
   selectedPrePatients = [];
 
   pageSize = 20;
-  tab: any = 'pre-patients';
+  tab: any = 'patients';
 
   searchTerm: string = '';
 
@@ -106,22 +106,41 @@ export class IndexComponent implements OnInit {
     const searchTerm = this.searchTerm.toLowerCase();
     var temp = [];
 
-    temp = this.tempPatients
-      // SEARCH FILTER
-      .filter((patient) => {
-        // console.log(patient);
-        return (
-          (patient.identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
-            patient.identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
-            patient.identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
-            patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
-          patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-          patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
-          patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
-          !searchTerm
-        );
-      });
-    this.patients = temp;
+    if (tab === 'patients') {
+      temp = this.tempPatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          // console.log(patient);
+          return (
+            (patient.identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
+              patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
+            patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.patients = temp;
+    }
+
+    if (tab === 'pre-patients') {
+      temp = this.tempPrePatients
+        // SEARCH FILTER
+        .filter((patient) => {
+          // console.log(patient);
+          return (
+            patient.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.secondLastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.email.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+            !searchTerm
+          );
+        });
+      this.prePatients = temp;
+    }
 
     // console.log(temp);
   }

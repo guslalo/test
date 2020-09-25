@@ -48,6 +48,7 @@
                   [columnMode]="ColumnMode.flex"
                   [limit]="pageSize"
                   [selectAllRowsOnPage]="true"
+                  [sorts]="[{ prop: 'personalData.name', dir: 'asc' }]"
                 >
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
                     <ng-template let-row="row" ngx-datatable-cell-template>
@@ -63,6 +64,7 @@
                     [resizeable]="false"
                     [flexGrow]="3"
                     name="{{ 'table.namePatient.label' | transloco }}"
+                    prop="personalData.name"
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <a routerLink="{{ row.userId }}">
@@ -140,6 +142,7 @@
                   [selectionType]="SelectionType.checkbox"
                   [selectAllRowsOnPage]="true"
                   (select)="onSelect($event)"
+                  [sorts]="[{ prop: 'name', dir: 'asc' }]"
                 >
                   <!-- MULTISELECT -->
                   <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
@@ -176,6 +179,7 @@
                     [resizeable]="false"
                     [flexGrow]="3"
                     name="{{ 'table.namePatient.label' | transloco }}"
+                    prop="name"
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <img class="mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
