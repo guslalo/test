@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://tcregionalbackendpiloto1-env.eba-h3bdpsgr.us-east-1.elasticbeanstalk.com/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://b1.medic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'https://jitsi.homeclinic.telemedicina.com', //meet.bdot.app
   apiKey: '',
