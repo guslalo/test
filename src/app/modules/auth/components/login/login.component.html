@@ -157,7 +157,7 @@
               <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg }}</p>
             </div>
             <re-captcha
-            *ngIf="recaptcha === true"
+            *ngIf="production === true && recaptcha === true"
             class="d-inline-block mt-3"
             formControlName="recaptchaReactive"
             (resolved)="resolved($event)"
