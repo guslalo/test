@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserLogin } from '../../../../models/models';
 import { AppointmentsService } from './../../../../services/appointments.service';
+import { environment } from 'src/environments/environment';
 
 // translate
 import { TranslocoService } from '@ngneat/transloco';
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   public currentUser: any = {};
   public errorMsg: string;
   public showPassword: boolean;
+  public recaptcha: boolean;
 
   constructor(
     private translocoService: TranslocoService,
@@ -43,12 +45,24 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.clear();
     this.spinner.hide();
+    if(
+      environment.baseUrl != 'https://backend.homeclinic.telemedicina.com/api/'
+     ){
+      this.recaptcha = false
+      this.formLogin = this.formBuilder.group({
+        username: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required]),
+      });
+     }else{
+       this.recaptcha = true;
+      this.formLogin = this.formBuilder.group({
+        username: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required]),
+        recaptchaReactive: new FormControl(null, Validators.required)
+      })
+     }
 
-    this.formLogin = this.formBuilder.group({
-      username: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
-      recaptchaReactive: new FormControl(null, Validators.required)
-    });
+   
   }
 
   setActiveLang(lang: string) {
