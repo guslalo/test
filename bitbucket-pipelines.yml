@@ -35,7 +35,7 @@ pipelines:
         name: "Build"
         script:
           - npm install
-          - npm run build-dev
+          - npm run build-staging
           - apt-get update && apt-get install -y
           - apt-get install zip
           - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
@@ -54,4 +54,31 @@ pipelines:
             ENVIRONMENT_NAME: "itmsFrontend-dev-env-1"
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+            WAIT: 'true'
+    staging:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-dev
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Staging"
+        deployment: staging
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: AKIAT7JGNEGM5C5PE6P5
+            AWS_SECRET_ACCESS_KEY: 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
+            AWS_DEFAULT_REGION: us-east-1
+            APPLICATION_NAME: TCRegional-FrontEnd-Piloto
+            ENVIRONMENT_NAME: TCRegional-FrontEnd-Piloto-env
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: elasticbeanstalk-us-east-1-273347846553
             WAIT: 'true'
