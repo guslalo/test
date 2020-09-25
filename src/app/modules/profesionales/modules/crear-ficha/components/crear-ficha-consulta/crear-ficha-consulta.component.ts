@@ -334,7 +334,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getAppointmentsTimeline(id) {
-    this.appointmentsService.getAppointmentsTimelineMilestone(id).subscribe(
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
       (data) => {
         this.timeline = data.payload;
         console.log(this.timeline);
