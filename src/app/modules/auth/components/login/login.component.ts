@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   public errorMsg: string;
   public showPassword: boolean;
   public recaptcha: boolean;
+  public errorLogin:number;
+  public production:boolean;
 
   constructor(
     private translocoService: TranslocoService,
@@ -43,27 +45,30 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.errorLogin = 0;
     localStorage.clear();
     this.spinner.hide();
+    console.log(  this.errorLogin );
     console.log( environment.production);
     if(
       environment.production === false
      ){
+      this.production = false;
       this.recaptcha = false
       this.formLogin = this.formBuilder.group({
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       });
      }else{
-       this.recaptcha = true;
-      this.formLogin = this.formBuilder.group({
-        username: new FormControl(null, [Validators.required, Validators.email]),
-        password: new FormControl(null, [Validators.required]),
-        recaptchaReactive: new FormControl(null, Validators.required)
-      })
-     }
-
-   
+       this.production = true;
+       if(this.recaptcha === true){
+        this.formLogin = this.formBuilder.group({
+          username: new FormControl(null, [Validators.required, Validators.email]),
+          password: new FormControl(null, [Validators.required]),
+          recaptchaReactive: new FormControl(null, Validators.required)
+        })
+       }
+    }  
   }
 
   setActiveLang(lang: string) {
@@ -134,6 +139,11 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
       },
       (err) => {
+        this.errorLogin ++
+        if(this.errorLogin > 3){
+          this.recaptcha = true;
+        }
+        console.log(this.errorLogin);
         this.spinner.hide();
         this.errorMsg = err.error.message;
         console.log(err);

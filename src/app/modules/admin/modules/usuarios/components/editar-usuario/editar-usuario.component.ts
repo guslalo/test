@@ -212,8 +212,6 @@ export class EditarUsuarioComponent implements OnInit {
       this.passwordForm
     );
 
-    this.inmigrationDate = this.calendar.getToday();
-
     setTimeout(() => {
       this.validateForm();
       this.spinner.hide();

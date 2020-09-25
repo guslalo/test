@@ -946,6 +946,9 @@
     "confirmAccount": {
       "label": "Conta confirm"
     },
+    "confirmAccountRecordatory": {
+      "label": "Digite o código de verificação de 6 dígitos que foi enviado para o e-mail associado à conta"
+    },
     "verify": {
       "label": "Verifica"
     },
