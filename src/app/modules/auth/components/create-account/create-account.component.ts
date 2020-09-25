@@ -122,15 +122,22 @@ export class CreateAccountComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[A-Z])/),
-          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+          Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
           Validators.pattern(/^(?=.*[0-9])/),
-          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
           Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+            Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
+            Validators.pattern(/^(?=.*[0-9])/),
+            Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
+            Validators.pattern(/^.{8,16}$/),
+          ])
         ),
       },
       {
