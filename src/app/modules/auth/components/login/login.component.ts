@@ -45,8 +45,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.clear();
     this.spinner.hide();
+    console.log( environment.production);
     if(
-      environment.baseUrl != 'https://backend.homeclinic.telemedicina.com/api/'
+      environment.production === false
      ){
       this.recaptcha = false
       this.formLogin = this.formBuilder.group({
