@@ -182,6 +182,7 @@ export class IndexComponent implements OnInit {
   getAppointments() {
     this.appointmentsService.getAllAppointments(1).subscribe(
       (data) => {
+        console.log(data.payload);
         this.tempAppointments = [...data.payload];
         this.appointments = data.payload;
         // console.log(this.appointments);

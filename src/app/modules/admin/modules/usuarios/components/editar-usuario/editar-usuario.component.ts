@@ -125,7 +125,7 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
       lastName: ['', Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)],
       motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
       secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
