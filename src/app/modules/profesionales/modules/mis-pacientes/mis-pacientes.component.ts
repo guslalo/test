@@ -21,10 +21,9 @@ export class MisPacientesComponent implements OnInit {
 
   tab: any = 'pre-patients';
   page = 1;
-  pageSize = 7;
+  pageSize = 20;
   moment: any = moment;
   patientIsEdit: boolean = false;
-  emailSent: boolean = false;
 
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
@@ -34,7 +33,6 @@ export class MisPacientesComponent implements OnInit {
   constructor(
     private patientService: PatientsService,
     private formBuilder: FormBuilder,
-    private currentUserService: CurrentUserService,
     private toastService: ToastrService
   ) {}
 
@@ -137,16 +135,14 @@ export class MisPacientesComponent implements OnInit {
       }
 
       console.log(validUsers);
-
-      this.patientService.sendInvitationEmail(validUsers).subscribe(() => {
-        this.toastService.success('Invitations Sent');
-      });
+      this.patientService.sendInvitationEmail(validUsers).subscribe();
+      this.toastService.success('Invitations Sent', 'Success');
     } else {
       this.selectedPrePatients = [];
       this.selectedPrePatients.push(userId);
-      this.patientService.sendInvitationEmail(this.selectedPrePatients).subscribe(() => {
-        this.toastService.success('Invitation Sent');
-      });
+      this.patientService.sendInvitationEmail(this.selectedPrePatients).subscribe();
+      console.log('sent');
+      this.toastService.success('Invitation Sent', 'Success');
     }
   }
 

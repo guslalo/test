@@ -18,6 +18,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [IndexComponent, FichaPacienteComponent],
@@ -36,6 +38,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     ReactiveFormsModule,
     FormsModule,
     TranslocoRootModule,
+    ToastrModule.forRoot(),
   ],
 })
 export class PacientesModule {}

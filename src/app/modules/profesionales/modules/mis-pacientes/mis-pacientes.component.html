@@ -266,16 +266,6 @@
     <div [ngbNavOutlet]="nav"></div>
   </div>
 
-  <ngb-toast
-    *ngIf="emailSent"
-    class="bg-success text-light"
-    [delay]="5000"
-    [autohide]="true"
-    (hide)="emailSent = false"
-  >
-    <div>{{ 'clinicalFile.emailSedSuccess.label' | transloco }}</div>
-  </ngb-toast>
-
   <!-- PATIENT MODAL -->
   <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">

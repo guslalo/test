@@ -46,7 +46,7 @@
                   footerHeight="auto"
                   rowHeight="70"
                   [columnMode]="ColumnMode.flex"
-                  [limit]="10"
+                  [limit]="pageSize"
                   [selectAllRowsOnPage]="true"
                 >
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
@@ -135,9 +135,43 @@
                   footerHeight="auto"
                   rowHeight="70"
                   [columnMode]="ColumnMode.flex"
-                  [limit]="10"
+                  [limit]="pageSize"
+                  [selected]="selectedPrePatients"
+                  [selectionType]="SelectionType.checkbox"
                   [selectAllRowsOnPage]="true"
+                  (select)="onSelect($event)"
                 >
+                  <!-- MULTISELECT -->
+                  <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
+                    <ng-template
+                      ngx-datatable-header-template
+                      let-value="value"
+                      let-allRowsSelected="allRowsSelected"
+                      let-selectFn="selectFn"
+                    >
+                      <input
+                        class="mb-n2"
+                        [ngStyle]="{ height: '24px' }"
+                        type="checkbox"
+                        [checked]="allRowsSelected"
+                        (change)="selectFn(!allRowsSelected)"
+                      />
+                    </ng-template>
+                    <ng-template
+                      ngx-datatable-cell-template
+                      let-row="row"
+                      let-isSelected="isSelected"
+                      let-onCheckboxChangeFn="onCheckboxChangeFn"
+                    >
+                      <input
+                        class="mb-n2"
+                        [ngStyle]="{ height: '24px' }"
+                        type="checkbox"
+                        [checked]="isSelected"
+                        (change)="onCheckboxChangeFn($event)"
+                      />
+                    </ng-template>
+                  </ngx-datatable-column>
                   <ngx-datatable-column
                     [resizeable]="false"
                     [flexGrow]="3"
@@ -246,6 +280,16 @@
             </ng-template>
           </li>
         </ul>
+      </div>
+      <div class="col-auto">
+        <button
+          type="button"
+          class="btn custom-btn-1 mx-2"
+          (click)="sendInvitationEmail()"
+          [disabled]="!selectedPrePatients.length"
+        >
+          <img src="assets/icons/icon-email.svg" />
+        </button>
       </div>
     </div>
 
