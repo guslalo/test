@@ -221,7 +221,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -400,7 +409,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -584,7 +602,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -811,7 +838,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>

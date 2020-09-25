@@ -2636,6 +2636,12 @@
       },
       "active": {
         "label": "Ativo"
+      },
+      "pending": {
+        "label": "Pendente"
+      },
+      "deactivate": {
+        "label": "Desativado"
       }
     },
     "profile": {
