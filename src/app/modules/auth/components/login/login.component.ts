@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.formLogin = this.formBuilder.group({
       username: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
+      recaptchaReactive: new FormControl(null, Validators.required)
     });
   }
 
