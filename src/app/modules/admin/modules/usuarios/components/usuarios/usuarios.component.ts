@@ -6,6 +6,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $;
 
@@ -33,7 +34,6 @@ export class UsuariosComponent implements OnInit {
   SelectionType = SelectionType;
 
   isEdit: boolean = false;
-  emailSent: boolean = false;
 
   userId: string;
   patientId: string;
@@ -45,7 +45,8 @@ export class UsuariosComponent implements OnInit {
     public adminService: AdminService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-    private el: Renderer2
+    private el: Renderer2,
+    private toastService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -224,15 +225,13 @@ export class UsuariosComponent implements OnInit {
         }
       }
 
-      this.adminService.sendInvitationEmail(validUsers).subscribe(() => {
-        this.emailSent = true;
-      });
+      this.adminService.sendInvitationEmail(validUsers).subscribe();
+      this.toastService.success('Invitations Sent', 'Success');
     } else {
       this.selected = [];
       this.selected.push(this.userId);
-      this.adminService.sendInvitationEmail(this.selected).subscribe(() => {
-        this.emailSent = true;
-      });
+      this.adminService.sendInvitationEmail(this.selected).subscribe();
+      this.toastService.success('Invitation Sent', 'Success');
     }
   }
 
