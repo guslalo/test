@@ -430,6 +430,9 @@
     "edit": {
       "label": "Editar"
     },
+    "deactivate": {
+      "label": "Desativar"
+    },
     "callEnded": {
       "label": "teleconsulta concluída"
     },
@@ -2486,6 +2489,11 @@
     }
   },
   "common": {
+    "user": {
+      "sessionExpired": {
+        "label": "Sessão expirada"
+      }
+    },
     "input": {
       "email": {
         "label": "Insira seu e-mail"

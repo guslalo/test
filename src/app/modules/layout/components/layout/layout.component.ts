@@ -54,7 +54,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   intervalCurrentTime: any;
   public inmediateAppointment: boolean;
- // public firstAccess:boolean;
+  // public firstAccess:boolean;
 
   constructor(
     public breakpointObserver: BreakpointObserver,
@@ -62,11 +62,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private translateService: TranslocoService
   ) {
-    // 10 MINUTES DEFAULT
+    // 20 MINUTES DEFAULT
     this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
       if (res) {
         console.log('session expired');
-        this.toastr.info('Session Expired');
+        this.toastr.info(this.translateService.translate('common.user.sessionExpired.label'));
 
         setTimeout(() => {
           document.location.href = '/';
