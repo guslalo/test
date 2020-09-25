@@ -160,6 +160,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   //update appointmentDetails
   putNotes(appointmentId) {
+  
     console.log(this.notes.controls.notes.value);
     let appointmentObject = {
       appointmentDetails: {

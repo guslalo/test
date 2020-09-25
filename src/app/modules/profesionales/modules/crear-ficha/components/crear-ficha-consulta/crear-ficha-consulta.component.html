@@ -1039,6 +1039,7 @@
                           class="btn btn-link p-0"
                           [disabled]="!permisoGuardar"
                           data-toggle="modal"
+                          (click)="this.notes.reset()"
                           data-target="#ingresarNota"
                         >
                           <p class="text-right">
