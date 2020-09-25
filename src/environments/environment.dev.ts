@@ -4,7 +4,7 @@ export const environment = {
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
-  sessionTime: 600,
+  sessionTime: 1200,
   apiKey: '',
   clientSecret: '',
   firebase: {
