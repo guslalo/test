@@ -411,7 +411,7 @@
             type="button"
             class="btn btn-primary rounded-pill"
             (click)="crearAvailability()"
-            [disabled]="!createAvailability.valid"
+            [disabled]="!createAvailability.valid && !this.daysSelected.length"
             data-dismiss="modal"
           >
             {{ 'disponibility.modal.create.btnCreate.label' | transloco }}
