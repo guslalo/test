@@ -4,10 +4,6 @@
   </div>
 </div>
 
-<ngb-toast *ngIf="emailSent" class="bg-success text-light" [delay]="5000" [autohide]="true" (hide)="emailSent = false">
-  <div>{{ 'clinicalFile.emailSedSuccess.label' | transloco }}</div>
-</ngb-toast>
-
 <div class="row">
   <div class="col-12">
     <!-- TABS -->
@@ -159,7 +155,7 @@
           <div class="col-12 mb-4">
             <div class="tableBox rounded p-4 bg-white">
               <ngx-datatable
-                *ngIf="users.length"
+                *ngIf="users.length; else noUsers"
                 #table
                 class="material"
                 [rows]="users"
@@ -168,45 +164,15 @@
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
                 [limit]="pageSize"
-                [selected]="selected"
-                [selectionType]="SelectionType.checkbox"
-                [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)"
               >
-                <!-- MULTISELECT -->
-                <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template
-                    ngx-datatable-header-template
-                    let-value="value"
-                    let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn"
-                  >
-                    <input
-                      class="mb-n2 px-0"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)"
-                    />
-                  </ng-template>
-                  <ng-template
-                    ngx-datatable-cell-template
-                    let-row="row"
-                    let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn"
-                  >
-                    <input
-                      class="mb-n2"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)"
-                    />
-                  </ng-template>
-                </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="nationalId" name="ID">
                 </ngx-datatable-column>
-                <ngx-datatable-column [resizeable]="false" [flexGrow]="3" [name]="'table.name.label' | transloco">
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  [name]="'table.name.label' | transloco"
+                  prop="fullName"
+                >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <a>
                       <img
@@ -251,7 +217,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -377,42 +352,7 @@
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
                 [limit]="pageSize"
-                [selected]="selected"
-                [selectionType]="SelectionType.checkbox"
-                [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)"
               >
-                <!-- MULTISELECT -->
-                <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template
-                    ngx-datatable-header-template
-                    let-value="value"
-                    let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn"
-                  >
-                    <input
-                      class="mb-n2"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)"
-                    />
-                  </ng-template>
-                  <ng-template
-                    ngx-datatable-cell-template
-                    let-row="row"
-                    let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn"
-                  >
-                    <input
-                      class="mb-n2"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)"
-                    />
-                  </ng-template>
-                </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
                 </ngx-datatable-column>
                 <ngx-datatable-column
@@ -465,7 +405,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -596,42 +545,7 @@
                 rowHeight="70"
                 [columnMode]="ColumnMode.flex"
                 [limit]="pageSize"
-                [selected]="selected"
-                [selectionType]="SelectionType.checkbox"
-                [selectAllRowsOnPage]="true"
-                (select)="onSelect($event)"
               >
-                <!-- MULTISELECT -->
-                <ngx-datatable-column [width]="30" [sortable]="false" [draggable]="false" [resizeable]="false">
-                  <ng-template
-                    ngx-datatable-header-template
-                    let-value="value"
-                    let-allRowsSelected="allRowsSelected"
-                    let-selectFn="selectFn"
-                  >
-                    <input
-                      class="mb-n2"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="allRowsSelected"
-                      (change)="selectFn(!allRowsSelected)"
-                    />
-                  </ng-template>
-                  <ng-template
-                    ngx-datatable-cell-template
-                    let-row="row"
-                    let-isSelected="isSelected"
-                    let-onCheckboxChangeFn="onCheckboxChangeFn"
-                  >
-                    <input
-                      class="mb-n2"
-                      [ngStyle]="{ height: '24px' }"
-                      type="checkbox"
-                      [checked]="isSelected"
-                      (change)="onCheckboxChangeFn($event)"
-                    />
-                  </ng-template>
-                </ngx-datatable-column>
                 <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="nationalId" name="ID">
                 </ngx-datatable-column>
                 <ngx-datatable-column
@@ -684,7 +598,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
@@ -911,7 +834,16 @@
                         'btn-light ': row.status === 'Deshabilitado'
                       }"
                     >
-                      {{ row.status }}
+                      {{
+                        (row.status === 'Activo'
+                          ? 'common.status.active.label'
+                          : row.status === 'Pendiente'
+                          ? 'common.status.pending.label'
+                          : row.status === 'Deshabilitado'
+                          ? 'common.status.deactivate.label'
+                          : 'S/R'
+                        ) | transloco
+                      }}
                     </button>
                   </ng-template>
                 </ngx-datatable-column>
