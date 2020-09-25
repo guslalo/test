@@ -206,9 +206,6 @@ export class CrearUsuarioComponent implements OnInit {
       this.passwordForm
     );
 
-    this.birthDate = this.maxDate;
-    this.inmigrationDate = this.calendar.getToday();
-
     setTimeout(() => {
       this.validateForm();
       this.spinner.hide();
