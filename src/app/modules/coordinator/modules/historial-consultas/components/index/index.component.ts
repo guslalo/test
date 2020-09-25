@@ -238,8 +238,9 @@ export class IndexComponent implements OnInit {
             item.patientDetails.userDetails[0].identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
           item.patientDetails.userDetails[0]?.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
           item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-          moment(item.dateDetails.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
-          item.dateDetails.start.toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.professionalDetails.userDetails[0]?.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+          moment(item.dateDetails?.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.dateDetails?.start?.toLowerCase().indexOf(searchTerm) !== -1 ||
           !searchTerm
         );
       })

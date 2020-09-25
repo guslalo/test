@@ -2123,6 +2123,9 @@
     "time": {
       "label": "Hora agendada"
     },
+    "horary": {
+      "label": "Cronograma"
+    },
     "objetive": {
       "label": "Objetivo"
     },
