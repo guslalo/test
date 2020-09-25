@@ -26,6 +26,7 @@ export class IndexComponent implements OnInit {
   dateAdapter = new CustomDateAdapter();
   moment: any = moment;
   ColumnMode = ColumnMode;
+  searchTerm: string = '';
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -80,6 +81,7 @@ export class IndexComponent implements OnInit {
   public disponibilidad: any;
   public disponibilidadObject = {};
   public disponibilidadArray = [];
+  public disponibilidadArrayTemp = [];
   public especialidad: any;
   public diasBloqueados: any;
   public createAvailability: FormGroup;
@@ -233,6 +235,7 @@ export class IndexComponent implements OnInit {
       (data) => {
         // console.log(data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
+        this.disponibilidadArrayTemp = [...availabilities];
         this.disponibilidadArray = availabilities;
       },
       (error) => {
@@ -519,5 +522,32 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  applyFilters() {
+    const searchTerm = this.searchTerm.toLowerCase();
+    var temp = [];
+
+    temp = this.disponibilidadArrayTemp
+      // SEARCH FILTER
+      .filter((disp) => {
+        // console.log(disp);
+        return (
+          disp.dateDetails.startDate.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.endDate.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.dailyRanges[0].start.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.dailyRanges[0].end.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.administrativeDetails.objective.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          this.AllSpecialtyMap[disp.professionalDetails?.specialtyId]?.specialtyName
+            .toString()
+            .toLowerCase()
+            .indexOf(searchTerm) !== -1 ||
+          disp.professionalName[0].personalData.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.professionalName[0].personalData.lastName.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+    this.disponibilidadArray = temp;
+    // console.log(temp);
   }
 }

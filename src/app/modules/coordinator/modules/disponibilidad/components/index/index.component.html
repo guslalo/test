@@ -30,12 +30,21 @@
       </button>
     </div>
   </div>
-  <div class="row mt-3">
+  <div class="row mt-2">
     <div class="col-12">
       <!--consultas activas-->
-      <div class="row mt-1">
-        <div class="col-12">
-          <h5 style="display: none;">{{ 'clinicalFile.acriveServices.label' | transloco }}</h5>
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <input
+            [(ngModel)]="searchTerm"
+            type="text"
+            class="form-control"
+            placeholder="{{ 'common.placeholder.search.label' | transloco }}"
+            (keyup)="applyFilters()"
+          />
+          <div class="searchBox">
+            <img src="assets/icons/icon-search.svg" />
+          </div>
         </div>
         <div class="col-12 mb-4">
           <div class="tableBox rounded p-4 bg-white">
@@ -48,19 +57,36 @@
               rowHeight="70"
               [columnMode]="ColumnMode.flex"
               [limit]="10"
+              [sorts]="[{ prop: 'dateDetails.startDate', dir: 'desc' }]"
             >
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" [name]="'table.days.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                [name]="'table.days.label' | transloco"
+                [sortable]="false"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span [ngStyle]="{ 'word-break': 'break-all' }">{{ row.dateDetails.days }}</span>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.date.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                prop="dateDetails.startDate"
+                [name]="'table.horary.label' | transloco"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ row.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }} -
                   {{ row.dateDetails.endDate | date: 'dd/MM/yyyy':'+0000' }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.time.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                prop="dateDetails.dailyRanges[0].start"
+                [name]="'table.time.label' | transloco"
+                [sortable]="false"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <div style="width: 100px;">
                     <ng-container *ngIf="row.dateDetails.dailyRanges.length > 1; else oneElement">
@@ -81,17 +107,32 @@
                 [name]="'table.objetive.label' | transloco"
               >
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.specialty.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                prop="professionalDetails.specialtyId"
+                [name]="'table.specialty.label' | transloco"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ AllSpecialtyMap[row.professionalDetails?.specialtyId]?.specialtyName }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.doctor.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                [name]="'table.doctor.label' | transloco"
+                [sortable]="false"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ row.professionalName[0].personalData.name + ' ' + row.professionalName[0].personalData.lastName }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.time.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                [name]="'table.status.label' | transloco"
+                [sortable]="false"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <div class="custom-control custom-switch">
                     <input
@@ -105,7 +146,12 @@
                   </div>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.state.label' | transloco">
+              <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="1"
+                [name]="'table.action.label' | transloco"
+                [sortable]="false"
+              >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <div ngbDropdown container="body">
                     <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>

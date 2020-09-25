@@ -120,6 +120,7 @@ export class IndexComponent implements OnInit {
   }
 
   onChangeTypeProfesional(id) {
+    this.blocks = [];
     this.flujoProfesional = false;
     console.log(id);
     this.getSpecialtiesIdService(id);
@@ -143,6 +144,7 @@ export class IndexComponent implements OnInit {
   }
 
   onChangeTypeSpecialtiesId(value) {
+    this.blocks = [];
     console.log(value);
     this.bloquearFecha = false;
     /*
@@ -297,6 +299,7 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
+    this.blocks = [];
     this.flujoProfesional = true;
     this.bloquearFecha = false;
     // console.log(professional.userData[0]._id);
@@ -390,6 +393,12 @@ export class IndexComponent implements OnInit {
             this.sinProfesionales = true;
           } else {
             this.blocks = data.payload;
+            let arrayFechas = []
+            for(let item of this.blocks){
+              arrayFechas.push(Date.parse(item));
+            }
+            console.log(arrayFechas);
+
             this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
             console.log(this.specialtiesIdReserve);
             localStorage.removeItem('reserva');

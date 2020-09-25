@@ -76,131 +76,249 @@
       <div class="col-12">
         <div class="tab-content pt-4" id="myTabContent">
           <!--tab-->
-          <div class="tab-pane fade active show" id="child1" role="tabpanel" aria-labelledby="home-tab2">
+          <div class="tab-pane fade show active" id="child1" role="tabpanel" aria-labelledby="home-tab2">
             <div class="tableBox p-4 bg-white mt-3">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="row">
-                      {{ 'videoChat.modalEnd.patient.label' | transloco }}
-                    </th>
-                    <th>{{ 'clinicalFile.patientData.tabs.identification.info.phone.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
-                    <th>{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
-                    <th>
-                      {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="consultas">
-                  <ng-container *ngIf="consultas && consultas.length === 0; else data">
-                    <div class="alert alert-warning mt-2" role="alert">
-                      {{ 'common.noInfo.label' | transloco }}
+              <ngx-datatable
+                *ngIf="consultas?.length; else noData"
+                class="material"
+                [rows]="consultas"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="10"
+              >
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  [name]="'table.patient.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="row.patientDetails.userDetails[0].photo" class="boxImg2 rounded-circle d-inline-block">
+                      <img src="{{ photoUrlBase }}{{ row.patientDetails.userDetails[0].photo }}" />
                     </div>
-                  </ng-container>
-                  <ng-template #data>
-                    <tr *ngFor="let item of consultas" id="{{ item._id }}">
-                      <th scope="row">
-                        <div
-                          *ngIf="item.patientDetails.userDetails[0].photo"
-                          class="boxImg2 rounded-circle d-inline-block"
-                        >
-                          <img src="{{ photoUrlBase }}{{ item.patientDetails.userDetails[0].photo }}" />
-                        </div>
-                        <p class="p-0 mt-2 ml-2 d-inline-block align-top">
-                          {{ item.patientDetails.userDetails[0].personalData.name }}
-                          {{ item.patientDetails.userDetails[0].personalData.lastName }}
-                        </p>
-                      </th>
-                      <td>{{ item.patientDetails.userDetails[0].personalData.phoneNumber }}</td>
-                      <td>{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}</td>
-                      <td>{{ item.dateDetails.start }} hrs.</td>
-                      <td>
-                        {{ item.professionalDetails.userDetails[0].name }}
-                        {{ item.professionalDetails.userDetails[0].lastName }}
-                      </td>
-                      <td>{{ 'table.objetive.label' | transloco }}</td>
-                      <td>
-                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{ item.administrativeDetails.status }}
-                        </button>
-                      </td>
-                      <td>
-                        ...
-                      </td>
-                    </tr>
+                    <p class="p-0 mt-2 ml-2 d-inline-block align-top">
+                      {{ row.patientDetails.userDetails[0].personalData.name }}
+                      {{ row.patientDetails.userDetails[0].personalData.lastName }}
+                    </p>
                   </ng-template>
-                </tbody>
-              </table>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.phone.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.patientDetails.userDetails[0].personalData.phoneNumber }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.date.label' | transloco"
+                  prop="dateDetails.date"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.time.label' | transloco"
+                  prop="dateDetails.start"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.dateDetails.start }} hrs.
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.doctor.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.professionalDetails.userDetails[0].name }}
+                    {{ row.professionalDetails.userDetails[0].lastName }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.objetive.label' | transloco"
+                  [sortable]="false"
+                >
+                  Objetive
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.status.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                      {{
+                        (row.administrativeDetails.status === 'reserved'
+                          ? 'clinicalFile.reserved.label'
+                          : row.administrativeDetails.status === 'appointed'
+                          ? 'clinicalFile.scheduled.label'
+                          : row.administrativeDetails.status === 'rescheduled'
+                          ? 'clinicalFile.reScheduled.label'
+                          : row.administrativeDetails.status === 'active'
+                          ? 'clinicalFile.active.label'
+                          : row.administrativeDetails.status === 'waitingInRoom'
+                          ? 'clinicalFile.inWaitingRoom.label'
+                          : row.administrativeDetails.status === 'waitingInList'
+                          ? 'clinicalFile.inWaitingList.label'
+                          : row.administrativeDetails.status === 'running'
+                          ? 'common.status.inProgress.label'
+                          : row.administrativeDetails.status === 'pending'
+                          ? 'clinicalFile.pending.label'
+                          : row.administrativeDetails.status === 'canceled'
+                          ? 'clinicalFile.canceled.label'
+                          : null
+                        ) | transloco
+                      }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.action.label' | transloco"
+                  [sortable]="false"
+                >
+                </ngx-datatable-column>
+              </ngx-datatable>
+              <ng-template #noData>
+                <h5 class="text-center text-primary">No existen coincidencias</h5>
+              </ng-template>
             </div>
           </div>
           <!--/tab-->
           <!--tab-->
           <div class="tab-pane fade" id="child2" role="tabpanel" aria-labelledby="home-tab2">
             <div class="tableBox p-4 bg-white mt-3">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="row">
-                      {{ 'videoChat.modalEnd.patient.label' | transloco }}
-                    </th>
-                    <th>{{ 'clinicalFile.patientData.tabs.identification.info.phone.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.services.table.date.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.services.table.hour.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</th>
-                    <th>{{ 'disponibility.modal.create.objetive.label' | transloco }}</th>
-                    <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
-                    <th>
-                      {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      <a routerLink="../mis-pacientes/ficha-paciente">
-                        <img src="assets/img/doctor-foto.svg" /> Antonia Miranda Torres
-                      </a>
-                    </th>
-                    <td>475859434</td>
-                    <td>22/93/2020</td>
-                    <td>12:14 Hrs.</td>
-                    <td>Antonio rojas</td>
-                    <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
-                    <td>
-                      <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{ 'common.status.inProgress.label' | transloco }}
-                      </button>
-                    </td>
-                    <td>
-                      ...
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a routerLink="../mis-pacientes/ficha-paciente">
-                        <img src="assets/img/doctor-foto.svg" /> Antonia Miranda Torres
-                      </a>
-                    </th>
-                    <td>475859434</td>
-                    <td>22/93/2020</td>
-                    <td>12:14 Hrs.</td>
-                    <td>Antonio rojas</td>
-                    <td>{{ 'disponibility.modal.create.objetive.label' | transloco }}</td>
-                    <td>
-                      <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{ 'common.status.inProgress.label' | transloco }}
-                      </button>
-                    </td>
-                    <td>
-                      ...
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <ngx-datatable
+                *ngIf="consultasListaDeEspera?.length; else noData"
+                class="material"
+                [rows]="consultasListaDeEspera"
+                headerHeight="auto"
+                footerHeight="auto"
+                rowHeight="70"
+                [columnMode]="ColumnMode.flex"
+                [limit]="10"
+              >
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="2"
+                  [name]="'table.patient.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="row.patientDetails.userDetails[0].photo" class="boxImg2 rounded-circle d-inline-block">
+                      <img src="{{ photoUrlBase }}{{ row.patientDetails.userDetails[0].photo }}" />
+                    </div>
+                    <p class="p-0 mt-2 ml-2 d-inline-block align-top">
+                      {{ row.patientDetails.userDetails[0].personalData.name }}
+                      {{ row.patientDetails.userDetails[0].personalData.lastName }}
+                    </p>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.time.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ moment(row.dateDetails.createdAt).format('HH:mm') }} hrs
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'waitingRoom.table.time.label' | transloco"
+                  prop="dateDetails.start"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    00 min.
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'waitingRoom.name.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>{{ row.administrativeDetails.waitingRoomDetails[0]?.name }}</a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.doctor.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <ng-template *ngIf="row.professionalDetails.userDetails.length; else noProfessional">
+                      {{ row.professionalDetails.userDetails[0]?.name }}
+                      {{ row.professionalDetails.userDetails[0]?.lastName }}
+                    </ng-template>
+                    <ng-template #noProfessional>
+                      {{ 'common.noInfo.label' | transloco }}
+                    </ng-template>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.status.label' | transloco"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                      {{
+                        (row.administrativeDetails.status === 'reserved'
+                          ? 'clinicalFile.reserved.label'
+                          : row.administrativeDetails.status === 'appointed'
+                          ? 'clinicalFile.scheduled.label'
+                          : row.administrativeDetails.status === 'rescheduled'
+                          ? 'clinicalFile.reScheduled.label'
+                          : row.administrativeDetails.status === 'active'
+                          ? 'clinicalFile.active.label'
+                          : row.administrativeDetails.status === 'waitingInRoom'
+                          ? 'clinicalFile.inWaitingRoom.label'
+                          : row.administrativeDetails.status === 'waitingInList'
+                          ? 'clinicalFile.inWaitingList.label'
+                          : row.administrativeDetails.status === 'running'
+                          ? 'common.status.inProgress.label'
+                          : row.administrativeDetails.status === 'pending'
+                          ? 'clinicalFile.pending.label'
+                          : row.administrativeDetails.status === 'canceled'
+                          ? 'clinicalFile.canceled.label'
+                          : null
+                        ) | transloco
+                      }}
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  [resizeable]="false"
+                  [flexGrow]="1"
+                  [name]="'table.action.label' | transloco"
+                  [sortable]="false"
+                >
+                </ngx-datatable-column>
+              </ngx-datatable>
+              <ng-template #noData>
+                <h5 class="text-center text-primary">No existen coincidencias</h5>
+              </ng-template>
             </div>
           </div>
           <!--/tab-->

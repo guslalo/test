@@ -27,9 +27,7 @@ export class AppointmentsService {
   private sibrareStatus = 'v1/appointments/sibrare/status';
   private sibrareStatusVerifiedSibrareDocuments = 'v1/appointments/sibrare/documents';
   private sibrareDocumentUrl = 'v1/appointments/sibrare/document-url';
-  private professionalData = 'v1/appointments/professional/'
-
- 
+  private professionalData = 'v1/appointments/professional/';
 
   constructor(private http: HttpClient) {}
 
@@ -55,6 +53,10 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('page', number);
     return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
+  }
+
+  getAllAppointmentsWaitinRooms(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/immediate/`);
   }
 
   getTotalPages(): Observable<any> {
@@ -123,18 +125,13 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
   }
 
-
-   //get Appointment professional data
-   /*  appointmentId=5f6abc83e8e27b05dd94a518
+  //get Appointment professional data
+  /*  appointmentId=5f6abc83e8e27b05dd94a518
    getProfessionalData(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
     return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
   }*/
-
-
-
-
 
   //events
   postRunAppointment(id): Observable<any> {
