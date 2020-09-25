@@ -8,6 +8,7 @@ import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 declare var $: any;
 
@@ -46,6 +47,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public urlSibrare: any;
   public videoCall:boolean;
   public descargar:boolean
+  public photoUrlBase = environment.photoUrlBase;
 
   constructor(
     private route: ActivatedRoute,
