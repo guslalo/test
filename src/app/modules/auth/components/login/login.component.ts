@@ -61,11 +61,14 @@ export class LoginComponent implements OnInit {
       });
      }else{
        this.production = true;
+       this.formLogin = this.formBuilder.group({
+        username: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required]),
+      })
        if(this.recaptcha === true){
         this.formLogin = this.formBuilder.group({
           username: new FormControl(null, [Validators.required, Validators.email]),
-          password: new FormControl(null, [Validators.required]),
-          recaptchaReactive: new FormControl(null, Validators.required)
+          password: new FormControl(null, [Validators.required])
         })
        }
     }  
