@@ -48,29 +48,19 @@ export class LoginComponent implements OnInit {
     this.errorLogin = 0;
     localStorage.clear();
     this.spinner.hide();
-    console.log(  this.errorLogin );
-    console.log( environment.production);
-    if(
-      environment.production === false
-     ){
+    if( environment.production === false ){
       this.production = false;
       this.recaptcha = false
       this.formLogin = this.formBuilder.group({
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       });
-     }else{
+     } else {
        this.production = true;
        this.formLogin = this.formBuilder.group({
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       })
-       if(this.recaptcha === true){
-        this.formLogin = this.formBuilder.group({
-          username: new FormControl(null, [Validators.required, Validators.email]),
-          password: new FormControl(null, [Validators.required])
-        })
-       }
     }  
   }
 
@@ -145,6 +135,13 @@ export class LoginComponent implements OnInit {
         this.errorLogin ++
         if(this.errorLogin > 3){
           this.recaptcha = true;
+          if(this.recaptcha === true){
+              this.formLogin = this.formBuilder.group({
+                username: new FormControl(null, [Validators.required, Validators.email]),
+                password: new FormControl(null, [Validators.required]),
+                recaptchaReactive: new FormControl(null, [Validators.required]),    
+            })
+          }
         }
         console.log(this.errorLogin);
         this.spinner.hide();
