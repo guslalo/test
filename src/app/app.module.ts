@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // modules
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 // routing
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { NgbCustomDateParserFormatter } from './shared/ngb-datepicker-formatter';
 
 const toastrConfig = {
   closeButton: true,
@@ -68,6 +69,11 @@ const toastrConfig = {
     MessagingService,
     AsyncPipe,
     FileUtilsService,
+    // DATEPICKER FORMATTER
+    {
+      provide: NgbDateParserFormatter,
+      useValue: new NgbCustomDateParserFormatter('DD/MM/YYYY'),
+    },
     // INTERCEPTOR TOASTR
     {
       provide: HTTP_INTERCEPTORS,

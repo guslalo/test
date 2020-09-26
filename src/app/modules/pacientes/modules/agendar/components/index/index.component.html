@@ -18,9 +18,7 @@
         <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation" 
-          (click)="refreshSearchSpecialty()"
-          >
+          <li class="nav-item" role="presentation" (click)="refreshSearchSpecialty()">
             <a
               class="nav-link active"
               id="home-tab4"
@@ -60,7 +58,6 @@
                   (click)="bloquearFecha = true"
                   (change)="onChangeTypeProfesional($event.target.value)"
                   id="searchProfessionalInput2"
-             
                 >
                   <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
                   <ng-container *ngFor="let item of medicalSpecialties">
@@ -80,7 +77,6 @@
                   [disabled]="bloquearSelect"
                   [disabled]="bloquearSelect3"
                   id="selectSpecialtiesId"
-                 
                 >
                   <!--{{item.medicalSpecialtyId}}-->
                   <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
@@ -136,7 +132,7 @@
               class="form-control"
               id="birthdate"
               [minDate]="minDate"
-              placeholder="yyyy-mm-dd"
+              placeholder="DD/MM/YYYY"
               name="birthdate"
               [(ngModel)]="model"
               ngbDatepicker
