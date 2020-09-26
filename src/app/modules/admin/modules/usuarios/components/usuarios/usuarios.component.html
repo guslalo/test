@@ -280,6 +280,16 @@
                         >
                           {{ 'common.activate.label' | transloco }}
                         </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
+                        </button>
                       </div>
                     </div>
                   </ng-template>
@@ -467,6 +477,16 @@
                           (click)="changeUserStatus(row.id, 'activate', 'professionals')"
                         >
                           {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
                         </button>
                       </div>
                     </div>
@@ -660,6 +680,16 @@
                           (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
                         >
                           {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
                         </button>
                       </div>
                     </div>
