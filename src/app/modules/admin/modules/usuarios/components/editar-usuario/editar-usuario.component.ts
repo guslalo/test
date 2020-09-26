@@ -572,7 +572,7 @@ export class EditarUsuarioComponent implements OnInit {
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate),
+        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',
