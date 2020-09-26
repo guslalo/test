@@ -18,7 +18,9 @@
         <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation" (click)="refreshSearch()">
+          <li class="nav-item" role="presentation" 
+          (click)="refreshSearchSpecialty()"
+          >
             <a
               class="nav-link active"
               id="home-tab4"
@@ -57,14 +59,17 @@
                   (click)="bloquearSelect = true"
                   (click)="bloquearFecha = true"
                   (change)="onChangeTypeProfesional($event.target.value)"
+                  id="searchProfessionalInput2"
+             
                 >
-                  <option selected>Selecciona</option>
+                  <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
                   <ng-container *ngFor="let item of medicalSpecialties">
-                    <option value="{{ item._id }}" (click)="refreshSearch()">{{ item.name }}</option>
+                    <option value="{{ item._id }}">{{ item.name }}</option>
                   </ng-container>
                 </select>
               </div>
 
+              <!--sub especialidad-->
               <div class="form-group">
                 <label class="font-weight-bold text-left w-100">{{
                   'dashboard.home.newService.type.specialty.label' | transloco
@@ -73,9 +78,12 @@
                   class="form-control custom-select"
                   (change)="onChangeTypeSpecialtiesId($event.target.value)"
                   [disabled]="bloquearSelect"
+                  [disabled]="bloquearSelect3"
+                  id="selectSpecialtiesId"
+                 
                 >
                   <!--{{item.medicalSpecialtyId}}-->
-                  <option selected>{{ 'common.select.label' | transloco }}</option>
+                  <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
                   <ng-container *ngFor="let item of specialtiesId">
                     <option value="{{ item._id }}">{{ item.specialtyName }} </option>
                   </ng-container>
@@ -85,13 +93,14 @@
           </div>
 
           <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
-            <div class="form-group">
+            <div class="form-group boxbusqueda">
               <label class="font-weight-bold text-left w-100">{{
                 'clinicalFile.patientData.tabs.doctor.label' | transloco
               }}</label>
               <input
                 *ngIf="professionals"
                 type="text"
+                id="searchProfessionalInput"
                 class="form-control"
                 placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                 [matAutocomplete]="auto"
