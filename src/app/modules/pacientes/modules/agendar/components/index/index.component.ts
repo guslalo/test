@@ -17,6 +17,7 @@ import { SafePipe } from './../../../../../../shared/pipes/sanitizer.pipe';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { analytics } from 'firebase';
 
 declare var $: any;
 
@@ -49,6 +50,7 @@ export class IndexComponent implements OnInit {
   public urlPago: any;
   public urlConfirmacion: any;
   public estadoPagado: boolean = false;
+  selectMedicalSpecialties:FormControl;
 
   imageError: string;
   isImageSaved: boolean;
@@ -56,11 +58,13 @@ export class IndexComponent implements OnInit {
   public sinProfesionales: boolean;
 
   public bloquearSelect = true;
+  public bloquearSelect3 = true;
   public bloquearFecha = true;
   public trustedUrl: SafeResourceUrl;
   private interval: any;
 
   professionalSelected = new FormControl();
+  selecEspecialdad:any
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -120,6 +124,7 @@ export class IndexComponent implements OnInit {
   }
 
   onChangeTypeProfesional(id) {
+
     this.blocks = [];
     this.flujoProfesional = false;
     console.log(id);
@@ -144,9 +149,13 @@ export class IndexComponent implements OnInit {
   }
 
   onChangeTypeSpecialtiesId(value) {
+    this.selecEspecialdad = ''
     this.blocks = [];
     console.log(value);
     this.bloquearFecha = false;
+    this.bloquearSelect3 = false;
+    this.bloquearSelect = false;
+
     /*
     this.reserve = new reserve(
       this.reserve.professionalDetails = value,
@@ -219,9 +228,30 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-  refreshSearch() {
+  refreshSearch(){
+    console.log('refresshear')
+    /*$("#birthdate").val("");
+    
+    $("#birthdate").prop("placeholder", "yyyy-mm-dd");*/
+    //$("#birthdate").$('.input').removeAttr('value')
+    $('#birthdate').removeAttr('value')
+    //this.professionalSelected = null
+    $('#searchProfessionalInput').val('')
+    $('#searchProfessionalInput2  option[value="none"]').prop("selected", "selected");
     this.blocks = [];
   }
+
+  refreshSearchSpecialty(){
+   /* $("#birthdate").val("");
+    $("#birthdate").attr("placeholder", "yyyy-mm-dd");*/
+    $('#searchProfessionalInput  option[value="none"]').prop("selected", "selected");
+    $('#selectSpecialtiesId  option[value="none"]').prop("selected", "selected");
+    
+    this.bloquearSelect3 = true;
+    this.bloquearFecha = true;
+    this.blocks = [];
+  }
+
   atras() {
     this.blocks = [];
     this.selectSintoma = false;
@@ -394,11 +424,11 @@ export class IndexComponent implements OnInit {
             this.sinProfesionales = true;
           } else {
             this.blocks = data.payload;
-            let arrayFechas = []
+            /*let arrayFechas = []
             for(let item of this.blocks){
               arrayFechas.push(Date.parse(item));
             }
-            console.log(arrayFechas);
+            console.log(arrayFechas);*/
 
             this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
             console.log(this.specialtiesIdReserve);
