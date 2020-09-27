@@ -71,7 +71,6 @@ export class IndexComponent implements OnInit {
       month: month,
     };
 
-    //console.log(currentMonth);
   }
 
   getSession(id) {
