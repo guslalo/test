@@ -543,8 +543,8 @@ export class MiDisponibilidadComponent implements OnInit {
               {
                 type: 'active',
                 title: `${item.administrativeDetails?.objective}: ${item.professionalDetails.specialtyDetails[0].specialtyName}`,
-                start: `${moment.utc(item.date).format('YYYY/MM/DD')}T${item.dailyRange[0].start}`,
-                end: `${moment.utc(item.date).format('YYYY/MM/DD')}T${item.dailyRange[0].end}`,
+                start: `${moment.utc(item.date).format('DD/MM/YYYY')}T${item.dailyRange[0].start}`,
+                end: `${moment.utc(item.date).format('DD/MM/YYYY')}T${item.dailyRange[0].end}`,
                 color: '#6fc1f1',
               }
             );
@@ -558,15 +558,15 @@ export class MiDisponibilidadComponent implements OnInit {
             events.push({
               type: 'blocked',
               title: this.translocoService.translate('disponibility.tabs.calendar.blockedDay.label'),
-              start: `${moment.utc(block.dateDetails.date).format('YYYY/MM/DD')}T${block.dateDetails.range.start}`,
-              end: `${moment.utc(block.dateDetails.date).format('YYYY/MM/DD')}T${block.dateDetails.range.end}`,
+              start: `${moment.utc(block.dateDetails.date).format('DD/MM/YYYY')}T${block.dateDetails.range.start}`,
+              end: `${moment.utc(block.dateDetails.date).format('DD/MM/YYYY')}T${block.dateDetails.range.end}`,
               color: '#ff5971',
             });
           } else {
             events.push({
               type: 'blocked',
               title: this.translocoService.translate('disponibility.tabs.calendar.blockedTime.label'),
-              date: moment.utc(block.dateDetails.date).format('YYYY/MM/DD'),
+              date: moment.utc(block.dateDetails.date).format('DD/MM/YYYY'),
               color: '#ff5971',
             });
           }
