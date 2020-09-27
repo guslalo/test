@@ -62,7 +62,6 @@
                 <th scope="col">
                   {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
                 </th>
-                <th scope="col">{{ 'common.status.active.label' | transloco }}</th>
                 <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
               </tr>
             </thead>
@@ -97,18 +96,6 @@
                       <b>{{ 'tabs.users.label' | transloco }}</b> {{ 'common.associated.label' | transloco }}</span
                     >
                   </ng-template>
-                </td>
-                <td>
-                  <div class="custom-control custom-switch mb-4">
-                    <input
-                      disabled
-                      [(ngModel)]="profile.isActive"
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="userPoliciesCreate"
-                    />
-                    <label class="custom-control-label" for="userPoliciesCreate"></label>
-                  </div>
                 </td>
                 <td>
                   <div class="btn-group">

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
-import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
 declare var $: any;
@@ -12,7 +11,7 @@ declare var $: any;
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent implements OnInit {
+export class TeleconsultaComponent implements OnInit {
   public appointmentDetail: any;
   public access_token: any;
   public downloadUrl: any;
@@ -37,9 +36,8 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = params.appointmentId;
       console.log(params);
-      this.getAppointmentsDetails(params.appointmentId);
+      this.getAppointmentsDetails(params.id);
     });
 
     this.user = new UserLogin(
@@ -71,6 +69,7 @@ export class IndexComponent implements OnInit {
       month: month,
     };
 
+    //console.log(currentMonth);
   }
 
   getSession(id) {
