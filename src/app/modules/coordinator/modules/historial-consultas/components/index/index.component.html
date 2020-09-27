@@ -117,7 +117,7 @@
             />
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID Paciente">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID Paciente" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{
               row.patientDetails.userDetails[0]?.identificationData.cpf ||
@@ -127,7 +127,7 @@
             }}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Nombre Paciente">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Nombre Paciente" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <img
               *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
@@ -145,7 +145,7 @@
             {{ row.patientDetails.userDetails[0]?.personalData.secondLastName }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha" prop="dateDetails.date">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <div *ngIf="row.dateDetails.date">
               {{ row.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
@@ -155,7 +155,7 @@
             </div>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Hora">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Hora" prop="dateDetails.start">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <div *ngIf="row.dateDetails.date">{{ row.dateDetails.start }} hrs.</div>
             <div *ngIf="row.dateDetails.createdAt">{{ moment(row.dateDetails.createdAt).format('HH:mm') }} hrs.</div>
@@ -171,13 +171,13 @@
             </ng-template>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Profesional">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Profesional" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{ row.professionalDetails.userDetails[0]?.name || 'S/R' }}
             {{ row.professionalDetails.userDetails[0]?.lastName }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado" prop="administrativeDetails.status">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <button
               *ngIf="row.administrativeDetails.status !== 'created'; else invalidStatus"
@@ -212,10 +212,10 @@
             <ng-template #invalidStatus>{{ 'common.notAll.label' | transloco }}</ng-template>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Accion">
+        <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Accion" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <ng-container *ngIf="row.administrativeDetails.status === 'finished'">
-              <a routerLink="/ficha-consulta/{{ row._id }}">
+              <a routerLink="{{ row._id }}">
                 <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                   {{ 'clinicalFile.viewMedCard.label' | transloco }}
                 </button>
@@ -229,7 +229,7 @@
                 row.administrativeDetails.status === 'pending'
               "
             >
-              <a routerLink="/ficha-consulta/{{ row._id }}">
+              <a routerLink="{{ row._id }}">
                 <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                   {{ 'clinicalFile.attend.label' | transloco }}
                 </button>
