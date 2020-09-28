@@ -24,6 +24,7 @@ export class InicioComponent implements OnInit {
   public appointment:boolean;
   public page: number = 1;
   public totalPages: number;
+  public idCancel:any;
 
   constructor(
     public currentUserService: CurrentUserService,
@@ -112,11 +113,25 @@ export class InicioComponent implements OnInit {
     this.appointmentsService.postCancelarAppointment(id).subscribe(
       data => {
         console.log(data);
+        this.appointmentsService.getAppointments(1).subscribe(
+          (data) => {
+            console.log(data);
+            this.consultas = data.payload;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+     
       },
       error => {
         console.log(error)
       }
     )
+  }
+
+  idForCancel(id){
+    this.idCancel = id;
   }
 
   
