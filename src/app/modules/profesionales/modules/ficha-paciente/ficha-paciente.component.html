@@ -132,7 +132,7 @@
           <div class="row">
             <!--bg-white rounded-lg-->
             <div class="col-12">
-              <div class="alert alert-primary" role="alert">
+              <div class="alert alert-primary d-none" role="alert">
                 Los datos de este paciente están al 30%, envíale un correo recordatorio para que complete sus datos
                 <button class="btn btn-outline-secondary btn-sm rounded-pill">
                   {{ 'clinicalFile.sendRemainder.label' | transloco }}
@@ -154,13 +154,15 @@
                 <ul class="paciente pl-0">
                   <li>
                     <i class="b">Sexo</i>
+                    {{ patientRecord.personalData?.gender}}<!---->
+                    <!--
                     {{
                       patientRecord.personalData?.gender === 'male'
                         ? 'clinicalFile.male.label'
                         : patientRecord.personalData?.gender === 'female'
                         ? 'clinicalFile.female.label'
                         : ('S/R' | transloco)
-                    }}
+                    }}-->
                   </li>
                   <li>
                     <i class="b">Edad</i>
@@ -186,7 +188,7 @@
             <div class="col-8">
               <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
                 <h4 class="title mb-3">
-                  {{ 'account.createAccount.birthData.title' | transloco }}
+                  {{ 'account.createAccount.birthData.label' | transloco }}
                 </h4>
                 <ul class="datos">
                   <li>
@@ -228,7 +230,7 @@
                     {{ cityMap[patientRecord.addressData?.city]?.name || 'S/R' }}
                   </li>
                   <li>
-                    <i>{{ 'account.createAccount.address.title' | transloco }}</i>
+                    <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
                       patientRecord.addressData?.neighborhood +
                         ', ' +
