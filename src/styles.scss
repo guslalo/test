@@ -769,16 +769,45 @@ table {
   }
   &.primary {
     background: $color-primary;
-
-    * {
-      color: #ffffff !important;
+    table {
+      p {
+        color: #ffffff;
+      }
+      svg {
+        cursor: pointer;
+        color: #ffffff;
+      }
     }
-  }
-  table {
     tbody {
       tr {
         &:hover {
           background-color: none !important;
+        }
+        td{
+          color: #ffffff;
+        }
+      }
+    }
+    /** {
+      color: #ffffff !important;
+    }*/
+  }
+  table {
+    /*
+    p {
+      color: #ffffff;
+    }
+    svg {
+      cursor: pointer;
+      color: #ffffff;
+    }*/
+    tbody {
+      tr {
+        &:hover {
+          background-color: none !important;
+        }
+        td{
+          //color: #ffffff;
         }
       }
     }
@@ -1042,4 +1071,8 @@ ngb-timepicker .ngb-tp-hour {
       height: 250px !important;
     }
   }
+}
+
+.disabled {
+  opacity: 0.2;
 }

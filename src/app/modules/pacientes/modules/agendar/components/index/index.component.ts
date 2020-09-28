@@ -62,6 +62,10 @@ export class IndexComponent implements OnInit {
   public bloquearFecha = true;
   public trustedUrl: SafeResourceUrl;
   private interval: any;
+  public reagendar:boolean;
+  public appointmentId:string;
+  public objectDate:any;
+  public appointmentRescheduled:any;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -80,6 +84,20 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //condicion para flujo reagendar
+    this.route.params.subscribe((params) => {
+      const id = params.appointmentId;
+      this.appointmentId = id;
+      console.log(id);
+      if(id == undefined || id == ''){
+        this.reagendar = false;
+        console.log('reagendar', this.reagendar);
+      }else{
+        this.reagendar = true;
+        console.log('reagendar', this.reagendar);
+      }
+    });
+
     const current = new Date();
     this.textInputFile = 'Seleccione Archivo';
     this.minDate = {
@@ -118,13 +136,11 @@ export class IndexComponent implements OnInit {
       id: deviceValue.value,
       text: deviceValue.selectedOptions[0].innerText,
     };
-    //console.log(selectedSintoma);
     this.sintomaSelected.push(selectedSintoma);
-    console.log(this.consolidate); /**/
+    console.log(this.consolidate);
   }
 
   onChangeTypeProfesional(id) {
-
     this.blocks = [];
     this.flujoProfesional = false;
     console.log(id);
@@ -136,7 +152,6 @@ export class IndexComponent implements OnInit {
   }
 
   private display(user): string {
-    //access component "this" here
     return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
@@ -155,12 +170,6 @@ export class IndexComponent implements OnInit {
     this.bloquearFecha = false;
     this.bloquearSelect3 = false;
     this.bloquearSelect = false;
-
-    /*
-    this.reserve = new reserve(
-      this.reserve.professionalDetails = value,
-      null
-    )*/
     this.reserve = {
       professionalDetails: {
         userId: null,
@@ -178,7 +187,6 @@ export class IndexComponent implements OnInit {
         start: null,
       },
     };
-
     console.log(this.reserve);
   }
 
@@ -186,7 +194,6 @@ export class IndexComponent implements OnInit {
     this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.postConsolidateService(this.consolidate);
-    //$('#exampleModal').modal();
   }
 
   opcionSeleccionado: any;
@@ -200,7 +207,45 @@ export class IndexComponent implements OnInit {
   }
   selectSintoma = false;
 
+  //selecionar bloque listado
   blockSelected(item, item2) {
+    if(this.reagendar === true) {
+      console.log(item, item2)
+     item.date = new Date(); 
+
+      let object = {
+        professionalDetails: {
+          specialtyId: item.professionalDetails.specialtyId,
+           userId: item.professionalDetails.userId
+        },
+        dateDetails: {
+          date:{
+            day: this.objectDate.day,
+            month:this.objectDate.month,
+            year: this.objectDate.year
+          },
+          start: item2
+       }
+      }
+      console.log(object);
+      
+      this.appointmentsService.postReschedule(this.appointmentId, object).subscribe(
+        data => {
+          console.log(data);
+          $('#reagendado').modal('show', function(){
+            this.getAppointmentDetail(this.appointmentId);
+          });
+
+          /*
+          $('#reagendado').on('show.bs.modal', function (e) {
+         
+          });*/
+         },
+        error => { 
+          console.log(error)
+        }
+      )/**/
+    } else {
     console.log(item);
     //console.log( item.professionalDetails.specialtyDetails[0].price);
     this.selectSintoma = true;
@@ -215,38 +260,42 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
         console.log(data);
-        this.consolidate = {
-          id: data.payload.id,
-          patientDetails: {
-            symptoms: [],
-            description: null,
-          },
-        };
+          this.consolidate = {
+            id: data.payload.id,
+            patientDetails: {
+              symptoms: [],
+              description: null,
+            },
+          };
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }  
+  }
+
+  getAppointmentDetail(id){
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      data => {
+        console.log(data)
+        this.appointmentRescheduled = data.payload;
       },
-      (error) => {
-        console.log(error);
+      error => {
+        console.log(error)
       }
-    );
+    )
   }
   refreshSearch(){
-    console.log('refresshear')
-    /*$("#birthdate").val("");
-    
-    $("#birthdate").prop("placeholder", "yyyy-mm-dd");*/
-    //$("#birthdate").$('.input').removeAttr('value')
     $('#birthdate').removeAttr('value')
-    //this.professionalSelected = null
     $('#searchProfessionalInput').val('')
     $('#searchProfessionalInput2  option[value="none"]').prop("selected", "selected");
     this.blocks = [];
   }
 
   refreshSearchSpecialty(){
-   /* $("#birthdate").val("");
-    $("#birthdate").attr("placeholder", "yyyy-mm-dd");*/
     $('#searchProfessionalInput  option[value="none"]').prop("selected", "selected");
-    $('#selectSpecialtiesId  option[value="none"]').prop("selected", "selected");
-    
+    $('#selectSpecialtiesId  option[value="none"]').prop("selected", "selected");   
     this.bloquearSelect3 = true;
     this.bloquearFecha = true;
     this.blocks = [];
@@ -333,7 +382,7 @@ export class IndexComponent implements OnInit {
     this.blocks = [];
     this.flujoProfesional = true;
     this.bloquearFecha = false;
-    // console.log(professional.userData[0]._id);
+    //console.log(professional.userData[0]._id);
     this.reserve = {
       professionalDetails: {
         userId: professional.userData[0]?._id,
@@ -352,7 +401,6 @@ export class IndexComponent implements OnInit {
       },
     };
     console.log(this.reserve);
-    //this.reserve.professionalDetails.specialtyId = event;
   }
 
   getProfessionalService() {
@@ -375,8 +423,6 @@ export class IndexComponent implements OnInit {
 
   eliminaSintoma(item) {
     this.removeElement(item);
-    //let elemento = document.getElementById('5f5800f825152591e20ac381').outerHTML = "";
-
     console.log(this.consolidate);
     this.symptomsService.deleteSymptoms(this.consolidate.id, item).subscribe(
       (data) => {
@@ -389,6 +435,11 @@ export class IndexComponent implements OnInit {
   }
 
   getPostBlocks(date) {
+    this.objectDate = {
+      month: date.month,
+      year: date.year,
+      day: date.day,
+    }
     if (this.flujoProfesional === true) {
       const object = {
         month: date.month,
@@ -414,7 +465,6 @@ export class IndexComponent implements OnInit {
         },
       };
 
-      //.reserve.dateDetails.date = object;
       console.log(this.reserve);
       console.log('flujo profesional');
       this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
@@ -424,19 +474,11 @@ export class IndexComponent implements OnInit {
             this.sinProfesionales = true;
           } else {
             this.blocks = data.payload;
-            /*let arrayFechas = []
-            for(let item of this.blocks){
-              arrayFechas.push(Date.parse(item));
-            }
-            console.log(arrayFechas);*/
-
             this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
             console.log(this.specialtiesIdReserve);
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
-            //console.log(data.internalCode);
-            /**/
             this.sinProfesionales = false;
           }
         },
@@ -455,11 +497,10 @@ export class IndexComponent implements OnInit {
       this.reserve.dateDetails.date = object;
       console.log(this.reserve.professionalDetails.specialtyId);
       console.log(object);
-      //.getServicesBlocks(object, this.reserve.professionalDetails.specialtyId)
       this.agendarService
         .postBlocks(
           object,
-          this.reserve.professionalDetails.specialtyId //
+          this.reserve.professionalDetails.specialtyId
         )
         .subscribe(
           (data) => {
@@ -467,7 +508,6 @@ export class IndexComponent implements OnInit {
             localStorage.removeItem('reserva');
             localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
-            // console.log(data.internalCode);
             if (data.internalCode === 103) {
               this.sinProfesionales = true;
             } else {
@@ -479,7 +519,7 @@ export class IndexComponent implements OnInit {
           }
         );
     }
-    /* */
+
   }
 
   //trae lso bloques

@@ -28,6 +28,7 @@ export class AppointmentsService {
   private sibrareStatusVerifiedSibrareDocuments = 'v1/appointments/sibrare/documents';
   private sibrareDocumentUrl = 'v1/appointments/sibrare/document-url';
   private professionalData = 'v1/appointments/professional/';
+  private cancel = 'v1/appointments/cancel'
 
   constructor(private http: HttpClient) {}
 
@@ -125,13 +126,22 @@ export class AppointmentsService {
     return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
   }
 
-  //get Appointment professional data
-  /*  appointmentId=5f6abc83e8e27b05dd94a518
-   getProfessionalData(id): Observable<any> {
+  //reagendar 
+  postReschedule(id, object): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
-    return this.http.get<any>(environment.baseUrl + this.appointments + '/professional/', { params: params });
-  }*/
+    return this.http.post<any>(environment.baseUrl + this.appointments + '/reschedule', object, { params: params });
+  }
+
+  //reagendar 
+  postCancelarAppointment(id): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.cancel, { }, { params: params });
+  }
+
+
+  
 
   //events
   postRunAppointment(id): Observable<any> {

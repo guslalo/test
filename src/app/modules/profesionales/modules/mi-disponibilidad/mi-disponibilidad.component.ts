@@ -4,7 +4,6 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
-//import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
 import { AvailabilityService } from '../../services/availability.service';

@@ -489,4 +489,39 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="reagendado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title d-none" id="exampleModalLabel">{{ 'clinicalFile.payService.label' | transloco }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2>Su consulta ha sido reagendada</h2>
+        <div *ngIf="appointmentRescheduled">
+          Profesional: Dr: 
+          {{appointmentRescheduled.professionalDetails.userDetails.name}} 
+          {{appointmentRescheduled.professionalDetails.userDetails.lastName}}
+          Fecha: {{appointmentRescheduled.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}
+          Hora: {{appointmentRescheduled.dateDetails.start}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="estadoPagado"
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          routerLink="{{ urlConfirmacion }}"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff"> </ngx-spinner>

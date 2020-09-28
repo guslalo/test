@@ -394,6 +394,9 @@
     "ended": {
       "label": "finalizados"
     },
+    "reschedule": {
+      "label": "Reagendar"
+    },
     "canceled": {
       "label": "Cancelado"
     },
@@ -2523,6 +2526,9 @@
       },
       "addNew": {
         "label": "Adicionar novo"
+      },
+      "reschedule": {
+        "label": "Reagendar"
       },
       "cancel": {
         "label": "Cancelar"
