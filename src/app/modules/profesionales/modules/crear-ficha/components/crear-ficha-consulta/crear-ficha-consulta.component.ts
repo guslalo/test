@@ -23,6 +23,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public downloadUrl: any;
   public user: any;
   public userId: any;
+  public category: any;
   public timeline: any;
   public fecha: any;
   public professionalData: any;
@@ -48,6 +49,17 @@ export class CrearFichaConsultaComponent implements OnInit {
   public videoCall:boolean;
   public descargar:boolean
   public photoUrlBase = environment.photoUrlBase;
+  public elemntoId: string;
+  public elemntoValue: string;
+  public antecedente: string;
+  sicknessIsCollapsed: boolean = true;
+  familiarHistoryIsCollapsed: boolean = true;
+  healthHabitsIsCollapsed: boolean = true;
+  medicinesIsCollapsed: boolean = true;
+  occupationalIsCollapsed: boolean = true;
+  othersIsCollapsed: boolean = true;
+  public addValidator: boolean;
+  public modelAntecedente: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -459,4 +471,74 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
+
+  //antecedentes//
+
+  categoryChangue(category?) {
+    this.addValidator = false;
+    console.log(category);
+    this.modelAntecedente = '';
+    //console.log(category);
+    this.category = category;
+    //return category
+  }
+
+  /*
+  hasAntecedents(antecedent, boolean) {
+    this.medicalRecordService(antecedent, boolean).subscribe(
+      (data) => {
+        this.medicalRecordService.getByUserId().subscribe((data) => {
+          this.exams = data.payload.exams;
+          this.antecedentes = data.payload.antecedent;
+        });
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }*/
+  
+  add(category){
+    console.log(this.modelAntecedente);
+    this.putAddAntecedent(category, this.modelAntecedente);
+  }
+  
+  putAddAntecedent(antecedent, object){
+    this.medicalRecord.putAddAntecedent(antecedent, object).subscribe(
+      data => {
+        console.log(data);
+        this.category = '';
+        //this.getMedicalRecord();
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+  
+  delete() {
+    this.medicalRecord.deleteAntecedent(this.antecedente, this.elemntoId).subscribe(
+      (data) => {
+        console.log(data);
+        //this.getMedicalRecord();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  //  //borrar antecedente
+  preDelete(item, event) {
+    let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(antecedent);
+    this.antecedente = antecedent;
+    this.elemntoId = item.id;
+    this.elemntoValue = item.value;
+  }
+
+
+
 }

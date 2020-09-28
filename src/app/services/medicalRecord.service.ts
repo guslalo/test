@@ -47,6 +47,13 @@ export class MedicalRecordService {
     return this.http.put<any>(environment.baseUrl + this.antecedent + antecedent, { value });
   }
 
+  //putAddAntecedent
+  postAddAntecedent(antecedent, value): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('antecedent', antecedent);
+    return this.http.post<any>(environment.baseUrl + this.antecedent + antecedent, { value });
+  }
+
   //deleteAntecedent
   deleteAntecedent(antecedent, id): Observable<any> {
     return this.http.delete<any>(environment.baseUrl + this.antecedent + antecedent + '/' + id);
