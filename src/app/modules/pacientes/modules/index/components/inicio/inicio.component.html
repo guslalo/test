@@ -148,8 +148,11 @@
                           >
                           {{ 'common.button.reschedule.label' | transloco }}
                           </button>
-                          <button class="dropdown-item" type="button"
-                           (click)="cancelarCita(nextAppointed[0]._id)">
+                          <button 
+                          (click)="idForCancel(nextAppointed[0]._id )" 
+                          data-toggle="modal"
+                          data-target="#cancelarCitaModal"
+                          class="dropdown-item" type="button">
                             {{ 'common.button.cancel.label' | transloco }}
                           </button>
                         </div>
@@ -334,7 +337,10 @@
                             item.administrativeDetails.status === 'waitingInList' ||
                             item.administrativeDetails.status === 'waitingInRoom'
                             "
-                            (click)="cancelarCita(item._id)"
+                            (click)="idForCancel(item._id)" 
+                            data-toggle="modal"
+                            data-target="#cancelarCitaModal"
+                            
                             >
                               {{ 'common.button.cancel.label' | transloco }}
                             </button>
@@ -478,4 +484,50 @@
     </div><!--tips home-->
   </div>
   <div class="col-12 col-md-4"></div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="cancelarCitaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+         <!--{{ 'dashboard.home.myHealth.modal.deleteItem.title' | transloco }}?--> 
+         ¿Esta seguro en cancelar esta consulta?
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate="">
+          <!--[formGroup]="availabilityBlocked" -->
+          <div class="row">
+            <div class="form-group col text-center">
+              <p>Considera que posiblemente perderas la consulta con este profesional</p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">
+          Volver
+          <!--{{ 'common.button.cancel.label' | transloco }}-->
+        </button>
+        <button type="button" 
+        class="btn btn-danger rounded-pill" 
+        data-dismiss="modal"  
+        (click)="cancelarCita(idCancel)"><!-- (click)="delete()"-->
+          {{ 'common.button.delete.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
