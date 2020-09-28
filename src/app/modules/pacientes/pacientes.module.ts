@@ -1,36 +1,28 @@
+//angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// import { PacientesComponent } from './pacientes/pacientes.component';
-
+//routing
 import { PacientesRoutingModule } from '../pacientes/pacientes-routing.module';
 
-import { ConsultaComponent } from './consulta/consulta.component';
-import { Consulta2Component } from './consulta2/consulta2.component';
-
-import { PublisherComponent } from './publisher/publisher.component';
-import { SubscriberComponent } from './subscriber/subscriber.component';
-import { OpentokService } from '../../services/opentok.service';
-
-import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
-import { MisConsultasFilterComponent } from './mis-consultas-filter/mis-consultas-filter.component';
-import { AgendarComponent } from './components/modals/agendar/agendar.component';
+//modules
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 
-//ConsultaComponent,
+//components
+import { ConsultaComponent } from './consulta/consulta.component';
+import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
+import { AgendarComponent } from './components/modals/agendar/agendar.component';
+
 @NgModule({
   declarations: [
-    PublisherComponent,
-    SubscriberComponent,
-    Consulta2Component,
     CambiarClaveComponent,
-    MisConsultasFilterComponent,
     AgendarComponent,
-    ConsultaComponent,
+    ConsultaComponent
   ],
   imports: [CommonModule, PacientesRoutingModule, SharedModule, TranslocoRootModule],
   exports: [AgendarComponent],
-  providers: [OpentokService],
+  providers: []
 })
+
 export class PacientesModule {}

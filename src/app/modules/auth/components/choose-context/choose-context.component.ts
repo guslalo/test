@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../services/authentication.service';
   templateUrl: './choose-context.component.html',
   styleUrls: ['../login/login.component.scss'],
 })
+
 export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};
@@ -57,7 +58,6 @@ export class ChooseContextComponent implements OnInit {
       }
     });
 
-
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -75,7 +75,7 @@ export class ChooseContextComponent implements OnInit {
 
     localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(this.user));
-    console.log(this.user);
+    //console.log(this.user);
 
     switch (profile.role) {
       case 'admin':

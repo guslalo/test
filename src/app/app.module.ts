@@ -6,10 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // modules
 import { NgbDateParserFormatter, NgbDatepickerI18n, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
+
 // routing
 import { AppRoutingModule } from './app-routing.module';
-
 import { RouterModule } from '@angular/router';
+
 import { LayoutModule } from './modules/layout/layout.module';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -22,16 +23,17 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireDatabase, FirebaseObjectObservable } from '@angular/fire/database-deprecated';
-
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
+
 import { AsyncPipe } from '@angular/common';
 import { environment } from './../environments/environment';
+
 import { FileUtilsService } from './services/file-utils.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpToastrInterceptor } from './interceptors/http-toastr.interceptor';
+
 import { ToastrModule } from 'ngx-toastr';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { CustomDatepickerI18n, NgbCustomDateParserFormatter } from './shared/ngb-datepicker-formatter';

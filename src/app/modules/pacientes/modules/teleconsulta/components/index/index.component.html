@@ -5,8 +5,13 @@
       <p>{{ 'calendar.serviceRoom.label' | transloco }}</p>
     </div>
     <div class="col-3 col-md-3">
-      <button class="btn btn-outline-primary rounded-pill d-none">
-        Cerrar Teleconsulta
+      <button 
+      *ngIf="
+      appointmentDetail.administrativeDetails.status !== 'active' || 
+      appointmentDetail.administrativeDetails.status !== 'running' || 
+      appointmentDetail.administrativeDetails.status !== 'finished' "
+      class="btn btn-outline-primary rounded-pill" >
+        {{ 'common.button.cancel.label' | transloco }} consulta
       </button>
       <a href="javascript:history.back()" class="back float-right align-top">
         <svg

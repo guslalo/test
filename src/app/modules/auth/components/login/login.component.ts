@@ -1,12 +1,19 @@
+//angular
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
-// import { CurrentUserService } from '../../../../services/current-user.service'
-import { UsersService } from '../../services/users.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { UserLogin } from '../../../../models/models';
-import { AppointmentsService } from './../../../../services/appointments.service';
+
+//environment
 import { environment } from 'src/environments/environment';
+
+//services
+import { AuthenticationService } from '../../services/authentication.service';
+import { UsersService } from '../../services/users.service';
+import { AppointmentsService } from './../../../../services/appointments.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+// import { CurrentUserService } from '../../../../services/current-user.service'
+
+//models
+import { UserLogin } from '../../../../models/models';
 
 // translate
 import { TranslocoService } from '@ngneat/transloco';
@@ -21,9 +28,9 @@ export class LoginComponent implements OnInit {
   public resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
-  public UserLogin: UserLogin;
-  formLogin: FormGroup;
 
+  public UserLogin: UserLogin;
+  public formLogin: FormGroup;
   public user: any = {};
   public users: any = [];
   public currentUser: any = {};
@@ -73,7 +80,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this.authenticationService.loginUser(this.user.username, this.user.password).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         localStorage.setItem('token', JSON.stringify(data.access_token));
         this.currentUser = new UserLogin(
           data.id,
@@ -102,7 +109,6 @@ export class LoginComponent implements OnInit {
             }
             break;
           case 'coordinator':
-            // MULTIPROFILE
             if (data.internalCode === 6) {
               this.router.navigate(['context']);
             } else {
