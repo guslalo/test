@@ -494,28 +494,30 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title d-none" id="exampleModalLabel">{{ 'clinicalFile.payService.label' | transloco }}</h5>
+        <h5 class="modal-title text-center w-100" id="exampleModalLabel">
+          Su consulta ha sido reagendada
+          <!--
+          {{ 'clinicalFile.payService.label' | transloco }}-->
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <h2>Su consulta ha sido reagendada</h2>
-        <div *ngIf="appointmentRescheduled">
-          Profesional: Dr: 
-          {{appointmentRescheduled.professionalDetails.userDetails.name}} 
-          {{appointmentRescheduled.professionalDetails.userDetails.lastName}}
-          Fecha: {{appointmentRescheduled.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}
-          Hora: {{appointmentRescheduled.dateDetails.start}}
+      <div class="modal-body ">
+        <div *ngIf="appointmentRescheduledObject" class="text-center">
+         <p>Profesional: Dr: 
+          {{appointmentRescheduledObject.professionalDetails.userDetails[0].name}} 
+          {{appointmentRescheduledObject.professionalDetails.userDetails[0].lastName}}</p> 
+
+          <p> Fecha: {{appointmentRescheduledObject.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}</p>
+         <p>  Hora: {{appointmentRescheduledObject.dateDetails.start}}</p>
         </div>
       </div>
       <div class="modal-footer">
         <button
-          *ngIf="estadoPagado"
           type="button"
           class="btn btn-secondary"
           data-dismiss="modal"
-          routerLink="{{ urlConfirmacion }}"
         >
           Cerrar
         </button>
