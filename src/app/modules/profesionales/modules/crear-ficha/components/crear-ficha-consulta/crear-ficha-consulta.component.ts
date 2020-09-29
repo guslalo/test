@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -18,6 +18,7 @@ declare var $: any;
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
 export class CrearFichaConsultaComponent implements OnInit {
+  public idConsulta:any;
   public appointmentDetail: any;
   public access_token: any;
   public downloadUrl: any;
@@ -138,6 +139,11 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.notes = this._formBuilder.group({
       notes: [''],
     });
+  }
+
+  enviarId(id){
+    console.log(id)
+    this.idConsulta = id;
   }
 
   //update appointmentDetails
