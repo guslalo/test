@@ -208,10 +208,14 @@
                       {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
+                  <!--apellido-->
                   <div class="col-12 col-md-6">
-                    <label for="lastName">{{
+                    <label for="lastName">
+                      <!--{{
                       'common.forms.user.identification.firstSurname.label' | transloco
-                    }}</label>
+                    }}-->
+                      {{ 'common.forms.user.identification.secondSurname.label' | transloco }} *
+                    </label>
                     <input
                       type="text"
                       name="lastName"
@@ -231,10 +235,13 @@
                 <!--/row-->
                 <!--row-->
                 <div class="form-row">
+                  <!--segundo apellido-->
                   <div class="form-group col-12 col-md-4">
-                    <label for="motherName"
-                      >{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *</label
-                    >
+                    <label for="motherName">
+                      {{
+                        'common.forms.user.identification.firstSurname.label' | transloco
+                      }}
+                      <!--{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *--></label>
                     <input
                       type="text"
                       name="secondLastName"

@@ -288,6 +288,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
+            this.fetchCalendar();
           },
           (error) => {
             console.log(error);
