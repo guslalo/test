@@ -124,7 +124,7 @@ export class MiSaludComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    ); /**/
+    );
   }
 
   putAddAntecedent(antecedent, object) {
