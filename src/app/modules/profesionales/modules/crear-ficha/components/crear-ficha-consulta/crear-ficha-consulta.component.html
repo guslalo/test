@@ -68,13 +68,19 @@
                     </svg>
                   </div>
                   <div class="text-center boxThumb rounded">
+                    <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
+                      <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                    </ng-container>
+                    <ng-template #noPhoto>
+                      <img src="asset/img/profile.png" />
+                    </ng-template>
                     <!--<ng-container *ngIf="fotoUser; else sinFoto">
                         <img src="{{fotoUser}}">
                       </ng-container>
                       <ng-template #sinFoto>
                         <img src="assets/img/thumb.jpg">
                       </ng-template>     <img src="assets/img/thumb.jpg" /> -->
-                      <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                   
                    
                   </div>
                 </ng-container>
