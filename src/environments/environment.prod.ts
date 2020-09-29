@@ -5,7 +5,7 @@ export const environment = {
   jitsi: 'https://jitsi.homeclinic.telemedicina.com', //meet.bdot.app
   apiKey: '',
   clientSecret: '',
-  photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
+  photoUrlBase: 'https://itms-prod.s3-sa-east-1.amazonaws.com/',
   sessionTime: 1200,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
