@@ -66,6 +66,7 @@ export class IndexComponent implements OnInit {
   public appointmentId:string;
   public objectDate:any;
   public appointmentRescheduled:any;
+  public appointmentRescheduledObject:any;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -232,6 +233,7 @@ export class IndexComponent implements OnInit {
       this.appointmentsService.postReschedule(this.appointmentId, object).subscribe(
         data => {
           console.log(data);
+          this.appointmentRescheduledObject = data.payload
           $('#reagendado').modal('show', function(){
             this.getAppointmentDetail(this.appointmentId);
           });
@@ -467,6 +469,7 @@ export class IndexComponent implements OnInit {
 
       console.log(this.reserve);
       console.log('flujo profesional');
+      this.blocks = [];
       this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
         (data) => {
           // console.log(data);

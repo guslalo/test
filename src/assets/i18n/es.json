@@ -2528,7 +2528,9 @@
         "label": "Agregar Nuevo"
       },
       "reschedule": {
-        "label": "Reagendar"
+        "title":"¿Está seguro en cancelar la consulta?",
+        "label": "Reagendar",
+        "warning":"Considera que posiblemente perderás la consulta con este profesional"
       },
       "cancel": {
         "label": "Cancelar"
@@ -2574,6 +2576,9 @@
       },
       "next": {
         "label": "Siguiente"
+      },
+      "volver": {
+        "label": "Volver"
       },
       "create": {
         "label": "Crear"
