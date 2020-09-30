@@ -179,14 +179,14 @@
                     <div class="row">
                       <div class="col-2 text-center">
                         <div class="text-center boxImg rounded">
-                          <img src="assets/img/profile.png" />
-                          <!--
-                          <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                            <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                          <!-- <img src="assets/img/profile.png" />-->
+                         
+                          <ng-container *ngIf="item.professionalDetails.userDetails[0].photo; else noPhoto">
+                            <img src="{{ item.professionalDetails.userDetails[0].photo }}" />
                           </ng-container>
                           <ng-template #noPhoto>
                             <img src="assets/img/profile.png" />
-                          </ng-template>-->
+                          </ng-template>
                          
                         </div>
                       </div>
@@ -282,7 +282,7 @@
                       <label for="validationTooltip01" class="text-left w-100">{{
                         'clinicalFile.selectSymptoms.label' | transloco
                       }}</label>
-                      <select class="form-control custom-select w-100" (change)="onChange($event.target)">
+                      <select id="selectSintomaId" class="form-control custom-select w-100" (change)="onChange($event.target)">
                         <option selected disabled>Seleccione síntoma</option>
                         <ng-container *ngFor="let item of symptoms">
                           <option value="{{ item._id }}">{{ item.name }}</option>

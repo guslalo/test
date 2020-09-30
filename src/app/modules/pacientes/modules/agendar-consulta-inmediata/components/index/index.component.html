@@ -42,7 +42,7 @@
                     <label for="validationTooltip01" class="text-left w-100">{{
                       'clinicalFile.selectSymptoms.label' | transloco
                     }}</label>
-                    <select class="form-control custom-select w-100" (change)="onChange($event.target)">
+                    <select class="form-control custom-select w-100" id="selectSintomaId" (change)="onChange($event.target)">
                       <option selected disabled>Seleccione síntoma</option>
                       <ng-container *ngFor="let item of symptoms">
                         <!---->
