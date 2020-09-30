@@ -997,14 +997,17 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Enfermedades 
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco
+                    }}
                   </a>
                     <div 
                     class="add float-right" 
                     (click)="categoryChangue('sickness')"
                     data-toggle="modal"
                     data-target="#add">
-                      Agregar
+                      <!--Agregar-->
+                      {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                  
@@ -1050,14 +1053,16 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Antecedentes Familiares 
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco
+                    }}
                   </a>
                     <div 
                     class="add float-right" 
                     data-toggle="modal"
                     (click)="categoryChangue('familiarHistory')"
                     data-target="#add">
-                      Agregar
+                    {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                     <ng-container *ngIf="antecedentesGeneral">
@@ -1102,14 +1107,14 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Hábitos de Salud
+                    {{ 'calendar.healthHabits.label' | transloco }}
                   </a>
                     <div 
                     class="add float-right" 
                     data-toggle="modal"
                     (click)="categoryChangue('healthHabits')"
                     data-target="#add">
-                      Agregar
+                    {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                     <ng-container *ngIf="antecedentesGeneral">
@@ -1155,14 +1160,16 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Medicamentos
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco
+                    }}
                   </a>
                     <div 
                     class="add float-right" 
                     data-toggle="modal"
                     (click)="categoryChangue('medicines')"
                     data-target="#add">
-                      Agregar
+                    {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                     <ng-container *ngIf="antecedentesGeneral">
@@ -1208,14 +1215,16 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Ocupacionales
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco
+                    }}
                   </a>
                     <div 
                     class="add float-right" 
                     data-toggle="modal"
                     (click)="categoryChangue('occupational')"
                     data-target="#add">
-                      Agregar
+                    {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                     <ng-container *ngIf="antecedentesGeneral">
@@ -1261,14 +1270,16 @@
                         fill="#7D7D7D"
                       />
                     </svg>
-                    Otros
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco
+                    }}
                   </a>
                     <div 
                     class="add float-right" 
                     data-toggle="modal" data-target="#add"
                     (click)="categoryChangue('others')"
                     >
-                      Agregar
+                    {{ 'common.button.add.label' | transloco }}
                       <img src="assets/img/+.svg">
                     </div>
                     <ng-container *ngIf="antecedentesGeneral">

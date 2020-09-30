@@ -511,11 +511,12 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
   
   putAddAntecedent(antecedent, object){
-    this.medicalRecord.putAddAntecedent(antecedent, object).subscribe(
+    this.appointmentsService.postAntecedentes(this.appointmentId, antecedent, object).subscribe(
       data => {
         console.log(data);
         this.category = '';
-        //this.getMedicalRecord();
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+        //this.getMedicalRecord(this.appointmentId);
       },
       error => {
         console.log(error)
@@ -524,10 +525,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
   
   delete() {
-    this.medicalRecord.deleteAntecedent(this.antecedente, this.elemntoId).subscribe(
+    this.appointmentsService.deleteAntecedentes(this.appointmentId, this.antecedente, this.elemntoId).subscribe(
       (data) => {
         console.log(data);
-        //this.getMedicalRecord();
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
       },
       (error) => {
         console.log(error);
