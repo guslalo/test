@@ -28,7 +28,7 @@ export class CreateAccountComponent implements OnInit {
     private config: NgbDatepickerConfig,
     private userService: UsersService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
   public userRegister: registerUser;
   public placement = 'bottom';
   model: NgbDateStruct;
@@ -90,10 +90,10 @@ export class CreateAccountComponent implements OnInit {
     this.personalData = this._formBuilder.group(
       {
         checkAge: [null, [Validators.requiredTrue]],
-        name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-        lastName: ['', Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
-        motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-        secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+        name: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
+        lastName: ['', Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)],
+        motherName: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
+        secondLastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
         email: [null, [Validators.email, Validators.required]],
         gender: [null, [Validators.required]],
         confirmEmail: ['', [Validators.required]],
