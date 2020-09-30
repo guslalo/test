@@ -30,6 +30,8 @@ export class FichaPacienteComponent implements OnInit {
   cityMap: any = [];
   countryMap: any = [];
 
+  identificationData: any = {};
+
   // EXTRAS
   moment: any = moment;
   ColumnMode = ColumnMode;
@@ -58,7 +60,7 @@ export class FichaPacienteComponent implements OnInit {
     private currentUserService: CurrentUserService,
     private documentService: DocumentService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
@@ -78,8 +80,9 @@ export class FichaPacienteComponent implements OnInit {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
-        // console.log(data.payload.patientData);
+        console.log('patient', data.payload);
         this.patientRecord = data.payload.patientData;
+        this.identificationData = data.payload.patientData.identificationData;
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
