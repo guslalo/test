@@ -729,14 +729,22 @@ export class EditarUsuarioComponent implements OnInit {
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
         uf: this.professionalForm.value.ufProfessionalRegistry.name,
-        university: this.professionalForm.value.university,
-        professionalTitle: this.professionalForm.value.professionalTitle,
-        course: this.professionalForm.value.course,
       });
     }
   }
 
   removeRegistry(index) {
     this.professionalRegistry.splice(index, 1);
+  }
+
+  updateProfilePhoto(event: any) {
+    console.log('subiendo foto', event)
+    this.adminService.uploadUserProfilePhoto(event.target.files[0], '')
+      .then(data => {
+        this.professionalPhoto = data;
+      })
+      .catch(err => {
+
+      })
   }
 }

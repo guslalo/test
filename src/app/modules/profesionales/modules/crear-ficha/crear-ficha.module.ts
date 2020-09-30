@@ -7,9 +7,21 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FichaHistorialComponent } from './components/ficha-historial/ficha-historial.component';
+import { JsonPathFinderPipe } from 'src/app/pipes/json-path-finder.pipe';
 
 @NgModule({
-  declarations: [CrearFichaConsultaComponent, FichaHistorialComponent],
-  imports: [CommonModule, CrearFichaRoutingModule, ReactiveFormsModule, FormsModule, NgxSpinnerModule, SharedModule],
+  declarations: [
+    CrearFichaConsultaComponent,
+    FichaHistorialComponent,
+    JsonPathFinderPipe,
+  ],
+  imports: [
+    CommonModule,
+    CrearFichaRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxSpinnerModule,
+    SharedModule
+  ],
 })
-export class CrearFichaModule {}
+export class CrearFichaModule { }
