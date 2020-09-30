@@ -30,13 +30,8 @@
                 <h4>{{ 'account.createAccount.identificationData.label' | transloco }}</h4>
               </ng-template>
               <div class="custom-control custom-checkbox custom-control-inline mb-2">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="isForeign"
-                  [(ngModel)]="isForeign"
-                  (change)="validateForm()"
-                />
+                <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign"
+                  (change)="validateForm()" />
                 <label class="custom-control-label" for="isForeign">{{
                   'account.createAccount.isForeign' | transloco
                 }}</label>
@@ -45,16 +40,10 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="document">{{ 'account.identificationDocument.label' | transloco }} *</label>
-                    <select
-                      class="form-control"
-                      name="document"
-                      formControlName="document"
-                      [ngClass]="{
+                    <select class="form-control" name="document" formControlName="document" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
-                      }"
-                      (change)="validateForm()"
-                    >
+                      }" (change)="validateForm()">
                       <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cpf">
                         {{
@@ -73,18 +62,12 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }} *</label>
-                    <input
-                      disabled
-                      type="text"
-                      class="form-control"
-                      name="idDocumentNumber"
-                      formControlName="idDocumentNumber"
-                      [ngClass]="{
+                    <input disabled type="text" class="form-control" name="idDocumentNumber"
+                      formControlName="idDocumentNumber" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('idDocumentNumber').valid &&
                           identificationData.get('idDocumentNumber').touched
-                      }"
-                    />
+                      }" />
                   </div>
                 </div>
                 <div class="row">
@@ -101,32 +84,21 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="passport">{{ 'common.passport.label' | transloco }}</label>
-                    <input
-                      [attr.disabled]="!isForeign ? '' : null"
-                      type="text"
-                      class="form-control"
-                      name="passport"
-                      formControlName="passport"
-                      [ngClass]="{
+                    <input [attr.disabled]="!isForeign ? '' : null" type="text" class="form-control" name="passport"
+                      formControlName="passport" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('passport').valid && identificationData.get('passport').touched
-                      }"
-                    />
+                      }" />
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="document">{{ 'account.secondaryDoc.label' | transloco }}</label>
-                    <select
-                      class="form-control"
-                      name="extraDocument"
-                      formControlName="extraDocument"
-                      [ngClass]="{
+                    <select class="form-control" name="extraDocument" formControlName="extraDocument" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('extraDocument').valid &&
                           identificationData.get('extraDocument').touched
-                      }"
-                    >
+                      }">
                       <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cbo">{{ 'auth.cbor.label' | transloco }}</option>
                       <option value="pasep">{{ 'auth.pispasep.label' | transloco }}</option>
@@ -138,27 +110,17 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}</label>
-                    <input
-                      disabled
-                      type="text"
-                      class="form-control"
-                      name="extraIdDocument"
-                      formControlName="extraIdDocument"
-                      [ngClass]="{
+                    <input disabled type="text" class="form-control" name="extraIdDocument"
+                      formControlName="extraIdDocument" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('extraIdDocument').valid &&
                           identificationData.get('extraIdDocument').touched
-                      }"
-                    />
+                      }" />
                   </div>
                 </div>
                 <div>
-                  <button
-                    type="button"
-                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                    matStepperNext
-                    [disabled]="!identificationData.valid"
-                  >
+                  <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                    matStepperNext [disabled]="!identificationData.valid">
                     {{ 'common.button.continue.label' | transloco }}
                   </button>
                 </div>
@@ -175,13 +137,8 @@
                 <div class="form-row">
                   <div class="form-group col">
                     <div class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        name="checkAge"
-                        id="checkAge"
-                        formControlName="checkAge"
-                      />
+                      <input type="checkbox" class="custom-control-input" name="checkAge" id="checkAge"
+                        formControlName="checkAge" />
                       <label class="custom-control-label" for="checkAge">
                         {{ 'account.createAccount.majorAge.label' | transloco }}
                       </label>
@@ -192,15 +149,9 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="name">{{ 'common.forms.user.identification.name.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      class="form-control"
-                      placeholder=""
+                    <input type="text" name="name" id="name" class="form-control" placeholder=""
                       [ngClass]="{ 'is-invalid': !personalData.get('name').valid && personalData.get('name').touched }"
-                      formControlName="name"
-                    />
+                      formControlName="name" />
                     <div *ngIf="personalData.controls['name'].errors?.required" class="invalid-feedback">
                       {{ 'common.forms.user.identification.name.label' | transloco }} *
                     </div>
@@ -216,17 +167,9 @@
                     }}-->
                       {{ 'common.forms.user.identification.secondSurname.label' | transloco }} *
                     </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      class="form-control"
-                      placeholder=""
-                      [ngClass]="{
+                    <input type="text" name="lastName" id="lastName" class="form-control" placeholder="" [ngClass]="{
                         'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
-                      }"
-                      formControlName="lastName"
-                    />
+                      }" formControlName="lastName" />
                     <div *ngIf="personalData.controls['lastName'].errors?.pattern" class="invalid-feedback">
                       {{ 'common.onlyChars.label' | transloco }}
                     </div>
@@ -242,18 +185,11 @@
                         'common.forms.user.identification.firstSurname.label' | transloco
                       }}
                       <!--{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *--></label>
-                    <input
-                      type="text"
-                      name="secondLastName"
-                      id="secondLastName"
-                      class="form-control"
-                      placeholder=""
-                      formControlName="secondLastName"
-                      [ngClass]="{
+                    <input type="text" name="secondLastName" id="secondLastName" class="form-control" placeholder=""
+                      formControlName="secondLastName" [ngClass]="{
                         'is-invalid':
                           !personalData.get('secondLastName').valid && personalData.get('secondLastName').touched
-                      }"
-                    />
+                      }" />
                     <div *ngIf="personalData.controls['secondLastName'].errors?.required" class="invalid-feedback">
                       {{ 'auth.surnameReq.label' | transloco }}
                     </div>
@@ -263,17 +199,10 @@
                   </div>
                   <div class="form-group col-12 col-md-4">
                     <label for="motherName">{{ 'account.motherNameReq.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="motherName"
-                      id="motherName"
-                      class="form-control"
-                      placeholder=""
-                      formControlName="motherName"
-                      [ngClass]="{
+                    <input type="text" name="motherName" id="motherName" class="form-control" placeholder=""
+                      formControlName="motherName" [ngClass]="{
                         'is-invalid': !personalData.get('motherName').valid && personalData.get('motherName').touched
-                      }"
-                    />
+                      }" />
                     <div *ngIf="personalData.controls['motherName'].errors?.required" class="invalid-feedback">
                       {{ 'common.motherNamesReq.label' | transloco }}
                     </div>
@@ -283,18 +212,10 @@
                   </div>
                   <div class="col-12 col-md-4">
                     <label for="gender">{{ 'account.grenderReq.label' | transloco }} *</label>
-                    <select
-                      formControlName="gender"
-                      name="gender"
-                      id="gender"
-                      class="form-control"
-                      placeholder=""
-                      class="form-control"
-                      id="gender"
-                      [ngClass]="{
+                    <select formControlName="gender" name="gender" id="gender" class="form-control" placeholder=""
+                      class="form-control" id="gender" [ngClass]="{
                         'is-invalid': !personalData.get('gender').valid && personalData.get('gender').touched
-                      }"
-                    >
+                      }">
                       <option value="male">{{ 'clinicalFile.male.label' | transloco }}</option>
                       <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
                     </select>
@@ -307,18 +228,10 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      class="form-control"
-                      placeholder="usuario@mail.cl"
+                    <input type="email" name="email" id="email" class="form-control" placeholder="usuario@mail.cl"
                       [ngClass]="{
                         'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
-                      }"
-                      formControlName="email"
-                      onkeypress="return event.charCode != 32"
-                    />
+                      }" formControlName="email" onkeypress="return event.charCode != 32" />
                     <div *ngIf="personalData.controls['email'].errors?.required" class="invalid-feedback">
                       email {{ 'account.erroneous.label' | transloco }}
                     </div>
@@ -326,18 +239,10 @@
 
                   <div class="form-group col-12 col-md-6">
                     <label for="confirmEmail">{{ 'account.confirmEmailReq.label' | transloco }} *</label>
-                    <input
-                      type="confirmEmail"
-                      name="confirmEmail"
-                      id="confirmEmail"
-                      class="form-control"
-                      placeholder="usuario@mail.cl"
-                      [ngClass]="{
+                    <input type="confirmEmail" name="confirmEmail" id="confirmEmail" class="form-control"
+                      placeholder="usuario@mail.cl" [ngClass]="{
                         'is-invalid': personalData.get('confirmEmail').touched && personalData.errors?.emailsNotMatch
-                      }"
-                      formControlName="confirmEmail"
-                      onkeypress="return event.charCode != 32"
-                    />
+                      }" formControlName="confirmEmail" onkeypress="return event.charCode != 32" />
                     <div *ngIf="personalData.errors?.emailsNotMatch" class="invalid-feedback">
                       {{ 'account.confirmEmailReq.label' | transloco }}
                     </div>
@@ -346,32 +251,19 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }} *</label>
-                    <input
-                      name="text"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      type="text"
-                      class="form-control"
-                      placeholder="#### o +(#)####-####"
-                      [ngClass]="{
+                    <input name="text" name="phoneNumber" id="phoneNumber" type="text" class="form-control"
+                      placeholder="#### o +(#)####-####" [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
-                      }"
-                      formControlName="phoneNumber"
-                    />
+                      }" formControlName="phoneNumber" />
                     <div *ngIf="personalData.controls['phoneNumber'].errors?.required" class="invalid-feedback">
                       telefono {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
                     <label for="breed">{{ 'account.breed.label' | transloco }} *</label>
-                    <select
-                      class="form-control"
-                      name="breed"
-                      formControlName="breed"
-                      [ngClass]="{
+                    <select class="form-control" name="breed" formControlName="breed" [ngClass]="{
                         'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of breeds">
                         {{ item.name }}
@@ -385,21 +277,14 @@
                 <div class="form-row"></div>
                 <div class="row mb-5 pb-5">
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
-                      matStepperPrevious
-                    >
+                    <button type="button" class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious>
                       {{ 'common.button.back.label' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                      matStepperNext
-                      [disabled]="!personalData.valid"
-                    >
+                    <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext [disabled]="!personalData.valid">
                       {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
@@ -417,26 +302,14 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="birthdate">
-                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label
-                    >
+                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label>
                     <div class="input-group dateregister">
                       <!--[minDate]="minDate"-->
-                      <input
-                        [placement]="placement"
-                        class="form-control"
-                        id="birthdate"
-                        [maxDate]="maxDate"
-                        [minDate]="{ year: 1900, month: 1, day: 1 }"
-                        placeholder="DD/MM/YYYY"
-                        name="birthdate"
-                        ngbDatepicker
-                        #d="ngbDatepicker"
-                        formControlName="birthdate"
-                        [ngClass]="{
+                      <input [placement]="placement" class="form-control" id="birthdate" [maxDate]="maxDate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }" placeholder="DD/MM/YYYY" name="birthdate"
+                        ngbDatepicker #d="ngbDatepicker" formControlName="birthdate" [ngClass]="{
                           'is-invalid': !birthData.get('birthdate').valid && birthData.get('birthdate').touched
-                        }"
-                        (click)="d.toggle()"
-                      />
+                        }" (click)="d.toggle()" />
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                       </div>
@@ -450,15 +323,10 @@
                     <label for="ufBirth">{{
                       'profile.personal.tabIdentification.birthData.uf.label' | transloco
                     }}</label>
-                    <select
-                      [attr.disabled]="isForeign ? '' : null"
-                      class="form-control"
-                      name="ufBirth"
-                      formControlName="ufBirth"
-                      [ngClass]="{
+                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"
+                      formControlName="ufBirth" [ngClass]="{
                         'is-invalid': !birthData.get('ufBirth').valid && birthData.get('ufBirth').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
@@ -475,16 +343,11 @@
                     <label for="municipalityBirth">{{
                       'profile.personal.tabIdentification.birthData.municipality.label' | transloco
                     }}</label>
-                    <select
-                      [attr.disabled]="isForeign ? '' : null"
-                      class="form-control"
-                      name="municipalityBirth"
-                      formControlName="municipalityBirth"
-                      [ngClass]="{
+                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="municipalityBirth"
+                      formControlName="municipalityBirth" [ngClass]="{
                         'is-invalid':
                           !birthData.get('municipalityBirth').valid && birthData.get('municipalityBirth').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
@@ -495,17 +358,12 @@
                     </div>
                   </div>
                   <div class="form-group col-12 col-md-6">
-                    <label for="confirmPasword"
-                      >{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }} *</label
-                    >
-                    <select
-                      class="form-control"
-                      name="nacionality"
-                      formControlName="nacionality"
-                      [ngClass]="{
+                    <label
+                      for="confirmPasword">{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}
+                      *</label>
+                    <select class="form-control" name="nacionality" formControlName="nacionality" [ngClass]="{
                         'is-invalid': !birthData.get('nacionality').valid && birthData.get('nacionality').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of countries">
                         {{ item.name }}
@@ -519,21 +377,14 @@
                 </div>
                 <div class="row mb-5 pb-5">
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
-                      matStepperPrevious
-                    >
+                    <button type="button" class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious>
                       {{ 'common.button.back.label' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                      matStepperNext
-                      [disabled]="!birthData.valid"
-                    >
+                    <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext [disabled]="!birthData.valid">
                       {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
@@ -552,29 +403,18 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="cep">{{ 'account.cep.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="cep"
-                      id="cep"
-                      class="form-control"
-                      placeholder=""
+                    <input type="text" name="cep" id="cep" class="form-control" placeholder=""
                       [ngClass]="{ 'is-invalid': !addressData.get('cep').valid && addressData.get('cep').touched }"
-                      formControlName="cep"
-                    />
+                      formControlName="cep" />
                     <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
                       {{ 'account.cep.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <label for="uf">{{ 'account.uf.label' | transloco }} *</label>
-                    <select
-                      class="form-control"
-                      name="uf"
-                      formControlName="uf"
-                      [ngClass]="{
+                    <select class="form-control" name="uf" formControlName="uf" [ngClass]="{
                         'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
@@ -589,17 +429,12 @@
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="city"
-                      >{{ 'clinicalFile.patientData.tabs.identification.addressData.city.label' | transloco }} *</label
-                    >
-                    <select
-                      class="form-control"
-                      name="city"
-                      formControlName="city"
-                      [ngClass]="{
+                    <label
+                      for="city">{{ 'clinicalFile.patientData.tabs.identification.addressData.city.label' | transloco }}
+                      *</label>
+                    <select class="form-control" name="city" formControlName="city" [ngClass]="{
                         'is-invalid': !addressData.get('city').valid && addressData.get('city').touched
-                      }"
-                    >
+                      }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
@@ -611,17 +446,10 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <label for="neighborhood">{{ 'account.neightberhood.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="neighborhood"
-                      id="neighborhood"
-                      class="form-control"
-                      placeholder=""
+                    <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder=""
                       [ngClass]="{
                         'is-invalid': !addressData.get('neighborhood').valid && addressData.get('neighborhood').touched
-                      }"
-                      formControlName="neighborhood"
-                    />
+                      }" formControlName="neighborhood" />
                     <div *ngIf="addressData.controls['neighborhood'].errors?.required" class="invalid-feedback">
                       {{ 'auth.neiberhoodReq.label' | transloco }}
                     </div>
@@ -631,17 +459,9 @@
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label for="street">{{ 'account.street.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="street"
-                      id="street"
-                      class="form-control"
-                      placeholder=""
-                      [ngClass]="{
+                    <input type="text" name="street" id="street" class="form-control" placeholder="" [ngClass]="{
                         'is-invalid': !addressData.get('street').valid && addressData.get('street').touched
-                      }"
-                      formControlName="street"
-                    />
+                      }" formControlName="street" />
                     <div *ngIf="addressData.controls['street'].errors?.required" class="invalid-feedback">
                       {{ 'account.streetReq.label' | transloco }}
                     </div>
@@ -649,41 +469,34 @@
 
                   <div class="form-group col-12 col-md-6">
                     <label for="streetNumber">{{ 'account.numeration.label' | transloco }} *</label>
-                    <input
-                      name="streetNumber"
-                      name="streetNumber"
-                      id="streetNumber"
-                      type="text"
-                      class="form-control"
-                      placeholder=""
-                      [ngClass]="{
+                    <input name="streetNumber" name="streetNumber" id="streetNumber" type="text" class="form-control"
+                      placeholder="" [ngClass]="{
                         'is-invalid': !addressData.get('streetNumber').valid && addressData.get('streetNumber').touched
-                      }"
-                      formControlName="streetNumber"
-                    />
+                      }" formControlName="streetNumber" />
                     <div *ngIf="addressData.controls['streetNumber'].errors?.required" class="invalid-feedback">
                       {{ 'account.numerationReq.label' | transloco }}
                     </div>
                   </div>
                 </div>
 
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="street">{{ 'auth.complement.label' |transloco }} *</label>
+                    <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                      formControlName="complement" />
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
-                      matStepperPrevious
-                    >
+                    <button type="button" class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious>
                       {{ 'common.button.back.label' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
-                    <button
-                      type="button"
-                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                      matStepperNext
-                      [disabled]="!addressData.valid"
-                    >
+                    <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext [disabled]="!addressData.valid">
                       {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
@@ -703,18 +516,10 @@
                   <div class="form-group col-12 col-md-6">
                     <label for="password">{{ 'account.password.label' | transloco }} *</label>
                     <div class="input-group mb-3">
-                      <input
-                        [type]="showPassword ? 'text' : 'password'"
-                        name="password"
-                        id="password"
-                        class="form-control"
-                        [ngClass]="{
+                      <input [type]="showPassword ? 'text' : 'password'" name="password" id="password"
+                        class="form-control" [ngClass]="{
                           'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
-                        }"
-                        formControlName="password"
-                        maxlength="16"
-                        onkeypress="return event.charCode != 32"
-                      />
+                        }" formControlName="password" maxlength="16" onkeypress="return event.charCode != 32" />
                       <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
                         <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
@@ -737,20 +542,11 @@
                   <div class="form-group col-12 col-md-6">
                     <label for="confirmPasword">{{ 'account.confirmPassword.label' | transloco }} *</label>
                     <div class="input-group mb-3">
-                      <input
-                        [type]="showPassword ? 'text' : 'password'"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        class="form-control"
-                        placeholder=""
-                        [ngClass]="{
+                      <input [type]="showPassword ? 'text' : 'password'" name="confirmPassword" id="confirmPassword"
+                        class="form-control" placeholder="" [ngClass]="{
                           'is-invalid':
                             passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
-                        }"
-                        formControlName="confirmPassword"
-                        maxlength="16"
-                        onkeypress="return event.charCode != 32"
-                      />
+                        }" formControlName="confirmPassword" maxlength="16" onkeypress="return event.charCode != 32" />
                       <div class="input-group-append" (click)="this.showPassword = !this.showPassword">
                         <button *ngIf="!this.showPassword" class="btn btn-outline-secondary px-3" type="button">
                           <img src="assets/icons/icon-show-password.svg" alt="img" />
@@ -771,18 +567,10 @@
                     <div class="alert alert-secondary" role="alert">
                       <div class="row">
                         <div class="col-2 text-center">
-                          <svg
-                            width="3em"
-                            height="3em"
-                            viewBox="0 0 16 16"
-                            class="bi bi-shield-lock-fill color-primary"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
-                            />
+                          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-shield-lock-fill color-primary"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                              d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z" />
                           </svg>
                         </div>
                         <div class="col-10 pl-0">
@@ -795,24 +583,15 @@
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
-                    <button
-                      type="button"
-                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
-                      matStepperPrevious
-                    >
+                    <button type="button" class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious>
                       {{ 'common.button.back.label' | transloco }}
                     </button>
                   </div>
                   <div class="col-12 col-md-6">
-                    <button
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                      type="submit"
-                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                      matStepperNext
-                      (click)="submit()"
-                      [disabled]="!passwordData.valid"
-                    >
+                    <button data-toggle="modal" data-target="#exampleModal" type="submit"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right" matStepperNext
+                      (click)="submit()" [disabled]="!passwordData.valid">
                       {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
@@ -828,19 +607,11 @@
 
           <div class="col">
             <a href="javascript:history.back()" class="float-right volver">
-              <svg
-                width="2em"
-                height="2em"
-                viewBox="0 0 16 16"
-                class="bi bi-arrow-left-circle"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path
-                  fill-rule="evenodd"
-                  d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
-                />
+                <path fill-rule="evenodd"
+                  d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
                 <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
               </svg>
             </a>
@@ -852,14 +623,8 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -871,27 +636,41 @@
         </button>
       </div>
       <div class="modal-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut tellus sed sapien semper egestas et in nibh.
-        Duis cursus ipsum sagittis, laoreet velit in, rhoncus tellus. Orci varius natoque penatibus et magnis dis
-        parturient montes, nascetur ridiculus mus. Ut ur ornare. Pellentesque maximus erat ex, non pulvinar sapien
-        fermentum ut. Vestibulum fringilla ac urna at sagittis. Nullam tincidunt tellus quis aliquet sollicitudin. Nulla
-        eget fermentum urna. Aenean sit amet orci posuere, pellentesque risus ut, blandit risus. Nulla molestie pharetra
-        orci, ut ornare massa porttitor non. Suspendisse per. In hac habitasse platea dictumst. Cras consectetur luctus
-        nibh, nec bibendum justo facilisamet neque vel nisl iaculis porttitor. Integer purus ante, interdum sollicitudin
-        nibh faucibus, sollicitudin porta lorem. Maecenas quis nulla mattis justo laoreet viverra. Duis vitae lectus nec
-        nulla viverra congue in sit amet quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu
-        laoreet velit. In ac orci eget ort. Suspendisse potenti. Etiam ac rutrum nisl. Maecenas sed neque ex. Morbi
-        vitae nulla ut augue suscipit elementum. Quisque nulla arcu, mattis ut vehicula at, laoreet et est. Quisque
-        lobortis laoreet odio at pretium. In hac habitasse platea dictumst. Nulla aliquet, dolor non condimentum
-        aliquam, diam nibh scelerisque est, et sagittis sem eros eleifend erat. Quisque iaculis faucibus eros non
-        malesuada. Sed tellus quam, egestas nec leo in, hendrerit euismod sem. Curabitur aliquet tellus sed ante
-        lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
+        <div class="row">
+          <div class="col col-12 col-md-12 col-sm-12 col-lg-12">
+            <h4>{{'common.confirmDocsCreateAccount.label' | transloco}}</h4>
+          </div>
+          <div class="col-lg-12">
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="terms" [(ngModel)]="termsAccepted" />
+                <label class="custom-control-label" for="terms"><a [routerLink]=""
+                    class="text-destacado">{{'auth.accept.termsAndconditions.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="privacy" [(ngModel)]="privacyAccepted" />
+                <label class="custom-control-label" for="privacy"><a [routerLink]=""
+                    class="text-destacado">{{'auth.accept.privacyPolicy.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="consent" [(ngModel)]="consentAccepted" />
+                <label class="custom-control-label" for="consent"><a [routerLink]=""
+                    class="text-destacado">{{'auth.accept.consent.label' | transloco}}</a></label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
           {{ 'clinicalFile.decline.label' | transloco }}
         </button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="crearCuenta()">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="crearCuenta()"
+          [disabled]="!termsAccepted || !privacyAccepted || !consentAccepted">
           {{ 'auth.acceptAndCreate.label' | transloco }}
         </button>
       </div>
