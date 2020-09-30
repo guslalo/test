@@ -1,3 +1,4 @@
+@import './../../../../../assets/scss/variables.scss';
 html {
   height: 100%;
 }
@@ -49,16 +50,16 @@ body {
     &.active {
       background: #f7f7f7;
       position: relative;
-      color: #35a6f5;
+      color: $color-primary;
       &:after {
         width: 7px;
         height: 100%;
-        background: #3bc4ca;
+        background: $color-primary;
         position: absolute;
         z-index: 1;
         left: 0px;
         top: 0px;
-        content: '.';
+        content: '';
       }
     }
     &:hover {
@@ -268,6 +269,10 @@ app-layout {
 }
 .logo {
   display: inline-block;
+  width: 100px;
+  img {
+    width: 100%;
+  }
 }
 
 .box-items {

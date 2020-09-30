@@ -6,3 +6,12 @@
         right: 16px;
     }
 }
+
+.boxImg {
+    width: 40px;
+    border-radius: 50% !important;
+    overflow: hidden;
+    img {
+        width: 100%;
+    }
+}

@@ -12,6 +12,8 @@ import { SymptomsService } from './../../../../../../services/symptoms.service';
 import { DocumentService } from './../../../../../../services/document.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { SafePipe } from './../../../../../../shared/pipes/sanitizer.pipe';
+import { environment } from 'src/environments/environment';
+
 
 //datepicker
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -51,7 +53,7 @@ export class IndexComponent implements OnInit {
   public urlConfirmacion: any;
   public estadoPagado: boolean = false;
   selectMedicalSpecialties:FormControl;
-
+  public photoUrlBase = environment.photoUrlBase;
   imageError: string;
   isImageSaved: boolean;
   cardImageBase64: string;
@@ -472,7 +474,7 @@ export class IndexComponent implements OnInit {
       this.blocks = [];
       this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
         (data) => {
-          // console.log(data);
+          console.log(data);
           if (data.internalCode === 103) {
             this.sinProfesionales = true;
           } else {
