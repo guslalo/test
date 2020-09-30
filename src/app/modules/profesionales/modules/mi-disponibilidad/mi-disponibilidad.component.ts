@@ -83,13 +83,13 @@ export class MiDisponibilidadComponent implements OnInit {
     this.checked = false;
 
     this.days = [
-      { id: 1, checked: false, name: 'Lun', value: 'lunes' },
-      { id: 2, checked: false, name: 'Mar', value: 'martes' },
-      { id: 3, checked: false, name: 'Mie', value: 'miercoles' },
-      { id: 4, checked: false, name: 'Jue', value: 'jueves' },
-      { id: 5, checked: false, name: 'Vie', value: 'viernes' },
-      { id: 6, checked: false, name: 'Sab', value: 'sabado' },
-      { id: 7, checked: false, name: 'Dom', value: 'domingo' },
+      { id: 1, checked: false, name: 'common.weekDaysAbbr.mon.label', value: 'lunes' },
+      { id: 2, checked: false, name: 'common.weekDaysAbbr.tue.label', value: 'martes' },
+      { id: 3, checked: false, name: 'common.weekDaysAbbr.wed.label', value: 'miercoles' },
+      { id: 4, checked: false, name: 'common.weekDaysAbbr.thu.label', value: 'jueves' },
+      { id: 5, checked: false, name: 'common.weekDaysAbbr.fri.label', value: 'viernes' },
+      { id: 6, checked: false, name: 'common.weekDaysAbbr.sat.label', value: 'sabado' },
+      { id: 7, checked: false, name: 'common.weekDaysAbbr.sun.label', value: 'domingo' },
     ];
   }
 
@@ -223,6 +223,9 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
         this.disponibilidad = data.payload;
+        this.disponibilidad.forEach(element => {
+          element.dateDetails.days = element.dateDetails.days.map(e => this.days.find(d => d.value == e).name);
+        });
         console.log(this.disponibilidad);
       },
       (error) => {
@@ -589,4 +592,5 @@ export class MiDisponibilidadComponent implements OnInit {
       this.calendarOptions.events = events;
     }, 2000);
   }
+
 }
