@@ -252,6 +252,7 @@
                     {{ appoimentDetail.appointmentDetails.diagnosticDetails.diagnostic }}
                   </p>
                   <p>{{ appoimentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
+                  <p>{{ appoimentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
               </div>
               <!--/diagnostico-->
@@ -301,7 +302,7 @@
               <!--/objetivo-->
               <hr />
 
-              <div>
+              <div class="d-none">
                 <p class="title font-weight-bold mb-1">
                   {{ 'clinicalFile.plan.label' | transloco }}
                 </p>

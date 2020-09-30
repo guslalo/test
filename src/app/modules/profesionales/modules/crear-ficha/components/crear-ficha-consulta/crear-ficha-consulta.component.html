@@ -50,13 +50,13 @@
                     </svg>
                   </div>
                   <div class="text-center boxThumb rounded">
-                    <!--
+                   
                     <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
                       <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                     </ng-container>
                     <ng-template #noPhoto>
                       <img src="assets/img/profile.png" />
-                    </ng-template>-->
+                    </ng-template> <!---->
 
                   </div>
                 </ng-container>
@@ -862,7 +862,7 @@
                           </select>
                         </div>
                         <div class="col-6">
-                          <label for="endBlock">{{
+                          <label for="diagnostic">{{
                             'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
                           }}</label>
                           <input class="form-control mb-3" type="text"
@@ -870,8 +870,17 @@
                             id="diagnostic" name="diagnostic" formControlName="diagnostic" />
                         </div>
                         <div class="col-12">
-                          <label for="endBlock">{{ 'clinicalFile.comments.label' | transloco }}</label>
+                          <label for="comments">{{ 'clinicalFile.comments.label' | transloco }}</label>
                           <textarea class="form-control" id="comments" name="comments" formControlName="comments"
+                            rows="5"></textarea>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <label for="indications">
+                            Indicaciones
+                            <!--
+                            {{ 'clinicalFile.comments.label' | transloco }}-->
+                          </label>
+                          <textarea class="form-control" id="indications" name="indications" formControlName="indications"
                             rows="5"></textarea>
                         </div>
                       </div>
