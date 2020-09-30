@@ -10,6 +10,9 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
+
+
+
 declare var $: any;
 
 @Component({
@@ -48,7 +51,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDocuments: any;
   public urlSibrare: any;
   public videoCall:boolean;
-  public descargar:boolean
+  public descargar:boolean;
+  public addExamen: FormGroup;
+  public base64: any;
+  public nameFile: any;
+  public textInputFile: any;
   public photoUrlBase = environment.photoUrlBase;
   public elemntoId: string;
   public elemntoValue: string;
@@ -68,12 +75,14 @@ export class CrearFichaConsultaComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
     private router: Router,
+    private medicalRecordService: MedicalRecordService,
     private _formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
+    this.textInputFile = 'seleccionar archivo';
     this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
@@ -138,6 +147,12 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     this.notes = this._formBuilder.group({
       notes: [''],
+    });
+
+    this.addExamen = this._formBuilder.group({
+      name: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      data: [null, [Validators.required]],
     });
   }
 
@@ -319,6 +334,47 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  resetValue() {
+    this.textInputFile = 'seleccionar archivo';
+  }
+
+  addExamenPost() {
+    
+    console.log(this.userId);
+    const formObject = {
+      name: this.nameFile,
+      type: this.addExamen.controls.type.value,
+      file: this.base64.split(',')[1],
+    };
+    this.putAddExamen(formObject, this.userId);
+  }
+
+  putAddExamen(object, id: string) {
+    this.medicalRecordService.putAddExamen(object, id).subscribe(
+      (data) => {
+        console.log(data);
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  openFile(event) {
+    const file = event.target.files[0];
+    this.nameFile = event.target.files[0].name;
+    this.textInputFile = event.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result);
+      this.base64 = reader.result;
+      this.base64.split(',')[1];
+      console.log(this.base64.split(',')[1]);
+    };
   }
 
   getSession(id: string) {

@@ -1651,37 +1651,37 @@
         <div class="tab-pane fade" id="examenesDocumentosTab" role="tabpanel" aria-labelledby="examenesDocumentos">
           <div class="row mb-4 align-items-center">
             <div class="col-12">
-              <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>
+              <!--<h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>-->
+              <button
+              type="button"
+              class="btn btn-outline-primary rounded-pill float-right"
+              data-toggle="modal"
+              data-target="#addExamen"
+              (click)="resetValue()"
+            >
+              {{ 'common.button.add.label' | transloco }} documento
+            </button>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
               <div class="bg-white p-3 rounded-lg">
-                <table class="table mt-1">
-                  <thead class="">
+                <table class="table mt-3">
+                  <thead>
                     <tr>
-                      <th scope="col" class="text-center">
-                        {{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}
-                      </th>
-                      <th scope="col" class="text-center">
-                        {{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}
-                      </th>
-                      <th scope="col" class="text-center">
-                        {{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}
-                      </th>
-                      <th scope="col" class="text-center">
-                        {{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}
-                      </th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.date.label' | transloco }}</th>
+                      <th scope="col">{{ 'clinicalFile.patientData.tabs.services.table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
-
                   <tbody>
                     <tr *ngFor="let item of exams">
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                       <td>
-                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
+                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
                             {{ 'clinicalFile.patientData.tabs.prescriptions.table.btnDownload.label' | transloco }}
                           </button>
@@ -2154,6 +2154,66 @@
     </div>
   </div>
 </div>
+
+<!-- Modal subir documentos-->
+<div
+  class="modal fade"
+  id="addExamen"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+          {{ 'common.button.add.label' | transloco }} Exámen
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addExamen" novalidate="">
+          <!-- -->
+          <div class="row">
+            <div class="form-group col">
+              <label for="type">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</label>
+              <select class="form-control" name="type" id="type" formControlName="type">
+                <option [value]="null">- Seleccionar -</option>
+                <option value="exam">Examen</option>
+                <option value="document">Documento</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  (change)="openFile($event)"
+                  id="customFile"
+                  style="overflow: hidden;"
+                />
+                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          {{ 'common.button.cancel.label' | transloco }}
+        </button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addExamenPost()">
+          {{ 'common.button.add.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
