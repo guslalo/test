@@ -653,7 +653,9 @@
             <div class="form-group col">
               <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" (change)="openFile($event)" id="customFile"
+                <input type="file" class="custom-file-input"
+                accept=".pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  
+                 (change)="openFile($event)" id="customFile"
                   style="overflow: hidden;" />
                 <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
               </div>
