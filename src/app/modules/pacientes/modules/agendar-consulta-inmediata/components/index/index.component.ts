@@ -90,6 +90,7 @@ export class IndexComponent implements OnInit {
 
   //selecion sintoma
   onChange(deviceValue) {
+    $("#selectSintomaId option:selected").attr('disabled','disabled');
     this.consolidate = {
       id: this.appointmentId,
       patientDetails: {
