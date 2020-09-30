@@ -377,7 +377,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     };
   }
 
-
   getSession(id: string) {
     this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
