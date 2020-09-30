@@ -5,6 +5,7 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
+import { environment } from 'src/environments/environment';
 
 declare var $: any;
 
@@ -23,6 +24,7 @@ export class IndexComponent implements OnInit {
   public fecha: any;
   public professionalData: any;
   public salaEspera: boolean;
+  public photoUrlBase = environment.photoUrlBase;
   url: string;
 
   public antecedentes: any;
