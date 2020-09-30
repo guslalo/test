@@ -15,7 +15,7 @@ export class AdminService {
   private clinicEndpoint = 'v1/clinic';
   private waitingRoomsEndpoint = 'v1/waiting-rooms';
 
-  constructor(private http: HttpClient, private fileUtils: FileUtilsService) {}
+  constructor(private http: HttpClient, private fileUtils: FileUtilsService) { }
 
   // GET availability/blocked
   getUsers(userType): Observable<any> {
@@ -159,5 +159,10 @@ export class AdminService {
       mode,
       enabled,
     });
+  }
+
+  async uploadUserProfilePhoto(file: any, userId: string) {
+    let base64 = await this.fileUtils.getBase64(file);
+    return base64;
   }
 }
