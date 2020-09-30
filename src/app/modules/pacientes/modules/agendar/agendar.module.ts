@@ -10,9 +10,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { IdPipe } from './pipes/id.pipe';
 
 @NgModule({
-  declarations: [IndexComponent, ResultadoComponent, SafePipe],
+  declarations: [IndexComponent, ResultadoComponent, SafePipe, IdPipe],
   imports: [
     CommonModule,
     AgendarRoutingModule,
