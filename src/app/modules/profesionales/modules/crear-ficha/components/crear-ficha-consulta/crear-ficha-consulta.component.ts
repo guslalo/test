@@ -143,6 +143,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       diagnostic: ['', Validators.required],
       type: ['', Validators.required],
       comments: ['', Validators.required],
+      indications: ['', Validators.required]
     });
 
     this.notes = this._formBuilder.group({
@@ -174,6 +175,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           type: this.diagnostico.controls.type.value,
           diagnostic: this.diagnostico.controls.diagnostic.value,
           comments: this.diagnostico.controls.comments.value,
+          indications: this.diagnostico.controls.indications.value,
         },
         objective: this.consultasForm.controls.objective.value,
         anamnesis: this.consultasForm.controls.anamnesis.value,
