@@ -257,6 +257,9 @@
           class="btn custom-btn-1 mx-2"
           (click)="sendInvitationEmail()"
           [disabled]="!selectedPrePatients.length"
+          data-toggle="tooltip"
+          data-placement="top"
+          [title]="'dashboard.home.userManagment.tooltips.sendInvitation.label' | transloco"
         >
           <img src="assets/icons/icon-email.svg" />
         </button>
@@ -265,16 +268,6 @@
 
     <div [ngbNavOutlet]="nav"></div>
   </div>
-
-  <ngb-toast
-    *ngIf="emailSent"
-    class="bg-success text-light"
-    [delay]="5000"
-    [autohide]="true"
-    (hide)="emailSent = false"
-  >
-    <div>{{ 'clinicalFile.emailSedSuccess.label' | transloco }}</div>
-  </ngb-toast>
 
   <!-- PATIENT MODAL -->
   <div class="modal fade" id="patientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

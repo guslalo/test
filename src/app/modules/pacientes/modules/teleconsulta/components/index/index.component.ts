@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
+import { environment } from 'src/environments/environment';
+
 declare var $: any;
 
 @Component({
@@ -12,6 +14,7 @@ declare var $: any;
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
+
 export class IndexComponent implements OnInit {
   public appointmentDetail: any;
   public access_token: any;
@@ -21,18 +24,22 @@ export class IndexComponent implements OnInit {
   public fecha: any;
   public professionalData: any;
   public salaEspera: boolean;
+  public photoUrlBase = environment.photoUrlBase;
   url: string;
 
   public antecedentes: any;
   public antecedentesGeneral: any;
   public exams: any;
   public userId: any;
+  public idCancel:any;
+  //private router: Router
 
   constructor(
     private route: ActivatedRoute,
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
-    private medicalRecord: MedicalRecordService
+    private medicalRecord: MedicalRecordService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +78,6 @@ export class IndexComponent implements OnInit {
       month: month,
     };
 
-    //console.log(currentMonth);
   }
 
   getSession(id) {
@@ -162,4 +168,33 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+
+  cancelarCita(id){
+    this.appointmentsService.postCancelarAppointment(id).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['app-paciente']);
+        /*
+        this.appointmentsService.getAppointments(1).subscribe(
+          (data) => {
+            console.log(data);
+            this.consultas = data.payload;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );*/
+     
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
+  idForCancel(id){
+    this.idCancel = id;
+  }
+
+
 }

@@ -6,36 +6,398 @@
 <div class="row">
   <div class="col-12">
     <div class="card-deck">
-      <div class="card bg-light mb-3 p-4">
-        <!--<div class="card-header">Header</div>-->
-        <div class="card-body text-center">
-          <div class="card-text mb-2">
-            <img src="assets/img/agendar-consulta-azul.svg" />
-          </div>
-          <h5 class="card-title font-weight-bold">{{ 'calendar.scheduleService.label' | transloco }}</h5>
-          <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
-          <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
-            {{ 'dashboard.home.newService.btnCreate.label' | transloco }}
-          </button>
-        </div>
-      </div>
-      <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
-        <div class="card-body text-center">
-          <div class="card-text mb-2">
-            <img src="assets/img/agendar-consulta--inmediata-azul.svg" />
-            <h5 class="card-title font-weight-bold"></h5>
-            <p>Simply dummy text of the printing and typesetting industry.</p>
-            <button
-              type="button"
-              class="btn btn-outline-primary rounded-pill text-center"
-              routerLink="agendar-consulta-inmediata"
-            >
-              {{ 'dashboard.home.inmediateService.btnCreate.label' | transloco }}
+        <!--accesos rapidos agenda-->
+      <ng-container *ngIf="!appointment">
+        <div class="card bg-light mb-3 p-4">
+          <!--<div class="card-header">Header</div>-->
+          <div class="card-body text-center">
+            <div class="card-text mb-2">
+              <img src="assets/img/agendar-consulta-azul.svg" />
+            </div>
+            <h5 class="card-title font-weight-bold">{{ 'calendar.scheduleService.label' | transloco }}</h5>
+            <p>Simply dummy text of the printing and types industry. Lorem Ipsum has been.</p>
+            <button type="button" routerLink="agendar-consulta" class="btn btn-outline-primary rounded-pill text-center">
+              {{ 'dashboard.home.newService.btnCreate.label' | transloco }}
             </button>
           </div>
         </div>
-      </div>
-      <div class="card bg-light mb-3 p-4">
+        <div *ngIf="inmediateAppointment" class="card bg-light mb-3 p-4">
+          <div class="card-body text-center">
+            <div class="card-text mb-2">
+              <img src="assets/img/agendar-consulta--inmediata-azul.svg" />
+              <h5 class="card-title font-weight-bold"></h5>
+              <p>Simply dummy text of the printing and typesetting industry.</p>
+              <button
+                type="button"
+                class="btn btn-outline-primary rounded-pill text-center"
+                routerLink="agendar-consulta-inmediata"
+              >
+                {{ 'dashboard.home.inmediateService.btnCreate.label' | transloco }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container><!--/accesos rapidos agenda-->
+
+      <!--next appointment-->
+      <ng-container *ngIf="appointment">
+        <div class="col-8">
+          <h4>Próximas consultas</h4>
+          <!-- colappsed-->
+          <div class="collapseCustom primary">
+            <table class="table dos table-borderless mb-0">
+              <tbody>
+                <ng-container *ngIf="nextAppointed; else noNextAppointed">
+                  <tr *ngIf="nextAppointed">
+                    <td>
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-calendar"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      {{ nextAppointed[0].dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                    </td>
+                    <td>
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-clock"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      {{ nextAppointed[0].dateDetails.start }} Hrs.
+                    </td>
+                    <td *ngIf="nextAppointed[0].patientDetails.userDetails[0]">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-person-circle"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
+                        />
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
+                        />
+                      </svg>
+                      {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }}
+                      {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                    </td>
+                    <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
+                      {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                    </td>
+                    <td>
+                      <a
+                        *ngIf="nextAppointed[0].patientDetails.userDetails[0]"
+                        routerLink="teleconsulta/{{ nextAppointed[0]._id}}"
+                      >
+                        <button type="button" class="btn btn-outline-dark rounded-pill text-center btnazulfondo btn-sm">
+                          {{ 'common.button.enter.label' | transloco }}
+                        </button>
+                      </a>
+                    </td>
+                    <td>
+                      <div class="btn-group dropdownAzul">
+                        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-three-dots"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <button *ngIf="nextAppointed[0].dateDetails.date" 
+                          routerLink="reagendar-consulta/{{ nextAppointed[0]._id }}"
+                            class="dropdown-item"
+                            type="button"
+                          >
+                          {{ 'common.button.reschedule.label' | transloco }}
+                          </button>
+                          <button 
+                          (click)="idForCancel(nextAppointed[0]._id )" 
+                          data-toggle="modal"
+                          data-target="#cancelarCitaModal"
+                          class="dropdown-item" type="button">
+                            {{ 'common.button.cancel.label' | transloco }}
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-template #noNextAppointed>
+                  <div class="row">
+                    <div class="col-12">
+                      <p class="pl-3 pt-3">sin información</p>
+                    </div>
+                  </div>
+                </ng-template>
+              </tbody>
+            </table>
+          </div>
+          <!--/colappsed-->
+
+          <h4>Mis consultas activas</h4>
+          <!-- colappsed-->
+          <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5"><!---->
+            <div class="collapseCustom" id="{{ item._id }}">
+              <table class="table dos table-borderless mb-0">
+                <tbody>
+                  <tr>
+                    <td style="width: 25%;" class="text-left">
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-calendar"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1zm1-3a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M3.5 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5zm9 0a.5.5 0 0 1 .5.5V1a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+                      {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }} / {{ item.dateDetails.start }}
+                    </td>
+                    <td style="width: 25%;" class="text-left">
+                      <!--{{item.professionalDetails.userDetails[0].userId}}  *ngIf="item.professionalDetails.userDetails[0].length"-->
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        class="bi bi-person-circle"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
+                        />
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
+                        />
+                      </svg>
+                      {{ item.professionalDetails.userDetails[0]?.name }}
+                      {{ item.professionalDetails.userDetails[0]?.lastName }}
+                      <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
+                    </td>
+
+                    <td style="width: 25%;" class="text-left">
+                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                        {{
+                          (item.administrativeDetails.status === 'reserved'
+                            ? 'clinicalFile.reserved.label'
+                            : item.administrativeDetails.status === 'appointed'
+                            ? 'clinicalFile.scheduled.label'
+                            : item.administrativeDetails.status === 'rescheduled'
+                            ? 'clinicalFile.reScheduled.label'
+                            : item.administrativeDetails.status === 'active'
+                            ? 'clinicalFile.active.label'
+                            : item.administrativeDetails.status === 'waitingInRoom'
+                            ? 'clinicalFile.inWaitingRoom.label'
+                            : item.administrativeDetails.status === 'waitingInList'
+                            ? 'clinicalFile.inWaitingList.label'
+                            : item.administrativeDetails.status === 'running'
+                            ? 'common.status.inProgress.label'
+                            : item.administrativeDetails.status === 'pending'
+                            ? 'clinicalFile.pending.label'
+                            : item.administrativeDetails.status === 'finished'
+                            ? 'clinicalFile.ended.label'
+                            : item.administrativeDetails.status === 'canceled'
+                            ? 'clinicalFile.canceled.label'
+                            : 'S/R'
+                          ) | transloco
+                        }}
+                      </button>
+                    </td>
+                    <td style="width: 20%;" class="text-left">
+                      <ng-container
+                        *ngIf="
+                          item.administrativeDetails.status === 'running' ||
+                          item.administrativeDetails.status === 'active' ||
+                          item.administrativeDetails.status === 'pending' ||
+                          item.administrativeDetails.status === 'waitingInList'
+                        "
+                      >
+                        <a routerLink="/app-paciente/teleconsulta/{{ item._id }}">
+                          <button class="rounded-pill btn-sm btn btn-primary" type="button">
+                            {{ 'clinicalFile.enter.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <div class="btn-group" style="display: none;">
+                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </div>
+
+                          <div class="dropdown-menu dropdown-menu-right" 
+                         >
+                            <button class="dropdown-item" type="button" routerLink="consulta/{{ item._id }}">
+                              {{ 'clinicalFile.enter.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                        <a routerLink="consulta/{{ item._id }}">
+                          <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                          </button>
+                        </a>
+                      </ng-container>
+                    </td>
+                    <td style="width: 5%;">
+                      <ng-container  *ngIf="
+                        item.administrativeDetails.status === 'appointed' ||
+                        item.administrativeDetails.status === 'waitingInList' ||
+                        item.administrativeDetails.status === 'waitingInRoom' ; else noCancel
+                        ">
+                        <div class="btn-group" style="cursor: pointer;">
+                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </div>
+                          <div class="dropdown-menu dropdown-menu-right"
+                          >
+                            <button *ngIf="
+                            item.administrativeDetails.status === 'appointed'
+                            "
+                            routerLink="reagendar-consulta/{{ item._id }}"
+                              class="dropdown-item"
+                              type="button"
+                            >
+                            {{ 'common.button.reschedule.label' | transloco }}
+                            </button>
+                            <button class="dropdown-item" type="button"  *ngIf="
+                            item.administrativeDetails.status === 'appointed' ||
+                            item.administrativeDetails.status === 'waitingInList' ||
+                            item.administrativeDetails.status === 'waitingInRoom'
+                            "
+                            (click)="idForCancel(item._id)" 
+                            data-toggle="modal"
+                            data-target="#cancelarCitaModal"
+                            
+                            >
+                              {{ 'common.button.cancel.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-template #noCancel>
+                        <div class="btn-group">
+                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"   class="disabled">
+                            <svg 
+                            
+                              width="1em"
+                              height="1em"
+                              viewBox="0 0 16 16"
+                              class="bi bi-three-dots"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                              />
+                            </svg>
+                          </div>
+                          <div class="dropdown-menu dropdown-menu-right d-none"
+                          >
+                            <button *ngIf="nextAppointed[0].dateDetails.date" 
+                            routerLink="reagendar-consulta/{{ nextAppointed[0]._id }}"
+                              class="dropdown-item"
+                              type="button"
+                            >
+                            {{ 'common.button.reschedule.label' | transloco }}
+                            </button>
+                            <button class="dropdown-item" type="button"  *ngIf="
+                            item.administrativeDetails.status === 'appointed' ||
+                            item.administrativeDetails.status === 'waitingInList' ||
+                            item.administrativeDetails.status === 'waitingInRoom'
+                            ">
+                              {{ 'common.button.cancel.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+                      </ng-template>
+                     
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+          <ngb-pagination [(page)]="page" [pageSize]="5" [collectionSize]="totalPages"></ngb-pagination>
+        </div>
+
+      </ng-container>
+      
+      <!--acceso mi salud-->
+      <div class="card bg-light mb-3 p-4" [ngClass]="{ 'heightFit': appointment === true }">
         <div class="card-body text-center h-100">
           <div class="card-text mb-2">
             <img src="assets/img/corazon-azul.svg" />
@@ -68,9 +430,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!--/acceso mi salud-->
     </div>
-    <div class="card-deck">
+
+    <!--tips home-->
+    <div *ngIf="!appointment" class="card-deck">
       <div class="card bg-light mt-3">
         <ng-container *ngIf="tips">
           <owl-carousel
@@ -117,7 +481,53 @@
           </owl-carousel>
         </ng-container>
       </div>
-    </div>
+    </div><!--tips home-->
   </div>
   <div class="col-12 col-md-4"></div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="cancelarCitaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+          {{ 'common.button.reschedule.title' | transloco }}  
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate="">
+          <!--[formGroup]="availabilityBlocked" -->
+          <div class="row">
+            <div class="form-group col text-center">
+              <p>
+                {{ 'common.button.reschedule.warning' | transloco }}  
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">
+          {{ 'common.button.volver.label' | transloco }}
+        </button>
+        <button type="button" 
+        class="btn btn-danger rounded-pill" 
+        data-dismiss="modal"  
+        (click)="cancelarCita(idCancel)"><!-- (click)="delete()"-->
+          {{ 'common.button.cancel.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

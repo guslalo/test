@@ -118,10 +118,10 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
-      lastName: ['', Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)],
-      motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
-      secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      lastName: ['', Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
+      motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: [null, Validators.required],
@@ -174,15 +174,22 @@ export class CrearUsuarioComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[A-Z])/),
-          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+          Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
           Validators.pattern(/^(?=.*[0-9])/),
-          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
           Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(16)])
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+            Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
+            Validators.pattern(/^(?=.*[0-9])/),
+            Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
+            Validators.pattern(/^.{8,16}$/),
+          ])
         ),
       },
       {
@@ -198,9 +205,6 @@ export class CrearUsuarioComponent implements OnInit {
       this.professionalForm,
       this.passwordForm
     );
-
-    this.birthDate = this.maxDate;
-    this.inmigrationDate = this.calendar.getToday();
 
     setTimeout(() => {
       this.validateForm();
@@ -430,7 +434,7 @@ export class CrearUsuarioComponent implements OnInit {
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate),
+        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',

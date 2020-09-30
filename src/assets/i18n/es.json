@@ -394,6 +394,9 @@
     "ended": {
       "label": "Finalizada"
     },
+    "reschedule": {
+      "label": "Reagendar"
+    },
     "canceled": {
       "label": "Cancelada"
     },
@@ -429,6 +432,9 @@
     },
     "edit": {
       "label": "Editar"
+    },
+    "deactivate": {
+      "label": "Desativar"
     },
     "callEnded": {
       "label": "Teleconsulta finalizada"
@@ -943,6 +949,9 @@
     "confirmAccount": {
       "label": "Confirmar Cuenta"
     },
+    "confirmAccountRecordatory": {
+      "label": "Ingresa el código de verificación de 6 dígitos que se ha enviado al email asociado a la cuenta"
+    },
     "verify": {
       "label": "Verificar"
     },
@@ -1226,7 +1235,7 @@
           "label": "Ocupacionales"
         },
         "others": {
-          "label": "Otros"
+          "label": "Alergias - Intervenciones Quirúrgicas - Otros"
         },
         "btnComplete": {
           "label": "Completar datos"
@@ -1408,6 +1417,9 @@
           }
         },
         "tooltips": {
+          "downloadXls": {
+            "label": "Descargar planilla excel"
+          },
           "uploadXls": {
             "label": "Subir lista excel"
           },
@@ -2123,6 +2135,9 @@
     "time": {
       "label": "Hora Agendada"
     },
+    "horary": {
+      "label": "Horario"
+    },
     "objetive": {
       "label": "Objetivo"
     },
@@ -2480,6 +2495,11 @@
     }
   },
   "common": {
+    "user": {
+      "sessionExpired": {
+        "label": "Sesión expirada"
+      }
+    },
     "input": {
       "email": {
         "label": "ingrese su email"
@@ -2506,6 +2526,11 @@
       },
       "addNew": {
         "label": "Agregar Nuevo"
+      },
+      "reschedule": {
+        "title": "¿Está seguro en cancelar la consulta?",
+        "label": "Reagendar",
+        "warning": "Considera que posiblemente perderás la consulta con este profesional"
       },
       "cancel": {
         "label": "Cancelar"
@@ -2551,6 +2576,9 @@
       },
       "next": {
         "label": "Siguiente"
+      },
+      "volver": {
+        "label": "Volver"
       },
       "create": {
         "label": "Crear"
@@ -2619,6 +2647,12 @@
       },
       "active": {
         "label": "Activo"
+      },
+      "pending": {
+        "label": "Pendiente"
+      },
+      "deactivate": {
+        "label": "Deshabilitado"
       }
     },
     "profile": {
@@ -2713,7 +2747,7 @@
             "label": "Primer apellido"
           },
           "secondSurname": {
-            "label": "Segundo Apellido"
+            "label": "Segundo nombre"
           },
           "surname": {
             "label": "Apellido"
@@ -2981,6 +3015,94 @@
     },
     "disabled": {
       "label": "Deshabilitado"
+    },
+    "weekDaysAbbr": {
+      "mon": {
+        "label": "Lun"
+      },
+      "tue": {
+        "label": "Mar"
+      },
+      "wed": {
+        "label": "Mie"
+      },
+      "thu": {
+        "label": "Jue"
+      },
+      "fri": {
+        "label": "Vie"
+      },
+      "sat": {
+        "label": "Sab"
+      },
+      "sun": {
+        "label": "Dom"
+      }
+    },
+    "sympthoms": {
+      "headness": {
+        "label": "Mareos"
+      },
+      "otherPain": {
+        "label": "Otro tipo de dolor"
+      },
+      "backPain": {
+        "label": "Dolor de espalda"
+      },
+      "generalDiscomfort": {
+        "label": "Malestar general"
+      },
+      "dificultyBreathing": {
+        "label": "Dificultad para respirar"
+      },
+      "nauseaVomit": {
+        "label": "Náuseas/vómitos"
+      },
+      "skinLesions": {
+        "label": "Lesiones en la piel"
+      },
+      "jointPain": {
+        "label": "Dolores articulares"
+      },
+      "nasalCongestion": {
+        "label": "Congestión nasal"
+      },
+      "soreThroat": {
+        "label": "Dolor de garganta"
+      },
+      "sprainsShock": {
+        "label": "Torceduras/golpes"
+      },
+      "bleeding": {
+        "label": "Sangramiento"
+      },
+      "urinaryDiscomfort": {
+        "label": "Molestias urinarias"
+      },
+      "cough": {
+        "label": "Tos"
+      },
+      "headache": {
+        "label": "Dolor de cabeza"
+      },
+      "abdominalPain": {
+        "label": "Dolor abdominal"
+      },
+      "fever": {
+        "label": "Fiebre"
+      },
+      "palpitations": {
+        "label": "Palpitaciones"
+      },
+      "chestPain": {
+        "label": "Dolor de pecho"
+      },
+      "bodyPain": {
+        "label": "Dolor de cuerpo"
+      },
+      "diarrhea": {
+        "label": "Diarrea"
+      }
     }
   },
   "profile": {
@@ -3239,39 +3361,39 @@
     "createAccount": {
       "title": "Crear cuenta",
       "label": "A continuación Ingrese sus datos para completar su registro.",
-      "isForeign": "Soy extranjero"
-    },
-    "identificationData": {
-      "label": "Datos de identificación"
-    },
-    "personalData": {
-      "label": "Datos personales"
-    },
-    "majorAge": {
-      "label": "¿Tengo más de 18 años?"
-    },
-    "birthData": {
-      "label": "Datos de nacimiento"
-    },
-    "address": {
-      "label": "Dirección"
-    },
-    "generatePassword": {
-      "title": "Generar clave"
-    },
-    "modal": {
-      "fail": {
-        "title": "¿Tienes más de 18 años?",
-        "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
+      "isForeign": "Soy extranjero",
+      "identificationData": {
+        "label": "Datos de identificación"
       },
-      "termAndConditions": {
-        "title": "Terminos y condiciones",
-        "btnCreate": "Crear cuenta",
-        "btnCancel": "Cancelar"
+      "personalData": {
+        "label": "Datos personales"
+      },
+      "majorAge": {
+        "label": "¿Tengo más de 18 años?"
+      },
+      "birthData": {
+        "label": "Datos de nacimiento"
+      },
+      "address": {
+        "label": "Dirección"
+      },
+      "generatePassword": {
+        "title": "Generar clave"
+      },
+      "modal": {
+        "fail": {
+          "title": "¿Tienes más de 18 años?",
+          "label": "Lo sentimos necesitas ser mayor de edad para poder ingresar"
+        },
+        "termAndConditions": {
+          "title": "Terminos y condiciones",
+          "btnCreate": "Crear cuenta",
+          "btnCancel": "Cancelar"
+        }
+      },
+      "hint": {
+        "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
       }
-    },
-    "hint": {
-      "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
     },
     "hintDisableUser": {
       "label": "Estas seguro de que deseas deshabilitar a este usuario?"

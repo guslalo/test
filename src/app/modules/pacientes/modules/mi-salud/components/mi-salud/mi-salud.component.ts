@@ -5,6 +5,7 @@ import { CurrentUserService } from './../../../../../../services/current-user.se
 import { UserLogin } from './../../../../../../models/models';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -13,6 +14,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   templateUrl: './mi-salud.component.html',
   styleUrls: ['./mi-salud.component.scss'],
 })
+
 export class MiSaludComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any;
@@ -44,7 +46,8 @@ export class MiSaludComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private documentService: DocumentService,
-    private medicalRecordService: MedicalRecordService
+    private medicalRecordService: MedicalRecordService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -121,7 +124,7 @@ export class MiSaludComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    ); /**/
+    );
   }
 
   putAddAntecedent(antecedent, object) {

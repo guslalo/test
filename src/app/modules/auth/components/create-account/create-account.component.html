@@ -14,7 +14,7 @@
       <!--/lang component-->
 
       <div class="row vertical-center h-100">
-        <div class="col-12 col-md-9 col-lg-8 mx-auto p-3 align-self-center">
+        <div class="col-12 col-md-9 col-lg-8 mx-auto py-3 align-self-center">
           <img class="d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms" />
           <div class="row">
             <div class="col">
@@ -159,7 +159,7 @@
                     matStepperNext
                     [disabled]="!identificationData.valid"
                   >
-                    {{ 'account.createAccount.personalData.label' | transloco }}
+                    {{ 'common.button.continue.label' | transloco }}
                   </button>
                 </div>
               </form>
@@ -208,10 +208,14 @@
                       {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
+                  <!--apellido-->
                   <div class="col-12 col-md-6">
-                    <label for="lastName">{{
-                      'common.forms.user.identification.firstSurname.label' | transloco
-                    }}</label>
+                    <label for="lastName">
+                     {{
+                      'common.forms.user.identification.secondSurname.label' | transloco
+                    }} <!---->
+                      <!--{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *-->
+                    </label>
                     <input
                       type="text"
                       name="lastName"
@@ -231,10 +235,13 @@
                 <!--/row-->
                 <!--row-->
                 <div class="form-row">
+                  <!--segundo apellido-->
                   <div class="form-group col-12 col-md-4">
-                    <label for="motherName"
-                      >{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *</label
-                    >
+                    <label for="motherName">
+                      <!--{{
+                        'common.forms.user.identification.firstSurname.label' | transloco
+                      }}-->
+                      {{ 'common.forms.user.identification.surname.label' | transloco }} *</label>
                     <input
                       type="text"
                       name="secondLastName"
@@ -393,7 +400,7 @@
                       matStepperNext
                       [disabled]="!personalData.valid"
                     >
-                      {{ 'account.createAccount.personalData.label' | transloco }}
+                      {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -420,7 +427,7 @@
                         id="birthdate"
                         [maxDate]="maxDate"
                         [minDate]="{ year: 1900, month: 1, day: 1 }"
-                        placeholder="yyyy-mm-dd"
+                        placeholder="DD/MM/YYYY"
                         name="birthdate"
                         ngbDatepicker
                         #d="ngbDatepicker"
@@ -527,7 +534,7 @@
                       matStepperNext
                       [disabled]="!birthData.valid"
                     >
-                      {{ 'account.createAccount.personalData.label' | transloco }}
+                      {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -677,7 +684,7 @@
                       matStepperNext
                       [disabled]="!addressData.valid"
                     >
-                      {{ 'account.createAccount.personalData.label' | transloco }}
+                      {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
                 </div>
@@ -806,7 +813,7 @@
                       (click)="submit()"
                       [disabled]="!passwordData.valid"
                     >
-                      {{ 'account.createAccount.personalData.label' | transloco }}
+                      {{ 'common.button.continue.label' | transloco }}
                     </button>
                   </div>
                 </div>

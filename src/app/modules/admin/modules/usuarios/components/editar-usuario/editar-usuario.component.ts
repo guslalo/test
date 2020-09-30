@@ -125,7 +125,7 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
       lastName: ['', Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)],
       motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
       secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
@@ -180,15 +180,22 @@ export class EditarUsuarioComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[A-Z])/),
-          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+          Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
           Validators.pattern(/^(?=.*[0-9])/),
-          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
           Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+            Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
+            Validators.pattern(/^(?=.*[0-9])/),
+            Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
+            Validators.pattern(/^.{8,16}$/),
+          ])
         ),
       },
       {
@@ -204,8 +211,6 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalForm,
       this.passwordForm
     );
-
-    this.inmigrationDate = this.calendar.getToday();
 
     setTimeout(() => {
       this.validateForm();
@@ -567,7 +572,7 @@ export class EditarUsuarioComponent implements OnInit {
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate),
+        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',

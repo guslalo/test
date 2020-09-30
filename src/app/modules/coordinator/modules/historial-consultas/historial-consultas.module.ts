@@ -14,9 +14,10 @@ import {
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { TeleconsultaComponent } from '../teleconsulta/components/index/index.component';
 
 @NgModule({
-  declarations: [IndexComponent],
+  declarations: [IndexComponent, TeleconsultaComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

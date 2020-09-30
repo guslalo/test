@@ -394,6 +394,9 @@
     "ended": {
       "label": "finalizados"
     },
+    "reschedule": {
+      "label": "Reagendar"
+    },
     "canceled": {
       "label": "Cancelado"
     },
@@ -429,6 +432,9 @@
     },
     "edit": {
       "label": "Editar"
+    },
+    "deactivate": {
+      "label": "Desativar"
     },
     "callEnded": {
       "label": "teleconsulta concluída"
@@ -943,6 +949,9 @@
     "confirmAccount": {
       "label": "Conta confirm"
     },
+    "confirmAccountRecordatory": {
+      "label": "Digite o código de verificação de 6 dígitos que foi enviado para o e-mail associado à conta"
+    },
     "verify": {
       "label": "Verifica"
     },
@@ -1226,7 +1235,7 @@
           "label": "Ocupacionais"
         },
         "others": {
-          "label": "Outros"
+          "label": "Alergias - Intervenções cirúrgicas - Outros"
         },
         "btnComplete": {
           "label": "Completar dados"
@@ -1408,6 +1417,9 @@
           }
         },
         "tooltips": {
+          "downloadXls": {
+            "label": "Baixar planilha do excel"
+          },
           "uploadXls": {
             "label": "Carregar lista excel"
           },
@@ -2123,6 +2135,9 @@
     "time": {
       "label": "Hora agendada"
     },
+    "horary": {
+      "label": "Cronograma"
+    },
     "objetive": {
       "label": "Objetivo"
     },
@@ -2480,6 +2495,11 @@
     }
   },
   "common": {
+    "user": {
+      "sessionExpired": {
+        "label": "Sessão expirada"
+      }
+    },
     "input": {
       "email": {
         "label": "Insira seu e-mail"
@@ -2506,6 +2526,11 @@
       },
       "addNew": {
         "label": "Adicionar novo"
+      },
+      "reschedule": {
+        "title": "¿Tem certeza que deseja cancelar a consulta?",
+        "label": "Reagendar",
+        "warning": "Considere que você pode perder a consulta com este profissional"
       },
       "cancel": {
         "label": "Cancelar"
@@ -2551,6 +2576,9 @@
       },
       "next": {
         "label": "Segue"
+      },
+      "volver": {
+        "label": "Retorna"
       },
       "create": {
         "label": "Crio"
@@ -2619,6 +2647,12 @@
       },
       "active": {
         "label": "Ativo"
+      },
+      "pending": {
+        "label": "Pendente"
+      },
+      "deactivate": {
+        "label": "Desativado"
       }
     },
     "profile": {
@@ -2981,6 +3015,94 @@
     },
     "disabled": {
       "label": "Desativado"
+    },
+    "weekDaysAbbr": {
+      "mon": {
+        "label": "Terç"
+      },
+      "tue": {
+        "label": "Terç"
+      },
+      "wed": {
+        "label": "Qua."
+      },
+      "thu": {
+        "label": "Qui."
+      },
+      "fri": {
+        "label": "Sex."
+      },
+      "sat": {
+        "label": "Sáb."
+      },
+      "sun": {
+        "label": "Dom."
+      }
+    },
+    "sympthoms": {
+      "headness": {
+        "label": "vertigens"
+      },
+      "otherPain": {
+        "label": "outra dor"
+      },
+      "backPain": {
+        "label": "Dor nas costas"
+      },
+      "generalDiscomfort": {
+        "label": "Mal estar, incomodo geral"
+      },
+      "dificultyBreathing": {
+        "label": "Dificuldade para respirar"
+      },
+      "nauseaVomit": {
+        "label": "Náuseas / vómitos"
+      },
+      "skinLesions": {
+        "label": "Lesões de pele"
+      },
+      "jointPain": {
+        "label": "dores nas articulações"
+      },
+      "nasalCongestion": {
+        "label": "Congestionamento nasal"
+      },
+      "soreThroat": {
+        "label": "Dor de garganta"
+      },
+      "sprainsShock": {
+        "label": "Entorses / Choque"
+      },
+      "bleeding": {
+        "label": "sangramento"
+      },
+      "urinaryDiscomfort": {
+        "label": "desconforto urinário"
+      },
+      "cough": {
+        "label": "Tosse"
+      },
+      "headache": {
+        "label": "Dor de cabeça"
+      },
+      "abdominalPain": {
+        "label": "Dor abdominal"
+      },
+      "fever": {
+        "label": "Febre"
+      },
+      "palpitations": {
+        "label": "taquicardia"
+      },
+      "chestPain": {
+        "label": "Dor no peito"
+      },
+      "bodyPain": {
+        "label": "Dor de corpo"
+      },
+      "diarrhea": {
+        "label": "Diarréia"
+      }
     }
   },
   "profile": {

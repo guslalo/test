@@ -1,11 +1,19 @@
+//angular
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+//environment
+import { environment } from 'src/environments/environment';
+
+//services
 import { AuthenticationService } from '../../services/authentication.service';
-// import { CurrentUserService } from '../../../../services/current-user.service'
 import { UsersService } from '../../services/users.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { UserLogin } from '../../../../models/models';
 import { AppointmentsService } from './../../../../services/appointments.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+// import { CurrentUserService } from '../../../../services/current-user.service'
+
+//models
+import { UserLogin } from '../../../../models/models';
 
 // translate
 import { TranslocoService } from '@ngneat/transloco';
@@ -17,14 +25,20 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public UserLogin: UserLogin;
-  formLogin: FormGroup;
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
 
+  public UserLogin: UserLogin;
+  public formLogin: FormGroup;
   public user: any = {};
   public users: any = [];
   public currentUser: any = {};
   public errorMsg: string;
   public showPassword: boolean;
+  public recaptcha: boolean;
+  public errorLogin:number;
+  public production:boolean;
 
   constructor(
     private translocoService: TranslocoService,
@@ -38,13 +52,23 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.errorLogin = 0;
     localStorage.clear();
     this.spinner.hide();
-
-    this.formLogin = this.formBuilder.group({
-      username: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
-    });
+    if( environment.production === false ){
+      this.production = false;
+      this.recaptcha = false
+      this.formLogin = this.formBuilder.group({
+        username: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required]),
+      });
+     } else {
+       this.production = true;
+       this.formLogin = this.formBuilder.group({
+        username: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required]),
+      })
+    }  
   }
 
   setActiveLang(lang: string) {
@@ -56,7 +80,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this.authenticationService.loginUser(this.user.username, this.user.password).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         localStorage.setItem('token', JSON.stringify(data.access_token));
         this.currentUser = new UserLogin(
           data.id,
@@ -85,7 +109,6 @@ export class LoginComponent implements OnInit {
             }
             break;
           case 'coordinator':
-            // MULTIPROFILE
             if (data.internalCode === 6) {
               this.router.navigate(['context']);
             } else {
@@ -115,6 +138,18 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
       },
       (err) => {
+        this.errorLogin ++
+        if(this.errorLogin > 3){
+          this.recaptcha = true;
+          if(this.recaptcha === true){
+              this.formLogin = this.formBuilder.group({
+                username: new FormControl(null, [Validators.required, Validators.email]),
+                password: new FormControl(null, [Validators.required]),
+                recaptchaReactive: new FormControl(null, [Validators.required]),    
+            })
+          }
+        }
+        console.log(this.errorLogin);
         this.spinner.hide();
         this.errorMsg = err.error.message;
         console.log(err);

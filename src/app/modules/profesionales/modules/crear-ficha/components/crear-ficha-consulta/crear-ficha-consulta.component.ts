@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -8,6 +8,10 @@ import { UserLogin } from './../../../../../../models/models';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+
+
+
 
 declare var $: any;
 
@@ -17,11 +21,13 @@ declare var $: any;
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
 export class CrearFichaConsultaComponent implements OnInit {
+  public idConsulta:any;
   public appointmentDetail: any;
   public access_token: any;
   public downloadUrl: any;
   public user: any;
   public userId: any;
+  public category: any;
   public timeline: any;
   public fecha: any;
   public professionalData: any;
@@ -45,7 +51,23 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDocuments: any;
   public urlSibrare: any;
   public videoCall:boolean;
-  public descargar:boolean
+  public descargar:boolean;
+  public addExamen: FormGroup;
+  public base64: any;
+  public nameFile: any;
+  public textInputFile: any;
+  public photoUrlBase = environment.photoUrlBase;
+  public elemntoId: string;
+  public elemntoValue: string;
+  public antecedente: string;
+  sicknessIsCollapsed: boolean = true;
+  familiarHistoryIsCollapsed: boolean = true;
+  healthHabitsIsCollapsed: boolean = true;
+  medicinesIsCollapsed: boolean = true;
+  occupationalIsCollapsed: boolean = true;
+  othersIsCollapsed: boolean = true;
+  public addValidator: boolean;
+  public modelAntecedente: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,12 +75,14 @@ export class CrearFichaConsultaComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
     private router: Router,
+    private medicalRecordService: MedicalRecordService,
     private _formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
+    this.textInputFile = 'seleccionar archivo';
     this.spinner.show();
     this.permisoGuardar = false;
     this.route.params.subscribe((params) => {
@@ -124,6 +148,17 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.notes = this._formBuilder.group({
       notes: [''],
     });
+
+    this.addExamen = this._formBuilder.group({
+      name: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      data: [null, [Validators.required]],
+    });
+  }
+
+  enviarId(id){
+    console.log(id)
+    this.idConsulta = id;
   }
 
   //update appointmentDetails
@@ -160,6 +195,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   //update appointmentDetails
   putNotes(appointmentId) {
+  
     console.log(this.notes.controls.notes.value);
     let appointmentObject = {
       appointmentDetails: {
@@ -300,6 +336,46 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  resetValue() {
+    this.textInputFile = 'seleccionar archivo';
+  }
+
+  addExamenPost() {
+    console.log(this.userId);
+    const formObject = {
+      name: this.nameFile,
+      type: this.addExamen.controls.type.value,
+      file: this.base64.split(',')[1],
+    };
+    this.putAddExamen(formObject, this.userId);
+  }
+
+  putAddExamen(object, id: string) {
+    this.medicalRecordService.putAddExamen(object, id).subscribe(
+      (data) => {
+        console.log(data);
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  openFile(event) {
+    const file = event.target.files[0];
+    this.nameFile = event.target.files[0].name;
+    this.textInputFile = event.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      //console.log(reader.result);
+      this.base64 = reader.result;
+      this.base64.split(',')[1];
+      console.log(this.base64.split(',')[1]);
+    };
+  }
+
   getSession(id: string) {
     this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
@@ -334,7 +410,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getAppointmentsTimeline(id) {
-    this.appointmentsService.getAppointmentsTimelineMilestone(id).subscribe(
+    this.appointmentsService.getAppointmentsTimeline().subscribe(
       (data) => {
         this.timeline = data.payload;
         console.log(this.timeline);
@@ -456,4 +532,75 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
+
+  //antecedentes//
+
+  categoryChangue(category?) {
+    this.addValidator = false;
+    console.log(category);
+    this.modelAntecedente = '';
+    //console.log(category);
+    this.category = category;
+    //return category
+  }
+
+  /*
+  hasAntecedents(antecedent, boolean) {
+    this.medicalRecordService(antecedent, boolean).subscribe(
+      (data) => {
+        this.medicalRecordService.getByUserId().subscribe((data) => {
+          this.exams = data.payload.exams;
+          this.antecedentes = data.payload.antecedent;
+        });
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }*/
+  
+  add(category){
+    console.log(this.modelAntecedente);
+    this.putAddAntecedent(category, this.modelAntecedente);
+  }
+  
+  putAddAntecedent(antecedent, object){
+    this.appointmentsService.postAntecedentes(this.appointmentId, antecedent, object).subscribe(
+      data => {
+        console.log(data);
+        this.category = '';
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+        //this.getMedicalRecord(this.appointmentId);
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+  
+  delete() {
+    this.appointmentsService.deleteAntecedentes(this.appointmentId, this.antecedente, this.elemntoId).subscribe(
+      (data) => {
+        console.log(data);
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  //  //borrar antecedente
+  preDelete(item, event) {
+    let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(antecedent);
+    this.antecedente = antecedent;
+    this.elemntoId = item.id;
+    this.elemntoValue = item.value;
+  }
+
+
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 
 @Component({
@@ -15,21 +15,9 @@ export class ConfirmAccountComponent implements OnInit {
 
   email_format: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private registerUser: RegisterService,
-    private router: Router,
-    private routerAct: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
 
-  ngOnInit(): void {
-    const email: string = this.routerAct.snapshot.params.email;
-    var splitEmail = email.split('@');
-    var domain = splitEmail[1];
-    var name = splitEmail[0];
-    this.email_format = name.substring(0, 3).concat('*********@').concat(domain);
-    // console.log(this.email_format);
-  }
+  ngOnInit(): void {}
 
   // todo: crear aviso registro exitoso
   confirmAccount(code) {

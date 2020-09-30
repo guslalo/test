@@ -18,7 +18,7 @@
         <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation" (click)="refreshSearch()">
+          <li class="nav-item" role="presentation" (click)="refreshSearchSpecialty()">
             <a
               class="nav-link active"
               id="home-tab4"
@@ -57,14 +57,16 @@
                   (click)="bloquearSelect = true"
                   (click)="bloquearFecha = true"
                   (change)="onChangeTypeProfesional($event.target.value)"
+                  id="searchProfessionalInput2"
                 >
-                  <option selected>Selecciona</option>
+                  <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
                   <ng-container *ngFor="let item of medicalSpecialties">
-                    <option value="{{ item._id }}" (click)="refreshSearch()">{{ item.name }}</option>
+                    <option value="{{ item._id }}">{{ item.name }}</option>
                   </ng-container>
                 </select>
               </div>
 
+              <!--sub especialidad-->
               <div class="form-group">
                 <label class="font-weight-bold text-left w-100">{{
                   'dashboard.home.newService.type.specialty.label' | transloco
@@ -73,9 +75,11 @@
                   class="form-control custom-select"
                   (change)="onChangeTypeSpecialtiesId($event.target.value)"
                   [disabled]="bloquearSelect"
+                  [disabled]="bloquearSelect3"
+                  id="selectSpecialtiesId"
                 >
                   <!--{{item.medicalSpecialtyId}}-->
-                  <option selected>{{ 'common.select.label' | transloco }}</option>
+                  <option value="none" selected>-{{ 'common.select.label' | transloco }}-</option>
                   <ng-container *ngFor="let item of specialtiesId">
                     <option value="{{ item._id }}">{{ item.specialtyName }} </option>
                   </ng-container>
@@ -85,13 +89,14 @@
           </div>
 
           <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
-            <div class="form-group">
+            <div class="form-group boxbusqueda">
               <label class="font-weight-bold text-left w-100">{{
                 'clinicalFile.patientData.tabs.doctor.label' | transloco
               }}</label>
               <input
                 *ngIf="professionals"
                 type="text"
+                id="searchProfessionalInput"
                 class="form-control"
                 placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                 [matAutocomplete]="auto"
@@ -127,7 +132,7 @@
               class="form-control"
               id="birthdate"
               [minDate]="minDate"
-              placeholder="yyyy-mm-dd"
+              placeholder="DD/MM/YYYY"
               name="birthdate"
               [(ngModel)]="model"
               ngbDatepicker
@@ -173,7 +178,17 @@
                   <div class="col-6">
                     <div class="row">
                       <div class="col-2 text-center">
-                        <img src="assets/img/doctor-foto.svg" />
+                        <div class="text-center boxImg rounded">
+                          <img src="assets/img/profile.png" />
+                          <!--
+                          <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
+                            <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                          </ng-container>
+                          <ng-template #noPhoto>
+                            <img src="assets/img/profile.png" />
+                          </ng-template>-->
+                         
+                        </div>
                       </div>
                       <!--professionals details-->
                       <div class="col-10">
@@ -268,7 +283,7 @@
                         'clinicalFile.selectSymptoms.label' | transloco
                       }}</label>
                       <select class="form-control custom-select w-100" (change)="onChange($event.target)">
-                        <option selected>Seleccione síntoma</option>
+                        <option selected disabled>Seleccione síntoma</option>
                         <ng-container *ngFor="let item of symptoms">
                           <option value="{{ item._id }}">{{ item.name }}</option>
                         </ng-container>
@@ -476,6 +491,43 @@
           class="btn btn-secondary"
           data-dismiss="modal"
           routerLink="{{ urlConfirmacion }}"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="reagendado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100" id="exampleModalLabel">
+          Su consulta ha sido reagendada
+          <!--
+          {{ 'clinicalFile.payService.label' | transloco }}-->
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <div *ngIf="appointmentRescheduledObject" class="text-center">
+         <p>Profesional: Dr: 
+          {{appointmentRescheduledObject.professionalDetails.userDetails[0].name}} 
+          {{appointmentRescheduledObject.professionalDetails.userDetails[0].lastName}}</p> 
+
+          <p> Fecha: {{appointmentRescheduledObject.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}</p>
+         <p>  Hora: {{appointmentRescheduledObject.dateDetails.start}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
         >
           Cerrar
         </button>

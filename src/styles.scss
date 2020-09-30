@@ -769,16 +769,45 @@ table {
   }
   &.primary {
     background: $color-primary;
-
-    * {
-      color: #ffffff !important;
+    table {
+      p {
+        color: #ffffff;
+      }
+      svg {
+        cursor: pointer;
+        color: #ffffff;
+      }
     }
-  }
-  table {
     tbody {
       tr {
         &:hover {
           background-color: none !important;
+        }
+        td{
+          color: #ffffff;
+        }
+      }
+    }
+    /** {
+      color: #ffffff !important;
+    }*/
+  }
+  table {
+    /*
+    p {
+      color: #ffffff;
+    }
+    svg {
+      cursor: pointer;
+      color: #ffffff;
+    }*/
+    tbody {
+      tr {
+        &:hover {
+          background-color: none !important;
+        }
+        td{
+          //color: #ffffff;
         }
       }
     }
@@ -931,9 +960,17 @@ button.custom-btn-1 {
   width: 48px !important;
   height: 48px !important;
   padding: 0px;
-}
-button.custom-btn-1:hover {
-  background-color: #ddd;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  &:disabled {
+    background-color: #fff;
+    &:hover {
+      background-color: #fff;
+    }
+  }
 }
 
 .dropdown-toggle::after {
@@ -944,7 +981,7 @@ button.custom-btn-1:hover {
   height: 100vh !important;
   overflow: hidden;
   iframe {
-    height: 100vh !important;
+    //height: 100vh !important;
   }
 }
 
@@ -1018,9 +1055,9 @@ ngb-timepicker .ngb-tp-hour {
     background: white;
     position: fixed;
     padding: 20px 11%;
-    width:calc(96% - 225px);
+    width: calc(96% - 225px);
     box-shadow: 0 1.125rem 1.25rem rgba(0, 0, 0, 0.075) !important;
-    z-index: 2;
+    z-index: 3;
     .leftwatermark {
       display: none !important;
     }
@@ -1028,10 +1065,14 @@ ngb-timepicker .ngb-tp-hour {
       padding: 10px 6px 0px 6px;
       box-shadow: none !important;
     }
-    top:10px;
+    top: 10px;
     .meetPatient2 {
       width: 100% !important;
       height: 250px !important;
     }
   }
+}
+
+.disabled {
+  opacity: 0.2;
 }

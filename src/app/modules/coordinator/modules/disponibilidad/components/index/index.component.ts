@@ -26,6 +26,7 @@ export class IndexComponent implements OnInit {
   dateAdapter = new CustomDateAdapter();
   moment: any = moment;
   ColumnMode = ColumnMode;
+  searchTerm: string = '';
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -80,6 +81,7 @@ export class IndexComponent implements OnInit {
   public disponibilidad: any;
   public disponibilidadObject = {};
   public disponibilidadArray = [];
+  public disponibilidadArrayTemp = [];
   public especialidad: any;
   public diasBloqueados: any;
   public createAvailability: FormGroup;
@@ -157,20 +159,17 @@ export class IndexComponent implements OnInit {
   showBlockedDays: Boolean = false;
 
   onCheckboxChange(e) {
-    const dailyDetails: FormArray = this.createAvailability.get('dailyDetails') as FormArray;
-
-    if (e.target.checked) {
-      dailyDetails.push(new FormControl(e.target.value));
+    // console.log(e.target.checked, value);
+    if (e.target.checked === true) {
+      this.daysSelected.push(e.target.value);
     } else {
-      let i = 0;
-      dailyDetails.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
-          dailyDetails.removeAt(i);
-          return;
+      for (var i = 0; i < this.daysSelected.length; i++) {
+        if (this.daysSelected[i] === e.target.value) {
+          this.daysSelected.splice(i, 1);
         }
-        i++;
-      });
+      }
     }
+    console.log(this.daysSelected);
   }
 
   initCalendar() {
@@ -236,6 +235,7 @@ export class IndexComponent implements OnInit {
       (data) => {
         // console.log(data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
+        this.disponibilidadArrayTemp = [...availabilities];
         this.disponibilidadArray = availabilities;
       },
       (error) => {
@@ -298,7 +298,7 @@ export class IndexComponent implements OnInit {
       dateDetails: {
         startDate: this.createAvailability.controls.startDate.value,
         endDate: this.createAvailability.controls.endDate.value,
-        days: this.createAvailability.controls.dailyDetails.value,
+        days: this.daysSelected,
         dailyRanges: [
           {
             start: this.toModel(this.createAvailability.controls.dailyRanges.value[0].start),
@@ -357,6 +357,8 @@ export class IndexComponent implements OnInit {
       .map((item) => item.value);
     console.log(id);
     console.log(this.createAvailability);
+    console.log(this.professionalSelected);
+
     const formObject = {
       id,
       administrativeDetails: {
@@ -364,6 +366,7 @@ export class IndexComponent implements OnInit {
         appointmentDuration: parseInt(this.createAvailability.controls.appointmentDuration.value),
       },
       professionalDetails: {
+        userId: this.professionalSelected,
         specialtyId: this.createAvailability.controls.specialty.value,
       },
       dateDetails: {
@@ -519,5 +522,32 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  applyFilters() {
+    const searchTerm = this.searchTerm.toLowerCase();
+    var temp = [];
+
+    temp = this.disponibilidadArrayTemp
+      // SEARCH FILTER
+      .filter((disp) => {
+        // console.log(disp);
+        return (
+          disp.dateDetails.startDate.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.endDate.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.dailyRanges[0].start.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.dateDetails.dailyRanges[0].end.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.administrativeDetails.objective.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          this.AllSpecialtyMap[disp.professionalDetails?.specialtyId]?.specialtyName
+            .toString()
+            .toLowerCase()
+            .indexOf(searchTerm) !== -1 ||
+          disp.professionalName[0].personalData.name.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          disp.professionalName[0].personalData.lastName.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          !searchTerm
+        );
+      });
+    this.disponibilidadArray = temp;
+    // console.log(temp);
   }
 }

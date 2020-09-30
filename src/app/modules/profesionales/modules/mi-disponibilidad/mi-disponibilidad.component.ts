@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, forkJoin } from 'rxjs';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-//import { FormsModule } from '@angular/forms';
+
 import { DatePipe } from '@angular/common';
-//import { NgbdTimepickerBasic } from './timepicker-basic';
 
 //services
 import { AvailabilityService } from '../../services/availability.service';
 import { ProfessionalService } from './../../../../services/professional.service';
 import { SpecialtiesService } from './../../../../services/specialties.service';
 import * as moment from 'moment';
-import { NgbDateStruct, NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateStruct,
+  NgbDateParserFormatter,
+  NgbTimeStruct,
+  NgbTimeAdapter,
+  NgbDatepickerConfig,
+} from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import esLocale from '@fullcalendar/core/locales/es';
 import ptLocale from '@fullcalendar/core/locales/pt';
@@ -129,11 +134,6 @@ export class MiDisponibilidadComponent implements OnInit {
     { min: '60', value: 60 },
   ];
 
-  especialidades: Array<any> = [
-    { min: 'Medicina general', value: 'Medicina general' },
-    { min: 'Cardiología', value: 'Cardiología' },
-    { min: 'Neurología', value: 'Neurología' },
-  ];
   minDate = undefined;
   minDateTermino = undefined;
 
@@ -288,6 +288,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
+            this.fetchCalendar();
           },
           (error) => {
             console.log(error);
@@ -461,13 +462,13 @@ export class MiDisponibilidadComponent implements OnInit {
         console.log(this.daysSelected);
 
         this.endDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.endDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.endDate).add('days').format('YYYY/MM/DD')
         );
         this.createAvailability.get('endDate').setValue(this.endDate);
         console.log(this.endDate);
 
         this.startDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.startDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.startDate).add('days').format('YYYY/MM/DD')
         );
         this.createAvailability.get('startDate').setValue(this.startDate);
 

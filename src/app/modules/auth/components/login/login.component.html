@@ -156,6 +156,15 @@
             <div class="row text-center">
               <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg }}</p>
             </div>
+            <re-captcha
+              *ngIf="production === true && recaptcha === true"
+              class="d-inline-block mt-3"
+              formControlName="recaptchaReactive"
+              id="recaptchaReactive"
+              name="recaptchaReactive"
+              (resolved)="resolved($event)"
+              siteKey="6LewNa4UAAAAAJ3En9CwBpPp_y3QkA5mfzTbl20k"
+            ></re-captcha>
           </form>
         </div>
       </div>

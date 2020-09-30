@@ -75,10 +75,10 @@ export class FinishRegistrationComponent implements OnInit {
       extraIdDocument: ['', null],
     });
     this.personalData = this._formBuilder.group({
-      name: [null, [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
-      lastName: [null, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)],
-      secondLastName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
-      motherName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZµùàçéèçÇ\s]*$/)]],
+      name: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      lastName: [null, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
+      secondLastName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      motherName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
       email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
@@ -102,15 +102,22 @@ export class FinishRegistrationComponent implements OnInit {
       {
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[A-Z])/),
-          Validators.pattern(/^(?=.*[a-z])/),
+          Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+          Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
           Validators.pattern(/^(?=.*[0-9])/),
-          Validators.pattern(/^(?=.*[$@$!%*?&])/),
+          Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
           Validators.pattern(/^.{8,16}$/),
         ]),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16)])
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-ZÁÉÍÓÚÜÑ])/),
+            Validators.pattern(/^(?=.*[a-záéíóúüñ])/),
+            Validators.pattern(/^(?=.*[0-9])/),
+            Validators.pattern(/^(?=.*[!@#\$%\^&\*\?_~\.\-\(\)\/])/),
+            Validators.pattern(/^.{8,16}$/),
+          ])
         ),
       },
       {

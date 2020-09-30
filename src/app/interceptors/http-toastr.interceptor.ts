@@ -13,7 +13,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class HttpToastrInterceptor implements HttpInterceptor {
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): any {
     return next.handle(request).pipe(
@@ -29,7 +29,7 @@ export class HttpToastrInterceptor implements HttpInterceptor {
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 400 || err.status == 500) {
-          this.toastr.error(err.error.message, `Status: ${err.status.toString()}`);
+          this.toastr.error(err.error.message || err.error[0], `Status: ${err.status.toString()}`);
         }
         return throwError(err);
       })

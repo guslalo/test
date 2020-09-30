@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-index',
@@ -9,33 +11,55 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 })
 export class IndexComponent implements OnInit {
   public consultas: any;
+  public consultasListaDeEspera: any;
   public currentUser: any = {};
-  public nextAppointed: any;
-  public consultasFinalizadas: any;
   public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/';
+
+  ColumnMode = ColumnMode;
+  moment: any = moment;
 
   constructor(public currentUserService: CurrentUserService, public appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
+    this.getAppointmentsWaitingRooms();
   }
 
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        let arrayForDate = data.payload.map((value) => value.dateDetails.date);
-        var min = arrayForDate[0];
-        arrayForDate.forEach((numero) => {
-          if (numero < min) {
-            min = numero;
-          }
-        });
-        this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
-        let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
-        this.consultasFinalizadas = finalizadas.length;
-        this.consultas = data.payload;
-        console.log(this.consultas);
+        // console.log(data.payload);
+        let filteredAppointments = data.payload
+          .sort((a, b) => {
+            var a: any = new Date(a.dateDetails?.date);
+            var b: any = new Date(a.dateDetails?.date);
+            return a - b;
+          })
+          .filter((finished) => finished.administrativeDetails.status !== 'finished');
+        this.consultas = filteredAppointments;
+        /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
+        var latest = new Date(Math.max.apply(null,dates));
+        var earliest = new Date(Math.min.apply(null,dates));*/
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAppointmentsWaitingRooms() {
+    this.appointmentsService.getAllAppointmentsWaitinRooms().subscribe(
+      (data) => {
+        console.log(data.payload);
+        let filteredAppointments = data.payload
+          .sort((a, b) => {
+            var a: any = new Date(a.dateDetails?.date);
+            var b: any = new Date(a.dateDetails?.date);
+            return a - b;
+          })
+          .filter((finished) => finished.administrativeDetails.status !== 'finished');
+        this.consultasListaDeEspera = filteredAppointments;
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
         var earliest = new Date(Math.min.apply(null,dates));*/

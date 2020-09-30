@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
-import { OpentokService } from '../../../services/opentok.service';
 import { AppointmentsService } from '../../../services/appointments.service';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -22,7 +21,6 @@ export class ConsultaComponent implements OnInit {
 
   constructor(
     private ref: ChangeDetectorRef,
-    private opentokService: OpentokService,
     private router: Router,
     private route: ActivatedRoute,
     private appointmentsService: AppointmentsService

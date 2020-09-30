@@ -182,6 +182,7 @@ export class IndexComponent implements OnInit {
   getAppointments() {
     this.appointmentsService.getAllAppointments(1).subscribe(
       (data) => {
+        console.log(data.payload);
         this.tempAppointments = [...data.payload];
         this.appointments = data.payload;
         // console.log(this.appointments);
@@ -238,8 +239,9 @@ export class IndexComponent implements OnInit {
             item.patientDetails.userDetails[0].identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
           item.patientDetails.userDetails[0]?.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
           item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-          moment(item.dateDetails.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
-          item.dateDetails.start.toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.professionalDetails.userDetails[0]?.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+          moment(item.dateDetails?.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
+          item.dateDetails?.start?.toLowerCase().indexOf(searchTerm) !== -1 ||
           !searchTerm
         );
       })
@@ -284,7 +286,9 @@ export class IndexComponent implements OnInit {
           item.patientDetails.userDetails[0]?.personalData.secondLastName ||
         item.patientDetails.userDetails[0]?.personalData.lastName,
       Fecha: moment(item.dateDetails.date).format('DD/MM/YYYY'),
-      Hora: item.dateDetails.start + ' hrs',
+      Hora: item.dateDetails.start
+        ? item.dateDetails.start + ' hrs'
+        : moment(item.dateDetails.createdAt).format('HH:mm') + ' hrs',
       Sala: 'S/R',
       Profesional:
         item.professionalDetails.userDetails[0]?.name + ' ' + item.professionalDetails.userDetails[0]?.lastName,
@@ -300,7 +304,7 @@ export class IndexComponent implements OnInit {
           : item.administrativeDetails.status === 'waitingInRoom'
           ? this.translationService.translate('clinicalFile.inWaitingRoom.label')
           : item.administrativeDetails.status === 'waitingInList'
-          ? this.translationService.translate('clinicalFile.inProgress.label')
+          ? this.translationService.translate('clinicalFile.inWaitingInList.label')
           : item.administrativeDetails.status === 'running'
           ? this.translationService.translate('clinicalFile.inProgress.label')
           : item.administrativeDetails.status === 'pending'
