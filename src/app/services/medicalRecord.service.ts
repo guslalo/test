@@ -24,6 +24,10 @@ export class MedicalRecordService {
     }
   }
 
+  downloadFromProfessional(userId?): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.medicalRecord + userId);
+  }
+
   getTimeline(userId?): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.appointements + 'timeline' + '?userId=' + userId);
   }

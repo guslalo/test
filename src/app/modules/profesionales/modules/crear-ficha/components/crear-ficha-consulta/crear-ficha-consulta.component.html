@@ -1675,7 +1675,7 @@
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                       <td>
-                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
+                        <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{userId}}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
                             {{ 'clinicalFile.patientData.tabs.prescriptions.table.btnDownload.label' | transloco }}
                           </button>
