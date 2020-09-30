@@ -341,7 +341,6 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   addExamenPost() {
-    
     console.log(this.userId);
     const formObject = {
       name: this.nameFile,

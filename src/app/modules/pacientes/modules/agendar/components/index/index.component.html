@@ -178,7 +178,17 @@
                   <div class="col-6">
                     <div class="row">
                       <div class="col-2 text-center">
-                        <img src="assets/img/doctor-foto.svg" />
+                        <div class="text-center boxImg rounded">
+                          <img src="assets/img/profile.png" />
+                          <!--
+                          <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
+                            <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                          </ng-container>
+                          <ng-template #noPhoto>
+                            <img src="assets/img/profile.png" />
+                          </ng-template>-->
+                         
+                        </div>
                       </div>
                       <!--professionals details-->
                       <div class="col-10">
