@@ -94,7 +94,7 @@ export class EditarUsuarioComponent implements OnInit {
     private roomsService: RoomsService,
     private calendar: NgbCalendar,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -293,11 +293,11 @@ export class EditarUsuarioComponent implements OnInit {
           .get('extraIdDocument')
           .setValue(
             user.identificationData.cbo ||
-              user.identificationData.pasep ||
-              user.identificationData.ctps ||
-              user.identificationData.idDocumentNumber ||
-              user.identificationData.titleVote ||
-              user.identificationData.professionalUfNumber
+            user.identificationData.pasep ||
+            user.identificationData.ctps ||
+            user.identificationData.idDocumentNumber ||
+            user.identificationData.titleVote ||
+            user.identificationData.professionalUfNumber
           );
 
         this.isSchool = user.personalData.isSchool;
@@ -729,6 +729,9 @@ export class EditarUsuarioComponent implements OnInit {
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
         uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
       });
     }
   }
