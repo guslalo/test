@@ -121,7 +121,7 @@ export class CreateAccountComponent implements OnInit {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
-      complement: ['', Validators.required],
+      complement: ['', null],
     });
     this.passwordData = new FormGroup(
       {

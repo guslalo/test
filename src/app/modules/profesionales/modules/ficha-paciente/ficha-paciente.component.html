@@ -97,7 +97,7 @@
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
-                    <i class="b">Sexo</i>
+                    <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.grender.label'  | transloco}}</i>
                     {{ patientRecord.personalData?.gender}}
                     <!---->
                     <!--
@@ -110,11 +110,11 @@
                     }}-->
                   </li>
                   <li>
-                    <i class="b">Edad</i>
+                    <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.age.label'  | transloco}}</i>
                     {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}
                   </li>
                   <li>
-                    <i class="b">Teléfono</i>
+                    <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.phone.label' | transloco}}</i>
                     {{ patientRecord.personalData?.phoneNumber || 'S/R' }}
                   </li>
                   <li>
