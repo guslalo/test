@@ -630,7 +630,8 @@
                   <div class="tab-pane fade p-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <!-- colappsed-->
                     <div class="collapseCustom">
-                      <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="false"
+                      <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="true"
+                      
                         aria-controls="collapseExample">
                         <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
@@ -649,7 +650,7 @@
                         <img src="assets/img/+.svg">
                       </div>
 
-                      <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                      <div class="collapse show"   id="sickness" *ngFor="let item of antecedentes">
                         <ul class="antecedentes">
                           <li class="pl-5">{{item.value}}
                             <div class="delete" data-toggle="modal" data-target="#eliminar"
@@ -686,7 +687,7 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse" id="familiarHistory"
+                        <div class="collapse show" id="familiarHistory"
                           *ngFor="let item of antecedentesGeneral.familiarHistory">
                           <ul class="antecedentes">
                             <li class="pl-5">{{item.value}}
@@ -721,7 +722,7 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                        <div class="collapse show" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
@@ -758,7 +759,7 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                        <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
@@ -795,7 +796,7 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                        <div class="collapse show" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
@@ -832,7 +833,7 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                        <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
@@ -1522,7 +1523,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title d-none" id="exampleModalLabel">Ficha consulta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="stopInterval()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -1532,7 +1533,7 @@
         <!--<iframe *ngIf="trustedUrl" frameBorder="0" width="100%" height="650" [src]="trustedUrl"></iframe>-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" (click)="stopInterval()">
           Cerrar
         </button>
       </div>

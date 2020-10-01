@@ -68,6 +68,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   othersIsCollapsed: boolean = true;
   public addValidator: boolean;
   public modelAntecedente: any;
+  public intervalGlobal:any
 
   constructor(
     private route: ActivatedRoute,
@@ -223,6 +224,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  stopInterval(){
+    //clearInterval(thisinterval);
+  }
+
   subirPrescripciones(type) {
     this.spinner.show();
     this.trustedUrl = '';
@@ -251,7 +256,7 @@ export class CrearFichaConsultaComponent implements OnInit {
                 this.getVerifiedSibrareDocuments(this.appointmentId);
               } else {
                 console.log(data);
-                //clearInterval(interval);
+                clearInterval(interval);
                 console.log('no verificado sin documentos');
               }
             },

@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
+declare var $:any;
+
 @Component({
   selector: 'app-mi-salud',
   templateUrl: './mi-salud.component.html',
@@ -35,6 +37,7 @@ export class MiSaludComponent implements OnInit {
   public textInputFile: any;
   public addValidator: boolean;
   public access_token: any;
+  public antecedentesGeneral:any;
 
   sicknessIsCollapsed: boolean = true;
   familiarHistoryIsCollapsed: boolean = true;
@@ -51,6 +54,9 @@ export class MiSaludComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    $('.collapse').on('hidden.bs.collapse', function () {
+      $('.collapse').eq(0).collapse('show');
+    })
     this.textInputFile = 'seleccionar archivo';
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -164,10 +170,15 @@ export class MiSaludComponent implements OnInit {
   getMedicalRecord() {
     this.medicalRecordService.getByUserId().subscribe(
       (data) => {
-        // console.log(data);
+        console.log(data);
         this.exams = data.payload.exams;
-        this.antecedentes = data.payload.antecedent;
-        // console.log(this.antecedentes);
+        this.antecedentesGeneral = data.payload.antecedent;
+        this.antecedentes = data.payload.antecedent.sickness;
+        /*
+        this.exams = data.payload.exams;
+        this.antecedentesGeneral = data.payload.antecedent;
+        this.antecedentes = data.payload.antecedent.sickness;
+        // console.log(this.antecedentes);*/
       },
       (error) => {
         console.log(error);
@@ -180,11 +191,29 @@ export class MiSaludComponent implements OnInit {
   }
 
   hasAntecedents(antecedent, boolean) {
+    console.log(antecedent, boolean);
+
+
     this.medicalRecordService.hasAntecedents(antecedent, boolean).subscribe(
       (data) => {
         this.medicalRecordService.getByUserId().subscribe((data) => {
           this.exams = data.payload.exams;
           this.antecedentes = data.payload.antecedent;
+         
+            this.medicalRecordService.getByUserId().subscribe(
+              (data) => {
+                console.log(data);
+            
+                console.log('filter',data.payload.antecedent.filter(antecedent));
+                this.exams = data.payload.exams;
+                this.antecedentes = data.payload.antecedent;
+                // console.log(this.antecedentes);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          
         });
         console.log(data);
       },
