@@ -326,7 +326,7 @@
                             <button *ngIf="
                             item.administrativeDetails.status === 'appointed'
                             "
-                            routerLink="reagendar-consulta/{{ item._id }}"
+                            routerLink="reagendar-consulta/{{ item._id }}/{{item.professionalDetails.specialtyId}}"
                               class="dropdown-item"
                               type="button"
                             >
