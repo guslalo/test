@@ -136,6 +136,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
 
     this.consultasForm = this._formBuilder.group({
+      motive: [''],
       objective: [''],
       anamnesis: [''],
     });
@@ -178,6 +179,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           comments: this.diagnostico.controls.comments.value,
           indications: this.diagnostico.controls.indications.value,
         },
+        motive: this.consultasForm.controls.motive.value,
         objective: this.consultasForm.controls.objective.value,
         anamnesis: this.consultasForm.controls.anamnesis.value,
         physicalExam: this.otros.controls.physicalExam.value,
@@ -256,12 +258,11 @@ export class CrearFichaConsultaComponent implements OnInit {
                 this.getVerifiedSibrareDocuments(this.appointmentId);
               } else {
                 console.log(data);
-                clearInterval(interval);
                 console.log('no verificado sin documentos');
               }
             },
             (error) => {
-              //clearInterval(interval);
+              clearInterval(interval);
               console.log(error);
             }
           ); /**/

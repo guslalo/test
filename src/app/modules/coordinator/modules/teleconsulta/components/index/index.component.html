@@ -37,7 +37,15 @@
               <div class="row">
                 <ng-container *ngIf="appointmentDetail.administrativeDetails.waitingRoomId === null; else salaEspera">
                   <div class="col-4 text-center">
-                    <img width="100" src="assets/profile.jpg" alt="img" />
+                    <div class="boxImg">
+                    <ng-container *ngIf="appointmentDetail.professionalDetails.userDetails[0].photo === null; else Photo">
+                      <img src="assets/img/profile.png" />
+                    </ng-container>
+                    <ng-template #Photo>
+                      <img src="{{ appointmentDetail.professionalDetails.userDetails[0].photo }}" />
+                      
+                    </ng-template>
+                  </div>
                   </div>
 
                   <div class="col-5">
