@@ -448,6 +448,7 @@ export class MiDisponibilidadComponent implements OnInit {
           });
         }
 
+
         console.log(daysSeletected);
 
         let filteredDays = this.days.filter((d, index) => {
@@ -461,6 +462,12 @@ export class MiDisponibilidadComponent implements OnInit {
         this.daysSelected = [...daysSeletected, ...filteredDays].sort((a, b) => {
           return a.id - b.id;
         });
+
+        this.daysSelected.forEach(e => {
+          e.name = this.days.find(d => d.value == e.value).name;
+        })
+
+        this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
 
         console.log(this.daysSelected);
 

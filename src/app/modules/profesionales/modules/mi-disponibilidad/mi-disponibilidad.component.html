@@ -450,7 +450,9 @@
             </div>
             <div class="row">
               <div class="form-group col">
-                <label for="endDate">Fecha inicio actual:
+                <label for="endDate">{{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.currentInitialDate.label' | transloco
+                }}:
                   {{ idAvailability.dateDetails.startDate | date: 'dd/MM/yyyy':'+0000' }}
                 </label>
                 <div class="input-group">
@@ -460,7 +462,7 @@
                 </div>
               </div>
               <div class="form-group col">
-                <label for="endDate">Fecha de término</label>
+                <label for="endDate">{{ 'common.endDate.label' | transloco }}</label>
                 <!-- formControlName="endDate"   id="endDate2"-->
                 <div class="input-group">
                   <input class="form-control" type="text" id="endDate" name="endDate" [minDate]="minDate" ngbDatepicker
@@ -481,7 +483,8 @@
             <div class="row">
               <!-- formControlName="appointmentDuration"-->
               <div class="form-group col">
-                <label for="appointmentDuration">Tiempo de Consulta (intervalo min)</label>
+                <label
+                  for="appointmentDuration">{{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.timming.label' | transloco }}</label>
                 <select class="form-control" id="appointmentDuration" formControlName="appointmentDuration">
                   <ng-container *ngFor="let item of interval">
                     <option value="{{ item.value }}">{{ item.value }}</option>
@@ -492,7 +495,10 @@
             <div class="row mt-2 mb-3">
               <div class="col-12">
                 <p>
-                  Disponibilidad de días actual: <b>{{ idAvailability.dateDetails.days }}</b>
+                  {{
+                    'dashboard.home.disponibilityManagment.modal.createDisponibility.disponibilityCurrentDay.label' | transloco
+                  }} <b
+                    *ngFor="let day of idAvailability.dateDetails.days; let isLast=last">{{ day | transloco }}{{isLast ? '' : ', '}}</b>
                 </p>
               </div>
               <div class="col">
@@ -501,7 +507,7 @@
                     <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
                       (change)="data.checked = !data.checked" [checked]="data.checked" />
                     <label class="custom-control-label" for="put{{ data.name }}">
-                      {{ data.name }}
+                      {{ data.name | transloco}}
                     </label>
                   </div>
                 </ng-container>
@@ -509,7 +515,9 @@
             </div>
             <div class="col-12">
               <p class="pl-0">
-                rango de horarios actual:<b>
+                {{
+                  'dashboard.home.disponibilityManagment.modal.createDisponibility.timeRange.label' | transloco
+                }}<b>
                   <ng-container *ngFor="let range of idAvailability.dateDetails.dailyRanges">
                     {{ range.start }} hrs - {{ range.end }} hrs
                   </ng-container>
