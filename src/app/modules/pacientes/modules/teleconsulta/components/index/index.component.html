@@ -7,9 +7,9 @@
     <div class="col-3 col-md-3">
       <button 
       *ngIf="
-      appointmentDetail.administrativeDetails.status !== 'active' || 
-      appointmentDetail.administrativeDetails.status !== 'running' || 
-      appointmentDetail.administrativeDetails.status !== 'finished' "
+      appointmentDetail.administrativeDetails.status === 'appointed' || 
+      appointmentDetail.administrativeDetails.status === 'waitingInList' || 
+      appointmentDetail.administrativeDetails.status === 'waitingInRoom' "
       class="btn btn-outline-primary rounded-pill" 
       (click)="idForCancel(appointmentDetail._id )" 
       data-toggle="modal"

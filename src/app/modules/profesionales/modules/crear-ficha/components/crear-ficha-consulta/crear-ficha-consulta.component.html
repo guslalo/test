@@ -306,7 +306,7 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row mt-3">
                         <div class="col-12 mb-4">
                           <label for="endBlock">{{ 'clinicalFile.anamnesis.label' | transloco }}</label>
                           <textarea class="form-control" rows="5" id="anamnesis" name="anamnesis"
@@ -479,7 +479,7 @@
                             {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}
                           </a>
 
-                          <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                          <div class="collapse show" id="sickness" *ngFor="let item of antecedentes">
                             <ul class="antecedentes">
                               <li class="pl-5">
                                 {{ item.value }}
@@ -504,7 +504,7 @@
                             {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }} Familiares
                           </a>
                           <ng-container *ngIf="antecedentesGeneral">
-                            <div class="collapse" id="familiarHistory"
+                            <div class="collapse show" id="familiarHistory"
                               *ngFor="let item of antecedentesGeneral.familiarHistory">
                               <ul class="antecedentes">
                                 <li class="pl-5">
@@ -531,7 +531,7 @@
                           </a>
 
                           <ng-container *ngIf="antecedentesGeneral">
-                            <div class="collapse" id="healthHabits"
+                            <div class="collapse show" id="healthHabits"
                               *ngFor="let item of antecedentesGeneral.healthHabits">
                               <ul class="antecedentes">
                                 <li class="pl-5" id="{{ item.id }}">
@@ -558,7 +558,7 @@
                           </a>
 
                           <ng-container *ngIf="antecedentesGeneral">
-                            <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                            <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
                               <ul class="antecedentes">
                                 <li class="pl-5" id="{{ item.id }}">
                                   {{ item.value }}
@@ -586,7 +586,7 @@
                           </a>
 
                           <ng-container *ngIf="antecedentesGeneral">
-                            <div class="collapse" id="occupational"
+                            <div class="collapse show" id="occupational"
                               *ngFor="let item of antecedentesGeneral.occupational">
                               <ul class="antecedentes">
                                 <li class="pl-5" id="{{ item.id }}">
@@ -612,7 +612,7 @@
                           </a>
 
                           <ng-container *ngIf="antecedentesGeneral">
-                            <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                            <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
                               <ul class="antecedentes">
                                 <li class="pl-5" id="{{ item.id }}">
                                   {{ item.value }}
@@ -952,7 +952,7 @@
                     {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}
                   </a>
 
-                  <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                  <div class="collapse show" id="sickness" *ngFor="let item of antecedentes">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
@@ -977,7 +977,7 @@
                     {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                   </a>
                   <ng-container *ngIf="antecedentesGeneral">
-                    <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
+                    <div class="collapse show" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
                       <ul class="antecedentes">
                         <li class="pl-5">
                           {{ item.value }}
@@ -1003,7 +1003,7 @@
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
-                    <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                    <div class="collapse show" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
                       <ul class="antecedentes">
                         <li class="pl-5" id="{{ item.id }}">
                           {{ item.value }}
@@ -1029,7 +1029,7 @@
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
-                    <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                    <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
                       <ul class="antecedentes">
                         <li class="pl-5" id="{{ item.id }}">
                           {{ item.value }}
@@ -1055,7 +1055,7 @@
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
-                    <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                    <div class="collapse show" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
                       <ul class="antecedentes">
                         <li class="pl-5" id="{{ item.id }}">
                           {{ item.value }}
@@ -1080,7 +1080,7 @@
                   </a>
 
                   <ng-container *ngIf="antecedentesGeneral">
-                    <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                    <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
                       <ul class="antecedentes">
                         <li class="pl-5" id="{{ item.id }}">
                           {{ item.value }}
