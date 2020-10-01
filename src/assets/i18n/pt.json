@@ -1004,6 +1004,20 @@
     },
     "personalBasicinfo": {
       "label": "Informações básicas de dados pessoais"
+    },
+    "complement": {
+      "label": "Dpto/Piso/Complemento"
+    },
+    "accept": {
+      "termsAndconditions": {
+        "label": "Eu li e aceitei os termos e condições"
+      },
+      "privacyPolicy": {
+        "label": "Eu li a política de privacidade"
+      },
+      "consent": {
+        "label": "Eu li o consentimento informado"
+      }
     }
   },
   "access": {
@@ -1656,6 +1670,9 @@
             },
             "timeRange": {
               "label": "variam dos tempos atuais:"
+            },
+            "currentInitialDate": {
+              "label": "Data de início atual"
             }
           }
         }
@@ -3018,7 +3035,7 @@
     },
     "weekDaysAbbr": {
       "mon": {
-        "label": "Terç"
+        "label": "Seg"
       },
       "tue": {
         "label": "Terç"
@@ -3103,6 +3120,9 @@
       "diarrhea": {
         "label": "Diarréia"
       }
+    },
+    "confirmDocsCreateAccount": {
+      "label": "Deve continuar a confirmar a seguinte"
     }
   },
   "profile": {
