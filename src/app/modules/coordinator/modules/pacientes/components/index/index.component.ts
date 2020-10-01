@@ -4,6 +4,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { PatientsService } from 'src/app/services/patients.service';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-index',
@@ -15,7 +16,7 @@ export class IndexComponent implements OnInit {
   public tempPatients = [];
   public prePatients: any[] = [];
   public tempPrePatients = [];
-  public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/';
+  public photoUrlBase = environment.photoUrlBase;
 
   moment: any = moment;
 
@@ -105,25 +106,26 @@ export class IndexComponent implements OnInit {
   applyFilters(tab: string) {
     const searchTerm = this.searchTerm.toLowerCase();
     var temp = [];
-
-    if (tab === 'patients') {
-      temp = this.tempPatients
-        // SEARCH FILTER
-        .filter((patient) => {
-          // console.log(patient);
-          return (
-            (patient.identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
-              patient.identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
-              patient.identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
-              patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
-            patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-            patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
-            patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
-            !searchTerm
-          );
-        });
-      this.patients = temp;
-    }
+    if(this.tempPatients) {
+      if (tab === 'patients') {
+        temp = this.tempPatients
+          // SEARCH FILTER
+          .filter((patient) => {
+            // console.log(patient);
+            return (
+              (patient.identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
+                patient.identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
+                patient.identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
+                patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
+              patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+              patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+              patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+              !searchTerm
+            );
+          });
+        this.patients = temp;
+      }
+   }
 
     if (tab === 'pre-patients') {
       temp = this.tempPrePatients
