@@ -85,6 +85,11 @@ export class AppointmentsService {
   }
 
   // getAppointmentsDetails
+  getAppointmentsTimelineUser(iduser): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.appointments + '/timeline?userId=' + iduser);
+  }
+
+  // getAppointmentsDetails
   getAppointmentsTimelineMilestone(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
