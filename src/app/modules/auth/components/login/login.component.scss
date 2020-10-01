@@ -38,7 +38,7 @@
 #login {
   //color:#f8f9fa;
   .left {
-    background-color: $color-primary2;
+    background-color: $color-primary;
     overflow: hidden;
   }
   .right {
@@ -169,4 +169,45 @@ button.calendar:active {
       }
     }
   }
+}
+
+
+.logoLogin{
+  width: 200px;
+  img {
+      width: 100%;
+  }
+}
+
+#wave {
+  position: absolute;
+  left:0px;
+  height: 70px;
+  width: 600px;
+  background: #e0efe3;
+    transform: rotate(270deg);
+}
+
+#wave:before {
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 100% 50%;
+        width: 340px;
+    height: 80px;
+    background-color: white;
+    right: -5px;
+    top: 35px;
+}
+
+#wave:after {
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 100% 50%;
+        width: 300px;
+    height: 70px;
+    background-color: #e0efe3;
+    left: 0;
+    top: 25px;
 }

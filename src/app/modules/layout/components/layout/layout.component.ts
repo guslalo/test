@@ -54,6 +54,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
   intervalCurrentTime: any;
   public inmediateAppointment: boolean;
+  currentDate: string;
   // public firstAccess:boolean;
 
   constructor(
@@ -77,7 +78,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   public state = 'open';
   public inmediateAppointmentPadre: boolean;
-  currentLang: string;
   status = false;
 
   ngOnInit(): void {
@@ -91,13 +91,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.inmediateAppointment = false;
     }
 
-    this.currentLang = this.translateService.getActiveLang();
-
-    // console.log(this.currentLang);
-    setTimeout(() => {
-      document.getElementById('current_date').innerHTML =
-        moment().locale(this.currentLang).format('LL') + ' | ' + moment().format('h:mm:ss a');
-    }, 1000);
+    setInterval(() => {
+      let currentLang = this.translateService.getActiveLang();
+      this.currentDate = moment().locale(currentLang).format('LL') + ' | ' + moment().format('h:mm:ss a');
+    }, 500)
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {

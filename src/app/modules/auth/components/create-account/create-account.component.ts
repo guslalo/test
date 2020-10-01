@@ -59,6 +59,10 @@ export class CreateAccountComponent implements OnInit {
   minDate = undefined;
   maxDate = undefined;
   showPassword: boolean;
+
+  termsAccepted: boolean = false;
+  privacyAccepted: boolean = false;
+  consentAccepted: boolean = false;
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
@@ -117,6 +121,7 @@ export class CreateAccountComponent implements OnInit {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
+      complement: ['', Validators.required],
     });
     this.passwordData = new FormGroup(
       {
@@ -271,6 +276,7 @@ export class CreateAccountComponent implements OnInit {
         neighborhood: this.form[3].neighborhood.value,
         street: this.form[3].street.value,
         streetNumber: parseInt(this.form[3].streetNumber.value),
+        complement: this.form[3].complement.value,
       },
       password: this.form[4].password.value,
     };

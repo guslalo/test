@@ -94,7 +94,7 @@ export class EditarUsuarioComponent implements OnInit {
     private roomsService: RoomsService,
     private calendar: NgbCalendar,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -293,11 +293,11 @@ export class EditarUsuarioComponent implements OnInit {
           .get('extraIdDocument')
           .setValue(
             user.identificationData.cbo ||
-              user.identificationData.pasep ||
-              user.identificationData.ctps ||
-              user.identificationData.idDocumentNumber ||
-              user.identificationData.titleVote ||
-              user.identificationData.professionalUfNumber
+            user.identificationData.pasep ||
+            user.identificationData.ctps ||
+            user.identificationData.idDocumentNumber ||
+            user.identificationData.titleVote ||
+            user.identificationData.professionalUfNumber
           );
 
         this.isSchool = user.personalData.isSchool;
@@ -735,5 +735,16 @@ export class EditarUsuarioComponent implements OnInit {
 
   removeRegistry(index) {
     this.professionalRegistry.splice(index, 1);
+  }
+
+  updateProfilePhoto(event: any) {
+    console.log('subiendo foto', event)
+    this.adminService.uploadUserProfilePhoto(event.target.files[0], '')
+      .then(data => {
+        this.professionalPhoto = data;
+      })
+      .catch(err => {
+
+      })
   }
 }

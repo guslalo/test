@@ -2,3 +2,14 @@
   overflow: hidden;
   height: 700px !important;
 }
+
+.boxImg {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  img{
+    width: 120%;
+    height: 100%;
+  }
+}
