@@ -75,7 +75,10 @@
                 </div>
                 <ng-template #dataInmediate>
                   <div class="col-5">
-                    <p class="p-0 font-weight-bold" id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}">
+                    <p
+                      class="p-0 font-weight-bold"
+                      id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}"
+                    >
                       {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
                       {{ appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
                     </p>
@@ -84,14 +87,12 @@
                         {{
                           'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
                         }}:
-                      
-                          {{ professionalData.professionalData.professionalTitle }}
-                        
+
+                        {{ professionalData.professionalData.professionalTitle }}
                       </li>
                     </ul>
                   </div>
                 </ng-template>
-                
               </div>
             </div>
           </div>
@@ -112,7 +113,10 @@
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"
+                    />
                     <path
                       fill-rule="evenodd"
                       d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
@@ -126,7 +130,6 @@
                   Fecha creación: {{ appoimentDetail.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
                 </p>
               </ng-template>
-
             </div>
           </div>
         </div>
@@ -252,54 +255,18 @@
                     {{ appoimentDetail.appointmentDetails.diagnosticDetails.diagnostic }}
                   </p>
                   <p>{{ appoimentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
-                  <p>{{ appoimentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
               </div>
               <!--/diagnostico-->
               <hr />
-              <!--objetivo-->
               <div>
                 <p class="title font-weight-bold mb-1">
-                  {{ 'disponibility.tabs.list.table.objetive.label' | transloco }}
+                  {{ 'clinicalFile.patientData.tabs.summary.indications.label' | transloco }}
                 </p>
                 <div>
-                  <p class="title">{{ appoimentDetail.appointmentDetails.objective }}</p>
+                  <p class="title">{{ appoimentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
               </div>
-              <!--/objetivo-->
-              <hr />
-
-              <div>
-                <p class="title font-weight-bold mb-1">
-                  {{ 'calendar.anamnesis.label' | transloco }}
-                </p>
-                <div>
-                  <p class="title">{{ appoimentDetail.appointmentDetails.anamnesis }}</p>
-                </div>
-              </div>
-              <!--/objetivo-->
-              <hr />
-
-              <div>
-                <p class="title font-weight-bold mb-1">
-                  {{ 'calendar.phisicalExam.label' | transloco }}
-                </p>
-                <div>
-                  <p class="title">{{ appoimentDetail.appointmentDetails.physicalExam }}</p>
-                </div>
-              </div>
-              <!--/objetivo-->
-              <hr />
-
-              <div>
-                <p class="title font-weight-bold mb-1">
-                  {{ 'clinicalFile.labAspects.label' | transloco }}
-                </p>
-                <div>
-                  <p class="title">{{ appoimentDetail.appointmentDetails.examHighlights }}</p>
-                </div>
-              </div>
-              <!--/objetivo-->
               <hr />
 
               <div class="d-none">
@@ -803,7 +770,7 @@
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left" *ngIf="item.professional">
-                                    {{ 'clinicalFile.dr.label' | transloco }} 
+                                    {{ 'clinicalFile.dr.label' | transloco }}
                                     {{ item.professional.name }}
                                     {{ item.professional.lastName }}
                                   </p>
@@ -852,4 +819,3 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
   <!-- <p style="color: white" > cargando...</p> -->
 </ngx-spinner>
-
