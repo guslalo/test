@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { PatientsService } from 'src/app/services/patients.service';
 import { environment } from 'src/environments/environment'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-index',
@@ -37,10 +38,12 @@ export class IndexComponent implements OnInit {
   constructor(
     private patientService: PatientsService,
     private formBuilder: FormBuilder,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
       name: ['', Validators.required],
@@ -62,6 +65,7 @@ export class IndexComponent implements OnInit {
         // console.log(data);
         this.tempPatients = [...data];
         this.patients = data;
+        this.spinner.hide();
       },
       (error) => {
         console.log(error);
@@ -193,4 +197,6 @@ export class IndexComponent implements OnInit {
       this.fetchPrePatients();
     }, 1000);
   }
+
+  
 }
