@@ -91,7 +91,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
-      this.getAppointmentsTimeline(id);
+   
     });
 
     this.user = new UserLogin(
@@ -412,7 +412,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getAppointmentsTimeline(id) {
-    this.appointmentsService.getAppointmentsTimeline().subscribe(
+    this.appointmentsService.getAppointmentsTimelineUser(id).subscribe(
       (data) => {
         this.timeline = data.payload;
         console.log(this.timeline);
@@ -484,6 +484,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        this.getAppointmentsTimeline(this.userId);
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);

@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { ProfessionalService } from 'src/app/services/professional.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-index',
@@ -21,7 +22,7 @@ export class IndexComponent implements OnInit {
   model2: NgbDateStruct;
   public timeline: any;
   public fecha: any;
-  public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/';
+  public photoUrlBase = environment.photoUrlBase;
 
   public patients = [];
   public tempPatients = [];

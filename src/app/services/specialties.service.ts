@@ -28,6 +28,11 @@ export class SpecialtiesService {
   getSpecialtiesId2(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.medicalSpecialties2);
   }
+  
+  //specialties
+  patchMedicalSpecialtiesId(id): Observable<any> {
+    return this.http.patch<any>(environment.baseUrl + this.specialties + '/' + id, { });
+  }
 
   //specialties
   getSpecialtiesForProfessional(id): Observable<any> {
