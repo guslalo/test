@@ -256,12 +256,11 @@ export class CrearFichaConsultaComponent implements OnInit {
                 this.getVerifiedSibrareDocuments(this.appointmentId);
               } else {
                 console.log(data);
-                clearInterval(interval);
                 console.log('no verificado sin documentos');
               }
             },
             (error) => {
-              //clearInterval(interval);
+              clearInterval(interval);
               console.log(error);
             }
           ); /**/
