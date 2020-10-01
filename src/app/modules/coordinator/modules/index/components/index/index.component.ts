@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
+import { environment } from 'src/environments/environment'
 import * as moment from 'moment';
 
 @Component({
@@ -13,7 +14,7 @@ export class IndexComponent implements OnInit {
   public consultas: any;
   public consultasListaDeEspera: any;
   public currentUser: any = {};
-  public photoUrlBase = 'https://itms-dev.s3-sa-east-1.amazonaws.com/';
+  public photoUrlBase = environment.photoUrlBase;
 
   ColumnMode = ColumnMode;
   moment: any = moment;
