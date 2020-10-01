@@ -69,6 +69,7 @@ export class IndexComponent implements OnInit {
   public objectDate:any;
   public appointmentRescheduled:any;
   public appointmentRescheduledObject:any;
+  public SpecialtiesId:any;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -91,12 +92,24 @@ export class IndexComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
       this.appointmentId = id;
+      this.SpecialtiesId = params.SpecialtiesId;
+     
+      console.log(params);
       console.log(id);
       if(id == undefined || id == ''){
         this.reagendar = false;
         console.log('reagendar', this.reagendar);
       }else{
+        this.bloquearFecha = false
         this.reagendar = true;
+        this.specialtiesService.patchMedicalSpecialtiesId(this.SpecialtiesId).subscribe(
+          data => {
+            console.log(data)
+          },
+          error => {
+            console.log(error)
+          }
+        )
         console.log('reagendar', this.reagendar);
       }
     });
@@ -221,8 +234,8 @@ export class IndexComponent implements OnInit {
 
       let object = {
         professionalDetails: {
-          specialtyId: item.professionalDetails.specialtyId,
-           userId: item.professionalDetails.userId
+          specialtyId: this.SpecialtiesId,
+          userId: item.professionalDetails.userId
         },
         dateDetails: {
           date:{
@@ -447,78 +460,48 @@ export class IndexComponent implements OnInit {
       year: date.year,
       day: date.day,
     }
-    if (this.flujoProfesional === true) {
-      const object = {
-        month: date.month,
-        year: date.year,
-        day: date.day,
-      };
 
-      this.reserve = {
-        professionalDetails: {
-          userId: this.reserve.professionalDetails.userId,
-          specialtyDetails: {
-            price: null,
+  if(this.reagendar === false) {
+      if (this.flujoProfesional === true) {
+        const object = {
+          month: date.month,
+          year: date.year,
+          day: date.day,
+        };
+
+        this.reserve = {
+          professionalDetails: {
+            userId: this.reserve.professionalDetails.userId,
+            specialtyDetails: {
+              price: null,
+            },
           },
-        },
-        professionalId: this.reserve.professionalDetails.userId,
-        dateDetails: {
-          date: {
-            year: object.year,
-            month: object.month,
-            day: object.day,
+          professionalId: this.reserve.professionalDetails.userId,
+          dateDetails: {
+            date: {
+              year: object.year,
+              month: object.month,
+              day: object.day,
+            },
+            start: null,
           },
-          start: null,
-        },
-      };
+        };
 
-      console.log(this.reserve);
-      console.log('flujo profesional');
-      this.blocks = [];
-      this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
-        (data) => {
-          console.log(data);
-          if (data.internalCode === 103) {
-            this.sinProfesionales = true;
-          } else {
-            this.blocks = data.payload;
-            this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
-            console.log(this.specialtiesIdReserve);
-            localStorage.removeItem('reserva');
-            localStorage.setItem('reserva', JSON.stringify(this.blocks));
-            console.log(data);
-            this.sinProfesionales = false;
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    } else {
-      console.log(date);
-      const object = {
-        month: date.month,
-        year: date.year,
-        day: date.day,
-      };
-
-      this.reserve.dateDetails.date = object;
-      console.log(this.reserve.professionalDetails.specialtyId);
-      console.log(object);
-      this.agendarService
-        .postBlocks(
-          object,
-          this.reserve.professionalDetails.specialtyId
-        )
-        .subscribe(
+        console.log(this.reserve);
+        console.log('flujo profesional');
+        this.blocks = [];
+        this.agendarService.postBlocksProfessionalId(object, this.reserve.professionalId).subscribe(
           (data) => {
-            this.blocks = data.payload;
-            localStorage.removeItem('reserva');
-            localStorage.setItem('reserva', JSON.stringify(this.blocks));
             console.log(data);
             if (data.internalCode === 103) {
               this.sinProfesionales = true;
             } else {
+              this.blocks = data.payload;
+              this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
+              console.log(this.specialtiesIdReserve);
+              localStorage.removeItem('reserva');
+              localStorage.setItem('reserva', JSON.stringify(this.blocks));
+              console.log(data);
               this.sinProfesionales = false;
             }
           },
@@ -526,8 +509,62 @@ export class IndexComponent implements OnInit {
             console.log(error);
           }
         );
-    }
+      } else {
+        console.log(date);
+        const object = {
+          month: date.month,
+          year: date.year,
+          day: date.day,
+        };
 
+        this.reserve.dateDetails.date = object;
+        console.log(this.reserve.professionalDetails.specialtyId);
+        console.log(object);
+        this.agendarService
+          .postBlocks(
+            object,
+            this.reserve.professionalDetails.specialtyId
+          )
+          .subscribe(
+            (data) => {
+              this.blocks = data.payload;
+              localStorage.removeItem('reserva');
+              localStorage.setItem('reserva', JSON.stringify(this.blocks));
+              console.log(data);
+              if (data.internalCode === 103) {
+                this.sinProfesionales = true;
+              } else {
+                this.sinProfesionales = false;
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
+    } else {
+      this.agendarService
+      .postBlocks(
+        this.objectDate,
+        this.SpecialtiesId
+      )
+      .subscribe(
+        (data) => {
+          this.blocks = data.payload;
+          localStorage.removeItem('reserva');
+          localStorage.setItem('reserva', JSON.stringify(this.blocks));
+          console.log(data);
+          if (data.internalCode === 103) {
+            this.sinProfesionales = true;
+          } else {
+            this.sinProfesionales = false;
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   //trae lso bloques

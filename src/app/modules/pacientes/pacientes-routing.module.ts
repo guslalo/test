@@ -23,7 +23,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
   },
   {
-    path: 'reagendar-consulta/:appointmentId',
+    path: 'reagendar-consulta/:appointmentId/:SpecialtiesId',
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
   },
   /*
