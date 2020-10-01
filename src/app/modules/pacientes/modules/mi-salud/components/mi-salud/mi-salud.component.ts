@@ -143,8 +143,8 @@ export class MiSaludComponent implements OnInit {
   //borrar antecedente
   preDelete(item, event) {
     let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
-    console.log(antecedent);
-    this.antecedente = antecedent;
+    console.log(event.target.parentNode.parentNode.parentNode.parentNode.id);
+    this.antecedente = event.target.parentNode.parentNode.parentNode.parentNode.id;
     this.elemntoId = item.id;
     this.elemntoValue = item.value;
   }
