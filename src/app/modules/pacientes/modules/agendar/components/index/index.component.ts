@@ -339,13 +339,14 @@ export class IndexComponent implements OnInit {
     localStorage.setItem('appointmentIdAgenda', consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
-        this.statusPago(consolidate.id);
+      
         this.consolidate = data.payload;
         btoa(this.blocks);
         console.log(data);
         console.log(this.consolidate.paymentUrl);
         if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
+          this.statusPago(consolidate.id);
         } else {
           //$('#sinPrecio').modal();
           this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
