@@ -189,11 +189,40 @@ export class AppointmentsService {
   }
 
   //subir antecedentes
+  getAntecedentByProfessional(appointmentId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', appointmentId);
+    return this.http.get<any>(
+      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/', { params: params });
+  }
+
+  //subir antecedentes
+  addAntecedentByProfessional(appointmentId, antecente, object): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', appointmentId);
+    return this.http.post<any>(
+      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/' + antecente + '/', 
+      { value:object },
+      { params: params }
+    );
+  }
+
+
+  //subir antecedentes
   deleteAntecedentes(appointmentId, antecente, idAntecedente): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.delete<any>(
       environment.baseUrl + this.eliminarAntecedentesMedico + antecente + '/' + idAntecedente + '/',  { params: params }
+    );
+  }
+
+  //subir antecedentes
+  deleteAntecedentesByProfessional(appointmentId, antecente, idAntecedente): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', appointmentId);
+    return this.http.delete<any>(
+      environment.baseUrl + this.eliminarAntecedentesMedico+'professional'+ '/'+ antecente + '/' + idAntecedente + '/',  { params: params }
     );
   }
 
