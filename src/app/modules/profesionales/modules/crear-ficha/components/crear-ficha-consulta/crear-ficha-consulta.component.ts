@@ -70,6 +70,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   public modelAntecedente: any;
   public intervalGlobal:any
 
+  public familiarHistoryByProfessional:any;
+  public healthHabitsByProfessional:any;
+  public medicinesByProfessional:any;
+  public occupationalByProfessional:any;
+  public othersByProfessional:any;
+  public sicknessByProfessional:any;
+
   constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
@@ -92,6 +99,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
+      this.getAntecedentByProfessional(this.appointmentId)
    
     });
 
@@ -344,6 +352,40 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  getAntecedentByProfessional(appointmentId) {
+    this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
+      (data) => {
+        console.log(data);
+        this.familiarHistoryByProfessional = data.payload.familiarHistory;
+        this.healthHabitsByProfessional = data.payload.healthHabits;
+        this.medicinesByProfessional = data.payload.medicines;
+        this.occupationalByProfessional = data.payload.occupational;
+        this.othersByProfessional = data.payload.others;
+        this.sicknessByProfessional = data.payload.sickness;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteAntecedentByProfessional(appointmentId) {
+    this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
+      (data) => {
+        console.log(data);
+        this.familiarHistoryByProfessional = data.payload.familiarHistory;
+        this.healthHabitsByProfessional = data.payload.healthHabits;
+        this.medicinesByProfessional = data.payload.medicines;
+        this.occupationalByProfessional = data.payload.occupational;
+        this.othersByProfessional = data.payload.others;
+        this.sicknessByProfessional = data.payload.sickness;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   resetValue() {
     this.textInputFile = 'seleccionar archivo';
   }
@@ -494,6 +536,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+
+
         console.log(this.appointmentDetail);
         if (this.appointmentDetail.administrativeDetails.status === 'running') {
           this.getSession(id);
@@ -575,12 +619,12 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
   
   putAddAntecedent(antecedent, object){
-    this.appointmentsService.postAntecedentes(this.appointmentId, antecedent, object).subscribe(
+    this.appointmentsService.addAntecedentByProfessional(this.appointmentId, antecedent, object).subscribe(
       data => {
         console.log(data);
         this.category = '';
+        this.getAntecedentByProfessional(this.appointmentId) 
         this.getAppointmentsDetailsRefresh(this.appointmentId);
-        //this.getMedicalRecord(this.appointmentId);
       },
       error => {
         console.log(error)
@@ -598,10 +642,24 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+    
+  }
+
+  deleteByProfessional() {
+    this.appointmentsService.deleteAntecedentesByProfessional(this.appointmentId, this.antecedente, this.elemntoId).subscribe(
+      (data) => {
+        console.log(data);
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+        this.getAntecedentByProfessional(this.appointmentId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 
-  //  //borrar antecedente
+  //borrar antecedente
   preDelete(item, event) {
     let antecedent = event.target.parentNode.parentNode.parentNode.parentNode.id;
     console.log(antecedent);

@@ -614,24 +614,22 @@
                         <!--/colappsed-->
                       </div>
                     </div>
-                  </div>
+                  </div><!--/tab info paciente-->
 
-                  <!--/tab info paciente-->
+                  <!--antecedentes by professional-->
                   <div class="tab-pane fade p-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <!-- colappsed-->
                     <div class="collapseCustom">
-                      <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="true"
-                      
-                        aria-controls="collapseExample">
+                      <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="true" aria-controls="collapseExample">
                         <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
                             fill="#7D7D7D" />
                         </svg>
-                        {{
-                      'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco
-                    }}
+                          {{
+                            'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco
+                          }}
                       </a>
                       <div class="add float-right" (click)="categoryChangue('sickness')" data-toggle="modal"
                         data-target="#add">
@@ -640,17 +638,15 @@
                         <img src="assets/img/+.svg">
                       </div>
 
-                      <div class="collapse show"   id="sickness" *ngFor="let item of antecedentes">
+                      <div class="collapse show"   id="sickness" *ngFor="let item of sicknessByProfessional">
                         <ul class="antecedentes">
                           <li class="pl-5">{{item.value}}
-                            <div class="delete" data-toggle="modal" data-target="#eliminar"
+                            <div class="delete" data-toggle="modal" data-target="#eliminar2"
                               (click)="preDelete(item, $event)">
                               <!--(click)="delete(item, $event)" -->
                               <img src="assets/img/delete.svg">
                             </div>
                           </li>
-
-                          <li style="display: none;">A medicamentos tipo C</li>
                         </ul>
 
                       </div>
@@ -668,8 +664,8 @@
                             fill="#7D7D7D" />
                         </svg>
                         {{
-                      'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco
-                    }}
+                          'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco
+                        }}
                       </a>
                       <div class="add float-right" data-toggle="modal" (click)="categoryChangue('familiarHistory')"
                         data-target="#add">
@@ -678,10 +674,10 @@
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
                         <div class="collapse show" id="familiarHistory"
-                          *ngFor="let item of antecedentesGeneral.familiarHistory">
+                          *ngFor="let item of familiarHistoryByProfessional">
                           <ul class="antecedentes">
                             <li class="pl-5">{{item.value}}
-                              <div class="delete" data-toggle="modal" data-target="#eliminar"
+                              <div class="delete" data-toggle="modal" data-target="#eliminar2"
                                 (click)="preDelete(item, $event)">
                                 <img src="assets/img/delete.svg">
                               </div>
@@ -712,11 +708,11 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse show" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                        <div class="collapse show" id="healthHabits" *ngFor="let item of healthHabitsByProfessional">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
-                              <div class="delete" data-toggle="modal" data-target="#eliminar"
+                              <div class="delete" data-toggle="modal" data-target="#eliminar2"
                                 (click)="preDelete(item, $event)">
                                 <img src="assets/img/delete.svg">
                               </div>
@@ -749,11 +745,11 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                        <div class="collapse show" id="medicines" *ngFor="let item of medicinesByProfessional">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
-                              <div class="delete" data-toggle="modal" data-target="#eliminar"
+                              <div class="delete" data-toggle="modal" data-target="#eliminar2"
                                 (click)="preDelete(item, $event)">
                                 <img src="assets/img/delete.svg">
                               </div>
@@ -786,16 +782,15 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse show" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                        <div class="collapse show" id="occupational" *ngFor="let item of occupationalByProfessional">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
-                              <div class="delete" data-toggle="modal" data-target="#eliminar"
+                              <div class="delete" data-toggle="modal" data-target="#eliminar2"
                                 (click)="preDelete(item, $event)">
                                 <img src="assets/img/delete.svg">
                               </div>
                             </li>
-                            <li style="display: none;">A medicamentos tipo C</li>
                           </ul>
 
                         </div>
@@ -823,11 +818,11 @@
                         <img src="assets/img/+.svg">
                       </div>
                       <ng-container *ngIf="antecedentesGeneral">
-                        <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
+                        <div class="collapse show" id="others" *ngFor="let item of othersByProfessional">
                           <ul class="antecedentes">
                             <li class="pl-5" id="{{item.id}}">
                               {{item.value}}
-                              <div class="delete" data-toggle="modal" data-target="#eliminar"
+                              <div class="delete" data-toggle="modal" data-target="#eliminar2"
                                 (click)="preDelete(item, $event)">
                                 <img src="assets/img/delete.svg">
                               </div>
@@ -1128,6 +1123,7 @@
             </div>
           </div>
         </div>
+
         <!--tab-->
         <div class="tab-pane fade" id="prescripacionesTab" role="tabpanel" aria-labelledby="prescripaciones">
           <div class="row mb-4 align-items-center">
@@ -1362,6 +1358,7 @@
           <div class="row"></div>
         </div>
         <!--/tab-->
+        
       </div>
       <!--/tabs-->
     </div>
@@ -1388,7 +1385,6 @@
     </div>
   </div>
 </div>
-
 
 <!--ingresar nota-->
 <div class="modal fade" tabindex="-1" id="ingresarNota">
@@ -1506,6 +1502,38 @@
   </div>
 </div>
 
+<!-- Modal eliminar antecedente-->
+<div class="modal fade" id="eliminar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">¿Deseas eliminar este
+          elemento?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate="">
+          <!--[formGroup]="availabilityBlocked" -->
+          <div class="row">
+            <div class="form-group col">
+              <h5 class="text-center w-100">{{elemntoValue}}</h5>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="deleteByProfessional()">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!--ver fichas historal-->
 <div class="modal fade" id="fichaConsulta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1579,8 +1607,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
