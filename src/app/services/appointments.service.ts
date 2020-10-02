@@ -202,7 +202,7 @@ export class AppointmentsService {
     params = params.append('appointmentId', appointmentId);
     return this.http.post<any>(
       environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/' + antecente + '/', 
-      {value:object},
+      { value:object },
       { params: params }
     );
   }
