@@ -228,6 +228,11 @@ export class IndexComponent implements OnInit {
 
   //selecionar bloque listado
   blockSelected(item, item2) {
+    console.log(this.blocks);
+    console.log(item)
+    this.blocks = item;
+    console.log( this.blocks)
+    //this.blocks = [ ]
     if(this.reagendar === true) {
       console.log(item, item2)
      item.date = new Date(); 
@@ -266,7 +271,8 @@ export class IndexComponent implements OnInit {
         }
       )/**/
     } else {
-    console.log(item);
+      console.log(item, item2)
+    //console.log(item);
     //console.log( item.professionalDetails.specialtyDetails[0].price);
     this.selectSintoma = true;
     this.reserve.dateDetails.start = item2;
@@ -306,6 +312,7 @@ export class IndexComponent implements OnInit {
       }
     )
   }
+
   refreshSearch(){
     $('#birthdate').removeAttr('value')
     $('#searchProfessionalInput').val('')
@@ -399,7 +406,7 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
-    this.blocks = [];
+    //this.blocks = [];
     this.flujoProfesional = true;
     this.bloquearFecha = false;
     //console.log(professional.userData[0]._id);
@@ -550,7 +557,7 @@ export class IndexComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.blocks = data.payload;
+          //this.blocks = data.payload;
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
@@ -577,7 +584,7 @@ export class IndexComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.blocks = data.payload;
+          //this.blocks = data.payload;
           localStorage.removeItem('reserva');
           localStorage.setItem('reserva', JSON.stringify(this.blocks));
           console.log(data);
