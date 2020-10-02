@@ -29,6 +29,7 @@ declare var $: any;
   styleUrls: ['./index.component.scss'],
   providers: [SafePipe],
 })
+
 export class IndexComponent implements OnInit {
   public specialties: string;
   public specialtiesId: string;
@@ -70,6 +71,7 @@ export class IndexComponent implements OnInit {
   public appointmentRescheduled:any;
   public appointmentRescheduledObject:any;
   public SpecialtiesId:any;
+  public blockSelectedByUser:any;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -231,6 +233,7 @@ export class IndexComponent implements OnInit {
     console.log(this.blocks);
     console.log(item)
     this.blocks = item;
+    this.blockSelectedByUser = item
     console.log( this.blocks)
     //this.blocks = [ ]
     if(this.reagendar === true) {
@@ -286,6 +289,7 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
         console.log(data);
+        this.appointmentId = data.payload.id
           this.consolidate = {
             id: data.payload.id,
             patientDetails: {
@@ -293,6 +297,7 @@ export class IndexComponent implements OnInit {
               description: null,
             },
           };
+          
         },
         (error) => {
           console.log(error);
@@ -339,16 +344,18 @@ export class IndexComponent implements OnInit {
     localStorage.setItem('appointmentIdAgenda', consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
-        this.statusPago(consolidate.id);
+      
         this.consolidate = data.payload;
         btoa(this.blocks);
         console.log(data);
         console.log(this.consolidate.paymentUrl);
         if (this.consolidate.paymentUrl) {
           $('#exampleModal').modal();
+          this.statusPago(consolidate.id);
         } else {
           //$('#sinPrecio').modal();
-          this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+          this.router.navigate(['resultado/' + this.appointmentId], { relativeTo: this.route });
+          //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
@@ -371,7 +378,8 @@ export class IndexComponent implements OnInit {
             clearInterval(interval);
             this.estadoPagado = true;
             $('#exampleModal').modal('hide');
-            this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+            this.router.navigate(['resultado/' + this.appointmentId], { relativeTo: this.route });
+            //this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
             console.log('pagado');
           }
         },
@@ -383,7 +391,7 @@ export class IndexComponent implements OnInit {
   }
 
   cerrarPago() {
-    this.router.navigate(['resultado/' + btoa(this.blocks)], { relativeTo: this.route });
+    this.router.navigate(['resultado/' + this.appointmentId], { relativeTo: this.route });
   }
 
   pago(url) {
@@ -504,7 +512,7 @@ export class IndexComponent implements OnInit {
               this.sinProfesionales = true;
             } else {
               this.blocks = data.payload;
-              this.specialtiesIdReserve = this.blocks[0]?.professionalDetails?.specialtyId || [];
+              this.specialtiesIdReserve = this.blocks?.professionalDetails?.specialtyId || [];
               console.log(this.specialtiesIdReserve);
               localStorage.removeItem('reserva');
               localStorage.setItem('reserva', JSON.stringify(this.blocks));
@@ -535,6 +543,7 @@ export class IndexComponent implements OnInit {
           .subscribe(
             (data) => {
               this.blocks = data.payload;
+              console.log()
               localStorage.removeItem('reserva');
               localStorage.setItem('reserva', JSON.stringify(this.blocks));
               console.log(data);
