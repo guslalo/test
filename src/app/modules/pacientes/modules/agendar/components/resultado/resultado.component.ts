@@ -16,6 +16,7 @@ export class ResultadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCall();
+
     /*this.appointmentId = localStorage.getItem('appointmentIdAgenda');
     console.log(this.appointmentId);
 
@@ -25,6 +26,7 @@ export class ResultadoComponent implements OnInit {
   initCall(): void {
     this.route.params.subscribe((params) => {
       const id = params.id;
+      this.appointmentId = params.appointmentId;
       console.log(params.appointmentId);
       this.getAppointmentDetails(params.appointmentId);
     });

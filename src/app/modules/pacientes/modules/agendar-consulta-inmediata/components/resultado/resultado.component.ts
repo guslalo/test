@@ -9,6 +9,7 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 })
 export class ResultadoComponent implements OnInit {
   public appointment: any;
+  public appointmentId:any;
 
   constructor(private route: ActivatedRoute, private appointmentsService: AppointmentsService) {}
 
@@ -20,6 +21,7 @@ export class ResultadoComponent implements OnInit {
 
   initCall(): void {
     this.route.params.subscribe((params) => {
+      this.appointmentId = params.appointmentId;
       const id = params.id;
       console.log(params.appointmentId);
       this.getAppointmentDetails(params.appointmentId);
