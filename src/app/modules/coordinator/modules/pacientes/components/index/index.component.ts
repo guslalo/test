@@ -62,9 +62,10 @@ export class IndexComponent implements OnInit {
   getPatients() {
     this.patientService.getAllPatients().subscribe(
       (data) => {
-        // console.log(data);
-        this.tempPatients = [...data];
+        console.log(data);
         this.patients = data;
+        this.tempPatients = [...data];
+      
         this.spinner.hide();
       },
       (error) => {
