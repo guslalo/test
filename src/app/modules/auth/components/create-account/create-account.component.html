@@ -413,9 +413,15 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <label for="uf">{{ 'account.uf.label' | transloco }} *</label>
-                    <select class="form-control" name="uf" formControlName="uf" [ngClass]="{
-                        'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
-                      }">
+                    <select 
+                      (change)="ufSelect($event.target)"
+                      class="form-control" 
+                      name="uf" formControlName="uf" 
+                      [ngClass]="
+                        {
+                          'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
+                        }"
+                    >
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
