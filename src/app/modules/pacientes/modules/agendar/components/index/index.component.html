@@ -387,8 +387,15 @@
       <div class="row align-items-center h-100">
         <div class="col-6 align-items-center">
           <div class="row align-items-center">
-            <div class="col-2 pr-0 text-center align-items-center">
-              <img src="assets/img/doctor-foto.svg" />
+            <div class="col-2 pr-0 text-center align-items-center"> 
+              <div class="boxImg rounded text-center d-inline-block">
+                <ng-container *ngIf="blocks[0].professionalDetails.userDetails[0].photo; else noPhoto">
+                  <img  src="{{ blocks[0].professionalDetails.userDetails[0].photo }}" />
+                </ng-container>
+                <ng-template #noPhoto>
+                  <img src="assets/img/profile.png" />
+                </ng-template>
+              </div>
             </div>
             <div class="col-10 align-items-center">
               <div class="box mr-3">
