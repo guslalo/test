@@ -302,6 +302,7 @@
                     <td style="width: 5%;">
                       <ng-container  *ngIf="
                         item.administrativeDetails.status === 'appointed' ||
+                        item.administrativeDetails.status === 'rescheduled' ||
                         item.administrativeDetails.status === 'waitingInList' ||
                         item.administrativeDetails.status === 'waitingInRoom' ; else noCancel
                         ">
@@ -324,7 +325,8 @@
                           <div class="dropdown-menu dropdown-menu-right"
                           >
                             <button *ngIf="
-                            item.administrativeDetails.status === 'appointed'
+                            item.administrativeDetails.status === 'appointed' ||
+                            item.administrativeDetails.status === 'rescheduled'
                             "
                             routerLink="reagendar-consulta/{{ item._id }}/{{item.professionalDetails.specialtyId}}"
                               class="dropdown-item"

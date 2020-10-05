@@ -232,11 +232,13 @@ export class IndexComponent implements OnInit {
   blockSelected(item, item2) {
     console.log(this.blocks);
     console.log(item)
-    this.blocks = item;
+    this.blocks = [item];
     this.blockSelectedByUser = item
     console.log( this.blocks)
+
     //this.blocks = [ ]
     if(this.reagendar === true) {
+    
       console.log(item, item2)
      item.date = new Date(); 
 
@@ -262,7 +264,7 @@ export class IndexComponent implements OnInit {
           this.appointmentRescheduledObject = data.payload
           $('#reagendado').modal('show', function(){
             this.getAppointmentDetail(this.appointmentId);
-          });
+          });/**/
 
           /*
           $('#reagendado').on('show.bs.modal', function (e) {
@@ -566,15 +568,28 @@ export class IndexComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          //this.blocks = data.payload;
-          localStorage.removeItem('reserva');
-          localStorage.setItem('reserva', JSON.stringify(this.blocks));
-          console.log(data);
-          if (data.internalCode === 103) {
-            this.sinProfesionales = true;
+          if(this.reagendar === true){
+            this.blocks = data.payload;
+            localStorage.removeItem('reserva');
+            localStorage.setItem('reserva', JSON.stringify(this.blocks));
+            console.log(data);
+            if (data.internalCode === 103) {
+              this.sinProfesionales = true;
+            } else {
+              this.sinProfesionales = false;
+            }
           } else {
-            this.sinProfesionales = false;
+            localStorage.removeItem('reserva');
+            localStorage.setItem('reserva', JSON.stringify(this.blocks));
+            console.log(data);
+            if (data.internalCode === 103) {
+              this.sinProfesionales = true;
+            } else {
+              this.sinProfesionales = false;
+            }
           }
+         
+       
         },
         (error) => {
           console.log(error);
