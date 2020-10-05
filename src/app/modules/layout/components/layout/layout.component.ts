@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private translateService: TranslocoService
   ) {
-    // 20 MINUTES DEFAULT
+    // 20 MINUTES DEFAULT 
     this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
       if (res) {
         console.log('session expired');
@@ -72,6 +72,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           document.location.href = '/';
         }, 3000);
+      }else {
+        console.log('reactivado');
+        this.bnIdle.resetTimer();
       }
     });
   }
