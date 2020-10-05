@@ -346,6 +346,11 @@ export class CreateAccountComponent implements OnInit {
     });
   }
 
+  ufSelect(id){
+    let idSelected = id.value.split(":");
+    console.log(idSelected[1]);
+  }
+
   getCities() {
     this.userService.getCities().subscribe((data) => {
       // console.log(data);

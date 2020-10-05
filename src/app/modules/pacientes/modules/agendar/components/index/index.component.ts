@@ -130,7 +130,7 @@ export class IndexComponent implements OnInit {
 
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       //clearInterval(this.interval);
-      this.atras();
+     // this.atras();
       //window.location.reload();
       console.log('closed');
     });
