@@ -6,7 +6,7 @@ export const environment = {
   apiKey: '',
   clientSecret: '',
   photoUrlBase: 'https://itms-prod.s3-sa-east-1.amazonaws.com/',
-  sessionTime: 1200,
+  sessionTime: 1200000,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
     authDomain: 'itms-d242b.firebaseapp.com',
