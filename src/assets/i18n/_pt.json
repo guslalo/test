@@ -2,7 +2,7 @@
   "history": {
     "tabs": {
       "latest": {
-        "label": "Últimas Consultas",
+        "label": "Ãšltimas Consultas",
         "table": {
           "id": "ID Pacientes",
           "name": "Nome de pacientes",
@@ -10,7 +10,7 @@
           "hour": "Hora",
           "room": "Sala",
           "state": "Estado",
-          "action": "Ação"
+          "action": "AÃ§Ã£o"
         }
       }
     }
@@ -46,10 +46,10 @@
               "label": "Tipo de documento"
             },
             "documentNumber": {
-              "label": "Nº de documento"
+              "label": "NÂº de documento"
             },
             "minicipality": {
-              "label": "Município de nascimento"
+              "label": "MunicÃ­pio de nascimento"
             },
             "nacionality": {
               "label": "Nacionalidade"
@@ -59,15 +59,15 @@
             }
           },
           "addressData": {
-            "title": "Dados de localização",
+            "title": "Dados de localizaÃ§Ã£o",
             "country": {
-              "label": "País"
+              "label": "PaÃ­s"
             },
             "city": {
               "label": "Cidade"
             },
             "address": {
-              "label": "Endereço"
+              "label": "EndereÃ§o"
             }
           }
         },
@@ -93,7 +93,7 @@
               "label": "Estado"
             },
             "action": {
-              "label": "Ação"
+              "label": "AÃ§Ã£o"
             }
           }
         },
@@ -102,10 +102,10 @@
             "background": {
               "label": "Antecedentes",
               "diseases": {
-                "label": "Doenças"
+                "label": "DoenÃ§as"
               },
               "habits": {
-                "label": "Hábitos de saúde"
+                "label": "HÃ¡bitos de saÃºde"
               },
               "meds": {
                 "label": "Medicamentos"
@@ -146,7 +146,7 @@
               "label": "Realizado por"
             },
             "action": {
-              "label": "Ação"
+              "label": "AÃ§Ã£o"
             },
             "btnView": {
               "label": "Ver documento"
@@ -157,7 +157,7 @@
           }
         },
         "prescriptions": {
-          "label": "Prescrições",
+          "label": "PrescriÃ§Ãµes",
           "table": {
             "type": {
               "label": "Tipo"
@@ -169,7 +169,7 @@
               "label": "Realizado por"
             },
             "action": {
-              "label": "Ação"
+              "label": "AÃ§Ã£o"
             },
             "btnDownload": {
               "label": "Download"
@@ -177,22 +177,22 @@
           }
         },
         "timeLine": {
-          "label": "Histórico de consultas"
+          "label": "HistÃ³ricos de consultas"
         },
         "summary": {
           "label": "Resumo da consulta",
           "title": "Resumo da consulta",
           "diagnosis": {
-            "label": "Diagnóstico"
+            "label": "DiagnÃ³stico"
           },
           "indications": {
-            "label": "Indicações"
+            "label": "IndicaÃ§Ãµes"
           },
           "medicalPrescription": {
             "label": "Receita"
           },
           "prescriptions": {
-            "label": "Prescrições"
+            "label": "PrescriÃ§Ãµes"
           },
           "synptoms": {
             "label": "Sintomas"
@@ -226,7 +226,7 @@
               "label": "IMC"
             },
             "imcClasification": {
-              "label": "Classificação IMC"
+              "label": "ClassificaÃ§Ã£o IMC"
             }
           },
           "btnDownload": {
@@ -236,7 +236,7 @@
         "patientHistory": {
           "label": "Antecedentes do paciente",
           "deceases": {
-            "label": "Doenças"
+            "label": "DoenÃ§as"
           },
           "familyHistory": {
             "label": "Antecedentes familiares"
@@ -245,41 +245,41 @@
             "label": "Medicamentos"
           },
           "habits": {
-            "label": "Hábitos de saúde"
+            "label": "HÃ¡bitos de saÃºde"
           }
         },
         "myHealth": {
-          "label": "Minha saúde"
+          "label": "Minha saÃºde"
         },
         "doctor": {
           "label": "Profissional"
         }
       },
       "title": "Ficha do paciente",
-      "label": "Dados do paciente"
+      "label": "Os dados do paciente"
     },
     "title": "Ficha da consulta",
     "identification": {
       "grender": {
-        "label": "Sexo"
+        "label": "sexo"
       },
       "age": {
-        "label": "Idade"
+        "label": "idade"
       },
       "nationality": {
-        "label": "Nacionalidade"
+        "label": "nacionalidade"
       },
       "id": {
-        "label": "Id atendimento"
+        "label": "id atendimento"
       },
       "phone": {
-        "label": "Telefone"
+        "label": "telefone"
       }
     },
     "status": {
-      "label": "Status da consulta",
+      "label": "query status",
       "id": {
-        "label": "Consulta ID:"
+        "label": "consulta ID:"
       }
     },
     "tooltips": {
@@ -288,45 +288,45 @@
       },
       "documents": {
         "prescriptions": {
-          "label": "Prescrições"
+          "label": "PrescriÃ§Ãµes"
         },
         "order": {
           "label": "Pedido de exame"
         },
         "license": {
-          "label": "Atestado médico"
+          "label": "Atestado mÃ©dico"
         }
       }
     },
     "viewMedCard": {
-      "label": "Visualizar ficha"
+      "label": "ficheiro See"
     },
     "newPatient": {
-      "label": "Novo paciente"
+      "label": "novo paciente"
     },
     "asociatedPatients": {
-      "label": "Pacientes atribuídos"
+      "label": "pacientes Associates"
     },
     "noAsociatedPatients": {
-      "label": "Não foram encontrados pacientes atribuídos"
+      "label": "Nenhum paciente foram encontrados associados"
     },
     "sendEmail": {
-      "label": "Enviar convite a e-mail"
+      "label": "Enviar convite para correio"
     },
     "noStoredPatients": {
-      "label": "Não existem pacientes atribuídos"
+      "label": "NÃ£o hÃ¡ internamento"
     },
     "emailSedSuccess": {
-      "label": "E-mail enviado com sucesso"
+      "label": "Correio enviada com sucesso"
     },
     "tutorAcount": {
-      "label": "Conta tutor"
+      "label": "conta tutor"
     },
     "mandatorySurname": {
       "label": "Segundo sobrenome"
     },
     "select": {
-      "label": "Selecionar"
+      "label": "Escolher"
     },
     "male": {
       "label": "Masculino"
@@ -335,13 +335,13 @@
       "label": "Feminino"
     },
     "acriveServices": {
-      "label": "Minhas consultas ativas"
+      "label": "Meus consultas ativas"
     },
     "noInfo": {
-      "label": "Sem informação"
+      "label": "Sem informaÃ§Ã£o"
     },
     "attend": {
-      "label": "Atender"
+      "label": "comparecer"
     },
     "apointmentWith": {
       "label": "Compromisso agendado com"
@@ -353,34 +353,34 @@
       "label": "Inativo"
     },
     "medCardPatient": {
-      "label": "Ficha do paciente"
+      "label": "guia paciente"
     },
     "dataOwnderAt": {
-      "label": "Os dados deste pacientes estão em"
+      "label": "Os dados deste paciente sÃ£o o"
     },
     "sendEmailRemainder": {
-      "label": "Enviar por e-maill um lembrete para completar seus dados"
+      "label": "Envie um email lembrete para completar os seus dados"
     },
     "sendRemainder": {
-      "label": "Enviar lembrete"
+      "label": "Mande um lembrete"
     },
     "docNumber": {
-      "label": "N º do documento."
+      "label": "N Âº do documento."
     },
     "filterByState": {
       "label": "Filtrar por Estado"
     },
     "reserved": {
-      "label": "Reservada"
+      "label": "reservado"
     },
     "scheduled": {
-      "label": "Agendada"
+      "label": "agendada"
     },
     "reScheduled": {
       "label": "Remarcado"
     },
     "active": {
-      "label": "Ativo"
+      "label": "ativo"
     },
     "inWaitingRoom": {
       "label": "Na sala de espera"
@@ -392,25 +392,25 @@
       "label": "Pendente"
     },
     "ended": {
-      "label": "Finalizados"
+      "label": "finalizados"
     },
     "reschedule": {
       "label": "Reagendar"
     },
     "canceled": {
-      "label": "Cancelada"
+      "label": "Cancelado"
     },
     "clearFilter": {
-      "label": "Limpar filtro"
+      "label": "Filtro limpo"
     },
     "noMatches": {
-      "label": "Não há coincidências"
+      "label": "NÃ£o hÃ¡ coincidÃªncias"
     },
     "notPresent": {
-      "label": "Não está presente"
+      "label": "nÃ£o"
     },
     "duedDate": {
-      "label": "Data de emissão"
+      "label": "data de emissÃ£o"
     },
     "loading": {
       "label": "Carregando..."
@@ -419,10 +419,10 @@
       "label": "Notas"
     },
     "symptomsDescription": {
-      "label": "A descrição dos sintomas"
+      "label": "A descriÃ§Ã£o dos sintomas"
     },
     "avgPA": {
-      "label": "PA Média"
+      "label": "media PA"
     },
     "temperature": {
       "label": "Temperatura"
@@ -437,82 +437,82 @@
       "label": "Desativar"
     },
     "callEnded": {
-      "label": "Teleconsulta finalizada"
+      "label": "teleconsulta concluÃ­da"
     },
     "waitingStartCall": {
-      "label": "Esperando para começar teleconsulta"
+      "label": "Esperando para comeÃ§ar teleconsulta"
     },
     "grender": {
       "label": "Sexo:"
     },
     "start": {
-      "label": "Começar"
+      "label": "ComeÃ§ar"
     },
     "endCall": {
-      "label": "Finalizar chamada"
+      "label": "fim da chamada"
     },
     "endService": {
-      "label": "Finalizar consulta"
+      "label": "consulta Finish"
     },
     "madeAt": {
-      "label": "Realizada em"
+      "label": "em"
     },
     "currentService": {
-      "label": "Consulta atual"
+      "label": "consulta ativa"
     },
     "service": {
-      "label": "Consulta"
+      "label": "Inquerir"
     },
     "serviceReason": {
-      "label": "Motivo da consulta:"
+      "label": "RazÃ£o para consulta:"
     },
     "serviceObjetive": {
-      "label": "Objetivo da consulta"
+      "label": "alvo de consulta"
     },
     "anamnesis": {
-      "label": "Anamnese"
+      "label": "anamnestic"
     },
     "nutritionalState": {
-      "label": "Estado nutricional"
+      "label": "estado nutricional"
     },
     "phisicalExam": {
-      "label": "Exame físico"
+      "label": "Exame fÃ­sico"
     },
     "labAspects": {
-      "label": "Aspectos laboratoriais de destaque"
+      "label": "laboratÃ³rio destaques"
     },
     "plan": {
       "label": "Plano"
     },
     "comments": {
-      "label": "Comentários"
+      "label": "ComentÃ¡rios"
     },
     "noStoredNotes": {
-      "label": "Há notas inseridas"
+      "label": "hÃ¡ notas inseridas"
     },
     "newNote": {
-      "label": "Nova nota"
+      "label": "nova nota"
     },
     "close": {
-      "label": "Fechar"
+      "label": "fechar"
     },
     "blockDays": {
-      "label": "Bloquear Dias"
+      "label": "Dia bloco"
     },
     "blockDay": {
-      "label": "Bloquear Dia"
+      "label": "dia bloco"
     },
     "editDisponibility": {
-      "label": "Editar disponibilidade"
+      "label": "editar disponibilidade"
     },
     "welcome": {
-      "label": "Bem vindo(a)"
+      "label": "Bem-vindo a)"
     },
     "numberMontlyServices": {
-      "label": "Nº de consultas mensais"
+      "label": "NÃ£o hÃ¡ consultas mensais"
     },
     "nextService": {
-      "label": "Próxima consulta"
+      "label": "consulta Proxima"
     },
     "hourDate": {
       "label": "Data e hora"
@@ -530,76 +530,76 @@
       "label": "Especialidade:"
     },
     "sat": {
-      "label": "SAT"
+      "label": "Sentou"
     },
     "temp": {
       "label": "Temp"
     },
     "regNumber": {
-      "label": "Número de registro"
+      "label": "NÃºmero de registro"
     },
     "thisInfoViewPro": {
-      "label": "Esta informação será visto por profissionais."
+      "label": "Esta informaÃ§Ã£o serÃ¡ visto por profissionais."
     },
     "myBackgrounds": {
-      "label": "Meus antecedentes"
+      "label": "meu fundo"
     },
     "completeThisForBetterService": {
-      "label": "Complete a sua informação médica para melhor atendimento"
+      "label": "Complete a sua informaÃ§Ã£o mÃ©dica para melhor atendimento"
     },
     "yes": {
-      "label": "Sim"
+      "label": "sim"
     },
     "dontHave": {
-      "label": "Não tenho"
+      "label": "NÃ£o tenho"
     },
     "iHave": {
-      "label": "Sim, tenho"
+      "label": "Sim tenho"
     },
     "prescriptions": {
-      "label": "Prescrições"
+      "label": "Prescipciones"
     },
     "medLicense": {
-      "label": "Atestados"
+      "label": "LicenÃ§a mÃ©dica"
     },
     "document": {
       "label": "Documento"
     },
     "loadDocument": {
-      "label": "Enviar documento"
+      "label": "documento de upload"
     },
     "scheduleService": {
-      "label": "Agende uma consulta"
+      "label": "cronograma de consulta"
     },
     "enterInstantService": {
-      "label": "Entrar no atendimento imediato"
+      "label": "Digite consulta imediata"
     },
     "servicesCard": {
-      "label": "Ficha de consultas"
+      "label": "guia consultas"
     },
     "done": {
-      "label": "Realizada"
+      "label": "feito"
     },
     "phisicalData": {
-      "label": "Dados físicos"
+      "label": "Dados fÃ­sicos"
     },
     "goToStart": {
-      "label": "Ir para o início"
+      "label": "Ir para o inÃ­cio"
     },
     "decline": {
       "label": "Recusar"
     },
     "selectDoctorAndSchedule": {
-      "label": "Selecione o profissional e horário"
+      "label": "Selecione o profissional e cronograma"
     },
     "AM": {
-      "label": "AM"
+      "label": "SOU"
     },
     "PM": {
       "label": "PM"
     },
     "noDoctorsAvailable": {
-      "label": "Não há profissionais disponíveis"
+      "label": "HÃ¡ profissionais disponÃ­veis"
     },
     "selectSymptoms": {
       "label": "Escolha os seus sintomas"
@@ -608,94 +608,94 @@
       "label": "Escolha um sintoma"
     },
     "payService": {
-      "label": "Pagar consulta"
+      "label": "pagando consulta"
     },
     "back": {
-      "label": "Voltar"
+      "label": "Retorna"
     },
     "medCardAttention": {
-      "label": "Ficha de atendimento médico"
+      "label": "guia de cuidados de saÃºde"
     },
     "asociatedDoctors": {
-      "label": "Médicos atribuídos"
+      "label": "mÃ©dicos associados"
     },
     "scheduleApointment": {
-      "label": "Agendar atendimento"
+      "label": "nomeaÃ§Ã£o agenda"
     },
     "basicInfo": {
-      "label": "Informação básica"
+      "label": "InformaÃ§Ã£o bÃ¡sica"
     },
     "newService": {
-      "label": "Nova consulta"
+      "label": "nova consulta"
     },
     "scheduleServiceBtn": {
       "label": "Marque uma consulta"
     },
     "exams": {
-      "label": "Exames"
+      "label": "exames"
     },
     "hintDateCancelService": {
-      "label": "Lembre-se de respeitar a data combinada para reagendamento e cancelamentos, verifique o seguinte link no menu Suporte"
+      "label": "Lembre-se de respeitar a data para reagendamientos cancelamentos acordad e verifique o seguinte link no Suporte"
     },
     "doService": {
-      "label": "Realizar consulta"
+      "label": "faÃ§a de inquÃ©rito"
     },
     "sat2": {
-      "label": "Sat O2"
+      "label": "SÃ¡b 02"
     },
     "ofDiagnostic": {
-      "label": "Diagnóstico"
+      "label": "DiagnÃ³stico"
     },
     "updateFile": {
-      "label": "Atualização de ficha"
+      "label": "guia Atualizar"
     },
     "saveSuccess": {
-      "label": "Informações salvas com sucesso"
+      "label": "informaÃ§Ãµes salvas com sucesso"
     },
     "numberOfServices": {
-      "label": "Número de consultas mensais"
+      "label": "NÃºmero de visitas mensais"
     },
     "numberOfMadeServices": {
-      "label": "Nº de consultas realizadas"
+      "label": "N.Âº consultas"
     },
     "servicesToNow": {
-      "label": "Consultas até à data"
+      "label": "Consultas atÃ© Ã  data"
     },
     "proximateMins": {
-      "label": "Minutos aprox."
+      "label": "minutos aprox."
     },
     "serviceSummary": {
-      "label": "Resumo da consulta"
+      "label": "resumo consulta"
     },
     "inmediateService": {
-      "label": "Atendimento imediato"
+      "label": "atenÃ§Ã£o inmediate"
     },
     "scheduling": {
-      "label": "Agendamento"
+      "label": "agendamento"
     },
     "reserveService": {
-      "label": "Reservar consulta"
+      "label": "livro de consulta"
     },
     "hoursAvailable": {
-      "label": "Horários disponíveis"
+      "label": "horas disponÃ­veis"
     },
     "noHoursAvailable": {
-      "label": "Não há horários disponíveis"
+      "label": "NÃ£o hÃ¡ horas disponÃ­veis."
     },
     "allServices": {
-      "label": "Todas as consultas"
+      "label": "Todos os inquÃ©ritos"
     },
     "patientsInSystem": {
-      "label": "Pacientes no sistema"
+      "label": "Sistema de paciente"
     },
     "medAtentionCard": {
-      "label": "Ficha de atendimento médico"
+      "label": "guia Medical Care"
     },
     "diagnosisType": {
-      "label": "Tipo de diagnóstico"
+      "label": "Tipo de diagnÃ³stico"
     },
     "generateDocs": {
-      "label": "Gerar documentos"
+      "label": "gerar documentos"
     }
   },
   "disponibility": {
@@ -723,7 +723,7 @@
             "label": "Estado"
           },
           "action": {
-            "label": "Ação"
+            "label": "AÃ§Ã£o"
           }
         },
         "blockedDays": {
@@ -731,7 +731,7 @@
         }
       },
       "calendar": {
-        "label": "Calendário",
+        "label": "CalendÃ¡rio",
         "workDays": {
           "label": "Dias habilitados"
         },
@@ -771,13 +771,13 @@
           "label": "Disponibilidade de dias"
         },
         "initialDate": {
-          "label": "Horário inicial"
+          "label": "HorÃ¡rio inicial"
         },
         "finalDate": {
-          "label": "Horário final"
+          "label": "HorÃ¡rio final"
         },
         "newVariation": {
-          "label": "Nova variação de disponibilidade"
+          "label": "Nova variaÃ§Ã£o de disponibilidade"
         },
         "btnCreate": {
           "label": "Criar disponibilidade"
@@ -792,10 +792,10 @@
           "label": "Todo o dia"
         },
         "initialDate": {
-          "label": "Horário inicial"
+          "label": "HorÃ¡rio inicial"
         },
         "finalDate": {
-          "label": "Horário final"
+          "label": "HorÃ¡rio final"
         },
         "btnCreate": {
           "label": "Bloquear dias"
@@ -818,10 +818,10 @@
           "label": "Intervalo de datas"
         },
         "initialHour": {
-          "label": "Horário inicial"
+          "label": "HorÃ¡rio inicial"
         },
         "finalHour": {
-          "label": "Horário final"
+          "label": "HorÃ¡rio final"
         },
         "objetive": {
           "label": "Objetivo"
@@ -830,7 +830,7 @@
           "label": "Especialidade"
         },
         "action": {
-          "label": "Ação"
+          "label": "AÃ§Ã£o"
         }
       }
     }
@@ -857,7 +857,7 @@
         "label": "Telefone"
       },
       "action": {
-        "label": "Ação"
+        "label": "AÃ§Ã£o"
       }
     },
     "modalCreate": {
@@ -869,7 +869,7 @@
   },
   "videoChat": {
     "welcome": {
-      "label": "A sua teleconsulta estará disponível em breve, aguarde um momento por favor ..."
+      "label": "A sua teleconsulta estarÃ¡ disponÃ­vel em breve, aguarde um momento por favor ..."
     },
     "modalEnd": {
       "title": "Sua teleconsulta finalizou",
@@ -877,10 +877,10 @@
         "label": "Paciente"
       },
       "rate": {
-        "label": "Avalie sua experiência com esta consulta"
+        "label": "Avalie sua experiÃªncia com esta consulta"
       },
       "comment": {
-        "label": "Você quer adicionar um comentário?"
+        "label": "VocÃª quer adicionar um comentÃ¡rio?"
       }
     }
   },
@@ -888,27 +888,27 @@
     "blockAccount": {
       "title": "Sua conta foi bloqueada.",
       "secHint": {
-        "label": "Por motivos de segurança, esta conta foi bloqueada devido a repetidas tentativas malsucedidas, digite seu e-mail para enviar as instruções de reativação."
+        "label": "Por motivos de seguranÃ§a, esta conta foi bloqueada devido a repetidas tentativas malsucedidas, digite seu e-mail para enviar as instruÃ§Ãµes de reativaÃ§Ã£o."
       }
     },
     "login": {
       "welcome": {
         "title": "Bem vindo a plataforma de Teleconsulta",
-        "label": "\nFaça login com sua conta ou crie uma nova para acessar."
+        "label": "\nFaÃ§a login com sua conta ou crie uma nova para acessar."
       },
       "title": "Acessar conta",
       "forgot": {
         "label": "Esqueceu sua senha?"
       },
       "welcomeTitle": {
-        "label": "Bem vindo a Plataforma de Teleconsulta"
+        "label": "Bem-vindo ao seu teleconsulta plataforma"
       }
     },
     "rg": {
       "label": "RG"
     },
     "cbor": {
-      "label": "CBO-R"
+      "label": "OC-R"
     },
     "pispasep": {
       "label": "PIS / PASEP"
@@ -917,106 +917,106 @@
       "label": "CTPS"
     },
     "identityNumber": {
-      "label": "Número de identidade"
+      "label": "NÃºmero de identidade"
     },
     "votantTitle": {
-      "label": "Título de eleitor"
+      "label": "tÃ­tulo de eleitor"
     },
     "proClassReg": {
       "label": "Classe Profissional de Registro"
     },
     "grender": {
-      "label": "Indicar o seu sexo"
+      "label": "indicar o seu sexo"
     },
     "emailReq": {
-      "label": "Campo e-mail é obrigatório"
+      "label": "o email"
     },
     "raceReq": {
-      "label": "Campo Raça é obrigatório"
+      "label": "RaÃ§a Ã© necessÃ¡rio"
     },
     "cityReq": {
-      "label": "Campo Cidade é obrigatório"
+      "label": "cidade necessÃ¡rio"
     },
     "neiberhoodReq": {
-      "label": "Campo Bairro é obrigatório"
+      "label": "Barrio Ã© necessÃ¡rio"
     },
     "acceptAndCreate": {
       "label": "Aceitar e criar conta"
     },
     "phoneReq": {
-      "label": "Campo Telefone é obrigatório"
+      "label": "telefone desejado"
     },
     "confirmAccount": {
-      "label": "Confirmar conta"
+      "label": "Conta confirm"
     },
     "confirmAccountRecordatory": {
-      "label": "Digite o código de verificação de 6 dígitos que foi enviado para o e-mail associado à conta"
+      "label": "Digite o cÃ³digo de verificaÃ§Ã£o de 6 dÃ­gitos que foi enviado para o e-mail associado Ã  conta"
     },
     "verify": {
-      "label": "Verificar"
+      "label": "Verifica"
     },
     "accountAccess": {
       "label": "Acessar a conta"
     },
     "btnLogin": {
-      "label": "Iniciar sessão"
+      "label": "Iniciar sessÃ£o"
     },
     "btnCreateAccunt": {
       "label": "Criar uma conta"
     },
     "email": {
       "sendTo": {
-        "label": "Foi enviado um e-mail para"
+        "label": "Ele enviou um email para"
       },
       "codeSent": {
-        "label": "com um código de verificação, verifique a sua caixa de entrada."
+        "label": "com um cÃ³digo de verificaÃ§Ã£o, verifique a sua caixa de entrada."
       },
       "followInstructions": {
-        "label": "Siga as instruções na mensagem para redefinir sua senha."
+        "label": "Siga as instruÃ§Ãµes na mensagem para redefinir sua senha."
       }
     },
     "verificationCode": {
-      "label": "Digite o código de verificação"
+      "label": "Digite o cÃ³digo de verificaÃ§Ã£o"
     },
     "surnameReq": {
-      "label": "Campo Sobrenome é necessário"
+      "label": "Segundo o sobrenome Ã© necessÃ¡ria"
     },
     "loginAgain": {
-      "label": "Acesso novamente"
+      "label": "acesso novamente"
     },
     "currentPwdInfo": {
-      "label": "Informações sobre a sua senha atual"
+      "label": "InformaÃ§Ãµes sobre a sua senha atual"
     },
     "currentPwdReq": {
-      "label": "Campo Senha é obrigatório"
+      "label": "password corrente necessÃ¡ria"
     },
     "currentPwdIncorrect": {
-      "label": "Senha atual está incorreta"
+      "label": "A senha atual estÃ¡ incorreto"
     },
     "pwdNotMatch": {
-      "label": "Senha não corresponde"
+      "label": "Senha nÃ£o corresponde"
     },
     "pwdUpdated": {
       "label": "Senha atualizada!"
     },
     "emailSendedToAsociatedAccount": {
-      "label": "Foi enviado um e-mail de confirmação para a conta associada"
+      "label": "Ele enviou um email de confirmaÃ§Ã£o para a conta associada."
     },
     "personalBasicinfo": {
-      "label": "Informações básicas de dados pessoais"
+      "label": "InformaÃ§Ãµes bÃ¡sicas de dados pessoais"
     },
     "complement": {
       "label": "Casa/Dpto/Complemento"
     },
     "accept": {
       "termsAndconditions": {
-        "label": "Eu li e aceitei os termos e condições"
+        "label": "Eu li e aceitei os termos e condiÃ§Ãµes"
       },
       "privacyPolicy": {
-        "label": "Eu li e aceitei política de privacidade"
+        "label": "Eu li a polÃ­tica de privacidade"
       },
       "consent": {
-        "label": "Eu li e aceitei consentimento informado"
+        "label": "Eu li o consentimento informado"
       }
     }
   },
@@ -1028,19 +1028,19 @@
       "tab": {
         "home": {
           "services": {
-            "title": "Nº de consultas realizadas",
+            "title": "NÂº de consultas realizadas",
             "label": "Consultas"
           },
           "nextService": {
-            "title": "Próxima consulta",
+            "title": "PrÃ³xima consulta",
             "label": "a(s)"
           },
           "ratings": {
-            "label": "Avaliação geral de pacientes"
+            "label": "AvaliaÃ§Ã£o geral de pacientes"
           },
           "tab": {
             "nextServices": {
-              "title": "Próxima consulta agendada",
+              "title": "PrÃ³xima consulta agendada",
               "table": {
                 "patients": {
                   "label": "Pacientes"
@@ -1058,7 +1058,7 @@
                   "label": "Estado"
                 },
                 "action": {
-                  "label": "Ação"
+                  "label": "AÃ§Ã£o"
                 }
               }
             },
@@ -1078,16 +1078,16 @@
                     "label": "Nome do paciente ou por ID"
                   },
                   "calendar": {
-                    "label": "Calendário"
+                    "label": "CalendÃ¡rio"
                   },
                   "schedule": {
-                    "label": "Horário"
+                    "label": "HorÃ¡rio"
                   },
                   "objetive": {
                     "label": "Objetivo da consulta"
                   },
                   "doctorInCharge": {
-                    "label": "Profissional responsável"
+                    "label": "Profissional responsÃ¡vel"
                   },
                   "specialty": {
                     "label": "Especialidade"
@@ -1097,7 +1097,7 @@
                   }
                 },
                 "emailNewUser": {
-                  "label": "Enviar e-mail para novo usuário",
+                  "label": "Enviar e-mail para novo usuÃ¡rio",
                   "name": {
                     "label": "Nome do paciente"
                   },
@@ -1108,16 +1108,16 @@
                     "label": "Mensagem"
                   },
                   "calendar": {
-                    "label": "Calendário"
+                    "label": "CalendÃ¡rio"
                   },
                   "schedule": {
-                    "label": "Horário"
+                    "label": "HorÃ¡rio"
                   },
                   "objetive": {
                     "label": "Objetivo da consulta"
                   },
                   "doctorInCharge": {
-                    "label": "Profissional responsável"
+                    "label": "Profissional responsÃ¡vel"
                   },
                   "specialty": {
                     "label": "Especialidade"
@@ -1133,14 +1133,14 @@
         }
       },
       "nextService": {
-        "title": "Próxima consulta"
+        "title": "PrÃ³xima consulta"
       },
       "newService": {
-        "title": "Agendar consulta médica",
+        "title": "Agendar consulta mÃ©dica",
         "btnCreate": {
           "label": "Agenda uma consulta"
         },
-        "label": "Agende sua cosulta médica",
+        "label": "Agende sua cosulta mÃ©dica",
         "type": {
           "title": "O que quer buscar?",
           "checkSpecialty": {
@@ -1159,12 +1159,12 @@
             "label": "Selecione a data"
           },
           "availableDoctor": {
-            "label": "Médicos disponíveis"
+            "label": "MÃ©dicos disponÃ­veis"
           }
         },
         "unselected": {
-          "title": "Selecione a especialidade e a data para ver os horários",
-          "label": "Selecione a especialidade e a data para oferecer os profissionais disponíveis"
+          "title": "Selecione a especialidade e a data para ver os horÃ¡rios",
+          "label": "Selecione a especialidade e a data para oferecer os profissionais disponÃ­veis"
         },
         "doctorFee": {
           "label": "Valor da consulta"
@@ -1200,7 +1200,7 @@
             "label": "Lembre-se de respeitar a data combinada para reagendamento e cancelamentos, verifique o seguinte link no menu Suporte"
           },
           "btnConditions": {
-            "label": "Ver condições"
+            "label": "Ver condiÃ§Ãµes"
           }
         },
         "failure": {
@@ -1211,13 +1211,13 @@
         },
         "inmediateCare": {
           "title": "Atendimento imediato / Acesso a salas",
-          "label": "Aqui você pode acessar uma consulta imediata",
+          "label": "Aqui vocÃª pode acessar uma consulta imediata",
           "success": {
             "title": "Seu acesso ao atendimento imediato foi realizado com sucesso",
             "btnEnterRoom": {
               "label": "Entrar na sala"
             },
-            "hint": "Lembre-se de ler nossos termos e condições para um melhor consentimento das partes."
+            "hint": "Lembre-se de ler nossos termos e condiÃ§Ãµes para um melhor consentimento das partes."
           }
         }
       },
@@ -1228,13 +1228,13 @@
         }
       },
       "medicalAdvice": {
-        "title": "Conselhos ou dicas de saúde"
+        "title": "Conselhos ou dicas de saÃºde"
       },
       "myHealth": {
-        "title": "Minha saúde",
-        "label": "Essa será a informação que os profissionais verão para melhor atendê-lo",
+        "title": "Minha saÃºde",
+        "label": "Essa serÃ¡ a informaÃ§Ã£o que os profissionais verÃ£o para melhor atendÃª-lo",
         "deceases": {
-          "label": "Doenças"
+          "label": "DoenÃ§as"
         },
         "familiHistory": {
           "label": "Antecedentes familiares"
@@ -1243,19 +1243,19 @@
           "label": "Medicamentos"
         },
         "healthHabits": {
-          "label": "Hábitos de saúde"
+          "label": "HÃ¡bitos de saÃºde"
         },
         "occupationals": {
           "label": "Ocupacionais"
         },
         "others": {
-          "label": "Alergias - Intervenções cirúrgicas - Outros"
+          "label": "Alergias - IntervenÃ§Ãµes cirÃºrgicas - Outros"
         },
         "btnComplete": {
           "label": "Completar dados"
         },
         "hint": {
-          "label": "Preencha seus dados médicos para um melhor atendimento"
+          "label": "Preencha seus dados mÃ©dicos para um melhor atendimento"
         },
         "modal": {
           "createBackground": {
@@ -1265,10 +1265,10 @@
             "label": "Alergias"
           },
           "noBackground": {
-            "label": "Não tenho antecedentes"
+            "label": "NÃ£o tenho antecedentes"
           },
           "surgery": {
-            "label": "Intervenções cirúrgicas"
+            "label": "IntervenÃ§Ãµes cirÃºrgicas"
           },
           "deleteItem": {
             "title": "Deseja eliminar este elemento?"
@@ -1277,21 +1277,21 @@
       },
       "myServices": {
         "title": "Minhas Consultas",
-        "label": "Informação de suas consultas médicas",
+        "label": "InformaÃ§Ã£o de suas consultas mÃ©dicas",
         "tabs": {
           "latest": {
-            "label": "Últimas Consultas"
+            "label": "Ãšltimas Consultas"
           },
           "timeline": {
-            "label": "Histórico de consultas"
+            "label": "HistÃ³rico de consultas"
           }
         }
       },
       "totalServices": {
-        "label": "Nº de consultas"
+        "label": "NÂºde consultas"
       },
       "avgTime": {
-        "label": "Tempo médio de espera"
+        "label": "Tempo mÃ©dio de espera"
       },
       "newPatients": {
         "label": "Novos pacientes"
@@ -1303,13 +1303,13 @@
         "label": "Atividade"
       },
       "medicalPerformance": {
-        "label": "Desempenho por profissionais de saúde"
+        "label": "Desempenho por profissionais de saÃºde"
       },
       "waitingRoomsPerformance": {
         "label": "Desempenho por salas de espera"
       },
       "reports": {
-        "title": "Administração de relatórios",
+        "title": "AdministraÃ§Ã£o de relatÃ³rios",
         "tabs": {
           "services": {
             "label": "Consultas",
@@ -1324,10 +1324,10 @@
                 "label": "Nome paciente"
               },
               "hourCreate": {
-                "label": "Hora de criação de agenda médica"
+                "label": "Hora de criaÃ§Ã£o de agenda mÃ©dica"
               },
               "hourService": {
-                "label": "Hora da consulta médica"
+                "label": "Hora da consulta mÃ©dica"
               },
               "nameCreate": {
                 "label": "Consulta criada por"
@@ -1347,20 +1347,20 @@
                 "label": "Data e hora"
               },
               "user": {
-                "label": "Usuário"
+                "label": "UsuÃ¡rio"
               },
               "surgeryResult": {
-                "label": "Resultado da operação"
+                "label": "Resultado da operaÃ§Ã£o"
               },
               "clinicResult": {
-                "label": "Operação clínica"
+                "label": "OperaÃ§Ã£o clÃ­nica"
               }
             }
           }
         }
       },
       "services": {
-        "title": "Gestão de consultas",
+        "title": "GestÃ£o de consultas",
         "table": {
           "id": {
             "label": "Id"
@@ -1381,24 +1381,24 @@
             "label": "Estado"
           },
           "action": {
-            "label": "Ação"
+            "label": "AÃ§Ã£o"
           }
         }
       },
       "agenda": {
-        "title": "Gestão de agenda"
+        "title": "GestÃ£o de agenda"
       },
       "userManagment": {
         "btnCreateDoctor": {
           "label": "Novo profissional"
         },
-        "title": "Gerenciamento de usuários",
+        "title": "Gerenciamento de usuÃ¡rios",
         "tabs": {
           "admins": {
             "label": "Administradores"
           },
           "doctors": {
-            "label": "Profissionais de saúde"
+            "label": "Profissionais de saÃºde"
           },
           "coordinators": {
             "label": "Coordenadores"
@@ -1427,7 +1427,7 @@
             "label": "Estado"
           },
           "action": {
-            "label": "Ação"
+            "label": "AÃ§Ã£o"
           }
         },
         "tooltips": {
@@ -1445,7 +1445,7 @@
           "title": "Criar paciente"
         },
         "createAccount": {
-          "title": "Administração de usuários / Criação de conta",
+          "title": "AdministraÃ§Ã£o de usuÃ¡rios / CriaÃ§Ã£o de conta",
           "btnCreate": {
             "label": "Criar conta"
           },
@@ -1453,7 +1453,7 @@
             "personal": {
               "label": "Pessoais",
               "identification": {
-                "label": "Identificação",
+                "label": "IdentificaÃ§Ã£o",
                 "cpf": {
                   "label": "CPF"
                 },
@@ -1467,13 +1467,13 @@
                   "label": "RG - Registro Geral"
                 },
                 "issuer": {
-                  "label": "Órgão emissor"
+                  "label": "Ã“rgÃ£o emissor"
                 },
                 "other": {
-                  "label": "Outro documento de identificação"
+                  "label": "Outro documento de identificaÃ§Ã£o"
                 },
                 "docNumber": {
-                  "label": "Nº do documento selecionado"
+                  "label": "NÂº do documento selecionado"
                 }
               },
               "personal": {
@@ -1501,7 +1501,7 @@
                 "label": "UF de nascimento"
               },
               "municipality": {
-                "label": "Município de nascimento"
+                "label": "MunicÃ­pio de nascimento"
               },
               "grender": {
                 "label": "Sexo"
@@ -1511,21 +1511,21 @@
               }
             },
             "role": {
-              "label": "Função",
+              "label": "FunÃ§Ã£o",
               "identification": {
-                "title": "Identificação",
+                "title": "IdentificaÃ§Ã£o",
                 "userType": {
-                  "label": "Tipo de usuário"
+                  "label": "Tipo de usuÃ¡rio"
                 },
                 "profile": {
                   "label": "Perfil"
                 }
               },
               "profileManagment": {
-                "title": "Administração de perfil",
+                "title": "AdministraÃ§Ã£o de perfil",
                 "table": {
                   "role": {
-                    "label": "Função"
+                    "label": "FunÃ§Ã£o"
                   },
                   "profile": {
                     "label": "Perfil"
@@ -1539,7 +1539,7 @@
             "waitingRoom": {
               "label": "Sala de espera (modalidade)",
               "identification": {
-                "title": "Identificação",
+                "title": "IdentificaÃ§Ã£o",
                 "waitingList": {
                   "label": "Lista de espera"
                 },
@@ -1550,13 +1550,13 @@
                       "label": "Sala de espera"
                     },
                     "description": {
-                      "label": "Descrição"
+                      "label": "DescriÃ§Ã£o"
                     },
                     "state": {
                       "label": "Estado"
                     },
                     "action": {
-                      "label": "Ação"
+                      "label": "AÃ§Ã£o"
                     }
                   }
                 }
@@ -1565,19 +1565,19 @@
             "academic": {
               "label": "Trabalho",
               "bio": {
-                "label": "Biografia acadêmica"
+                "label": "Biografia acadÃªmica"
               },
               "specialty": {
                 "label": "Especialidades"
               },
               "specialtyName": {
-                "label": "Nome da especialidade"
+                "label": "Nome da especioalidade"
               },
               "education": {
-                "label": "Formação"
+                "label": "FormaÃ§Ã£o"
               },
               "degree": {
-                "label": "Título profissional"
+                "label": "TÃ­tulo profissional"
               },
               "university": {
                 "label": "Universidade/Faculdade"
@@ -1589,7 +1589,7 @@
                 "label": "Registro profissional"
               },
               "regNumber": {
-                "label": "Nº de registro"
+                "label": "NÂº de registro"
               }
             },
             "password": {
@@ -1624,81 +1624,81 @@
               "label": "Disponibilidade de dias"
             },
             "initialHour": {
-              "label": "Horário inicial"
+              "label": "HorÃ¡rio inicial"
             },
             "newDisponibilityVariation": {
-              "label": "Nova variação de disponibilidade"
+              "label": "Nova variaÃ§Ã£o de disponibilidade"
             },
             "btnCreate": {
               "label": "Criar disponibilidade"
             },
             "blockDays": {
-              "label": "Bloquear dias"
+              "label": "dias bloco"
             },
             "listAll": {
-              "label": "Lista de disponibilidade"
+              "label": "Lista disponibilidade"
             },
             "currentWork": {
-              "label": "Minhas consultas ativas"
+              "label": "Meus consultas ativas"
             },
             "noDisponibilities": {
-              "label": "Não há disponibilidade criada"
+              "label": "NÃ£o hÃ¡ disponibilidade criado"
             },
             "edit": {
               "label": "Editar"
             },
             "noBlockedDays": {
-              "label": "Não existem dias bloqueados"
+              "label": "NÃ£o existe sÃ£o bloqueados dias"
             },
             "allDay": {
               "label": "Todo o dia"
             },
             "timming": {
-              "label": "Tempo de consulta (intervalo em minutos)"
+              "label": "Consulta Tempo (min de intervalo)"
             },
             "remove": {
-              "label": "Remover"
+              "label": "Mexer"
             },
             "blockDay": {
-              "label": "Bloquear dias"
+              "label": "dia bloco"
             },
             "editDisponibility": {
-              "label": "Editar disponibilidade"
+              "label": "editar disponibilidade"
             },
             "disponibilityCurrentDay": {
               "label": "Disponibilidade dia atual:"
             },
             "timeRange": {
-              "label": "Períodos de horários atuais:"
+              "label": "variam dos tempos atuais:"
             },
             "currentInitialDate": {
-              "label": "Data de início atual"
+              "label": "Data de inÃ­cio atual"
             }
           }
         }
       },
       "waitingRoomManagment": {
-        "title": "Adminitração da sala de espera",
+        "title": "AdminitraÃ§Ã£o da sala de espera",
         "modal": {
           "create": {
             "title": "Nova sala de espera",
             "assignedPayment": {
-              "label": "Com pagamento atribuído"
+              "label": "Com pagamento atribuÃ­do"
             },
             "roomName": {
               "label": "Nome da sala"
             },
             "description": {
-              "label": "Descrição"
+              "label": "DescriÃ§Ã£o"
             },
             "healthProfessionals": {
-              "label": "Profissional de saúde"
+              "label": "Profissional de saÃºde"
             },
             "coordinators": {
               "label": "Coordenadores"
             },
             "proffetionalsAndCoordinatorsAssigned": {
-              "label": "Profissionais e coordenadores atribuídos"
+              "label": "Profissionais e coordenadores atribuÃ­dos"
             },
             "createRoom": {
               "label": "Criar sala"
@@ -1710,86 +1710,86 @@
           "label": "Nome da sala"
         },
         "asingnee": {
-          "label": "Atribuídos"
+          "label": "AtribuÃ­dos"
         }
       },
       "config": {
-        "title": "Configuração clínica",
+        "title": "ConfiguraÃ§Ã£o clÃ­nica",
         "tabs": {
           "information": {
-            "label": "Nome da clínica",
+            "label": "Nome da clÃ­nica",
             "description": {
-              "label": "Descrição"
+              "label": "DescriÃ§Ã£o"
             },
             "clinicPhone": {
-              "label": "Telefone da Instituição"
+              "label": "Telefone da InstituiÃ§Ã£o"
             },
             "sipportPhone": {
               "label": "Telefone de suporte"
             },
             "workingDays": {
-              "label": "Horário útil"
+              "label": "HorÃ¡rio Ãºtil"
             },
             "address": {
-              "label": "Endereço da instituição"
+              "label": "EndereÃ§o da instituiÃ§Ã£o"
             },
             "email": {
-              "label": "E-mail da instituição"
+              "label": "E-mail da instituiÃ§Ã£o"
             },
             "initialHint": {
               "label": "Dica inicial"
             },
             "initialTitle": {
-              "label": "Título"
+              "label": "TÃ­tulo"
             },
             "initialDescription": {
-              "title": "Descrição ..."
+              "title": "DescriÃ§Ã£o ..."
             }
           },
           "design": {
-            "label": "Layout",
+            "label": "Desenho",
             "logo400px": {
               "label": "Logo Plataforma web",
               "hint": {
-                "label": "Recomendável un logo de 400 x 600 px"
+                "label": "RecomendÃ¡vel un logo de 400 x 600 px"
               }
             },
             "logo60px": {
               "label": "Logo plataforma web barra navegador",
               "hint": {
-                "label": "Recomendável un logo de 60 x 60 px"
+                "label": "RecomendÃ¡vel un logo de 60 x 60 px"
               }
             },
             "colors": {
               "title": "Cores do sistema",
               "default": {
-                "label": "Por padrão"
+                "label": "Por padrÃ£o"
               },
               "option2": {
-                "label": "Opção de cor 2"
+                "label": "OpÃ§Ã£o de cor 2"
               },
               "option3": {
-                "label": "Opção de cor 3"
+                "label": "OpÃ§Ã£o de cor 3"
               },
               "option4": {
-                "label": "Opção de cor 4"
+                "label": "OpÃ§Ã£o de cor 4"
               },
               "option5": {
-                "label": "Opção de cor 5"
+                "label": "OpÃ§Ã£o de cor 5"
               },
               "option6": {
-                "label": "Opção de cor 6"
+                "label": "OpÃ§Ã£o de cor 6"
               },
               "option7": {
-                "label": "Opção de cor 7"
+                "label": "OpÃ§Ã£o de cor 7"
               },
               "option8": {
-                "label": "Opção de cor 8"
+                "label": "OpÃ§Ã£o de cor 8"
               }
             }
           },
           "notifications": {
-            "label": "Notificações",
+            "label": "NotificaÃ§Ãµes",
             "invitation": {
               "label": "Convite"
             },
@@ -1797,14 +1797,14 @@
               "label": "Foi criada uma nova agenda para hoje"
             },
             "confirmation": {
-              "label": "Confirmação"
+              "label": "ConfirmaÃ§Ã£o"
             },
             "remainder": {
               "label": "Lembrete"
             }
           },
           "healthProfessionals": {
-            "label": "Profissionais de saúde",
+            "label": "Profissionais de saÃºde",
             "btnNewtype": {
               "label": "Novo tipo de profissional"
             },
@@ -1816,13 +1816,13 @@
                 "label": "Tipo"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "users": {
-                "label": "Usuários"
+                "label": "UsuÃ¡rios"
               },
               "action": {
-                "label": "Ação"
+                "label": "AÃ§Ã£o"
               }
             },
             "modalCreate": {
@@ -1831,7 +1831,7 @@
                 "label": "Nome do tipo de profissional"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "btnCreate": {
                 "label": "Criar tipo de profissional"
@@ -1854,13 +1854,13 @@
                 "label": "Tipo"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "users": {
-                "label": "Usuários"
+                "label": "UsuÃ¡rios"
               },
               "action": {
-                "label": "Ação"
+                "label": "AÃ§Ã£o"
               }
             },
             "modalCreate": {
@@ -1869,10 +1869,10 @@
                 "label": "Nome da especialidade"
               },
               "type": {
-                "label": "Tipo de profissional de saúde"
+                "label": "Tipo de profissional de saÃºde"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "btnCreate": {
                 "label": "Criar especialidade"
@@ -1892,13 +1892,13 @@
                 "label": "Objetivo da consulta"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "specialties": {
                 "label": "Especialidades"
               },
               "action": {
-                "label": "Ação"
+                "label": "AÃ§Ã£o"
               }
             },
             "modalCreate": {
@@ -1910,7 +1910,7 @@
                 "label": "Especialidades"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "btnCreate": {
                 "label": "Criar especialidade"
@@ -1921,38 +1921,38 @@
             "label": "Modalidade",
             "table": {
               "name": {
-                "label": "Nome da modalidade"
+                "label": "Nome do acesso"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               },
               "status": {
                 "label": "Estado"
               },
               "action": {
-                "label": "Ação"
+                "label": "AÃ§Ã£o"
               }
             },
             "modalConfig": {
-              "title": "Configurar módulo de atendimento imediato",
+              "title": "Configurar mÃ³dulo de atendimento imediato",
               "waitingRoom": {
                 "label": "Sala de espera"
               },
               "description": {
-                "label": "Descrição"
+                "label": "DescriÃ§Ã£o"
               }
             }
           },
           "docs": {
             "label": "Documentos",
             "terms": {
-              "label": "Condições de uso"
+              "label": "CondiÃ§Ãµes de uso"
             },
             "hint": {
-              "label": "É recomendável documentos PDF ou Word."
+              "label": "Se recomenda Documentos PDF e formato Word."
             },
             "privacy": {
-              "label": "Política de privacidade"
+              "label": "CondiÃ§Ãµes de privacidade"
             },
             "agreement": {
               "label": "Consentimento de telemedicina"
@@ -1977,20 +1977,20 @@
                 "label": "Profissional"
               },
               "doctorFee": {
-                "label": "Valor médico"
+                "label": "Valor mÃ©dico"
               },
               "clinicFee": {
-                "label": "Valor clínica"
+                "label": "Valor clÃ­nica"
               },
               "action": {
-                "label": "Ação"
+                "label": "AÃ§Ã£o"
               }
             }
           }
         },
         "clinic": {
           "inmediateAtention": {
-            "label": "Texto atenção imediata"
+            "label": "Texto atenÃ§Ã£o imediata"
           },
           "scheduling": {
             "label": "agendamento de texto"
@@ -2002,73 +2002,73 @@
       },
       "uncategorized": {
         "newAdmin": {
-          "label": "Novo gerente"
+          "label": "novo gerente"
         },
         "newCoordinator": {
-          "label": "Novo coordenador"
+          "label": "novo coordenador"
         },
         "userManagmentEditAccount": {
-          "label": "Gerenciamento de usuários / Editar Conta"
+          "label": "Gerenciamento de usuÃ¡rios / Editar Conta"
         },
         "createUser": {
-          "label": "Criar usuário"
+          "label": "Criar usuÃ¡rio"
         },
         "editUser": {
-          "label": "Editar usuário"
+          "label": "Editar usuÃ¡rio"
         },
         "disableUser": {
-          "label": "Desabilitar usuário"
+          "label": "disable UsuÃ¡rio"
         },
         "sendInvitationToPatient": {
           "label": "Enviar convite para o paciente"
         },
         "virepatientCard": {
-          "label": "Visualizar ficha do paciente"
+          "label": "Veja Folha Paciente"
         },
         "viewServices": {
-          "label": "Visualizar consultas"
+          "label": "veja consultas"
         },
         "editServices": {
-          "label": "Editar consultas"
+          "label": "editar consultas"
         },
         "viewBackground": {
-          "label": "Visualizar antecedentes"
+          "label": "veja Background"
         },
         "editBackground": {
-          "label": "Editar antecedentes"
+          "label": "antecedentes"
         },
         "viewExams": {
-          "label": "Visualizar exames"
+          "label": "Consulte teste"
         },
         "viewPrescription": {
-          "label": "Visualizar prescrição"
+          "label": "Veja PrescipciÃ³n"
         },
         "attachFile": {
           "label": "Anexar arquivo"
         },
         "generateMedPrescription": {
-          "label": "Gerar prescrição"
+          "label": "gerar Prescription"
         },
         "generateExamOrder": {
-          "label": "Gerar pedido de exame"
+          "label": "Gerar Order comentÃ¡rio"
         },
         "generateMedLicense": {
-          "label": "Gerar atestado de saúde"
+          "label": "Gerar LicenÃ§a MÃ©dica"
         },
         "calendarAccess": {
-          "label": "Calendário"
+          "label": "CalendÃ¡rio de acesso"
         },
         "createService": {
-          "label": "Cronograma de consulta"
+          "label": "cronograma de consulta"
         },
         "cancelService": {
           "label": "Anular Consulta"
         },
         "editDisponibility": {
-          "label": "Editar disponibilidade"
+          "label": "Disponibilidade de ediÃ§Ã£o"
         },
         "cancelDisponibility": {
-          "label": "Cancelar disponibilidade"
+          "label": "Anular Disponibilidade"
         },
         "editWaitinRoom": {
           "label": "Editar Sala de Espera"
@@ -2080,31 +2080,31 @@
           "label": "Atribuir Sala de Espera"
         },
         "editInformation": {
-          "label": "Editar informações"
+          "label": "editar informaÃ§Ãµes"
         },
         "editDesign": {
           "label": "Editar layout"
         },
         "editNotifications": {
-          "label": "Editar notificações"
+          "label": "editar notificaÃ§Ãµes"
         },
         "editHealthProfessional": {
-          "label": "Editar profissional de saúde"
+          "label": "Profissionais Editar SaÃºde"
         },
         "editSpecialty": {
-          "label": "Editar especialidade"
+          "label": "editar especialidade"
         },
         "editServiceReason": {
-          "label": "Objetivo Editar Referência"
+          "label": "Objetivo Editar ReferÃªncia"
         },
         "editModality": {
-          "label": "Editar objetivo da consulta"
+          "label": "Editar modo de Consulta"
         },
         "reportManagment": {
-          "label": "Relatórios de gestão"
+          "label": "RelatÃ³rios de gestÃ£o"
         },
         "logsManagment": {
-          "label": "Administração de logs"
+          "label": "log Management"
         },
         "professionalDegree": {
           "label": "Titulo profissional"
@@ -2113,7 +2113,7 @@
           "label": "Registro UF"
         },
         "professionalReg": {
-          "label": "Registo profissional"
+          "label": "registo profissional"
         },
         "CRM": {
           "label": "CRM"
@@ -2137,7 +2137,7 @@
           "label": "CREFONO"
         },
         "regNumber": {
-          "label": "Número de registro."
+          "label": "NÃºmero de registro."
         }
       }
     }
@@ -2162,7 +2162,7 @@
       "label": "Estado"
     },
     "action": {
-      "label": "Ação"
+      "label": "AÃ§Ã£o"
     },
     "idService": {
       "label": "ID Consulta"
@@ -2174,13 +2174,13 @@
       "label": "Nome do Paciente"
     },
     "age": {
-      "label": "Idade"
+      "label": "Era"
     },
     "hourCreate": {
-      "label": "Hora da criação da agenda médica"
+      "label": "Hora da criaÃ§Ã£o da agenda mÃ©dica"
     },
     "hourService": {
-      "label": "Hora da agenda médica"
+      "label": "Hora da agenda mÃ©dica"
     },
     "nameCreate": {
       "label": "Agenda criada por"
@@ -2192,13 +2192,13 @@
       "label": "Nome do evento"
     },
     "user": {
-      "label": "Usuário"
+      "label": "UsuÃ¡rio"
     },
     "surgeryResult": {
-      "label": "Resultado da operação"
+      "label": "Resultado da operaÃ§Ã£o"
     },
     "clinicResult": {
-      "label": "Operação clínica"
+      "label": "OperaÃ§Ã£o cÃ­nica"
     },
     "patient": {
       "label": "Paciente"
@@ -2225,13 +2225,13 @@
       "label": "Perfil"
     },
     "role": {
-      "label": "Função"
+      "label": "FunÃ§Ã£o"
     },
     "waitingRoom": {
       "label": "Sala de espera"
     },
     "description": {
-      "label": "Descrição"
+      "label": "DescriÃ§Ã£o"
     },
     "state": {
       "label": "Estado"
@@ -2254,10 +2254,10 @@
   },
   "tabs": {
     "latest": {
-      "label": "Últimas Consultas"
+      "label": "Ãšltimas Consultas"
     },
     "timeline": {
-      "label": "Histórico de consultas"
+      "label": "HistÃ³rico de consultas"
     },
     "services": {
       "label": "Consultas"
@@ -2272,7 +2272,7 @@
       "label": "Administrador"
     },
     "doctors": {
-      "label": "Profissionais de saúde"
+      "label": "Profissionais de saÃºde"
     },
     "coordinator": {
       "label": "Coordenador"
@@ -2296,13 +2296,13 @@
       "label": "Trabalhos"
     },
     "password": {
-      "label": "Senha"
+      "label": "Chave"
     },
     "information": {
-      "label": "Informação"
+      "label": "InformaÃ§Ã£o"
     },
     "users": {
-      "label": "Usuários"
+      "label": "UsuÃ¡rios"
     },
     "profiles": {
       "label": "Perfis"
@@ -2317,10 +2317,10 @@
       "label": "Sala de espera"
     },
     "config": {
-      "label": "Configuração da clínica"
+      "label": "ConfiguraÃ§Ã£o da clÃ­nica"
     },
     "report": {
-      "label": "Relatório"
+      "label": "RelatÃ³rio"
     }
   },
   "waitingRoom": {
@@ -2329,7 +2329,7 @@
       "label": "Sala criada em % por %"
     },
     "usersAwaiting": {
-      "label": "% usuário(s) em sala de espera"
+      "label": "% usuÃ¡rio(s) em sala de espera"
     },
     "amountProffetionals": {
       "label": "% profissionais"
@@ -2349,53 +2349,53 @@
       }
     },
     "joined": {
-      "label": "Salas de espera associados"
+      "label": "salas de espera associados"
     },
     "payments": {
-      "label": "Pagamentos"
+      "label": "pagamentos"
     },
     "current": {
-      "label": "Ativo"
+      "label": "ativo"
     },
     "notExists": {
-      "label": "Não há salas de espera atribuídas"
+      "label": "NÃ£o hÃ¡ salas de espera associados"
     },
     "name": {
       "label": "Sala de espera"
     },
     "createdAt": {
-      "label": "Sala criada em"
+      "label": "Criado quarto"
     },
     "noRecords": {
-      "label": "Não há registros associados"
+      "label": "NÃ£o hÃ¡ registros associados"
     },
     "usersInRoom": {
-      "label": "Usuários (s) em sala de espera"
+      "label": "UsuÃ¡rios (s) em sala de espera"
     },
     "inmediateService": {
-      "title": "Atendimento imediato / Acesso a sala",
-      "label": "Aqui você poderá acessar um atendimento imediata"
+      "title": "Imediato Cuidados quarto / Acesso",
+      "label": "Aqui vocÃª pode acessar consulta imediata"
     },
     "inmediateServiceHint": {
-      "label": "Você entrará em uma lista de espera até que um profissional de saúde possa atendê-lo. Se optar por não esperar, clique no botão."
+      "label": "VocÃª vai entrar numa lista de espera atÃ© que um profissional de saÃºde pode ajudÃ¡-lo, se vocÃª nÃ£o quiser esperar, clique no botÃ£o."
     },
     "waitingTime": {
-      "label": "O tempo de espera é de 15 minutos aproximadamente."
+      "label": "O tempo de espera Ã© de 15 minutos aproximadamente."
     },
     "iWantSchedule": {
-      "label": "Prefiro agendar"
+      "label": "Desejo melhor agenda"
     },
     "servicePrice": {
       "label": "VALOR DE CONSULTA:"
     },
     "serviceDate": {
-      "label": "Sua consulta será realizada em"
+      "label": "Seu inquÃ©rito serÃ¡ realizada em"
     },
     "roomManagment": {
-      "label": "Administração da sala"
+      "label": "gestÃ£o de sala"
     },
     "schedule": {
-      "label": "Agenda"
+      "label": "Cronograma"
     },
     "disponibility": {
       "label": "Disponibilidade"
@@ -2404,41 +2404,41 @@
       "label": "Sala de espera"
     },
     "noWaitingRoomsWithThisParams": {
-      "label": "Não existe sala de espera com eses parâmetros"
+      "label": "HÃ¡ quartos sem espera com estes parÃ¢metros"
     },
     "roomName": {
       "label": "Nome da sala"
     },
     "serviceFee": {
-      "label": "Valor Consulta"
+      "label": "valor Consulta"
     },
     "assignedProfessionals": {
-      "label": "Profissionais atribuídos"
+      "label": "profissional atribuÃ­dos"
     },
     "inRoom": {
-      "label": "Na sala de espera"
+      "label": "na sala de espera"
     },
     "updateRoom": {
-      "label": "Atualizar sala"
+      "label": "Upgrade de quarto"
     },
     "deleteRoom": {
-      "label": "Eliminar sala"
+      "label": "remover Sala"
     },
     "createRoom": {
       "label": "Criar Sala de Espera"
     },
     "managment": {
-      "label": "Administração de salas de espera"
+      "label": "GestÃ£o de salas de espera"
     },
     "coordinatorsAssigned": {
-      "label": "Coordenadores atribuídos"
+      "label": "coordenadores alocados"
     },
     "select": {
       "label": "Escolhendo sala de espera"
     }
   },
   "calendar": {
-    "label": "Calendário",
+    "label": "CalendÃ¡rio",
     "button": {
       "newAtention": {
         "label": "Nova consulta"
@@ -2462,59 +2462,59 @@
       "label": "Linha do tempo"
     },
     "noAssociatedPrice": {
-      "label": "Esta agenda não tem preço atribuído"
+      "label": "Esta agenda nÃ£o tem preÃ§o associado"
     },
     "inmediateAtentionRoomAccess": {
-      "label": "Atendimento imediato / Acesso a sala"
+      "label": "Imediato Cuidados quarto / Acesso"
     },
     "joinWaitingListHint": {
-      "label": "Você entrará em uma lista de espera até que um profissional de saúde possa atendê-lo. Se optar por não esperar, clique no botão."
+      "label": "VocÃª vai entrar numa lista de espera atÃ© que um profissional de saÃºde pode ajudÃ¡-lo, se vocÃª nÃ£o quiser esperar botÃ£o Agendar clique Desejo."
     },
     "scheduleService": {
       "label": "Marque uma consulta"
     },
     "healthHabits": {
-      "label": "Hábitos de saúde"
+      "label": "HÃ¡bitos de saÃºde"
     },
     "anamnesis": {
-      "label": "Anamnese"
+      "label": "anamnese"
     },
     "phisicalExam": {
-      "label": "Exame físico"
+      "label": "Exame fÃ­sico"
     },
     "nutrition": {
-      "label": "Nutrição"
+      "label": "NutriÃ§Ã£o"
     },
     "serviceRoom": {
-      "label": "Sala médica"
+      "label": "sala mÃ©dica"
     },
     "ATW": {
-      "label": "Tempo de espera aproximado"
+      "label": "tempo de espera aproximado"
     },
     "videoService": {
-      "label": "Video consulta"
+      "label": "veja o vÃ­deo"
     }
   },
   "support": {
     "title": "Suporte",
-    "label": "Informação básica de seus dados",
+    "label": "InformaÃ§Ã£o bÃ¡sica de seus dados",
     "termsAndConditions": {
-      "title": "Termos e condições",
+      "title": "Termos e condiÃ§Ãµes",
       "accept": {
-        "label": "Aceito os termos e condições"
+        "label": "Aceito os termos e condiÃ§Ãµes"
       }
     },
     "helpInfoHint": {
-      "label": "informações para ajudar a orientar nossa plataforma"
+      "label": "informaÃ§Ãµes para ajudar a orientar nossa plataforma"
     },
     "useVidelCall": {
-      "label": "Usar video chamada"
+      "label": "chamada de vÃ­deo Use"
     }
   },
   "common": {
     "user": {
       "sessionExpired": {
-        "label": "Sessão expirada"
+        "label": "SessÃ£o expirada"
       }
     },
     "input": {
@@ -2545,9 +2545,9 @@
         "label": "Adicionar novo"
       },
       "reschedule": {
-        "title": "Tem certeza que deseja cancelar a consulta?",
+        "title": "Â¿Tem certeza que deseja cancelar a consulta?",
         "label": "Reagendar",
-        "warning": "Considere que você pode perder a consulta com este profissional!"
+        "warning": "Considere que vocÃª pode perder a consulta com este profissional"
       },
       "cancel": {
         "label": "Cancelar"
@@ -2568,7 +2568,7 @@
         "label": "Continuar"
       },
       "back": {
-        "label": "Voltar"
+        "label": "AtrÃ¡s"
       },
       "viewMore": {
         "label": "Ver mais"
@@ -2598,7 +2598,7 @@
         "label": "Retorna"
       },
       "create": {
-        "label": "Criado"
+        "label": "Crio"
       },
       "update": {
         "label": "Atualizar"
@@ -2631,7 +2631,7 @@
     },
     "menu": {
       "home": {
-        "label": "Início"
+        "label": "InÃ­cio"
       },
       "schedule": {
         "label": "Minha agenda"
@@ -2643,13 +2643,13 @@
         "label": "Meus pacientes"
       },
       "history": {
-        "label": "Histórico de consultas"
+        "label": "HistÃ³rico de consultas"
       },
       "support": {
         "label": "Suporte"
       },
       "myServices": {
-        "label": "Minhas consultas"
+        "label": "meus consultas"
       }
     },
     "patient": {
@@ -2687,7 +2687,7 @@
           "label": "Alterar idioma"
         },
         "clinic": {
-          "label": "Alterar clínica"
+          "label": "Alterar clÃ­nica"
         },
         "logout": {
           "label": "Sair"
@@ -2730,10 +2730,10 @@
         "label": "Digite sua Universidade"
       },
       "degree": {
-        "label": "Digite Título"
+        "label": "Digite TÃ­tulo"
       },
       "regNumber": {
-        "label": "Digite Nº de Registro"
+        "label": "Digite NÂº de Registro"
       },
       "initialDate": {
         "label": "Data Inicial"
@@ -2748,7 +2748,7 @@
         "label": "Filtrar por"
       },
       "searchCoordinator": {
-        "label": "Pesquisar coordenador"
+        "label": "pesquisa Coordenador"
       }
     },
     "deleteAll": {
@@ -2785,40 +2785,40 @@
             "label": "Idade"
           },
           "motherName": {
-            "label": "Nome da mãe"
+            "label": "Nome da mÃ£e"
           },
           "race": {
-            "label": "Raça"
+            "label": "RaÃ§a"
           }
         }
       }
     },
     "noNotifications": {
-      "label": "Desativar as notificações"
+      "label": "desativar as notificaÃ§Ãµes"
     },
     "oneCap": {
-      "label": "* Pelo menos uma letra maiúscula"
+      "label": "* Pelo menos uma letra maiÃºscula"
     },
     "oneLower": {
-      "label": "* Pelo menos uma letra minúscula"
+      "label": "* Uma menos um minÃºsculas"
     },
     "oneNumber": {
-      "label": "* Pelo menos um número"
+      "label": "* Um um nÃºmero mÃ­nimo"
     },
     "oneSpecialChar": {
-      "label": "* Pelo menos um caracter especial"
+      "label": "* A um carÃ¡cter menos especial"
     },
     "eigthLengthMin": {
-      "label": "* Comprimento mínimo de 8 caracteres (max. 16)"
+      "label": "* Um comprimento mÃ­nimo de 8 caracteres (max. 16)"
     },
     "userNotExists": {
-      "label": "Usuário não existe"
+      "label": "UsuÃ¡rio nÃ£o existe"
     },
     "retry": {
-      "label": "Tentar novamente"
+      "label": "retrying"
     },
     "error": {
-      "label": "Erro"
+      "label": "erro"
     },
     "disable": {
       "label": "Desabilitar"
@@ -2830,16 +2830,16 @@
       "label": "Filtrar por perfil"
     },
     "confirm": {
-      "label": "Confirmar"
+      "label": "confirme"
     },
     "startDateReq": {
-      "label": "Campo data de início é obrigatório"
+      "label": "data de inÃ­cio Ã© necessÃ¡ria"
     },
     "endDate": {
-      "label": "Data de término"
+      "label": "Data de tÃ©rmino"
     },
     "dates": {
-      "label": "Datas"
+      "label": "datas"
     },
     "select": {
       "label": "- Selecionar -"
@@ -2848,10 +2848,10 @@
       "label": "Todas as"
     },
     "familiars": {
-      "label": "Familiares"
+      "label": "famÃ­lia"
     },
     "uploadDate": {
-      "label": "Data adicionado"
+      "label": "Uploaded"
     },
     "timelineOf": {
       "label": "Linha do tempo"
@@ -2860,32 +2860,32 @@
       "label": "Hrs."
     },
     "teleconsult": {
-      "label": "Teleconsulta"
+      "label": "teleconsultoria"
     },
     "noInfo": {
-      "label": "Sem informação"
+      "label": "Sem informaÃ§Ã£o"
     },
     "in": {
-      "label": "Em"
+      "label": "No"
     },
     "remainderDatefoCacelations": {
-      "label": "Lembre-se de respeitar a data para reagendamentos e cancelamentos. Revise no link em Suporte."
+      "label": "Lembre-se de respeitar a data para reagendamientos cancelamentos acordad e verifique o seguinte link no Suporte"
     },
     "lastModification": {
-      "label": "Última modificação"
+      "label": "Ãšltima modificaÃ§Ã£o"
     },
     "hello": {
-      "label": "Olá"
+      "label": "OlÃ¡"
     },
     "startDate": {
-      "label": "Data de início"
+      "label": "Data de inÃ­cio"
     },
     "finalHour": {
-      "label": "Horário final"
+      "label": "horas finais"
     },
     "filter": {
       "role": {
-        "label": "Filtrar por função"
+        "label": "Filtrar por papel"
       }
     },
     "foreign": {
@@ -2895,107 +2895,107 @@
       "label": "Passaporte"
     },
     "added": {
-      "label": "Adicionado"
+      "label": "adicionado"
     },
     "description": {
-      "label": "Descrição"
+      "label": "DescriÃ§Ã£o"
     },
     "aviabilityActualDays": {
-      "label": "Disponibilidade de dias atual"
+      "label": "Disponibilidade dia atual"
     },
     "ingresed": {
-      "label": "Adicionado"
+      "label": "Juntou"
     },
     "SR": {
       "label": "SR"
     },
     "lang": {
       "spanish": {
-        "label": "Espanhol"
+        "label": "espanhol"
       },
       "english": {
-        "label": "Inglês"
+        "label": "InglÃªs"
       },
       "portuguese": {
-        "label": "Português"
+        "label": "portuguÃªs"
       }
     },
     "viewUsers": {
-      "label": "Visualizar usuários"
+      "label": "vista dos usuÃ¡rios"
     },
     "associated": {
-      "label": "Visualizar usuários"
+      "label": "associado"
     },
     "thisProfileDoesntHave": {
-      "label": "Este perfil não possui"
+      "label": "Esta pÃ¡gina nÃ£o tem"
     },
     "by": {
-      "label": "por"
+      "label": "de"
     },
     "placeholders": {
       "searchProfessional": {
-        "label": "Procurar profissional"
+        "label": "procurar profissional"
       },
       "mmhg": {
         "label": "mmHg"
       },
       "latMin": {
-        "label": "Batimentos / minuto"
+        "label": "batimentos / minuto"
       },
       "resMin": {
         "label": "res / min"
       },
       "celFar": {
-        "label": "°C - ° F"
+        "label": "Â° - Â° F"
       },
       "kgLb": {
         "label": "Kg - Lb"
       },
       "mFt": {
-        "label": "m ou pés"
+        "label": "m ou pÃ©s"
       },
       "searchPatient": {
-        "label": "Buscar paciente"
+        "label": "Find Patient"
       }
     },
     "motherNames": {
-      "label": "Nome da mãe"
+      "label": "MÃ£e Nome"
     },
     "motherNamesReq": {
-      "label": "Campo Nome  da mãe é obrigatório"
+      "label": "MÃ£e Nome Ã© necessÃ¡ria"
     },
     "actions": {
-      "label": "Ações"
+      "label": "AÃ§Ãµes"
     },
     "noDefined": {
-      "label": "Não definido"
+      "label": "Indefinido"
     },
     "recordPerPage": {
-      "label": "Registros por página"
+      "label": "Registros por pÃ¡gina"
     },
     "noRecordsFound": {
-      "label": "Sem registros encontrados"
+      "label": "sem registros encontrados"
     },
     "onlyChars": {
-      "label": "Inserir apenas caracteres"
+      "label": "Introduzir apenas caracteres"
     },
     "itsNecesesary": {
-      "label": "é obrigatório"
+      "label": "Ã© necessÃ¡rio"
     },
     "currentStartDate": {
-      "label": "Data de início atual"
+      "label": "data de inÃ­cio atual"
     },
     "currentDateRange": {
-      "label": "Períodos de horários atuais:"
+      "label": "gama de tempos atuais"
     },
     "notAll": {
-      "label": "Negar todos"
+      "label": "N / D"
     },
     "professionalsOnline": {
-      "label": "Profissional online"
+      "label": "profissional online"
     },
     "minutes": {
-      "label": "Minutos"
+      "label": "minutos"
     },
     "choose": {
       "label": "Escolher"
@@ -3007,28 +3007,28 @@
       "label": "Faturamento"
     },
     "profileUpdated": {
-      "label": "Perfil atualizado"
+      "label": "perfil atualizado"
     },
     "updatePic": {
-      "label": "Atualizar foto"
+      "label": "atualizaÃ§Ã£o Foto"
     },
     "identificationData": {
-      "label": "Dados de identificação"
+      "label": "Os dados de identificaÃ§Ã£o"
     },
     "identificationType": {
-      "label": "tipo de identificação"
+      "label": "tipo de identificaÃ§Ã£o"
     },
     "ufState": {
       "label": "Estado (UF)"
     },
     "number": {
-      "label": "Número"
+      "label": "NÃºmero"
     },
     "enterService": {
-      "label": "Acessar consulta"
+      "label": "Digite consulta"
     },
     "createdAt": {
-      "label": "Data de criação"
+      "label": "Data de criaÃ§Ã£o"
     },
     "disabled": {
       "label": "Desativado"
@@ -3038,7 +3038,7 @@
         "label": "Seg"
       },
       "tue": {
-        "label": "Terç"
+        "label": "TerÃ§"
       },
       "wed": {
         "label": "Qua."
@@ -3050,7 +3050,7 @@
         "label": "Sex."
       },
       "sat": {
-        "label": "Sáb."
+        "label": "SÃ¡b."
       },
       "sun": {
         "label": "Dom."
@@ -3058,10 +3058,10 @@
     },
     "sympthoms": {
       "headness": {
-        "label": "Vertigens"
+        "label": "vertigens"
       },
       "otherPain": {
-        "label": "Outra dor"
+        "label": "outra dor"
       },
       "backPain": {
         "label": "Dor nas costas"
@@ -3073,13 +3073,13 @@
         "label": "Dificuldade para respirar"
       },
       "nauseaVomit": {
-        "label": "Náuseas / vómitos"
+        "label": "NÃ¡useas / vÃ³mitos"
       },
       "skinLesions": {
-        "label": "Lesões de pele"
+        "label": "LesÃµes de pele"
       },
       "jointPain": {
-        "label": "Dores nas articulações"
+        "label": "dores nas articulaÃ§Ãµes"
       },
       "nasalCongestion": {
         "label": "Congestionamento nasal"
@@ -3091,16 +3091,16 @@
         "label": "Entorses / Choque"
       },
       "bleeding": {
-        "label": "Sangramento"
+        "label": "sangramento"
       },
       "urinaryDiscomfort": {
-        "label": "Desconforto urinário"
+        "label": "desconforto urinÃ¡rio"
       },
       "cough": {
         "label": "Tosse"
       },
       "headache": {
-        "label": "Dor de cabeça"
+        "label": "Dor de cabeÃ§a"
       },
       "abdominalPain": {
         "label": "Dor abdominal"
@@ -3109,7 +3109,7 @@
         "label": "Febre"
       },
       "palpitations": {
-        "label": "Taquicardia"
+        "label": "taquicardia"
       },
       "chestPain": {
         "label": "Dor no peito"
@@ -3118,7 +3118,7 @@
         "label": "Dor de corpo"
       },
       "diarrhea": {
-        "label": "Diarréia"
+        "label": "DiarrÃ©ia"
       }
     },
     "confirmDocsCreateAccount": {
@@ -3127,8 +3127,8 @@
   },
   "profile": {
     "personal": {
-      "title": "Dados de usuário",
-      "label": "Informação básico de seus dados",
+      "title": "Dados de usuÃ¡rio",
+      "label": "InformaÃ§Ã£o bÃ¡sico de seus dados",
       "tabIdentification": {
         "label": "Meus dados pessoais",
         "personalData": {
@@ -3161,7 +3161,7 @@
             "label": "UF de nascimento"
           },
           "municipality": {
-            "label": "Município de nascimento"
+            "label": "MunicÃ­pio de nascimento"
           },
           "nacionality": {
             "label": "Nacionalidade"
@@ -3169,18 +3169,18 @@
         }
       },
       "tabAcademic": {
-        "label": "Dados acadêmicos",
+        "label": "Dados acadÃªmicos",
         "academicData": {
-          "title": "Dados acadêmicos",
-          "label": "Biografia Acadêmcia",
+          "title": "Dados acadÃªmicos",
+          "label": "Biografia AcadÃªmcia",
           "university": {
             "label": "Univesidade"
           },
           "degree": {
-            "label": "Título"
+            "label": "TÃ­tulo"
           },
           "regNumber": {
-            "label": "Nº de registro"
+            "label": "NÂº de registro"
           },
           "specialties": {
             "label": "Especialidades"
@@ -3189,24 +3189,24 @@
       },
       "changePassword": {
         "title": "Alterar senha",
-        "label": "Informação básica de seus dados",
+        "label": "InformaÃ§Ã£o bÃ¡sica de seus dados",
         "current": {
           "title": "Senha atual",
           "lastModification": {
-            "label": "Última modificação em"
+            "label": "Ãšltima modificaÃ§Ã£o em"
           }
         },
         "asNameAndPic": {
-          "label": "O nome e foto"
+          "label": "o nome e foto"
         },
         "security": {
-          "label": "Segurança"
+          "label": "seguranÃ§a"
         },
         "useInVideoCall": {
-          "label": "Que utiliza no sistema de teleconsulta."
+          "label": "vocÃª usa os videoconsultas sistema."
         },
         "pwdChange": {
-          "label": "Mudança de senha"
+          "label": "MudanÃ§a de senha"
         },
         "enterNewPwd": {
           "label": "Insira a nova senha"
@@ -3215,22 +3215,22 @@
           "label": "Confirme a nova senha"
         },
         "notMatch": {
-          "label": "As senhas não coincidem"
+          "label": "As senhas nÃ£o coincidem"
         },
         "recover": {
-          "label": "Recuperação de senha"
+          "label": "RecuperaÃ§Ã£o de senha"
         },
         "pwdReseted": {
-          "label": "Senha restaurada"
+          "label": "senha restaurada"
         },
         "emailAsociatedAccount": {
-          "label": "Digite seu endereço de e-mail associado à sua conta."
+          "label": "Digite seu endereÃ§o de e-mail associado Ã  sua conta."
         },
         "emailSendedResetPwd": {
-          "label": "Foi enviado um e-mail para redefinir sua senha"
+          "label": "Ele enviou um email para redefinir sua senha"
         },
         "hintSecutity": {
-          "label": "informações básicas, como o nome e foto, segurança, você usa os videoconsultas sistema."
+          "label": "informaÃ§Ãµes bÃ¡sicas, como o nome e foto, seguranÃ§a, vocÃª usa os videoconsultas sistema."
         },
         "change": {
           "title": "Alterar senha",
@@ -3243,14 +3243,14 @@
           "repeat": {
             "label": "Repetir senha",
             "hint": {
-              "label": "Lembre-se de que você deve criar uma senha que contenha caracteres alfanuméricos e que contenha pelo menos letras maiúsculas e minúsculas."
+              "label": "Lembre-se de que vocÃª deve criar uma senha que contenha caracteres alfanumÃ©ricos e que contenha pelo menos letras maiÃºsculas e minÃºsculas."
             }
           }
         }
       },
       "changeLanguage": {
         "title": "Alterar senha",
-        "label": "Informação básica de seus dados",
+        "label": "InformaÃ§Ã£o bÃ¡sica de seus dados",
         "platform": {
           "title": "Idioma da plataforma",
           "label": "Idioma"
@@ -3259,7 +3259,7 @@
     },
     "payments": {
       "title": "Meus pagamentos",
-      "label": "Informação básica de seus usuários",
+      "label": "InformaÃ§Ã£o bÃ¡sica de seus usuÃ¡rios",
       "tabPaymentsDocuments": {
         "account": {
           "label": "Conta",
@@ -3267,7 +3267,7 @@
             "label": "Tipo de conta"
           },
           "number": {
-            "label": "Número da conta"
+            "label": "NÃºmero da conta"
           },
           "bank": {
             "label": "Banco"
@@ -3291,22 +3291,22 @@
         "modal": {
           "newSpecialty": {
             "title": "Adicionar especialidade",
-            "label": "Especialidade"
+            "label": "especialidade"
           },
           "newPrice": {
             "title": "Adicionar valor",
             "specialty": {
-              "label": "Especialidade"
+              "label": "especialidade"
             },
             "price": {
-              "label": "Valor"
+              "label": "valor"
             }
           }
         }
       }
     },
     "myShoppings": {
-      "title": "Meus dados pessoais  Minhas compras",
+      "title": "Meus dados pessoais  Minha compras",
       "table": {
         "document": {
           "label": "Documento"
@@ -3323,10 +3323,10 @@
       }
     },
     "profileManagmentCreateProfile": {
-      "label": "Perfil Gestão / Criar perfil"
+      "label": "Perfil GestÃ£o / Criar perfil"
     },
     "profiles": {
-      "label": "Perfis"
+      "label": "perfis"
     },
     "profileName": {
       "label": "Perfil"
@@ -3338,7 +3338,7 @@
       "label": "Tipo de registo"
     },
     "sendInfoToPatient": {
-      "label": "Enviar Informação ao Paciente"
+      "label": "Enviar InformaÃ§Ã£o ao Paciente"
     },
     "createProfile": {
       "label": "Criar perfil"
@@ -3347,31 +3347,31 @@
       "label": "Editar Perfil"
     },
     "disableProfile": {
-      "label": "Desabilitar perfil"
+      "label": "disable Perfil"
     },
     "viewPrescription": {
-      "label": "Visualizar prescrição"
+      "label": "veja Prescription"
     },
     "generateExamOrder": {
-      "label": "Gerar pedido de exame"
+      "label": "Gerar Order Exam"
     },
     "reportManagment": {
-      "label": "Relatório gerencial"
+      "label": "RelatÃ³rio gerencial"
     },
     "profileManagmentUpdateProfile": {
-      "label": "Perfil Gestão / Atualização"
+      "label": "Perfil GestÃ£o / AtualizaÃ§Ã£o"
     },
     "cep": {
       "label": "CEP"
     },
     "managmentDisponibility": {
-      "label": "Gerenciamento de disponibilidade"
+      "label": "gerenciamento de disponibilidade"
     },
     "updateProfile": {
       "label": "Atualizar perfil"
     },
     "secondaryIdentification": {
-      "label": "Identificação secundário"
+      "label": "identificaÃ§Ã£o secundÃ¡rio"
     }
   },
   "account": {
@@ -3381,9 +3381,9 @@
     "createAccount": {
       "title": "Criar conta",
       "label": "Em seguida, insira seus dados para concluir seu registro.",
-      "isForeign": "Estrangeiro de passagem",
+      "isForeign": "eu sou um estrangeiro",
       "identificationData": {
-        "label": "Dados de identificação"
+        "label": "Dados de identificaÃ§Ã£o"
       },
       "personalData": {
         "label": "Dados pessoais"
@@ -3395,7 +3395,7 @@
         "label": "Dados de nascimento"
       },
       "address": {
-        "label": "Endereço"
+        "label": "EndereÃ§o"
       },
       "generatePassword": {
         "title": "Gerar senha"
@@ -3403,50 +3403,50 @@
       "modal": {
         "fail": {
           "title": "Tem mais de 18 anos?",
-          "label": "Desculpe, você precisa ser maior de idade para entrar"
+          "label": "Desculpe, vocÃª precisa ser maior de idade para entrar"
         },
         "termAndConditions": {
-          "title": "Termos e condições",
+          "title": "Termos e condiÃ§Ãµes",
           "btnCreate": "Criar conta",
           "btnCancel": "Cancelar"
         }
       },
       "hint": {
-        "label": "Lembre-se de que você deve criar uma senha que contenha caracteres alfanuméricos e que contenha pelo menos letras maiúsculas e minúsculas."
+        "label": "Lembre-se de que vocÃª deve criar uma senha que contenha caracteres alfanumÃ©ricos e que contenha pelo menos letras maiÃºsculas e minÃºsculas."
       }
     },
     "hintDisableUser": {
-      "label": "Tem certeza de que deseja desativar este usuário?"
+      "label": "Tem certeza de que deseja desativar este usuÃ¡rio?"
     },
     "disableUser": {
-      "label": "Disable Usuário"
+      "label": "disable UsuÃ¡rio"
     },
     "sendConfirmationEmail": {
-      "label": "Enviar e-mail de confirmação"
+      "label": "Enviar e-mail de confirmaÃ§Ã£o"
     },
     "updateAccount": {
-      "label": "Atualizar conta"
+      "label": "atualizar conta"
     },
     "identificationDocument": {
-      "label": "Documento de identificação"
+      "label": "Documento de identificaÃ§Ã£o"
     },
     "identificationDocumentReq": {
-      "label": "Campo documento de identificação é obrigatório"
+      "label": "Documento de identificaÃ§Ã£o"
     },
     "selectedDocumentNumberReq": {
-      "label": "Campo número de documento é obrigatório"
+      "label": "Selecionado Documento No."
     },
     "secondaryDoc": {
-      "label": "Documentação secundária"
+      "label": "documentaÃ§Ã£o secundÃ¡rio"
     },
     "votantTitle": {
-      "label": "Título de eleitor"
+      "label": "tÃ­tulo de eleitor"
     },
     "selectedDocumentNumber": {
-      "label": "Nº de documento selecionado"
+      "label": "Seleccionada No. Documento"
     },
     "schoolAsistant": {
-      "label": "Estudante"
+      "label": "Escola Assistant"
     },
     "nameReq": {
       "label": "Nome"
@@ -3458,10 +3458,10 @@
       "label": "Sobrenome"
     },
     "motherNameReq": {
-      "label": "Nome da mãe"
+      "label": "MÃ£e Nome"
     },
     "emailReq": {
-      "label": "Campo e-mail é obrigatório"
+      "label": "o email"
     },
     "confirmEmailReq": {
       "label": "Confirmar e-mail"
@@ -3470,61 +3470,61 @@
       "label": "Telefone"
     },
     "breed": {
-      "label": "Raça"
+      "label": "RaÃ§a"
     },
     "grenderReq": {
-      "label": "Sexo"
+      "label": "sexo"
     },
     "dateOfBirthReq": {
       "label": "Data de nascimento"
     },
     "nationalityReq": {
-      "label": "Nacionalidade"
+      "label": "nacionalidade"
     },
     "country": {
-      "label": "País de origem"
+      "label": "PaÃ­s de origem"
     },
     "countryEntrance": {
-      "label": "Data de entrada para o País"
+      "label": "Data de entrada para o PaÃ­s"
     },
     "erroneous": {
-      "label": "Incorreto"
+      "label": "errado"
     },
     "raceColor": {
-      "label": "Raça / cor"
+      "label": "RaÃ§a / cor"
     },
     "familyStatus": {
-      "label": "Situação familiar / conjugal"
+      "label": "situaÃ§Ã£o familiar / conjugal"
     },
     "cityReq": {
       "label": "Cidade"
     },
     "neighborhoodReq": {
-      "label": "Bairro"
+      "label": "Barrio"
     },
     "streetReq": {
-      "label": "Campo rua é obrigatório"
+      "label": "Rua Ã© necessÃ¡ria"
     },
     "numberReq": {
-      "label": "Número"
+      "label": "nÃºmero"
     },
     "userType": {
-      "label": "Tipo de usuário"
+      "label": "Tipo de usuÃ¡rio"
     },
     "atLeastOneUpper": {
-      "label": "* Pelo menos uma letra maiúscula"
+      "label": "* Pelo menos uma letra maiÃºscula"
     },
     "atLeastOneLower": {
-      "label": "* Pelo menos uma letra minúscula"
+      "label": "* Uma menos um minÃºsculas"
     },
     "atLeastOneNumber": {
-      "label": "* Pelo menos um número"
+      "label": "* Um um nÃºmero mÃ­nimo"
     },
     "lengthMinEigthCharsMaxSixTeen": {
-      "label": "* Comprimento mínimo de 8 caracteres (max. 16)"
+      "label": "* Um comprimento mÃ­nimo de 8 caracteres (max. 16)"
     },
     "atLeastOneSpecialChar": {
-      "label": "* Pelo menos um caracter especial"
+      "label": "* A um carÃ¡cter menos especial"
     },
     "password": {
       "label": "Senha"
@@ -3533,49 +3533,49 @@
       "label": "Confirmar senha"
     },
     "passwordsNotMatch": {
-      "label": "As senhas não correspondem"
+      "label": "As senhas nÃ£o correspondem"
     },
     "passwordHint": {
-      "label": "Lembre-se de criar uma senha que contém caracteres alfanuméricos e conter pelo menos um maiúsculas, minúsculas e caracteres especiais."
+      "label": "Lembre-se de criar uma senha que contÃ©m caracteres alfanumÃ©ricos e conter pelo menos um maiÃºsculas, minÃºsculas e caracteres especiais."
     },
     "upperAndSpecialChar": {
-      "label": "minúsculas e um caractere especial."
+      "label": "minÃºsculas e um caractere especial."
     },
     "userManagmentAccountCreation": {
-      "label": "Gerenciamento de usuários / Criação de Conta"
+      "label": "Gerenciamento de usuÃ¡rios / CriaÃ§Ã£o de Conta"
     },
     "genPassword": {
       "label": "gerar senha"
     },
     "disableUserHint": {
-      "label": "Tem certeza de que deseja desativar este usuário?"
+      "label": "Tem certeza de que deseja desativar este usuÃ¡rio?"
     },
     "cep": {
       "label": "CEP"
     },
     "neightberhood": {
-      "label": "Bairro"
+      "label": "VizinhanÃ§a"
     },
     "street": {
       "label": "Rua"
     },
     "numeration": {
-      "label": "Número"
+      "label": "NumeraÃ§Ã£o"
     },
     "uf": {
       "label": "UF"
     },
     "numerationReq": {
-      "label": "Campo número é obrigatório"
+      "label": "A numeraÃ§Ã£o Ã© necessÃ¡ria"
     },
     "passwordGeneration": {
-      "label": "Geração de senha"
+      "label": "geraÃ§Ã£o de senha"
     },
     "lengthMinEightChars": {
-      "label": "* Um mínimo de 8 caracteres"
+      "label": "* Um mÃ­nimo de 8 caracteres"
     },
     "academicBio": {
-      "label": "Biografia acadêmica"
+      "label": "Academica biografia"
     }
   }
 }
