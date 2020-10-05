@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
+import { ClinicService } from '../../../../services/clinic.service';
+
 import {
   NgbDateStruct,
   NgbCalendar,
@@ -27,7 +29,8 @@ export class CreateAccountComponent implements OnInit {
     private calendar: NgbCalendar,
     private config: NgbDatepickerConfig,
     private userService: UsersService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private clinicService:ClinicService
   ) { }
   public userRegister: registerUser;
   public placement = 'bottom';
@@ -63,12 +66,20 @@ export class CreateAccountComponent implements OnInit {
   termsAccepted: boolean = false;
   privacyAccepted: boolean = false;
   consentAccepted: boolean = false;
+  public clinic:string;
+
+  public useTerm:any;
+  public privacyTerms:any;
+  public telemedicineConsent:any;
+
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
   }
 
   ngOnInit(): void {
+    this.clinic = '5f236fc966fbb0054894b780';
+    this.politicas();
     const current = new Date();
     this.minDate = {
       year: current.getFullYear(),
@@ -94,10 +105,10 @@ export class CreateAccountComponent implements OnInit {
     this.personalData = this._formBuilder.group(
       {
         checkAge: [null, [Validators.requiredTrue]],
-        name: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
-        lastName: ['', Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)],
-        motherName: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
-        secondLastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)]],
+        name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+        lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+        motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+        secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
         email: [null, [Validators.email, Validators.required]],
         gender: [null, [Validators.required]],
         confirmEmail: ['', [Validators.required]],
@@ -163,6 +174,20 @@ export class CreateAccountComponent implements OnInit {
       this.addressData.controls,
       this.passwordData.controls
     );
+  }
+
+  politicas(){
+    this.clinicService.getPoliticas(this.clinic).subscribe(
+      data => {
+        console.log(data)
+        this.useTerm = data.payload.useTerm;
+        this.privacyTerms = data.payload.privacyTerms;
+        this.telemedicineConsent = data.payload.telemedicineConsent;
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   validateForm() {
