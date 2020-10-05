@@ -645,21 +645,21 @@
             <div class="col-lg-12">
               <div class="custom-control custom-checkbox custom-control-inline">
                 <input type="checkbox" class="custom-control-input" id="terms" [(ngModel)]="termsAccepted" />
-                <label class="custom-control-label" for="terms"><a [routerLink]=""
+                <label class="custom-control-label" for="terms"><a [routerLink]="useTerm" target="_blank"
                     class="text-destacado">{{'auth.accept.termsAndconditions.label' | transloco}}</a></label>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="custom-control custom-checkbox custom-control-inline">
                 <input type="checkbox" class="custom-control-input" id="privacy" [(ngModel)]="privacyAccepted" />
-                <label class="custom-control-label" for="privacy"><a [routerLink]=""
+                <label class="custom-control-label" for="privacy"><a [routerLink]="privacyTerms"  target="_blank"
                     class="text-destacado">{{'auth.accept.privacyPolicy.label' | transloco}}</a></label>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="custom-control custom-checkbox custom-control-inline">
                 <input type="checkbox" class="custom-control-input" id="consent" [(ngModel)]="consentAccepted" />
-                <label class="custom-control-label" for="consent"><a [routerLink]=""
+                <label class="custom-control-label" for="consent"><a [routerLink]="telemedicineConsent"  target="_blank"
                     class="text-destacado">{{'auth.accept.consent.label' | transloco}}</a></label>
               </div>
             </div>
