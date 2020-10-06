@@ -39,6 +39,7 @@ export class CreateAccountComponent implements OnInit {
 
   states: any = [];
   cities: any = [];
+  citiesFilter: any = [];
   countries: any = [];
   breeds: any = [];
   educations: any = [];
@@ -349,6 +350,17 @@ export class CreateAccountComponent implements OnInit {
   ufSelect(id){
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
+    this.getCitiesforId(idSelected[1].trim());
+  }
+  getCitiesforId(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe((data) => {
+      console.log(data);
+      this.citiesFilter = data.payload;
+    },
+    error => {
+      console.log(error)
+    }
+    );
   }
 
   getCities() {

@@ -10,6 +10,7 @@ import * as moment from 'moment';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
+
 export class IndexComponent implements OnInit {
   public consultas: any;
   public consultasListaDeEspera: any;
