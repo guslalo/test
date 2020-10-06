@@ -229,7 +229,7 @@
                     <label for="ufBirth">{{
                       'profile.personal.tabIdentification.birthData.uf.label' | transloco
                     }}</label>
-                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"
+                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"  (change)="ufSelect($event.target)"
                       formControlName="ufBirth">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
@@ -244,7 +244,7 @@
                     <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="municipalityBirth"
                       formControlName="municipalityBirth">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
                         {{ item.name }}
                       </option>
                     </select>

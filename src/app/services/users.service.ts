@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
@@ -32,6 +32,12 @@ export class UsersService {
 
   getCities(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + 'v1/cities');
+  }
+
+  getCitiesForUf(stateId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('stateId',stateId);
+    return this.http.get<any>(environment.baseUrl + 'v1/cities', {params:params});
   }
 
   getBreeds(): Observable<any> {

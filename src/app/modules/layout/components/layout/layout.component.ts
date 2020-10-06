@@ -71,7 +71,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
         setTimeout(() => {
           document.location.href = '/';
-        }, 3000);
+        }, 10000);
       }else {
         console.log('reactivado');
         this.bnIdle.resetTimer();
