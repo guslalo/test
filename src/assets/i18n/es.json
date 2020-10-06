@@ -1025,6 +1025,10 @@
   },
   "dashboard": {
     "home": {
+      "shortcut": {
+        "appointment": "Agendar una cita médica con un profesional de salud o especialista",
+        "appointmentFast":"Atención con médico para obtener asesoramiento inmediato (la atención se realiza por orden de llegada y no es posible elegir especialidad)."
+      },
       "tab": {
         "home": {
           "services": {
