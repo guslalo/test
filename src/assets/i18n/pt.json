@@ -1025,6 +1025,10 @@
   },
   "dashboard": {
     "home": {
+      "shortcut": {
+        "appointment": "Agende uma consulta com um profissional de saúde.",
+        "appointmentFast":"Atendimento imediato com profissional de saúde (o atendimento é feito por ordem de chegada e nenhuma especialidade pode ser escolhida)."
+      },
       "tab": {
         "home": {
           "services": {

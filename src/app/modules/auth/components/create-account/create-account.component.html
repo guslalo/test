@@ -324,7 +324,7 @@
                     <label for="ufBirth">{{
                       'profile.personal.tabIdentification.birthData.uf.label' | transloco
                     }}</label>
-                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"
+                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth" (change)="ufSelect($event.target)"
                       formControlName="ufBirth" [ngClass]="{
                         'is-invalid': !birthData.get('ufBirth').valid && birthData.get('ufBirth').touched
                       }">
@@ -350,7 +350,7 @@
                           !birthData.get('municipalityBirth').valid && birthData.get('municipalityBirth').touched
                       }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
                         {{ item.name }}
                       </option>
                     </select>
@@ -443,7 +443,7 @@
                         'is-invalid': !addressData.get('city').valid && addressData.get('city').touched
                       }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
                         {{ item.name }}
                       </option>
                     </select>
