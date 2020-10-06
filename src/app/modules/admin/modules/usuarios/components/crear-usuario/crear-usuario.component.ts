@@ -118,10 +118,10 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      lastName: ['', Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
-      motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      name: ['', [Validators.required, ]], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      lastName: ['', ], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      motherName: ['', [Validators.required,]],// Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: [null, Validators.required],
