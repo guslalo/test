@@ -3461,16 +3461,31 @@
     "surnameReq": {
       "label": "Sobrenome"
     },
+    "surname": {
+      "label": "Sobrenome"
+    },
     "motherNameReq": {
+      "label": "Nome da mãe"
+    },
+    "motherName": {
       "label": "Nome da mãe"
     },
     "emailReq": {
       "label": "Campo e-mail é obrigatório"
     },
+    "email": {
+      "label": "Campo e-mail é obrigatório"
+    },
     "confirmEmailReq": {
       "label": "Confirmar e-mail"
     },
+    "confirmEmail": {
+      "label": "Confirmar e-mail"
+    },
     "phoneReq": {
+      "label": "Telefone"
+    },
+    "phone": {
       "label": "Telefone"
     },
     "breed": {
@@ -3479,8 +3494,17 @@
     "grenderReq": {
       "label": "Sexo"
     },
+    "grender": {
+      "label": "Sexo"
+    },
     "dateOfBirthReq": {
       "label": "Data de nascimento"
+    },
+    "dateOfBirth": {
+      "label": "Data de nascimento"
+    },
+    "nationality": {
+      "label": "Nacionalidade"
     },
     "nationalityReq": {
       "label": "Nacionalidade"
@@ -3503,13 +3527,22 @@
     "cityReq": {
       "label": "Cidade"
     },
+    "city": {
+      "label": "Cidade"
+    },
     "neighborhoodReq": {
+      "label": "Bairro"
+    },
+    "neighborhood": {
       "label": "Bairro"
     },
     "streetReq": {
       "label": "Campo rua é obrigatório"
     },
     "numberReq": {
+      "label": "Número"
+    },
+    "number": {
       "label": "Número"
     },
     "userType": {
