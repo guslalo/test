@@ -65,7 +65,7 @@ const toastrConfig = {
     AngularFireStorageModule, // For Storage
     AngularFireAuthModule, // For Authentication
     ModalModule.forRoot(),
-    ToastrModule.forRoot(toastrConfig),
+    ToastrModule.forRoot(toastrConfig)
   ],
   providers: [
     AngularFireDatabaseModule,
@@ -90,6 +90,7 @@ const toastrConfig = {
     BnNgIdleService,
   ],
   bootstrap: [AppComponent],
-  exports: [],
+  exports: [
+  ],
 })
 export class AppModule {}

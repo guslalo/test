@@ -3455,22 +3455,40 @@
     "nameReq": {
       "label": "Nombre"
     },
+    "name": {
+      "label": "Nombre"
+    },
     "lastName": {
       "label": "Segundo Nombre"
     },
     "surnameReq": {
       "label": "Apellido"
     },
+    "surname": {
+      "label": "Apellido"
+    },
     "motherNameReq": {
+      "label": "Nombres de la Madre"
+    },
+    "motherName": {
       "label": "Nombres de la Madre"
     },
     "emailReq": {
       "label": "Email"
     },
+    "email": {
+      "label": "Email"
+    },
     "confirmEmailReq": {
       "label": "Confirmar email"
     },
+    "confirmEmail": {
+      "label": "Confirmar email"
+    },
     "phoneReq": {
+      "label": "Telefono"
+    },
+    "phone": {
       "label": "Telefono"
     },
     "breed": {
@@ -3479,10 +3497,19 @@
     "grenderReq": {
       "label": "Sexo"
     },
+    "grender": {
+      "label": "Sexo"
+    },
     "dateOfBirthReq": {
       "label": "Fecha de Nacimiento"
     },
+    "dateOfBirth": {
+      "label": "Fecha de Nacimiento"
+    },
     "nationalityReq": {
+      "label": "Nacionalidad"
+    },
+    "nationality": {
       "label": "Nacionalidad"
     },
     "country": {
@@ -3510,6 +3537,9 @@
       "label": "Calle es necesario"
     },
     "numberReq": {
+      "label": "Numero"
+    },
+    "number": {
       "label": "Numero"
     },
     "userType": {
