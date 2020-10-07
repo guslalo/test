@@ -78,7 +78,7 @@
               <form [formGroup]="identificationData">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="document">{{ 'account.identificationDocumentReq.label' | transloco }}*</label>
+                    <label for="document">{{ 'account.identificationDocument.label' | transloco }}*</label>
                     <select disabled class="form-control" name="document" formControlName="document" [ngClass]="{
                         'is-invalid': !identificationData.get('document').valid && !isForeign
                       }" (change)="validateForm()">
@@ -99,7 +99,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}*</label>
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}*</label>
                     <input disabled type="text" class="form-control" name="idDocumentNumber"
                       formControlName="idDocumentNumber" [ngClass]="{
                         'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
@@ -142,7 +142,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumberReq.label' | transloco }}</label>
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}</label>
                     <input disabled type="text" class="form-control" name="extraIdDocument"
                       formControlName="extraIdDocument" [ngClass]="{
                         'is-invalid': !identificationData.get('extraIdDocument').valid && !isForeign
@@ -166,7 +166,7 @@
               <form [formGroup]="personalData">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="name">{{ 'account.nameReq.label' | transloco }}*</label>
+                    <label for="name">{{ 'account.name.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="name" formControlName="name" [ngClass]="{
                         'is-invalid': !personalData.get('name').valid
                       }" />
@@ -178,14 +178,14 @@
                       }" />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="secondLastName">{{ 'account.surnameReq.label' | transloco }}*</label>
+                    <label for="secondLastName">{{ 'account.surname.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="secondLastName" formControlName="secondLastName"
                       [ngClass]="{
                         'is-invalid': !personalData.get('secondLastName').valid
                       }" />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="lastName">{{ 'account.nameReq.label' | transloco }}s de la Madre *</label>
+                    <label for="lastName">{{ 'account.motherName.label' | transloco }}s de la Madre *</label>
                     <input type="text" class="form-control" name="motherName" formControlName="motherName" [ngClass]="{
                         'is-invalid': !personalData.get('motherName').valid
                       }" />
@@ -193,19 +193,19 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
+                    <label for="email">{{ 'auth.email.label' | transloco }}*</label>
                     <input type="email" class="form-control" name="email" formControlName="email" [ngClass]="{
                         'is-invalid': !personalData.get('email').valid
                       }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com" />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }}*</label>
+                    <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber" [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid
                       }" placeholder="#### o +(#)####-####" />
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="gender">{{ 'account.grenderReq.label' | transloco }}*</label>
+                    <label for="gender">{{ 'account.grender.label' | transloco }}*</label>
                     <select class="form-control" name="gender" formControlName="gender" [ngClass]="{
                         'is-invalid': !personalData.get('gender').valid
                       }">
@@ -215,7 +215,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="birthdate">{{ 'account.dateOfBirthReq.label' | transloco }}*</label>
+                    <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
                       <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" [maxDate]="maxDate"
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
@@ -250,7 +250,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="nacionality">{{ 'account.nationalityReq.label' | transloco }}*</label>
+                    <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
                     <select class="form-control" name="nacionality" formControlName="nacionality" [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
                       }">
@@ -335,7 +335,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="city">{{ 'account.cityReq.label' | transloco }}*</label>
+                    <label for="city">{{ 'account.city.label' | transloco }}*</label>
                     <select class="form-control" name="city" formControlName="city" [ngClass]="{
                         'is-invalid': !personalData.get('city').valid
                       }">
@@ -346,20 +346,20 @@
                     </select>
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="street">{{ 'account.neighborhoodReq.label' | transloco }}*</label>
+                    <label for="street">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="neighborhood" formControlName="neighborhood"
                       [ngClass]="{
                         'is-invalid': !personalData.get('neighborhood').valid
                       }" />
                   </div>
                   <div class="form-group col-md-2">
-                    <label for="street">{{ 'account.streetReq.label' | transloco }}*</label>
+                    <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="street" formControlName="street" [ngClass]="{
                         'is-invalid': !personalData.get('street').valid
                       }" />
                   </div>
                   <div class="form-group col-md-1">
-                    <label for="streetNumber">{{ 'account.numberReq.label' | transloco }}*</label>
+                    <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="streetNumber" formControlName="streetNumber"
                       [ngClass]="{
                         'is-invalid': !personalData.get('streetNumber').valid
@@ -581,7 +581,7 @@
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
+                    <label for="speciality">{{ 'account.name.label' | transloco }}Especialidad</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
