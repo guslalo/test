@@ -1994,13 +1994,13 @@
         },
         "clinic": {
           "inmediateAtention": {
-            "label": "texto atencion inmediata"
+            "label": "atencion inmediata"
           },
           "scheduling": {
-            "label": "text agendamiento"
+            "label": "agendamiento"
           },
           "payments": {
-            "label": "texto pagos"
+            "label": "pagos"
           }
         }
       },
