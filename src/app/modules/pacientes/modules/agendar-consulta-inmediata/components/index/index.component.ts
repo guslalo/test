@@ -185,7 +185,8 @@ export class IndexComponent implements OnInit {
   postImmediateConsolidate(consolidate) {
     this.appointmentsService.postImmediateConsolidate(consolidate).subscribe(
       (data) => {
-        if (data.payload.paymentUrl) {
+        console.log(data);
+        if (data.payload && data.payload.paymentUrl) {
           this.pago(data.payload.paymentUrl);
           this.statusPago(consolidate.id);
           $('#exampleModal').modal();
