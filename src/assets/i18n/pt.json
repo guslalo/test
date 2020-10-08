@@ -965,6 +965,7 @@
       "label": "Criar uma conta"
     },
     "email": {
+      "label":"E-mail",
       "sendTo": {
         "label": "Foi enviado um e-mail para"
       },
