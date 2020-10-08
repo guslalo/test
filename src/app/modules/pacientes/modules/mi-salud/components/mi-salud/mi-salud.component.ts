@@ -57,7 +57,7 @@ export class MiSaludComponent implements OnInit {
     $('.collapse').on('hidden.bs.collapse', function () {
       $('.collapse').eq(0).collapse('show');
     })
-    this.textInputFile = 'seleccionar archivo';
+    this.textInputFile = '';//seleccionar archivo
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
@@ -187,7 +187,7 @@ export class MiSaludComponent implements OnInit {
   }
 
   resetValue() {
-    this.textInputFile = 'seleccionar archivo';
+    this.textInputFile = '';//seleccionar archivo
   }
 
   hasAntecedents(antecedent, boolean) {
