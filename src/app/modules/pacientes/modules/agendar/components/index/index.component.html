@@ -283,7 +283,11 @@
                         'clinicalFile.selectSymptoms.label' | transloco
                       }}</label>
                       <select id="selectSintomaId" class="form-control custom-select w-100" (change)="onChange($event.target)">
-                        <option selected disabled>Seleccione síntoma</option>
+                        <option selected disabled>
+                          {{
+                            'clinicalFile.select.label' | transloco
+                          }}
+                        </option>
                         <ng-container *ngFor="let item of symptoms">
                           <option value="{{ item._id }}">{{ item.name }}</option>
                         </ng-container>

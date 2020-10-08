@@ -2527,6 +2527,12 @@
       },
       "password": {
         "label": "contraseña"
+      },
+      "file":{
+        "examen":"exámen",
+        "documento":"documento",
+        "seleccionar":"seleccionar",
+        "buscar":"Buscar"
       }
     },
     "button": {

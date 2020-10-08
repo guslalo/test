@@ -515,9 +515,19 @@
             <div class="form-group col">
               <label for="type">{{ 'clinicalFile.patientData.tabs.exams.table.type.label' | transloco }}</label>
               <select class="form-control" name="type" id="type" formControlName="type">
-                <option [value]="null">- Seleccionar -</option>
-                <option value="exam">Examen</option>
-                <option value="document">Documento</option>
+                <option [value]="null">-   {{
+                  'clinicalFile.select.label' | transloco
+                }} -</option>
+                <option value="exam">
+                  {{
+                    'common.input.file.examen' | transloco
+                  }}
+                </option>
+                <option value="document">
+                  {{
+                    'common.input.file.documento' | transloco
+                  }}
+                </option>
               </select>
             </div>
             <div class="form-group col">
@@ -527,7 +537,7 @@
                 accept=".pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  
                  (change)="openFile($event)" id="customFile"
                   style="overflow: hidden;" />
-                <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+                <label class="custom-file-label" for="customFile" >{{ textInputFile }}</label>
               </div>
             </div>
           </div>
