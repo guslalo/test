@@ -35,7 +35,7 @@ export class EditarUsuarioComponent implements OnInit {
   passwordForm: FormGroup;
   showPassword: boolean;
   professionalPhoto: any;
-  citiesFilter:any;
+  citiesFilter: any;
 
   profileSelected: any;
   roomSelected: any;
@@ -219,7 +219,7 @@ export class EditarUsuarioComponent implements OnInit {
     }, 1000);
   }
 
-  ufSelect(id){
+  ufSelect(id) {
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
@@ -229,9 +229,9 @@ export class EditarUsuarioComponent implements OnInit {
       console.log(data);
       this.citiesFilter = data.payload;
     },
-    error => {
-      console.log(error)
-    }
+      error => {
+        console.log(error)
+      }
     );
   }
 
@@ -610,8 +610,10 @@ export class EditarUsuarioComponent implements OnInit {
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,
         course: this.formUser[4].value.course,
-        ufRegistry: this.formUser[4].value.ufRegistry,
+        ufRegistry: this.formUser[4].value.ufRegistry._id,
+        professionalRegistryType: this.formUser[4].value.professionalRegistryType,
         professionalRegistry: this.professionalRegistry,
+        ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
       },
       password: this.formUser[5].value.password,
       confirmPassword: this.formUser[5].value.confirmPassword,
@@ -739,6 +741,9 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   addProfessionalRegistry() {
+
+    console.log(this.professionalForm)
+
     if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
       alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
     } else {
@@ -746,6 +751,10 @@ export class EditarUsuarioComponent implements OnInit {
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
         uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
+        ufRegistry: this.professionalForm.value.ufRegistry.name
       });
     }
   }
