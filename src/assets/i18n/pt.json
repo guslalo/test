@@ -965,7 +965,7 @@
       "label": "Criar uma conta"
     },
     "email": {
-      "label":"E-mail",
+      "label": "E-mail",
       "sendTo": {
         "label": "Foi enviado um e-mail para"
       },
@@ -1028,7 +1028,7 @@
     "home": {
       "shortcut": {
         "appointment": "Agende uma consulta com um profissional de saúde.",
-        "appointmentFast":"Atendimento imediato com profissional de saúde (o atendimento é feito por ordem de chegada e nenhuma especialidade pode ser escolhida)."
+        "appointmentFast": "Atendimento imediato com profissional de saúde (o atendimento é feito por ordem de chegada e nenhuma especialidade pode ser escolhida)."
       },
       "tab": {
         "home": {
@@ -2148,6 +2148,9 @@
     }
   },
   "table": {
+    "ufReg": {
+      "label": "Registro UF"
+    },
     "patients": {
       "label": "Dias"
     },
