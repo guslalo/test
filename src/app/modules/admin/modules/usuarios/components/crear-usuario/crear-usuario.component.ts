@@ -91,7 +91,7 @@ export class CrearUsuarioComponent implements OnInit {
     private specialtiesService: SpecialtiesService,
     private calendar: NgbCalendar,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -118,10 +118,10 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, ]], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
-      lastName: ['', ], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      name: ['', [Validators.required,]], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      lastName: ['',], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       motherName: ['', [Validators.required,]],// Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
-      secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      secondLastName: ['', [Validators.required,]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: [null, Validators.required],
@@ -455,8 +455,10 @@ export class CrearUsuarioComponent implements OnInit {
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,
         course: this.formUser[4].value.course,
-        ufRegistry: this.formUser[4].value.ufRegistry,
+        ufRegistry: this.formUser[4].value.ufRegistry._id,
+        professionalRegistryType: this.formUser[4].value.professionalRegistryType,
         professionalRegistry: this.professionalRegistry,
+        ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
       },
       password: this.formUser[5].value.password,
       confirmPassword: this.formUser[5].value.confirmPassword,
@@ -589,6 +591,10 @@ export class CrearUsuarioComponent implements OnInit {
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
         uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
+        ufRegistry: this.professionalForm.value.ufRegistry.name
       });
     }
   }
