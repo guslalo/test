@@ -193,7 +193,6 @@ export class MiSaludComponent implements OnInit {
   hasAntecedents(antecedent, boolean) {
     console.log(antecedent, boolean);
 
-
     this.medicalRecordService.hasAntecedents(antecedent, boolean).subscribe(
       (data) => {
         this.medicalRecordService.getByUserId().subscribe((data) => {
