@@ -545,7 +545,7 @@
       "label": "Meus antecedentes"
     },
     "completeThisForBetterService": {
-      "label": "Complete a sua informação clínica para melhor atendimento"
+      "label": "Complete a sua informação médica para melhor atendimento"
     },
     "yes": {
       "label": "Sim"
@@ -620,7 +620,7 @@
       "label": "Médicos atribuídos"
     },
     "scheduleApointment": {
-      "label": "Agendar Consulta"
+      "label": "Agendar atendimento"
     },
     "basicInfo": {
       "label": "Informação básica"
@@ -970,7 +970,7 @@
         "label": "Foi enviado um e-mail para"
       },
       "codeSent": {
-        "label": "com um código de verificação. Verifique sua caixa de entrada."
+        "label": "com um código de verificação, verifique a sua caixa de entrada."
       },
       "followInstructions": {
         "label": "Siga as instruções na mensagem para redefinir sua senha."
@@ -1220,7 +1220,7 @@
           "success": {
             "title": "Seu acesso ao atendimento imediato foi realizado com sucesso",
             "btnEnterRoom": {
-              "label": "Acessar"
+              "label": "Entrar na sala"
             },
             "hint": "Lembre-se de ler nossos termos e condições para um melhor consentimento das partes."
           }
@@ -1229,7 +1229,7 @@
       "inmediateService": {
         "title": "Consulta imediata",
         "btnCreate": {
-          "label": "Acessar"
+          "label": "Entrar na sala"
         }
       },
       "medicalAdvice": {
@@ -2382,7 +2382,7 @@
       "label": "Aqui você poderá acessar um atendimento imediata"
     },
     "inmediateServiceHint": {
-      "label": "Você entrará em uma lista de espera até que um profissional de saúde possa atendê-lo. Se optar por não esperar, clique no botão, Prefiro Agendar."
+      "label": "Você entrará em uma lista de espera até que um profissional de saúde possa atendê-lo. Se optar por não esperar, clique no botão."
     },
     "waitingTime": {
       "label": "O tempo de espera é de 15 minutos aproximadamente."
@@ -2528,12 +2528,6 @@
       },
       "password": {
         "label": "Senha"
-      },
-      "file":{
-        "examen":"exame",
-        "documento":"documento",
-        "seleccionar":"selecionar",
-        "buscar":"buscar"
       }
     },
     "button": {
@@ -3481,16 +3475,16 @@
       "label": "Nome da mãe"
     },
     "emailReq": {
-      "label": "Campo E-mail é obrigatório"
+      "label": "Campo e-mail é obrigatório"
     },
     "email": {
-      "label": "E-mail"
+      "label": "Campo e-mail é obrigatório"
     },
     "confirmEmailReq": {
-      "label": "Campo Confirmar E-mail é obrigatório"
+      "label": "Confirmar e-mail"
     },
     "confirmEmail": {
-      "label": "Confirmar E-mail"
+      "label": "Confirmar e-mail"
     },
     "phoneReq": {
       "label": "Telefone"
@@ -3523,7 +3517,7 @@
       "label": "País de origem"
     },
     "countryEntrance": {
-      "label": "Data de entrada no País"
+      "label": "Data de entrada para o País"
     },
     "erroneous": {
       "label": "Incorreto"
@@ -3547,7 +3541,7 @@
       "label": "Bairro"
     },
     "streetReq": {
-      "label": "Campo Logradouro é obrigatório"
+      "label": "Campo rua é obrigatório"
     },
     "numberReq": {
       "label": "Número"
@@ -3583,7 +3577,7 @@
       "label": "As senhas não correspondem"
     },
     "passwordHint": {
-      "label": "Lembre-se de criar uma senha que contém caracteres alfanuméricos e conter pelo menos letras maiúsculas, minúsculas e caracteres especiais."
+      "label": "Lembre-se de criar uma senha que contém caracteres alfanuméricos e conter pelo menos um maiúsculas, minúsculas e caracteres especiais."
     },
     "upperAndSpecialChar": {
       "label": "minúsculas e um caractere especial."
@@ -3604,7 +3598,7 @@
       "label": "Bairro"
     },
     "street": {
-      "label": "Logradouro"
+      "label": "Rua"
     },
     "numeration": {
       "label": "Número"
