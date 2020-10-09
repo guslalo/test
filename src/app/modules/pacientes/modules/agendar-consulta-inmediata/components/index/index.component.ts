@@ -27,6 +27,9 @@ export class IndexComponent implements OnInit {
   public textInputFile: any;
   public base64: any;
   public sinPrecio: boolean;
+  public documentsList:any;
+  public access_token: any;
+  public downloadUrl: any;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -41,6 +44,9 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.textInputFile = 'Seleccione Archivo';
     this.urlConfirmacion = 'resultado/';
+    this.access_token = JSON.parse(localStorage.getItem('token'));
+    this.downloadUrl = this.documentService.download();
+
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       //clearInterval(this.interval);
       //this.atras();
@@ -166,10 +172,19 @@ export class IndexComponent implements OnInit {
         type: 'documento',
         data: this.base64.split(',')[1],
       };
-      console.log(this.consolidate.id);
+      //console.log(this.consolidate.id);
       this.documentService.postDocumentAppointment(this.consolidate.id, documentDetailsObject).subscribe(
         (data) => {
           console.log(data);
+          this.appointmentsService.getAppointmentsDetails(this.consolidate.id).subscribe(
+            data => {
+              console.log(data.payload.patientDetails.documentDetails)
+              this.documentsList = data.payload.patientDetails.documentDetails;
+            },
+            error => {
+              console.log(error)
+            }
+          )
         },
         (error) => {
           console.log(error);
@@ -203,4 +218,27 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+
+  //multi docs
+  deleteDocument(path){
+    this.documentService.deleteDocumentAppointment(this.appointmentId, path).subscribe(
+      data => {
+        console.log(data);
+        this.appointmentsService.getAppointmentsDetails(this.appointmentId).subscribe(
+          data => {
+            console.log(data.payload.patientDetails.documentDetails)
+            this.documentsList = data.payload.patientDetails.documentDetails;
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+  }
+
 }
