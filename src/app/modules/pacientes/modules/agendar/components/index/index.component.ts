@@ -15,11 +15,13 @@ import { SafePipe } from './../../../../../../shared/pipes/sanitizer.pipe';
 import { environment } from 'src/environments/environment';
 
 
+
 //datepicker
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { analytics } from 'firebase';
+import { error } from 'protractor';
 
 declare var $: any;
 
@@ -59,6 +61,8 @@ export class IndexComponent implements OnInit {
   isImageSaved: boolean;
   cardImageBase64: string;
   public sinProfesionales: boolean;
+  public documentsList:any;
+  public access_token: any;
 
   public bloquearSelect = true;
   public bloquearSelect3 = true;
@@ -72,6 +76,9 @@ export class IndexComponent implements OnInit {
   public appointmentRescheduledObject:any;
   public SpecialtiesId:any;
   public blockSelectedByUser:any;
+  public inputFilesFormGroup: FormGroup;
+  public multiDocs: FormGroup;
+  public downloadUrl: any;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -86,7 +93,8 @@ export class IndexComponent implements OnInit {
     private documentService: DocumentService,
     private router: Router,
     private route: ActivatedRoute,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -127,7 +135,8 @@ export class IndexComponent implements OnInit {
     this.getMedicalSpecialties();
     this.getSpecialtiesService();
     this.getsymptoms();
-
+    this.access_token = JSON.parse(localStorage.getItem('token'));
+    this.downloadUrl = this.documentService.download();
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       //clearInterval(this.interval);
      // this.atras();
@@ -145,6 +154,11 @@ export class IndexComponent implements OnInit {
         this.professionals = this.filterAutocompleteProfessionals(newValue);
       }
     });
+  
+    this.multiDocs = this._formBuilder.group({
+      inputsRanges: this._formBuilder.array([]),
+    });
+
   }
 
   //selecion sintoma
@@ -662,6 +676,27 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  deleteDocument(path){
+    this.documentService.deleteDocumentAppointment(this.appointmentId, path).subscribe(
+      data => {
+        console.log(data);
+        this.appointmentsService.getAppointmentsDetails(this.appointmentId).subscribe(
+          data => {
+            console.log(data.payload.patientDetails.documentDetails)
+            this.documentsList = data.payload.patientDetails.documentDetails;
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+  }
+
   changeListener(event): void {
     //this.readThis($event.target);
     console.log(event.target.files[0]);
@@ -684,12 +719,41 @@ export class IndexComponent implements OnInit {
       this.documentService.postDocumentAppointment(this.consolidate.id, documentDetailsObject).subscribe(
         (data) => {
           console.log(data);
+          this.appointmentsService.getAppointmentsDetails(this.appointmentId).subscribe(
+            data => {
+              console.log(data.payload.patientDetails.documentDetails)
+              this.documentsList = data.payload.patientDetails.documentDetails;
+            },
+            error => {
+              console.log(error)
+            }
+          )
         },
         (error) => {
           console.log(error);
         }
       );
     };
+  }
+
+// controls reactivos
+agregardailyRanges() {
+  this.inputFilesFormGroup = this._formBuilder.group({
+    start: ['', [Validators.required]],
+    end: ['', [Validators.required]],
+  });
+
+  this.inputsRanges.push(this.inputFilesFormGroup);
+}
+
+
+
+  get inputsRanges() {
+    return this.multiDocs.get('inputsRanges') as FormArray;
+  }
+  //documentos
+  removerInputsRanges(indice: number) {
+    this.inputsRanges.removeAt(indice);
   }
 
   postDocumentService() {
