@@ -193,7 +193,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="email">{{ 'auth.email.label' | transloco }}*</label>
+                    <label for="email">{{ 'account.email.label' | transloco }}*</label>
                     <input type="email" class="form-control" name="email" formControlName="email" [ngClass]="{
                         'is-invalid': !personalData.get('email').valid
                       }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com" />
@@ -229,8 +229,8 @@
                     <label for="ufBirth">{{
                       'profile.personal.tabIdentification.birthData.uf.label' | transloco
                     }}</label>
-                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"  (change)="ufSelect($event.target)"
-                      formControlName="ufBirth">
+                    <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="ufBirth"
+                      (change)="ufSelect($event.target)" formControlName="ufBirth">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
@@ -648,7 +648,7 @@
                         'is-invalid': !professionalForm.get('ufRegistry').valid
                       }">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state._id" *ngFor="let state of states">
+                      <option [ngValue]="state" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
@@ -707,17 +707,47 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
+                        <th scope="col">
+                          {{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}
+                        </th>
+                        <th scope="col">
+                          {{ 'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco }}
+                        </th>
+                        <th scope="col">
+                          {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
+                        </th>
+                        <th scope="col">
+                          {{ 'table.ufReg' | transloco }}
+                        </th>
+                        <th scope="col">
+                          {{ 'profile.regType.label' | transloco }}
+                        </th>
+                        <th scope="col">
+                          {{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}
+                        </th>
                         <th scope="col">
                           {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                         </th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">
+                          Acciones
+                        </th>
                       </tr>
                     </thead>
 
                     <tbody>
                       <tr *ngFor="let registry of professionalRegistry; let i = index">
+                        <td>
+                          {{ registry.professionalTitle }}
+                        </td>
+                        <td>
+                          {{ registry.university }}
+                        </td>
+                        <td>
+                          {{ registry.course }}
+                        </td>
+                        <td>
+                          {{ registry.ufRegistry }}
+                        </td>
                         <td>
                           {{ registry.type }}
                         </td>

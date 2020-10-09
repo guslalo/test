@@ -325,8 +325,8 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>{{ 'common.createdAt.label' | transloco }}</th>
-                  <th>{{ 'table.status.label' | transloco }}</th>
+                  <th style="width: 25%;" class="text-right">{{ 'common.createdAt.label' | transloco }}</th>
+                  <th class="text-center">{{ 'table.status.label' | transloco }}</th>
                   <th>{{ 'table.action.label' | transloco }}</th>
                 </tr>
               </thead>
@@ -339,7 +339,7 @@
               <table class="table dos table-borderless mb-0">
                 <tbody>
                   <tr>
-                    <td style="width: 25%;" class="text-left">
+                    <td style="width: 25%;" class="text-center">
                       <svg
                         width="1em"
                         height="1em"
@@ -360,7 +360,7 @@
                       {{ item.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
                     </td>
 
-                    <td style="width: 25%;" class="text-left">
+                    <td style="width: 20%;" class="text-center">
                       <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
                         {{
                           (item.administrativeDetails.status === 'reserved'
