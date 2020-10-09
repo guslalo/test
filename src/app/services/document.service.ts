@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { CurrentUserService } from './current-user.service';
@@ -11,6 +11,8 @@ export class DocumentService {
   private uploadUrl = 'v1/documents/appointment/upload';
   public urlDownload = 'v1/medical-record/download/';
   public urlUpload = 'v1/medical-record/add-exam?userId=';
+  public delete = 'v1/documents/appointment/document/';
+
 
   constructor(private http: HttpClient, private currentUserService: CurrentUserService) {}
 
@@ -34,4 +36,13 @@ export class DocumentService {
       documentDetails,
     });
   }
+
+  //postDocumentAppointment
+  deleteDocumentAppointment(appointmentId: string, path): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('appointmentId', appointmentId);
+    return this.http.delete<any>(environment.baseUrl + this.delete + path, {params:params});
+  }
+
+
 }
