@@ -99,7 +99,7 @@ export class InicioComponent implements OnInit {
           var latest = new Date(Math.max.apply(null,dates));
           var earliest = new Date(Math.min.apply(null,dates));*/
           //this.spinner.hide();
-        }else {
+        } else {
           this.appointment = false
         }
       },
@@ -122,7 +122,6 @@ export class InicioComponent implements OnInit {
             console.log(error);
           }
         );
-     
       },
       error => {
         console.log(error)

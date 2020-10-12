@@ -126,12 +126,12 @@ export class EditarUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      lastName: ['', Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)],
-      motherName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
-      secondLastName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9µùàçéèçÇ\s]*$/)]],
+      name: ['', [Validators.required, ]],
+      lastName: ['', ],
+      motherName: ['', [Validators.required, ]],
+      secondLastName: ['', [Validators.required,]],
       email: ['', [Validators.email, Validators.required]],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      phoneNumber: [null, [Validators.required, ]],
       gender: [null, Validators.required],
       birthdate: [null, null],
       ufBirth: [null, null],
