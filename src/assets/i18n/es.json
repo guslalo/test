@@ -16,6 +16,10 @@
     }
   },
   "clinicalFile": {
+    "tabs":{
+      "antecentesFromProfessional":"Antecedentes registrados por el profesional de salud",
+      "antecentesFromPatient":"Antecedentes registrados por el paciente"
+    },
     "patientData": {
       "tabs": {
         "notes": {
