@@ -132,6 +132,18 @@
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
+                id="antecedentesPaciente2"
+                data-toggle="tab"
+                href="#antecedentesPacienteTab2"
+                role="tab"
+                aria-controls="antecedentesPaciente2"
+              >
+              {{ 'clinicalFile.tabs.antecentesFromProfessional' | transloco }}
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
                 id="profile-tab2"
                 data-toggle="tab"
                 href="#examenesDocumentosTab"
@@ -740,6 +752,182 @@
               </div>
               <!--/colappsed-->
               <!--/colappsed-->
+            </div>
+          </div>
+        </div>
+        <!--/tab-->
+
+        <!--tab antecedentes desde professional-->
+        <div class="tab-pane fade" id="antecedentesPacienteTab2" role="tabpanel" aria-labelledby="antecedentesPaciente2">
+          <div class="row">
+            <div class="col-12">
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="true" aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                      {{
+                        'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco
+                      }}
+                  </a>
+                
+                  <div class="collapse show"   id="sickness" *ngFor="let item of sicknessByProfessional">
+                    <ul class="antecedentes">
+                      <li class="pl-5">{{item.value}}
+                       
+                    </ul>
+
+                  </div>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#familiarHistory" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                    {{
+                      'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco
+                    }}
+                  </a>
+                
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse show" id="familiarHistory"
+                      *ngFor="let item of familiarHistoryByProfessional">
+                      <ul class="antecedentes">
+                        <li class="pl-5">{{item.value}}
+                         
+                        </li>
+                        
+                      </ul>
+
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#healthHabits" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                    {{ 'calendar.healthHabits.label' | transloco }}
+                  </a>
+                 
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse show" id="healthHabits" *ngFor="let item of healthHabitsByProfessional">
+                      <ul class="antecedentes">
+                        <li class="pl-5" id="{{item.id}}">
+                          {{item.value}}
+                        
+                        </li>
+                    
+                      </ul>
+
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#medicines" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                    {{
+                  'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco
+                }}
+                  </a>
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse show" id="medicines" *ngFor="let item of medicinesByProfessional">
+                      <ul class="antecedentes">
+                        <li class="pl-5" id="{{item.id}}">
+                          {{item.value}}
+                         
+                        </li>
+                      </ul>
+
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#occupational" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                    {{
+                  'clinicalFile.patientData.tabs.videoChat.info.background.occupational.label' | transloco
+                }}
+                  </a>
+                
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse show" id="occupational" *ngFor="let item of occupationalByProfessional">
+                      <ul class="antecedentes">
+                        <li class="pl-5" id="{{item.id}}">
+                          {{item.value}}
+                       
+                        </li>
+                      </ul>
+
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom">
+                  <a class="p-4" data-toggle="collapse" href="#others" role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D" />
+                    </svg>
+                    {{
+                  'clinicalFile.patientData.tabs.videoChat.info.background.other.label' | transloco
+                }}
+                  </a>
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse show" id="others" *ngFor="let item of othersByProfessional">
+                      <ul class="antecedentes">
+                        <li class="pl-5" id="{{item.id}}">
+                          {{item.value}}
+                          
+                        </li>
+                      </ul>
+
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
             </div>
           </div>
         </div>

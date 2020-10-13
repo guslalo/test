@@ -31,6 +31,13 @@ export class FichaConsultaComponent implements OnInit {
   public urlSibrare: any;
   public descargar:any;
 
+  public familiarHistoryByProfessional:any;
+  public healthHabitsByProfessional:any;
+  public medicinesByProfessional:any;
+  public occupationalByProfessional:any;
+  public othersByProfessional:any;
+  public sicknessByProfessional:any;
+
   constructor(
     private route: ActivatedRoute,
     private medicalRecord: MedicalRecordService,
@@ -50,6 +57,7 @@ export class FichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getVerifiedSibrareDocuments2(id);
+      this.getAntecedentByProfessional(id);
     });
     this.getAppointmentsTimeline();
     this.getFecha();
@@ -74,6 +82,23 @@ export class FichaConsultaComponent implements OnInit {
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
         console.log(this.appointmentDetail);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAntecedentByProfessional(appointmentId) {
+    this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
+      (data) => {
+        console.log(data);
+        this.familiarHistoryByProfessional = data.payload.familiarHistory;
+        this.healthHabitsByProfessional = data.payload.healthHabits;
+        this.medicinesByProfessional = data.payload.medicines;
+        this.occupationalByProfessional = data.payload.occupational;
+        this.othersByProfessional = data.payload.others;
+        this.sicknessByProfessional = data.payload.sickness;
       },
       (error) => {
         console.log(error);
