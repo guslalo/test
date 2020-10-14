@@ -9,6 +9,32 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.searchBox2 {
+ width: 100%;
+ position:relative;
+  .responseSearch {
+    display: none;
+    margin-top: -15px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background: #ffffff;
+    ul{
+      padding: 0px 0 0px 0;
+      width: 100%;
+      li{
+        display: inline-block;
+        width: 100%;
+        padding: 20px 20px;
+        cursor: pointer;
+        &:hover {
+          background: #f2f2f2;
+        }
+      }
+    }
+  }
+}
+
 .alert-secondary {
   background: #f2f2f2;
 }
