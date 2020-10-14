@@ -16,9 +16,9 @@
     }
   },
   "clinicalFile": {
-    "tabs":{
-      "antecentesFromProfessional":"Antecedentes registrados por el profesional de salud",
-      "antecentesFromPatient":"Antecedentes registrados por el paciente"
+    "tabs": {
+      "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
+      "antecentesFromPatient": "Antecedentes registrados por el paciente"
     },
     "patientData": {
       "tabs": {
@@ -107,6 +107,12 @@
               "label": "Antecedentes",
               "diseases": {
                 "label": "Enfermedades"
+              },
+              "allergies": {
+                "label": "Alergias"
+              },
+              "surgicalInterventions": {
+                "label": "Intervenciones Quirúrgicas"
               },
               "habits": {
                 "label": "Hábitos de salud"
@@ -1243,6 +1249,12 @@
         "label": "Esta sera la información que veran los profesionales para darte una mejor atención",
         "deceases": {
           "label": "Enfermedades"
+        },
+        "allergies": {
+          "label": "Alergias"
+        },
+        "surgicalInterventions": {
+          "label": "Intervenciones Quirúrgicas"
         },
         "familiHistory": {
           "label": "Antecedentes Familares"
@@ -2535,11 +2547,11 @@
       "password": {
         "label": "contraseña"
       },
-      "file":{
-        "examen":"exámen",
-        "documento":"documento",
-        "seleccionar":"seleccionar",
-        "buscar":"Buscar"
+      "file": {
+        "examen": "exámen",
+        "documento": "documento",
+        "seleccionar": "seleccionar",
+        "buscar": "Buscar"
       }
     },
     "button": {
