@@ -190,7 +190,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
  
   selectDiagnostico(item){
-    this.diagnostico.controls.diagnostic = item.display;
+    console.log(item.display)
+    this.diagnostico.controls['diagnostic'].setValue(item.display);
+    /*this.diagnostico.controls.diagnostic.setValue = item.display
+    this.diagnostico.controls.diagnostic = item.display*/
     this.searchDisplay = false
     console.log(this.diagnostico)
   }
