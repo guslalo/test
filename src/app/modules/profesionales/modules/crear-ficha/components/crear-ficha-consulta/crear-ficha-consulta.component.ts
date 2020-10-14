@@ -9,6 +9,7 @@ import { MedicalRecordService } from './../../../../../../services/medicalRecord
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { AdminitrativeService } from './../../../../../../services/administrative.service';
 
 
 
@@ -76,6 +77,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   public occupationalByProfessional:any;
   public othersByProfessional:any;
   public sicknessByProfessional:any;
+  public search:boolean;
+  public searchInput:any;
+  public searchResponse:any;
+  public searchDisplay:boolean;
+  public spinnerSearch:boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -86,10 +92,12 @@ export class CrearFichaConsultaComponent implements OnInit {
     private medicalRecordService: MedicalRecordService,
     private _formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private adminitrativeService:AdminitrativeService
   ) {}
 
   ngOnInit(): void {
+    this.search = false;
     this.textInputFile = 'seleccionar archivo';
     this.spinner.show();
     this.permisoGuardar = false;
@@ -101,6 +109,11 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId)
    
+    });
+
+    $(".responseSearch").mouseout(function(){
+      $(this).css("display", "none");
+      this.searchDisplay = false
     });
 
     this.user = new UserLogin(
@@ -151,7 +164,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     this.diagnostico = this._formBuilder.group({
       diagnostic: ['', Validators.required],
-      type: ['', Validators.required],
+      type: [null, Validators.required],
       comments: ['', Validators.required],
       indications: ['', Validators.required]
     });
@@ -170,6 +183,41 @@ export class CrearFichaConsultaComponent implements OnInit {
   enviarId(id){
     console.log(id)
     this.idConsulta = id;
+  }
+
+  typeDiagnostic(){
+    this.search = true;
+  }
+ 
+  selectDiagnostico(item){
+    this.diagnostico.controls.diagnostic = item.display;
+    this.searchDisplay = false
+    console.log(this.diagnostico)
+  }
+
+  //buscador de diagnostico
+  onChangeSearch(event){
+    if(event && event.length >= 2){
+      this.spinnerSearch = true;
+      setTimeout(() => {
+        console.log('busqueda activada',event);
+        //this.spinner.hide();
+        this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
+          data => {
+            this.spinnerSearch = false;
+            this.searchDisplay = true;
+            this.searchResponse = data.payload;
+            console.log(data)
+          },
+          error => {
+            console.log(error)
+          }
+        )
+      }, 1000);
+     
+    } else {
+      console.log('busqueda inactiva',event);
+    }
   }
 
   //update appointmentDetails

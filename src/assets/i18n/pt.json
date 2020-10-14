@@ -2524,6 +2524,7 @@
     }
   },
   "common": {
+    "withOut":"sem resultados",
     "user": {
       "sessionExpired": {
         "label": "Sessão expirada"

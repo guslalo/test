@@ -842,18 +842,49 @@
                       <div class="row">
                         <div class="col-6">
                           <label>{{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
-                          <select class="form-control" formControlName="type" id="type" name="type">
-                            <option value="cie10">CIE10</option>
+                          <select class="form-control" formControlName="type" id="type" name="type" (change)="typeDiagnostic()">
+                            <!--<option value="null" disabled selected>{{ 'common.select.label' | transloco }}</option>-->
+                            <option value="cie10" selected>CIE10</option>
                             <option class="d-none" value="snomed">snomed</option>
                           </select>
                         </div>
-                        <div class="col-6">
-                          <label for="diagnostic">{{
-                            'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
-                          }}</label>
-                          <input class="form-control mb-3" type="text"
-                            placeholder="{{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}"
-                            id="diagnostic" name="diagnostic" formControlName="diagnostic" />
+                        <div class="col-6 ">
+                        
+                            <label for="diagnostic">{{
+                              'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
+                            }}</label>
+                            <div class="searchBox2">
+                              <input class="form-control mb-3" type="text"
+                                placeholder="{{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}"
+                                id="diagnostic" name="diagnostic" formControlName="diagnostic"
+                                [attr.disabled]="search === false ? true : null"
+                                [(ngModel)]="searchInput" (ngModelChange)="onChangeSearch($event)"
+                                /><!-- [attr.disabled]="search ? false : null"-->
+                                <div 
+                                  class="responseSearch shadow-sm bg-white rounded" 
+                                  [ngStyle]="{'display':searchDisplay === true ? 'inline-block' : 'none' }"
+                                >
+                                  <ul>
+                                    <li *ngIf="spinnerSearch">
+                                      <div class="text-center">
+                                        <div class="spinner-border" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <ng-container *ngIf="!spinnerSearch">
+                                      <ng-container *ngIf="searchResponse && searchResponse.length > 0; else noSearch">
+                                        <li *ngFor="let item of searchResponse" id="{{item._id}}" (click)="selectDiagnostico(item)">
+                                          {{item.display}}
+                                        </li>
+                                      </ng-container>
+                                      <ng-template #noSearch>
+                                        <li>{{'common.withOut' | transloco}}</li>
+                                      </ng-template>
+                                    </ng-container>
+                                  </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                           <label for="comments">{{ 'clinicalFile.comments.label' | transloco }}</label>
@@ -1588,7 +1619,7 @@
               <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" (change)="openFile($event)" id="customFile"
-                 accept=".pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  
+                 accept=".xls, .xlsx, .csv, .pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  
                   style="overflow: hidden;" />
                 <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
               </div>
