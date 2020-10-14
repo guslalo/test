@@ -11,9 +11,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { AdminitrativeService } from './../../../../../../services/administrative.service';
 
-
-
-
 declare var $: any;
 
 @Component({
@@ -22,7 +19,7 @@ declare var $: any;
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
 export class CrearFichaConsultaComponent implements OnInit {
-  public idConsulta:any;
+  public idConsulta: any;
   public appointmentDetail: any;
   public access_token: any;
   public downloadUrl: any;
@@ -51,8 +48,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   public sibrareDocumentId: any;
   public arrayDocuments: any;
   public urlSibrare: any;
-  public videoCall:boolean;
-  public descargar:boolean;
+  public videoCall: boolean;
+  public descargar: boolean;
   public addExamen: FormGroup;
   public base64: any;
   public nameFile: any;
@@ -69,19 +66,21 @@ export class CrearFichaConsultaComponent implements OnInit {
   othersIsCollapsed: boolean = true;
   public addValidator: boolean;
   public modelAntecedente: any;
-  public intervalGlobal:any
+  public intervalGlobal: any;
 
-  public familiarHistoryByProfessional:any;
-  public healthHabitsByProfessional:any;
-  public medicinesByProfessional:any;
-  public occupationalByProfessional:any;
-  public othersByProfessional:any;
-  public sicknessByProfessional:any;
-  public search:boolean;
-  public searchInput:any;
-  public searchResponse:any;
-  public searchDisplay:boolean;
-  public spinnerSearch:boolean;
+  public sicknessByProfessional: any;
+  public allergiesByProfessional: any;
+  public surgicalInterventionsByProfessional: any;
+  public familiarHistoryByProfessional: any;
+  public healthHabitsByProfessional: any;
+  public medicinesByProfessional: any;
+  public occupationalByProfessional: any;
+  public othersByProfessional: any;
+  public search: boolean;
+  public searchInput: any;
+  public searchResponse: any;
+  public searchDisplay: boolean;
+  public spinnerSearch: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,7 +92,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer,
-    private adminitrativeService:AdminitrativeService
+    private adminitrativeService: AdminitrativeService
   ) {}
 
   ngOnInit(): void {
@@ -107,13 +106,12 @@ export class CrearFichaConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
-      this.getAntecedentByProfessional(this.appointmentId)
-   
+      this.getAntecedentByProfessional(this.appointmentId);
     });
 
-    $(".responseSearch").mouseout(function(){
-      $(this).css("display", "none");
-      this.searchDisplay = false
+    $('.responseSearch').mouseout(function () {
+      $(this).css('display', 'none');
+      this.searchDisplay = false;
     });
 
     this.user = new UserLogin(
@@ -166,7 +164,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       diagnostic: ['', Validators.required],
       type: [null, Validators.required],
       comments: ['', Validators.required],
-      indications: ['', Validators.required]
+      indications: ['', Validators.required],
     });
 
     this.notes = this._formBuilder.group({
@@ -180,46 +178,45 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
   }
 
-  enviarId(id){
-    console.log(id)
+  enviarId(id) {
+    console.log(id);
     this.idConsulta = id;
   }
 
-  typeDiagnostic(){
+  typeDiagnostic() {
     this.search = true;
   }
- 
-  selectDiagnostico(item){
-    console.log(item.display)
+
+  selectDiagnostico(item) {
+    console.log(item.display);
     this.diagnostico.controls['diagnostic'].setValue(item.display);
     /*this.diagnostico.controls.diagnostic.setValue = item.display
     this.diagnostico.controls.diagnostic = item.display*/
-    this.searchDisplay = false
-    console.log(this.diagnostico)
+    this.searchDisplay = false;
+    console.log(this.diagnostico);
   }
 
   //buscador de diagnostico
-  onChangeSearch(event){
-    if(event && event.length >= 2){
+  onChangeSearch(event) {
+    if (event && event.length >= 2) {
       this.spinnerSearch = true;
       setTimeout(() => {
-        console.log('busqueda activada',event);
+        console.log('busqueda activada', event);
         //this.spinner.hide();
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
-          data => {
+          (data) => {
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
-            console.log(data)
+            console.log(data);
           },
-          error => {
-            console.log(error)
+          (error) => {
+            console.log(error);
           }
-        )
+        );
       }, 1000);
-     
     } else {
-      console.log('busqueda inactiva',event);
+      console.log('busqueda inactiva', event);
     }
   }
 
@@ -259,7 +256,6 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   //update appointmentDetails
   putNotes(appointmentId) {
-  
     console.log(this.notes.controls.notes.value);
     let appointmentObject = {
       appointmentDetails: {
@@ -285,7 +281,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-  stopInterval(){
+  stopInterval() {
     //clearInterval(thisinterval);
   }
 
@@ -377,9 +373,9 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(this.urlSibrare);
         console.log(data);
         this.spinner.hide();
-        if(this.descargar === true){     
-          return  window.open(this.urlSibrare);
-        }else{
+        if (this.descargar === true) {
+          return window.open(this.urlSibrare);
+        } else {
           console.log(this.urlSibrare);
         }
       },
@@ -407,12 +403,14 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
       (data) => {
         console.log(data);
+        this.sicknessByProfessional = data.payload.sickness;
+        this.allergiesByProfessional = data.payload.allergies;
+        this.surgicalInterventionsByProfessional = data.payload.surgicalInterventions;
         this.familiarHistoryByProfessional = data.payload.familiarHistory;
         this.healthHabitsByProfessional = data.payload.healthHabits;
         this.medicinesByProfessional = data.payload.medicines;
         this.occupationalByProfessional = data.payload.occupational;
         this.othersByProfessional = data.payload.others;
-        this.sicknessByProfessional = data.payload.sickness;
       },
       (error) => {
         console.log(error);
@@ -424,12 +422,14 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
       (data) => {
         console.log(data);
+        this.sicknessByProfessional = data.payload.sickness;
+        this.allergiesByProfessional = data.payload.allergies;
+        this.surgicalInterventionsByProfessional = data.payload.surgicalInterventions;
         this.familiarHistoryByProfessional = data.payload.familiarHistory;
         this.healthHabitsByProfessional = data.payload.healthHabits;
         this.medicinesByProfessional = data.payload.medicines;
         this.occupationalByProfessional = data.payload.occupational;
         this.othersByProfessional = data.payload.others;
-        this.sicknessByProfessional = data.payload.sickness;
       },
       (error) => {
         console.log(error);
@@ -536,7 +536,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   endTeleconsultation(appointmentId, event) {
-    this.videoCall = false
+    this.videoCall = false;
     $('#meet').remove();
     /*this.jitsiGlobal.excutecommnad( 'hangup');
     this.jitsiGlobal.dispose();*/
@@ -588,7 +588,6 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
 
-
         console.log(this.appointmentDetail);
         if (this.appointmentDetail.administrativeDetails.status === 'running') {
           this.getSession(id);
@@ -598,14 +597,13 @@ export class CrearFichaConsultaComponent implements OnInit {
           //modo flotante video call
           $(window).bind('scroll', function () {
             if ($(window).scrollTop() > 200) {
-               $('.vistaFixed').addClass('fixed');
-               $(".mtfixed").css('margin-top',400);
-               $(".vistaFixed .card").css('box-shadow','none !important');
-              
+              $('.vistaFixed').addClass('fixed');
+              $('.mtfixed').css('margin-top', 400);
+              $('.vistaFixed .card').css('box-shadow', 'none !important');
             } else {
               $('.toolbox-icon').click();
-              console.log('no fixed')
-              $(".mtfixed").css('margin-top',0);
+              console.log('no fixed');
+              $('.mtfixed').css('margin-top', 0);
               $('.vistaFixed').removeClass('fixed');
             }
           });
@@ -663,26 +661,26 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }*/
-  
-  add(category){
+
+  add(category) {
     console.log(this.modelAntecedente);
     this.putAddAntecedent(category, this.modelAntecedente);
   }
-  
-  putAddAntecedent(antecedent, object){
+
+  putAddAntecedent(antecedent, object) {
     this.appointmentsService.addAntecedentByProfessional(this.appointmentId, antecedent, object).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.category = '';
-        this.getAntecedentByProfessional(this.appointmentId) 
+        this.getAntecedentByProfessional(this.appointmentId);
         this.getAppointmentsDetailsRefresh(this.appointmentId);
       },
-      error => {
-        console.log(error)
+      (error) => {
+        console.log(error);
       }
-    )
+    );
   }
-  
+
   delete() {
     this.appointmentsService.deleteAntecedentes(this.appointmentId, this.antecedente, this.elemntoId).subscribe(
       (data) => {
@@ -693,22 +691,22 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
-    
   }
 
   deleteByProfessional() {
-    this.appointmentsService.deleteAntecedentesByProfessional(this.appointmentId, this.antecedente, this.elemntoId).subscribe(
-      (data) => {
-        console.log(data);
-        this.getAppointmentsDetailsRefresh(this.appointmentId);
-        this.getAntecedentByProfessional(this.appointmentId);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.appointmentsService
+      .deleteAntecedentesByProfessional(this.appointmentId, this.antecedente, this.elemntoId)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getAppointmentsDetailsRefresh(this.appointmentId);
+          this.getAntecedentByProfessional(this.appointmentId);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
-
 
   //borrar antecedente
   preDelete(item, event) {
@@ -718,7 +716,4 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.elemntoId = item.id;
     this.elemntoValue = item.value;
   }
-
-
-
 }
