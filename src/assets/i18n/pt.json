@@ -1270,7 +1270,7 @@
           "label": "Ocupacionais"
         },
         "others": {
-          "label": "Alergias - Intervenções cirúrgicas - Outros"
+          "label": "Outros"
         },
         "btnComplete": {
           "label": "Completar dados"
@@ -2536,7 +2536,7 @@
     }
   },
   "common": {
-    "withOut":"sem resultados",
+    "withOut": "sem resultados",
     "user": {
       "sessionExpired": {
         "label": "Sessão expirada"
