@@ -227,7 +227,8 @@ export class EditarUsuarioComponent implements OnInit {
   getCitiesforId(stateId) {
     this.userService.getCitiesForUf(stateId).subscribe((data) => {
       console.log(data);
-      this.citiesFilter = data.payload;
+      this.cities = data.payload
+      //this.citiesFilter = data.payload;
     },
       error => {
         console.log(error)

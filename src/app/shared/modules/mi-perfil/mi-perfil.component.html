@@ -381,7 +381,8 @@
                             <label for="ufBirth">{{
                               'profile.personal.tabIdentification.birthData.uf.label' | transloco
                             }}</label>
-                            <select disabled class="form-control" name="ufBirth" formControlName="ufBirth">
+                            <select disabled class="form-control" name="ufBirth" formControlName="ufBirth" 
+                          >
                               <option [ngValue]="null">- Seleccionar -</option>
                               <option [ngValue]="item._id" *ngFor="let item of states">
                                 {{ item.name }}
@@ -448,10 +449,10 @@
                           </div>
                           <div class="form-group col-md-4">
                             <label for="city">{{ 'common.ufState.label' | transloco }}</label>
-                            <select class="form-control" formControlName="uf">
-                              <ng-container *ngFor="let item of states">
-                                <option value="{{ item._id }}">{{ item.name }}</option>
-                              </ng-container>
+                            <select class="form-control" formControlName="uf" (change)="ufSelect($event.target)" >
+                              <option [ngValue]="item._id" *ngFor="let item of states">
+                                {{ item.name }}
+                              </option>
                             </select>
                           </div>
                           <div class="form-group col-md-4">

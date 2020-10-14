@@ -335,6 +335,25 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  ufSelect(id) {
+    console.log(id);
+    let idSelected = id.value.split(":");
+    console.log(idSelected[1]);
+    this.getCitiesforId(idSelected[1].trim());
+  }
+  getCitiesforId(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe((data) => {
+      console.log(data);
+      this.cities = data.payload
+      //this.citiesFilter = data.payload;
+    },
+      error => {
+        console.log(error)
+      }
+    );
+  }
+
+
   getCities() {
     this.userService.getCities().subscribe((data) => {
       // console.log(data);

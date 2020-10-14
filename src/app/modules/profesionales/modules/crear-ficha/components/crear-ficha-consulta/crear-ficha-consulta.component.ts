@@ -82,6 +82,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchResponse:any;
   public searchDisplay:boolean;
   public spinnerSearch:boolean;
+  public searchFormcontrol:boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -190,23 +191,28 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
  
   selectDiagnostico(item){
+    //this.searchFormcontrol = false;
     console.log(item.display)
     this.diagnostico.controls['diagnostic'].setValue(item.display);
     /*this.diagnostico.controls.diagnostic.setValue = item.display
     this.diagnostico.controls.diagnostic = item.display*/
     this.searchDisplay = false
+    
     console.log(this.diagnostico)
+    console.log(this.searchFormcontrol)
   }
 
   //buscador de diagnostico
   onChangeSearch(event){
-    if(event && event.length >= 2){
+    console.log(this.searchFormcontrol)
+    if(event && event.length >= 2 && this.searchFormcontrol === false){
       this.spinnerSearch = true;
       setTimeout(() => {
         console.log('busqueda activada',event);
         //this.spinner.hide();
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
           data => {
+            //this.searchFormcontrol = true
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
@@ -216,6 +222,7 @@ export class CrearFichaConsultaComponent implements OnInit {
             console.log(error)
           }
         )
+        //this.searchFormcontrol = false
       }, 1000);
      
     } else {
