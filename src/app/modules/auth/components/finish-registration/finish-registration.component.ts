@@ -143,6 +143,23 @@ export class FinishRegistrationComponent implements OnInit {
     this.getPrePatientData(this.prePatientId);
   }
 
+  ufSelect(id) {
+    let idSelected = id.value.split(":");
+    console.log(idSelected[1]);
+    this.getCitiesforId(idSelected[1].trim());
+  }
+  getCitiesforId(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe((data) => {
+      console.log(data);
+      this.cities = data.payload
+      //this.citiesFilter = data.payload;
+    },
+      error => {
+        console.log(error)
+      }
+    );
+  }
+
   validateForm() {
     // console.log(console.log(this.form[0]));
 

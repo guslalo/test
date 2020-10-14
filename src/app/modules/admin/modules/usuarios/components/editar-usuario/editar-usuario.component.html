@@ -244,7 +244,7 @@
                     <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="municipalityBirth"
                       formControlName="municipalityBirth">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>
@@ -325,7 +325,9 @@
                   <div class="form-group col-md-2">
                     <label for="uf">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                       (UF) *</label>
-                    <select class="form-control" name="uf" formControlName="uf" [ngClass]="{
+                    <select class="form-control" name="uf" formControlName="uf" 
+                    (change)="ufSelect($event.target)" 
+                    [ngClass]="{
                         'is-invalid': !personalData.get('uf').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
