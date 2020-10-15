@@ -1129,7 +1129,7 @@
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
-                      <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
+                      <td>{{item.issuerDetails[0].name}} {{item.issuerDetails[0].lastName}}</td>
                       <td>
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
