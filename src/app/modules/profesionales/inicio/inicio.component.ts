@@ -49,7 +49,7 @@ export class InicioPComponent implements OnInit {
       (data) => {
         console.log(data);
         this.consultas = data.payload;
-        if (data.payload.length > 0) {
+        if (data.payload.length > 0 ) {
           let arrayForDate = data.payload.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
           arrayForDate.forEach((numero) => {
@@ -57,8 +57,14 @@ export class InicioPComponent implements OnInit {
               min = numero;
             }
           });
-          this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
+         
+         
+          
           let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+          if(!finalizadas){
+            this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min );
+            console.log(this.nextAppointed)
+          }
           this.consultasFinalizadas = finalizadas.length;
 
           console.log(this.consultas);
