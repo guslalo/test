@@ -326,7 +326,7 @@
                     <label for="uf">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                       (UF) *</label>
                     <select class="form-control" name="uf" formControlName="uf" 
-                    (change)="ufSelect($event.target)" 
+                    (change)="ufSelect2($event.target)" 
                     [ngClass]="{
                         'is-invalid': !personalData.get('uf').valid
                       }">
@@ -342,7 +342,7 @@
                         'is-invalid': !personalData.get('city').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                      <option [ngValue]="item._id" *ngFor="let item of cities2">
                         {{ item.name }}
                       </option>
                     </select>
