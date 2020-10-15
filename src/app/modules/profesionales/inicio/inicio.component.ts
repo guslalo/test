@@ -48,17 +48,21 @@ export class InicioPComponent implements OnInit {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data);
-        this.consultas = data.payload;
-        if (data.payload.length > 0) {
-          let arrayForDate = data.payload.map((value) => value.dateDetails.date);
+        this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished');
+        console.log( this.consultas);
+        if (this.consultas.length > 0 ) {
+          let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
           arrayForDate.forEach((numero) => {
             if (numero < min) {
               min = numero;
             }
           });
-          this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
+         
+         
+          this.nextAppointed = this.consultas.filter((now) => now.dateDetails.date === min );
           let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+         
           this.consultasFinalizadas = finalizadas.length;
 
           console.log(this.consultas);
