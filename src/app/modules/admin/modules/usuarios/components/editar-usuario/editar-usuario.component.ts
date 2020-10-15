@@ -42,6 +42,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   states: any = [];
   cities: any = [];
+  cities2: any = [];
   countries: any = [];
   breeds: any = [];
   educations: any = [];
@@ -224,10 +225,28 @@ export class EditarUsuarioComponent implements OnInit {
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
   }
+  ufSelect2(id) {
+    let idSelected = id.value.split(":");
+    console.log(idSelected[1]);
+    this.getCitiesforId2(idSelected[1].trim());
+  }
+  getCitiesforId2(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe((data) => {
+      console.log(data);
+      this.cities2 = data.payload
+      //this.citiesFilter = data.payload;
+    },
+      error => {
+        console.log(error)
+      }
+    );
+  }
+
   getCitiesforId(stateId) {
     this.userService.getCitiesForUf(stateId).subscribe((data) => {
       console.log(data);
-      this.citiesFilter = data.payload;
+      this.cities = data.payload
+      //this.citiesFilter = data.payload;
     },
       error => {
         console.log(error)

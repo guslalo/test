@@ -16,9 +16,9 @@
     }
   },
   "clinicalFile": {
-    "tabs":{
-      "antecentesFromProfessional":"Antecedentes registrados pelo profissional de saúde",
-      "antecentesFromPatient":"Antecedentes registrados pelo paciente"
+    "tabs": {
+      "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
+      "antecentesFromPatient": "Antecedentes registrados pelo paciente"
     },
     "patientData": {
       "tabs": {
@@ -107,6 +107,12 @@
               "label": "Antecedentes",
               "diseases": {
                 "label": "Doenças"
+              },
+              "allergies": {
+                "label": "Alergias"
+              },
+              "surgicalInterventions": {
+                "label": "Intervenções cirúrgicas"
               },
               "habits": {
                 "label": "Hábitos de saúde"
@@ -1245,6 +1251,12 @@
         "deceases": {
           "label": "Doenças"
         },
+        "allergies": {
+          "label": "Alergias"
+        },
+        "surgicalInterventions": {
+          "label": "Intervenções cirúrgicas"
+        },
         "familiHistory": {
           "label": "Antecedentes familiares"
         },
@@ -1258,7 +1270,7 @@
           "label": "Ocupacionais"
         },
         "others": {
-          "label": "Alergias - Intervenções cirúrgicas - Outros"
+          "label": "Outros"
         },
         "btnComplete": {
           "label": "Completar dados"
@@ -2524,7 +2536,7 @@
     }
   },
   "common": {
-    "withOut":"sem resultados",
+    "withOut": "sem resultados",
     "user": {
       "sessionExpired": {
         "label": "Sessão expirada"
@@ -2537,11 +2549,11 @@
       "password": {
         "label": "Senha"
       },
-      "file":{
-        "examen":"exame",
-        "documento":"documento",
-        "seleccionar":"selecionar",
-        "buscar":"buscar"
+      "file": {
+        "examen": "exame",
+        "documento": "documento",
+        "seleccionar": "selecionar",
+        "buscar": "buscar"
       }
     },
     "button": {

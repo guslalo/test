@@ -143,6 +143,24 @@ export class FinishRegistrationComponent implements OnInit {
     this.getPrePatientData(this.prePatientId);
   }
 
+  ufSelect(id) {
+    let idSelected = id.value.split(':');
+    console.log(idSelected[1]);
+    this.getCitiesforId(idSelected[1].trim());
+  }
+  getCitiesforId(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data.payload;
+        //this.citiesFilter = data.payload;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   validateForm() {
     // console.log(console.log(this.form[0]));
 
@@ -326,14 +344,8 @@ export class FinishRegistrationComponent implements OnInit {
         this.personalData.get('phoneNumber').setValue(patient.phoneNumber);
 
         const current = new Date();
-        this.minDate = {
-          year: current.getFullYear() - patient.age,
-          month: 1,
-          day: 1,
-        };
-
         this.maxDate = {
-          year: current.getFullYear() - patient.age + 1,
+          year: current.getFullYear() - 18,
           month: current.getMonth() + 1,
           day: current.getDate(),
         };

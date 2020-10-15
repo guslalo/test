@@ -18,3 +18,11 @@
 [0905/051133.085:ERROR:exception_snapshot_win.cc(100)] thread ID 17628 not found in process
 [0905/051133.085:ERROR:process_reader_win.cc(127)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
 [0905/051133.085:ERROR:exception_snapshot_win.cc(100)] thread ID 18740 not found in process
+[1013/225021.318:ERROR:settings.cc(430)] Settings version is not 5
+[1013/230021.356:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\2dd7cca8-fdfb-4fd1-9e4b-cb9981c63cd2: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.360:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\6fdc2e5d-269b-40a7-9a0d-9d97dab3f5ad: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.361:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\786131af-cf97-4746-92c4-a42a19a476f2: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.363:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\87e143c1-b09b-4048-b928-3b819bee97e5: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.363:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\b8f0f288-46b9-4bd4-ba1e-bbab5627393c: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.364:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\e2e98989-7bbe-4b86-afe5-1b077767766f: El sistema no puede encontrar la ruta especificada. (0x3)
+[1013/230021.365:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

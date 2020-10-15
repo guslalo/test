@@ -318,13 +318,12 @@
                       {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label
                     >
                     <div class="input-group dateregister">
-                      <!--[minDate]="minDate"-->
                       <input
                         [placement]="placement"
                         class="form-control"
                         id="birthdate"
                         [maxDate]="maxDate"
-                        [minDate]="minDate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
                         placeholder="DD/MM/YYYY"
                         name="birthdate"
                         ngbDatepicker
@@ -352,6 +351,7 @@
                       [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
                       name="ufBirth"
+                      (change)="ufSelect($event.target)"
                       formControlName="ufBirth"
                       [ngClass]="{
                         'is-invalid': !birthData.get('ufBirth').valid && birthData.get('ufBirth').touched
@@ -467,6 +467,7 @@
                     <select
                       class="form-control"
                       name="uf"
+                      (change)="ufSelect($event.target)"
                       formControlName="uf"
                       [ngClass]="{
                         'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
