@@ -203,7 +203,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   //buscador de diagnostico
   onChangeSearch(event) {
     console.log(this.searchFormcontrol);
-    if (event && event.length >= 2 && this.searchFormcontrol === false) {
+    if (event && event.length >= 2 ) {//&& this.searchFormcontrol === false
       this.spinnerSearch = true;
       setTimeout(() => {
         console.log('busqueda activada', event);
