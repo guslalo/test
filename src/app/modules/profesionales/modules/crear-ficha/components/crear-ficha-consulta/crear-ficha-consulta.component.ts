@@ -82,6 +82,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchDisplay: boolean;
   public spinnerSearch: boolean;
   public searchFormcontrol: boolean;
+  public arrayDiagnostic = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -190,14 +191,28 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   selectDiagnostico(item) {
     //this.searchFormcontrol = false;
+    console.log(item);
     console.log(item.display);
     this.diagnostico.controls['diagnostic'].setValue(item.display);
+    let objectDiagnostic = {
+      _id: item._id,
+      display:item.display,
+      type: 'cie10'
+    }
+
+    let objectDiagnostic2 = objectDiagnostic;
+    if(JSON.stringify(objectDiagnostic) !== JSON.stringify(objectDiagnostic)){
+      this.arrayDiagnostic.push(objectDiagnostic);
+      console.log(this.arrayDiagnostic);
+    }
+
+
     /*this.diagnostico.controls.diagnostic.setValue = item.display
     this.diagnostico.controls.diagnostic = item.display*/
     this.searchDisplay = false;
 
     console.log(this.diagnostico);
-    console.log(this.searchFormcontrol);
+    //console.log(this.searchFormcontrol);
   }
 
   //buscador de diagnostico
@@ -210,10 +225,12 @@ export class CrearFichaConsultaComponent implements OnInit {
         //this.spinner.hide();
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
           (data) => {
+            
             //this.searchFormcontrol = true
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
+       
             console.log(data);
           },
           (error) => {
@@ -221,7 +238,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           }
         );
         //this.searchFormcontrol = false
-      }, 1000);
+      }, 600);
     } else {
       console.log('busqueda inactiva', event);
     }
