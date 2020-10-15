@@ -344,12 +344,6 @@ export class FinishRegistrationComponent implements OnInit {
         this.personalData.get('phoneNumber').setValue(patient.phoneNumber);
 
         const current = new Date();
-        this.minDate = {
-          year: current.getFullYear(),
-          month: current.getMonth() + 1,
-          day: current.getDate(),
-        };
-
         this.maxDate = {
           year: current.getFullYear() - 18,
           month: current.getMonth() + 1,
