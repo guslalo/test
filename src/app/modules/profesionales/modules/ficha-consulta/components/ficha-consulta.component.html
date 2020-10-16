@@ -893,6 +893,84 @@
                 <a
                   class="p-4"
                   data-toggle="collapse"
+                  href="#allergies"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
+                </a>
+
+                <div class="collapse show" id="allergies" *ngFor="let item of allergiesByProfessional">
+                  <ul class="antecedentes">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#surgicalInterventions"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{
+                    'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label' | transloco
+                  }}
+                </a>
+
+                <div
+                  class="collapse show"
+                  id="surgicalInterventions"
+                  *ngFor="let item of surgicalInterventionsByProfessional"
+                >
+                  <ul class="antecedentes">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
                   href="#familiarHistory"
                   role="button"
                   aria-expanded="false"
@@ -1129,7 +1207,7 @@
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
-                      <td>{{item.issuerDetails[0].name}} {{item.issuerDetails[0].lastName}}</td>
+                      <td>{{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}</td>
                       <td>
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
