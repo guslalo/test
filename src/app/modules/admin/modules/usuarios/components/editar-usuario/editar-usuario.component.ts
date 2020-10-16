@@ -36,6 +36,7 @@ export class EditarUsuarioComponent implements OnInit {
   showPassword: boolean;
   professionalPhoto: any;
   citiesFilter: any;
+  city2:boolean;
 
   profileSelected: any;
   roomSelected: any;
@@ -146,6 +147,7 @@ export class EditarUsuarioComponent implements OnInit {
       cep: ['', Validators.required],
       uf: [null, Validators.required],
       city: [null, Validators.required],
+      city2: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
@@ -221,14 +223,18 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   ufSelect(id) {
+    this.city2 = false;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
+    
   }
   ufSelect2(id) {
+    this.city2 = true;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId2(idSelected[1].trim());
+
   }
   getCitiesforId2(stateId) {
     this.userService.getCitiesForUf(stateId).subscribe((data) => {
@@ -356,6 +362,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('cep').setValue(user.addressData.cep);
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
+        this.personalData.get('city2').setValue(user.addressData.city);
         this.personalData.get('neighborhood').setValue(user.addressData.neighborhood);
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
@@ -708,6 +715,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.userService.getCities().subscribe((data) => {
       // console.log(data);
       this.cities = data.payload;
+      this.cities2 = data.payload;
     });
   }
 
