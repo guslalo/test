@@ -253,14 +253,12 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   ufSelect(id) {
-    this.city2 = false;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
     
   }
   ufSelect2(id) {
-    this.city2 = true;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId2(idSelected[1].trim());
