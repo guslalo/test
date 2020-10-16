@@ -189,6 +189,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.search = true;
   }
 
+
+
   selectDiagnostico(item) {
     //this.searchFormcontrol = false;
     console.log(item);
@@ -200,19 +202,24 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: 'cie10'
     }
 
-    let objectDiagnostic2 = objectDiagnostic;
-    if(JSON.stringify(objectDiagnostic) !== JSON.stringify(objectDiagnostic)){
-      this.arrayDiagnostic.push(objectDiagnostic);
-      console.log(this.arrayDiagnostic);
-    }
-
-
+    this.arrayDiagnostic.push(objectDiagnostic);
+    console.log(this.arrayDiagnostic);
+    //console.log(this.searchFormcontrol);
     /*this.diagnostico.controls.diagnostic.setValue = item.display
     this.diagnostico.controls.diagnostic = item.display*/
     this.searchDisplay = false;
 
     console.log(this.diagnostico);
     //console.log(this.searchFormcontrol);
+  }
+
+  deleteDiagnostic(_id){
+    console.log(this.arrayDiagnostic );
+    console.log(_id);
+
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== item._id);
+    console.log(this.arrayDiagnostic);
+  
   }
 
   //buscador de diagnostico
@@ -254,8 +261,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       },
       appointmentDetails: {
         diagnosticDetails: {
-          type: this.diagnostico.controls.type.value,
-          diagnostic: this.diagnostico.controls.diagnostic.value,
+          //type: this.diagnostico.controls.type.value,
+          diagnostics: this.arrayDiagnostic,
           comments: this.diagnostico.controls.comments.value,
           indications: this.diagnostico.controls.indications.value,
         },
