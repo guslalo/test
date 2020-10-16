@@ -1544,8 +1544,9 @@
                             /><!-- [attr.disabled]="search ? false : null"-->
                             <div
                               class="responseSearch shadow-sm bg-white rounded"
-                              [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"
+                             
                             >
+                            <!-- [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"-->
                               <ul>
                                 <li *ngIf="spinnerSearch">
                                   <div class="text-center">
@@ -1565,7 +1566,7 @@
                                     </li>
                                   </ng-container>
                                   <ng-template #noSearch>
-                                    <li>{{ 'common.withOut' | transloco }}</li>
+                                    <li [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }">{{ 'common.withOut' | transloco }}</li>
                                   </ng-template>
                                 </ng-container>
                               </ul>
@@ -1584,7 +1585,7 @@
                                 </div>
                                 <p class="text-right">
                                   {{ item.display }}
-                                  <i> <!-- (click)="eliminaSintoma(item.id)"-->
+                                  <i (click)="deleteDiagnostic(item._id)"> <!-- -->
                                     <svg
                                       width="1em"
                                       height="1em"
@@ -1604,6 +1605,7 @@
                                   </i>
                                 </p>
                               </div>
+                                
                             </ng-container>
 
                         </div>
