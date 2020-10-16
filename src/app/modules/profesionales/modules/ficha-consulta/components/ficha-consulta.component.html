@@ -517,7 +517,7 @@
                   data-toggle="collapse"
                   href="#sickness"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="collapseExample"
                 >
                   <svg
@@ -538,13 +538,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}
                 </a>
 
-                <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                <div class="collapse show" id="sickness" *ngFor="let item of antecedentes">
                   <ul class="antecedentes">
                     <li class="pl-5">
                       {{ item.value }}
                     </li>
-
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </div>
@@ -557,7 +555,7 @@
                   data-toggle="collapse"
                   href="#allergies"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="collapseExample"
                 >
                   <svg
@@ -578,12 +576,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
                       </li>
-                      <li style="display: none;">A medicamentos tipo C</li>
                     </ul>
                   </div>
                 </ng-container>
@@ -621,7 +618,7 @@
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
                   <div
-                    class="collapse"
+                    class="collapse show"
                     id="surgicalInterventions"
                     *ngFor="let item of antecedentesGeneral.surgicalInterventions"
                   >
@@ -664,7 +661,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco }}
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
+                  <div
+                    class="collapse show"
+                    id="familiarHistory"
+                    *ngFor="let item of antecedentesGeneral.familiarHistory"
+                  >
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
@@ -705,7 +706,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                  <div class="collapse show" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -746,7 +747,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                  <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -787,7 +788,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                  <div class="collapse show" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -827,7 +828,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                  <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
