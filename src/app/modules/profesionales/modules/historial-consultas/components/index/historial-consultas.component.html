@@ -169,14 +169,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!--<ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5"></ng-container>-->
-                  <ng-container *ngIf="consultas && consultas.length === 0; else data">
-                    <div class="alert alert-warning mt-2" role="alert">
-                      {{ 'common.noInfo.label' | transloco }}
-                    </div>
-                  </ng-container>
+                  
+                    <ng-container *ngIf="consultas && consultas.length === 0; else data">
+                      <div class="alert alert-warning mt-2" role="alert">
+                        {{ 'common.noInfo.label' | transloco }}
+                      </div>
+                    </ng-container>
+                  
+           
+        
                   <ng-template #data>
-                    <tr *ngFor="let item of consultas" id="{{ item._id }}">
+                    <tr *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10" id="{{ item._id }}">
                       <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo1">
                         {{ item.patientDetails.userDetails[0].userId }}
                       </td>
@@ -228,7 +231,8 @@
                     </tr>
                   </ng-template>
                 </tbody>
-              </table>
+              </table>          
+              <ngb-pagination [(page)]="page" [collectionSize]="totalPages"></ngb-pagination>
             </div>
           </div>
         </div>
