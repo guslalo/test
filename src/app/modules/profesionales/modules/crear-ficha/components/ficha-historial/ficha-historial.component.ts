@@ -50,7 +50,7 @@ export class FichaHistorialComponent implements OnInit {
       console.log(params);
     });
    
-    this.appointmentId = this.idConsulta;
+    //this.appointmentId = this.idConsulta;
  
     this.getAppointmentsDetails(this.idConsulta);
     this.getVerifiedSibrareDocuments2(this.idConsulta);
@@ -129,7 +129,7 @@ export class FichaHistorialComponent implements OnInit {
     this.spinner.show();
     this.descargar = true;
     console.log(documentId);
-    this.getSibrareDocuments(this.appointmentId, documentId);
+    this.getSibrareDocuments(this.idConsulta, documentId);
   }
 
   // get documents sibrare
