@@ -390,6 +390,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
         this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);
+        //this.professionalForm.controls['ufRegistry'].setValue(user.professionalData?.ufRegistry);
 
         this.specialitiesData = this.specialities?.reduce((obj, value: any) => {
           obj[value._id] = value;
@@ -399,12 +400,17 @@ export class EditarUsuarioComponent implements OnInit {
         if (user.specialities?.length) {
           for (const sp of user.specialities) {
             this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-              this.specialitiesAssigned.push(data.payload);
-            });
+              console.log(data);
+              this.specialitiesAssigned.push(data.payload[0]);
+            },
+            error => {
+              console.log(error)
+            }
+            );
           }
         }
 
-        // console.log(this.specialitiesAssigned);
+        console.log(this.specialitiesAssigned);
         if (user.professionalData?.professionalRegistry.length) {
           for (const rg of user.professionalData.professionalRegistry) {
             this.professionalRegistry.push(rg);
@@ -706,7 +712,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   getUfs() {
     this.userService.getStates().subscribe((data) => {
-      // console.log(data);
+      console.log(data);
       this.states = data.payload;
     });
   }
