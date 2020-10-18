@@ -642,7 +642,7 @@ export class EditarUsuarioComponent implements OnInit {
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,
         course: this.formUser[4].value.course,
-        ufRegistry: this.formUser[4].value.ufRegistry._id,
+        ufRegistry: this.formUser[4].value.ufRegistry, //his.formUser[4].value.ufRegistry._id,
         professionalRegistryType: this.formUser[4].value.professionalRegistryType,
         professionalRegistry: this.professionalRegistry,
         ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
