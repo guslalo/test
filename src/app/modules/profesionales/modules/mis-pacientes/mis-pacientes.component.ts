@@ -47,7 +47,7 @@ export class MisPacientesComponent implements OnInit {
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       secondLastName: ['', Validators.required],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      phoneNumber: [null, [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
       age: [18, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
