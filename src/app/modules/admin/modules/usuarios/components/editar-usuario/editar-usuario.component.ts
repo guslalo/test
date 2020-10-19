@@ -229,6 +229,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.getCitiesforId(idSelected[1].trim());
     
   }
+
   ufSelect2(id) {
     this.city2 = true;
     let idSelected = id.value.split(":");
@@ -236,6 +237,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.getCitiesforId2(idSelected[1].trim());
 
   }
+
   getCitiesforId2(stateId) {
     this.userService.getCitiesForUf(stateId).subscribe((data) => {
       console.log(data);
@@ -519,7 +521,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    // console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
+    console.log(/*this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]*/);
 
     switch (this.userType) {
       case 'admins':
@@ -658,8 +660,8 @@ export class EditarUsuarioComponent implements OnInit {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.updateUser(this.userType, this.userObject).subscribe(
           (res) => {
-            this.spinner.hide();
             console.log(res);
+            this.spinner.hide();
           },
           (err) => {
             this.spinner.hide();
@@ -679,7 +681,7 @@ export class EditarUsuarioComponent implements OnInit {
     } else {
       this.adminService.updateUser(this.userType, this.userObject).subscribe(
         (res) => {
-          // console.log(response);
+          console.log(res);
           this.spinner.hide();
           console.log(res);
         },

@@ -221,6 +221,7 @@ export class CreateAccountComponent implements OnInit {
 
     if (this.identificationData.get('document').value === 'rgRegistry') {
       this.identificationData.get('idDocumentNumber').enable();
+      this.identificationData.get('issuingBody').setValidators([Validators.required]);
       this.identificationData.get('issuingBody').enable();
     } else {
       this.identificationData.get('passport').reset();
