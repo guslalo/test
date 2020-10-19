@@ -192,8 +192,12 @@
                 <div>
                   <p class="font-weight-bold title mb-0">
                     {{ appointmentDetail.appointmentDetails.diagnosticDetails.type }} -
-                    {{ appointmentDetail.appointmentDetails.diagnosticDetails.diagnostic }}
                   </p>
+                  <ul>
+                    <ng-container *ngFor="let item of appointmentDetail.appointmentDetails.diagnosticDetails.diagnostics ">
+                      <li>{{ item.display }}</li>
+                    </ng-container>
+                  </ul>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>

@@ -234,9 +234,13 @@
                 </p>
                 <div>
                   <p class="font-weight-bold title mb-0">
-                    {{ appointmentDetail.appointmentDetails.diagnosticDetails.type }} -
-                    {{ appointmentDetail.appointmentDetails.diagnosticDetails.diagnostic }}
+                    {{ appointmentDetail.appointmentDetails.diagnosticDetails.type }}
                   </p>
+                  <ul>
+                    <ng-container *ngFor="let item of appointmentDetail.appointmentDetails.diagnosticDetails.diagnostics ">
+                      <li>{{ item.display }}</li>
+                    </ng-container>
+                  </ul>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
@@ -517,7 +521,7 @@
                   data-toggle="collapse"
                   href="#sickness"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="collapseExample"
                 >
                   <svg
@@ -538,13 +542,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.diseases.label' | transloco }}
                 </a>
 
-                <div class="collapse" id="sickness" *ngFor="let item of antecedentes">
+                <div class="collapse show" id="sickness" *ngFor="let item of antecedentes">
                   <ul class="antecedentes">
                     <li class="pl-5">
                       {{ item.value }}
                     </li>
-
-                    <li style="display: none;">A medicamentos tipo C</li>
                   </ul>
                 </div>
               </div>
@@ -557,7 +559,7 @@
                   data-toggle="collapse"
                   href="#allergies"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="collapseExample"
                 >
                   <svg
@@ -578,12 +580,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
                       </li>
-                      <li style="display: none;">A medicamentos tipo C</li>
                     </ul>
                   </div>
                 </ng-container>
@@ -621,7 +622,7 @@
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
                   <div
-                    class="collapse"
+                    class="collapse show"
                     id="surgicalInterventions"
                     *ngFor="let item of antecedentesGeneral.surgicalInterventions"
                   >
@@ -664,7 +665,11 @@
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.family.label' | transloco }}
                 </a>
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="familiarHistory" *ngFor="let item of antecedentesGeneral.familiarHistory">
+                  <div
+                    class="collapse show"
+                    id="familiarHistory"
+                    *ngFor="let item of antecedentesGeneral.familiarHistory"
+                  >
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
@@ -705,7 +710,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
+                  <div class="collapse show" id="healthHabits" *ngFor="let item of antecedentesGeneral.healthHabits">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -746,7 +751,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
+                  <div class="collapse show" id="medicines" *ngFor="let item of antecedentesGeneral.medicines">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -787,7 +792,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
+                  <div class="collapse show" id="occupational" *ngFor="let item of antecedentesGeneral.occupational">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -827,7 +832,7 @@
                 </a>
 
                 <ng-container *ngIf="antecedentesGeneral">
-                  <div class="collapse" id="others" *ngFor="let item of antecedentesGeneral.others">
+                  <div class="collapse show" id="others" *ngFor="let item of antecedentesGeneral.others">
                     <ul class="antecedentes">
                       <li class="pl-5" id="{{ item.id }}">
                         {{ item.value }}
@@ -881,6 +886,84 @@
                 </a>
 
                 <div class="collapse show" id="sickness" *ngFor="let item of sicknessByProfessional">
+                  <ul class="antecedentes">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#allergies"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
+                </a>
+
+                <div class="collapse show" id="allergies" *ngFor="let item of allergiesByProfessional">
+                  <ul class="antecedentes">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#surgicalInterventions"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="collapseExample"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{
+                    'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label' | transloco
+                  }}
+                </a>
+
+                <div
+                  class="collapse show"
+                  id="surgicalInterventions"
+                  *ngFor="let item of surgicalInterventionsByProfessional"
+                >
                   <ul class="antecedentes">
                     <li class="pl-5">{{ item.value }}</li>
                   </ul>
@@ -1129,7 +1212,7 @@
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
-                      <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
+                      <td>{{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}</td>
                       <td>
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">

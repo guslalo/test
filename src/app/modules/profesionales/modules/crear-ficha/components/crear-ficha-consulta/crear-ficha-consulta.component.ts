@@ -83,6 +83,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public spinnerSearch: boolean;
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
+  public preArray = []
 
   constructor(
     private route: ActivatedRoute,
@@ -110,6 +111,10 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
     });
+
+    $('#fichaConsulta').on('hidden.bs.modal', function () {
+      this.clearId();
+    })
 
     $('.responseSearch').mouseout(function () {
       $(this).css('display', 'none');
@@ -179,6 +184,10 @@ export class CrearFichaConsultaComponent implements OnInit {
       data: [null, [Validators.required]],
     });
   }
+  
+  clearId(){
+    this.idConsulta = null
+  }
 
   enviarId(id) {
     console.log(id);
@@ -190,29 +199,19 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-    //this.searchFormcontrol = false;
-    console.log(item);
-    console.log(item.display);
-    this.diagnostico.controls['diagnostic'].setValue(item.display);
-    let objectDiagnostic = {
-      _id: item._id,
+    this.preArray.push({
       display:item.display,
+      _id: item._id,
       type: 'cie10'
-    }
+    })
+    this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
+      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
+    });
+  }
 
-    let objectDiagnostic2 = objectDiagnostic;
-    if(JSON.stringify(objectDiagnostic) !== JSON.stringify(objectDiagnostic)){
-      this.arrayDiagnostic.push(objectDiagnostic);
-      console.log(this.arrayDiagnostic);
-    }
-
-
-    /*this.diagnostico.controls.diagnostic.setValue = item.display
-    this.diagnostico.controls.diagnostic = item.display*/
-    this.searchDisplay = false;
-
-    console.log(this.diagnostico);
-    //console.log(this.searchFormcontrol);
+  deleteDiagnostic(_id){
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
+    console.log(this.arrayDiagnostic);
   }
 
   //buscador de diagnostico
@@ -224,20 +223,17 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log('busqueda activada', event);
         //this.spinner.hide();
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
-          (data) => {
-            
+          (data) => { 
             //this.searchFormcontrol = true
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
-       
             console.log(data);
           },
           (error) => {
             console.log(error);
           }
         );
-        //this.searchFormcontrol = false
       }, 600);
     } else {
       console.log('busqueda inactiva', event);
@@ -254,8 +250,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       },
       appointmentDetails: {
         diagnosticDetails: {
-          type: this.diagnostico.controls.type.value,
-          diagnostic: this.diagnostico.controls.diagnostic.value,
+          //type: this.diagnostico.controls.type.value,
+          diagnostics: this.arrayDiagnostic,
           comments: this.diagnostico.controls.comments.value,
           indications: this.diagnostico.controls.indications.value,
         },

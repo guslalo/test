@@ -36,6 +36,7 @@ export class EditarUsuarioComponent implements OnInit {
   showPassword: boolean;
   professionalPhoto: any;
   citiesFilter: any;
+  city2:boolean;
 
   profileSelected: any;
   roomSelected: any;
@@ -146,6 +147,7 @@ export class EditarUsuarioComponent implements OnInit {
       cep: ['', Validators.required],
       uf: [null, Validators.required],
       city: [null, Validators.required],
+      city2: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
@@ -221,15 +223,21 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   ufSelect(id) {
+    this.city2 = false;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
+    
   }
+
   ufSelect2(id) {
+    this.city2 = true;
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId2(idSelected[1].trim());
+
   }
+
   getCitiesforId2(stateId) {
     this.userService.getCitiesForUf(stateId).subscribe((data) => {
       console.log(data);
@@ -356,6 +364,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('cep').setValue(user.addressData.cep);
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
+        this.personalData.get('city2').setValue(user.addressData.city);
         this.personalData.get('neighborhood').setValue(user.addressData.neighborhood);
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
@@ -383,6 +392,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
         this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);
+        //this.professionalForm.controls['ufRegistry'].setValue(user.professionalData?.ufRegistry);
 
         this.specialitiesData = this.specialities?.reduce((obj, value: any) => {
           obj[value._id] = value;
@@ -392,12 +402,17 @@ export class EditarUsuarioComponent implements OnInit {
         if (user.specialities?.length) {
           for (const sp of user.specialities) {
             this.specialtiesService.getSpecialtiesId(sp).subscribe((data) => {
-              this.specialitiesAssigned.push(data.payload);
-            });
+              console.log(data);
+              this.specialitiesAssigned.push(data.payload[0]);
+            },
+            error => {
+              console.log(error)
+            }
+            );
           }
         }
 
-        // console.log(this.specialitiesAssigned);
+        console.log(this.specialitiesAssigned);
         if (user.professionalData?.professionalRegistry.length) {
           for (const rg of user.professionalData.professionalRegistry) {
             this.professionalRegistry.push(rg);
@@ -506,7 +521,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    // console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
+    console.log(/*this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]*/);
 
     switch (this.userType) {
       case 'admins':
@@ -629,7 +644,7 @@ export class EditarUsuarioComponent implements OnInit {
         professionalTitle: this.formUser[4].value.professionalTitle,
         university: this.formUser[4].value.university,
         course: this.formUser[4].value.course,
-        ufRegistry: this.formUser[4].value.ufRegistry._id,
+        ufRegistry: this.formUser[4].value.ufRegistry, //his.formUser[4].value.ufRegistry._id,
         professionalRegistryType: this.formUser[4].value.professionalRegistryType,
         professionalRegistry: this.professionalRegistry,
         ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
@@ -645,8 +660,8 @@ export class EditarUsuarioComponent implements OnInit {
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.updateUser(this.userType, this.userObject).subscribe(
           (res) => {
-            this.spinner.hide();
             console.log(res);
+            this.spinner.hide();
           },
           (err) => {
             this.spinner.hide();
@@ -666,7 +681,7 @@ export class EditarUsuarioComponent implements OnInit {
     } else {
       this.adminService.updateUser(this.userType, this.userObject).subscribe(
         (res) => {
-          // console.log(response);
+          console.log(res);
           this.spinner.hide();
           console.log(res);
         },
@@ -699,7 +714,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   getUfs() {
     this.userService.getStates().subscribe((data) => {
-      // console.log(data);
+      console.log(data);
       this.states = data.payload;
     });
   }
@@ -708,6 +723,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.userService.getCities().subscribe((data) => {
       // console.log(data);
       this.cities = data.payload;
+      this.cities2 = data.payload;
     });
   }
 

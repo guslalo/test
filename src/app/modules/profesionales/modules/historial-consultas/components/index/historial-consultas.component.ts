@@ -3,6 +3,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const states = ['test', 'test3', 'test4'];
 
@@ -17,6 +18,8 @@ export class HistorialConsultasComponent implements OnInit {
   model2: NgbDateStruct;
   public timeline: any;
   public fecha: any;
+  public page: number = 1;
+  public totalPages: number;
 
   constructor(private appointmentsService: AppointmentsService) {}
 
@@ -30,12 +33,18 @@ export class HistorialConsultasComponent implements OnInit {
     );
 
   ngOnInit(): void {
+    this.page = 1;
     this.getAppointments();
     this.getFecha();
     this.getAppointmentsTimeline();
+    this.appointmentsService.getTotalPages().subscribe((data) => {
+      console.log(data);
+      this.totalPages = data.payload.numberOfPages;
+    });
   }
 
   getFecha() {
+  
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
