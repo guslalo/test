@@ -407,7 +407,7 @@
           </button>
           <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="crearAvailability()"
             [disabled]="!createAvailability.valid && !this.daysSelected.length">
-            Crear disponibilidad
+            {{ 'disponibility.modal.create.btnCreate.label' | transloco }}
           </button>
         </div>
       </div>
