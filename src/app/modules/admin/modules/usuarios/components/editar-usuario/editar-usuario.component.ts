@@ -222,6 +222,14 @@ export class EditarUsuarioComponent implements OnInit {
       this.validateForm();
       this.spinner.hide();
     }, 1000);
+
+    this.professionalForm.controls['professionalRegistryType'].setValue(' ');
+    this.professionalForm.controls['professionalRegistry'].setValue(' ');
+    this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
+    this.professionalForm.controls['university'].setValue(' ');
+    this.professionalForm.controls['professionalTitle'].setValue(' ');
+    this.professionalForm.controls['course'].setValue(' ');
+    this.professionalForm.controls['ufRegistry'].setValue(' ');
   }
 
   ufSelect(id) {
@@ -390,10 +398,10 @@ export class EditarUsuarioComponent implements OnInit {
 
         this.professionalPhoto = user.photo;
         this.profileDataForm.get('biography').setValue(user.professionalData?.biography || '');
-        this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
+        /*this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
-        this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);
+        this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);*/
         //this.professionalForm.controls['ufRegistry'].setValue(user.professionalData?.ufRegistry);
 
         this.specialitiesData = this.specialities?.reduce((obj, value: any) => {
