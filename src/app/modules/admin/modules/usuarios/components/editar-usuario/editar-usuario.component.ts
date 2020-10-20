@@ -87,6 +87,7 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesAssigned: any = [];
 
   professionalRegistry: any = [];
+  professionalRegistrySend: any = [];
 
   constructor(
     private location: Location,
@@ -777,10 +778,19 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   ufRegistry(id){
-    return this.registerUf = id.options[id.selectedIndex].text
+    let idSelected =  id.options[id.selectedIndex].value.split(":");
+    console.log(idSelected[1])
+    this.registerUf = {
+      id:idSelected[1],
+      name:id.options[id.selectedIndex].text
+    }
   }
   ufRegistry2(id){
-    return this.registerUf2 = id.options[id.selectedIndex].text
+    let idSelected2 =  id.options[id.selectedIndex].value.split(":");
+    this.registerUf2 = {
+      id:idSelected2[1],
+      name:id.options[id.selectedIndex].text
+    }
   }
 
   addProfessionalRegistry() {
@@ -795,11 +805,21 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.registerUf2,
+        uf: this.registerUf2.name,
         university: this.professionalForm.value.university,
         professionalTitle: this.professionalForm.value.professionalTitle,
         course: this.professionalForm.value.course,
-        ufRegistry: this.registerUf
+        ufRegistry: this.registerUf.name
+      });
+
+      this.professionalRegistrySend.push({
+        type: this.professionalForm.value.professionalRegistryType,
+        registry: this.professionalForm.value.professionalRegistry,
+        uf: this.registerUf2.id,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
+        ufRegistry: this.registerUf.id
       });
        
       this.professionalForm.controls['professionalRegistryType'].setValue(' ');
@@ -810,7 +830,7 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalForm.controls['course'].setValue(' ');
       this.professionalForm.controls['ufRegistry'].setValue(' ');
 
-      console.log(this.professionalRegistry);
+      console.log(this.professionalRegistrySend);
     }
   }
 
