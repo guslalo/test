@@ -37,7 +37,8 @@ export class EditarUsuarioComponent implements OnInit {
   professionalPhoto: any;
   citiesFilter: any;
   city2:boolean;
-
+  registerUf:any;
+  registerUf2:any;
   profileSelected: any;
   roomSelected: any;
 
@@ -775,7 +776,16 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
+  ufRegistry(id){
+    return this.registerUf = id.options[id.selectedIndex].text
+  }
+  ufRegistry2(id){
+    return this.registerUf2 = id.options[id.selectedIndex].text
+  }
+
   addProfessionalRegistry() {
+  
+  
 
     console.log(this.professionalForm)
 
@@ -785,12 +795,22 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        uf: this.registerUf2,
         university: this.professionalForm.value.university,
         professionalTitle: this.professionalForm.value.professionalTitle,
         course: this.professionalForm.value.course,
-        ufRegistry: this.professionalForm.value.ufRegistry.name
+        ufRegistry: this.registerUf
       });
+       
+      this.professionalForm.controls['professionalRegistryType'].setValue(' ');
+      this.professionalForm.controls['professionalRegistry'].setValue(' ');
+      this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
+      this.professionalForm.controls['university'].setValue(' ');
+      this.professionalForm.controls['professionalTitle'].setValue(' ');
+      this.professionalForm.controls['course'].setValue(' ');
+      this.professionalForm.controls['ufRegistry'].setValue(' ');
+
+      console.log(this.professionalRegistry);
     }
   }
 
