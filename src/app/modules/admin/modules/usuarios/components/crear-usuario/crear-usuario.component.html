@@ -887,6 +887,7 @@
                     <select
                       class="form-control"
                       name="ufRegistry"
+                      (change)="ufRegistry($event.target)" 
                       formControlName="ufRegistry"
                       [ngClass]="{
                         'is-invalid': !professionalForm.get('ufRegistry').valid
@@ -940,6 +941,7 @@
                       'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
                     }}</label>
                     <select
+                    (change)="ufRegistry2($event.target)" 
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       class="form-control"
                       name="ufProfessionalRegistry"
