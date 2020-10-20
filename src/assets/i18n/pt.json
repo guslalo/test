@@ -236,7 +236,15 @@
               "label": "IMC"
             },
             "imcClasification": {
-              "label": "Classificação IMC"
+              "label": "Classificação IMC",
+              "values":{
+                "low":"Abaixo do peso",
+                "normal":"Peso normal",
+                "over":"Acima do peso",
+                "type1":"Obesidade I",
+                "type2":"Obesidade II (severa)",
+                "type3":"Obesidade III (mórbida)"
+              }
             }
           },
           "btnDownload": {
