@@ -646,7 +646,9 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
-                    <select class="form-control" name="ufRegistry" formControlName="ufRegistry" [ngClass]="{
+                    <select class="form-control" name="ufRegistry" formControlName="ufRegistry" 
+                    (change)="ufRegistry($event.target)" 
+                    [ngClass]="{
                         'is-invalid': !professionalForm.get('ufRegistry').valid
                       }">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
@@ -686,10 +688,11 @@
                       }" />
                   </div>
                   <div class="col-md-3">
+                    <!--uf-->
                     <label for="ufProfessionalRegistry">{{
                       'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
                     }}</label>
-                    <select
+                    <select (change)="ufRegistry2($event.target)" 
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       class="form-control" name="ufProfessionalRegistry" formControlName="ufProfessionalRegistry">
                       <option [ngValue]="null" disabled>{{ 'common.select.label' | transloco }}</option>
