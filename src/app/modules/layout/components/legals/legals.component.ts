@@ -11,574 +11,115 @@ export class LegalsComponent implements OnInit {
   public trustedContent: SafeHtml;
   constructor(private sanitizer: DomSanitizer) { 
     this.content = `
-    <!DOCTYPE html>
-    <!-- saved from url=(0059)https://zurich.telemedicina.com/consentimiento-informado-2/ -->
-    <html lang="es" class=" js_active  vc_desktop  vc_transform  vc_transform "><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--meta-->
-        
-        <meta name="generator" content="WordPress 5.5.1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="description" content="Zurich">
-        <meta name="format-detection" content="telephone=no">
-        <!--style-->
-        <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://zurich.telemedicina.com/feed/">
-        <link rel="pingback" href="https://zurich.telemedicina.com/xmlrpc.php">
-              <link rel="shortcut icon" href="https://agenda.telemedicina.com/wp-content/uploads/2020/06/favicon.ico">
-              <title>Consentimiento Informado – Teleconsulta</title>
-    <script>window._wca = window._wca || [];</script>
-    <link rel="dns-prefetch" href="https://stats.wp.com/">
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
-    <link rel="dns-prefetch" href="https://s.w.org/">
-    <link rel="alternate" type="application/rss+xml" title="Teleconsulta » Feed" href="https://zurich.telemedicina.com/feed/">
-    <link rel="alternate" type="application/rss+xml" title="Teleconsulta » Feed de los comentarios" href="https://zurich.telemedicina.com/comments/feed/">
-        <script type="text/javascript">
-          window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/zurich.telemedicina.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.1"}};
-          !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
-        </script><script src="./Consentimiento Informado – Teleconsulta_files/wp-emoji-release.min.js.descarga" type="text/javascript" defer=""></script>
-        <style type="text/css">
-    img.wp-smiley,
-    img.emoji {
-      display: inline !important;
-      border: none !important;
-      box-shadow: none !important;
-      height: 1em !important;
-      width: 1em !important;
-      margin: 0 .07em !important;
-      vertical-align: -0.1em !important;
-      background: none !important;
-      padding: 0 !important;
-    }
-    </style>
-      <link rel="stylesheet" id="revslider-material-icons-css" href="./Consentimiento Informado – Teleconsulta_files/material-icons.css" type="text/css" media="all">
-    <link rel="stylesheet" id="revslider-basics-css-css" href="./Consentimiento Informado – Teleconsulta_files/basics.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rs-color-picker-css-css" href="./Consentimiento Informado – Teleconsulta_files/tp-color-picker.css" type="text/css" media="all">
-    <link rel="stylesheet" id="revbuilder-select2RS-css" href="./Consentimiento Informado – Teleconsulta_files/select2RS.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rs-roboto-css" href="./Consentimiento Informado – Teleconsulta_files/css" type="text/css" media="all">
-    <link rel="stylesheet" id="tp-material-icons-css" href="./Consentimiento Informado – Teleconsulta_files/icon" type="text/css" media="all">
-    <link rel="stylesheet" id="wp-block-library-css" href="./Consentimiento Informado – Teleconsulta_files/style.min.css" type="text/css" media="all">
-    <style id="wp-block-library-inline-css" type="text/css">
-    .has-text-align-justify{text-align:justify;}
-    </style>
-    <link rel="stylesheet" id="wp-block-library-theme-css" href="./Consentimiento Informado – Teleconsulta_files/theme.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="wc-block-vendors-style-css" href="./Consentimiento Informado – Teleconsulta_files/vendors-style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="wc-block-style-css" href="./Consentimiento Informado – Teleconsulta_files/style.css" type="text/css" media="all">
-    <link rel="stylesheet" id="custom-style-css" href="./Consentimiento Informado – Teleconsulta_files/custom_script.css" type="text/css" media="all">
-    <style id="custom-style-inline-css" type="text/css">
     
-                    .am-cabinet-menu-item:nth-child(2){
-                        visibility: hidden;
-                    }
-                    .am-cabinet-menu-item:nth-child(3){
-                        visibility: hidden;
-                    }
-                    .am-cabinet-profile {
-                        visibility: hidden;
-                    }
+<!-- saved from url=(0060)https://clinic.vsee.me/assets/privacy?detect_browser=disable -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-                    
-    </style>
-    <link rel="stylesheet" id="fork-me-css" href="./Consentimiento Informado – Teleconsulta_files/gh-fork-ribbon.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="rs-plugin-settings-css" href="./Consentimiento Informado – Teleconsulta_files/rs6.css" type="text/css" media="all">
-    <style id="rs-plugin-settings-inline-css" type="text/css">
-    #rs-demo-id {}
-    </style>
-    <link rel="stylesheet" id="woocommerce-layout-css" href="./Consentimiento Informado – Teleconsulta_files/woocommerce-layout.css" type="text/css" media="all">
-    <style id="woocommerce-layout-inline-css" type="text/css">
-    
-      .infinite-scroll .woocommerce-pagination {
-        display: none;
-      }
-    </style>
-    <link rel="stylesheet" id="woocommerce-smallscreen-css" href="./Consentimiento Informado – Teleconsulta_files/woocommerce-smallscreen.css" type="text/css" media="only screen and (max-width: 768px)">
-    <link rel="stylesheet" id="woocommerce-general-css" href="./Consentimiento Informado – Teleconsulta_files/woocommerce.css" type="text/css" media="all">
-    <style id="woocommerce-inline-inline-css" type="text/css">
-    .woocommerce form .form-row .required { visibility: visible; }
-    </style>
-    <link rel="stylesheet" id="reset-css" href="./Consentimiento Informado – Teleconsulta_files/reset.css" type="text/css" media="all">
-    <link rel="stylesheet" id="superfish-css" href="./Consentimiento Informado – Teleconsulta_files/superfish.css" type="text/css" media="all">
-    <link rel="stylesheet" id="prettyPhoto-css" href="./Consentimiento Informado – Teleconsulta_files/prettyPhoto.css" type="text/css" media="all">
-    <link rel="stylesheet" id="jquery-qtip-css" href="./Consentimiento Informado – Teleconsulta_files/jquery.qtip.css" type="text/css" media="all">
-    <link rel="stylesheet" id="parent-style-css" href="./Consentimiento Informado – Teleconsulta_files/style(1).css" type="text/css" media="all">
-    <link rel="stylesheet" id="google-font-source-sans-pro-css" href="./Consentimiento Informado – Teleconsulta_files/css(1)" type="text/css" media="all">
-    <link rel="stylesheet" id="google-font-open-sans-css" href="./Consentimiento Informado – Teleconsulta_files/css(2)" type="text/css" media="all">
-    <link rel="stylesheet" id="google-font-pt-serif-css" href="./Consentimiento Informado – Teleconsulta_files/css(3)" type="text/css" media="all">
-    <link rel="stylesheet" id="odometer-css" href="./Consentimiento Informado – Teleconsulta_files/odometer-theme-default.css" type="text/css" media="all">
-    <link rel="stylesheet" id="animations-css" href="./Consentimiento Informado – Teleconsulta_files/animations.css" type="text/css" media="all">
-    <link rel="stylesheet" id="main-style-css" href="./Consentimiento Informado – Teleconsulta_files/style(2).css" type="text/css" media="all">
-    <link rel="stylesheet" id="responsive-css" href="./Consentimiento Informado – Teleconsulta_files/responsive.css" type="text/css" media="all">
-    <link rel="stylesheet" id="woocommerce-custom-css" href="./Consentimiento Informado – Teleconsulta_files/style(3).css" type="text/css" media="all">
-    <link rel="stylesheet" id="woocommerce-responsive-css" href="./Consentimiento Informado – Teleconsulta_files/responsive(1).css" type="text/css" media="all">
-    <link rel="stylesheet" id="mc-features-css" href="./Consentimiento Informado – Teleconsulta_files/style(4).css" type="text/css" media="all">
-    <link rel="stylesheet" id="mc-template-css" href="./Consentimiento Informado – Teleconsulta_files/style(5).css" type="text/css" media="all">
-    <link rel="stylesheet" id="mc-social-css" href="./Consentimiento Informado – Teleconsulta_files/style(6).css" type="text/css" media="all">
-    <link rel="stylesheet" id="custom-css" href="./Consentimiento Informado – Teleconsulta_files/custom.css" type="text/css" media="all">
-    <link rel="stylesheet" id="js_composer_front-css" href="./Consentimiento Informado – Teleconsulta_files/js_composer.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="jetpack_css-css" href="./Consentimiento Informado – Teleconsulta_files/jetpack.css" type="text/css" media="all">
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.js.descarga" id="jquery-core-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/rbtools.min.js.descarga" id="tp-tools-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/rs6.min.js.descarga" id="revmin-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.blockUI.min.js.descarga" id="jquery-blockui-js"></script>
-    <script type="text/javascript" id="wc-add-to-cart-js-extra">
-    /* <![CDATA[ */
-    var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"Ver carrito","cart_url":"https:\/\/zurich.telemedicina.com\/checkout\/","is_cart":"","cart_redirect_after_add":"no"};
-    /* ]]> */
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/add-to-cart.min.js.descarga" id="wc-add-to-cart-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/woocommerce-add-to-cart.js.descarga" id="vc_woocommerce-add-to-cart-js-js"></script>
-    <script async="" defer="" type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/s-202042.js.descarga" id="woocommerce-analytics-js"></script>
-    <link rel="https://api.w.org/" href="https://zurich.telemedicina.com/wp-json/"><link rel="alternate" type="application/json" href="https://zurich.telemedicina.com/wp-json/wp/v2/pages/4245"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://zurich.telemedicina.com/xmlrpc.php?rsd">
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://zurich.telemedicina.com/wp-includes/wlwmanifest.xml"> 
-    <meta name="generator" content="WordPress 5.5.1">
-    <meta name="generator" content="WooCommerce 4.3.2">
-    <link rel="canonical" href="https://zurich.telemedicina.com/consentimiento-informado-2/">
-    <link rel="shortlink" href="https://zurich.telemedicina.com/?p=4245">
-    <link rel="alternate" type="application/json+oembed" href="https://zurich.telemedicina.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fzurich.telemedicina.com%2Fconsentimiento-informado-2%2F">
-    <link rel="alternate" type="text/xml+oembed" href="https://zurich.telemedicina.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fzurich.telemedicina.com%2Fconsentimiento-informado-2%2F&amp;format=xml">
-            <script>
-              // your javscript code goes
-              jQuery(document).ready(function(){
-                if(jQuery("#amelia-app-booking0").length == 80) {
-                    
-               }
-            });
-    
-            
-    
-            function esrut(e){return-1!=e.indexOf("-")&&(r=e.search("-"),dv=e.substr(r+1,1),semir=e.substr(0,e.length-2),!isNaN(semir)&&(veri=verifica(semir),veri==dv.toUpperCase()))}function verifica(r){var e,i=2,s=0;e=r.length;for(var t=1;t<=e;t++)s+=parseInt(r.substring(e-t,e-t+1))*i,8==(i+=1)&&(i=2);return 10==(s=Math.floor(11-s%11))?"K":11==s?"0":s}
-    
-            window.beforeConfirmBookingLoaded = function() {
-                //alert('beforeConfirmBookingLoaded');
-                /*    jQuery("input:text")[12].type="date";
-                    jQuery('form').eq(1).on('submit', function(e){alert('nopes');
-                        e.stopPropagation();
-                        return false;
-                    
-                    });*/
-                    
-                    //jQuery("input:text")[10].value="HOLA";
-                    if (jQuery("label.el-form-item__label").eq(10).html().indexOf('nacimiento menor')>=0) {
-                        jQuery("input:text")[11].type="date";
-                    } else {
-                        jQuery("input:text")[12].type="date";
-                    }
-                    
-    
-                    jQuery('.el-button--primary').eq(2).on('click', function(evt) {
-                        //Hide
-                        //alert("click");
-                        if (!esrut(jQuery("input:text")[10].value)) {
-                            if(jQuery('form').eq(1)[0].__vue__.$data.fields[7].validateState != "error") {
-                            jQuery("input:text").eq(10).parent().closest('div').after('<div class="el-form-item__error" id="rut_error">El rut no es válido</div>');
-                            jQuery("input:text").eq(10).parent().parent().closest('div').addClass('is-error');
-                            jQuery('form').eq(1)[0].__vue__.$data.fields[7].validateState = 'error';
-                            }
-                            evt.stopImmediatePropagation();
-                            return false;
-                        } else {
-                            jQuery("input:text").eq(10).parent().parent().closest('div').removeClass('is-error');
-                            jQuery("#rut_error").remove();
-                        }
-                
-                    });
-    
-                    var eventList = jQuery._data(jQuery(".el-button--primary").eq(2), "events");
-                    //eventList.click.unshift(eventList.click.pop());
-    
-    
-                
-    
-    };    
-    
-            </script>
-            <script> 
-        var id;
-        var id2;
-        var API_PAY_URL = 'http://apiqa.app.telemedicina.com/api/v1/payment/';
-        
-    
-        var MD5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()};function M(d){for(var _,m="0123456789ABCDEF",f="",r=0;r<d.length;r++)_=d.charCodeAt(r),f+=m.charAt(_>>>4&15)+m.charAt(15&_);return f}function X(d){for(var _=Array(d.length>>2),m=0;m<_.length;m++)_[m]=0;for(m=0;m<8*d.length;m+=8)_[m>>5]|=(255&d.charCodeAt(m/8))<<m%32;return _}function V(d){for(var _="",m=0;m<32*d.length;m+=8)_+=String.fromCharCode(d[m>>5]>>>m%32&255);return _}function Y(d,_){d[_>>5]|=128<<_%32,d[14+(_+64>>>9<<4)]=_;for(var m=1732584193,f=-271733879,r=-1732584194,i=271733878,n=0;n<d.length;n+=16){var h=m,t=f,g=r,e=i;f=md5_ii(f=md5_ii(f=md5_ii(f=md5_ii(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_ff(f=md5_ff(f=md5_ff(f=md5_ff(f,r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+0],7,-680876936),f,r,d[n+1],12,-389564586),m,f,d[n+2],17,606105819),i,m,d[n+3],22,-1044525330),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+4],7,-176418897),f,r,d[n+5],12,1200080426),m,f,d[n+6],17,-1473231341),i,m,d[n+7],22,-45705983),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+8],7,1770035416),f,r,d[n+9],12,-1958414417),m,f,d[n+10],17,-42063),i,m,d[n+11],22,-1990404162),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+12],7,1804603682),f,r,d[n+13],12,-40341101),m,f,d[n+14],17,-1502002290),i,m,d[n+15],22,1236535329),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+1],5,-165796510),f,r,d[n+6],9,-1069501632),m,f,d[n+11],14,643717713),i,m,d[n+0],20,-373897302),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+5],5,-701558691),f,r,d[n+10],9,38016083),m,f,d[n+15],14,-660478335),i,m,d[n+4],20,-405537848),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+9],5,568446438),f,r,d[n+14],9,-1019803690),m,f,d[n+3],14,-187363961),i,m,d[n+8],20,1163531501),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+13],5,-1444681467),f,r,d[n+2],9,-51403784),m,f,d[n+7],14,1735328473),i,m,d[n+12],20,-1926607734),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+5],4,-378558),f,r,d[n+8],11,-2022574463),m,f,d[n+11],16,1839030562),i,m,d[n+14],23,-35309556),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+1],4,-1530992060),f,r,d[n+4],11,1272893353),m,f,d[n+7],16,-155497632),i,m,d[n+10],23,-1094730640),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+13],4,681279174),f,r,d[n+0],11,-358537222),m,f,d[n+3],16,-722521979),i,m,d[n+6],23,76029189),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+9],4,-640364487),f,r,d[n+12],11,-421815835),m,f,d[n+15],16,530742520),i,m,d[n+2],23,-995338651),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+0],6,-198630844),f,r,d[n+7],10,1126891415),m,f,d[n+14],15,-1416354905),i,m,d[n+5],21,-57434055),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+12],6,1700485571),f,r,d[n+3],10,-1894986606),m,f,d[n+10],15,-1051523),i,m,d[n+1],21,-2054922799),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+8],6,1873313359),f,r,d[n+15],10,-30611744),m,f,d[n+6],15,-1560198380),i,m,d[n+13],21,1309151649),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+4],6,-145523070),f,r,d[n+11],10,-1120210379),m,f,d[n+2],15,718787259),i,m,d[n+9],21,-343485551),m=safe_add(m,h),f=safe_add(f,t),r=safe_add(r,g),i=safe_add(i,e)}return Array(m,f,r,i)}function md5_cmn(d,_,m,f,r,i){return safe_add(bit_rol(safe_add(safe_add(_,d),safe_add(f,i)),r),m)}function md5_ff(d,_,m,f,r,i,n){return md5_cmn(_&m|~_&f,d,_,r,i,n)}function md5_gg(d,_,m,f,r,i,n){return md5_cmn(_&f|m&~f,d,_,r,i,n)}function md5_hh(d,_,m,f,r,i,n){return md5_cmn(_^m^f,d,_,r,i,n)}function md5_ii(d,_,m,f,r,i,n){return md5_cmn(m^(_|~f),d,_,r,i,n)}function safe_add(d,_){var m=(65535&d)+(65535&_);return(d>>16)+(_>>16)+(m>>16)<<16|65535&m}function bit_rol(d,_){return d<<_|d>>>32-_}
-    
-        function check_boton() { 
-    
-            if (jQuery('div#am-cabinet > div:nth-child(4) > div > div.el-dialog__footer > span > button.el-button.am-cabinet-action-button.el-button--default > span').length == 1) {
-                jQuery('div#am-cabinet > div:nth-child(4) > div > div.el-dialog__footer > span > button.el-button.am-cabinet-action-button.el-button--default > span').html('No');
-                //clearInterval(id);
-            }
-        }
-    
-        function link_pago() {
-            if (jQuery("#am-cabinet > div.am-cabinet-dashboard > div.am-cabinet-content > span > div > div.am-cabinet-list").find('div.am-cabinet-row.el-row').length>0) {
-                element = jQuery("#am-cabinet > div.am-cabinet-dashboard > div.am-cabinet-content > span > div > div.am-cabinet-list").find('div.am-cabinet-row.el-row');
-                
-                    ameliaData = document.getElementById('amelia-app-booking0').__vue__.$children[0].appointments;
-    
-                    ahora = Date.parse(new Date());
-                    i = 0;
-                    for(var key in ameliaData){
-                        for(var key2 in ameliaData[key].appointments){
-                            fecha_cita = Date.parse(ameliaData[key].appointments[key2].bookingStart);
-    
-                            if(ameliaData[key].appointments[key2].status == 'pending' && ameliaData[key].appointments[key2].bookings[0].payments[0].status == 'pending' && fecha_cita > ahora) {
-                                jQuery(element).eq(i).find('div.am-cabinet-buttons-align-right').eq(0).find('div.el-col').remove()
-                                jQuery(element).eq(i).find('div.am-cabinet-buttons-align-right').eq(0).append('<div class="el-col"><a href="'+API_PAY_URL+MD5(ameliaData[key].appointments[key2].id.toString())+'" class="el-button el-button--primary el-button--mini" style="margin-top:5px;">Pagar</a></div>')
-                            }
-                            i++;
-                        }
-                        
-                        
-                        
-                    }
-    
-                    
-    
-                
-    
-                //clearInterval(id2);
-            }
-    
-            //jQuery("body").on('DOMSubtreeModified', ".am-cabinet-row", function() {
-                //console.log('cambié!') 
-                //id2 = setInterval(link_pago, 500);
-    
-                
-        }
-        
-        jQuery(document).ready(function(jQuery){
-            if (window.location.pathname == '/panel-de-reservas/') {
-                
-                id = setInterval(check_boton, 500);
-                id2 = setInterval(link_pago, 2000);
-        };
-      });
-            
-            
-        
-        </script>
-    <style type="text/css">img#wpstats{display:none}</style>	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
-      <meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
-    <meta name="generator" content="Powered by Slider Revolution 6.2.22 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
-    <script type="text/javascript">function setREVStartSize(e){
-          //window.requestAnimationFrame(function() {				 
-            window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;	
-            window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;	
-            try {								
-              var pw = document.getElementById(e.c).parentNode.offsetWidth,
-                newh;
-              pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
-              e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
-              e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
-              e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
-              e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
-              e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
-              e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
-              e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
-              if(e.layout==="fullscreen" || e.l==="fullscreen") 						
-                newh = Math.max(e.mh,window.RSIH);					
-              else{					
-                e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
-                for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
-                e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
-                e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
-                for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
-                          
-                var nl = new Array(e.rl.length),
-                  ix = 0,						
-                  sl;					
-                e.tabw = e.tabhide>=pw ? 0 : e.tabw;
-                e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
-                e.tabh = e.tabhide>=pw ? 0 : e.tabh;
-                e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
-                for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
-                sl = nl[0];									
-                for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
-                var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
-                newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
-              }				
-              if(window.rs_init_css===undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));					
-              document.getElementById(e.c).height = newh+"px";
-              window.rs_init_css.innerHTML += "#"+e.c+"_wrapper { height: "+newh+"px }";				
-            } catch(e){
-              console.log("Failure at Presize of Slider:" + e)
-            }					   
-          //});
-          };</script>
-    <script data-ampdevmode="" type="text/javascript">
-    /* <![CDATA[ */
-      var wpNotesIsJetpackClient = true;
-      var wpNotesIsJetpackClientV2 = true;
-      var wpNotesLinkAccountsURL = 'https://zurich.telemedicina.com/wp-admin/admin.php?page=jetpack';
-    /* ]]> */
-    </script>
-    <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>		<!--custom style-->
-    <style type="text/css">
-      </style>	</head>
-      <body data-rsssl="1" class="privacy-policy page-template-default page page-id-4245 logged-in theme-medicenter woocommerce-js wpb-js-composer js-comp-ver-6.1 vc_responsive">
-        <div class="site-container fullwidth">
-                  <div class="header-top-sidebar-container">
-              <div class="header-top-sidebar clearfix">
-                      <div class="textwidget"><div style="padding: 17px 0;" class="clearfix">
-    <ul class="thin-list">
-    <li>
-    <span class="header-icon template-location">Gertrudis Echeñique 30, Las Condes, Santiago</span>
-    </li>
-    <li>
-    <span class="header-icon template-phone">800 470 911 opción 3<br><br>
-    Desde celular 22 437 4905 opción 3</span>
-    </li>
-    <li>
-    <a href="mailto:teleconsulta@telemedicina.com" class="header-icon template-mail">teleconsulta@telemedicina.com</a>
-    </li>
-    </ul>
-    
-    <div class="icons-list">
-    <a href="https://www.instagram.com/itms_chile" target="_blank" class="icon-single mc-icon social-instagram" rel="noopener noreferrer"></a>
-    <a href="https://www.youtube.com/channel/UCtD_uhlH2MpHXG3m0AppD-g" target="_blank" class="icon-single mc-icon social-youtube" rel="noopener noreferrer"></a>
-    <a href="https://www.linkedin.com/company/itms-chile/" target="_blank" class="icon-single mc-icon social-linkedin" rel="noopener noreferrer"></a>
-    
-    </div>
-    </div></div>
-                  </div>
-            </div>
-                  <!-- Header -->
-                <div class="header-container ">
-            <div class="header clearfix layout-1">
-                        <div class="header-left">
-                <a href="https://zurich.telemedicina.com/" title="Teleconsulta">
-                                <img src="./Consentimiento Informado – Teleconsulta_files/Logo-Zurich-2.png" alt="logo">
-                                            </a>
-                <a href="https://zurich.telemedicina.com/consentimiento-informado-2/#" class="mobile-menu-switch vertical-align-cell">
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="line"></span>
-                </a>
-                          </div>
-              <div class="menu-main-menu-container"><ul id="menu-main-menu" class="sf-menu header-right"><li id="menu-item-3876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-3876"><a href="https://zurich.telemedicina.com/">INICIO</a></li>
-    <li id="menu-item-4194" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-4194"><a href="https://zurich.telemedicina.com/teleconsulta2/">TELECONSULTA</a>
-    <ul class="sub-menu">
-      <li id="menu-item-4181" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4181"><a href="https://zurich.telemedicina.com/agendar-una-cita/">Agendar una Cita</a></li>
-      <li id="menu-item-4182" class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4182"><a href="https://zurich.telemedicina.com/features/alternative-therapies/">Beneficios de la Teleconsulta</a></li>
-      <li id="menu-item-4184" class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4184"><a href="https://zurich.telemedicina.com/features/heart-disorders/">Documentos que debes tener a mano</a></li>
-      <li id="menu-item-4183" class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4183"><a href="https://zurich.telemedicina.com/features/clinical-trial-supply/">Aprende a utilizar nuestra Plataforma</a></li>
-      <li id="menu-item-4267" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-4245 current_page_item menu-item-4267"><a href="https://zurich.telemedicina.com/consentimiento-informado-2/" aria-current="page">Consentimiento Informado</a></li>
-    </ul>
-    </li>
-    <li id="menu-item-3967" class="left-flyout menu-item menu-item-type-post_type menu-item-object-page menu-item-3967"><a href="https://zurich.telemedicina.com/contact-style-3/">CONTACTO</a></li>
-    <li id="menu-item-4160" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4160"><a href="https://zurich.telemedicina.com/my-account/">MI CUENTA</a>
-    <ul class="sub-menu">
-      <li id="menu-item-4394" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4394"><a href="https://zurich.telemedicina.com/agendar-una-cita/">Agendar con un Especialista</a></li>
-      <li id="menu-item-4464" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4464"><a href="https://zurich.telemedicina.com/buscar-una-cita/">Buscar una Cita</a></li>
-      <li id="menu-item-4163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4163"><a href="https://zurich.telemedicina.com/panel-de-reservas/">Mis Reservas</a></li>
-      <li id="menu-item-3936" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3936"><a href="https://zurich.telemedicina.com/my-account/">Mis Datos</a></li>
-      <li id="menu-item-4561" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4561"><a href="https://zurich.telemedicina.com/proximas-citas/">Resumen citas</a></li>
-      <li id="menu-item-4562" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4562"><a href="https://zurich.telemedicina.com/wp-login.php?action=logout">Salir</a></li>
-    </ul>
-    </li>
-    </ul></div>							<div class="mobile-menu-container clearfix">
-                    <div class="mobile-menu-divider"></div>
-                    <nav class="mobile-menu collapsible-mobile-submenus"><ul id="menu-main-menu-1" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-3876"><a href="https://zurich.telemedicina.com/">INICIO</a></li>
-    <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-4194"><a href="https://zurich.telemedicina.com/teleconsulta2/">TELECONSULTA</a><a href="https://zurich.telemedicina.com/consentimiento-informado-2/#" class="template-arrow-menu"></a>
-    <ul class="sub-menu">
-      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4181"><a href="https://zurich.telemedicina.com/agendar-una-cita/">Agendar una Cita</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4182"><a href="https://zurich.telemedicina.com/features/alternative-therapies/">Beneficios de la Teleconsulta</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4184"><a href="https://zurich.telemedicina.com/features/heart-disorders/">Documentos que debes tener a mano</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-features menu-item-4183"><a href="https://zurich.telemedicina.com/features/clinical-trial-supply/">Aprende a utilizar nuestra Plataforma</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-4245 current_page_item menu-item-4267"><a href="https://zurich.telemedicina.com/consentimiento-informado-2/" aria-current="page">Consentimiento Informado</a></li>
-    </ul>
-    </li>
-    <li class="left-flyout menu-item menu-item-type-post_type menu-item-object-page menu-item-3967"><a href="https://zurich.telemedicina.com/contact-style-3/">CONTACTO</a></li>
-    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4160"><a href="https://zurich.telemedicina.com/my-account/">MI CUENTA</a><a href="https://zurich.telemedicina.com/consentimiento-informado-2/#" class="template-arrow-menu"></a>
-    <ul class="sub-menu">
-      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4394"><a href="https://zurich.telemedicina.com/agendar-una-cita/">Agendar con un Especialista</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4464"><a href="https://zurich.telemedicina.com/buscar-una-cita/">Buscar una Cita</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4163"><a href="https://zurich.telemedicina.com/panel-de-reservas/">Mis Reservas</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3936"><a href="https://zurich.telemedicina.com/my-account/">Mis Datos</a></li>
-      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4561"><a href="https://zurich.telemedicina.com/proximas-citas/">Resumen citas</a></li>
-      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4562"><a href="https://zurich.telemedicina.com/wp-login.php?action=logout">Salir</a></li>
-    </ul>
-    </li>
-    </ul></nav>							</div>
-                          </div>
-          </div>
-              <!-- /Header --><div class="theme-page relative">
-      <div class="vc_row wpb_row vc_row-fluid page-header vertical-align-table full-width">
-        <div class="vc_row wpb_row vc_inner vc_row-fluid">
-          <div class="page-header-left">
-            <h1 class="page-title">Consentimiento Informado</h1>
-            <ul class="bread-crumb">
-              <li>
-                <a href="https://zurich.telemedicina.com/" title="Home">
-                  Home						</a>
-              </li>
-              <li class="separator template-arrow-horizontal-1">
-                &nbsp;
-              </li>
-              <li>
-                Consentimiento Informado					</li>
-            </ul>
-          </div>
-              </div>
-      </div>
-      <div class="clearfix">
-        <div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-8"><div class="wpb_wrapper"><h3 class="box-header no-border">La teleconsulta a la que usted se someterá corresponde a una consulta a distancia con las siguientes características:</h3><ul class="simple-list margin-top-15 clearfix"><li class="template-tick-2 clearfix">
-          <span>Se realiza entre un paciente y un profesional de salud.</span></li><li class="template-tick-2 clearfix">
-          <span>Se realiza a través de tecnologías de la información y telecomunicaciones (video-llamada).</span></li><li class="template-tick-2 clearfix">
-          <span>A pesar de que el paciente y el profesional de salud se encuentran en lugares geográficos distintos, pueden interactuar entre sí en tiempo real.</span></li><li class="template-tick-2 clearfix">
-          <span>Su principal beneficio es permitir que un paciente permanezca en un sitio remoto mientras recibe atención por parte de un profesional de la salud.</span></li></ul><h3 class="box-header no-border">La teleconsulta presenta los siguientes riesgos:</h3><ul class="simple-list margin-top-15 clearfix"><li class="template-tick-2 clearfix">
-          <span>Nunca reemplazará la atención presencial, toda vez que carece de la posibilidad de efectuar examen físico entre otras evaluaciones.</span></li><li class="template-tick-2 clearfix">
-          <span>No es posible establecer diagnósticos con la misma exactitud que una consulta presencial, ni tampoco una prescripción de tratamiento con la misma certeza.</span></li><li class="template-tick-2 clearfix">
-          <span>Puede verse alterada por problemas tecnológicos.</span></li><li class="template-tick-2 clearfix">
-          <span>La información podría verse vulnerada si no se toman los resguardos necesarios por parte del proveedor y del paciente. Para este efecto, el proveedor se ha preocupado de contar con sistemas de seguridad robustos.</span></li></ul><h3 class="box-header no-border">Por el presente documento entiendo que:</h3><ul class="simple-list margin-top-15 clearfix"><li class="template-tick-2 clearfix">
-          <span>Accedo a compartir mi información por vía tecnológicas con un profesional de salud que será el receptor de la misma.</span></li><li class="template-tick-2 clearfix">
-          <span>Entiendo que excepcionalmente puede verse vulnerada la información otorgada en cuanto a su privacidad o confidencialidad, a pesar de que el proveedor cumpla con los estándares requeridos.</span></li><li class="template-tick-2 clearfix">
-          <span>Me obligó al inicio y durante toda la realización de la teleconsulta a encontrarme en un lugar en donde se respete la privacidad.</span></li><li class="template-tick-2 clearfix">
-          <span>Entiendo que la teleconsulta de forma alguna reemplazará la atención presencial y que podría ser incompleta por carecer de la realización de examen físico y otras evaluaciones.</span></li><li class="template-tick-2 clearfix">
-          <span>Entiendo que la transmisión podría verse alterada por fallas de tipo tecnológicas.</span></li><li class="template-tick-2 clearfix">
-          <span>Consiento a que todo o parte de la transmisión sea grabada. No obstante, la institución se encargará por velar la seguridad y confidencialidad de la misma, la que con todo en casos excepcionales podría verse vulnerada.</span></li></ul>
-      <div class="wpb_text_column wpb_content_element ">
-        <div class="wpb_wrapper">
-          <p>Si quieres puedes descargar este documento en formato PDF, haciendo click <a href="https://agenda.telemedicina.com/wp-content/uploads/2020/06/Consentimiento-informado-TC-agenda-V2.pdf" target="_blank" rel="noopener noreferrer">acá</a>.</p>
-    
-        </div>
-      </div>
-    </div></div><div class="wpb_column vc_column_container vc_col-sm-4"><div class="wpb_wrapper"><h3 class="box-header">Características de Nuestro Servicio</h3><ul class="clearfix mc-features mc-features-large mc-features-style-default page-margin-top"><li class="item-content clearfix">
-            <span class="hexagon animated-element animation-fadeIn fadeIn" title="Mejora Acceso a la salud" style="animation-duration: 600ms; animation-delay: 0ms; transition-delay: 0ms;"><span class="features-clock"></span></span><div class="text"><p>Mejoramos el acceso a la Salud, desde el lugar que te encuentres, a la hora que más te acomoda.</p>
-    </div>
-          </li><li class="item-content clearfix">
-            <span class="hexagon animated-element animation-fadeIn fadeIn" title="Preocupación por la Calidad" style="animation-duration: 600ms; animation-delay: 0ms; transition-delay: 0ms;"><span class="features-medical-staff"></span></span><div class="text"><p>Nos preocupamos de la calidad, tanto en la experiencia del paciente, como en los profesionales que atienden.</p>
-    </div>
-          </li><li class="item-content clearfix">
-            <span class="hexagon animated-element animation-fadeIn fadeIn" title="Fomentamos la Equidad" style="animation-duration: 600ms; animation-delay: 0ms; transition-delay: 0ms;"><span class="features-eye"></span></span><div class="text"><p>Fomentamos la equidad en todas sus formas, entregando un servicio transparente y claro para todos.</p>
-    </div>
-          </li><li class="item-content clearfix">
-            <span class="hexagon animated-element animation-fadeIn fadeIn" title="Disponibilidad en la atención" style="animation-duration: 600ms; animation-delay: 0ms; transition-delay: 0ms;"><span class="features-time"></span></span><div class="text"><p>Nos preocupamos por la disponibilidad en la atención, logrando la disminución de esperas innecesarias.</p>
-    </div>
-          </li></ul>
-      <div class="wpb_widgetised_column wpb_content_element clearfix page-margin-top">
-        <div class="wpb_wrapper">
-          
-          
-        </div>
-      </div>
-    </div></div></div>	</div>
-    </div>
-                <div class="footer-container">
-            <div class="footer">
-                        <ul class="footer-banner-box-container clearfix">
-                    <li class="footer-banner-box features-hospital animated-element animation-fadeIn duration-500 fadeIn" style="animation-duration: 500ms; animation-delay: 0ms; transition-delay: 0ms;">
-          <h2>¿Quieres agendar una Consulta?</h2>						<p class="content-margin">	
-          <a href="https://agenda.telemedicina.com/agendar-una-cita/">¡Pincha acá!</a>			</p>
+</head>
+
+<body>
+    <h1 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">&emspPrivacy Policy</span></h1>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">as amended: June 1, 2016</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">INTRODUCTION</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee (“VSee”, “Company”, “us”, and “we”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Information (as defined below) we collect from users of both our website, located at www.vsee.com and the VSee Platform (collectively the “VSee Platform”) as described and defined in the VSee Terms of Use (“VSee TOS”). Capitalized terms not defined herein are defined in the VSee TOS.Our Privacy Policy also serves as a notice to describe how personal information and health information (PHI) about you may be used, how it may be disclosed and how you can obtain access to this information. The law (45 CFR Part 160 and Part 164, Subparts A and E) requires that your PHI be kept private. We must give you such notice about our privacy practices and follow the terms of this notice while it is in effect. Your use of the VSee Platform indicates your acceptance of the terms of this notice and our Privacy Policy.VSee is engaged in the business of providing internet healthcare resources to connect our Users with Independent Professional dietitians in real time, via live streaming video, telephone, messaging, social media and/or secure e-mail and to provide VSee Collection Services between our Users and Independent Professionals (collectively “Platform Services”).</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">INFORMATION THAT MAY BE COLLECTED BY VSEE</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">In order to use the Platform Services, you as a User are required to enter an email address and password, which we refer to here as your VSee ID or credentials. After you create your VSee ID, you can use the same credentials to log in to VSee’s website and utilize the Platform Services. This log-in process will allow you to manage your account, it will allow you to search dietitian, make appointments, attend appointments, and utilize and enjoy all Platform Services.The first time you log in to VSee’s website to utilize the Platform Services, you will be asked to create an account also known as your profile. To create an account, you must provide personal information such as name, address, telephone number, date of birth, e-mail address, gender, and other pertinent data that will be available for you to share with the Independent Professionals who are also registered on the VSee Platform.VSee will use the email address you provide when you create your account to send you an email requesting that you validate your account. Your email address may also be used by VSee to provide appointment reminders, changes in appointments, messages from our Independent Professionals and other relevant communications in connection with Platform Services.VSee will also use your e-mail address as the primary means to reset your username and password. Your email address will not be shared with any other third parties and will not be used for advertising or sales purposes.VSee creates as appropriate, a textual, audio, and visual record of all Platform Services in which you participate. Some examples include the creation of video and/or audio files associated with all dietitian sessions, electronic medical records that may be uploaded or created as a result of treatment by you or an Independent Professional, data received from medical wearable technologies, etc.</span></p>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">For certain Platform Services that require a fee, we will collect credit card or billing/payment account information which we maintain in encrypted form on secure servers.In order to participate in Platform Services, you will need to provide, and/or upload to the VSee Platform , Personal Health Information (“PHI”). Here are examples of the types of Personal Health Information we gather:-Information You Give Us – Examples of the types of information you may provide us include measurements, such as weight, blood pressure or glucose levels, lab results, medications, health history, and other health or PHI, such as prescription information.-Information Accessed through Third-Party Data Platform Services – When you use VSee Platform Services, we may access health-related information about you that is stored with third party-data Platform Services such as Microsoft HealthVault or Google Health, and such information will subsequently be available to us.-Third-Party Information – Health-related information about you received from third-parties (such as nurses, doctors or family members) as well as personally identifiable and other health-related information you provide specifically related to family members who may be utilizing the Platform Services under your account.Demographic information, such as age, education, gender, social security number and zip code.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">HOW INFORMATION ABOUT YOU MAY BE USED BY VSEE</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee may gather PHI primarily to share with our Independent Professionals for the purposes of diagnosis, treatment, and health care operations. However, in limited circumstances VSee may use de-identified, non-personal information for statistical analysis, improvement of the Platform Services, and customization of web design and content layout.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Uses and Disclosures of PHI</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee is permitted to use and disclose your PHI for following purposes: For Dietitian Treatment. VSee may use or disclose your PHI to facilitate your treatment via Platform Services that is being provided by a VSee registered Independent Professional dietitian. For Payment. VSee may use and disclose your PHI with others who help pay for your care such as health insurers or health plans in connection with the processing and payments of claims and other charges. For Health Care Operations. VSee may use and disclose your PHI for its health care operations. These uses and disclosures help us run our programs and make sure VSee’s patients receive quality care. For example, VSee may use PHI to review the treatment and provision of Platform Services. VSee may use PHI to measure the performance of the Independent Professionals who are working with you or providing you treatment. VSee may share PHI with third parties who VSee engages to provide various Platform Services. If any such third party requires access to your PHI in order to perform the agreed upon Platform Services, VSee will require that third party be bound to the terms outlined in this Privacy Policy. Business Associates. VSee may contract with outside businesses to provide some Platform Services. For example, VSee may use the Platform Services of transcription, laboratories or collection agencies. Each contracted party must enter into a Business Associate agreement with VSee, which requires said third party businesses to protect PHI that is shared with them in accordance with the restrictions outlined in this Privacy Notice. Furthermore, PHI will only be provided to third party businesses for the limited scope of performing required Platform Services to help facilitate treatment, payment, and health care operations to you. For Appointment Reminders. VSee may contact you to remind you about your appointments. Treatment Alternatives. VSee may use and disclose PHI to tell you about different types of treatment available to you. VSee may use and share PHI to tell you about other benefits and Platform Services related to your health. Research. In support of telemedicine and ehealth initiatives, VSee may use and disclose your PHI for research. VSee will only use and disclose information for research if VSee receives your written consent, or if a review committee that meets Federal standards says VSee does not need your consent. Genetic Information. VSee does not collect or use genetic information. VSee does not use genetic information for underwriting and related purposes. Fundraising Activities. VSee will not disclose your individual PHI for fundraising activities without your written authorization. As Required By Law. VSee may use and disclose your PHI when required to do so by federal, state or local law. Testimonials. We display personal testimonials of satisfied customers on our site in addition to other endorsements. With your consent we may post your testimonial along with your name.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">How VSee May Use and Disclose PHI – Special Situations</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Military. If you are in the U.S. or foreign armed Platform Services, VSee may share your PHI as required by the proper military authorities. Workers’ Compensation. VSee may share your PHI for workers’ compensation or programs like it. VSee may do this to the extent required by law. Public Health Risks. VSee may share your PHI for public health activities, as required by federal, state or local law.For example, we may share your PHI:</span></p>
+    <ul>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to prevent or control disease, injury or disability;</span></p>
         </li>
-            <li class="footer-banner-box features-phone animated-element animation-slideRight duration-800 delay-250 slideRight" style="animation-duration: 800ms; animation-delay: 250ms; transition-delay: 250ms;">
-          <h2>¡Llámanos para agendar una consulta!</h2>						<p class="content-margin">	
-          <a href="tel:800470911#">800 470 911</a>			</p>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report births and deaths;</span></p>
         </li>
-            <li class="footer-banner-box features-email animated-element animation-slideRight200 duration-800 delay-500 slideRight200" style="animation-duration: 800ms; animation-delay: 500ms; transition-delay: 500ms;">
-          <h2>¡Queremos conocer tu experiencia!</h2>						<p class="content-margin">	
-          <a href="mailto:teleconsulta@telemedicina.com">Envíanos un Correo</a>			</p>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report child abuse or neglect;</span></p>
         </li>
-                  </ul>
-                        <div class="footer-box-container vc_row wpb_row vc_row-fluid clearfix">
-                <div id="medicenter_contact_details-2" class="widget mc_contact_details_widget vc_col-sm-3 wpb_column vc_column_container"><h3 class="box-header animation-slide animation-slide slide">Sobre Nosotros</h3><p class="info">En ITMS estamos comprometidos con el bienestar de nuestros pacientes y su experiencia en la telemedicina.</p>		<ul class="contact-data">
-                <li class="clearfix template-location"><div class="value">Gertrudis Echeñique 30<br>Las Condes, Santiago</div></li>
-                <li class="clearfix template-phone"><div class="value"><a href="tel:800470911">(800) 470 911 opción 3</a><br><a href="tel:(562)24374905">Desde celular 22 437 4905 opción 3</a></div></li>
-                <li class="clearfix template-mail"><div class="value"><a href="mailto:teleconsulta@telemedicina.com">teleconsulta@telemedicina.com</a></div></li>
-              </ul>
-        </div>					</div>
-                      </div>
-          </div>
-                <div class="copyright-area-container">
-            <div class="copyright-area clearfix">
-                        <div class="copyright-text">
-              © 2020 <a target="_blank" title="MediCenter Theme" href="https://www.itms.cl/" rel="nofollow">ITMS Chile SPA</a>. Todos los derechos reservados.					</div>
-              <div id="text-5" class="widget widget_text">			<div class="textwidget"><div class="icons-list">
-    <a href="https://www.linkedin.com/company/itms-chile/" target="_blank" class="icon-single mc-icon social-linkedin" rel="noopener noreferrer"></a>
-    <a href="https://www.instagram.com/itms_chile/" target="_blank" class="icon-single mc-icon social-instagram" rel="noopener noreferrer"></a>
-    </div></div>
-        </div><div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="footer-menu"><li id="menu-item-3869" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3869"><a href="https://agenda.telemedicina.com/terminos-y-condiciones/">Términos y Condiciones</a></li>
-    <li id="menu-item-4334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-4245 current_page_item menu-item-4334"><a href="https://zurich.telemedicina.com/consentimiento-informado-2/" aria-current="page">Consentimiento Informado</a></li>
-    </ul></div>				</div>
-          </div>
-              </div>
-            <a href="https://zurich.telemedicina.com/consentimiento-informado-2/#top" class="scroll-top animated-element template-arrow-vertical-3 fadeOut" title="Scroll to top" style="animation-duration: 600ms; animation-delay: 0ms; transition-delay: 0ms;"></a>
-        <a class="github-fork-ribbon left-top fixed" href="https://zurich.telemedicina.com/consentimiento-informado-2/#" data-ribbon="Demo Privada" title="Demo Privada">Demo Privada</a><script type="text/html" id="wpb-modifications"></script>	<script type="text/javascript">
-        var c = document.body.className;
-        c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
-        document.body.className = c;
-      </script>
-      <link rel="stylesheet" id="dashicons-css" href="./Consentimiento Informado – Teleconsulta_files/dashicons.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="admin-bar-css" href="./Consentimiento Informado – Teleconsulta_files/admin-bar.min.css" type="text/css" media="all">
-    <link rel="stylesheet" id="wpcom-notes-admin-bar-css" href="./Consentimiento Informado – Teleconsulta_files/admin-bar-v2.css" type="text/css" media="all">
-    <link rel="stylesheet" id="noticons-css" href="./Consentimiento Informado – Teleconsulta_files/noticons.css" type="text/css" media="all">
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/js.cookie.min.js.descarga" id="js-cookie-js"></script>
-    <script type="text/javascript" id="woocommerce-js-extra">
-    /* <![CDATA[ */
-    var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
-    /* ]]> */
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/woocommerce.min.js.descarga" id="woocommerce-js"></script>
-    <script type="text/javascript" id="wc-cart-fragments-js-extra">
-    /* <![CDATA[ */
-    var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_2caa5b41e6011157746348c545821f35","fragment_name":"wc_fragments_2caa5b41e6011157746348c545821f35","request_timeout":"5000"};
-    /* ]]> */
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/cart-fragments.min.js.descarga" id="wc-cart-fragments-js"></script>
-    <script type="text/javascript" id="wc-cart-fragments-js-after">
-        jQuery( 'body' ).bind( 'wc_fragments_refreshed', function() {
-          var jetpackLazyImagesLoadEvent;
-          try {
-            jetpackLazyImagesLoadEvent = new Event( 'jetpack-lazy-images-load', {
-              bubbles: true,
-              cancelable: true
-            } );
-          } catch ( e ) {
-            jetpackLazyImagesLoadEvent = document.createEvent( 'Event' )
-            jetpackLazyImagesLoadEvent.initEvent( 'jetpack-lazy-images-load', true, true );
-          }
-          jQuery( 'body' ).get( 0 ).dispatchEvent( jetpackLazyImagesLoadEvent );
-        } );
-      
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/core.min.js.descarga" id="jquery-ui-core-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/widget.min.js.descarga" id="jquery-ui-widget-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/accordion.min.js.descarga" id="jquery-ui-accordion-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/tabs.min.js.descarga" id="jquery-ui-tabs-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/datepicker.min.js.descarga" id="jquery-ui-datepicker-js"></script>
-    <script type="text/javascript" id="jquery-ui-datepicker-js-after">
-    jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Cerrar","currentText":"Hoy","monthNames":["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"monthNamesShort":["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],"nextText":"Siguiente","prevText":"Anterior","dayNames":["domingo","lunes","martes","mi\u00e9rcoles","jueves","viernes","s\u00e1bado"],"dayNamesShort":["Dom","Lun","Mar","Mi\u00e9","Jue","Vie","S\u00e1b"],"dayNamesMin":["D","L","M","X","J","V","S"],"dateFormat":"dd\/mm\/yy","firstDay":1,"isRTL":false});});
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.ba-bbq.min.js.descarga" id="jquery-ba-bqq-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.history.js.descarga" id="jquery-history-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.easing.1.3.js.descarga" id="jquery-easing-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.carouFredSel-6.2.1-packed.js.descarga" id="jquery-carouFredSel-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.sliderControl.js.descarga" id="jquery-sliderControl-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.timeago.js.descarga" id="jquery-timeago-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.hint.js.descarga" id="jquery-hint-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.isotope-packed.js.descarga" id="jquery-isotope-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.prettyPhoto.js.descarga" id="jquery-prettyPhoto-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.qtip.min.js.descarga" id="jquery-qtip-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.blockUI.js.descarga" id="jquery-block-ui-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.parallax.min.js.descarga" id="jquery-parallax-js"></script>
-    <script type="text/javascript" id="theme-main-js-extra">
-    /* <![CDATA[ */
-    var config = [];
-    config = {"ajaxurl":"https:\/\/zurich.telemedicina.com\/wp-admin\/admin-ajax.php","themename":"medicenter","home_url":"https:\/\/zurich.telemedicina.com","is_rtl":0};;
-    /* ]]> */
-    </script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/main.js.descarga" id="theme-main-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/odometer.min.js.descarga" id="jquery-odometer-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/wp-embed.min.js.descarga" id="wp-embed-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.ui.widget.js.descarga" id="my-custom-script-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/jquery.fileupload.js.descarga" id="my-custom-script2-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/underscore.min.js.descarga" id="underscore-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/backbone.min.js.descarga" id="backbone-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/mustache.js.descarga" id="mustache-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/notes-common-v2.js.descarga" id="wpcom-notes-common-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/admin-bar-v2.js.descarga" id="wpcom-notes-admin-bar-js"></script>
-    <script type="text/javascript" src="./Consentimiento Informado – Teleconsulta_files/js_composer_front.min.js.descarga" id="wpb_composer_front_js-js"></script>
-      
-    </body></html>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report reactions to medicines or problems with products;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell you about product recalls;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell you if you have been exposed to a disease or may be at risk for catching or spreading a disease or condition;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell the proper government department if VSee believes a patient has been the victim of abuse, neglect or domestic violence. VSee will only share this information when ordered or required by law.</span></p>
+        </li>
+    </ul>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">De-identified Information. VSee may use, disclose, and request PHI if the Health Information to be used or disclosed is de-identified pursuant to the procedures set forth in 45 CFR 145.514(a)-(c).Health Oversight Activities and Registries. VSee may share your PHI with government agencies that oversee health care. VSee may do so for activities approved by law. These activities include, but are not limited to, audits, investigations, inspections and licensure surveys. The government uses these activities to monitor the health care system. It also monitors the outbreak of disease, government programs, compliance with civil rights laws, and patient outcomes. VSee may share PHI with government registries, if required. Lawsuits and Disputes. If you are in a lawsuit or a dispute, VSee may share your PHI in response to a court order, legal demand or other lawful process. Law Enforcement. VSee may share PHI if asked to do so by a law enforcement official under limited circumstances as follows:</span></p>
+    <ul>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report certain types of wounds;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to respond to a court order, subpoena, warrant, summons or similar process;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to identify or locate a suspect, fugitive, material witness, or missing person;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">about the victim of a crime, if under certain limited circumstances, VSee is unable to obtain the victim’s agreement;</span></p>
+        </li>
+    </ul>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Decedents. VSee may, under limited circumstances, disclose your PHI to coroners, medical examiners, funeral directors for the purposes of identification, determining the cause of death and fulfilling duties relating to decedents.National Security. VSee may share, if required, your PHI with the proper federal officials for national security reasons.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">HOW PHI DATA SECURITY IS HANDLED AT VSEE</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">The importance of security for all personal information including, but not limited to, PHI associated with you is of utmost concern to us. At VSee, we exercise state of the art care in providing secure transmission of your information from your PC or mobile device to our servers. PHI collected by the VSee platform is stored in secure operation environments that are not available or accessible to the public. Only those employees who need access to your information in order to do their jobs are allowed access, each having signed confidentiality agreements. Any employee who violates our privacy or security policies is subject to disciplinary action, including possible termination and civil and/or criminal prosecution.VSee is not only HIPPA compliant but additionally utilizes the latest technologies to ensure utmost security. VSee uses several layers of firewall security and different degrees of encryption for each customer’s sensitive PHI to ensure the highest level of security which meets or exceeds the requirements promulgated under HIPAA (defined below)VSee Medical Group is the sole owner of the information collected on its site. VSee Medical Group will not sell, share or lease this information to others. VSee does not sell any customer lists, e-mail addresses, cookies or other data without your written authorization.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Cookies and Tracking Technologies</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Cookies are text information files that your web browser places on your computer when you visit a website. Cookies assist in providing non-personal information from you as an online visitor. It can be used in the customization of your preferences when visiting our website. Most browsers accept cookies automatically, but can be configured not to accept them or to indicate when a cookie is being sent. VSee uses Google Analytics, a third-party tracking service, which uses cookies to track non-personal identifiable information about our visitors to our main site in the aggregate to capture usage and volume statistics. VSee has no access to or control over these cookies.</span></p>
+    <p><span style="font-family: Arial,Helvetica,sans-serif;"><br></span></p>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee works with other companies, including Google, who use tracking technologies to serve ads on our behalf across the Internet. These companies use first-party cookies (such as the Google Analytics cookies) and third-party cookies (such as the Adwords cookie) to collect information about your interaction on our website, including advertising, and remarketing. If you would like to opt-out of receiving ads tailored by 3rd party tracking technologies associated with our website, please click <a href="http://www.networkadvertising.org/choices/">here</a>. Note that if you opt-out from these third party tracking technologies, you may still see our ads at other websites, but the ads will not be tailored using third party tracking technologies associated with our website.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Secure interaction</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">When you interact with the VSee Platform, all of your PHI including, but not limited to, your credit card number and delivery address, is transmitted through the Internet using Secure Socket Layers (SSL) technology. SSL technology causes your browser to encrypt your entered information before transmitting it to our secure server. SSL technology, an industry standard, is designed to prevent someone other than operators of our web site from capturing and viewing your personal information. VSee also takes the following measures to protect your PHI online: Passwords. To provide you with an increased level of security, online access to your PHI is protected with a password you select. We strongly recommend that you do not disclose your password to anyone. VSee will never ask you for your password in any unsolicited communication (including unsolicited correspondence such as letters, phone calls, or E-mail messages). No data transmission over the Internet can be guaranteed to be 100% secure. While we strive to protect your PHI from unauthorized access, use or disclosure, VSee cannot ensure or warrant the security of any information you transmit to us on our web site.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Your Rights Regarding Your PHI</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">You have the following rights regarding PHI that VSee maintains about you: Right To Inspect and To Receive Copies. You have the right to view and receive copies of the PHI used to make decisions about your care, provided you submit your request in writing. Usually, this includes medical and billing records. It does not include some records such as psychotherapy notes. VSee may deny your request to view and/or copy your PHI in limited circumstances. If your request is denied, VSee will inform you of the reason of the denial and you have the right to request a review of the denial. VSee may charge a fee for the costs of processing your request. Right To Amend. If you think that personal information VSee has about you is wrong or incomplete, you have the right to ask for an amendment to your record. To request deletion of any personal information or ask for a change to your record, you must make your request in writing and submit it to VSee. If we are not able to comply with your request, we will respond with an explanation. VSee may deny your request for an amendment to your record. VSee may deny your request if it is not submitted in writing or does not include a reason to support the request. VSee may also deny your request if you ask VSee to amend information that:</span></p>
+    <ul>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee did not create, unless the person or entity that created the information is no longer available to make the amendment;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the records used to make decisions about you;</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the information which you are permitted to inspect and to receive a copy; or is accurate and complete.</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the information which you are permitted to inspect and to receive a copy; or is accurate and complete.</span></p>
+        </li>
+    </ul>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">We will retain your information for as long as your account is active or as needed to provide you Platform Services. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. Right To an Accounting of Disclosures. You have the right to get a list of the disclosures VSee has made of your PHI. This list will not include all disclosures that VSee made. For example, this list will not include disclosures that VSee made for treatment, payment or health care operations. It will not include disclosures you specifically approved. To ask for this list, you must submit your request in writing on the approved form. The form will be provided to you upon request. Right To Request Restrictions. You have the right to ask for a restriction or limitation on the PHI VSee uses or discloses for treatment, payment or health care operations. You also have the right to ask for a limit on the PHI VSee discloses with someone who is involved in your care or in the payment for your care. Such a person may be a family member or friend. VSee is not required to comply with your request. If VSee does agree, we will fulfill your request unless the information is needed to provide you with emergency treatment or if otherwise required by law. To ask for restrictions, you must make your request in writing on a form that we will give you upon request. You must tell us:</span></p>
+    <ul>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">what information you want to limit,</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">how you want us to limit the information, and</span></p>
+        </li>
+        <li dir="ltr">
+            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to whom you want the limits to apply.</span></p>
+        </li>
+    </ul>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Right To Request Confidential Communications. You have the right to request confidential communications of your PHI or medical matters. You may request that VSee communicate with you through specific means or at a specific location. You must make your request in writing on a form that will be provided to you upon request. VSee will fulfill all reasonable requests. Right To a Paper Copy of This Notice. You may ask VSee to give you a written copy of this Notice at any time. Even if you have agreed to get this Notice electronically, you still have a right to a paper copy of this Notice.If you click on a link to a third party site, you will leave the VSee site you are visiting and go to the site you selected. Because we cannot control the activities of third parties, we cannot accept responsibility for any use of your PHI by such third parties, and we cannot guarantee that they will adhere to the same privacy practices as VSee. We encourage you to review the privacy policies of any other service provider from whom you request services. If you visit a third party website that is linked to the VSee Platform, you should read that site’s privacy policy before providing any personal information.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Revisions To This Notice</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee is constantly innovating and implementing new features as part of its Platform Services. As a result, our privacy practices may change. We may revise this Notice to reflect any changes in our privacy practices. We reserve the right to make the revised Notice effective for PHI we already have about you. It also will be effective for any information we receive in the future. We will post a current version of the Notice on this Site prior to the change becoming effective. The effective date of this Notice is on the first page, in the top, left-hand corner. If we make any material changes we will notify you by email (sent to the e-mail address specified in your account) or by means of a notice on the VSee Platform prior to the change becoming effective.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Social Media Widgets</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Our Web site includes Social Media Features, such as the Facebook button. These Features may collect your IP address, which page you are visiting on our site, and may set a cookie to enable the Feature to function properly. Social Media Features and Widgets are either hosted by a third party or hosted directly on the VSee Platform. Your interactions with these Features are governed by the privacy policy of the company providing it.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Complaints</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">If you think your privacy rights have been violated, you may file a complaint with legal@vsee.com. You may also file a complaint with the Secretary of the Department of Health and Human Services. You will not be penalized for filing a complaint. You may also contact us for further information about your privacy rights by emailing us at support@vsee.com.</span></p>
+    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">ACCEPTANCE</span></h3>
+    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">By using the VSee Platform and the Platform Services, you acknowledge your acceptance of this Privacy Policy and agree to its terms. If you do not agree with this policy, you should not use the VSee Platform and the Platform Services. It is recommended that you read this privacy policy before use of Platform Services to ensure that you have not missed any changes to the privacy policy. Your continued use of the Platform Services following any changes to the privacy policy signifies your acceptance of those changes.</span></p>
+
+
+
+</body></html>
     `;
     this.trustedContent = sanitizer.bypassSecurityTrustHtml(this.content)
   }
