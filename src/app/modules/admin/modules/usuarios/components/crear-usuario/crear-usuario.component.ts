@@ -29,8 +29,12 @@ export class CrearUsuarioComponent implements OnInit {
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
   professionalForm: FormGroup;
+  professionalRegistrySend: any = [];
   passwordForm: FormGroup;
   showPassword: boolean;
+
+  registerUf:any;
+  registerUf2:any;
 
   states: any = [];
   cities: any = [];
@@ -412,7 +416,25 @@ export class CrearUsuarioComponent implements OnInit {
     return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
+  ufRegistry(id){
+    let idSelected =  id.options[id.selectedIndex].value.split(":");
+    console.log(idSelected[1])
+    this.registerUf = {
+      id:idSelected[1],
+      name:id.options[id.selectedIndex].text
+    }
+  }
+  ufRegistry2(id){
+    let idSelected2 =  id.options[id.selectedIndex].value.split(":");
+    this.registerUf2 = {
+      id:idSelected2[1],
+      name:id.options[id.selectedIndex].text
+    }
+  }
+
+
   createUser() {
+    //console.log(this.formUser[4]);
     // console.log(this.profilesAssigned);]
     (<HTMLInputElement>document.getElementById('submit-button')).disabled = true;
 
@@ -430,80 +452,162 @@ export class CrearUsuarioComponent implements OnInit {
       return map.id;
     });
 
-    this.userObject = {
-      identificationData: {
-        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
-        ...(this.formUser[0].value.document === 'rgRegistry' && {
-          rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-        }),
-        passport: this.formUser[0].value.passport || '',
-        issuingBody: this.formUser[0].value.issuingBody || '',
-        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-        ...(this.formUser[0].value.extraDocument === 'pasep' && {
-          pasep: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'ctps' && {
-          ctps: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
-          idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-          titleVote: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-          professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
-        }),
-        isForeign: this.isForeign,
-      },
-      personalData: {
-        isSchool: this.isSchool,
-        name: this.formUser[1].value.name,
-        lastName: this.formUser[1].value.lastName,
-        motherName: this.formUser[1].value.motherName,
-        secondLastName: this.formUser[1].value.secondLastName,
-        email: this.formUser[1].value.email,
-        phoneNumber: this.formUser[1].value.phoneNumber,
-        birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-        ufBirth: this.formUser[1].value.ufBirth || '',
-        municipalityBirth: this.formUser[1].value.municipalityBirth || '',
-        gender: this.formUser[1].value.gender,
-        nacionality: this.formUser[1].value.nacionality,
-        originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-        breed: this.formUser[1].value.breed,
-        education: this.formUser[1].value.education || '',
-        familySituation: this.formUser[1].value.familySituation || '',
-      },
-      addressData: {
-        cep: this.formUser[1].value.cep,
-        uf: this.formUser[1].value.uf,
-        city: this.formUser[1].value.city,
-        neighborhood: this.formUser[1].value.neighborhood,
-        street: this.formUser[1].value.street,
-        streetNumber: parseInt(this.formUser[1].value.streetNumber),
-      },
-      profiles: _profiles,
-      waitingRooms: this.waitingRoomsAssigned,
-      specialities: _specialities,
-      professionalData: {
-        biography: this.formUser[3].value.biography,
-        professionalTitle: this.formUser[4].value.professionalTitle,
-        university: this.formUser[4].value.university,
-        course: this.formUser[4].value.course,
-        ufRegistry: this.formUser[4].value.ufRegistry._id,
-        professionalRegistryType: this.formUser[4].value.professionalRegistryType,
-        professionalRegistry: this.professionalRegistry,
-        ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
-      },
-      password: this.formUser[5].value.password,
-      confirmPassword: this.formUser[5].value.confirmPassword,
-    };
+    
 
     console.log(this.userObject);
+    
 
-    if (this.userType !== 'patient') {
+    if (this.userType === 'patient') {
+      this.userObject = {
+        identificationData: {
+          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'rgRegistry' && {
+            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
+          }),
+          passport: this.formUser[0].value.passport || '',
+          issuingBody: this.formUser[0].value.issuingBody || '',
+          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
+          ...(this.formUser[0].value.extraDocument === 'pasep' && {
+            pasep: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'ctps' && {
+            ctps: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
+            idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
+            titleVote: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
+            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
+          }),
+          isForeign: this.isForeign,
+        },
+        personalData: {
+          isSchool: this.isSchool,
+          name: this.formUser[1].value.name,
+          lastName: this.formUser[1].value.lastName,
+          motherName: this.formUser[1].value.motherName,
+          secondLastName: this.formUser[1].value.secondLastName,
+          email: this.formUser[1].value.email,
+          phoneNumber: this.formUser[1].value.phoneNumber,
+          birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
+          ufBirth: this.formUser[1].value.ufBirth || '',
+          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          gender: this.formUser[1].value.gender,
+          nacionality: this.formUser[1].value.nacionality,
+          originCountry: this.formUser[1].value.originCountry || '',
+          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
+          breed: this.formUser[1].value.breed,
+          education: this.formUser[1].value.education || '',
+          familySituation: this.formUser[1].value.familySituation || '',
+        },
+        addressData: {
+          cep: this.formUser[1].value.cep,
+          uf: this.formUser[1].value.uf,
+          city: this.formUser[1].value.city,
+          neighborhood: this.formUser[1].value.neighborhood,
+          street: this.formUser[1].value.street,
+          streetNumber: parseInt(this.formUser[1].value.streetNumber),
+        },
+        profiles: _profiles,
+        waitingRooms: this.waitingRoomsAssigned,
+        specialities: _specialities,
+        password: this.formUser[5].value.password,
+        confirmPassword: this.formUser[5].value.confirmPassword,
+      };
+      this.adminService.createUser(this.userType, this.userObject).subscribe(
+        (res) => {
+          this.spinner.hide();
+          console.log(res);
+        },
+        (err) => {
+          this.spinner.hide();
+          console.log(err);
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+        },
+        () => {
+          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
+          this.location.back();
+        }
+      );
+
+    } 
+
+    if(this.userType === 'professional'){
+      
+      this.userObject = {
+        identificationData: {
+          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'rgRegistry' && {
+            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
+          }),
+          passport: this.formUser[0].value.passport || '',
+          issuingBody: this.formUser[0].value.issuingBody || '',
+          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
+          ...(this.formUser[0].value.extraDocument === 'pasep' && {
+            pasep: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'ctps' && {
+            ctps: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
+            idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
+            titleVote: this.formUser[0].value.extraIdDocument || '',
+          }),
+          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
+            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
+          }),
+          isForeign: this.isForeign,
+        },
+        personalData: {
+          isSchool: this.isSchool,
+          name: this.formUser[1].value.name,
+          lastName: this.formUser[1].value.lastName,
+          motherName: this.formUser[1].value.motherName,
+          secondLastName: this.formUser[1].value.secondLastName,
+          email: this.formUser[1].value.email,
+          phoneNumber: this.formUser[1].value.phoneNumber,
+          birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
+          ufBirth: this.formUser[1].value.ufBirth || '',
+          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          gender: this.formUser[1].value.gender,
+          nacionality: this.formUser[1].value.nacionality,
+          originCountry: this.formUser[1].value.originCountry || '',
+          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
+          breed: this.formUser[1].value.breed,
+          education: this.formUser[1].value.education || '',
+          familySituation: this.formUser[1].value.familySituation || '',
+        },
+        addressData: {
+          cep: this.formUser[1].value.cep,
+          uf: this.formUser[1].value.uf,
+          city: this.formUser[1].value.city,
+          neighborhood: this.formUser[1].value.neighborhood,
+          street: this.formUser[1].value.street,
+          streetNumber: parseInt(this.formUser[1].value.streetNumber),
+        },
+        profiles: _profiles,
+        waitingRooms: this.waitingRoomsAssigned,
+        specialities: _specialities,
+        professionalData: {
+          biography: this.formUser[3].value.biography,
+          professionalTitle: this.formUser[4].value.professionalTitle,
+          university: this.formUser[4].value.university,
+          course: this.formUser[4].value.course,
+          ufRegistry: this.formUser[4].value.ufRegistry._id,
+          professionalRegistryType: this.formUser[4].value.professionalRegistryType,
+          professionalRegistry: this.professionalRegistry,
+          ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
+        },
+        password: this.formUser[5].value.password,
+        confirmPassword: this.formUser[5].value.confirmPassword,
+      };
       if (this.profilesAssigned.length && this.waitingRoomsAssigned.length) {
         this.adminService.createUser(this.userType, this.userObject).subscribe(
           (res) => {
@@ -525,23 +629,9 @@ export class CrearUsuarioComponent implements OnInit {
         (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
         alert('Complete el formulario con todos los datos necesarios');
       }
-    } else {
-      this.adminService.createUser(this.userType, this.userObject).subscribe(
-        (res) => {
-          this.spinner.hide();
-          console.log(res);
-        },
-        (err) => {
-          this.spinner.hide();
-          console.log(err);
-          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
-        },
-        () => {
-          (<HTMLInputElement>document.getElementById('submit-button')).disabled = false;
-          this.location.back();
-        }
-      );
+      
     }
+    
   }
 
   getRooms() {
@@ -628,11 +718,22 @@ export class CrearUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        uf: this.registerUf2.name,
         university: this.professionalForm.value.university,
         professionalTitle: this.professionalForm.value.professionalTitle,
         course: this.professionalForm.value.course,
-        ufRegistry: this.professionalForm.value.ufRegistry.name
+        ufRegistry:  this.registerUf.name
+      });
+
+      
+      this.professionalRegistrySend.push({
+        type: this.professionalForm.value.professionalRegistryType,
+        registry: this.professionalForm.value.professionalRegistry,
+        uf: this.registerUf2.id,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
+        ufRegistry: this.registerUf.id
       });
     }
   }

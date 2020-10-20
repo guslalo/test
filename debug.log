@@ -26,3 +26,4 @@
 [1013/230021.363:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\b8f0f288-46b9-4bd4-ba1e-bbab5627393c: El sistema no puede encontrar la ruta especificada. (0x3)
 [1013/230021.364:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\gustavo\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\e2e98989-7bbe-4b86-afe5-1b077767766f: El sistema no puede encontrar la ruta especificada. (0x3)
 [1013/230021.365:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1020/150101.590:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

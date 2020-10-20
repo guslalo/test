@@ -893,7 +893,7 @@
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state" *ngFor="let state of states">
+                      <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>

@@ -75,13 +75,13 @@ export class FinishRegistrationComponent implements OnInit {
       extraIdDocument: ['', null],
     });
     this.personalData = this._formBuilder.group({
-      name: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      lastName: [null, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
-      secondLastName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      motherName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      name: [null, [Validators.required,]],
+      lastName: [null, ],
+      secondLastName: [null, [Validators.required ]],
+      motherName: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      phoneNumber: [null, [Validators.required]],
       breed: [null, Validators.required],
     });
     this.birthData = this._formBuilder.group({
