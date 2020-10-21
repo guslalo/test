@@ -57,7 +57,7 @@
                 <div class="col-4" *ngIf="inmediate === false; else dataInmediate">
                   <p class="p-0 font-weight-bold" id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}">
                     {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                    {{ appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                    {{ appoimentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                   </p>
                   <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                   <ul class="simple-list">
@@ -80,7 +80,7 @@
                       id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}"
                     >
                       {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                      {{ appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                      {{ appoimentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                     </p>
                     <ul class="simple-list" *ngIf="professionalData">
                       <li>
@@ -504,7 +504,7 @@
                         </td>
                         <td class="text-center">{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                         <td class="text-center" *ngIf="item.issuerDetails[0]">
-                          {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}
+                          {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].secondLastName }}
                         </td>
                         <td class="text-center">
                           <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
@@ -780,7 +780,7 @@
                                   <p class="m-0 text-left" *ngIf="item.professional">
                                     {{ 'clinicalFile.dr.label' | transloco }}
                                     {{ item.professional.name }}
-                                    {{ item.professional.lastName }}
+                                    {{ item.professional.secondLastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">
