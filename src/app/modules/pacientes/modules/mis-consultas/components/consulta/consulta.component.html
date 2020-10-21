@@ -54,10 +54,10 @@
                     </defs>
                   </svg>
                 </div>
-                <div class="col-5" *ngIf="inmediate === false; else dataInmediate">
+                <div class="col-4" *ngIf="inmediate === false; else dataInmediate">
                   <p class="p-0 font-weight-bold" id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}">
                     {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                    {{ appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                    {{ appoimentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                   </p>
                   <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                   <ul class="simple-list">
@@ -74,21 +74,24 @@
                   </ul>
                 </div>
                 <ng-template #dataInmediate>
-                  <div class="col-5">
+                  <div class="col-6">
                     <p
                       class="p-0 font-weight-bold"
                       id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}"
                     >
                       {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                      {{ appoimentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                      {{ appoimentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                     </p>
-                    <ul class="simple-list">
+                    <ul class="simple-list" *ngIf="professionalData">
                       <li>
                         {{
                           'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
                         }}:
-
-                        {{ professionalData.professionalData.professionalTitle }}
+                       
+                          <ng-container *ngFor="let item of professionalData.specialities">
+                            <li>{{item.specialtyName}}</li>
+                          </ng-container>
+                        
                       </li>
                     </ul>
                   </div>
@@ -252,8 +255,12 @@
                 <div>
                   <p class="font-weight-bold title mb-0">
                     {{ appoimentDetail.appointmentDetails.diagnosticDetails.type }} -
-                    {{ appoimentDetail.appointmentDetails.diagnosticDetails.diagnostic }}
                   </p>
+                  <ul>
+                    <ng-container *ngFor="let item of appoimentDetail.appointmentDetails.diagnosticDetails.diagnostics ">
+                      <li>{{ item.display }}</li>
+                    </ng-container>
+                  </ul>
                   <p>{{ appoimentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
                 </div>
               </div>
@@ -497,7 +504,7 @@
                         </td>
                         <td class="text-center">{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                         <td class="text-center" *ngIf="item.issuerDetails[0]">
-                          {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}
+                          {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].secondLastName }}
                         </td>
                         <td class="text-center">
                           <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
@@ -679,8 +686,9 @@
               </div>
               <div>
                 <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
-                {{ professionalData.professionalData.ufRegistry.name }}
-
+                <ng-container *ngFor="let item of professionalData.professionalData">
+                  {{ item.ufRegistry }}
+                </ng-container>
                 <hr />
               </div>
               <div>
@@ -772,7 +780,7 @@
                                   <p class="m-0 text-left" *ngIf="item.professional">
                                     {{ 'clinicalFile.dr.label' | transloco }}
                                     {{ item.professional.name }}
-                                    {{ item.professional.lastName }}
+                                    {{ item.professional.secondLastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">

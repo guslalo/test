@@ -46,7 +46,7 @@ export class MisPacientesComponent implements OnInit {
       isTutor: [false],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      secondLastName: ['', Validators.required],
+      secondLastName: ['', ],
       phoneNumber: [null, [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
