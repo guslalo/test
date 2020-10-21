@@ -3564,8 +3564,14 @@
     "cityReq": {
       "label": "Ciudad"
     },
+    "city":{
+      "label": "Ciudad"
+    },
     "neighborhoodReq": {
       "label": "Barrio"
+    },
+    "neighborhood":{
+      "label":"Barrio"
     },
     "streetReq": {
       "label": "Calle es necesario"
