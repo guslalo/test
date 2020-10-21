@@ -66,6 +66,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   formUser: any = [];
   userObject: any = {};
+  public cpfvalid: boolean = true;
 
   roles: any = [
     { name: 'common.roles.admin.label', value: 'admin' },
@@ -113,7 +114,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.getSpecialties();
 
     this.identificationData = this.formBuilder.group({
-      document: [null, Validators.required],
+      document: [null,Validators.required],
       idDocumentNumber: ['', Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
@@ -210,7 +211,6 @@ export class CrearUsuarioComponent implements OnInit {
       this.professionalForm,
       this.passwordForm
     );
-
     setTimeout(() => {
       this.validateForm();
       this.spinner.hide();
@@ -254,6 +254,41 @@ export class CrearUsuarioComponent implements OnInit {
     }
 
     this.identificationData.updateValueAndValidity();
+  }
+
+  validCPF(cpf: string){
+    this.cpfvalid = this.validateCPF(cpf);
+    console.log(this.cpfvalid)
+  }
+  validateCPF(cpf: string){
+    console.log(this.identificationData.get('document').value)
+    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
+    if(cpf.length <= 0) return false
+    cpf = cpf.replace(/[^0-9]/, "").replace(/[^0-9]/, "").replace(/[^0-9]/, "")
+    cpf.padStart(11,'0')
+    if (cpf.length != 11) return false
+    
+    else if(cpf == '00000000000' || 
+            cpf == '11111111111' || 
+            cpf == '22222222222' || 
+            cpf == '33333333333' || 
+            cpf == '44444444444' || 
+            cpf == '55555555555' || 
+            cpf == '66666666666' || 
+            cpf == '77777777777' || 
+            cpf == '88888888888' || 
+            cpf == '99999999999') return false
+    else {
+      for (let i = 9; i < 11; i++) {
+        let j = 0, d = 0
+        for (let h = 0; j < i; j++) {
+          d += parseInt(cpf[j]) * ((i + 1) - j);  
+        }
+        d = ((10 * d) % 11) % 10;
+        if(parseInt(cpf[j]) != d) return false
+      }
+      return true
+    }
   }
 
   ufSelect(id) {
@@ -399,7 +434,9 @@ export class CrearUsuarioComponent implements OnInit {
           return false;
         }
       case 'patient':
-        if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[5].valid) {
+        if (this.formUser[0].valid 
+            && this.formUser[1].valid 
+            && this.formUser[5].valid && this.cpfvalid) {
           return true;
         } else {
           return false;
