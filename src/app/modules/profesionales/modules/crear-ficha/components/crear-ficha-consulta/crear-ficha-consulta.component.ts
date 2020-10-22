@@ -170,8 +170,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
 
     this.diagnostico = this._formBuilder.group({
-      diagnostic: ['', Validators.required],
-      type: [null, Validators.required],
+      diagnostic: ['',], // Validators.required
+      type: ['cie10', Validators.required],
       comments: ['', Validators.required],
       indications: ['', Validators.required],
     });
@@ -391,7 +391,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
       (data) => {
         this.urlSibrare = data.payload[0].documento;
-        //window.location.href= this.urlSibrare ;
         console.log(this.urlSibrare);
         console.log(data);
         this.spinner.hide();

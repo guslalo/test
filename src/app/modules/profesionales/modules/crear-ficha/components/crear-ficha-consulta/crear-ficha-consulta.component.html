@@ -1542,10 +1542,10 @@
                               id="diagnostic"
                               name="diagnostic"
                               formControlName="diagnostic"
-                              [attr.disabled]="search === false ? true : null"
+                              
                               [(ngModel)]="searchInput"
                               (ngModelChange)="onChangeSearch($event)"
-                            /><!-- [attr.disabled]="search ? false : null"-->
+                            /><!-- [attr.disabled]="search === false ? true : null"-->
                             <div
                               class="responseSearch shadow-sm bg-white rounded"
                              
