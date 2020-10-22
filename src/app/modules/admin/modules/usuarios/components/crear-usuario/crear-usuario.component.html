@@ -887,13 +887,14 @@
                     <select
                       class="form-control"
                       name="ufRegistry"
+                      (change)="ufRegistry($event.target)" 
                       formControlName="ufRegistry"
                       [ngClass]="{
                         'is-invalid': !professionalForm.get('ufRegistry').valid
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state" *ngFor="let state of states">
+                      <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
@@ -940,6 +941,7 @@
                       'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
                     }}</label>
                     <select
+                    (change)="ufRegistry2($event.target)" 
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       class="form-control"
                       name="ufProfessionalRegistry"

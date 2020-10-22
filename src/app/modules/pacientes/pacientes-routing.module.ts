@@ -26,11 +26,6 @@ const routes: Routes = [
     path: 'reagendar-consulta/:appointmentId/:SpecialtiesId',
     loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
   },
-  /*
-  {
-    path: 're-agendar-consulta-professional/:professionalId',
-    loadChildren: () => import('./modules/agendar/agendar.module').then((m) => m.AgendarModule),
-  },*/
   {
     path: 'agendar-consulta-inmediata',
     loadChildren: () =>

@@ -37,7 +37,8 @@ export class EditarUsuarioComponent implements OnInit {
   professionalPhoto: any;
   citiesFilter: any;
   city2:boolean;
-
+  registerUf:any;
+  registerUf2:any;
   profileSelected: any;
   roomSelected: any;
 
@@ -86,6 +87,7 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesAssigned: any = [];
 
   professionalRegistry: any = [];
+  professionalRegistrySend: any = [];
 
   constructor(
     private location: Location,
@@ -220,6 +222,14 @@ export class EditarUsuarioComponent implements OnInit {
       this.validateForm();
       this.spinner.hide();
     }, 1000);
+
+    this.professionalForm.controls['professionalRegistryType'].setValue(' ');
+    this.professionalForm.controls['professionalRegistry'].setValue(' ');
+    this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
+    this.professionalForm.controls['university'].setValue(' ');
+    this.professionalForm.controls['professionalTitle'].setValue(' ');
+    this.professionalForm.controls['course'].setValue(' ');
+    this.professionalForm.controls['ufRegistry'].setValue(' ');
   }
 
   ufSelect(id) {
@@ -388,10 +398,10 @@ export class EditarUsuarioComponent implements OnInit {
 
         this.professionalPhoto = user.photo;
         this.profileDataForm.get('biography').setValue(user.professionalData?.biography || '');
-        this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
+        /*this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
-        this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);
+        this.professionalForm.get('ufRegistry').setValue(user.professionalData?.ufRegistry);*/
         //this.professionalForm.controls['ufRegistry'].setValue(user.professionalData?.ufRegistry);
 
         this.specialitiesData = this.specialities?.reduce((obj, value: any) => {
@@ -775,7 +785,25 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
+  ufRegistry(id){
+    let idSelected =  id.options[id.selectedIndex].value.split(":");
+    console.log(idSelected[1])
+    this.registerUf = {
+      id:idSelected[1],
+      name:id.options[id.selectedIndex].text
+    }
+  }
+  ufRegistry2(id){
+    let idSelected2 =  id.options[id.selectedIndex].value.split(":");
+    this.registerUf2 = {
+      id:idSelected2[1],
+      name:id.options[id.selectedIndex].text
+    }
+  }
+
   addProfessionalRegistry() {
+  
+  
 
     console.log(this.professionalForm)
 
@@ -785,12 +813,32 @@ export class EditarUsuarioComponent implements OnInit {
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType,
         registry: this.professionalForm.value.professionalRegistry,
-        uf: this.professionalForm.value.ufProfessionalRegistry.name,
+        uf: this.registerUf2.name,
         university: this.professionalForm.value.university,
         professionalTitle: this.professionalForm.value.professionalTitle,
         course: this.professionalForm.value.course,
-        ufRegistry: this.professionalForm.value.ufRegistry.name
+        ufRegistry: this.registerUf.name
       });
+
+      this.professionalRegistrySend.push({
+        type: this.professionalForm.value.professionalRegistryType,
+        registry: this.professionalForm.value.professionalRegistry,
+        uf: this.registerUf2.id,
+        university: this.professionalForm.value.university,
+        professionalTitle: this.professionalForm.value.professionalTitle,
+        course: this.professionalForm.value.course,
+        ufRegistry: this.registerUf.id
+      });
+       
+      this.professionalForm.controls['professionalRegistryType'].setValue(' ');
+      this.professionalForm.controls['professionalRegistry'].setValue(' ');
+      this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
+      this.professionalForm.controls['university'].setValue(' ');
+      this.professionalForm.controls['professionalTitle'].setValue(' ');
+      this.professionalForm.controls['course'].setValue(' ');
+      this.professionalForm.controls['ufRegistry'].setValue(' ');
+
+      console.log(this.professionalRegistrySend);
     }
   }
 

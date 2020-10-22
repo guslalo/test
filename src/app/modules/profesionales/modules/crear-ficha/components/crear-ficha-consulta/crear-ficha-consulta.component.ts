@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { AdminitrativeService } from './../../../../../../services/administrative.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 declare var $: any;
 
@@ -95,7 +96,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer,
-    private adminitrativeService: AdminitrativeService
+    private adminitrativeService: AdminitrativeService,
+    private translateService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -735,5 +737,35 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.antecedente = antecedent;
     this.elemntoId = item.id;
     this.elemntoValue = item.value;
+  }
+
+  //Calcular Indice de Masa Corporal
+  imcCalculate(){
+    //Obtengo el valor de la altura y el peso
+    let weight = this.nutricion.controls['weight'].value || 0;
+    let height = this.nutricion.controls['height'].value || 0.1;
+    // formula para el calculo
+    let imc = (parseFloat(weight) / (parseFloat(height) * parseFloat(height))).toFixed(2);
+    //seteo el valor dependiendo de la medida
+    this.nutricion.controls['imc'].setValue(imc);
+    if(parseFloat(imc) < 18.50){
+      let bajo = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.low')
+      this.nutricion.controls['imcClassification'].setValue(bajo);
+    }else if(parseFloat(imc) >= 18.50 && parseFloat(imc) < 25){
+      let normal = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.normal')
+      this.nutricion.controls['imcClassification'].setValue(normal);
+    }else if(parseFloat(imc) >= 25 && parseFloat(imc) < 30){
+      let above = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.over')
+      this.nutricion.controls['imcClassification'].setValue(above);
+    }else if(parseFloat(imc) >= 30 && parseFloat(imc) < 35){
+      let type1 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type1')
+      this.nutricion.controls['imcClassification'].setValue(type1);
+    }else if(parseFloat(imc) >= 35 && parseFloat(imc) < 40){
+      let type2 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type2')
+      this.nutricion.controls['imcClassification'].setValue(type2);
+    }else {
+      let type3 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type3')
+      this.nutricion.controls['imcClassification'].setValue(type3);
+    }
   }
 }

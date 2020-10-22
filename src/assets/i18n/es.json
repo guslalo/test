@@ -236,7 +236,15 @@
               "label": "IMC"
             },
             "imcClasification": {
-              "label": "Clasificación IMC"
+              "label": "Clasificación IMC",
+              "values":{
+                "low":"Bajo peso",
+                "normal":"Peso normal",
+                "over":"Sobrepeso",
+                "type1":"Obesidad tipo I",
+                "type2":"Obesidad tipo II",
+                "type3":"Obesidad tipo III (mórbida)"
+              }
             }
           },
           "btnDownload": {
@@ -3556,8 +3564,14 @@
     "cityReq": {
       "label": "Ciudad"
     },
+    "city":{
+      "label": "Ciudad"
+    },
     "neighborhoodReq": {
       "label": "Barrio"
+    },
+    "neighborhood":{
+      "label":"Barrio"
     },
     "streetReq": {
       "label": "Calle es necesario"

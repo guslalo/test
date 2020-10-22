@@ -585,6 +585,8 @@
                                   max="60"
                                   name="weight"
                                   formControlName="weight"
+                                  (keyup)="imcCalculate()"
+                                  
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -600,6 +602,7 @@
                                   min="1"
                                   max="60"
                                   formControlName="height"
+                                  (keyup)="imcCalculate()"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -613,6 +616,7 @@
                                   name="imc"
                                   id="imc"
                                   formControlName="imc"
+                                  readonly
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -627,6 +631,7 @@
                                   name="imcClassification"
                                   id="imcClassification"
                                   formControlName="imcClassification"
+                                  readonly
                                 />
                               </div>
                             </div>
