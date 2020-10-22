@@ -8,3 +8,4 @@ self.addEventListener('push', function(event) {
 
   event.waitUntil(self.registration.showNotification(title, options));
 });
+//https://victordeandres.es/post/angular-push-notifications
