@@ -7,6 +7,8 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { TranslocoService } from '@ngneat/transloco';
+import { MessagingService } from 'src/app/services/messaging.service';
+
 
 @Component({
   selector: 'app-layout',
@@ -61,7 +63,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public breakpointObserver: BreakpointObserver,
     private bnIdle: BnNgIdleService,
     private toastr: ToastrService,
-    private translateService: TranslocoService
+    private translateService: TranslocoService,
+    private webNotfications: MessagingService
   ) {
     // 20 MINUTES DEFAULT 
     this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
@@ -81,8 +84,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   public state = 'open';
   public inmediateAppointmentPadre: boolean;
+  message;
   status = false;
-
+  public nots: Array<any>
   ngOnInit(): void {
     //this.firstAccess = true;
 
@@ -107,8 +111,23 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // mobile
       }
     });
+    this.webNotfications.getNotifications().subscribe((data)=> this.nots = data, (error)=>console.log(error))
+    this.webNotfications.requestPermission()
+    this.webNotfications.receiveMessage()
+    this.message = this.webNotfications.currentMessage;
+    setInterval(()=>{
+      this.webNotfications.getNotifications().subscribe((data)=>{
+        let notsArray: Array<any> = data;
+        notsArray.forEach((element)=> {
+          let finded = this.nots.find((element1)=> element._id == element1._id)
+          if(!finded){
+            this.nots.push(element)
+            this.nots = this.nots.slice()
+          }
+        })
+      }, (error)=>console.log(error))
+    }, 10000)
   }
-
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';
   }
@@ -119,4 +138,5 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.intervalCurrentTime);
   }
+  trackByItems(index: number, not: any): number { return index; }
 }
