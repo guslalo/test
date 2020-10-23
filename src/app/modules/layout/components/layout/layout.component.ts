@@ -88,7 +88,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public inmediateAppointmentPadre: boolean;
   message;
   status = false;
-  public nots: Array<any>
+  public nots: Array<any> = []
   ngOnInit(): void {
     //this.firstAccess = true;
 
