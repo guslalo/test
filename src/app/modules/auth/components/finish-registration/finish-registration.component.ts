@@ -266,6 +266,7 @@ export class FinishRegistrationComponent implements OnInit {
         neighborhood: this.form[3].neighborhood.value,
         street: this.form[3].street.value,
         streetNumber: parseInt(this.form[3].streetNumber.value),
+        complement: ['', null]
       },
       password: this.form[4].password.value,
     };
