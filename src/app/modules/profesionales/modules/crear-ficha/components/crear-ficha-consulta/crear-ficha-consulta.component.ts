@@ -84,6 +84,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public spinnerSearch: boolean;
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
+  public arrayDiagnostic2 = [];
   public preArray = []
 
   constructor(
@@ -170,7 +171,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
 
     this.diagnostico = this._formBuilder.group({
-      diagnostic: ['',], // Validators.required
+      diagnostic: ['',], // 
       type: ['cie10', Validators.required],
       comments: ['', Validators.required],
       indications: ['', Validators.required],
@@ -201,6 +202,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+  
     this.preArray.push({
       display:item.display,
       _id: item._id,
@@ -213,11 +215,13 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   deleteDiagnostic(_id){
     this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
+    this.arrayDiagnostic2 =  [...this.arrayDiagnostic.filter(item => item._id !== _id)]; 
     console.log(this.arrayDiagnostic);
   }
 
   //buscador de diagnostico
   onChangeSearch(event) {
+    this.arrayDiagnostic =   this.arrayDiagnostic2;
     console.log(this.searchFormcontrol);
     if (event && event.length >= 2 ) {//&& this.searchFormcontrol === false
       this.spinnerSearch = true;

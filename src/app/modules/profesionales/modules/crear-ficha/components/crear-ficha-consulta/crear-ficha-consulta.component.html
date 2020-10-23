@@ -1542,7 +1542,6 @@
                               id="diagnostic"
                               name="diagnostic"
                               formControlName="diagnostic"
-                              
                               [(ngModel)]="searchInput"
                               (ngModelChange)="onChangeSearch($event)"
                             /><!-- [attr.disabled]="search === false ? true : null"-->
@@ -1565,6 +1564,7 @@
                                       *ngFor="let item of searchResponse"
                                       id="{{ item._id }}"
                                       (click)="selectDiagnostico(item)"
+                                      
                                     >
                                       {{ item.display }}
                                     </li>
@@ -1681,7 +1681,7 @@
                         <button
                           class="btn btn-secondary rounded-pill"
                           (click)="putAppointment(appointmentDetail._id)"
-                          [disabled]="!permisoGuardar || !diagnostico.valid"
+                          [disabled]="!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0"
                           data-toggle="modal"
                           data-target="#exampleModal"
                         >
