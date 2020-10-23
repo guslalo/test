@@ -29,6 +29,8 @@ export class FichaPacienteComponent implements OnInit {
   ufMap: any = [];
   cityMap: any = [];
   countryMap: any = [];
+  public antecedentes: any;
+  public antecedentesGeneral: any;
 
   identificationData: any = {};
 
@@ -87,6 +89,9 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+
+        this.antecedentesGeneral = data.payload.antecedent;
+        this.antecedentes = data.payload.antecedent.sickness;
         console.log(data.payload.antecedent);
 
         this.userService.getStates().subscribe((data) => {
