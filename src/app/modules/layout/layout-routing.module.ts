@@ -69,15 +69,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'terms-and-conditions',
-    component: LegalsComponent
-  },
-  {
-    path: 'privacy',
-    component: LegalsComponent
-  },
-  {
-    path: 'consent',
+    path: 'terms-and-conditions/:clinicId/:term',
     component: LegalsComponent
   }
 ];

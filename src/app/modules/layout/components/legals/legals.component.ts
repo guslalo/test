@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ClinicService } from 'src/app/services/clinic.service';
 
 @Component({
   selector: 'app-legals',
@@ -9,122 +11,20 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class LegalsComponent implements OnInit {
   public content: string;
   public trustedContent: SafeHtml;
-  constructor(private sanitizer: DomSanitizer) { 
-    this.content = `
-    
-<!-- saved from url=(0060)https://clinic.vsee.me/assets/privacy?detect_browser=disable -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-
-<body>
-    <h1 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">&emspPrivacy Policy</span></h1>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">as amended: June 1, 2016</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">INTRODUCTION</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee (“VSee”, “Company”, “us”, and “we”) is committed to protecting your privacy. We have prepared this Privacy Policy to describe to you our practices regarding the Personal Information (as defined below) we collect from users of both our website, located at www.vsee.com and the VSee Platform (collectively the “VSee Platform”) as described and defined in the VSee Terms of Use (“VSee TOS”). Capitalized terms not defined herein are defined in the VSee TOS.Our Privacy Policy also serves as a notice to describe how personal information and health information (PHI) about you may be used, how it may be disclosed and how you can obtain access to this information. The law (45 CFR Part 160 and Part 164, Subparts A and E) requires that your PHI be kept private. We must give you such notice about our privacy practices and follow the terms of this notice while it is in effect. Your use of the VSee Platform indicates your acceptance of the terms of this notice and our Privacy Policy.VSee is engaged in the business of providing internet healthcare resources to connect our Users with Independent Professional dietitians in real time, via live streaming video, telephone, messaging, social media and/or secure e-mail and to provide VSee Collection Services between our Users and Independent Professionals (collectively “Platform Services”).</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">INFORMATION THAT MAY BE COLLECTED BY VSEE</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">In order to use the Platform Services, you as a User are required to enter an email address and password, which we refer to here as your VSee ID or credentials. After you create your VSee ID, you can use the same credentials to log in to VSee’s website and utilize the Platform Services. This log-in process will allow you to manage your account, it will allow you to search dietitian, make appointments, attend appointments, and utilize and enjoy all Platform Services.The first time you log in to VSee’s website to utilize the Platform Services, you will be asked to create an account also known as your profile. To create an account, you must provide personal information such as name, address, telephone number, date of birth, e-mail address, gender, and other pertinent data that will be available for you to share with the Independent Professionals who are also registered on the VSee Platform.VSee will use the email address you provide when you create your account to send you an email requesting that you validate your account. Your email address may also be used by VSee to provide appointment reminders, changes in appointments, messages from our Independent Professionals and other relevant communications in connection with Platform Services.VSee will also use your e-mail address as the primary means to reset your username and password. Your email address will not be shared with any other third parties and will not be used for advertising or sales purposes.VSee creates as appropriate, a textual, audio, and visual record of all Platform Services in which you participate. Some examples include the creation of video and/or audio files associated with all dietitian sessions, electronic medical records that may be uploaded or created as a result of treatment by you or an Independent Professional, data received from medical wearable technologies, etc.</span></p>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">For certain Platform Services that require a fee, we will collect credit card or billing/payment account information which we maintain in encrypted form on secure servers.In order to participate in Platform Services, you will need to provide, and/or upload to the VSee Platform , Personal Health Information (“PHI”). Here are examples of the types of Personal Health Information we gather:-Information You Give Us – Examples of the types of information you may provide us include measurements, such as weight, blood pressure or glucose levels, lab results, medications, health history, and other health or PHI, such as prescription information.-Information Accessed through Third-Party Data Platform Services – When you use VSee Platform Services, we may access health-related information about you that is stored with third party-data Platform Services such as Microsoft HealthVault or Google Health, and such information will subsequently be available to us.-Third-Party Information – Health-related information about you received from third-parties (such as nurses, doctors or family members) as well as personally identifiable and other health-related information you provide specifically related to family members who may be utilizing the Platform Services under your account.Demographic information, such as age, education, gender, social security number and zip code.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">HOW INFORMATION ABOUT YOU MAY BE USED BY VSEE</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee may gather PHI primarily to share with our Independent Professionals for the purposes of diagnosis, treatment, and health care operations. However, in limited circumstances VSee may use de-identified, non-personal information for statistical analysis, improvement of the Platform Services, and customization of web design and content layout.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Uses and Disclosures of PHI</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee is permitted to use and disclose your PHI for following purposes: For Dietitian Treatment. VSee may use or disclose your PHI to facilitate your treatment via Platform Services that is being provided by a VSee registered Independent Professional dietitian. For Payment. VSee may use and disclose your PHI with others who help pay for your care such as health insurers or health plans in connection with the processing and payments of claims and other charges. For Health Care Operations. VSee may use and disclose your PHI for its health care operations. These uses and disclosures help us run our programs and make sure VSee’s patients receive quality care. For example, VSee may use PHI to review the treatment and provision of Platform Services. VSee may use PHI to measure the performance of the Independent Professionals who are working with you or providing you treatment. VSee may share PHI with third parties who VSee engages to provide various Platform Services. If any such third party requires access to your PHI in order to perform the agreed upon Platform Services, VSee will require that third party be bound to the terms outlined in this Privacy Policy. Business Associates. VSee may contract with outside businesses to provide some Platform Services. For example, VSee may use the Platform Services of transcription, laboratories or collection agencies. Each contracted party must enter into a Business Associate agreement with VSee, which requires said third party businesses to protect PHI that is shared with them in accordance with the restrictions outlined in this Privacy Notice. Furthermore, PHI will only be provided to third party businesses for the limited scope of performing required Platform Services to help facilitate treatment, payment, and health care operations to you. For Appointment Reminders. VSee may contact you to remind you about your appointments. Treatment Alternatives. VSee may use and disclose PHI to tell you about different types of treatment available to you. VSee may use and share PHI to tell you about other benefits and Platform Services related to your health. Research. In support of telemedicine and ehealth initiatives, VSee may use and disclose your PHI for research. VSee will only use and disclose information for research if VSee receives your written consent, or if a review committee that meets Federal standards says VSee does not need your consent. Genetic Information. VSee does not collect or use genetic information. VSee does not use genetic information for underwriting and related purposes. Fundraising Activities. VSee will not disclose your individual PHI for fundraising activities without your written authorization. As Required By Law. VSee may use and disclose your PHI when required to do so by federal, state or local law. Testimonials. We display personal testimonials of satisfied customers on our site in addition to other endorsements. With your consent we may post your testimonial along with your name.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">How VSee May Use and Disclose PHI – Special Situations</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Military. If you are in the U.S. or foreign armed Platform Services, VSee may share your PHI as required by the proper military authorities. Workers’ Compensation. VSee may share your PHI for workers’ compensation or programs like it. VSee may do this to the extent required by law. Public Health Risks. VSee may share your PHI for public health activities, as required by federal, state or local law.For example, we may share your PHI:</span></p>
-    <ul>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to prevent or control disease, injury or disability;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report births and deaths;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report child abuse or neglect;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report reactions to medicines or problems with products;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell you about product recalls;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell you if you have been exposed to a disease or may be at risk for catching or spreading a disease or condition;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to tell the proper government department if VSee believes a patient has been the victim of abuse, neglect or domestic violence. VSee will only share this information when ordered or required by law.</span></p>
-        </li>
-    </ul>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">De-identified Information. VSee may use, disclose, and request PHI if the Health Information to be used or disclosed is de-identified pursuant to the procedures set forth in 45 CFR 145.514(a)-(c).Health Oversight Activities and Registries. VSee may share your PHI with government agencies that oversee health care. VSee may do so for activities approved by law. These activities include, but are not limited to, audits, investigations, inspections and licensure surveys. The government uses these activities to monitor the health care system. It also monitors the outbreak of disease, government programs, compliance with civil rights laws, and patient outcomes. VSee may share PHI with government registries, if required. Lawsuits and Disputes. If you are in a lawsuit or a dispute, VSee may share your PHI in response to a court order, legal demand or other lawful process. Law Enforcement. VSee may share PHI if asked to do so by a law enforcement official under limited circumstances as follows:</span></p>
-    <ul>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to report certain types of wounds;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to respond to a court order, subpoena, warrant, summons or similar process;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to identify or locate a suspect, fugitive, material witness, or missing person;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">about the victim of a crime, if under certain limited circumstances, VSee is unable to obtain the victim’s agreement;</span></p>
-        </li>
-    </ul>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Decedents. VSee may, under limited circumstances, disclose your PHI to coroners, medical examiners, funeral directors for the purposes of identification, determining the cause of death and fulfilling duties relating to decedents.National Security. VSee may share, if required, your PHI with the proper federal officials for national security reasons.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">HOW PHI DATA SECURITY IS HANDLED AT VSEE</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">The importance of security for all personal information including, but not limited to, PHI associated with you is of utmost concern to us. At VSee, we exercise state of the art care in providing secure transmission of your information from your PC or mobile device to our servers. PHI collected by the VSee platform is stored in secure operation environments that are not available or accessible to the public. Only those employees who need access to your information in order to do their jobs are allowed access, each having signed confidentiality agreements. Any employee who violates our privacy or security policies is subject to disciplinary action, including possible termination and civil and/or criminal prosecution.VSee is not only HIPPA compliant but additionally utilizes the latest technologies to ensure utmost security. VSee uses several layers of firewall security and different degrees of encryption for each customer’s sensitive PHI to ensure the highest level of security which meets or exceeds the requirements promulgated under HIPAA (defined below)VSee Medical Group is the sole owner of the information collected on its site. VSee Medical Group will not sell, share or lease this information to others. VSee does not sell any customer lists, e-mail addresses, cookies or other data without your written authorization.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Cookies and Tracking Technologies</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Cookies are text information files that your web browser places on your computer when you visit a website. Cookies assist in providing non-personal information from you as an online visitor. It can be used in the customization of your preferences when visiting our website. Most browsers accept cookies automatically, but can be configured not to accept them or to indicate when a cookie is being sent. VSee uses Google Analytics, a third-party tracking service, which uses cookies to track non-personal identifiable information about our visitors to our main site in the aggregate to capture usage and volume statistics. VSee has no access to or control over these cookies.</span></p>
-    <p><span style="font-family: Arial,Helvetica,sans-serif;"><br></span></p>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee works with other companies, including Google, who use tracking technologies to serve ads on our behalf across the Internet. These companies use first-party cookies (such as the Google Analytics cookies) and third-party cookies (such as the Adwords cookie) to collect information about your interaction on our website, including advertising, and remarketing. If you would like to opt-out of receiving ads tailored by 3rd party tracking technologies associated with our website, please click <a href="http://www.networkadvertising.org/choices/">here</a>. Note that if you opt-out from these third party tracking technologies, you may still see our ads at other websites, but the ads will not be tailored using third party tracking technologies associated with our website.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Secure interaction</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">When you interact with the VSee Platform, all of your PHI including, but not limited to, your credit card number and delivery address, is transmitted through the Internet using Secure Socket Layers (SSL) technology. SSL technology causes your browser to encrypt your entered information before transmitting it to our secure server. SSL technology, an industry standard, is designed to prevent someone other than operators of our web site from capturing and viewing your personal information. VSee also takes the following measures to protect your PHI online: Passwords. To provide you with an increased level of security, online access to your PHI is protected with a password you select. We strongly recommend that you do not disclose your password to anyone. VSee will never ask you for your password in any unsolicited communication (including unsolicited correspondence such as letters, phone calls, or E-mail messages). No data transmission over the Internet can be guaranteed to be 100% secure. While we strive to protect your PHI from unauthorized access, use or disclosure, VSee cannot ensure or warrant the security of any information you transmit to us on our web site.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Your Rights Regarding Your PHI</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">You have the following rights regarding PHI that VSee maintains about you: Right To Inspect and To Receive Copies. You have the right to view and receive copies of the PHI used to make decisions about your care, provided you submit your request in writing. Usually, this includes medical and billing records. It does not include some records such as psychotherapy notes. VSee may deny your request to view and/or copy your PHI in limited circumstances. If your request is denied, VSee will inform you of the reason of the denial and you have the right to request a review of the denial. VSee may charge a fee for the costs of processing your request. Right To Amend. If you think that personal information VSee has about you is wrong or incomplete, you have the right to ask for an amendment to your record. To request deletion of any personal information or ask for a change to your record, you must make your request in writing and submit it to VSee. If we are not able to comply with your request, we will respond with an explanation. VSee may deny your request for an amendment to your record. VSee may deny your request if it is not submitted in writing or does not include a reason to support the request. VSee may also deny your request if you ask VSee to amend information that:</span></p>
-    <ul>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee did not create, unless the person or entity that created the information is no longer available to make the amendment;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the records used to make decisions about you;</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the information which you are permitted to inspect and to receive a copy; or is accurate and complete.</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">is not part of the information which you are permitted to inspect and to receive a copy; or is accurate and complete.</span></p>
-        </li>
-    </ul>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">We will retain your information for as long as your account is active or as needed to provide you Platform Services. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. Right To an Accounting of Disclosures. You have the right to get a list of the disclosures VSee has made of your PHI. This list will not include all disclosures that VSee made. For example, this list will not include disclosures that VSee made for treatment, payment or health care operations. It will not include disclosures you specifically approved. To ask for this list, you must submit your request in writing on the approved form. The form will be provided to you upon request. Right To Request Restrictions. You have the right to ask for a restriction or limitation on the PHI VSee uses or discloses for treatment, payment or health care operations. You also have the right to ask for a limit on the PHI VSee discloses with someone who is involved in your care or in the payment for your care. Such a person may be a family member or friend. VSee is not required to comply with your request. If VSee does agree, we will fulfill your request unless the information is needed to provide you with emergency treatment or if otherwise required by law. To ask for restrictions, you must make your request in writing on a form that we will give you upon request. You must tell us:</span></p>
-    <ul>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">what information you want to limit,</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">how you want us to limit the information, and</span></p>
-        </li>
-        <li dir="ltr">
-            <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">to whom you want the limits to apply.</span></p>
-        </li>
-    </ul>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Right To Request Confidential Communications. You have the right to request confidential communications of your PHI or medical matters. You may request that VSee communicate with you through specific means or at a specific location. You must make your request in writing on a form that will be provided to you upon request. VSee will fulfill all reasonable requests. Right To a Paper Copy of This Notice. You may ask VSee to give you a written copy of this Notice at any time. Even if you have agreed to get this Notice electronically, you still have a right to a paper copy of this Notice.If you click on a link to a third party site, you will leave the VSee site you are visiting and go to the site you selected. Because we cannot control the activities of third parties, we cannot accept responsibility for any use of your PHI by such third parties, and we cannot guarantee that they will adhere to the same privacy practices as VSee. We encourage you to review the privacy policies of any other service provider from whom you request services. If you visit a third party website that is linked to the VSee Platform, you should read that site’s privacy policy before providing any personal information.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Revisions To This Notice</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">VSee is constantly innovating and implementing new features as part of its Platform Services. As a result, our privacy practices may change. We may revise this Notice to reflect any changes in our privacy practices. We reserve the right to make the revised Notice effective for PHI we already have about you. It also will be effective for any information we receive in the future. We will post a current version of the Notice on this Site prior to the change becoming effective. The effective date of this Notice is on the first page, in the top, left-hand corner. If we make any material changes we will notify you by email (sent to the e-mail address specified in your account) or by means of a notice on the VSee Platform prior to the change becoming effective.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Social Media Widgets</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Our Web site includes Social Media Features, such as the Facebook button. These Features may collect your IP address, which page you are visiting on our site, and may set a cookie to enable the Feature to function properly. Social Media Features and Widgets are either hosted by a third party or hosted directly on the VSee Platform. Your interactions with these Features are governed by the privacy policy of the company providing it.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">Complaints</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">If you think your privacy rights have been violated, you may file a complaint with legal@vsee.com. You may also file a complaint with the Secretary of the Department of Health and Human Services. You will not be penalized for filing a complaint. You may also contact us for further information about your privacy rights by emailing us at support@vsee.com.</span></p>
-    <h3 dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">ACCEPTANCE</span></h3>
-    <p dir="ltr"><span style="font-family: Arial,Helvetica,sans-serif;">By using the VSee Platform and the Platform Services, you acknowledge your acceptance of this Privacy Policy and agree to its terms. If you do not agree with this policy, you should not use the VSee Platform and the Platform Services. It is recommended that you read this privacy policy before use of Platform Services to ensure that you have not missed any changes to the privacy policy. Your continued use of the Platform Services following any changes to the privacy policy signifies your acceptance of those changes.</span></p>
-
-
-
-</body></html>
-    `;
-    this.trustedContent = sanitizer.bypassSecurityTrustHtml(this.content)
-  }
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private clinicService:ClinicService) { }
 
   ngOnInit(): void {
+    this.clinicService.getPoliticas(this.route.snapshot.params.clinicId,this.route.snapshot.params.term ).subscribe(
+        data => {
+          console.log(data)
+          this.content = atob(data.payload.content)
+          console.log(this.content)
+          this.trustedContent = this.sanitizer.bypassSecurityTrustHtml(this.content)
+        },
+        error => {
+          console.log(error)
+        }
+      )
   }
 
 }
