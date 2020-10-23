@@ -170,7 +170,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
 
     this.diagnostico = this._formBuilder.group({
-      diagnostic: ['',], // Validators.required
+      diagnostic: ['',], // 
       type: ['cie10', Validators.required],
       comments: ['', Validators.required],
       indications: ['', Validators.required],
