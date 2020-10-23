@@ -145,10 +145,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }else if(role == "patient" ){
         this.router.navigate([`/app-paciente/teleconsulta`, noti.data.id])
       }
-    }else if(noti.data.action == "goToNextAppointment"){
-      this.router.navigate(['/app-coordinator/historial-consultas/', noti.data.id])
+    }else if(noti.data.action == "goToNextAppointments"){
+      this.router.navigate(['/app-coordinator/#child1'])
     }else if(noti.data.action == "goToWaitingRoom"){
-      this.router.navigate(['/app-coordinator/historial-consultas/', noti.data.id])
+      this.router.navigate(['/app-coordinator/#child2'])
     }
     this.deleteNot(noti._id)
   }
