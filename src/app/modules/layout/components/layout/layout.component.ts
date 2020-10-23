@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { TranslocoService } from '@ngneat/transloco';
 import { MessagingService } from 'src/app/services/messaging.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private bnIdle: BnNgIdleService,
     private toastr: ToastrService,
     private translateService: TranslocoService,
-    private webNotfications: MessagingService
+    private webNotfications: MessagingService,
+    private router: Router
   ) {
     // 20 MINUTES DEFAULT 
     this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
@@ -118,13 +120,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     setInterval(()=>{
       this.webNotfications.getNotifications().subscribe((data)=>{
         let notsArray: Array<any> = data;
-        notsArray.forEach((element)=> {
-          let finded = this.nots.find((element1)=> element._id == element1._id)
-          if(!finded){
-            this.nots.push(element)
-            this.nots = this.nots.slice()
-          }
-        })
+        this.nots = notsArray;
+        this.nots = this.nots.slice();
       }, (error)=>console.log(error))
     }, 10000)
   }
@@ -139,4 +136,27 @@ export class LayoutComponent implements OnInit, OnDestroy {
     clearInterval(this.intervalCurrentTime);
   }
   trackByItems(index: number, not: any): number { return index; }
+
+  toTheNots(noti:any){
+    let role = JSON.parse(localStorage.getItem('currentUser')).role
+    if(noti.data.action == "goToAppointment"){
+      if(role == "professional"){
+        this.router.navigate([`/app-professional/teleconsulta`, noti.data.id])
+      }else if(role == "patient" ){
+        this.router.navigate([`/app-paciente/teleconsulta`, noti.data.id])
+      }
+    }else if(noti.data.action == "goToNextAppointment"){
+      this.router.navigate(['/app-coordinator/historial-consultas/', noti.data.id])
+    }else if(noti.data.action == "goToWaitingRoom"){
+      this.router.navigate(['/app-coordinator/historial-consultas/', noti.data.id])
+    }
+    this.deleteNot(noti._id)
+  }
+  deleteNot(id: string){
+    let pos = this.nots.findIndex((element)=> element._id == id)
+    this.nots.splice(pos,1)
+    this.nots.slice()
+    console.log(this.nots);
+    this.webNotfications.deleteNotification(id).subscribe((data)=> console.log(data), (error)=> console.log(error))
+  }
 }

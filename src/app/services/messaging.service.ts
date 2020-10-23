@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -41,5 +41,17 @@ export class MessagingService {
       token,
       type:"WEB"
     })
+  }
+
+  deleteNotification(id:string): Observable<any>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: {
+        notificationId:id
+      }
+    }
+    return this.http.delete<any>(environment.baseUrl + 'v1/notifications', options)
   }
 }
