@@ -157,7 +157,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.otros = this._formBuilder.group({
       physicalExam: [''],
       examHighlights: [''],
-      plan: [''],
     },{ updateOn: 'blur' });
 
     this.nutricion = this._formBuilder.group({
@@ -174,6 +173,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     },{ updateOn: 'blur' });
 
     this.diagnostico = this._formBuilder.group({
+      plan: [''],
       diagnostic: ['',], // 
       type: ['cie10', Validators.required],
       comments: ['', Validators.required],
@@ -307,7 +307,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         anamnesis: this.consultasForm.controls.anamnesis.value,
         physicalExam: this.otros.controls.physicalExam.value,
         examHighlights: this.otros.controls.examHighlights.value,
-        plan: this.otros.controls.plan.value,
+        plan: this.diagnostico.controls.plan.value
       },
     };
     //console.log(appointmentObject);
@@ -648,7 +648,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.consultasForm.controls['anamnesis'].setValue(data.payload.appointmentDetails.anamnesis);
 
         this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);
-        this.otros.controls['plan'].setValue(data.payload.appointmentDetails.plan);
+       
         this.otros.controls['examHighlights'].setValue(data.payload.appointmentDetails.examHighlights);
 
         this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
@@ -664,6 +664,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.nutricion.controls['imc'].setValue(data.payload.patientDetails.nutritionalState.imc);
         this.nutricion.controls['imcClassification'].setValue(data.payload.patientDetails.nutritionalState.imcClassification);
 
+        this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
       }

@@ -672,20 +672,7 @@
                             </textarea>
                           </div>
                         </div>
-                        <div class="col-12 mt-3">
-                          <div class="form-row">
-                            <label for="plan">{{ 'clinicalFile.plan.label' | transloco }}</label>
-                            <textarea
-                              name="plan"
-                              class="form-control"
-                              id="plan"
-                              rows="5"
-                              id="plan"
-                              formControlName="plan"
-                            >
-                            </textarea>
-                          </div>
-                        </div>
+                      
                       </div>
                     </form>
 
@@ -1518,6 +1505,20 @@
                   <div class="tab-pane fade p-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <form [formGroup]="diagnostico">
                       <div class="row">
+                        <div class="col-12 mb-3">
+                          <div class="form-row">
+                            <label for="plan">{{ 'clinicalFile.plan.label' | transloco }}</label>
+                            <textarea
+                              name="plan"
+                              class="form-control"
+                              id="plan"
+                              rows="5"
+                              id="plan"
+                              formControlName="plan"
+                            >
+                            </textarea>
+                          </div>
+                        </div>
                         <div class="col-6">
                           <label>{{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
                           <select
