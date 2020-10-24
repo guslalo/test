@@ -1546,6 +1546,8 @@
                               formControlName="diagnostic"
                               [(ngModel)]="searchInput"
                               (ngModelChange)="onChangeSearch($event)"
+                              [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'"
+                             
                             /><!-- [attr.disabled]="search === false ? true : null"-->
                             <div class="responseSearch shadow-sm bg-white rounded">
                             <!-- [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"-->
