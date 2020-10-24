@@ -159,6 +159,7 @@
                   </button>
                   <button
                     *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
+                    [disabled]="arrayDiagnostic && arrayDiagnostic.length === 0"
                     class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
                     (click)="finish(appointmentDetail._id, 'finish')"
                   >
@@ -380,6 +381,7 @@
                             id="motive"
                             name="motive"
                             formControlName="motive"
+                            (focusout)="autoSave($event)"
                           ></textarea>
                         </div>
                         <div class="col-6 mt-3">
@@ -1545,10 +1547,7 @@
                               [(ngModel)]="searchInput"
                               (ngModelChange)="onChangeSearch($event)"
                             /><!-- [attr.disabled]="search === false ? true : null"-->
-                            <div
-                              class="responseSearch shadow-sm bg-white rounded"
-                             
-                            >
+                            <div class="responseSearch shadow-sm bg-white rounded">
                             <!-- [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"-->
                               <ul>
                                 <li *ngIf="spinnerSearch">
@@ -1681,10 +1680,10 @@
                         <button
                           class="btn btn-secondary rounded-pill"
                           (click)="putAppointment(appointmentDetail._id)"
-                          [disabled]="!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0"
                           data-toggle="modal"
                           data-target="#exampleModal"
                         >
+                        <!--!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0-->
                           {{ 'common.button.save.label' | transloco }}
                         </button>
                       </div>
