@@ -16,7 +16,7 @@ export class LegalsComponent implements OnInit {
   ngOnInit(): void {
     this.clinicService.getPoliticas(this.route.snapshot.params.clinicId,this.route.snapshot.params.term ).subscribe(
         data => {
-          console.log(data)
+          console.log(data.payload.content)
           this.content = atob(data.payload.content)
           console.log(this.content)
           this.trustedContent = this.sanitizer.bypassSecurityTrustHtml(this.content)
