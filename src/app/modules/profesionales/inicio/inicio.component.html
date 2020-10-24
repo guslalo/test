@@ -370,7 +370,30 @@
                       </td>
                       <td>
                         <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{ item.administrativeDetails.status }}
+                          {{
+                            (item.administrativeDetails.status === 'reserved'
+                              ? 'clinicalFile.reserved.label'
+                              : item.administrativeDetails.status === 'appointed'
+                              ? 'clinicalFile.scheduled.label'
+                              : item.administrativeDetails.status === 'rescheduled'
+                              ? 'clinicalFile.reScheduled.label'
+                              : item.administrativeDetails.status === 'active'
+                              ? 'clinicalFile.active.label'
+                              : item.administrativeDetails.status === 'waitingInRoom'
+                              ? 'clinicalFile.inWaitingRoom.label'
+                              : item.administrativeDetails.status === 'waitingInList'
+                              ? 'clinicalFile.inWaitingList.label'
+                              : item.administrativeDetails.status === 'running'
+                              ? 'common.status.inProgress.label'
+                              : item.administrativeDetails.status === 'pending'
+                              ? 'clinicalFile.pending.label'
+                              : item.administrativeDetails.status === 'finished'
+                              ? 'clinicalFile.ended.label'
+                              : item.administrativeDetails.status === 'canceled'
+                              ? 'clinicalFile.canceled.label'
+                              : 'S/R'
+                            ) | transloco
+                          }}
                         </button>
                       </td>
                       <td>
@@ -381,8 +404,18 @@
                             </button>
                           </a>
                         </ng-container>
-                        <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'">
+                        <ng-container *ngIf="item.administrativeDetails.status === 'waitingInList'" >
                           <a *ngIf="item.patientDetails.userDetails[0]" (click)="atender(item._id)">
+                            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
+                              {{ 'clinicalFile.attend.label' | transloco }}
+                            </button>
+                          </a>
+                        </ng-container>
+
+                        <ng-container *ngIf="  item.administrativeDetails.status === 'running' ||
+                        item.administrativeDetails.status === 'pending'  " >
+                        
+                          <a *ngIf="item.patientDetails.userDetails[0]"  routerLink="crear-ficha-consulta/{{ item._id }}">
                             <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                               {{ 'clinicalFile.attend.label' | transloco }}
                             </button>

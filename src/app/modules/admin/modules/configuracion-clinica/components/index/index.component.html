@@ -251,7 +251,7 @@
                   <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="termsUploader.click()">
                     {{ 'common.button.uploadFile.label' | transloco }}
                   </button>
-                  <input hidden type="file" #termsUploader (change)="uploadTerms($event)" />
+                  <input hidden type="file" accept=".html, .htm" #termsUploader (change)="uploadTerms($event)" />
                 </div>
 
                 <div class="col col-lg-4 col-md-4 col-sm-12">

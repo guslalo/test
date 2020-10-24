@@ -65,12 +65,18 @@
                     name="{{ 'table.namePatient.label' | transloco }}"
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }">
-                        <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                        {{
+                     
+                        <div class="img boxImg2 rounded-circle d-inline-block">
+                        <img class="mr-2" width="38" height="38"  src="assets/img/profile.png"  alt="img" />
+                        </div>
+                         <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }"
+                         style="top: -17px !important;
+                         position: relative; left:5px"
+                         >{{
                           row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName)
                         }}
                       </a>
+                      
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
@@ -154,22 +160,35 @@
                       />
                     </ng-template>
                   </ngx-datatable-column>
+
                   <ngx-datatable-column
-                    [resizeable]="false"
-                    [flexGrow]="3"
-                    name="{{ 'table.namePatient.label' | transloco }}"
-                  >
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                      {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
-                    </ng-template>
-                  </ngx-datatable-column>
+                  [resizeable]="false"
+                  [flexGrow]="3"
+                  name="{{ 'table.namePatient.label' | transloco }}"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div class="img boxImg2 rounded-circle d-inline-block">
+                      <img class="mr-2" width="38" height="38"  src="assets/img/profile.png"  alt="img" />
+                    </div>
+                    <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }" 
+                    style="top: -17px !important;
+                    position: relative; left:5px" 
+                    >
+                     
+                      {{
+                        row.name + ' ' + (row.secondLastName || row.lastName)
+                      }}
+                    </a>
+                    
+                  </ng-template>
+                </ngx-datatable-column>
+      
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="email" name="Correo">
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{ moment().diff(row.age, 'year') }}
-                    </ng-template>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="age" name="{{ 'table.age.label' | transloco }}">
+                    <!--<ng-template let-row="row" ngx-datatable-cell-template  class="d-none">
+                      {{ moment().diff(row.age, 'year') }} 54
+                    </ng-template>-->
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
                     <ng-template let-row="row" ngx-datatable-cell-template>

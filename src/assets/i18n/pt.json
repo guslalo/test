@@ -106,7 +106,7 @@
             "background": {
               "label": "Antecedentes",
               "diseases": {
-                "label": "Doenças"
+                "label": "Comorbidades"
               },
               "allergies": {
                 "label": "Alergias"
@@ -115,10 +115,10 @@
                 "label": "Intervenções cirúrgicas"
               },
               "habits": {
-                "label": "Hábitos de saúde"
+                "label": "Fatores de risco"
               },
               "meds": {
-                "label": "Medicamentos"
+                "label": "Medicamentos em uso"
               },
               "occupational": {
                 "label": "Ocupacionais"
@@ -260,10 +260,10 @@
             "label": "Antecedentes familiares"
           },
           "meds": {
-            "label": "Medicamentos"
+            "label": "Medicamentos em uso"
           },
           "habits": {
-            "label": "Hábitos de saúde"
+            "label": "Fatores de risco"
           }
         },
         "myHealth": {
@@ -482,13 +482,13 @@
       "label": "Consulta"
     },
     "serviceReason": {
-      "label": "Motivo da consulta:"
+      "label": "Queixa principal:"
     },
     "serviceObjetive": {
       "label": "Objetivo da consulta"
     },
     "anamnesis": {
-      "label": "Anamnese"
+      "label": "História da Moléstia Atual (HMA)"
     },
     "nutritionalState": {
       "label": "Estado nutricional"
@@ -497,13 +497,13 @@
       "label": "Exame físico"
     },
     "labAspects": {
-      "label": "Aspectos laboratoriais de destaque"
+      "label": "Resultado exames laboratoriais e/ou imagen"
     },
     "plan": {
-      "label": "Plano"
+      "label": "Plano terapêutico"
     },
     "comments": {
-      "label": "Comentários"
+      "label": "Informaçoes adicionais de diagnóstico"
     },
     "noStoredNotes": {
       "label": "Há notas inseridas"
@@ -1257,7 +1257,7 @@
         "title": "Minha saúde",
         "label": "Essa será a informação que os profissionais verão para melhor atendê-lo",
         "deceases": {
-          "label": "Doenças"
+          "label": "Comorbidades"
         },
         "allergies": {
           "label": "Alergias"
@@ -1269,13 +1269,13 @@
           "label": "Antecedentes familiares"
         },
         "meds": {
-          "label": "Medicamentos"
+          "label": "Medicamentos em uso"
         },
         "healthHabits": {
-          "label": "Hábitos de saúde"
+          "label": "Fatores de risco"
         },
         "occupationals": {
-          "label": "Ocupacionais"
+          "label": "Ocupaçao principal"
         },
         "others": {
           "label": "Outros"
@@ -1978,7 +1978,7 @@
               "label": "Condições de uso"
             },
             "hint": {
-              "label": "É recomendável documentos PDF ou Word."
+              "label": "É recomendável documentos HTML ou HTM."
             },
             "privacy": {
               "label": "Política de privacidade"
@@ -2506,7 +2506,7 @@
       "label": "Marque uma consulta"
     },
     "healthHabits": {
-      "label": "Hábitos de saúde"
+      "label": "Fatores de risco"
     },
     "anamnesis": {
       "label": "Anamnese"
@@ -2991,10 +2991,10 @@
         "label": "°C - ° F"
       },
       "kgLb": {
-        "label": "Kg - Lb"
+        "label": "Kg"
       },
       "mFt": {
-        "label": "m ou pés"
+        "label": "m"
       },
       "searchPatient": {
         "label": "Buscar paciente"

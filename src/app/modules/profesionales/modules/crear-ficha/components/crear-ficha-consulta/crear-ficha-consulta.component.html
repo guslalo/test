@@ -118,6 +118,7 @@
                       <li>
                         <b>{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}:</b>
                         {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
+                     
                       </li>
                       <li>
                         <b>{{ 'common.forms.user.identification.phone.label' | transloco }}:</b>
@@ -159,6 +160,7 @@
                   </button>
                   <button
                     *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
+                    [disabled]="arrayDiagnostic && arrayDiagnostic.length === 0"
                     class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
                     (click)="finish(appointmentDetail._id, 'finish')"
                   >
@@ -380,6 +382,7 @@
                             id="motive"
                             name="motive"
                             formControlName="motive"
+                            (focusout)="autoSave($event)"
                           ></textarea>
                         </div>
                         <div class="col-6 mt-3">
@@ -670,20 +673,7 @@
                             </textarea>
                           </div>
                         </div>
-                        <div class="col-12 mt-3">
-                          <div class="form-row">
-                            <label for="plan">{{ 'clinicalFile.plan.label' | transloco }}</label>
-                            <textarea
-                              name="plan"
-                              class="form-control"
-                              id="plan"
-                              rows="5"
-                              id="plan"
-                              formControlName="plan"
-                            >
-                            </textarea>
-                          </div>
-                        </div>
+                      
                       </div>
                     </form>
 
@@ -1516,6 +1506,20 @@
                   <div class="tab-pane fade p-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <form [formGroup]="diagnostico">
                       <div class="row">
+                        <div class="col-12 mb-3">
+                          <div class="form-row">
+                            <label for="plan">{{ 'clinicalFile.plan.label' | transloco }}</label>
+                            <textarea
+                              name="plan"
+                              class="form-control"
+                              id="plan"
+                              rows="5"
+                              id="plan"
+                              formControlName="plan"
+                            >
+                            </textarea>
+                          </div>
+                        </div>
                         <div class="col-6">
                           <label>{{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
                           <select
@@ -1542,14 +1546,12 @@
                               id="diagnostic"
                               name="diagnostic"
                               formControlName="diagnostic"
-                              [attr.disabled]="search === false ? true : null"
                               [(ngModel)]="searchInput"
                               (ngModelChange)="onChangeSearch($event)"
-                            /><!-- [attr.disabled]="search ? false : null"-->
-                            <div
-                              class="responseSearch shadow-sm bg-white rounded"
+                              [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'"
                              
-                            >
+                            /><!-- [attr.disabled]="search === false ? true : null"-->
+                            <div class="responseSearch shadow-sm bg-white rounded">
                             <!-- [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"-->
                               <ul>
                                 <li *ngIf="spinnerSearch">
@@ -1565,6 +1567,7 @@
                                       *ngFor="let item of searchResponse"
                                       id="{{ item._id }}"
                                       (click)="selectDiagnostico(item)"
+                                      
                                     >
                                       {{ item.display }}
                                     </li>
@@ -1681,10 +1684,10 @@
                         <button
                           class="btn btn-secondary rounded-pill"
                           (click)="putAppointment(appointmentDetail._id)"
-                          [disabled]="!permisoGuardar || !diagnostico.valid"
                           data-toggle="modal"
                           data-target="#exampleModal"
                         >
+                        <!--!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0-->
                           {{ 'common.button.save.label' | transloco }}
                         </button>
                       </div>

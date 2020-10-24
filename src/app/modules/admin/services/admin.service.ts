@@ -106,6 +106,7 @@ export class AdminService {
 
   async uploadTerms(file: any, clinicId: string) {
     let base64 = await this.fileUtils.getBase64(file);
+    console.log(base64)
     return this.http
       .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
         term: 'use-term',
