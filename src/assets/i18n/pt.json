@@ -2557,6 +2557,9 @@
       "password": {
         "label": "Senha"
       },
+      "user":{
+        "label":"E-mail"
+      },
       "file": {
         "examen": "exame",
         "documento": "documento",
