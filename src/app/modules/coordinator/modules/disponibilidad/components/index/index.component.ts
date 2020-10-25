@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { TranslocoService } from '@ngneat/transloco';
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 @Component({
@@ -55,7 +56,8 @@ export class IndexComponent implements OnInit {
     private coordinatorService: CoordinatorService,
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
-    private specialtiesService: SpecialtiesService
+    private specialtiesService: SpecialtiesService,
+    private translocoService: TranslocoService
   ) {
     const current = new Date();
     this.minDate = {
@@ -109,13 +111,13 @@ export class IndexComponent implements OnInit {
   //time = { hour: 13, minute: 30 };
 
   days: Array<any> = [
-    { id: 1, checked: false, name: 'Lun', value: 'lunes' },
-    { id: 2, checked: false, name: 'Mar', value: 'martes' },
-    { id: 3, checked: false, name: 'Mie', value: 'miercoles' },
-    { id: 4, checked: false, name: 'Jue', value: 'jueves' },
-    { id: 5, checked: false, name: 'Vie', value: 'viernes' },
-    { id: 6, checked: false, name: 'Sab', value: 'sabado' },
-    { id: 7, checked: false, name: 'Dom', value: 'domingo' },
+    { id: 1, checked: false, name: 'common.weekDaysAbbr.mon.label', value: 'lunes' },
+    { id: 2, checked: false, name: 'common.weekDaysAbbr.tue.label', value: 'martes' },
+    { id: 3, checked: false, name: 'common.weekDaysAbbr.wed.label', value: 'miercoles' },
+    { id: 4, checked: false, name: 'common.weekDaysAbbr.thu.label', value: 'jueves' },
+    { id: 5, checked: false, name: 'common.weekDaysAbbr.fri.label', value: 'viernes' },
+    { id: 6, checked: false, name: 'common.weekDaysAbbr.sat.label', value: 'sabado' },
+    { id: 7, checked: false, name: 'common.weekDaysAbbr.sun.label', value: 'domingo' },
   ];
   daysSelected: Array<any> = [];
 
@@ -233,10 +235,13 @@ export class IndexComponent implements OnInit {
     this.disponibilidadArray = [];
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
-        // console.log(data.payload);
+        console.log(data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
         this.disponibilidadArrayTemp = [...availabilities];
         this.disponibilidadArray = availabilities;
+        this.disponibilidadArray.forEach(element => {
+          element.dateDetails.days = element.dateDetails.days.map(e => this.days.find(d => d.value == e).name);
+        })
       },
       (error) => {
         console.log(error);
