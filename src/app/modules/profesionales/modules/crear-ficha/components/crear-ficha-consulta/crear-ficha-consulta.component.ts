@@ -388,7 +388,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         let appointmentObject = {
           appointmentDetails: {
             diagnosticDetails: {
-              comments: this.diagnostico.controls.comments.value
+              comments: this.diagnostico.controls.comments.value,
+              diagnostics: this.arrayDiagnostic
             }
             
           },
@@ -414,6 +415,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           appointmentDetails: {
             diagnosticDetails: {
               indications: this.diagnostico.controls.indications.value,
+              diagnostics: this.arrayDiagnostic
             }
             
           },

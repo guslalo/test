@@ -1714,7 +1714,7 @@
                           (click)="putAppointment(appointmentDetail._id)"
                           data-toggle="modal"
                           data-target="#exampleModal"
-                        
+                          [disabled]="!permisoGuardar"
                         >
                         <!--!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0-->
                           {{ 'common.button.save.label' | transloco }}
