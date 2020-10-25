@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -103,6 +103,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     private translateService: TranslocoService
   ) {}
 
+  ngOnChanges(){
+ 
+  }
+
   ngOnInit(): void {
     this.alive = true;
     this.search = false;
@@ -173,27 +177,275 @@ export class CrearFichaConsultaComponent implements OnInit {
     },{ updateOn: 'blur' });
 
     this.diagnostico = this._formBuilder.group({
-      plan: [''],
-      diagnostic: ['',], // 
-      type: ['cie10', Validators.required],
-      comments: ['', Validators.required],
-      indications: ['', Validators.required],
-    },{ updateOn: 'blur' });
+      plan: ['', { updateOn: 'blur' }],
+      diagnostic: ['',], // Validators.required
+      type: ['cie10', ], //Validators.required
+      comments: ['', { updateOn: 'blur' }], //Validators.required
+      indications: ['',{ updateOn: 'blur' }],
+    });
 
     this.notes = this._formBuilder.group({
       notes: [''],
-    },{ updateOn: 'blur' });
+    });
 
     this.addExamen = this._formBuilder.group({
       name: [null, [Validators.required]],
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
-    },{ updateOn: 'blur' });
-    
-    
-    this.consultasForm.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
     });
+
+
+  }
+
+  saveAppointment(appointmentObject){
+    this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
+      (data) => {
+        if(environment.production === false){
+          console.log(data);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  
+  clearId(){
+    this.idConsulta = null
+  }
+
+  enviarId(id) {
+    console.log(id);
+    this.idConsulta = id;
+  }
+
+  //autoSave
+  autoSave(){
+
+    //consultas form
+    this.consultasForm.valueChanges.subscribe((data) => {
+      if(this.consultasForm.controls.motive.value != null){
+        let appointmentObject = { 
+          appointmentDetails: {
+            motive: this.consultasForm.controls.motive.value
+          }
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.consultasForm.controls.objective.value != null){
+        let appointmentObject = { 
+          appointmentDetails: {
+            objective: this.consultasForm.controls.objective.value
+          }
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.consultasForm.controls.anamnesis.value != null){
+        let appointmentObject = { 
+          appointmentDetails: {
+            anamnesis: this.consultasForm.controls.anamnesis.value
+          }
+        };
+        this.saveAppointment(appointmentObject);
+      }
+    });
+
+    //signos
+    this.signos.valueChanges.subscribe((data) => {
+      if(this.signos.controls.PAS.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              PAS:this.signos.controls.PAS.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.PAD.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              PAD:this.signos.controls.PAD.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.PAmedia.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              PAmedia:this.signos.controls.PAmedia.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.FC.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              FC:this.signos.controls.FC.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.FR.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              FR:this.signos.controls.FR.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.Temp.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              Temp:this.signos.controls.Temp.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.signos.controls.Sat.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            vitalSigns: {
+              Sat:this.signos.controls.Sat.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+    });
+
+    //nutricion
+    this.nutricion.valueChanges.subscribe(() => {
+      if(this.nutricion.controls.weight.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            nutritionalState: {
+              weight:this.nutricion.controls.weight.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.nutricion.controls.height.value != null){
+        let appointmentObject = {
+          patientDetails: {
+            nutritionalState: {
+              height:this.nutricion.controls.height.value 
+            }
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+    });
+
+    this.otros.valueChanges.subscribe(() => {
+      if(this.otros.controls.physicalExam.value != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            physicalExam: this.otros.controls.physicalExam.value 
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+      if(this.otros.controls.examHighlights.value != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            examHighlights: this.otros.controls.examHighlights.value 
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+    });
+
+    this.diagnostico.get('plan').valueChanges.subscribe( x =>  {
+      if(this.diagnostico.controls.plan.value != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            plan: this.diagnostico.controls.plan.value  
+          },
+        };
+        this.saveAppointment(appointmentObject);
+       }
+      }
+    );
+
+    //diagnostico
+    this.diagnostico.valueChanges.subscribe((data) => {
+      //console.log(data);
+      if(this.diagnostico.controls.comments.value  != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            diagnosticDetails: {
+              comments: this.diagnostico.controls.comments.value
+            }
+            
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }
+
+      /*
+      if(this.diagnostico.controls.diagnostics.value  != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            diagnosticDetails: {
+              diagnostics: this.arrayDiagnostic
+            }
+            
+          },
+        };
+        this.saveAppointment(appointmentObject);
+      }*/
+    
+      if(this.diagnostico.controls.indications.value != null){
+        let appointmentObject = {
+          appointmentDetails: {
+            diagnosticDetails: {
+              indications: this.diagnostico.controls.indications.value,
+            }
+            
+          },
+        };
+      
+        this.saveAppointment(appointmentObject);
+      } 
+    });
+
+    /*let appointmentObject = {
+      patientDetails: {
+        vitalSigns: this.signos.value,
+        nutritionalState: this.nutricion.value,
+      },
+      appointmentDetails: {
+        diagnosticDetails: {
+          //type: this.diagnostico.controls.type.value,
+          diagnostics: this.arrayDiagnostic,
+          comments: this.diagnostico.controls.comments.value,
+          indications: this.diagnostico.controls.indications.value,
+        },
+        motive: this.consultasForm.controls.motive.value,
+        objective: this.consultasForm.controls.objective.value,
+        anamnesis: this.consultasForm.controls.anamnesis.value,
+        physicalExam: this.otros.controls.physicalExam.value,
+        examHighlights: this.otros.controls.examHighlights.value,
+        plan: this.diagnostico.controls.plan.value
+      },
+    };*/
+    //signosForm
+   
+    /*
     this.signos.valueChanges.subscribe(() => {
       this.putAppointment( this.appointmentId)
     });
@@ -206,38 +458,11 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.diagnostico.valueChanges.subscribe(() => {
       this.putAppointment( this.appointmentId)
     });
-    this.notes.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
     this.addExamen.valueChanges.subscribe(() => {
       this.putAppointment( this.appointmentId)
     });
-    
-    /*
-    this.consultasForm.updateOn.pipe(takeWhile (() => this.alive)). subscribe ((estado) => {
-      console.log (estado);
-      this.putAppointment( this.appointmentId);
-    });*/
-    /*
-    this.consultasForm.statusChanges()
-    .takeWhile(this.alive) //
-    .subscribe((status) => {
-      // 
-    });*/
-  }
-  
-  clearId(){
-    this.idConsulta = null
-  }
+    */
 
-  enviarId(id) {
-    console.log(id);
-    this.idConsulta = id;
-  }
-
-  //autoSave
-  autoSave(event){
-    console.log(event)
   }
 
   typeDiagnostic() {
@@ -251,8 +476,22 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: 'cie10'
     })
     this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
+      if(this.arrayDiagnostic!= null){
+        let appointmentObject = {
+          appointmentDetails: {
+            diagnosticDetails: {
+              diagnostics: this.arrayDiagnostic
+            }
+            
+          },
+        };
+      
+        this.saveAppointment(appointmentObject);
+      } 
       return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
     });
+ 
+
   }
 
   deleteDiagnostic(_id){
@@ -647,9 +886,26 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.consultasForm.controls['objective'].setValue(data.payload.appointmentDetails.objective);
         this.consultasForm.controls['anamnesis'].setValue(data.payload.appointmentDetails.anamnesis);
 
-        this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);
-       
+        this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);     
         this.otros.controls['examHighlights'].setValue(data.payload.appointmentDetails.examHighlights);
+        /*
+        if(
+          data.payload.patientDetails.vitalSigns.PAS != null,
+          data.payload.patientDetails.vitalSigns.PAD != null,
+          data.payload.patientDetails.vitalSigns.PAmedia != null,
+          data.payload.patientDetails.vitalSigns.FC != null,
+          data.payload.patientDetails.vitalSigns.FR != null,
+          data.payload.patientDetails.vitalSigns.Temp != null,
+          data.payload.patientDetails.vitalSigns.Sat != null
+        ) {
+        this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
+        this.signos.controls['PAD'].setValue(data.payload.patientDetails.vitalSigns.PAD);
+        this.signos.controls['PAmedia'].setValue(data.payload.patientDetails.vitalSigns.PAmedia);
+        this.signos.controls['FC'].setValue(data.payload.patientDetails.vitalSigns.FC);
+        this.signos.controls['FR'].setValue(data.payload.patientDetails.vitalSigns.FR);
+        this.signos.controls['Temp'].setValue(data.payload.patientDetails.vitalSigns.Temp);
+        this.signos.controls['Sat'].setValue(data.payload.patientDetails.vitalSigns.Sat);
+        }*/
 
         this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
         this.signos.controls['PAD'].setValue(data.payload.patientDetails.vitalSigns.PAD);
@@ -684,12 +940,20 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
         
-
         console.log(this.appointmentDetail);
+
+        if(this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending'){
+          this.permisoGuardar = true;
+          this.autoSave();
+        } else {
+          this.permisoGuardar = false;
+        }
+
         if (this.appointmentDetail.administrativeDetails.status === 'running') {
           this.getSession(id);
           this.permisoGuardar = true;
           this.videoCall = true;
+
 
           //modo flotante video call
           $(window).bind('scroll', function () {
@@ -704,10 +968,11 @@ export class CrearFichaConsultaComponent implements OnInit {
               $('.vistaFixed').removeClass('fixed');
             }
           });
-        }
+        } 
+        /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
-        }
+        }*/
         this.spinner.hide();
       },
       (error) => {

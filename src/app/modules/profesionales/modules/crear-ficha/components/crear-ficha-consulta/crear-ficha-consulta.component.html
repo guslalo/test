@@ -116,8 +116,19 @@
                         {{ appointmentDetail.patientDetails.userDetails.personalData.age }}
                       </li>
                       <li>
-                        <b>{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}:</b>
-                        {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
+                        <b>
+                          <!--
+                          {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}:-->
+                          {{ 'account.identificationDocument.label' | transloco }}:
+                        </b>
+                        <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.identificationData">
+                          {{appointmentDetail.patientDetails.userDetails.identificationData.passport}}
+                          {{appointmentDetail.patientDetails.userDetails.identificationData.cbo}}
+                          {{appointmentDetail.patientDetails.userDetails.identificationData.cboDesc}}
+                          {{appointmentDetail.patientDetails.userDetails.identificationData.ctps}}
+                          
+                        </ng-container>
+                        
                      
                       </li>
                       <li>
@@ -382,7 +393,7 @@
                             id="motive"
                             name="motive"
                             formControlName="motive"
-                            (focusout)="autoSave($event)"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                           ></textarea>
                         </div>
                         <div class="col-6 mt-3">
@@ -393,6 +404,7 @@
                             id="objective"
                             name="objective"
                             formControlName="objective"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                           />
                         </div>
                         <div class="col-6 mt-3">
@@ -431,6 +443,7 @@
                             id="anamnesis"
                             name="anamnesis"
                             formControlName="anamnesis"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                           ></textarea>
                         </div>
                       </div>
@@ -470,6 +483,7 @@
                                   max="60"
                                   name="document"
                                   formControlName="PAS"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -485,6 +499,7 @@
                                   min="1"
                                   max="60"
                                   formControlName="PAD"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -496,6 +511,7 @@
                                   name="PAmedia"
                                   id="PAmedia"
                                   formControlName="PAmedia"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -509,6 +525,7 @@
                                   name="FC"
                                   id="FC"
                                   formControlName="FC"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                             </div>
@@ -524,6 +541,7 @@
                                   name="FR"
                                   id="FR"
                                   formControlName="FR"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -535,6 +553,7 @@
                                   name="Temp"
                                   id="Temp"
                                   formControlName="Temp"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -546,6 +565,7 @@
                                   name="Sat"
                                   id="Sat"
                                   formControlName="Sat"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                 />
                               </div>
                             </div>
@@ -589,7 +609,7 @@
                                   name="weight"
                                   formControlName="weight"
                                   (keyup)="imcCalculate()"
-                                  
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"    
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -603,6 +623,7 @@
                                   name="height"
                                   id="height"
                                   min="1"
+                                  [attr.disabled]="permisoGuardar === false ? '' : null"
                                   max="60"
                                   formControlName="height"
                                   (keyup)="imcCalculate()"
@@ -655,6 +676,7 @@
                               rows="5"
                               id="physicalExam"
                               formControlName="physicalExam"
+                              [attr.disabled]="permisoGuardar === false ? '' : null"
                             >
                             </textarea>
                           </div>
@@ -669,6 +691,7 @@
                               rows="5"
                               id="examHighlights"
                               formControlName="examHighlights"
+                              [attr.disabled]="permisoGuardar === false ? '' : null"
                             >
                             </textarea>
                           </div>
@@ -1516,6 +1539,7 @@
                               rows="5"
                               id="plan"
                               formControlName="plan"
+                              [attr.disabled]="permisoGuardar === false ? '' : null"
                             >
                             </textarea>
                           </div>
@@ -1527,6 +1551,7 @@
                             formControlName="type"
                             id="type"
                             name="type"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                             (change)="typeDiagnostic()"
                           >
                             <!--<option value="null" disabled selected>{{ 'common.select.label' | transloco }}</option>-->
@@ -1547,6 +1572,7 @@
                               name="diagnostic"
                               formControlName="diagnostic"
                               [(ngModel)]="searchInput"
+                              [attr.disabled]="permisoGuardar === false ? '' : null" 
                               (ngModelChange)="onChangeSearch($event)"
                               [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'"
                              
@@ -1616,13 +1642,14 @@
                             </ng-container>
 
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mt-3">
                           <label for="comments">{{ 'clinicalFile.comments.label' | transloco }}</label>
                           <textarea
                             class="form-control"
                             id="comments"
                             name="comments"
                             formControlName="comments"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                             rows="5"
                           ></textarea>
                         </div>
@@ -1637,6 +1664,7 @@
                             id="indications"
                             name="indications"
                             formControlName="indications"
+                            [attr.disabled]="permisoGuardar === false ? '' : null"
                             rows="5"
                           ></textarea>
                         </div>
@@ -1686,6 +1714,7 @@
                           (click)="putAppointment(appointmentDetail._id)"
                           data-toggle="modal"
                           data-target="#exampleModal"
+                        
                         >
                         <!--!permisoGuardar || !diagnostico.valid || arrayDiagnostic && arrayDiagnostic.length === 0-->
                           {{ 'common.button.save.label' | transloco }}
