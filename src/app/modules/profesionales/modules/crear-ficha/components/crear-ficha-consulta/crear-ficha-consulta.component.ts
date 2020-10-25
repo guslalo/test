@@ -384,21 +384,18 @@ export class CrearFichaConsultaComponent implements OnInit {
     //diagnostico
     this.diagnostico.valueChanges.subscribe((data) => {
       //console.log(data);
-    
       if(this.diagnostico.controls.comments.value  != null){
         let appointmentObject = {
           appointmentDetails: {
             diagnosticDetails: {
-              //type: this.diagnostico.controls.type.value,
-              diagnostics: this.arrayDiagnostic,
-              comments: this.diagnostico.controls.comments.value,
-              indications: this.diagnostico.controls.indications.value,
+              comments: this.diagnostico.controls.comments.value
             }
             
           },
         };
         this.saveAppointment(appointmentObject);
       }
+
       /*
       if(this.diagnostico.controls.diagnostics.value  != null){
         let appointmentObject = {
@@ -416,9 +413,6 @@ export class CrearFichaConsultaComponent implements OnInit {
         let appointmentObject = {
           appointmentDetails: {
             diagnosticDetails: {
-              //type: this.diagnostico.controls.type.value,
-              diagnostics: this.arrayDiagnostic,
-              comments: this.diagnostico.controls.comments.value,
               indications: this.diagnostico.controls.indications.value,
             }
             
@@ -482,8 +476,22 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: 'cie10'
     })
     this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
+      if(this.arrayDiagnostic!= null){
+        let appointmentObject = {
+          appointmentDetails: {
+            diagnosticDetails: {
+              diagnostics: this.arrayDiagnostic
+            }
+            
+          },
+        };
+      
+        this.saveAppointment(appointmentObject);
+      } 
       return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
     });
+ 
+
   }
 
   deleteDiagnostic(_id){

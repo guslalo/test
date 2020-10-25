@@ -1572,7 +1572,7 @@
                               name="diagnostic"
                               formControlName="diagnostic"
                               [(ngModel)]="searchInput"
-                              [attr.disabled]="permisoGuardar === false ? '' : null"
+                              [attr.disabled]="permisoGuardar === false ? '' : null" 
                               (ngModelChange)="onChangeSearch($event)"
                               [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'"
                              
