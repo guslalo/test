@@ -920,6 +920,9 @@
       },
       "welcomeTitle": {
         "label": "Bienvenido a tu plataforma de teleconsulta"
+      },
+      "invalidEmail":{
+        "label": "E-mail inválido"
       }
     },
     "rg": {
