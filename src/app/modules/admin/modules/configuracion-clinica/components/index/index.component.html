@@ -260,7 +260,7 @@
                   <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="privacyUploader.click()">
                     {{ 'common.button.uploadFile.label' | transloco }}
                   </button>
-                  <input hidden type="file" #privacyUploader (change)="uploadPrivacy($event)" />
+                  <input hidden type="file" accept=".html, .htm" #privacyUploader (change)="uploadPrivacy($event)" />
                 </div>
 
                 <div class="col col-lg-4 col-md-4 col-sm-12">
@@ -269,7 +269,7 @@
                   <button class="btn btn-sm btn-outline-primary rounded-pill" (click)="agreementUploader.click()">
                     {{ 'common.button.uploadFile.label' | transloco }}
                   </button>
-                  <input hidden type="file" #agreementUploader (change)="uploadAgreement($event)" />
+                  <input hidden type="file" accept=".html, .htm" #agreementUploader (change)="uploadAgreement($event)" />
                 </div>
               </div>
             </div>
