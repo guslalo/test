@@ -41,9 +41,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.clinicId = this.currentUser.administrativeData.find(
-      (e) => e.clinicProfileId == this.currentUser.administrativeDataContext
-    ).clinicId;
+    this.clinicId = localStorage.getItem('clinic');
     console.log('currentuser', this.currentUser);
     this.adminService.getClinic(this.clinicId).subscribe(
       (data) => {
