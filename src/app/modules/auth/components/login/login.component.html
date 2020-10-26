@@ -99,7 +99,7 @@
                 [ngClass]="{ 'is-invalid': !formLogin.get('username').valid }"
               />
               <div *ngIf="formLogin.get('username').errors?.email" class="invalid-feedback">
-                Invalid Email
+                {{ 'auth.login.invalidEmail.label' | transloco }}
               </div>
             </div>
             <div class="form-group">
