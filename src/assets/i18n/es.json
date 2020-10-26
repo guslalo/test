@@ -2562,6 +2562,9 @@
       "password": {
         "label": "contraseña"
       },
+      "user":{
+        "label":"E-mail"
+      },
       "file": {
         "examen": "exámen",
         "documento": "documento",
