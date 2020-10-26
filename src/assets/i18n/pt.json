@@ -923,6 +923,9 @@
       },
       "welcomeTitle": {
         "label": "Bem vindo a Plataforma de Teleconsulta"
+      },
+      "invalidEmail":{
+        "label": "E-mail inválido"
       }
     },
     "rg": {
