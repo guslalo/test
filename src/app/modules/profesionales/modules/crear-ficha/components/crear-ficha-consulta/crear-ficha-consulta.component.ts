@@ -490,9 +490,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           }
         },
       };
-    
       this.saveAppointment(appointmentObject);
-      
     } 
  
 
@@ -502,6 +500,16 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
     this.arrayDiagnostic2 =  [...this.arrayDiagnostic.filter(item => item._id !== _id)]; 
     console.log(this.arrayDiagnostic);
+    if(this.arrayDiagnostic!= null){
+      let appointmentObject = {
+        appointmentDetails: {
+          diagnosticDetails: {
+            diagnostics: this.arrayDiagnostic
+          }
+        },
+      };
+      this.saveAppointment(appointmentObject);
+    } 
   }
 
   //buscador de diagnostico
