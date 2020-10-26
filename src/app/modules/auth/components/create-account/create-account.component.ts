@@ -178,9 +178,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   politicas(){
-    this.useTerm = ['/terms-and-conditions/', this.clinic, 'use-term'];
-    this.privacyTerms = ['/terms-and-conditions/', this.clinic, 'privacy-term'];
-    this.telemedicineConsent = ['/terms-and-conditions/', this.clinic, 'telemedicine-consent'];
+    this.useTerm = ['/terms-and-conditions'];
+    this.privacyTerms = ['/privacy'];
+    this.telemedicineConsent = ['/consent'];
   }
 
   validateForm() {
