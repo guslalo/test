@@ -105,8 +105,7 @@ export class AdminService {
   }
 
   async uploadTerms(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file);
-    console.log(base64)
+    let base64 = await this.fileUtils.getBase64Docs(file);
     return this.http
       .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
         term: 'use-term',
@@ -120,7 +119,7 @@ export class AdminService {
   }
 
   async uploadPrivacy(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file);
+    let base64 = await this.fileUtils.getBase64Docs(file);
     return this.http
       .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
         term: 'privacy-term',
@@ -134,7 +133,7 @@ export class AdminService {
   }
 
   async uploadAgreement(file: any, clinicId: string) {
-    let base64 = await this.fileUtils.getBase64(file);
+    let base64 = await this.fileUtils.getBase64Docs(file);
     return this.http
       .post<any>(`${environment.baseUrl}${this.clinicEndpoint}/upload-term/${clinicId}`, {
         term: 'telemedicine-consent',
