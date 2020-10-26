@@ -1545,7 +1545,8 @@
                           </div>
                         </div>
                         <div class="col-6">
-                          <label>{{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
+                          <label>
+                            {{ 'clinicalFile.diagnosisType.label' | transloco }}</label>
                           <select
                             class="form-control"
                             formControlName="type"
@@ -1560,9 +1561,9 @@
                           </select>
                         </div>
                         <div class="col-6">
-                          <label for="diagnostic">{{
+                          <label [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'error-text' : ''" for="diagnostic">{{
                             'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
-                          }}</label>
+                          }} *</label>
                           <div class="searchBox2">
                             <input
                               class="form-control mb-3"
