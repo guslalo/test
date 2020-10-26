@@ -745,7 +745,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     let weight = this.nutricion.controls['weight'].value || 0;
     let height = this.nutricion.controls['height'].value || 0.1;
     // formula para el calculo
-    let imc = (parseFloat(weight) / (parseFloat(height) * parseFloat(height))).toFixed(2);
+    let imc = (parseFloat(weight.replace(',','.')) / (parseFloat(height.replace(',','.')) * parseFloat(height.replace(',','.')))).toFixed(2);
     //seteo el valor dependiendo de la medida
     this.nutricion.controls['imc'].setValue(imc);
     if(parseFloat(imc) < 18.50){
