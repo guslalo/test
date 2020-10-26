@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClinicService } from 'src/app/services/clinic.service';
 
 @Component({
@@ -22,9 +22,7 @@ export class LegalsComponent implements OnInit {
     this.clinic = '5f236fc966fbb0054894b780';
     this.clinicService.getPoliticas(this.clinic,this.term).subscribe(
         data => {
-          console.log(data.payload.content)
-          this.content = atob(data.payload.content)
-          console.log(this.content)
+          this.content = decodeURIComponent(escape(atob(data.payload.content)))
           this.trustedContent = this.sanitizer.bypassSecurityTrustHtml(this.content)
         },
         error => {
