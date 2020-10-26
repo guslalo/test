@@ -38,7 +38,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { CustomDatepickerI18n, NgbCustomDateParserFormatter } from './shared/ngb-datepicker-formatter';
 import { TranslocoService } from '@ngneat/transloco';
-
 const toastrConfig = {
   closeButton: true,
   positionClass: 'toast-bottom-right',
