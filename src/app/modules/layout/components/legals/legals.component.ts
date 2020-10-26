@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ClinicService } from 'src/app/services/clinic.service';
 
 @Component({
@@ -11,10 +11,16 @@ import { ClinicService } from 'src/app/services/clinic.service';
 export class LegalsComponent implements OnInit {
   public content: string;
   public trustedContent: SafeHtml;
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private clinicService:ClinicService) { }
+  public clinic:string;
+  private term: string;
+  constructor(private sanitizer: DomSanitizer, private clinicService:ClinicService, private router: Router) { }
 
   ngOnInit(): void {
-    this.clinicService.getPoliticas(this.route.snapshot.params.clinicId,this.route.snapshot.params.term ).subscribe(
+    if(this.router.url == '/terms-and-conditions') this.term = 'use-term'
+    else if(this.router.url == '/privacy') this.term = 'privacy-term'
+    else if(this.router.url == '/consent') this.term = 'telemedicine-consent'
+    this.clinic = '5f236fc966fbb0054894b780';
+    this.clinicService.getPoliticas(this.clinic,this.term).subscribe(
         data => {
           console.log(data.payload.content)
           this.content = atob(data.payload.content)
