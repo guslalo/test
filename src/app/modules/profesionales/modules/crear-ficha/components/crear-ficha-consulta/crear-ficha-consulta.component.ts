@@ -478,7 +478,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: 'cie10'
     })
     this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
-
       return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
     });
 
@@ -492,8 +491,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       };
       this.saveAppointment(appointmentObject);
     } 
- 
-
   }
 
   deleteDiagnostic(_id){
