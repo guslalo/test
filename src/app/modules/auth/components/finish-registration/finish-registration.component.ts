@@ -58,13 +58,20 @@ export class FinishRegistrationComponent implements OnInit {
   birthData: FormGroup;
   addressData: FormGroup;
   passwordData: FormGroup;
+  termsAccepted: boolean = false;
+  privacyAccepted: boolean = false;
+  consentAccepted: boolean = false;
+  public clinic:string;
   form = [];
   minDate = undefined;
   maxDate = undefined;
-
+  public useTerm:any;
+  public privacyTerms:any;
+  public telemedicineConsent:any;
   prePatientId = this.routerAct.snapshot.queryParamMap.get('patient');
 
   ngOnInit(): void {
+    this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
       idDocumentNumber: [null, Validators.required],
@@ -142,7 +149,11 @@ export class FinishRegistrationComponent implements OnInit {
     // console.log(this.prePatientId);
     this.getPrePatientData(this.prePatientId);
   }
-
+  politicas(){
+    this.useTerm = ['/terms-and-conditions'];
+    this.privacyTerms = ['/privacy'];
+    this.telemedicineConsent = ['/consent'];
+  }
   ufSelect(id) {
     let idSelected = id.value.split(':');
     console.log(idSelected[1]);
