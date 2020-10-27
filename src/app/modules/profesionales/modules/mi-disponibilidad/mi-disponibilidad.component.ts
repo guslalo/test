@@ -443,6 +443,7 @@ export class MiDisponibilidadComponent implements OnInit {
         for (const day of this.idAvailability.dateDetails.days) {
           let formatDay = day.charAt(0).toUpperCase() + day.slice(1);
           daysSeletected.push({
+            id: day.id,
             checked: true,
             name: formatDay.substring(0, 3),
             value: day,
@@ -453,10 +454,12 @@ export class MiDisponibilidadComponent implements OnInit {
         console.log(daysSeletected);
 
         let filteredDays = this.days.filter((d, index) => {
+          let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value)
           // console.log(d, index);
-          if (daysSeletected.map((item) => item.value).indexOf(this.days[index].value) === -1) {
-            // console.log(true);
+          if (i === -1) {
             return d;
+          }else{
+            daysSeletected[i].id = this.days[index].id
           }
         });
 
