@@ -489,7 +489,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label for="uf"
                       >{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} ({{
                         'account.uf.label' | transloco
@@ -510,7 +510,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="city">{{ 'account.city.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -526,7 +526,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label for="street">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -538,7 +538,10 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -550,7 +553,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-1">
+                  <div class="form-group col-md-3">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -561,6 +564,25 @@
                         'is-invalid': !personalData.get('streetNumber').valid
                       }"
                     />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="streetNumber"
+                      formControlName="streetNumber"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('streetNumber').valid
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                
+                      <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                      <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                        formControlName="complement" />
+                
                   </div>
                 </div>
               </form>
