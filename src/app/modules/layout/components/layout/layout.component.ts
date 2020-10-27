@@ -141,10 +141,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
     let role = JSON.parse(localStorage.getItem('currentUser')).role
     if(noti.data.action == "goToAppointment"){
       if(role == "professional"){
-        this.router.navigate([`/app-professional/teleconsulta`, noti.data.id])
+        this.router.navigate([`/app-professional/crear-ficha-consulta`, noti.data.id])
       }else if(role == "patient" ){
         this.router.navigate([`/app-paciente/teleconsulta`, noti.data.id])
       }
+    }else if(noti.data.action == "goToFinishedAppointment"){
+      this.router.navigate(['/app-paciente/mis-consultas/consulta', noti.data.id])  
     }else if(noti.data.action == "goToNextAppointments"){
       this.router.navigate(['/app-coordinator/#child1'])
     }else if(noti.data.action == "goToWaitingRoom"){
