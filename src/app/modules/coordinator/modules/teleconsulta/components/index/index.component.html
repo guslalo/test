@@ -55,7 +55,8 @@
                       id="{{ appointmentDetail.professionalDetails.userDetails[0].userId }}"
                     >
                       {{ appointmentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                      {{ appointmentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                      {{ appointmentDetail.professionalDetails.userDetails[0].lastName | uppercase }} 
+                      {{ appointmentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                     </p>
                     <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                     <ul class="simple-list">
