@@ -3,6 +3,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,13 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(private angularFireMessaging: AngularFireMessaging, private http: HttpClient) {
-    // this.angularFireMessaging.messaging.subscribe((_messaging) => {
-    //   _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-    //   _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
-    // });
+    firebase.messaging().onMessage((payload)=>{
+      console.log(payload)
+    })
+    this.angularFireMessaging.messaging.subscribe((_messaging) => {
+      _messaging.onMessage = _messaging.onMessage.bind(_messaging);
+      _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
+    });
   }
   requestPermission() {
     this.angularFireMessaging.requestToken.subscribe(
@@ -25,8 +29,11 @@ export class MessagingService {
     )
   }
   receiveMessage() {
-    this.angularFireMessaging.messages.subscribe((payload) => {
+    this.angularFireMessaging.messages.subscribe((payload:any) => {
       console.log('new message received. ', payload);
+      let not: Notification = new Notification(payload.notification.title,{
+        body: payload.notification.body
+      })
       this.currentMessage.next(payload);
     });
   }

@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/5.4.2/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.17.2/firebase-messaging.js');
 firebase.initializeApp({
   apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
   authDomain: 'itms-d242b.firebaseapp.com',
@@ -23,3 +23,4 @@ messaging.setBackgroundMessageHandler(function(payload) {
   return self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
