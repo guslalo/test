@@ -144,6 +144,7 @@ export class CrearUsuarioComponent implements OnInit {
       city: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
+      complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
     });
 
@@ -511,6 +512,7 @@ export class CrearUsuarioComponent implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
+          complement: this.formUser[1].value.complement
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -591,6 +593,7 @@ export class CrearUsuarioComponent implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
+          complement: this.formUser[1].value.complement
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -687,6 +690,7 @@ export class CrearUsuarioComponent implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
+          complement: this.formUser[1].value.complement
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -782,6 +786,7 @@ export class CrearUsuarioComponent implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
+          complement: this.formUser[1].value.complement
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,

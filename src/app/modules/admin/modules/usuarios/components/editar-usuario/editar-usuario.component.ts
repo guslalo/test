@@ -153,6 +153,7 @@ export class EditarUsuarioComponent implements OnInit {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
+      complement: [null, ],
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -378,7 +379,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('neighborhood').setValue(user.addressData.neighborhood);
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
-
+        this.personalData.get('complement').setValue(user.addressData.complement);
         this.waitingRoomsAssigned = user.waitingRooms || [];
         // console.log(this.waitingRoomsAssigned);
 
