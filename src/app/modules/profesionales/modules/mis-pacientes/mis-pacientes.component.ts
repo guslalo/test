@@ -57,7 +57,7 @@ export class MisPacientesComponent implements OnInit {
   fetchPatients() {
     this.patientService.getPatientsForProfesional().subscribe(
       (data) => {
-        // console.log(data);
+         console.log(data);
         // NO PATIENTS FOUND
         if (Array.isArray(data.payload)) {
           this.tempPatients = [...data.payload];
@@ -168,6 +168,7 @@ export class MisPacientesComponent implements OnInit {
               patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
             patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.secondLastName.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
             !searchTerm
           );

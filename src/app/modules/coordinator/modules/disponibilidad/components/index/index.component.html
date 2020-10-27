@@ -125,7 +125,7 @@
               >
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ row.professionalName[0].personalData.name + ' ' 
-                  + row.professionalName[0].personalData.lastName + ' ' + row.professionalName[0].personalData.secondlastName
+                  + ' ' + row.professionalName[0].personalData.secondLastName
                 
                 }}
                 </ng-template>
@@ -248,7 +248,7 @@
                   (optionSelected)="escogerProfessional($event.option.value)"
                 >
                   <mat-option *ngFor="let item of professionals" [value]="item">
-                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                    {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                   </mat-option>
                 </mat-autocomplete>
               </div>
@@ -521,7 +521,7 @@
                   (optionSelected)="escogerProfessional($event.option.value)"
                 >
                   <mat-option *ngFor="let item of professionals" [value]="item">
-                    {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                    {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                   </mat-option>
                 </mat-autocomplete>
               </div>

@@ -145,7 +145,7 @@
                     {{ nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
                   </td>
                   <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
-                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.lastName }}
+                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
                   </td>
                   <td>
                     <a
@@ -247,8 +247,7 @@
                   <tr *ngFor="let item of consultas" id="{{ item._id }}">
                     <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                       <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
-                        {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                        {{ item.patientDetails.userDetails[0].personalData.name }} 
                         {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
                       </td>
                       <ng-template #sinInfo>
@@ -357,8 +356,7 @@
                   <tr *ngFor="let item of consultasEsperas" id="{{ item._id }}">
                     <ng-container>
                       <td scope="row">
-                        {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.lastName }}
+                        {{ item.patientDetails.userDetails[0].personalData.name }} 
                         {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
                       </td>
 

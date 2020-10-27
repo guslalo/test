@@ -502,14 +502,96 @@
                 </p>
               </div>
               <div class="col">
-                <ng-container *ngFor="let data of daysSelected">
-                  <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
-                      (change)="data.checked = !data.checked" [checked]="data.checked" />
-                    <label class="custom-control-label" for="put{{ data.name }}">
-                      {{ data.name | transloco}}
-                    </label>
-                  </div>
+                <ng-container *ngFor="let data of daysSelected "> <!--let i = index-->
+                  <ng-container *ngIf="data.value === 'lunes'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}}
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'martes'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}} 
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'miercoles'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}} 
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'jueves'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}} 
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'viernes'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}}
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'sabado'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}}
+                      </label> 
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="data.value === 'domingo'">
+                    <div class="custom-control custom-control-inline custom-checkbox pr-3">
+                      <input id="put{{ data.name }}" 
+                        class="custom-control-input" type="checkbox" 
+                        [value]="data.value"
+                        (change)="data.checked = !data.checked" 
+                        [checked]="data.checked" />
+                      <label class="custom-control-label" for="put{{ data.name }}">
+                        {{ data.name | transloco}} 
+                      </label> 
+                    </div>
+                  </ng-container>
+                  
+                  
+                  
+                  
+                   
                 </ng-container>
               </div>
             </div>

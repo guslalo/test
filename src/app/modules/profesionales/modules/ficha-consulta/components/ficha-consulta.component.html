@@ -38,8 +38,7 @@
                 </div>
                 <div class="col-5">
                   <p class="p-0 font-weight-bold">
-                    {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }}
-                    {{ appointmentDetail.patientDetails.userDetails.personalData.LastName | uppercase }}
+                    {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }} 
                     {{ appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase }}
                   </p>
                   <!--font-weight-bold-->
@@ -1212,7 +1211,7 @@
                       <th scope="row">{{ item.name }}</th>
                       <td>{{ item.type }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
-                      <td>{{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}</td>
+                      <td>{{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].secondLastName }}</td>
                       <td>
                         <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}?userId={{ userId }}" download>
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm">
@@ -1389,7 +1388,7 @@
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
-                                    {{ item.professional.lastName }}
+                                    {{ item.professional.secondLastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left">
                                     <ng-container *ngIf="item.isActive; else inactivo">

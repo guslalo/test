@@ -174,7 +174,7 @@
         <ngx-datatable-column [resizeable]="false" [flexGrow]="1" [name]="'table.doctor.label' | transloco" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{ row.professionalDetails.userDetails[0]?.name || 'S/R' }}
-            {{ row.professionalDetails.userDetails[0]?.lastName }}
+            {{ row.professionalDetails.userDetails[0]?.secondLastName }}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado" prop="administrativeDetails.status">
@@ -280,7 +280,7 @@
                 (optionSelected)="setPatient($event.option.value)"
               >
                 <mat-option *ngFor="let item of patients" [value]="item">
-                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                  {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                 </mat-option>
               </mat-autocomplete>
             </div>
@@ -352,7 +352,7 @@
                 (optionSelected)="getSpecialties($event.option.value)"
               >
                 <mat-option *ngFor="let item of professionals" [value]="item">
-                  {{ item.personalData.name + ' ' + item.personalData.lastName }}
+                  {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                 </mat-option>
               </mat-autocomplete>
             </div>
