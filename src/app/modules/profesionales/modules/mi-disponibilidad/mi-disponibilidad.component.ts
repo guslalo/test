@@ -118,6 +118,7 @@ export class MiDisponibilidadComponent implements OnInit {
   //time = { hour: 13, minute: 30 };
 
   daysSelected = [];
+  daysSelectedNoOrder = [];
 
   interval: Array<any> = [
     { min: '5', value: 5 },
@@ -459,9 +460,18 @@ export class MiDisponibilidadComponent implements OnInit {
           }
         });
 
+
         this.daysSelected = [...daysSeletected, ...filteredDays].sort((a, b) => {
           return a.id - b.id;
         });
+
+        this.daysSelectedNoOrder = [...daysSeletected, ...filteredDays].sort((a, b) => {
+          return a.id - b.id;
+        });
+
+
+        console.log(this.daysSelectedNoOrder);
+        console.log(this.daysSelected);
 
         this.daysSelected.forEach(e => {
           e.name = this.days.find(d => d.value == e.value).name;
@@ -469,7 +479,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
         this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
 
-        console.log(this.daysSelected);
+       
 
         this.endDate = this.dateAdapter.fromModel(
           moment(this.idAvailability.dateDetails.endDate).add('days').format('YYYY/MM/DD')

@@ -101,8 +101,7 @@
                   </div>
                   <div class="col mt-5">
                     <p class="p-0 font-weight-bold text-left">
-                      {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }}
-                      {{ appointmentDetail.patientDetails.userDetails.personalData.lastName | uppercase }}
+                      {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }} 
                       {{ appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase }}
                     </p>
                     <!--font-weight-bold-->
@@ -2318,7 +2317,7 @@
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
-                                    {{ item.professional.lastName }}
+                                    {{ item.professional.secondLastName }}
                                   </p>
                                   <div
                                     class="btn btn-primary btn-sm rounded-pill float-left"

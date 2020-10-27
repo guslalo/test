@@ -90,7 +90,7 @@
                           />
                         </ng-template>
                         {{
-                          row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName)
+                          row.personalData.name + ' ' + (row.personalData.secondLastName)
                         }}
                       </a>
                     </ng-template>
@@ -185,7 +185,7 @@
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <img class="mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
-                      {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
+                      {{ row.name + ' ' + (row.secondLastName ) }}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column

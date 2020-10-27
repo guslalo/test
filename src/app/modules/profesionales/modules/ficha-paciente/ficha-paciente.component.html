@@ -149,7 +149,7 @@
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
                   <br />
-                  {{ patientRecord.personalData?.lastName || null }} {{ patientRecord.personalData?.secondLastName || null }}
+                 
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
@@ -481,7 +481,7 @@
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
-                      (row.patientDetails.userDetails[0].secondLastName || row.patientDetails.userDetails[0].lastName)
+                      (row.patientDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -491,8 +491,7 @@
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
-                      (row.professionalDetails.userDetails[0].secondLastName ||
-                        row.professionalDetails.userDetails[0].lastName)
+                      (row.professionalDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -1064,7 +1063,7 @@
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
-                                    {{ item.professional?.lastName }}
+                                    {{ item.professional?.secondLastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
                                     <ng-container *ngIf="item.isActive; else inactivo">

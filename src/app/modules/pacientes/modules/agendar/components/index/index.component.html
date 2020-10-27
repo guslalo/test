@@ -480,7 +480,7 @@
                 </td>
                 <td class="text-center">{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                 <td class="text-center" *ngIf="item.issuerDetails[0]">
-                  {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].lastName }}
+                  {{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].secondLastName }}
                 </td>
                 <td class="text-center">
                   <a href="{{ downloadUrl }}{{ access_token }}/{{ item.path }}" download>
@@ -528,7 +528,7 @@
               <div class="box mr-3">
                 <p class="m-0 font-weight-bold">
                   {{ blocks[0].professionalDetails.userDetails[0].name }}
-                  {{ blocks[0].professionalDetails.userDetails[0].lastName }}
+                  {{ blocks[0].professionalDetails.userDetails[0].secondLastName }}
                 </p>
                 <p class="m-0">
                   {{ 'disponibility.modal.create.specialty.label' | transloco }}
@@ -651,7 +651,7 @@
         <div *ngIf="appointmentRescheduledObject" class="text-center">
          <p>Profesional: Dr: 
          {{appointmentRescheduledObject.professionalDetails.userDetails[0].name}} 
-          {{appointmentRescheduledObject.professionalDetails.userDetails[0].lastName}}</p> 
+          {{appointmentRescheduledObject.professionalDetails.userDetails[0].secondLastName}}</p> 
 
           <p> Fecha: {{appointmentRescheduledObject.dateDetails.date | date: 'dd/MM/yyyy':'+0000'}}</p>
          <p>  Hora: {{appointmentRescheduledObject.dateDetails.start}}</p>
