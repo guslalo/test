@@ -13,9 +13,6 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(private angularFireMessaging: AngularFireMessaging, private http: HttpClient,private router: Router) {
-    firebase.messaging().onMessage((payload)=>{
-      console.log(payload)
-    })
     this.angularFireMessaging.messaging.subscribe((_messaging) => {
       _messaging.onMessage = _messaging.onMessage.bind(_messaging);
       _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
