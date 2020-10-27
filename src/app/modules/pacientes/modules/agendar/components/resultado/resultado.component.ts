@@ -27,7 +27,6 @@ export class ResultadoComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const id = params.id;
       this.appointmentId = params.appointmentId;
-      console.log(params.appointmentId);
       this.getAppointmentDetails(params.appointmentId);
     });
   }
@@ -36,7 +35,6 @@ export class ResultadoComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointment = data.payload;
-        console.log( this.appointment); 
       },
       (error) => {
         console.log(error);

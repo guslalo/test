@@ -923,6 +923,9 @@
       },
       "welcomeTitle": {
         "label": "Bienvenido a tu plataforma de teleconsulta"
+      },
+      "invalidEmail":{
+        "label": "E-mail inválido"
       }
     },
     "rg": {
@@ -2558,6 +2561,9 @@
       },
       "password": {
         "label": "contraseña"
+      },
+      "user":{
+        "label":"E-mail"
       },
       "file": {
         "examen": "exámen",

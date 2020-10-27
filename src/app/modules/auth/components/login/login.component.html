@@ -92,14 +92,14 @@
                 class="form-control"
                 id="username"
                 name="username"
-                placeholder="{{ 'table.user.label' | transloco }}"
+                placeholder="{{ 'common.input.user.label' | transloco }}"
                 [(ngModel)]="user.username"
                 onkeypress="return event.charCode != 32"
                 formControlName="username"
                 [ngClass]="{ 'is-invalid': !formLogin.get('username').valid }"
               />
               <div *ngIf="formLogin.get('username').errors?.email" class="invalid-feedback">
-                Invalid Email
+                {{ 'auth.login.invalidEmail.label' | transloco }}
               </div>
             </div>
             <div class="form-group">
