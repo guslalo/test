@@ -66,7 +66,7 @@
                 [sortable]="false"
               >
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <span [ngStyle]="{ 'word-break': 'break-all' }">{{ row.dateDetails.days }}</span>
+                  <span [ngStyle]="{ 'word-break': 'break-all' }">{{ row.dateDetails.days | transloco}}</span>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column
@@ -367,7 +367,7 @@
                       (change)="onCheckboxChange($event)"
                     />
                     <label class="custom-control-label" for="{{ data.name }}">
-                      {{ data.name }}
+                      {{ data.name | transloco}}
                     </label>
                   </div>
                 </ng-container>
@@ -645,7 +645,7 @@
                       [checked]="data.checked"
                     />
                     <label class="custom-control-label" for="put{{ data.name }}">
-                      {{ data.name }}
+                      {{ data.name | transloco }}
                     </label>
                   </div>
                 </ng-container>

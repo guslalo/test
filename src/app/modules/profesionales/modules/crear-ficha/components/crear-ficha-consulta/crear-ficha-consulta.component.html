@@ -607,7 +607,7 @@
                                   max="60"
                                   name="weight"
                                   formControlName="weight"
-                                  (keyup)="imcCalculate()"
+                                  (keydown)="imcCalculate()"
                                   [attr.disabled]="permisoGuardar === false ? '' : null"    
                                 />
                               </div>
@@ -625,7 +625,7 @@
                                   [attr.disabled]="permisoGuardar === false ? '' : null"
                                   max="60"
                                   formControlName="height"
-                                  (keyup)="imcCalculate()"
+                                  (keydown)="imcCalculate()"
                                 />
                               </div>
                               <div class="form-group col-3">
@@ -1767,7 +1767,6 @@
                       <li class="pl-5">
                         {{ item.value }}
                       </li>
-
                       <li style="display: none;">A medicamentos tipo C</li>
                     </ul>
                   </div>
