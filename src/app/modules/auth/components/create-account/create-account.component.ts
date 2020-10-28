@@ -73,6 +73,10 @@ export class CreateAccountComponent implements OnInit {
   public useTerm:any;
   public privacyTerms:any;
   public telemedicineConsent:any;
+  public ufObject:any;
+  public cityObject:any;
+  public neighborhood:any;
+  public street:any;
 
   // public form:any;
   onClick(index: number): void {
@@ -192,12 +196,15 @@ export class CreateAccountComponent implements OnInit {
       this.userService.getLocationDataFromCep(x).subscribe(
         data => {
           console.log(data)
+          this.ufObject = data.payload.uf
+          this.cityObject = data.payload.city
+          this.neighborhood = data.payload.neighborhood
+          this.street = data.payload.street
         },
         error => {
           console.log(error)
         }
-      )
-      }
+      )}
     );
 
    
