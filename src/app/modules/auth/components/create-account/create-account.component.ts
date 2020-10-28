@@ -15,6 +15,7 @@ import { registerUser } from '../../../../models/registerUser';
 import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-create-account',
@@ -167,6 +168,7 @@ export class CreateAccountComponent implements OnInit {
     this.getCities();
     this.getCountries();
     this.getBreeds();
+    this.getLocationDataFromCep();
 
     this.form.push(
       this.identificationData.controls,
@@ -181,6 +183,33 @@ export class CreateAccountComponent implements OnInit {
     this.useTerm = ['/terms-and-conditions'];
     this.privacyTerms = ['/privacy'];
     this.telemedicineConsent = ['/consent'];
+  }
+
+
+
+  getLocationDataFromCep(){
+    this.addressData.get('cep').valueChanges.subscribe( x =>  {
+      this.userService.getLocationDataFromCep(x).subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+      }
+    );
+
+   
+    /*
+    this.userService.getLocationDataFromCep(cep).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )*/
   }
 
   validateForm() {

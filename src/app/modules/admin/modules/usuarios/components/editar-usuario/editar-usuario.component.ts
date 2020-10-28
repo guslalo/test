@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
+import { months } from 'moment';
 
 const current = new Date();
 
@@ -41,6 +42,7 @@ export class EditarUsuarioComponent implements OnInit {
   registerUf2:any;
   profileSelected: any;
   roomSelected: any;
+  setDate:any;
 
   states: any = [];
   cities: any = [];
@@ -54,19 +56,19 @@ export class EditarUsuarioComponent implements OnInit {
   specialitiesData: any;
 
   currentDate = {
-    year: current.getFullYear(),
-    month: current.getMonth() + 1,
     day: current.getDate(),
+    month: current.getMonth() + 1,
+    year: current.getFullYear()
   };
 
   maxDate = {
-    year: current.getFullYear() - 18,
-    month: current.getMonth() + 1,
     day: current.getDate(),
+    month: current.getMonth() + 1,
+    year: current.getFullYear() - 18 
   };
 
   dateAdapter = new CustomDateAdapter();
-  birthDate: NgbDateStruct;
+  birthDate:NgbDateStruct;
   inmigrationDate: NgbDateStruct;
 
   formUser: any = [];
@@ -355,6 +357,8 @@ export class EditarUsuarioComponent implements OnInit {
             user.identificationData.professionalUfNumber
           );
 
+          
+         
         this.isSchool = user.personalData.isSchool;
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
@@ -363,7 +367,13 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
         this.birthDate = this.dateAdapter.fromModel(user.personalData.birthdate);
-        this.personalData.get('birthdate').setValue(this.birthDate);
+        this.setDate = {
+          day:this.birthDate.year,
+          month:this.birthDate.month,
+          year:this.birthDate.day,
+        }
+        console.log(this.setDate);
+        this.personalData.get('birthdate').setValue(this.setDate);
         this.personalData.get('ufBirth').setValue(user.personalData.ufBirth || null);
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth || null);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
@@ -381,6 +391,8 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
         this.personalData.get('complement').setValue(user.addressData.complement);
         this.waitingRoomsAssigned = user.waitingRooms || [];
+        console.log(this.birthDate );
+        console.log(this.dateAdapter.fromModel(user.personalData.birthdate))
         // console.log(this.waitingRoomsAssigned);
 
         // PROFILES

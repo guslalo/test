@@ -4,7 +4,12 @@ export class CustomDateAdapter {
   fromModel(value: string): NgbDateStruct {
     if (!value) return null;
     let parts = value.split('/');
-    return { year: +parts[0], month: +parts[1], day: +parts[2] } as NgbDateStruct;
+    console.log(value);
+    return { 
+      day: +parts[2],
+      month: +parts[1], 
+      year: +parts[0]
+       } as NgbDateStruct;
   }
 
   toModel(date: NgbDateStruct): string {

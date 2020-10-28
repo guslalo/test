@@ -10,8 +10,17 @@ import { Router } from '@angular/router';
 export class UsersService {
   private users = 'users/';
   private users2 = 'https://reqres.in/api/';
+  private cepUrl = 'v1/identification/location' 
 
   constructor(private http: HttpClient, private router: Router) {}
+
+
+  //cep data
+  getLocationDataFromCep(cep): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('cep',cep);
+    return this.http.get<any>(environment.baseUrl + this.cepUrl, {params:params});
+  }
 
   // get user
   getusers(idUser?: any): Observable<any> {
