@@ -202,7 +202,7 @@
                     <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber" [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid
-                      }" placeholder="#### o +(#)####-####" />
+                      }" placeholder="(##)-####-####" />
                   </div>
                   <div class="form-group col-md-3">
                     <label for="gender">{{ 'account.grender.label' | transloco }}*</label>
@@ -244,7 +244,7 @@
                     <select [attr.disabled]="isForeign ? '' : null" class="form-control" name="municipalityBirth"
                       formControlName="municipalityBirth">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>
@@ -325,7 +325,9 @@
                   <div class="form-group col-md-2">
                     <label for="uf">{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                       (UF) *</label>
-                    <select class="form-control" name="uf" formControlName="uf" [ngClass]="{
+                    <select class="form-control" name="uf" formControlName="uf" 
+                    (change)="ufSelect2($event.target)" 
+                    [ngClass]="{
                         'is-invalid': !personalData.get('uf').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -340,7 +342,7 @@
                         'is-invalid': !personalData.get('city').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                      <option [ngValue]="item._id" *ngFor="let item of cities2">
                         {{ item.name }}
                       </option>
                     </select>
@@ -365,6 +367,15 @@
                         'is-invalid': !personalData.get('streetNumber').valid
                       }" />
                   </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                
+                    <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                    <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                      formControlName="complement" />
+              
+                </div>
                 </div>
               </form>
             </div>
@@ -644,11 +655,13 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
-                    <select class="form-control" name="ufRegistry" formControlName="ufRegistry" [ngClass]="{
+                    <select class="form-control" name="ufRegistry" formControlName="ufRegistry" 
+                    (change)="ufRegistry($event.target)" 
+                    [ngClass]="{
                         'is-invalid': !professionalForm.get('ufRegistry').valid
                       }">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state" *ngFor="let state of states">
+                      <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
@@ -684,14 +697,15 @@
                       }" />
                   </div>
                   <div class="col-md-3">
+                    <!--uf-->
                     <label for="ufProfessionalRegistry">{{
                       'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
                     }}</label>
-                    <select
+                    <select (change)="ufRegistry2($event.target)" 
                       [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
                       class="form-control" name="ufProfessionalRegistry" formControlName="ufProfessionalRegistry">
                       <option [ngValue]="null" disabled>{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state" *ngFor="let state of states">
+                      <option [ngValue]="state._id" *ngFor="let state of states">
                         {{ state.name }}
                       </option>
                     </select>
@@ -717,7 +731,7 @@
                           {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
                         </th>
                         <th scope="col">
-                          {{ 'table.ufReg' | transloco }}
+                          {{ 'table.ufReg.label' | transloco }}
                         </th>
                         <th scope="col">
                           {{ 'profile.regType.label' | transloco }}
@@ -746,7 +760,7 @@
                           {{ registry.course }}
                         </td>
                         <td>
-                          {{ registry.ufRegistry }}
+                          {{ registry.ufRegistry}}
                         </td>
                         <td>
                           {{ registry.type }}

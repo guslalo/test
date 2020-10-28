@@ -256,7 +256,7 @@
                   <div class="form-group col-12 col-md-6">
                     <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }} *</label>
                     <input name="text" name="phoneNumber" id="phoneNumber" type="text" class="form-control"
-                      placeholder="#### o +(#)####-####" [ngClass]="{
+                      placeholder="(##)-####-####" [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
                       }" formControlName="phoneNumber" />
                     <div *ngIf="personalData.controls['phoneNumber'].errors?.required" class="invalid-feedback">
@@ -490,7 +490,7 @@
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group col-12 col-md-6">
+                  <div class="form-group col-12 col-md-12">
                     <label for="street">{{ 'auth.complement.label' |transloco }}</label>
                     <input type="text" name="complement" id="complement" class="form-control" placeholder=""
                       formControlName="complement" />

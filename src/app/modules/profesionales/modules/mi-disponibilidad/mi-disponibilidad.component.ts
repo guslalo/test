@@ -118,6 +118,7 @@ export class MiDisponibilidadComponent implements OnInit {
   //time = { hour: 13, minute: 30 };
 
   daysSelected = [];
+  daysSelectedNoOrder = [];
 
   interval: Array<any> = [
     { min: '5', value: 5 },
@@ -442,6 +443,7 @@ export class MiDisponibilidadComponent implements OnInit {
         for (const day of this.idAvailability.dateDetails.days) {
           let formatDay = day.charAt(0).toUpperCase() + day.slice(1);
           daysSeletected.push({
+            id: day.id,
             checked: true,
             name: formatDay.substring(0, 3),
             value: day,
@@ -452,16 +454,27 @@ export class MiDisponibilidadComponent implements OnInit {
         console.log(daysSeletected);
 
         let filteredDays = this.days.filter((d, index) => {
+          let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value)
           // console.log(d, index);
-          if (daysSeletected.map((item) => item.value).indexOf(this.days[index].value) === -1) {
-            // console.log(true);
+          if (i === -1) {
             return d;
+          }else{
+            daysSeletected[i].id = this.days[index].id
           }
         });
+
 
         this.daysSelected = [...daysSeletected, ...filteredDays].sort((a, b) => {
           return a.id - b.id;
         });
+
+        this.daysSelectedNoOrder = [...daysSeletected, ...filteredDays].sort((a, b) => {
+          return a.id - b.id;
+        });
+
+
+        console.log(this.daysSelectedNoOrder);
+        console.log(this.daysSelected);
 
         this.daysSelected.forEach(e => {
           e.name = this.days.find(d => d.value == e.value).name;
@@ -469,7 +482,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
         this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
 
-        console.log(this.daysSelected);
+       
 
         this.endDate = this.dateAdapter.fromModel(
           moment(this.idAvailability.dateDetails.endDate).add('days').format('YYYY/MM/DD')

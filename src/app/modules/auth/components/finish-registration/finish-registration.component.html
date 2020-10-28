@@ -318,13 +318,12 @@
                       {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label
                     >
                     <div class="input-group dateregister">
-                      <!--[minDate]="minDate"-->
                       <input
                         [placement]="placement"
                         class="form-control"
                         id="birthdate"
                         [maxDate]="maxDate"
-                        [minDate]="minDate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }"
                         placeholder="DD/MM/YYYY"
                         name="birthdate"
                         ngbDatepicker
@@ -352,6 +351,7 @@
                       [attr.disabled]="isForeign ? '' : null"
                       class="form-control"
                       name="ufBirth"
+                      (change)="ufSelect($event.target)"
                       formControlName="ufBirth"
                       [ngClass]="{
                         'is-invalid': !birthData.get('ufBirth').valid && birthData.get('ufBirth').touched
@@ -467,6 +467,7 @@
                     <select
                       class="form-control"
                       name="uf"
+                      (change)="ufSelect($event.target)"
                       formControlName="uf"
                       [ngClass]="{
                         'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
@@ -562,6 +563,14 @@
                       {{ 'account.numeration.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
+                  <div class="form-row">
+                    <div class="form-group col-12 col-md-6">
+                      <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                      <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                        formControlName="complement" />
+                    </div>
+                  </div>
+  
                 </div>
 
                 <div class="row">
@@ -725,27 +734,40 @@
         </button>
       </div>
       <div class="modal-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut tellus sed sapien semper egestas et in nibh.
-        Duis cursus ipsum sagittis, laoreet velit in, rhoncus tellus. Orci varius natoque penatibus et magnis dis
-        parturient montes, nascetur ridiculus mus. Ut ur ornare. Pellentesque maximus erat ex, non pulvinar sapien
-        fermentum ut. Vestibulum fringilla ac urna at sagittis. Nullam tincidunt tellus quis aliquet sollicitudin. Nulla
-        eget fermentum urna. Aenean sit amet orci posuere, pellentesque risus ut, blandit risus. Nulla molestie pharetra
-        orci, ut ornare massa porttitor non. Suspendisse per. In hac habitasse platea dictumst. Cras consectetur luctus
-        nibh, nec bibendum justo facilisamet neque vel nisl iaculis porttitor. Integer purus ante, interdum sollicitudin
-        nibh faucibus, sollicitudin porta lorem. Maecenas quis nulla mattis justo laoreet viverra. Duis vitae lectus nec
-        nulla viverra congue in sit amet quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu
-        laoreet velit. In ac orci eget ort. Suspendisse potenti. Etiam ac rutrum nisl. Maecenas sed neque ex. Morbi
-        vitae nulla ut augue suscipit elementum. Quisque nulla arcu, mattis ut vehicula at, laoreet et est. Quisque
-        lobortis laoreet odio at pretium. In hac habitasse platea dictumst. Nulla aliquet, dolor non condimentum
-        aliquam, diam nibh scelerisque est, et sagittis sem eros eleifend erat. Quisque iaculis faucibus eros non
-        malesuada. Sed tellus quam, egestas nec leo in, hendrerit euismod sem. Curabitur aliquet tellus sed ante
-        lacinia, eget posuere tellus viverra. Mauris sit amet eros rutrum, tempus nibh vitae,
+        <div class="row">
+          <div class="col col-12 col-md-12 col-sm-12 col-lg-12">
+            <h4>{{'common.confirmDocsCreateAccount.label' | transloco}}</h4>
+          </div>
+          <div class="col-lg-12">
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="terms" [(ngModel)]="termsAccepted" />
+                <label class="custom-control-label" for="terms"><a [routerLink]="useTerm" target="_blank"
+                    class="text-destacado">{{'auth.accept.termsAndconditions.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="privacy" [(ngModel)]="privacyAccepted" />
+                <label class="custom-control-label" for="privacy"><a [routerLink]="privacyTerms"  target="_blank"
+                    class="text-destacado">{{'auth.accept.privacyPolicy.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="consent" [(ngModel)]="consentAccepted" />
+                <label class="custom-control-label" for="consent"><a [routerLink]="telemedicineConsent"  target="_blank"
+                    class="text-destacado">{{'auth.accept.consent.label' | transloco}}</a></label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           {{ 'clinicalFile.decline.label' | transloco }}
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="crearCuenta()">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"  [disabled]="!termsAccepted || !privacyAccepted || !consentAccepted" (click)="crearCuenta()">
           {{ 'auth.acceptAndCreate.label' | transloco }}
         </button>
       </div>

@@ -178,17 +178,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   politicas(){
-    this.clinicService.getPoliticas(this.clinic).subscribe(
-      data => {
-        console.log(data)
-        this.useTerm = data.payload.useTerm;
-        this.privacyTerms = data.payload.privacyTerms;
-        this.telemedicineConsent = data.payload.telemedicineConsent;
-      },
-      error => {
-        console.log(error)
-      }
-    )
+    this.useTerm = ['/terms-and-conditions'];
+    this.privacyTerms = ['/privacy'];
+    this.telemedicineConsent = ['/consent'];
   }
 
   validateForm() {
@@ -221,6 +213,7 @@ export class CreateAccountComponent implements OnInit {
 
     if (this.identificationData.get('document').value === 'rgRegistry') {
       this.identificationData.get('idDocumentNumber').enable();
+      this.identificationData.get('issuingBody').setValidators([Validators.required]);
       this.identificationData.get('issuingBody').enable();
     } else {
       this.identificationData.get('passport').reset();

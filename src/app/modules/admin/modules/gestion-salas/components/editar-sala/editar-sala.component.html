@@ -164,7 +164,7 @@
         />
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
           <mat-option *ngFor="let item of professionals" [value]="item">
-            {{ item.personalData.name + ' ' + item.personalData.lastName }}
+            {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
           </mat-option>
         </mat-autocomplete>
         <div class="searchBox">
@@ -187,7 +187,7 @@
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of professionalsData; let i = index">
-        {{ item.personalData.name + ' ' + item.personalData.lastName }}
+        {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
         <button type="button" class="btn btn-light btn-sm float-right" (click)="removeProfessional(i)">
           Eliminar <img src="assets/img/delete.svg" />
         </button>
@@ -207,7 +207,7 @@
         />
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
           <mat-option *ngFor="let item of coordinators" [value]="item">
-            {{ item.personalData.name + ' ' + item.personalData.lastName }}
+            {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
           </mat-option>
         </mat-autocomplete>
         <div class="searchBox">
@@ -232,7 +232,7 @@
     </div>
     <div class="list-group list-group-flush">
       <li class="list-group-item" *ngFor="let item of coordinatorsData; let i = index">
-        {{ item.personalData.name + ' ' + item.personalData.lastName }}
+        {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
         <button type="button" class="btn btn-light btn-sm float-right" (click)="removeCoordinator(i)">
           Eliminar <img src="assets/img/delete.svg" />
         </button>

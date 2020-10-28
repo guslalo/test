@@ -13,6 +13,7 @@ import { PacienteGuard } from '../../guards/paciente.guard';
 import { AdminGuard } from '../../guards/admin.guard';
 import { CoordinatorGuard } from '../../guards/coordinator.guard';
 import { CambiarClaveComponent } from '../pacientes/cambiar-clave/cambiar-clave.component';
+import { LegalsComponent} from './components/legals/legals.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,18 @@ const routes: Routes = [
       },
       { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] }
     ],
+  },
+  {
+    path: 'terms-and-conditions',
+    component: LegalsComponent
+  },
+  {
+    path: 'privacy',
+    component: LegalsComponent
+  },
+  {
+    path: 'consent',
+    component: LegalsComponent
   }
 ];
 

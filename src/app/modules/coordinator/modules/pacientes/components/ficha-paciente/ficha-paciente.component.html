@@ -150,7 +150,7 @@
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
                   <br />
-                  {{ patientRecord.personalData?.lastName || null }}
+                  {{ patientRecord.personalData?.lastName || null }} {{ patientRecord.personalData?.secondLastName || null }}
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
@@ -369,7 +369,7 @@
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
-                      (row.patientDetails.userDetails[0].secondLastName || row.patientDetails.userDetails[0].lastName)
+                      (row.patientDetails.userDetails[0].secondLastName || row.patientDetails.userDetails[0].lastName || row.patientDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -477,6 +477,97 @@
               <ng-template #noSickness>
                 <div class="collapseCustom p-4">
                   {{ 'dashboard.home.myHealth.deceases.label' | transloco }}:
+                  <span class="text-primary float-right">
+                    {{ 'clinicalFile.notPresent.label' | transloco }}
+                  </span>
+                </div>
+              </ng-template>
+
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div class="collapseCustom" *ngIf="antecedentsRecord.hasAllergies; else noAllergies">
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#allergies"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="allergies"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{ 'dashboard.home.myHealth.allergies.label' | transloco }}
+                </a>
+                <div class="collapse show" id="allergies">
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.allergies">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <ng-template #noAllergies>
+                <div class="collapseCustom p-4">
+                  {{ 'dashboard.home.myHealth.allergies.label' | transloco }}:
+                  <span class="text-primary float-right">
+                    {{ 'clinicalFile.notPresent.label' | transloco }}
+                  </span>
+                </div>
+              </ng-template>
+
+              <!--/colappsed-->
+
+              <!-- colappsed-->
+              <div
+                class="collapseCustom"
+                *ngIf="antecedentsRecord.hasSurgicalInterventions; else noSurgicalInterventions"
+              >
+                <a
+                  class="p-4"
+                  data-toggle="collapse"
+                  href="#allergies"
+                  role="button"
+                  aria-expanded="true"
+                  aria-controls="allergies"
+                >
+                  <svg
+                    class="mr-2"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                      fill="#7D7D7D"
+                    />
+                  </svg>
+                  {{ 'dashboard.home.myHealth.surgicalInterventions.label' | transloco }}
+                </a>
+                <div class="collapse show" id="surgicalInterventions">
+                  <ul class="antecedentes" *ngFor="let item of antecedentsRecord.surgicalInterventions">
+                    <li class="pl-5">{{ item.value }}</li>
+                  </ul>
+                </div>
+              </div>
+              <ng-template #noSurgicalInterventions>
+                <div class="collapseCustom p-4">
+                  {{ 'dashboard.home.myHealth.surgicalInterventions.label' | transloco }}:
                   <span class="text-primary float-right">
                     {{ 'clinicalFile.notPresent.label' | transloco }}
                   </span>
@@ -883,7 +974,7 @@
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
-                                    {{ item.professional?.lastName }}
+                                    {{ item.professional?.lastName }} {{ item.professional?.secondlastName }}
                                   </p>
                                   <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
                                     <ng-container *ngIf="item.isActive; else inactivo">

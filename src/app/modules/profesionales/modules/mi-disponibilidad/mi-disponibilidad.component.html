@@ -284,7 +284,7 @@
             <div class="row">
               <div class="form-group col">
                 <label for="startDate">{{
-                  'clinicalFile.patientData.tabs.services.table.date.label' | transloco
+                  'common.startDate.label' | transloco
                 }}</label>
                 <div class="input-group">
                   <input class="form-control" type="text" placeholder="DD/MM/YYYY" id="startDate" name="startDate"
@@ -407,7 +407,7 @@
           </button>
           <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="crearAvailability()"
             [disabled]="!createAvailability.valid && !this.daysSelected.length">
-            Crear disponibilidad
+            {{ 'disponibility.modal.create.btnCreate.label' | transloco }}
           </button>
         </div>
       </div>
@@ -502,14 +502,19 @@
                 </p>
               </div>
               <div class="col">
-                <ng-container *ngFor="let data of daysSelected">
+                <ng-container *ngFor="let data of daysSelected "> <!--let i = index-->
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
-                      (change)="data.checked = !data.checked" [checked]="data.checked" />
+                    <input id="put{{ data.name }}" 
+                      class="custom-control-input" type="checkbox" 
+                      [value]="data.value"
+                      (change)="data.checked = !data.checked" 
+                      [checked]="data.checked" />
                     <label class="custom-control-label" for="put{{ data.name }}">
                       {{ data.name | transloco}}
-                    </label>
+                    </label> 
                   </div>
+                  
+                   
                 </ng-container>
               </div>
             </div>

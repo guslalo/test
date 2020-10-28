@@ -1,4 +1,7 @@
 {
+  "cie10":{
+    "cie10":" CIE10"
+  },
   "history": {
     "tabs": {
       "latest": {
@@ -16,9 +19,9 @@
     }
   },
   "clinicalFile": {
-    "tabs":{
-      "antecentesFromProfessional":"Antecedentes registrados por el profesional de salud",
-      "antecentesFromPatient":"Antecedentes registrados por el paciente"
+    "tabs": {
+      "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
+      "antecentesFromPatient": "Antecedentes registrados por el paciente"
     },
     "patientData": {
       "tabs": {
@@ -107,6 +110,12 @@
               "label": "Antecedentes",
               "diseases": {
                 "label": "Enfermedades"
+              },
+              "allergies": {
+                "label": "Alergias"
+              },
+              "surgicalInterventions": {
+                "label": "Intervenciones Quirúrgicas"
               },
               "habits": {
                 "label": "Hábitos de salud"
@@ -230,7 +239,15 @@
               "label": "IMC"
             },
             "imcClasification": {
-              "label": "Clasificación IMC"
+              "label": "Clasificación IMC",
+              "values":{
+                "low":"Bajo peso",
+                "normal":"Peso normal",
+                "over":"Sobrepeso",
+                "type1":"Obesidad tipo I",
+                "type2":"Obesidad tipo II",
+                "type3":"Obesidad tipo III (mórbida)"
+              }
             }
           },
           "btnDownload": {
@@ -906,6 +923,9 @@
       },
       "welcomeTitle": {
         "label": "Bienvenido a tu plataforma de teleconsulta"
+      },
+      "invalidEmail":{
+        "label": "E-mail inválido"
       }
     },
     "rg": {
@@ -1244,6 +1264,12 @@
         "deceases": {
           "label": "Enfermedades"
         },
+        "allergies": {
+          "label": "Alergias"
+        },
+        "surgicalInterventions": {
+          "label": "Intervenciones Quirúrgicas"
+        },
         "familiHistory": {
           "label": "Antecedentes Familares"
         },
@@ -1257,7 +1283,7 @@
           "label": "Ocupacionales"
         },
         "others": {
-          "label": "Alergias - Intervenciones Quirúrgicas - Otros"
+          "label": "Otros"
         },
         "btnComplete": {
           "label": "Completar datos"
@@ -1957,7 +1983,7 @@
               "label": "Condiciones de uso"
             },
             "hint": {
-              "label": "Se recomienda Documentos PDF y formato word."
+              "label": "Se recomienda Documentos HTML y formato HTM."
             },
             "privacy": {
               "label": "Condiciones de Priivacidad"
@@ -2523,6 +2549,7 @@
     }
   },
   "common": {
+    "withOut": "sin resultados",
     "user": {
       "sessionExpired": {
         "label": "Sesión expirada"
@@ -2535,11 +2562,14 @@
       "password": {
         "label": "contraseña"
       },
-      "file":{
-        "examen":"exámen",
-        "documento":"documento",
-        "seleccionar":"seleccionar",
-        "buscar":"Buscar"
+      "user":{
+        "label":"E-mail"
+      },
+      "file": {
+        "examen": "exámen",
+        "documento": "documento",
+        "seleccionar": "seleccionar",
+        "buscar": "Buscar"
       }
     },
     "button": {
@@ -3543,8 +3573,14 @@
     "cityReq": {
       "label": "Ciudad"
     },
+    "city":{
+      "label": "Ciudad"
+    },
     "neighborhoodReq": {
       "label": "Barrio"
+    },
+    "neighborhood":{
+      "label":"Barrio"
     },
     "streetReq": {
       "label": "Calle es necesario"

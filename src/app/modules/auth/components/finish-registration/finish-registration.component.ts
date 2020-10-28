@@ -58,13 +58,20 @@ export class FinishRegistrationComponent implements OnInit {
   birthData: FormGroup;
   addressData: FormGroup;
   passwordData: FormGroup;
+  termsAccepted: boolean = false;
+  privacyAccepted: boolean = false;
+  consentAccepted: boolean = false;
+  public clinic:string;
   form = [];
   minDate = undefined;
   maxDate = undefined;
-
+  public useTerm:any;
+  public privacyTerms:any;
+  public telemedicineConsent:any;
   prePatientId = this.routerAct.snapshot.queryParamMap.get('patient');
 
   ngOnInit(): void {
+    this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
       idDocumentNumber: [null, Validators.required],
@@ -75,13 +82,13 @@ export class FinishRegistrationComponent implements OnInit {
       extraIdDocument: ['', null],
     });
     this.personalData = this._formBuilder.group({
-      name: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      lastName: [null, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)],
-      secondLastName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
-      motherName: [null, [Validators.required, Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)]],
+      name: [null, [Validators.required,]],
+      lastName: [null, ],
+      secondLastName: [null, [Validators.required ]],
+      motherName: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      phoneNumber: [null, [Validators.required]],
       breed: [null, Validators.required],
     });
     this.birthData = this._formBuilder.group({
@@ -141,6 +148,28 @@ export class FinishRegistrationComponent implements OnInit {
 
     // console.log(this.prePatientId);
     this.getPrePatientData(this.prePatientId);
+  }
+  politicas(){
+    this.useTerm = ['/terms-and-conditions'];
+    this.privacyTerms = ['/privacy'];
+    this.telemedicineConsent = ['/consent'];
+  }
+  ufSelect(id) {
+    let idSelected = id.value.split(':');
+    console.log(idSelected[1]);
+    this.getCitiesforId(idSelected[1].trim());
+  }
+  getCitiesforId(stateId) {
+    this.userService.getCitiesForUf(stateId).subscribe(
+      (data) => {
+        console.log(data);
+        this.cities = data.payload;
+        //this.citiesFilter = data.payload;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   validateForm() {
@@ -248,6 +277,7 @@ export class FinishRegistrationComponent implements OnInit {
         neighborhood: this.form[3].neighborhood.value,
         street: this.form[3].street.value,
         streetNumber: parseInt(this.form[3].streetNumber.value),
+        complement: ['', null]
       },
       password: this.form[4].password.value,
     };
@@ -326,14 +356,8 @@ export class FinishRegistrationComponent implements OnInit {
         this.personalData.get('phoneNumber').setValue(patient.phoneNumber);
 
         const current = new Date();
-        this.minDate = {
-          year: current.getFullYear() - patient.age,
-          month: 1,
-          day: 1,
-        };
-
         this.maxDate = {
-          year: current.getFullYear() - patient.age + 1,
+          year: current.getFullYear() - 18,
           month: current.getMonth() + 1,
           day: current.getDate(),
         };

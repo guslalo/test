@@ -178,8 +178,8 @@
                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
                         />
                       </svg>
-                      {{ item.professionalDetails.userDetails[0]?.name }}
-                      {{ item.professionalDetails.userDetails[0]?.lastName }}
+                      {{ item.professionalDetails.userDetails[0]?.name }} 
+                      {{ item.professionalDetails.userDetails[0]?.secondLastName }}
                       <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                     </td>
 
@@ -522,7 +522,7 @@
                                 <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                 <p class="m-0 text-left" *ngIf="item.professional">
                                   {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
-                                  {{ item.professional.lastName }}
+                                  {{ item.professional.secondLastName }}
                                 </p>
                                 <div class="btn btn-primary btn-sm rounded-pill float-left">
                                   <ng-container *ngIf="item.isActive; else inactivo">

@@ -160,14 +160,12 @@ export class IndexComponent implements OnInit {
   }
 
   setPatient(patient) {
-    console.log(patient);
     this.patientSelected = patient.userId;
   }
 
   getSpecialties(professional) {
     this.professionalSelected = professional.userData[0]._id;
     let userId = professional.userData[0]._id;
-    console.log(userId);
 
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
@@ -183,7 +181,6 @@ export class IndexComponent implements OnInit {
   getAppointments() {
     this.appointmentsService.getAllAppointments(1).subscribe(
       (data) => {
-        console.log(data.payload);
         this.tempAppointments = [...data.payload];
         this.appointments = data.payload;
         // console.log(this.appointments);
@@ -219,7 +216,6 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.postReserveCustomPatient(reserve).subscribe(
       (data) => {
         this.getAppointments();
-        console.log(data);
       },
       (error) => {
         console.log(error);
@@ -260,7 +256,6 @@ export class IndexComponent implements OnInit {
       .filter((item) => {
         if (this.appointmentDateSelected) {
           const date = this.dateAdapter.toModel(this.appointmentDateSelected);
-          console.log(date, item.dateDetails.date);
           if (moment(item.dateDetails.date).format('YYYY/MM/DD') === date) {
             return item;
           }

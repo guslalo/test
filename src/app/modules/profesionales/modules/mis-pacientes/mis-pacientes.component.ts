@@ -46,18 +46,18 @@ export class MisPacientesComponent implements OnInit {
       isTutor: [false],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      secondLastName: ['', Validators.required],
-      phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+      secondLastName: ['', ],
+      phoneNumber: [null, [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
-      age: [18, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
+      age: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
     });
   }
 
   fetchPatients() {
     this.patientService.getPatientsForProfesional().subscribe(
       (data) => {
-        // console.log(data);
+         console.log(data);
         // NO PATIENTS FOUND
         if (Array.isArray(data.payload)) {
           this.tempPatients = [...data.payload];
@@ -168,6 +168,7 @@ export class MisPacientesComponent implements OnInit {
               patient.identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
             patient.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+            patient.personalData.secondLastName.toLowerCase().indexOf(searchTerm) !== -1 ||
             patient.personalData.phoneNumber.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
             !searchTerm
           );

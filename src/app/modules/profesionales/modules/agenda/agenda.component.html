@@ -259,7 +259,7 @@
                                 <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                 <p class="m-0 text-left">
                                   {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
-                                  {{ item.professional.lastName }}
+                                  {{ item.professional.lastName }} {{ item.professional.secondLastName }}
                                 </p>
                                 <div class="btn btn-primary btn-sm rounded-pill float-left">
                                   <ng-container *ngIf="item.isActive; else inactivo">

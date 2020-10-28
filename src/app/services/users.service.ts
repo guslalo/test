@@ -40,6 +40,25 @@ export class UsersService {
     return this.http.get<any>(environment.baseUrl + 'v1/cities', {params:params});
   }
 
+  getCityForId(cityId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('cityId',cityId);
+    return this.http.get<any>(environment.baseUrl + 'v1/cities', {params:params});
+  }
+
+  getStatesId(stateId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('stateId',stateId);
+    return this.http.get<any>(environment.baseUrl + 'v1/states', {params:params});
+  }
+
+  getStatesId2(stateId): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('stateId',stateId);
+    return this.http.get<any>(environment.baseUrl + 'v1/states', {params:params});
+  }
+
+
   getBreeds(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + 'v1/breeds');
   }

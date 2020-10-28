@@ -36,6 +36,16 @@ body {
 .img-fluid {
   max-width: 106px;
 }
+.hyphenation {
+  word-break: break-all;
+    /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 .nav {
   a {
     color: #3f3f3f;
@@ -154,7 +164,7 @@ app-layout {
     //flex: 0 1 auto;
     box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.17);
     //min-height: 100%; //calc(100vh - 80px);
-    max-width: 250px;
+    max-width: 251px;
     min-width: 70px;
     //height: calc(100% - 80px);
     transition: width 0.2s;

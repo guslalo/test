@@ -38,14 +38,15 @@
                 <ng-container *ngIf="appointmentDetail.administrativeDetails.waitingRoomId === null; else salaEspera">
                   <div class="col-4 text-center">
                     <div class="boxImg">
-                    <ng-container *ngIf="appointmentDetail.professionalDetails.userDetails[0].photo === null; else Photo">
-                      <img src="assets/img/profile.png" />
-                    </ng-container>
-                    <ng-template #Photo>
-                      <img src="{{ appointmentDetail.professionalDetails.userDetails[0].photo }}" />
-                      
-                    </ng-template>
-                  </div>
+                      <ng-container
+                        *ngIf="appointmentDetail.professionalDetails.userDetails[0].photo === null; else Photo"
+                      >
+                        <img src="assets/img/profile.png" />
+                      </ng-container>
+                      <ng-template #Photo>
+                        <img src="{{ appointmentDetail.professionalDetails.userDetails[0].photo }}" />
+                      </ng-template>
+                    </div>
                   </div>
 
                   <div class="col-5">
@@ -53,8 +54,8 @@
                       class="p-0 font-weight-bold"
                       id="{{ appointmentDetail.professionalDetails.userDetails[0].userId }}"
                     >
-                      {{ appointmentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                      {{ appointmentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
+                      {{ appointmentDetail.professionalDetails.userDetails[0].name | uppercase }} 
+                      {{ appointmentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
                     </p>
                     <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                     <ul class="simple-list">
@@ -436,6 +437,90 @@
                       <li style="display: none;">A medicamentos tipo C</li>
                     </ul>
                   </div>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom border-dark">
+                  <a
+                    class="p-3"
+                    data-toggle="collapse"
+                    href="#allergies"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    <svg
+                      class="mr-2"
+                      width="15"
+                      height="9"
+                      viewBox="0 0 15 9"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+                    {{ 'clinicalFile.patientData.tabs.patientHistory.allergies.label' | transloco }}
+                  </a>
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div class="collapse" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                      <ul class="antecedentes">
+                        <li class="pl-5">
+                          {{ item.value }}
+                        </li>
+                        <li style="display: none;">A medicamentos tipo C</li>
+                      </ul>
+                    </div>
+                  </ng-container>
+                </div>
+                <!--/colappsed-->
+
+                <!-- colappsed-->
+                <div class="collapseCustom border-dark">
+                  <a
+                    class="p-3"
+                    data-toggle="collapse"
+                    href="#surgicalInterventions"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    <svg
+                      class="mr-2"
+                      width="15"
+                      height="9"
+                      viewBox="0 0 15 9"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
+                        fill="#7D7D7D"
+                      />
+                    </svg>
+                    {{ 'clinicalFile.patientData.tabs.patientHistory.surgicalInterventions.label' | transloco }}
+                  </a>
+                  <ng-container *ngIf="antecedentesGeneral">
+                    <div
+                      class="collapse"
+                      id="surgicalInterventions"
+                      *ngFor="let item of antecedentesGeneral.surgicalInterventions"
+                    >
+                      <ul class="antecedentes">
+                        <li class="pl-5">
+                          {{ item.value }}
+                        </li>
+                        <li style="display: none;">A medicamentos tipo C</li>
+                      </ul>
+                    </div>
+                  </ng-container>
                 </div>
                 <!--/colappsed-->
 

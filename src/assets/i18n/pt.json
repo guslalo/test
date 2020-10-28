@@ -1,4 +1,7 @@
 {
+  "cie10":{
+    "cie10":" CID10"
+  },
   "history": {
     "tabs": {
       "latest": {
@@ -16,9 +19,9 @@
     }
   },
   "clinicalFile": {
-    "tabs":{
-      "antecentesFromProfessional":"Antecedentes registrados pelo profissional de saúde",
-      "antecentesFromPatient":"Antecedentes registrados pelo paciente"
+    "tabs": {
+      "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
+      "antecentesFromPatient": "Antecedentes registrados pelo paciente"
     },
     "patientData": {
       "tabs": {
@@ -106,16 +109,22 @@
             "background": {
               "label": "Antecedentes",
               "diseases": {
-                "label": "Doenças"
+                "label": "Comorbidades"
+              },
+              "allergies": {
+                "label": "Alergias"
+              },
+              "surgicalInterventions": {
+                "label": "Intervenções cirúrgicas"
               },
               "habits": {
-                "label": "Hábitos de saúde"
+                "label": "Fatores de risco"
               },
               "meds": {
-                "label": "Medicamentos"
+                "label": "Medicamentos em uso"
               },
               "occupational": {
-                "label": "Ocupacionais"
+                "label": "Ocupaçao principal"
               },
               "family": {
                 "label": "Antecedentes familiares"
@@ -230,7 +239,15 @@
               "label": "IMC"
             },
             "imcClasification": {
-              "label": "Classificação IMC"
+              "label": "Classificação IMC",
+              "values":{
+                "low":"Abaixo do peso",
+                "normal":"Peso normal",
+                "over":"Acima do peso",
+                "type1":"Obesidade I",
+                "type2":"Obesidade II (severa)",
+                "type3":"Obesidade III (mórbida)"
+              }
             }
           },
           "btnDownload": {
@@ -246,10 +263,10 @@
             "label": "Antecedentes familiares"
           },
           "meds": {
-            "label": "Medicamentos"
+            "label": "Medicamentos em uso"
           },
           "habits": {
-            "label": "Hábitos de saúde"
+            "label": "Fatores de risco"
           }
         },
         "myHealth": {
@@ -468,13 +485,13 @@
       "label": "Consulta"
     },
     "serviceReason": {
-      "label": "Motivo da consulta:"
+      "label": "Queixa principal:"
     },
     "serviceObjetive": {
       "label": "Objetivo da consulta"
     },
     "anamnesis": {
-      "label": "Anamnese"
+      "label": "História da Moléstia Atual (HMA)"
     },
     "nutritionalState": {
       "label": "Estado nutricional"
@@ -483,13 +500,13 @@
       "label": "Exame físico"
     },
     "labAspects": {
-      "label": "Aspectos laboratoriais de destaque"
+      "label": "Resultado exames laboratoriais e/ou imagen"
     },
     "plan": {
-      "label": "Plano"
+      "label": "Plano terapêutico"
     },
     "comments": {
-      "label": "Comentários"
+      "label": "Informaçoes adicionais de diagnóstico"
     },
     "noStoredNotes": {
       "label": "Há notas inseridas"
@@ -906,6 +923,9 @@
       },
       "welcomeTitle": {
         "label": "Bem vindo a Plataforma de Teleconsulta"
+      },
+      "invalidEmail":{
+        "label": "E-mail inválido"
       }
     },
     "rg": {
@@ -1243,22 +1263,28 @@
         "title": "Minha saúde",
         "label": "Essa será a informação que os profissionais verão para melhor atendê-lo",
         "deceases": {
-          "label": "Doenças"
+          "label": "Comorbidades"
+        },
+        "allergies": {
+          "label": "Alergias"
+        },
+        "surgicalInterventions": {
+          "label": "Intervenções cirúrgicas"
         },
         "familiHistory": {
           "label": "Antecedentes familiares"
         },
         "meds": {
-          "label": "Medicamentos"
+          "label": "Medicamentos em uso"
         },
         "healthHabits": {
-          "label": "Hábitos de saúde"
+          "label": "Fatores de risco"
         },
         "occupationals": {
-          "label": "Ocupacionais"
+          "label": "Ocupaçao principal"
         },
         "others": {
-          "label": "Alergias - Intervenções cirúrgicas - Outros"
+          "label": "Outros"
         },
         "btnComplete": {
           "label": "Completar dados"
@@ -1958,7 +1984,7 @@
               "label": "Condições de uso"
             },
             "hint": {
-              "label": "É recomendável documentos PDF ou Word."
+              "label": "É recomendável documentos HTML ou HTM."
             },
             "privacy": {
               "label": "Política de privacidade"
@@ -2486,7 +2512,7 @@
       "label": "Marque uma consulta"
     },
     "healthHabits": {
-      "label": "Hábitos de saúde"
+      "label": "Fatores de risco"
     },
     "anamnesis": {
       "label": "Anamnese"
@@ -2524,6 +2550,7 @@
     }
   },
   "common": {
+    "withOut": "sem resultados",
     "user": {
       "sessionExpired": {
         "label": "Sessão expirada"
@@ -2536,11 +2563,14 @@
       "password": {
         "label": "Senha"
       },
-      "file":{
-        "examen":"exame",
-        "documento":"documento",
-        "seleccionar":"selecionar",
-        "buscar":"buscar"
+      "user":{
+        "label":"E-mail"
+      },
+      "file": {
+        "examen": "exame",
+        "documento": "documento",
+        "seleccionar": "selecionar",
+        "buscar": "buscar"
       }
     },
     "button": {
@@ -2967,10 +2997,10 @@
         "label": "°C - ° F"
       },
       "kgLb": {
-        "label": "Kg - Lb"
+        "label": "Kg"
       },
       "mFt": {
-        "label": "m ou pés"
+        "label": "m"
       },
       "searchPatient": {
         "label": "Buscar paciente"

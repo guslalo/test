@@ -29,14 +29,16 @@ export class FichaConsultaComponent implements OnInit {
   public photoUrlBase = environment.photoUrlBase;
   public arrayDocuments: any;
   public urlSibrare: any;
-  public descargar:any;
+  public descargar: any;
 
-  public familiarHistoryByProfessional:any;
-  public healthHabitsByProfessional:any;
-  public medicinesByProfessional:any;
-  public occupationalByProfessional:any;
-  public othersByProfessional:any;
-  public sicknessByProfessional:any;
+  public sicknessByProfessional: any;
+  public allergiesByProfessional: any;
+  public surgicalInterventionsByProfessional: any;
+  public familiarHistoryByProfessional: any;
+  public healthHabitsByProfessional: any;
+  public medicinesByProfessional: any;
+  public occupationalByProfessional: any;
+  public othersByProfessional: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,12 +95,14 @@ export class FichaConsultaComponent implements OnInit {
     this.appointmentsService.getAntecedentByProfessional(appointmentId).subscribe(
       (data) => {
         console.log(data);
+        this.sicknessByProfessional = data.payload.sickness;
+        this.allergiesByProfessional = data.payload.allergies;
+        this.surgicalInterventionsByProfessional = data.payload.surgicalInterventions;
         this.familiarHistoryByProfessional = data.payload.familiarHistory;
         this.healthHabitsByProfessional = data.payload.healthHabits;
         this.medicinesByProfessional = data.payload.medicines;
         this.occupationalByProfessional = data.payload.occupational;
         this.othersByProfessional = data.payload.others;
-        this.sicknessByProfessional = data.payload.sickness;
       },
       (error) => {
         console.log(error);
@@ -161,9 +165,9 @@ export class FichaConsultaComponent implements OnInit {
       (data) => {
         this.urlSibrare = data.payload[0].documento;
         this.spinner.hide();
-        if(this.descargar === true){     
-          return  window.open(this.urlSibrare);
-        }else{
+        if (this.descargar === true) {
+          return window.open(this.urlSibrare);
+        } else {
           console.log(this.urlSibrare);
         }
       },
@@ -172,6 +176,4 @@ export class FichaConsultaComponent implements OnInit {
       }
     );
   }
-
-  
 }

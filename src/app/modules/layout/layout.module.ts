@@ -16,9 +16,10 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from '../../shared/interceptor.service';
 import { HeaderComponent } from './components/header/header.component';
+import { LegalsComponent } from './components/legals/legals.component';
 
 @NgModule({
-  declarations: [LayoutComponent, HeaderComponent],
+  declarations: [LayoutComponent, HeaderComponent, LegalsComponent],
   imports: [
     CommonModule,
     HttpClientModule,

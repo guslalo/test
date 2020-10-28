@@ -19,9 +19,10 @@
 <div class="row">
   <div class="col-12">
     <div class="row">
-      <div class="col-12 col-md-3"><!---->
+      <div class="col-12 col-md-3">
+        <!---->
         <input
-        *ngIf="tempPatients"
+          *ngIf="tempPatients"
           [(ngModel)]="searchTerm"
           type="text"
           class="form-control"
@@ -89,7 +90,7 @@
                           />
                         </ng-template>
                         {{
-                          row.personalData.name + ' ' + (row.personalData.secondLastName || row.personalData.lastName)
+                          row.personalData.name + ' ' + (row.personalData.secondLastName)
                         }}
                       </a>
                     </ng-template>
@@ -184,7 +185,7 @@
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <img class="mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
-                      {{ row.name + ' ' + (row.secondLastName || row.lastName) }}
+                      {{ row.name + ' ' + (row.secondLastName ) }}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column
@@ -194,10 +195,10 @@
                     name="{{ 'table.email.label' | transloco }}"
                   >
                   </ngx-datatable-column>
-                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
-                    <ng-template let-row="row" ngx-datatable-cell-template>
+                  <ngx-datatable-column [resizeable]="false" [flexGrow]="1" prop="age" name="{{ 'table.age.label' | transloco }}">
+                    <!--<ng-template let-row="row" ngx-datatable-cell-template>
                       {{ moment().diff(row.age, 'year') }}
-                    </ng-template>
+                    </ng-template>-->
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
                     <ng-template let-row="row" ngx-datatable-cell-template>
@@ -320,7 +321,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-center w-100 mt-1">
-            {{ !patientIsEdit ? 'common.button.create.label' : ('common.button.update.label' | transloco) }}
+            {{
+              !patientIsEdit ? ('common.button.create.label' | transloco) : ('common.button.update.label' | transloco)
+            }}
             {{ 'common.patient.label' | transloco }}
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -448,7 +451,7 @@
             (click)="savePatient()"
             [disabled]="!patientForm.valid"
           >
-            {{ !patientIsEdit ? 'common.button.create.label' : 'common.button.update.label' }}
+            {{ !patientIsEdit ? ('common.button.create.label' | transloco) : 'common.button.update.label' }}
             {{ 'common.patient.label' | transloco }}
           </button>
         </div>
@@ -457,6 +460,4 @@
   </div>
 </div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
-
-</ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff"> </ngx-spinner>
