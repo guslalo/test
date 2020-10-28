@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+ import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -260,10 +260,10 @@ export class UsuariosComponent implements OnInit {
       .filter((user) => {
         // console.log(user);
         return (
-          user.nationalId.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
-          user.fullName.toLowerCase().indexOf(searchTerm) !== -1 ||
-          user.email.toLowerCase().indexOf(searchTerm) !== -1 ||
-          user.phone.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.nationalId?.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.fullName?.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.email?.toLowerCase().indexOf(searchTerm) !== -1 ||
+          user.phone?.toString().toLowerCase().indexOf(searchTerm) !== -1 ||
           !searchTerm
         );
       });
