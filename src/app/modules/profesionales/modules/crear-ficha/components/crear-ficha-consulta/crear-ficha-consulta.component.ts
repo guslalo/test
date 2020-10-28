@@ -1074,25 +1074,28 @@ export class CrearFichaConsultaComponent implements OnInit {
   //Calcular Indice de Masa Corporal
   imcCalculate(){
     //Obtengo el valor de la altura y el peso
-    let weight = this.nutricion.controls['weight'].value || 0;
-    let height = this.nutricion.controls['height'].value || 0.1;
+    let weight = this.nutricion.controls['weight'].value || "0";
+    let height = this.nutricion.controls['height'].value || "0.1";
+    weight = parseFloat(weight.replace(',','.'))
+    height = parseFloat(height.replace(',','.'))
     // formula para el calculo
-    let imc = (parseFloat(weight.replace(',','.')) / (parseFloat(height.replace(',','.')) * parseFloat(height.replace(',','.')))).toFixed(2);
+
+    let imc = (weight) / (height * height);
     //seteo el valor dependiendo de la medida
-    this.nutricion.controls['imc'].setValue(imc);
-    if(parseFloat(imc) < 18.50){
+    this.nutricion.controls['imc'].setValue(imc.toFixed(2));
+    if(imc < 18.50){
       let bajo = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.low')
       this.nutricion.controls['imcClassification'].setValue(bajo);
-    }else if(parseFloat(imc) >= 18.50 && parseFloat(imc) < 25){
+    }else if(imc >= 18.50 && imc < 25){
       let normal = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.normal')
       this.nutricion.controls['imcClassification'].setValue(normal);
-    }else if(parseFloat(imc) >= 25 && parseFloat(imc) < 30){
+    }else if(imc >= 25 && imc < 30){
       let above = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.over')
       this.nutricion.controls['imcClassification'].setValue(above);
-    }else if(parseFloat(imc) >= 30 && parseFloat(imc) < 35){
+    }else if(imc >= 30 && imc < 35){
       let type1 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type1')
       this.nutricion.controls['imcClassification'].setValue(type1);
-    }else if(parseFloat(imc) >= 35 && parseFloat(imc) < 40){
+    }else if(imc >= 35 && imc < 40){
       let type2 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type2')
       this.nutricion.controls['imcClassification'].setValue(type2);
     }else {
