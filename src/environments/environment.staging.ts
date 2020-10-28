@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   baseUrl: 'https://b1.medic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
-  jitsi: 'https://jitsi.homeclinic.telemedicina.com', //meet.bdot.app
+  jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
   apiKey: '',
   clientSecret: '',
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
