@@ -2287,6 +2287,12 @@
     },
     "payment": {
       "label": "Pago"
+    },
+    "immediate":{
+      "label":"C. Inmediata"
+    },
+    "agendada":{
+      "label":"C. Agendada"
     }
   },
   "tabs": {

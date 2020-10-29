@@ -2288,6 +2288,12 @@
     },
     "payment": {
       "label": "Forma de pagamento"
+    },
+    "immediate":{
+      "label":"C. Imediata"
+    },
+    "agendada":{
+      "label":"C. Agendada"
     }
   },
   "tabs": {
