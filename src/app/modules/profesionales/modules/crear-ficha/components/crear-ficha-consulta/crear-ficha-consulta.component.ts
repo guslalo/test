@@ -685,10 +685,11 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(data);
         this.spinner.hide();
         if (this.descargar === true) {
-          return window.open(this.urlSibrare);
+          return window.open(this.urlSibrare, "_blank");
         } else {
           console.log(this.urlSibrare);
         }
+        this.videoCall = true;
       },
       (error) => {
         console.log(error);
