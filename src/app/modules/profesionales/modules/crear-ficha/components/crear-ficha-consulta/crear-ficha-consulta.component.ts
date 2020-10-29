@@ -1073,9 +1073,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   //Calcular Indice de Masa Corporal
-  imcCalculate(){
+  imcCalculateFromWeight(event){
     //Obtengo el valor de la altura y el peso
-    let weight = this.nutricion.controls['weight'].value || "0";
+    let weight = event.srcElement.value || "0";
     let height = this.nutricion.controls['height'].value || "0.1";
     weight = parseFloat(weight.replace(',','.'))
     height = parseFloat(height.replace(',','.'))
@@ -1083,6 +1083,23 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     let imc = (weight) / (height * height);
     //seteo el valor dependiendo de la medida
+    this.setImc(imc)
+  }
+
+  imcCalculateFromHeight(event){
+    //Obtengo el valor de la altura y el peso
+    let weight = this.nutricion.controls['weight'].value || "0";
+    let height = event.srcElement.value || "0.1";
+    weight = parseFloat(weight.replace(',','.'))
+    height = parseFloat(height.replace(',','.'))
+    // formula para el calculo
+
+    let imc = (weight) / (height * height);
+    //seteo el valor dependiendo de la medida
+    this.setImc(imc)
+  }
+
+  setImc(imc: number){
     this.nutricion.controls['imc'].setValue(imc.toFixed(2));
     if(imc < 18.50){
       let bajo = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.low')

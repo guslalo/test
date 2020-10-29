@@ -606,7 +606,7 @@
                                   max="60"
                                   name="weight"
                                   formControlName="weight"
-                                  (keydown)="imcCalculate()"
+                                  (keyup)="imcCalculateFromWeight($event)"
                                   [attr.disabled]="permisoGuardar === false ? '' : null"    
                                 />
                               </div>
@@ -624,7 +624,7 @@
                                   [attr.disabled]="permisoGuardar === false ? '' : null"
                                   max="60"
                                   formControlName="height"
-                                  (keydown)="imcCalculate()"
+                                  (keyup)="imcCalculateFromHeight($event)"
                                 />
                               </div>
                               <div class="form-group col-3">
