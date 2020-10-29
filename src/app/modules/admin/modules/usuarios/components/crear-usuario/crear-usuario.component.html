@@ -478,8 +478,11 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-2">
-                    <label for="cep">{{ 'account.cep.label' | transloco }} *</label>
+                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
                     <input
+                      (focusout)="getLocationDataFromCep()"
+                      mask="99999-999"
+                      [dropSpecialCharacters]="false" 
                       type="text"
                       class="form-control"
                       name="cep"
@@ -488,6 +491,9 @@
                         'is-invalid': !personalData.get('cep').valid
                       }"
                     />
+                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
+                      {{ errorCepString }}
+                    </div>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="uf"

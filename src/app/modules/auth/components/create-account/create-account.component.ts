@@ -50,6 +50,7 @@ export class CreateAccountComponent implements OnInit {
   public password: any;
   public user: any = {};
   public errorMsg: string;
+  public errorCepString:string;
 
   dateAdapter = new CustomDateAdapter();
 
@@ -64,7 +65,7 @@ export class CreateAccountComponent implements OnInit {
   minDate = undefined;
   maxDate = undefined;
   showPassword: boolean;
-  public errorCep:boolean = false;
+
 
   termsAccepted: boolean = false;
   privacyAccepted: boolean = false;
@@ -74,6 +75,8 @@ export class CreateAccountComponent implements OnInit {
   public useTerm:any;
   public privacyTerms:any;
   public telemedicineConsent:any;
+  
+  public errorCep:boolean = false;
   public ufObject:any;
   public cityObject:any;
   public neighborhood:any;
@@ -176,6 +179,13 @@ export class CreateAccountComponent implements OnInit {
     this.getBreeds();
     this.getLocationDataFromCep();
 
+    this.addressData.get('uf').disable();
+    this.addressData.get('city').disable();
+    this.addressData.get('neighborhood').disable();
+    this.addressData.get('street').disable();
+    this.addressData.get('streetNumber').disable();
+    this.addressData.get('complement').disable();
+
     this.form.push(
       this.identificationData.controls,
       this.personalData.controls,
@@ -200,31 +210,39 @@ export class CreateAccountComponent implements OnInit {
       if(x.length >= 9) {
         this.userService.getLocationDataFromCep(x).subscribe(
           data => {
-            if(data !== {}){
+            console.log(data.payload);
+            if(data.payload.error){
+              this.errorCepString = data.payload.error
+              this.errorCep = true; 
+            } else {
               this.ufObject = data.payload.uf._id
               this.cityObject = data.payload.city._id
-              this.errorCep = false;
-              console.log(data)
-              this.addressData.get('uf').setValue(this.ufObject);
-              this.addressData.get('city').setValue(this.cityObject);
-
-              this.addressData.get('uf').valueChanges.subscribe( x =>  {
-                this.getCitiesforId(this.ufObject);
-                //console.log( this.cityObject);
-                //this.addressData.get('city').setValue(this.ufObject);
-              });
-              
-            
               this.neighborhood = data.payload.neighborhood
               this.street = data.payload.street
-            } else {
-              console.log(this.errorCep)
-              this.errorCep = true;
+              this.errorCep = false;
+              console.log(data)
+              this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              this.addressData.get('city').setValue(this.cityObject);
+              
+              this.addressData.get('uf').enable();
+              this.addressData.get('city').enable();
+              this.addressData.get('neighborhood').enable();
+              this.addressData.get('street').enable();
+              this.addressData.get('streetNumber').enable();
+              this.addressData.get('complement').enable();
+              this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
+              this.addressData.get('street').setValue(this.street, {emitEvent: false});
+  
+              this.addressData.get('uf').valueChanges.subscribe( x =>  {
+                this.getCitiesforId(this.ufObject);
+  
+              });
             }
            
           },
           error => {
             console.log(this.errorCep)
+            console.log(this.errorCep, 'error')
               this.errorCep = true;
             console.log(error)
           }

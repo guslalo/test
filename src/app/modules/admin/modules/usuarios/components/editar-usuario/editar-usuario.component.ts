@@ -55,6 +55,13 @@ export class EditarUsuarioComponent implements OnInit {
 
   specialitiesData: any;
 
+  errorCepString:string;
+  public errorCep:boolean = false;
+  public ufObject:any;
+  public cityObject:any;
+  public neighborhood:any;
+  public street:any;
+
   currentDate = {
     day: current.getDate(),
     month: current.getMonth() + 1,
@@ -528,6 +535,66 @@ export class EditarUsuarioComponent implements OnInit {
         specialtyName: data.specialtyName,
       });
     }
+  }
+
+  getLocationDataFromCep(){
+    this.errorCep = false;
+    this.personalData.get('cep').valueChanges.subscribe( x =>  {
+      console.log(x);
+      if(x.length >= 9) {
+        this.userService.getLocationDataFromCep(x).subscribe(
+          data => {
+            console.log(data.payload);
+            if(data.payload.error){
+              this.errorCepString = data.payload.error
+              this.errorCep = true; 
+            } else {
+              this.ufObject = data.payload.uf._id
+              this.cityObject = data.payload.city._id
+              this.neighborhood = data.payload.neighborhood
+              this.street = data.payload.street
+              this.errorCep = false;
+              console.log(data)
+              this.personalData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              this.personalData.get('city').setValue(this.cityObject);
+              
+              this.personalData.get('uf').enable();
+              this.personalData.get('city').enable();
+              this.personalData.get('neighborhood').enable();
+              this.personalData.get('street').enable();
+              this.personalData.get('streetNumber').enable();
+              this.personalData.get('complement').enable();
+              this.personalData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
+              this.personalData.get('street').setValue(this.street, {emitEvent: false});
+  
+              this.personalData.get('uf').valueChanges.subscribe( x =>  {
+                this.getCitiesforId(this.ufObject);
+  
+              });
+            }
+           
+          },
+          error => {
+            console.log(this.errorCep)
+            console.log(this.errorCep, 'error')
+              this.errorCep = true;
+            console.log(error)
+          }
+        )
+      }
+     }
+    );
+
+   
+    /*
+    this.userService.getLocationDataFromCep(cep).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )*/
   }
 
   removeSpeciality(index) {
