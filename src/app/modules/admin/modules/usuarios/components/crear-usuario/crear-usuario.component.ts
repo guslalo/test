@@ -910,31 +910,26 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   addProfessionalRegistry() {
+    this.professionalRegistry.push({
+      type: this.professionalForm.value.professionalRegistryType,
+      registry: this.professionalForm.value.professionalRegistry,
+      uf: this.registerUf2.name,
+      university: this.professionalForm.value.university,
+      professionalTitle: this.professionalForm.value.professionalTitle,
+      course: this.professionalForm.value.course,
+      ufRegistry:  this.registerUf.name
+    });
 
-    if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
-      alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
-    } else {
-      this.professionalRegistry.push({
-        type: this.professionalForm.value.professionalRegistryType,
-        registry: this.professionalForm.value.professionalRegistry,
-        uf: this.registerUf2.name,
-        university: this.professionalForm.value.university,
-        professionalTitle: this.professionalForm.value.professionalTitle,
-        course: this.professionalForm.value.course,
-        ufRegistry:  this.registerUf.name
-      });
-
-      
-      this.professionalRegistrySend.push({
-        type: this.professionalForm.value.professionalRegistryType,
-        registry: this.professionalForm.value.professionalRegistry,
-        uf: this.registerUf2.id,
-        university: this.professionalForm.value.university,
-        professionalTitle: this.professionalForm.value.professionalTitle,
-        course: this.professionalForm.value.course,
-        ufRegistry: this.registerUf.id
-      });
-    }
+    
+    this.professionalRegistrySend.push({
+      type: this.professionalForm.value.professionalRegistryType,
+      registry: this.professionalForm.value.professionalRegistry,
+      uf: this.registerUf2.id,
+      university: this.professionalForm.value.university,
+      professionalTitle: this.professionalForm.value.professionalTitle,
+      course: this.professionalForm.value.course,
+      ufRegistry: this.registerUf.id
+    });
   }
 
   removeRegistry(index) {

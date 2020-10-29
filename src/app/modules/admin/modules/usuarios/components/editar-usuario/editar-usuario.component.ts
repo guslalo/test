@@ -815,44 +815,33 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   addProfessionalRegistry() {
-  
-  
+    this.professionalRegistry.push({
+      type: this.professionalForm.value.professionalRegistryType,
+      registry: this.professionalForm.value.professionalRegistry,
+      uf: this.registerUf2.name,
+      university: this.professionalForm.value.university,
+      professionalTitle: this.professionalForm.value.professionalTitle,
+      course: this.professionalForm.value.course,
+      ufRegistry: this.registerUf.name
+    });
 
-    console.log(this.professionalForm)
-
-    if (this.professionalRegistry.some((pro) => pro.type === this.professionalForm.value.professionalRegistryType)) {
-      alert(`El registro ${this.professionalForm.value.professionalRegistryType} ya esta asignado al profesional`);
-    } else {
-      this.professionalRegistry.push({
-        type: this.professionalForm.value.professionalRegistryType,
-        registry: this.professionalForm.value.professionalRegistry,
-        uf: this.registerUf2.name,
-        university: this.professionalForm.value.university,
-        professionalTitle: this.professionalForm.value.professionalTitle,
-        course: this.professionalForm.value.course,
-        ufRegistry: this.registerUf.name
-      });
-
-      this.professionalRegistrySend.push({
-        type: this.professionalForm.value.professionalRegistryType,
-        registry: this.professionalForm.value.professionalRegistry,
-        uf: this.registerUf2.id,
-        university: this.professionalForm.value.university,
-        professionalTitle: this.professionalForm.value.professionalTitle,
-        course: this.professionalForm.value.course,
-        ufRegistry: this.registerUf.id
-      });
-       
-      this.professionalForm.controls['professionalRegistryType'].setValue(' ');
-      this.professionalForm.controls['professionalRegistry'].setValue(' ');
-      this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
-      this.professionalForm.controls['university'].setValue(' ');
-      this.professionalForm.controls['professionalTitle'].setValue(' ');
-      this.professionalForm.controls['course'].setValue(' ');
-      this.professionalForm.controls['ufRegistry'].setValue(' ');
-
-      console.log(this.professionalRegistrySend);
-    }
+    this.professionalRegistrySend.push({
+      type: this.professionalForm.value.professionalRegistryType,
+      registry: this.professionalForm.value.professionalRegistry,
+      uf: this.registerUf2.id,
+      university: this.professionalForm.value.university,
+      professionalTitle: this.professionalForm.value.professionalTitle,
+      course: this.professionalForm.value.course,
+      ufRegistry: this.registerUf.id
+    });
+     
+    this.professionalForm.controls['professionalRegistryType'].setValue(' ');
+    this.professionalForm.controls['professionalRegistry'].setValue(' ');
+    this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');
+    this.professionalForm.controls['university'].setValue(' ');
+    this.professionalForm.controls['professionalTitle'].setValue(' ');
+    this.professionalForm.controls['course'].setValue(' ');
+    this.professionalForm.controls['ufRegistry'].setValue(' ');
   }
 
   removeRegistry(index) {
