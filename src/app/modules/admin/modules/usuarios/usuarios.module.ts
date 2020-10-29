@@ -5,6 +5,7 @@ import { UsuariosRountingModule } from '../usuarios/usuarios-routing.module';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 import {
   NgbDatepickerModule,
   NgbTypeaheadModule,
@@ -39,6 +40,9 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     NgxDatatableModule,
     NgxSpinnerModule,
     TranslocoRootModule,
+    NgxMaskModule.forRoot({
+      validation: true,
+    })
   ],
 })
 export class UsuariosModule {}
