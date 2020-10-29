@@ -42,7 +42,11 @@ export class AppointmentsService {
   }
 
   //getAppointments
-  getAppointments(number, status?): Observable<any> {
+  getAppointments(number, status?, context?): Observable<any> {
+    if (context) {
+      const params = new HttpParams().set('page', number).set('status', status).set('context', context);
+      return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
+    }
     if (status) {
       const params = new HttpParams().set('page', number).set('status', status);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
@@ -51,6 +55,7 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
+    
   }
 
   getAllAppointments(number): Observable<any> {

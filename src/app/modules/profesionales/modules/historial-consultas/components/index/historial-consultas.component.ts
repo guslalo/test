@@ -39,7 +39,8 @@ export class HistorialConsultasComponent implements OnInit {
     this.getAppointmentsTimeline();
     this.appointmentsService.getTotalPages().subscribe((data) => {
       console.log(data);
-      this.totalPages = data.payload.numberOfPages;
+      //this.totalPages = 3;
+      //this.totalPages = data.payload.numberOfPages;
     });
   }
 
@@ -56,17 +57,19 @@ export class HistorialConsultasComponent implements OnInit {
   }
 
   getAppointments() {
-    this.appointmentsService.getAppointments(1, 'finished').subscribe(
+    this.appointmentsService.getAppointments(1, 'finished', 'historic').subscribe(
       (data) => {
         console.log(data);
         this.consultas = data.payload;
-        console.log(this.consultas);
+        this.totalPages = this.consultas.length;
+        console.log(this.totalPages);
       },
       (error) => {
         console.log(error);
       }
     );
   }
+  
 
   getAppointmentsTimeline() {
     this.appointmentsService.getAppointmentsTimeline().subscribe(

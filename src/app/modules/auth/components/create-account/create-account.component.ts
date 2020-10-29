@@ -64,6 +64,7 @@ export class CreateAccountComponent implements OnInit {
   minDate = undefined;
   maxDate = undefined;
   showPassword: boolean;
+  public errorCep:boolean = false;
 
   termsAccepted: boolean = false;
   privacyAccepted: boolean = false;
@@ -84,6 +85,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.errorCep = false;
     this.clinic = '5f236fc966fbb0054894b780';
     this.politicas();
     const current = new Date();
@@ -192,19 +194,37 @@ export class CreateAccountComponent implements OnInit {
 
 
   getLocationDataFromCep(){
+    this.errorCep = false;
     this.addressData.get('cep').valueChanges.subscribe( x =>  {
-      this.userService.getLocationDataFromCep(x).subscribe(
-        data => {
-          console.log(data)
-          this.ufObject = data.payload.uf
-          this.cityObject = data.payload.city
-          this.neighborhood = data.payload.neighborhood
-          this.street = data.payload.street
-        },
-        error => {
-          console.log(error)
-        }
-      )}
+      console.log(x);
+      if(x.length >= 9) {
+        this.userService.getLocationDataFromCep(x).subscribe(
+          data => {
+            if(data !== {}){
+              this.ufObject = data.payload.uf._id
+              this.cityObject = data.payload.city._id
+              this.errorCep = false;
+              console.log(data)
+              this.addressData.get('uf').setValue(this.ufObject);
+              this.addressData.get('city').setValue(this.cityObject);
+              
+            
+              this.neighborhood = data.payload.neighborhood
+              this.street = data.payload.street
+            } else {
+              console.log(this.errorCep)
+              this.errorCep = true;
+            }
+           
+          },
+          error => {
+            console.log(this.errorCep)
+              this.errorCep = true;
+            console.log(error)
+          }
+        )
+      }
+     }
     );
 
    
