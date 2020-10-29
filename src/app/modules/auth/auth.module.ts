@@ -1,6 +1,7 @@
 // core
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxMaskModule } from 'ngx-mask';
 
 // modules
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -56,7 +57,10 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     SharedModule,
     TranslocoRootModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    NgxMaskModule.forRoot({
+      validation: true,
+    })
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
