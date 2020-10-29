@@ -207,6 +207,12 @@ export class CreateAccountComponent implements OnInit {
               console.log(data)
               this.addressData.get('uf').setValue(this.ufObject);
               this.addressData.get('city').setValue(this.cityObject);
+
+              this.addressData.get('uf').valueChanges.subscribe( x =>  {
+                this.getCitiesforId(this.ufObject);
+                //console.log( this.cityObject);
+                //this.addressData.get('city').setValue(this.ufObject);
+              });
               
             
               this.neighborhood = data.payload.neighborhood
