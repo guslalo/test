@@ -5,7 +5,7 @@ export const environment = {
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
   apiKey: '',
   clientSecret: '',
-  photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
+  photoUrlBase: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',//https://itms-prod.s3-sa-east-1.amazonaws.com/
   sessionTime: 600,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
