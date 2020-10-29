@@ -57,7 +57,7 @@ export class HistorialConsultasComponent implements OnInit {
   }
 
   getAppointments() {
-    this.appointmentsService.getAppointments(1, 'finished').subscribe(
+    this.appointmentsService.getAppointments(1, 'finished', 'historic').subscribe(
       (data) => {
         console.log(data);
         this.consultas = data.payload;
