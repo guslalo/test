@@ -163,11 +163,11 @@
         </ngx-datatable-column>
         <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Sala">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <div *ngIf="row.dateDetails.createdAt; else noWaitingRoom">
-              Sala X
+            <div *ngIf="row.administrativeDetails.isImmediate; else noWaitingRoom">
+              {{ 'table.immediate.label' | transloco }}
             </div>
             <ng-template #noWaitingRoom>
-              N/A
+              {{ 'table.agendada.label' | transloco }}
             </ng-template>
           </ng-template>
         </ngx-datatable-column>
