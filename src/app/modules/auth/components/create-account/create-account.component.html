@@ -47,10 +47,11 @@
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
                       }" (change)="validateForm()"
-                      (focusout)="getLocationDataFromCep()"
                       mask="999999999-99"
                       [dropSpecialCharacters]="false"  
                       >
+                      <!--
+                      (focusout)="getLocationDataFromCep()""-->
                       <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="cpf">
                         {{
