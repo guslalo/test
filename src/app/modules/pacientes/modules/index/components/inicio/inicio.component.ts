@@ -80,7 +80,10 @@ export class InicioComponent implements OnInit {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data);
-        this.consultas = data.payload;
+        
+        this.consultas = data.payload.filter((a) => a.administrativeDetails.status !== 'finished' && a.administrativeDetails.status !== 'canceled')
+        console.log(this.consultas)
+    
         if (data.payload.length > 0) {
           this.appointment = true;
           let arrayForDate = data.payload.map((value) => value.dateDetails.date);
