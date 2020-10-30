@@ -115,7 +115,6 @@ export class MiDisponibilidadComponent implements OnInit {
   timeUpdated = new Subject<string>();
 
   date: { year: string; month: string };
-  //time = { hour: 13, minute: 30 };
 
   daysSelected = [];
   daysSelectedNoOrder = [];
