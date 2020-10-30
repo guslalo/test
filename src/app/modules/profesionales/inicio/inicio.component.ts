@@ -97,7 +97,7 @@ export class InicioPComponent implements OnInit {
     this.appointmentsService.getWaitingAppointmentForRoomsId(value).subscribe(
       (data) => {
         console.log(data);
-        this.consultasEsperas = data.payload;
+        this.consultasEsperas = data.payload.filter(x => x.canEnter === true);
         console.log(this.consultasEsperas);
       },
       (error) => {
