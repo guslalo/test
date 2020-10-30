@@ -43,14 +43,14 @@
                 <div class="row"><!-- (focusout)="getLocationDataFromCep()"-->
                   <div class="form-group col-md-6">
                     <label for="document">{{ 'account.identificationDocument.label' | transloco }} *</label>
-                    <select class="form-control" name="document" formControlName="document" 
+                    <select class="form-control" name="document" formControlName="document"  
                  
                     [ngClass]="{
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
                       }" (change)="validateForm()" id="select-type-document">
-                      <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option value="cpf" [selected]="true">
+                      <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
+                      <option  value="cpf" [selected]="true" selected> 
                         {{
                           'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
                             | transloco
