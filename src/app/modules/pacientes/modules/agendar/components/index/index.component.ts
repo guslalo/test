@@ -736,21 +736,20 @@ export class IndexComponent implements OnInit {
     };
   }
 
-// controls reactivos
-agregardailyRanges() {
-  this.inputFilesFormGroup = this._formBuilder.group({
-    start: ['', [Validators.required]],
-    end: ['', [Validators.required]],
-  });
+  // controls reactivos
+  agregardailyRanges() {
+    this.inputFilesFormGroup = this._formBuilder.group({
+      start: ['', [Validators.required]],
+      end: ['', [Validators.required]],
+    });
 
-  this.inputsRanges.push(this.inputFilesFormGroup);
-}
-
-
+    this.inputsRanges.push(this.inputFilesFormGroup);
+  }
 
   get inputsRanges() {
     return this.multiDocs.get('inputsRanges') as FormArray;
   }
+
   //documentos
   removerInputsRanges(indice: number) {
     this.inputsRanges.removeAt(indice);

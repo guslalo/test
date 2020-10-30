@@ -101,9 +101,11 @@
                   <div class="form-group col-md-4">
                     <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}*</label>
                     <input disabled type="text" class="form-control" name="idDocumentNumber"
+                    (change)="validCPF(identificationData.get('idDocumentNumber').value)"
                       formControlName="idDocumentNumber" [ngClass]="{
                         'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
                       }" />
+                      <label for="" *ngIf="!cpfvalid">CPF inválido</label>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="issuingBody">{{

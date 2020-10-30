@@ -20,8 +20,9 @@ import { error } from 'protractor';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
-  styleUrls: ['../login/login.component.scss'],
+  styleUrls: ['../login/login.component.scss']
 })
+
 export class CreateAccountComponent implements OnInit {
   constructor(
     private router: Router,

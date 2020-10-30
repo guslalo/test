@@ -52,6 +52,7 @@ export class EditarUsuarioComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
+  public cpfvalid: boolean = true;
 
   specialitiesData: any;
 
@@ -586,6 +587,8 @@ export class EditarUsuarioComponent implements OnInit {
     );
 
    
+
+   
     /*
     this.userService.getLocationDataFromCep(cep).subscribe(
       data => {
@@ -596,6 +599,42 @@ export class EditarUsuarioComponent implements OnInit {
       }
     )*/
   }
+
+  validCPF(cpf: string){
+    this.cpfvalid = this.validateCPF(cpf);
+    console.log(this.cpfvalid)
+  }
+  validateCPF(cpf: string){
+    console.log(this.identificationData.get('document').value)
+    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
+    if(cpf.length <= 0) return false
+    cpf = cpf.replace(/[^0-9]/, "").replace(/[^0-9]/, "").replace(/[^0-9]/, "")
+    cpf.padStart(11,'0')
+    if (cpf.length != 11) return false
+    
+    else if(cpf == '00000000000' || 
+            cpf == '11111111111' || 
+            cpf == '22222222222' || 
+            cpf == '33333333333' || 
+            cpf == '44444444444' || 
+            cpf == '55555555555' || 
+            cpf == '66666666666' || 
+            cpf == '77777777777' || 
+            cpf == '88888888888' || 
+            cpf == '99999999999') return false
+    else {
+      for (let i = 9; i < 11; i++) {
+        let j = 0, d = 0
+        for (let h = 0; j < i; j++) {
+          d += parseInt(cpf[j]) * ((i + 1) - j);  
+        }
+        d = ((10 * d) % 11) % 10;
+        if(parseInt(cpf[j]) != d) return false
+      }
+      return true
+    }
+  }
+
 
   removeSpeciality(index) {
     // console.log(index);
