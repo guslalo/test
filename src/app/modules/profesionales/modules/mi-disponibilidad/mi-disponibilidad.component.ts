@@ -224,8 +224,8 @@ export class MiDisponibilidadComponent implements OnInit {
     this.availabilityService.getAvailability().subscribe(
       (data) => {
         this.disponibilidad = data.payload;
-        this.disponibilidad.forEach(element => {
-          element.dateDetails.days = element.dateDetails.days.map(e => this.days.find(d => d.value == e).name);
+        this.disponibilidad.forEach((element) => {
+          element.dateDetails.days = element.dateDetails.days.map((e) => this.days.find((d) => d.value == e).name);
         });
         console.log(this.disponibilidad);
       },
@@ -450,19 +450,17 @@ export class MiDisponibilidadComponent implements OnInit {
           });
         }
 
-
         console.log(daysSeletected);
 
         let filteredDays = this.days.filter((d, index) => {
-          let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value)
-          // console.log(d, index);
+          let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value);
           if (i === -1) {
             return d;
-          }else{
-            daysSeletected[i].id = this.days[index].id
+          } else {
+            daysSeletected[i].id = this.days[index].id;
+            daysSeletected[i].name = this.days[index].name;
           }
         });
-
 
         this.daysSelected = [...daysSeletected, ...filteredDays].sort((a, b) => {
           return a.id - b.id;
@@ -472,17 +470,16 @@ export class MiDisponibilidadComponent implements OnInit {
           return a.id - b.id;
         });
 
-
         console.log(this.daysSelectedNoOrder);
         console.log(this.daysSelected);
 
-        this.daysSelected.forEach(e => {
-          e.name = this.days.find(d => d.value == e.value).name;
-        })
+        this.daysSelected.forEach((e) => {
+          e.name = this.days.find((d) => d.value == e.value).name;
+        });
 
-        this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
-
-       
+        this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(
+          (e) => this.days.find((d) => d.value == e).name
+        );
 
         this.endDate = this.dateAdapter.fromModel(
           moment(this.idAvailability.dateDetails.endDate).add('days').format('YYYY/MM/DD')
@@ -612,5 +609,4 @@ export class MiDisponibilidadComponent implements OnInit {
       this.calendarOptions.events = events;
     }, 2000);
   }
-
 }
