@@ -47,8 +47,8 @@ export class IndexComponent implements OnInit {
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
       name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      secondLastName: ['', ],
+      lastName: ['', ],
+      secondLastName: ['', Validators.required],
       phoneNumber: [null, [Validators.required, ]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
