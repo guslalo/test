@@ -451,6 +451,7 @@ export class IndexComponent implements OnInit {
         this.daysSelected = [...daysSeletected, ...filteredDays].sort((a, b) => {
           return a.id - b.id;
         });
+        this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
 
         console.log(this.daysSelected);
 

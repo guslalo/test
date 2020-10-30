@@ -2506,6 +2506,7 @@
                 placeholder="ingrese item"
                 class="form-control"
                 name="modelAntecedente"
+                [placeholder]="'dashboard.home.myHealth.categories.'+category+'.label' | transloco"
                 id="test"
                 [(ngModel)]="modelAntecedente"
                 [ngModelOptions]="{ standalone: true }"

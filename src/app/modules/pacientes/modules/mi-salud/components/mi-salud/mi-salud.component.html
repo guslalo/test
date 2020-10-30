@@ -701,6 +701,7 @@
                 class="form-control"
                 name="modelAntecedente"
                 id="item"
+                [placeholder]="'dashboard.home.myHealth.categories.'+category+'.label' | transloco"
                 [(ngModel)]="modelAntecedente"
                 formControlName="item"
                 (click)="clear(modelAntecedente)"

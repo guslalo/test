@@ -1309,6 +1309,29 @@
           "deleteItem": {
             "title": "Deseja eliminar este elemento?"
           }
+        },
+        "categories":{
+          "sickness":{
+            "label":"Exemplo: Hipertensão Arterial ou Diabetes Mellitus Tipo 1"
+          },
+          "allergies":{
+            "label":"Exemplo: Pó, Pólen ou Aspirina"
+          },
+          "surgicalInterventions":{
+            "label":"Exemplo: Marca-passo ou Stent coronario"
+          },
+          "familiarHistory":{
+            "label":"Exemplo: Infarto (mãe) ou Câncer (irmão )"
+          },
+          "medicines":{
+            "label":"Exemplo: Paracetamol ou Captopril ou Levotiroxina ou Insulina"
+          },
+          "healthHabits":{
+            "label":"Exemplo: Fumante(2 cigarros/dia) ou Sedentário"
+          },
+          "others":{
+            "label":"Exemplo: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
+          }
         }
       },
       "myServices": {
