@@ -122,12 +122,13 @@
                       name="document"
                       formControlName="document"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('document').valid && !isForeign
+                        'is-invalid': (!identificationData.get('document').valid && !isForeign)
                       }"
                       (change)="validateForm()"
+                      id="select-type-document"
                     >
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option value="cpf">
+                      <option value="cpf" [selected]="userType=='patient'">
                         {{
                           'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
                             | transloco
@@ -150,10 +151,12 @@
                       class="form-control"
                       name="idDocumentNumber"
                       formControlName="idDocumentNumber"
+                      (change)="validCPF(identificationData.get('idDocumentNumber').value)"
                       [ngClass]="{
-                        'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
+                        'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign || !cpfvalid
                       }"
                     />
+                    <label for="" *ngIf="!cpfvalid">CPF inválido</label>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="issuingBody">{{
