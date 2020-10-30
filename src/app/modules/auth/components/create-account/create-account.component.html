@@ -40,20 +40,17 @@
                 }}</label>
               </div>
               <form [formGroup]="identificationData">
-                <div class="row">
+                <div class="row"><!-- (focusout)="getLocationDataFromCep()"-->
                   <div class="form-group col-md-6">
                     <label for="document">{{ 'account.identificationDocument.label' | transloco }} *</label>
-                    <select class="form-control" name="document" formControlName="document" [ngClass]="{
+                    <select class="form-control" name="document" formControlName="document" 
+                 
+                    [ngClass]="{
                         'is-invalid':
                           !identificationData.get('document').valid && identificationData.get('document').touched
-                      }" (change)="validateForm()"
-                      mask="999999999-99"
-                      [dropSpecialCharacters]="false"  
-                      >
-                      <!--
-                      (focusout)="getLocationDataFromCep()""-->
+                      }" (change)="validateForm()" id="select-type-document">
                       <option disabled [value]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option value="cpf">
+                      <option value="cpf" [selected]="true">
                         {{
                           'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
                             | transloco
@@ -70,12 +67,16 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }} *</label>
-                    <input disabled type="text" class="form-control" name="idDocumentNumber"
-                      formControlName="idDocumentNumber" [ngClass]="{
+                    <!-- mask="999999999-99"  
+                    [dropSpecialCharacters]="false"-->
+                    <input type="text" class="form-control" name="idDocumentNumber" (change)="validCPF(identificationData.get('idDocumentNumber').value)"
+                  
+                    formControlName="idDocumentNumber" [ngClass]="{
                         'is-invalid':
-                          !identificationData.get('idDocumentNumber').valid &&
-                          identificationData.get('idDocumentNumber').touched
+                          (!identificationData.get('idDocumentNumber').valid &&
+                          identificationData.get('idDocumentNumber').touched) || !cpfvalid
                       }" />
+                    <label for="" *ngIf="!cpfvalid">CPF inválido</label>
                   </div>
                 </div>
                 <div class="row">
@@ -118,7 +119,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }}</label>
-                    <input disabled type="text" class="form-control" name="extraIdDocument"
+                    <input  type="text" class="form-control" name="extraIdDocument"
                       formControlName="extraIdDocument" [ngClass]="{
                         'is-invalid':
                           !identificationData.get('extraIdDocument').valid &&
@@ -128,7 +129,7 @@
                 </div>
                 <div>
                   <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                    matStepperNext [disabled]="!identificationData.valid">
+                    matStepperNext [disabled]="(!cpfvalid) || !identificationData.valid">
                     {{ 'common.button.continue.label' | transloco }}
                   </button>
                 </div>
