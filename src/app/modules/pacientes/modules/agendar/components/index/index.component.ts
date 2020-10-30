@@ -40,6 +40,8 @@ export class IndexComponent implements OnInit {
   public blocks: any;
   public symptoms: any;
   public consolidate: any;
+  public consolidateClone: any;
+  public consolidate2: any;
   public professionals = [];
   public tempProfessionals = [];
   public sintomaSelected = [];
@@ -138,6 +140,7 @@ export class IndexComponent implements OnInit {
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
     $('#exampleModal').on('hidden.bs.modal', function (e) {
+      this.this.consolidate = this.consolidateClone
       //clearInterval(this.interval);
      // this.atras();
       //window.location.reload();
@@ -228,7 +231,9 @@ export class IndexComponent implements OnInit {
   agendar() {
     this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
+    this.consolidateClone = this.consolidate;
     this.postConsolidateService(this.consolidate);
+    console.log(this.consolidate)
   }
 
   opcionSeleccionado: any;
@@ -360,12 +365,11 @@ export class IndexComponent implements OnInit {
     localStorage.setItem('appointmentIdAgenda', consolidate.id);
     this.appointmentsService.postConsolidate(consolidate).subscribe(
       (data) => {
-      
-        this.consolidate = data.payload;
+        this.consolidate2 = data.payload;
         btoa(this.blocks);
         console.log(data);
-        console.log(this.consolidate.paymentUrl);
-        if (this.consolidate.paymentUrl) {
+        console.log(this.consolidate2.paymentUrl);
+        if (this.consolidate2.paymentUrl) {
           $('#exampleModal').modal();
           this.statusPago(consolidate.id);
         } else {
@@ -375,7 +379,7 @@ export class IndexComponent implements OnInit {
         }
         console.log(consolidate.id);
         this.urlConfirmacion = 'resultado/' + btoa(this.blocks);
-        this.pago(this.consolidate.paymentUrl);
+        this.pago(this.consolidate2.paymentUrl);
       },
       (error) => {
         console.log(error);
@@ -746,10 +750,11 @@ export class IndexComponent implements OnInit {
     this.inputsRanges.push(this.inputFilesFormGroup);
   }
 
+
+
   get inputsRanges() {
     return this.multiDocs.get('inputsRanges') as FormArray;
   }
-
   //documentos
   removerInputsRanges(indice: number) {
     this.inputsRanges.removeAt(indice);
