@@ -77,7 +77,7 @@ export class CreateAccountComponent implements OnInit {
   public useTerm:any;
   public privacyTerms:any;
   public telemedicineConsent:any;
-  
+  documentTypeDefault:any;
   public errorCep:boolean = false;
   public ufObject:any;
   public cityObject:any;
@@ -105,16 +105,19 @@ export class CreateAccountComponent implements OnInit {
       month: current.getMonth() + 1,
       day: current.getDate(),
     };
-
+    
+    
     this.identificationData = this._formBuilder.group({
-      document: [null, null],
+      document:  new FormControl('cpf'),
       idDocumentNumber: [null, Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
-      issuingBody: [null, null],
-      extraDocument: [null, null],
+      issuingBody: ['', null],
+      extraDocument: ['', null],
       extraIdDocument: ['', null],
     });
+    //this.documentTypeDefault = this.identificationData.controls.document.value;
+
     this.personalData = this._formBuilder.group(
       {
         checkAge: [null, [Validators.requiredTrue]],

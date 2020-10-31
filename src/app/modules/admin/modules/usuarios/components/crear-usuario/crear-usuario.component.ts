@@ -19,6 +19,7 @@ const current = new Date();
   templateUrl: './crear-usuario.component.html',
   styleUrls: ['./crear-usuario.component.scss'],
 })
+
 export class CrearUsuarioComponent implements OnInit {
   isForeign: boolean = false;
   isSchool: boolean = false;
@@ -32,7 +33,7 @@ export class CrearUsuarioComponent implements OnInit {
   professionalRegistrySend: any = [];
   passwordForm: FormGroup;
   showPassword: boolean;
-
+  documentTypeDefault:any;
   errorCepString:string;
   public errorCep:boolean = false;
   public ufObject:any;
@@ -122,7 +123,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.getSpecialties();
 
     this.identificationData = this.formBuilder.group({
-      document: [null,Validators.required],
+      document:  new FormControl('cpf'),
       idDocumentNumber: ['', Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],

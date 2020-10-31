@@ -127,8 +127,8 @@
                       (change)="validateForm()"
                       id="select-type-document"
                     >
-                      <option [value]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option value="cpf" [selected]="userType=='patient'">
+                      <option [value]="null" disabled>{{ 'common.select.label' | transloco }}</option>
+                      <option value="cpf" [selected]="userType =='patient'">
                         {{
                           'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label'
                             | transloco
