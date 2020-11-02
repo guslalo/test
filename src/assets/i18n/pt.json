@@ -1329,8 +1329,11 @@
           "healthHabits":{
             "label":"Exemplo: Fumante(2 cigarros/dia) ou Sedentário"
           },
-          "others":{
+          "occupational":{
             "label":"Exemplo: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
+          },
+          "others":{
+            "label":""
           }
         }
       },

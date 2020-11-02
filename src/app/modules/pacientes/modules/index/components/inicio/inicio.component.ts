@@ -82,6 +82,7 @@ export class InicioComponent implements OnInit {
         console.log(data);
         
         this.consultas = data.payload.filter((a) => a.administrativeDetails.status !== 'finished' && a.administrativeDetails.status !== 'canceled')
+        this.totalPages = this.consultas.length;
         console.log(this.consultas)
     
         if (data.payload.length > 0) {
