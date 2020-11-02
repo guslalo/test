@@ -3030,10 +3030,10 @@
         "label": "ºC - ºF"
       },
       "kgLb": {
-        "label": "Kg - Lb"
+        "label": "Kg"
       },
       "mFt": {
-        "label": "m o ft"
+        "label": "m"
       },
       "searchPatient": {
         "label": "Buscar Paciente"
