@@ -1314,22 +1314,22 @@
             "label":"Ejemplo: hipertensión arterial o Diabetes Mellitus tipo 1"
           },
           "allergies":{
-            "label":"Ejemplo: Polvo o Polen o Aspirina"
+            "label":"Ej: Polvo o Polen o Aspirina"
           },
           "surgicalInterventions":{
-            "label":"Ejemplo: Marcapaso o Stent coronario"
+            "label":"Ej: Marcapaso o Stent coronario"
           },
           "familiarHistory":{
-            "label":"Ejemplo: Infarto (madre) o Cáncer (hermano)"
+            "label":"Ej: Infarto (madre) o Cáncer (hermano)"
           },
           "medicines":{
-            "label":"Ejemplo: Paracetamol o Captopril o Levotiroxina o Insulina"
+            "label":"Ej: Paracetamol o Captopril o Levotiroxina o Insulina"
           },
           "healthHabits":{
-            "label":"Ejemplo: Fumador(2 cigarros/día) o Sedentario"
+            "label":"Ej: Fumador(2 cigarros/día) o Sedentario"
           },
           "occupational":{
-            "label":"Exemplo: Estudiante u ocupación (profesión), empleado o jubilado"
+            "label":"Ej: Estudiante u ocupación (profesión), empleado o jubilado"
           },
           "others":{
             "label":" "

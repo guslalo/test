@@ -1312,25 +1312,25 @@
         },
         "categories":{
           "sickness":{
-            "label":"Exemplo: Hipertensão Arterial ou Diabetes Mellitus Tipo 1"
+            "label":"Ex: Hipertensão Arterial ou Diabetes Mellitus Tipo 1"
           },
           "allergies":{
-            "label":"Exemplo: Pó, Pólen ou Aspirina"
+            "label":"Ex: Pó, Pólen ou Aspirina"
           },
           "surgicalInterventions":{
-            "label":"Exemplo: Marca-passo ou Stent coronario"
+            "label":"Ex: Marca-passo ou Stent coronario"
           },
           "familiarHistory":{
-            "label":"Exemplo: Infarto (mãe) ou Câncer (irmão )"
+            "label":"Ex: Infarto (mãe) ou Câncer (irmão )"
           },
           "medicines":{
-            "label":"Exemplo: Paracetamol ou Captopril ou Levotiroxina ou Insulina"
+            "label":"Ex: Paracetamol ou Captopril ou Levotiroxina ou Insulina"
           },
           "healthHabits":{
-            "label":"Exemplo: Fumante(2 cigarros/dia) ou Sedentário"
+            "label":"Ex: Fumante(2 cigarros/dia) ou Sedentário"
           },
           "occupational":{
-            "label":"Exemplo: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
+            "label":"Ex: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
           },
           "others":{
             "label":" "
