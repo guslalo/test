@@ -190,14 +190,14 @@ export class IndexComponent implements OnInit {
   }
 
   private display(user): string {
-    return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
+    return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
   }
 
   filterAutocompleteProfessionals(search: string) {
     return this.tempProfessionals.filter(
       (value) =>
         value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
-        value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+        value.personalData.secondLastName.toLowerCase().indexOf(search.toLowerCase()) === 0
     );
   }
 

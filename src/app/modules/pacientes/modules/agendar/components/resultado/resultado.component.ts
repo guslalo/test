@@ -34,6 +34,7 @@ export class ResultadoComponent implements OnInit {
   getAppointmentDetails(id) {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+        console.log(data)
         this.appointment = data.payload;
       },
       (error) => {
