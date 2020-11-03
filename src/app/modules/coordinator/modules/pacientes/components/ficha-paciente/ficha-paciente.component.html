@@ -150,18 +150,19 @@
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
                   <br />
-                  {{ patientRecord.personalData?.lastName || null }} {{ patientRecord.personalData?.secondLastName || null }}
                 </h4>
                 <ul class="paciente pl-0">
                   <li>
-                    <i class="b">{{ 'common.forms.user.identification.grender.label' | transloco }}</i>
+                    <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.grender.label' | transloco }}</i>
+                    {{ patientRecord.personalData?.gender }}
+                    <!--
                     {{
                       patientRecord.personalData?.gender === 'male'
                         ? 'clinicalFile.male.label'
                         : patientRecord.personalData?.gender === 'female'
                         ? 'clinicalFile.female.label'
                         : ('S/R' | transloco)
-                    }}
+                    }}-->
                   </li>
                   <li>
                     <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }}</i>
