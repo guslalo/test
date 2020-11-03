@@ -3030,10 +3030,10 @@
         "label": "°C - ° F"
       },
       "kgLb": {
-        "label": "Kg"
+        "label": "Kg(Ex: 88,5 ou 88.5)"
       },
       "mFt": {
-        "label": "m"
+        "label": "Metros (ex:1,70 ou 1.70)"
       },
       "searchPatient": {
         "label": "Buscar paciente"
