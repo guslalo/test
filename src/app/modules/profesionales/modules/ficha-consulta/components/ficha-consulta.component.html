@@ -92,7 +92,30 @@
             <div class="card-body text-center mt-3">
               <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
-                {{ appointmentDetail.administrativeDetails.status }}
+                {{
+                  (appoimentDetail.administrativeDetails.status === 'reserved'
+                    ? 'clinicalFile.reserved.label'
+                    : appoimentDetail.administrativeDetails.status === 'appointed'
+                    ? 'clinicalFile.scheduled.label'
+                    : appoimentDetail.administrativeDetails.status === 'rescheduled'
+                    ? 'clinicalFile.reScheduled.label'
+                    : appoimentDetail.administrativeDetails.status === 'active'
+                    ? 'clinicalFile.active.label'
+                    : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
+                    ? 'clinicalFile.inWaitingRoom.label'
+                    : appoimentDetail.administrativeDetails.status === 'waitingInList'
+                    ? 'clinicalFile.inWaitingList.label'
+                    : appoimentDetail.administrativeDetails.status === 'running'
+                    ? 'common.status.inProgress.label'
+                    : itappoimentDetailem.administrativeDetails.status === 'pending'
+                    ? 'clinicalFile.pending.label'
+                    : appoimentDetail.administrativeDetails.status === 'finished'
+                    ? 'clinicalFile.ended.label'
+                    : appoimentDetail.administrativeDetails.status === 'canceled'
+                    ? 'clinicalFile.canceled.label'
+                    : 'S/R'
+                  ) | transloco
+                }}
               </button>
               <p class="card-text text-center mt-1">ID consulta: {{ appointmentDetail._id }}</p>
             </div>
