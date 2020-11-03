@@ -177,7 +177,30 @@
                   </button>
 
                   <button type="button" class="btn btn-primary rounded-pill btn-sm mt-1">
-                    {{ appointmentDetail.administrativeDetails.status }}
+                    {{
+                      (appoimentDetail.administrativeDetails.status === 'reserved'
+                        ? 'clinicalFile.reserved.label'
+                        : appoimentDetail.administrativeDetails.status === 'appointed'
+                        ? 'clinicalFile.scheduled.label'
+                        : appoimentDetail.administrativeDetails.status === 'rescheduled'
+                        ? 'clinicalFile.reScheduled.label'
+                        : appoimentDetail.administrativeDetails.status === 'active'
+                        ? 'clinicalFile.active.label'
+                        : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
+                        ? 'clinicalFile.inWaitingRoom.label'
+                        : appoimentDetail.administrativeDetails.status === 'waitingInList'
+                        ? 'clinicalFile.inWaitingList.label'
+                        : appoimentDetail.administrativeDetails.status === 'running'
+                        ? 'common.status.inProgress.label'
+                        : itappoimentDetailem.administrativeDetails.status === 'pending'
+                        ? 'clinicalFile.pending.label'
+                        : appoimentDetail.administrativeDetails.status === 'finished'
+                        ? 'clinicalFile.ended.label'
+                        : appoimentDetail.administrativeDetails.status === 'canceled'
+                        ? 'clinicalFile.canceled.label'
+                        : 'S/R'
+                      ) | transloco
+                    }}
                   </button>
                   <p class="card-text text-center mt-3 mb-2">ID consulta: {{ appointmentDetail._id }}</p>
                   <p class="card-text text-center">
@@ -643,7 +666,7 @@
                               </div>
                               <div class="form-group col-3">
                                 <label for="imcClassification"
-                                  >Clasificación
+                                  >Classificação
                                   {{ 'clinicalFile.patientData.tabs.summary.nutritional.imc.label' | transloco }}</label
                                 >
                                 <input

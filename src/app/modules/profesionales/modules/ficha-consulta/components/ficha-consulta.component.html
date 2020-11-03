@@ -44,16 +44,16 @@
                   <!--font-weight-bold-->
                   <ul class="simple-list">
                     <li>Sexo: {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}</li>
-                    <li>Edad: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
+                    <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                     <li>
-                      Nacionalidad: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
+                      Nacionalidade: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
                     </li>
                   </ul>
                 </div>
                 <div class="col-5">
                   <p class="p-0">&#8205;</p>
                   <ul class="simple-list">
-                    <li>Teléfono: {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}</li>
+                    <li>Telefone: {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}</li>
                   </ul>
                 </div>
               </div>
@@ -92,7 +92,30 @@
             <div class="card-body text-center mt-3">
               <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
               <button type="button" class="btn btn-primary rounded-pill btn-sm">
-                {{ appointmentDetail.administrativeDetails.status }}
+                {{
+                  (appoimentDetail.administrativeDetails.status === 'reserved'
+                    ? 'clinicalFile.reserved.label'
+                    : appoimentDetail.administrativeDetails.status === 'appointed'
+                    ? 'clinicalFile.scheduled.label'
+                    : appoimentDetail.administrativeDetails.status === 'rescheduled'
+                    ? 'clinicalFile.reScheduled.label'
+                    : appoimentDetail.administrativeDetails.status === 'active'
+                    ? 'clinicalFile.active.label'
+                    : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
+                    ? 'clinicalFile.inWaitingRoom.label'
+                    : appoimentDetail.administrativeDetails.status === 'waitingInList'
+                    ? 'clinicalFile.inWaitingList.label'
+                    : appoimentDetail.administrativeDetails.status === 'running'
+                    ? 'common.status.inProgress.label'
+                    : itappoimentDetailem.administrativeDetails.status === 'pending'
+                    ? 'clinicalFile.pending.label'
+                    : appoimentDetail.administrativeDetails.status === 'finished'
+                    ? 'clinicalFile.ended.label'
+                    : appoimentDetail.administrativeDetails.status === 'canceled'
+                    ? 'clinicalFile.canceled.label'
+                    : 'S/R'
+                  ) | transloco
+                }}
               </button>
               <p class="card-text text-center mt-1">ID consulta: {{ appointmentDetail._id }}</p>
             </div>
@@ -279,7 +302,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Exámen físico
+                  Exame Físico
                 </p>
                 <div>
                   <p class="title">{{ appointmentDetail.appointmentDetails.physicalExam }}</p>
@@ -290,7 +313,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Aspectos destacados de laboratorio
+                  Resultado exames laboratoriais e/ou imagen
                 </p>
                 <div>
                   <p class="title">{{ appointmentDetail.appointmentDetails.examHighlights }}</p>
@@ -492,14 +515,14 @@
               </div>
 
               <div>
-                <p class="title font-weight-bold"><img src="assets/icons/icon-nutricion.svg" /> Nutrición</p>
+                <p class="title font-weight-bold"><img src="assets/icons/icon-nutricion.svg" /> Estado nutricional</p>
 
                 <ul class="nutricion">
                   <li><i class="b">Peso</i> {{ appointmentDetail.patientDetails.nutritionalState.weight }}</li>
                   <li><i class="b">Estatura</i> {{ appointmentDetail.patientDetails.nutritionalState.height }}</li>
                   <li><i class="b">IMC</i> {{ appointmentDetail.patientDetails.nutritionalState.imc }}</li>
                   <li>
-                    <i class="b">Clasificación IMC</i>
+                    <i class="b">Classificação IMC</i>
                     {{ appointmentDetail.patientDetails.nutritionalState.imcClassification }}
                   </li>
                 </ul>

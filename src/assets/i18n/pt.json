@@ -33,7 +33,7 @@
           "label": "Dados do paciente",
           "info": {
             "grender": {
-              "label": "Sexo"
+              "label": "Sexo "
             },
             "age": {
               "label": "Idade"
@@ -125,7 +125,7 @@
                 "label": "Medicamentos em uso"
               },
               "occupational": {
-                "label": "Ocupaçao principal"
+                "label": "Ocupação principal"
               },
               "family": {
                 "label": "Antecedentes familiares"
@@ -507,7 +507,7 @@
       "label": "Plano terapêutico"
     },
     "comments": {
-      "label": "Informaçoes adicionais de diagnóstico"
+      "label": "Informações adicionais do diagnóstico"
     },
     "noStoredNotes": {
       "label": "Há notas inseridas"
@@ -561,7 +561,7 @@
       "label": "Número de registro"
     },
     "thisInfoViewPro": {
-      "label": "Esta informação será visto por profissionais."
+      "label": "Esta informação será visualizada por profissionais."
     },
     "myBackgrounds": {
       "label": "Meus antecedentes"
@@ -1189,7 +1189,7 @@
             "label": "Selecione a data"
           },
           "availableDoctor": {
-            "label": "Médicos disponíveis"
+            "label": "Profissionais disponíveis"
           }
         },
         "unselected": {
@@ -1282,7 +1282,7 @@
           "label": "Fatores de risco"
         },
         "occupationals": {
-          "label": "Ocupaçao principal"
+          "label": "Ocupação principal"
         },
         "others": {
           "label": "Outros"
@@ -2679,7 +2679,7 @@
         "label": "Retorna"
       },
       "create": {
-        "label": "Criado"
+        "label": "Criar"
       },
       "update": {
         "label": "Atualizar"
@@ -2866,7 +2866,7 @@
             "label": "Idade"
           },
           "motherName": {
-            "label": "Nome da mãe"
+            "label": "Nome completo da mãe"
           },
           "race": {
             "label": "Raça"
@@ -3040,7 +3040,7 @@
       }
     },
     "motherNames": {
-      "label": "Nome da mãe"
+      "label": "Nome completo da mãe"
     },
     "motherNamesReq": {
       "label": "Campo Nome  da mãe é obrigatório"
@@ -3255,7 +3255,7 @@
           "title": "Dados acadêmicos",
           "label": "Biografia Acadêmcia",
           "university": {
-            "label": "Univesidade"
+            "label": "Universidade/Faculdade"
           },
           "degree": {
             "label": "Título"
@@ -3545,10 +3545,10 @@
       "label": "Sobrenome"
     },
     "motherNameReq": {
-      "label": "Nome da mãe"
+      "label": "Nome completo da mãe"
     },
     "motherName": {
-      "label": "Nome da mãe"
+      "label": "Nome completo da mãe"
     },
     "emailReq": {
       "label": "Campo E-mail é obrigatório"
