@@ -33,7 +33,7 @@
           "label": "Dados do paciente",
           "info": {
             "grender": {
-              "label": "Sexo"
+              "label": "Sexo "
             },
             "age": {
               "label": "Idade"
