@@ -177,7 +177,30 @@
                   </button>
 
                   <button type="button" class="btn btn-primary rounded-pill btn-sm mt-1">
-                    {{ appointmentDetail.administrativeDetails.status }}
+                    {{
+                      (appointmentDetail.administrativeDetails.status === 'reserved'
+                        ? 'clinicalFile.reserved.label'
+                        : appointmentDetail.administrativeDetails.status === 'appointed'
+                        ? 'clinicalFile.scheduled.label'
+                        : appointmentDetail.administrativeDetails.status === 'rescheduled'
+                        ? 'clinicalFile.reScheduled.label'
+                        : appointmentDetail.administrativeDetails.status === 'active'
+                        ? 'clinicalFile.active.label'
+                        : appointmentDetail.administrativeDetails.status === 'waitingInRoom'
+                        ? 'clinicalFile.inWaitingRoom.label'
+                        : appointmentDetail.administrativeDetails.status === 'waitingInList'
+                        ? 'clinicalFile.inWaitingList.label'
+                        : appointmentDetail.administrativeDetails.status === 'running'
+                        ? 'common.status.inProgress.label'
+                        : appointmentDetail.administrativeDetails.status === 'pending'
+                        ? 'clinicalFile.pending.label'
+                        : appointmentDetail.administrativeDetails.status === 'finished'
+                        ? 'clinicalFile.ended.label'
+                        : appointmentDetail.administrativeDetails.status === 'canceled'
+                        ? 'clinicalFile.canceled.label'
+                        : 'S/R'
+                      ) | transloco
+                    }}
                   </button>
                   <p class="card-text text-center mt-3 mb-2">ID consulta: {{ appointmentDetail._id }}</p>
                   <p class="card-text text-center">
