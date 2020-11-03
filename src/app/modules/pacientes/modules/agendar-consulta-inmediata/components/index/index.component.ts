@@ -42,7 +42,7 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.textInputFile = 'Seleccione Archivo';
+    this.textInputFile = 'Selecione Arquivo';
     this.urlConfirmacion = 'resultado/';
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();

@@ -26,16 +26,16 @@
                   <!--font-weight-bold-->
                   <ul class="simple-list">
                     <li>Sexo: {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}</li>
-                    <li>Edad: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
+                    <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                     <li>
-                      Nacionalidad: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
+                      Nacionalidade: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
                     </li>
                   </ul>
                 </div>
                 <div class="col-5">
                   <p class="p-0">&#8205;</p>
                   <ul class="simple-list">
-                    <li>Teléfono: {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}</li>
+                    <li>Telefone: {{ appointmentDetail.patientDetails.userDetails.personalData.phoneNumber }}</li>
                   </ul>
                 </div>
               </div>
@@ -229,7 +229,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Exámen físico
+                  Exame Físico
                 </p>
                 <div>
                   <p class="title">{{ appointmentDetail.appointmentDetails.physicalExam }}</p>
@@ -240,7 +240,7 @@
 
               <div>
                 <p class="title font-weight-bold mb-1">
-                  Aspectos destacados de laboratorio
+                  Resultado exames laboratoriais e/ou imagen
                 </p>
                 <div>
                   <p class="title">{{ appointmentDetail.appointmentDetails.examHighlights }}</p>
@@ -442,14 +442,14 @@
               </div>
 
               <div>
-                <p class="title font-weight-bold"><img src="assets/icons/icon-nutricion.svg" /> Nutrición</p>
+                <p class="title font-weight-bold"><img src="assets/icons/icon-nutricion.svg" /> Estado nutricional</p>
 
                 <ul class="nutricion">
                   <li><i class="b">Peso</i> {{ appointmentDetail.patientDetails.nutritionalState.weight }}</li>
                   <li><i class="b">Estatura</i> {{ appointmentDetail.patientDetails.nutritionalState.height }}</li>
                   <li><i class="b">IMC</i> {{ appointmentDetail.patientDetails.nutritionalState.imc }}</li>
                   <li>
-                    <i class="b">Clasificación IMC</i>
+                    <i class="b">Classificação IMC</i>
                     {{ appointmentDetail.patientDetails.nutritionalState.imcClassification }}
                   </li>
                 </ul>
