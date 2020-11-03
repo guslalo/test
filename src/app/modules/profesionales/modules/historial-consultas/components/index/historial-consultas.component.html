@@ -202,7 +202,30 @@
                       </td>
                       <td>
                         <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                          {{ item.administrativeDetails.status }}
+                          {{
+                            (appoimentDetail.administrativeDetails.status === 'reserved'
+                              ? 'clinicalFile.reserved.label'
+                              : appoimentDetail.administrativeDetails.status === 'appointed'
+                              ? 'clinicalFile.scheduled.label'
+                              : appoimentDetail.administrativeDetails.status === 'rescheduled'
+                              ? 'clinicalFile.reScheduled.label'
+                              : appoimentDetail.administrativeDetails.status === 'active'
+                              ? 'clinicalFile.active.label'
+                              : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
+                              ? 'clinicalFile.inWaitingRoom.label'
+                              : appoimentDetail.administrativeDetails.status === 'waitingInList'
+                              ? 'clinicalFile.inWaitingList.label'
+                              : appoimentDetail.administrativeDetails.status === 'running'
+                              ? 'common.status.inProgress.label'
+                              : itappoimentDetailem.administrativeDetails.status === 'pending'
+                              ? 'clinicalFile.pending.label'
+                              : appoimentDetail.administrativeDetails.status === 'finished'
+                              ? 'clinicalFile.ended.label'
+                              : appoimentDetail.administrativeDetails.status === 'canceled'
+                              ? 'clinicalFile.canceled.label'
+                              : 'S/R'
+                            ) | transloco
+                          }}
                         </button>
                       </td>
                       <td>
