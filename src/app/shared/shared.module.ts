@@ -10,6 +10,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]);
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -51,6 +53,9 @@ import { LangComponent } from './lang/lang.component';
     NgbRatingModule,
     PasswordStrengthMeterModule,
     FullCalendarModule,
+    NgxMaskModule.forRoot({
+      validation: true,
+    })
   ],
   exports: [
     // MODULES TO RE-USE
