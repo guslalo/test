@@ -125,13 +125,13 @@ https://www.npmjs.com/package/ngx-toastr
 
 **Deployment**
 
-**&quot;build&quot;**** : ****&quot;ng build --prod --aot --configuration=production --output-hashing=all&quot; ****,**
+build : ng build --prod --aot --configuration=production --output-hashing=all,
 
-**&quot;build-dev&quot;**** : ****&quot;ng build --prod --aot --configuration=dev --output-hashing=all&quot; ****,**
+build-dev : ng build --prod --aot --configuration=dev --output-hashing=all&,
 
-**&quot;build-staging&quot;**** : ****&quot;ng build --prod --configuration=staging --output-hashing=all&quot; ****,**
+build-staging : ng build --prod --configuration=staging --output-hashing=all,
 
 Para crear un nuevo deploy respectivo a un nuevo cliente
 
 1. Crear nuevo archivo environment.NombreCliente.ts
-2. Despliegue comando : ng build **--configuration=N** ombreCliente
+2. Despliegue comando : ng build **--configuration=NombreCliente

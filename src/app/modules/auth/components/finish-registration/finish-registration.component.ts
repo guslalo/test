@@ -70,6 +70,14 @@ export class FinishRegistrationComponent implements OnInit {
   public telemedicineConsent:any;
   prePatientId = this.routerAct.snapshot.queryParamMap.get('patient');
 
+  public errorCepString:string;
+  public errorCep:boolean = false;
+  public ufObject:any;
+  public cityObject:any;
+  public neighborhood:any;
+  public street:any;
+
+
   ngOnInit(): void {
     this.politicas()
     this.identificationData = this._formBuilder.group({
@@ -137,6 +145,7 @@ export class FinishRegistrationComponent implements OnInit {
     this.getCities();
     this.getCountries();
     this.getBreeds();
+    this.getLocationDataFromCep();
 
     this.form.push(
       this.identificationData.controls,
@@ -314,6 +323,66 @@ export class FinishRegistrationComponent implements OnInit {
       // console.log(data);
       this.issuingEntities = data.payload;
     });
+  }
+
+  getLocationDataFromCep(){
+    this.errorCep = false;
+    this.addressData.get('cep').valueChanges.subscribe( x =>  {
+      console.log(x);
+      if(x.length >= 9) {
+        this.userService.getLocationDataFromCep(x).subscribe(
+          data => {
+            console.log(data.payload);
+            if(data.payload.error){
+              this.errorCepString = data.payload.error
+              this.errorCep = true; 
+            } else {
+              this.ufObject = data.payload.uf._id
+              this.cityObject = data.payload.city._id
+              this.neighborhood = data.payload.neighborhood
+              this.street = data.payload.street
+              this.errorCep = false;
+              console.log(data)
+              this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              this.addressData.get('city').setValue(this.cityObject);
+              
+              this.addressData.get('uf').enable();
+              this.addressData.get('city').enable();
+              this.addressData.get('neighborhood').enable();
+              this.addressData.get('street').enable();
+              this.addressData.get('streetNumber').enable();
+              this.addressData.get('complement').enable();
+              this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
+              this.addressData.get('street').setValue(this.street, {emitEvent: false});
+  
+              this.addressData.get('uf').valueChanges.subscribe( x =>  {
+                this.getCitiesforId(this.ufObject);
+  
+              });
+            }
+           
+          },
+          error => {
+            console.log(this.errorCep)
+            console.log(this.errorCep, 'error')
+              this.errorCep = true;
+            console.log(error)
+          }
+        )
+      }
+     }
+    );
+
+   
+    /*
+    this.userService.getLocationDataFromCep(cep).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )*/
   }
 
   getUfs() {

@@ -448,16 +448,18 @@
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
-                    <label for="cep">{{ 'account.cep.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      name="cep"
-                      id="cep"
-                      class="form-control"
-                      placeholder=""
+                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
+                    <input type="text" name="cep" id="cep" 
+                      class="form-control" placeholder=""
+                      (focusout)="getLocationDataFromCep()"
+                      mask="99999-999"
+                      [dropSpecialCharacters]="false"  
                       [ngClass]="{ 'is-invalid': !addressData.get('cep').valid && addressData.get('cep').touched }"
-                      formControlName="cep"
+                      formControlName="cep" 
                     />
+                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
+                      {{ errorCepString }}
+                    </div>
                     <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
                       {{ 'account.cep.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
                     </div>

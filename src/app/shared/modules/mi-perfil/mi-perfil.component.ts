@@ -14,6 +14,7 @@ const current = new Date();
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.scss'],
 })
+
 export class PerfilComponent implements OnInit {
   public identificationDataGet: any;
   isForeign: boolean = false;
@@ -43,6 +44,14 @@ export class PerfilComponent implements OnInit {
   issuingEntities: any = [];
   countryMap: any = [];
 
+  public errorCep:boolean = false;
+  public ufObject:any;
+  public cityObject:any;
+  public neighborhood:any;
+  public street:any;
+  public errorMsg: string;
+  public errorCepString:string;
+
   currentDate = {
     year: current.getFullYear(),
     month: current.getMonth() + 1,
@@ -70,7 +79,7 @@ export class PerfilComponent implements OnInit {
     this.getBreeds();
     this.getEducations();
     this.getFamiliarSituations();
-
+    //this.getLocationDataFromCep();
     this.getUser();
 
     this.identificationData = this._formBuilder.group({
@@ -210,6 +219,66 @@ export class PerfilComponent implements OnInit {
     }
 
     this.identificationData.updateValueAndValidity();
+  }
+
+  getLocationDataFromCep(){
+    this.errorCep = false;
+    this.addressData.get('cep').valueChanges.subscribe( x =>  {
+      console.log(x);
+      if(x.length >= 9) {
+        this.userService.getLocationDataFromCep(x).subscribe(
+          data => {
+            console.log(data.payload);
+            if(data.payload.error){
+              this.errorCepString = data.payload.error
+              this.errorCep = true; 
+            } else {
+              this.ufObject = data.payload.uf._id
+              this.cityObject = data.payload.city._id
+              this.neighborhood = data.payload.neighborhood
+              this.street = data.payload.street
+              this.errorCep = false;
+              console.log(data)
+              this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              this.addressData.get('city').setValue(this.cityObject);
+              
+             /* this.addressData.get('uf').enable();
+              this.addressData.get('city').enable();
+              this.addressData.get('neighborhood').enable();
+              this.addressData.get('street').enable();
+              this.addressData.get('streetNumber').enable();
+              //this.addressData.get('complement').enable();*/
+              this.addressData.get('neighborhood').setValue(this.neighborhood);
+              this.addressData.get('street').setValue(this.street);
+  
+              this.addressData.get('uf').valueChanges.subscribe( x =>  {
+                this.getCitiesforId(this.ufObject);
+  
+              });
+            }
+           
+          },
+          error => {
+            console.log(this.errorCep)
+            console.log(this.errorCep, 'error')
+              this.errorCep = true;
+            console.log(error)
+          }
+        )
+      }
+     }
+    );
+
+   
+    /*
+    this.userService.getLocationDataFromCep(cep).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+    )*/
   }
 
   updateData() {
