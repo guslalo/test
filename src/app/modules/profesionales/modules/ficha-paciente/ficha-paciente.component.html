@@ -154,7 +154,16 @@
                 <ul class="paciente pl-0">
                   <li>
                     <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.grender.label' | transloco }}</i>
-                    {{ patientRecord.personalData?.gender }}
+                    <!--{{patientRecord.patientData.personalData?.gender}}-->
+                    <!--{{ patientRecord.personalData?.gender }}-->
+                    <!---->
+                    <ng-container *ngIf="patientRecord.personalData?.gender === 'male'; else female">
+                      {{'clinicalFile.male.label' | transloco}}
+                    </ng-container>
+                    <ng-template #female>
+                      {{'clinicalFile.female.label' | transloco}}
+                    </ng-template>
+                   
                     <!---->
                     <!--
                     {{
