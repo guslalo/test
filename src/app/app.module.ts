@@ -39,11 +39,13 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { CustomDatepickerI18n, NgbCustomDateParserFormatter } from './shared/ngb-datepicker-formatter';
 import { TranslocoService } from '@ngneat/transloco';
 import { initializeApp } from 'firebase/app';
+
 const toastrConfig = {
   closeButton: true,
   positionClass: 'toast-bottom-right',
   preventDuplicates: true,
 };
+
 initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
