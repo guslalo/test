@@ -165,9 +165,9 @@
                     }}-->
                   </li>
                   <li>
-                    <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }} sdf</i>
-                    {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}
-                    <!--  {{ patientAge}}-->
+                    <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }}</i>
+                   <!-- {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}-->
+                    {{ patientAge}}
                   </li>
                   <li>
                     <i class="b">{{ 'common.forms.user.identification.phone.label' | transloco }}</i>

@@ -19,7 +19,7 @@ export class AppComponent {
       if(event instanceof NavigationEnd) {
         //var title = this.getTitle(router.routerState, router.routerState.root).join('-');
         const title = environment.title
-        console.log('title', title);
+        //console.log('title', title);
         titleService.setTitle(title);
       }
     });
