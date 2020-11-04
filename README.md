@@ -1,27 +1,137 @@
-# Itmstl
+**Nuevo Cliente:**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+1. Crear Environment con prefijo nombre cliente ej: environment.nameClient.ts
+2. Colocar información respectiva.
+3. Colores:
 
-## Development server
+dirigirse a src/assets/scss/variables.scss y ajustar:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- color-primary:
+- color-secondary:
+- color-hover:
 
-## Code scaffolding
+1. idioma por defecto: ajustar valor en environment defaultLang
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. exportconstenvironment = {
+2. defaultLang:&#39;pt&#39;,
 
-## Build
+5) Favicon custom, reemplazar archivo favicon.ico en la raiz de src\&gt; favicon.ico
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+6) Title app: ajustar valor en environment =\&gt; title
 
-## Running unit tests
+**Estructura de Archivos:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Patrón General para crear un módulo:
 
-## Running end-to-end tests
+![](RackMultipart20201104-4-1vluhda_html_d5cff10478f19e01.png)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Carpeta de módulo con archivo módulo routing separado y carpeta de componentes, en caso de que algún componente sea muy grande se puede aplicar recursivamente la estructura padre del módulo.
 
-## Further help
+Para cada acceso perfil existe un módulo padre
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+(admin, coordinator, patient y professional):
+
+![](RackMultipart20201104-4-1vluhda_html_14d7b5a74cdbafd8.png)
+
+**Patrón de Arquitectura:**
+
+**MVP ( modelo vista presentador )**
+
+- El _modelo_ es una interfaz que define los datos que se mostrará o no actuado en la interfaz de usuario.
+- El _presentador_ actúa sobre el modelo y la vista. Recupera datos de los repositorios (el modelo), y los formatea para mostrarlos en la vista.
+- La _vista_ es una interfaz pasiva que exhibe datos (el modelo) y órdenes de usuario de las rutas (eventos) al presentador para actuar sobre los datos
+
+**NPM Librerías:**
+
+- **angular/fire**
+
+FireBase para angular
+
+[https://firebaseopensource.com/projects/angular/angularfire2/](https://firebaseopensource.com/projects/angular/angularfire2/)
+
+- **fullcalendar**
+
+Librería de calendario agenda para angular
+
+https://fullcalendar.io/docs/angular
+
+- **ng-bootstrap/ng-bootstrap**
+
+Framework UI base de la aplicación que contiene componentes tales como:
+
+datepicker, botones, grilla. tabs, etc.
+
+https://ng-bootstrap.github.io/#/home
+
+- **ngneat/transloco**
+
+Módulo de multi lenguajes de la app
+
+https://ngneat.github.io/transloco/docs/installation
+
+- **swimlane/ngx-charts**
+
+Módulo para la utilización de gráficos en la app
+
+https://swimlane.gitbook.io/ngx-charts/
+
+- **swimlane/ngx-datatable**
+
+Módulo datatable para Angular
+
+https://swimlane.github.io/ngx-datatable/
+
+- **angular-password-strength-meter**
+
+Módulo para medir fuerza de una contraseña
+
+https://www.npmjs.com/package/angular-password-strength-meter
+
+- **ng-recaptcha**
+
+Google recaptcha disponible para v2 y v3
+
+https://www.npmjs.com/package/ng-recaptcha
+
+- **ngx-mask**
+
+Módulo para configuración de todo tipo de máscaras para formatos de inputs
+
+https://www.npmjs.com/package/ngx-mask
+
+- **ngx-owl-carousel**
+
+Módulo para crear carrusel, slide de variados tipos.
+
+https://www.npmjs.com/package/ngx-owl-carousel-o
+
+- **ngx-pagination**
+
+paginador Angular
+
+https://www.npmjs.com/package/ngx-pagination
+
+- **ngx-spinner**
+
+Modulo con múltiples tipos de spinners
+
+https://www.npmjs.com/package/ngx-spinner
+
+- **ngx-toastr**
+
+Toast para angular utilizado principalmente con interceptores
+
+https://www.npmjs.com/package/ngx-toastr
+
+**Deployment**
+
+**&quot;build&quot;**** : ****&quot;ng build --prod --aot --configuration=production --output-hashing=all&quot; ****,**
+
+**&quot;build-dev&quot;**** : ****&quot;ng build --prod --aot --configuration=dev --output-hashing=all&quot; ****,**
+
+**&quot;build-staging&quot;**** : ****&quot;ng build --prod --configuration=staging --output-hashing=all&quot; ****,**
+
+Para crear un nuevo deploy respectivo a un nuevo cliente
+
+1. Crear nuevo archivo environment.NombreCliente.ts
+2. Despliegue comando : ng build **--configuration=N** ombreCliente

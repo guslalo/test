@@ -20,6 +20,7 @@ export class FichaPacienteComponent implements OnInit {
   id = this.routerAct.snapshot.queryParamMap.get('id');
   patientRecord: any = [];
   appointmentsRecord: any = [];
+  patientAge: any;
 
   antecedentsRecord: any = [];
   examsRecord: any = [];
@@ -79,12 +80,38 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
+
+
+  calcularEdad(dateString){
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;
+  }
+
+
+
+
   getMedicalRecord(userId) {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
         console.log(data.payload);
         this.patientRecord = data.payload.patientData;
+        this.calcularEdad(data.payload.patientData.birthdate)
+
+        var fechaDeNacimiento = new Date(data.payload.patientData.birthdate);
+        var hoy = new Date();
+
+        console.log(this.patientAge)
+
+
+        
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
