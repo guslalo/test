@@ -108,7 +108,13 @@
                     <ul class="simple-list">
                       <li>
                         <b>{{ 'common.forms.user.identification.grender.label' | transloco }}:</b>
-                        {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}
+                        <ng-container *ngIf=" appointmentDetail.patientDetails.userDetails.personalData.gender=== 'male'; else female">
+                          {{'clinicalFile.male.label' | transloco}}
+                        </ng-container>
+                        <ng-template #female>
+                          {{'clinicalFile.female.label' | transloco}}
+                        </ng-template>
+                       
                       </li>
                       <li>
                         <b>{{ 'table.age.label' | transloco }}:</b>
