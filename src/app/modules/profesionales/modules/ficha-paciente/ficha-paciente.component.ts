@@ -53,6 +53,8 @@ export class FichaPacienteComponent implements OnInit {
   public base64: any;
   public nameFile: any;
   public textInputFile: any;
+  patientAge: any;
+
 
   constructor(
     private routerAct: ActivatedRoute,
@@ -78,6 +80,19 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
+  calcularEdad(dateString){
+    let separa = dateString.split("/");
+    let separaAno = separa[2]
+    console.log(separaAno.split(""))
+    let today = new Date();
+    if(separaAno.split("").length === 4){
+    this.patientAge =  today.getFullYear() - separa[2]
+    } else {
+      this.patientAge =  today.getFullYear() - separa[0]
+    }
+    return this.patientAge;
+  }
+
   getMedicalRecord(userId) {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
@@ -89,6 +104,7 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+        this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.antecedentesGeneral = data.payload.antecedent;
         this.antecedentes = data.payload.antecedent.sickness;
@@ -230,7 +246,7 @@ export class FichaPacienteComponent implements OnInit {
       })
       // CHECKBOX APPOINTMENTS FILTER
       .filter((item) => {
-        console.log(JSON.parse(localStorage.getItem('currentUser')).id, item.professionalDetails.userDetails[0].userId);
+        //console.log(JSON.parse(localStorage.getItem('currentUser')).id, item.professionalDetails.userDetails[0].userId);
         if (this.appointmentCheckBox === 'allAppointments') return item;
         if (this.appointmentCheckBox === 'myAppointments') {
           if (item.professionalDetails.userDetails[0].userId === JSON.parse(localStorage.getItem('currentUser')).id)

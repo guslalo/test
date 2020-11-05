@@ -154,7 +154,12 @@
                 <ul class="paciente pl-0">
                   <li>
                     <i class="b">{{ 'clinicalFile.patientData.tabs.identification.info.grender.label' | transloco }}</i>
-                    {{ patientRecord.personalData?.gender }}
+                    <ng-container *ngIf="patientRecord.personalData?.gender === 'male'; else female">
+                      {{'clinicalFile.male.label' | transloco}}
+                    </ng-container>
+                    <ng-template #female>
+                      {{'clinicalFile.female.label' | transloco}}
+                    </ng-template>
                     <!--
                     {{
                       patientRecord.personalData?.gender === 'male'
@@ -165,9 +170,9 @@
                     }}-->
                   </li>
                   <li>
-                    <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }} sdf</i>
-                    {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}
-                    <!--  {{ patientAge}}-->
+                    <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }}</i>
+                   <!-- {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}-->
+                    {{ patientAge}}
                   </li>
                   <li>
                     <i class="b">{{ 'common.forms.user.identification.phone.label' | transloco }}</i>

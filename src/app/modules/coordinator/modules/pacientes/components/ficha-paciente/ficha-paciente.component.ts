@@ -83,15 +83,16 @@ export class FichaPacienteComponent implements OnInit {
 
 
   calcularEdad(dateString){
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
-    {
-        age--;
+    let separa = dateString.split("/");
+    let separaAno = separa[2]
+    console.log(separaAno.split(""))
+    let today = new Date();
+    if(separaAno.split("").length === 4){
+    this.patientAge =  today.getFullYear() - separa[2]
+    } else {
+      this.patientAge =  today.getFullYear() - separa[0]
     }
-    return age;
+    return this.patientAge;
   }
 
 
@@ -103,10 +104,9 @@ export class FichaPacienteComponent implements OnInit {
       (data) => {
         console.log(data.payload);
         this.patientRecord = data.payload.patientData;
-        this.calcularEdad(data.payload.patientData.birthdate)
+        this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
-        var fechaDeNacimiento = new Date(data.payload.patientData.birthdate);
-        var hoy = new Date();
+    
 
         console.log(this.patientAge)
 
@@ -245,7 +245,7 @@ export class FichaPacienteComponent implements OnInit {
         if (this.appointmentDateSelected) {
           const date = this.dateAdapter.toModel(this.appointmentDateSelected);
           console.log(date, item.dateDetails.date);
-          if (moment(item.dateDetails.date).format('YYYY/MM/DD') === date) {
+          if (moment(item.dateDetails.date).format('DD/MM/YYYY') === date) {
             return item;
           }
         } else {

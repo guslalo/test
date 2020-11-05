@@ -19,6 +19,8 @@ dirigirse a src/assets/scss/variables.scss y ajustar:
 
 6) Title app: ajustar valor en environment =\&gt; title
 
+7) Logotipo: reemplazar archivo logo-app.svg en ruta: assets/img/logo-app.svg
+
 **Estructura de Archivos:**
 
 Patrón General para crear un módulo:
