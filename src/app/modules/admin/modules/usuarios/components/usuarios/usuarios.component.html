@@ -341,7 +341,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -543,7 +543,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               data-target="#disponibilidad"
@@ -755,7 +755,7 @@
           </div>
           <div class="col-12 col-md-5 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
