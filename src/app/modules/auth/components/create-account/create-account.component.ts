@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormA
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 import { ClinicService } from '../../../../services/clinic.service';
+import { environment } from './../../../../../environments/environment';
 
 import {
   NgbDateStruct,
@@ -85,7 +86,8 @@ export class CreateAccountComponent implements OnInit {
   public cityObject:any;
   public neighborhood:any;
   public street:any;
-
+  public mayorEdad:boolean;
+  
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
@@ -102,11 +104,56 @@ export class CreateAccountComponent implements OnInit {
       day: current.getDate(),
     };
 
-    this.maxDate = {
-      year: current.getFullYear() - 18,
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
+    if(environment.checkAge === false){
+      this.mayorEdad = false
+        this.personalData = this._formBuilder.group(
+          {
+            checkAge: [null, ],
+            name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+            lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+            motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+            secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+            email: [null, [Validators.email, Validators.required]],
+            gender: [null, [Validators.required]],
+            confirmEmail: ['', [Validators.required]],
+            phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+            breed: [null, Validators.required],
+          },
+          {
+            validators: this.confirmEmail.bind(this),
+          }
+        );
+      this.maxDate = {
+        year: current.getFullYear(),
+        month: current.getMonth(),
+        day: current.getDate(),
+      };
+    } else {
+      this.mayorEdad = true
+      this.personalData = this._formBuilder.group(
+        {
+          checkAge: [null, [Validators.requiredTrue]], //
+          name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          email: [null, [Validators.email, Validators.required]],
+          gender: [null, [Validators.required]],
+          confirmEmail: ['', [Validators.required]],
+          phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+          breed: [null, Validators.required],
+        },
+        {
+          validators: this.confirmEmail.bind(this),
+        }
+      );
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
     
     
     this.identificationData = this._formBuilder.group({
@@ -120,23 +167,6 @@ export class CreateAccountComponent implements OnInit {
     });
     //this.documentTypeDefault = this.identificationData.controls.document.value;
 
-    this.personalData = this._formBuilder.group(
-      {
-        checkAge: [null, [Validators.requiredTrue]],
-        name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-        lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-        motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-        secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-        email: [null, [Validators.email, Validators.required]],
-        gender: [null, [Validators.required]],
-        confirmEmail: ['', [Validators.required]],
-        phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-        breed: [null, Validators.required],
-      },
-      {
-        validators: this.confirmEmail.bind(this),
-      }
-    );
     this.birthData = this._formBuilder.group({
       birthdate: [null, Validators.required],
       ufBirth: [null, null],

@@ -143,7 +143,7 @@
                 <ng-template matStepLabel>
                   <h4>{{ 'account.createAccount.personalData.label' | transloco }}</h4>
                 </ng-template>
-                <div class="form-row">
+                <div class="form-row" *ngIf="mayorEdad === true">
                   <div class="form-group col">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" name="checkAge" id="checkAge"
