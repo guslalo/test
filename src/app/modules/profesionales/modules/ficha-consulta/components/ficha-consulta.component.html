@@ -43,7 +43,17 @@
                   </p>
                   <!--font-weight-bold-->
                   <ul class="simple-list">
-                    <li>Sexo: {{ appointmentDetail.patientDetails.userDetails.personalData.gender }}</li>
+                    <li>Sexo:     
+                      <ng-container *ngIf=" appointmentDetail.patientDetails.userDetails.personalData.gender=== 'male'; else female">
+                      {{'clinicalFile.male.label' | transloco}}
+                      </ng-container>
+                      <ng-template #female>
+                      {{'clinicalFile.female.label' | transloco}}
+                      </ng-template>
+                   
+              
+
+                    </li>
                     <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                     <li>
                       Nacionalidade: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
