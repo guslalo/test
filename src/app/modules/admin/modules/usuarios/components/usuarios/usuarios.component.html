@@ -257,7 +257,7 @@
                       <div ngbDropdownMenu>
                         <button
 
-                        *ngxPermissionsOnly="['Update:User']"
+                          *ngxPermissionsOnly="['Update:User']"
 
                           ngbDropdownItem
                           type="button"
@@ -456,7 +456,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -659,7 +659,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -906,7 +906,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
