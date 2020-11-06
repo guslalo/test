@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   defaultLang:'pt',
+  checkAge:false,
   title: 'Itms | Teleconsulta',
   baseUrl: 'https://b1.medic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
