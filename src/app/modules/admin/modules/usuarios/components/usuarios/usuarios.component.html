@@ -267,7 +267,8 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngIf="row.status === 'Activo'"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -465,7 +466,8 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngIf="row.status === 'Activo'"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -668,7 +670,8 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngIf="row.status === 'Activo'"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -915,7 +918,8 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngIf="row.status === 'Activo'"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
