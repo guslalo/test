@@ -35,6 +35,8 @@ import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
 import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
+import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
+
 @NgModule({
   declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
   imports: [
@@ -76,8 +78,9 @@ import { LangComponent } from './lang/lang.component';
     NgbdTimepickerBasic,
     ChangePassComponent,
     LangComponent,
+    NgxPermissionsModule
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SharedModule {}
+export class SharedModule { }

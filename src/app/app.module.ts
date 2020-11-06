@@ -40,6 +40,8 @@ import { CustomDatepickerI18n, NgbCustomDateParserFormatter } from './shared/ngb
 import { TranslocoService } from '@ngneat/transloco';
 import { initializeApp } from 'firebase/app';
 
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 const toastrConfig = {
   closeButton: true,
   positionClass: 'toast-bottom-right',
@@ -67,7 +69,8 @@ initializeApp(environment.firebase);
     AngularFireStorageModule, // For Storage
     AngularFireAuthModule, // For Authentication
     ModalModule.forRoot(),
-    ToastrModule.forRoot(toastrConfig)
+    ToastrModule.forRoot(toastrConfig),
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     AngularFireDatabaseModule,
@@ -95,4 +98,4 @@ initializeApp(environment.firebase);
   exports: [
   ],
 })
-export class AppModule {}
+export class AppModule { }

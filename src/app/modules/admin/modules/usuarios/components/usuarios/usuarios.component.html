@@ -139,7 +139,9 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+            
+             *ngxPermissionsOnly="['Create:User']"
+
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -254,7 +256,9 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+
+                        *ngxPermissionsOnly="['Update:Users']"
+
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"

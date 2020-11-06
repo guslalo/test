@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+// import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent],
@@ -42,7 +43,8 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     TranslocoRootModule,
     NgxMaskModule.forRoot({
       validation: true,
-    })
+    }),
+    // NgxPermissionsModule
   ],
 })
-export class UsuariosModule {}
+export class UsuariosModule { }

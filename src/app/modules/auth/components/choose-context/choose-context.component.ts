@@ -3,6 +3,9 @@ import { UserLogin } from '../../../../models/models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 
+import { NgxPermissionsService } from 'ngx-permissions';
+import { PoliciesService } from '../../../../services/policies.service';
+
 @Component({
   selector: 'app-choose-context',
   templateUrl: './choose-context.component.html',
@@ -13,7 +16,7 @@ export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.user = new UserLogin(
@@ -30,9 +33,9 @@ export class ChooseContextComponent implements OnInit {
   }
 
   chooseContext(clinicId, role) {
-    if( localStorage.getItem('firstAccessMultirole') === 'true'){
+    if (localStorage.getItem('firstAccessMultirole') === 'true') {
       this.getRouteForClinicAndRole(clinicId, role);
-    }else{
+    } else {
       this.authenticationService.accessWeb(clinicId).subscribe(
         (data) => {
           // console.log(data.access_token);
