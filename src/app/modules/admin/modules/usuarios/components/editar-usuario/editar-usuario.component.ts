@@ -650,7 +650,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-    console.log(/*this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]*/);
+   //console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
 
     switch (this.userType) {
       case 'admins':
