@@ -365,7 +365,7 @@
                 </div>
                 <i class="text">{{ 'common.menu.history.label' | transloco }}</i>
               </a>
-              <a class="nav-link" routerLink="agenda" routerLinkActive="active">
+              <a *ngxPermissionsOnly="['Set:Appointment']" class="nav-link" routerLink="agenda" routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/agenda.svg" />
                 </div>
