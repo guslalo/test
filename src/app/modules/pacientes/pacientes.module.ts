@@ -13,6 +13,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { CambiarClaveComponent } from './cambiar-clave/cambiar-clave.component';
 import { AgendarComponent } from './components/modals/agendar/agendar.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,8 @@ import { AgendarComponent } from './components/modals/agendar/agendar.component'
     ConsultaComponent
   ],
   imports: [CommonModule, PacientesRoutingModule, SharedModule, TranslocoRootModule],
-  exports: [AgendarComponent],
+  exports: [AgendarComponent, NgxPermissionsModule],
   providers: []
 })
 
-export class PacientesModule {}
+export class PacientesModule { }

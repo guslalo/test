@@ -17,9 +17,6 @@ export class PoliciesService {
   }
 
   setPoliciesToUser(): void {
-    console.log('SET POLICIES', JSON.parse(localStorage.getItem('policies')))
-
-    // if (JSON.parse(localStorage.getItem('policies')) != null) return
 
     let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
     let _backendPolicies = _currentUser.administrativeData
@@ -27,11 +24,7 @@ export class PoliciesService {
 
     this.flushPolicies()
 
-    console.log('USER', _currentUser)
-
     _backendPolicies.forEach(element => {
-
-      console.log('ITERA', element)
 
       let _p = this.parse(element)
       let _pArr = this.makePolicy(_p)
@@ -45,16 +38,30 @@ export class PoliciesService {
     localStorage.setItem('policies', JSON.stringify(this.policies));
 
     this.policies.forEach(element => {
+
+      console.log(element.policies)
+
       if (element.clinic == localStorage.getItem('clinic')) {
         this.permissionsService.loadPermissions(element.policies);
       }
     });
+
+    this.listPolicies()
   }
 
   flushPolicies(): void {
     localStorage.removeItem('policies');
+    this.permissionsService.flushPermissions();
     this.policies = []
     this._policiesArr = []
+  }
+
+  listPolicies() {
+    var permissions = this.permissionsService.getPermissions();
+
+    this.permissionsService.permissions$.subscribe((permissions) => {
+      console.log(permissions)
+    })
   }
 
   parse(_policies: any): any {
