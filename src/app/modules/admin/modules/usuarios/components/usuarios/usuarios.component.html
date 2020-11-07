@@ -139,9 +139,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-            
              *ngxPermissionsOnly="['Create:User']"
-
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -255,55 +253,43 @@
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <div class="" ngbDropdownItem>
-                          <button
-
-                            *ngxPermissionsOnly="['Update:User']"
-
-                            ngbDropdownItem
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'admins', userId: row.id }"
-                          >
-                            {{ 'clinicalFile.edit.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Activo'" ngbDropdownItem>
-                          <button
-                            
-                            *ngxPermissionsOnly="['Delete:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                          >
-                            {{ 'common.disable.label' | transloco }}
-                          </button>
-                        </div>
-                        
-                        <div class="" *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem>
-                          <button
-                            ngbDropdownItem
-                            type="button"
-                            (click)="changeUserStatus(row.id, 'activate', 'admins')"
-                          >
-                            {{ 'common.activate.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Pendiente'" ngbDropdownItem>
-                          <button
-                            *ngxPermissionsOnly="['SendInvitation:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                          >
-                            {{ 'clinicalFile.sendEmail.label' | transloco }}
-                          </button>
-                        </div>
-                        
+                        <button
+                          *ngxPermissionsOnly="['Update:User']"
+                          ngbDropdownItem
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'admins', userId: row.id }"
+                        >
+                          {{ 'clinicalFile.edit.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['Delete:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          {{ 'common.disable.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'admins')"
+                        >
+                          {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['SendInvitation:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
+                        </button>
                       </div>
                     </div>
                   </ng-template>
@@ -351,7 +337,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngxPermissionsOnly="['Create:User']"
+            *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -465,53 +451,43 @@
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <div class="" ngbDropdownItem>
-                          <button
-                            *ngxPermissionsOnly="['Update:User']"
-                            ngbDropdownItem
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'professionals', userId: row.id }"
-                          >
-                            {{ 'clinicalFile.edit.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Activo'" ngbDropdownItem>
-                          <button
-                            
-                            *ngxPermissionsOnly="['Delete:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                          >
-                            {{ 'common.disable.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem >
-                          <button
-                            ngbDropdownItem
-                            type="button"
-                            (click)="changeUserStatus(row.id, 'activate', 'professionals')"
-                          >
-                            {{ 'common.activate.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Pendiente'" ngbDropdownItem>
-                          <button
-                            
-                            *ngxPermissionsOnly="['SendInvitation:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                          >
-                            {{ 'clinicalFile.sendEmail.label' | transloco }}
-                          </button>
-                        </div>
-                        
+                        <button
+                         *ngxPermissionsOnly="['Update:User']"
+                          ngbDropdownItem
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'professionals', userId: row.id }"
+                        >
+                          {{ 'clinicalFile.edit.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['Delete:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          {{ 'common.disable.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'professionals')"
+                        >
+                          {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['SendInvitation:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
+                        </button>
                       </div>
                     </div>
                   </ng-template>
@@ -563,7 +539,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngxPermissionsOnly="['Create:User']"
+             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               data-target="#disponibilidad"
@@ -678,55 +654,43 @@
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <div class="" ngbDropdownItem>
-                          <button
-                            *ngxPermissionsOnly="['Update:User']"
-                            ngbDropdownItem
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'coordinators', userId: row.id }"
-                          >
-                            {{ 'clinicalFile.edit.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Activo'" ngbDropdownItem>
-                          <button
-                          
+                        <button
+                          *ngxPermissionsOnly="['Update:User']"
+                          ngbDropdownItem
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'coordinators', userId: row.id }"
+                        >
+                          {{ 'clinicalFile.edit.label' | transloco }}
+                        </button>
+                        <button
                           *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
                           data-target="#disableUserModal"
                           (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                          >
-                            {{ 'common.disable.label' | transloco }}
-                          </button>
-                        </div>
-                        
-                        <div class=""  *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem>
-                          <button
-                           
-                            ngbDropdownItem
-                            type="button"
-                            (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
-                          >
-                            {{ 'common.activate.label' | transloco }}
-                          </button>
-                        </div>
-                        
-                        <div class="" *ngIf="row.status === 'Pendiente'" ngbDropdownItem>
-                          <button
-                            *ngxPermissionsOnly="['SendInvitation:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#sendInvitationModal"
-                            (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                          >
-                            {{ 'clinicalFile.sendEmail.label' | transloco }}
-                          </button>
-                        </div>
-                        
+                        >
+                          {{ 'common.disable.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'coordinators')"
+                        >
+                          {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['SendInvitation:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
+                        </button>
                       </div>
                     </div>
                   </ng-template>
@@ -788,7 +752,7 @@
           </div>
           <div class="col-12 col-md-5 float-right">
             <button
-              *ngxPermissionsOnly="['Create:User']"
+             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -938,51 +902,43 @@
                         </svg>
                       </button>
                       <div ngbDropdownMenu>
-                        <div class="" ngbDropdownItem>
-                          <button
-                            ngbDropdownItem
-                            *ngxPermissionsOnly="['Update:User']"
-                            type="button"
-                            [routerLink]="['editar-usuario']"
-                            [queryParams]="{ userType: 'patients', userId: row.id }"
-                          >
-                            {{ 'clinicalFile.edit.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Activo'" ngbDropdownItem>
-                          <button
-                            *ngxPermissionsOnly="['Delete:User']"
-                            ngbDropdownItem
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#disableUserModal"
-                            (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
-                          >
-                            {{ 'common.disable.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Deshabilitado'" ngbDropdownItem>
-                          <button
+                        <button
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
-                            type="button"
-                            (click)="changeUserStatus(row.id, 'activate', 'patients')"
-                          >
-                            {{ 'common.activate.label' | transloco }}
-                          </button>
-                        </div>
-                        <div class="" *ngIf="row.status === 'Pendiente'" ngbDropdownItem>
-                            <button
-                              ngbDropdownItem
-                              *ngxPermissionsOnly="['SendInvitation:User']"
-                              type="button"
-                              data-toggle="modal"
-                              data-target="#sendInvitationModal"
-                              (click)="openSendInvitationModal(sendInvitationModal, row.id)"
-                          >
-                            {{ 'clinicalFile.sendEmail.label' | transloco }}
-                          </button>
-                        </div>
-                        
+                          type="button"
+                          [routerLink]="['editar-usuario']"
+                          [queryParams]="{ userType: 'patients', userId: row.id }"
+                        >
+                          {{ 'clinicalFile.edit.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['Delete:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#disableUserModal"
+                          (click)="openDeactivateUserModal(deactivateUserModal, row.id)"
+                        >
+                          {{ 'common.disable.label' | transloco }}
+                        </button>
+                        <button
+                          *ngIf="row.status === 'Deshabilitado'"
+                          ngbDropdownItem
+                          type="button"
+                          (click)="changeUserStatus(row.id, 'activate', 'patients')"
+                        >
+                          {{ 'common.activate.label' | transloco }}
+                        </button>
+                        <button
+                          *ngxPermissionsOnly="['SendInvitation:User']"
+                          ngbDropdownItem
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#sendInvitationModal"
+                          (click)="openSendInvitationModal(sendInvitationModal, row.id)"
+                        >
+                          {{ 'clinicalFile.sendEmail.label' | transloco }}
+                        </button>
                       </div>
                     </div>
                   </ng-template>

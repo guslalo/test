@@ -10,7 +10,7 @@
       data-toggle="modal"
       data-target="#waitingRoomForm"
     >
-      {{ 'waitingRoom.createRoom.label' | transloco }}
+      {{ 'waitingRoom.createRoom.label' | transloco }} 
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
     </button>
   </div>
@@ -113,7 +113,9 @@
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    <button *ngxPermissionsOnly="['Update:WaitingRoom']" ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
+                    <button 
+                    *ngxPermissionsOnly="['Update:WaitingRoom']"
+                    ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
                       {{ 'clinicalFile.edit.label' | transloco }}
                     </button>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">

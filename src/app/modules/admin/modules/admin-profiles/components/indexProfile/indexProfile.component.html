@@ -119,25 +119,23 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <button
                         *ngxPermissionsOnly="['Update:Profile']"
-                        
                         class="dropdown-item"
                         type="button"
                         [routerLink]="['editar-perfil']"
                         [queryParams]="{ profileId: profile.id }"
                       >
                         {{ 'clinicalFile.edit.label' | transloco }}
-                      </button>
-                      <div class="dropdown-item" *ngxPermissionsOnly="['Delete:Profile']">
-                        <button
-                          *ngIf="profile.isActive"
+                      </button><!-- *ngIf="profile.isActive"-->
+                      <ng-container *ngIf="profile.isActive">
+                        <button                 
+                          *ngxPermissionsOnly="['Delete:Profile']"
                           class="dropdown-item"
                           type="button"
                           (click)="deactivateProfile(profile.id)"
                         >
                           {{ 'clinicalFile.deactivate.label' | transloco }}
                         </button>
-                      </div>
-                      
+                      </ng-container>
                     </div>
                   </div>
                 </td>
