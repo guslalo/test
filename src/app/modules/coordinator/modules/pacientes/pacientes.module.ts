@@ -20,6 +20,7 @@ import {
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [IndexComponent, FichaPacienteComponent],
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     TranslocoRootModule,
     ToastrModule.forRoot(),
+    NgxPermissionsModule
   ],
 })
-export class PacientesModule {}
+export class PacientesModule { }

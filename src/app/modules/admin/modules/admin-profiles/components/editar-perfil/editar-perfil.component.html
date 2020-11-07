@@ -179,7 +179,9 @@
                 {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- REVISION -->
+            <!-- https://prnt.sc/ve8icf -->
+            <!-- <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -191,7 +193,7 @@
               >
                 {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}
               </a>
-            </li>
+            </li> -->
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
@@ -538,7 +540,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
@@ -556,7 +559,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesUpdateAppointments"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }}
@@ -633,7 +636,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.attachFile.label' | transloco }}
                       </td>
@@ -651,7 +655,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesAttachFiles"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr *ngIf="profile.role === 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.generateMedPrescription.label' | transloco }}
@@ -917,7 +921,8 @@
               </div>
             </div>
             <!-- SALA DE ESPERA -->
-            <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
+            <!-- REVISION -->
+            <!-- <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
                   [(ngModel)]="checkAllWaitingRoomsPolicies"
@@ -1026,8 +1031,9 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> -->
             <!-- CONFIGURACION CLINICA -->
+            
             <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -1245,7 +1251,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
+                    <!-- REVISION -->
+                    <!-- <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.logsManagment.label' | transloco }}
                       </td>
@@ -1263,7 +1270,7 @@
                           <label class="custom-control-label" for="reportPoliciesReportLogs"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>

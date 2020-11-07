@@ -15,6 +15,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [IndexComponent],
@@ -32,6 +33,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule,
     MatAutocompleteModule,
     TranslocoRootModule,
+    NgxPermissionsModule
   ],
 })
-export class DisponibilidadModule {}
+export class DisponibilidadModule { }

@@ -15,6 +15,7 @@ import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { TranslocoService } from '@ngneat/transloco';
+import { NgxPermissionsService } from 'ngx-permissions';
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 @Component({
@@ -57,7 +58,8 @@ export class IndexComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private permissionsService: NgxPermissionsService
   ) {
     const current = new Date();
     this.minDate = {
@@ -185,6 +187,13 @@ export class IndexComponent implements OnInit {
     this.getProfessionalSpecialties();
     this.getSpecialties();
     this.getAvailability();
+
+    var permissions = this.permissionsService.getPermissions();
+
+    this.permissionsService.permissions$.subscribe((permissions) => {
+      console.log('CONTROLLER ', permissions)
+    })
+
 
     this.createAvailability = this._formBuilder.group({
       professional: [null, Validators.required],
@@ -439,10 +448,10 @@ export class IndexComponent implements OnInit {
         let filteredDays = this.days.filter((d, index) => {
           // console.log(d, index);
           let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value)
-          if ( i === -1) {
+          if (i === -1) {
             // console.log(true);
             return d;
-          }else{
+          } else {
             daysSeletected[i].id = this.days[index].id
             daysSeletected[i].name = this.days[index].name
           }
