@@ -1,36 +1,50 @@
+import { NgxPermissionsService } from 'ngx-permissions';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class PoliciesService {
 
   private policies = [];
   private _policiesArr = []
+  private _currentUser: any;
 
-  constructor(private _policies: any) {
-
-    if (_policies.length > 1) {
-      _policies.forEach(element => {
-
-        let _p = this.parse(element)
-        let _pArr = this.makePolicy(_p)
-
-        this.policies.push({
-          'clinic': element.clinicId,
-          'policies': _pArr
-        })
-      });
-    } else {
-      let _p = this.parse(_policies)
-      let _pArr = this.makePolicy(_p)
-
-      this.policies.push({
-        'clinic': _policies.clinicId,
-        'policies': _pArr
-      })
-    }
-
-  }
+  constructor(private permissionsService: NgxPermissionsService) { }
 
   get viewPolicies(): any {
     return this.policies
+  }
+
+  setPoliciesToUser(): void {
+    let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    let _backendPolicies = _currentUser.administrativeData
+    let _policies
+
+    console.log('USER', _currentUser)
+
+    _backendPolicies.forEach(element => {
+
+      let _p = this.parse(element)
+      let _pArr = this.makePolicy(_p)
+
+      this.policies.push({
+        'clinic': element.clinicId,
+        'policies': _pArr
+      })
+    });
+
+    localStorage.setItem('policies', JSON.stringify(this.policies));
+
+    this.policies.forEach(element => {
+      if (element.clinic == localStorage.getItem('clinic')) {
+        this.permissionsService.loadPermissions(element.policies);
+      }
+    });
+  }
+
+  flushPolicies(): void {
+    localStorage.removeItem('policies');
   }
 
   parse(_policies: any): any {
