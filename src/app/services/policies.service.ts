@@ -38,9 +38,6 @@ export class PoliciesService {
     localStorage.setItem('policies', JSON.stringify(this.policies));
 
     this.policies.forEach(element => {
-
-      console.log(element.policies)
-
       if (element.clinic == localStorage.getItem('clinic')) {
         this.permissionsService.loadPermissions(element.policies);
       }
