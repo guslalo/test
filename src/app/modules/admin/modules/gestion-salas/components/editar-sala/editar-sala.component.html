@@ -12,7 +12,7 @@
     >
       {{ 'waitingRoom.updateRoom.label' | transloco }}
     </button>
-    <button disabled id="submit-button" type="button" class="btn btn-outline-secondary rounded-pill float-right mr-3">
+    <button *ngxPermissionsOnly="['Delete:WaitingRoom']" disabled id="submit-button" type="button" class="btn btn-outline-secondary rounded-pill float-right mr-3">
       {{ 'waitingRoom.deleteRoom.label' | transloco }}
     </button>
 

@@ -4,6 +4,7 @@
   </div>
   <div class="col">
     <button
+      *ngxPermissionsOnly="['Create:WaitingRoom']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
@@ -112,7 +113,7 @@
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
+                    <button *ngxPermissionsOnly="['Update:WaitingRoom']" ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
                       {{ 'clinicalFile.edit.label' | transloco }}
                     </button>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
