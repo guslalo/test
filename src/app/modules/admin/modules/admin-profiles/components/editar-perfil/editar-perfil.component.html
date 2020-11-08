@@ -120,7 +120,6 @@
                 role="tab"
                 aria-controls="users"
                 aria-selected="false"
-                *ngIf="profile.role === 'admin'"
               >
                 {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
@@ -162,6 +161,7 @@
                 role="tab"
                 aria-controls="consultas"
                 aria-selected="false"
+                *ngIf="profile.role !== 'admin'"
               >
                 {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
@@ -175,6 +175,7 @@
                 role="tab"
                 aria-controls="disponibilidad"
                 aria-selected="false"
+                *ngIf="profile.role !== 'admin'"
               >
                 {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>

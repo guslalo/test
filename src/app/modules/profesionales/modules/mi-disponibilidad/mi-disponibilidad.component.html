@@ -4,7 +4,7 @@
       <h2>{{ 'disponibility.title' | transloco }}</h2>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary rounded-pill float-right" ng-reflect-tour-anchor="agendar"
+      <button type="button" class="btn btn-primary rounded-pill float-right" *ngxPermissionsOnly="['Create:Availabilities']" ng-reflect-tour-anchor="agendar"
         (click)="createAvailability.reset()" data-toggle="modal" data-target="#disponibilidad">
         {{ 'disponibility.btnNewDisponibility.label' | transloco }}
         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
@@ -144,11 +144,11 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button"
+                            <button data-toggle="modal" *ngxPermissionsOnly="['Update:Availabilities']" data-target="#editar" class="dropdown-item" type="button"
                               (click)="putAvailability(item._id)">
                               {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
-                            <button class="dropdown-item" type="button" (click)="deleteAvailability(item._id)">
+                            <button class="dropdown-item" type="button" *ngxPermissionsOnly="['Delete:Availabilities']" (click)="deleteAvailability(item._id)">
                               {{ 'common.button.delete.label' | transloco }}
                             </button>
                           </div>
