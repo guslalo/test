@@ -190,6 +190,7 @@
                 role="tab"
                 aria-controls="sale"
                 aria-selected="false"
+                *ngIf="profile.role !== 'professional'"
               >
                 {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}
               </a>
@@ -217,6 +218,7 @@
                 role="tab"
                 aria-controls="reporte"
                 aria-selected="false"
+                *ngIf="profile.role !== 'professional'"
               >
                 {{ 'tabs.report.label' | transloco }}
               </a>
@@ -542,7 +544,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
@@ -560,7 +562,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesUpdateAppointments"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }}
@@ -580,7 +582,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editBackground.label' | transloco }}
                       </td>
@@ -598,7 +600,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesUpdateAntecedents"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.viewExams.label' | transloco }}
