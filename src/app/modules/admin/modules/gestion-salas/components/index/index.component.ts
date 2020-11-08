@@ -5,6 +5,7 @@ import { RoomsService } from 'src/app/services/rooms.service';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-index',

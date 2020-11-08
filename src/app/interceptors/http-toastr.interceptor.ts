@@ -29,7 +29,7 @@ export class HttpToastrInterceptor implements HttpInterceptor {
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status == 400 || err.status == 500) {
-          if(err.error.message == "Device Token registration failed") return throwError(err);
+          if (err.error.message == "Device Token registration failed") return throwError(err);
           this.toastr.error(err.error.message || err.error[0], `Status: ${err.status.toString()}`);
         }
         return throwError(err);

@@ -19,6 +19,10 @@ import { UserLogin } from '../../../../models/models';
 import { TranslocoService } from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { PoliciesService } from '../../../../services/policies.service';
+
+import { NgxPermissionsService } from 'ngx-permissions';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,8 +41,8 @@ export class LoginComponent implements OnInit {
   public errorMsg: string;
   public showPassword: boolean;
   public recaptcha: boolean;
-  public errorLogin:number;
-  public production:boolean;
+  public errorLogin: number;
+  public production: boolean;
 
   constructor(
     private translocoService: TranslocoService,
@@ -49,26 +53,26 @@ export class LoginComponent implements OnInit {
     private UserService: UsersService,
     private router: Router,
     private appointmentsService: AppointmentsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.errorLogin = 0;
     localStorage.clear();
     this.spinner.hide();
-    if( environment.production === false ){
+    if (environment.production === false) {
       this.production = false;
       this.recaptcha = false
       this.formLogin = this.formBuilder.group({
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       });
-     } else {
-       this.production = true;
-       this.formLogin = this.formBuilder.group({
+    } else {
+      this.production = true;
+      this.formLogin = this.formBuilder.group({
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       })
-    }  
+    }
   }
 
   setActiveLang(lang: string) {
@@ -135,17 +139,21 @@ export class LoginComponent implements OnInit {
             );
             break;
         }
+
+        let _policies = new PoliciesService(this.currentUser.administrativeData)
+        localStorage.setItem('policies', JSON.stringify(_policies.viewPolicies))
+
         this.spinner.hide();
       },
       (err) => {
-        this.errorLogin ++
-        if(this.errorLogin > 3){
+        this.errorLogin++
+        if (this.errorLogin > 3) {
           this.recaptcha = true;
-          if(this.recaptcha === true){
-              this.formLogin = this.formBuilder.group({
-                username: new FormControl(null, [Validators.required, Validators.email]),
-                password: new FormControl(null, [Validators.required]),
-                recaptchaReactive: new FormControl(null, [Validators.required]),    
+          if (this.recaptcha === true) {
+            this.formLogin = this.formBuilder.group({
+              username: new FormControl(null, [Validators.required, Validators.email]),
+              password: new FormControl(null, [Validators.required]),
+              recaptchaReactive: new FormControl(null, [Validators.required]),
             })
           }
         }

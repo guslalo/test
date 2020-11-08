@@ -1,4 +1,4 @@
- import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { AdminService } from '../../../../services/admin.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,6 +7,8 @@ import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+
+import { NgxPermissionsService } from 'ngx-permissions';
 
 declare var $;
 
@@ -47,7 +49,7 @@ export class UsuariosComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private el: Renderer2,
     private toastService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();

@@ -139,7 +139,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -254,7 +254,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -263,7 +263,7 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -281,7 +281,7 @@
                           {{ 'common.activate.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          *ngxPermissionsOnly="['SendInvitation:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -337,7 +337,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+            *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -452,7 +452,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                         *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -461,7 +461,7 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -479,7 +479,7 @@
                           {{ 'common.activate.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          *ngxPermissionsOnly="['SendInvitation:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -539,7 +539,7 @@
           </div>
           <div class="col-12 col-md-4 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               data-target="#disponibilidad"
@@ -655,7 +655,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -664,7 +664,7 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -682,7 +682,7 @@
                           {{ 'common.activate.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          *ngxPermissionsOnly="['SendInvitation:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -738,6 +738,7 @@
               <img src="assets/icons/icon-export-excel.svg" />
             </button>
             <button
+              *ngxPermissionsOnly="['SendInvitation:User']"
               type="button"
               class="btn custom-btn-1 mx-2"
               (click)="sendInvitationEmail()"
@@ -751,7 +752,7 @@
           </div>
           <div class="col-12 col-md-5 float-right">
             <button
-              *ngIf="currentUser.policies.userPolicies.create"
+             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               [routerLink]="['crear-usuario']"
@@ -902,7 +903,7 @@
                       </button>
                       <div ngbDropdownMenu>
                         <button
-                          *ngIf="currentUser.policies.userPolicies.update"
+                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
                           [routerLink]="['editar-usuario']"
@@ -911,7 +912,7 @@
                           {{ 'clinicalFile.edit.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Activo' && currentUser.policies.userPolicies.delete"
+                          *ngxPermissionsOnly="['Delete:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"
@@ -929,7 +930,7 @@
                           {{ 'common.activate.label' | transloco }}
                         </button>
                         <button
-                          *ngIf="row.status === 'Pendiente' && currentUser.policies.userPolicies.sendInvitation"
+                          *ngxPermissionsOnly="['SendInvitation:User']"
                           ngbDropdownItem
                           type="button"
                           data-toggle="modal"

@@ -4,7 +4,7 @@
   </div>
   <div class="col">
     <button
-      *ngIf="currentUser.policies.profilePolicies.create"
+      *ngxPermissionsOnly="['Create:Profile']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       routerLink="crear-perfil"
@@ -118,22 +118,24 @@
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
                       <button
-                        *ngIf="currentUser.policies.profilePolicies.update"
+                        *ngxPermissionsOnly="['Update:Profile']"
                         class="dropdown-item"
                         type="button"
                         [routerLink]="['editar-perfil']"
                         [queryParams]="{ profileId: profile.id }"
                       >
                         {{ 'clinicalFile.edit.label' | transloco }}
-                      </button>
-                      <button
-                        *ngIf="currentUser.policies.profilePolicies.delete && profile.isActive"
-                        class="dropdown-item"
-                        type="button"
-                        (click)="deactivateProfile(profile.id)"
-                      >
-                        {{ 'clinicalFile.deactivate.label' | transloco }}
-                      </button>
+                      </button><!-- *ngIf="profile.isActive"-->
+                      <ng-container *ngIf="profile.isActive">
+                        <button                 
+                          *ngxPermissionsOnly="['Delete:Profile']"
+                          class="dropdown-item"
+                          type="button"
+                          (click)="deactivateProfile(profile.id)"
+                        >
+                          {{ 'clinicalFile.deactivate.label' | transloco }}
+                        </button>
+                      </ng-container>
                     </div>
                   </div>
                 </td>

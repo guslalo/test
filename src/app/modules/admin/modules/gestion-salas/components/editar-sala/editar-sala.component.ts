@@ -4,6 +4,7 @@ import { RoomsService } from 'src/app/services/rooms.service';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-editar-sala',
