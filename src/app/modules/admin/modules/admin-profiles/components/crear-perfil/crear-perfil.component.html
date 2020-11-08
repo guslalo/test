@@ -163,6 +163,7 @@
                 role="tab"
                 aria-controls="consultas"
                 aria-selected="false"
+                *ngIf="profile.role !== 'admin'"
               >
                 {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
@@ -176,6 +177,7 @@
                 role="tab"
                 aria-controls="disponibilidad"
                 aria-selected="false"
+                *ngIf="profile.role !== 'admin'"
               >
                 {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>
@@ -1085,11 +1087,12 @@
                         {{ 'dashboard.home.uncategorized.editDesign.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateDesing"
                             type="checkbox"
                             class="custom-control-input"
@@ -1104,11 +1107,12 @@
                         {{ 'dashboard.home.uncategorized.editNotifications.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateNotifications"
                             type="checkbox"
                             class="custom-control-input"
@@ -1123,11 +1127,12 @@
                         {{ 'dashboard.home.uncategorized.editHealthProfessional.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateProfessionals"
                             type="checkbox"
                             class="custom-control-input"
@@ -1142,11 +1147,12 @@
                         {{ 'dashboard.home.uncategorized.editSpecialty.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateSpecialities"
                             type="checkbox"
                             class="custom-control-input"
@@ -1161,11 +1167,12 @@
                         {{ 'dashboard.home.uncategorized.editServiceReason.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentObjective"
                             type="checkbox"
                             class="custom-control-input"
@@ -1180,11 +1187,12 @@
                         {{ 'dashboard.home.uncategorized.editModality.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{ 'common.Soon' | transloco }}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentModality"
                             type="checkbox"
                             class="custom-control-input"
