@@ -4,6 +4,7 @@
   </div>
   <div class="col">
     <button
+      *ngxPermissionsOnly="['Create:User']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
@@ -110,7 +111,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients">
+          <li ngbNavItem="pre-patients" *ngxPermissionsOnly="['Create:User']">
             <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
@@ -248,7 +249,7 @@
                         </button>
                         <div ngbDropdownMenu>
                           <button
-                            *ngIf="row.status === 'joined' || row.status == 'pending'"
+                            *ngxPermissionsOnly="['SendInvitationUser']"
                             ngbDropdownItem
                             type="button"
                             data-toggle="modal"
