@@ -4,6 +4,7 @@
   </div>
   <div class="col">
     <button
+      *ngxPermissionsOnly="['Create:User']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
@@ -69,13 +70,20 @@
                         <div class="img boxImg2 rounded-circle d-inline-block">
                         <img class="mr-2" width="38" height="38"  src="assets/img/profile.png"  alt="img" />
                         </div>
-                         <a [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }"
+                         <a *ngxPermissionsOnly="['Read:MedicalRecord']" [routerLink]="['ficha-paciente']" [queryParams]="{ userId: row.userId }"
                          style="top: -17px !important;
                          position: relative; left:5px"
                          >{{
-                          row.personalData.name + ' ' + row.personalData.secondLastName
-                        }}
-                      </a>
+                            row.personalData.name + ' ' + row.personalData.secondLastName
+                          }}
+                        </a>
+                        <p *ngxPermissionsExcept="['Read:MedicalRecord']"
+                          style="top: -17px !important;
+                          position: relative; left:5px"
+                          >{{
+                            row.personalData.name + ' ' + row.personalData.secondLastName
+                          }}
+                        </p>
                       
                     </ng-template>
                   </ngx-datatable-column>
@@ -110,7 +118,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients">
+          <li ngbNavItem="pre-patients" *ngxPermissionsOnly="['Create:User']">
             <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
@@ -248,7 +256,7 @@
                         </button>
                         <div ngbDropdownMenu>
                           <button
-                            *ngIf="row.status === 'joined' || row.status == 'pending'"
+                            *ngxPermissionsOnly="['SendInvitation:User']"
                             ngbDropdownItem
                             type="button"
                             data-toggle="modal"

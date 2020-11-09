@@ -2104,6 +2104,7 @@
             <div class="col-12">
               <!--<h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>-->
               <button
+                *ngxPermissionsOnly="['Attach:Files']"
                 type="button"
                 class="btn btn-outline-primary rounded-pill float-right"
                 data-toggle="modal"
@@ -2174,6 +2175,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a
+                    *ngxPermissionsOnly="['Create:Prescription']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
@@ -2182,6 +2184,7 @@
                     >{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a
                   >
                   <a
+                    *ngxPermissionsOnly="['Create:ExamOrders']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
@@ -2190,6 +2193,7 @@
                     >{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a
                   >
                   <a
+                   *ngxPermissionsOnly="['Create:MedicalLicenses']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
