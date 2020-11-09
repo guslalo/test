@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
+
+import { environment } from './../../../../../environments/environment';
 import {
   NgbDateStruct,
   NgbCalendar,
@@ -77,8 +79,11 @@ export class FinishRegistrationComponent implements OnInit {
   public neighborhood:any;
   public street:any;
 
+  public mayorEdad:boolean;
+
 
   ngOnInit(): void {
+    
     this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
@@ -423,13 +428,23 @@ export class FinishRegistrationComponent implements OnInit {
         this.personalData.get('email').setValue(patient.email);
         this.personalData.get('gender').setValue(patient.gender);
         this.personalData.get('phoneNumber').setValue(patient.phoneNumber);
-
         const current = new Date();
-        this.maxDate = {
-          year: current.getFullYear() - 18,
-          month: current.getMonth() + 1,
-          day: current.getDate(),
-        };
+
+        if(environment.checkAge === false){
+          this.mayorEdad = false
+          this.maxDate = {
+            year: current.getFullYear(),
+            month: current.getMonth(),
+            day: current.getDate(),
+          };
+        } else {
+          this.mayorEdad = true
+          this.maxDate = {
+            year: current.getFullYear() - 18,
+            month: current.getMonth() + 1,
+            day: current.getDate(),
+          };
+        }  
       },
       (error) => console.log(error)
     );

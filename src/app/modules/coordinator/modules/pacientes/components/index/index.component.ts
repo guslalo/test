@@ -52,7 +52,7 @@ export class IndexComponent implements OnInit {
       phoneNumber: [null, [Validators.required, ]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
-      age: [18, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
+      age: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
     });
 
     this.getPatients();

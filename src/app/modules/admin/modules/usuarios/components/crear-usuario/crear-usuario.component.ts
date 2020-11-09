@@ -12,6 +12,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 
+import { environment } from './../../../../../../../environments/environment';
+
 const current = new Date();
 
 @Component({
@@ -40,6 +42,9 @@ export class CrearUsuarioComponent implements OnInit {
   public cityObject:any;
   public neighborhood:any;
   public street:any;
+  public mayorEdad:boolean;
+  maxDate = undefined;
+
 
 
   registerUf:any;
@@ -63,11 +68,8 @@ export class CrearUsuarioComponent implements OnInit {
     day: current.getDate(),
   };
 
-  maxDate = {
-    year: current.getFullYear() - 18,
-    month: current.getMonth() + 1,
-    day: current.getDate(),
-  };
+
+
 
   dateAdapter = new CustomDateAdapter();
   birthDate: NgbDateStruct;
@@ -93,6 +95,8 @@ export class CrearUsuarioComponent implements OnInit {
 
   professionalRegistry: any = [];
 
+  
+
   // FOR CUSTOM FORM
   public userType = this.routerAct.snapshot.queryParamMap.get('userType');
 
@@ -109,6 +113,24 @@ export class CrearUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    
+  if(environment.checkAge === false){
+    this.mayorEdad = false
+    this.maxDate = {
+      year: current.getFullYear(),
+      month: current.getMonth(),
+      day: current.getDate(),
+    };
+  } else {
+    this.mayorEdad = true
+    this.maxDate = {
+      year: current.getFullYear() - 18,
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    };
+  }
+
     this.spinner.show();
 
     this.getProfiles();
@@ -133,9 +155,9 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required,]], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
-      lastName: ['',], //Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
-      motherName: ['', [Validators.required,]],// Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      name: ['', [Validators.required,]], 
+      lastName: ['',], 
+      motherName: ['', [Validators.required,]],
       secondLastName: ['', [Validators.required,]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
