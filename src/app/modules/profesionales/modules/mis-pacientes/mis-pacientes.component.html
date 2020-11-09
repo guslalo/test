@@ -77,13 +77,13 @@
                             row.personalData.name + ' ' + row.personalData.secondLastName
                           }}
                         </a>
-                        <p *ngxPermissionsExcept="['Read:MedicalRecord']"
+                        <a *ngxPermissionsExcept="['Read:MedicalRecord']"
                           style="top: -17px !important;
                           position: relative; left:5px"
                           >{{
                             row.personalData.name + ' ' + row.personalData.secondLastName
                           }}
-                        </p>
+                        </a>
                       
                     </ng-template>
                   </ngx-datatable-column>
@@ -118,7 +118,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients" *ngxPermissionsOnly="['Create:User']">
+          <li ngbNavItem="pre-patients" >
             <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
