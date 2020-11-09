@@ -279,7 +279,7 @@
                 [displayWith]="getDisplayFn()"
                 (optionSelected)="setPatient($event.option.value)"
               >
-                <mat-option *ngFor="let item of patients" [value]="item">
+                <mat-option *ngFor="let item of filteredPatients | async" [value]="item">
                   {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                 </mat-option>
               </mat-autocomplete>
@@ -351,7 +351,7 @@
                 [displayWith]="getDisplayFn()"
                 (optionSelected)="getSpecialties($event.option.value)"
               >
-                <mat-option *ngFor="let item of professionals" [value]="item">
+                <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
                   {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                 </mat-option>
               </mat-autocomplete>
@@ -373,6 +373,7 @@
             <div class="modal-footer text-center justify-content-center">
               <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
               <button
+                *ngIf="blocks.length"
                 type="button"
                 class="btn btn-primary rounded-pill"
                 data-dismiss="modal"

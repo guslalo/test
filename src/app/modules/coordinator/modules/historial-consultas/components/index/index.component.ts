@@ -11,6 +11,8 @@ import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { ProfessionalService } from 'src/app/services/professional.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { environment } from 'src/environments/environment'
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -25,6 +27,8 @@ export class IndexComponent implements OnInit {
   public photoUrlBase = environment.photoUrlBase;
 
   public patients = [];
+  public filteredPatients: Observable<any[]>;
+  public filteredProfessionals: Observable<any[]>;
   public tempPatients = [];
   public professionals = [];
   public tempProfessionals = [];
@@ -84,6 +88,13 @@ export class IndexComponent implements OnInit {
       professional: [null, Validators.required],
       specialty: [null, Validators.required],
     });
+    this.filteredPatients = this.appointmentForm.controls['patient'].valueChanges.pipe(startWith(''), map(newVal => {
+      return this.patients.filter(value => (value.personalData.name + ' ' + value.personalData.lastName).toLowerCase().indexOf(newVal.toLowerCase()) === 0)
+    }))
+
+    this.filteredProfessionals = this.appointmentForm.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
+      return this.professionals.filter(value => (value.personalData.name + ' ' + value.personalData.lastName).toLowerCase().indexOf(newVal.toLowerCase()) === 0)
+    }))
   }
 
   onSelect({ selected }) {
@@ -98,6 +109,7 @@ export class IndexComponent implements OnInit {
 
   private display(user): string {
     //access component "this" here
+    console.log(user)
     return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
   }
 
@@ -107,6 +119,7 @@ export class IndexComponent implements OnInit {
         // console.log(data);
         this.tempPatients = [...data];
         this.patients = data;
+        this.filteredPatients = data;
       },
       (error) => {
         console.log(error);
