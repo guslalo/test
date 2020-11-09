@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './components/index/index.component';
 import { FichaPacienteComponent } from './components/ficha-paciente/ficha-paciente.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -11,6 +12,12 @@ const routes: Routes = [
   {
     path: ':id',
     component: FichaPacienteComponent,
+    canActivate: [NgxPermissionsGuard],
+    data: {
+      permissions: {
+        only: ['Read:MedicalRecord'],
+      }
+    }
   },
 ];
 
@@ -18,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PacientesRoutingModule {}
+export class PacientesRoutingModule { }

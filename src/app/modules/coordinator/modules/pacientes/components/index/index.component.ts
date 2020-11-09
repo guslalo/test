@@ -40,16 +40,16 @@ export class IndexComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastService: ToastrService,
     private spinner: NgxSpinnerService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
       name: ['', Validators.required],
-      lastName: ['', ],
+      lastName: ['',],
       secondLastName: ['', Validators.required],
-      phoneNumber: [null, [Validators.required, ]],
+      phoneNumber: [null, [Validators.required,]],
       email: ['', [Validators.email, Validators.required]],
       gender: ['male', Validators.required],
       age: [18, [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.min(1), Validators.max(120)]],
@@ -65,7 +65,7 @@ export class IndexComponent implements OnInit {
         console.log(data);
         this.patients = data;
         this.tempPatients = [...data];
-      
+
         this.spinner.hide();
       },
       (error) => {
@@ -111,7 +111,7 @@ export class IndexComponent implements OnInit {
   applyFilters(tab: string) {
     const searchTerm = this.searchTerm.toLowerCase();
     var temp = [];
-    if(this.tempPatients) {
+    if (this.tempPatients) {
       if (tab === 'patients') {
         temp = this.tempPatients
           // SEARCH FILTER
@@ -122,29 +122,29 @@ export class IndexComponent implements OnInit {
             return (
               patient.identificationData.cpf?.toLowerCase().includes(searchTerm) ||
               patient.identificationData.cns?.toLowerCase().includes(searchTerm) ||
-              patient.identificationData.rgRegistry?.toLowerCase().includes(searchTerm)  ||
-              patient.identificationData.passport?.toLowerCase().includes(searchTerm)  ||
-              viewName.toLowerCase().includes(searchTerm)  ||
-              patient.personalData.phoneNumber?.toString().toLowerCase().includes(searchTerm)  ||
+              patient.identificationData.rgRegistry?.toLowerCase().includes(searchTerm) ||
+              patient.identificationData.passport?.toLowerCase().includes(searchTerm) ||
+              viewName.toLowerCase().includes(searchTerm) ||
+              patient.personalData.phoneNumber?.toString().toLowerCase().includes(searchTerm) ||
               !searchTerm
             );
           });
-          console.log(temp)
+        console.log(temp)
         this.patients = temp;
       }
-   }
+    }
 
     if (tab === 'pre-patients') {
       temp = this.tempPrePatients
         // SEARCH FILTER
         .filter((patient) => {
           let viewName = patient.name + ' ' + (patient.secondLastName || patient.lastName)
-            if (viewName.toLowerCase().includes(searchTerm)) console.log(viewName)
+          if (viewName.toLowerCase().includes(searchTerm)) console.log(viewName)
           return (
-            viewName.toString().toLowerCase().includes(searchTerm)  ||
+            viewName.toString().toLowerCase().includes(searchTerm) ||
             patient.secondLastName?.toLowerCase().includes(searchTerm) ||
-            patient.email?.toLowerCase().includes(searchTerm)  ||
-            patient.phoneNumber?.toString().toLowerCase().includes(searchTerm)  ||
+            patient.email?.toLowerCase().includes(searchTerm) ||
+            patient.phoneNumber?.toString().toLowerCase().includes(searchTerm) ||
             !searchTerm
           );
         });
@@ -201,5 +201,11 @@ export class IndexComponent implements OnInit {
     }, 1000);
   }
 
-  
+  disableLink(event) {
+    console.log(event)
+    event.preventDefault();
+    event.stopPropagation()
+    return
+  }
+
 }

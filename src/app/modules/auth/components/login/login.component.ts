@@ -21,8 +21,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { PoliciesService } from '../../../../services/policies.service';
 
-import { NgxPermissionsService } from 'ngx-permissions';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -52,7 +50,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private UserService: UsersService,
     private router: Router,
-    private appointmentsService: AppointmentsService
+    private appointmentsService: AppointmentsService,
+    private _policyService: PoliciesService
   ) { }
 
   ngOnInit(): void {
@@ -104,6 +103,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
 
+        this._policyService.setPoliciesToUser()
+
         switch (this.currentUser.administrativeData[0].role) {
           case 'admin':
             if (data.internalCode === 6) {
@@ -139,9 +140,6 @@ export class LoginComponent implements OnInit {
             );
             break;
         }
-
-        let _policies = new PoliciesService(this.currentUser.administrativeData)
-        localStorage.setItem('policies', JSON.stringify(_policies.viewPolicies))
 
         this.spinner.hide();
       },
