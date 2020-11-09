@@ -111,6 +111,7 @@
                 {{ 'tabs.information.label' | transloco }}
               </a>
             </li>
+            <!-- para ver la G7 se debe agregar el rol en la linea 124 y parametrizar segun perfil -->
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
@@ -120,6 +121,7 @@
                 role="tab"
                 aria-controls="users"
                 aria-selected="false"
+                *ngIf="profile.role == 'coordinator'"
               >
                 {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
@@ -182,7 +184,7 @@
             </li>
             <!-- REVISION -->
             <!-- https://prnt.sc/ve8icf -->
-            <!-- <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -194,7 +196,7 @@
               >
                 {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}
               </a>
-            </li> -->
+            </li>
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
@@ -542,7 +544,7 @@
                       </td>
                     </tr>
                     <!-- REVISAR -->
-                    <!-- <tr>
+                    <tr *ngIf="profile.role != 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
@@ -560,7 +562,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesUpdateAppointments"></label>
                         </div>
                       </td>
-                    </tr> -->
+                    </tr>
                     <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }}
@@ -923,7 +925,7 @@
             </div>
             <!-- SALA DE ESPERA -->
             <!-- REVISION -->
-            <!-- <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
+            <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
                   [(ngModel)]="checkAllWaitingRoomsPolicies"
@@ -1032,7 +1034,7 @@
                   </tbody>
                 </table>
               </div>
-            </div> -->
+            </div>
             <!-- CONFIGURACION CLINICA -->
             
             <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
