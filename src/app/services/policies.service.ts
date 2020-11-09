@@ -26,7 +26,7 @@ export class PoliciesService {
         'policies': _pArr
       })
     }
-
+    console.log(this.policies);
   }
 
   get viewPolicies(): any {
