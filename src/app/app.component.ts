@@ -16,7 +16,7 @@ export class AppComponent {
   message: string;
   title = 'itmstl';
 
-  constructor(titleService: Title, router: Router, private permissionsService: NgxPermissionsService) {
+  constructor(titleService: Title, router: Router, private permissionsService: NgxPermissionsService, private _policyService: PoliciesService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         //var title = this.getTitle(router.routerState, router.routerState.root).join('-');
@@ -39,18 +39,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    console.log('run')
 
-    let _policies = new PoliciesService(JSON.parse(localStorage.getItem('currentUser')).administrativeData)
-    console.log(_policies.viewPolicies)
-
-    console.log('clinic id', localStorage.getItem('clinic'))
-
-    _policies.viewPolicies.forEach(element => {
-      if (element.clinic == localStorage.getItem('clinic')) {
-        this.permissionsService.loadPermissions(element.policies);
-      }
-    });
+    this._policyService.setPoliciesToUser()
 
     /*const userId = 'user001';
     this.messagingService.requestPermission(userId)
