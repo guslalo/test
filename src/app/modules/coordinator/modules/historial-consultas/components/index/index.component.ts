@@ -88,12 +88,20 @@ export class IndexComponent implements OnInit {
       professional: [null, Validators.required],
       specialty: [null, Validators.required],
     });
-    this.filteredPatients = this.appointmentForm.controls['patient'].valueChanges.pipe(startWith(''), map(newVal => {
-      return this.patients.filter(value => (value.personalData.name + ' ' + value.personalData.lastName).toLowerCase().indexOf(newVal.toLowerCase()) === 0)
+    this.filteredPatients = this.appointmentForm.controls['patient'].valueChanges.pipe(startWith(''), map((newVal:string) => {
+      return this.patients.filter(value => {
+        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+      })
     }))
 
     this.filteredProfessionals = this.appointmentForm.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
-      return this.professionals.filter(value => (value.personalData.name + ' ' + value.personalData.lastName).toLowerCase().indexOf(newVal.toLowerCase()) === 0)
+      return this.professionals.filter(value => {
+        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+      })
     }))
   }
 
@@ -110,7 +118,7 @@ export class IndexComponent implements OnInit {
   private display(user): string {
     //access component "this" here
     console.log(user)
-    return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
+    return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
   }
 
   getPatients() {
@@ -119,7 +127,6 @@ export class IndexComponent implements OnInit {
         // console.log(data);
         this.tempPatients = [...data];
         this.patients = data;
-        this.filteredPatients = data;
       },
       (error) => {
         console.log(error);

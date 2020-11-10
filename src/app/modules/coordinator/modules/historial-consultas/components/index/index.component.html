@@ -311,27 +311,6 @@
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="form-group col">
-              <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
-              <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
-                <ng-container *ngFor="let item of blocks">
-                  <option value="{{ item }}">{{ item }}</option>
-                </ng-container>
-              </select>
-              <ng-container *ngIf="!blocks.length">
-                <p class="text-primary">{{ 'clinicalFile.noHoursAvailable.label' | transloco }}</p>
-              </ng-container>
-            </div>
-            <div class="form-group col">
-              <label for="objective">{{
-                'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
-              }}</label>
-              <input type="text" class="form-control" name="objective" formControlName="objective" />
-            </div>
-          </div>
-
           <div class="row">
             <div class="form-group col">
               <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
@@ -368,17 +347,38 @@
               </select>
             </div>
           </div>
+          <div class="row">
+            <div class="form-group col">
+              <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
+              <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
+                <ng-container *ngFor="let item of blocks">
+                  <option value="{{ item }}">{{ item }}</option>
+                </ng-container>
+              </select>
+              <ng-container *ngIf="!blocks.length">
+                <p class="text-primary">{{ 'clinicalFile.noHoursAvailable.label' | transloco }}</p>
+              </ng-container>
+            </div>
+            <div class="form-group col">
+              <label for="objective">{{
+                'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
+              }}</label>
+              <input type="text" class="form-control" name="objective" formControlName="objective" />
+            </div>
+          </div>
+
+          
 
           <div class="row">
             <div class="modal-footer text-center justify-content-center">
               <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
               <button
-                *ngIf="blocks.length"
+                
                 type="button"
                 class="btn btn-primary rounded-pill"
                 data-dismiss="modal"
                 (click)="createAppointment()"
-                [disabled]="!appointmentForm.valid"
+                [disabled]="!appointmentForm.valid || !blocks.length"
               >
                 <!--[disabled]="!createAvailability.valid"-->
                 {{ 'clinicalFile.reserveService.label' | transloco }}
