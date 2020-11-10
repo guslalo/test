@@ -111,6 +111,7 @@
                 {{ 'tabs.information.label' | transloco }}
               </a>
             </li>
+            <!-- para ver la G7 se debe agregar el rol en la linea 124 y parametrizar segun perfil -->
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
@@ -120,6 +121,7 @@
                 role="tab"
                 aria-controls="users"
                 aria-selected="false"
+                *ngIf="profile.role == 'coordinator'"
               >
                 {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
@@ -180,7 +182,9 @@
                 {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- REVISION -->
+            <!-- https://prnt.sc/ve8icf -->
+            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -539,7 +543,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <tr *ngIf="profile.role != 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
@@ -634,7 +639,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.attachFile.label' | transloco }}
                       </td>
@@ -652,7 +658,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesAttachFiles"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr *ngIf="profile.role === 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.generateMedPrescription.label' | transloco }}
@@ -918,6 +924,7 @@
               </div>
             </div>
             <!-- SALA DE ESPERA -->
+            <!-- REVISION -->
             <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -1029,6 +1036,7 @@
               </div>
             </div>
             <!-- CONFIGURACION CLINICA -->
+            
             <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -1182,7 +1190,7 @@
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
-                          <input
+                          <input 
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentModality"
                             type="checkbox"
                             class="custom-control-input"
@@ -1246,7 +1254,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
+                    <!-- REVISION -->
+                    <!-- <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.logsManagment.label' | transloco }}
                       </td>
@@ -1264,7 +1273,7 @@
                           <label class="custom-control-label" for="reportPoliciesReportLogs"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>

@@ -51,7 +51,7 @@
                 {{ 'clinicalFile.patientData.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAppointments:MedicalRecord']">
               <a
                 class="nav-link"
                 id="consultasPaciente"
@@ -63,7 +63,7 @@
                 {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAntecedents:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab2"
@@ -76,7 +76,7 @@
                 {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['UpdateAntecedents:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab3"
@@ -89,7 +89,7 @@
                 {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab"
@@ -102,7 +102,7 @@
                 {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAppointments:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab"

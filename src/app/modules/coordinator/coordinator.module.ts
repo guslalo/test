@@ -8,4 +8,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [],
   imports: [CommonModule, CoordinatorRoutingModule, SharedModule],
 })
-export class CoordinatorModule {}
+export class CoordinatorModule { }

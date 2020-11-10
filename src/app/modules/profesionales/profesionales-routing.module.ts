@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 // import { PacientesComponent } from './pacientes/pacientes.component';
 
 // guards
-import { GuardsGuard } from '../../guards/guards.guard';
 import { ProfesionalGuard } from '../../guards/profesional.guard';
 import { PacienteGuard } from '../../guards/paciente.guard';
 
@@ -16,7 +15,6 @@ import { InicioPComponent } from '../profesionales/inicio/inicio.component';
 import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-disponibilidad.component';
 //import { FichaConsultaComponent } from './modules/ficha-consulta/ficha-consulta.component';
 
-import { VerticalTimelineModule } from 'angular-vertical-timeline';
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
