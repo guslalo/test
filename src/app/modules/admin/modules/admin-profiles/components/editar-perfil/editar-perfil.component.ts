@@ -156,8 +156,8 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   actualizarPerfil() {
     this.profile.isActive = true;
     if (this.profile.profileName !== null || this.profile.profileName !== '') {
-      this.adminService.updateProfile(this.profile, this.profileId).subscribe(() => {
-        // console.log(response);
+      this.adminService.updateProfile(this.profile, this.profileId).subscribe(response => {
+        console.log(response);
         this.location.back();
       });
     } else {
