@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private UserService: UsersService,
     private router: Router,
-    private appointmentsService: AppointmentsService
+    private appointmentsService: AppointmentsService,
+    private permissionsService: NgxPermissionsService
   ) { }
 
   ngOnInit(): void {
@@ -103,7 +104,14 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(data.access_token));
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
-
+        console.log(this.currentUser)
+        let _policies = new PoliciesService(this.currentUser.administrativeData)
+        localStorage.setItem('policies', JSON.stringify(_policies.viewPolicies))
+        _policies.viewPolicies.forEach(element => {
+          if (element.clinic == localStorage.getItem('clinic')) {
+            this.permissionsService.loadPermissions(element.policies);
+          }
+        });
         switch (this.currentUser.administrativeData[0].role) {
           case 'admin':
             if (data.internalCode === 6) {
@@ -139,9 +147,7 @@ export class LoginComponent implements OnInit {
             );
             break;
         }
-
-        let _policies = new PoliciesService(this.currentUser.administrativeData)
-        localStorage.setItem('policies', JSON.stringify(_policies.viewPolicies))
+        
 
         this.spinner.hide();
       },

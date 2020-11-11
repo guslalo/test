@@ -5,27 +5,17 @@ export class PoliciesService {
   private _policiesArr = []
 
   constructor(private _policies: any) {
+    console.log(_policies);
+    _policies.forEach(element => {
 
-    if (_policies.length > 1) {
-      _policies.forEach(element => {
-
-        let _p = this.parse(element)
-        let _pArr = this.makePolicy(_p)
-
-        this.policies.push({
-          'clinic': element.clinicId,
-          'policies': _pArr
-        })
-      });
-    } else {
-      let _p = this.parse(_policies)
+      let _p = this.parse(element)
       let _pArr = this.makePolicy(_p)
 
       this.policies.push({
-        'clinic': _policies.clinicId,
+        'clinic': element.clinicId,
         'policies': _pArr
       })
-    }
+    });
     console.log(this.policies);
   }
 
