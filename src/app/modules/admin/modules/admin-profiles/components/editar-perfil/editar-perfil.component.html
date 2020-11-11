@@ -111,6 +111,7 @@
                 {{ 'tabs.information.label' | transloco }}
               </a>
             </li>
+            <!-- para ver la G7 se debe agregar el rol en la linea 124 y parametrizar segun perfil -->
             <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
@@ -120,6 +121,7 @@
                 role="tab"
                 aria-controls="users"
                 aria-selected="false"
+                *ngIf="profile.role == 'coordinator'"
               >
                 {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
@@ -180,7 +182,9 @@
                 {{ 'waitingRoom.disponibility.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- REVISION -->
+            <!-- https://prnt.sc/ve8icf -->
+            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -302,7 +306,7 @@
                         {{ 'dashboard.home.uncategorized.createUser.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                       {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -321,7 +325,7 @@
                         {{ 'dashboard.home.uncategorized.editUser.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -340,7 +344,7 @@
                         {{ 'dashboard.home.uncategorized.disableUser.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -359,7 +363,7 @@
                         {{ 'dashboard.home.uncategorized.sendInvitationToPatient.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -410,7 +414,7 @@
                         {{ 'profile.createProfile.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -429,7 +433,7 @@
                         {{ 'profile.editProfile.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -448,7 +452,7 @@
                         {{ 'profile.disableProfile.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -508,7 +512,7 @@
                         {{ 'dashboard.home.uncategorized.virepatientCard.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -527,7 +531,7 @@
                         {{ 'dashboard.home.uncategorized.viewServices.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -541,12 +545,13 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <tr *ngIf="profile.role != 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -565,7 +570,7 @@
                         {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -584,7 +589,7 @@
                         {{ 'dashboard.home.uncategorized.editBackground.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -603,7 +608,7 @@
                         {{ 'dashboard.home.uncategorized.viewExams.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -622,7 +627,7 @@
                         {{ 'profile.viewPrescription.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -636,12 +641,13 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- REVISAR -->
+                    <!-- <tr>
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.attachFile.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -654,13 +660,13 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesAttachFiles"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr *ngIf="profile.role === 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.generateMedPrescription.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -679,7 +685,7 @@
                         {{ 'dashboard.home.uncategorized.generateExamOrder.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -698,7 +704,7 @@
                         {{ 'dashboard.home.uncategorized.generateMedLicense.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -752,7 +758,7 @@
                         {{ 'dashboard.home.uncategorized.calendarAccess.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -771,7 +777,7 @@
                         {{ 'clinicalFile.scheduleService.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -790,7 +796,7 @@
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -809,7 +815,7 @@
                         {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -863,7 +869,7 @@
                         {{ 'dashboard.home.disponibilityManagment.modal.createDisponibility.title' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -882,7 +888,7 @@
                         {{ 'dashboard.home.uncategorized.editDisponibility.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -901,7 +907,7 @@
                         {{ 'dashboard.home.uncategorized.cancelDisponibility.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -920,6 +926,7 @@
               </div>
             </div>
             <!-- SALA DE ESPERA -->
+            <!-- REVISION -->
             <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sale-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -955,7 +962,7 @@
                         {{ 'waitingRoom.createRoom.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -974,7 +981,7 @@
                         {{ 'dashboard.home.uncategorized.editWaitinRoom.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -993,7 +1000,7 @@
                         {{ 'dashboard.home.uncategorized.cancelWaitinRoom.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1012,7 +1019,7 @@
                         {{ 'dashboard.home.uncategorized.assignWaitinRoom.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1031,6 +1038,7 @@
               </div>
             </div>
             <!-- CONFIGURACION CLINICA -->
+            
             <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -1066,7 +1074,7 @@
                         {{ 'dashboard.home.uncategorized.editInformation.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1085,7 +1093,7 @@
                         {{ 'dashboard.home.uncategorized.editDesign.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1104,7 +1112,7 @@
                         {{ 'dashboard.home.uncategorized.editNotifications.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1123,7 +1131,7 @@
                         {{ 'dashboard.home.uncategorized.editHealthProfessional.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1142,7 +1150,7 @@
                         {{ 'dashboard.home.uncategorized.editSpecialty.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1161,7 +1169,7 @@
                         {{ 'dashboard.home.uncategorized.editServiceReason.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1180,11 +1188,11 @@
                         {{ 'dashboard.home.uncategorized.editModality.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
-                          <input
+                          <input 
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentModality"
                             type="checkbox"
                             class="custom-control-input"
@@ -1198,7 +1206,7 @@
                 </table>
               </div>
             </div>
-            <!-- REPORTES -->
+            <!-- REPORTES-->
             <div class="tab-pane fade" id="reporte" role="tabpanel" aria-labelledby="reporte-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
@@ -1234,7 +1242,7 @@
                         {{ 'profile.reportManagment.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1248,12 +1256,13 @@
                         </div>
                       </td>
                     </tr>
-                    <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
+                    <!-- REVISION -->
+                    <!-- <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.logsManagment.label' | transloco }}
                       </td>
                       <td class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ipsum nulla. Vestibulum.
+                        {{'soon' | transloco}}
                       </td>
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
@@ -1266,7 +1275,7 @@
                           <label class="custom-control-label" for="reportPoliciesReportLogs"></label>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>

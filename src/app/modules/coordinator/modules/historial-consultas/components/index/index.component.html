@@ -279,7 +279,7 @@
                 [displayWith]="getDisplayFn()"
                 (optionSelected)="setPatient($event.option.value)"
               >
-                <mat-option *ngFor="let item of patients" [value]="item">
+                <mat-option *ngFor="let item of filteredPatients | async" [value]="item">
                   {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                 </mat-option>
               </mat-autocomplete>
@@ -311,7 +311,42 @@
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="form-group col">
+              <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
+              <input
+                *ngIf="professionals"
+                type="text"
+                class="form-control"
+                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
+                [matAutocomplete]="autoProfessionals"
+                formControlName="professional"
+              />
+              <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                <img src="assets/icons/icon-search.svg" />
+              </div>
+              <mat-autocomplete
+                #autoProfessionals="matAutocomplete"
+                [displayWith]="getDisplayFn()"
+                (optionSelected)="getSpecialties($event.option.value)"
+              >
+                <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
+                  {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+            <div class="form-group col">
+              <label for="specialty">{{
+                'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.specialty.label' | transloco
+              }}</label>
+              <select class="form-control custom-select" (change)="getBlocks()" formControlName="specialty">
+                <option selected>{{ 'common.select.label' | transloco }}</option>
+                <ng-container *ngFor="let item of specialties">
+                  <option value="{{ item._id }}">{{ item.specialtyName }} </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="form-group col">
               <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
@@ -332,52 +367,18 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="form-group col">
-              <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
-              <input
-                *ngIf="professionals"
-                type="text"
-                class="form-control"
-                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
-                [matAutocomplete]="autoProfessionals"
-                formControlName="professional"
-              />
-              <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
-                <img src="assets/icons/icon-search.svg" />
-              </div>
-              <mat-autocomplete
-                #autoProfessionals="matAutocomplete"
-                [displayWith]="getDisplayFn()"
-                (optionSelected)="getSpecialties($event.option.value)"
-              >
-                <mat-option *ngFor="let item of professionals" [value]="item">
-                  {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
-                </mat-option>
-              </mat-autocomplete>
-            </div>
-            <div class="form-group col">
-              <label for="specialty">{{
-                'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.specialty.label' | transloco
-              }}</label>
-              <select class="form-control custom-select" (change)="getBlocks()" formControlName="specialty">
-                <option selected>{{ 'common.select.label' | transloco }}</option>
-                <ng-container *ngFor="let item of specialties">
-                  <option value="{{ item._id }}">{{ item.specialtyName }} </option>
-                </ng-container>
-              </select>
-            </div>
-          </div>
+          
 
           <div class="row">
             <div class="modal-footer text-center justify-content-center">
               <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
               <button
+                
                 type="button"
                 class="btn btn-primary rounded-pill"
                 data-dismiss="modal"
                 (click)="createAppointment()"
-                [disabled]="!appointmentForm.valid"
+                [disabled]="!appointmentForm.valid || !blocks.length"
               >
                 <!--[disabled]="!createAvailability.valid"-->
                 {{ 'clinicalFile.reserveService.label' | transloco }}

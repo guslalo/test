@@ -1433,8 +1433,7 @@
     <div class="modal-content p-3">
       <div class="modal-header text-center">
         <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
-          <!--{{ 'dashboard.home.myHealth.modal.deleteItem.title' | transloco }}?-->
-          ¿Esta seguro en cancelar esta consulta?
+          {{'common.button.reschedule.title' | transloco }}
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -1445,20 +1444,17 @@
           <!--[formGroup]="availabilityBlocked" -->
           <div class="row">
             <div class="form-group col text-center">
-              <p>Considera que posiblemente perderas la consulta con este profesional</p>
+              <p> {{'common.button.reschedule.warning' | transloco }}</p>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">
-          Volver
-          <!--{{ 'common.button.cancel.label' | transloco }}-->
+          {{ 'clinicalFile.back.label' | transloco }}
         </button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="cancelarCita(idCancel)">
-          <!-- (click)="delete()"-->
-          Cancelar consulta
-          <!--{{ 'common.button.delete.label' | transloco }}-->
+          {{ 'common.button.cancel.label' | transloco }} consulta
         </button>
       </div>
     </div>

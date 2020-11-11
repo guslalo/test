@@ -1,6 +1,12 @@
 {
+  "soon":"Em breve",
   "cie10":{
     "cie10":" CID10"
+  },
+  "sibrare": {
+    "prescription": "prescrição",
+    "report": "Atestado",
+    "exam-order": "Pedido de exame"
   },
   "exemplo":"exemplo",
   "history": {
@@ -2627,9 +2633,9 @@
         "label": "Adicionar novo"
       },
       "reschedule": {
-        "title": "Tem certeza que deseja cancelar a consulta?",
+        "title": "Tem certeza que deseja cancelar esta consulta?",
         "label": "Reagendar",
-        "warning": "Considere que você pode perder a consulta com este profissional!"
+        "warning": "Considere perder a consulta com esse profissional!"
       },
       "cancel": {
         "label": "Cancelar"
