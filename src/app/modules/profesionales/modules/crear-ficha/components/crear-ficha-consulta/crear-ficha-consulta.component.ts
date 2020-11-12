@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { AdminitrativeService } from './../../../../../../services/administrative.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { takeWhile } from 'rxjs/operators';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 declare var $: any;
 
@@ -88,6 +89,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDiagnostic2 = [];
   public preArray = []
   private alive: boolean;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -100,7 +102,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private domSanitizer: DomSanitizer,
     private adminitrativeService: AdminitrativeService,
-    private translateService: TranslocoService
+    private translateService: TranslocoService,
+    private NgxPermissionsService: NgxPermissionsService
   ) {}
 
   ngOnChanges(){
@@ -108,6 +111,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
+
+    this.NgxPermissionsService.permissions$.subscribe((permissions) => {
+        console.log(permissions)
+    })
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
@@ -201,7 +209,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
         if(environment.production === false){
-          console.log(data);
+          //console.log(data);
         }
       },
       (error) => {

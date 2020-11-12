@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FichaHistorialComponent } from './components/ficha-historial/ficha-historial.component';
 import { JsonPathFinderPipe } from 'src/app/pipes/json-path-finder.pipe';
 
+
 @NgModule({
   declarations: [
     CrearFichaConsultaComponent,
