@@ -35,7 +35,7 @@ import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
 import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
-import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
@@ -55,6 +55,7 @@ import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
     NgbRatingModule,
     PasswordStrengthMeterModule,
     FullCalendarModule,
+    NgxPermissionsModule,
     NgxMaskModule.forRoot({
       validation: true,
     })

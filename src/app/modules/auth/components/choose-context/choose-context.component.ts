@@ -15,8 +15,9 @@ import { PoliciesService } from '../../../../services/policies.service';
 export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};
+  public arrayAdministrativeData = [ ];
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router,   private _policyService: PoliciesService) { }
 
   ngOnInit(): void {
     this.user = new UserLogin(
@@ -33,6 +34,21 @@ export class ChooseContextComponent implements OnInit {
   }
 
   chooseContext(clinicId, role) {
+    //let arrayAdministrativeData = [ ];
+    //let arrayAdministrativeData = this.user.administrativeData;
+    
+    for(let item of this.user.administrativeData){
+      if(clinicId === item.clinicProfileId ) {
+        this.arrayAdministrativeData.push(item);
+      } 
+    }
+    localStorage.setItem('contextRole', JSON.stringify(this.arrayAdministrativeData));
+     this._policyService.setPoliciesToUser()
+  
+      
+    
+
+
     if (localStorage.getItem('firstAccessMultirole') === 'true') {
       this.getRouteForClinicAndRole(clinicId, role);
     } else {
