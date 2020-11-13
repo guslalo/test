@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { NgxPermissionsService } from 'ngx-permissions';
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-editar-sala',
@@ -44,6 +45,25 @@ export class EditarSalaComponent implements OnInit {
     });
   }
 
+
+  _sort(prop, arr) {
+    prop = prop.split('.');
+    var len = prop.length;
+
+    arr.sort(function (a, b) {
+      var i = 0;
+      while (i < len) { a = a[prop[i]]; b = b[prop[i]]; i++; }
+      if (a < b) {
+        return -1;
+      } else if (a > b) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    return arr;
+  };
+
   ngOnInit(): void {
     this.roomId = this.router.url.split('/').pop();
     // console.log(roomId);
@@ -55,9 +75,12 @@ export class EditarSalaComponent implements OnInit {
       this.requirePayment = data.payload.administrativeDetails?.requirePayment;
       this.roomForm.get('appointmentPrice').setValue(data.payload.administrativeDetails?.appointmentPrice);
 
-      this.professionalsData = data.payload.personnelDetails?.professionals;
-      this.coordinatorsData = data.payload.personnelDetails?.coordinators;
+      this.professionalsData = _.orderBy(data.payload.personnelDetails?.professionals, [item => item.personalData.name.toLowerCase()], ['asc']);
+
+      this.coordinatorsData = _.orderBy(data.payload.personnelDetails?.coordinators, [item => item.personalData.name.toLowerCase()], ['asc'])
+
       this.createdAt = moment(data.payload.administrativeDetails.createdAt).format('DD-MM-YYYY');
+
       if (data.payload.administrativeDetails.createdBy.length)
         this.createdBy =
           data.payload.administrativeDetails.createdBy[0]?.personalData.name +
