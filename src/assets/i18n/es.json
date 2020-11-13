@@ -1317,25 +1317,25 @@
         },
         "categories": {
           "sickness": {
-            "label": "Ej: hipertensión arterial o Diabetes Mellitus tipo 1"
+            "label": "Ej: hipertensión arterial, Diabetes Mellitus, etc."
           },
           "allergies": {
-            "label": "Ej: Polvo o Polen o Aspirina"
+            "label": "Ej: Polvo, Polen, Aspirina, etc."
           },
           "surgicalInterventions": {
-            "label": "Ej: Marcapaso o Stent coronario"
+            "label": "Ej: Marcapasos, Stent coronario, etc."
           },
           "familiarHistory": {
-            "label": "Ej: Infarto (madre) o Cáncer (hermano)"
+            "label": "Ej: Infarto (madre), cáncer (hermano), etc."
           },
           "medicines": {
-            "label": "Ej: Paracetamol o Captopril o Levotiroxina o Insulina"
+            "label": "Ej: Paracetamol, levotiroxina, insulina, etc."
           },
           "healthHabits": {
-            "label": "Ej: Fumador(2 cigarros/día) o Sedentario"
+            "label": "Ej: Fumador (2 cigarros/día), Sedentario, actividad física (3 veces por semana), etc."
           },
           "occupational": {
-            "label": "Ej: Estudiante u ocupación (profesión), empleado o jubilado"
+            "label": "Ej: Estudiante, profesor, empleado, pensionado, etc."
           },
           "others": {
             "label": " "
