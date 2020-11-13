@@ -1,14 +1,14 @@
 {
-  "soon":"Em breve",
-  "cie10":{
-    "cie10":" CID10"
+  "soon": "Em breve",
+  "cie10": {
+    "cie10": " CID10"
   },
   "sibrare": {
     "prescription": "prescrição",
     "report": "Atestado",
     "exam-order": "Pedido de exame"
   },
-  "exemplo":"exemplo",
+  "exemplo": "exemplo",
   "history": {
     "tabs": {
       "latest": {
@@ -247,13 +247,13 @@
             },
             "imcClasification": {
               "label": "Classificação IMC",
-              "values":{
-                "low":"Abaixo do peso",
-                "normal":"Peso normal",
-                "over":"Acima do peso",
-                "type1":"Obesidade I",
-                "type2":"Obesidade II (severa)",
-                "type3":"Obesidade III (mórbida)"
+              "values": {
+                "low": "Abaixo do peso",
+                "normal": "Peso normal",
+                "over": "Acima do peso",
+                "type1": "Obesidade I",
+                "type2": "Obesidade II (severa)",
+                "type3": "Obesidade III (mórbida)"
               }
             }
           },
@@ -931,7 +931,7 @@
       "welcomeTitle": {
         "label": "Bem vindo a Plataforma de Teleconsulta"
       },
-      "invalidEmail":{
+      "invalidEmail": {
         "label": "E-mail inválido"
       }
     },
@@ -1316,30 +1316,30 @@
             "title": "Deseja eliminar este elemento?"
           }
         },
-        "categories":{
-          "sickness":{
-            "label":"Ex: Hipertensão Arterial ou Diabetes Mellitus Tipo 1"
+        "categories": {
+          "sickness": {
+            "label": "Ex: Hipertensão Arterial ou Diabetes Mellitus Tipo 1"
           },
-          "allergies":{
-            "label":"Ex: Pó, Pólen ou Aspirina"
+          "allergies": {
+            "label": "Ex: Pó, Pólen ou Aspirina"
           },
-          "surgicalInterventions":{
-            "label":"Ex: Marca-passo ou Stent coronario"
+          "surgicalInterventions": {
+            "label": "Ex: Marca-passo ou Stent coronario"
           },
-          "familiarHistory":{
-            "label":"Ex: Infarto (mãe) ou Câncer (irmão )"
+          "familiarHistory": {
+            "label": "Ex: Infarto (mãe) ou Câncer (irmão )"
           },
-          "medicines":{
-            "label":"Ex: Paracetamol ou Captopril ou Levotiroxina ou Insulina"
+          "medicines": {
+            "label": "Ex: Paracetamol ou Captopril ou Levotiroxina ou Insulina"
           },
-          "healthHabits":{
-            "label":"Ex: Fumante(2 cigarros/dia) ou Sedentário"
+          "healthHabits": {
+            "label": "Ex: Fumante(2 cigarros/dia) ou Sedentário"
           },
-          "occupational":{
-            "label":"Ex: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
+          "occupational": {
+            "label": "Ex: Estudante ou Ocupação (profissão) ou Empregado ou Aposentado"
           },
-          "others":{
-            "label":" "
+          "others": {
+            "label": " "
           }
         }
       },
@@ -2322,11 +2322,11 @@
     "payment": {
       "label": "Forma de pagamento"
     },
-    "immediate":{
-      "label":"C. Imediata"
+    "immediate": {
+      "label": "C. Imediata"
     },
-    "agendada":{
-      "label":"C. Agendada"
+    "agendada": {
+      "label": "C. Agendada"
     }
   },
   "tabs": {
@@ -2405,6 +2405,9 @@
     "description": {
       "label": "Sala criada em % por %"
     },
+    "professionals": {
+      "label": "Profissional(is)"
+    },
     "usersAwaiting": {
       "label": "% usuário(s) em sala de espera"
     },
@@ -2442,6 +2445,9 @@
     },
     "createdAt": {
       "label": "Sala criada em"
+    },
+    "by": {
+      "label": "por"
     },
     "noRecords": {
       "label": "Não há registros associados"
@@ -2590,7 +2596,7 @@
   },
   "common": {
     "withOut": "sem resultados",
-    "Soon":"Em breve",
+    "Soon": "Em breve",
     "user": {
       "sessionExpired": {
         "label": "Sessão expirada"
@@ -2603,8 +2609,8 @@
       "password": {
         "label": "Senha"
       },
-      "user":{
-        "label":"E-mail"
+      "user": {
+        "label": "E-mail"
       },
       "file": {
         "examen": "exame",

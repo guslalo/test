@@ -35,4 +35,4 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     TranslocoRootModule,
   ],
 })
-export class GestionSalasModule {}
+export class GestionSalasModule { }

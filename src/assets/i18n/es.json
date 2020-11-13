@@ -1,14 +1,14 @@
 {
-  "soon":"Próximamente",
-  "cie10":{
-    "cie10":" CIE10"
+  "soon": "Próximamente",
+  "cie10": {
+    "cie10": " CIE10"
   },
   "sibrare": {
     "prescription": "Preescripción",
     "report": "Reporte",
     "exam-order": "Orden de exámen"
   },
-  "exemplo":"Ejemplo",
+  "exemplo": "Ejemplo",
   "history": {
     "tabs": {
       "latest": {
@@ -247,13 +247,13 @@
             },
             "imcClasification": {
               "label": "Clasificación IMC",
-              "values":{
-                "low":"Bajo peso",
-                "normal":"Peso normal",
-                "over":"Sobrepeso",
-                "type1":"Obesidad tipo I",
-                "type2":"Obesidad tipo II",
-                "type3":"Obesidad tipo III (mórbida)"
+              "values": {
+                "low": "Bajo peso",
+                "normal": "Peso normal",
+                "over": "Sobrepeso",
+                "type1": "Obesidad tipo I",
+                "type2": "Obesidad tipo II",
+                "type3": "Obesidad tipo III (mórbida)"
               }
             }
           },
@@ -931,7 +931,7 @@
       "welcomeTitle": {
         "label": "Bienvenido a tu plataforma de teleconsulta"
       },
-      "invalidEmail":{
+      "invalidEmail": {
         "label": "E-mail inválido"
       }
     },
@@ -1315,32 +1315,31 @@
             "title": "¿Deseas eliminar este elemento?"
           }
         },
-        "categories":{
-          "sickness":{
-            "label":"Ej: hipertensión arterial o Diabetes Mellitus tipo 1"
+        "categories": {
+          "sickness": {
+            "label": "Ej: hipertensión arterial o Diabetes Mellitus tipo 1"
           },
-          "allergies":{
-            "label":"Ej: Polvo o Polen o Aspirina"
+          "allergies": {
+            "label": "Ej: Polvo o Polen o Aspirina"
           },
-          "surgicalInterventions":{
-            "label":"Ej: Marcapaso o Stent coronario"
+          "surgicalInterventions": {
+            "label": "Ej: Marcapaso o Stent coronario"
           },
-          "familiarHistory":{
-            "label":"Ej: Infarto (madre) o Cáncer (hermano)"
+          "familiarHistory": {
+            "label": "Ej: Infarto (madre) o Cáncer (hermano)"
           },
-          "medicines":{
-            "label":"Ej: Paracetamol o Captopril o Levotiroxina o Insulina"
+          "medicines": {
+            "label": "Ej: Paracetamol o Captopril o Levotiroxina o Insulina"
           },
-          "healthHabits":{
-            "label":"Ej: Fumador(2 cigarros/día) o Sedentario"
+          "healthHabits": {
+            "label": "Ej: Fumador(2 cigarros/día) o Sedentario"
           },
-          "occupational":{
-            "label":"Ej: Estudiante u ocupación (profesión), empleado o jubilado"
+          "occupational": {
+            "label": "Ej: Estudiante u ocupación (profesión), empleado o jubilado"
           },
-          "others":{
-            "label":" "
+          "others": {
+            "label": " "
           }
-          
         }
       },
       "myServices": {
@@ -2322,11 +2321,11 @@
     "payment": {
       "label": "Pago"
     },
-    "immediate":{
-      "label":"C. Inmediata"
+    "immediate": {
+      "label": "C. Inmediata"
     },
-    "agendada":{
-      "label":"C. Agendada"
+    "agendada": {
+      "label": "C. Agendada"
     }
   },
   "tabs": {
@@ -2405,6 +2404,9 @@
     "description": {
       "label": "Sala creada el % por % "
     },
+    "professionals": {
+      "label": "Profesional(es)"
+    },
     "usersAwaiting": {
       "label": "% usuario en sala de espera "
     },
@@ -2442,6 +2444,9 @@
     },
     "createdAt": {
       "label": "Sala creada el"
+    },
+    "by": {
+      "label": "por"
     },
     "noRecords": {
       "label": "No existen registros asociados"
@@ -2590,7 +2595,7 @@
   },
   "common": {
     "withOut": "sin resultados",
-    "Soon":"Proximamente",
+    "Soon": "Proximamente",
     "user": {
       "sessionExpired": {
         "label": "Sesión expirada"
@@ -2603,8 +2608,8 @@
       "password": {
         "label": "contraseña"
       },
-      "user":{
-        "label":"E-mail"
+      "user": {
+        "label": "E-mail"
       },
       "file": {
         "examen": "exámen",
@@ -3614,14 +3619,14 @@
     "cityReq": {
       "label": "Ciudad"
     },
-    "city":{
+    "city": {
       "label": "Ciudad"
     },
     "neighborhoodReq": {
       "label": "Barrio"
     },
-    "neighborhood":{
-      "label":"Barrio"
+    "neighborhood": {
+      "label": "Barrio"
     },
     "streetReq": {
       "label": "Calle es necesario"
