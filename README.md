@@ -1,4 +1,4 @@
-## Requirimientos mínimos
+## Requerimientos mínimos
 
 - Node JS V.11
 - Angular 9
@@ -189,4 +189,86 @@ Para crear un nuevo deploy respectivo a un nuevo cliente
 2. Despliegue comando : 
 ```bash
 ng build --configuration=NombreCliente  
+```
+
+
+## CI/CD Telemedicina
+
+La integración continua hacia los servicios de Beanstalk de AWS se realizan desde los pipeline de bitbucket, por lo que es necesario configurar las variables de entorno del repositorio con la información que entrega Beanstalk para realizar el deploy correspondiente (también existe la opción de configurar variables por rama en la opción deployment)
+
+Una vez configurado las variables se procede a configurar el archivo para los pipelines, los cuales en bitbucket se llama bitbucket-pipelines.yml, el cual se deja en la carpeta raíz de cada proyecto a establecer integración continua.
+
+## FrontEnd
+
+El pipeline se divide por ramas (cada rama hace un deploy a un entorno distinto) en la que se deben instalar las dependencias de la aplicación, proceder a compilarlas y una vez finalizado se hace el deploy al entorno, en el siguiente código se muestra un ejemplo de configuración de pipeline para la rama master (producción) con las variables de entorno creadas en el paso anterior.
+```bash
+image: node:12.18.2
+pipelines:
+  branches:
+    master:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Production"
+        deployment: production
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            APPLICATION_NAME: "itms-frontend"
+            ENVIRONMENT_NAME: "itmsFrontend-env"
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+            WAIT: 'true'
+```
+
+## BackEnd
+
+Este pipeline es prácticamente igual al del front, con la diferencia que el deploy se hace sin archivos de docker (la aplicación corre directamente en un entorno de nodejs). Se deja un ejemplo para la rama master del backend
+
+```bash
+image: node:12.18.2
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          name: 'Build'
+          script:
+            - npm install
+            - npm run build
+            - apt-get update && apt-get install -y
+            - apt-get install zip
+            - zip -r itms-backend.zip dist/ package.json node_modules .ebextensions .platform mails
+          artifacts:
+            - itms-backend.zip
+      - step:
+          name: 'Deploy to Production'
+          deployment: production
+          script:
+            - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: 'itms-backend'
+                ENVIRONMENT_NAME: 'itmsBackend-env'
+                ZIP_FILE: 'itms-backend.zip'
+                S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+                WAIT: 'true'
+
+
 ```
