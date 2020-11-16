@@ -51,7 +51,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   }
 
   setRole(value) {
-    // console.log(this.profile);
+    console.log(this.profile);
     this.profile.role = value;
   }
 
@@ -120,26 +120,32 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
         // console.log(profile);
         const role = profileData.role;
         this.profile = profileData;
-
+        const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
+        const tab_coor = <HTMLInputElement>document.querySelector('#coordinator-tab');
+        const tab_pro = <HTMLInputElement>document.querySelector('#professional-tab');
+        console.log(role)
         switch (role) {
           case 'admin':
             this.profile.medicalRecordPolicies = this.profileModel.medicalRecordPolicies;
-            const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
             this.el.removeClass(tab_adm, 'active');
             this.el.addClass(tab_adm, 'active');
+            this.el.addClass(tab_coor, 'disabled-tab');
+            this.el.addClass(tab_pro, 'disabled-tab');
             break;
-
           case 'coordinator':
+            this.el.removeClass(tab_coor, 'active');
+            this.el.addClass(tab_coor, 'active');
+            this.el.addClass(tab_adm, 'disabled-tab');
+            this.el.addClass(tab_pro, 'disabled-tab');
+            this.profile.userPolicies = this.profileModel.userPolicies;
+            this.profile.profilePolicies = this.profileModel.profilePolicies;
+            this.profile.clinicPolicies = this.profileModel.clinicPolicies;
+            break;
           case 'professional':
-            if (role === 'coordinator') {
-              const tab_coor = <HTMLInputElement>document.querySelector('#coordinator-tab');
-              this.el.removeClass(tab_coor, 'active');
-              this.el.addClass(tab_coor, 'active');
-            } else if (role === 'professional') {
-              const tab_pro = <HTMLInputElement>document.querySelector('#professional-tab');
-              this.el.removeClass(tab_pro, 'active');
-              this.el.addClass(tab_pro, 'active');
-            }
+            this.el.removeClass(tab_pro, 'active');
+            this.el.addClass(tab_pro, 'active');
+            this.el.addClass(tab_coor, 'disabled-tab');
+            this.el.addClass(tab_adm, 'disabled-tab');
             this.profile.userPolicies = this.profileModel.userPolicies;
             this.profile.profilePolicies = this.profileModel.profilePolicies;
             this.profile.clinicPolicies = this.profileModel.clinicPolicies;
