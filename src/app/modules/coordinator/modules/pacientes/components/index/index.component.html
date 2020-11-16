@@ -265,7 +265,7 @@
                         </button>
                         <div ngbDropdownMenu>
                           <button
-                            *ngIf="row.status === 'joined' || row.status == 'pending'"
+                            *ngxPermissionsOnly="['SendInvitation:User']"
                             ngbDropdownItem
                             type="button"
                             data-toggle="modal"
@@ -289,6 +289,7 @@
       </div>
       <div class="col-auto">
         <button
+          *ngxPermissionsOnly="['SendInvitation:User']"
           type="button"
           class="btn custom-btn-1 mx-2"
           (click)="sendInvitationEmail()"
