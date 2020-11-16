@@ -137,7 +137,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
             this.el.addClass(tab_coor, 'active');
             this.el.addClass(tab_adm, 'disabled-tab');
             this.el.addClass(tab_pro, 'disabled-tab');
-            this.profile.userPolicies = this.profileModel.userPolicies;
             this.profile.profilePolicies = this.profileModel.profilePolicies;
             this.profile.clinicPolicies = this.profileModel.clinicPolicies;
             break;
