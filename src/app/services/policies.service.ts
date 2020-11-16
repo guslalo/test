@@ -9,6 +9,7 @@ export class PoliciesService {
   private policies = [];
   private _policiesArr = []
   private _currentUser: any;
+  private _backendPolicies = []
 
   constructor(private permissionsService: NgxPermissionsService) { }
 
@@ -17,15 +18,23 @@ export class PoliciesService {
   }
 
   setPoliciesToUser(): void {
+    //console.log(JSON.parse(localStorage.getItem('contextRole')))
 
-    let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
-    let _backendPolicies = _currentUser.administrativeData
+    if(localStorage.getItem('contextRole') && JSON.parse(localStorage.getItem('contextRole')).length > 0) {
+      let _currentUser: any = JSON.parse(localStorage.getItem('contextRole'));
+      this._backendPolicies = _currentUser
+    } else {
+      let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+      this._backendPolicies = _currentUser.administrativeData
+    }
+    
+
     let _policies
 
     this.flushPolicies()
 
-    _backendPolicies.forEach(element => {
-
+    this._backendPolicies.forEach(element => {
+      //console.log(element);
       let _p = this.parse(element)
       let _pArr = this.makePolicy(_p)
 
@@ -33,11 +42,15 @@ export class PoliciesService {
         'clinic': element.clinicId,
         'policies': _pArr
       })
+     //console.log(this.policies)
     });
 
+
     localStorage.setItem('policies', JSON.stringify(this.policies));
+    
 
     this.policies.forEach(element => {
+      //console.log(element.policies);
       if (element.clinic == localStorage.getItem('clinic')) {
         this.permissionsService.loadPermissions(element.policies);
       }
@@ -57,7 +70,7 @@ export class PoliciesService {
     var permissions = this.permissionsService.getPermissions();
 
     this.permissionsService.permissions$.subscribe((permissions) => {
-      console.log(permissions)
+      //console.log(permissions)
     })
   }
 

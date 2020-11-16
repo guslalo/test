@@ -154,7 +154,7 @@
                 {{ 'clinicalFile.medCardPatient.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item d-none" role="presentation">
+            <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
                 id="consultas-tab"
@@ -163,12 +163,12 @@
                 role="tab"
                 aria-controls="consultas"
                 aria-selected="false"
-                *ngIf="profile.role !== 'admin'"
+                *ngIf="profile.role != 'admin'"
               >
                 {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
-            <li class="nav-item d-none" role="presentation">
+            <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
                 id="disponibilidad-tab"
@@ -193,6 +193,7 @@
                 role="tab"
                 aria-controls="sale"
                 aria-selected="false"
+                *ngIf="profile.role !== 'professional'"
               >
                 {{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.waitingRoom.label' | transloco }}
               </a>
@@ -220,6 +221,7 @@
                 role="tab"
                 aria-controls="reporte"
                 aria-selected="false"
+                *ngIf="profile.role !== 'professional'"
               >
                 {{ 'tabs.report.label' | transloco }}
               </a>

@@ -25,7 +25,7 @@ export class MisConsultasComponent implements OnInit {
     this.page = 1;
     this.appointmentsService.getTotalPages().subscribe((data) => {
       console.log(data);
-      this.totalPages = data.payload.numberOfPages;
+      //this.totalPages = data.payload.numberOfPages;
     });
 
     this.appointmentsService.getAppointments(1).subscribe(
@@ -53,7 +53,8 @@ export class MisConsultasComponent implements OnInit {
           (lista) =>
             lista.administrativeDetails.status === 'created' || lista.administrativeDetails.status === 'waitingInList'
         );
-        //this.consultasActivas = data.payload;
+        this.consultasActivas = data.payload;
+        this.totalPages =  this.consultasActivas.length;
       },
       (error) => {
         console.log(error);

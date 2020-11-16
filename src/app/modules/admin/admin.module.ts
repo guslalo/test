@@ -25,4 +25,4 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   exports: [NgxChartsModule, NgbTypeaheadModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AdminModule {}
+export class AdminModule { }

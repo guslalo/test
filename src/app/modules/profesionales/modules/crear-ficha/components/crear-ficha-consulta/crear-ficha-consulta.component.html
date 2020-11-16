@@ -2,6 +2,7 @@
   <div class="row mb-3">
     <div class="col-6 col-md-6">
       <h2>{{ 'clinicalFile.title' | transloco }}</h2>
+      
       <p>
         {{ 'common.teleconsult.label' | transloco }}
         {{ appointmentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}.
@@ -2104,7 +2105,7 @@
             <div class="col-12">
               <!--<h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>-->
               <button
-                *ngxPermissionsOnly="['Attach:Files']"
+                *ngxPermissionsOnly="['AttachFiles:MedicalRecord']"
                 type="button"
                 class="btn btn-outline-primary rounded-pill float-right"
                 data-toggle="modal"
@@ -2175,7 +2176,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a
-                    *ngxPermissionsOnly="['Create:Prescription']"
+                    *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
@@ -2184,7 +2185,7 @@
                     >{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a
                   >
                   <a
-                    *ngxPermissionsOnly="['Create:ExamOrders']"
+                    *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
@@ -2193,7 +2194,7 @@
                     >{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a
                   >
                   <a
-                   *ngxPermissionsOnly="['Create:MedicalLicenses']"
+                   *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']"
                     class="dropdown-item"
                     data-toggle="modal"
                     data-target="#preescripcionesModal"
@@ -2511,7 +2512,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
-          Cerrar
+          {{'clinicalFile.close.label' | transloco}}
         </button>
       </div>
     </div>
@@ -2590,7 +2591,7 @@
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="delete()">
-          Eliminar
+          {{'common.button.delete.label' | transloco}}
         </button>
       </div>
     </div>
@@ -2629,7 +2630,7 @@
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">cancelar</button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="deleteByProfessional()">
-          Eliminar
+          {{'clinicalFile.delete.label' | transloco}}
         </button>
       </div>
     </div>
@@ -2652,7 +2653,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" (click)="clearId()">
-          Cerrar
+          {{'clinicalFile.closed.label' | transloco}}
         </button>
       </div>
     </div>

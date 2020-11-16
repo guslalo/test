@@ -3,14 +3,9 @@
     <h2>{{ 'dashboard.home.waitingRoomManagment.title' | transloco }}</h2>
   </div>
   <div class="col">
-    <button
-      *ngxPermissionsOnly="['Create:WaitingRoom']"
-      type="button"
-      class="btn btn-primary rounded-pill float-right"
-      data-toggle="modal"
-      data-target="#waitingRoomForm"
-    >
-      {{ 'waitingRoom.createRoom.label' | transloco }} 
+    <button *ngxPermissionsOnly="['Create:WaitingRoom']" type="button" class="btn btn-primary rounded-pill float-right"
+      data-toggle="modal" data-target="#waitingRoomForm">
+      {{ 'waitingRoom.createRoom.label' | transloco }}
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
     </button>
   </div>
@@ -20,13 +15,8 @@
   <div class="col-12">
     <div class="row mt-2">
       <div class="col-12 col-md-6">
-        <input
-          [(ngModel)]="searchTerm"
-          type="text"
-          class="form-control"
-          placeholder="{{ 'common.placeholder.search.label' | transloco }}"
-          (keyup)="applyFilters()"
-        />
+        <input [(ngModel)]="searchTerm" type="text" class="form-control"
+          placeholder="{{ 'common.placeholder.search.label' | transloco }}" (keyup)="applyFilters()" />
         <div class="searchBox">
           <img src="assets/icons/icon-search.svg" />
         </div>
@@ -39,18 +29,9 @@
       </div>
       <div class="col-12 mb-4">
         <div class="tableBox rounded p-4 bg-white">
-          <ngx-datatable
-            *ngIf="waitingRooms.length; else noData"
-            #table
-            class="material"
-            [rows]="waitingRooms"
-            headerHeight="auto"
-            footerHeight="auto"
-            rowHeight="70"
-            [columnMode]="ColumnMode.flex"
-            [limit]="pageSize"
-            [selectAllRowsOnPage]="true"
-          >
+          <ngx-datatable *ngIf="waitingRooms.length; else noData" #table class="material" [rows]="waitingRooms"
+            headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize"
+            [selectAllRowsOnPage]="true">
             <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="name" name="Sala de Espera">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <a [routerLink]="[row._id]">{{ row.roomDetails?.name }}</a>
@@ -69,13 +50,8 @@
             <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="payments" name="Pagos">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <div class="custom-control custom-switch mb-4">
-                  <input
-                    disabled
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="pay"
-                    [(ngModel)]="row.administrativeDetails.requirePayment"
-                  />
+                  <input disabled type="checkbox" class="custom-control-input" id="pay"
+                    [(ngModel)]="row.administrativeDetails.requirePayment" />
                   <label class="custom-control-label" for="pay"></label>
                 </div>
               </ng-template>
@@ -83,13 +59,8 @@
             <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="status" name="Activa">
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <div class="custom-control custom-switch mb-4">
-                  <input
-                    [(ngModel)]="row.administrativeDetails.isActive"
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="status"
-                    disabled
-                  />
+                  <input [(ngModel)]="row.administrativeDetails.isActive" type="checkbox" class="custom-control-input"
+                    id="status" disabled />
                   <label class="custom-control-label" for="status"></label>
                 </div>
               </ng-template>
@@ -98,24 +69,15 @@
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <div ngbDropdown container="body">
                   <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
-                    <svg
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      class="bi bi-three-dots"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                      />
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    <button 
-                    *ngxPermissionsOnly="['Update:WaitingRoom']"
-                    ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
+                    <button *ngxPermissionsOnly="['Update:WaitingRoom']" ngbDropdownItem type="button"
+                      [routerLink]="['editar-sala/' + row._id]">
                       {{ 'clinicalFile.edit.label' | transloco }}
                     </button>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
@@ -162,30 +124,18 @@
           <div class="row">
             <div class="form-group col-12 col-md-8">
               <label for="startBlock">{{ 'waitingRoom.roomName.label' | transloco }}*</label>
-              <input
-                type="text"
-                class="form-control"
-                name="name"
+              <input type="text" class="form-control" name="name"
                 placeholder="{{ 'clinicalFile.patientData.tabs.services.table.room.label' | transloco }}"
-                formControlName="name"
-                [ngClass]="{
+                formControlName="name" [ngClass]="{
                   'is-invalid': !roomForm.get('name').valid && roomForm.get('name').touched
-                }"
-              />
+                }" />
             </div>
             <div class="form-group col-12 col-md-4">
               <label for="startBlock">{{ 'waitingRoom.serviceFee.label' | transloco }}</label>
-              <input
-                [attr.disabled]="!requirePayment ? '' : null"
-                type="text"
-                class="form-control"
-                name="price"
-                placeholder="$0"
-                formControlName="appointmentPrice"
-                [ngClass]="{
+              <input [attr.disabled]="!requirePayment ? '' : null" type="text" class="form-control" name="price"
+                placeholder="$0" formControlName="appointmentPrice" [ngClass]="{
                   'is-invalid': !roomForm.get('appointmentPrice').valid && roomForm.get('appointmentPrice').touched
-                }"
-              />
+                }" />
             </div>
           </div>
           <div class="row">
@@ -193,44 +143,23 @@
               <label for="startBlock">{{
                 'dashboard.home.waitingRoomManagment.modal.create.description.label' | transloco
               }}</label>
-              <textarea
-                type="time"
-                class="form-control"
-                name="description"
-                rows="6"
-                [ngStyle]="{ resize: 'none' }"
-                placeholder="{{ 'common.description.label' | transloco }}"
-                formControlName="description"
-              ></textarea>
+              <textarea type="time" class="form-control" name="description" rows="6" [ngStyle]="{ resize: 'none' }"
+                placeholder="{{ 'common.description.label' | transloco }}" formControlName="description"></textarea>
             </div>
           </div>
           <div class="row">
             <div class="form-check">
-              <input
-                [(ngModel)]="role"
-                [ngModelOptions]="{ standalone: true }"
-                class="form-check-input mx-auto"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
-                value="professionals"
-                [ngStyle]="{ height: 'auto' }"
-              />
+              <input [(ngModel)]="role" [ngModelOptions]="{ standalone: true }" class="form-check-input mx-auto"
+                type="radio" name="exampleRadios" id="exampleRadios1" value="professionals"
+                [ngStyle]="{ height: 'auto' }" />
               <label class="form-check-label pl-4" for="exampleRadios1">
                 {{ 'dashboard.home.waitingRoomManagment.modal.create.healthProfessionals.label' | transloco }}
               </label>
             </div>
             <div class="form-check">
-              <input
-                [(ngModel)]="role"
-                [ngModelOptions]="{ standalone: true }"
-                class="form-check-input mx-auto"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="coordinators"
-                [ngStyle]="{ height: 'auto' }"
-              />
+              <input [(ngModel)]="role" [ngModelOptions]="{ standalone: true }" class="form-check-input mx-auto"
+                type="radio" name="exampleRadios" id="exampleRadios2" value="coordinators"
+                [ngStyle]="{ height: 'auto' }" />
               <label class="form-check-label pl-4" for="exampleRadios2">
                 {{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }}
               </label>
@@ -240,13 +169,9 @@
           <div *ngIf="role === 'professionals'">
             <div class="row mt-2">
               <div class="col-12 col-md-8 mx-auto mt-2">
-                <input
-                  type="text"
-                  class="form-control"
+                <input type="text" class="form-control"
                   placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
-                  [matAutocomplete]="auto"
-                  [formControl]="professionalSelected"
-                />
+                  [matAutocomplete]="auto" [formControl]="professionalSelected" />
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
                   <mat-option *ngFor="let item of professionals" [value]="item">
                     {{ item.personalData?.name + ' ' + item.personalData?.secondLastName }}
@@ -257,12 +182,8 @@
                 </div>
               </div>
               <div class="col-12 col-md-4">
-                <button
-                  type="button"
-                  class="btn btn-outline-primary rounded-pill mt-1"
-                  (click)="addPersonnel()"
-                  [disabled]="!professionalSelected.value"
-                >
+                <button type="button" class="btn btn-outline-primary rounded-pill mt-1" (click)="addPersonnel()"
+                  [disabled]="!professionalSelected.value">
                   {{ 'common.button.add.label' | transloco }}
                 </button>
               </div>
@@ -283,13 +204,9 @@
           <div *ngIf="role === 'coordinators'">
             <div class="row mt-2">
               <div class="col-12 col-md-8 mx-auto mt-2">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="{{ 'common.placeholder.searchCoordinator.label' | transloco }}"
-                  [matAutocomplete]="auto"
-                  [formControl]="coordinatorSelected"
-                />
+                <input type="text" class="form-control"
+                  placeholder="{{ 'common.placeholder.searchCoordinator.label' | transloco }}" [matAutocomplete]="auto"
+                  [formControl]="coordinatorSelected" />
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getDisplayFn()">
                   <mat-option *ngFor="let item of coordinators" [value]="item">
                     {{ item.personalData?.name + ' ' + item.personalData?.secondLastName }}
@@ -300,12 +217,8 @@
                 </div>
               </div>
               <div class="col-12 col-md-4">
-                <button
-                  type="button"
-                  class="btn btn-outline-primary rounded-pill mt-1"
-                  (click)="addPersonnel()"
-                  [disabled]="!coordinatorSelected.value"
-                >
+                <button type="button" class="btn btn-outline-primary rounded-pill mt-1" (click)="addPersonnel()"
+                  [disabled]="!coordinatorSelected.value">
                   {{ 'common.button.add.label' | transloco }}
                 </button>
               </div>
@@ -330,13 +243,8 @@
         <button type="button" class="btn btn-outline-primary rounded-pill" data-dismiss="modal">
           {{ 'common.button.cancel.label' | transloco }}
         </button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          (click)="createWaitingRoom()"
-          [disabled]="!validRoom()"
-        >
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="createWaitingRoom()"
+          [disabled]="!validRoom()">
           {{ 'dashboard.home.waitingRoomManagment.modal.create.createRoom.label' | transloco }}
         </button>
       </div>

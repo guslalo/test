@@ -18,11 +18,12 @@ export class VerSalaComponent implements OnInit {
   ColumnMode = ColumnMode;
 
   professionalsTotal: number;
+  usersTotal: number;
   roomName: string;
   createdAt: any;
   createdBy: any;
 
-  constructor(private router: Router, private roomsService: RoomsService) {}
+  constructor(private router: Router, private roomsService: RoomsService) { }
 
   ngOnInit() {
     this.roomId = this.router.url.split('/').pop();
@@ -32,6 +33,9 @@ export class VerSalaComponent implements OnInit {
       this.appointments = data.payload.appointmentDetails;
       this.roomName = data.payload.roomDetails.name;
       this.professionalsTotal = data.payload.personnelDetails.professionals.length;
+      this.usersTotal = data.payload.appointmentDetails.appointments.length
+
+      console.log('this.professionalsTotal', this.professionalsTotal);
 
       this.createdAt = moment(data.payload.administrativeDetails.createdAt).format('DD-MM-YYYY');
       if (data.payload.administrativeDetails.createdBy.length)
