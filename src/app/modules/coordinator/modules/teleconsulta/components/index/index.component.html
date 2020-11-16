@@ -226,10 +226,10 @@
                   aria-controls="prescripaciones"
                   aria-selected="false"
                 >
-                  {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
+                  {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }} 
                 </a>
               </li>
-              <li class="nav-item" role="presentation">
+              <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadExams:MedicalRecord']"><!--*ngxPermissionsOnly="['ReadExams:MedicalRecord']"-->
                 <a
                   class="nav-link"
                   id="profile-tab"
@@ -776,7 +776,13 @@
                 </div>
                 <div>
                   <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
-                  {{ professionalData.professionalData.ufRegistry.name }}
+                  <ul>
+                  <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
+                   
+                      <li>{{ item.ufRegistry}} - {{ item.registry}}</li>
+                  </ng-container>
+                 </ul>
+                  
 
                   <hr />
                 </div>
