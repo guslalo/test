@@ -69,7 +69,31 @@
                     prop="personalData.name"
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      <a routerLink="{{ row.userId }}">
+                      <a routerLink="{{ row.userId }}" *ngxPermissionsOnly="['Read:MedicalRecord']">
+                        <img
+                          *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
+                          class="profile mr-2"
+                          id="image0"
+                          width="38"
+                          height="38"
+                          [src]="photoUrlBase + (row.patientDetails?.userDetails)[0]?.photo"
+                          alt="img"
+                        />
+                        <ng-template #noPhoto>
+                          <img
+                            class="profile mr-2"
+                            id="image0"
+                            width="38"
+                            height="38"
+                            src="/assets/profile.jpg"
+                            alt="img"
+                          />
+                        </ng-template>
+                        {{
+                          row.personalData.name + ' ' + (row.personalData.secondLastName)
+                        }}
+                      </a>
+                      <a routerLink="{{ row.userId }}" *ngxPermissionsExcept="['Read:MedicalRecord']">
                         <img
                           *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
                           class="profile mr-2"
