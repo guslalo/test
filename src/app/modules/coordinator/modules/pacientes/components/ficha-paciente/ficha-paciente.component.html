@@ -196,12 +196,14 @@
                 <h4 class="title mb-3">
                   {{ 'clinicalFile.patientData.tabs.identification.birthData.title' | transloco }}
                 </h4>
-                <ul class="datos">
-                  <li>
-                    <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
-                    {{ identification.type?.toUpperCase() || 'S/R' }}
-                  </li>
-                  <li>
+                <ul class="datos"> 
+                  <ng-container *ngFor="let item of identification2">
+                    <li *ngIf="item[0] !== 'isForeign' ">
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>            
+                      {{ item[0] || 'S/R' }} - {{ item[1] || 'S/R' }}               
+                    </li>
+                  </ng-container>
+                  <li class="d-none">
                     <i>{{
                       'clinicalFile.patientData.tabs.identification.birthData.documentNumber.label' | transloco
                     }}</i>
