@@ -121,7 +121,6 @@
                 role="tab"
                 aria-controls="users"
                 aria-selected="false"
-                *ngIf="profile.role == 'coordinator'"
               >
                 {{ 'dashboard.home.config.tabs.healthProfessionals.table.users.label' | transloco }}
               </a>
@@ -184,7 +183,7 @@
             </li>
             <!-- REVISION -->
             <!-- https://prnt.sc/ve8icf -->
-            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
+            <li class="nav-item" role="presentation">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -481,7 +480,7 @@
               <div class="custom-control custom-switch mb-4">
                 <input
                   [(ngModel)]="checkAllMedicalRecords"
-                  (click)="checkAll('medicalRecords')"
+                  (change)="checkAll('medicalRecords')"
                   id="medicalRecords"
                   type="checkbox"
                   class="custom-control-input"
