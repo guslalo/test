@@ -18,7 +18,13 @@ export class AppComponent {
   message: string;
   title = 'itmstl';
 
-  constructor(titleService: Title, router: Router, private permissionsService: NgxPermissionsService, private _policyService: PoliciesService, private idleEvents: IdleEventsService) {
+  constructor(
+    titleService: Title,
+    router: Router,
+    private permissionsService: NgxPermissionsService,
+    private _policyService: PoliciesService,
+    private idleEvents: IdleEventsService,
+  ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         //var title = this.getTitle(router.routerState, router.routerState.root).join('-');
@@ -28,8 +34,13 @@ export class AppComponent {
       }
     });
 
-    idleEvents.inVideoCall$.subscribe(_state => console.log('ESTADO APP', _state))
+    idleEvents.attachMonitor()
+
+    idleEvents.inVideoCall$.subscribe((_state) => {
+      console.warn('ESTADO APP', _state)
+    })
   }
+
   getTitle(state, parent) {
     var data = [];
     if (parent && parent.snapshot.data && parent.snapshot.data.title) {
@@ -41,6 +52,7 @@ export class AppComponent {
     }
     return data;
   }
+
 
   ngOnInit() {
 
