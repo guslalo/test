@@ -27,6 +27,7 @@ export class FichaPacienteComponent implements OnInit {
   prescriptionsRecord: any = [];
   timelineRecord: any = [];
   identification: any = {};
+  public identification2 = []
   ufMap: any = [];
   cityMap: any = [];
   countryMap: any = [];
@@ -141,7 +142,8 @@ export class FichaPacienteComponent implements OnInit {
             return obj;
           }, {});
         });
-
+        this.identification2.push(this.patientRecord.identificationData);
+        console.log(this.identification2);
         this.getIdentification(this.patientRecord.identificationData);
         // console.log(this.patientRecord.patientData.identificationData);
 
@@ -171,7 +173,12 @@ export class FichaPacienteComponent implements OnInit {
   }
 
   getIdentification(data) {
+    console.log( Object.entries(data));
+    console.log( Object.keys(data))
+    this.identification2 =  Object.entries(data);
+    
     for (const item of Object.keys(data)) {
+      console.log(item)
       if (data[item]) {
         this.identification.type = item;
         this.identification.value = data[item];

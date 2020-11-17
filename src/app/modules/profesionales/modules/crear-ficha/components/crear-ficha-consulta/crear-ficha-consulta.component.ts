@@ -70,6 +70,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public addValidator: boolean;
   public modelAntecedente: any;
   public intervalGlobal: any;
+  public allergies:any;
 
   public sicknessByProfessional: any;
   public allergiesByProfessional: any;
@@ -711,6 +712,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(data);
         this.exams = data.payload.exams;
         this.antecedentesGeneral = data.payload.antecedent;
+        this.allergies = data.payload.antecedent.allergies;
         this.antecedentes = data.payload.antecedent.sickness;
       },
       (error) => {
