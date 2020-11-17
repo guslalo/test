@@ -34,7 +34,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
     private location: Location,
     private el: Renderer2,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formProfile = new FormGroup({

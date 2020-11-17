@@ -42,6 +42,9 @@ import { initializeApp } from 'firebase/app';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
 
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'angular2-moment';
+
 const toastrConfig = {
   closeButton: true,
   positionClass: 'toast-bottom-right',
@@ -70,7 +73,9 @@ initializeApp(environment.firebase);
     AngularFireAuthModule, // For Authentication
     ModalModule.forRoot(),
     ToastrModule.forRoot(toastrConfig),
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    MomentModule,
+    NgIdleKeepaliveModule.forRoot()
   ],
   providers: [
     AngularFireDatabaseModule,
