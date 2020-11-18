@@ -115,7 +115,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   getProfile(profileId) {
     this.adminService.getProfileById(profileId).subscribe(
       (profileData) => {
-        // console.log(profile);
+        console.log(profileData);
         const role = profileData.role;
         this.profile = profileData;
         const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
