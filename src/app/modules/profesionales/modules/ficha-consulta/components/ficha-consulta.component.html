@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <!--nav-tabs-->
+      <!--nav-tabs -->
       <div class="row">
         <div class="col-12 mb-2">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -170,7 +170,7 @@
                 {{ 'clinicalFile.tabs.antecentesFromProfessional' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadExams:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab2"
