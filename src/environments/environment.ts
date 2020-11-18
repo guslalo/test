@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  defaultLang:'pt',
-  checkAge:false,
+  defaultLang: 'pt',
+  checkAge: false,
   title: 'Itms Dev | Teleconsulta',
   baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
@@ -19,5 +19,6 @@ export const environment = {
     messagingSenderId: '976429325991',
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
-  }
+  },
+  ttlSession: 20000 * 60
 };

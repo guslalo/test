@@ -34,7 +34,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
     private location: Location,
     private el: Renderer2,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formProfile = new FormGroup({
@@ -51,7 +51,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   }
 
   setRole(value) {
-    console.log(this.profile);
     this.profile.role = value;
   }
 
@@ -62,7 +61,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
         if (this.checkAllUserPolicies) this.profile.userPolicies = _.mapValues(this.profile.userPolicies, () => true);
         if (!this.checkAllUserPolicies) this.profile.userPolicies = _.mapValues(this.profile.userPolicies, () => false);
         break;
-
       case 'profiles':
         if (this.checkAllProfilesPolicies)
           this.profile.profilePolicies = _.mapValues(this.profile.profilePolicies, () => true);

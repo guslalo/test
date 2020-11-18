@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import * as moment from 'moment';
-import { BnNgIdleService } from 'bn-ng-idle';
+// import { BnNgIdleService } from 'bn-ng-idle';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { TranslocoService } from '@ngneat/transloco';
@@ -62,26 +62,26 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     public breakpointObserver: BreakpointObserver,
-    private bnIdle: BnNgIdleService,
+    // private bnIdle: BnNgIdleService,
     private toastr: ToastrService,
     private translateService: TranslocoService,
     private webNotfications: MessagingService,
     private router: Router
   ) {
     // 20 MINUTES DEFAULT 
-    this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
-      if (res) {
-        console.log('session expired');
-        this.toastr.info(this.translateService.translate('common.user.sessionExpired.label'));
+    // this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
+    //   if (res) {
+    //     console.log('session expired');
+    //     this.toastr.info(this.translateService.translate('common.user.sessionExpired.label'));
 
-        setTimeout(() => {
-          document.location.href = '/';
-        }, 10000);
-      }else {
-        console.log('reactivado');
-        this.bnIdle.resetTimer();
-      }
-    });
+    //     setTimeout(() => {
+    //       document.location.href = '/';
+    //     }, 10000);
+    //   }else {
+    //     console.log('reactivado');
+    //     this.bnIdle.resetTimer();
+    //   }
+    // });
   }
 
   public state = 'open';
@@ -113,16 +113,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
         // mobile
       }
     });
-    this.webNotfications.getNotifications().subscribe((data)=> this.nots = data, (error)=>console.log(error))
+    this.webNotfications.getNotifications().subscribe((data) => this.nots = data, (error) => console.log(error))
     this.webNotfications.requestPermission()
     this.webNotfications.receiveMessage()
     this.message = this.webNotfications.currentMessage;
-    setInterval(()=>{
-      this.webNotfications.getNotifications().subscribe((data)=>{
+    setInterval(() => {
+      this.webNotfications.getNotifications().subscribe((data) => {
         let notsArray: Array<any> = data;
         this.nots = notsArray;
         this.nots = this.nots.slice();
-      }, (error)=>console.log(error))
+      }, (error) => console.log(error))
     }, 10000)
   }
   sideBar() {
@@ -137,28 +137,28 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   trackByItems(index: number, not: any): number { return index; }
 
-  toTheNots(noti:any){
+  toTheNots(noti: any) {
     let role = JSON.parse(localStorage.getItem('currentUser')).role
-    if(noti.data.action == "goToAppointment"){
-      if(role == "professional"){
+    if (noti.data.action == "goToAppointment") {
+      if (role == "professional") {
         this.router.navigate([`/app-professional/crear-ficha-consulta`, noti.data.id])
-      }else if(role == "patient" ){
+      } else if (role == "patient") {
         this.router.navigate([`/app-paciente/teleconsulta`, noti.data.id])
       }
-    }else if(noti.data.action == "goToFinishedAppointment"){
-      this.router.navigate(['/app-paciente/mis-consultas/consulta', noti.data.id])  
-    }else if(noti.data.action == "goToNextAppointments"){
+    } else if (noti.data.action == "goToFinishedAppointment") {
+      this.router.navigate(['/app-paciente/mis-consultas/consulta', noti.data.id])
+    } else if (noti.data.action == "goToNextAppointments") {
       this.router.navigate(['/app-coordinator/#child1'])
-    }else if(noti.data.action == "goToWaitingRoom"){
+    } else if (noti.data.action == "goToWaitingRoom") {
       this.router.navigate(['/app-coordinator/#child2'])
     }
     this.deleteNot(noti._id)
   }
-  deleteNot(id: string){
-    let pos = this.nots.findIndex((element)=> element._id == id)
-    this.nots.splice(pos,1)
+  deleteNot(id: string) {
+    let pos = this.nots.findIndex((element) => element._id == id)
+    this.nots.splice(pos, 1)
     this.nots.slice()
     console.log(this.nots);
-    this.webNotfications.deleteNotification(id).subscribe((data)=> console.log(data), (error)=> console.log(error))
+    this.webNotfications.deleteNotification(id).subscribe((data) => console.log(data), (error) => console.log(error))
   }
 }

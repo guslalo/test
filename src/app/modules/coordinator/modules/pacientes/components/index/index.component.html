@@ -150,7 +150,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients">
+          <li ngbNavItem="pre-patients" *ngxPermissionsOnly="['SendInvitation:User']">
             <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
