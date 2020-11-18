@@ -115,6 +115,7 @@ export class FichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         this.exams = data.payload.exams;
+        this.arrayDocuments = data.payload.prescriptions;
         // console.log(this.exams);
         this.antecedentesGeneral = data.payload.antecedent;
         this.antecedentes = data.payload.antecedent.sickness;
@@ -143,7 +144,7 @@ export class FichaConsultaComponent implements OnInit {
   getVerifiedSibrareDocuments2(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
       (data) => {
-        console.log(data);
+        console.log(this.arrayDocuments);
         this.arrayDocuments = data.payload;
       },
       (error) => {
