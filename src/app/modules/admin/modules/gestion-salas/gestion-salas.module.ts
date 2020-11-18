@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [IndexComponent, EditarSalaComponent, VerSalaComponent],
@@ -33,6 +34,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
     MatAutocompleteModule,
     MatFormFieldModule,
     TranslocoRootModule,
+    NgxPermissionsModule
   ],
 })
 export class GestionSalasModule { }
