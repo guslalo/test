@@ -50,9 +50,6 @@
                       <ng-template #female>
                       {{'clinicalFile.female.label' | transloco}}
                       </ng-template>
-                   
-              
-
                     </li>
                     <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                     <li>
@@ -1309,7 +1306,16 @@
                         <ng-container> {{ item.documentType }} tipo </ng-container>
                       </td>
                       <td class="text-center">
-                        {{ item.documentType }}
+                        <ng-container *ngIf="item.documentType === 'prescription'">
+                          {{ 'sibrare.prescription' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'report'">
+                          {{ 'sibrare.report' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                          {{ 'sibrare.exam-order' | transloco}}
+                        </ng-container>
+                        <!--{{ item.documentType }}-->
                       </td>
                       <td class="text-center">
                         {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
