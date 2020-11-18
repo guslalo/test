@@ -98,6 +98,7 @@ export class Profile implements profile {
     viewPrescriptions: false,
     attachFiles: false,
     createPerscription: false,
+    createPrescriptions: false,
     createExamOrders: false,
     createMedicalLicenses: false,
   };

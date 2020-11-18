@@ -76,7 +76,9 @@
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    <button *ngxPermissionsOnly="['Update:WaitingRoom']" ngbDropdownItem type="button"
+                    
+                    <!--*ngxPermissionsOnly="['Update:WaitingRoom']"-->
+                    <button *ngxPermissionsOnly="['UpdateInfo:Clinic']" ngbDropdownItem type="button"
                       [routerLink]="['editar-sala/' + row._id]">
                       {{ 'clinicalFile.edit.label' | transloco }}
                     </button>
