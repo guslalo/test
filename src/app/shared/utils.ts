@@ -6,8 +6,8 @@ export class CustomDateAdapter {
     let parts = value.split('/');
     console.log(value);
     return { 
-      day: +parts[2],
-      month: +parts[1], 
+      day: +parts[1],
+      month: +parts[2], 
       year: +parts[0]
        } as NgbDateStruct;
   }

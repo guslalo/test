@@ -179,7 +179,7 @@ export class PerfilComponent implements OnInit {
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
-        this.personalData.get('birthdate').setValue(moment(user.personalData.birthdate).format('DD/MM/YYYY'));
+        this.personalData.get('birthdate').setValue(user.personalData.birthdate);
         this.personalData.get('ufBirth').setValue(user.personalData.ufBirth || null);
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth || null);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
