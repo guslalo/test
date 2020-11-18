@@ -76,12 +76,11 @@
                     </svg>
                   </button>
                   <div ngbDropdownMenu>
-                    
-                    <!--*ngxPermissionsOnly="['Update:WaitingRoom']"-->
-                    <button *ngxPermissionsOnly="['UpdateInfo:Clinic']" ngbDropdownItem type="button"
-                      [routerLink]="['editar-sala/' + row._id]">
-                      {{ 'clinicalFile.edit.label' | transloco }}
-                    </button>
+                    <div *ngxPermissionsOnly="['Update:WaitingRoom']">
+                      <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
+                        {{ 'clinicalFile.edit.label' | transloco }}
+                      </button>
+                    </div>
                     <button ngbDropdownItem type="button" data-toggle="modal" data-target="#disableUserModal">
                       {{ 'common.disable.label' | transloco }}
                     </button>

@@ -32,7 +32,7 @@ export class IndexComponent implements OnInit {
   professionalSelected = new FormControl();
   coordinatorSelected = new FormControl();
 
-  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService) {
+  constructor(private formBuilder: FormBuilder, private roomsService: RoomsService, private permissions: NgxPermissionsService) {
     this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
       appointmentPrice: [null, [Validators.pattern(/^[0-9]{1,5}([\\.][0-9]{1,2})?$/)]],
@@ -42,6 +42,8 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchRooms();
+
+    console.log('PERMISOS', this.permissions.getPermissions())
 
     this.roomsService.getProfessionals().subscribe((data) => {
       // console.log(data);
