@@ -184,7 +184,7 @@
             </li>
             <!-- REVISION -->
             <!-- https://prnt.sc/ve8icf -->
-            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
+            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator' && profile.role !== 'admin'">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -546,7 +546,7 @@
                       </td>
                     </tr>
                     <!-- REVISAR -->
-                    <tr *ngIf="profile.role != 'coordinator'">
+                    <tr *ngIf="profile.role != 'coordinator' && profile.role != 'professional' ">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editServices.label' | transloco }}
                       </td>
@@ -565,9 +565,9 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr ><!---->
                       <td scope="row" class="text-left">
-                        {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }}
+                        {{ 'dashboard.home.uncategorized.viewBackground.label' | transloco }} 
                       </td>
                       <td class="text-center">
                         {{'soon' | transloco}}
@@ -584,7 +584,8 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- antecedentes -->
+                    <tr *ngIf="profile.role !== 'professional' ">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editBackground.label' | transloco }}
                       </td>
@@ -622,6 +623,7 @@
                         </div>
                       </td>
                     </tr>
+                    <!--ver preescripciones-->
                     <tr>
                       <td scope="row" class="text-left">
                         {{ 'profile.viewPrescription.label' | transloco }}
@@ -642,7 +644,8 @@
                       </td>
                     </tr>
                     <!-- REVISAR -->
-                    <!-- <tr>
+                    <!--adjuntar archivos--> 
+                    <tr *ngIf="profile.role === 'professional' ">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.attachFile.label' | transloco }}
                       </td>
@@ -660,7 +663,7 @@
                           <label class="custom-control-label" for="medicalRecordPoliciesAttachFiles"></label>
                         </div>
                       </td>
-                    </tr> -->
+                    </tr> 
                     <tr *ngIf="profile.role === 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.generateMedPrescription.label' | transloco }}
@@ -671,12 +674,12 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
-                            [(ngModel)]="profile.medicalRecordPolicies.createPerscription"
+                            [(ngModel)]="profile.medicalRecordPolicies.createPrescriptions"
                             type="checkbox"
                             class="custom-control-input"
                             id="medicalRecordCreatePerscription"
                           />
-                          <label class="custom-control-label" for="medicalRecordCreatePerscription"></label>
+                          <label class="custom-control-label" for="medicalRecordCreatePerscriptions"></label>
                         </div>
                       </td>
                     </tr>
@@ -1098,6 +1101,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateDesing"
                             type="checkbox"
                             class="custom-control-input"
@@ -1117,6 +1121,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateNotifications"
                             type="checkbox"
                             class="custom-control-input"
@@ -1136,6 +1141,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateProfessionals"
                             type="checkbox"
                             class="custom-control-input"
@@ -1155,6 +1161,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateSpecialities"
                             type="checkbox"
                             class="custom-control-input"
@@ -1174,6 +1181,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentObjective"
                             type="checkbox"
                             class="custom-control-input"
@@ -1193,6 +1201,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input 
+                            disabled
                             [(ngModel)]="profile.clinicPolicies.updateAppointmentModality"
                             type="checkbox"
                             class="custom-control-input"
@@ -1210,6 +1219,7 @@
             <div class="tab-pane fade" id="reporte" role="tabpanel" aria-labelledby="reporte-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
+                  disabled
                   [(ngModel)]="checkAllReportsPolicies"
                   (change)="checkAll('reports')"
                   id="reports"
@@ -1247,6 +1257,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.reportPolicies.reportManagement"
                             type="checkbox"
                             class="custom-control-input"
@@ -1257,7 +1268,7 @@
                       </td>
                     </tr>
                     <!-- REVISION -->
-                    <!-- <tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
+                    <!--  --><tr *ngIf="profile.role === 'admin' || profile.role === 'coordinator'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.logsManagment.label' | transloco }}
                       </td>
@@ -1267,6 +1278,7 @@
                       <td class="text-right">
                         <div class="custom-control custom-switch mb-4">
                           <input
+                            disabled
                             [(ngModel)]="profile.reportPolicies.reportLogs"
                             type="checkbox"
                             class="custom-control-input"
@@ -1275,7 +1287,7 @@
                           <label class="custom-control-label" for="reportPoliciesReportLogs"></label>
                         </div>
                       </td>
-                    </tr> -->
+                    </tr>
                   </tbody>
                 </table>
               </div>
