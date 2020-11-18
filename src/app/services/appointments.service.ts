@@ -302,6 +302,7 @@ export class AppointmentsService {
       return this.http.post<any>(environment.baseUrl + this.blocks, {
         date,
         specialtyId: specialtyId,
+        professionalId: professionalId,
       });
     } else {
       return this.http.post<any>(environment.baseUrl + this.blocks, {

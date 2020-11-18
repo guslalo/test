@@ -150,13 +150,15 @@ export class IndexComponent implements OnInit {
   getBlocks() {
     let date = this.appointmentForm.controls.date.value;
     let specialtyId = this.appointmentForm.controls.specialty.value;
+    let professionalId = this.professionalSelected
     console.log(date, specialtyId);
     this.blocks = [];
 
     this.appointmentsService
       .postBlocks(
         date,
-        specialtyId //
+        specialtyId,
+        professionalId //
       )
       .subscribe(
         (data) => {

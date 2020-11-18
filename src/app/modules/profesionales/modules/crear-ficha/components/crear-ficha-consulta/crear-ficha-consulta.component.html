@@ -803,7 +803,8 @@
                             {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                           </a>
 
-                          <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                          <div class="collapse show" id="allergies" 
+                          *ngFor="let item of allergies">
                             <ul class="antecedentes">
                               <li class="pl-5">
                                 {{ item.value }}

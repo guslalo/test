@@ -21,6 +21,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { PoliciesService } from '../../../../services/policies.service';
 
+import { IdleEventsService } from '../../../../services/idle-events.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -51,7 +53,8 @@ export class LoginComponent implements OnInit {
     private UserService: UsersService,
     private router: Router,
     private appointmentsService: AppointmentsService,
-    private _policyService: PoliciesService
+    private _policyService: PoliciesService,
+    private idleEvents: IdleEventsService
   ) { }
 
   ngOnInit(): void {
@@ -103,31 +106,30 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
 
-        if ( this.currentUser.administrativeData.length === 1 ){
+        if (this.currentUser.administrativeData.length === 1) {
           this._policyService.setPoliciesToUser()
         }
-      
 
         switch (this.currentUser.administrativeData[0].role) {
           case 'admin':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-admin']);
+              this.router.navigate(['app-admin']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'coordinator':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-coordinator']);
+              this.router.navigate(['app-coordinator']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'professional':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-professional']);
+              this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'patient':
@@ -135,7 +137,7 @@ export class LoginComponent implements OnInit {
               (data) => {
                 localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
                 console.log(data);
-                this.router.navigate(['app-paciente']);
+                this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
               },
               (error) => {
                 console.log(error);
@@ -143,7 +145,6 @@ export class LoginComponent implements OnInit {
             );
             break;
         }
-
         this.spinner.hide();
       },
       (err) => {

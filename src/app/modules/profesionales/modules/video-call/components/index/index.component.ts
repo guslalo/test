@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from './../../services/appointments.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
 @Component({
   selector: 'app-index',
@@ -10,7 +11,11 @@ import { environment } from 'src/environments/environment';
 })
 export class IndexComponent implements OnInit {
   url: string;
-  constructor(private appointmentsService: AppointmentsService, private route: ActivatedRoute) {}
+  constructor(
+    private appointmentsService: AppointmentsService,
+    private route: ActivatedRoute,
+    private idleEvents: IdleEventsService
+  ) { }
 
   ngOnInit(): void {
     //this.initCall();
@@ -51,6 +56,10 @@ export class IndexComponent implements OnInit {
         const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
         console.log(data);
+
+        console.log('EN TELECONSULTA')
+        this.idleEvents.inVideoCall(true)
+
       },
       (error) => {
         console.log(error);

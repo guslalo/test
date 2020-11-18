@@ -119,7 +119,7 @@
             </ng-template>
           </li>
           <li ngbNavItem="pre-patients" >
-            <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
+            <a ngbNavLink *ngxPermissionsOnly="['SendInvitation:User']">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
                 <ngx-datatable
@@ -254,10 +254,10 @@
                             />
                           </svg>
                         </button>
-                        <!--*ngxPermissionsOnly="['SendInvitation:User']"-->
+                        <!---->
                         <div ngbDropdownMenu>
                           <button
-                            
+                            *ngxPermissionsOnly="['SendInvitation:User']"
                             ngbDropdownItem
                             type="button"
                             data-toggle="modal"
@@ -281,6 +281,7 @@
       </div>
       <div class="col-auto">
         <button
+          *ngxPermissionsOnly="['SendInvitation:User']"
           type="button"
           class="btn custom-btn-1 mx-2"
           (click)="sendInvitationEmail()"

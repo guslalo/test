@@ -23,6 +23,9 @@ export class VerSalaComponent implements OnInit {
   createdAt: any;
   createdBy: any;
 
+  coordinators: any;
+  professionals: any;
+
   constructor(private router: Router, private roomsService: RoomsService) { }
 
   ngOnInit() {
@@ -44,6 +47,13 @@ export class VerSalaComponent implements OnInit {
           ' ' +
           data.payload.administrativeDetails.createdBy[0]?.personalData.lastName;
       else this.createdBy = 'S/R';
+
+      data.payload.personnelDetails.coordinators.type = 'Coordinador';
+      data.payload.personnelDetails.professionals.type = 'Profesional';
+
+      this.coordinators = data.payload.personnelDetails.coordinators
+      this.professionals = data.payload.personnelDetails.professionals
+
     });
   }
 }

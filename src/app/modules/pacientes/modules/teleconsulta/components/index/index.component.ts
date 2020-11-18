@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -6,6 +6,8 @@ import { CurrentUserService } from './../../../../../../services/current-user.se
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
 import { environment } from 'src/environments/environment';
+
+import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
 declare var $: any;
 
@@ -31,7 +33,7 @@ export class IndexComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public userId: any;
-  public idCancel:any;
+  public idCancel: any;
   //private router: Router
 
   constructor(
@@ -39,8 +41,9 @@ export class IndexComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
     private medicalRecord: MedicalRecordService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private idleEvents: IdleEventsService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -66,6 +69,10 @@ export class IndexComponent implements OnInit {
     this.getFecha();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+  }
+
+  ngOnDestroy(): void {
+    this.idleEvents.inVideoCall(false)
   }
 
   getFecha() {
@@ -94,6 +101,11 @@ export class IndexComponent implements OnInit {
         const jitsi = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         jitsi.executeCommand('subject', 'Consulta');
         $('.toolbox-icon').find('jitsi-icon').click();
+
+        console.log('EN TELECONSULTA')
+        this.idleEvents.inVideoCall(true)
+
+
         /*
         jitsi.on('readyToClose', () => {
           console.log ('cerrado');
@@ -169,7 +181,7 @@ export class IndexComponent implements OnInit {
     );
   }
 
-  cancelarCita(id){
+  cancelarCita(id) {
     this.appointmentsService.postCancelarAppointment(id).subscribe(
       data => {
         console.log(data);
@@ -184,7 +196,7 @@ export class IndexComponent implements OnInit {
             console.log(error);
           }
         );*/
-     
+
       },
       error => {
         console.log(error)
@@ -192,7 +204,7 @@ export class IndexComponent implements OnInit {
     )
   }
 
-  idForCancel(id){
+  idForCancel(id) {
     this.idCancel = id;
   }
 

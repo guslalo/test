@@ -80,7 +80,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <a
-              *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']"
+              *ngxPermissionsOnly="['ReadExams:MedicalRecord']"
                 class="nav-link"
                 id="profile-tab3"
                 data-toggle="tab"
@@ -94,6 +94,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <a
+                *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']"
                 class="nav-link"
                 id="profile-tab"
                 data-toggle="tab"
@@ -102,7 +103,7 @@
                 aria-controls="notas"
                 aria-selected="false"
               >
-                {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
+                {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }} 
               </a>
             </li>
             <li class="nav-item" role="presentation">
