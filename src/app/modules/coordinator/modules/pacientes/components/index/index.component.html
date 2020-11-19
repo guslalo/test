@@ -4,6 +4,7 @@
   </div>
   <div class="col">
     <button
+      *ngxPermissionsOnly="['Create:User']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
