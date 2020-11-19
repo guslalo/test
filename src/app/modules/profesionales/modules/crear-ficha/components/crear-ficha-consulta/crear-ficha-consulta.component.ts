@@ -90,6 +90,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDiagnostic2 = [];
   public preArray = []
   private alive: boolean;
+  public destinies: any;
+  public destiniesSelected = [];
+  public destiniesToSave = [];
   
 
   constructor(
@@ -576,6 +579,37 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onChange(deviceValue){
+    $("#selectSintomaId option:selected").attr('disabled','disabled');
+      this.destiniesToSave.push(deviceValue.value);
+      let selectedSintoma = {
+        id: deviceValue.value,
+        text: deviceValue.selectedOptions[0].innerText,
+      };
+      this.destiniesSelected.push(selectedSintoma);
+  }
+
+  removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+  }
+  getDestinies(){
+    this.destinies = [
+      {
+        id:1,
+        name:"Destino"
+      },
+      {
+        id:2,
+        name:"Otro destino"
+      }
+    ]
+  }
+
+  removeDestiny(destino){
+    this.removeElement(destino);
   }
 
   //update appointmentDetails
