@@ -318,7 +318,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr id="item.id2">
+                    <tr id="item.id2"   *ngIf="profile.role !== 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.editUser.label' | transloco }}
                       </td>
@@ -337,7 +337,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr id="item.id2">
+                    <tr id="item.id2" *ngIf="profile.role !== 'professional'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.disableUser.label' | transloco }}
                       </td>
