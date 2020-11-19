@@ -182,7 +182,7 @@
             </li>
             <!-- REVISION-->
             <!-- https://prnt.sc/ve8icf -->
-            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator' && profile.role !== 'admin'">
+            <li class="nav-item" role="presentation" *ngIf="profile.role !== 'coordinator'">
               <a
                 class="nav-link"
                 id="sale-tab"
@@ -1015,7 +1015,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="profile.role !== 'admin'">
                       <td scope="row" class="text-left">
                         {{ 'dashboard.home.uncategorized.assignWaitinRoom.label' | transloco }}
                       </td>
@@ -1043,6 +1043,7 @@
             <div class="tab-pane fade" id="clinica" role="tabpanel" aria-labelledby="reports-tab">
               <div class="custom-control custom-switch mb-4">
                 <input
+                  disabled
                   [(ngModel)]="checkAllClinicsPolicies"
                   (change)="checkAll('clinics')"
                   type="checkbox"
