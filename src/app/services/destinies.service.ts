@@ -18,7 +18,7 @@ export class DestiniesService {
   }
 
   //delete specialties
-  deleteSymptoms(appointmentId, destiny): Observable<any> {
+  deleteDestiny(appointmentId, destiny): Observable<any> {
     console.log(appointmentId, destiny);
     const params = new HttpParams().set('appointmentId', appointmentId).set('destinyId', destiny);
 

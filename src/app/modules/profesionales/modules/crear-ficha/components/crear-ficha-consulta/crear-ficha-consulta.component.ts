@@ -134,6 +134,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.setAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
+      this.getDestinies();
     });
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
@@ -196,6 +197,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: ['cie10', ], //Validators.required
       comments: ['', { updateOn: 'blur' }], //Validators.required
       indications: ['',{ updateOn: 'blur' }],
+      destinies: ['',],
     });
 
     this.notes = this._formBuilder.group({
@@ -586,11 +588,18 @@ export class CrearFichaConsultaComponent implements OnInit {
   onChange(deviceValue){
     $("#selectSintomaId option:selected").attr('disabled','disabled');
       this.destiniesToSave.push(deviceValue.value);
-      let selectedSintoma = {
-        id: deviceValue.value,
-        text: deviceValue.selectedOptions[0].innerText,
+      let selectedDestiny = {
+        destinyId: deviceValue.value,
+        name: deviceValue.selectedOptions[0].innerText,
       };
-      this.destiniesSelected.push(selectedSintoma);
+      this.destiniesSelected.push(selectedDestiny);
+      let appointmentObject = {
+        appointmentDetails: {
+          patientDestinies: this.destiniesToSave
+        },
+      }; 
+
+      this.saveAppointment(appointmentObject)
   }
 
   removeElement(id) {
@@ -608,6 +617,9 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   removeDestiny(destino){
     this.removeElement(destino);
+    let index = this.destiniesSelected.findIndex((val) => val.id = destino);
+    this.destiniesSelected.splice(index,1);
+    this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
   }
 
   //update appointmentDetails
@@ -975,6 +987,9 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
+        this.appointmentDetail.appointmentDetails.patientDestinies.forEach(element => {
+          this.destiniesSelected.push(element)
+        });
       }
     )
   }
@@ -1042,6 +1057,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.notesArray = data.payload.appointmentDetails.notes;
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+        
         console.log(this.appointmentDetail);
       },
       (error) => {
