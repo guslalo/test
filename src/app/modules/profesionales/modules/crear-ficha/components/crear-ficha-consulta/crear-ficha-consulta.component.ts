@@ -13,6 +13,7 @@ import { AdminitrativeService } from './../../../../../../services/administrativ
 import { TranslocoService } from '@ngneat/transloco';
 import { takeWhile } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { DestiniesService } from 'src/app/services/destinies.service';
 
 declare var $: any;
 
@@ -107,7 +108,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private adminitrativeService: AdminitrativeService,
     private translateService: TranslocoService,
-    private NgxPermissionsService: NgxPermissionsService
+    private NgxPermissionsService: NgxPermissionsService,
+    private destinyService: DestiniesService
   ) {}
 
   ngOnChanges(){
@@ -596,16 +598,12 @@ export class CrearFichaConsultaComponent implements OnInit {
     return elem.parentNode.removeChild(elem);
   }
   getDestinies(){
-    this.destinies = [
-      {
-        id:1,
-        name:"Destino"
-      },
-      {
-        id:2,
-        name:"Otro destino"
-      }
-    ]
+    this.destinyService.getDestinies().subscribe(
+      (data)=> {
+        this.destinies = data.payload
+      }, 
+      (error)=> console.log(error)
+    )
   }
 
   removeDestiny(destino){
