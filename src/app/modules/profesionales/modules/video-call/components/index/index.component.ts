@@ -25,6 +25,11 @@ export class IndexComponent implements OnInit {
       this.getSession(id);
     });
   }
+
+  ngOnDestroy(): void {
+    this.idleEvents.inVideoCall(false)
+  }
+
   /*
   initCall(): void {
     this.route.params.subscribe((params) => {
