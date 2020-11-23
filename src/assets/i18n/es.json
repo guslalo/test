@@ -2404,6 +2404,9 @@
     "description": {
       "label": "Sala creada el % por % "
     },
+    "asignedUsers": {
+      "label": "usuarios asignados"
+    },
     "professionals": {
       "label": "Profesional(es)"
     },
