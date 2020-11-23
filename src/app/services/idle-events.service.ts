@@ -48,7 +48,9 @@ export class IdleEventsService {
     });
 
     this.idle.onIdleStart.subscribe(() => {
-      this.idleState = 'La sesión se cerrará por inactividad'
+      this.idleState = 'La sesión se cerrará por inactividad en 10 segundos'
+
+      console.warn(this.idleState)
 
       this.toastr.error(this.idleState, 'Cierre de Sesión', {
         timeOut: 10000,

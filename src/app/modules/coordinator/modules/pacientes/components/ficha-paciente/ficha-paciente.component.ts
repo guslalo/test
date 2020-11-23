@@ -32,6 +32,7 @@ export class FichaPacienteComponent implements OnInit {
   ufMap: any = [];
   cityMap: any = [];
   countryMap: any = [];
+  issuerMap: any = [];
 
   // EXTRAS
   moment: any = moment;
@@ -67,7 +68,7 @@ export class FichaPacienteComponent implements OnInit {
     private documentService: DocumentService,
     private spinner: NgxSpinnerService,
     private appointmentsService: AppointmentsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.routerAct.params.subscribe((params) => {
@@ -89,7 +90,7 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
-  
+
 
   //getVerifiedSibrareDocuments
   getVerifiedSibrareDocuments2(appointmentId) {
@@ -132,15 +133,15 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
-  calcularEdad(dateString){
+  calcularEdad(dateString) {
     let separa = dateString.split("/");
     let separaAno = separa[2]
     console.log(separaAno.split(""))
     let today = new Date();
-    if(separaAno.split("").length === 4){
-    this.patientAge =  today.getFullYear() - separa[2]
+    if (separaAno.split("").length === 4) {
+      this.patientAge = today.getFullYear() - separa[2]
     } else {
-      this.patientAge =  today.getFullYear() - separa[0]
+      this.patientAge = today.getFullYear() - separa[0]
     }
     return this.patientAge;
   }
@@ -152,16 +153,14 @@ export class FichaPacienteComponent implements OnInit {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
-        console.log(data.payload);
+
+        console.log('PAYLOAD', data.payload);
+
         this.patientRecord = data.payload.patientData;
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.arrayDocuments = data.payload.prescriptions;
 
-        console.log(this.patientAge)
-
-
-        
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
@@ -191,8 +190,18 @@ export class FichaPacienteComponent implements OnInit {
             return obj;
           }, {});
         });
+
+        this.userService.getIssuingEntities().subscribe((data) => {
+          this.issuerMap = data.payload.reduce((obj, item) => {
+            obj[item._id] = item
+            return obj
+          }, {})
+        })
+
         this.identification2.push(this.patientRecord.identificationData);
+
         console.log(this.identification2);
+
         this.getIdentification(this.patientRecord.identificationData);
         // console.log(this.patientRecord.patientData.identificationData);
 
@@ -222,10 +231,10 @@ export class FichaPacienteComponent implements OnInit {
   }
 
   getIdentification(data) {
-    console.log( Object.entries(data));
-    console.log( Object.keys(data))
-    this.identification2 =  Object.entries(data);
-    
+    console.log(Object.entries(data));
+    console.log(Object.keys(data))
+    this.identification2 = Object.entries(data);
+
     for (const item of Object.keys(data)) {
       console.log(item)
       if (data[item]) {
