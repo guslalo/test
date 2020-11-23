@@ -67,7 +67,7 @@ export class FichaPacienteComponent implements OnInit {
     private documentService: DocumentService,
     private spinner: NgxSpinnerService,
     private appointmentsService: AppointmentsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.routerAct.params.subscribe((params) => {
@@ -89,7 +89,7 @@ export class FichaPacienteComponent implements OnInit {
     });
   }
 
-  
+
 
   //getVerifiedSibrareDocuments
   getVerifiedSibrareDocuments2(appointmentId) {
@@ -132,15 +132,15 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
-  calcularEdad(dateString){
+  calcularEdad(dateString) {
     let separa = dateString.split("/");
     let separaAno = separa[2]
     console.log(separaAno.split(""))
     let today = new Date();
-    if(separaAno.split("").length === 4){
-    this.patientAge =  today.getFullYear() - separa[2]
+    if (separaAno.split("").length === 4) {
+      this.patientAge = today.getFullYear() - separa[2]
     } else {
-      this.patientAge =  today.getFullYear() - separa[0]
+      this.patientAge = today.getFullYear() - separa[0]
     }
     return this.patientAge;
   }
@@ -161,7 +161,7 @@ export class FichaPacienteComponent implements OnInit {
         console.log(this.patientAge)
 
 
-        
+
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
@@ -222,10 +222,10 @@ export class FichaPacienteComponent implements OnInit {
   }
 
   getIdentification(data) {
-    console.log( Object.entries(data));
-    console.log( Object.keys(data))
-    this.identification2 =  Object.entries(data);
-    
+    console.log(Object.entries(data));
+    console.log(Object.keys(data))
+    this.identification2 = Object.entries(data);
+
     for (const item of Object.keys(data)) {
       console.log(item)
       if (data[item]) {
