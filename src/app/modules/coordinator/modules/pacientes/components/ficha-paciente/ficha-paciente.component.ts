@@ -32,6 +32,7 @@ export class FichaPacienteComponent implements OnInit {
   ufMap: any = [];
   cityMap: any = [];
   countryMap: any = [];
+  issuerMap: any = [];
 
   // EXTRAS
   moment: any = moment;
@@ -152,15 +153,13 @@ export class FichaPacienteComponent implements OnInit {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
-        console.log(data.payload);
+
+        console.log('PAYLOAD', data.payload);
+
         this.patientRecord = data.payload.patientData;
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.arrayDocuments = data.payload.prescriptions;
-
-        console.log(this.patientAge)
-
-
 
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
@@ -191,8 +190,18 @@ export class FichaPacienteComponent implements OnInit {
             return obj;
           }, {});
         });
+
+        this.userService.getIssuingEntities().subscribe((data) => {
+          this.issuerMap = data.payload.reduce((obj, item) => {
+            obj[item._id] = item
+            return obj
+          }, {})
+        })
+
         this.identification2.push(this.patientRecord.identificationData);
+
         console.log(this.identification2);
+
         this.getIdentification(this.patientRecord.identificationData);
         // console.log(this.patientRecord.patientData.identificationData);
 
