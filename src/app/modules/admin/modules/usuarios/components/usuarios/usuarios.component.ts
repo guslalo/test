@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from "../../../../../../../environments/environment";
 
 import { NgxPermissionsService } from 'ngx-permissions';
 
@@ -34,7 +35,7 @@ export class UsuariosComponent implements OnInit {
   pageSize: number = 10;
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
-
+  createRoute = "crear-usuario";
   isEdit: boolean = false;
 
   userId: string;
@@ -100,6 +101,10 @@ export class UsuariosComponent implements OnInit {
       this.el.addClass(tab_adm, 'active');
       this.getUsers('admins');
       this.getProfiles('admin');
+    }
+
+    if (environment.setup == 'CL'){
+      this.createRoute = "crear-usuario-cl"
     }
   }
 

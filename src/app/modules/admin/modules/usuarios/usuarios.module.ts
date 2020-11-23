@@ -4,6 +4,7 @@ import { UsuariosRountingModule } from '../usuarios/usuarios-routing.module';
 // ADMIN ROUTES
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
+import { CrearUsuarioComponentCL } from "./components/crear-usuario-cl/crear-usuario-cl.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import {
@@ -26,7 +27,7 @@ import { TranslocoRootModule } from 'src/app/transloco-root.module';
 // import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
-  declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent],
+  declarations: [UsuariosComponent, CrearUsuarioComponent, EditarUsuarioComponent, CrearUsuarioComponentCL],
   imports: [
     CommonModule,
     UsuariosRountingModule,

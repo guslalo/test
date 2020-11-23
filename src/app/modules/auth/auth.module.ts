@@ -20,6 +20,7 @@ import { RecoveryComponent } from './components/recovery/recovery.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 import { LeftColumnComponent } from './components/left-column/left-column.component';
+import { CreateAccountCLComponent } from "./components/create-account-cl/create-account-cl.component";
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
@@ -44,6 +45,7 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     ConfirmAccountComponent,
     ResetPasswordComponent,
     RecoveryDoneComponent,
+    CreateAccountCLComponent
   ],
   imports: [
     CommonModule,
