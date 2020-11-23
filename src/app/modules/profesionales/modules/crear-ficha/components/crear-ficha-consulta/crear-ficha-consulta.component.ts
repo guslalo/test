@@ -587,19 +587,20 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   onChange(deviceValue){
     $("#selectSintomaId option:selected").attr('disabled','disabled');
-      this.destiniesToSave.push(deviceValue.value);
-      let selectedDestiny = {
-        destinyId: deviceValue.value,
-        name: deviceValue.selectedOptions[0].innerText,
-      };
-      this.destiniesSelected.push(selectedDestiny);
-      let appointmentObject = {
-        appointmentDetails: {
-          patientDestinies: this.destiniesToSave
-        },
-      }; 
+    if (this.destiniesSelected.find((element) => element.destinyId == deviceValue.value)) return
+    this.destiniesToSave.push(deviceValue.value);
+    let selectedDestiny = {
+      destinyId: deviceValue.value,
+      name: deviceValue.selectedOptions[0].innerText,
+    };
+    this.destiniesSelected.push(selectedDestiny);
+    let appointmentObject = {
+      appointmentDetails: {
+        patientDestinies: this.destiniesToSave
+      },
+    }; 
 
-      this.saveAppointment(appointmentObject)
+    this.saveAppointment(appointmentObject)
   }
 
   removeElement(id) {
