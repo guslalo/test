@@ -2213,6 +2213,12 @@
     "ufReg": {
       "label": "Registro UF"
     },
+    "fatherSurname": {
+      "label": "Apellido Paterno"
+    },
+    "motherSurname": {
+      "label": "Apellido Materno"
+    },
     "patients": {
       "label": "Días"
     },

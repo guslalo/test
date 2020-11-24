@@ -26,7 +26,7 @@
 <div class="row mt-2">
   <div class="col-12">
 
-    <h2>Coordinadores</h2>
+    <h2>{{ 'dashboard.home.userManagment.tabs.coordinators.label' | transloco }}</h2>
 
     <div class="tableBox rounded p-4 bg-white">
       <!-- <ngx-datatable *ngIf="appointments.length; else noData" #table class="material" [rows]="appointments"
@@ -52,13 +52,13 @@
       <div class="tableBox rounded p-4 bg-white">
         <ngx-datatable #table class="material" [rows]="coordinators" headerHeight="auto" footerHeight="auto"
           rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize" [selectAllRowsOnPage]="true">
-          <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.name" name="Nombre">
+          <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.name" name="{{ 'account.name.label' | transloco }}">
           </ngx-datatable-column>
           <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.lastName"
-            name="Apellido Paterno">
+            name="{{ 'table.fatherSurname.label' | transloco }}">
           </ngx-datatable-column>
           <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.secondLastName"
-            name="Apellido Materno">
+            name="{{ 'table.motherSurname.label' | transloco }}">
           </ngx-datatable-column>
           <!-- <ngx-datatable-column [resizeable]="false" [flexGrow]="2" prop="type" name="Tipo">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -84,20 +84,20 @@
 <div class="row mt-2">
   <div class="col-12">
 
-    <h2>Profesionales</h2>
+    <h2>{{ 'dashboard.home.userManagment.tabs.doctors.label' | transloco }}</h2>
 
     <div class="tableBox rounded p-4 bg-white">
 
       <div class="tableBox rounded p-4 bg-white">
         <ngx-datatable #table class="material" [rows]="professionals" headerHeight="auto" footerHeight="auto"
           rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="pageSize" [selectAllRowsOnPage]="true">
-          <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.name" name="Nombre">
+          <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.name" name="{{ 'account.name.label' | transloco }}">
           </ngx-datatable-column>
           <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.lastName"
-            name="Apellido Paterno">
+            name="{{ 'table.fatherSurname.label' | transloco }}">
           </ngx-datatable-column>
           <ngx-datatable-column [resizeable]="false" [flexGrow]="3" prop="personalData.secondLastName"
-            name="Apellido Materno">
+            name="{{ 'table.motherSurname.label' | transloco }}">
           </ngx-datatable-column>
         </ngx-datatable>
       </div>
