@@ -2214,6 +2214,12 @@
     "ufReg": {
       "label": "Registro UF"
     },
+    "fatherSurname": {
+      "label": "Nome do meio"
+    },
+    "motherSurname": {
+      "label": "Sobrenome"
+    },
     "patients": {
       "label": "Dias"
     },
@@ -2406,13 +2412,13 @@
       "label": "Sala criada em % por %"
     },
     "asignedUsers": {
-      "label": "usuários atribuidos"
+      "label": "usuários atribuídos"
     },
     "professionals": {
       "label": "Profissional(is)"
     },
     "usersAwaiting": {
-      "label": "% usuário(s) em sala de espera"
+      "label": "% usuário(s) na sala de espera"
     },
     "amountProffetionals": {
       "label": "% profissionais"
@@ -2456,7 +2462,7 @@
       "label": "Não há registros associados"
     },
     "usersInRoom": {
-      "label": "Usuários (s) em sala de espera"
+      "label": "Usuários (s) na sala de espera"
     },
     "inmediateService": {
       "title": "Atendimento imediato / Acesso a sala",

@@ -149,7 +149,7 @@
                   </ng-container> -->
 
                   <ng-container
-                    *ngIf="patientRecord.identificationData.rgRegistry != '' && !patientRecord.identificationData.isForeign">
+                    *ngIf="patientRecord.identificationData?.rgRegistry && !patientRecord.identificationData?.isForeign">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.rg.label' | transloco }}
@@ -162,11 +162,42 @@
 
                     <li>
                       <i>{{ 'account.number.label' | transloco }}</i>
-                      {{ patientRecord.identificationData.rgRegistry }}
+                      {{ patientRecord.identificationData?.rgRegistry }}
                     </li>
                   </ng-container>
 
-                  <ng-container *ngIf="patientRecord.identificationData.isForeign">
+                  <!-- CNS -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.cns">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cns.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.cns }}
+                    </li>
+                  </ng-container>
+
+
+                  <!-- CPF -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.cpf">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.cpf }}
+                    </li>
+                  </ng-container>
+
+                  <!-- passport -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.isForeign">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'common.passport.label' | transloco}}
@@ -174,13 +205,13 @@
 
                     <li>
                       <i> {{ 'account.number.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.passport }} 989898876
+                      {{ patientRecord.identificationData.passport }}
                     </li>
                   </ng-container>
 
 
                   <!-- CBO -->
-                  <ng-container *ngIf="patientRecord.identificationData.cbo">
+                  <ng-container *ngIf="patientRecord.identificationData?.cbo">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.cbor.label' | transloco }}
@@ -188,12 +219,12 @@
 
                     <li>
                       <i> {{ 'account.number.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.cbo }}
+                      {{ patientRecord.identificationData?.cbo }}
                     </li>
                   </ng-container>
 
                   <!-- PASEP -->
-                  <ng-container *ngIf="patientRecord.identificationData.pasep">
+                  <ng-container *ngIf="patientRecord.identificationData?.pasep">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.pispasep.label' | transloco }}
@@ -201,12 +232,12 @@
 
                     <li>
                       <i> {{ 'account.number.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.pasep }}
+                      {{ patientRecord.identificationData?.pasep }}
                     </li>
                   </ng-container>
 
                   <!-- CTPS -->
-                  <ng-container *ngIf="patientRecord.identificationData.ctps">
+                  <ng-container *ngIf="patientRecord.identificationData?.ctps">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.ctps.label' | transloco }}
@@ -219,20 +250,20 @@
                   </ng-container>
 
                   <!-- idDocumentNumber -->
-                  <ng-container *ngIf="patientRecord.identificationData.idDocumentNumber">
+                  <ng-container *ngIf="patientRecord.identificationData?.idDocumentNumber">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.identityNumber.label' | transloco }}
                     </li>
 
                     <li>
-                      <i> {{ 'account.identityNumber.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.idDocumentNumber }}
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.idDocumentNumber }}
                     </li>
                   </ng-container>
 
                   <!-- titleVote -->
-                  <ng-container *ngIf="patientRecord.identificationData.titleVote">
+                  <ng-container *ngIf="patientRecord.identificationData?.titleVote">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.votantTitle.label' | transloco }}
@@ -240,12 +271,12 @@
 
                     <li>
                       <i> {{ 'account.number.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.titleVote }}
+                      {{ patientRecord.identificationData?.titleVote }}
                     </li>
                   </ng-container>
 
                   <!-- professionalUfNumber -->
-                  <ng-container *ngIf="patientRecord.identificationData.professionalUfNumber">
+                  <ng-container *ngIf="patientRecord.identificationData?.professionalUfNumber">
                     <li>
                       <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
                       {{ 'auth.proClassReg.label' | transloco }}
@@ -253,7 +284,7 @@
 
                     <li>
                       <i> {{ 'account.number.label' | transloco }} </i>
-                      {{ patientRecord.identificationData.professionalUfNumber }}
+                      {{ patientRecord.identificationData?.professionalUfNumber }}
                     </li>
                   </ng-container>
 
