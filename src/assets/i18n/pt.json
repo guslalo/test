@@ -1007,6 +1007,9 @@
         "label": "Siga as instruções na mensagem para redefinir sua senha."
       }
     },
+    "prevission":{
+      "label":"Prevision de salud"
+    },
     "verificationCode": {
       "label": "Digite o código de verificação"
     },

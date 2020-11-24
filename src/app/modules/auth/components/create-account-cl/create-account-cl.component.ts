@@ -409,17 +409,31 @@ export class CreateAccountCLComponent implements OnInit {
     const formObject = {
       clinicId: '5f236fc966fbb0054894b780',
       identificationData: {
-        ...(this.form[0].document.value === 'cpf' && { cpf: this.form[0].idDocumentNumber.value || '' }),
-        ...(this.form[0].document.value === 'put' && { cpf: this.form[0].idDocumentNumber.value || '' }),
-        ...(this.form[0].document.value === 'cns' && { cns: this.form[0].idDocumentNumber.value || '' }),
-        ...(this.form[0].document.value === 'rgRegistry' && {
-          rgRegistry: this.form[0].idDocumentNumber.value || '',
-        }),
-        passport: this.form[0].passport.value || '',
-        ...(this.form[0].extraDocument.value === 'idDocumentNumber' && {
-          idDocumentNumber: this.form[0].extraIdDocument.value || '',
-        }),
-        isForeign: this.isForeign,
+        ...(this.form[0].value.document === 'cpf' && { cpf: this.form[0].value.idDocumentNumber || '' }),
+          ...(this.form[0].value.document === 'cns' && { cns: this.form[0].value.idDocumentNumber || '' }),
+          ...(this.form[0].value.document === 'run' && { cns: this.form[0].value.idDocumentNumber || '' }),
+          ...(this.form[0].value.document === 'rgRegistry' && {
+            rgRegistry: this.form[0].value.idDocumentNumber || '',
+          }),
+          passport: this.form[0].value.passport || '',
+          issuingBody: this.form[0].value.issuingBody || '',
+          ...(this.form[0].value.extraDocument === 'cbo' && { cbo: this.form[0].value.extraIdDocument || '' }),
+          ...(this.form[0].value.extraDocument === 'pasep' && {
+            pasep: this.form[0].value.extraIdDocument || '',
+          }),
+          ...(this.form[0].value.extraDocument === 'ctps' && {
+            ctps: this.form[0].value.extraIdDocument || '',
+          }),
+          ...(this.form[0].value.extraDocument === 'idDocumentNumber' && {
+            idDocumentNumber: this.form[0].value.extraIdDocument || '',
+          }),
+          ...(this.form[0].value.extraDocument === 'titleVote' && {
+            titleVote: this.form[0].value.extraIdDocument || '',
+          }),
+          ...(this.form[0].value.extraDocument === 'professionalUfNumber' && {
+            professionalUfNumber: this.form[0].value.extraIdDocument || '',
+          }),
+          isForeign: this.isForeign,
       },
       personalData: {
         name: this.form[1].name.value,

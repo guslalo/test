@@ -13,6 +13,7 @@ import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 
 import { environment } from '../../../../../../../environments/environment';
+import { validate } from 'rut.js';
 
 const current = new Date();
 
@@ -50,6 +51,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   registerUf:any;
   registerUf2:any;
 
+  previsionHealth: any = [];
   states: any = [];
   cities: any = [];
   cities2: any = [];
@@ -178,6 +180,8 @@ export class CrearUsuarioComponentCL implements OnInit {
       street: ['', Validators.required],
       complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
+      prevission: ['',null],
+      postal: ['',null]
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -288,6 +292,9 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.identificationData.updateValueAndValidity();
   }
 
+  validRUN(run:string){
+    this.cpfvalid = validate(run);
+  }
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
@@ -531,6 +538,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -572,6 +580,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           breed: this.formUser[1].value.breed,
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
+          prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -580,7 +589,8 @@ export class CrearUsuarioComponentCL implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
-          complement: this.formUser[1].value.complement
+          complement: this.formUser[1].value.complement,
+          postal: this.formUser[1].value.postal
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -653,6 +663,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           breed: this.formUser[1].value.breed,
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
+          prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -661,7 +672,8 @@ export class CrearUsuarioComponentCL implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
-          complement: this.formUser[1].value.complement
+          complement: this.formUser[1].value.complement,
+          postal: this.formUser[1].value.postal
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -1011,6 +1023,12 @@ export class CrearUsuarioComponentCL implements OnInit {
     });
   }
 
+  getPrevissions(){
+    this.userService.getStates().subscribe((data)=>{
+      this.previsionHealth = data.payload 
+    })
+  }
+
   getFamiliarSituations() {
     this.userService.getFamiliarSituations().subscribe((data) => {
       // console.log(data);
@@ -1026,6 +1044,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   validProfessionalRegistry() {
+    if(this.userType == 'professional') return true
     if (
       this.professionalForm.value.professionalRegistryType !== null &&
       this.professionalForm.value.professionalRegistry !== null &&

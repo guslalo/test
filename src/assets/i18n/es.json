@@ -1004,7 +1004,11 @@
       },
       "followInstructions": {
         "label": "Sigue las instrucciones del mensaje para restablecer tu contraseña."
-      }
+      },
+      "label":"Correo electronico"
+    },
+    "prevission":{
+      "label":"Prevision de salud"
     },
     "verificationCode": {
       "label": "Ingrese codigo de verificación"
@@ -3623,13 +3627,13 @@
       "label": "Ciudad"
     },
     "city": {
-      "label": "Ciudad"
+      "label": "Region"
     },
     "neighborhoodReq": {
       "label": "Barrio"
     },
     "neighborhood": {
-      "label": "Barrio"
+      "label": "Comuna"
     },
     "streetReq": {
       "label": "Calle es necesario"
