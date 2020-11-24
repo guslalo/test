@@ -454,7 +454,6 @@ export class MiDisponibilidadComponent implements OnInit {
         let filteredDays = this.days.filter((d, index) => {
           let i = daysSeletected.map((item) => item.value).indexOf(this.days[index].value);
           if (i === -1) {
-            // console.log(true);
             return d;
           } else {
             daysSeletected[i].id = this.days[index].id;
