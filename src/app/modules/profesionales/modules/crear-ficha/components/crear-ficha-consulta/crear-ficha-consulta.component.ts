@@ -13,6 +13,7 @@ import { AdminitrativeService } from './../../../../../../services/administrativ
 import { TranslocoService } from '@ngneat/transloco';
 import { takeWhile } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
@@ -92,7 +93,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDiagnostic2 = [];
   public preArray = []
   private alive: boolean;
-
+  public destinies: any;
+  public destiniesSelected = [];
+  public destiniesToSave = [];
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -107,8 +111,9 @@ export class CrearFichaConsultaComponent implements OnInit {
     private adminitrativeService: AdminitrativeService,
     private translateService: TranslocoService,
     private NgxPermissionsService: NgxPermissionsService,
+    private destinyService: DestiniesService,
     private idleEvents: IdleEventsService
-  ) { }
+  ){}
 
   ngOnChanges() {
 
@@ -136,6 +141,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.setAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
+      this.getDestinies();
     });
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
@@ -197,7 +203,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       diagnostic: ['',], // Validators.required
       type: ['cie10',], //Validators.required
       comments: ['', { updateOn: 'blur' }], //Validators.required
-      indications: ['', { updateOn: 'blur' }],
+      indications: ['',{ updateOn: 'blur' }],
+      destinies: ['',],
     });
 
     this.notes = this._formBuilder.group({
@@ -585,6 +592,44 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  onChange(deviceValue){
+    $("#selectSintomaId option:selected").attr('disabled','disabled');
+    if (this.destiniesSelected.find((element) => element.destinyId == deviceValue.value)) return
+    this.destiniesToSave.push(deviceValue.value);
+    let selectedDestiny = {
+      destinyId: deviceValue.value,
+      name: deviceValue.selectedOptions[0].innerText,
+    };
+    this.destiniesSelected.push(selectedDestiny);
+    let appointmentObject = {
+      appointmentDetails: {
+        patientDestinies: this.destiniesToSave
+      },
+    }; 
+
+    this.saveAppointment(appointmentObject)
+  }
+
+  removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+  }
+  getDestinies(){
+    this.destinyService.getDestinies().subscribe(
+      (data)=> {
+        this.destinies = data.payload
+      }, 
+      (error)=> console.log(error)
+    )
+  }
+
+  removeDestiny(destino){
+    this.removeElement(destino);
+    let index = this.destiniesSelected.findIndex((val) => val.id = destino);
+    this.destiniesSelected.splice(index,1);
+    this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
+  }
+
   //update appointmentDetails
   putNotes(appointmentId) {
     console.log(this.notes.controls.notes.value);
@@ -952,6 +997,9 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
+        this.appointmentDetail.appointmentDetails.patientDestinies.forEach(element => {
+          this.destiniesSelected.push(element)
+        });
       }
     )
   }
@@ -1019,6 +1067,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.notesArray = data.payload.appointmentDetails.notes;
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+        
         console.log(this.appointmentDetail);
       },
       (error) => {

@@ -224,6 +224,11 @@
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
+                <ul>
+                  <ng-container *ngFor="let item of appointmentDetail.appointmentDetails.patientDestinies ">
+                    <li>{{ item.name }}</li>
+                  </ng-container>
+                </ul>
               </div>
               <!--/diagnostico-->
               <hr />
