@@ -74,6 +74,24 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  calcularEdad(dateString) {
+
+    if(!dateString) return
+
+    let separa = dateString.split("/");
+    let separaAno = separa[2]
+    let today = new Date();
+
+    let _age: any
+
+    if (separaAno.split("").length === 4) {
+      _age = today.getFullYear() - separa[2]
+    } else {
+      _age = today.getFullYear() - separa[0]
+    }
+    return _age;
+  };
+
   sendInvitationEmail(userId?: string) {
     if (this.selectedPrePatients.length) {
       const usersToInvite = this.prePatients
