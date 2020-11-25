@@ -168,14 +168,14 @@ export class IndexComponent implements OnInit {
   onChange(deviceValue) {
     console.log(deviceValue.value);
     $("#selectSintomaId option:selected").attr('disabled','disabled');
-      this.consolidate.patientDetails.symptoms.push(deviceValue.value);
-      let selectedSintoma = {
-        id: deviceValue.value,
-        text: deviceValue.selectedOptions[0].innerText,
-      };
-      console.log(selectedSintoma);
-      this.sintomaSelected.push(selectedSintoma);
-      console.log(this.consolidate.patientDetails.symptoms);
+    this.consolidate.patientDetails.symptoms.push(deviceValue.value);
+    let selectedSintoma = {
+      id: deviceValue.value,
+      text: deviceValue.selectedOptions[0].innerText,
+    };
+    console.log(selectedSintoma);
+    this.sintomaSelected.push(selectedSintoma);
+    console.log(this.consolidate.patientDetails.symptoms);
   }
 
   onChangeTypeProfesional(id) {
