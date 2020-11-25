@@ -627,6 +627,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.removeElement(destino);
     let index = this.destiniesSelected.findIndex((val) => val.id = destino);
     this.destiniesSelected.splice(index,1);
+    this.destiniesToSave.splice(index,1);
+    console.log(this.destiniesSelected)
     this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
   }
 
