@@ -146,7 +146,7 @@
                     {{ 'clinicalFile.endCall.label' | transloco }}
                   </button>
                   <button *ngIf="appointmentDetail.administrativeDetails.status === 'pending'"
-                    [disabled]="arrayDiagnostic && arrayDiagnostic.length === 0 && destiniesSelected && destiniesSelected.length === 0"
+                    [disabled]="(arrayDiagnostic && arrayDiagnostic.length === 0) || (destiniesSelected.length === 0)"
                     class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
                     (click)="finish(appointmentDetail._id, 'finish')">
                     {{ 'clinicalFile.endService.label' | transloco }}
@@ -1100,7 +1100,7 @@
                         </div>
                         <div class="col-6 mt-3">
                           <label for="destinies">
-                            Defeches
+                            {{ 'clinicalFile.defeche.label' | transloco}} *
                             <!--
                             {{ 'clinicalFile.comments.label' | transloco }}-->
                           </label>
