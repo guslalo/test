@@ -50,9 +50,6 @@
                       <ng-template #female>
                       {{'clinicalFile.female.label' | transloco}}
                       </ng-template>
-                   
-              
-
                     </li>
                     <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
                     <li>
@@ -133,7 +130,7 @@
         </div>
       </div>
 
-      <!--nav-tabs-->
+      <!--nav-tabs -->
       <div class="row">
         <div class="col-12 mb-2">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -173,7 +170,7 @@
                 {{ 'clinicalFile.tabs.antecentesFromProfessional' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadExams:MedicalRecord']">
               <a
                 class="nav-link"
                 id="profile-tab2"
@@ -1309,7 +1306,16 @@
                         <ng-container> {{ item.documentType }} tipo </ng-container>
                       </td>
                       <td class="text-center">
-                        {{ item.documentType }}
+                        <ng-container *ngIf="item.documentType === 'prescription'">
+                          {{ 'sibrare.prescription' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'report'">
+                          {{ 'sibrare.report' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                          {{ 'sibrare.exam-order' | transloco}}
+                        </ng-container>
+                        <!--{{ item.documentType }}-->
                       </td>
                       <td class="text-center">
                         {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}

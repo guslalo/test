@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
   public textInputFile: any;
   public base64: any;
   public sinPrecio: boolean;
-  public documentsList:any;
+  public documentsList: any;
   public access_token: any;
   public downloadUrl: any;
 
@@ -39,7 +39,7 @@ export class IndexComponent implements OnInit {
     private documentService: DocumentService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.textInputFile = 'Selecione Arquivo';
@@ -96,7 +96,7 @@ export class IndexComponent implements OnInit {
 
   //selecion sintoma
   onChange(deviceValue) {
-    $("#selectSintomaId option:selected").attr('disabled','disabled');
+    $("#selectSintomaId option:selected").attr('disabled', 'disabled');
     this.consolidate = {
       id: this.appointmentId,
       patientDetails: {
@@ -220,7 +220,7 @@ export class IndexComponent implements OnInit {
   }
 
   //multi docs
-  deleteDocument(path){
+  deleteDocument(path) {
     this.documentService.deleteDocumentAppointment(this.appointmentId, path).subscribe(
       data => {
         console.log(data);

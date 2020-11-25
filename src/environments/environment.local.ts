@@ -3,7 +3,7 @@ export const environment = {
   defaultLang: 'pt',
   checkAge: false,
   title: 'Itms | Teleconsulta',
-  baseUrl: 'http://localhost:3000/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'http://192.168.0.156:3000/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
@@ -20,5 +20,5 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
-  ttlSession: 20000 * 60
+  ttlSession: 60 * 20
 };

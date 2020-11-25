@@ -2213,6 +2213,12 @@
     "ufReg": {
       "label": "Registro UF"
     },
+    "fatherSurname": {
+      "label": "Apellido Paterno"
+    },
+    "motherSurname": {
+      "label": "Apellido Materno"
+    },
     "patients": {
       "label": "Días"
     },
@@ -2403,6 +2409,9 @@
     "title": "Sala de espera cardiología A1",
     "description": {
       "label": "Sala creada el % por % "
+    },
+    "asignedUsers": {
+      "label": "usuarios asignados"
     },
     "professionals": {
       "label": "Profesional(es)"

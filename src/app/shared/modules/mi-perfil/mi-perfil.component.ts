@@ -134,6 +134,7 @@ export class PerfilComponent implements OnInit {
         if (user.identificationData.cns) this.identificationData.get('document').setValue('cns');
         if (user.identificationData.rgRegistry) this.identificationData.get('document').setValue('rgRegistry');
         // SECONDARY IDENTIFICATION
+        if (user.identificationData.titleVote) this.identificationData.get('extraDocument').setValue('titleVote');
         if (user.identificationData.cbo) this.identificationData.get('extraDocument').setValue('cbo');
         if (user.identificationData.pasep) this.identificationData.get('extraDocument').setValue('pasep');
         if (user.identificationData.ctps) this.identificationData.get('extraDocument').setValue('ctps');
@@ -179,7 +180,7 @@ export class PerfilComponent implements OnInit {
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
-        this.personalData.get('birthdate').setValue(moment(user.personalData.birthdate).format('DD/MM/YYYY'));
+        this.personalData.get('birthdate').setValue(user.personalData.birthdate);
         this.personalData.get('ufBirth').setValue(user.personalData.ufBirth || null);
         this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth || null);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);

@@ -4,29 +4,17 @@
       <h2>{{ 'clinicalFile.medCardPatient.label' | transloco }}</h2>
     </div>
     <div class="col-3 col-md-3">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill float-right"
-        data-toggle="modal"
-        data-target="#appointmentModal"
-      >
+      <button type="button" class="btn btn-primary rounded-pill float-right" data-toggle="modal"
+        data-target="#appointmentModal">
         {{ 'clinicalFile.newService.label' | transloco }}
       </button>
 
       <a href="javascript:history.back()" class="back float-right align-top mr-3">
-        <svg
-          width="2em"
-          height="2em"
-          viewBox="0 0 16 16"
-          class="bi bi-arrow-left-circle"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-          <path
-            fill-rule="evenodd"
-            d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
-          />
+          <path fill-rule="evenodd"
+            d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
           <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
         </svg>
       </a>
@@ -40,78 +28,38 @@
         <div class="col-12 mb-2">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a
-                class="nav-link active"
-                id="datosPaciente"
-                data-toggle="tab"
-                href="#datosPacienteTab"
-                role="tab"
-                aria-controls="datosPaciente"
-              >
+              <a class="nav-link active" id="datosPaciente" data-toggle="tab" href="#datosPacienteTab" role="tab"
+                aria-controls="datosPaciente">
                 {{ 'clinicalFile.patientData.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAppointments:MedicalRecord']">
-              <a
-                class="nav-link"
-                id="consultasPaciente"
-                data-toggle="tab"
-                href="#consultasPacienteTab"
-                role="tab"
-                aria-controls="consultasPaciente"
-              >
+              <a class="nav-link" id="consultasPaciente" data-toggle="tab" href="#consultasPacienteTab" role="tab"
+                aria-controls="consultasPaciente">
                 {{ 'clinicalFile.patientData.tabs.services.title' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAntecedents:MedicalRecord']">
-              <a
-                class="nav-link"
-                id="profile-tab2"
-                data-toggle="tab"
-                href="#antecedentesTab"
-                role="tab"
-                aria-controls="examenesDocumentos"
-                aria-selected="false"
-              >
+              <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#antecedentesTab" role="tab"
+                aria-controls="examenesDocumentos" aria-selected="false">
                 {{ 'clinicalFile.patientData.tabs.videoChat.info.background.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadExams:MedicalRecord']">
-              <a
-                class="nav-link"
-                id="profile-tab3"
-                data-toggle="tab"
-                href="#prescripacionesTab"
-                role="tab"
-                aria-controls="prescripaciones"
-                aria-selected="false"
-              >
+              <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#prescripacionesTab" role="tab"
+                aria-controls="prescripaciones" aria-selected="false">
                 {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']">
-              <a
-                class="nav-link"
-                id="profile-tab"
-                data-toggle="tab"
-                href="#notasTab"
-                role="tab"
-                aria-controls="notas"
-                aria-selected="false"
-              >
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#notasTab" role="tab" aria-controls="notas"
+                aria-selected="false">
                 {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
               </a>
             </li>
             <li class="nav-item" role="presentation" *ngxPermissionsOnly="['ReadAppointments:MedicalRecord']">
-              <a
-                class="nav-link"
-                id="profile-tab"
-                data-toggle="tab"
-                href="#timelineTab"
-                role="tab"
-                aria-controls="timeline"
-                aria-selected="false"
-              >
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#timelineTab" role="tab"
+                aria-controls="timeline" aria-selected="false">
                 {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
               </a>
             </li>
@@ -123,12 +71,8 @@
       <!--tabs-->
       <div class="tab-content w-100 mt-3" id="myTabContent">
         <!-- DATOS PACIENTE -->
-        <div
-          class="tab-pane fade show active pt-2"
-          id="datosPacienteTab"
-          role="tabpanel"
-          aria-labelledby="datosPaciente"
-        >
+        <div class="tab-pane fade show active pt-2" id="datosPacienteTab" role="tabpanel"
+          aria-labelledby="datosPaciente">
           <div class="row">
             <div class="col-12 d-none">
               <div class="alert alert-primary" role="alert">
@@ -171,7 +115,7 @@
                   </li>
                   <li>
                     <i class="b">{{ 'common.forms.user.identification.age.label' | transloco }}</i>
-                   <!-- {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}-->
+                    <!-- {{ moment().diff(patientRecord.personalData?.birthdate, 'year') }}-->
                     {{ patientAge}}
                   </li>
                   <li>
@@ -196,13 +140,155 @@
                 <h4 class="title mb-3">
                   {{ 'clinicalFile.patientData.tabs.identification.birthData.title' | transloco }}
                 </h4>
-                <ul class="datos"> 
-                  <ng-container *ngFor="let item of identification2">
+                <ul class="datos">
+                  <!-- <ng-container *ngFor="let item of identification2">
                     <li *ngIf="item[0] !== 'isForeign' ">
-                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>            
-                      {{ item[0] || 'S/R' }} - {{ item[1] || 'S/R' }}               
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ item[0] || 'S/R' }} - {{ item[1] || 'S/R' }}
+                    </li>
+                  </ng-container> -->
+
+                  <ng-container
+                    *ngIf="patientRecord.identificationData?.rgRegistry && !patientRecord.identificationData?.isForeign">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.rg.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i>{{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.issuer.label' | transloco }}</i>
+                      {{ issuerMap[patientRecord.identificationData?.issuingBody]?.name }}
+                    </li>
+
+                    <li>
+                      <i>{{ 'account.number.label' | transloco }}</i>
+                      {{ patientRecord.identificationData?.rgRegistry }}
                     </li>
                   </ng-container>
+
+                  <!-- CNS -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.cns">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cns.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.cns }}
+                    </li>
+                  </ng-container>
+
+
+                  <!-- CPF -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.cpf">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.cpf.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.cpf }}
+                    </li>
+                  </ng-container>
+
+                  <!-- passport -->
+
+                  <ng-container *ngIf="patientRecord.identificationData?.isForeign">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'common.passport.label' | transloco}}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData.passport }}
+                    </li>
+                  </ng-container>
+
+
+                  <!-- CBO -->
+                  <ng-container *ngIf="patientRecord.identificationData?.cbo">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.cbor.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.cbo }}
+                    </li>
+                  </ng-container>
+
+                  <!-- PASEP -->
+                  <ng-container *ngIf="patientRecord.identificationData?.pasep">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.pispasep.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.pasep }}
+                    </li>
+                  </ng-container>
+
+                  <!-- CTPS -->
+                  <ng-container *ngIf="patientRecord.identificationData?.ctps">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.ctps.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData.ctps }}
+                    </li>
+                  </ng-container>
+
+                  <!-- idDocumentNumber -->
+                  <ng-container *ngIf="patientRecord.identificationData?.idDocumentNumber">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.identityNumber.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.idDocumentNumber }}
+                    </li>
+                  </ng-container>
+
+                  <!-- titleVote -->
+                  <ng-container *ngIf="patientRecord.identificationData?.titleVote">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.votantTitle.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.titleVote }}
+                    </li>
+                  </ng-container>
+
+                  <!-- professionalUfNumber -->
+                  <ng-container *ngIf="patientRecord.identificationData?.professionalUfNumber">
+                    <li>
+                      <i>{{ 'clinicalFile.patientData.tabs.identification.birthData.documentType.label' | transloco }}</i>
+                      {{ 'auth.proClassReg.label' | transloco }}
+                    </li>
+
+                    <li>
+                      <i> {{ 'account.number.label' | transloco }} </i>
+                      {{ patientRecord.identificationData?.professionalUfNumber }}
+                    </li>
+                  </ng-container>
+
+
                   <li class="d-none">
                     <i>{{
                       'clinicalFile.patientData.tabs.identification.birthData.documentNumber.label' | transloco
@@ -258,25 +344,17 @@
         <div class="tab-pane fade" id="consultasPacienteTab" role="tabpanel" aria-labelledby="consultasPaciente">
           <div class="row mt-2">
             <div class="col-12 col-md-3">
-              <input
-                [(ngModel)]="searchTerm"
-                type="text"
-                class="form-control"
+              <input [(ngModel)]="searchTerm" type="text" class="form-control"
                 placeholder="{{ 'common.placeholder.search.label' | transloco }}"
-                (keyup)="applyFiltersAppointments()"
-              />
+                (keyup)="applyFiltersAppointments()" />
               <div class="searchBox">
                 <img src="assets/icons/icon-search.svg" />
               </div>
             </div>
             <div class="col-12 col-md-3">
               <div class="form-group">
-                <select
-                  [(ngModel)]="appointmentStatusSelected"
-                  class="form-control"
-                  id="status"
-                  (change)="applyFiltersAppointments()"
-                >
+                <select [(ngModel)]="appointmentStatusSelected" class="form-control" id="status"
+                  (change)="applyFiltersAppointments()">
                   <option [ngValue]="null">{{ 'clinicalFile.filterByState.label' | transloco }}</option>
                   <option ngValue="reserved">{{ 'clinicalFile.reserved.label' | transloco }}</option>
                   <option ngValue="appointed">{{ 'clinicalFile.scheduled.label' | transloco }}</option>
@@ -292,57 +370,31 @@
               </div>
             </div>
             <div class="col-12 col-md-2">
-              <input
-                [(ngModel)]="appointmentDateSelected"
-                class="form-control"
-                type="text"
-                placeholder="DD/MM/YYYY"
-                id="endDate"
-                name="endDate"
-                [minDate]="{ year: 1940, month: 1, day: 1 }"
-                ngbDatepicker
-                #e="ngbDatepicker"
-                (click)="e.toggle()"
-                (ngModelChange)="applyFiltersAppointments()"
-                [footerTemplate]="footerCalendar"
-              />
+              <input [(ngModel)]="appointmentDateSelected" class="form-control" type="text" placeholder="DD/MM/YYYY"
+                id="endDate" name="endDate" [minDate]="{ year: 1940, month: 1, day: 1 }" ngbDatepicker
+                #e="ngbDatepicker" (click)="e.toggle()" (ngModelChange)="applyFiltersAppointments()"
+                [footerTemplate]="footerCalendar" />
               <ng-template #footerCalendar>
                 <hr class="my-0" />
-                <button
-                  class="btn btn-primary btn-sm m-2"
-                  (click)="appointmentDateSelected = null; applyFiltersAppointments(); e.close()"
-                >
+                <button class="btn btn-primary btn-sm m-2"
+                  (click)="appointmentDateSelected = null; applyFiltersAppointments(); e.close()">
                   {{ 'clinicalFile.clearFilter.label' | transloco }}
                 </button>
               </ng-template>
             </div>
             <div class="col-12 col-md-4">
               <div class="form-check">
-                <input
-                  [(ngModel)]="appointmentCheckBox"
-                  class="form-check-input"
-                  type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios1"
-                  value="myAppointments"
-                  (change)="applyFiltersAppointments()"
-                  [ngStyle]="{ height: 'auto' }"
-                />
+                <input [(ngModel)]="appointmentCheckBox" class="form-check-input" type="radio" name="exampleRadios"
+                  id="exampleRadios1" value="myAppointments" (change)="applyFiltersAppointments()"
+                  [ngStyle]="{ height: 'auto' }" />
                 <label class="form-check-label" for="exampleRadios1">
                   {{ 'common.menu.myServices.label' | transloco }}
                 </label>
               </div>
               <div class="form-check">
-                <input
-                  [(ngModel)]="appointmentCheckBox"
-                  class="form-check-input"
-                  type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios2"
-                  value="allAppointments"
-                  (change)="applyFiltersAppointments()"
-                  [ngStyle]="{ height: 'auto' }"
-                />
+                <input [(ngModel)]="appointmentCheckBox" class="form-check-input" type="radio" name="exampleRadios"
+                  id="exampleRadios2" value="allAppointments" (change)="applyFiltersAppointments()"
+                  [ngStyle]="{ height: 'auto' }" />
                 <label class="form-check-label" for="exampleRadios2">
                   {{ 'clinicalFile.allServices.label' | transloco }}
                 </label>
@@ -351,17 +403,9 @@
           </div>
 
           <div class="tableBox rounded p-4 bg-white">
-            <ngx-datatable
-              *ngIf="appointmentsRecord.length; else noData"
-              class="material"
-              [rows]="appointmentsRecord"
-              headerHeight="auto"
-              footerHeight="auto"
-              rowHeight="70"
-              [columnMode]="ColumnMode.flex"
-              [limit]="10"
-              [selectAllRowsOnPage]="true"
-            >
+            <ngx-datatable *ngIf="appointmentsRecord.length; else noData" class="material" [rows]="appointmentsRecord"
+              headerHeight="auto" footerHeight="auto" rowHeight="70" [columnMode]="ColumnMode.flex" [limit]="10"
+              [selectAllRowsOnPage]="true">
               <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span>{{
@@ -452,28 +496,13 @@
             <div class="col-12">
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasSickness; else noSickness">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#sickness"
-                  role="button"
-                  aria-expanded="true"
-                  aria-controls="sickness"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#sickness" role="button" aria-expanded="true"
+                  aria-controls="sickness">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'dashboard.home.myHealth.deceases.label' | transloco }}
                 </a>
@@ -496,28 +525,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasAllergies; else noAllergies">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#allergies"
-                  role="button"
-                  aria-expanded="true"
-                  aria-controls="allergies"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#allergies" role="button" aria-expanded="true"
+                  aria-controls="allergies">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'dashboard.home.myHealth.allergies.label' | transloco }}
                 </a>
@@ -539,32 +553,15 @@
               <!--/colappsed-->
 
               <!-- colappsed-->
-              <div
-                class="collapseCustom"
-                *ngIf="antecedentsRecord.hasSurgicalInterventions; else noSurgicalInterventions"
-              >
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#allergies"
-                  role="button"
-                  aria-expanded="true"
-                  aria-controls="allergies"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+              <div class="collapseCustom"
+                *ngIf="antecedentsRecord.hasSurgicalInterventions; else noSurgicalInterventions">
+                <a class="p-4" data-toggle="collapse" href="#allergies" role="button" aria-expanded="true"
+                  aria-controls="allergies">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'dashboard.home.myHealth.surgicalInterventions.label' | transloco }}
                 </a>
@@ -587,28 +584,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasFamiliarHistory; else noFamiliarHistory">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#familiarHistory"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="familiarHistory"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#familiarHistory" role="button" aria-expanded="false"
+                  aria-controls="familiarHistory">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
                 </a>
@@ -630,28 +612,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasMedicines; else noMedicines">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#medicines"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="medicines"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#medicines" role="button" aria-expanded="false"
+                  aria-controls="medicines">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'clinicalFile.patientData.tabs.videoChat.info.background.meds.label' | transloco }}
                 </a>
@@ -673,28 +640,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasHealthHabits; else noHealthHabits">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#healthHabits"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#healthHabits" role="button" aria-expanded="false"
+                  aria-controls="collapseExample">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'clinicalFile.patientData.tabs.patientHistory.habits.label' | transloco }}
                 </a>
@@ -716,28 +668,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasOccupational; else noOccupational">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#occupational"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="occupational"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#occupational" role="button" aria-expanded="false"
+                  aria-controls="occupational">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'dashboard.home.myHealth.occupationals.label' | transloco }}
                 </a>
@@ -759,28 +696,13 @@
 
               <!-- colappsed-->
               <div class="collapseCustom" *ngIf="antecedentsRecord.hasOthers; else noOthers">
-                <a
-                  class="p-4"
-                  data-toggle="collapse"
-                  href="#others"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="others"
-                >
-                  <svg
-                    class="mr-2"
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                <a class="p-4" data-toggle="collapse" href="#others" role="button" aria-expanded="false"
+                  aria-controls="others">
+                  <svg class="mr-2" width="15" height="9" viewBox="0 0 15 9" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
-                      fill="#7D7D7D"
-                    />
+                      fill="#7D7D7D" />
                   </svg>
                   {{ 'dashboard.home.myHealth.others.label' | transloco }}
                 </a>
@@ -836,8 +758,7 @@
                         <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                            fill="#A9A9A9"
-                          />
+                            fill="#A9A9A9" />
                         </svg>
                         <ng-container>
                           {{ item.name }}
@@ -901,7 +822,55 @@
                       <th scope="col" class="text-center">{{ 'table.action.label' | transloco }}</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+                    <tr *ngFor="let item of arrayDocuments" id="{{ item.documentId }}">
+                      <td scope="row" class="text-center d-none">
+                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
+                            fill="#A9A9A9" />
+                        </svg>
+                        <ng-container> {{ item.documentType }} tipo </ng-container>
+                      </td>
+                      <td class="text-center">
+                        <ng-container *ngIf="item.documentType === 'prescription'">
+                          {{ 'sibrare.prescription' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'report'">
+                          {{ 'sibrare.report' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                          {{ 'sibrare.exam-order' | transloco}}
+                        </ng-container>
+                        <!--{{ item.documentType }}-->
+                      </td>
+                      <td class="text-center">
+                        {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+                      <td class="text-center">
+                        {{ item.issuerDetails.fullName }}
+                      </td>
+                      <td class="text-center">
+                        <a (click)="downloadSibrare(item.documentId)">
+                          <!-- routerLink="{{urlSibrare}}" target="_blank-->
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+                        <div class="btn-group d-none">
+                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled></div>
+                          <div class="dropdown-menu dropdown-menu-right d-none">
+                            <button class="dropdown-item" type="button">
+                              {{ 'common.button.delete.label' | transloco }}
+                            </button>
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                              {{ 'clinicalFile.edit.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -930,13 +899,8 @@
                           {{ item.startAt }} {{ 'common.hours.label' | transloco }}
                         </div>
                         <div class="col p-0">
-                          <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 15 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
@@ -997,13 +961,8 @@
                           </div>
                         </div>
                         <div class="col-2 p-0">
-                          <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 15 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
@@ -1042,28 +1001,12 @@
       <div class="modal-body p-4">
         <ul class="nav nav-tabs nav-pills nav-fill tabconsultamodal rounded" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#home2"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a
-            >
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home"
+              aria-selected="true">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#profile2"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-              >{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a
-            >
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile"
+              aria-selected="false">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.label' | transloco }}</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -1152,12 +1095,8 @@
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
-        <button
-          type="button"
-          class="btn btn-primary rounded-pill"
-          data-dismiss="modal"
-          routerLink="crear-ficha-consulta"
-        >
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+          routerLink="crear-ficha-consulta">
           {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
       </div>
