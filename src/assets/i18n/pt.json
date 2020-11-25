@@ -2604,6 +2604,9 @@
     }
   },
   "common": {
+    "appointmentHasPreviousImmediate": {
+      "label": "Você já tem uma consulta imediata ativa, por favor consulte o menu MINHAS CONSULTAS"
+    },
     "withOut": "sem resultados",
     "Soon": "Em breve",
     "user": {
