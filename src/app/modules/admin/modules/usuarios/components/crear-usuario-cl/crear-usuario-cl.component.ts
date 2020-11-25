@@ -33,6 +33,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
   professionalForm: FormGroup;
+  workForm: FormGroup;
   professionalRegistrySend: any = [];
   passwordForm: FormGroup;
   showPassword: boolean;
@@ -97,6 +98,7 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   professionalRegistry: any = [];
 
+  works: any = [];
   
 
   // FOR CUSTOM FORM
@@ -211,6 +213,10 @@ export class CrearUsuarioComponentCL implements OnInit {
       professionalRegistry: ['', Validators.required],
       ufProfessionalRegistry: [null, Validators.required],
     });
+
+    this.workForm = this.formBuilder.group({
+
+    })
 
     this.passwordForm = new FormGroup(
       {
@@ -687,6 +693,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           professionalRegistryType: this.formUser[4].value.professionalRegistryType,
           professionalRegistry: this.professionalRegistry,
           ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
+          works: this.works
         },
         password: this.formUser[5].value.password,
         confirmPassword: this.formUser[5].value.confirmPassword,
@@ -1078,6 +1085,12 @@ export class CrearUsuarioComponentCL implements OnInit {
       course: this.professionalForm.value.course,
       ufRegistry: this.registerUf.id
     });
+  }
+
+  addWork(){
+    this.works.push({
+      nroRegistryIntendece: this.workForm.value.nroRegistryIntendece
+    })
   }
 
   removeRegistry(index) {
