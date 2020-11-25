@@ -30,6 +30,9 @@
       "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
       "antecentesFromPatient": "Antecedentes registrados por el paciente"
     },
+    "defeche":{
+      "label":"Destinos"
+    },
     "patientData": {
       "tabs": {
         "notes": {
