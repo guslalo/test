@@ -212,6 +212,15 @@ export class CrearUsuarioComponentCL implements OnInit {
       professionalRegistryType: [null, Validators.required],
       professionalRegistry: ['', Validators.required],
       ufProfessionalRegistry: [null, Validators.required],
+      nrRegistryHealthIntendence: [null, Validators.required],
+      workCity: [null, Validators.required],
+      workNeighborhood: [null, Validators.required],
+      workStreet: [null, Validators.required],
+      workNumber: [null, Validators.required],
+      workComplement: ['', null],
+      workPostal: ['', null],
+      workPhone: ['', null],
+      workMutuality: ['',null]
     });
 
     this.workForm = this.formBuilder.group({
@@ -1087,11 +1096,6 @@ export class CrearUsuarioComponentCL implements OnInit {
     });
   }
 
-  addWork(){
-    this.works.push({
-      nroRegistryIntendece: this.workForm.value.nroRegistryIntendece
-    })
-  }
 
   removeRegistry(index) {
     this.professionalRegistry.splice(index, 1);

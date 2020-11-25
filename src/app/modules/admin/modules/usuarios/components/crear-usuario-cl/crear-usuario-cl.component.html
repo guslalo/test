@@ -1035,16 +1035,14 @@
               <form [formGroup]="">
                 <div class="row">
                   <div class="form-group col-md-3">
-                    <label for="professionalTitle">{{
-                      'dashboard.home.uncategorized.professionalDegree.label' | transloco
-                    }}</label>
+                    <label for="nrRegistryHealthIntendence">N° Registro en Super intendencia de salud</label>
                     <input
                       type="text"
                       class="form-control"
-                      name="professionalTitle"
-                      formControlName="professionalTitle"
+                      name="nrRegistryHealthIntendence"
+                      formControlName="nrRegistryHealthIntendence"
                       [ngClass]="{
-                        'is-invalid': !professionalForm.get('professionalTitle').valid
+                        'is-invalid': !professionalForm.get('nrRegistryHealthIntendence').valid
                       }"
                     />
                   </div>
@@ -1156,79 +1154,6 @@
                       {{ 'common.button.add.label' | transloco }}
                     </button>
                   </div>
-                </div>
-                <div class="row mx-2">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <!-- <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
-                        <th scope="col">
-                          {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                        </th>
-                        <th scope="col">{{ 'common.actions.label' | transloco }}</th>
-                      </tr> -->
-
-                        <th scope="col">
-                          {{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}
-                        </th>
-                        <th scope="col">
-                          {{ 'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'table.ufReg.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'profile.regType.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}
-                        </th>
-                        <th scope="col" >{{ 'common.actions.label' | transloco }}</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr *ngFor="let registry of professionalRegistry; let i = index">
-                        <td >
-                          {{ registry.professionalTitle }}
-                        </td>
-                        <td>
-                          {{ registry.university }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.course }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.ufRegistry }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.type }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.registry }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.uf }}
-                        </td>
-                        <td>
-                          <div class="custom-control custom-switch">
-                            <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              id="switch{{ registry.id }}"
-                              [checked]="true"
-                              (change)="removeRegistry(i)"
-                            />
-                            <label class="custom-control-label" for="switch{{ registry.id }}"></label>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
               </form>
             </div>
