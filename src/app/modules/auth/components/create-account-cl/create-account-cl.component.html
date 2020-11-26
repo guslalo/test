@@ -81,7 +81,7 @@
                 </div>
                 <div>
                   <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                    matStepperNext [disabled]="(!cpfvalid) || !identificationData.valid">
+                    matStepperNext [disabled]="(!cpfvalid) || !identificationData.valid || !isForeign">
                     {{ 'common.button.continue.label' | transloco }}
                   </button>
                 </div>

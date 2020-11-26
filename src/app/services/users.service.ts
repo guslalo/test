@@ -40,7 +40,7 @@ export class UsersService {
   }
 
   getPrevissions(): Observable<any>{
-    return this.http.get<any>(environment.baseUrl + '/v1/health-insurances')
+    return this.http.get<any>(environment.baseUrl + 'v1/health-insurances')
   }
 
   getCities(): Observable<any> {

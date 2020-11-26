@@ -221,6 +221,7 @@ export class CreateAccountCLComponent implements OnInit {
     this.getCountries();
     this.getBreeds();
     this.getLocationDataFromCep();
+    this.getPrevissions();
 
     this.addressData.get('uf').disable();
     this.addressData.get('city').disable();
@@ -409,29 +410,29 @@ export class CreateAccountCLComponent implements OnInit {
     const formObject = {
       clinicId: '5f236fc966fbb0054894b780',
       identificationData: {
-        ...(this.form[0].value.document === 'cpf' && { cpf: this.form[0].value.idDocumentNumber || '' }),
-          ...(this.form[0].value.document === 'cns' && { cns: this.form[0].value.idDocumentNumber || '' }),
-          ...(this.form[0].value.document === 'run' && { cns: this.form[0].value.idDocumentNumber || '' }),
-          ...(this.form[0].value.document === 'rgRegistry' && {
+          ...(this.form[0].document.value === 'cpf' && { cpf: this.form[0].idDocumentNumber.value || '' }),
+          ...(this.form[0].document.value === 'cns' && { cns: this.form[0].idDocumentNumber.value || '' }),
+          ...(this.form[0].document.value === 'run' && { cns: this.form[0].idDocumentNumber.value || '' }),
+          ...(this.form[0].document === 'rgRegistry' && {
             rgRegistry: this.form[0].value.idDocumentNumber || '',
           }),
-          passport: this.form[0].value.passport || '',
-          issuingBody: this.form[0].value.issuingBody || '',
-          ...(this.form[0].value.extraDocument === 'cbo' && { cbo: this.form[0].value.extraIdDocument || '' }),
-          ...(this.form[0].value.extraDocument === 'pasep' && {
-            pasep: this.form[0].value.extraIdDocument || '',
+          passport: this.form[0].passport.value || '',
+          issuingBody: this.form[0].issuingBody.value || '',
+          ...(this.form[0].extraDocument.value === 'cbo' && { cbo: this.form[0].extraIdDocument.value || '' }),
+          ...(this.form[0].extraDocument.value === 'pasep' && {
+            pasep: this.form[0].extraIdDocument.value || '',
           }),
-          ...(this.form[0].value.extraDocument === 'ctps' && {
-            ctps: this.form[0].value.extraIdDocument || '',
+          ...(this.form[0].extraDocument.value === 'ctps' && {
+            ctps: this.form[0].extraIdDocument.value || '',
           }),
-          ...(this.form[0].value.extraDocument === 'idDocumentNumber' && {
-            idDocumentNumber: this.form[0].value.extraIdDocument || '',
+          ...(this.form[0].extraDocument.value === 'idDocumentNumber' && {
+            idDocumentNumber: this.form[0].extraIdDocument.value || '',
           }),
-          ...(this.form[0].value.extraDocument === 'titleVote' && {
-            titleVote: this.form[0].value.extraIdDocument || '',
+          ...(this.form[0].extraDocument.value === 'titleVote' && {
+            titleVote: this.form[0].extraIdDocument.value || '',
           }),
-          ...(this.form[0].value.extraDocument === 'professionalUfNumber' && {
-            professionalUfNumber: this.form[0].value.extraIdDocument || '',
+          ...(this.form[0].extraDocument.value === 'professionalUfNumber' && {
+            professionalUfNumber: this.form[0].extraIdDocument.value || '',
           }),
           isForeign: this.isForeign,
       },
@@ -444,23 +445,23 @@ export class CreateAccountCLComponent implements OnInit {
         phoneNumber: this.form[1].phoneNumber.value,
         email: this.form[1].email.value,
         breed: this.form[1].breed.value,
-        birthdate: this.dateAdapter.toModel(this.form[2].birthdate.value),
-        ufBirth: this.form[2].ufBirth.value || '',
-        municipalityBirth: this.form[2].municipalityBirth.value || '',
-        nacionality: this.form[2].nacionality.value,
-        prevission: this.form[2].prevission.value
+        birthdate: this.dateAdapter.toModel(this.form[1].birthdate.value),
+        ufBirth:  '',
+        municipalityBirth:  '',
+        nacionality: '',
+        prevission: ''
       },
       addressData: {
-        cep: this.form[3].cep.value,
-        uf: this.form[3].uf.value,
-        city: this.form[3].city.value,
-        neighborhood: this.form[3].neighborhood.value,
-        street: this.form[3].street.value,
-        streetNumber: parseInt(this.form[3].streetNumber.value),
-        complement: this.form[3].complement.value,
-        postal: this.form[3].postal.value
+        cep: this.form[2].cep.value,
+        uf: this.form[2].uf.value || '',
+        city: this.form[2].city.value || '',
+        neighborhood: this.form[2].neighborhood.value,
+        street: this.form[2].street.value,
+        streetNumber: parseInt(this.form[2].streetNumber.value),
+        complement: this.form[2].complement.value,
+        postal: this.form[2].postal.value
       },
-      password: this.form[4].password.value,
+      password: this.form[3].password.value,
     };
 
     if (formObject) {
