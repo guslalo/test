@@ -266,7 +266,7 @@
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
                         }" (change)="validateForm()" id="select-type-document">
                         <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item.id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
+                        <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
                           {{item.name}}
                         </option>
                     </select>

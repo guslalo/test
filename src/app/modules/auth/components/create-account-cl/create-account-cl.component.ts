@@ -541,7 +541,7 @@ export class CreateAccountCLComponent implements OnInit {
   }
 
   getPrevissions(){
-    this.userService.getStates().subscribe((data)=>{
+    this.userService.getPrevissions().subscribe((data)=>{
       this.previsionHealth = data.payload 
     })
   }

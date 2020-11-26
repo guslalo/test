@@ -2209,6 +2209,33 @@
         },
         "regNumber": {
           "label": "Número de registro."
+        },
+        "nrRegistryHealth":{
+          "label":"Nro de registro da super adminstraçao de saúde"
+        },
+        "workCity":{
+          "label":"Regiao de trabalho"
+        },
+        "workNeighborhood":{
+          "label":"Comuna de trabalho"
+        },
+        "workStreet":{
+          "label":"Rua de trabalho"
+        },
+        "workNumber":{
+          "label":"Numero de do endereço de trabalho"
+        },
+        "wprkComplement":{
+          "label":"Dpto/Local/Outro"
+        },
+        "workPostal":{
+          "label":"Codigo postal del trabalho"
+        },
+        "workPhone":{
+          "label":"Telefone del trabalho"
+        },
+        "workMutuality":{
+          "label":"Mutualidad a la que esta afiliado"
         }
       }
     }

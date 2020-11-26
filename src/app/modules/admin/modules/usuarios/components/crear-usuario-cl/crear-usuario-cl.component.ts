@@ -637,6 +637,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -701,8 +702,14 @@ export class CrearUsuarioComponentCL implements OnInit {
           ufRegistry: this.formUser[4].value.ufRegistry._id,
           professionalRegistryType: this.formUser[4].value.professionalRegistryType,
           professionalRegistry: this.professionalRegistry,
-          ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
-          works: this.works
+          nrRegistryHealthIntendence: this.formUser[4].value.nrRegistryHealthIntendence,
+          workCity: this.formUser[4].value.workCity,
+          workNeighborhood: this.formUser[4].value.workNeighborhood,
+          workStreet: this.formUser[4].value.workStreet,
+          workNumber: this.formUser[4].value.workNumber,
+          workComplement: this.formUser[4].value.workComplement,
+          workPostal: this.formUser[4].vaue.workPostal,
+          workPhone: this.formUser[4].value.workPhone
         },
         password: this.formUser[5].value.password,
         confirmPassword: this.formUser[5].value.confirmPassword,
@@ -1040,7 +1047,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   getPrevissions(){
-    this.userService.getStates().subscribe((data)=>{
+    this.userService.getPrevissions().subscribe((data)=>{
       this.previsionHealth = data.payload 
     })
   }
