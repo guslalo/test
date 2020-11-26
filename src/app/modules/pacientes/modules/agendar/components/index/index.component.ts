@@ -139,6 +139,8 @@ export class IndexComponent implements OnInit {
     this.getsymptoms();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+
+    // ???? se usa????
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       this.this.consolidate = this.consolidateClone
       //clearInterval(this.interval);
@@ -232,8 +234,10 @@ export class IndexComponent implements OnInit {
     this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.consolidateClone = this.consolidate;
+
+        console.log(this.consolidate)
+    console.log(this.consolidateClone)
     this.postConsolidateService(this.consolidate);
-    console.log(this.consolidate)
   }
 
   opcionSeleccionado: any;
@@ -307,6 +311,10 @@ export class IndexComponent implements OnInit {
     this.reserve.professionalDetails.specialtyId = item.professionalDetails.specialtyId;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
+
+    // propiedad para diferenciar agendamiento de consulta inmediata
+    this.reserve.appointmentType = 'agendamiento'
+    
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
         console.log(data);
