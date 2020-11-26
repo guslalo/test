@@ -57,6 +57,13 @@ export class IndexComponent implements OnInit {
     });
 
     console.log('INIT')
+    this.consolidate = {
+      id: this.appointmentId,
+      patientDetails: {
+        symptoms: [],
+        description: null,
+      },
+    };
 
     this.appointmentsService.AppointmentInmediate().subscribe(
       (data) => {
@@ -112,13 +119,6 @@ export class IndexComponent implements OnInit {
   //selecion sintoma
   onChange(deviceValue) {
     $("#selectSintomaId option:selected").attr('disabled', 'disabled');
-    this.consolidate = {
-      id: this.appointmentId,
-      patientDetails: {
-        symptoms: [],
-        description: null,
-      },
-    };
     this.consolidate.patientDetails.symptoms.push(deviceValue.value);
     let selectedSintoma = {
       id: deviceValue.value,
