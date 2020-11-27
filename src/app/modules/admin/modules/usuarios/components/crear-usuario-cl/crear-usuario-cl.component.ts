@@ -147,6 +147,7 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.getEducations();
     this.getFamiliarSituations();
     this.getSpecialties();
+    this.getPrevissions();
 
     this.identificationData = this.formBuilder.group({
       document:  new FormControl('cpf'),
@@ -308,6 +309,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   validRUN(run:string){
+    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) this.cpfvalid
     this.cpfvalid = validate(run);
   }
   validCPF(cpf: string){
@@ -490,7 +492,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       case 'patient':
         if (this.formUser[0].valid 
             && this.formUser[1].valid 
-            && this.formUser[5].valid && this.cpfvalid) {
+            && this.formUser[5].valid) {
           return true;
         } else {
           return false;
@@ -1082,13 +1084,13 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   addProfessionalRegistry() {
     this.professionalRegistry.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.name,
-      university: this.professionalForm.value.university,
-      professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry:  this.registerUf.name
+      type: this.professionalForm.value.professionalRegistryType || '',
+      registry: this.professionalForm.value.professionalRegistry || '',
+      uf: '',
+      university: this.professionalForm.value.university || '',
+      professionalTitle: this.professionalForm.value.professionalTitle || '',
+      course: this.professionalForm.value.course || '',
+      ufRegistry:  this.registerUf.name || ''
     });
 
     
