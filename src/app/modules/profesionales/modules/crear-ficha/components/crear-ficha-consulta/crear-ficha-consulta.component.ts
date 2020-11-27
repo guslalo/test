@@ -496,11 +496,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+
+    console.log(item)
+
     this.preArray.push({
       display: item.display,
       _id: item._id,
       type: 'cie10'
     })
+
     this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
       return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
     });
@@ -518,9 +522,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   deleteDiagnostic(_id) {
+
     this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
-    this.arrayDiagnostic2 = [...this.arrayDiagnostic.filter(item => item._id !== _id)];
+
+    // this.arrayDiagnostic2 = [...this.arrayDiagnostic.filter(item => item._id !== _id)];
+    
     console.log(this.arrayDiagnostic);
+
     if (this.arrayDiagnostic != null) {
       let appointmentObject = {
         appointmentDetails: {
