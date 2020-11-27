@@ -125,11 +125,6 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
-    this.NgxPermissionsService.permissions$.subscribe((permissions) => {
-      console.log(permissions)
-    })
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
@@ -217,8 +212,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
-
-
   }
 
   saveAppointment(appointmentObject) {
@@ -233,8 +226,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
-
-
 
   clearId() {
     this.idConsulta = null
@@ -496,19 +487,16 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-
-    console.log(item)
-
-    this.preArray.push({
+    this.arrayDiagnostic.push({
       display: item.display,
       _id: item._id,
       type: 'cie10'
     })
 
-    this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
-      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
-    });
+    this.updateModelDiagnostics()
+  }
 
+  updateModelDiagnostics() {
     if (this.arrayDiagnostic != null) {
       let appointmentObject = {
         appointmentDetails: {
@@ -522,23 +510,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   deleteDiagnostic(_id) {
-
-    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
-
-    // this.arrayDiagnostic2 = [...this.arrayDiagnostic.filter(item => item._id !== _id)];
-    
-    console.log(this.arrayDiagnostic);
-
-    if (this.arrayDiagnostic != null) {
-      let appointmentObject = {
-        appointmentDetails: {
-          diagnosticDetails: {
-            diagnostics: this.arrayDiagnostic
-          }
-        },
-      };
-      this.saveAppointment(appointmentObject);
-    }
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+    this.updateModelDiagnostics()
   }
 
   //buscador de diagnostico
@@ -619,7 +592,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.saveAppointment(appointmentObject)
   }
 
-  getDestinies(){
+  getDestinies() {
     this.destinyService.getDestinies().subscribe(
       (data) => {
         this.destinies = data.payload
@@ -628,8 +601,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     )
   }
 
-  removeDestiny(destino){
-    this.destiniesSelected =  this.destiniesSelected.filter((val) => val.destinyId !== destino);
+  removeDestiny(destino) {
+    this.destiniesSelected = this.destiniesSelected.filter((val) => val.destinyId !== destino);
     this.destiniesToSave = [...this.destiniesSelected.filter((val) => val.destinyId !== destino).map(val => val.destinyId)]
     console.log(this.destiniesSelected)
     this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
@@ -963,8 +936,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   async setAppointmentsDetails(id) {
+    console.log('setAppointmentsDetails', id)
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       data => {
+
+        console.log('setAppointmentsDetails => getAppointmentsDetails', data)
+
         this.consultasForm.controls['motive'].setValue(data.payload.appointmentDetails.motive);
         this.consultasForm.controls['objective'].setValue(data.payload.appointmentDetails.objective);
         this.consultasForm.controls['anamnesis'].setValue(data.payload.appointmentDetails.anamnesis);
@@ -1006,6 +984,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
+
         this.appointmentDetail.appointmentDetails.patientDestinies.forEach(element => {
           this.destiniesSelected.push(element)
         });
@@ -1020,15 +999,18 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
 
-        console.log(data)
+        console.log('getAppointmentsDetails => DATA', data)
 
         this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.getAppointmentsTimeline(this.userId);
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
+
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+
         console.log(this.arrayDiagnostic)
+
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
 
@@ -1100,6 +1082,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getAppointmentsDetailsRefresh(id) {
+
+    console.log('getAppointmentsDetailsRefresh')
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;

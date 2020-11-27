@@ -536,7 +536,7 @@
                                 d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
                                 fill="#7D7D7D" />
                             </svg>
-                            {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
+                            {{ 'clinicalFile.patientData.tabs.videoChat.info.background?.allergies.label' | transloco }}
                           </a>
 
                           <div class="collapse show" id="allergies" *ngFor="let item of allergies">
@@ -561,13 +561,13 @@
                                 fill="#7D7D7D" />
                             </svg>
                             {{
-                              'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label'
+                              'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label'
                                 | transloco
                             }}
                           </a>
 
                           <div class="collapse show" id="surgicalInterventions"
-                            *ngFor="let item of antecedentesGeneral.surgicalInterventions">
+                            *ngFor="let item of antecedentesGeneral?.surgicalInterventions">
                             <ul class="antecedentes">
                               <li class="pl-5">
                                 {{ item.value }}
@@ -762,7 +762,7 @@
                             d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
                             fill="#7D7D7D" />
                         </svg>
-                        {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
+                        {{ 'clinicalFile.patientData.tabs.videoChat.info.background?.allergies.label' | transloco }}
                       </a>
                       <div class="add float-right" data-toggle="modal" (click)="categoryChangue('allergies')"
                         data-target="#add">
@@ -797,7 +797,7 @@
                             fill="#7D7D7D" />
                         </svg>
                         {{
-                          'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label'
+                          'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label'
                             | transloco
                         }}
                       </a>
@@ -1247,7 +1247,7 @@
                     {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                   </a>
 
-                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral?.allergies">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
@@ -1270,12 +1270,12 @@
                         fill="#7D7D7D" />
                     </svg>
                     {{
-                      'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label' | transloco
+                      'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label' | transloco
                     }}
                   </a>
 
                   <div class="collapse show" id="surgicalInterventions"
-                    *ngFor="let item of antecedentesGeneral.surgicalInterventions">
+                    *ngFor="let item of antecedentesGeneral?.surgicalInterventions">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
