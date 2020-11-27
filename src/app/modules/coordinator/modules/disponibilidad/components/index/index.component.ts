@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
@@ -16,6 +16,7 @@ import { CustomDateAdapter } from 'src/app/shared/utils';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { TranslocoService } from '@ngneat/transloco';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { startWith, map } from 'rxjs/operators';
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 @Component({
@@ -97,7 +98,7 @@ export class IndexComponent implements OnInit {
   public specialtiesId: string;
   public medicalSpecialties: any;
   public state: any;
-
+  public filteredProfessionals: Observable<any[]>;
   public professionals = [];
   public tempProfessionals = [];
 
@@ -213,6 +214,13 @@ export class IndexComponent implements OnInit {
       startBlock: [null],
       endBlock: [null],
     });
+    this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
+      return this.professionals.filter(value => {
+        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+      })
+    }))
 
     this.agregardailyRanges();
   }

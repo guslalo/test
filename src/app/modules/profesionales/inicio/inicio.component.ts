@@ -120,8 +120,6 @@ export class InicioPComponent implements OnInit {
   }
 
   atender(item) {
-    console.log(item);
-    return
     this.appointmentsService.attendAppointmentInmediate(item).subscribe(
       (data) => {
         console.log(data);
