@@ -610,10 +610,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.saveAppointment(appointmentObject)
   }
 
-  removeElement(id) {
-    var elem = document.getElementById(id);
-    return elem.parentNode.removeChild(elem);
-  }
   getDestinies(){
     this.destinyService.getDestinies().subscribe(
       (data)=> {
@@ -624,10 +620,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   removeDestiny(destino){
-    this.removeElement(destino);
-    let index = this.destiniesSelected.findIndex((val) => val.id = destino);
-    this.destiniesSelected.splice(index,1);
-    this.destiniesToSave.splice(index,1);
+    this.destiniesSelected =  this.destiniesSelected.filter((val) => val.destinyId !== destino);
+    this.destiniesToSave = [...this.destiniesSelected.filter((val) => val.destinyId !== destino).map(val => val.destinyId)]
     console.log(this.destiniesSelected)
     this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
   }
