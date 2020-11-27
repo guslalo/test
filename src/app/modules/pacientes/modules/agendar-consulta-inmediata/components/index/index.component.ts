@@ -57,6 +57,7 @@ export class IndexComponent implements OnInit {
     });
 
     console.log('INIT')
+
     this.consolidate = {
       id: this.appointmentId,
       patientDetails: {
@@ -69,7 +70,8 @@ export class IndexComponent implements OnInit {
       (data) => {
         console.log(data);
 
-        if(data.internalCode == 117){
+        if (data.internalCode == 117) {
+          this.spinner.hide();
           Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -80,6 +82,7 @@ export class IndexComponent implements OnInit {
         }
 
         this.appointmentId = data.payload._id;
+        this.consolidate.id = data.payload._id;
       },
       (error) => {
         console.log(error);
