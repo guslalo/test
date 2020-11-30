@@ -116,8 +116,6 @@
                           {{appointmentDetail.patientDetails.userDetails.identificationData.cboDesc}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.ctps}}
                         </ng-container>
-
-
                       </li>
                       <li>
                         <b>{{ 'common.forms.user.identification.phone.label' | transloco }}:</b>
@@ -235,10 +233,10 @@
                 {{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}
               </a>
             </li>
-            <li class="nav-item" role="presentation" style="display: none;">
+            <li class="nav-item" role="presentation">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#notasTab" role="tab" aria-controls="notas"
                 aria-selected="false">
-                {{ 'clinicalFile.patientData.tabs.notes.label' | transloco }}
+                {{ 'clinicalFile.tabs.gesEno.label' | transloco }}
               </a>
             </li>
           </ul>
@@ -1672,41 +1670,34 @@
         <!--tab-->
         <div class="tab-pane fade" id="notasTab" role="tabpanel" aria-labelledby="notas">
           <div class="row bg-white p-5 rounded-lg">
-            <div class="col-12">
+            <div class="col-6">
               <div class="">
-                <h5 class="mb-4">{{ 'clinicalFile.patientData.tabs.notes.label' | transloco }}</h5>
+                <h5 class="mb-4">asdasd</h5>
               </div>
             </div>
             <div class="col-6">
-              <div class="boxNotas p-4 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada urna ac fringilla venenatis. Donec
-                non consequat nibh, in gravida ligula. Curabitur interdum, ante vel ullamcorper egestas, orci tellus
-                lobortis est, at viverra libero dolor et diam. Integer hendrerit justo non consequat.
+              
+              <div class="dropdown" *ngIf="setup === 'CLss'">
+                <button [disabled]="!permisoGuardar"
+                  class="btn btn-secondary rounded-pill float-right align-middle dropdown-toggle" type="button"
+                  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ 'clinicalFile.tabs.gesEno.button' | transloco }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
+                    data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;"
+                    (click)="subirPrescripciones('prescription')">{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a>
+                  <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
+                    data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')"
+                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a>
+                  <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
+                    data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')"
+                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a>
+                </div>
               </div>
             </div>
-            <div class="col-6">
-              <div class="boxNotas p-4 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada urna ac fringilla venenatis. Donec
-                non consequat nibh, in gravida ligula. Curabitur interdum, ante vel ullamcorper egestas, orci tellus
-                lobortis est, at viverra libero dolor et diam. Integer hendrerit justo non consequat.
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="boxNotas p-4 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada urna ac fringilla venenatis. Donec
-                non consequat nibh, in gravida ligula. Curabitur interdum, ante vel ullamcorper egestas, orci tellus
-                lobortis est, at viverra libero dolor et diam. Integer hendrerit justo non consequat.
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="boxNotas p-4 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada urna ac fringilla venenatis. Donec
-                non consequat nibh, in gravida ligula. Curabitur interdum, ante vel ullamcorper egestas, orci tellus
-                lobortis est, at viverra libero dolor et diam. Integer hendrerit justo non consequat.
-              </div>
-            </div>
+           
           </div>
-          <div class="row"></div>
         </div>
         <!--/tab-->
       </div>

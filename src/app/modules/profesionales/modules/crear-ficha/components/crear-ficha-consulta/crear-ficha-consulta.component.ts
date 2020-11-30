@@ -98,6 +98,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public destiniesToSave = [];
 
   public videoCallStatus: any;
+  public setup:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -125,6 +126,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setup = environment.setup
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
