@@ -36,6 +36,7 @@ export class UsuariosComponent implements OnInit {
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   createRoute = "crear-usuario";
+  updateRoute = "editar-usuario";
   isEdit: boolean = false;
 
   userId: string;
@@ -105,6 +106,7 @@ export class UsuariosComponent implements OnInit {
 
     if (environment.setup == 'CL'){
       this.createRoute = "crear-usuario-cl"
+      this.updateRoute = "editar-usuario-cl"
     }
   }
 

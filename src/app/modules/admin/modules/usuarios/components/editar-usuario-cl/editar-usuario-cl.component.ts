@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { months } from 'moment';
+import { validate } from 'rut.js';
 
 const current = new Date();
 
@@ -625,7 +626,10 @@ export class EditarUsuarioCLComponent implements OnInit {
       }
     )*/
   }
-
+  validRUN(run:string){
+    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) this.cpfvalid
+    this.cpfvalid = validate(run);
+  }
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
@@ -782,6 +786,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         breed: this.formUser[1].value.breed,
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',
+        prevission: this.formUser[1].value.prevission || ''
       },
       addressData: {
         cep: this.formUser[1].value.cep,
@@ -790,6 +795,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         neighborhood: this.formUser[1].value.neighborhood,
         street: this.formUser[1].value.street,
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
+        postal: this.formUser[1].value.postal
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
@@ -803,6 +809,14 @@ export class EditarUsuarioCLComponent implements OnInit {
         professionalRegistryType: this.formUser[4].value.professionalRegistryType,
         professionalRegistry: this.professionalRegistry,
         ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
+        nrRegistryHealthIntendence: this.formUser[4].value.nrRegistryHealthIntendence,
+        workState: this.formUser[4].value.workState,
+        workCity: this.formUser[4].value.workCity,
+        workStreet: this.formUser[4].value.workStreet,
+        workNumber: this.formUser[4].value.workNumber,
+        workComplement: this.formUser[4].value.workComplement,
+        workPostal: this.formUser[4].value.workPostal,
+        workPhone: this.formUser[4].value.workPhone
       },
       password: this.formUser[5].value.password,
       confirmPassword: this.formUser[5].value.confirmPassword,
