@@ -489,6 +489,12 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+    let _i = this.arrayDiagnostic.map((e) => {
+      return e._id
+    }).indexOf(item._id)
+
+    if (_i >= 0) return
+
     this.arrayDiagnostic.push({
       display: item.display,
       _id: item._id,
