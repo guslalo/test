@@ -2214,10 +2214,10 @@
           "label":"Nro de registro de super intendecia de salud"
         },
         "workCity":{
-          "label":"Region de trabajo"
-        },
-        "workNeighborhood":{
           "label":"Comuna de trabajo"
+        },
+        "workState":{
+          "label":"Region de trabajo"
         },
         "workStreet":{
           "label":"Nombre de la calle de trabajo"
@@ -2225,7 +2225,7 @@
         "workNumber":{
           "label":"Numero de la direccion de trabajo"
         },
-        "wprkComplement":{
+        "workComplement":{
           "label":"Dpto/Sitio/Otro"
         },
         "workPostal":{
@@ -3727,6 +3727,9 @@
     },
     "uf": {
       "label": "UF"
+    },
+    "region":{
+      "label":"Region"
     },
     "numerationReq": {
       "label": "Numeración es necesario"

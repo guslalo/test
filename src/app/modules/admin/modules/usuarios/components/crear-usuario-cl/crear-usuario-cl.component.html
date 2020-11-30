@@ -447,12 +447,11 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="uf"
-                      >{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }} ({{
-                        'account.uf.label' | transloco
-                      }}) *</label
+                      >{{
+                        'account.region.label' | transloco
+                      }} *</label
                     >
                     <select
-                      [attr.disabled]="userType == 'professional' ? '' : null"
                       class="form-control"
                       name="uf"
                       formControlName="uf"
@@ -506,7 +505,7 @@
                         [ngClass]="{
                           'is-invalid':
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
-                        }" (change)="validateForm()" id="select-type-document">
+                        }" id="select-type-document">
                         <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
                         <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
                           {{item.name}}
@@ -1047,6 +1046,24 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
+                    <label for="workState">{{
+                      'dashboard.home.uncategorized.workState.label' | transloco
+                    }} * </label>
+                    <select
+                      class="form-control"
+                      name="workState"
+                      formControlName="workState"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('workState').valid
+                      }"
+                    >
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
                     <label for="workCity">{{
                       'dashboard.home.uncategorized.workCity.label' | transloco
                     }} * </label>
@@ -1063,20 +1080,6 @@
                         {{ item.name }}
                       </option>
                     </select>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="workNeighborhood">{{
-                      'dashboard.home.uncategorized.workNeighborhood.label' | transloco
-                    }} *</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="workNeighborhood"
-                      formControlName="workNeighborhood"
-                      [ngClass]="{
-                        'is-invalid': !professionalForm.get('workNeighborhood').valid
-                      }"
-                    />
                   </div>
                   
                 </div>

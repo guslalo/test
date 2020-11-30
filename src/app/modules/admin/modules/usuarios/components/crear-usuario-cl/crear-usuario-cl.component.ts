@@ -14,6 +14,7 @@ import { RoomsService } from 'src/app/services/rooms.service';
 
 import { environment } from '../../../../../../../environments/environment';
 import { validate } from 'rut.js';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 const current = new Date();
 
@@ -173,17 +174,17 @@ export class CrearUsuarioComponentCL implements OnInit {
       nacionality: [null, Validators.required],
       originCountry: [null, null],
       inmigrationDate: [null, null],
-      breed: [null, Validators.required],
+      breed: ['', null],
       education: [null, null],
       familySituation: [null, null],
-      cep: ['', Validators.required],
+      cep: ['', null],
       uf: [null, Validators.required],
       city: [null, Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
-      prevission: ['',null],
+      prevission: ['',Validators.required],
       postal: ['',null]
     });
 
@@ -208,14 +209,14 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.professionalForm = this.formBuilder.group({
       professionalTitle: ['', Validators.required],
       university: ['', Validators.required],
-      course: ['', Validators.required],
-      ufRegistry: [null, Validators.required],
-      professionalRegistryType: [null, Validators.required],
-      professionalRegistry: ['', Validators.required],
-      ufProfessionalRegistry: [null, Validators.required],
+      course: ['', null],
+      ufRegistry: ['', null],
+      professionalRegistryType: ['', null],
+      professionalRegistry: ['', null],
+      ufProfessionalRegistry: ['', null],
       nrRegistryHealthIntendence: [null, Validators.required],
+      workState: [null, Validators.required],
       workCity: [null, Validators.required],
-      workNeighborhood: [null, Validators.required],
       workStreet: [null, Validators.required],
       workNumber: [null, Validators.required],
       workComplement: ['', null],
@@ -484,6 +485,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         }
 
       case 'professional':
+        console.log(this.formUser[0].valid, this.formUser[1].valid, this.formUser[4].valid, this.formUser[5].valid)
         if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid && this.formUser[5].valid) {
           return true;
         } else {
@@ -705,12 +707,12 @@ export class CrearUsuarioComponentCL implements OnInit {
           professionalRegistryType: this.formUser[4].value.professionalRegistryType,
           professionalRegistry: this.professionalRegistry,
           nrRegistryHealthIntendence: this.formUser[4].value.nrRegistryHealthIntendence,
+          workState: this.formUser[4].value.workState,
           workCity: this.formUser[4].value.workCity,
-          workNeighborhood: this.formUser[4].value.workNeighborhood,
           workStreet: this.formUser[4].value.workStreet,
           workNumber: this.formUser[4].value.workNumber,
           workComplement: this.formUser[4].value.workComplement,
-          workPostal: this.formUser[4].vaue.workPostal,
+          workPostal: this.formUser[4].value.workPostal,
           workPhone: this.formUser[4].value.workPhone
         },
         password: this.formUser[5].value.password,
@@ -1090,18 +1092,18 @@ export class CrearUsuarioComponentCL implements OnInit {
       university: this.professionalForm.value.university || '',
       professionalTitle: this.professionalForm.value.professionalTitle || '',
       course: this.professionalForm.value.course || '',
-      ufRegistry:  this.registerUf.name || ''
+      ufRegistry: ''
     });
 
     
     this.professionalRegistrySend.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.id,
-      university: this.professionalForm.value.university,
-      professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry: this.registerUf.id
+      type: this.professionalForm.value.professionalRegistryType || '',
+      registry: this.professionalForm.value.professionalRegistry || '',
+      uf: '',
+      university: this.professionalForm.value.university || '',
+      professionalTitle: this.professionalForm.value.professionalTitle || '',
+      course: this.professionalForm.value.course || '',
+      ufRegistry: ''
     });
   }
 
