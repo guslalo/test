@@ -43,6 +43,7 @@ export class EditarUsuarioCLComponent implements OnInit {
   profileSelected: any;
   roomSelected: any;
   setDate:any;
+  previsionHealth: any = [];
 
   states: any = [];
   cities: any = [];
@@ -128,6 +129,7 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.getEducations();
     this.getFamiliarSituations();
     this.getSpecialties();
+    this.getPrevissions();
 
     this.identificationData = this.formBuilder.group({
       document: [null, Validators.required],
@@ -164,7 +166,8 @@ export class EditarUsuarioCLComponent implements OnInit {
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: [null, ],
-      prevission: [null, ]
+      prevission: [null, Validators.required],
+      postal: ['', null]
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -192,6 +195,15 @@ export class EditarUsuarioCLComponent implements OnInit {
       professionalRegistryType: [null, null],
       professionalRegistry: [null, null],
       ufProfessionalRegistry: [null, null],
+      nrRegistryHealthIntendence: [null, Validators.required],
+      workState: [null, Validators.required],
+      workCity: [null, Validators.required],
+      workStreet: [null, Validators.required],
+      workNumber: [null, Validators.required],
+      workComplement: ['', null],
+      workPostal: ['', null],
+      workPhone: ['', null],
+      workMutuality: ['',null]
     });
 
     this.passwordForm = new FormGroup(
@@ -342,7 +354,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         // USER DATA
         this.identificationData
           .get('idDocumentNumber')
-          .setValue(user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
+          .setValue(user.identificationData.run || user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
 
         if (user.identificationData.rgRegistry)
           this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody || null);
@@ -392,6 +404,8 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.personalData.get('education').setValue(user.personalData.education || null);
         this.personalData.get('familySituation').setValue(user.personalData.familySituation || null);
         this.personalData.get('motherName').setValue(user.personalData.motherName);
+        this.personalData.get('prevission').setValue(user.personalData.prevission);
+        this.personalData.get('postal').setValue(user.personalData?.postal || '');
 
         this.personalData.get('cep').setValue(user.addressData.cep);
         this.personalData.get('uf').setValue(user.addressData.uf);
@@ -401,6 +415,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
         this.personalData.get('complement').setValue(user.addressData.complement);
+        
         this.waitingRoomsAssigned = user.waitingRooms || [];
         console.log(this.birthDate );
         console.log(this.dateAdapter.fromModel(user.personalData.birthdate))
@@ -422,6 +437,14 @@ export class EditarUsuarioCLComponent implements OnInit {
 
         this.professionalPhoto = user.photo;
         this.profileDataForm.get('biography').setValue(user.professionalData?.biography || '');
+        this.professionalForm.get('nrRegistryHealthIntendence').setValue(user.professionalData?.nrRegistryHealthIntendence || '')
+        this.professionalForm.get('workState').setValue(user.professionalData?.workState || '')
+        this.professionalForm.get('workCity').setValue(user.professionalData?.workCity || '')
+        this.professionalForm.get('workStreet').setValue(user.professionalData?.workStreet || '')
+        this.professionalForm.get('workNumber').setValue(user.professionalData?.workNumber || '')
+        this.professionalForm.get('workComplement').setValue(user.professionalData?.workCOmplement || '')
+        this.professionalForm.get('workPostal').setValue(user.professionalData?.workPostal || '')
+        this.professionalForm.get('workPhone').setValue(user.professionalData?.workState || '')
         /*this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
@@ -842,6 +865,11 @@ export class EditarUsuarioCLComponent implements OnInit {
       // console.log(data);
       this.issuingEntities = data.payload;
     });
+  }
+  getPrevissions(){
+    this.userService.getPrevissions().subscribe((data)=>{
+      this.previsionHealth = data.payload 
+    })
   }
 
   getUfs() {

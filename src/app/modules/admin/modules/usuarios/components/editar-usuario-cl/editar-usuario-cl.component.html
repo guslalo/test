@@ -342,6 +342,22 @@
                       </option>
                     </select>
                   </div>
+                  <div class="form-group col-12 col-md-2">
+                    <label for="prevission">{{ 'auth.prevission.label' | transloco }}*</label>
+                    <div class="input-group">
+                        <select class="form-control" name="prevission" formControlName="prevission"  
+                  
+                        [ngClass]="{
+                          'is-invalid':
+                            !personalData.get('prevission').valid && personalData.get('prevission').touched
+                        }" id="select-type-document">
+                        <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
+                          {{item.name}}
+                        </option>
+                    </select>
+                    </div>
+                  </div>
                   <div class="form-group col-md-3">
                     <label for="city">{{ 'account.city.label' | transloco }}*</label>
                     <select class="form-control" name="city" formControlName="city" [ngClass]="{
@@ -786,6 +802,127 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="userType=='professional'">
+          <div class="col-md-12">
+            <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <h4 class="pb-2">{{ 'dashboard.home.uncategorized.workNumber.label' | transloco }}</h4>
+              <form [formGroup]="professionalForm">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="nrRegistryHealthIntendence">{{ 'dashboard.home.uncategorized.nrRegistryHealth.label' | transloco }} *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nrRegistryHealthIntendence"
+                      formControlName="nrRegistryHealthIntendence"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('nrRegistryHealthIntendence').valid
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="workState">{{
+                      'dashboard.home.uncategorized.workState.label' | transloco
+                    }} * </label>
+                    <select
+                      class="form-control"
+                      name="workState"
+                      formControlName="workState"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('workState').valid
+                      }"
+                    >
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="workCity">{{
+                      'dashboard.home.uncategorized.workCity.label' | transloco
+                    }} * </label>
+                    <select
+                      class="form-control"
+                      name="workCity"
+                      formControlName="workCity"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('workCity').valid
+                      }"
+                    >
+                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities2">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4" >
+                    <label for="workStreet">{{ 'dashboard.home.uncategorized.workStreet.label' | transloco }} * </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workStreet"
+                      formControlName="workStreet"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('workStreet').valid
+                      }"
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="workNumber">{{ 'dashboard.home.uncategorized.workNumber.label' | transloco }} *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workNumber"
+                      formControlName="workNumber"
+                      [ngClass]="{
+                        'is-invalid': !professionalForm.get('workNumber').valid
+                      }"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="workComplement" >{{
+                      'dashboard.home.uncategorized.workComplement.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workComplement"
+                      formControlName="workComplement"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="workPostal">{{
+                      'dashboard.home.uncategorized.workPostal.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workPostal"
+                      formControlName="workPostal"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="workPhone">{{
+                      'dashboard.home.uncategorized.workPhone.label' | transloco
+                    }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="workPhone"
+                      formControlName="workPhone"
+                    />
+                  </div>
                 </div>
               </form>
             </div>
