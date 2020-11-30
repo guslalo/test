@@ -34,7 +34,7 @@ export class ConsultaComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   initCall() {
     console.log(this.meet);
