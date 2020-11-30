@@ -31,7 +31,7 @@
       "antecentesFromPatient": "Antecedentes registrados pelo paciente"
     },
     "defeche":{
-      "label":"Defeches"
+      "label":"Desfecho(s)"
     },
     "patientData": {
       "tabs": {
