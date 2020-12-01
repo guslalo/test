@@ -112,15 +112,15 @@ export class CreateAccountCLComponent implements OnInit {
             checkAge: [null, ],
             name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
             lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-            motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+            // motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
             secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
             email: [null, [Validators.email, Validators.required]],
             gender: [null, [Validators.required]],
             confirmEmail: ['', [Validators.required]],
             phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-            breed: [null, Validators.required],
+            //breed: [null, Validators.required],
             birthdate: [null, Validators.required],
-            prevission: ['', null]
+            prevission: ['', Validators.required]
           },
           {
             validators: this.confirmEmail.bind(this),
@@ -138,15 +138,15 @@ export class CreateAccountCLComponent implements OnInit {
           checkAge: [null, [Validators.requiredTrue]], //
           name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
           lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-          motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          // motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
           secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
           email: [null, [Validators.email, Validators.required]],
           gender: [null, [Validators.required]],
           confirmEmail: ['', [Validators.required]],
           phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-          breed: [null, Validators.required],
+          //breed: [null, Validators.required],
           birthdate: [null, Validators.required],
-          prevission: ['', null]
+          prevission: ['', Validators.required]
         },
         {
           validators: this.confirmEmail.bind(this),
@@ -162,7 +162,7 @@ export class CreateAccountCLComponent implements OnInit {
     
     
     this.identificationData = this._formBuilder.group({
-      document:  new FormControl('cpf'),
+      document:  new FormControl('run'),
       idDocumentNumber: [null, Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
@@ -179,10 +179,10 @@ export class CreateAccountCLComponent implements OnInit {
       nacionality: [null, Validators.required],
     });
     this.addressData = this._formBuilder.group({
-      cep: ['', Validators.required],
+      //cep: ['', Validators.required],
       uf: [null, Validators.required],
       city: [null, Validators.required],
-      neighborhood: ['', Validators.required],
+      //neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: ['', null],
@@ -220,15 +220,15 @@ export class CreateAccountCLComponent implements OnInit {
     this.getCities();
     this.getCountries();
     this.getBreeds();
-    this.getLocationDataFromCep();
+    //this.getLocationDataFromCep();
     this.getPrevissions();
 
-    this.addressData.get('uf').disable();
-    this.addressData.get('city').disable();
-    this.addressData.get('neighborhood').disable();
-    this.addressData.get('street').disable();
-    this.addressData.get('streetNumber').disable();
-    this.addressData.get('complement').disable();
+    //this.addressData.get('uf').disable();
+    //this.addressData.get('city').disable();
+    //this.addressData.get('neighborhood').disable();
+    //this.addressData.get('street').disable();
+    //this.addressData.get('streetNumber').disable();
+    //this.addressData.get('complement').disable();
 
     this.form.push(
       this.identificationData.controls,
@@ -246,65 +246,65 @@ export class CreateAccountCLComponent implements OnInit {
 
 
 
-  getLocationDataFromCep(){
-    this.errorCep = false;
-    this.addressData.get('cep').valueChanges.subscribe( x =>  {
-      console.log(x);
-      if(x.length >= 9) {
-        this.userService.getLocationDataFromCep(x).subscribe(
-          data => {
-            console.log(data.payload);
-            if(data.payload.error){
-              this.errorCepString = data.payload.error
-              this.errorCep = true; 
-            } else {
-              this.ufObject = data.payload.uf._id
-              this.cityObject = data.payload.city._id
-              this.neighborhood = data.payload.neighborhood
-              this.street = data.payload.street
-              this.errorCep = false;
-              console.log(data)
-              this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
-              this.addressData.get('city').setValue(this.cityObject);
+  // getLocationDataFromCep(){
+  //   this.errorCep = false;
+  //   this.addressData.get('cep').valueChanges.subscribe( x =>  {
+  //     console.log(x);
+  //     if(x.length >= 9) {
+  //       this.userService.getLocationDataFromCep(x).subscribe(
+  //         data => {
+  //           console.log(data.payload);
+  //           if(data.payload.error){
+  //             this.errorCepString = data.payload.error
+  //             this.errorCep = true; 
+  //           } else {
+  //             this.ufObject = data.payload.uf._id
+  //             this.cityObject = data.payload.city._id
+  //             this.neighborhood = data.payload.neighborhood
+  //             this.street = data.payload.street
+  //             this.errorCep = false;
+  //             console.log(data)
+  //             this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
+  //             this.addressData.get('city').setValue(this.cityObject);
               
-              this.addressData.get('uf').enable();
-              this.addressData.get('city').enable();
-              this.addressData.get('neighborhood').enable();
-              this.addressData.get('street').enable();
-              this.addressData.get('streetNumber').enable();
-              this.addressData.get('complement').enable();
-              this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
-              this.addressData.get('street').setValue(this.street, {emitEvent: false});
+  //             this.addressData.get('uf').enable();
+  //             this.addressData.get('city').enable();
+  //             //this.addressData.get('neighborhood').enable();
+  //             this.addressData.get('street').enable();
+  //             this.addressData.get('streetNumber').enable();
+  //             this.addressData.get('complement').enable();
+  //             this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
+  //             this.addressData.get('street').setValue(this.street, {emitEvent: false});
   
-              this.addressData.get('uf').valueChanges.subscribe( x =>  {
-                this.getCitiesforId(this.ufObject);
+  //             this.addressData.get('uf').valueChanges.subscribe( x =>  {
+  //               this.getCitiesforId(this.ufObject);
   
-              });
-            }
+  //             });
+  //           }
            
-          },
-          error => {
-            console.log(this.errorCep)
-            console.log(this.errorCep, 'error')
-              this.errorCep = true;
-            console.log(error)
-          }
-        )
-      }
-     }
-    );
+  //         },
+  //         error => {
+  //           console.log(this.errorCep)
+  //           console.log(this.errorCep, 'error')
+  //             this.errorCep = true;
+  //           console.log(error)
+  //         }
+  //       )
+  //     }
+  //    }
+  //   );
 
    
-    /*
-    this.userService.getLocationDataFromCep(cep).subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {
-        console.log(error)
-      }
-    )*/
-  }
+  //   /*
+  //   this.userService.getLocationDataFromCep(cep).subscribe(
+  //     data => {
+  //       console.log(data)
+  //     },
+  //     error => {
+  //       console.log(error)
+  //     }
+  //   )*/
+  // }
 
   validateForm() {
     // console.log(console.log(this.form[0]));
@@ -350,8 +350,10 @@ export class CreateAccountCLComponent implements OnInit {
     console.log(this.cpfvalid)
   }
 
-  validRUN(run: string){ 
+  validRUN(run: string){
+    
     this.cpfvalid = validate(run);
+    console.log(this.cpfvalid, this.identificationData.valid, this.isForeign);
   }
   validateCPF(cpf: string){
     console.log(this.identificationData.get('document').value)
@@ -440,11 +442,11 @@ export class CreateAccountCLComponent implements OnInit {
         name: this.form[1].name.value,
         lastName: this.form[1].lastName.value || '',
         secondLastName: this.form[1].secondLastName.value,
-        motherName: this.form[1].motherName.value,
+        motherName: '',
         gender: this.form[1].gender.value,
         phoneNumber: this.form[1].phoneNumber.value,
         email: this.form[1].email.value,
-        breed: this.form[1].breed.value,
+        breed: '',
         birthdate: this.dateAdapter.toModel(this.form[1].birthdate.value),
         ufBirth:  '',
         municipalityBirth:  '',
@@ -452,10 +454,10 @@ export class CreateAccountCLComponent implements OnInit {
         prevission: ''
       },
       addressData: {
-        cep: this.form[2].cep.value,
+        cep: '',
         uf: this.form[2].uf.value || '',
         city: this.form[2].city.value || '',
-        neighborhood: this.form[2].neighborhood.value,
+        neighborhood: '',
         street: this.form[2].street.value,
         streetNumber: parseInt(this.form[2].streetNumber.value),
         complement: this.form[2].complement.value,

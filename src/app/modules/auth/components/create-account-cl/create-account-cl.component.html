@@ -81,7 +81,7 @@
                 </div>
                 <div>
                   <button type="button" class="btn btn-block-xs-only btn-primary rounded-pill float-right"
-                    matStepperNext [disabled]="(!cpfvalid) || !identificationData.valid || !isForeign">
+                    matStepperNext [disabled]="(!cpfvalid) || !identificationData.valid || (isForeign && !identificationData.valid)">
                     {{ 'common.button.continue.label' | transloco }}
                   </button>
                 </div>
@@ -141,7 +141,7 @@
                 <!--row-->
                 <div class="form-row">
                   <!--segundo apellido-->
-                  <div class="form-group col-12 col-md-4">
+                  <div class="form-group col-12 col-md-6">
                     <label for="motherName">
                       <!--{{
                         'common.forms.user.identification.firstSurname.label' | transloco
@@ -159,7 +159,7 @@
                       {{ 'common.onlyChars.label' | transloco }}
                     </div>
                   </div>
-                  <div class="form-group col-12 col-md-4">
+                  <!-- <div class="form-group col-12 col-md-4">
                     <label for="motherName">{{ 'account.motherNameReq.label' | transloco }} *</label>
                     <input type="text" name="motherName" id="motherName" class="form-control" placeholder=""
                       formControlName="motherName" [ngClass]="{
@@ -171,8 +171,8 @@
                     <div *ngIf="personalData.controls['motherName'].errors?.pattern" class="invalid-feedback">
                       {{ 'common.onlyChars.label' | transloco }}
                     </div>
-                  </div>
-                  <div class="col-12 col-md-4">
+                  </div> -->
+                  <div class="col-12 col-md-6">
                     <label for="gender">{{ 'account.grenderReq.label' | transloco }} *</label>
                     <select formControlName="gender" name="gender" id="gender" class="form-control" placeholder=""
                       class="form-control" id="gender" [ngClass]="{
@@ -221,7 +221,7 @@
                       telefono {{ 'common.itsNecesesary.label' | transloco }}
                     </div>
                   </div>
-                  <div class="form-group col-12 col-md-6">
+                  <!-- <div class="form-group col-12 col-md-6">
                     <label for="breed">{{ 'account.breed.label' | transloco }} *</label>
                     <select class="form-control" name="breed" formControlName="breed" [ngClass]="{
                         'is-invalid': !personalData.get('breed').valid && personalData.get('breed').touched
@@ -234,9 +234,7 @@
                     <div *ngIf="personalData.controls['breed'].errors?.required" class="invalid-feedback">
                       {{ 'auth.raceReq.label' | transloco }}
                     </div>
-                  </div>
-                </div>
-                <div class="form-row">
+                  </div> -->
                   <div class="form-group col-12 col-md-6">
                     <label for="birthdate">
                       {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label>
@@ -256,6 +254,9 @@
                       {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
+                </div>
+                <div class="form-row">
+                  
                   <div class="form-group col-12 col-md-6">
                     <label for="prevission">Prevision de salud *</label>
                     <div class="input-group">
@@ -362,58 +363,19 @@
                   <h4>{{ 'account.createAccount.address.label' | transloco }}</h4>
                 </ng-template>
                 <!--row-->
-                <div class="form-row">
-                  <div class="form-group col-12 col-md-6">
-                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
-                    <input type="text" name="cep" id="cep" 
-                      class="form-control" placeholder=""
-                      (focusout)="getLocationDataFromCep()"
-                      mask="99999-999"
-                      [dropSpecialCharacters]="false"  
-                      [ngClass]="{ 'is-invalid': !addressData.get('cep').valid && addressData.get('cep').touched }"
-                      formControlName="cep" 
-                    />
-                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
-                      {{ errorCepString }}
-                    </div>
-                    <div *ngIf="addressData.controls['cep'].errors?.required" class="invalid-feedback">
-                      {{ 'account.cep.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label for="uf">{{ 'account.uf.label' | transloco }} *</label>
-                    <select 
-                      (change)="ufSelect($event.target)"
-                      class="form-control" 
-                      name="uf" formControlName="uf" 
-                      [ngClass]="
-                        {
-                          'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
-                        }"
-                    >
-                  
-                      <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of states">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                    <div *ngIf="addressData.controls['uf'].errors?.required" class="invalid-feedback">
-                      {{ 'account.uf.label' | transloco }} *
-                    </div>
-                  </div>
-                </div>
                 <!--/row-->
                 <!--row-->
                 <div class="form-row">
                   <div class="form-group col-12 col-md-6">
                     <label
-                      for="city"> Region
-                      *</label>
-                    <select class="form-control" name="city" formControlName="city" [ngClass]="{
-                        'is-invalid': !addressData.get('city').valid && addressData.get('city').touched
+                      for="city"> {{
+                        'account.region.label' | transloco
+                      }} *</label>
+                    <select  (change)="ufSelect($event.target)" class="form-control" name="uf" formControlName="uf" [ngClass]="{
+                        'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
                       }">
                       <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
+                      <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
                     </select>
@@ -421,15 +383,21 @@
                       {{ 'auth.cityReq.label' | transloco }}
                     </div>
                   </div>
-                  <div class="col-12 col-md-6">
-                    <label for="neighborhood">Comuna *</label>
-                    <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder=""
+                  <div class="form-group col-md-6">
+                    <label for="city">{{ 'account.city.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="city"
+                      formControlName="city"
                       [ngClass]="{
-                        'is-invalid': !addressData.get('neighborhood').valid && addressData.get('neighborhood').touched
-                      }" formControlName="neighborhood" />
-                    <div *ngIf="addressData.controls['neighborhood'].errors?.required" class="invalid-feedback">
-                      {{ 'auth.neiberhoodReq.label' | transloco }}
-                    </div>
+                        'is-invalid': !addressData.get('city').valid
+                      }"
+                    >
+                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of citiesFilter">
+                        {{ item.name }}
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <!--/row-->
