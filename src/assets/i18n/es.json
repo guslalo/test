@@ -2904,13 +2904,13 @@
       "user": {
         "identification": {
           "name": {
-            "label": "Nombre"
+            "label": "Nombres"
           },
           "firstSurname": {
             "label": "Primer apellido"
           },
           "secondSurname": {
-            "label": "Segundo nombre"
+            "label": "Segundo apellido"
           },
           "surname": {
             "label": "Apellido"
