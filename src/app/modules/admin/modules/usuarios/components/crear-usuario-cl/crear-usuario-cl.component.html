@@ -178,7 +178,7 @@
               </div>
               <form [formGroup]="personalData">
                 <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="name">{{ 'account.name.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -190,7 +190,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
                     <input
                       type="text"
@@ -202,7 +202,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="secondLastName">{{ 'account.surname.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -214,21 +214,9 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="lastName">{{ 'common.motherNames.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="motherName"
-                      formControlName="motherName"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('motherName').valid
-                      }"
-                    />
-                  </div>
                 </div>
                 <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="email">{{ 'auth.email.label' | transloco }}*</label>
                     <input
                       type="email"
@@ -242,7 +230,7 @@
                       placeholder="usuario@mail.com"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -255,7 +243,7 @@
                       placeholder="(##)-####-####"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="gender">{{ 'account.grender.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -270,7 +258,7 @@
                       <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
                       <input
@@ -294,40 +282,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="ufBirth">{{
-                      'profile.personal.tabIdentification.birthData.uf.label' | transloco
-                    }}</label>
-                    <select
-                      [attr.disabled]="isForeign || userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="ufBirth"
-                      formControlName="ufBirth"
-                      (change)="ufSelect($event.target)"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of states">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="municipalityBirth">{{
-                      'clinicalFile.patientData.tabs.identification.birthData.minicipality.label' | transloco
-                    }}</label>
-                    <select
-                      [attr.disabled]="isForeign || userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="municipalityBirth"
-                      formControlName="municipalityBirth"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -343,23 +298,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="originCountry">{{ 'account.country.label' | transloco }}</label>
-                    <select
-                      [attr.disabled]="!isForeign ? '' : null"
-                      class="form-control"
-                      name="originCountry"
-                      formControlName="originCountry"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of countries">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
                     <div class="input-group dateregister">
                       <input
@@ -387,7 +326,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
+                </div>
+                <div class="row">
+                  
+                  <div class="form-group col-md-4">
                     <label for="breed">{{ 'account.raceColor.label' | transloco }} </label>
                     <select
                       [attr.disabled]="userType == 'professional' ? '' : null"
@@ -404,7 +346,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="education">{{
                       'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
                     }}</label>
@@ -415,7 +357,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
                     <select class="form-control" name="familySituation" formControlName="familySituation" [attr.disabled]="userType == 'professional' ? '' : null">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -445,7 +387,7 @@
                       {{ errorCepString }}
                     </div>
                   </div> -->
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="uf"
                       >{{
                         'account.region.label' | transloco
@@ -467,7 +409,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="city">{{ 'account.city.label' | transloco }}*</label>
+                    <label for="city">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <select
                       class="form-control"
                       name="city"
@@ -482,22 +424,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="street">{{ 'account.neighborhood.label' | transloco }}*</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="neighborhood"
-                      formControlName="neighborhood"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('neighborhood').valid
-                      }"
-                    />
-                  </div>
-                  
-                </div>
-                <div class="row">
-                  <div class="form-group col-12 col-md-3">
+                  <div class="form-group col-12 col-md-4">
                     <label for="prevission">{{ 'auth.prevission.label' | transloco }}*</label>
                     <div class="input-group">
                         <select class="form-control" name="prevission" formControlName="prevission"  
@@ -513,6 +440,9 @@
                     </select>
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                  
                   <div class="form-group col-md-3">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input
@@ -525,7 +455,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -537,14 +467,14 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-3">
                 
                       <label for="street">{{ 'auth.complement.label' |transloco }}</label>
                       <input type="text" name="complement" id="complement" class="form-control" placeholder=""
                         formControlName="complement" />
                 
                   </div>
-                  <div class="form-group col-12 col-md-2">
+                  <div class="form-group col-12 col-md-3">
                     <label for="postal">Codigo postal</label>
                     <input type="text" name="postal" id="postal" class="form-control" placeholder=""
                       formControlName="postal" />
