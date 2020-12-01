@@ -28,7 +28,11 @@
   "clinicalFile": {
     "tabs": {
       "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
-      "antecentesFromPatient": "Antecedentes registrados pelo paciente"
+      "antecentesFromPatient": "Antecedentes registrados pelo paciente",
+      "gesEno": {
+        "label": "Notificaciones GES/ENO",
+        "button": "Registrar notificación"
+      }
     },
     "defeche":{
       "label":"Desfecho(s)"
@@ -2374,6 +2378,9 @@
     },
     "timeline": {
       "label": "Histórico de consultas"
+    },
+    "gesEno": {
+      "label": "Notificaciones GES/ENO"
     },
     "services": {
       "label": "Consultas"
