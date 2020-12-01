@@ -24,6 +24,8 @@ declare var $: any;
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
+
+
 export class CrearFichaConsultaComponent implements OnInit {
   public idConsulta: any;
   public appointmentDetail: any;
@@ -43,6 +45,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public signos: FormGroup;
   public otros: FormGroup;
   public consultasForm: FormGroup;
+  public formAddGesEno: FormGroup;
   public diagnostico: FormGroup;
   public notes: FormGroup;
   public nutricion: FormGroup;
@@ -127,6 +130,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.setup = environment.setup
+    console.log(this.setup)
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
@@ -183,6 +187,14 @@ export class CrearFichaConsultaComponent implements OnInit {
       examHighlights: [''],
     }, { updateOn: 'blur' });
 
+    this.formAddGesEno = this._formBuilder.group({
+      professionalId: [''],
+      page: [''],
+      diagnostic: [''],
+      type: [''], 
+      observations: [''],
+    }, { updateOn: 'blur' });
+
     this.nutricion = this._formBuilder.group({
       weight: [''],
       height: [''],
@@ -217,8 +229,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   saveAppointment(appointmentObject) {
+    console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
+         console.log(data);
         if (environment.production === false) {
           //console.log(data);
         }
@@ -434,53 +448,13 @@ export class CrearFichaConsultaComponent implements OnInit {
               indications: this.diagnostico.controls.indications.value,
               diagnostics: this.arrayDiagnostic
             }
-
           },
         };
-
         this.saveAppointment(appointmentObject);
       }
-    });
+    }
+  );
 
-    /*let appointmentObject = {
-      patientDetails: {
-        vitalSigns: this.signos.value,
-        nutritionalState: this.nutricion.value,
-      },
-      appointmentDetails: {
-        diagnosticDetails: {
-          //type: this.diagnostico.controls.type.value,
-          diagnostics: this.arrayDiagnostic,
-          comments: this.diagnostico.controls.comments.value,
-          indications: this.diagnostico.controls.indications.value,
-        },
-        motive: this.consultasForm.controls.motive.value,
-        objective: this.consultasForm.controls.objective.value,
-        anamnesis: this.consultasForm.controls.anamnesis.value,
-        physicalExam: this.otros.controls.physicalExam.value,
-        examHighlights: this.otros.controls.examHighlights.value,
-        plan: this.diagnostico.controls.plan.value
-      },
-    };*/
-    //signosForm
-
-    /*
-    this.signos.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.otros.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.nutricion.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.diagnostico.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.addExamen.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    */
 
   }
 
@@ -491,17 +465,72 @@ export class CrearFichaConsultaComponent implements OnInit {
   selectDiagnostico(item) {
     let _i = this.arrayDiagnostic.map((e) => {
       return e._id
-    }).indexOf(item._id)
+    }).indexOf(item._id);
 
+    if(environment.setup === 'CL' ){
+      if(item.isGES === true ) {
+        console.log(item)
+        $('#addNotificationGes').modal('show')
+      }
+      if(item.isENO === true ) {
+        console.log(item)
+        $('#addNotificationEno').modal('show')
+      }
+      if( item.isENO === true && item.isGES === true ) {
+        console.log(item)
+        $('#addNotificationGesEno').modal('show')
+      }
+  
+    }
+   
+
+   
+
+   
     if (_i >= 0) return
 
     this.arrayDiagnostic.push({
       display: item.display,
       _id: item._id,
-      type: 'cie10'
+      type: 'cie10',
+      isENO: item.isENO,
+      isGES: item.isGES
     })
 
+    /*
+    if(this.arrayDiagnostic.isGES === true) {
+      console.log(this.arrayDiagnostic)
+    }*/
+
     this.updateModelDiagnostics()
+  }
+
+  nextStep(type){
+    if(type === 'eno'){
+      window.open('https://epivigila.minsal.cl/', "_blank");
+      $('#addEno').modal('hide')
+      $('#addGesEno').modal('show')   
+    }
+    if(type === 'ges'){
+      $('#addGesEno').modal('show')
+      $('#addGes').modal('hide')
+    }  
+  }
+
+  addRegistryGesEno(){
+    let appointmentObject = {
+      appointmentDetails: {
+        notifiableDiseases: [
+          {
+            diagnostic: this.formAddGesEno.controls.diagnostic.value,
+            professionaId: '5f580599fd059702a80d14d1',
+            page: this.formAddGesEno.controls.page.value,
+            observations: this.formAddGesEno.controls.observations.value
+          }
+        ]  
+      },
+    };
+    this.saveAppointment(appointmentObject);
   }
 
   updateModelDiagnostics() {
