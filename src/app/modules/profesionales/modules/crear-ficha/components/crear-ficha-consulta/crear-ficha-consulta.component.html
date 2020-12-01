@@ -1667,7 +1667,7 @@
         </div>
         <!--/tab-->
 
-        <!--tab-->
+        <!--tab notifaciones registro GES ENO-->
         <div class="tab-pane fade" id="notasTab" role="tabpanel" aria-labelledby="notas">
           <div class="row">
             <div class="col-6">
@@ -1685,70 +1685,60 @@
             </div>
           </div>
 
-          <div class="row bg-white p-5 rounded-lg">
+          <div class="row bg-white p-3 rounded-lg">
             <table class="table mt-1">
               <thead class="">
                 <tr>
-                  <th scope="col" class="text-center d-none">
-                    {{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}
+                  <th scope="col" class="text-center">
+                   Fecha y hora
                   </th>
                   <th scope="col" class="text-center">
-                    {{ 'dashboard.home.config.tabs.specialty.table.type.label' | transloco }}
+                    Profesional
                   </th>
-                  <th scope="col" class="text-center">{{ 'common.uploadDate.label' | transloco }}</th>
                   <th scope="col" class="text-center">
-                    {{ 'clinicalFile.patientData.tabs.prescriptions.table.by.label' | transloco }}
+                   Tipo
                   </th>
-                  <th scope="col" class="text-center">{{ 'table.action.label' | transloco }}</th>
+                  <th scope="col" class="text-center">
+                    Código
+                  </th>
+                  <th scope="col" class="text-center">
+                    N° Folio
+                  </th>
+                  <th scope="col" class="text-center">
+                    Observaciones
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr *ngFor="let item of arrayDocuments" id="{{ item.documentId }}">
-                  <td scope="row" class="text-center d-none">
-                    <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
-                        fill="#A9A9A9" />
-                    </svg>
-                    <ng-container> {{ item.documentType }} tipo </ng-container>
+                <tr *ngFor="let item of appointmentDetail.appointmentDetails.notifiableDiseases">
+                  <td class="text-center">
+                  
+                    {{ item.updatedAt | date: 'dd/MM/yyyy':'+0000' }}
                   </td>
                   <td class="text-center">
-                    <ng-container *ngIf="item.documentType === 'prescription'">
-                      {{ 'sibrare.prescription' | transloco}}
+                   
+                  </td>
+                  <td class="text-center">
+                    <ng-container *ngIf="item.diagnostic.isENO === true">
+                      ENO
                     </ng-container>
-                    <ng-container *ngIf="item.documentType === 'report'">
-                      {{ 'sibrare.report' | transloco}}
+                    <ng-container *ngIf="item.diagnostic.isGES === true">
+                      GES
                     </ng-container>
-                    <ng-container *ngIf="item.documentType === 'exam-order'">
-                      {{ 'sibrare.exam-order' | transloco}}
-                    </ng-container>
-                    <!--{{ item.documentType }}-->
                   </td>
                   <td class="text-center">
-                    {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                    
+                    I10
+                   
                   </td>
                   <td class="text-center">
-                    {{ item.issuerDetails.fullName }}
+                    {{item.page}}
+                   
                   </td>
                   <td class="text-center">
-                    <a (click)="downloadSibrare(item.documentId)">
-                      <!-- routerLink="{{urlSibrare}}" target="_blank-->
-                      <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
-                        {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
-                      </button>
-                    </a>
-                    <div class="btn-group d-none">
-                      <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled></div>
-                      <div class="dropdown-menu dropdown-menu-right d-none">
-                        <button class="dropdown-item" type="button">
-                          {{ 'common.button.delete.label' | transloco }}
-                        </button>
-                        <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
-                          {{ 'clinicalFile.edit.label' | transloco }}
-                        </button>
-                      </div>
-                    </div>
+                    {{item.observations}}
+                   
                   </td>
                 </tr>
               </tbody>
