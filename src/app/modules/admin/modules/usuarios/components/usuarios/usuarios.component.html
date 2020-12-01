@@ -142,7 +142,7 @@
              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'admin' }"
             >
               {{ 'dashboard.home.uncategorized.newAdmin.label' | transloco }}
@@ -340,7 +340,7 @@
             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'professional' }"
             >
               {{ 'dashboard.home.userManagment.btnCreateDoctor.label' | transloco }}
@@ -543,7 +543,7 @@
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               data-target="#disponibilidad"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'coordinator' }"
             >
               {{ 'dashboard.home.uncategorized.newCoordinator.label' | transloco }}
@@ -755,7 +755,7 @@
              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'patient' }"
             >
               {{ 'myPatients.btnCreate.label' | transloco }}

@@ -10,6 +10,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
+import { CreateAccountCLComponent } from './components/create-account-cl/create-account-cl.component';
 
 const recovery = 'recovery-password';
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'create-account',
     component: CreateAccountComponent,
+  },
+  {
+    path: 'create-account-cl',
+    component: CreateAccountCLComponent,
   },
   {
     path: 'finish-registration',

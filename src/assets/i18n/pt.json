@@ -1010,6 +1010,9 @@
         "label": "Siga as instruções na mensagem para redefinir sua senha."
       }
     },
+    "prevission":{
+      "label":"Prevision de salud"
+    },
     "verificationCode": {
       "label": "Digite o código de verificação"
     },
@@ -2209,6 +2212,33 @@
         },
         "regNumber": {
           "label": "Número de registro."
+        },
+        "nrRegistryHealth":{
+          "label":"Nro de registro da super adminstraçao de saúde"
+        },
+        "workCity":{
+          "label":"Comuna de trabalho"
+        },
+        "workState":{
+          "label":"Regiao de trabalho"
+        },
+        "workStreet":{
+          "label":"Rua de trabalho"
+        },
+        "workNumber":{
+          "label":"Numero de do endereço de trabalho"
+        },
+        "workComplement":{
+          "label":"Dpto/Local/Outro"
+        },
+        "workPostal":{
+          "label":"Codigo postal del trabalho"
+        },
+        "workPhone":{
+          "label":"Telefone del trabalho"
+        },
+        "workMutuality":{
+          "label":"Mutualidad a la que esta afiliado"
         }
       }
     }
@@ -3709,6 +3739,9 @@
     },
     "uf": {
       "label": "UF"
+    },
+    "region":{
+      "label":"Region"
     },
     "numerationReq": {
       "label": "Campo número é obrigatório"
