@@ -30,6 +30,9 @@
       "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
       "antecentesFromPatient": "Antecedentes registrados pelo paciente"
     },
+    "defeche":{
+      "label":"Desfecho(s)"
+    },
     "patientData": {
       "tabs": {
         "notes": {
@@ -921,7 +924,7 @@
     },
     "login": {
       "welcome": {
-        "title": "Bem vindo a plataforma de Teleconsulta",
+        "title": "Bem vindo à plataforma de Teleconsulta",
         "label": "\nFaça login com sua conta ou crie uma nova para acessar."
       },
       "title": "Acessar conta",
@@ -929,7 +932,7 @@
         "label": "Esqueceu sua senha?"
       },
       "welcomeTitle": {
-        "label": "Bem vindo a Plataforma de Teleconsulta"
+        "label": "Bem vindo à Plataforma de Teleconsulta"
       },
       "invalidEmail": {
         "label": "E-mail inválido"
@@ -1222,7 +1225,7 @@
           "label": "Anexar documentos"
         },
         "btnCheckout": {
-          "label": "Pagar e agendar"
+          "label": "Avançar"
         },
         "success": {
           "title": "Sua consulta foi agendada com sucesso",
@@ -1327,7 +1330,7 @@
             "label": "Ex: Pó, Pólen ou Aspirina"
           },
           "surgicalInterventions": {
-            "label": "Ex: Marca-passo ou Stent coronario"
+            "label": "Ex: Marcapasso ou Stent coronário"
           },
           "familiarHistory": {
             "label": "Ex: Infarto (mãe) ou Câncer (irmão )"
@@ -2244,6 +2247,12 @@
     "ufReg": {
       "label": "Registro UF"
     },
+    "fatherSurname": {
+      "label": "Nome do meio"
+    },
+    "motherSurname": {
+      "label": "Sobrenome"
+    },
     "patients": {
       "label": "Dias"
     },
@@ -2436,13 +2445,13 @@
       "label": "Sala criada em % por %"
     },
     "asignedUsers": {
-      "label": "usuários atribuidos"
+      "label": "usuários atribuídos"
     },
     "professionals": {
       "label": "Profissional(is)"
     },
     "usersAwaiting": {
-      "label": "% usuário(s) em sala de espera"
+      "label": "% usuário(s) na sala de espera"
     },
     "amountProffetionals": {
       "label": "% profissionais"
@@ -2486,7 +2495,7 @@
       "label": "Não há registros associados"
     },
     "usersInRoom": {
-      "label": "Usuários (s) em sala de espera"
+      "label": "Usuários (s) na sala de espera"
     },
     "inmediateService": {
       "title": "Atendimento imediato / Acesso a sala",
@@ -2628,6 +2637,9 @@
     }
   },
   "common": {
+    "appointmentHasPreviousImmediate": {
+      "label": "Você já tem uma consulta imediata ativa, por favor consulte o menu MINHAS CONSULTAS"
+    },
     "withOut": "sem resultados",
     "Soon": "Em breve",
     "user": {

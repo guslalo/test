@@ -248,7 +248,7 @@
                   [displayWith]="getDisplayFn()"
                   (optionSelected)="escogerProfessional($event.option.value)"
                 >
-                  <mat-option *ngFor="let item of professionals" [value]="item">
+                  <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
                     {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                   </mat-option>
                 </mat-autocomplete>

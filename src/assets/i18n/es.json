@@ -30,6 +30,9 @@
       "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
       "antecentesFromPatient": "Antecedentes registrados por el paciente"
     },
+    "defeche":{
+      "label":"Destinos"
+    },
     "patientData": {
       "tabs": {
         "notes": {
@@ -2244,6 +2247,12 @@
     "ufReg": {
       "label": "Registro UF"
     },
+    "fatherSurname": {
+      "label": "Apellido Paterno"
+    },
+    "motherSurname": {
+      "label": "Apellido Materno"
+    },
     "patients": {
       "label": "Días"
     },
@@ -2628,6 +2637,9 @@
     }
   },
   "common": {
+    "appointmentHasPreviousImmediate": {
+      "label": "Ud ya cuenta con una consulta inmediata activa, por favor consulte el menú MIS CONSULTAS"
+    },
     "withOut": "sin resultados",
     "Soon": "Proximamente",
     "user": {

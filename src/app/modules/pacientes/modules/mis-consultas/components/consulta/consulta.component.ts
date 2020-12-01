@@ -5,6 +5,7 @@ import { DocumentService } from './../../../../../../services/document.service';
 import { CurrentUserService } from './../../../../../../services/current-user.service';
 import { UserLogin } from './../../../../../../models/models';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 
 @Component({
   selector: 'app-consulta',
@@ -19,18 +20,25 @@ export class ConsultaComponent implements OnInit {
   public timeline: any;
   public fecha: any;
   public professionalData: any;
-  public inmediate:boolean;
+  public inmediate: boolean;
   public arrayDocuments: any;
   public urlSibrare: any;
-  public appointmentId:any;
-  public descargar:boolean
+  public appointmentId: any;
+  public descargar: boolean
+  public exams: any;
+  public antecedentesGeneral: any;
+  public allergies: any;
+  public antecedentes: any;
+  public userId: any;
+
 
   constructor(
     private route: ActivatedRoute,
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private medicalRecordService: MedicalRecordService
+  ) { }
 
   ngOnInit(): void {
     this.user = new UserLogin(
@@ -57,6 +65,9 @@ export class ConsultaComponent implements OnInit {
 
     this.getAppointmentsTimeline();
     this.getFecha();
+
+    this.downloadUrl = this.documentService.download();
+    this.access_token = JSON.parse(localStorage.getItem('token'));
   }
 
   getFecha() {
@@ -101,13 +112,16 @@ export class ConsultaComponent implements OnInit {
         this.appoimentDetail = data.payload;
         console.log(this.appoimentDetail);
 
-        if(this.appoimentDetail.administrativeDetails.waitingRoomId === null){
+        this.getMedicalRecord(this.appoimentDetail.patientDetails.userDetails.userId)
+        this.userId = this.appoimentDetail.patientDetails.userDetails.userId;
+
+        if (this.appoimentDetail.administrativeDetails.waitingRoomId === null) {
           this.inmediate = false
           this.getAppointmentsProfessionalData(id);
-        }else{
-         this.inmediate = true;
+        } else {
+          this.inmediate = true;
         }
-       
+
       },
       (error) => {
         console.log(error);
@@ -115,9 +129,8 @@ export class ConsultaComponent implements OnInit {
     );
   }
 
-
-   //getVerifiedSibrareDocuments
-   getVerifiedSibrareDocuments2(appointmentId) {
+  //getVerifiedSibrareDocuments
+  getVerifiedSibrareDocuments2(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
       (data) => {
         console.log(data);
@@ -142,9 +155,9 @@ export class ConsultaComponent implements OnInit {
       (data) => {
         this.urlSibrare = data.payload[0].documento;
         this.spinner.hide();
-        if(this.descargar === true){     
-          return  window.open(this.urlSibrare);
-        }else{
+        if (this.descargar === true) {
+          return window.open(this.urlSibrare);
+        } else {
           console.log(this.urlSibrare);
         }
       },
@@ -154,7 +167,20 @@ export class ConsultaComponent implements OnInit {
     );
   }
 
-
+  getMedicalRecord(id) {
+    this.medicalRecordService.getByUserId(id).subscribe(
+      (data) => {
+        console.log(data);
+        this.exams = data.payload.exams;
+        this.antecedentesGeneral = data.payload.antecedent;
+        this.allergies = data.payload.antecedent.allergies;
+        this.antecedentes = data.payload.antecedent.sickness;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
 
 

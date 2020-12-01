@@ -5,7 +5,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DocumentService } from './../../../../../../services/document.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import Swal from 'sweetalert2'
+import { TranslocoService } from '@ngneat/transloco';
 declare var $: any;
 
 @Component({
@@ -38,7 +39,8 @@ export class IndexComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private documentService: DocumentService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translocoService: TranslocoService,
   ) { }
 
   ngOnInit(): void {
@@ -54,10 +56,33 @@ export class IndexComponent implements OnInit {
       console.log('closed');
     });
 
+    console.log('INIT')
+
+    this.consolidate = {
+      id: this.appointmentId,
+      patientDetails: {
+        symptoms: [],
+        description: null,
+      },
+    };
+
     this.appointmentsService.AppointmentInmediate().subscribe(
       (data) => {
         console.log(data);
+
+        if (data.internalCode == 117) {
+          this.spinner.hide();
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: this.translocoService.translate('common.appointmentHasPreviousImmediate.label'),
+          }).then((res) => {
+            this.router.navigate(['/app-paciente']);
+          })
+        }
+
         this.appointmentId = data.payload._id;
+        this.consolidate.id = data.payload._id;
       },
       (error) => {
         console.log(error);
@@ -97,13 +122,6 @@ export class IndexComponent implements OnInit {
   //selecion sintoma
   onChange(deviceValue) {
     $("#selectSintomaId option:selected").attr('disabled', 'disabled');
-    this.consolidate = {
-      id: this.appointmentId,
-      patientDetails: {
-        symptoms: [],
-        description: null,
-      },
-    };
     this.consolidate.patientDetails.symptoms.push(deviceValue.value);
     let selectedSintoma = {
       id: deviceValue.value,

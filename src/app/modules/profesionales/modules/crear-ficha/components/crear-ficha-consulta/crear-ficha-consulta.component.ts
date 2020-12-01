@@ -13,6 +13,7 @@ import { AdminitrativeService } from './../../../../../../services/administrativ
 import { TranslocoService } from '@ngneat/transloco';
 import { takeWhile } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
@@ -92,7 +93,11 @@ export class CrearFichaConsultaComponent implements OnInit {
   public arrayDiagnostic2 = [];
   public preArray = []
   private alive: boolean;
+  public destinies: any;
+  public destiniesSelected = [];
+  public destiniesToSave = [];
 
+  public videoCallStatus: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -107,6 +112,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     private adminitrativeService: AdminitrativeService,
     private translateService: TranslocoService,
     private NgxPermissionsService: NgxPermissionsService,
+    private destinyService: DestiniesService,
     private idleEvents: IdleEventsService
   ) { }
 
@@ -119,11 +125,6 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
-    this.NgxPermissionsService.permissions$.subscribe((permissions) => {
-      console.log(permissions)
-    })
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
@@ -136,6 +137,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.setAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
+      this.getDestinies();
     });
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
@@ -198,6 +200,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: ['cie10',], //Validators.required
       comments: ['', { updateOn: 'blur' }], //Validators.required
       indications: ['', { updateOn: 'blur' }],
+      destinies: ['',],
     });
 
     this.notes = this._formBuilder.group({
@@ -209,8 +212,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
-
-
   }
 
   saveAppointment(appointmentObject) {
@@ -225,8 +226,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       }
     );
   }
-
-
 
   clearId() {
     this.idConsulta = null
@@ -488,15 +487,22 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-    this.preArray.push({
+    let _i = this.arrayDiagnostic.map((e) => {
+      return e._id
+    }).indexOf(item._id)
+
+    if (_i >= 0) return
+
+    this.arrayDiagnostic.push({
       display: item.display,
       _id: item._id,
       type: 'cie10'
     })
-    this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
-      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
-    });
 
+    this.updateModelDiagnostics()
+  }
+
+  updateModelDiagnostics() {
     if (this.arrayDiagnostic != null) {
       let appointmentObject = {
         appointmentDetails: {
@@ -510,19 +516,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   deleteDiagnostic(_id) {
-    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
-    this.arrayDiagnostic2 = [...this.arrayDiagnostic.filter(item => item._id !== _id)];
-    console.log(this.arrayDiagnostic);
-    if (this.arrayDiagnostic != null) {
-      let appointmentObject = {
-        appointmentDetails: {
-          diagnosticDetails: {
-            diagnostics: this.arrayDiagnostic
-          }
-        },
-      };
-      this.saveAppointment(appointmentObject);
-    }
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+    this.updateModelDiagnostics()
   }
 
   //buscador de diagnostico
@@ -583,6 +578,40 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onChange(deviceValue) {
+    $("#selectSintomaId option:selected").attr('disabled', 'disabled');
+    if (this.destiniesSelected.find((element) => element.destinyId == deviceValue.value)) return
+    this.destiniesToSave.push(deviceValue.value);
+    let selectedDestiny = {
+      destinyId: deviceValue.value,
+      name: deviceValue.selectedOptions[0].innerText,
+    };
+    this.destiniesSelected.push(selectedDestiny);
+    let appointmentObject = {
+      appointmentDetails: {
+        patientDestinies: this.destiniesToSave
+      },
+    };
+
+    this.saveAppointment(appointmentObject)
+  }
+
+  getDestinies() {
+    this.destinyService.getDestinies().subscribe(
+      (data) => {
+        this.destinies = data.payload
+      },
+      (error) => console.log(error)
+    )
+  }
+
+  removeDestiny(destino) {
+    this.destiniesSelected = this.destiniesSelected.filter((val) => val.destinyId !== destino);
+    this.destiniesToSave = [...this.destiniesSelected.filter((val) => val.destinyId !== destino).map(val => val.destinyId)]
+    console.log(this.destiniesSelected)
+    this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
   }
 
   //update appointmentDetails
@@ -807,6 +836,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getSession(id: string) {
+
+    console.log('getSession')
+    console.log('id', id)
+
     this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
         console.log(data);
@@ -909,8 +942,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   async setAppointmentsDetails(id) {
+    console.log('setAppointmentsDetails', id)
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       data => {
+
+        console.log('setAppointmentsDetails => getAppointmentsDetails', data)
+
         this.consultasForm.controls['motive'].setValue(data.payload.appointmentDetails.motive);
         this.consultasForm.controls['objective'].setValue(data.payload.appointmentDetails.objective);
         this.consultasForm.controls['anamnesis'].setValue(data.payload.appointmentDetails.anamnesis);
@@ -952,24 +990,37 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
+
+        this.appointmentDetail.appointmentDetails.patientDestinies.forEach(element => {
+          this.destiniesSelected.push(element)
+        });
       }
     )
   }
 
   getAppointmentsDetails(id) {
+
+    console.log('getAppointmentsDetails', id)
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+
+        console.log('getAppointmentsDetails => DATA', data)
+
         this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.getAppointmentsTimeline(this.userId);
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
+
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+
         console.log(this.arrayDiagnostic)
+
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
 
-        console.log(this.appointmentDetail);
+        console.log(this.appointmentDetail.administrativeDetails.status)
 
         if (this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
@@ -978,25 +1029,24 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.permisoGuardar = false;
         }
 
-        if (this.appointmentDetail.administrativeDetails.status === 'running') {
+        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList') {
+          this.attendPatient(id, (data) => {
+            // this.appointmentDetail.administrativeDetails.status = 'running'
+            this.getSession(id);
+            this.permisoGuardar = true;
+            this.videoCall = true;
+
+            this.floatVideoCallViewer()
+
+            this.getAppointmentsDetailsRefresh(id)
+          })
+        }
+
+        if (this.appointmentDetail.administrativeDetails.status == 'running') {
           this.getSession(id);
           this.permisoGuardar = true;
           this.videoCall = true;
-
-
-          //modo flotante video call
-          $(window).bind('scroll', function () {
-            if ($(window).scrollTop() > 200) {
-              $('.vistaFixed').addClass('fixed');
-              $('.mtfixed').css('margin-top', 400);
-              $('.vistaFixed .card').css('box-shadow', 'none !important');
-            } else {
-              $('.toolbox-icon').click();
-              console.log('no fixed');
-              $('.mtfixed').css('margin-top', 0);
-              $('.vistaFixed').removeClass('fixed');
-            }
-          });
+          this.floatVideoCallViewer()
         }
         /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
@@ -1010,7 +1060,37 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  floatVideoCallViewer() {
+    //modo flotante video call
+    $(window).bind('scroll', function () {
+      if ($(window).scrollTop() > 200) {
+        $('.vistaFixed').addClass('fixed');
+        $('.mtfixed').css('margin-top', 400);
+        $('.vistaFixed .card').css('box-shadow', 'none !important');
+      } else {
+        $('.toolbox-icon').click();
+        console.log('no fixed');
+        $('.mtfixed').css('margin-top', 0);
+        $('.vistaFixed').removeClass('fixed');
+      }
+    });
+  }
+
+  attendPatient(id, cb) {
+    this.appointmentsService.attendAppointmentInmediate(id).subscribe(
+      (data) => {
+        cb(data)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getAppointmentsDetailsRefresh(id) {
+
+    console.log('getAppointmentsDetailsRefresh')
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         this.appointmentDetail = data.payload;
@@ -1019,6 +1099,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.notesArray = data.payload.appointmentDetails.notes;
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+
         console.log(this.appointmentDetail);
       },
       (error) => {
