@@ -1011,7 +1011,11 @@
       },
       "followInstructions": {
         "label": "Sigue las instrucciones del mensaje para restablecer tu contraseña."
-      }
+      },
+      "label":"Correo electronico"
+    },
+    "prevission":{
+      "label":"Prevision de salud"
     },
     "verificationCode": {
       "label": "Ingrese codigo de verificación"
@@ -2212,6 +2216,33 @@
         },
         "regNumber": {
           "label": "N° de Registro"
+        },
+        "nrRegistryHealth":{
+          "label":"Nro de registro de super intendecia de salud"
+        },
+        "workCity":{
+          "label":"Comuna de trabajo"
+        },
+        "workState":{
+          "label":"Region de trabajo"
+        },
+        "workStreet":{
+          "label":"Nombre de la calle de trabajo"
+        },
+        "workNumber":{
+          "label":"Numero de la direccion de trabajo"
+        },
+        "workComplement":{
+          "label":"Dpto/Sitio/Otro"
+        },
+        "workPostal":{
+          "label":"Codigo postal del trabajo"
+        },
+        "workPhone":{
+          "label":"Telefono del trabajo"
+        },
+        "workMutuality":{
+          "label":"Mutualidad a la que esta afiliado"
         }
       }
     }
@@ -3642,13 +3673,13 @@
       "label": "Ciudad"
     },
     "city": {
-      "label": "Ciudad"
+      "label": "Region"
     },
     "neighborhoodReq": {
       "label": "Barrio"
     },
     "neighborhood": {
-      "label": "Barrio"
+      "label": "Comuna"
     },
     "streetReq": {
       "label": "Calle es necesario"
@@ -3715,6 +3746,9 @@
     },
     "uf": {
       "label": "UF"
+    },
+    "region":{
+      "label":"Region"
     },
     "numerationReq": {
       "label": "Numeración es necesario"
