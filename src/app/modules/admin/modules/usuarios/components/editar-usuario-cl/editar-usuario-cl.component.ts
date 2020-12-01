@@ -17,8 +17,8 @@ const current = new Date();
 
 @Component({
   selector: 'app-editar-usuario',
-  templateUrl: './editar-usuario.component.html',
-  styleUrls: ['./editar-usuario.component.scss'],
+  templateUrl: './editar-usuario-cl.component.html',
+  styleUrls: ['./editar-usuario-cl.component.scss'],
 })
 export class EditarUsuarioCLComponent implements OnInit {
   clinicId: string;
@@ -156,10 +156,10 @@ export class EditarUsuarioCLComponent implements OnInit {
       nacionality: [null, Validators.required],
       originCountry: [null, null],
       inmigrationDate: [null, null],
-      breed: [null, Validators.required],
+      breed: [null, null],
       education: [null, null],
       familySituation: [null, null],
-      cep: ['', Validators.required],
+      cep: ['', null],
       uf: [null, Validators.required],
       city: [null, Validators.required],
       city2: [null, Validators.required],
@@ -192,7 +192,7 @@ export class EditarUsuarioCLComponent implements OnInit {
       professionalTitle: ['', Validators.required],
       university: ['', Validators.required],
       course: ['', Validators.required],
-      ufRegistry: [null, Validators.required],
+      ufRegistry: [null, null],
       professionalRegistryType: [null, null],
       professionalRegistry: [null, null],
       ufProfessionalRegistry: [null, null],
