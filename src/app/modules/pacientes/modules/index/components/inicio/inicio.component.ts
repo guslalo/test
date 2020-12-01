@@ -5,6 +5,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { error } from 'protractor';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-inicio',
@@ -21,19 +22,20 @@ export class InicioComponent implements OnInit {
   public consultas: any;
   public nextAppointed: any;
   public consultasFinalizadas: any;
-  public appointment:boolean;
+  public appointment: boolean;
   public page: number = 1;
   public totalPages: number;
-  public idCancel:any;
+  public idCancel: any;
 
   constructor(
     public currentUserService: CurrentUserService,
     public homeService: HomeService,
     public appointmentsService: AppointmentsService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    console.log('PACIENTE')
     this.appointment = true;
     this.getAppointments();
     this.page = 1;
@@ -61,8 +63,6 @@ export class InicioComponent implements OnInit {
       this.inmediateAppointment = false;
     }
 
- 
-
     this.homeService.getTips().subscribe(
       (data) => {
         this.tips = data;
@@ -71,38 +71,39 @@ export class InicioComponent implements OnInit {
         console.log(error);
       }
     );
-
-
   }
 
-  
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data);
-        
+
         this.consultas = data.payload.filter((a) => a.administrativeDetails.status !== 'finished' && a.administrativeDetails.status !== 'canceled')
         this.totalPages = this.consultas.length;
+
         console.log(this.consultas)
-    
-        if (data.payload.length > 0) {
+
+        if (this.consultas.length > 0) {
           this.appointment = true;
-          let arrayForDate = data.payload.map((value) => value.dateDetails.date);
+
+          let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
+
           arrayForDate.forEach((numero) => {
             if (numero < min) {
               min = numero;
             }
           });
-          this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
-          let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
-          this.consultasFinalizadas = finalizadas.length;
 
-          console.log(this.consultas);
-          /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
-          var latest = new Date(Math.max.apply(null,dates));
-          var earliest = new Date(Math.min.apply(null,dates));*/
-          //this.spinner.hide();
+          this.nextAppointed = this.consultas.filter((now) => {
+            if (now.dateDetails.date === min) {
+              return now
+            }
+          });
+
+          let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+
+          this.consultasFinalizadas = finalizadas.length;
         } else {
           this.appointment = false
         }
@@ -113,19 +114,10 @@ export class InicioComponent implements OnInit {
     );
   }
 
-  cancelarCita(id){
+  cancelarCita(id) {
     this.appointmentsService.postCancelarAppointment(id).subscribe(
       data => {
-        console.log(data);
-        this.appointmentsService.getAppointments(1).subscribe(
-          (data) => {
-            console.log(data);
-            this.consultas = data.payload;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.getAppointments()
       },
       error => {
         console.log(error)
@@ -133,9 +125,7 @@ export class InicioComponent implements OnInit {
     )
   }
 
-  idForCancel(id){
+  idForCancel(id) {
     this.idCancel = id;
   }
-
-  
 }
