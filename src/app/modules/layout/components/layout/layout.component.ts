@@ -58,6 +58,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   intervalCurrentTime: any;
   public inmediateAppointment: boolean;
   currentDate: string;
+  public setup:any;
   // public firstAccess:boolean;
 
   constructor(
@@ -91,7 +92,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public nots: Array<any> = []
   ngOnInit(): void {
     //this.firstAccess = true;
-
+    this.setup = environment.setup
     if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;
       this.inmediateAppointment = true;
