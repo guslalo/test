@@ -144,6 +144,7 @@ export class LoginComponent implements OnInit {
             
             this.clinicService.accessMode().subscribe(
               (data) => {
+                console.log(data)
                 localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
                 localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
                 localStorage.setItem('paymentAppointment', data.payload.payment.toString());
