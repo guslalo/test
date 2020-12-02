@@ -153,7 +153,7 @@ export class LoginComponent implements OnInit {
               (error) => {
                 console.log(error);
               }
-            );/**/
+            );
             /*
             this.appointmentsService.getAppointmentInmediateState().subscribe(
               (data) => {
