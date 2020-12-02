@@ -305,7 +305,12 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  resetForm(){
+    this.createAvailability.reset();
+  }
+
   crearAvailability() {
+
     console.log(this.createAvailability.controls.specialty);
 
     const formObject = {
