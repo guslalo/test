@@ -94,6 +94,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
   public arrayDiagnostic2 = [];
+  public objectDiagnostic = { };
   public preArray = []
   private alive: boolean;
   public destinies: any;
@@ -129,6 +130,12 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.objectDiagnostic = {
+      _id:null,
+      isGES:null,
+      isENO:null,
+      display:null
+    }
     this.setup = environment.setup
     console.log(this.setup)
     this.alive = true;
@@ -463,9 +470,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+
+
+    //console.log( this.objectDiagnostic.display)
     let _i = this.arrayDiagnostic.map((e) => {
       return e._id
     }).indexOf(item._id);
+    
 
     if(environment.setup === 'CL' ){
       if(item.isGES === true ) {
@@ -483,11 +494,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   
     }
    
-
-   
-
-   
     if (_i >= 0) return
+    this.objectDiagnostic = item;
+    console.log(item)
+    this.objectDiagnostic = {
+      _id:item._id,
+      isGES:item.isGES,
+      isENO:item.isENO,
+      display:item.display
+    }
 
     this.arrayDiagnostic.push({
       display: item.display,
@@ -496,12 +511,6 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: item.isENO,
       isGES: item.isGES
     })
-
-    /*
-    if(this.arrayDiagnostic.isGES === true) {
-      console.log(this.arrayDiagnostic)
-    }*/
-
     this.updateModelDiagnostics()
   }
 
@@ -518,11 +527,13 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   addRegistryGesEno(){
+    console.log(this.objectDiagnostic);
+    //let DataisENO = this.objectDiagnostic.isENO
     let appointmentObject = {
       appointmentDetails: {
         notifiableDiseases: [
           {
-            diagnostic: this.formAddGesEno.controls.diagnostic.value,
+            diagnostic: this.objectDiagnostic,
             professionaId: '5f580599fd059702a80d14d1',
             page: this.formAddGesEno.controls.page.value,
             observations: this.formAddGesEno.controls.observations.value
@@ -530,7 +541,12 @@ export class CrearFichaConsultaComponent implements OnInit {
         ]  
       },
     };
+    /*
+            isENO: true,
+            isGES: false,
+    */
     this.saveAppointment(appointmentObject);
+    
   }
 
   updateModelDiagnostics() {
@@ -627,6 +643,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     };
 
     this.saveAppointment(appointmentObject)
+    this.getAppointmentsDetailsRefresh(this.appointmentId);
   }
 
   getDestinies() {
@@ -1045,6 +1062,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
 
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+
+        
 
         console.log(this.arrayDiagnostic)
 
