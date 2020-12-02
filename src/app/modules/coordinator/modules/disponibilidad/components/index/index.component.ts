@@ -473,12 +473,12 @@ export class IndexComponent implements OnInit {
         console.log(this.daysSelected);
 
         this.endDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.endDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.endDate).add(0, 'days').format('YYYY/MM/DD')
         );
         this.createAvailability.get('endDate').setValue(this.endDate);
 
         this.startDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.startDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.startDate).add(0, 'days').format('YYYY/MM/DD')
         );
         this.createAvailability.get('startDate').setValue(this.startDate);
 
