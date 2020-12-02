@@ -39,6 +39,10 @@ export class UsersService {
     return this.http.get<any>(environment.baseUrl + 'v1/states');
   }
 
+  getPrevissions(): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + 'v1/health-insurances')
+  }
+
   getCities(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + 'v1/cities');
   }

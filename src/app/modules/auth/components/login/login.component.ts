@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   public recaptcha: boolean;
   public errorLogin: number;
   public production: boolean;
+  public createRoute = "/create-account";
 
   constructor(
     private translocoService: TranslocoService,
@@ -74,6 +75,9 @@ export class LoginComponent implements OnInit {
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       })
+    }
+    if(environment.setup == 'CL'){
+      this.createRoute = "/create-account-cl"
     }
   }
 
