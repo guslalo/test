@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AgendarComponent implements OnInit {
   @Input() inmediateAppointmentHijo: boolean;
   public inmediateAppointment: boolean;
+  public scheduleAppointment: boolean;
 
   constructor() {}
 
@@ -16,6 +17,12 @@ export class AgendarComponent implements OnInit {
       this.inmediateAppointment = true;
     } else {
       this.inmediateAppointment = false;
+    }
+
+    if (localStorage.getItem('scheduleAppointment') === 'true') {
+      this.scheduleAppointment = true;
+    } else {
+      this.scheduleAppointment = false;
     }
   }
 }

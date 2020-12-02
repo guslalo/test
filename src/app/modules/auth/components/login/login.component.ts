@@ -20,6 +20,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PoliciesService } from '../../../../services/policies.service';
+import { ClinicService } from '../../../../services/clinic.service';
 
 import { IdleEventsService } from '../../../../services/idle-events.service';
 
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private appointmentsService: AppointmentsService,
     private _policyService: PoliciesService,
-    private idleEvents: IdleEventsService
+    private idleEvents: IdleEventsService,
+    private clinicService:ClinicService
   ) { }
 
   ngOnInit(): void {
@@ -139,6 +141,20 @@ export class LoginComponent implements OnInit {
             }
             break;
           case 'patient':
+            
+            this.clinicService.accessMode().subscribe(
+              (data) => {
+                localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+                localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+                localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+                console.log(data);
+                this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+              },
+              (error) => {
+                console.log(error);
+              }
+            );/**/
+            /*
             this.appointmentsService.getAppointmentInmediateState().subscribe(
               (data) => {
                 localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
@@ -148,7 +164,7 @@ export class LoginComponent implements OnInit {
               (error) => {
                 console.log(error);
               }
-            );
+            );*/
             break;
         }
         this.spinner.hide();
