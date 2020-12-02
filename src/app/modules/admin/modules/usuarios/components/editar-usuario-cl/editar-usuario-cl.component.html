@@ -90,7 +90,7 @@
                       id="select-type-document"
                     >
                       <option [value]="null" disabled>{{ 'common.select.label' | transloco }}</option>
-                      <option value="run" [selected]="userType =='patient'">
+                      <option value="run" [selected]="!isForeign">
                         RUN
                       </option>
                     </select>
@@ -293,33 +293,26 @@
                     </div>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="street">{{ 'account.neighborhood.label' | transloco }}*</label>
-                    <input type="text" class="form-control" name="neighborhood" formControlName="neighborhood"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('neighborhood').valid
-                      }" />
-                  </div>
-                  <div class="form-group col-md-3">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="street" formControlName="street" [ngClass]="{
                         'is-invalid': !personalData.get('street').valid
                       }" />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="streetNumber" formControlName="streetNumber"
                       [ngClass]="{
                         'is-invalid': !personalData.get('streetNumber').valid
                       }" />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
 
                     <label for="street">{{ 'auth.complement.label' |transloco }}</label>
                     <input type="text" name="complement" id="complement" class="form-control" placeholder=""
                       formControlName="complement" />
 
                   </div>
-                  <div class="form-group col-12 col-md-2">
+                  <div class="form-group col-12 col-md-4">
                     <label for="postal">Codigo postal</label>
                     <input type="text" name="postal" id="postal" class="form-control" placeholder=""
                       formControlName="postal" />
