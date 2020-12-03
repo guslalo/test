@@ -8,6 +8,10 @@
     "report": "Atestado",
     "exam-order": "Pedido de exame"
   },
+  "waitingRoomInstructions":{
+    "instruction1":"Para sua consulta, permaneça em um lugar tranquilo e sem ruídos.",
+    "instruction2":"Lembre-se de ter todos seus exames em mãos antes de iniciar a teleconsulta."
+  },
   "exemplo": "exemplo",
   "history": {
     "tabs": {

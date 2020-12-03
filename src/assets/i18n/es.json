@@ -8,6 +8,10 @@
     "report": "Reporte",
     "exam-order": "Orden de exámen"
   },
+  "waitingRoomInstructions":{
+    "instruction1":"Ubíquese en un lugar tranquilo y sin ruido.",
+    "instruction2":"Recuerde tener cerca sus exámenes antes de iniciar la teleconsulta."
+  },
   "exemplo": "Ejemplo",
   "history": {
     "tabs": {
