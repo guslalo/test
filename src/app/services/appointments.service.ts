@@ -31,7 +31,7 @@ export class AppointmentsService {
   private cancel = 'v1/appointments/cancel'
   private subirAntecedentesMedico = 'v1/appointments/antecedents/'
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
-
+  private objetives = 'v1/objetives/'
 
   constructor(private http: HttpClient) { }
 
@@ -323,5 +323,9 @@ export class AppointmentsService {
         date,
       });
     }
+  }
+
+  getObjetives(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.objetives);
   }
 }
