@@ -19,7 +19,7 @@ export class MisPacientesComponent implements OnInit {
   tempPrePatients: any[] = [];
   searchTerm: string = '';
 
-  tab: any = 'pre-patients';
+  tab: any = '1';
   page = 1;
   pageSize = 20;
   moment: any = moment;
@@ -174,7 +174,7 @@ export class MisPacientesComponent implements OnInit {
     const searchTerm = this.searchTerm.toLowerCase();
     var temp = [];
     if (this.tempPatients) {
-      if (tab === 'patients') {
+      if (tab === '1') {
         temp = this.tempPatients
           // SEARCH FILTER
           .filter((patient) => {
@@ -196,7 +196,7 @@ export class MisPacientesComponent implements OnInit {
       }
     }
 
-    if (tab === 'pre-patients') {
+    if (tab === '2') {
       temp = this.tempPrePatients
         // SEARCH FILTER
         .filter((patient) => {
