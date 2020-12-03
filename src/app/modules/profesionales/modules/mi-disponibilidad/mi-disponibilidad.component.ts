@@ -292,13 +292,14 @@ export class MiDisponibilidadComponent implements OnInit {
         .postAvailability(formObject.administrativeDetails, formObject.professionalDetails, formObject.dateDetails)
         .subscribe(
           (data) => {
-            this.createAvailability.reset();
             this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
             this.fetchCalendar();
+            this.createAvailability.reset();
           },
           (error) => {
+            this.createAvailability.reset();
             console.log(error);
           }
         );
@@ -367,6 +368,7 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   actualizarAvailability(id) {
+
     //this.createAvailability = id;
     let _days = this.daysSelected
       .filter((item) => {

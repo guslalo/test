@@ -31,6 +31,7 @@ export class IndexComponent implements OnInit {
   public documentsList: any;
   public access_token: any;
   public downloadUrl: any;
+  public setup:any;
 
   constructor(
     private spinner: NgxSpinnerService,

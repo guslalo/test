@@ -305,7 +305,12 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  resetForm(){
+    this.createAvailability.reset();
+  }
+
   crearAvailability() {
+
     console.log(this.createAvailability.controls.specialty);
 
     const formObject = {
@@ -470,15 +475,15 @@ export class IndexComponent implements OnInit {
         });
         this.idAvailability.dateDetails.days = this.idAvailability.dateDetails.days.map(e => this.days.find(d => d.value == e).name)
 
-        console.log(this.daysSelected);
+        console.log(moment(this.idAvailability.dateDetails.endDate).utc(false).format('YYYY/MM/DD'));
 
         this.endDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.endDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.endDate).utc(false).format('YYYY/MM/DD')
         );
         this.createAvailability.get('endDate').setValue(this.endDate);
 
         this.startDate = this.dateAdapter.fromModel(
-          moment(this.idAvailability.dateDetails.startDate).add(1, 'days').format('YYYY/MM/DD')
+          moment(this.idAvailability.dateDetails.startDate).utc(false).format('YYYY/MM/DD')
         );
         this.createAvailability.get('startDate').setValue(this.startDate);
 
