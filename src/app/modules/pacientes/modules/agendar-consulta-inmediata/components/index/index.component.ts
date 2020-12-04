@@ -75,7 +75,7 @@ export class IndexComponent implements OnInit {
           this.spinner.hide();
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'Erro',
             text: this.translocoService.translate('common.appointmentHasPreviousImmediate.label'),
           }).then((res) => {
             this.router.navigate(['/app-paciente']);
