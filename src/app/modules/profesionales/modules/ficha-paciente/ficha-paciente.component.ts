@@ -124,6 +124,7 @@ export class FichaPacienteComponent implements OnInit {
           //this.videoCall = true;
         },
         (error) => {
+          this.spinner.hide();
           console.log(error);
         }
       );
