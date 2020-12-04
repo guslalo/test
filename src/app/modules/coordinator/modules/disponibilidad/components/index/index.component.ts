@@ -529,6 +529,10 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
+    this.specialtiesId = '';
+        this.medicalSpecialty = '';
+        this.specialtySelected = '';
+    console.log(professional);
     let userId = this.professionalSelected || professional?.userData[0]?._id;
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
