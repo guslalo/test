@@ -21,5 +21,6 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 300,
-  setup: 'BR'
+  setup: 'BR',
+  version: '{BUILD_VERSION}-home'
 };

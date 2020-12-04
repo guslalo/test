@@ -4,9 +4,9 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build --prod --aot --configuration=production --output-hashing=all",
-        "build-dev": "ng build --prod --aot --configuration=dev --output-hashing=all",
-        "build-staging": "ng build --prod --configuration=staging --output-hashing=all",
+        "build": "node ./updateVersion.js && ng build --prod --aot --configuration=production --output-hashing=all",
+        "build-dev": "node ./updateVersion.js && ng build --prod --aot --configuration=dev --output-hashing=all",
+        "build-staging": "node ./updateVersion.js && ng build --prod --configuration=staging --output-hashing=all",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
@@ -55,6 +55,7 @@
         "ngx-spinner": "^9.0.2",
         "ngx-toastr": "^13.0.0",
         "popper.js": "^1.16.1",
+        "replace-in-file": "^6.1.0",
         "rut.js": "^1.0.2",
         "rxjs": "~6.5.4",
         "save": "^2.4.0",

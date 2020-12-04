@@ -9,9 +9,11 @@ import { environment } from 'src/environments/environment';
 })
 export class LeftColumnComponent implements OnInit {
   public setup:any;
+  public version: any;
   constructor() {}
 
   ngOnInit(): void {
-    this.setup = environment.setup
+    this.setup = environment.setup;
+    this.version = environment.version
   }
 }
