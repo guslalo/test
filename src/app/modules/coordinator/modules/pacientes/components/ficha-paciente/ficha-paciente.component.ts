@@ -77,7 +77,7 @@ export class FichaPacienteComponent implements OnInit {
       this.appointmentId = params.id
       console.log(this.id);
       this.getMedicalRecord(this.id);
-      this.getVerifiedSibrareDocuments2(this.id);
+      //this.getVerifiedSibrareDocuments2(this.id);
     });
 
     this.access_token = JSON.parse(localStorage.getItem('token'));
@@ -105,11 +105,11 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
-  downloadSibrare(documentId) {
+  downloadSibrare(appointmentId,documentId) {
     this.descargar = true;
     this.spinner.show();
     console.log(documentId);
-    this.getSibrareDocuments(this.appointmentId, documentId);
+    this.getSibrareDocuments(appointmentId, documentId);
   }
 
   // get documents sibrare
@@ -128,6 +128,7 @@ export class FichaPacienteComponent implements OnInit {
         //this.videoCall = true;
       },
       (error) => {
+        this.spinner.hide();
         console.log(error);
       }
     );
