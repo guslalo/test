@@ -617,8 +617,11 @@
           <p class="title font-weight-bold">
             {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
           </p>
-
-          {{ professionalData.professionalData.university }}
+          <ul>
+            <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
+              <li>{{ item.university }}</li>
+            </ng-container>
+          </ul>
           <hr />
         </div>
         <div>
