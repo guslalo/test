@@ -85,7 +85,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     // });
   }
 
-  public state = 'open';
+  public state = 'closed';
   public inmediateAppointmentPadre: boolean;
   message;
   status = false;
@@ -130,6 +130,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.state = this.state === 'open' ? 'closed' : 'open';
   }
   sideBarMenu() {
+    //$('.boxSidebarMain').css("left":'')
     this.status = !this.status;
   }
 
