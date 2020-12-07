@@ -1,0 +1,129 @@
+<!-- APPOINTMENT MODAL -->
+<div class="modal fade" id="modalAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100 mt-1">{{ 'clinicalFile.reserveService.label' | transloco }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4">
+                <form [formGroup]="appointmentForm" class="mt-4">
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="startBlock">{{
+                  'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco
+                }}</label>
+                            <input *ngIf="patients" type="text" class="form-control"
+                                placeholder="{{ 'common.placeholders.searchPatient.label' | transloco }}"
+                                [matAutocomplete]="autoPatients" formControlName="patient" />
+                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                                <img src="assets/icons/icon-search.svg" />
+                            </div>
+                            <mat-autocomplete #autoPatients="matAutocomplete" [displayWith]="getDisplayFn()"
+                                (optionSelected)="setPatient($event.option.value)">
+                                <mat-option *ngFor="let item of filteredPatients | async" [value]="item">
+                                    <!-- {{ 'CPF - ' + item.identificationData.cpf + ' - ' + item.personalData.name + ' ' + item.personalData.secondLastName }} -->
+                                    {{ item.name }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+
+                        <div class="form-group col">
+                            <label for="startDate">Fecha</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="DD/MM/YYYY" id="date" name="date"
+                                    formControlName="date" [(ngModel)]="appoinmentDate" [minDate]="minDate"
+                                    ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [ngClass]="{
+                      'is-invalid': !appointmentForm.get('date').valid && appointmentForm.get('date').touched
+                    }" [(ngModel)]="currentDate" (ngModelChange)="getBlocks()" />
+                                <div *ngIf="appointmentForm.controls['date'].errors?.required" class="invalid-feedback">
+                                    Fecha es Obligatoria
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label
+                                for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
+                            <input *ngIf="professionals" type="text" class="form-control"
+                                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
+                                [matAutocomplete]="autoProfessionals" formControlName="professional" />
+                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                                <img src="assets/icons/icon-search.svg" />
+                            </div>
+                            <mat-autocomplete #autoProfessionals="matAutocomplete" [displayWith]="getDisplayFn()"
+                                (optionSelected)="getSpecialties($event.option.value)">
+                                <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
+                                    {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div class="form-group col">
+                            <label for="specialty">{{
+                  'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.specialty.label' | transloco
+                }}</label>
+                            <select class="form-control custom-select" (change)="getBlocks()"
+                                formControlName="specialty">
+                                <option selected>{{ 'common.select.label' | transloco }}</option>
+                                <ng-container *ngFor="let item of specialties">
+                                    <option value="{{ item._id }}">{{ item.specialtyName }} </option>
+                                </ng-container>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
+                            <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
+                                <ng-container *ngFor="let item of blocks">
+                                    <option value="{{ item }}">{{ item }}</option>
+                                </ng-container>
+                            </select>
+                            <ng-container *ngIf="!blocks.length">
+                                <p class="text-primary">{{ 'clinicalFile.noHoursAvailable.label' | transloco }}</p>
+                            </ng-container>
+                        </div>
+                        <div class="form-group col">
+                            <label for="objective">{{
+                  'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
+                }}</label>
+                            <!-- <input type="text" class="form-control" name="objective" formControlName="objective" /> -->
+
+                            <select class="form-control" name="objective" formControlName="objective">
+                                <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                                <option [ngValue]="item._id" *ngFor="let item of objetives">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="modal-footer text-center justify-content-center">
+                            <button type="button" class="btn btn-secondary rounded-pill"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+                                (click)="createAppointment()" [disabled]="!appointmentForm.valid || !blocks.length">
+                                <!--[disabled]="!createAvailability.valid"-->
+                                {{ 'clinicalFile.reserveService.label' | transloco }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+            routerLink="crear-ficha-consulta">
+            {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
+        </button>
+    </div>
+</div>
