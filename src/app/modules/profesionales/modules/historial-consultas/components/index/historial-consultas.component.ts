@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AppointmentEventsService } from './../../../../../../services/appointment-events.service';
 
 const states = ['test', 'test3', 'test4'];
 
@@ -21,7 +22,7 @@ export class HistorialConsultasComponent implements OnInit {
   public page: number = 1;
   public totalPages: number;
 
-  constructor(private appointmentsService: AppointmentsService) {}
+  constructor(private appointmentsService: AppointmentsService, private appointmentsEvents: AppointmentEventsService) { }
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -44,8 +45,15 @@ export class HistorialConsultasComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    let _userId = _user.id
+    this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
+    this.appointmentsEvents.buildForm$.emit(_user.role)
+  }
+
   getFecha() {
-  
+
     const fecha = new Date();
     fecha.getFullYear();
     const month = fecha.toLocaleString('default', { month: 'long' });
@@ -69,7 +77,7 @@ export class HistorialConsultasComponent implements OnInit {
       }
     );
   }
-  
+
 
   getAppointmentsTimeline() {
     this.appointmentsService.getAppointmentsTimeline().subscribe(

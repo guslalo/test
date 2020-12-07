@@ -5,14 +5,12 @@ import { PatientsService } from 'src/app/services/patients.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpecialtiesService } from 'src/app/services/specialties.service';
 import { ProfessionalService } from 'src/app/services/professional.service';
-import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 import { switchMap, startWith, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { AppointmentEventsService } from '../../../services/appointment-events.service'
 import { ModalConfig } from './modal.interface'
-import { userInfo } from 'os';
 
 @Component({
   selector: 'modal-create-appointment',
@@ -50,11 +48,12 @@ export class CreateAppointmentComponent implements OnInit {
   public professionalSelected: any;
   public professionals = [];
   public specialties: any;
-  tempAppointments: any[];
-  appointments: any;
-  tempProfessionals: any[];
+  public tempAppointments: any[];
+  public appointments: any;
+  public tempProfessionals: any[];
   public medicalSpecialties: any;
   public selectedProfessionals: string;
+  public buildModal: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -63,11 +62,11 @@ export class CreateAppointmentComponent implements OnInit {
     private specialtiesService: SpecialtiesService,
     private professionalService: ProfessionalService,
     private formBuilder: FormBuilder,
-    private translationService: TranslocoService,
     private appointmentsEvents: AppointmentEventsService
   ) { }
 
   ngOnInit(): void {
+    console.log('INIT MODAL')
     let _user = JSON.parse(localStorage.getItem('currentUser'))
 
     this.modalConfig = {
@@ -76,37 +75,7 @@ export class CreateAppointmentComponent implements OnInit {
       profile: _user.role // coordinator, admin, professional
     }
 
-    this.getProfessionals()
     this.getObjetives()
-    this.getMedicalSpecialties()
-
-    this.appointmentForm = this.formBuilder.group({
-      patient: [null, Validators.required],
-      date: [null, Validators.required],
-      start: [null, Validators.required],
-      objective: ['', Validators.required],
-      professional: [null, Validators.required],
-      specialty: [null, Validators.required],
-      profesional_type: [null, Validators.required],
-    });
-
-    this.filteredPatients = this.appointmentForm.controls['patient'].valueChanges.pipe(
-      startWith(''),
-      debounceTime(200),
-      distinctUntilChanged(),
-      switchMap(val => {
-        if (typeof val === 'string' && val)
-          return this.searchPatients(val || '')
-      })
-    )
-
-    // this.filteredProfessionals = this.appointmentForm.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
-    //   return this.professionals.filter(value => {
-    //     return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
-    //       value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
-    //       (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
-    //   })
-    // }))
 
     this.appointmentsEvents.filterProfessionalsByType$.subscribe(
       (data) => {
@@ -114,6 +83,67 @@ export class CreateAppointmentComponent implements OnInit {
       }
     )
 
+    this.appointmentsEvents.getSpecialtiesForProfessional$.subscribe(
+      (data) => {
+        this.getSpecialties(data)
+      }
+    )
+
+    this.appointmentsEvents.getProfessionals$.subscribe(
+      (data) => {
+        this.getProfessionals()
+      }
+    )
+
+    this.appointmentsEvents.getMedicalSpecialties$.subscribe(
+      (data) => {
+        this.getMedicalSpecialties()
+      }
+    )
+
+  }
+
+  ngAfterContentInit() {
+    this.appointmentsEvents.buildForm$.subscribe(
+      (data) => {
+
+        this.buildModal = true
+
+        switch (data) {
+          case 'professional':
+            this.appointmentForm = this.formBuilder.group({
+              patient: [null, Validators.required],
+              date: [null, Validators.required],
+              start: [null, Validators.required],
+              objective: ['', Validators.required],
+              specialty: [null, Validators.required],
+            });
+            break;
+
+          default:
+            this.appointmentForm = this.formBuilder.group({
+              patient: [null, Validators.required],
+              date: [null, Validators.required],
+              start: [null, Validators.required],
+              objective: ['', Validators.required],
+              professional: [null, Validators.required],
+              specialty: [null, Validators.required],
+              profesional_type: [null, Validators.required],
+            });
+            break;
+        }
+
+        this.filteredPatients = this.appointmentForm?.controls['patient'].valueChanges.pipe(
+          startWith(''),
+          debounceTime(200),
+          distinctUntilChanged(),
+          switchMap(val => {
+            if (typeof val === 'string' && val)
+              return this.searchPatients(val || '')
+          })
+        )
+      }
+    )
   }
 
   searchPatients(query): Observable<any[]> {
@@ -145,7 +175,6 @@ export class CreateAppointmentComponent implements OnInit {
     let date = this.appointmentForm.controls.date.value;
     let specialtyId = this.appointmentForm.controls.specialty.value;
     let professionalId = this.professionalSelected
-    console.log(date, specialtyId);
     this.blocks = [];
 
     this.appointmentsService
@@ -202,7 +231,6 @@ export class CreateAppointmentComponent implements OnInit {
   getMedicalSpecialties() {
     this.specialtiesService.getMedicalSpecialties().subscribe(
       (data) => {
-        console.log(data)
         this.medicalSpecialties = data.payload
       }
     )
@@ -211,7 +239,6 @@ export class CreateAppointmentComponent implements OnInit {
   selectProfessionalType(item) {
     this.professionalService.getProfessionalsBySpecialtyId(item).subscribe(
       (data) => {
-        // this.selectedProfessionals = data
         this.appointmentsEvents.filterProfessionalsByType(data)
       }
     )

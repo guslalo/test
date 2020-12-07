@@ -127,6 +127,14 @@ export class IndexComponent implements OnInit {
     // }))
   }
 
+  ngAfterViewInit() {
+    console.log('BUILD FORMS -> EMIT')
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    this.appointmentsEvents.getProfessionals$.emit()
+    this.appointmentsEvents.getMedicalSpecialties$.emit()
+    this.appointmentsEvents.buildForm$.emit(_user.role)
+  }
+
 
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);

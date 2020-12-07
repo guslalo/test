@@ -6,10 +6,18 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class AppointmentEventsService {
   public updateAppointments$: EventEmitter<boolean>;
   public filterProfessionalsByType$: EventEmitter<boolean>;
+  public getSpecialtiesForProfessional$: EventEmitter<boolean>;
+  public getProfessionals$: EventEmitter<boolean>;
+  public getMedicalSpecialties$: EventEmitter<boolean>;
+  public buildForm$: EventEmitter<boolean>;
 
   constructor() {
     this.updateAppointments$ = new EventEmitter();
     this.filterProfessionalsByType$ = new EventEmitter();
+    this.getSpecialtiesForProfessional$ = new EventEmitter();
+    this.getProfessionals$ = new EventEmitter();
+    this.getMedicalSpecialties$ = new EventEmitter();
+    this.buildForm$ = new EventEmitter();
   }
 
   updateAppointments() {
@@ -41,4 +49,5 @@ export class AppointmentEventsService {
     }
 
   }
+
 }

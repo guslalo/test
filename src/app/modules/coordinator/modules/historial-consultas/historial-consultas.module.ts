@@ -16,10 +16,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { TeleconsultaComponent } from '../teleconsulta/components/index/index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CreateAppointmentComponent } from 'src/app/shared/modules/create-appointment/create-appointment.component';
 
 @NgModule({
-  declarations: [IndexComponent, TeleconsultaComponent, CreateAppointmentComponent],
+  declarations: [IndexComponent, TeleconsultaComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -32,6 +31,7 @@ import { CreateAppointmentComponent } from 'src/app/shared/modules/create-appoin
     NgxDatatableModule,
     MatAutocompleteModule,
     TranslocoRootModule,
+    SharedModule
   ],
   exports: [NgbDatepickerModule]
 })

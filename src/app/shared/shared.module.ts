@@ -37,9 +37,10 @@ import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { CreateAppointmentComponent } from './modules/create-appointment/create-appointment.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -83,7 +84,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgbdTimepickerBasic,
     ChangePassComponent,
     LangComponent,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    CreateAppointmentComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
