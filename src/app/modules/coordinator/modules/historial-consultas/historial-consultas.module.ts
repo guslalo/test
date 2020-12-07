@@ -15,9 +15,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { TeleconsultaComponent } from '../teleconsulta/components/index/index.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CreateAppointmentComponent } from 'src/app/shared/modules/create-appointment/create-appointment.component';
 
 @NgModule({
-  declarations: [IndexComponent, TeleconsultaComponent],
+  declarations: [IndexComponent, TeleconsultaComponent, CreateAppointmentComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -31,6 +33,6 @@ import { TeleconsultaComponent } from '../teleconsulta/components/index/index.co
     MatAutocompleteModule,
     TranslocoRootModule,
   ],
-  exports: [NgbDatepickerModule],
+  exports: [NgbDatepickerModule]
 })
-export class HistorialConsultasModule {}
+export class HistorialConsultasModule { }

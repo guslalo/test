@@ -123,10 +123,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     private idleEvents: IdleEventsService
   ) { }
 
-  ngOnChanges() {
-
-  }
-
   ngOnDestroy(): void {
     this.idleEvents.inVideoCall(false)
   }
@@ -138,13 +134,17 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: null,
       display: null
     }
+
     this.setup = environment.setup
+
     console.log(this.setup)
+
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
     this.spinner.show();
     this.permisoGuardar = false;
+
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
       this.appointmentId = params.appointmentId;
@@ -474,13 +474,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-
-
     //console.log( this.objectDiagnostic.display)
     let _i = this.arrayDiagnostic.map((e) => {
       return e._id
     }).indexOf(item._id);
-
 
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
@@ -495,10 +492,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(item)
         $('#addNotificationGesEno').modal('show')
       }
-
     }
 
     if (_i >= 0) return
+
     this.objectDiagnostic = item;
     console.log(item)
     this.objectDiagnostic = {
@@ -515,6 +512,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: item.isENO,
       isGES: item.isGES
     })
+
     this.updateModelDiagnostics()
   }
 

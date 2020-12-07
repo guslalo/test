@@ -16,7 +16,8 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, i
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 // Translation
@@ -58,7 +59,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxPermissionsModule,
     NgxMaskModule.forRoot({
       validation: true,
-    })
+    }),
+    NgbPaginationModule,
+    NgbTimepickerModule,
+    MatAutocompleteModule
   ],
   exports: [
     // MODULES TO RE-USE

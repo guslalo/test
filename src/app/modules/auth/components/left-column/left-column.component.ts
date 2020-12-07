@@ -8,8 +8,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['../login/login.component.scss'],
 })
 export class LeftColumnComponent implements OnInit {
-  public setup:any;
-  constructor() {}
+  public setup: any;
+  public appVersion: any
+
+  constructor() { }
 
   ngOnInit(): void {
     this.setup = environment.setup
