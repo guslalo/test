@@ -559,6 +559,9 @@
     "enter": {
       "label": "Entrar"
     },
+    "enterAppointment": {
+      "label": "Entrar a la consulta"
+    },
     "accountScheduleded": {
       "label": "Cuenta agendada"
     },
