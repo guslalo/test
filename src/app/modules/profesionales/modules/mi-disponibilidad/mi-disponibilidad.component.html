@@ -4,7 +4,8 @@
       <h2>{{ 'disponibility.title' | transloco }}</h2>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary rounded-pill float-right" *ngxPermissionsOnly="['Create:Availabilities']" ng-reflect-tour-anchor="agendar"
+      <button type="button" class="btn btn-primary rounded-pill float-right"
+        *ngxPermissionsOnly="['Create:Availabilities']" ng-reflect-tour-anchor="agendar"
         (click)="createAvailability.reset()" data-toggle="modal" data-target="#disponibilidad">
         {{ 'disponibility.btnNewDisponibility.label' | transloco }}
         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
@@ -144,11 +145,13 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" *ngxPermissionsOnly="['Update:Availabilities']" data-target="#editar" class="dropdown-item" type="button"
+                            <button data-toggle="modal" *ngxPermissionsOnly="['Update:Availabilities']"
+                              data-target="#editar" class="dropdown-item" type="button"
                               (click)="putAvailability(item._id)">
                               {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
-                            <button class="dropdown-item" type="button" *ngxPermissionsOnly="['Delete:Availabilities']" (click)="deleteAvailability(item._id)">
+                            <button class="dropdown-item" type="button" *ngxPermissionsOnly="['Delete:Availabilities']"
+                              (click)="deleteAvailability(item._id)">
                               {{ 'common.button.delete.label' | transloco }}
                             </button>
                           </div>
@@ -267,9 +270,20 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input type="text" class="form-control" id="objective" formControlName="objective" [ngClass]="{
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <!-- <input type="text" class="form-control" id="objective" formControlName="objective" [ngClass]="{
                     'is-invalid': !createAvailability.get('objective').touched
-                  }" />
+                  }" /> -->
+
               </div>
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
@@ -432,11 +446,21 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input type="text" class="form-control" id="objective" name="objective" formControlName="objective"
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <!-- <input type="text" class="form-control" id="objective" name="objective" formControlName="objective"
                   [ngClass]="{
                     'is-invalid':
                       !createAvailability.get('objective').valid && createAvailability.get('objective').touched
-                  }" />
+                  }" /> -->
                 <!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
@@ -502,19 +526,17 @@
                 </p>
               </div>
               <div class="col">
-                <ng-container *ngFor="let data of daysSelected "> <!--let i = index-->
+                <ng-container *ngFor="let data of daysSelected ">
+                  <!--let i = index-->
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input id="put{{ data.name }}" 
-                      class="custom-control-input" type="checkbox" 
-                      [value]="data.value"
-                      (change)="data.checked = !data.checked" 
-                      [checked]="data.checked" />
+                    <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
+                      (change)="data.checked = !data.checked" [checked]="data.checked" />
                     <label class="custom-control-label" for="put{{ data.name }}">
                       {{ data.name | transloco}}
-                    </label> 
+                    </label>
                   </div>
-                  
-                   
+
+
                 </ng-container>
               </div>
             </div>

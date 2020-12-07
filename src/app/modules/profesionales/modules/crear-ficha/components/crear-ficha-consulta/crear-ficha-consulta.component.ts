@@ -94,7 +94,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
   public arrayDiagnostic2 = [];
-  public objectDiagnostic = { };
+  public objectDiagnostic = {};
   public preArray = []
   private alive: boolean;
   public destinies: any;
@@ -102,7 +102,9 @@ export class CrearFichaConsultaComponent implements OnInit {
   public destiniesToSave = [];
 
   public videoCallStatus: any;
-  public setup:string;
+  public setup: string;
+
+  public objetives: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -131,10 +133,10 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.objectDiagnostic = {
-      _id:null,
-      isGES:null,
-      isENO:null,
-      display:null
+      _id: null,
+      isGES: null,
+      isENO: null,
+      display: null
     }
     this.setup = environment.setup
     console.log(this.setup)
@@ -198,7 +200,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       professionalId: [''],
       page: [''],
       diagnostic: [''],
-      type: [''], 
+      type: [''],
       observations: [''],
     }, { updateOn: 'blur' });
 
@@ -233,13 +235,15 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
+
+    this.getObjetives()
   }
 
   saveAppointment(appointmentObject) {
     console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
-         console.log(data);
+        console.log(data);
         if (environment.production === false) {
           //console.log(data);
         }
@@ -460,7 +464,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.saveAppointment(appointmentObject);
       }
     }
-  );
+    );
 
 
   }
@@ -476,32 +480,32 @@ export class CrearFichaConsultaComponent implements OnInit {
     let _i = this.arrayDiagnostic.map((e) => {
       return e._id
     }).indexOf(item._id);
-    
 
-    if(environment.setup === 'CL' ){
-      if(item.isGES === true ) {
+
+    if (environment.setup === 'CL') {
+      if (item.isGES === true) {
         console.log(item)
         $('#addNotificationGes').modal('show')
       }
-      if(item.isENO === true ) {
+      if (item.isENO === true) {
         console.log(item)
         $('#addNotificationEno').modal('show')
       }
-      if( item.isENO === true && item.isGES === true ) {
+      if (item.isENO === true && item.isGES === true) {
         console.log(item)
         $('#addNotificationGesEno').modal('show')
       }
-  
+
     }
-   
+
     if (_i >= 0) return
     this.objectDiagnostic = item;
     console.log(item)
     this.objectDiagnostic = {
-      _id:item._id,
-      isGES:item.isGES,
-      isENO:item.isENO,
-      display:item.display
+      _id: item._id,
+      isGES: item.isGES,
+      isENO: item.isENO,
+      display: item.display
     }
 
     this.arrayDiagnostic.push({
@@ -514,19 +518,19 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.updateModelDiagnostics()
   }
 
-  nextStep(type){
-    if(type === 'eno'){
+  nextStep(type) {
+    if (type === 'eno') {
       window.open('https://epivigila.minsal.cl/', "_blank");
       $('#addEno').modal('hide')
-      $('#addGesEno').modal('show')   
+      $('#addGesEno').modal('show')
     }
-    if(type === 'ges'){
+    if (type === 'ges') {
       $('#addGesEno').modal('show')
       $('#addGes').modal('hide')
-    }  
+    }
   }
 
-  addRegistryGesEno(){
+  addRegistryGesEno() {
     console.log(this.objectDiagnostic);
     //let DataisENO = this.objectDiagnostic.isENO
     let appointmentObject = {
@@ -538,7 +542,7 @@ export class CrearFichaConsultaComponent implements OnInit {
             page: this.formAddGesEno.controls.page.value,
             observations: this.formAddGesEno.controls.observations.value
           }
-        ]  
+        ]
       },
     };
     /*
@@ -546,7 +550,7 @@ export class CrearFichaConsultaComponent implements OnInit {
             isGES: false,
     */
     this.saveAppointment(appointmentObject);
-    
+
   }
 
   updateModelDiagnostics() {
@@ -1063,7 +1067,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
 
-        
+
 
         console.log(this.arrayDiagnostic)
 
@@ -1273,10 +1277,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
 
-
-
-
-
-
+  getObjetives() {
+    this.appointmentsService.getObjetives().subscribe((data) => {
+      this.objetives = data
+    })
+  }
 
 }
