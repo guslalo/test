@@ -151,7 +151,7 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.getPrevissions();
 
     this.identificationData = this.formBuilder.group({
-      document:  new FormControl('cpf'),
+      document:  new FormControl('run'),
       idDocumentNumber: ['', Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
@@ -180,7 +180,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       cep: ['', null],
       uf: [null, Validators.required],
       city: [null, Validators.required],
-      neighborhood: ['', Validators.required],
+      neighborhood: ['', null],
       street: ['', Validators.required],
       complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
@@ -485,13 +485,13 @@ export class CrearUsuarioComponentCL implements OnInit {
         }
 
       case 'professional':
-        console.log(this.formUser[0].valid, this.formUser[1].valid, this.formUser[4].valid, this.formUser[5].valid)
         if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid && this.formUser[5].valid) {
           return true;
         } else {
           return false;
         }
       case 'patient':
+        
         if (this.formUser[0].valid 
             && this.formUser[1].valid 
             && this.formUser[5].valid) {
