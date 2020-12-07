@@ -201,7 +201,7 @@ export class IndexComponent implements OnInit {
       specialty: [null, [Validators.required]],
       specialtyName: new FormControl(),
       objective: [null, [Validators.required]], //[Validators.required],
-      appointmentDuration: [5, null],
+      appointmentDuration: [5, null, [Validators.required]],
       endDate: [null, [Validators.required]], // [Validators.required]
       startDate: [null], //new FormControl()
       dailyDetails: this._formBuilder.array([]), //[Validators.required]
@@ -310,7 +310,7 @@ export class IndexComponent implements OnInit {
   }
 
   crearAvailability() {
-
+    console.log(this.createAvailability);
     console.log(this.createAvailability.controls.specialty);
 
     const formObject = {
