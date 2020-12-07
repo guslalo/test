@@ -182,7 +182,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       city: [null, Validators.required],
       neighborhood: ['', null],
       street: ['', Validators.required],
-      complement: [null, ],
+      complement: ['', null],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       prevission: ['',Validators.required],
       postal: ['',null]
