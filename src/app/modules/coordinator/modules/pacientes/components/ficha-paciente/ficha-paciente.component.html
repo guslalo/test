@@ -851,7 +851,7 @@
                         {{ item.issuerDetails.fullName }}
                       </td>
                       <td class="text-center">
-                        <a (click)="downloadSibrare(item.documentId)">
+                        <a (click)="downloadSibrare(item.appointmentId, item.documentId)">
                           <!-- routerLink="{{urlSibrare}}" target="_blank-->
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}

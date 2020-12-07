@@ -3,15 +3,20 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center w-100 mt-1">{{ 'clinicalFile.reserveService.label' | transloco }}
+                <h5 class="modal-title text-center w-100 mt-1">
+                    {{ modalConfig.title | transloco }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body p-4">
+
                 <form [formGroup]="appointmentForm" class="mt-4">
+                    <!-- linea 1 -->
                     <div class="row">
+                        <!-- paciente -->
                         <div class="form-group col">
                             <label for="startBlock">{{
                   'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.name.label' | transloco
@@ -31,25 +36,57 @@
                             </mat-autocomplete>
                         </div>
 
+                        <!-- fecha -->
                         <div class="form-group col">
-                            <label for="startDate">Fecha</label>
+                            <label for="startDate">
+                                {{ 'table.date.label' | transloco }}
+                            </label>
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="DD/MM/YYYY" id="date" name="date"
                                     formControlName="date" [(ngModel)]="appoinmentDate" [minDate]="minDate"
                                     ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [ngClass]="{
-                      'is-invalid': !appointmentForm.get('date').valid && appointmentForm.get('date').touched
-                    }" [(ngModel)]="currentDate" (ngModelChange)="getBlocks()" />
+                    'is-invalid': !appointmentForm.get('date').valid && appointmentForm.get('date').touched
+                }" [(ngModel)]="currentDate" (ngModelChange)="getBlocks()" />
                                 <div *ngIf="appointmentForm.controls['date'].errors?.required" class="invalid-feedback">
                                     Fecha es Obligatoria
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="row">
+
+                    <!-- linea 2 -->
+                    <div class="row" *ngIf="modalConfig.profile != 'professional'">
+                        <!-- tipo profesional -->
                         <div class="form-group col">
-                            <label
-                                for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}</label>
-                            <input *ngIf="professionals" type="text" class="form-control"
+                            <label for="profesional_type">{{
+                    'dashboard.home.config.tabs.specialty.modalCreate.type.label' | transloco
+                }}</label>
+                            <select #profesional_type id="profesional_type" class="form-control" name="profesional_type"
+                                formControlName="profesional_type"
+                                (change)="selectProfessionalType($event.target.value)">
+                                <option [value]="null">{{ 'common.select.label' | transloco }}</option>
+                                <option [value]="item._id" *ngFor="let item of medicalSpecialties">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <!-- profesional -->
+                        <div class="form-group col">
+                            <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}
+                            </label>
+
+                            <select #profesional_type id="profesional_type" class="form-control" name="professional"
+                                formControlName="professional" (change)="getSpecialties($event.target.value)">
+                                <option [value]="null">{{ 'common.select.label' | transloco }}</option>
+                                <option [value]="item.userId" *ngFor="let item of selectedProfessionals">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+
+                            <!-- <input *ngIf="professionals" type="text" class="form-control"
                                 placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
                                 [matAutocomplete]="autoProfessionals" formControlName="professional" />
                             <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
@@ -60,8 +97,13 @@
                                 <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
                                     {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                                 </mat-option>
-                            </mat-autocomplete>
+                            </mat-autocomplete> -->
                         </div>
+                    </div>
+
+                    <!-- linea 3 -->
+                    <div class="row">
+                        <!-- especialidad -->
                         <div class="form-group col">
                             <label for="specialty">{{
                   'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.specialty.label' | transloco
@@ -74,24 +116,29 @@
                                 </ng-container>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
+
+                        <!-- disponibilidad -->
                         <div class="form-group col">
                             <label for="startBlock">{{ 'clinicalFile.hoursAvailable.label' | transloco }}</label>
-                            <select class="form-control custom-select" *ngIf="blocks.length" formControlName="start">
+                            <select class="form-control custom-select" *ngIf="blocks?.length" formControlName="start">
                                 <ng-container *ngFor="let item of blocks">
                                     <option value="{{ item }}">{{ item }}</option>
                                 </ng-container>
                             </select>
-                            <ng-container *ngIf="!blocks.length">
+                            <ng-container *ngIf="!blocks?.length">
                                 <p class="text-primary">{{ 'clinicalFile.noHoursAvailable.label' | transloco }}</p>
                             </ng-container>
                         </div>
+
+                    </div>
+
+                    <!-- linea 4 -->
+                    <div class="row">
+                        <!-- objetivo -->
                         <div class="form-group col">
                             <label for="objective">{{
                   'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.objetive.label' | transloco
                 }}</label>
-                            <!-- <input type="text" class="form-control" name="objective" formControlName="objective" /> -->
 
                             <select class="form-control" name="objective" formControlName="objective">
                                 <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -101,9 +148,10 @@
                             </select>
 
                         </div>
+
                     </div>
 
-                    <div class="row">
+                    <div>
                         <div class="modal-footer text-center justify-content-center">
                             <button type="button" class="btn btn-secondary rounded-pill"
                                 data-dismiss="modal">Cancelar</button>
@@ -114,16 +162,17 @@
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal-footer text-center justify-content-center">
+    <!-- <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
         <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
             routerLink="crear-ficha-consulta">
             {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
         </button>
-    </div>
+    </div> -->
 </div>

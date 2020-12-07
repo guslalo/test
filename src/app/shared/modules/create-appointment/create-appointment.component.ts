@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { PatientsService } from 'src/app/services/patients.service';
@@ -11,6 +11,8 @@ import { switchMap, startWith, debounceTime, distinctUntilChanged, map } from 'r
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { AppointmentEventsService } from '../../../services/appointment-events.service'
+import { ModalConfig } from './modal.interface'
+import { userInfo } from 'os';
 
 @Component({
   selector: 'modal-create-appointment',
@@ -18,6 +20,7 @@ import { AppointmentEventsService } from '../../../services/appointment-events.s
   styleUrls: ['./create-appointment.component.scss']
 })
 export class CreateAppointmentComponent implements OnInit {
+  @Input() public modalConfig: ModalConfig
   @ViewChild('modal') private modalContent: TemplateRef<CreateAppointmentComponent>
   private modalRef: NgbModalRef
   appointmentForm: FormGroup;
@@ -50,6 +53,8 @@ export class CreateAppointmentComponent implements OnInit {
   tempAppointments: any[];
   appointments: any;
   tempProfessionals: any[];
+  public medicalSpecialties: any;
+  public selectedProfessionals: string;
 
   constructor(
     private modalService: NgbModal,
@@ -63,9 +68,17 @@ export class CreateAppointmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+
+    this.modalConfig = {
+      // title: 'clinicalFile.reSheduleService.label'
+      title: 'clinicalFile.reserveService.label',
+      profile: _user.role // coordinator, admin, professional
+    }
 
     this.getProfessionals()
     this.getObjetives()
+    this.getMedicalSpecialties()
 
     this.appointmentForm = this.formBuilder.group({
       patient: [null, Validators.required],
@@ -74,6 +87,7 @@ export class CreateAppointmentComponent implements OnInit {
       objective: ['', Validators.required],
       professional: [null, Validators.required],
       specialty: [null, Validators.required],
+      profesional_type: [null, Validators.required],
     });
 
     this.filteredPatients = this.appointmentForm.controls['patient'].valueChanges.pipe(
@@ -86,49 +100,26 @@ export class CreateAppointmentComponent implements OnInit {
       })
     )
 
-    this.filteredProfessionals = this.appointmentForm.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
-      return this.professionals.filter(value => {
-        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
-          value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
-          (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
-      })
-    }))
+    // this.filteredProfessionals = this.appointmentForm.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
+    //   return this.professionals.filter(value => {
+    //     return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+    //       value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+    //       (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+    //   })
+    // }))
 
-  }
+    this.appointmentsEvents.filterProfessionalsByType$.subscribe(
+      (data) => {
+        this.selectedProfessionals = this.appointmentsEvents.createDisplayForSelect(data)
+      }
+    )
 
-  open() {
-    this.modalRef = this.modalService.open(this.modalContent)
-    this.modalRef.result.then()
-  }
-
-  close() {
-    this.modalRef.close()
-  }
-
-  dismiss() {
-    this.modalRef.dismiss()
   }
 
   searchPatients(query): Observable<any[]> {
     return this.patientService.search(query)
       .pipe(
-        map(response => {
-          if (response.payload.length) {
-            return response.payload.map(_e => {
-              let name
-
-              (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
-              (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
-              (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
-
-              name += _e.personalData.name + ' ' + _e.personalData.secondLastName
-
-              return { id: _e._id, name }
-            })
-          } else {
-            return []
-          }
-        })
+        map(res => this.appointmentsEvents.createDisplayForSelect(res.payload))
       )
   }
 
@@ -195,9 +186,8 @@ export class CreateAppointmentComponent implements OnInit {
     );
   }
 
-  getSpecialties(professional) {
-    this.professionalSelected = professional.userData[0]._id;
-    let userId = professional.userData[0]._id;
+  getSpecialties(userId) {
+    this.professionalSelected = userId
 
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
@@ -207,6 +197,24 @@ export class CreateAppointmentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getMedicalSpecialties() {
+    this.specialtiesService.getMedicalSpecialties().subscribe(
+      (data) => {
+        console.log(data)
+        this.medicalSpecialties = data.payload
+      }
+    )
+  }
+
+  selectProfessionalType(item) {
+    this.professionalService.getProfessionalsBySpecialtyId(item).subscribe(
+      (data) => {
+        // this.selectedProfessionals = data
+        this.appointmentsEvents.filterProfessionalsByType(data)
+      }
+    )
   }
 
   getAppointments() {

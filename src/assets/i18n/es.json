@@ -8,6 +8,10 @@
     "report": "Reporte",
     "exam-order": "Orden de exámen"
   },
+  "waitingRoomInstructions": {
+    "instruction1": "Ubíquese en un lugar tranquilo y sin ruido.",
+    "instruction2": "Recuerde tener cerca sus exámenes antes de iniciar la teleconsulta."
+  },
   "exemplo": "Ejemplo",
   "history": {
     "tabs": {
@@ -34,8 +38,8 @@
         "button": "Registrar notificación"
       }
     },
-    "defeche":{
-      "label":"Destinos"
+    "defeche": {
+      "label": "Destinos"
     },
     "patientData": {
       "tabs": {
@@ -711,6 +715,9 @@
     "reserveService": {
       "label": "Reservar Consulta"
     },
+    "reSheduleService": {
+      "label": "Reagendar Consulta"
+    },
     "hoursAvailable": {
       "label": "Horas Disponibles"
     },
@@ -1012,10 +1019,10 @@
       "followInstructions": {
         "label": "Sigue las instrucciones del mensaje para restablecer tu contraseña."
       },
-      "label":"Correo electronico"
+      "label": "Correo electronico"
     },
-    "prevission":{
-      "label":"Prevision de salud"
+    "prevission": {
+      "label": "Prevision de salud"
     },
     "verificationCode": {
       "label": "Ingrese codigo de verificación"
@@ -2217,32 +2224,32 @@
         "regNumber": {
           "label": "N° de Registro"
         },
-        "nrRegistryHealth":{
-          "label":"Nro de registro de super intendecia de salud"
+        "nrRegistryHealth": {
+          "label": "Nro de registro de super intendecia de salud"
         },
-        "workCity":{
-          "label":"Comuna de trabajo"
+        "workCity": {
+          "label": "Comuna de trabajo"
         },
-        "workState":{
-          "label":"Region de trabajo"
+        "workState": {
+          "label": "Region de trabajo"
         },
-        "workStreet":{
-          "label":"Nombre de la calle de trabajo"
+        "workStreet": {
+          "label": "Nombre de la calle de trabajo"
         },
-        "workNumber":{
-          "label":"Numero de la direccion de trabajo"
+        "workNumber": {
+          "label": "Numero de la direccion de trabajo"
         },
-        "workComplement":{
-          "label":"Dpto/Sitio/Otro"
+        "workComplement": {
+          "label": "Dpto/Sitio/Otro"
         },
-        "workPostal":{
-          "label":"Codigo postal del trabajo"
+        "workPostal": {
+          "label": "Codigo postal del trabajo"
         },
-        "workPhone":{
-          "label":"Telefono del trabajo"
+        "workPhone": {
+          "label": "Telefono del trabajo"
         },
-        "workMutuality":{
-          "label":"Mutualidad a la que esta afiliado"
+        "workMutuality": {
+          "label": "Mutualidad a la que esta afiliado"
         }
       }
     }
@@ -3747,8 +3754,8 @@
     "uf": {
       "label": "UF"
     },
-    "region":{
-      "label":"Region"
+    "region": {
+      "label": "Region"
     },
     "numerationReq": {
       "label": "Numeración es necesario"

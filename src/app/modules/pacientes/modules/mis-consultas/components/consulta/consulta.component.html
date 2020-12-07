@@ -57,17 +57,16 @@
                     <ul class="simple-list" *ngIf="professionalData">
                       <li>
                         {{
-                          'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
+                        'dashboard.home.tab.calendar.modal.newAtention.tab.emailNewUser.specialty.label' | transloco
                         }}:
 
                         <ng-container *ngFor="let item of professionalData.specialities">
-                      <li>{{item.specialtyName}}</li>
-</ng-container>
-
-</li>
-</ul>
-</div>
-</ng-template>
+                        <li>{{item.specialtyName}}</li>
+                        </ng-container>
+                      </li>
+                    </ul>
+                  </div>
+                </ng-template>
 </div>
 </div>
 </div>
@@ -578,7 +577,7 @@
   </div>
   <!--/tab-->
 
-  <!--tab-->
+  <!--tab info professional de la consulta-->
   <div class="tab-pane fade bg-white rounded-lg p-5" id="prescripacionesTab" role="tabpanel"
     aria-labelledby="prescripaciones">
     <div class="row" *ngIf="professionalData">
@@ -602,9 +601,15 @@
             {{ 'dashboard.home.userManagment.createAccount.tabs.academic.specialty.label' | transloco }}
           </p>
           <ng-container *ngFor="let item of appoimentDetail.professionalDetails.specialtyDetails">
-            <img src="assets/img/especialidad-icon.svg" /> {{ item.specialtyName }}
+            <img src="assets/img/especialidad-icon.svg" /> <!--{{ item.specialtyName }}-->
             <hr />
+            
           </ng-container>
+          <ul>
+          <ng-container *ngFor="let item of professionalData.specialities">
+           <li>{{item.specialtyName}}</li> 
+            </ng-container>
+          </ul>
         </div>
       </div>
       <div class="col-6">
@@ -612,19 +617,26 @@
           <p class="title font-weight-bold">
             {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
           </p>
-
-          {{ professionalData.professionalData.university }}
+          <ul>
+            <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
+              <li>{{ item.university }}</li>
+            </ng-container>
+          </ul>
           <hr />
         </div>
         <div>
           <p class="title font-weight-bold">
             {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
           </p>
-
-          {{ professionalData.professionalData.professionalTitle }}
+          <ul>
+            <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
+              <li>{{ item.professionalTitle }} - {{ item.registry }}</li>
+            </ng-container>
+          </ul>
+         
           <hr />
         </div>
-        <div>
+        <div class="d-none">
           <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
           <ng-container *ngFor="let item of professionalData.professionalData">
             {{ item.ufRegistry }}
@@ -635,7 +647,9 @@
           <p class="title font-weight-bold">
             {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
           </p>
-          {{ professionalData.professionalData.course }}
+          <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
+            <li>{{ item.course }}</li>
+          </ng-container>
           <hr />
         </div>
       </div>
