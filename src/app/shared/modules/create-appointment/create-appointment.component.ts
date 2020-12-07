@@ -12,6 +12,16 @@ import * as moment from 'moment';
 import { AppointmentEventsService } from '../../../services/appointment-events.service'
 import { ModalConfig } from './modal.interface'
 
+/** 
+ *  para implementar poner este callback en el componente a integrar
+ *   ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    this.appointmentsEvents.buildForm$.emit(_user.role)
+    this.appointmentsEvents.getProfessionals$.emit()
+    this.appointmentsEvents.getMedicalSpecialties$.emit()
+  }
+*/
+
 @Component({
   selector: 'modal-create-appointment',
   templateUrl: './create-appointment.component.html',

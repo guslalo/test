@@ -128,7 +128,6 @@ export class IndexComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log('BUILD FORMS -> EMIT')
     let _user = JSON.parse(localStorage.getItem('currentUser'))
     this.appointmentsEvents.getProfessionals$.emit()
     this.appointmentsEvents.getMedicalSpecialties$.emit()
