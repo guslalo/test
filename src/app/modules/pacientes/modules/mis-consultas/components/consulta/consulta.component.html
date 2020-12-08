@@ -617,6 +617,7 @@
           <p class="title font-weight-bold">
             {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
           </p>
+          {{professionalData.professionalData.university}}
           <ul>
             <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
               <li>{{ item.university }}</li>
@@ -628,6 +629,9 @@
           <p class="title font-weight-bold">
             {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
           </p>
+          {{professionalData.professionalData.professionalTitle}} -
+          {{professionalData.professionalData.ufProfessionalRegistry}} - 
+          {{professionalData.professionalData.ufRegistry}}
           <ul>
             <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
               <li>{{ item.professionalTitle }} - {{ item.registry }}</li>

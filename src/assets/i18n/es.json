@@ -559,6 +559,9 @@
     "enter": {
       "label": "Entrar"
     },
+    "enterAppointment": {
+      "label": "Entrar a la consulta"
+    },
     "accountScheduleded": {
       "label": "Cuenta agendada"
     },
@@ -2971,7 +2974,7 @@
       "label": "Reintentar"
     },
     "error": {
-      "label": "error"
+      "label": "Error"
     },
     "disable": {
       "label": "Deshabilitar"

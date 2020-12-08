@@ -75,13 +75,12 @@ export class IndexComponent implements OnInit {
           this.spinner.hide();
           Swal.fire({
             icon: 'error',
-            title: 'Erro',
+            title:  this.translocoService.translate('common.error.label'), 
             text: this.translocoService.translate('common.appointmentHasPreviousImmediate.label'),
           }).then((res) => {
             this.router.navigate(['/app-paciente']);
           })
-        }
-
+        }1
         this.appointmentId = data.payload._id;
         this.consolidate.id = data.payload._id;
       },

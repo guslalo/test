@@ -284,6 +284,7 @@
                   'dashboard.home.disponibilityManagment.modal.createDisponibility.specialty.label' | transloco
                 }}</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
+                  <option value="null" selected>Seleccionar especialidad</option>
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>
