@@ -474,33 +474,35 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-
-
     //console.log( this.objectDiagnostic.display)
     let _i = this.arrayDiagnostic.map((e) => {
       return e._id
     }).indexOf(item._id);
 
+    if (_i >= 0) return
 
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
+
         console.log(item)
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
         console.log(item)
+
         $('#addNotificationEno').modal('show')
       }
       if (item.isENO === true && item.isGES === true) {
+
         console.log(item)
         $('#addNotificationGesEno').modal('show')
       }
-
     }
 
-    if (_i >= 0) return
     this.objectDiagnostic = item;
+
     console.log(item)
+
     this.objectDiagnostic = {
       _id: item._id,
       isGES: item.isGES,
@@ -515,6 +517,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: item.isENO,
       isGES: item.isGES
     })
+
     this.updateModelDiagnostics()
   }
 
