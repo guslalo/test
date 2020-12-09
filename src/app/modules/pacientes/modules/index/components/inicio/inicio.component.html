@@ -46,6 +46,7 @@
           <!-- colappsed-->
           <div class="collapseCustom primary">
             <table class="table dos table-borderless mb-0 table-responsive">
+             
               <tbody>
                 <ng-container *ngIf="nextAppointed; else noNextAppointed">
                   <tr *ngIf="nextAppointed">
@@ -135,6 +136,7 @@
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5">
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0 table-responsive">
+             
                 <tbody>
                   <tr>
                     <td style="width: 25%;" class="text-left">
