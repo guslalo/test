@@ -302,7 +302,18 @@ app-layout {
     z-index: 10;
   }
 
-
+  .collapseCustom {
+    p {
+      display:none
+    }
+    .add {
+      top: -30px;
+      position: absolute;
+      right: 0px;
+      background: white;
+      padding: 8px;
+    }
+  }
  
 
   .date-layout {
@@ -312,9 +323,10 @@ app-layout {
   .logo {
     width: 65%;
     display: inline-block;
+    text-align: center;
     img,
     svg {
-      width: 35%;
+      width: 50%;
     }
   }
 
