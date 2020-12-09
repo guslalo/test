@@ -302,6 +302,9 @@ app-layout {
     z-index: 10;
   }
 
+
+ 
+
   .date-layout {
     display: none;
   }
@@ -311,7 +314,7 @@ app-layout {
     display: inline-block;
     img,
     svg {
-      width: 100%;
+      width: 35%;
     }
   }
 
@@ -327,6 +330,7 @@ app-layout {
       height: 100vh;
       z-index: 9;
       &.open {
+        left: 0%;
         width: 100%;
         max-width: 100%;
         i {
@@ -341,6 +345,7 @@ app-layout {
         }
       }
       &.closed {
+          left: -100%;
         width: 0%;
         max-width: 0%;
         i {

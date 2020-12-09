@@ -157,7 +157,7 @@
     <!--boxSidebarMain-->
     <div class="boxSidebarMain">
       <!--sidebar-->
-      <div class="sidebar" [ngClass]="status ? 'closed' : 'open'">
+      <div class="sidebar" [ngClass]="status ? 'open' : 'closed'">
         <ng-container *ngIf="currentUser">
           <div class="top" style="display: none;">
             <div class="img">
@@ -258,7 +258,7 @@
 
             <!--menu paciente-->
             <ng-container *ngIf="currentUser.role === 'patient'">
-              <a class="nav-link" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
+              <a class="nav-link" (click)="closeMenu()" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
                 routerLinkActive="active">
                 <div class="icon">
                   <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor"
