@@ -64,6 +64,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public inmediateAppointment: boolean;
   currentDate: string;
   public setup:any;
+  public mobile:boolean;
   // public firstAccess:boolean;
 
   constructor(
@@ -114,6 +115,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
+        this.mobile = false
         $('.wrap .sidebar').removeClass('menuMobile');
         this.state = 'open';
         $('.iconMenu').click();
@@ -122,12 +124,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
         //$('.wrap .sidebar').removeClass('closed');
         // desktop
       } else {
-       
+        this.mobile = true;
         this.state = 'closed';
         $('.wrap .sidebar').addClass('menuMobile');
         $('.wrap .sidebar').removeClass('open');
         //$('.wrap .sidebar').addClass('closed');
         console.log('mobile')
+       //this.closeMenu();
         ///$('.wrap .sidebar.closed').css('left','-100%');
        
         //this.state = 'closed'
@@ -149,9 +152,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';
   }
-  closeMenu(){
-    $('.wrap .sidebar').removeClass('open');
-     $('.wrap .sidebar').addClass('closed');
+
+  
+  closeMenu(isMobile){
+    if(isMobile === true) {
+      $('.wrap .sidebar').removeClass('open');
+      $('.wrap .sidebar').addClass('closed');
+    }
     //this.state = 'closed';
   }
   sideBarMenu() {

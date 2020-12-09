@@ -1055,6 +1055,9 @@ button.custom-btn-1 {
 
 //responsive
 @include media-breakpoint-only(xs) {
+  .btn-xs-block {
+    width: 100% !important;
+  }
   .timeLine { 
     width: 80%;
     /*&:before {

@@ -176,7 +176,7 @@
 <!--tabs-->
 <div class="tab-content w-100 mt-3" id="myTabContent">
   <!--tab-->
-  <div class="tab-pane fade show active bg-white rounded-lg p-5" id="resumenConsultaTab" role="tabpanel"
+  <div class="tab-pane fade show active bg-white rounded-lg p-3 p-md-5" id="resumenConsultaTab" role="tabpanel"
     aria-labelledby="resumenConsulta">
     <div class="row">
       <div class="col-12 mb-3">
@@ -186,7 +186,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <!--diagnostico-->
         <div>
           <p class="title font-weight-bold mb-2">
@@ -238,7 +238,7 @@
         </div>
 
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <div>
           <p class="title font-weight-bold">
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -377,10 +377,10 @@
   <!--tab-->
   <div class="tab-pane fade" id="examenesDocumentosTab" role="tabpanel" aria-labelledby="examenesDocumentos">
     <div class="row mb-4 align-items-center">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</h5>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <!--
               <button class="btn btn-secondary rounded-pill float-right align-middle">
                 Subir documento
@@ -390,7 +390,7 @@
     <div class="row">
       <div class="col-12">
         <div class="bg-white p-3 rounded-lg">
-          <table class="table mt-1">
+          <table class="table mt-1 table-responsive">
             <thead class="">
               <tr>
                 <th scope="col" class="text-center">
@@ -487,10 +487,10 @@
   <!--tab-->
   <div class="tab-pane fade" id="examenesDocumentosTab2" role="tabpanel" aria-labelledby="examenesDocumentos">
     <div class="row mb-4 align-items-center">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <h5 class="mb-0">{{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}</h5>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
 
         <!--
               <button class="btn btn-secondary rounded-pill float-right align-middle">
@@ -501,7 +501,7 @@
     <div class="row">
       <div class="col-12">
         <div class="bg-white p-3 rounded-lg">
-          <table class="table mt-1">
+          <table class="table mt-1 table-responsive">
             <thead class="">
               <tr>
                 <th scope="col" class="text-center d-none">
@@ -588,7 +588,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <div>
           <p class="title font-weight-bold">
             {{ 'dashboard.home.userManagment.createAccount.tabs.academic.bio.label' | transloco }}
@@ -612,7 +612,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <div>
           <p class="title font-weight-bold">
             {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
@@ -665,7 +665,7 @@
   <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline">
     <div class="row">
       <div class="col-12">
-        <div class="bg-white p-5 rounded-lg text-center">
+        <div class="bg-white  p-2 p-sm-5 rounded-lg text-center">
           <h5 class="mb-0 text-left">{{ 'clinicalFile.patientData.tabs.timeLine.label' | transloco }}</h5>
           <div class="timeLine">
             <div class="line bg-white">{{ fecha.year }}</div>
@@ -695,7 +695,7 @@
               </div>
               <div class="line">
                 <div class="row align-items-center">
-                  <div class="col-5 text-right p-0">
+                  <div class="col-12 col-md-5 text-right p-0">
                     <div class="box">
                       <div class="boxCont text-center">
                         <div class="row">
@@ -730,7 +730,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-2 p-0">
+                  <div class="col-2 p-0 d-none d-md-block">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                     </svg>
