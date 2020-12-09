@@ -1055,6 +1055,14 @@ button.custom-btn-1 {
 
 //responsive
 @include media-breakpoint-only(xs) {
+  
+  .infoExtra {
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    width: 100%;
+    top: 69px;
+  }
   .btn-xs-block {
     width: 100% !important;
   }

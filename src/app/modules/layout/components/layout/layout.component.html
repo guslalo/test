@@ -40,12 +40,12 @@
               </svg>
             </div>
             <!--col row justify-content-center align-self-center-->
-            <div class="flex-grow-1 info-extra d-none d-sm-block"><!--d-none d-sm-block-->
+            <div class="flex-grow-1 infoExtra"><!--d-none d-sm-block-->
               <div class="box-items mr-2">
                 <div class="items">
                   <ng-container *ngIf="currentUser.administrativeData[0].role === 'patient'">
                     <button tourAnchor="agendar" type="button" data-toggle="modal" data-target="#agendarModal"
-                      class="btn btn-primary rounded-pill mr-3">
+                      class="btn btn-primary rounded-pill mr-3 btn-xs-block mb-2 mb-md-0">
                       {{ 'clinicalFile.doService.label' | transloco }}
                       <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
                 <!--/lang component-->
 
                 <!--items-->
-                <div class="items">
+                <div class="items itemSub">
                   <div class="m-0 text-right top-currentUser">
                     <a routerLink="perfil" class="name">{{ 'common.hello.label' | transloco }},
                       {{ currentUser.name }}</a>
@@ -88,7 +88,7 @@
                 </div>
                 <!--/items-->
                 <!--items-->
-                <div class="items">
+                <div class="items  itemSub">
                   <ng-container *ngIf="currentUser; else administrative">
                     <div class="dropdown">
                       <div class="imguser dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"

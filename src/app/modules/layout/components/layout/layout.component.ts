@@ -99,6 +99,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //this.state = 'open';
     //this.firstAccess = true;
+    $('.dots-mobile').click(function(){
+      $('.infoExtra').slideToggle('fast');
+    });
+
     this.setup = environment.setup
     if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;

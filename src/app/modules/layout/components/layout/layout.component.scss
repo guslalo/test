@@ -298,6 +298,25 @@ app-layout {
 }
 
 @media only screen and (max-width: 600px) {
+  .wrap .notificationBox {
+    position: absolute;
+    top: -48px;
+    right: 53px;
+    z-index: 3;
+  }
+ .box-items{
+   display: inline-block;
+   padding: 20px 20px;
+   .items {
+     margin-left: 0px;
+     display: inline-block;
+     width: 100%;
+     &.itemSub {
+       width: 50%; text-align: center;
+     }
+   }
+ }
+  
   #header {
     z-index: 10;
   }
