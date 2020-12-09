@@ -40,7 +40,7 @@
               </svg>
             </div>
             <!--col row justify-content-center align-self-center-->
-            <div class="flex-grow-1 d-none d-sm-block">
+            <div class="flex-grow-1 info-extra d-none d-sm-block"><!--d-none d-sm-block-->
               <div class="box-items mr-2">
                 <div class="items">
                   <ng-container *ngIf="currentUser.administrativeData[0].role === 'patient'">
@@ -258,7 +258,7 @@
 
             <!--menu paciente-->
             <ng-container *ngIf="currentUser.role === 'patient'">
-              <a class="nav-link" (click)="closeMenu()" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
                 routerLinkActive="active">
                 <div class="icon">
                   <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor"
@@ -273,13 +273,13 @@
                 </div>
                 <i class="text">{{ 'common.menu.home.label' | transloco }}</i>
               </a>
-              <a class="nav-link" (click)="closeMenu()" routerLink="mi-salud" routerLinkActive="active">
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="mi-salud" routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/mi-salud-menu-icon.svg" />
                 </div>
                 <i class="text">{{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}</i>
               </a>
-              <a class="nav-link" (click)="closeMenu()" routerLink="mis-consultas" routerLinkActive="active">
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="mis-consultas" routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/mis-consultas-icon-menu.svg" />
                 </div>
@@ -386,7 +386,7 @@
             </ng-container>
             <!--/menu coordinator-->
 
-            <a class="ayuda nav-link" (click)="closeMenu()" routerLink="ayuda" routerLinkActive="active">
+            <a class="ayuda nav-link" (click)="closeMenu(mobile)" routerLink="ayuda" routerLinkActive="active">
               <div class="icon mr-2">
                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
