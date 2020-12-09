@@ -130,7 +130,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
         $('.wrap .sidebar').removeClass('open');
         //$('.wrap .sidebar').addClass('closed');
         console.log('mobile')
-       this.closeMenu2();
+       //this.closeMenu();
         ///$('.wrap .sidebar.closed').css('left','-100%');
        
         //this.state = 'closed'
