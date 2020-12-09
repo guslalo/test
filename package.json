@@ -4,12 +4,13 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "node ./updateVersion.js && ng build --prod --aot --configuration=production --output-hashing=all",
-        "build-dev": "node ./updateVersion.js && ng build --prod --aot --configuration=dev --output-hashing=all",
-        "build-staging": "node ./updateVersion.js && ng build --prod --configuration=staging --output-hashing=all",
+        "build": "node ./updateVersion.js && ng build --prod --aot --configuration=production --output-hashing=all && npm run checkout",
+        "build-dev": "node ./updateVersion.js && ng build --prod --aot --configuration=dev --output-hashing=all && npm run checkout",
+        "build-staging": "node ./updateVersion.js && ng build --prod --configuration=staging --output-hashing=all && npm run checkout",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "checkout": "git checkout ./src/environments/*"
     },
     "private": true,
     "dependencies": {
