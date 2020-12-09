@@ -10,44 +10,49 @@ import { TranslocoService } from '@ngneat/transloco';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { Router } from '@angular/router';
 
+declare var $: any;
+
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   animations: [
-    trigger('sideBarAnimation', [
+    trigger('sideBarAnimation', [/*
       state(
         'open',
         style({
           // backgroundColor: '#000000',
           // transform: 'scale(1.5)'
         })
-      ),
+      ),*/
+      /*
       state(
         'closed',
         style({
           width: '68px',
           padding: '0px',
         })
-      ),
+      ),*/
       transition('closed => open', animate('100ms ease-in')),
       transition('open => closed', animate('100ms ease-out')),
     ]),
     trigger('sideBarElements', [
+      /*
       state(
         'open',
         style({
           // backgroundColor: '#000000',
           // transform: 'scale(1.5)'
         })
-      ),
+      ),*/
+      /*
       state(
         'closed',
         style({
           display: 'none',
         })
-      ),
+      ),*/
       transition('closed => open', animate('100ms ease-in')),
       transition('open => closed', animate('100ms ease-out')),
     ]),
@@ -85,12 +90,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
     // });
   }
 
-  public state = 'closed';
+  public state:any;
   public inmediateAppointmentPadre: boolean;
   message;
   status = false;
   public nots: Array<any> = []
   ngOnInit(): void {
+    //this.state = 'open';
     //this.firstAccess = true;
     this.setup = environment.setup
     if (localStorage.getItem('inmediateAppointment') === 'true') {
@@ -108,8 +114,22 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
+        $('.wrap .sidebar').removeClass('menuMobile');
+        this.state = 'open';
+        $('.iconMenu').click();
+        console.log('desktop');
+        //$('.wrap .sidebar').addClass('open');
+        //$('.wrap .sidebar').removeClass('closed');
         // desktop
       } else {
+       
+        this.state = 'closed';
+        $('.wrap .sidebar').addClass('menuMobile');
+        $('.wrap .sidebar').removeClass('open');
+        //$('.wrap .sidebar').addClass('closed');
+        console.log('mobile')
+        ///$('.wrap .sidebar.closed').css('left','-100%');
+       
         //this.state = 'closed'
         // mobile
       }
@@ -128,6 +148,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';
+  }
+  closeMenu(){
+    $('.wrap .sidebar').removeClass('open');
+     $('.wrap .sidebar').addClass('closed');
+    //this.state = 'closed';
   }
   sideBarMenu() {
     //$('.boxSidebarMain').css("left":'')
