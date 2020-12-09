@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -121,7 +121,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private translateService: TranslocoService,
     private NgxPermissionsService: NgxPermissionsService,
     private destinyService: DestiniesService,
-    private idleEvents: IdleEventsService
+    private idleEvents: IdleEventsService,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnChanges() {
@@ -153,7 +154,11 @@ export class CrearFichaConsultaComponent implements OnInit {
       const id = params.appointmentId;
       this.appointmentId = params.appointmentId;
       this.getAppointmentsDetails(id);
-      this.setAppointmentsDetails(id);
+
+      if (this.setup != 'BR') {
+        this.setAppointmentsDetails(id);
+      }
+
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
       this.getDestinies();
@@ -659,6 +664,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
           (data) => {
             //this.searchFormcontrol = true
+
+            this.cdr.detectChanges();
 
             this.spinnerSearch = false;
             this.searchDisplay = true;
