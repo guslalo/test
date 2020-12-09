@@ -791,6 +791,11 @@ table {
   border-radius: 10px;
   position: relative;
   margin-bottom: 35px;
+  p {
+    display: inline-block;
+    font-size: 17px;
+    margin: 0px 6px 0px 0px;
+  }
   .delete {
     cursor: pointer;
     position: absolute;
