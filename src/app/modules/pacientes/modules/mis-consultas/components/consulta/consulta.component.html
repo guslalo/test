@@ -19,16 +19,16 @@
   <div class="row">
     <div class="col-12">
       <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3 mb-md-0">
           <div class="card bg-light shadow-sm">
             <div class="card-body">
               <div class="row">
-                <div class="col-2 text-center">
+                <div class="col-4 col-md-2  text-center">
                   <div class="boxImgFicha rounded-circle d-inline-block">
                     <img src="{{ appoimentDetail.professionalDetails.userDetails[0].photo }}" />
                   </div>
                 </div>
-                <div class="col-4" *ngIf="inmediate === false; else dataInmediate">
+                <div class="col-8 col-md-4" *ngIf="inmediate === false; else dataInmediate">
                   <p class="p-0 font-weight-bold" id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}">
                     {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
                     {{ appoimentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
@@ -48,7 +48,7 @@
                   </ul>
                 </div>
                 <ng-template #dataInmediate>
-                  <div class="col-6">
+                  <div class="col-6 col-md-6">
                     <p class="p-0 font-weight-bold"
                       id="{{ appoimentDetail.professionalDetails.userDetails[0].userId }}">
                       {{ appoimentDetail.professionalDetails.userDetails[0].name | uppercase }}
@@ -67,76 +67,76 @@
                     </ul>
                   </div>
                 </ng-template>
-</div>
-</div>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card bg-light shadow-sm">
-    <div class="card-body text-center mt-4">
-      <ng-container *ngIf="inmediate === false; else inmediateData2">
-        <p class="card-text text-center">
-          Realizada: {{ appoimentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-        </p>
-        <h5 class="card-title">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
-            <path fill-rule="evenodd"
-              d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
-          </svg>
-          {{ appoimentDetail.dateDetails.start }}
-        </h5>
-      </ng-container>
-      <ng-template #inmediateData2>
-        <p class="card-text text-center">
-          {{'common.createdAt.label' | transloco }}:
-          {{ appoimentDetail.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
-        </p>
-      </ng-template>
-    </div>
-  </div>
-</div>
-<div class="col-md-3">
-  <div class="card bg-light shadow-sm">
-    <div class="card-body text-center mt-3">
-      <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
-      <button type="button" class="btn btn-primary rounded-pill btn-sm">
-        {{
-                  (appoimentDetail.administrativeDetails.status === 'reserved'
-                    ? 'clinicalFile.reserved.label'
-                    : appoimentDetail.administrativeDetails.status === 'appointed'
-                    ? 'clinicalFile.scheduled.label'
-                    : appoimentDetail.administrativeDetails.status === 'rescheduled'
-                    ? 'clinicalFile.reScheduled.label'
-                    : appoimentDetail.administrativeDetails.status === 'active'
-                    ? 'clinicalFile.active.label'
-                    : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
-                    ? 'clinicalFile.inWaitingRoom.label'
-                    : appoimentDetail.administrativeDetails.status === 'waitingInList'
-                    ? 'clinicalFile.inWaitingList.label'
-                    : appoimentDetail.administrativeDetails.status === 'running'
-                    ? 'common.status.inProgress.label'
-                    : appoimentDetail.administrativeDetails.status === 'pending'
-                    ? 'clinicalFile.pending.label'
-                    : appoimentDetail.administrativeDetails.status === 'finished'
-                    ? 'clinicalFile.ended.label'
-                    : appoimentDetail.administrativeDetails.status === 'canceled'
-                    ? 'clinicalFile.canceled.label'
-                    : 'S/R'
-                  ) | transloco
-                }}
-      </button>
-      <p class="card-text text-center mt-1">ID consulta: {{ appoimentDetail._id }}</p>
-    </div>
-  </div>
-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 mb-md-0">
+          <div class="card bg-light shadow-sm">
+            <div class="card-body text-center mt-4">
+              <ng-container *ngIf="inmediate === false; else inmediateData2">
+                <p class="card-text text-center">
+                  Realizada: {{ appoimentDetail.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
+                </p>
+                <h5 class="card-title">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+                    <path fill-rule="evenodd"
+                      d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                  {{ appoimentDetail.dateDetails.start }}
+                </h5>
+              </ng-container>
+              <ng-template #inmediateData2>
+                <p class="card-text text-center">
+                  {{'common.createdAt.label' | transloco }}:
+                  {{ appoimentDetail.dateDetails.createdAt | date: 'dd/MM/yyyy':'+0000' }}
+                </p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 mb-md-0">
+          <div class="card bg-light shadow-sm">
+            <div class="card-body text-center mt-3">
+              <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
+              <button type="button" class="btn btn-primary rounded-pill btn-sm">
+                {{
+                          (appoimentDetail.administrativeDetails.status === 'reserved'
+                            ? 'clinicalFile.reserved.label'
+                            : appoimentDetail.administrativeDetails.status === 'appointed'
+                            ? 'clinicalFile.scheduled.label'
+                            : appoimentDetail.administrativeDetails.status === 'rescheduled'
+                            ? 'clinicalFile.reScheduled.label'
+                            : appoimentDetail.administrativeDetails.status === 'active'
+                            ? 'clinicalFile.active.label'
+                            : appoimentDetail.administrativeDetails.status === 'waitingInRoom'
+                            ? 'clinicalFile.inWaitingRoom.label'
+                            : appoimentDetail.administrativeDetails.status === 'waitingInList'
+                            ? 'clinicalFile.inWaitingList.label'
+                            : appoimentDetail.administrativeDetails.status === 'running'
+                            ? 'common.status.inProgress.label'
+                            : appoimentDetail.administrativeDetails.status === 'pending'
+                            ? 'clinicalFile.pending.label'
+                            : appoimentDetail.administrativeDetails.status === 'finished'
+                            ? 'clinicalFile.ended.label'
+                            : appoimentDetail.administrativeDetails.status === 'canceled'
+                            ? 'clinicalFile.canceled.label'
+                            : 'S/R'
+                          ) | transloco
+                        }}
+              </button>
+              <p class="card-text text-center mt-1">ID consulta: {{ appoimentDetail._id }}</p>
+            </div>
+          </div>
+        </div>
 </div>
 
 <!--nav-tabs-->
 <div class="row">
   <div class="col-12 mb-2">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs flex-column flex-sm-row" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <a class="nav-link active" id="resumenConsulta" data-toggle="tab" href="#resumenConsultaTab" role="tab"
           aria-controls="resumenConsulta">
