@@ -414,7 +414,7 @@ export class CreateAccountCLComponent implements OnInit {
       identificationData: {
           ...(this.form[0].document.value === 'cpf' && { cpf: this.form[0].idDocumentNumber.value || '' }),
           ...(this.form[0].document.value === 'cns' && { cns: this.form[0].idDocumentNumber.value || '' }),
-          ...(this.form[0].document.value === 'run' && { cns: this.form[0].idDocumentNumber.value || '' }),
+          ...(this.form[0].document.value === 'run' && { run: this.form[0].idDocumentNumber.value || '' }),
           ...(this.form[0].document === 'rgRegistry' && {
             rgRegistry: this.form[0].value.idDocumentNumber || '',
           }),

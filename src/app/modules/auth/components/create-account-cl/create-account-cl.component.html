@@ -125,7 +125,7 @@
                     <label for="lastName">
                       {{
                       'common.forms.user.identification.firstSurname.label' | transloco
-                    }}
+                    }} *
                       <!---->
                       <!--{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *-->
                     </label>
@@ -266,8 +266,8 @@
                           'is-invalid':
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
                         }" id="select-type-document">
-                        <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
+                        <option  [selected]="true" value="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  value="item._id" *ngFor="let item of previsionHealth"  > 
                           {{item.name}}
                         </option>
                     </select>

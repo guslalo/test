@@ -162,7 +162,7 @@ export class CrearUsuarioComponentCL implements OnInit {
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required,]], 
-      lastName: ['',], 
+      lastName: ['',[Validators.required,]], 
       motherName: ['', null],
       secondLastName: ['', [Validators.required,]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
@@ -477,6 +477,16 @@ export class CrearUsuarioComponentCL implements OnInit {
 
     switch (this.userType) {
       case 'admin':
+        console.log(this.formUser[0].valid 
+          , this.formUser[1].valid 
+          , this.formUser[5].valid)
+        if (this.formUser[0].valid 
+          && this.formUser[1].valid 
+          && this.formUser[5].valid) {
+          return true;
+        } else {
+          return false;
+        }
       case 'coordinator':
         if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[5].valid) {
           return true;
@@ -557,7 +567,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -596,7 +606,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
           prevission: this.formUser[1].value.prevission || ''
@@ -641,7 +651,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -680,7 +690,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
           prevission: this.formUser[1].value.prevission || ''
@@ -748,6 +758,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -786,7 +797,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
           prevission: this.formUser[1].value.prevission || ''
@@ -845,6 +856,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -883,7 +895,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
           prevission: this.formUser[1].value.prevission || ''

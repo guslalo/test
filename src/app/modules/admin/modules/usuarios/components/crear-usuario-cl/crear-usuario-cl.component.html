@@ -330,23 +330,6 @@
                 <div class="row">
                   
                   <div class="form-group col-md-4">
-                    <label for="breed">{{ 'account.raceColor.label' | transloco }} </label>
-                    <select
-                      [attr.disabled]="userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="breed"
-                      formControlName="breed"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('breed').valid && userType != 'professional'
-                      }"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of breeds">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-4">
                     <label for="education">{{
                       'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
                     }}</label>
@@ -362,6 +345,27 @@
                     <select class="form-control" name="familySituation" formControlName="familySituation" [attr.disabled]="userType == 'professional' ? '' : null">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="uf"
+                      >{{
+                        'account.region.label' | transloco
+                      }} *</label
+                    >
+                    <select
+                      class="form-control"
+                      name="uf"
+                      formControlName="uf"
+                      (change)="ufSelect2($event.target)"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('uf').valid && userType != 'professional'
+                      }"
+                    >
+                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
                     </select>
@@ -387,27 +391,7 @@
                       {{ errorCepString }}
                     </div>
                   </div> -->
-                  <div class="form-group col-md-4">
-                    <label for="uf"
-                      >{{
-                        'account.region.label' | transloco
-                      }} *</label
-                    >
-                    <select
-                      class="form-control"
-                      name="uf"
-                      formControlName="uf"
-                      (change)="ufSelect2($event.target)"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('uf').valid && userType != 'professional'
-                      }"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of states">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
+                 
                   <div class="form-group col-md-4">
                     <label for="city">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <select
@@ -433,17 +417,14 @@
                           'is-invalid':
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
                         }" id="select-type-document">
-                        <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
+                        <option [selected]="true"  value="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  value="item._id" *ngFor="let item of previsionHealth" > 
                           {{item.name}}
                         </option>
                     </select>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -455,7 +436,11 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                </div>
+                <div class="row">
+                  
+                  
+                  <div class="form-group col-md-4">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -467,14 +452,14 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                 
                       <label for="street">{{ 'auth.complement.label' |transloco }}</label>
                       <input type="text" name="complement" id="complement" class="form-control" placeholder=""
                         formControlName="complement" />
                 
                   </div>
-                  <div class="form-group col-12 col-md-3">
+                  <div class="form-group col-12 col-md-4">
                     <label for="postal">Codigo postal</label>
                     <input type="text" name="postal" id="postal" class="form-control" placeholder=""
                       formControlName="postal" />
