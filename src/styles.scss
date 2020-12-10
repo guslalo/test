@@ -1059,6 +1059,16 @@ button.custom-btn-1 {
 
 //responsive
 @include media-breakpoint-only(xs) {
+
+  .btnLang {
+    border-radius: 40px !important;
+    height: 42px;
+    .btn {
+      padding: 7px 10px !important;
+      height: 42px;
+      border-radius:  40px;
+    }
+  }
   .iconTable {
     display: inline-block;
     color: #ffffff;padding-top: 
