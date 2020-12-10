@@ -50,7 +50,7 @@
                           !identificationData.get('document').valid && identificationData.get('document').touched
                       }" (change)="validateForm()" id="select-type-document">
                       <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
-                      <option  value="rut" [selected]="true" selected> 
+                      <option  value="run" [selected]="true" selected> 
                         RUT
                       </option>
                     </select>
@@ -254,13 +254,29 @@
                       {{ 'account.erroneous.label' | transloco }}
                     </div>
                   </div>
+                  
                 </div>
                 <div class="form-row">
-                  
+                  <div class="form-group col-md-6">
+                    <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
+                    <select
+                      class="form-control"
+                      name="nacionality"
+                      formControlName="nacionality"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('nacionality').valid
+                      }"
+                    >
+                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
                   <div class="form-group col-12 col-md-6">
                     <label for="prevission">Prevision de salud *</label>
                     <div class="input-group">
-                        <select class="form-control" name="prevission" formControlName="prevission"  
+                      <select class="form-control" name="prevission" formControlName="prevission"  
                   
                         [ngClass]="{
                           'is-invalid':
@@ -270,7 +286,7 @@
                         <option  value="item._id" *ngFor="let item of previsionHealth"  > 
                           {{item.name}}
                         </option>
-                    </select>
+                      </select>
                     </div>
                   </div>
                 </div>

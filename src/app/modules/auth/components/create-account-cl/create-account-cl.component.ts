@@ -120,7 +120,8 @@ export class CreateAccountCLComponent implements OnInit {
             phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
             //breed: [null, Validators.required],
             birthdate: [null, Validators.required],
-            prevission: ['', Validators.required]
+            prevission: ['', Validators.required],
+            nacionality: [null, Validators.required],
           },
           {
             validators: this.confirmEmail.bind(this),
@@ -146,7 +147,8 @@ export class CreateAccountCLComponent implements OnInit {
           phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
           //breed: [null, Validators.required],
           birthdate: [null, Validators.required],
-          prevission: ['', Validators.required]
+          prevission: ['', Validators.required],
+          nacionality: [null, Validators.required],
         },
         {
           validators: this.confirmEmail.bind(this),
@@ -450,8 +452,8 @@ export class CreateAccountCLComponent implements OnInit {
         birthdate: this.dateAdapter.toModel(this.form[1].birthdate.value),
         ufBirth:  '',
         municipalityBirth:  '',
-        nacionality: '',
-        prevission: ''
+        nacionality: this.form[1].nacionality.value || '',
+        prevission: this.form[1].prevission.value || ''
       },
       addressData: {
         cep: '',
