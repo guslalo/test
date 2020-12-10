@@ -1036,6 +1036,7 @@
                               (ngModelChange)="onChangeSearch($event)"
                               [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'" />
                             <!-- [attr.disabled]="search === false ? true : null"-->
+
                             <div class="responseSearch shadow-sm bg-white rounded">
                               <!-- [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }"-->
                               <ul>
@@ -1060,6 +1061,7 @@
                                 </ng-container>
                               </ul>
                             </div>
+
                           </div>
                           <ng-container *ngFor="let item of arrayDiagnostic">
                             <!--sintoma-->
@@ -2103,7 +2105,9 @@
               <label [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'error-text' : ''"
                 for="diagnostic">{{
                   'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
-                }} *</label>
+                }} *
+              </label>
+
               <div class="searchBox2">
                 <input class="form-control mb-3" type="text"
                   placeholder="{{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}"
@@ -2122,20 +2126,23 @@
                       </div>
                     </li>
                     <ng-container *ngIf="!spinnerSearch">
-                      <ng-container *ngIf="searchResponse && searchResponse.length > 0; else noSearch">
+                      <ng-container *ngIf="searchResponse?.length; else noSearch">
                         <li *ngFor="let item of searchResponse" id="{{ item._id }}" (click)="selectDiagnostico(item)">
                           {{ item.display }}
                         </li>
                       </ng-container>
                       <ng-template #noSearch>
                         <li [ngStyle]="{ display: searchDisplay === true ? 'inline-block' : 'none' }">
-                          {{ 'common.withOut' | transloco }}</li>
+                          {{ 'common.withOut' | transloco }}
+                        </li>
                       </ng-template>
                     </ng-container>
                   </ul>
                 </div>
               </div>
-              <ng-container *ngFor="let item of arrayDiagnostic">
+
+              <ng-container *ngFor="let item of arrayDiagnostic; trackBy: trackItem">
+
                 <!--sintoma-->
                 <div class="sintoma mt-4 mb-3 overflow-hidden" id="{{ item._id }}">
                   <div class="icon">
@@ -2161,9 +2168,8 @@
                 </div>
 
               </ng-container>
-
-
             </div>
+
             <div class="form-group col-12">
               <label for="type">Tipo de notificacion</label>
               <select class="form-control" name="type" id="type" formControlName="type">
@@ -2173,16 +2179,20 @@
                 <option value="gesEno">GES/ENO</option>
               </select>
             </div>
+
             <div class="form-group col-12">
               <label for="page">N° Folio</label>
-              <input class="form-control" type="text" id="page" formControlName="page">
+              <input class="form-control" type="text" id="page" name="page" formControlName="page">
             </div>
+
             <div class="form-group col-12">
               <label for="observations">Observación</label>
-              <textarea class="form-control" rows="5" formControlName="observations"></textarea>
+              <textarea class="form-control" rows="5" name="observations" formControlName="observations"></textarea>
             </div>
+
           </div>
         </form>
+
       </div>
       <div class="modal-footer text-center justify-content-center">
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">

@@ -30,6 +30,7 @@ export class IndexComponent implements OnInit {
   moment: any = moment;
   ColumnMode = ColumnMode;
   searchTerm: string = '';
+  public seleccionE:boolean;
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -198,7 +199,7 @@ export class IndexComponent implements OnInit {
 
     this.createAvailability = this._formBuilder.group({
       professional: [null, Validators.required],
-      specialty: [null, [Validators.required]],
+      specialty: [null, Validators.required],
       specialtyName: new FormControl(),
       objective: [null, [Validators.required]], //[Validators.required],
       appointmentDuration: [5,  [Validators.required]],
@@ -242,6 +243,13 @@ export class IndexComponent implements OnInit {
     });
 
     this.dailyRanges.push(this.dailyRangeFormGroup);
+  }
+  selectSpecialty(selectSpecialty){
+    let item = selectSpecialty.target.value
+    if (item!= 'undefined' && item!= '' && item!= null){
+      this.seleccionE = false;
+    }
+    console.log(selectSpecialty.target.value);
   }
 
   removerDailyRanges(indice: number) {
@@ -311,7 +319,7 @@ export class IndexComponent implements OnInit {
 
   crearAvailability() {
     console.log(this.createAvailability);
-    console.log(this.createAvailability.controls.specialty);
+    console.log(this.createAvailability.controls.specialty.value);
 
     const formObject = {
       administrativeDetails: {
