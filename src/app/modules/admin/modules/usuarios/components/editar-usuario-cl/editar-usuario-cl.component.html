@@ -524,7 +524,7 @@
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">{{ 'account.name.label' | transloco }}Especialidad</label>
+                    <label for="speciality">{{ 'clinicalFile.select.label' | transloco }} {{ 'clinicalFile.specialty.label' | transloco }}</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
