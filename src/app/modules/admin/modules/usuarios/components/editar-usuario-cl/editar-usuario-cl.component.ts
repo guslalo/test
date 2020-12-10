@@ -144,13 +144,13 @@ export class EditarUsuarioCLComponent implements OnInit {
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required, ]],
-      lastName: ['', ],
-      motherName: ['', [Validators.required, ]],
+      lastName: ['', [Validators.required,]],
+      motherName: ['', null],
       secondLastName: ['', [Validators.required,]],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, ]],
       gender: [null, Validators.required],
-      birthdate: [null, null],
+      birthdate: [null, Validators.required],
       ufBirth: [null, null],
       municipalityBirth: [null, null],
       nacionality: [null, Validators.required],
@@ -162,8 +162,8 @@ export class EditarUsuarioCLComponent implements OnInit {
       cep: ['', null],
       uf: [null, Validators.required],
       city: [null, Validators.required],
-      city2: [null, Validators.required],
-      neighborhood: ['', Validators.required],
+      city2: ['',null],
+      neighborhood: ['', null],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: [null, ],
@@ -684,6 +684,11 @@ export class EditarUsuarioCLComponent implements OnInit {
 
     switch (this.userType) {
       case 'admins':
+        if (this.formUser[0].valid && this.formUser[1].valid) {
+          return true;
+        } else {
+          return false;
+        }
       case 'coordinators':
         if (this.formUser[0].valid && this.formUser[1].valid) {
           return true;
@@ -745,6 +750,7 @@ export class EditarUsuarioCLComponent implements OnInit {
       identificationData: {
         ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
         ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+        ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
         ...(this.formUser[0].value.document === 'rgRegistry' && {
           rgRegistry: this.formUser[0].value.idDocumentNumber || '',
         }),
@@ -783,7 +789,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
         inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-        breed: this.formUser[1].value.breed,
+        breed: '',
         education: this.formUser[1].value.education || '',
         familySituation: this.formUser[1].value.familySituation || '',
         prevission: this.formUser[1].value.prevission || ''
