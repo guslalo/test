@@ -2,13 +2,13 @@ export const environment = {
   production: true,
   defaultLang: 'pt',
   checkAge: false,
-  title: 'Itms | Teleconsulta',
-  baseUrl: 'https://b1.medic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
+  title: 'Medline | Teleconsulta',
+  baseUrl: 'https://b1.medline.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
   apiKey: '',
   clientSecret: '',
-  photoUrlBase: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',//https://itms-prod.s3-sa-east-1.amazonaws.com/
+  photoUrlBase: 'https://tc-regional-medline.s3.us-east-1.amazonaws.com/',//https://itms-prod.s3-sa-east-1.amazonaws.com/
   sessionTime: 600,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
