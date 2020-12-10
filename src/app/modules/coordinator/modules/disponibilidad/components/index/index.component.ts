@@ -217,14 +217,29 @@ export class IndexComponent implements OnInit {
     });
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
       return this.professionals.filter(value => {
+        console.log(value);
         return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
               value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
               (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
       })
+      
     }))
+
+    
 
     this.agregardailyRanges();
   }
+
+  /*
+  resetAutoInput(optVal, trigger: MatAutocompleteTrigger, auto: MatAutoComplete) {
+    setTimeout(_ => {
+      auto.options.forEach((item) => {
+        item.deselect()
+      });
+      this.createAvailability.controls['professional'].reset('');
+      trigger.openPanel();
+      }, 100);
+  }*/
 
   public getDisplayFn() {
     return (val) => this.display(val);
@@ -356,8 +371,10 @@ export class IndexComponent implements OnInit {
             this.createAvailability.reset();
             console.log('disponibilidad creada', data);
             this.getAvailability();
+            this.resetSearch();
           },
           (error) => {
+            this.resetSearch();
             console.log(error);
           }
         );
@@ -537,10 +554,16 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
+    
+
+      
+    //this.getProfessionals();
     this.specialtiesId = '';
         this.medicalSpecialty = '';
         this.specialtySelected = '';
-    console.log(professional);
+    //console.log(professional);
+    //let userId = '';
+    this.professionalSelected  = '';
     let userId = this.professionalSelected || professional?.userData[0]?._id;
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
@@ -552,6 +575,19 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+   this.resetSearch();
+  }
+
+  resetSearch(){
+    this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
+      return this.professionals.filter(value => {
+        console.log(value);
+        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+      })
+      
+    }))
   }
 
   getProfessionals() {

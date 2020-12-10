@@ -25,7 +25,6 @@ declare var $: any;
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
 
-
 export class CrearFichaConsultaComponent implements OnInit {
   public idConsulta: any;
   public appointmentDetail: any;
@@ -156,7 +155,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAppointmentsDetails(id);
 
       if (this.setup != 'BR') {
-        this.setAppointmentsDetails(id);
+        //this.setAppointmentsDetails(id);
       }
 
       this.getAppointmentsProfessionalData(id);
@@ -248,7 +247,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   saveAppointment(appointmentObject) {
-    console.log(appointmentObject)
+    //console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
         if (environment.production === false) {
