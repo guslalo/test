@@ -298,6 +298,13 @@ app-layout {
 }
 
 @media only screen and (max-width: 600px) {
+  .dropdown.language {
+    border-radius: 25px;
+  }
+
+  header {
+    z-index: 2 !important;
+  }
   .wrap .notificationBox {
     position: absolute;
     top: -48px;
@@ -311,8 +318,18 @@ app-layout {
      margin-left: 0px;
      display: inline-block;
      width: 100%;
+     &.itemSub2{
+      width: 80%;
+     }
+  
      &.itemSub {
-       width: 50%; text-align: center;
+      width: 20%; text-align: center;
+      > div {
+        > div {
+          position: relative;
+          top: 10px;
+        }
+      }
      }
    }
  }
