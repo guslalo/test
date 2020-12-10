@@ -363,8 +363,10 @@ export class IndexComponent implements OnInit {
             this.createAvailability.reset();
             console.log('disponibilidad creada', data);
             this.getAvailability();
+            this.resetSearch();
           },
           (error) => {
+            this.resetSearch();
             console.log(error);
           }
         );
@@ -545,24 +547,13 @@ export class IndexComponent implements OnInit {
 
   escogerProfessional(professional) {
     
-    /*resetAutoInput(optVal, trigger: MatAutocompleteTrigger, auto: MatAutoComplete) {
-   
-    }*/
-    /**/
-    setTimeout(_ => {
-      //this.createAvailability.controls['professional'].reset('');
-      /*auto.options.forEach((item) => {
-        item.deselect()
-      });
-      this.createAvailability.controls['professional'].reset('');
-      trigger.openPanel();*/
-      }, 1000);
+
       
     //this.getProfessionals();
     this.specialtiesId = '';
         this.medicalSpecialty = '';
         this.specialtySelected = '';
-    console.log(professional);
+    //console.log(professional);
     //let userId = '';
     this.professionalSelected  = '';
     let userId = this.professionalSelected || professional?.userData[0]?._id;
@@ -576,6 +567,10 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+   this.resetSearch();
+  }
+
+  resetSearch(){
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
       return this.professionals.filter(value => {
         console.log(value);
