@@ -1,6 +1,6 @@
 const fs = require('fs')
-const _env = process.argv[2]
-let colors
+let _env = process.argv[2]
+let colors, _fileEnv
 
 function parseEnv(path) {
     console.log('parseando archivo de entorno:', path)
@@ -40,23 +40,16 @@ function makeCss(_path) {
     fs.writeFileSync('./src/assets/scss/variables.scss', css)
 }
 
-switch (_env) {
-    case 'production':
-        colors = makeCss('./src/environments/environment.prod.ts')
-        break;
+try {
+    if (_env === 'production') _env = 'prod'
+    _fileEnv = './src/environments/environment.' + _env + '.ts'
 
-    case 'dev':
-        colors = makeCss('./src/environments/environment.dev.ts')
-        break;
-
-    case 'staging':
-        colors = makeCss('./src/environments/environment.staging.ts')
-        break;
-
-    case 'local':
-        colors = makeCss('./src/environments/environment.local.ts')
-        break;
-
-    default:
-        break;
+    if (fs.existsSync(_fileEnv)) {
+        makeCss(_fileEnv)
+    } else {
+        let _strError = 'No se encontró el archivo de entorno espcificado como argumento => ' + _env + ' <= en ./src/environments/, el archivo ' + _fileEnv + ' no existe'
+        throw new Error(_strError)
+    }
+} catch (err) {
+    console.log(err)
 }
