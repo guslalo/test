@@ -651,7 +651,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'disponibility.modal.blockDays.title' | transloco }}</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'clinicalFile.blockDays.label' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -673,20 +673,20 @@
                 <div class="custom-control custom-control-inline custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="allDay" name="allDay" formControlName="allDay"
                     (click)="allDayBooleanState()" />
-                  <label class="custom-control-label" for="allDay">{{ 'disponibility.modal.blockDays.allDay.label' | transloco }}</label>
+                  <label class="custom-control-label" for="allDay">{{ 'clinicalFile.blockDays.allDay.label' | transloco }}</label>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="startBlock">{{ 'disponibility.modal.blockDays.initialDate.label' | transloco }}</label>
+                <label for="startBlock">{{ 'initialDate.label' | transloco }}</label>
                 <div class="d-flex justify-content-center">
                   <ngb-timepicker id="startBlock" formControlName="startBlock"> </ngb-timepicker>
                 </div>
               </div>
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="endBlock">{{ 'disponibility.modal.blockDays.finalDate.label' | transloco }}</label>
+                <label for="endBlock">{{ 'finalDate.label' | transloco }}</label>
                 <div class="d-flex justify-content-center">
                   <ngb-timepicker id="endBlock" formControlName="endBlock"> </ngb-timepicker>
                 </div>
@@ -698,7 +698,7 @@
           <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
           <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
             [disabled]="!availabilityBlocked.valid" (click)="postAvailabilityBlocked()">
-            {{ 'disponibility.modal.blockDays.btnCreate.label' | transloco }}
+            {{ 'clinicalFile.blockDay.label' | transloco }}
           </button>
         </div>
       </div>
