@@ -17,7 +17,13 @@
                 </svg>
               </div>
               <div class="logo">
-                <img src="assets/img/logo-app.svg">
+                <ng-container *ngIf="setup === 'BR'">
+                  <img src="assets/img/logo-app.svg">
+                </ng-container>
+                <ng-container *ngIf="setup === 'CL'">
+                  <img src="assets/itms-atrys-chile.svg">
+                </ng-container>
+               
               </div>
             </div>
             <!--/col-->
@@ -34,12 +40,12 @@
               </svg>
             </div>
             <!--col row justify-content-center align-self-center-->
-            <div class="flex-grow-1 d-none d-sm-block">
+            <div class="flex-grow-1 infoExtra"><!--d-none d-sm-block-->
               <div class="box-items mr-2">
                 <div class="items">
                   <ng-container *ngIf="currentUser.administrativeData[0].role === 'patient'">
                     <button tourAnchor="agendar" type="button" data-toggle="modal" data-target="#agendarModal"
-                      class="btn btn-primary rounded-pill mr-3">
+                      class="btn btn-primary rounded-pill mr-3 btn-xs-block mb-2 mb-md-0">
                       {{ 'clinicalFile.doService.label' | transloco }}
                       <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +67,7 @@
                 <!--/lang component-->
 
                 <!--items-->
-                <div class="items">
+                <div class="items itemSub2">
                   <div class="m-0 text-right top-currentUser">
                     <a routerLink="perfil" class="name">{{ 'common.hello.label' | transloco }},
                       {{ currentUser.name }}</a>
@@ -82,7 +88,7 @@
                 </div>
                 <!--/items-->
                 <!--items-->
-                <div class="items">
+                <div class="items  itemSub">
                   <ng-container *ngIf="currentUser; else administrative">
                     <div class="dropdown">
                       <div class="imguser dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -151,7 +157,7 @@
     <!--boxSidebarMain-->
     <div class="boxSidebarMain">
       <!--sidebar-->
-      <div class="sidebar" [ngClass]="status ? 'closed' : 'open'">
+      <div class="sidebar" [ngClass]="status ? 'open' : 'closed'">
         <ng-container *ngIf="currentUser">
           <div class="top" style="display: none;">
             <div class="img">
@@ -252,7 +258,7 @@
 
             <!--menu paciente-->
             <ng-container *ngIf="currentUser.role === 'patient'">
-              <a class="nav-link" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="/app-paciente" [routerLinkActiveOptions]="{ exact: true }"
                 routerLinkActive="active">
                 <div class="icon">
                   <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor"
@@ -267,13 +273,13 @@
                 </div>
                 <i class="text">{{ 'common.menu.home.label' | transloco }}</i>
               </a>
-              <a class="nav-link" routerLink="mi-salud" routerLinkActive="active">
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="mi-salud" routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/mi-salud-menu-icon.svg" />
                 </div>
                 <i class="text">{{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}</i>
               </a>
-              <a class="nav-link" routerLink="mis-consultas" routerLinkActive="active">
+              <a class="nav-link" (click)="closeMenu(mobile)" routerLink="mis-consultas" routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/mis-consultas-icon-menu.svg" />
                 </div>
@@ -380,7 +386,7 @@
             </ng-container>
             <!--/menu coordinator-->
 
-            <a class="ayuda nav-link" routerLink="ayuda" routerLinkActive="active">
+            <a class="ayuda nav-link" (click)="closeMenu(mobile)" routerLink="ayuda" routerLinkActive="active">
               <div class="icon mr-2">
                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path

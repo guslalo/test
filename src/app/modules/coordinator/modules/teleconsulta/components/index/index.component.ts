@@ -4,6 +4,8 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { DocumentService } from './../../../../../../services/document.service';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
 import { UserLogin } from './../../../../../../models/models';
+import { IdleEventsService } from '../../../../../../services/idle-events.service'
+
 declare var $: any;
 
 @Component({
@@ -31,8 +33,9 @@ export class TeleconsultaComponent implements OnInit {
     private route: ActivatedRoute,
     private appointmentsService: AppointmentsService,
     private documentService: DocumentService,
-    private medicalRecord: MedicalRecordService
-  ) {}
+    private medicalRecord: MedicalRecordService,
+    private idleEvents: IdleEventsService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -91,6 +94,10 @@ export class TeleconsultaComponent implements OnInit {
           console.log ('cerrado');
         });*/
         console.log(data);
+
+        console.log('EN TELECONSULTA')
+        this.idleEvents.inVideoCall(true)
+
       },
       (error) => {
         console.log(error);

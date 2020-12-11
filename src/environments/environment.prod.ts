@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  defaultLang:'pt',
-  checkAge:false,
+  defaultLang: 'pt',
+  checkAge: false,
   title: 'Itms | Teleconsulta',
   baseUrl: 'https://backend.homeclinic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
@@ -20,4 +20,12 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
+  ttlSession: 60,
+  setup: 'BR',
+  version: '{BUILD_VERSION}-home',
+  colors: {
+    "color-primary": "#3B4085;",
+    "color-secondary": "#0A6FF5;",
+    "color-hover": "#0A6FF5;",
+  }
 };

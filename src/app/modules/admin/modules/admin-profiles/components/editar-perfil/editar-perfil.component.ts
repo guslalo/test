@@ -34,7 +34,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
     private location: Location,
     private el: Renderer2,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formProfile = new FormGroup({
@@ -51,7 +51,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   }
 
   setRole(value) {
-    console.log(this.profile);
     this.profile.role = value;
   }
 
@@ -62,7 +61,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
         if (this.checkAllUserPolicies) this.profile.userPolicies = _.mapValues(this.profile.userPolicies, () => true);
         if (!this.checkAllUserPolicies) this.profile.userPolicies = _.mapValues(this.profile.userPolicies, () => false);
         break;
-
       case 'profiles':
         if (this.checkAllProfilesPolicies)
           this.profile.profilePolicies = _.mapValues(this.profile.profilePolicies, () => true);
@@ -117,7 +115,7 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
   getProfile(profileId) {
     this.adminService.getProfileById(profileId).subscribe(
       (profileData) => {
-        // console.log(profile);
+        console.log(profileData);
         const role = profileData.role;
         this.profile = profileData;
         const tab_adm = <HTMLInputElement>document.querySelector('#admin-tab');
@@ -145,7 +143,6 @@ export class EditarPerfilComponent implements OnInit, AfterContentChecked {
             this.el.addClass(tab_pro, 'active');
             this.el.addClass(tab_coor, 'disabled-tab');
             this.el.addClass(tab_adm, 'disabled-tab');
-            this.profile.userPolicies = this.profileModel.userPolicies;
             this.profile.profilePolicies = this.profileModel.profilePolicies;
             this.profile.clinicPolicies = this.profileModel.clinicPolicies;
             break;

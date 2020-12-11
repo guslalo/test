@@ -31,9 +31,9 @@ export class AppointmentsService {
   private cancel = 'v1/appointments/cancel'
   private subirAntecedentesMedico = 'v1/appointments/antecedents/'
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
+  private objetives = 'v1/objetives/'
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   paramsId(id) {
     let params = new HttpParams();
@@ -55,7 +55,7 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
-    
+
   }
 
   getAllAppointments(number): Observable<any> {
@@ -150,11 +150,11 @@ export class AppointmentsService {
   postCancelarAppointment(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
-    return this.http.post<any>(environment.baseUrl + this.cancel, { }, { params: params });
+    return this.http.post<any>(environment.baseUrl + this.cancel, {}, { params: params });
   }
 
 
-  
+
 
   //events
   postRunAppointment(id): Observable<any> {
@@ -189,7 +189,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.post<any>(
-      environment.baseUrl + this.subirAntecedentesMedico + antecente + '/', {value:object}, { params: params }
+      environment.baseUrl + this.subirAntecedentesMedico + antecente + '/', { value: object }, { params: params }
     );
   }
 
@@ -198,7 +198,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.get<any>(
-      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/', { params: params });
+      environment.baseUrl + this.subirAntecedentesMedico + 'professional' + '/', { params: params });
   }
 
   //subir antecedentes
@@ -206,8 +206,8 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.post<any>(
-      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/' + antecente + '/', 
-      { value:object },
+      environment.baseUrl + this.subirAntecedentesMedico + 'professional' + '/' + antecente + '/',
+      { value: object },
       { params: params }
     );
   }
@@ -218,7 +218,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.delete<any>(
-      environment.baseUrl + this.eliminarAntecedentesMedico + antecente + '/' + idAntecedente + '/',  { params: params }
+      environment.baseUrl + this.eliminarAntecedentesMedico + antecente + '/' + idAntecedente + '/', { params: params }
     );
   }
 
@@ -227,7 +227,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.delete<any>(
-      environment.baseUrl + this.eliminarAntecedentesMedico+'professional'+ '/'+ antecente + '/' + idAntecedente + '/',  { params: params }
+      environment.baseUrl + this.eliminarAntecedentesMedico + 'professional' + '/' + antecente + '/' + idAntecedente + '/', { params: params }
     );
   }
 
@@ -302,6 +302,7 @@ export class AppointmentsService {
       return this.http.post<any>(environment.baseUrl + this.blocks, {
         date,
         specialtyId: specialtyId,
+        professionalId: professionalId,
       });
     } else {
       return this.http.post<any>(environment.baseUrl + this.blocks, {
@@ -322,5 +323,9 @@ export class AppointmentsService {
         date,
       });
     }
+  }
+
+  getObjetives(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.objetives);
   }
 }

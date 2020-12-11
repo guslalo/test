@@ -20,6 +20,9 @@ import { TranslocoService } from '@ngneat/transloco';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PoliciesService } from '../../../../services/policies.service';
+import { ClinicService } from '../../../../services/clinic.service';
+
+import { IdleEventsService } from '../../../../services/idle-events.service';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +44,8 @@ export class LoginComponent implements OnInit {
   public recaptcha: boolean;
   public errorLogin: number;
   public production: boolean;
+  public createRoute = "/create-account";
+  public setup:any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -51,10 +56,13 @@ export class LoginComponent implements OnInit {
     private UserService: UsersService,
     private router: Router,
     private appointmentsService: AppointmentsService,
-    private _policyService: PoliciesService
+    private _policyService: PoliciesService,
+    private idleEvents: IdleEventsService,
+    private clinicService:ClinicService
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup
     this.errorLogin = 0;
     localStorage.clear();
     this.spinner.hide();
@@ -71,6 +79,9 @@ export class LoginComponent implements OnInit {
         username: new FormControl(null, [Validators.required, Validators.email]),
         password: new FormControl(null, [Validators.required]),
       })
+    }
+    if(environment.setup == 'CL'){
+      this.createRoute = "/create-account-cl"
     }
   }
 
@@ -103,47 +114,60 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
 
-        if ( this.currentUser.administrativeData.length === 1 ){
+        if (this.currentUser.administrativeData.length === 1) {
           this._policyService.setPoliciesToUser()
         }
-      
 
         switch (this.currentUser.administrativeData[0].role) {
           case 'admin':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-admin']);
+              this.router.navigate(['app-admin']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'coordinator':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-coordinator']);
+              this.router.navigate(['app-coordinator']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'professional':
             if (data.internalCode === 6) {
-              this.router.navigate(['context']);
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-professional']);
+              this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
             }
             break;
           case 'patient':
-            this.appointmentsService.getAppointmentInmediateState().subscribe(
+            
+            this.clinicService.accessMode().subscribe(
               (data) => {
-                localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
+                console.log(data)
+                localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+                localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+                localStorage.setItem('paymentAppointment', data.payload.payment.toString());
                 console.log(data);
-                this.router.navigate(['app-paciente']);
+                this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
               },
               (error) => {
                 console.log(error);
               }
             );
+            /*
+            this.appointmentsService.getAppointmentInmediateState().subscribe(
+              (data) => {
+                localStorage.setItem('inmediateAppointment', data.payload.administrativeDetails.isActive);
+                console.log(data);
+                this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+              },
+              (error) => {
+                console.log(error);
+              }
+            );*/
             break;
         }
-
         this.spinner.hide();
       },
       (err) => {

@@ -22,6 +22,8 @@ import esLocale from '@fullcalendar/core/locales/es';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import { TranslocoService } from '@ngneat/transloco';
 
+import { AppointmentsService } from './../../../../services/appointments.service';
+
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 // carrusel
@@ -65,7 +67,8 @@ export class MiDisponibilidadComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private appointmentsService: AppointmentsService
   ) {
     const current = new Date();
     this.minDate = {
@@ -111,6 +114,7 @@ export class MiDisponibilidadComponent implements OnInit {
   public specialtiesId: string;
   public medicalSpecialties: any;
   public state: any;
+  public objetives: any;
 
   timeUpdated = new Subject<string>();
 
@@ -203,6 +207,7 @@ export class MiDisponibilidadComponent implements OnInit {
 
     this.agregardailyRanges();
     this.getSpecialtiesIdService();
+    this.getObjetives();
   }
 
   // controls reactivos
@@ -287,13 +292,14 @@ export class MiDisponibilidadComponent implements OnInit {
         .postAvailability(formObject.administrativeDetails, formObject.professionalDetails, formObject.dateDetails)
         .subscribe(
           (data) => {
-            this.createAvailability.reset();
             this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
             this.fetchCalendar();
+            this.createAvailability.reset();
           },
           (error) => {
+            this.createAvailability.reset();
             console.log(error);
           }
         );
@@ -362,6 +368,7 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   actualizarAvailability(id) {
+
     //this.createAvailability = id;
     let _days = this.daysSelected
       .filter((item) => {
@@ -608,4 +615,11 @@ export class MiDisponibilidadComponent implements OnInit {
       this.calendarOptions.events = events;
     }, 2000);
   }
+
+  getObjetives() {
+    this.appointmentsService.getObjetives().subscribe((data) => {
+      this.objetives = data
+    })
+  }
+
 }

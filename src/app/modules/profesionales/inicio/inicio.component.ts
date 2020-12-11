@@ -49,8 +49,8 @@ export class InicioPComponent implements OnInit {
       (data) => {
         console.log(data);
         this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished' && finished.administrativeDetails.status !== 'canceled');
-        console.log( this.consultas);
-        if (this.consultas.length > 0 ) {
+        console.log(this.consultas);
+        if (this.consultas.length > 0) {
           let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
           arrayForDate.forEach((numero) => {
@@ -58,11 +58,11 @@ export class InicioPComponent implements OnInit {
               min = numero;
             }
           });
-         
-         
-          this.nextAppointed = this.consultas.filter((now) => now.dateDetails.date === min );
+
+
+          this.nextAppointed = this.consultas.filter((now) => now.dateDetails.date === min);
           let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
-         
+
           this.consultasFinalizadas = finalizadas.length;
 
           console.log(this.consultas);
@@ -120,7 +120,6 @@ export class InicioPComponent implements OnInit {
   }
 
   atender(item) {
-    console.log(item);
     this.appointmentsService.attendAppointmentInmediate(item).subscribe(
       (data) => {
         console.log(data);

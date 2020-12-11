@@ -219,7 +219,7 @@
                   <div class="form-group col-md-3">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
-                      <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" [maxDate]="maxDate"
+                      <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" 
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
                         [startDate]="setDate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate"
                         (click)="d.toggle()" />
@@ -394,7 +394,7 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}es</h4>
+              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</h4>
               <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
                 <div class="row">
                   <div class="form-group col-md-3">
@@ -598,7 +598,7 @@
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">{{ 'account.name.label' | transloco }}Especialidad</label>
+                    <label for="speciality">{{ 'clinicalFile.select.label' | transloco }} {{ 'clinicalFile.specialty.label' | transloco }}</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">

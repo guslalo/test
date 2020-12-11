@@ -248,7 +248,7 @@
                   [displayWith]="getDisplayFn()"
                   (optionSelected)="escogerProfessional($event.option.value)"
                 >
-                  <mat-option *ngFor="let item of professionals" [value]="item">
+                  <mat-option *ngFor="let item of filteredProfessionals | async" [value]="item">
                     {{ item.personalData.name + ' ' + item.personalData.secondLastName }}
                   </mat-option>
                 </mat-autocomplete>
@@ -283,7 +283,13 @@
                 <label for="specialty">{{
                   'dashboard.home.disponibilityManagment.modal.createDisponibility.specialty.label' | transloco
                 }}</label>
-                <select class="form-control" id="specialty" formControlName="specialty">
+                <select class="form-control" id="specialty" formControlName="specialty" name="specialty" 
+                (change)='selectSpecialty($event)'
+                [ngClass]="{
+                  'is-invalid':
+                    !createAvailability.get('specialty').valid }"
+                >
+                  <option value="null"  disabled>Seleccionar especialidad</option>
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>
@@ -461,7 +467,7 @@
             type="button"
             class="btn btn-primary rounded-pill"
             (click)="crearAvailability()"
-            [disabled]="!createAvailability.valid && !this.daysSelected.length"
+            [disabled]="!createAvailability.valid"
             data-dismiss="modal"
           >
             {{ 'disponibility.modal.create.btnCreate.label' | transloco }}
@@ -493,7 +499,7 @@
             class="close"
             data-dismiss="modal"
             aria-label="Close"
-            (click)="createAvailability.reset()"
+            (click)="resetForm()"
           >
             <span aria-hidden="true">&times;</span>
           </button>

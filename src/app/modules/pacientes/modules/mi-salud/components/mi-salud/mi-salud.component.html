@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-12">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs flex-column flex-sm-row" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <a
           class="nav-link active"
@@ -52,8 +52,8 @@
       <!--tab-->
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
-          <div class="col-4">
-            <div class="card bg-light pb-3">
+          <div class="col-12 col-md-4">
+            <div class="card bg-light pb-3 mb-4 mb-md-0">
               <div class="card-header" style="display: none;">
                 {{ 'clinicalFile.patientData.tabs.myHealth.label' | transloco }}
                 <p>
@@ -68,9 +68,9 @@
               </div>
             </div>
           </div>
-          <div class="col-8">
+          <div class="col-12 col-md-8">
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -98,7 +98,7 @@
               </a>
               <div class="add float-right" (click)="categoryChangue('sickness')" data-toggle="modal" data-target="#add">
                 <!--Agregar-->
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
 
@@ -119,7 +119,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -151,7 +151,7 @@
                 data-toggle="modal"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
 
@@ -171,7 +171,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -203,7 +203,7 @@
                 data-toggle="modal"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
 
@@ -226,7 +226,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -258,7 +258,7 @@
                 (click)="categoryChangue('familiarHistory')"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
               <ng-container *ngIf="antecedentesGeneral">
@@ -282,7 +282,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -314,7 +314,7 @@
                 (click)="categoryChangue('healthHabits')"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
               <ng-container *ngIf="antecedentesGeneral">
@@ -334,7 +334,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -366,7 +366,7 @@
                 (click)="categoryChangue('medicines')"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
               <ng-container *ngIf="antecedentesGeneral">
@@ -386,7 +386,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -418,7 +418,7 @@
                 (click)="categoryChangue('occupational')"
                 data-target="#add"
               >
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
               <ng-container *ngIf="antecedentesGeneral">
@@ -438,7 +438,7 @@
             <!--/colappsed-->
 
             <!-- colappsed-->
-            <div class="collapseCustom">
+            <div class="collapseCustom mb-3 mt-md-0">
               <a
                 class="p-4"
                 data-toggle="collapse"
@@ -465,7 +465,7 @@
                 {{ 'dashboard.home.myHealth.others.label' | transloco }}
               </a>
               <div class="add float-right" data-toggle="modal" data-target="#add" (click)="categoryChangue('others')">
-                {{ 'common.button.add.label' | transloco }}
+                <p>{{ 'common.button.add.label' | transloco }}</p>
                 <img src="assets/img/+.svg" />
               </div>
               <ng-container *ngIf="antecedentesGeneral">
@@ -492,11 +492,11 @@
       <!--tab-->
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="row mb-3">
-          <div class="col-12 col-md-6">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</div>
+          <div class="col-12 col-md-6 mb-3 mt-3 mb-md-0 mt-md-0">{{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}</div>
           <div class="col-12 col-md-6">
             <button
               type="button"
-              class="btn btn-outline-primary rounded-pill float-right"
+              class="btn btn-outline-primary rounded-pill float-right btn-xs-block"
               data-toggle="modal"
               data-target="#addExamen"
               (click)="resetValue()"
@@ -508,7 +508,7 @@
         <div class="row">
           <div class="col-12">
             <div class="tableBox rounded p-4 bg-white">
-              <table class="table mt-3">
+              <table class="table mt-3 table-responsive">
                 <thead>
                   <tr>
                     <th scope="col">{{ 'clinicalFile.patientData.tabs.exams.table.doc.label' | transloco }}</th>
@@ -781,7 +781,7 @@
     <div class="modal-content p-3">
       <div class="modal-header text-center">
         <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
-          {{ 'common.button.add.label' | transloco }} Exámen
+          {{ 'common.button.add.label' | transloco }} {{ 'clinicalFile.patientData.tabs.exams.label' | transloco }}
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

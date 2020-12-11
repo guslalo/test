@@ -10,6 +10,7 @@ import { DocumentService } from 'src/app/services/document.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { AppointmentsService } from './../../../../services/appointments.service';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -55,6 +56,11 @@ export class FichaPacienteComponent implements OnInit {
   public textInputFile: any;
   patientAge: any;
 
+  public arrayDocuments: any;
+  public descargar: boolean;
+  public appointmentId: any;
+  public urlSibrare: any;
+
 
   constructor(
     private routerAct: ActivatedRoute,
@@ -63,12 +69,14 @@ export class FichaPacienteComponent implements OnInit {
     private userService: UsersService,
     private currentUserService: CurrentUserService,
     private documentService: DocumentService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private appointmentsService: AppointmentsService
   ) { }
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
     console.log(this.userId);
+    this.appointmentId = this.userId
     this.getMedicalRecord(this.userId);
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
@@ -79,6 +87,48 @@ export class FichaPacienteComponent implements OnInit {
       data: [null, [Validators.required]],
     });
   }
+
+    //getVerifiedSibrareDocuments
+    getVerifiedSibrareDocuments2(appointmentId) {
+      this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
+        (data) => {
+          console.log(data);
+          this.arrayDocuments = data.payload;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  
+    downloadSibrare(appointmentId, documentId) {
+      this.descargar = true;
+      this.spinner.show();
+      console.log(documentId);
+      this.getSibrareDocuments(appointmentId, documentId);
+    }
+  
+    // get documents sibrare
+    getSibrareDocuments(id, documentId) {
+      this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
+        (data) => {
+          this.urlSibrare = data.payload[0].documento;
+          console.log(this.urlSibrare);
+          console.log(data);
+          this.spinner.hide();
+          if (this.descargar === true) {
+            return window.open(this.urlSibrare, "_blank");
+          } else {
+            console.log(this.urlSibrare);
+          }
+          //this.videoCall = true;
+        },
+        (error) => {
+          this.spinner.hide();
+          console.log(error);
+        }
+      );
+    }
 
   calcularEdad(dateString){
     let separa = dateString.split("/");
@@ -104,6 +154,7 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+        this.arrayDocuments = data.payload.prescriptions;
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.antecedentesGeneral = data.payload.antecedent;

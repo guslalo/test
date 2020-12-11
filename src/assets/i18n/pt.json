@@ -8,6 +8,10 @@
     "report": "Atestado",
     "exam-order": "Pedido de exame"
   },
+  "waitingRoomInstructions":{
+    "instruction1":"Para sua consulta, permaneça em um lugar tranquilo e sem ruídos.",
+    "instruction2":"Lembre-se de ter todos seus exames em mãos antes de iniciar a teleconsulta."
+  },
   "exemplo": "exemplo",
   "history": {
     "tabs": {
@@ -28,7 +32,14 @@
   "clinicalFile": {
     "tabs": {
       "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
-      "antecentesFromPatient": "Antecedentes registrados pelo paciente"
+      "antecentesFromPatient": "Antecedentes registrados pelo paciente",
+      "gesEno": {
+        "label": "Notificaciones GES/ENO",
+        "button": "Registrar notificación"
+      }
+    },
+    "defeche":{
+      "label":"Desfecho(s)"
     },
     "patientData": {
       "tabs": {
@@ -372,7 +383,7 @@
       "label": "Atender"
     },
     "apointmentWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "dr": {
       "label": "Dr."
@@ -507,7 +518,7 @@
       "label": "Exame físico"
     },
     "labAspects": {
-      "label": "Resultado exames laboratoriais e/ou imagen"
+      "label": "Resultado exames laboratoriais e/ou imagem"
     },
     "plan": {
       "label": "Plano terapêutico"
@@ -534,7 +545,7 @@
       "label": "Editar disponibilidade"
     },
     "welcome": {
-      "label": "Bem vindo(a)"
+      "label": "Bem-vindo(a)"
     },
     "numberMontlyServices": {
       "label": "Nº de consultas mensais"
@@ -548,11 +559,14 @@
     "enter": {
       "label": "Entrar"
     },
+    "enterAppointment": {
+      "label": "Entrar na consulta"
+    },
     "accountScheduleded": {
       "label": "conta agendada"
     },
     "accountSchedulededWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "specialty": {
       "label": "Especialidade:"
@@ -921,7 +935,7 @@
     },
     "login": {
       "welcome": {
-        "title": "Bem vindo a plataforma de Teleconsulta",
+        "title": "Bem-vindo à plataforma de Teleconsulta",
         "label": "\nFaça login com sua conta ou crie uma nova para acessar."
       },
       "title": "Acessar conta",
@@ -929,7 +943,7 @@
         "label": "Esqueceu sua senha?"
       },
       "welcomeTitle": {
-        "label": "Bem vindo a Plataforma de Teleconsulta"
+        "label": "Bem-vindo à Plataforma de Teleconsulta"
       },
       "invalidEmail": {
         "label": "E-mail inválido"
@@ -1006,6 +1020,9 @@
       "followInstructions": {
         "label": "Siga as instruções na mensagem para redefinir sua senha."
       }
+    },
+    "prevission":{
+      "label":"Prevision de salud"
     },
     "verificationCode": {
       "label": "Digite o código de verificação"
@@ -1219,7 +1236,7 @@
           "label": "Anexar documentos"
         },
         "btnCheckout": {
-          "label": "Pagar e agendar"
+          "label": "Avançar"
         },
         "success": {
           "title": "Sua consulta foi agendada com sucesso",
@@ -1324,7 +1341,7 @@
             "label": "Ex: Pó, Pólen ou Aspirina"
           },
           "surgicalInterventions": {
-            "label": "Ex: Marca-passo ou Stent coronario"
+            "label": "Ex: Marcapasso ou Stent coronário"
           },
           "familiarHistory": {
             "label": "Ex: Infarto (mãe) ou Câncer (irmão )"
@@ -2206,6 +2223,33 @@
         },
         "regNumber": {
           "label": "Número de registro."
+        },
+        "nrRegistryHealth":{
+          "label":"Nro de registro da super adminstraçao de saúde"
+        },
+        "workCity":{
+          "label":"Comuna de trabalho"
+        },
+        "workState":{
+          "label":"Regiao de trabalho"
+        },
+        "workStreet":{
+          "label":"Rua de trabalho"
+        },
+        "workNumber":{
+          "label":"Numero de do endereço de trabalho"
+        },
+        "workComplement":{
+          "label":"Dpto/Local/Outro"
+        },
+        "workPostal":{
+          "label":"Codigo postal del trabalho"
+        },
+        "workPhone":{
+          "label":"Telefone del trabalho"
+        },
+        "workMutuality":{
+          "label":"Mutualidad a la que esta afiliado"
         }
       }
     }
@@ -2213,6 +2257,12 @@
   "table": {
     "ufReg": {
       "label": "Registro UF"
+    },
+    "fatherSurname": {
+      "label": "Nome do meio"
+    },
+    "motherSurname": {
+      "label": "Sobrenome"
     },
     "patients": {
       "label": "Dias"
@@ -2336,6 +2386,9 @@
     "timeline": {
       "label": "Histórico de consultas"
     },
+    "gesEno": {
+      "label": "Notificaciones GES/ENO"
+    },
     "services": {
       "label": "Consultas"
     },
@@ -2405,11 +2458,14 @@
     "description": {
       "label": "Sala criada em % por %"
     },
+    "asignedUsers": {
+      "label": "usuários atribuídos"
+    },
     "professionals": {
       "label": "Profissional(is)"
     },
     "usersAwaiting": {
-      "label": "% usuário(s) em sala de espera"
+      "label": "% usuário(s) na sala de espera"
     },
     "amountProffetionals": {
       "label": "% profissionais"
@@ -2453,7 +2509,7 @@
       "label": "Não há registros associados"
     },
     "usersInRoom": {
-      "label": "Usuários (s) em sala de espera"
+      "label": "Usuários (s) na sala de espera"
     },
     "inmediateService": {
       "title": "Atendimento imediato / Acesso a sala",
@@ -2595,6 +2651,9 @@
     }
   },
   "common": {
+    "appointmentHasPreviousImmediate": {
+      "label": "Você já tem uma consulta imediata ativa, por favor consulte o menu MINHAS CONSULTAS"
+    },
     "withOut": "sem resultados",
     "Soon": "Em breve",
     "user": {
@@ -3209,7 +3268,7 @@
         "label": "Dor no peito"
       },
       "bodyPain": {
-        "label": "Dor de corpo"
+        "label": "Dor no corpo"
       },
       "diarrhea": {
         "label": "Diarréia"
@@ -3675,7 +3734,7 @@
       "label": "Gerenciamento de usuários / Criação de Conta"
     },
     "genPassword": {
-      "label": "gerar senha"
+      "label": "Gerar senha"
     },
     "disableUserHint": {
       "label": "Tem certeza de que deseja desativar este usuário?"
@@ -3694,6 +3753,9 @@
     },
     "uf": {
       "label": "UF"
+    },
+    "region":{
+      "label":"Region"
     },
     "numerationReq": {
       "label": "Campo número é obrigatório"

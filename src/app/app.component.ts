@@ -7,6 +7,8 @@ import { environment } from './../environments/environment';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { PoliciesService } from './services/policies.service';
 
+import { IdleEventsService } from './services/idle-events.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +18,13 @@ export class AppComponent {
   message: string;
   title = 'itmstl';
 
-  constructor(titleService: Title, router: Router, private permissionsService: NgxPermissionsService, private _policyService: PoliciesService) {
+  constructor(
+    titleService: Title,
+    router: Router,
+    private permissionsService: NgxPermissionsService,
+    private _policyService: PoliciesService,
+    private idleEvents: IdleEventsService,
+  ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         //var title = this.getTitle(router.routerState, router.routerState.root).join('-');
@@ -25,7 +33,14 @@ export class AppComponent {
         titleService.setTitle(title);
       }
     });
+
+    idleEvents.attachMonitor()
+
+    idleEvents.inVideoCall$.subscribe((_state) => {
+      console.warn('ESTADO APP', _state)
+    })
   }
+
   getTitle(state, parent) {
     var data = [];
     if (parent && parent.snapshot.data && parent.snapshot.data.title) {
@@ -37,6 +52,7 @@ export class AppComponent {
     }
     return data;
   }
+
 
   ngOnInit() {
 

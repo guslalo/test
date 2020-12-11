@@ -5,7 +5,12 @@
   <div class="logo mt-1 ">
     <div class="text-left">
       <div class="logoLogin">
-     <img src="assets/img/telemedicina.svg">
+        <ng-container *ngIf="setup === 'BR'">
+          <img src="assets/img/telemedicina.svg">
+        </ng-container>
+        <ng-container *ngIf="setup === 'CL'">
+          <img src="assets/itms-atrys-chile-blanco.svg">
+        </ng-container>
     </div>
     </div>
   </div>
@@ -15,8 +20,8 @@
     </h1>
     <p>{{ 'auth.login.welcome.label' | transloco }}</p>
   </div>
-
   <p class="copyright align-self-end align-items-end">
-    {{ 'common.poweredBy.label' | transloco }}
+    {{ 'common.poweredBy.label' | transloco }} <br>
+    version: {{ version }}
   </p>
 </div>

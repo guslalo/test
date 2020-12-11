@@ -8,6 +8,10 @@
     "report": "Reporte",
     "exam-order": "Orden de exámen"
   },
+  "waitingRoomInstructions":{
+    "instruction1":"Ubíquese en un lugar tranquilo y sin ruido.",
+    "instruction2":"Recuerde tener cerca sus exámenes antes de iniciar la teleconsulta."
+  },
   "exemplo": "Ejemplo",
   "history": {
     "tabs": {
@@ -28,7 +32,14 @@
   "clinicalFile": {
     "tabs": {
       "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
-      "antecentesFromPatient": "Antecedentes registrados por el paciente"
+      "antecentesFromPatient": "Antecedentes registrados por el paciente",
+      "gesEno": {
+        "label": "Notificaciones GES/ENO",
+        "button": "Registrar notificación"
+      }
+    },
+    "defeche":{
+      "label":"Destinos"
     },
     "patientData": {
       "tabs": {
@@ -548,6 +559,9 @@
     "enter": {
       "label": "Entrar"
     },
+    "enterAppointment": {
+      "label": "Entrar a la consulta"
+    },
     "accountScheduleded": {
       "label": "Cuenta agendada"
     },
@@ -1004,7 +1018,11 @@
       },
       "followInstructions": {
         "label": "Sigue las instrucciones del mensaje para restablecer tu contraseña."
-      }
+      },
+      "label":"Correo electronico"
+    },
+    "prevission":{
+      "label":"Prevision de salud"
     },
     "verificationCode": {
       "label": "Ingrese codigo de verificación"
@@ -2205,6 +2223,33 @@
         },
         "regNumber": {
           "label": "N° de Registro"
+        },
+        "nrRegistryHealth":{
+          "label":"Nro de registro de super intendecia de salud"
+        },
+        "workCity":{
+          "label":"Comuna de trabajo"
+        },
+        "workState":{
+          "label":"Region de trabajo"
+        },
+        "workStreet":{
+          "label":"Nombre de la calle de trabajo"
+        },
+        "workNumber":{
+          "label":"Numero de la direccion de trabajo"
+        },
+        "workComplement":{
+          "label":"Dpto/Sitio/Otro"
+        },
+        "workPostal":{
+          "label":"Codigo postal del trabajo"
+        },
+        "workPhone":{
+          "label":"Telefono del trabajo"
+        },
+        "workMutuality":{
+          "label":"Mutualidad a la que esta afiliado"
         }
       }
     }
@@ -2212,6 +2257,12 @@
   "table": {
     "ufReg": {
       "label": "Registro UF"
+    },
+    "fatherSurname": {
+      "label": "Apellido Paterno"
+    },
+    "motherSurname": {
+      "label": "Apellido Materno"
     },
     "patients": {
       "label": "Días"
@@ -2335,6 +2386,9 @@
     "timeline": {
       "label": "Timeline de consultas"
     },
+    "gesEno": {
+      "label": "Notificaciones GES/ENO"
+    },
     "services": {
       "label": "Consultas"
     },
@@ -2403,6 +2457,9 @@
     "title": "Sala de espera cardiología A1",
     "description": {
       "label": "Sala creada el % por % "
+    },
+    "asignedUsers": {
+      "label": "usuarios asignados"
     },
     "professionals": {
       "label": "Profesional(es)"
@@ -2594,6 +2651,9 @@
     }
   },
   "common": {
+    "appointmentHasPreviousImmediate": {
+      "label": "Ud ya cuenta con una consulta inmediata activa, por favor consulte el menú MIS CONSULTAS"
+    },
     "withOut": "sin resultados",
     "Soon": "Proximamente",
     "user": {
@@ -2911,7 +2971,7 @@
       "label": "Reintentar"
     },
     "error": {
-      "label": "error"
+      "label": "Error"
     },
     "disable": {
       "label": "Deshabilitar"
@@ -3620,13 +3680,13 @@
       "label": "Ciudad"
     },
     "city": {
-      "label": "Ciudad"
+      "label": "Region"
     },
     "neighborhoodReq": {
       "label": "Barrio"
     },
     "neighborhood": {
-      "label": "Barrio"
+      "label": "Comuna"
     },
     "streetReq": {
       "label": "Calle es necesario"
@@ -3693,6 +3753,9 @@
     },
     "uf": {
       "label": "UF"
+    },
+    "region":{
+      "label":"Region"
     },
     "numerationReq": {
       "label": "Numeración es necesario"
