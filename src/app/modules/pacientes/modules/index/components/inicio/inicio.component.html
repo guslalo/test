@@ -41,11 +41,12 @@
 
       <!--next appointment-->
       <ng-container *ngIf="appointment">
-        <div class="col-8">
+        <div class="col-12 col-md-8 p-0 p-sm-3">
           <h4>{{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}</h4>
           <!-- colappsed-->
           <div class="collapseCustom primary">
-            <table class="table dos table-borderless mb-0">
+            <table class="table dos table-borderless mb-0 table-responsive">
+             
               <tbody>
                 <ng-container *ngIf="nextAppointed; else noNextAppointed">
                   <tr *ngIf="nextAppointed">
@@ -120,7 +121,7 @@
                 <ng-template #noNextAppointed>
                   <div class="row">
                     <div class="col-12">
-                      <p class="pl-3 pt-3">sin información</p>
+                      <p class="pl-3 pt-3">{{ 'clinicalFile.noInfo.label' | transloco }}</p>
                     </div>
                   </div>
                 </ng-template>
@@ -133,10 +134,9 @@
           <h4>Minhas consultas ativas</h4>
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5">
-            <!---->
-
             <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0">
+              <table class="table dos table-borderless mb-0 table-responsive">
+             
                 <tbody>
                   <tr>
                     <td style="width: 25%;" class="text-left">

@@ -10,44 +10,49 @@ import { TranslocoService } from '@ngneat/transloco';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { Router } from '@angular/router';
 
+declare var $: any;
+
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   animations: [
-    trigger('sideBarAnimation', [
+    trigger('sideBarAnimation', [/*
       state(
         'open',
         style({
           // backgroundColor: '#000000',
           // transform: 'scale(1.5)'
         })
-      ),
+      ),*/
+      /*
       state(
         'closed',
         style({
           width: '68px',
           padding: '0px',
         })
-      ),
+      ),*/
       transition('closed => open', animate('100ms ease-in')),
       transition('open => closed', animate('100ms ease-out')),
     ]),
     trigger('sideBarElements', [
+      /*
       state(
         'open',
         style({
           // backgroundColor: '#000000',
           // transform: 'scale(1.5)'
         })
-      ),
+      ),*/
+      /*
       state(
         'closed',
         style({
           display: 'none',
         })
-      ),
+      ),*/
       transition('closed => open', animate('100ms ease-in')),
       transition('open => closed', animate('100ms ease-out')),
     ]),
@@ -59,6 +64,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public inmediateAppointment: boolean;
   currentDate: string;
   public setup:any;
+  public mobile:boolean;
   // public firstAccess:boolean;
 
   constructor(
@@ -85,13 +91,30 @@ export class LayoutComponent implements OnInit, OnDestroy {
     // });
   }
 
-  public state = 'closed';
+  public state:any;
   public inmediateAppointmentPadre: boolean;
   message;
   status = false;
   public nots: Array<any> = []
   ngOnInit(): void {
+    //this.state = 'open';
     //this.firstAccess = true;
+    $('.dots-mobile').click(function(){
+      $('.infoExtra').slideToggle('fast');
+    });
+
+    
+setTimeout(()=>{                          
+  $('.table').append("<div class='iconTable'><svg width='2em' height='2em' viewBox='0 0 16 16' class='bi bi-arrow-left-right' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z'/></svg></div>");
+  $('.iconTable').click(function(){
+    $('.iconTable').remove();
+  })
+  $('.iconTable').mouseover(function(){
+    $('.iconTable').remove();
+  })
+}, 2500);
+    
+
     this.setup = environment.setup
     if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;
@@ -108,8 +131,24 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.breakpointObserver.observe(['(min-width: 640px)']).subscribe((state: BreakpointState) => {
       if (state.matches) {
+        this.mobile = false
+        $('.wrap .sidebar').removeClass('menuMobile');
+        this.state = 'open';
+        $('.iconMenu').click();
+        console.log('desktop');
+        //$('.wrap .sidebar').addClass('open');
+        //$('.wrap .sidebar').removeClass('closed');
         // desktop
       } else {
+        this.mobile = true;
+        this.state = 'closed';
+        $('.wrap .sidebar').addClass('menuMobile');
+        $('.wrap .sidebar').removeClass('open');
+        //$('.wrap .sidebar').addClass('closed');
+        console.log('mobile')
+       //this.closeMenu();
+        ///$('.wrap .sidebar.closed').css('left','-100%');
+       
         //this.state = 'closed'
         // mobile
       }
@@ -128,6 +167,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';
+  }
+
+  
+  closeMenu(isMobile){
+    if(isMobile === true) {
+      $('.wrap .sidebar').removeClass('open');
+      $('.wrap .sidebar').addClass('closed');
+    }
+    //this.state = 'closed';
   }
   sideBarMenu() {
     //$('.boxSidebarMain').css("left":'')

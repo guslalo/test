@@ -30,6 +30,7 @@ export class IndexComponent implements OnInit {
   moment: any = moment;
   ColumnMode = ColumnMode;
   searchTerm: string = '';
+  public seleccionE:boolean;
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -198,7 +199,7 @@ export class IndexComponent implements OnInit {
 
     this.createAvailability = this._formBuilder.group({
       professional: [null, Validators.required],
-      specialty: [null, [Validators.required]],
+      specialty: [null, Validators.required],
       specialtyName: new FormControl(),
       objective: [null, [Validators.required]], //[Validators.required],
       appointmentDuration: [5,  [Validators.required]],
@@ -216,14 +217,29 @@ export class IndexComponent implements OnInit {
     });
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
       return this.professionals.filter(value => {
+        console.log(value);
         return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
               value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
               (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
       })
+      
     }))
+
+    
 
     this.agregardailyRanges();
   }
+
+  /*
+  resetAutoInput(optVal, trigger: MatAutocompleteTrigger, auto: MatAutoComplete) {
+    setTimeout(_ => {
+      auto.options.forEach((item) => {
+        item.deselect()
+      });
+      this.createAvailability.controls['professional'].reset('');
+      trigger.openPanel();
+      }, 100);
+  }*/
 
   public getDisplayFn() {
     return (val) => this.display(val);
@@ -242,6 +258,13 @@ export class IndexComponent implements OnInit {
     });
 
     this.dailyRanges.push(this.dailyRangeFormGroup);
+  }
+  selectSpecialty(selectSpecialty){
+    let item = selectSpecialty.target.value
+    if (item!= 'undefined' && item!= '' && item!= null){
+      this.seleccionE = false;
+    }
+    console.log(selectSpecialty.target.value);
   }
 
   removerDailyRanges(indice: number) {
@@ -311,7 +334,7 @@ export class IndexComponent implements OnInit {
 
   crearAvailability() {
     console.log(this.createAvailability);
-    console.log(this.createAvailability.controls.specialty);
+    console.log(this.createAvailability.controls.specialty.value);
 
     const formObject = {
       administrativeDetails: {
@@ -348,8 +371,10 @@ export class IndexComponent implements OnInit {
             this.createAvailability.reset();
             console.log('disponibilidad creada', data);
             this.getAvailability();
+            this.resetSearch();
           },
           (error) => {
+            this.resetSearch();
             console.log(error);
           }
         );
@@ -529,10 +554,16 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
+    
+
+      
+    //this.getProfessionals();
     this.specialtiesId = '';
         this.medicalSpecialty = '';
         this.specialtySelected = '';
-    console.log(professional);
+    //console.log(professional);
+    //let userId = '';
+    this.professionalSelected  = '';
     let userId = this.professionalSelected || professional?.userData[0]?._id;
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
@@ -544,6 +575,19 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+   this.resetSearch();
+  }
+
+  resetSearch(){
+    this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
+      return this.professionals.filter(value => {
+        console.log(value);
+        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
+              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+      })
+      
+    }))
   }
 
   getProfessionals() {

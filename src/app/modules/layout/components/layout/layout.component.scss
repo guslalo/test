@@ -298,20 +298,59 @@ app-layout {
 }
 
 @media only screen and (max-width: 600px) {
+  .dropdown.language {
+    border-radius: 25px;
+  }
+
+  header {
+    z-index: 2 !important;
+  }
+  .wrap .notificationBox {
+    position: absolute;
+    top: -48px;
+    right: 53px;
+    z-index: 3;
+  }
+ .box-items{
+   display: inline-block;
+   padding: 20px 20px;
+   .items {
+     margin-left: 0px;
+     display: inline-block;
+     width: 100%;
+     &.itemSub2{
+      width: 80%;
+     }
+  
+     &.itemSub {
+      width: 20%; text-align: center;
+      > div {
+        > div {
+          position: relative;
+          top: 10px;
+        }
+      }
+     }
+   }
+ }
+  
   #header {
     z-index: 10;
   }
+
+
 
   .date-layout {
     display: none;
   }
 
   .logo {
-    width: 65%;
+    width: 50%;
     display: inline-block;
+    text-align: center;
     img,
     svg {
-      width: 100%;
+      width: 50%;
     }
   }
 
@@ -327,6 +366,7 @@ app-layout {
       height: 100vh;
       z-index: 9;
       &.open {
+        left: 0%;
         width: 100%;
         max-width: 100%;
         i {
@@ -341,6 +381,7 @@ app-layout {
         }
       }
       &.closed {
+          left: -100%;
         width: 0%;
         max-width: 0%;
         i {

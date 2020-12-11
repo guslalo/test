@@ -383,7 +383,7 @@
       "label": "Atender"
     },
     "apointmentWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "dr": {
       "label": "Dr."
@@ -545,7 +545,7 @@
       "label": "Editar disponibilidade"
     },
     "welcome": {
-      "label": "Bem vindo(a)"
+      "label": "Bem-vindo(a)"
     },
     "numberMontlyServices": {
       "label": "Nº de consultas mensais"
@@ -566,7 +566,7 @@
       "label": "conta agendada"
     },
     "accountSchedulededWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "specialty": {
       "label": "Especialidade:"
@@ -935,7 +935,7 @@
     },
     "login": {
       "welcome": {
-        "title": "Bem vindo à plataforma de Teleconsulta",
+        "title": "Bem-vindo à plataforma de Teleconsulta",
         "label": "\nFaça login com sua conta ou crie uma nova para acessar."
       },
       "title": "Acessar conta",
@@ -943,7 +943,7 @@
         "label": "Esqueceu sua senha?"
       },
       "welcomeTitle": {
-        "label": "Bem vindo à Plataforma de Teleconsulta"
+        "label": "Bem-vindo à Plataforma de Teleconsulta"
       },
       "invalidEmail": {
         "label": "E-mail inválido"
