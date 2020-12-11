@@ -3,6 +3,8 @@ const _env = process.argv[2]
 let colors
 
 function parseEnv(path) {
+    console.log('parseando archivo de entorno:', path)
+
     var regExp = /\{([^)]+)\}/;
     let f = fs.readFileSync(path)
 
@@ -19,12 +21,21 @@ function parseEnv(path) {
 }
 
 function makeCss(_path) {
+    console.log('compilando variables css')
+
     let css = fs.readFileSync('./src/assets/scss/variables.scss').toString()
     let envColors = parseEnv(_path)
 
-    css = css.replace('$color-primary: #fff;', '$color-primary: ' + envColors['color-primary'])
-    css = css.replace('$color-secondary: #fff;', '$color-secondary: ' + envColors['color-secondary'])
-    css = css.replace('$color-hover: #fff;', '$color-hover: ' + envColors['color-hover'])
+    let hexRegex = /#(?:[a-f\d]{3}){1,2}\b|rgb\((?:(?:\s*0*(?:25[0-5]|2[0-4]\d|1?\d?\d)\s*,){2}\s*0*(?:25[0-5]|2[0-4]\d|1?\d?\d)|\s*0*(?:100(?:\.0+)?|\d?\d(?:\.\d+)?)%(?:\s*,\s*0*(?:100(?:\.0+)?|\d?\d(?:\.\d+)?)%){2})\s*\)|hsl\(\s*0*(?:360|3[0-5]\d|[12]?\d?\d)\s*(?:,\s*0*(?:100(?:\.0+)?|\d?\d(?:\.\d+)?)%\s*){2}\)|(?:rgba\((?:(?:\s*0*(?:25[0-5]|2[0-4]\d|1?\d?\d)\s*,){3}|(?:\s*0*(?:100(?:\.0+)?|\d?\d(?:\.\d+)?)%\s*,){3})|hsla\(\s*0*(?:360|3[0-5]\d|[12]?\d?\d)\s*(?:,\s*0*(?:100(?:\.0+)?|\d?\d(?:\.\d+)?)%\s*){2},)\s*0*(?:1|0(?:\.\d+)?)\s*\)/gim;
+    let colorMatches = css.match(hexRegex)
+
+    let _primary = colorMatches[0]
+    let _secondary = colorMatches[1]
+    let _hover = colorMatches[2]
+
+    css = css.replace("$color-primary: " + _primary + ";", '$color-primary: ' + envColors['color-primary'])
+    css = css.replace("$color-secondary: " + _secondary + ";", '$color-secondary: ' + envColors['color-secondary'])
+    css = css.replace("$color-hover: " + _hover + ";", '$color-hover: ' + envColors['color-hover'])
 
     fs.writeFileSync('./src/assets/scss/variables.scss', css)
 }
