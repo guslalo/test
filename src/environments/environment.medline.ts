@@ -22,5 +22,5 @@ export const environment = {
   },
   ttlSession: 3600,
   setup: 'BR',
-  version: '{BUILD_VERSION}-medline'
+  version: '{BUILD_VERSION}-staging'
 };
