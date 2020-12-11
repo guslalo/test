@@ -383,7 +383,7 @@
       "label": "Atender"
     },
     "apointmentWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "dr": {
       "label": "Dr."
@@ -566,7 +566,7 @@
       "label": "conta agendada"
     },
     "accountSchedulededWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "specialty": {
       "label": "Especialidade:"
