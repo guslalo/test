@@ -4,13 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:dev:config-local": "ng serve -c=local --host 0.0.0.0 --port=80 --disable-host-check",
-    "build": "node ./updateVersion.js && ng build --prod --aot --configuration=production --output-hashing=all",
-    "build-dev": "node ./updateVersion.js && ng build --prod --aot --configuration=dev --output-hashing=all",
-    "build-staging": "node ./updateVersion.js && ng build --prod --configuration=staging --output-hashing=all",
+    "start:dev:config-local": "ng serve itms-cl -c=local --host 0.0.0.0 --port=80 --disable-host-check",
+    "build": "node ./updateVersion.js && ng build --prod --aot --configuration=production --output-hashing=all && npm run checkout",
+    "build-dev": "node ./updateVersion.js && ng build --prod --aot --configuration=dev --output-hashing=all && npm run checkout",
+    "build-staging": "node ./updateVersion.js && ng build --prod --configuration=staging --output-hashing=all && npm run checkout",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "checkout": "git checkout ./src/environments/*"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +44,7 @@
     "angular2-moment": "^1.9.0",
     "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.4.0",
+    "dotenv": "^8.2.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.17.2",
     "lodash": "^4.17.20",

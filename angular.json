@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "itmstl": {
+        "itms-cl": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -146,22 +146,22 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "itmstl:build"
+                        "browserTarget": "itms-cl:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "itmstl:build:production"
+                            "browserTarget": "itms-cl:build:production"
                         },
                         "local": {
                             "hmr": false,
-                            "browserTarget": "itmstl:build:local"
+                            "browserTarget": "itms-cl:build:local"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "itmstl:build"
+                        "browserTarget": "itms-cl:build"
                     }
                 },
                 "test": {
@@ -199,18 +199,18 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "itmstl:serve"
+                        "devServerTarget": "itms-cl:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "itmstl:serve:production"
+                            "devServerTarget": "itms-cl:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "itmstl",
+    "defaultProject": "itms-cl",
     "cli": {
         "analytics": false
     }

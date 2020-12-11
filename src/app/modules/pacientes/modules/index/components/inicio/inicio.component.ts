@@ -101,6 +101,8 @@ export class InicioComponent implements OnInit {
             }
           });
 
+          console.log(this.nextAppointed)
+
           let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
 
           this.consultasFinalizadas = finalizadas.length;

@@ -38,9 +38,10 @@ import { LangComponent } from './lang/lang.component';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { CreateAppointmentComponent } from './modules/create-appointment/create-appointment.component';
+import { RescheduleAppointmentComponent } from './modules/reschedule-appointment/reschedule-appointment.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent],
   imports: [
     CommonModule,
     // HttpClientModule,

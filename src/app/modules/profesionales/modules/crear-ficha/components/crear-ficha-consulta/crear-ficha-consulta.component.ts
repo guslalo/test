@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -105,6 +105,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public setup: string;
 
   public objetives: any;
+  public notifiableDiseases = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -120,7 +121,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private translateService: TranslocoService,
     private NgxPermissionsService: NgxPermissionsService,
     private destinyService: DestiniesService,
-    private idleEvents: IdleEventsService
+    private idleEvents: IdleEventsService,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnDestroy(): void {
@@ -149,7 +151,11 @@ export class CrearFichaConsultaComponent implements OnInit {
       const id = params.appointmentId;
       this.appointmentId = params.appointmentId;
       this.getAppointmentsDetails(id);
-      this.setAppointmentsDetails(id);
+
+      if (this.setup != 'BR') {
+        this.setAppointmentsDetails(id);
+      }
+
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
       this.getDestinies();
@@ -159,10 +165,10 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.clearId();
     })
 
-    $('.responseSearch').mouseout(function () {
-      $(this).css('display', 'none');
-      this.searchDisplay = false;
-    });
+    // $('.responseSearch').mouseout(function () {
+    //   $(this).css('display', 'none');
+    //   this.searchDisplay = false;
+    // });
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -197,7 +203,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     }, { updateOn: 'blur' });
 
     this.formAddGesEno = this._formBuilder.group({
-      professionalId: [''],
       page: [''],
       diagnostic: [''],
       type: [''],
@@ -243,7 +248,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
-        console.log(data);
         if (environment.production === false) {
           //console.log(data);
         }
@@ -474,46 +478,80 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
-    //console.log( this.objectDiagnostic.display)
-    let _i = this.arrayDiagnostic.map((e) => {
-      return e._id
-    }).indexOf(item._id);
 
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
-        console.log(item)
+        // console.log(item)
+
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
-        console.log(item)
+        // console.log(item)
+
         $('#addNotificationEno').modal('show')
       }
       if (item.isENO === true && item.isGES === true) {
-        console.log(item)
+        // console.log(item)
+
         $('#addNotificationGesEno').modal('show')
       }
+
+      let _i = this.notifiableDiseases.map((e) => {
+        return e.diagnostic._id
+      }).indexOf(item._id);
+
+      if (_i >= 0) return
+
+      this.notifiableDiseases.push({
+        isENO: item.isENO,
+        isGES: item.isGES,
+        diagnostic: item,
+      })
+
+      this.arrayDiagnostic.push({
+        display: item.display,
+        _id: item._id,
+        type: 'cie10',
+        isENO: item.isENO,
+        isGES: item.isGES
+      })
+
+      // this.updateModelNotifiableDiseases()
+    } else {
+      // setup BR
+
+      let _i = this.arrayDiagnostic.map((e) => {
+        return e._id
+      }).indexOf(item._id);
+
+      if (_i >= 0) return
+
+      item.type = 'cie10'
+      this.arrayDiagnostic.push(item)
+
+      this.updateModelDiagnostics()
     }
 
-    if (_i >= 0) return
+    // this.objectDiagnostic = item;
 
-    this.objectDiagnostic = item;
-    console.log(item)
-    this.objectDiagnostic = {
-      _id: item._id,
-      isGES: item.isGES,
-      isENO: item.isENO,
-      display: item.display
-    }
+    // console.log(item)
 
-    this.arrayDiagnostic.push({
-      display: item.display,
-      _id: item._id,
-      type: 'cie10',
-      isENO: item.isENO,
-      isGES: item.isGES
-    })
+    // this.objectDiagnostic = {
+    //   _id: item._id,
+    //   isGES: item.isGES,
+    //   isENO: item.isENO,
+    //   display: item.display
+    // }
 
-    this.updateModelDiagnostics()
+    // this.arrayDiagnostic.push({
+    //   display: item.display,
+    //   _id: item._id,
+    //   type: 'cie10',
+    //   isENO: item.isENO,
+    //   isGES: item.isGES
+    // })
+
+    // this.updateModelDiagnostics()
   }
 
   nextStep(type) {
@@ -529,26 +567,28 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   addRegistryGesEno() {
-    console.log(this.objectDiagnostic);
     //let DataisENO = this.objectDiagnostic.isENO
-    let appointmentObject = {
-      appointmentDetails: {
-        notifiableDiseases: [
-          {
-            diagnostic: this.objectDiagnostic,
-            professionaId: '5f580599fd059702a80d14d1',
-            page: this.formAddGesEno.controls.page.value,
-            observations: this.formAddGesEno.controls.observations.value
-          }
-        ]
-      },
-    };
+
+    this.updateModelNotifiableDiseases()
+
+    // let appointmentObject = {
+    //   appointmentDetails: {
+    //     notifiableDiseases: [
+    //       {
+    //         diagnostic: this.objectDiagnostic,
+    //         professionaId: '5f580599fd059702a80d14d1',
+    //         page: this.formAddGesEno.controls.page.value,
+    //         observations: this.formAddGesEno.controls.observations.value
+    //       }
+    //     ]
+    //   },
+    // };
     /*
             isENO: true,
             isGES: false,
     */
-    this.saveAppointment(appointmentObject);
-
+    // this.saveAppointment(appointmentObject);
+    this.getAppointmentsDetails(this.appointmentId)
   }
 
   updateModelDiagnostics() {
@@ -564,32 +604,79 @@ export class CrearFichaConsultaComponent implements OnInit {
     }
   }
 
+  updateModelNotifiableDiseases() {
+    this.notifiableDiseases.map((e) => {
+      e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
+        e.page = this.formAddGesEno.getRawValue().page,
+        e.type = this.formAddGesEno.getRawValue().type,
+        e.observations = this.formAddGesEno.getRawValue().observations
+    })
+
+    console.log(this.notifiableDiseases)
+
+    if (this.arrayDiagnostic != null) {
+      let appointmentObject = {
+        appointmentDetails: {
+          notifiableDiseases: this.notifiableDiseases
+        },
+      };
+      this.saveAppointment(appointmentObject);
+    }
+  }
+
+  displayDiagnosticsSetupBR(_array) {
+    this.arrayDiagnostic = _array.map((item) => { return item.diagnostic })
+  }
+
   deleteDiagnostic(_id) {
-    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
-    this.updateModelDiagnostics()
+    if (environment.setup === 'CL') {
+      this.notifiableDiseases = this.notifiableDiseases.filter(item => item.diagnostic._id != _id)
+
+      this.displayDiagnosticsSetupBR(this.notifiableDiseases)
+
+      console.log(this.notifiableDiseases, _id)
+
+      this.updateModelNotifiableDiseases()
+    } else {
+      this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+      this.updateModelDiagnostics()
+    }
+  }
+
+  trackItem(index: number, item: any) {
+    return item._id
   }
 
   //buscador de diagnostico
   onChangeSearch(event) {
     //this.arrayDiagnostic =   this.arrayDiagnostic2;
-    console.log(this.searchFormcontrol);
+    // console.log(this.searchFormcontrol);
+
     if (event && event.length >= 2) {
       this.spinnerSearch = true;
+
       setTimeout(() => {
         console.log('busqueda activada', event);
+
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
           (data) => {
             //this.searchFormcontrol = true
+
+            this.cdr.detectChanges();
+
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
-            console.log(data);
+
+            console.log('this.searchResponse', this.searchResponse);
           },
           (error) => {
             console.log(error);
           }
         );
+
       }, 600);
+
     } else {
       console.log('busqueda inactiva', event);
     }
@@ -1063,9 +1150,14 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.getAppointmentsTimeline(this.userId);
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
 
-        this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+        if (environment.setup === 'CL') {
 
+          this.displayDiagnosticsSetupBR(data.payload.appointmentDetails.notifiableDiseases)
+          this.notifiableDiseases = data.payload.appointmentDetails.notifiableDiseases
 
+        } else {
+          this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+        }
 
         console.log(this.arrayDiagnostic)
 

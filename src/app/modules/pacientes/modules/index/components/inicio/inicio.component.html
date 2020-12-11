@@ -41,11 +41,12 @@
 
       <!--next appointment-->
       <ng-container *ngIf="appointment">
-        <div class="col-8">
+        <div class="col-12 col-md-8 p-0 p-sm-3">
           <h4>{{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}</h4>
           <!-- colappsed-->
           <div class="collapseCustom primary">
-            <table class="table dos table-borderless mb-0">
+            <table class="table dos table-borderless mb-0 table-responsive">
+
               <tbody>
                 <ng-container *ngIf="nextAppointed; else noNextAppointed">
                   <tr *ngIf="nextAppointed">
@@ -104,8 +105,8 @@
                         </div>
                         <div class="dropdown-menu dropdown-menu-right">
                           <button *ngIf="nextAppointed[0]?.dateDetails.date"
-                            routerLink="reagendar-consulta/{{ nextAppointed[0]._id }}" class="dropdown-item"
-                            type="button">
+                            routerLink="reagendar-consulta/{{ nextAppointed[0]._id }}/{{ nextAppointed[0].professionalDetails.specialtyId }}"
+                            class="dropdown-item" type="button">
                             {{ 'common.button.reschedule.label' | transloco }}
                           </button>
                           <button (click)="idForCancel(nextAppointed[0]._id )" data-toggle="modal"
@@ -133,10 +134,9 @@
           <h4>Minhas consultas ativas</h4>
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5">
-            <!---->
-
             <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0">
+              <table class="table dos table-borderless mb-0 table-responsive">
+
                 <tbody>
                   <tr>
                     <td style="width: 25%;" class="text-left">

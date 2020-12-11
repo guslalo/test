@@ -4,6 +4,7 @@ import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 
 @Component({
   selector: 'app-inicio',
@@ -27,7 +28,8 @@ export class InicioPComponent implements OnInit {
     public currentUserService: CurrentUserService,
     config: NgbRatingConfig,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appointmentsEvents: AppointmentEventsService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -42,6 +44,13 @@ export class InicioPComponent implements OnInit {
     this.getAppointments();
     //this.getAppointments2();
     this.getRooms();
+  }
+
+  ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    let _userId = _user.id
+    this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
+    this.appointmentsEvents.buildForm$.emit(_user.role)
   }
 
   getAppointments() {
