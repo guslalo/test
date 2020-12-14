@@ -1,15 +1,15 @@
 export const environment = {
-  production: false,
+  production: true,
   defaultLang: 'es',
   checkAge: false,
-  title: 'Itms Dev | Teleconsulta',
-  baseUrl: 'https://backend-dev.bdot.app/api/',
+  title: 'Itms | Teleconsulta',
+  baseUrl: 'https://backend-dev-cl.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
+  clientSecret: '',
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
   sessionTime: 1200,
-  clientSecret: '',
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
     authDomain: 'itms-d242b.firebaseapp.com',
@@ -21,6 +21,5 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20000 * 60,
-  setup: 'CL',
-  version: 'local'
+  setup: 'CL'
 };

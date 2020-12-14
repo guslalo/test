@@ -2911,13 +2911,13 @@
       "user": {
         "identification": {
           "name": {
-            "label": "Nombre"
+            "label": "Nombres"
           },
           "firstSurname": {
             "label": "Primer apellido"
           },
           "secondSurname": {
-            "label": "Segundo nombre"
+            "label": "Segundo apellido"
           },
           "surname": {
             "label": "Apellido"
@@ -3608,13 +3608,13 @@
       "label": "Nombre"
     },
     "lastName": {
-      "label": "Segundo Nombre"
+      "label": "Primer Apellido"
     },
     "surnameReq": {
       "label": "Apellido"
     },
     "surname": {
-      "label": "Apellido"
+      "label": "Segundo Apellido"
     },
     "motherNameReq": {
       "label": "Nombres de la Madre"
