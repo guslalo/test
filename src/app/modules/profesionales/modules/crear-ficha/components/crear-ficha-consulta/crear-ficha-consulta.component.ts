@@ -132,6 +132,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.idleEvents.inVideoCall(false)
   }
 
+
   ngOnInit(): void {
     this.objectDiagnostic = {
       _id: null,
@@ -140,6 +141,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       display: null
     }
     this.setup = environment.setup
+ 
 
     console.log(this.setup)
 
@@ -480,6 +482,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+    console.log(item)
 
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
@@ -508,6 +511,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
+        
       })
 
       this.arrayDiagnostic.push({
@@ -608,6 +612,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   updateModelNotifiableDiseases() {
     this.notifiableDiseases.map((e) => {
+      console.log(e);
       e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
         e.page = this.formAddGesEno.getRawValue().page,
         e.type = this.formAddGesEno.getRawValue().type,
@@ -648,13 +653,33 @@ export class CrearFichaConsultaComponent implements OnInit {
   trackItem(index: number, item: any) {
     return item._id
   }
+  searchInModal(){
+    $( "#diagnostics" ).focus();
+    $( ".searchBox2 .responseSearch" ).show();
+  }
 
+  searchInModalHide(){
+    $( ".searchBox2 .responseSearch" ).hide();
+  }
   //buscador de diagnostico
   onChangeSearch(event) {
+    
+    console.log(event)
+    this.searchResponse = null;
     //this.arrayDiagnostic =   this.arrayDiagnostic2;
     // console.log(this.searchFormcontrol);
+    //this.searchResponse = null;
+    /*$("#addGesEno").on("click","#titlelabelgeseno", function(){
+      alert("success");
+    });*/
+    //
+    $(document).on('change','#titlelabelgesen',function(){
+      //your code
+      })
+    if (event && event.length >= 2 ) { //
 
-    if (event && event.length >= 2) {
+   
+
       this.spinnerSearch = true;
 
       setTimeout(() => {
@@ -664,7 +689,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           (data) => {
             //this.searchFormcontrol = true
 
-            this.cdr.detectChanges();
+            //this.cdr.detectChanges();
 
             this.spinnerSearch = false;
             this.searchDisplay = true;
@@ -677,7 +702,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           }
         );
 
-      }, 600);
+      }, 800);
 
     } else {
       console.log('busqueda inactiva', event);
@@ -1170,7 +1195,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         if (this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
-          this.autoSave();
+          //this.autoSave();
         } else {
           this.permisoGuardar = false;
         }

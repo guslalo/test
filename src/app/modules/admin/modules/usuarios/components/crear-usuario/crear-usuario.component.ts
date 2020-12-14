@@ -31,6 +31,9 @@ export class CrearUsuarioComponent implements OnInit {
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
+  titularForm: FormGroup;
+  titular:any;
+  loarderTutor:boolean;
   professionalForm: FormGroup;
   professionalRegistrySend: any = [];
   passwordForm: FormGroup;
@@ -113,7 +116,7 @@ export class CrearUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.loarderTutor = false;
     
   if(environment.checkAge === false){
     this.mayorEdad = false
@@ -153,6 +156,27 @@ export class CrearUsuarioComponent implements OnInit {
       extraDocument: [null, null],
       extraIdDocument: ['', null],
     });
+
+    
+    this.titularForm = this.formBuilder.group({
+      //document:  new FormControl('cpf'),
+      //idDocumentNumber: ['', Validators.required],
+      titularDependiente: ['', Validators.required],
+      titularidadCpf: ['', null],
+      titularidadName: ['', null]  
+    });
+
+    //nutrititularFormcion
+    /*
+      this.titularForm.valueChanges.subscribe((x) => {
+        //console.log(x)
+        if(this.titularForm.controls.titularDependiente.value === 'dependienteRadio' && x.length > 5){
+         
+        }
+        this.getforCpf(x.titularidadCpf)
+      }
+      );/**/
+
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required,]], 
@@ -287,6 +311,34 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.identificationData.updateValueAndValidity();
   }
+  /*
+  radioSelect(){
+    console.log(this.titularForm)
+  }*/
+
+  
+
+
+  getforCpf(cpf) {
+    //console.log(cpf)
+    this.loarderTutor = true;
+
+    this.userService.getForCpf(cpf).subscribe((data) => {
+      console.log(data);
+      this.titular  = data.payload
+      this.titularForm.get('titularidadName').setValue(this.titular.fullName, {emitEvent: false});
+      this.loarderTutor = false;
+    },
+      error => {
+        console.log(error)
+        this.loarderTutor = false
+      }
+    );
+  
+   
+  
+  }
+
 
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
@@ -555,6 +607,7 @@ export class CrearUsuarioComponent implements OnInit {
           isForeign: this.isForeign,
         },
         personalData: {
+          //isTutor:this.isTutor,
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,

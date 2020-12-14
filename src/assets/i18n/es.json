@@ -1,4 +1,11 @@
 {
+  "titularidad": {
+    "title":"Titularidad",
+    "titular":"Titular",
+    "dependiente":"Dependiente",
+    "name":"Nombre del titular",
+    "cpf":"CPF del titular"
+  },
   "soon": "Próximamente",
   "cie10": {
     "cie10": " CIE10"
