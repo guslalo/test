@@ -11,6 +11,7 @@ export class UsersService {
   private users = 'users/';
   private users2 = 'https://reqres.in/api/';
   private cepUrl = 'v1/identification/location' 
+  private searchCpf = 'v1/users/titular/'
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,6 +31,14 @@ export class UsersService {
       return this.http.get<any>(this.users2 + this.users);
     }
   }
+
+
+  getForCpf(cpf): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('nationalId',cpf);
+    return this.http.get<any>(environment.baseUrl +  this.searchCpf, {params:params});
+  }
+
 
   getCountries(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + 'v1/countries');

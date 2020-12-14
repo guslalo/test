@@ -85,7 +85,7 @@
                   <div class="col mt-5">
                     <p class="p-0 font-weight-bold text-left">
                       {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }}
-                      {{ appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase }}
+                      {{ appointmentDetail.patientDetails.userDetails.personalData.lastName | uppercase }}
                     </p>
                     <!--font-weight-bold-->
                     <ul class="simple-list">
@@ -2089,7 +2089,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content p-3">
       <div class="modal-header text-center">
-        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="exampleModalLabel">
+        <h5 class="modal-title text-center w-100 mt-1 font-weight-bold" id="titlelabelgeseno">
           Registro notificacion Ges - Eno
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -2102,16 +2102,16 @@
           <div class="row">
             <div class="form-group col-12">
 
-              <label [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'error-text' : ''"
+              <label id="w-100" [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'error-text' : ''"
                 for="diagnostic">{{
                   'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco
                 }} *
               </label>
 
-              <div class="searchBox2">
+              <div class="searchBox2" id="searchModal">
                 <input class="form-control mb-3" type="text"
                   placeholder="{{ 'clinicalFile.patientData.tabs.summary.diagnosis.label' | transloco }}"
-                  id="diagnostic" name="diagnostic" formControlName="diagnostic" [(ngModel)]="searchInput"
+                  id="diagnostics" name="diagnostic" formControlName="diagnostic" 
                   [attr.disabled]="permisoGuardar === false ? '' : null" (ngModelChange)="onChangeSearch($event)"
                   [className]=" arrayDiagnostic && arrayDiagnostic.length === 0 ? 'form-control is-invalid' : 'form-control'" />
                 <!-- [attr.disabled]="search === false ? true : null"-->
@@ -2127,7 +2127,7 @@
                     </li>
                     <ng-container *ngIf="!spinnerSearch">
                       <ng-container *ngIf="searchResponse?.length; else noSearch">
-                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" (click)="selectDiagnostico(item)">
+                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" (click)="selectDiagnostico(item)" (click)="searchInModalHide()">
                           {{ item.display }}
                         </li>
                       </ng-container>
@@ -2140,8 +2140,11 @@
                   </ul>
                 </div>
               </div>
+              <div class="buscarModalBtn">
+                <button type="button" class="btn btn-primary" (click)="searchInModal()">buscar</button>
+              </div>
 
-              <ng-container *ngFor="let item of arrayDiagnostic; trackBy: trackItem">
+              <ng-container *ngFor="let item of arrayDiagnostic; "><!--trackBy: trackItem-->
 
                 <!--sintoma-->
                 <div class="sintoma mt-4 mb-3 overflow-hidden" id="{{ item._id }}">

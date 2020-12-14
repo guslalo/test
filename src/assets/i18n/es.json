@@ -1,4 +1,11 @@
 {
+  "titularidad": {
+    "title":"Titularidad",
+    "titular":"Titular",
+    "dependiente":"Dependiente",
+    "name":"Nombre del titular",
+    "cpf":"CPF del titular"
+  },
   "soon": "Próximamente",
   "cie10": {
     "cie10": " CIE10"
@@ -2911,13 +2918,13 @@
       "user": {
         "identification": {
           "name": {
-            "label": "Nombre"
+            "label": "Nombres"
           },
           "firstSurname": {
             "label": "Primer apellido"
           },
           "secondSurname": {
-            "label": "Segundo nombre"
+            "label": "Segundo apellido"
           },
           "surname": {
             "label": "Apellido"
@@ -3608,13 +3615,13 @@
       "label": "Nombre"
     },
     "lastName": {
-      "label": "Segundo Nombre"
+      "label": "Primer Apellido"
     },
     "surnameReq": {
       "label": "Apellido"
     },
     "surname": {
-      "label": "Apellido"
+      "label": "Segundo Apellido"
     },
     "motherNameReq": {
       "label": "Nombres de la Madre"

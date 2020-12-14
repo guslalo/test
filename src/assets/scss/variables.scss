@@ -1,16 +1,27 @@
-@import "globalVars";
-
 // colores por defecto, no modificar
 // ----------------------------
-$color-primary: #fff;
-$color-secondary: #fff;
-$color-hover: #fff;
+$color-primary: #25b0bb;
+$color-secondary: #044AAB;
+$color-hover: #044AAB;
 // ----------------------------
+//ATRIS
+$color-primary: #044AAB;
+$color-secondary: #4680ae;
+$color-hover: #000000;
+
+
+//DEFAULT BR
+/*
+$color-primary: #3B4085;
+$color-secondary: #0A6FF5;
+$color-hover: #0A6FF5;*/
+
+
 
 $color-primary3: #5e6472;
 $color-primary2: #35a6f5;
 //verde
-//$color-hover: #3bc4ca;
+//$color-hover: #044AAB;
 $color-success: #0000ff;
 //$color-success2: #3bc4ca;
 $color-success2: #3B4085;
@@ -26,14 +37,14 @@ $border-radius: 10px;
 $color-text-bold: #000000;
 $color-text-light: #8b8b8b;
 
-@if $profile == 'BR' {
-    $color-primary: #3B4085;
-    $color-secondary: #0A6FF5;
-    $color-hover: #0A6FF5;
-}
+// @if $profile == 'BR' {
+//     $color-primary: #3B4085;
+//     $color-secondary: #0A6FF5;
+//     $color-hover: #0A6FF5;
+// }
 
-@if $profile == 'CL' {
-    $color-primary: #25b0bb;
-    $color-secondary: #044AAB;
-    $color-hover: #044AAB;
-}
+// @if $profile == 'CL' {
+//     $color-primary: #25b0bb;
+//     $color-secondary: #044AAB;
+//     $color-hover: #044AAB;
+// }

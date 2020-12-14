@@ -22,5 +22,10 @@ export const environment = {
   },
   ttlSession: 60,
   setup: 'BR',
-  version: '{BUILD_VERSION}-home'
+  version: '{BUILD_VERSION}-home',
+  colors: {
+    "color-primary": "#3B4085;",
+    "color-secondary": "#0A6FF5;",
+    "color-hover": "#0A6FF5;",
+  }
 };
