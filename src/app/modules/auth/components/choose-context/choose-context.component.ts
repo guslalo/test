@@ -69,6 +69,18 @@ export class ChooseContextComponent implements OnInit {
     }
   }
 
+  chooseDependent(dependentId){
+    if (dependentId !== this.user.id){
+      let dependents: any[] = JSON.parse(localStorage.getItem('dependents'))
+      let user = dependents.find(element => element._id = dependentId);
+      user.id = user._id;
+      localStorage.removeItem('currentUser');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+    this._policyService.setPoliciesToUser()
+    this.router.navigate(['app-paciente']);
+  }
+
   getRouteForClinicAndRole(clinicId, role) {
     const profile = this.user.administrativeData.find((profile) => {
       if (profile.clinicProfileId === clinicId && profile.role === role) {
