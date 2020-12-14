@@ -202,6 +202,13 @@
                 >
                 </ngx-datatable-column>
                 <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                prop="titularidade"
+                [name]="'table.phone.label' | transloco"
+              >
+              </ngx-datatable-column>
+                <ngx-datatable-column
                   [resizeable]="false"
                   [flexGrow]="2"
                   prop="status"
