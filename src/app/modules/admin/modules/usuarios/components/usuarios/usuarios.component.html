@@ -200,7 +200,15 @@
                   prop="phone"
                   [name]="'table.phone.label' | transloco"
                 >
+              
                 </ngx-datatable-column>
+                <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                prop="titularidade"
+                [name]="'titularidad.title' | transloco"
+              >
+              </ngx-datatable-column>
                 <ngx-datatable-column
                   [resizeable]="false"
                   [flexGrow]="2"
@@ -257,7 +265,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'admins', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -455,7 +463,7 @@
                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'professionals', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -658,7 +666,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'coordinators', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -906,7 +914,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'patients', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}

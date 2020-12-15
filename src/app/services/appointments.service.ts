@@ -190,6 +190,15 @@ export class AppointmentsService {
     return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails, { params: params });
   }
 
+  
+  //put ges notification/
+  /**/ 
+    putGesEno(id, gesEno): Observable<any> {
+      let params = new HttpParams();
+      params = params.append('appointmentId', id);
+      return this.http.put<any>(environment.baseUrl + 'v1/appointments/add-notificable-desease/', gesEno, { params: params });
+    }
+
   //subir antecedentes
   postAntecedentes(appointmentId, antecente, object): Observable<any> {
     let params = new HttpParams();

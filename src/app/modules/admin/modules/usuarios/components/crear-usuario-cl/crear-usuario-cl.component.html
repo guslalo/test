@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col mb-2">
     <h2>{{ 'account.userManagmentAccountCreation.label' | transloco }}</h2>
@@ -164,6 +165,7 @@
                 </div>
               </form>
             </div>
+            
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <div class="row">
                 <h4 class="pl-3 pb-2">
@@ -178,7 +180,7 @@
               </div>
               <form [formGroup]="personalData">
                 <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="name">{{ 'account.name.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -190,7 +192,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
                     <input
                       type="text"
@@ -202,7 +204,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="secondLastName">{{ 'account.surname.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -214,21 +216,9 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="lastName">{{ 'common.motherNames.label' | transloco }} *</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="motherName"
-                      formControlName="motherName"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('motherName').valid
-                      }"
-                    />
-                  </div>
                 </div>
                 <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="email">{{ 'auth.email.label' | transloco }}*</label>
                     <input
                       type="email"
@@ -242,7 +232,7 @@
                       placeholder="usuario@mail.com"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -255,7 +245,7 @@
                       placeholder="(##)-####-####"
                     />
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="gender">{{ 'account.grender.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -270,7 +260,7 @@
                       <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
                       <input
@@ -294,40 +284,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="ufBirth">{{
-                      'profile.personal.tabIdentification.birthData.uf.label' | transloco
-                    }}</label>
-                    <select
-                      [attr.disabled]="isForeign || userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="ufBirth"
-                      formControlName="ufBirth"
-                      (change)="ufSelect($event.target)"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of states">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="municipalityBirth">{{
-                      'clinicalFile.patientData.tabs.identification.birthData.minicipality.label' | transloco
-                    }}</label>
-                    <select
-                      [attr.disabled]="isForeign || userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="municipalityBirth"
-                      formControlName="municipalityBirth"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -343,23 +300,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="originCountry">{{ 'account.country.label' | transloco }}</label>
-                    <select
-                      [attr.disabled]="!isForeign ? '' : null"
-                      class="form-control"
-                      name="originCountry"
-                      formControlName="originCountry"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of countries">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
                     <div class="input-group dateregister">
                       <input
@@ -387,24 +328,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="breed">{{ 'account.raceColor.label' | transloco }} </label>
-                    <select
-                      [attr.disabled]="userType == 'professional' ? '' : null"
-                      class="form-control"
-                      name="breed"
-                      formControlName="breed"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('breed').valid && userType != 'professional'
-                      }"
-                    >
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of breeds">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
+                </div>
+                <div class="row">
+                  
+                  <div class="form-group col-md-4">
                     <label for="education">{{
                       'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
                     }}</label>
@@ -415,7 +342,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <!-- <div class="form-group col-md-4">
                     <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
                     <select class="form-control" name="familySituation" formControlName="familySituation" [attr.disabled]="userType == 'professional' ? '' : null">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -423,29 +350,8 @@
                         {{ item.name }}
                       </option>
                     </select>
-                  </div>
-                </div>
-                <div class="row" >
-                  <div class="form-group col-md-2">
-                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
-                    <input
-                      [attr.disabled]="userType == 'professional' ? '' : null"
-                      (focusout)="getLocationDataFromCep()"
-                      mask="99999-999"
-                      [dropSpecialCharacters]="false" 
-                      type="text"
-                      class="form-control"
-                      name="cep"
-                      formControlName="cep"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('cep').valid && userType != 'professional'
-                      }"
-                    />
-                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
-                      {{ errorCepString }}
-                    </div>
-                  </div>
-                  <div class="form-group col-md-3">
+                  </div> -->
+                  <div class="form-group col-md-4">
                     <label for="uf"
                       >{{
                         'account.region.label' | transloco
@@ -467,7 +373,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="city">{{ 'account.city.label' | transloco }}*</label>
+                    <label for="city">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <select
                       class="form-control"
                       name="city"
@@ -482,22 +388,30 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-3">
-                    <label for="street">{{ 'account.neighborhood.label' | transloco }}*</label>
+                </div>
+                <div class="row" >
+                  <!-- <div class="form-group col-md-2">
+                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
                     <input
+                      [attr.disabled]="userType == 'professional' ? '' : null"
+                      (focusout)="getLocationDataFromCep()"
+                      mask="99999-999"
+                      [dropSpecialCharacters]="false" 
                       type="text"
                       class="form-control"
-                      name="neighborhood"
-                      formControlName="neighborhood"
+                      name="cep"
+                      formControlName="cep"
                       [ngClass]="{
-                        'is-invalid': !personalData.get('neighborhood').valid
+                        'is-invalid': !personalData.get('cep').valid && userType != 'professional'
                       }"
                     />
-                  </div>
+                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
+                      {{ errorCepString }}
+                    </div>
+                  </div> -->
+                 
                   
-                </div>
-                <div class="row">
-                  <div class="form-group col-12 col-md-3">
+                  <div class="form-group col-12 col-md-4">
                     <label for="prevission">{{ 'auth.prevission.label' | transloco }}*</label>
                     <div class="input-group">
                         <select class="form-control" name="prevission" formControlName="prevission"  
@@ -506,14 +420,14 @@
                           'is-invalid':
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
                         }" id="select-type-document">
-                        <option disabled  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item._id" *ngFor="let item of previsionHealth" [selected]="true" selected> 
+                        <option [selected]="true"  value="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  value="item._id" *ngFor="let item of previsionHealth" > 
                           {{item.name}}
                         </option>
                     </select>
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -525,7 +439,7 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input
                       type="text"
@@ -537,14 +451,19 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-2">
+                </div>
+                <div class="row">
+                  
+                  
+                  
+                  <div class="form-group col-md-4">
                 
                       <label for="street">{{ 'auth.complement.label' |transloco }}</label>
                       <input type="text" name="complement" id="complement" class="form-control" placeholder=""
                         formControlName="complement" />
                 
                   </div>
-                  <div class="form-group col-12 col-md-2">
+                  <div class="form-group col-12 col-md-4">
                     <label for="postal">Codigo postal</label>
                     <input type="text" name="postal" id="postal" class="form-control" placeholder=""
                       formControlName="postal" />
@@ -787,7 +706,7 @@
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">{{ 'account.nameReq.label' | transloco }}Especialidad</label>
+                    <label for="speciality">{{ 'clinicalFile.select.label' | transloco }} {{ 'clinicalFile.specialty.label' | transloco }}</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">

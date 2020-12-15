@@ -151,7 +151,7 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.getPrevissions();
 
     this.identificationData = this.formBuilder.group({
-      document:  new FormControl('cpf'),
+      document:  new FormControl('run'),
       idDocumentNumber: ['', Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
@@ -162,8 +162,8 @@ export class CrearUsuarioComponentCL implements OnInit {
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required,]], 
-      lastName: ['',], 
-      motherName: ['', [Validators.required,]],
+      lastName: ['',[Validators.required,]], 
+      motherName: ['', null],
       secondLastName: ['', [Validators.required,]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
@@ -180,9 +180,9 @@ export class CrearUsuarioComponentCL implements OnInit {
       cep: ['', null],
       uf: [null, Validators.required],
       city: [null, Validators.required],
-      neighborhood: ['', Validators.required],
+      neighborhood: ['', null],
       street: ['', Validators.required],
-      complement: [null, ],
+      complement: ['', null],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       prevission: ['',Validators.required],
       postal: ['',null]
@@ -477,6 +477,16 @@ export class CrearUsuarioComponentCL implements OnInit {
 
     switch (this.userType) {
       case 'admin':
+        console.log(this.formUser[0].valid 
+          , this.formUser[1].valid 
+          , this.formUser[5].valid)
+        if (this.formUser[0].valid 
+          && this.formUser[1].valid 
+          && this.formUser[5].valid) {
+          return true;
+        } else {
+          return false;
+        }
       case 'coordinator':
         if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[2].valid && this.formUser[5].valid) {
           return true;
@@ -485,13 +495,13 @@ export class CrearUsuarioComponentCL implements OnInit {
         }
 
       case 'professional':
-        console.log(this.formUser[0].valid, this.formUser[1].valid, this.formUser[4].valid, this.formUser[5].valid)
         if (this.formUser[0].valid && this.formUser[1].valid && this.formUser[4].valid && this.formUser[5].valid) {
           return true;
         } else {
           return false;
         }
       case 'patient':
+        
         if (this.formUser[0].valid 
             && this.formUser[1].valid 
             && this.formUser[5].valid) {
@@ -557,7 +567,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -585,20 +595,20 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: this.formUser[1].value.motherName,
+          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: this.formUser[1].value.ufBirth || '',
-          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          ufBirth: '',
+          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: this.formUser[1].value.originCountry || '',
+          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation:  '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
@@ -641,7 +651,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'run' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -669,20 +679,20 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: this.formUser[1].value.motherName,
+          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: this.formUser[1].value.ufBirth || '',
-          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          ufBirth: '',
+          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: this.formUser[1].value.originCountry || '',
+          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation: '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
@@ -748,6 +758,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -775,20 +786,21 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: this.formUser[1].value.motherName,
+          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: this.formUser[1].value.ufBirth || '',
-          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          ufBirth: '',
+          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: this.formUser[1].value.originCountry || '',
+          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation: '',
+          prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -844,6 +856,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         identificationData: {
           ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
+          ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'rgRegistry' && {
             rgRegistry: this.formUser[0].value.idDocumentNumber || '',
           }),
@@ -871,20 +884,21 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: this.formUser[1].value.motherName,
+          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: this.formUser[1].value.ufBirth || '',
-          municipalityBirth: this.formUser[1].value.municipalityBirth || '',
+          ufBirth: '',
+          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: this.formUser[1].value.originCountry || '',
+          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: this.formUser[1].value.breed,
+          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation:  '',
+          prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,

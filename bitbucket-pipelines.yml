@@ -82,3 +82,30 @@ pipelines:
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: elasticbeanstalk-us-east-1-273347846553
             WAIT: 'true'
+    chile:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-chile
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Chile"
+        deployment: chile
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            APPLICATION_NAME: itms-frontend
+            ENVIRONMENT_NAME: ItmsFrontend-cl
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+            WAIT: 'true'

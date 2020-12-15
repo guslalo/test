@@ -18,6 +18,7 @@ export class InicioComponent implements OnInit {
   public user: any;
   public tips: any;
   public inmediateAppointment: boolean;
+  public scheduleAppointment: boolean;
   public consultasActivas: any;
   public consultas: any;
   public nextAppointed: any;
@@ -61,6 +62,12 @@ export class InicioComponent implements OnInit {
       this.inmediateAppointment = true;
     } else {
       this.inmediateAppointment = false;
+    }
+
+    if (localStorage.getItem('scheduleAppointment') === 'true') {
+      this.scheduleAppointment = true;
+    } else {
+      this.scheduleAppointment = false;
     }
 
     this.homeService.getTips().subscribe(

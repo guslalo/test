@@ -5,19 +5,24 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 import { NgxPermissionsService } from 'ngx-permissions';
 import { PoliciesService } from '../../../../services/policies.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-choose-context',
   templateUrl: './choose-context.component.html',
   styleUrls: ['../login/login.component.scss'],
 })
-
 export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};
-  public arrayAdministrativeData = [ ];
+  public arrayAdministrativeData = [];
 
-  constructor(private authenticationService: AuthenticationService, private router: Router,   private _policyService: PoliciesService) { }
+  constructor(
+    private translocoService: TranslocoService,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private _policyService: PoliciesService
+  ) {}
 
   ngOnInit(): void {
     this.user = new UserLogin(
@@ -36,18 +41,14 @@ export class ChooseContextComponent implements OnInit {
   chooseContext(clinicId, role) {
     //let arrayAdministrativeData = [ ];
     //let arrayAdministrativeData = this.user.administrativeData;
-    
-    for(let item of this.user.administrativeData){
-      if(clinicId === item.clinicProfileId ) {
+
+    for (let item of this.user.administrativeData) {
+      if (clinicId === item.clinicProfileId) {
         this.arrayAdministrativeData.push(item);
-      } 
+      }
     }
     localStorage.setItem('contextRole', JSON.stringify(this.arrayAdministrativeData));
-     this._policyService.setPoliciesToUser()
-  
-      
-    
-
+    this._policyService.setPoliciesToUser();
 
     if (localStorage.getItem('firstAccessMultirole') === 'true') {
       this.getRouteForClinicAndRole(clinicId, role);
@@ -67,6 +68,18 @@ export class ChooseContextComponent implements OnInit {
         }
       );
     }
+  }
+
+  chooseDependent(dependentId){
+    if (dependentId !== this.user.id){
+      let dependents: any[] = JSON.parse(localStorage.getItem('dependents'))
+      let user = dependents.find(element => element._id = dependentId);
+      user.id = user._id;
+      localStorage.removeItem('currentUser');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+    this._policyService.setPoliciesToUser()
+    this.router.navigate(['app-paciente']);
   }
 
   getRouteForClinicAndRole(clinicId, role) {
@@ -106,6 +119,17 @@ export class ChooseContextComponent implements OnInit {
       case 'professional':
         this.router.navigate(['app-professional']);
         break;
+    }
+  }
+
+  getRoleName(role) {
+    switch (role) {
+      case 'admin':
+        return this.translocoService.translate('common.roles.admin.label');
+      case 'coordinator':
+        return this.translocoService.translate('common.roles.coordinator.label');
+      case 'professional':
+        return this.translocoService.translate('common.roles.doctor.label');
     }
   }
 }

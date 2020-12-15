@@ -1,14 +1,14 @@
 export const environment = {
-  production: false,
+  production: true,
   defaultLang: 'pt',
   checkAge: false,
   title: 'Itms | Teleconsulta',
-  baseUrl: 'http://192.168.0.156:3000/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://backend.homeclinic.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
-  jitsi: 'meet.bdot.app', //meet.bdot.app
+  jitsi: 'https://jitsi.homeclinic.telemedicina.com', //meet.bdot.app
   apiKey: '',
   clientSecret: '',
-  photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
+  photoUrlBase: 'https://itms-prod.s3-sa-east-1.amazonaws.com/',
   sessionTime: 1200,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
@@ -20,12 +20,12 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
-  ttlSession: 20000 * 60,
-  setup: 'CL',
-  version: '{BUILD_VERSION}',
+  ttlSession: 60,
+  setup: 'BR',
+  version: '{BUILD_VERSION}-home',
   colors: {
-    "color-primary": "#25b0bb;",
-    "color-secondary": "#044AAB;",
-    "color-hover": "#044AAB;",
+    "color-primary": "#B99DF0;",
+    "color-secondary": "#DC221C;",
+    "color-hover": "#0A6FF5;",
   }
 };
