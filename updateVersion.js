@@ -14,7 +14,7 @@ const options = {
     'src/environments/environment.staging.ts',
     'src/environments/environment.production.ts',
     'src/environments/environment.chile.ts',
-    'src/environments/environment.medline.ts],
+    'src/environments/environment.medline.ts'],
     from: /{BUILD_VERSION}/g,
     to: buildVersion,
     allowEmptyPaths: false,
