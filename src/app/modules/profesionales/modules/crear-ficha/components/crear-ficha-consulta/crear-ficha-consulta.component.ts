@@ -512,6 +512,9 @@ export class CrearFichaConsultaComponent implements OnInit {
       })
 
       this.objectDiagnostic = item
+      this.arrayDiagnostic2 = [
+        this.objectDiagnostic
+      ]
       
       this.arrayDiagnostic.push({
         display: item.display,
@@ -1153,6 +1156,8 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);
         this.otros.controls['examHighlights'].setValue(data.payload.appointmentDetails.examHighlights);
+
+
         /*
         if(
           data.payload.patientDetails.vitalSigns.PAS != null,
@@ -1172,6 +1177,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.signos.controls['Sat'].setValue(data.payload.patientDetails.vitalSigns.Sat);
         }*/
 
+
+      
         this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
         this.signos.controls['PAD'].setValue(data.payload.patientDetails.vitalSigns.PAD);
         this.signos.controls['PAmedia'].setValue(data.payload.patientDetails.vitalSigns.PAmedia);
