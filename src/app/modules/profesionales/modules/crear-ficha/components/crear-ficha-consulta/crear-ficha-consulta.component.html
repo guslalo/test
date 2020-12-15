@@ -1721,17 +1721,19 @@
                     {{ item.name }}
                   </td>
                   <td class="text-center">
-                    <ng-container *ngIf="item.diagnostic.isENO === true">
+                   
+                    <ng-container *ngIf="item.isENO == true;">
                       ENO
                     </ng-container>
-                    <ng-container *ngIf="item.diagnostic.isGES === true">
+                    <ng-container *ngIf="item.isGES == true">
                       GES
+                    </ng-container>
+                    <ng-container *ngIf="item.isGES == false && item.isGES == false">
+                      Sin información
                     </ng-container>
                   </td>
                   <td class="text-center">
-
-                    I10
-
+                      {{item.diagnostic.type}}
                   </td>
                   <td class="text-center">
                     {{item.page}}
@@ -2127,7 +2129,8 @@
                     </li>
                     <ng-container *ngIf="!spinnerSearch">
                       <ng-container *ngIf="searchResponse?.length; else noSearch">
-                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" (click)="selectDiagnostico(item)" (click)="searchInModalHide()">
+                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" 
+                        (click)="selectDiagnostico(item)" (click)="searchInModalHide()">
                           {{ item.display }}
                         </li>
                       </ng-container>

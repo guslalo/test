@@ -142,7 +142,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       display: null
     }
     this.setup = environment.setup
- 
+    //this.arrayDiagnostic = []
 
     console.log(this.setup)
 
@@ -512,9 +512,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
-        
       })
+
       this.objectDiagnostic = item
+      
       this.arrayDiagnostic.push({
         display: item.display,
         _id: item._id,
@@ -522,6 +523,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES
       })
+
       console.log(this.arrayDiagnostic)
 
       // this.updateModelNotifiableDiseases()
