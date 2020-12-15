@@ -574,7 +574,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     }
   }
   addRegistryGesEno2(){
-    this.updateModelNotifiableDiseases();
+    //this.updateModelNotifiableDiseases();
     this.notifiableDiseases2 = {
       professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
       page: this.formAddGesEno.getRawValue().page,
