@@ -41,7 +41,6 @@ function makeCss(_path) {
 }
 
 try {
-    // if (_env === 'production') _env = 'prod'
     _fileEnv = './src/environments/environment.' + _env + '.ts'
 
     if (fs.existsSync(_fileEnv)) {
