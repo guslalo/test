@@ -20,12 +20,12 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
-  ttlSession: 20000 * 60,
+  ttlSession: 600,
   setup: 'BR',
   version: '{BUILD_VERSION}-Medline ',
   colors: {
-    "color-primary": "#86393E;",
+    "color-primary": "#394184;",
     "color-secondary": "#D03B34;",
-    "color-hover": "#0A6FF5;",
+    "color-hover": "#77787B;",
   }
 };
