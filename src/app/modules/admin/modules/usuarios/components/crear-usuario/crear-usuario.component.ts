@@ -266,7 +266,8 @@ export class CrearUsuarioComponent implements OnInit {
       this.profilesForm,
       this.profileDataForm,
       this.professionalForm,
-      this.passwordForm
+      this.passwordForm,
+      this.titularForm
     );
     setTimeout(() => {
       this.validateForm();
@@ -519,8 +520,9 @@ export class CrearUsuarioComponent implements OnInit {
           return false;
         }
       case 'patient':
-        if (this.formUser[0].valid 
-            && this.formUser[1].valid 
+        if (this.formUser[0].valid &&
+            this.formUser[6].valid &&
+            this.formUser[1].valid 
             && this.formUser[5].valid && this.cpfvalid) {
           return true;
         } else {
@@ -626,6 +628,11 @@ export class CrearUsuarioComponent implements OnInit {
           breed: this.formUser[1].value.breed,
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
+        },
+        titularData:{
+          titularDependiente: this.formUser[6].value.titularDependiente,
+          titularidadCpf: this.formUser[6].value.titularidadCpf,
+          titularidadName: this.formUser[6].value.titularidadName
         },
         addressData: {
           cep: this.formUser[1].value.cep,
