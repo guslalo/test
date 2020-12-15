@@ -203,6 +203,13 @@
               
                 </ngx-datatable-column>
                 <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                prop="titularidade"
+                [name]="'titularidad.title' | transloco"
+              >
+              </ngx-datatable-column>
+                <ngx-datatable-column
                   [resizeable]="false"
                   [flexGrow]="2"
                   prop="status"
