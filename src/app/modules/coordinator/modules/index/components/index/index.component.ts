@@ -24,24 +24,29 @@ export class IndexComponent implements OnInit {
   constructor(
     public currentUserService: CurrentUserService, 
     public appointmentsService: AppointmentsService,
-    private appointmentEvents: AppointmentEventsService,
+    private appointmentsEvents: AppointmentEventsService,
     ) {}
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
     this.getAppointmentsWaitingRooms();
+
+    this.appointmentsEvents.listAppointments$.subscribe(() => {
+      this.getAppointments()
+    })
   }
 
   setAppointment(item){
     console.log('APPOINTMEN FROM LIST', item)
-    this.appointmentEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
   }
 
   getAppointments() {
-    this.appointmentsService.getAppointments(1).subscribe(
+    this.appointmentsService.getAllAppointments(1).subscribe(
       (data) => {
-        // console.log(data.payload);
+        console.log('getAllAppointments', data.payload);
+
         let filteredAppointments = data.payload
           .sort((a, b) => {
             var a: any = new Date(a.dateDetails?.date);
@@ -52,7 +57,6 @@ export class IndexComponent implements OnInit {
         
           this.consultas = filteredAppointments;
 
-        console.log("consultas", data)
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
         var earliest = new Date(Math.min.apply(null,dates));*/
@@ -61,6 +65,10 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  setAppointmentCancelReasons(row){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(row)
   }
 
   getAppointmentsWaitingRooms() {
