@@ -88,7 +88,8 @@ import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-
     LangComponent,
     NgxPermissionsModule,
     CreateAppointmentComponent,
-    RescheduleAppointmentComponent
+    RescheduleAppointmentComponent,
+    CancelAppointmentComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -36,6 +36,22 @@ export class AppointmentsService {
   private subirAntecedentesMedico = 'v1/appointments/antecedents/'
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
   private objetives = 'v1/objetives/'
+  private cancels = 'v1/cancels'
+
+  public appointmentStatus = {
+    RESERVED: 'reserved',
+    APPOINTED: 'appointed',
+    RESCHEDULED: 'rescheduled',
+    ACTIVE: 'active',
+    WAITING_IN_ROOM: 'waitingInRoom',
+    IMMEDIATE_CREATED: 'created',
+    WAITING_IN_LIST: 'waitingInList',
+    PROCESS: 'process',
+    RUNNING: 'running',
+    PENDING: 'pending',
+    FINISHED: 'finished',
+    CANCELED: 'canceled',
+  };
 
   constructor(
     private http: HttpClient, 
@@ -424,5 +440,8 @@ export class AppointmentsService {
     }
   }
   
+  cancelReasons(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.cancels);
+  }
 
 }

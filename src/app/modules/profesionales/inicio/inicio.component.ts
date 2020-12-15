@@ -64,10 +64,16 @@ export class InicioPComponent implements OnInit {
     this.appointmentsEvents.getProfessionalBlocks$.emit(item)
   }
 
+  setAppointmentCancelReasons(status){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
+  }
+
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        console.log(data);
+        
+        console.log('getAppointments', data);
+
         this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished' && finished.administrativeDetails.status !== 'canceled');
         console.log(this.consultas);
         if (this.consultas.length > 0) {

@@ -259,6 +259,13 @@
                               data-toggle="modal" data-target="#modalReAgendamiento">
                                 {{ 'clinicalFile.reschedule.label' | transloco }}
                               </button>
+
+                              <button ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
+                              data-toggle="modal" data-target="#modalCancelAppointment">
+                                {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
+                              </button>
+                              
+
                             </div>
                           </div>
                         </ng-container>
@@ -511,3 +518,4 @@
 </div>
 
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>
+<modal-cancel-appointment [modalConfig] #modalCancelAppointment></modal-cancel-appointment>
