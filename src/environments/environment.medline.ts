@@ -22,7 +22,7 @@ export const environment = {
   },
   ttlSession: 3600,
   setup: 'BR',
-  version: '{BUILD_VERSION}-staging',
+  version: '{BUILD_VERSION}-Medline ',
   colors: {
     "color-primary": "#394184;",
     "color-secondary": "#D03B34;",
