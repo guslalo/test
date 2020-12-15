@@ -166,16 +166,17 @@ export class CrearUsuarioComponent implements OnInit {
       titularidadName: ['', null]  
     });
 
-    //nutrititularFormcion
-    /*
-      this.titularForm.valueChanges.subscribe((x) => {
-        //console.log(x)
-        if(this.titularForm.controls.titularDependiente.value === 'dependienteRadio' && x.length > 5){
-         
+    //titularForm
+    
+      this.titularForm.get('titularidadCpf').valueChanges.subscribe((x) => {
+        console.log(x)
+        //titularForm.get('titularidadCpf')
+        if(x.length >= 9){
+          this.getforCpf(x)
         }
-        this.getforCpf(x.titularidadCpf)
+       
       }
-      );/**/
+      );  /**/
 
 
     this.personalData = this.formBuilder.group({

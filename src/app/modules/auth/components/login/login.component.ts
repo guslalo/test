@@ -141,20 +141,25 @@ export class LoginComponent implements OnInit {
             }
             break;
           case 'patient':
+            if (data.internalCode === 6) {
+              localStorage.setItem('dependents', JSON.stringify(data.dependents));
+              this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
+            } else {
+              this.clinicService.accessMode().subscribe(
+                (data) => {
+                  console.log(data)
+                  localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+                  localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+                  localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+                  console.log(data);
+                  this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
             
-            this.clinicService.accessMode().subscribe(
-              (data) => {
-                console.log(data)
-                localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
-                localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
-                localStorage.setItem('paymentAppointment', data.payload.payment.toString());
-                console.log(data);
-                this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
             /*
             this.appointmentsService.getAppointmentInmediateState().subscribe(
               (data) => {

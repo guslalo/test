@@ -189,9 +189,9 @@
                       <label for="titularidadCpf">{{'titularidad.cpf' | transloco}}</label>
                      
                       <!--    (focusOut)="getforCpf(titularForm.controls.titularidadCpf.value)" 
-                        (change)="validCPF(titularForm.get('titularDependiente').value)"-->
+                        (change)="validCPF(titularForm.get('titularDependiente').value)" (change)="getforCpf(titularForm.get('titularidadCpf').value)"-->
                       <input  type="text" class="form-control" name="titularidadCpf" 
-                        (change)="getforCpf(titularForm.get('titularidadCpf').value)"
+                        
                         formControlName="titularidadCpf"
                      
                          [ngClass]="{
