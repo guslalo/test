@@ -93,7 +93,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
   public arrayDiagnostic2 = [];
-  public objectDiagnostic = {};
+  public objectDiagnostic:any;
   public preArray = []
   private alive: boolean;
   public destinies: any;
@@ -142,7 +142,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       display: null
     }
     this.setup = environment.setup
- 
+    //this.arrayDiagnostic = []
 
     console.log(this.setup)
 
@@ -502,7 +502,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         $('#addNotificationGesEno').modal('show')
       }
 
-      let _i = this.notifiableDiseases.map((e) => {
+      let _i = this.notifiableDiseases?.map((e) => {
         return e.diagnostic._id
       }).indexOf(item._id);
 
@@ -512,9 +512,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
-        
       })
 
+      this.objectDiagnostic = item
+      
       this.arrayDiagnostic.push({
         display: item.display,
         _id: item._id,
@@ -522,6 +523,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES
       })
+
+      console.log(this.arrayDiagnostic)
 
       // this.updateModelNotifiableDiseases()
     } else {
@@ -536,6 +539,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       item.type = 'cie10'
       this.objectDiagnostic = item
       this.arrayDiagnostic.push(item)
+      console.log(this.arrayDiagnostic)
 
       this.updateModelDiagnostics()
     }
@@ -575,39 +579,35 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
   addRegistryGesEno2(){
     this.updateModelNotifiableDiseases();
-    this.notifiableDiseases2 = {
-      professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
-      page: this.formAddGesEno.getRawValue().page,
-      type: this.formAddGesEno.getRawValue().type,
-      observations:this.formAddGesEno.getRawValue().observations,
-      diagnostic: this.objectDiagnostic
-    }
+    console.log("Se ejecuta")
+    //
 
-    /*this.notifiableDiseases.forEach((e) => {
-      console.log(e);
-      e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
-        e.page = this.formAddGesEno.getRawValue().page,
-        e.type = this.formAddGesEno.getRawValue().type,
-        e.observations = this.formAddGesEno.getRawValue().observations
-    })*/
-     //console.log(appointmentObject)
-     this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
-      (data) => {
-        console.log(data);
-        if (environment.production === false) {
-          //console.log(data);
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // /*this.notifiableDiseases.forEach((e) => {
+    //   console.log(e);
+    //   e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
+    //     e.page = this.formAddGesEno.getRawValue().page,
+    //     e.type = this.formAddGesEno.getRawValue().type,
+    //     e.observations = this.formAddGesEno.getRawValue().observations
+    // })*/
+    //  console.log(appointmentObject)
+    //  this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     if (environment.production === false) {
+    //       console.log(data);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    this.getAppointmentsDetails(this.appointmentId)
   }
 
   addRegistryGesEno() {
     //let DataisENO = this.objectDiagnostic.isENO
 
-    this.updateModelNotifiableDiseases()
+    //this.updateModelNotifiableDiseases()
 
     // let appointmentObject = {
     //   appointmentDetails: {
@@ -643,29 +643,33 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   updateModelNotifiableDiseases() {
-    this.notifiableDiseases.forEach((e) => {
-      console.log(e);
-      e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
-        e.page = this.formAddGesEno.getRawValue().page,
-        e.type = this.formAddGesEno.getRawValue().type,
-        e.observations = this.formAddGesEno.getRawValue().observations
-    })
-
-    console.log(this.notifiableDiseases)
-
-    if (this.arrayDiagnostic != null) {
-      let appointmentObject = {
-        appointmentDetails: {
-          notifiableDiseases: this.notifiableDiseases
-        },
-      };
-      
-      this.saveAppointment(appointmentObject);
+    if(this.objectDiagnostic._id == null) {
+      this.objectDiagnostic = this.arrayDiagnostic[this.arrayDiagnostic.length - 1];
     }
+    this.notifiableDiseases2 = {
+      name: JSON.parse(localStorage.getItem('currentUser')).name + ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName,
+      professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
+      page: this.formAddGesEno.getRawValue().page,
+      type: this.formAddGesEno.getRawValue().type,
+      observations: this.formAddGesEno.getRawValue().observations,
+      diagnostic: this.objectDiagnostic,
+    };
+
+    this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+        (data) => {
+          console.log(data);
+          if (environment.production === false) {
+            console.log(data);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+    );
   }
 
   displayDiagnosticsSetupBR(_array) {
-    this.arrayDiagnostic = _array.map((item) => { return item.diagnostic })
+    this.arrayDiagnostic = _array?.map((item) => { return item.diagnostic })
   }
 
   deleteDiagnostic(_id) {
@@ -676,7 +680,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
       console.log(this.notifiableDiseases, _id)
 
-      this.updateModelNotifiableDiseases()
+      //this.updateModelNotifiableDiseases()
     } else {
       this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
       this.updateModelDiagnostics()

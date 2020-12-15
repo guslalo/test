@@ -608,7 +608,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation:  '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
@@ -692,7 +692,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation: '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
@@ -799,7 +799,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation: '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
@@ -897,7 +897,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: this.formUser[1].value.familySituation || '',
+          familySituation:  '',
           prevission: this.formUser[1].value.prevission || ''
         },
         addressData: {
