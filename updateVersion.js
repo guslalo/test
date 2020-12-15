@@ -12,7 +12,7 @@ const options = {
     files: ['src/environments/environment.prod.ts', 
     'src/environments/environment.dev.ts', 
     'src/environments/environment.staging.ts',
-    'src/environments/environment.cl.ts',
+    'src/environments/environment.chilel.ts',
     'src/environments/environment.medline.ts'],
     from: /{BUILD_VERSION}/g,
     to: buildVersion,
