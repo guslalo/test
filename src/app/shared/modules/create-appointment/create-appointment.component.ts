@@ -31,7 +31,7 @@ export class CreateAppointmentComponent implements OnInit {
   @Input() public modalConfig: ModalConfig
   @ViewChild('modal') private modalContent: TemplateRef<CreateAppointmentComponent>
   private modalRef: NgbModalRef
-  appointmentForm: FormGroup;
+  public appointmentForm: FormGroup;
 
   public patients = [];
   public patientSelected: string;
@@ -89,7 +89,7 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.appointmentsEvents.filterProfessionalsByType$.subscribe(
       (data) => {
-        this.selectedProfessionals = this.appointmentsEvents.createDisplayForSelect(data)
+        this.selectedProfessionals = this.appointmentsService.createDisplayForSelect(data)
       }
     )
 
@@ -143,25 +143,27 @@ export class CreateAppointmentComponent implements OnInit {
             break;
         }
 
-        this.filteredPatients = this.appointmentForm?.controls['patient'].valueChanges.pipe(
-          startWith(''),
-          debounceTime(200),
-          distinctUntilChanged(),
-          switchMap(val => {
-            if (typeof val === 'string' && val)
-              return this.searchPatients(val || '')
-          })
-        )
+        this.filteredPatients = this.appointmentsService.search(this.appointmentForm?.controls['patient'], 'patients')
+
+        // this.filteredPatients = this.appointmentForm?.controls['patient'].valueChanges.pipe(
+        //   startWith(''),
+        //   debounceTime(200),
+        //   distinctUntilChanged(),
+        //   switchMap(val => {
+        //     if (typeof val === 'string' && val)
+        //       return this.searchPatients(val || '')
+        //   })
+        // )
       }
     )
   }
 
-  searchPatients(query): Observable<any[]> {
-    return this.patientService.search(query)
-      .pipe(
-        map(res => this.appointmentsEvents.createDisplayForSelect(res.payload))
-      )
-  }
+  // searchPatients(query): Observable<any[]> {
+  //   return this.patientService.search(query)
+  //     .pipe(
+  //       map(res => this.appointmentsService.createDisplayForSelect(res.payload))
+  //     )
+  // }
 
   getObjetives() {
     this.appointmentsService.getObjetives().subscribe((data) => {

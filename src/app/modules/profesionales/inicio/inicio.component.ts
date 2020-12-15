@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CurrentUserService } from './../../../services/current-user.service';
-import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
+import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedule-appointment/reschedule-appointment.component';
 
 @Component({
   selector: 'app-inicio',
@@ -12,7 +13,7 @@ import { AppointmentEventsService } from 'src/app/services/appointment-events.se
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPComponent implements OnInit {
-  // public currentUser:any;
+  @ViewChild('modal') private modalContent: TemplateRef<RescheduleAppointmentComponent>
   public consultas: any;
   public currentUser: any = {};
   currentRate = 4;
@@ -26,10 +27,11 @@ export class InicioPComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private appointmentsService: AppointmentsService,
     public currentUserService: CurrentUserService,
-    config: NgbRatingConfig,
+    public config: NgbRatingConfig,
     private router: Router,
     private route: ActivatedRoute,
-    private appointmentsEvents: AppointmentEventsService
+    private appointmentsEvents: AppointmentEventsService,
+    private modalService: NgbModal
   ) {
     config.max = 5;
     config.readonly = true;
@@ -44,6 +46,10 @@ export class InicioPComponent implements OnInit {
     this.getAppointments();
     //this.getAppointments2();
     this.getRooms();
+
+    this.appointmentsEvents.listAppointments$.subscribe(() => {
+      this.getAppointments()
+    })
   }
 
   ngAfterViewInit() {
@@ -51,6 +57,11 @@ export class InicioPComponent implements OnInit {
     let _userId = _user.id
     this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
     this.appointmentsEvents.buildForm$.emit(_user.role)
+  }
+
+  openModalReagendamiento(item) {
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.getProfessionalBlocks$.emit(item)
   }
 
   getAppointments() {

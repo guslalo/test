@@ -255,7 +255,8 @@
                                 </a>
                               </ng-container>
 
-                              <button ngbDropdownItem type="button" data-toggle="modal" data-target="#modalAppointment">
+                              <button ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
+                              data-toggle="modal" data-target="#modalReAgendamiento">
                                 {{ 'clinicalFile.reschedule.label' | transloco }}
                               </button>
                             </div>
@@ -509,4 +510,4 @@
 </ngx-spinner>-->
 </div>
 
-<modal-create-appointment #modalAppointment></modal-create-appointment>
+<modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>

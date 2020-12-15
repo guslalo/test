@@ -168,7 +168,7 @@
                 </svg>
               </button>
               <div ngbDropdownMenu>
-                <button ngbDropdownItem type="button">
+                <button ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
                   {{ 'clinicalFile.reschedule.label' | transloco }}
                 </button>
                 <button ngbDropdownItem type="button">
@@ -213,3 +213,4 @@
 </div>
 
 <modal-create-appointment #modalAppointment></modal-create-appointment>
+<modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>

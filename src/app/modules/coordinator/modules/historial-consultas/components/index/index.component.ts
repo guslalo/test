@@ -75,14 +75,18 @@ export class IndexComponent implements OnInit {
     private professionalService: ProfessionalService,
     private formBuilder: FormBuilder,
     private translationService: TranslocoService,
-    private appointmentsEvents: AppointmentEventsService
+    private appointmentEvents: AppointmentEventsService,
   ) { }
 
   ngOnInit(): void {
     this.getAppointments();
 
-    this.appointmentsEvents.updateAppointments$.subscribe(() => {
+    this.appointmentEvents.updateAppointments$.subscribe(() => {
       this.getAppointments();
+    })
+
+    this.appointmentEvents.listAppointments$.subscribe((data) => {
+      this.getAppointments()
     })
 
     // this.getPatients();
@@ -129,9 +133,9 @@ export class IndexComponent implements OnInit {
 
   ngAfterViewInit() {
     let _user = JSON.parse(localStorage.getItem('currentUser'))
-    this.appointmentsEvents.getProfessionals$.emit()
-    this.appointmentsEvents.getMedicalSpecialties$.emit()
-    this.appointmentsEvents.buildForm$.emit(_user.role)
+    this.appointmentEvents.getProfessionals$.emit()
+    this.appointmentEvents.getMedicalSpecialties$.emit()
+    this.appointmentEvents.buildForm$.emit(_user.role)
   }
 
 
@@ -279,6 +283,11 @@ export class IndexComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  setAppointment(item){
+    console.log('APPOINTMEN FROM LIST', item)
+    this.appointmentEvents.setAppointmentReagendamiento$.emit(item)
   }
 
   // createAppointment() {
