@@ -26,6 +26,6 @@ export const environment = {
   colors: {
     "color-primary": "#4680AE;",
     "color-secondary": "#4680ae;",
-    "color-hover": "#25b0bb;",
+    "color-hover": "#05A78B;",
   }
 };
