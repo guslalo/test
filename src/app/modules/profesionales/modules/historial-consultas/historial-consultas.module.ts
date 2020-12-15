@@ -25,4 +25,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
   ],
 })
-export class HistorialConsultasModule {}
+export class HistorialConsultasModule { }

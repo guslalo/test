@@ -4,6 +4,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { environment } from 'src/environments/environment'
 import * as moment from 'moment';
+import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 
 @Component({
   selector: 'app-index',
@@ -20,12 +21,21 @@ export class IndexComponent implements OnInit {
   ColumnMode = ColumnMode;
   moment: any = moment;
 
-  constructor(public currentUserService: CurrentUserService, public appointmentsService: AppointmentsService) {}
+  constructor(
+    public currentUserService: CurrentUserService, 
+    public appointmentsService: AppointmentsService,
+    private appointmentEvents: AppointmentEventsService,
+    ) {}
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
     this.getAppointmentsWaitingRooms();
+  }
+
+  setAppointment(item){
+    console.log('APPOINTMEN FROM LIST', item)
+    this.appointmentEvents.setAppointmentReagendamiento$.emit(item)
   }
 
   getAppointments() {
@@ -39,7 +49,10 @@ export class IndexComponent implements OnInit {
             return a - b;
           })
           .filter((finished) => finished.administrativeDetails.status !== 'finished');
-        this.consultas = filteredAppointments;
+        
+          this.consultas = filteredAppointments;
+
+        console.log("consultas", data)
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
         var earliest = new Date(Math.min.apply(null,dates));*/

@@ -80,4 +80,4 @@ FullCalendarModule.registerPlugins([
     NgbDatepickerModule,
   ],
 })
-export class ProfesionalesModule {}
+export class ProfesionalesModule { }
