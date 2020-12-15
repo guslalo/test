@@ -124,7 +124,7 @@ pipelines:
           - itms-frontend.zip
     - step:
         name: "Deploy to medline"
-        deployment: medline
+        deployment: Medline
         script:
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
           variables:
@@ -134,5 +134,5 @@ pipelines:
             APPLICATION_NAME: Tcregional-FrontEnd-MedilineEnv
             ENVIRONMENT_NAME: TcregionalFrontendMedilineenv-env
             ZIP_FILE: "itms-frontend.zip"
-            S3_BUCKET: elasticbeanstalk-us-east-1-273347846553
+            S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
             WAIT: 'true'
