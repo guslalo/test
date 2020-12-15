@@ -21,5 +21,6 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20000 * 60,
-  setup: 'CL'
+  setup: 'CL',
+  version: '{BUILD_VERSION}-cl',
 };
