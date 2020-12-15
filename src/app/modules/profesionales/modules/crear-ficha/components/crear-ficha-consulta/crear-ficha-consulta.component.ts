@@ -105,6 +105,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   public objetives: any;
   public notifiableDiseases = [];
+  public notifiableDiseases2 = { };
 
   constructor(
     private route: ActivatedRoute,
@@ -533,6 +534,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       if (_i >= 0) return
 
       item.type = 'cie10'
+      this.objectDiagnostic = item
       this.arrayDiagnostic.push(item)
 
       this.updateModelDiagnostics()
@@ -570,6 +572,36 @@ export class CrearFichaConsultaComponent implements OnInit {
       $('#addGesEno').modal('show')
       $('#addGes').modal('hide')
     }
+  }
+  addRegistryGesEno2(){
+    this.updateModelNotifiableDiseases();
+    this.notifiableDiseases2 = {
+      professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
+      page: this.formAddGesEno.getRawValue().page,
+      type: this.formAddGesEno.getRawValue().type,
+      observations:this.formAddGesEno.getRawValue().observations,
+      diagnostic: this.objectDiagnostic
+    }
+
+    /*this.notifiableDiseases.forEach((e) => {
+      console.log(e);
+      e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
+        e.page = this.formAddGesEno.getRawValue().page,
+        e.type = this.formAddGesEno.getRawValue().type,
+        e.observations = this.formAddGesEno.getRawValue().observations
+    })*/
+     //console.log(appointmentObject)
+     this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+      (data) => {
+        console.log(data);
+        if (environment.production === false) {
+          //console.log(data);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   addRegistryGesEno() {
@@ -611,7 +643,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   updateModelNotifiableDiseases() {
-    this.notifiableDiseases.map((e) => {
+    this.notifiableDiseases.forEach((e) => {
       console.log(e);
       e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
         e.page = this.formAddGesEno.getRawValue().page,
@@ -627,6 +659,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           notifiableDiseases: this.notifiableDiseases
         },
       };
+      
       this.saveAppointment(appointmentObject);
     }
   }

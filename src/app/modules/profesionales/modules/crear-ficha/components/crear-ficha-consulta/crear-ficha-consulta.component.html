@@ -2144,7 +2144,7 @@
                 <button type="button" class="btn btn-primary" (click)="searchInModal()">buscar</button>
               </div>
 
-              <ng-container *ngFor="let item of arrayDiagnostic; "><!--trackBy: trackItem-->
+              <ng-container *ngFor="let item of arrayDiagnostic; trackBy: trackItem">
 
                 <!--sintoma-->
                 <div class="sintoma mt-4 mb-3 overflow-hidden" id="{{ item._id }}">
@@ -2201,7 +2201,7 @@
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
           {{ 'common.button.cancel.label' | transloco }}
         </button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addRegistryGesEno()">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addRegistryGesEno2()">
           Registrar
         </button>
       </div>
