@@ -105,6 +105,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   public objetives: any;
   public notifiableDiseases = [];
+  public notifiableDiseases2 = { };
 
   constructor(
     private route: ActivatedRoute,
@@ -132,6 +133,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.idleEvents.inVideoCall(false)
   }
 
+
   ngOnInit(): void {
     this.objectDiagnostic = {
       _id: null,
@@ -140,6 +142,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       display: null
     }
     this.setup = environment.setup
+ 
 
     console.log(this.setup)
 
@@ -480,6 +483,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   selectDiagnostico(item) {
+    console.log(item)
 
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
@@ -508,6 +512,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
+        
       })
 
       this.arrayDiagnostic.push({
@@ -529,6 +534,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       if (_i >= 0) return
 
       item.type = 'cie10'
+      this.objectDiagnostic = item
       this.arrayDiagnostic.push(item)
 
       this.updateModelDiagnostics()
@@ -566,6 +572,36 @@ export class CrearFichaConsultaComponent implements OnInit {
       $('#addGesEno').modal('show')
       $('#addGes').modal('hide')
     }
+  }
+  addRegistryGesEno2(){
+    this.updateModelNotifiableDiseases();
+    this.notifiableDiseases2 = {
+      professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
+      page: this.formAddGesEno.getRawValue().page,
+      type: this.formAddGesEno.getRawValue().type,
+      observations:this.formAddGesEno.getRawValue().observations,
+      diagnostic: this.objectDiagnostic
+    }
+
+    /*this.notifiableDiseases.forEach((e) => {
+      console.log(e);
+      e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
+        e.page = this.formAddGesEno.getRawValue().page,
+        e.type = this.formAddGesEno.getRawValue().type,
+        e.observations = this.formAddGesEno.getRawValue().observations
+    })*/
+     //console.log(appointmentObject)
+     this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+      (data) => {
+        console.log(data);
+        if (environment.production === false) {
+          //console.log(data);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   addRegistryGesEno() {
@@ -607,7 +643,8 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   updateModelNotifiableDiseases() {
-    this.notifiableDiseases.map((e) => {
+    this.notifiableDiseases.forEach((e) => {
+      console.log(e);
       e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
         e.page = this.formAddGesEno.getRawValue().page,
         e.type = this.formAddGesEno.getRawValue().type,
@@ -622,6 +659,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           notifiableDiseases: this.notifiableDiseases
         },
       };
+      
       this.saveAppointment(appointmentObject);
     }
   }
@@ -648,13 +686,33 @@ export class CrearFichaConsultaComponent implements OnInit {
   trackItem(index: number, item: any) {
     return item._id
   }
+  searchInModal(){
+    $( "#diagnostics" ).focus();
+    $( ".searchBox2 .responseSearch" ).show();
+  }
 
+  searchInModalHide(){
+    $( ".searchBox2 .responseSearch" ).hide();
+  }
   //buscador de diagnostico
   onChangeSearch(event) {
+    
+    console.log(event)
+    this.searchResponse = null;
     //this.arrayDiagnostic =   this.arrayDiagnostic2;
     // console.log(this.searchFormcontrol);
+    //this.searchResponse = null;
+    /*$("#addGesEno").on("click","#titlelabelgeseno", function(){
+      alert("success");
+    });*/
+    //
+    $(document).on('change','#titlelabelgesen',function(){
+      //your code
+      })
+    if (event && event.length >= 2 ) { //
 
-    if (event && event.length >= 2) {
+   
+
       this.spinnerSearch = true;
 
       setTimeout(() => {
@@ -664,7 +722,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           (data) => {
             //this.searchFormcontrol = true
 
-            this.cdr.detectChanges();
+            //this.cdr.detectChanges();
 
             this.spinnerSearch = false;
             this.searchDisplay = true;
@@ -677,7 +735,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           }
         );
 
-      }, 600);
+      }, 800);
 
     } else {
       console.log('busqueda inactiva', event);
@@ -1170,7 +1228,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         if (this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
-          this.autoSave();
+          //this.autoSave();
         } else {
           this.permisoGuardar = false;
         }

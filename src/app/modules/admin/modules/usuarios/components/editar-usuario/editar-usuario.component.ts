@@ -62,6 +62,9 @@ export class EditarUsuarioComponent implements OnInit {
   public cityObject: any;
   public neighborhood: any;
   public street: any;
+  titularForm: FormGroup;
+  titular:any;
+  public loarderTutor:boolean;
 
   // [maxDate]="maxDate" ln 222
   currentDate = {
@@ -99,6 +102,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   professionalRegistry: any = [];
   professionalRegistrySend: any = [];
+  
 
   constructor(
     private location: Location,
@@ -113,6 +117,7 @@ export class EditarUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loarderTutor = false;
     this.spinner.show();
 
     this.getUser(this.userType, this.userId);
@@ -139,6 +144,16 @@ export class EditarUsuarioComponent implements OnInit {
       extraDocument: [null, null],
       extraIdDocument: ['', null],
     });
+
+       
+    this.titularForm = this.formBuilder.group({
+      //document:  new FormControl('cpf'),
+      //idDocumentNumber: ['', Validators.required],
+      titularDependiente: ['', Validators.required],
+      titularidadCpf: ['', null],
+      titularidadName: ['', null]  
+    });
+
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required,]],
@@ -587,9 +602,6 @@ export class EditarUsuarioComponent implements OnInit {
     }
     );
 
-
-
-
     /*
     this.userService.getLocationDataFromCep(cep).subscribe(
       data => {
@@ -600,6 +612,27 @@ export class EditarUsuarioComponent implements OnInit {
       }
     )*/
   }
+
+  getforCpf(cpf) {
+    //console.log(cpf)
+    this.loarderTutor = true;
+
+    this.userService.getForCpf(cpf).subscribe((data) => {
+      console.log(data);
+      this.titular  = data.payload
+      this.titularForm.get('titularidadName').setValue(this.titular.fullName, {emitEvent: false});
+      this.loarderTutor = false;
+    },
+      error => {
+        console.log(error)
+        this.loarderTutor = false
+      }
+    );
+  
+   
+  
+  }
+
 
   validCPF(cpf: string) {
     this.cpfvalid = this.validateCPF(cpf);

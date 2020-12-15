@@ -230,7 +230,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-4">
+                  <!-- <div class="form-group col-md-4">
                     <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
                     <select class="form-control" name="familySituation" formControlName="familySituation" [attr.disabled]="userType == 'professional' ? '' : null">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -238,7 +238,7 @@
                         {{ item.name }}
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                   <div class="form-group col-md-4">
                     <label for="uf">{{ 'account.region.label' | transloco }}
                       (UF) *</label>
@@ -252,10 +252,6 @@
                       </option>
                     </select>
                   </div>
-                </div>
-                
-                <div class="row">
-                  
                   <div class="form-group col-md-4">
                     <label for="city">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <select class="form-control" name="city" formControlName="city" [ngClass]="{
@@ -267,6 +263,11 @@
                       </option>
                     </select>
                   </div>
+                </div>
+                
+                <div class="row">
+                  
+                  
                   <div class="form-group col-12 col-md-4">
                     <label for="prevission">{{ 'auth.prevission.label' | transloco }}*</label>
                     <div class="input-group">
@@ -296,6 +297,9 @@
                         'is-invalid': !personalData.get('streetNumber').valid
                       }" />
                   </div>
+                  
+                </div>
+                <div class="row">
                   <div class="form-group col-md-4">
 
                     <label for="street">{{ 'auth.complement.label' |transloco }}</label>
