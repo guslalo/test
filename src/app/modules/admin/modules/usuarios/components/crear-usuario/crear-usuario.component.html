@@ -166,7 +166,7 @@
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" 
                         value="titularRadio"
-                        id="titularRadio"  formControlName="titularDependiente" 
+                        id="titular"  formControlName="titularDependiente" 
                         name="titularDependiente" 
                         class="custom-control-input">
                         <label class="custom-control-label" for="titularRadio">{{'titularidad.titular' | transloco}}</label>
@@ -174,7 +174,7 @@
 
                       <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" 
-                        value="dependienteRadio"
+                        value="dependiente"
                         id="dependienteRadio" formControlName="titularDependiente" 
                          name="titularDependiente" 
                         class="custom-control-input" >
@@ -184,7 +184,7 @@
                     </div>
                   
                   </div>
-                  <div class="row" *ngIf="titularForm.controls.titularDependiente.value == 'dependienteRadio'">
+                  <div class="row" *ngIf="titularForm.controls.titularDependiente.value == 'dependiente'">
                     <div class="form-group col-md-6">
                       <label for="titularidadCpf">{{'titularidad.cpf' | transloco}}</label>
                      
