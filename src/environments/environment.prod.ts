@@ -24,7 +24,7 @@ export const environment = {
   setup: 'BR',
   version: '{BUILD_VERSION}-home',
   colors: {
-    "color-primary": "#DC701F;",
+    "color-primary": "#D0211E;",
     "color-secondary": "#DC221F;",
     "color-hover": "#0A6FF5;",
   }
