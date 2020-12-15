@@ -1063,7 +1063,7 @@
                             </div>
 
                           </div>
-                          <ng-container *ngFor="let item of arrayDiagnostic">
+                          <ng-container *ngFor="let item of arrayDiagnostic; trackBy: trackItem">
                             <!--sintoma-->
                             <div class="sintoma mt-4 mb-3 overflow-hidden" id="{{ item._id }}">
                               <div class="icon">
@@ -1714,24 +1714,24 @@
               <tbody>
                 <tr *ngFor="let item of appointmentDetail.appointmentDetails.notifiableDiseases">
                   <td class="text-center">
-
                     {{ item.updatedAt | date: 'dd/MM/yyyy':'+0000' }}
                   </td>
                   <td class="text-center">
-
+                    {{ item.name }}
                   </td>
                   <td class="text-center">
-                    <ng-container *ngIf="item.diagnostic.isENO === true">
+                    <ng-container *ngIf="item.isENO == true;">
                       ENO
                     </ng-container>
-                    <ng-container *ngIf="item.diagnostic.isGES === true">
+                    <ng-container *ngIf="item.isGES == true">
                       GES
+                    </ng-container>
+                    <ng-container *ngIf="item.isGES == false && item.isGES == false">
+                      Sin información
                     </ng-container>
                   </td>
                   <td class="text-center">
-
-                    I10
-
+                      {{item.diagnostic.type}}
                   </td>
                   <td class="text-center">
                     {{item.page}}
@@ -2127,7 +2127,8 @@
                     </li>
                     <ng-container *ngIf="!spinnerSearch">
                       <ng-container *ngIf="searchResponse?.length; else noSearch">
-                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" (click)="selectDiagnostico(item)" (click)="searchInModalHide()">
+                        <li *ngFor="let item of searchResponse" id="{{ item._id }}" 
+                        (click)="selectDiagnostico(item)" (click)="searchInModalHide()">
                           {{ item.display }}
                         </li>
                       </ng-container>
