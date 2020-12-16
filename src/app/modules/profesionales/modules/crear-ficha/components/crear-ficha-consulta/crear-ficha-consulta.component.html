@@ -1729,11 +1729,19 @@
                     {{ item.name }}
                   </td>
                   <td class="text-center">
-                    <ng-container *ngIf="item.diagnostic.isENO == true;">
+                    <ng-container *ngIf="item.diagnostic.isENO == true && item.diagnostic.isGES == false">
                       ENO
                     </ng-container>
-                    <ng-container *ngIf="item.diagnostic.isGES == true">
+                    <ng-container *ngIf="item.diagnostic.isGES == true && item.diagnostic.isENO == false">
                       GES
+                    </ng-container>
+                    <ng-container *ngIf="item.diagnostic.isGES == true && item.diagnostic.isENO == true">
+                      <ng-container *ngIf="item.isGES == true && item.isENO == false">
+                        GES
+                      </ng-container>
+                      <ng-container *ngIf="item.isGES == false && item.isENO == true">
+                        ENO
+                      </ng-container>
                     </ng-container>
                     <ng-container *ngIf="item.diagnostic.isGES == false && item.diagnostic.isENO == false">
                       Sin información
@@ -2063,9 +2071,21 @@
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal"  (click)="refreshData()">
           No
         </button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="nextStep('eno')">
-          Si
-        </button>
+        <ng-container *ngIf="multi == true; noMultiEno">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="multiEno = true" 
+          (click)="nextStep('eno')" 
+          
+          >
+            Si
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="multi == false;">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="nextStep('eno')">
+            Si
+          </button>
+        </ng-container>
+     
       </div>
     </div>
   </div>
@@ -2093,9 +2113,21 @@
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" (click)="refreshData()">
           No
         </button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="nextStep('ges')">
-          Si
-        </button>
+        <ng-container *ngIf="multi == true; noMultiGes">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="multiGes = true" 
+          (click)="nextStep('ges')" 
+          
+          >
+            Si
+          </button>
+        </ng-container>
+        <ng-container *ngIf="multi == false;">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="nextStep('ges')">
+            Si
+          </button>
+        </ng-container>
+       
+     
       </div>
     </div>
   </div>
@@ -2183,13 +2215,12 @@
             </div>
 
             <!--
-            <div class="form-group col-12">
+            <div class="form-group col-12" *ngIf="multi == true">
               <label for="type">Tipo de notificacion</label>
               <select class="form-control" name="type" id="type" formControlName="type">
                 <option [value]="null">- Seleccionar -</option>
                 <option value="ges">GES</option>
                 <option value="eno">ENO</option>
-                <option value="gesEno">GES/ENO</option>
               </select>
             </div>-->
 
@@ -2211,9 +2242,17 @@
         <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
           {{ 'common.button.cancel.label' | transloco }}
         </button>
-        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addRegistryGesEno2()">
-          Registrar
-        </button>
+        <ng-container *ngIf="multi == true; noMulti">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addRegistryGesEno2()">
+            Registrar
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="multi == false;">
+          <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal" (click)="addRegistryGesEno2()">
+            Registrar
+          </button>
+        </ng-container>
       </div>
     </div>
   </div>
