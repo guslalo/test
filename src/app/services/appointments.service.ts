@@ -37,6 +37,7 @@ export class AppointmentsService {
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
   private objetives = 'v1/objetives/'
   private cancels = 'v1/cancels'
+  private prescripcionsRecemed = 'v1/prescriptions/create-prescription'
 
   public appointmentStatus = {
     RESERVED: 'reserved',
@@ -442,6 +443,10 @@ export class AppointmentsService {
   
   cancelReasons(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.cancels);
+  }
+
+  createPrescriptionRecemed(data): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.prescripcionsRecemed,  data);
   }
 
 }

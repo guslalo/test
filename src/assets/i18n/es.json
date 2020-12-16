@@ -46,7 +46,7 @@
       }
     },
     "defeche": {
-      "label": "Destinos"
+      "label": "Destino del paciente"
     },
     "patientData": {
       "tabs": {
@@ -2661,6 +2661,18 @@
     }
   },
   "common": {
+    "detail": {
+      "label": "Detalle"
+    },
+    "observations":{
+      "label": "Observaciones"
+    },
+    "hold":{
+      "label": "Retenida"
+    },
+    "ges":{
+      "label": "GES"
+    },
     "appointmentHasPreviousImmediate": {
       "label": "Ud ya cuenta con una consulta inmediata activa, por favor consulte el menú MIS CONSULTAS"
     },

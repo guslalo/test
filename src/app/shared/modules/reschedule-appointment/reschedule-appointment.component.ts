@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { } from "module";
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';

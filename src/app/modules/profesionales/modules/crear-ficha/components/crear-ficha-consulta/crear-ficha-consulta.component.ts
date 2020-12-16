@@ -17,6 +17,8 @@ import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
+import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
+
 declare var $: any;
 
 @Component({
@@ -126,6 +128,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     private destinyService: DestiniesService,
     private idleEvents: IdleEventsService,
     private cdr: ChangeDetectorRef,
+    private appointmentEvents: AppointmentEventsService
   ) { }
 
   ngOnDestroy(): void {
@@ -486,15 +489,14 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   notify(item){
+    this.objectDiagnostic = item;
     if (environment.setup === 'CL') {
-      if (item.isGES === true) {
-          
+      if (item.isGES === true) {    
           
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
         // console.log(item)
-        //this.arrayDiagnostic.push(item);
         $('#addNotificationEno').modal('show')
       }
    }
@@ -505,6 +507,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     console.log('multi',  this.multi)
     this.arrayDiagnostic.push(item);
     this.objectDiagnostic = item
+    console.log( this.objectDiagnostic)
     this.updateModelDiagnostics();
 
     if (item.isGES === true && item.isENO === false) {
@@ -1359,6 +1362,9 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.videoCall = true;
           this.floatVideoCallViewer()
         }
+
+        this.appointmentEvents.setAppointmentDetails$.emit(data.payload)
+
         /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
