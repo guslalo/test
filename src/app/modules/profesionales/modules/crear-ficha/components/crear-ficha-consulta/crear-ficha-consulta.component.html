@@ -1741,7 +1741,7 @@
                   </th>
                 </tr>
               </thead>
-
+              <!-- listado de notificaciones ges/eno -->
               <tbody>
                 <tr *ngFor="let item of appointmentDetail.appointmentDetails.notifiableDiseases">
                   <td class="text-center">
@@ -1770,7 +1770,7 @@
                     </ng-container>
                   </td>
                   <td class="text-center">
-                      {{item.diagnostic.type}}
+                      {{item.diagnostic.code}}
                   </td>
                   <td class="text-center">
                     {{item.page}}
