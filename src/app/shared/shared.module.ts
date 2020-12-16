@@ -40,9 +40,11 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { CreateAppointmentComponent } from './modules/create-appointment/create-appointment.component';
 import { RescheduleAppointmentComponent } from './modules/reschedule-appointment/reschedule-appointment.component';
 import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-appointment.component';
+import { RecemedPrescriptionComponent } from './modules/recemed-prescription/recemed-prescription.component';
+import { RecemedProcedureComponent } from './modules/recemed-procedure/recemed-procedure.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -89,7 +91,9 @@ import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-
     NgxPermissionsModule,
     CreateAppointmentComponent,
     RescheduleAppointmentComponent,
-    CancelAppointmentComponent
+    CancelAppointmentComponent,
+    RecemedPrescriptionComponent,
+    RecemedProcedureComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

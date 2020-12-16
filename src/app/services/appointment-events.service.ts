@@ -16,6 +16,7 @@ export class AppointmentEventsService {
   public listAppointments$: EventEmitter<boolean>;
   public getProfessionalBlocks$: EventEmitter<boolean>;
   public setAppointmentCancelReasons$: EventEmitter<boolean>;
+  public setAppointmentDetails$: EventEmitter<boolean>;
 
   constructor() {
     this.updateAppointments$ = new EventEmitter();
@@ -28,6 +29,7 @@ export class AppointmentEventsService {
     this.listAppointments$ = new EventEmitter();
     this.getProfessionalBlocks$ = new EventEmitter();
     this.setAppointmentCancelReasons$ = new EventEmitter();
+    this.setAppointmentDetails$ = new EventEmitter();
   }
 
   updateAppointments() {

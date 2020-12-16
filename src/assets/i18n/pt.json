@@ -2661,6 +2661,18 @@
     }
   },
   "common": {
+    "detail": {
+      "label": "Detalle"
+    },
+    "observations":{
+      "label": "Observaciones"
+    },
+    "hold":{
+      "label": "Retenida"
+    },
+    "ges":{
+      "label": "GES"
+    },
     "appointmentHasPreviousImmediate": {
       "label": "Você já tem uma consulta imediata ativa, por favor consulte o menu MINHAS CONSULTAS"
     },
