@@ -482,25 +482,40 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.search = true;
   }
 
-  selectDiagnostico(item) {
-    console.log(item)
-
+  notify(item){
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
-        // console.log(item)
-
+          
+          
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
         // console.log(item)
-
+        //this.arrayDiagnostic.push(item);
         $('#addNotificationEno').modal('show')
       }
-      if (item.isENO === true && item.isGES === true) {
+   }
+  }
+
+  selectDiagnostico(item) {
+    console.log(item)
+    this.arrayDiagnostic.push(item);
+    this.updateModelDiagnostics();
+    if (environment.setup === 'CL') {
+      if (item.isGES === true) {
+        this.formAddGesEno.reset();
+        
+        $('#addNotificationGes').modal('show')
+      }
+      if (item.isENO === true) {
+        this.formAddGesEno.reset();
+        $('#addNotificationEno').modal('show')
+      }
+      /*if (item.isENO === true && item.isGES === true) {
         // console.log(item)
 
         $('#addNotificationGesEno').modal('show')
-      }
+      }*/
 
       let _i = this.notifiableDiseases?.map((e) => {
         return e.diagnostic._id
@@ -508,28 +523,41 @@ export class CrearFichaConsultaComponent implements OnInit {
 
       if (_i >= 0) return
 
+      
       this.notifiableDiseases.push({
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
-      })
+      })/**/
 
       this.objectDiagnostic = item
-      this.arrayDiagnostic2 = [
-        this.objectDiagnostic
-      ]
+      //this.arrayDiagnostic2.push(item);
+      console.log( this.arrayDiagnostic2)
       
+     
+      // this.arrayDiagnostic = []/**/
+      
+      /*
       this.arrayDiagnostic.push({
         display: item.display,
         _id: item._id,
         type: 'cie10',
         isENO: item.isENO,
         isGES: item.isGES
-      })
+      })*/
 
       console.log(this.arrayDiagnostic)
 
-      // this.updateModelNotifiableDiseases()
+      /*let appointmentObject = {
+        appointmentDetails: {
+          diagnosticDetails: {
+            diagnostics: this.arrayDiagnostic
+          }
+        },
+      };*/
+      //this.updateModelNotifiableDiseases()
+      this.updateModelDiagnostics();
+      //this.saveAppointment(appointmentObject)
     } else {
       // setup BR
 
@@ -570,7 +598,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   nextStep(type) {
-    if (type === 'eno') {
+    if (type === 'eno' ) {
       window.open('https://epivigila.minsal.cl/', "_blank");
       $('#addEno').modal('hide')
       $('#addGesEno').modal('show')
@@ -581,6 +609,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     }
   }
   addRegistryGesEno2(){
+    this.formAddGesEno.reset();
     this.updateModelNotifiableDiseases();
     console.log("Se ejecuta")
     //
@@ -604,7 +633,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     //     console.log(error);
     //   }
     // );
-    this.getAppointmentsDetails(this.appointmentId)
+    //this.getAppointmentsDetails(this.appointmentId)
   }
 
   addRegistryGesEno() {
@@ -664,6 +693,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           if (environment.production === false) {
             console.log(data);
           }
+          this.getAppointmentsDetailsRefresh(this.appointmentId);
         },
         (error) => {
           console.log(error);
@@ -676,12 +706,17 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   deleteDiagnostic(_id) {
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+    this.updateModelDiagnostics();
+    //
     if (environment.setup === 'CL') {
       this.notifiableDiseases = this.notifiableDiseases.filter(item => item.diagnostic._id != _id)
-
-      this.displayDiagnosticsSetupBR(this.notifiableDiseases)
+      this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+      this.updateModelDiagnostics();
+      //this.displayDiagnosticsSetupBR(this.notifiableDiseases)
 
       console.log(this.notifiableDiseases, _id)
+ 
 
       //this.updateModelNotifiableDiseases()
     } else {
@@ -1025,6 +1060,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  refreshData(){
+    this.getAppointmentsDetailsRefresh(this.appointmentId);
+  }
+
   openFile(event) {
     const file = event.target.files[0];
     this.nameFile = event.target.files[0].name;
@@ -1225,6 +1264,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
           this.displayDiagnosticsSetupBR(data.payload.appointmentDetails.notifiableDiseases)
           this.notifiableDiseases = data.payload.appointmentDetails.notifiableDiseases
+          this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
 
         } else {
           this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
