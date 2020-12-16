@@ -23,7 +23,7 @@
                 <ng-container *ngIf="setup === 'CL'">
                   <img src="assets/itms-atrys-chile.svg">
                 </ng-container>
-               
+
               </div>
             </div>
             <!--/col-->
@@ -128,18 +128,22 @@
                           d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                       </svg>
                     </div>
-                    <div class="dropdown-menu dropdown-menu-right mt-3" style="max-height: 550px;"  aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu dropdown-menu-right mt-3" style="max-height: 550px;"
+                      aria-labelledby="dropdownMenuButton">
                       <p class="dropdown-item" style="height: auto;">{{
                         'dashboard.home.config.tabs.notifications.label' | transloco
                       }}</p>
                       <hr />
                       <ul style="overflow-y: scroll; max-height: 400px;">
-                        <li *ngFor="let not of nots; let i=index; trackBy: trackByItems" style="cursor: pointer;" class="dropdown-item" >
-                          <div (click)="toTheNots(not)" style="max-width:350px;min-width: 200px; text-overflow: clip;white-space: normal; font-size:x-small">{{not.body}}</div>
+                        <li *ngFor="let not of nots; let i=index; trackBy: trackByItems" style="cursor: pointer;"
+                          class="dropdown-item">
+                          <div (click)="toTheNots(not)"
+                            style="max-width:350px;min-width: 200px; text-overflow: clip;white-space: normal; font-size:x-small">
+                            {{not.body}}</div>
                         </li>
                       </ul>
-                      
-                      
+
+
                     </div>
                   </div>
                 </div>
@@ -197,7 +201,8 @@
                 </div>
                 <i class="text">{{ 'common.menu.home.label' | transloco }}</i>
               </a>
-              <a class="nav-link" routerLink="mi-agenda" *ngxPermissionsOnly="['Calendar:Appointment']" routerLinkActive="active">
+              <a class="nav-link" routerLink="mi-agenda" *ngxPermissionsOnly="['Calendar:Appointment']"
+                routerLinkActive="active">
                 <div class="icon">
                   <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus-fill"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -371,7 +376,8 @@
                 </div>
                 <i class="text">{{ 'common.menu.history.label' | transloco }}</i>
               </a>
-              <a *ngxPermissionsOnly="['Calendar:Appointment']" class="nav-link" routerLink="agenda" routerLinkActive="active">
+              <a *ngxPermissionsOnly="['Calendar:Appointment']" class="nav-link" routerLink="agenda"
+                routerLinkActive="active">
                 <div class="icon">
                   <img src="assets/img/agenda.svg" />
                 </div>

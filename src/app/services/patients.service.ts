@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,9 @@ export class PatientsService {
   private coordinators = 'v1/coordinator';
   private professionals = 'v1/professionals';
   private patients = 'v1/patient';
+  private opts = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // getProfessionals
   getPatientsForProfesional(): Observable<any> {
@@ -47,5 +49,12 @@ export class PatientsService {
     return this.http.patch<any>(environment.baseUrl + this.professionals + '/sendInvitation', {
       patients: patientsIds,
     });
+  }
+
+  search(query) {
+    return this.opts.length ?
+      of(this.opts) :
+      this.http.get<any>(environment.baseUrl + this.patients + '/search?filter=' + query)
+        .pipe(tap(data => this.opts = data))
   }
 }

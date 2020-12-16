@@ -125,10 +125,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     private cdr: ChangeDetectorRef,
   ) { }
 
-  ngOnChanges() {
-
-  }
-
   ngOnDestroy(): void {
     this.idleEvents.inVideoCall(false)
   }
@@ -141,6 +137,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: null,
       display: null
     }
+
     this.setup = environment.setup
     //this.arrayDiagnostic = []
 

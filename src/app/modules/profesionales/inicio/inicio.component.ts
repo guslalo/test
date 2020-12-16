@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CurrentUserService } from './../../../services/current-user.service';
-import { NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
+import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedule-appointment/reschedule-appointment.component';
 
 @Component({
   selector: 'app-inicio',
@@ -11,7 +13,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPComponent implements OnInit {
-  // public currentUser:any;
+  @ViewChild('modal') private modalContent: TemplateRef<RescheduleAppointmentComponent>
   public consultas: any;
   public currentUser: any = {};
   currentRate = 4;
@@ -25,9 +27,11 @@ export class InicioPComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private appointmentsService: AppointmentsService,
     public currentUserService: CurrentUserService,
-    config: NgbRatingConfig,
+    public config: NgbRatingConfig,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appointmentsEvents: AppointmentEventsService,
+    private modalService: NgbModal
   ) {
     config.max = 5;
     config.readonly = true;
@@ -42,12 +46,34 @@ export class InicioPComponent implements OnInit {
     this.getAppointments();
     //this.getAppointments2();
     this.getRooms();
+
+    this.appointmentsEvents.listAppointments$.subscribe(() => {
+      this.getAppointments()
+    })
+  }
+
+  ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    let _userId = _user.id
+    this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
+    this.appointmentsEvents.buildForm$.emit(_user.role)
+  }
+
+  openModalReagendamiento(item) {
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.getProfessionalBlocks$.emit(item)
+  }
+
+  setAppointmentCancelReasons(status){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
   }
 
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        console.log(data);
+        
+        console.log('getAppointments', data);
+
         this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished' && finished.administrativeDetails.status !== 'canceled');
         console.log(this.consultas);
         if (this.consultas.length > 0) {

@@ -24,7 +24,7 @@ export const environment = {
   setup: 'BR',
   version: '{BUILD_VERSION}-Medline ',
   colors: {
-    "color-primary": "#394184;",
+    "color-primary": "#86393E;",
     "color-secondary": "#D03B34;",
     "color-hover": "#77787B;",
   }

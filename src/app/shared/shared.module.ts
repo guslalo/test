@@ -16,7 +16,8 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, i
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 // Translation
@@ -36,9 +37,12 @@ import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { CreateAppointmentComponent } from './modules/create-appointment/create-appointment.component';
+import { RescheduleAppointmentComponent } from './modules/reschedule-appointment/reschedule-appointment.component';
+import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-appointment.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -58,7 +62,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxPermissionsModule,
     NgxMaskModule.forRoot({
       validation: true,
-    })
+    }),
+    NgbPaginationModule,
+    NgbTimepickerModule,
+    MatAutocompleteModule
   ],
   exports: [
     // MODULES TO RE-USE
@@ -79,7 +86,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgbdTimepickerBasic,
     ChangePassComponent,
     LangComponent,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    CreateAppointmentComponent,
+    RescheduleAppointmentComponent,
+    CancelAppointmentComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
