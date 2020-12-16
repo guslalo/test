@@ -1494,7 +1494,25 @@
                   {{ 'clinicalFile.generateDocs.label' | transloco }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
+                  
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreatePrescriptionRecemed">
+                        {{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateProcedureRecemed">
+                        {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div *ngIf="setup == 'BR'">
+                    <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;"
                     (click)="subirPrescripciones('prescription')">{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a>
                   <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
@@ -1503,6 +1521,10 @@
                   <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')"
                     href="javascript:;">{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a>
+                  </div>
+                  
+
+                  
                 </div>
               </div>
             </div>
@@ -2223,3 +2245,6 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
   <!-- <p style="color: white" > cargando...</p> -->
 </ngx-spinner>
+
+<modal-recemed-prescription #modalCreatePrescriptionRecemed></modal-recemed-prescription>
+<modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
