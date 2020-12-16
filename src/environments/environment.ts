@@ -3,7 +3,7 @@ export const environment = {
   defaultLang: 'es',
   checkAge: false,
   title: 'Itms Dev | Teleconsulta',
-  baseUrl: 'http://localhost:3000/api/',
+  baseUrl: 'https://backend-dev.bdot.app/api/',
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
