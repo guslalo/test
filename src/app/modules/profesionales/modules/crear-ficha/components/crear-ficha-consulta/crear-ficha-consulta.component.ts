@@ -480,15 +480,14 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   notify(item){
+    this.objectDiagnostic = item;
     if (environment.setup === 'CL') {
-      if (item.isGES === true) {
-          
+      if (item.isGES === true) {    
           
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
         // console.log(item)
-        //this.arrayDiagnostic.push(item);
         $('#addNotificationEno').modal('show')
       }
    }
@@ -498,6 +497,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     console.log(item)
     this.arrayDiagnostic.push(item);
     this.objectDiagnostic = item
+    console.log( this.objectDiagnostic)
     this.updateModelDiagnostics();
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
