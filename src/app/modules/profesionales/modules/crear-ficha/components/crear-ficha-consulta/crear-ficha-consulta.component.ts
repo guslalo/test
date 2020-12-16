@@ -500,15 +500,16 @@ export class CrearFichaConsultaComponent implements OnInit {
   selectDiagnostico(item) {
     console.log(item)
     this.arrayDiagnostic.push(item);
+    this.objectDiagnostic = item
     this.updateModelDiagnostics();
     if (environment.setup === 'CL') {
       if (item.isGES === true) {
-        this.formAddGesEno.reset();
+        //this.formAddGesEno.reset();
         
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
-        this.formAddGesEno.reset();
+        //this.formAddGesEno.reset();
         $('#addNotificationEno').modal('show')
       }
       /*if (item.isENO === true && item.isGES === true) {
@@ -530,7 +531,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         diagnostic: item,
       })/**/
 
-      this.objectDiagnostic = item
+     
       //this.arrayDiagnostic2.push(item);
       console.log( this.arrayDiagnostic2)
       
@@ -609,7 +610,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     }
   }
   addRegistryGesEno2(){
-    this.formAddGesEno.reset();
+   
     this.updateModelNotifiableDiseases();
     console.log("Se ejecuta")
     //
@@ -694,6 +695,7 @@ export class CrearFichaConsultaComponent implements OnInit {
             console.log(data);
           }
           this.getAppointmentsDetailsRefresh(this.appointmentId);
+          this.formAddGesEno.reset();
         },
         (error) => {
           console.log(error);
