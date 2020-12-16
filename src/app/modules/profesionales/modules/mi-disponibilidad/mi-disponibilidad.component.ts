@@ -536,9 +536,11 @@ export class MiDisponibilidadComponent implements OnInit {
 
   //GET sub especialidad
   getSpecialtiesIdService() {
-    this.specialtiesService.getSpecialtiesId2().subscribe(
+
+    let _currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    this.specialtiesService.getSpecialtiesForprofessional(_currentUser.id).subscribe(
       (data) => {
-        console.log(data);
+        console.log('getSpecialtiesForprofessional', data);
         this.specialtiesId = data.payload;
         //this.bloquearSelect = false;
       },
