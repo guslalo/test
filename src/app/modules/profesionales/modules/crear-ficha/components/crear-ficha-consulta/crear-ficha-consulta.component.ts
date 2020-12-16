@@ -104,6 +104,9 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   public videoCallStatus: any;
   public setup: string;
+  public multi:boolean;
+  public multiGes:boolean;
+  public multiEno:boolean;
 
   public objetives: any;
   public notifiableDiseases = [];
@@ -140,6 +143,9 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: null,
       display: null
     }
+
+    this.multi = false;
+    console.log(this.multi)
 
     this.setup = environment.setup
     //this.arrayDiagnostic = []
@@ -498,25 +504,35 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   selectDiagnostico(item) {
     console.log(item)
+    console.log('multi',  this.multi)
     this.arrayDiagnostic.push(item);
     this.objectDiagnostic = item
     console.log( this.objectDiagnostic)
     this.updateModelDiagnostics();
+
+    if (item.isGES === true && item.isENO === false) {
+      this.multi = false;
+    }
+    if (item.isENO === true && item.isGES === false) {
+      this.multi = false;
+    }
     if (environment.setup === 'CL') {
-      if (item.isGES === true) {
-        //this.formAddGesEno.reset();
+      if (item.isGES === true && item.isENO === false) {
+        this.multi = false;
         
         $('#addNotificationGes').modal('show')
       }
-      if (item.isENO === true) {
-        //this.formAddGesEno.reset();
+      if (item.isENO === true && item.isGES === false) {
+        this.multi = false;
         $('#addNotificationEno').modal('show')
       }
-      /*if (item.isENO === true && item.isGES === true) {
+      if (item.isENO === true && item.isGES === true) {
         // console.log(item)
-
-        $('#addNotificationGesEno').modal('show')
-      }*/
+        this.multi = true;
+        $('#addNotificationGes').modal('show')
+        $('#addNotificationEno').modal('show')
+        //$('#addNotificationGesEno').modal('show')
+      }
 
       let _i = this.notifiableDiseases?.map((e) => {
         return e.diagnostic._id
@@ -524,13 +540,36 @@ export class CrearFichaConsultaComponent implements OnInit {
 
       if (_i >= 0) return
 
-      
+     if (this.multi = true ){
+        if(this.multiGes == true && this.multiEno == false) {
+          this.notifiableDiseases.push({
+            isENO: false,
+            isGES: true,
+            diagnostic: item,
+          })
+        }
+        if(this.multiGes == false && this.multiEno == true) {
+          this.notifiableDiseases.push({
+            isENO: true,
+            isGES: false,
+            diagnostic: item,
+          })
+        }
+
+      } else {
+        this.notifiableDiseases.push({
+          isENO: item.isENO,
+          isGES: item.isGES,
+          diagnostic: item,
+        })
+      }/* 
+
       this.notifiableDiseases.push({
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
-      })/**/
-
+      })*/
+    
      
       //this.arrayDiagnostic2.push(item);
       console.log( this.arrayDiagnostic2)
@@ -599,6 +638,17 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   nextStep(type) {
+    console.log('ges',this.multiGes)
+    if(this.multiGes == true) {
+      this.multiEno = false
+    }
+
+    if(this.multiGes == false ||  this.multiEno == true) {
+      this.multiEno = true
+      
+    }
+    
+    console.log('eno', this.multiEno)
     if (type === 'eno' ) {
       window.open('https://epivigila.minsal.cl/', "_blank");
       $('#addEno').modal('hide')
@@ -676,6 +726,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   updateModelNotifiableDiseases() {
+    //console.log(this.objectDiagnostic);
     if(this.objectDiagnostic._id == null) {
       this.objectDiagnostic = this.arrayDiagnostic[this.arrayDiagnostic.length - 1];
     }
@@ -685,6 +736,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       page: this.formAddGesEno.getRawValue().page,
       type: this.formAddGesEno.getRawValue().type,
       observations: this.formAddGesEno.getRawValue().observations,
+      isENO: this.multiEno,
+      isGES: this.multiGes,
       diagnostic: this.objectDiagnostic,
     };
 
@@ -695,6 +748,10 @@ export class CrearFichaConsultaComponent implements OnInit {
             console.log(data);
           }
           this.getAppointmentsDetailsRefresh(this.appointmentId);
+          this.multiGes = false;
+          this.multiEno = false;
+          //this.multi = false;
+         
           this.formAddGesEno.reset();
         },
         (error) => {
