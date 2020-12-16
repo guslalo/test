@@ -17,6 +17,8 @@ import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
+import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
+
 declare var $: any;
 
 @Component({
@@ -123,6 +125,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     private destinyService: DestiniesService,
     private idleEvents: IdleEventsService,
     private cdr: ChangeDetectorRef,
+    private appointmentEvents: AppointmentEventsService
   ) { }
 
   ngOnDestroy(): void {
@@ -1302,6 +1305,9 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.videoCall = true;
           this.floatVideoCallViewer()
         }
+
+        this.appointmentEvents.setAppointmentDetails$.emit(data.payload)
+
         /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
