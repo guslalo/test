@@ -184,8 +184,8 @@ export class CrearUsuarioComponentCL implements OnInit {
       street: ['', Validators.required],
       complement: ['', null],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
-      prevission: ['',Validators.required],
-      postal: ['',null]
+      healthInsurance: ['',Validators.required],
+      zipcode: ['',null]
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -565,29 +565,10 @@ export class CrearUsuarioComponentCL implements OnInit {
     if (this.userType === 'patient') {
       this.userObject = {
         identificationData: {
-          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'rgRegistry' && {
-            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-          }),
           passport: this.formUser[0].value.passport || '',
-          issuingBody: this.formUser[0].value.issuingBody || '',
-          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-          ...(this.formUser[0].value.extraDocument === 'pasep' && {
-            pasep: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'ctps' && {
-            ctps: this.formUser[0].value.extraIdDocument || '',
-          }),
           ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
             idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-            titleVote: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
           }),
           isForeign: this.isForeign,
         },
@@ -595,31 +576,24 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: '',
-          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: '',
           education: this.formUser[1].value.education || '',
           familySituation:  '',
-          prevission: this.formUser[1].value.prevission || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || ''
         },
         addressData: {
-          cep: this.formUser[1].value.cep,
           uf: this.formUser[1].value.uf,
           city: this.formUser[1].value.city,
-          neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
           complement: this.formUser[1].value.complement,
-          postal: this.formUser[1].value.postal
+          zipcode: this.formUser[1].value.zipcode
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -649,29 +623,10 @@ export class CrearUsuarioComponentCL implements OnInit {
       
       this.userObject = {
         identificationData: {
-          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'rgRegistry' && {
-            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-          }),
           passport: this.formUser[0].value.passport || '',
-          issuingBody: this.formUser[0].value.issuingBody || '',
-          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-          ...(this.formUser[0].value.extraDocument === 'pasep' && {
-            pasep: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'ctps' && {
-            ctps: this.formUser[0].value.extraIdDocument || '',
-          }),
           ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
             idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-            titleVote: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
           }),
           isForeign: this.isForeign,
         },
@@ -679,21 +634,15 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: '',
-          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: '',
-          prevission: this.formUser[1].value.prevission || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -703,7 +652,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
           complement: this.formUser[1].value.complement,
-          postal: this.formUser[1].value.postal
+          zipcode: this.formUser[1].value.zipcode
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -756,29 +705,10 @@ export class CrearUsuarioComponentCL implements OnInit {
       
       this.userObject = {
         identificationData: {
-          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'rgRegistry' && {
-            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-          }),
           passport: this.formUser[0].value.passport || '',
-          issuingBody: this.formUser[0].value.issuingBody || '',
-          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-          ...(this.formUser[0].value.extraDocument === 'pasep' && {
-            pasep: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'ctps' && {
-            ctps: this.formUser[0].value.extraIdDocument || '',
-          }),
           ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
             idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-            titleVote: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
           }),
           isForeign: this.isForeign,
         },
@@ -786,21 +716,15 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: '',
-          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation: '',
-          prevission: this.formUser[1].value.prevission || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -809,7 +733,8 @@ export class CrearUsuarioComponentCL implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
-          complement: this.formUser[1].value.complement
+          complement: this.formUser[1].value.complement,
+          zipcode: this.formUser[1].value.zipcode
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,
@@ -854,29 +779,10 @@ export class CrearUsuarioComponentCL implements OnInit {
       
       this.userObject = {
         identificationData: {
-          ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
           ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
-          ...(this.formUser[0].value.document === 'rgRegistry' && {
-            rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-          }),
           passport: this.formUser[0].value.passport || '',
-          issuingBody: this.formUser[0].value.issuingBody || '',
-          ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-          ...(this.formUser[0].value.extraDocument === 'pasep' && {
-            pasep: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'ctps' && {
-            ctps: this.formUser[0].value.extraIdDocument || '',
-          }),
           ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
             idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-            titleVote: this.formUser[0].value.extraIdDocument || '',
-          }),
-          ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-            professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
           }),
           isForeign: this.isForeign,
         },
@@ -884,21 +790,15 @@ export class CrearUsuarioComponentCL implements OnInit {
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
-          motherName: '',
           secondLastName: this.formUser[1].value.secondLastName,
           email: this.formUser[1].value.email,
           phoneNumber: this.formUser[1].value.phoneNumber,
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-          ufBirth: '',
-          municipalityBirth: '',
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          originCountry: '',
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-          breed: '',
           education: this.formUser[1].value.education || '',
-          familySituation:  '',
-          prevission: this.formUser[1].value.prevission || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || ''
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -907,7 +807,8 @@ export class CrearUsuarioComponentCL implements OnInit {
           neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
-          complement: this.formUser[1].value.complement
+          complement: this.formUser[1].value.complement,
+          zipcode: this.formUser[1].value.zipcode
         },
         profiles: _profiles,
         waitingRooms: this.waitingRoomsAssigned,

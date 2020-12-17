@@ -167,8 +167,8 @@ export class EditarUsuarioCLComponent implements OnInit {
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: [null, ],
-      prevission: [null, Validators.required],
-      postal: ['', null]
+      healthInsurance: [null, Validators.required],
+      zipcode: ['', null]
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -339,26 +339,16 @@ export class EditarUsuarioCLComponent implements OnInit {
         console.log(user);
 
         // MAIN IDENTIFICATION
-        if (user.identificationData.cpf) this.identificationData.get('document').setValue('cpf');
-        if (user.identificationData.cns) this.identificationData.get('document').setValue('cns');
         if (user.identificationData.run) this.identificationData.get('document').setValue('run');
-        if (user.identificationData.rgRegistry) this.identificationData.get('document').setValue('rgRegistry');
         // SECONDARY IDENTIFICATION
-        if (user.identificationData.cbo) this.identificationData.get('extraDocument').setValue('cbo');
-        if (user.identificationData.pasep) this.identificationData.get('extraDocument').setValue('pasep');
-        if (user.identificationData.ctps) this.identificationData.get('extraDocument').setValue('ctps');
         if (user.identificationData.idDocumentNumber)
           this.identificationData.get('extraDocument').setValue('idDocumentNumber');
-        if (user.identificationData.professionalUfNumber)
-          this.identificationData.get('extraDocument').setValue('professionalUfNumber');
 
         // USER DATA
         this.identificationData
           .get('idDocumentNumber')
-          .setValue(user.identificationData.run || user.identificationData.cpf || user.identificationData.cns || user.identificationData.rgRegistry);
+          .setValue(user.identificationData.run || null);
 
-        if (user.identificationData.rgRegistry)
-          this.identificationData.get('issuingBody').setValue(user.identificationData.issuingBody || null);
 
         this.isForeign = user.identificationData.isForeign;
         if (user.identificationData.isForeign) {
@@ -369,16 +359,6 @@ export class EditarUsuarioCLComponent implements OnInit {
           this.personalData.get('inmigrationDate').setValue(this.inmigrationDate);
         }
 
-        this.identificationData
-          .get('extraIdDocument')
-          .setValue(
-            user.identificationData.cbo ||
-            user.identificationData.pasep ||
-            user.identificationData.ctps ||
-            user.identificationData.idDocumentNumber ||
-            user.identificationData.titleVote ||
-            user.identificationData.professionalUfNumber
-          );
 
           
          
@@ -398,21 +378,14 @@ export class EditarUsuarioCLComponent implements OnInit {
         }
         console.log(this.setDate);
         this.personalData.get('birthdate').setValue(this.setDate);
-        this.personalData.get('ufBirth').setValue(user.personalData.ufBirth || null);
-        this.personalData.get('municipalityBirth').setValue(user.personalData.municipalityBirth || null);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
-        this.personalData.get('breed').setValue(user.personalData.breed);
         this.personalData.get('education').setValue(user.personalData.education || null);
-        this.personalData.get('familySituation').setValue(user.personalData.familySituation || null);
-        this.personalData.get('motherName').setValue(user.personalData.motherName);
-        this.personalData.get('prevission').setValue(user.personalData.prevission);
-        this.personalData.get('postal').setValue(user.personalData?.postal || '');
-
-        this.personalData.get('cep').setValue(user.addressData.cep);
+        this.personalData.get('healthInsurance').setValue(user.personalData.healthInsurance || user.personalData.prevission);
+        this.personalData.get('zipcode').setValue(user.personalData?.zipcode || user.personalData?.postal || '');
+;
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
         this.personalData.get('city2').setValue(user.addressData.city);
-        this.personalData.get('neighborhood').setValue(user.addressData.neighborhood);
         this.personalData.get('street').setValue(user.addressData.street);
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
         this.personalData.get('complement').setValue(user.addressData.complement);
@@ -747,29 +720,11 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.userObject = {
       id: this.userId,
       identificationData: {
-        ...(this.formUser[0].value.document === 'cpf' && { cpf: this.formUser[0].value.idDocumentNumber || '' }),
-        ...(this.formUser[0].value.document === 'cns' && { cns: this.formUser[0].value.idDocumentNumber || '' }),
         ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
-        ...(this.formUser[0].value.document === 'rgRegistry' && {
-          rgRegistry: this.formUser[0].value.idDocumentNumber || '',
-        }),
+
         passport: this.formUser[0].value.passport || '',
-        issuingBody: this.formUser[0].value.issuingBody || '',
-        ...(this.formUser[0].value.extraDocument === 'cbo' && { cbo: this.formUser[0].value.extraIdDocument || '' }),
-        ...(this.formUser[0].value.extraDocument === 'pasep' && {
-          pasep: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'ctps' && {
-          ctps: this.formUser[0].value.extraIdDocument || '',
-        }),
         ...(this.formUser[0].value.extraDocument === 'idDocumentNumber' && {
           idDocumentNumber: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'titleVote' && {
-          titleVote: this.formUser[0].value.extraIdDocument || '',
-        }),
-        ...(this.formUser[0].value.extraDocument === 'professionalUfNumber' && {
-          professionalUfNumber: this.formUser[0].value.extraIdDocument || '',
         }),
         isForeign: this.isForeign,
       },
@@ -782,25 +737,19 @@ export class EditarUsuarioCLComponent implements OnInit {
         email: this.formUser[1].value.email,
         phoneNumber: this.formUser[1].value.phoneNumber,
         birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
-        ufBirth: this.formUser[1].value.ufBirth || '',
-        municipalityBirth: this.formUser[1].value.municipalityBirth || '',
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
         inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
-        breed: '',
         education: this.formUser[1].value.education || '',
-        familySituation:  '',
-        prevission: this.formUser[1].value.prevission || ''
+        healthInsurance: this.formUser[1].value.healthInsurance || ''
       },
       addressData: {
-        cep: this.formUser[1].value.cep,
         uf: this.formUser[1].value.uf,
         city: this.formUser[1].value.city,
-        neighborhood: this.formUser[1].value.neighborhood,
         street: this.formUser[1].value.street,
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
-        postal: this.formUser[1].value.postal
+        zipcode: this.formUser[1].value.zipcode
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
