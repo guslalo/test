@@ -161,7 +161,7 @@ export class CrearUsuarioComponent implements OnInit {
     
     this.titularForm = this.formBuilder.group({
       //document:  new FormControl('cpf'),
-      //idDocumentNumber: ['', Validators.required],
+      id: [''],
       titularDependiente: ['', Validators.required],
       titularidadCpf: ['', null],
       titularidadName: ['', null]  
@@ -552,6 +552,7 @@ export class CrearUsuarioComponent implements OnInit {
       name:id.options[id.selectedIndex].text
     }
   }
+
   ufRegistry2(id){
     let idSelected2 =  id.options[id.selectedIndex].value.split(":");
     this.registerUf2 = {
