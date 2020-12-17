@@ -179,7 +179,7 @@
                         data-toggle="modal"
                         data-target="#editar"
                         type="button"
-                        (click)="putAvailability(row._id)"
+                        (click)="putAvailability(row)"
                       >
                         Editar
                       </button>
@@ -269,7 +269,17 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+                
+                <!-- <input
                   type="text"
                   class="form-control"
                   id="objective"
@@ -277,7 +287,7 @@
                   [ngClass]="{
                     'is-invalid': !createAvailability.get('objective').touched
                   }"
-                />
+                /> -->
               </div>
               <div class="form-group col">
                 <label for="specialty">{{
@@ -547,7 +557,17 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <!-- <input
                   type="text"
                   class="form-control"
                   id="objective"
@@ -557,7 +577,7 @@
                     'is-invalid':
                       !createAvailability.get('objective').valid && createAvailability.get('objective').touched
                   }"
-                /><!--   value="{{idAvailability.administrativeDetails.objective}}"-->
+                />  value="{{idAvailability.administrativeDetails.objective}}" -->
               </div>
               <div class="form-group col">
                 <label for="specialty"
