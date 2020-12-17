@@ -3802,5 +3802,43 @@
       "registro": "Número de registro",
       "curso": "Curso"
     }
+  },
+  "year": {
+    "january": {
+      "label": "Enero"
+    },
+    "february": {
+      "label": "Febrero"
+    },
+    "march": {
+      "label": "Marzo"
+    },
+    "april": {
+      "label": "Abril"
+    },
+    "may": {
+      "label": "Mayo"
+    },
+    "june": {
+      "label": "Junio"
+    },
+    "july": {
+      "label": "Julio"
+    },
+    "august": {
+      "label": "Agosto"
+    },
+    "september": {
+      "label": "Septiembre"
+    },
+    "october": {
+      "label": "Octubre"
+    },
+    "november": {
+      "label": "Noviembre"
+    },
+    "december": {
+      "label": "Diciembre"
+    }
   }
 }
