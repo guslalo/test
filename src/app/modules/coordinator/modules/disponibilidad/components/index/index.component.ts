@@ -289,7 +289,7 @@ export class IndexComponent implements OnInit {
     this.disponibilidadArray = [];
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
-        console.log(data.payload);
+        console.log('getAvailability', data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
         this.disponibilidadArrayTemp = [...availabilities];
         this.disponibilidadArray = availabilities;
@@ -618,7 +618,7 @@ export class IndexComponent implements OnInit {
         // console.log(data);
         this.tempProfessionals = [...data];
         this.professionals = data;
-        // console.log(this.professionals);
+        console.log(this.professionals);
       },
       (error) => {
         console.log(error);
