@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   private loginUrl = 'v1/access/login-web';
   private accessWebUrl = 'v1/access/access-web';
+  private loginDependentUrl = 'v1/access/login-dependent';
   private recoveryUrl = 'v1/account/generate-reset-password';
   private resetPassUrl = 'v1/account/reset-password';
   private changePass = 'v1/account/change-password';
@@ -46,6 +47,10 @@ export class AuthenticationService {
   // ACCESs choose context
   accessWeb(clinicProfileId): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.accessWebUrl, { clinicProfileId });
+  }
+
+  loginDependent(userId): Observable<any>{
+    return this.http.post<any>(environment.baseUrl + this.loginDependentUrl, { userId });
   }
 
   logout() {
