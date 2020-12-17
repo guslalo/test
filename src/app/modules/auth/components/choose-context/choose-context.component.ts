@@ -13,6 +13,7 @@ import { ClinicService } from 'src/app/services/clinic.service';
   templateUrl: './choose-context.component.html',
   styleUrls: ['../login/login.component.scss'],
 })
+
 export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};

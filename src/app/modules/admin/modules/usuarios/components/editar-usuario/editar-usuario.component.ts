@@ -96,7 +96,6 @@ export class EditarUsuarioComponent implements OnInit {
   profilesAssigned: any = [];
   waitingRooms: any = [];
   waitingRoomsAssigned: any = [];
-
   specialities: any = [];
   specialitiesAssigned: any = [];
 
