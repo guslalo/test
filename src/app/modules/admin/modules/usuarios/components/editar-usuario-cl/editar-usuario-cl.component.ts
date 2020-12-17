@@ -627,7 +627,6 @@ export class EditarUsuarioCLComponent implements OnInit {
     )*/
   }
   validRUN(run:string){
-    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) this.cpfvalid
     this.cpfvalid = validate(run);
   }
   validCPF(cpf: string){

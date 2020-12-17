@@ -9,7 +9,7 @@
       (click)="createUser()"
       type="button"
       class="btn btn-secondary rounded-pill float-right"
-      [disabled]="!formUserValid()"
+      [disabled]="!formUserValid() || !cpfvalid"
     >
       {{ 'dashboard.home.userManagment.createAccount.btnCreate.label' | transloco }} 
     </button>
@@ -147,7 +147,7 @@
                         'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign || !cpfvalid
                       }"
                     />
-                    <label for="" *ngIf="!cpfvalid">CPF inválido</label>
+                    <label for="" *ngIf="!cpfvalid">RUN inválido</label>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="passport">{{ 'common.passport.label' | transloco }}</label>
@@ -420,8 +420,8 @@
                           'is-invalid':
                             !personalData.get('prevission').valid && personalData.get('prevission').touched
                         }" id="select-type-document">
-                        <option [selected]="true"  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item._id" *ngFor="let item of previsionHealth" > 
+                        <option [selected]="true"  [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  [ngValue]="item._id" *ngFor="let item of previsionHealth" > 
                           {{item.name}}
                         </option>
                     </select>
