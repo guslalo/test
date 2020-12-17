@@ -89,7 +89,7 @@
                       (change)="validateForm()"
                       id="select-type-document"
                     >
-                      <option [value]="null" disabled>{{ 'common.select.label' | transloco }}</option>
+                      <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="run" [selected]="!isForeign">
                         RUN
                       </option>
@@ -275,10 +275,10 @@
                   
                         [ngClass]="{
                           'is-invalid':
-                            !personalData.get('prevission').valid && personalData.get('prevission').touched
+                            !personalData.get('prevission').valid
                         }" id="select-type-document">
-                        <option [selected]="true"  value="null">{{ 'common.select.label' | transloco }}</option>
-                        <option  value="item._id" *ngFor="let item of previsionHealth" > 
+                        <option [selected]="true"  [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  [ngValue]="item._id" *ngFor="let item of previsionHealth" > 
                           {{item.name}}
                         </option>
                     </select>
@@ -678,7 +678,7 @@
                           {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                         </th>
                         <th scope="col">
-                          Acciones
+                          {{ 'dashboard.home.userManagment.table.action.label' | transloco }}
                         </th>
                       </tr>
                     </thead>

@@ -310,8 +310,8 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   validRUN(run:string){
-    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) this.cpfvalid
     this.cpfvalid = validate(run);
+    console.log(this.cpfvalid, run)
   }
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
