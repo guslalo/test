@@ -3551,7 +3551,7 @@
   },
   "account": {
     "completeRegister": {
-      "label": "Registro completo"
+      "label": "Completar cadastro"
     },
     "createAccount": {
       "title": "Criar conta",
