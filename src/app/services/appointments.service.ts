@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { PatientsService } from './patients.service';
+import { AppointmentEventsService } from './appointment-events.service';
+import { ProfessionalService } from './professional.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +36,30 @@ export class AppointmentsService {
   private subirAntecedentesMedico = 'v1/appointments/antecedents/'
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
   private objetives = 'v1/objetives/'
+  private cancels = 'v1/cancels'
+  private prescripcionsRecemed = 'v1/prescriptions/create-prescription'
 
-  constructor(private http: HttpClient) { }
+  public appointmentStatus = {
+    RESERVED: 'reserved',
+    APPOINTED: 'appointed',
+    RESCHEDULED: 'rescheduled',
+    ACTIVE: 'active',
+    WAITING_IN_ROOM: 'waitingInRoom',
+    IMMEDIATE_CREATED: 'created',
+    WAITING_IN_LIST: 'waitingInList',
+    PROCESS: 'process',
+    RUNNING: 'running',
+    PENDING: 'pending',
+    FINISHED: 'finished',
+    CANCELED: 'canceled',
+  };
+
+  constructor(
+    private http: HttpClient, 
+    private patientService: PatientsService, 
+    private appointmentsEvents: AppointmentEventsService,
+    private professionalService: ProfessionalService
+    ) { }
 
   paramsId(id) {
     let params = new HttpParams();
@@ -152,9 +178,6 @@ export class AppointmentsService {
     params = params.append('appointmentId', id);
     return this.http.post<any>(environment.baseUrl + this.cancel, {}, { params: params });
   }
-
-
-
 
   //events
   postRunAppointment(id): Observable<any> {
@@ -337,4 +360,93 @@ export class AppointmentsService {
   getObjetives(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.objetives);
   }
+
+  reScheduleAppointment(date, hour, SpecialtiesId, professionalId, appointmentId, objetive): Observable<any> {
+
+     let object = {
+       appointmentDetails: {
+         objetive: objetive
+       },
+       professionalDetails: {
+         specialtyId: SpecialtiesId,
+         userId: professionalId
+       },
+       dateDetails: {
+         date:{
+           day: date.day,
+           month: date.month,
+           year: date.year
+         },
+         start: hour
+      }
+     }
+     
+     return this.postReschedule(appointmentId, object)
+  }
+
+  search(patientControl, method){
+    return patientControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(val => {
+        if (typeof val === 'string' && val)
+          switch (method) {
+            case 'patients':
+              return this.searchPatients(val || '')
+              break;
+      
+              case 'professionals':
+                return this.searchProfessionals(val || '')
+                break;
+  
+            default:
+              break;
+          }
+      })
+    )
+  }
+
+  searchPatients(query): Observable<any[]> {
+    return this.patientService.search(query)
+      .pipe(
+        map(res => this.createDisplayForSelect(res.payload))
+      )
+  }
+
+  searchProfessionals(query): Observable<any[]>{
+    return this.professionalService.search(query)
+    .pipe(
+      map(res => this.createDisplayForSelect(res.payload))
+    )
+  }
+
+  createDisplayForSelect(item) {
+    if (item.length) {
+      return item.map(_e => {
+        let name
+
+        (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
+
+        name += _e.personalData.name + ' ' + _e.personalData.secondLastName
+
+        let userId = _e.userData ? _e.userData[0]._id : 'NONE'
+
+        return { id: _e._id, name, userId }
+      })
+    } else {
+      return []
+    }
+  }
+  
+  cancelReasons(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.cancels);
+  }
+
+  createPrescriptionRecemed(data): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.prescripcionsRecemed,  data);
+  }
+
 }

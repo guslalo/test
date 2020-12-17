@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { PoliciesService } from '../../../../services/policies.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { ClinicService } from 'src/app/services/clinic.service';
 
 @Component({
   selector: 'app-choose-context',
@@ -21,7 +22,8 @@ export class ChooseContextComponent implements OnInit {
     private translocoService: TranslocoService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private _policyService: PoliciesService
+    private _policyService: PoliciesService,
+    private clinicService:ClinicService
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +81,19 @@ export class ChooseContextComponent implements OnInit {
       localStorage.setItem('currentUser', JSON.stringify(user));
     }
     this._policyService.setPoliciesToUser()
-    this.router.navigate(['app-paciente']);
+    this.clinicService.accessMode().subscribe(
+      (data) => {
+        console.log(data)
+        localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+        localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+        localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+        console.log(data);
+        this.router.navigate(['app-paciente']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getRouteForClinicAndRole(clinicId, role) {

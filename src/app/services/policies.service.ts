@@ -20,21 +20,28 @@ export class PoliciesService {
   setPoliciesToUser(): void {
     //console.log(JSON.parse(localStorage.getItem('contextRole')))
 
-    if(localStorage.getItem('contextRole') && JSON.parse(localStorage.getItem('contextRole')).length > 0) {
-      let _currentUser: any = JSON.parse(localStorage.getItem('contextRole'));
-      this._backendPolicies = _currentUser
-    } else {
-      let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
-      this._backendPolicies = _currentUser.administrativeData
-    }
-    
+    // ??????????
+
+    // if(localStorage.getItem('contextRole') && JSON.parse(localStorage.getItem('contextRole')).length > 0) {
+    //   let _currentUser: any = JSON.parse(localStorage.getItem('contextRole'));
+    //   this._backendPolicies = _currentUser
+    // } else {
+    //   let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    //   if(!_currentUser) return
+    //   console.log(_currentUser)
+    //   this._backendPolicies = _currentUser.administrativeData
+    // }
+
+    let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    this._backendPolicies = _currentUser?.administrativeData || []
 
     let _policies
+    let _permissionsSize = []
+    let _mayor = 0
 
     this.flushPolicies()
 
     this._backendPolicies.forEach(element => {
-      //console.log(element);
       let _p = this.parse(element)
       let _pArr = this.makePolicy(_p)
 
@@ -42,19 +49,30 @@ export class PoliciesService {
         'clinic': element.clinicId,
         'policies': _pArr
       })
-     //console.log(this.policies)
     });
 
-
-    localStorage.setItem('policies', JSON.stringify(this.policies));
-    
-
-    this.policies.forEach(element => {
-      //console.log(element.policies);
+    for (let i = 0; i < this.policies.length; i++) {
+      const element = this.policies[i];
       if (element.clinic == localStorage.getItem('clinic')) {
+        _permissionsSize.push(element.policies.length)
+      }else{
+        localStorage.setItem('policies', JSON.stringify(element.policies));
         this.permissionsService.loadPermissions(element.policies);
       }
-    });
+    }
+
+    for (let i = 0; i < _permissionsSize.length; i++) {
+      const element = _permissionsSize[i];
+      if(element > _mayor) _mayor = element  
+    }
+
+    for (let i = 0; i < this.policies.length; i++) {
+      const element = this.policies[i];
+      if(element.policies.length == _mayor){
+        localStorage.setItem('policies', JSON.stringify(element.policies));
+        this.permissionsService.loadPermissions(element.policies);
+      }
+    }
 
     this.listPolicies()
   }

@@ -17,6 +17,8 @@ import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
+import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
+
 declare var $: any;
 
 @Component({
@@ -102,6 +104,9 @@ export class CrearFichaConsultaComponent implements OnInit {
 
   public videoCallStatus: any;
   public setup: string;
+  public multi:boolean;
+  public multiGes:boolean;
+  public multiEno:boolean;
 
   public objetives: any;
   public notifiableDiseases = [];
@@ -123,11 +128,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     private destinyService: DestiniesService,
     private idleEvents: IdleEventsService,
     private cdr: ChangeDetectorRef,
+    private appointmentEvents: AppointmentEventsService
   ) { }
-
-  ngOnChanges() {
-
-  }
 
   ngOnDestroy(): void {
     this.idleEvents.inVideoCall(false)
@@ -141,6 +143,10 @@ export class CrearFichaConsultaComponent implements OnInit {
       isENO: null,
       display: null
     }
+
+    this.multi = false;
+    console.log(this.multi)
+
     this.setup = environment.setup
     //this.arrayDiagnostic = []
 
@@ -482,24 +488,50 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.search = true;
   }
 
-  selectDiagnostico(item) {
-    console.log(item)
-
+  notify(item){
+    this.objectDiagnostic = item;
     if (environment.setup === 'CL') {
-      if (item.isGES === true) {
-        // console.log(item)
-
+      if (item.isGES === true) {    
+          
         $('#addNotificationGes').modal('show')
       }
       if (item.isENO === true) {
         // console.log(item)
+        $('#addNotificationEno').modal('show')
+      }
+   }
+  }
 
+  selectDiagnostico(item) {
+    console.log(item)
+    console.log('multi',  this.multi)
+    this.arrayDiagnostic.push(item);
+    this.objectDiagnostic = item
+    console.log( this.objectDiagnostic)
+    this.updateModelDiagnostics();
+
+    if (item.isGES === true && item.isENO === false) {
+      this.multi = false;
+    }
+    if (item.isENO === true && item.isGES === false) {
+      this.multi = false;
+    }
+    if (environment.setup === 'CL') {
+      if (item.isGES === true && item.isENO === false) {
+        this.multi = false;
+        
+        $('#addNotificationGes').modal('show')
+      }
+      if (item.isENO === true && item.isGES === false) {
+        this.multi = false;
         $('#addNotificationEno').modal('show')
       }
       if (item.isENO === true && item.isGES === true) {
         // console.log(item)
-
-        $('#addNotificationGesEno').modal('show')
+        this.multi = true;
+        $('#addNotificationGes').modal('show')
+        $('#addNotificationEno').modal('show')
+        //$('#addNotificationGesEno').modal('show')
       }
 
       let _i = this.notifiableDiseases?.map((e) => {
@@ -508,25 +540,64 @@ export class CrearFichaConsultaComponent implements OnInit {
 
       if (_i >= 0) return
 
+     if (this.multi = true ){
+        if(this.multiGes == true && this.multiEno == false) {
+          this.notifiableDiseases.push({
+            isENO: false,
+            isGES: true,
+            diagnostic: item,
+          })
+        }
+        if(this.multiGes == false && this.multiEno == true) {
+          this.notifiableDiseases.push({
+            isENO: true,
+            isGES: false,
+            diagnostic: item,
+          })
+        }
+
+      } else {
+        this.notifiableDiseases.push({
+          isENO: item.isENO,
+          isGES: item.isGES,
+          diagnostic: item,
+        })
+      }/* 
+
       this.notifiableDiseases.push({
         isENO: item.isENO,
         isGES: item.isGES,
         diagnostic: item,
-      })
-
-      this.objectDiagnostic = item
+      })*/
+    
+     
+      //this.arrayDiagnostic2.push(item);
+      console.log( this.arrayDiagnostic2)
       
+     
+      // this.arrayDiagnostic = []/**/
+      
+      /*
       this.arrayDiagnostic.push({
         display: item.display,
         _id: item._id,
         type: 'cie10',
         isENO: item.isENO,
         isGES: item.isGES
-      })
+      })*/
 
       console.log(this.arrayDiagnostic)
 
-      // this.updateModelNotifiableDiseases()
+      /*let appointmentObject = {
+        appointmentDetails: {
+          diagnosticDetails: {
+            diagnostics: this.arrayDiagnostic
+          }
+        },
+      };*/
+      //this.updateModelNotifiableDiseases()
+      this.updateModelDiagnostics();
+      //this.saveAppointment(appointmentObject)
     } else {
       // setup BR
 
@@ -567,7 +638,18 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   nextStep(type) {
-    if (type === 'eno') {
+    console.log('ges',this.multiGes)
+    if(this.multiGes == true) {
+      this.multiEno = false
+    }
+
+    if(this.multiGes == false ||  this.multiEno == true) {
+      this.multiEno = true
+      
+    }
+    
+    console.log('eno', this.multiEno)
+    if (type === 'eno' ) {
       window.open('https://epivigila.minsal.cl/', "_blank");
       $('#addEno').modal('hide')
       $('#addGesEno').modal('show')
@@ -578,6 +660,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     }
   }
   addRegistryGesEno2(){
+   
     this.updateModelNotifiableDiseases();
     console.log("Se ejecuta")
     //
@@ -601,7 +684,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     //     console.log(error);
     //   }
     // );
-    this.getAppointmentsDetails(this.appointmentId)
+    //this.getAppointmentsDetails(this.appointmentId)
   }
 
   addRegistryGesEno() {
@@ -643,6 +726,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   updateModelNotifiableDiseases() {
+    //console.log(this.objectDiagnostic);
     if(this.objectDiagnostic._id == null) {
       this.objectDiagnostic = this.arrayDiagnostic[this.arrayDiagnostic.length - 1];
     }
@@ -652,6 +736,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       page: this.formAddGesEno.getRawValue().page,
       type: this.formAddGesEno.getRawValue().type,
       observations: this.formAddGesEno.getRawValue().observations,
+      isENO: this.multiEno,
+      isGES: this.multiGes,
       diagnostic: this.objectDiagnostic,
     };
 
@@ -661,6 +747,12 @@ export class CrearFichaConsultaComponent implements OnInit {
           if (environment.production === false) {
             console.log(data);
           }
+          this.getAppointmentsDetailsRefresh(this.appointmentId);
+          this.multiGes = false;
+          this.multiEno = false;
+          //this.multi = false;
+         
+          this.formAddGesEno.reset();
         },
         (error) => {
           console.log(error);
@@ -673,12 +765,17 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   deleteDiagnostic(_id) {
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+    this.updateModelDiagnostics();
+    //
     if (environment.setup === 'CL') {
       this.notifiableDiseases = this.notifiableDiseases.filter(item => item.diagnostic._id != _id)
-
-      this.displayDiagnosticsSetupBR(this.notifiableDiseases)
+      this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+      this.updateModelDiagnostics();
+      //this.displayDiagnosticsSetupBR(this.notifiableDiseases)
 
       console.log(this.notifiableDiseases, _id)
+ 
 
       //this.updateModelNotifiableDiseases()
     } else {
@@ -1022,6 +1119,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  refreshData(){
+    this.getAppointmentsDetailsRefresh(this.appointmentId);
+  }
+
   openFile(event) {
     const file = event.target.files[0];
     this.nameFile = event.target.files[0].name;
@@ -1156,6 +1257,8 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);
         this.otros.controls['examHighlights'].setValue(data.payload.appointmentDetails.examHighlights);
+
+
         /*
         if(
           data.payload.patientDetails.vitalSigns.PAS != null,
@@ -1175,6 +1278,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.signos.controls['Sat'].setValue(data.payload.patientDetails.vitalSigns.Sat);
         }*/
 
+
+      
         this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
         this.signos.controls['PAD'].setValue(data.payload.patientDetails.vitalSigns.PAD);
         this.signos.controls['PAmedia'].setValue(data.payload.patientDetails.vitalSigns.PAmedia);
@@ -1218,6 +1323,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
           this.displayDiagnosticsSetupBR(data.payload.appointmentDetails.notifiableDiseases)
           this.notifiableDiseases = data.payload.appointmentDetails.notifiableDiseases
+          this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
 
         } else {
           this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
@@ -1256,6 +1362,9 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.videoCall = true;
           this.floatVideoCallViewer()
         }
+
+        this.appointmentEvents.setAppointmentDetails$.emit(data.payload)
+
         /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;

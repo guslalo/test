@@ -25,6 +25,7 @@ const current = new Date();
 export class CrearUsuarioComponent implements OnInit {
   isForeign: boolean = false;
   isSchool: boolean = false;
+  isTutor: boolean;
   identificationData: FormGroup;
   personalData: FormGroup;
   profilesForm: FormGroup;
@@ -167,16 +168,19 @@ export class CrearUsuarioComponent implements OnInit {
     });
 
     //titularForm
-    
-      this.titularForm.get('titularidadCpf').valueChanges.subscribe((x) => {
-        console.log(x)
-        //titularForm.get('titularidadCpf')
-        if(x.length >= 9){
-          this.getforCpf(x)
+      this.titularForm.valueChanges.subscribe((x) => {
+          console.log(x)
+          //titularForm.get('titularidadCpf')
+          if(x.titularidadCpf.length >= 9){
+            this.getforCpf(x.titularidadCpf)
+          }
+          if(x.titularDependiente === 'titular' ) {
+            this.isTutor = true;
+          } else {
+            this.isTutor = false;
+          }
         }
-       
-      }
-      );  /**/
+      );  
 
 
     this.personalData = this.formBuilder.group({
@@ -610,7 +614,8 @@ export class CrearUsuarioComponent implements OnInit {
           isForeign: this.isForeign,
         },
         personalData: {
-          //isTutor:this.isTutor,
+          isTutor:this.isTutor,
+          tutorNationalId:this.formUser[6].value.titularidadCpf,
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
@@ -628,11 +633,6 @@ export class CrearUsuarioComponent implements OnInit {
           breed: this.formUser[1].value.breed,
           education: this.formUser[1].value.education || '',
           familySituation: this.formUser[1].value.familySituation || '',
-        },
-        titularData:{
-          titularDependiente: this.formUser[6].value.titularDependiente,
-          titularidadCpf: this.formUser[6].value.titularidadCpf,
-          titularidadName: this.formUser[6].value.titularidadName
         },
         addressData: {
           cep: this.formUser[1].value.cep,
