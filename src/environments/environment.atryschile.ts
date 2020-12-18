@@ -22,10 +22,10 @@ export const environment = {
   },
   ttlSession: 600,
   setup: 'CL',
-  version: '{BUILD_VERSION}-Medline ',
+  version: '{BUILD_VERSION}-Atrys_Chile ',
   colors: {
-    "color-primary": "#394184;",
-    "color-secondary": "#D03B34;",
-    "color-hover": "#77787B;",
+    "color-primary": "#4680AE;",
+    "color-secondary": "#4680ae;",
+    "color-hover": "#05A78B;",
   }
 };
