@@ -369,14 +369,12 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.personalData.get('email').setValue(user.personalData.email);
         this.personalData.get('phoneNumber').setValue(user.personalData.phoneNumber);
         this.personalData.get('gender').setValue(user.personalData.gender);
-        this.personalData.get('prevission').setValue(user.personalData.gender);
         this.birthDate = this.dateAdapter.fromModel(user.personalData.birthdate);
         this.setDate = {
           day:this.birthDate.year,
           month:this.birthDate.month,
           year:this.birthDate.day,
         }
-        console.log(this.setDate);
         this.personalData.get('birthdate').setValue(this.setDate);
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
         this.personalData.get('education').setValue(user.personalData.education || null);
@@ -749,6 +747,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         city: this.formUser[1].value.city,
         street: this.formUser[1].value.street,
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
+        complement: this.formUser[1].value.complement,
         zipcode: this.formUser[1].value.zipcode
       },
       profiles: _profiles,
