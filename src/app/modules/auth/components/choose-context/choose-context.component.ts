@@ -8,6 +8,7 @@ import { PoliciesService } from '../../../../services/policies.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { ClinicService } from 'src/app/services/clinic.service';
 import { IdleEventsService } from 'src/app/services/idle-events.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-choose-context',
@@ -19,6 +20,7 @@ export class ChooseContextComponent implements OnInit {
   public UserLogin: UserLogin;
   public user: any = {};
   public arrayAdministrativeData = [];
+  public setup:any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -30,6 +32,7 @@ export class ChooseContextComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setup = environment.setup
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
