@@ -76,15 +76,16 @@ export class InicioPComponent implements OnInit {
 
         this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished' && finished.administrativeDetails.status !== 'canceled');
         console.log(this.consultas);
+        
         if (this.consultas.length > 0) {
           let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
+
           arrayForDate.forEach((numero) => {
             if (numero < min) {
               min = numero;
             }
           });
-
 
           this.nextAppointed = this.consultas.filter((now) => now.dateDetails.date === min);
           let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');

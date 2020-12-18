@@ -951,12 +951,16 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
         console.log(data);
+
         setTimeout(() => {
           this.spinner.hide();
         }, 3000);
+        
         this.sibrareDocumentId = data.payload.documentId;
+
         console.log(this.sibrareDocumentId);
         console.log(this.appointmentId);
+        
         let interval = setInterval(() => {
           this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
             (data) => {
@@ -1312,6 +1316,8 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
 
         console.log('getAppointmentsDetails => DATA', data)
+
+        this.appointmentEvents.setAppointmentReagendamiento$.emit(data.payload)
 
         this.getVerifiedSibrareDocuments2(id);
         this.appointmentDetail = data.payload;
