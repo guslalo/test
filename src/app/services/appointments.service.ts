@@ -363,8 +363,6 @@ export class AppointmentsService {
 
   reScheduleAppointment(date, hour, SpecialtiesId, professionalId, appointmentId, objetive): Observable<any> {
 
-    console.log(date, hour, SpecialtiesId, professionalId, appointmentId, objetive)
-    
      let object = {
        appointmentDetails: {
          objetive: objetive
