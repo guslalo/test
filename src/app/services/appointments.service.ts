@@ -16,12 +16,14 @@ export class AppointmentsService {
   private session = '/session';
   private reserve = '/reserve';
   private coordinators = 'v1/coordinator';
-  private consolidate = '/consolidate';
+  private consolidate = '/consolidate'
+  ;
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
   private inmediateAppointment = 'v1/administrative/immediate/state';
   private inmediate = 'v1/appointments/immediate/';
-  private immediateConsolidate = 'v1/appointments/immediate/consolidate';
+  private immediateConsolidate = 'v1/appointments/immediate/consolidate'
+  ;
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
@@ -53,6 +55,8 @@ export class AppointmentsService {
     FINISHED: 'finished',
     CANCELED: 'canceled',
   };
+  reservedAppointment: any;
+  self: this;
 
   constructor(
     private http: HttpClient, 
@@ -153,9 +157,12 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.coordinators + '/appointment/reserve', reserve);
   }
 
-  //consolidate appointments
-  postConsolidate(consolidate): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate);
+  //consolidate appointment
+  
+  postConsolidate(consolidate): Observable<any> 
+  {
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate)
+    ;
   }
 
   //get Appointment professional data
@@ -272,8 +279,10 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.inmediate, {});
   }
 
-  postImmediateConsolidate(object): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object);
+  postImmediateConsolidate(object): Observable<any> 
+  {
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object)
+    ;
   }
 
   getPaymentStatusAppointmentInmediate(id): Observable<any> {
@@ -410,18 +419,18 @@ export class AppointmentsService {
   searchPatients(query): Observable<any[]> {
     return this.patientService.search(query)
       .pipe(
-        map(res => this.createDisplayForSelect(res.payload))
+        map(res => this.createDisplayForSelect(res.payload, 'patient'))
       )
   }
 
   searchProfessionals(query): Observable<any[]>{
     return this.professionalService.search(query)
     .pipe(
-      map(res => this.createDisplayForSelect(res.payload))
+      map(res => this.createDisplayForSelect(res.payload, 'other'))
     )
   }
 
-  createDisplayForSelect(item) {
+  createDisplayForSelect(item, role) {
     if (item.length) {
       return item.map(_e => {
         let name
@@ -432,9 +441,18 @@ export class AppointmentsService {
 
         name += _e.personalData.name + ' ' + _e.personalData.secondLastName
 
+        console.log(_e)
+        let _id
+
+        if(role == 'patient'){
+          _id = _e.userId
+        }else{
+          _id = _e._id
+        }
+        
         let userId = _e.userData ? _e.userData[0]._id : 'NONE'
 
-        return { id: _e._id, name, userId }
+        return { id: _id, name, userId }
       })
     } else {
       return []
@@ -447,6 +465,55 @@ export class AppointmentsService {
 
   createPrescriptionRecemed(data): Observable<any> {
     return this.http.post<any>(environment.baseUrl + this.prescripcionsRecemed,  data);
+  }
+
+  reserveAppointment(reserva){
+    return new Promise((resolve, reject) => {
+      this.postReserve(reserva).subscribe(
+        (_data) => {
+          let reservedAppointment = {
+            data: _data,
+            self: this,
+            reserva: reserva
+          }
+          resolve(reservedAppointment)
+        },
+        (error) => {
+          reject(error)
+        }
+      );
+    })
+  }
+
+  consolidateHandler(reservedAppointment){
+    console.log(reservedAppointment)
+    return new Promise((resolve, reject) => {
+      let _obj = {
+        reserved: {
+          id: reservedAppointment.data.payload.id,
+          patientDetails: {
+            symptoms: [],
+            userId: reservedAppointment.reserva.patientDetails.userId
+          }
+        },
+        self: reservedAppointment.self
+      }
+      resolve(_obj)
+    })
+  }
+
+  consolidateAppointment(appointment){
+    return new Promise((resolve, reject) => {
+      appointment.self.postConsolidate(appointment.reserved)
+      .subscribe(
+        (data) => {
+          resolve(data)
+        },
+        (error) => {
+          reject(error)
+        }
+      )
+    })
   }
 
 }

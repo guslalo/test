@@ -89,7 +89,7 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.appointmentsEvents.filterProfessionalsByType$.subscribe(
       (data) => {
-        this.selectedProfessionals = this.appointmentsService.createDisplayForSelect(data)
+        this.selectedProfessionals = this.appointmentsService.createDisplayForSelect(data, 'other')
       }
     )
 
@@ -144,26 +144,9 @@ export class CreateAppointmentComponent implements OnInit {
         }
 
         this.filteredPatients = this.appointmentsService.search(this.appointmentForm?.controls['patient'], 'patients')
-
-        // this.filteredPatients = this.appointmentForm?.controls['patient'].valueChanges.pipe(
-        //   startWith(''),
-        //   debounceTime(200),
-        //   distinctUntilChanged(),
-        //   switchMap(val => {
-        //     if (typeof val === 'string' && val)
-        //       return this.searchPatients(val || '')
-        //   })
-        // )
       }
     )
   }
-
-  // searchPatients(query): Observable<any[]> {
-  //   return this.patientService.search(query)
-  //     .pipe(
-  //       map(res => this.appointmentsService.createDisplayForSelect(res.payload))
-  //     )
-  // }
 
   getObjetives() {
     this.appointmentsService.getObjetives().subscribe((data) => {
@@ -180,6 +163,7 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   setPatient(patient) {
+    console.log(patient)
     this.patientSelected = patient.id;
   }
 
@@ -269,16 +253,17 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   createAppointment() {
-    const reserve = {
+    let reserva = {
+      appointmentType: 'agendamiento',
       patientDetails: {
         userId: this.patientSelected,
       },
       professionalDetails: {
         userId: this.professionalSelected,
-        specialtyId: this.appointmentForm.controls.specialty.value,
         specialtyDetails: {
-          price: null,
+          price: 0,
         },
+        specialtyId: this.appointmentForm.controls.specialty.value,
       },
       professionalId: this.professionalSelected,
       dateDetails: {
@@ -287,13 +272,16 @@ export class CreateAppointmentComponent implements OnInit {
       },
     };
 
-    this.appointmentsService.postReserveCustomPatient(reserve).subscribe(
-      (data) => {
-        this.appointmentsEvents.updateAppointments()
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.appointmentsService.reserveAppointment(reserva)
+    .then(this.appointmentsService.consolidateHandler)
+    .then(this.appointmentsService.consolidateAppointment)
+    .then((data) => {
+      console.log(data)
+      this.appointmentsEvents.updateAppointments()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
   }
 }
