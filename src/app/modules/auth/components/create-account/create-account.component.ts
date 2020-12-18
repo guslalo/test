@@ -18,7 +18,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { error } from 'protractor';
 
-//import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-account',
@@ -27,22 +26,13 @@ import { error } from 'protractor';
 })
 
 export class CreateAccountComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private registerUser: RegisterService,
-    private _formBuilder: FormBuilder,
-    private calendar: NgbCalendar,
-    private config: NgbDatepickerConfig,
-    private userService: UsersService,
-    private spinner: NgxSpinnerService,
-    private clinicService:ClinicService
-  ) { }
+ 
   public userRegister: registerUser;
   public placement = 'bottom';
   public cpfvalid: boolean = true;
+  public setup:any;
   model: NgbDateStruct;
   date: { year: number; month: number };
-
   states: any = [];
   cities: any = [];
   citiesFilter: any = [];
@@ -51,14 +41,11 @@ export class CreateAccountComponent implements OnInit {
   educations: any = [];
   familiarSituations: any = [];
   issuingEntities: any = [];
-
   public password: any;
   public user: any = {};
   public errorMsg: string;
   public errorCepString:string;
-
   dateAdapter = new CustomDateAdapter();
-
   isLinear = false;
   isForeign: boolean = false;
   identificationData: FormGroup;
@@ -70,13 +57,10 @@ export class CreateAccountComponent implements OnInit {
   minDate = undefined;
   maxDate = undefined;
   showPassword: boolean;
-
-
   termsAccepted: boolean = false;
   privacyAccepted: boolean = false;
   consentAccepted: boolean = false;
   public clinic:string;
-
   public useTerm:any;
   public privacyTerms:any;
   public telemedicineConsent:any;
@@ -87,13 +71,24 @@ export class CreateAccountComponent implements OnInit {
   public neighborhood:any;
   public street:any;
   public mayorEdad:boolean;
-  
-  // public form:any;
+
+  constructor(
+    private router: Router,
+    private registerUser: RegisterService,
+    private _formBuilder: FormBuilder,
+    private calendar: NgbCalendar,
+    private config: NgbDatepickerConfig,
+    private userService: UsersService,
+    private spinner: NgxSpinnerService,
+    private clinicService:ClinicService
+  ) { }
+
   onClick(index: number): void {
     // this.selectedIndex = index;
   }
 
   ngOnInit(): void {
+    this.setup = environment.setup
     this.errorCep = false;
     this.clinic = '5f236fc966fbb0054894b780';
     this.politicas();
@@ -153,9 +148,7 @@ export class CreateAccountComponent implements OnInit {
         day: current.getDate(),
       };
     }
-  
-    
-    
+   
     this.identificationData = this._formBuilder.group({
       document:  new FormControl('cpf'),
       idDocumentNumber: [null, Validators.required],
@@ -165,7 +158,6 @@ export class CreateAccountComponent implements OnInit {
       extraDocument: ['', null],
       extraIdDocument: ['', null],
     });
-    //this.documentTypeDefault = this.identificationData.controls.document.value;
 
     this.birthData = this._formBuilder.group({
       birthdate: [null, Validators.required],
@@ -238,8 +230,6 @@ export class CreateAccountComponent implements OnInit {
     this.telemedicineConsent = ['/consent'];
   }
 
-
-
   getLocationDataFromCep(){
     this.errorCep = false;
     this.addressData.get('cep').valueChanges.subscribe( x =>  {
@@ -272,10 +262,8 @@ export class CreateAccountComponent implements OnInit {
   
               this.addressData.get('uf').valueChanges.subscribe( x =>  {
                 this.getCitiesforId(this.ufObject);
-  
               });
-            }
-           
+            }         
           },
           error => {
             console.log(this.errorCep)
@@ -287,24 +275,10 @@ export class CreateAccountComponent implements OnInit {
       }
      }
     );
-
-   
-    /*
-    this.userService.getLocationDataFromCep(cep).subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {
-        console.log(error)
-      }
-    )*/
   }
 
   validateForm() {
-    // console.log(console.log(this.form[0]));
-
     this.identificationData.clearValidators();
-
     if (this.isForeign) {
       this.identificationData.get('passport').setValidators([Validators.required]);
       this.identificationData.get('idDocumentNumber').setValidators(null);
@@ -327,7 +301,6 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('extraIdDocument').enable();
     }
-
     if (this.identificationData.get('document').value === 'rgRegistry') {
       this.identificationData.get('idDocumentNumber').enable();
       this.identificationData.get('issuingBody').setValidators([Validators.required]);
@@ -336,13 +309,14 @@ export class CreateAccountComponent implements OnInit {
       this.identificationData.get('passport').reset();
       this.identificationData.get('issuingBody').disable();
     }
-
     this.identificationData.updateValueAndValidity();
   }
+
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
   }
+
   validateCPF(cpf: string){
     console.log(this.identificationData.get('document').value)
     if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
@@ -350,7 +324,6 @@ export class CreateAccountComponent implements OnInit {
     cpf = cpf.replace(/[^0-9]/, "").replace(/[^0-9]/, "").replace(/[^0-9]/, "")
     cpf.padStart(11,'0')
     if (cpf.length != 11) return false
-    
     else if(cpf == '00000000000' || 
             cpf == '11111111111' || 
             cpf == '22222222222' || 
@@ -452,8 +425,6 @@ export class CreateAccountComponent implements OnInit {
     };
 
     if (formObject) {
-      console.log(formObject);
-
       this.registerUser
         .registerUser(
           formObject.clinicId,
@@ -464,7 +435,6 @@ export class CreateAccountComponent implements OnInit {
         )
         .subscribe(
           (data) => {
-            console.log(data);
             this.spinner.hide();
             this.router.navigate(['confirm-account/' + data.id, { email: formObject.personalData.email }]);
           },
@@ -479,14 +449,12 @@ export class CreateAccountComponent implements OnInit {
 
   getIssuingEntities() {
     this.userService.getIssuingEntities().subscribe((data) => {
-      // console.log(data);
       this.issuingEntities = data.payload;
     });
   }
 
   getUfs() {
     this.userService.getStates().subscribe((data) => {
-      // console.log(data);
       this.states = data.payload;
     });
   }
@@ -509,21 +477,18 @@ export class CreateAccountComponent implements OnInit {
 
   getCities() {
     this.userService.getCities().subscribe((data) => {
-      // console.log(data);
       this.cities = data.payload;
     });
   }
 
   getCountries() {
     this.userService.getCountries().subscribe((data) => {
-      // console.log(data);
       this.countries = data.payload;
     });
   }
 
   getBreeds() {
     this.userService.getBreeds().subscribe((data) => {
-      // console.log(data);
       this.breeds = data.payload;
     });
   }
@@ -531,4 +496,5 @@ export class CreateAccountComponent implements OnInit {
   submit() {
     console.log(this.form);
   }
+
 }
