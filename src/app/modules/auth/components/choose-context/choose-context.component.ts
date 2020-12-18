@@ -7,6 +7,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { PoliciesService } from '../../../../services/policies.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { ClinicService } from 'src/app/services/clinic.service';
+import { IdleEventsService } from 'src/app/services/idle-events.service';
 
 @Component({
   selector: 'app-choose-context',
@@ -24,21 +25,24 @@ export class ChooseContextComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private _policyService: PoliciesService,
-    private clinicService:ClinicService
+    private clinicService:ClinicService,
+    private idleEvents: IdleEventsService,
   ) {}
 
   ngOnInit(): void {
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
-      JSON.parse(localStorage.getItem('currentUser')).internalCode,
       JSON.parse(localStorage.getItem('currentUser')).email,
       JSON.parse(localStorage.getItem('currentUser')).name,
       JSON.parse(localStorage.getItem('currentUser')).lastName,
       JSON.parse(localStorage.getItem('currentUser')).access_token,
       JSON.parse(localStorage.getItem('currentUser')).expires_in,
+      JSON.parse(localStorage.getItem('currentUser')).internalCode,
       JSON.parse(localStorage.getItem('currentUser')).administrativeData,
-      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext
+      JSON.parse(localStorage.getItem('currentUser')).administrativeDataContext,
+      
     );
+    this.user.dependents = JSON.parse(localStorage.getItem('dependents'))
   }
 
   chooseContext(clinicId, role) {
@@ -74,27 +78,51 @@ export class ChooseContextComponent implements OnInit {
   }
 
   chooseDependent(dependentId){
+    console.log(dependentId)
     if (dependentId !== this.user.id){
-      let dependents: any[] = JSON.parse(localStorage.getItem('dependents'))
-      let user = dependents.find(element => element._id = dependentId);
-      user.id = user._id;
-      localStorage.removeItem('currentUser');
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.authenticationService.loginDependent(dependentId).subscribe(
+        (data) => {
+          //console.log(data);
+          localStorage.setItem('token', JSON.stringify(data.access_token));
+          this.user = new UserLogin(
+            data.id,
+            data.email,
+            data.name,
+            data.lastName,
+            data.access_token,
+            data.expires_in,
+            data.internalCode,
+            data.administrativeData,
+            data.administrativeDataContext,
+            data.administrativeData[0].role,
+            data.administrativeData[0].policies,
+            data.photo
+          );
+          localStorage.setItem('token', JSON.stringify(data.access_token));
+          localStorage.setItem('currentUser', JSON.stringify(this.user));
+          localStorage.setItem('clinic', this.user.administrativeData[0].clinicId);
+
+          this.clinicService.accessMode().subscribe(
+            (data) => {
+              console.log(data)
+              localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+              localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+              localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+              console.log(data);
+              this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }else{
+      this.router.navigate(['app-paciente']);
     }
-    this._policyService.setPoliciesToUser()
-    this.clinicService.accessMode().subscribe(
-      (data) => {
-        console.log(data)
-        localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
-        localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
-        localStorage.setItem('paymentAppointment', data.payload.payment.toString());
-        console.log(data);
-        this.router.navigate(['app-paciente']);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   getRouteForClinicAndRole(clinicId, role) {

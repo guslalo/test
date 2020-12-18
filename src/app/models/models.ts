@@ -41,7 +41,8 @@ export class UserLogin {
       reportPolicies?: reportPolicies;
       medicalRecordPolicies?: medicalRecordPolicies;
     },
-    public photo?: string
+    public photo?: string,
+    public dependents?: any[]
   ) {}
 
   // cliente
