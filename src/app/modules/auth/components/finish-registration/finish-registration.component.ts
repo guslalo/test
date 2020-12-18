@@ -70,6 +70,7 @@ export class FinishRegistrationComponent implements OnInit {
   public useTerm:any;
   public privacyTerms:any;
   public telemedicineConsent:any;
+  public setup:any;
   prePatientId = this.routerAct.snapshot.queryParamMap.get('patient');
 
   public errorCepString:string;
@@ -83,7 +84,7 @@ export class FinishRegistrationComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+    this.setup = environment.setup
     this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
