@@ -85,6 +85,7 @@ export class FinishRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.setup = environment.setup
+    
     this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
