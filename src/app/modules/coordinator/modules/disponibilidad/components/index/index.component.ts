@@ -17,6 +17,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { TranslocoService } from '@ngneat/transloco';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { startWith, map } from 'rxjs/operators';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 @Component({
@@ -31,6 +32,8 @@ export class IndexComponent implements OnInit {
   ColumnMode = ColumnMode;
   searchTerm: string = '';
   public seleccionE:boolean;
+
+  public objetives; any;
 
   fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
@@ -61,7 +64,8 @@ export class IndexComponent implements OnInit {
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService,
     private translocoService: TranslocoService,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private appointmentService: AppointmentsService
   ) {
     const current = new Date();
     this.minDate = {
@@ -178,6 +182,14 @@ export class IndexComponent implements OnInit {
     console.log(this.daysSelected);
   }
 
+  getObjetives(){
+    this.appointmentService
+    .getObjetives()
+    .subscribe((data) => {
+      this.objetives = data
+    })
+  }
+
   initCalendar() {
     setTimeout(() => {
       this.calendar = true;
@@ -215,18 +227,20 @@ export class IndexComponent implements OnInit {
       startBlock: [null],
       endBlock: [null],
     });
+
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
-      return this.professionals.filter(value => {
-        console.log(value);
-        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
-              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
-              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
-      })
-      
+      if(typeof newVal?.toLowerCase === 'function'){
+        return this.professionals.filter(value => {
+          console.log(value);
+          return value.personalData.name?.toLowerCase().includes(newVal?.toLowerCase()) ||
+                value.personalData.secondLastName?.toLowerCase().includes(newVal?.toLowerCase()) ||
+                (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal?.toLowerCase())
+        }) 
+      }
     }))
 
     
-
+    this.getObjetives()
     this.agregardailyRanges();
   }
 
@@ -275,7 +289,7 @@ export class IndexComponent implements OnInit {
     this.disponibilidadArray = [];
     this.coordinatorService.getAvailability().subscribe(
       (data) => {
-        console.log(data.payload);
+        console.log('getAvailability', data.payload);
         let availabilities = data.payload.filter((item) => !item.isDeleted);
         this.disponibilidadArrayTemp = [...availabilities];
         this.disponibilidadArray = availabilities;
@@ -456,10 +470,13 @@ export class IndexComponent implements OnInit {
     } /**/
   }
 
-  putAvailability(id) {
+  putAvailability(row) {
+    let _id = row._id
+    this.professionalSelected = row.professionalDetails.userId
+
     //this.idAvailability = id;
     //console.log(this.idAvailability)
-    this.availabilityService.getAvailabilityCoordinator(id).subscribe(
+    this.availabilityService.getAvailabilityCoordinator(_id).subscribe(
       (data) => {
         this.idAvailability = data.payload[0];
         console.log(this.idAvailability);
@@ -554,22 +571,26 @@ export class IndexComponent implements OnInit {
   }
 
   escogerProfessional(professional) {
-    
+    let _userId
 
-      
+    if(professional?.userData){
+      _userId = professional?.userData[0]._id;
+    }
+
     //this.getProfessionals();
     this.specialtiesId = '';
-        this.medicalSpecialty = '';
-        this.specialtySelected = '';
+    this.medicalSpecialty = '';
+    this.specialtySelected = '';
     //console.log(professional);
     //let userId = '';
-    this.professionalSelected  = '';
-    let userId = this.professionalSelected || professional?.userData[0]?._id;
+    let userId = this.professionalSelected || _userId
+
     this.specialtiesService.getSpecialtiesForProfessional(userId).subscribe(
       (data) => {
         this.specialtiesId = data.payload;
         this.medicalSpecialty = data.payload[0].medicalSpecialtyId;
         this.specialtySelected = data.payload[0].specialtyName;
+        this.professionalSelected  = '';
       },
       (error) => {
         console.log(error);
@@ -580,13 +601,14 @@ export class IndexComponent implements OnInit {
 
   resetSearch(){
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
-      return this.professionals.filter(value => {
-        console.log(value);
-        return value.personalData.name?.toLowerCase().includes(newVal.toLowerCase()) ||
-              value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
-              (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
-      })
-      
+      if(typeof newVal?.toLowerCase === 'function'){
+        return this.professionals.filter(value => {
+          console.log(value);
+          return value.personalData.name?.toLowerCase().includes(newVal?.toLowerCase()) ||
+                value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
+                (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
+        })
+      }      
     }))
   }
 
@@ -596,7 +618,7 @@ export class IndexComponent implements OnInit {
         // console.log(data);
         this.tempProfessionals = [...data];
         this.professionals = data;
-        // console.log(this.professionals);
+        console.log(this.professionals);
       },
       (error) => {
         console.log(error);

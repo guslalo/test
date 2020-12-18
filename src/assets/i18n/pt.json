@@ -3791,5 +3791,43 @@
     "academicBio": {
       "label": "Biografia acadêmica"
     }
+  },
+  "year": {
+    "january": {
+      "label": "Janeiro"
+    },
+    "february": {
+      "label": "Fevereiro"
+    },
+    "march": {
+      "label": "Março"
+    },
+    "april": {
+      "label": "Abril"
+    },
+    "may": {
+      "label": "Maio"
+    },
+    "june": {
+      "label": "Junho"
+    },
+    "july": {
+      "label": "Julho"
+    },
+    "august": {
+      "label": "Agosto"
+    },
+    "september": {
+      "label": "Setembro"
+    },
+    "october": {
+      "label": "Outubro"
+    },
+    "november": {
+      "label": "Novembro"
+    },
+    "december": {
+      "label": "Dezembro"
+    }
   }
 }
