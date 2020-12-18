@@ -168,10 +168,10 @@
                 </svg>
               </button>
               <div ngbDropdownMenu>
-                <button ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
+                <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
                   {{ 'clinicalFile.reschedule.label' | transloco }}
                 </button>
-                <button ngbDropdownItem type="button">
+                <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button">
                   {{ 'common.button.cancel.label' | transloco }}
                 </button>
               </div>

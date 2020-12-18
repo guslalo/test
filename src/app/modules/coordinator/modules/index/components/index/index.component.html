@@ -7,6 +7,7 @@
       <!-- *ngIf="userCurrent.lastName === 'professional'"-->
 
       <button
+        *ngxPermissionsOnly="['Create:Appointment']"
         data-toggle="modal"
         data-target="#exampleModal"
         type="button"
