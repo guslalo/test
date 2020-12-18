@@ -136,3 +136,30 @@ pipelines:
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
             WAIT: 'true'
+    atryschile:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-atryschile
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend-atryschile.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend-atryschile.zip
+    - step:
+        name: "Deploy to atryschile"
+        deployment: atryschile
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
+            AWS_SECRET_ACCESS_KEY: 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
+            AWS_DEFAULT_REGION: us-east-1
+            APPLICATION_NAME: Atrys-TCRegional-FrontEnd
+            ENVIRONMENT_NAME: AtrysTcregionalFrontend-env
+            ZIP_FILE: "itms-frontend-atryschile.zip"
+            S3_BUCKET: 'elasticbeanstalk-us-east-1-023564466378'
+            WAIT: 'true'
