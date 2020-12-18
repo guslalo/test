@@ -1,4 +1,5 @@
-import { Injectable, EventEmitter, TemplateRef } from '@angular/core';
+import { Injectable, EventEmitter, TemplateRef, HostListener } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,4 +41,20 @@ export class AppointmentEventsService {
     this.filterProfessionalsByType$.emit(payload)
   }
 
+  enableCheckDatesEnableButtons(array){
+    var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    let now = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1) + 'Z';
+    
+    console.log('enableCheckDatesEnableButtons')
+
+      for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        let dest = moment(element.dateDetails.scheduledAt)
+        let _diff = dest.diff(now, 'minutes')
+  
+        if(_diff > 0){
+          element.canUse = true
+        }
+      }
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CurrentUserService } from './../../../services/current-user.service';
 import { NgbModal, NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
@@ -13,6 +13,11 @@ import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedul
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPComponent implements OnInit {
+  @HostListener('click', ['$event.target']) 
+  onClick(e) {
+    this.appointmentsEvents.enableCheckDatesEnableButtons(this.consultas)
+  }
+
   @ViewChild('modal') private modalContent: TemplateRef<RescheduleAppointmentComponent>
   public consultas: any;
   public currentUser: any = {};
