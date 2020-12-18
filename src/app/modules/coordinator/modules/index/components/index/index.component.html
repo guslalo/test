@@ -230,17 +230,12 @@
                       </button>
 
                       <div ngbDropdownMenu>
-                        <!-- <div *ngxPermissionsOnly="['Update:WaitingRoom']">
-                          <button ngbDropdownItem type="button" [routerLink]="['editar-sala/' + row._id]">
-                            {{ 'clinicalFile.edit.label' | transloco }}
-                          </button>
-                        </div> -->
                       
-                        <button ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
+                        <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
                           {{ 'clinicalFile.reschedule.label' | transloco }}
                         </button>
 
-                        <button ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(row)"
+                        <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(row)"
                           data-toggle="modal" data-target="#modalCancelAppointment">
                             {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                         </button>
