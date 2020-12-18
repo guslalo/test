@@ -80,7 +80,7 @@ export class ChooseContextComponent implements OnInit {
   chooseDependent(dependentId){
     console.log(dependentId)
     if (dependentId !== this.user.id){
-      this.authenticationService.loginDependent(this.user.username).subscribe(
+      this.authenticationService.loginDependent(dependentId).subscribe(
         (data) => {
           //console.log(data);
           localStorage.setItem('token', JSON.stringify(data.access_token));
