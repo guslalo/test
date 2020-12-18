@@ -747,6 +747,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         city: this.formUser[1].value.city,
         street: this.formUser[1].value.street,
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
+        complement: this.formUser[1].value.complement,
         zipcode: this.formUser[1].value.zipcode
       },
       profiles: _profiles,
