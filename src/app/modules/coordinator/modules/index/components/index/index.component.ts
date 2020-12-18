@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
@@ -13,6 +13,11 @@ import { AppointmentEventsService } from 'src/app/services/appointment-events.se
 })
 
 export class IndexComponent implements OnInit {
+  @HostListener('click', ['$event.target']) 
+  onClick(e) {
+    this.appointmentsEvents.enableCheckDatesEnableButtons(this.consultas)
+  }
+
   public consultas: any;
   public consultasListaDeEspera: any;
   public currentUser: any = {};
@@ -56,6 +61,7 @@ export class IndexComponent implements OnInit {
           .filter((finished) => finished.administrativeDetails.status !== 'finished');
         
           this.consultas = filteredAppointments;
+          this.appointmentsEvents.enableCheckDatesEnableButtons(this.consultas)
 
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
