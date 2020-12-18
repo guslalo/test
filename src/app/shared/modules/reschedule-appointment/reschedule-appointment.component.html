@@ -15,7 +15,7 @@
 
                 <form [formGroup]="appointmentForm" class="mt-4">
 
-                    <div class="row" *ngIf="modalConfig.profile != 'professional'">
+                    <div class="row" *ngIf="modalConfig.profile != 'professional' || hidePatientProfessional">
                         <!-- paciente -->
                         <div class="form-group col">
                             <label for="startBlock">{{
@@ -35,7 +35,6 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </div>
-
   
                         <div class="form-group col">
                             <label for="professional">{{ 'clinicalFile.patientData.tabs.doctor.label' | transloco }}
@@ -48,23 +47,8 @@
                                     {{ item.personalData.name }} {{ item.personalData.secondLastName }}
                                 </option>
                             </select>
-
-                            <!-- <input type="text" class="form-control"
-                                placeholder="{{ 'common.placeholders.searchProfessional.label' | transloco }}"
-                                [matAutocomplete]="autoProfessionals" formControlName="professional" />
-                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
-                                <img src="assets/icons/icon-search.svg" />
-                            </div>
-                            <mat-autocomplete #autoProfessionals="matAutocomplete" [displayWith]="getDisplayFn()">
-                                <mat-option (click)="getProfessionalBlocks(item)" *ngFor="let item of filteredProfessionals | async" [value]="item">
-                                    {{ item.name }}
-                                </mat-option>
-                            </mat-autocomplete> -->
                         </div>
-
                     </div>
-
-
 
                     <div class="row">
                         <!-- fecha -->
@@ -99,7 +83,6 @@
 
                     </div>
 
-
                     <div class="row">
                         <!-- objetivo -->
                         <div class="form-group col">
@@ -124,12 +107,10 @@
                                 data-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
                                 (click)="reagendar()" [disabled]="!appointmentForm.valid || !blocks.length">
-                                <!--[disabled]="!createAvailability.valid"-->
-                                {{ 'clinicalFile.reserveService.label' | transloco }}
+                                {{ modalConfig.title | transloco }}
                             </button>
                         </div>
                     </div>
-
 
                 </form>
 

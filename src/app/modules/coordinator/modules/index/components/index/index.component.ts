@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit {
   }
 
   setAppointment(item){
-    console.log('APPOINTMEN FROM LIST', item)
+    console.log('setAppointment Coordinator', item)
     this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
   }
 
