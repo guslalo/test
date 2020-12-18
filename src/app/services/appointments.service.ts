@@ -385,7 +385,7 @@ export class AppointmentsService {
   }
 
   search(patientControl, method){
-    return patientControl.valueChanges.pipe(
+    return patientControl?.valueChanges.pipe(
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),

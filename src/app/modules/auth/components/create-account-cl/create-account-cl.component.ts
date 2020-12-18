@@ -88,7 +88,7 @@ export class CreateAccountCLComponent implements OnInit {
   public neighborhood:any;
   public street:any;
   public mayorEdad:boolean;
-  public setup: any;
+  public setup:any;
   
   // public form:any;
   onClick(index: number): void {

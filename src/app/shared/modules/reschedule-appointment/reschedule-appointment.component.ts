@@ -48,6 +48,7 @@ export class RescheduleAppointmentComponent implements OnInit {
   public professionals: any;
   public professionalId: any;
   public specialtyId: any;
+  public hidePatientProfessional: any;
 
   constructor(
     private appointmentsService: AppointmentsService,
@@ -64,9 +65,17 @@ export class RescheduleAppointmentComponent implements OnInit {
     
     this.appointmentEvents.setAppointmentReagendamiento$.subscribe(
       (data) => {
-        console.log('setAppointmentReagendamiento event', data)
         this.appointment = data
-        this.specialtyId = this.appointment.professionalDetails.specialtyId
+
+        console.log('setAppointmentReagendamiento event', data, Array.isArray(this.appointment.professionalDetails.specialtyDetails))
+
+        // this.hidePatientProfessional = true
+
+        if(this.appointment.professionalDetails.specialtyId){
+          this.specialtyId = this.appointment.professionalDetails.specialtyId
+        }else{
+          this.specialtyId = this.appointment.professionalDetails.specialtyDetails[0].specialtyId
+        }
 
         // perfil coordinador
         if(Array.isArray(this.appointment.professionalDetails.specialtyDetails)){
@@ -140,6 +149,7 @@ export class RescheduleAppointmentComponent implements OnInit {
       this.appointment._id,
       objetive
     ).subscribe((data) => {
+      console.log(data)
       this.appointmentEvents.listAppointments$.emit()
     })
   }
