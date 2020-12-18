@@ -71,7 +71,7 @@
                 </h4>
                 <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
                   <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign"
-                    (change)="validateForm()" />
+                    (change)="validateForm()"  disabled/>
                   <label class="custom-control-label" for="isForeign">{{ 'common.foreign.label' | transloco }}</label>
                 </div>
               </div>
@@ -88,6 +88,7 @@
                       }"
                       (change)="validateForm()"
                       id="select-type-document"
+                      disabled
                     >
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="run" [selected]="!isForeign">
@@ -101,12 +102,12 @@
                       (change)="validRUN(identificationData.get('idDocumentNumber').value)"
                       formControlName="idDocumentNumber" [ngClass]="{
                         'is-invalid': !identificationData.get('idDocumentNumber').valid && !isForeign
-                      }" />
+                      }" disabled/>
                     <label for="" *ngIf="!cpfvalid">RUN inválido</label>
                   </div>
                   <div class="form-group col-md-2">
                     <label for="passport">{{ 'common.passport.label' | transloco }}</label>
-                    <input [attr.disabled]="!isForeign ? '' : null" type="text" class="form-control" name="passport"
+                    <input disabled type="text" class="form-control" name="passport"
                       formControlName="passport" [ngClass]="{
                         'is-invalid': !identificationData.get('passport').valid
                       }" />
@@ -131,19 +132,19 @@
                 <div class="row">
                   <div class="form-group col-md-4">
                     <label for="name">{{ 'account.name.label' | transloco }}*</label>
-                    <input type="text" class="form-control" name="name" formControlName="name" [ngClass]="{
+                    <input type="text" class="form-control" name="name" formControlName="name" disabled [ngClass]="{
                         'is-invalid': !personalData.get('name').valid
                       }" />
                   </div>
                   <div class="form-group col-md-4">
                     <label for="lastName">{{ 'account.lastName.label' | transloco }}*</label>
-                    <input type="text" class="form-control" name="lastName" formControlName="lastName" [ngClass]="{
+                    <input type="text" class="form-control" name="lastName" formControlName="lastName" disabled [ngClass]="{
                         'is-invalid': !personalData.get('lastName').valid
                       }" />
                   </div>
                   <div class="form-group col-md-4">
                     <label for="secondLastName">{{ 'account.surname.label' | transloco }}*</label>
-                    <input type="text" class="form-control" name="secondLastName" formControlName="secondLastName"
+                    <input type="text" class="form-control" name="secondLastName" disabled formControlName="secondLastName"
                       [ngClass]="{
                         'is-invalid': !personalData.get('secondLastName').valid
                       }" />
@@ -152,19 +153,19 @@
                 <div class="row">
                   <div class="form-group col-md-3">
                     <label for="email">{{ 'account.email.label' | transloco }}*</label>
-                    <input type="email" class="form-control" name="email" formControlName="email" [ngClass]="{
+                    <input type="email" class="form-control" name="email" disabled formControlName="email" [ngClass]="{
                         'is-invalid': !personalData.get('email').valid
                       }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com" />
                   </div>
                   <div class="form-group col-md-3">
                     <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
-                    <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber" [ngClass]="{
+                    <input type="text" class="form-control" name="phoneNumber"  formControlName="phoneNumber" [ngClass]="{
                         'is-invalid': !personalData.get('phoneNumber').valid
                       }" placeholder="(##)-####-####" />
                   </div>
                   <div class="form-group col-md-3">
                     <label for="gender">{{ 'account.grender.label' | transloco }}*</label>
-                    <select class="form-control" name="gender" formControlName="gender" [ngClass]="{
+                    <select class="form-control" name="gender" disabled formControlName="gender" [ngClass]="{
                         'is-invalid': !personalData.get('gender').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
@@ -175,18 +176,18 @@
                   <div class="form-group col-md-3">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
-                      <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" [maxDate]="maxDate"
+                      <input type="text" [placement]="'bottom'" disabled class="form-control" id="birthdate" [maxDate]="maxDate"
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
                         [startDate]="setDate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate"
                         (click)="d.toggle()" />
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        <button class="btn btn-outline-secondary calendar" disabled (click)="d.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
                   <div class="form-group col-md-4">
                     <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
-                    <select class="form-control" name="nacionality" formControlName="nacionality" [ngClass]="{
+                    <select class="form-control" disabled name="nacionality" formControlName="nacionality" [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
                       }">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
