@@ -22,6 +22,9 @@ export class IndexComponent implements OnInit {
   public consultasListaDeEspera: any;
   public currentUser: any = {};
   public photoUrlBase = environment.photoUrlBase;
+  public nextAppointments = []
+  public openAppointments = []
+  public immediateAppointments = []
 
   ColumnMode = ColumnMode;
   moment: any = moment;
@@ -36,7 +39,7 @@ export class IndexComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
     this.getAppointmentsWaitingRooms();
-
+    this.getAppointmentsForTypes();
     this.appointmentsEvents.listAppointments$.subscribe(() => {
       this.getAppointments()
     })
@@ -66,6 +69,22 @@ export class IndexComponent implements OnInit {
         /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
         var latest = new Date(Math.max.apply(null,dates));
         var earliest = new Date(Math.min.apply(null,dates));*/
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAppointmentsForTypes() {
+    this.appointmentsService.getAppointmentsForTypes().subscribe(
+      (data) => {
+        console.log(data)
+        this.openAppointments = data.payload.openAppointments
+        this.immediateAppointments = data.payload.immediateAppointments
+        this.nextAppointments = data.payload.nextAppointments
+
+        console.log( this.nextAppointments)
       },
       (error) => {
         console.log(error);
