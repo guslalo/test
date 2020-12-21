@@ -379,7 +379,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
         this.personalData.get('education').setValue(user.personalData.education || null);
         this.personalData.get('healthInsurance').setValue(user.personalData.healthInsurance || user.personalData.prevission);
-        this.personalData.get('zipcode').setValue(user.personalData?.zipcode || user.personalData?.postal || '');
+        this.personalData.get('zipcode').setValue(user.addressData?.zipcode || user.personalData?.postal || '');
 ;
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
