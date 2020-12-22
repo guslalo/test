@@ -1,0 +1,625 @@
+<div class="container-fluid h-100 d-inline-block" id="login">
+  <div class="row h-100">
+    <!--columnleft-->
+    <div class="col-12 col-md-4 left d-none d-md-block">
+      <app-left-column></app-left-column>
+    </div>
+    <!--/columnleft-->
+
+    <div class="col-12 col-md-8 right">
+      <!--lang component-->
+      <div class="boxIdioma">
+        <app-lang></app-lang>
+      </div>
+      <!--/lang component-->
+
+      <div class="row vertical-center h-100">
+        <div class="col-12 col-md-9 col-lg-8 mx-auto py-3 align-self-center">
+          <img class="d-md-none mb-1" src="assets/img/Logo03.webp" id="icon" alt="itms" />
+          <div class="row">
+            <div class="col">
+              <h2>{{ 'account.completeRegister.label' | transloco }}</h2>
+            </div>
+          </div>
+          <p>{{ 'account.createAccount.label' | transloco }}</p>
+          <!--stepper-->
+          <mat-vertical-stepper linear #stepper>
+            <!-- paso 1-->
+            <mat-step [stepControl]="identificationData">
+              <ng-template matStepLabel>
+                <h4>{{ 'account.createAccount.identificationData.label' | transloco }}</h4>
+              </ng-template>
+              <div class="custom-control custom-checkbox custom-control-inline mb-2">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="isForeign"
+                  [(ngModel)]="isForeign"
+                  (change)="validateForm()"
+                />
+                <label class="custom-control-label" for="isForeign">{{
+                  'account.createAccount.isForeign' | transloco
+                }}</label>
+              </div>
+              <form [formGroup]="identificationData">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="document">{{ 'account.identificationDocument.label' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="document"
+                      formControlName="document"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('document').valid && identificationData.get('document').touched
+                      }"
+                      (change)="validateForm()"
+                    >
+                      <option [value]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option value="run">RUT</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="idDocumentNumber">{{ 'account.selectedDocumentNumber.label' | transloco }} *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="idDocumentNumber"
+                      formControlName="idDocumentNumber"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('idDocumentNumber').valid &&
+                          identificationData.get('idDocumentNumber').touched
+                      }"
+                    />
+                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="passport">{{ 'common.passport.label' | transloco }}</label>
+                    <input
+                      [attr.disabled]="!isForeign ? '' : null"
+                      type="text"
+                      class="form-control"
+                      name="passport"
+                      formControlName="passport"
+                      [ngClass]="{
+                        'is-invalid':
+                          !identificationData.get('passport').valid && identificationData.get('passport').touched
+                      }"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                    matStepperNext
+                    [disabled]="!identificationData.valid && !isForeign"
+                  >
+                    {{ 'common.button.continue.label' | transloco }}
+                  </button>
+                </div>
+              </form>
+            </mat-step>
+            <!-- /paso 1-->
+
+            <!-- paso 2-->
+            <mat-step [stepControl]="personalData">
+              <form [formGroup]="personalData" novalidate="" class="">
+                <ng-template matStepLabel>
+                  <h4>{{ 'account.createAccount.personalData.label' | transloco }}</h4>
+                </ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="name">{{ 'common.forms.user.identification.name.label' | transloco }} *</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder=""
+                      [ngClass]="{ 'is-invalid': !personalData.get('name').valid && personalData.get('name').touched }"
+                      formControlName="name" disabled/>
+                    <div *ngIf="personalData.controls['name'].errors?.required" class="invalid-feedback">
+                      {{ 'common.forms.user.identification.name.label' | transloco }} *
+                    </div>
+                    <div *ngIf="personalData.controls['name'].errors?.pattern" class="invalid-feedback">
+                      {{ 'common.onlyChars.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="lastName">{{
+                      'common.forms.user.identification.firstSurname.label' | transloco
+                    }} *</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      class="form-control"
+                      placeholder=""
+                      formControlName="lastName"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('lastName').valid && personalData.get('lastName').touched
+                      }"
+                     disabled/>
+                    <div *ngIf="personalData.controls['lastName'].errors?.pattern" class="invalid-feedback">
+                      {{ 'common.onlyChars.label' | transloco }}
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <!--row-->
+                <div class="form-row">
+                  
+                  <div class="form-group col-12 col-md-6">
+                    <label for="motherName"
+                      >{{ 'common.forms.user.identification.secondSurname.label' | transloco }} *</label
+                    >
+                    <input
+                      disabled
+                      type="text"
+                      name="secondLastName"
+                      id="secondLastName"
+                      class="form-control"
+                      placeholder=""
+                      formControlName="secondLastName"
+                    disabled/>
+                    <div *ngIf="personalData.controls['secondLastName'].errors?.required" class="invalid-feedback">
+                      {{ 'common.forms.user.identification.secondSurname.label' | transloco }}
+                      {{ 'common.itsNecesesary.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="gender">{{ 'account.grenderReq.label' | transloco }} *</label>
+                    <select formControlName="gender" name="gender" id="gender" class="form-control" placeholder=""
+                      class="form-control" id="gender" [ngClass]="{
+                        'is-invalid': !personalData.get('gender').valid && personalData.get('gender').touched
+                      }" disabled>
+                      <option value="male">{{ 'clinicalFile.male.label' | transloco }}</option>
+                      <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
+                    </select>
+                    <div *ngIf="personalData.controls['gender'].errors?.required" class="invalid-feedback">
+                      {{ 'auth.grender.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="healthInsurance">Prevision de salud *</label>
+                    <div class="input-group">
+                      <select class="form-control" name="healthInsurance" formControlName="healthInsurance"  
+                  
+                        [ngClass]="{
+                          'is-invalid':
+                            !personalData.get('healthInsurance').valid
+                        }" id="select-type-document">
+                        <option  [selected]="true" value="null">{{ 'common.select.label' | transloco }}</option>
+                        <option  value="item._id" *ngFor="let item of previsionHealth"  > 
+                          {{item.name}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="email">{{ 'auth.emailReq.label' | transloco }}*</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="usuario@mail.cl"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('email').valid && personalData.get('email').touched
+                      }" formControlName="email" onkeypress="return event.charCode != 32" disabled/>
+                    <div *ngIf="personalData.controls['email'].errors?.required" class="invalid-feedback">
+                      email {{ 'account.erroneous.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="phoneNumber">{{ 'account.phoneReq.label' | transloco }} *</label>
+                    <input name="text" name="phoneNumber" id="phoneNumber" type="text" class="form-control"
+                      placeholder="(##)-####-####" [ngClass]="{
+                        'is-invalid': !personalData.get('phoneNumber').valid && personalData.get('phoneNumber').touched
+                      }" formControlName="phoneNumber" disabled/>
+                    <div *ngIf="personalData.controls['phoneNumber'].errors?.required" class="invalid-feedback">
+                      telefono {{ 'common.itsNecesesary.label' | transloco }}
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <div class="form-row">
+                  
+                  
+                </div>
+                <div class="row mb-5 pb-5">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious
+                    >
+                      {{ 'common.button.back.label' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!personalData.valid"
+                    >
+                      {{ 'common.button.continue.label' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form> </mat-step
+            ><!-- /paso 2-->
+
+            <!-- paso 2-->
+            <mat-step [stepControl]="birthData">
+              <form [formGroup]="birthData">
+                <ng-template matStepLabel>
+                  <h4>{{ 'account.createAccount.birthData.label' | transloco }}</h4>
+                </ng-template>
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="birthdate">
+                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }} *</label>
+                    <div class="input-group dateregister">
+                      <!--[minDate]="minDate"-->
+                      <input [placement]="placement" class="form-control" id="birthdate" [maxDate]="maxDate"
+                        [minDate]="{ year: 1900, month: 1, day: 1 }" placeholder="DD/MM/YYYY" name="birthdate"
+                        ngbDatepicker #d="ngbDatepicker" formControlName="birthdate" [ngClass]="{
+                          'is-invalid': !birthData.get('birthdate').valid && birthData.get('birthdate').touched
+                        }" (click)="d.toggle()" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                    <div *ngIf="birthData.controls['birthdate'].errors?.required" class="invalid-feedback">
+                      {{ 'profile.personal.tabIdentification.birthData.date.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="nacionality"
+                      >{{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }} *</label
+                    >
+                    <select
+                      class="form-control"
+                      name="nacionality"
+                      formControlName="nacionality"
+                      [ngClass]="{
+                        'is-invalid': !birthData.get('nacionality').valid && birthData.get('nacionality').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of countries">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="birthData.controls['nacionality'].errors?.required" class="invalid-feedback">
+                      {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}
+                      {{ 'account.erroneous.label' | transloco }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-5 pb-5">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn mb-3 mb-sm-0 btn-outline-primary rounded-pill btn-block-xs-only"
+                      matStepperPrevious
+                    >
+                      {{ 'common.button.back.label' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!birthData.valid"
+                    >
+                      {{ 'common.button.continue.label' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form> </mat-step
+            ><!-- /paso 2-->
+
+            <!--paso 3-->
+            <mat-step [stepControl]="addressData">
+              <form [formGroup]="addressData">
+                <ng-template matStepLabel>
+                  <h4>{{ 'account.createAccount.address.label' | transloco }}</h4>
+                </ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="col-12 col-md-6">
+                    <label for="uf">{{ 'account.uf.label' | transloco }} *</label>
+                    <select
+                      class="form-control"
+                      name="uf"
+                      (change)="ufSelect($event.target)"
+                      formControlName="uf"
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('uf').valid && addressData.get('uf').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="addressData.controls['uf'].errors?.required" class="invalid-feedback">
+                      {{ 'account.uf.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="city"
+                      >{{ 'clinicalFile.patientData.tabs.identification.addressData.city.label' | transloco }} *</label
+                    >
+                    <select
+                      class="form-control"
+                      name="city"
+                      formControlName="city"
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('city').valid && addressData.get('city').touched
+                      }"
+                    >
+                      <option disabled [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="addressData.controls['city'].errors?.required" class="invalid-feedback">
+                      ciudad necesario
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="street">{{ 'account.street.label' | transloco }} *</label>
+                    <input
+                      type="text"
+                      name="street"
+                      id="street"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('street').valid && addressData.get('street').touched
+                      }"
+                      formControlName="street"
+                    />
+                    <div *ngIf="addressData.controls['street'].errors?.required" class="invalid-feedback">
+                      {{ 'account.street.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
+                    </div>
+                  </div>
+
+                  <div class="form-group col-12 col-md-6">
+                    <label for="streetNumber">{{ 'account.numeration.label' | transloco }} *</label>
+                    <input
+                      name="streetNumber"
+                      name="streetNumber"
+                      id="streetNumber"
+                      type="text"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid': !addressData.get('streetNumber').valid && addressData.get('streetNumber').touched
+                      }"
+                      formControlName="streetNumber"
+                    />
+                    <div *ngIf="addressData.controls['streetNumber'].errors?.required" class="invalid-feedback">
+                      {{ 'account.numeration.label' | transloco }} {{ 'common.itsNecesesary.label' | transloco }}
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                    <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                      formControlName="complement" />
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="postal">Codigo postal</label>
+                    <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder=""
+                      formControlName="zipcode" />
+                  </div>
+  
+                </div>
+
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious
+                    >
+                      {{ 'common.button.back.label' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!addressData.valid"
+                    >
+                      {{ 'common.button.continue.label' | transloco }}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+            <!--/paso 3-->
+
+            <!--paso 4-->
+            <mat-step [stepControl]="passwordData">
+              <form [formGroup]="passwordData">
+                <ng-template matStepLabel>
+                  <h4>{{ 'account.passwordGeneration.label' | transloco }}</h4>
+                </ng-template>
+                <!--row-->
+                <div class="form-row">
+                  <div class="form-group col-12 col-md-6">
+                    <label for="password">{{ 'account.confirmPassword.label' | transloco }} *</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': !passwordData.get('password').valid && passwordData.get('password').touched
+                      }"
+                      formControlName="password"
+                      maxlength="16"
+                    />
+                    <div *ngIf="passwordData.controls['password'].errors?.pattern" class="invalid-feedback">
+                      <ul>
+                        <li>{{ 'account.atLeastOneUpper.label' | transloco }}</li>
+                        <li>{{ 'account.atLeastOneLower.label' | transloco }}</li>
+                        <li>{{ 'account.atLeastOneNumber.label' | transloco }}</li>
+                        <li>{{ 'account.atLeastOneSpecialChar.label' | transloco }}</li>
+                        <li>{{ 'account.lengthMinEightChars.label' | transloco }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group col-12 col-md-6">
+                    <label for="confirmPasword">{{ 'account.confirmPassword.label' | transloco }} *</label>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      class="form-control"
+                      placeholder=""
+                      [ngClass]="{
+                        'is-invalid':
+                          passwordData.get('confirmPassword').touched && passwordData.errors?.passwordNotMatch
+                      }"
+                      formControlName="confirmPassword"
+                      maxlength="20"
+                    />
+                    <div *ngIf="passwordData.errors?.passwordNotMatch" class="invalid-feedback">
+                      {{ 'account.passwordsNotMatch.label' | transloco }}
+                    </div>
+                  </div>
+                </div>
+                <password-strength-meter [password]="passwordData.value.password"></password-strength-meter>
+                <div class="row">
+                  <div class="col">
+                    <div class="alert alert-secondary" role="alert">
+                      <div class="row">
+                        <div class="col-2 text-center">
+                          <svg
+                            width="3em"
+                            height="3em"
+                            viewBox="0 0 16 16"
+                            class="bi bi-shield-lock-fill color-primary"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M5.187 1.025C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815zm3.328 6.884a1.5 1.5 0 1 0-1.06-.011.5.5 0 0 0-.044.136l-.333 2a.5.5 0 0 0 .493.582h.835a.5.5 0 0 0 .493-.585l-.347-2a.5.5 0 0 0-.037-.122z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="col-10 pl-0">
+                          {{ 'account.passwordHint.label' | transloco }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <!--<button mat-button (click)="stepper.reset()">Reset</button>-->
+                    <button
+                      type="button"
+                      class="btn btn-block-xs-only btn-outline-primary rounded-pill"
+                      matStepperPrevious
+                    >
+                      {{ 'common.button.back.label' | transloco }}
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <button
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      type="submit"
+                      class="btn btn-block-xs-only btn-primary rounded-pill float-right"
+                      matStepperNext
+                      [disabled]="!passwordData.valid"
+                    >
+                      {{ 'common.button.continue.label' | transloco }}
+                    </button>
+                  </div>
+                </div>
+                <!--/row-->
+              </form>
+            </mat-step>
+            <!--/paso 4-->
+          </mat-vertical-stepper>
+          <!--/stepper-->
+
+          <p class="text-danger mt-4" *ngIf="errorMsg">{{ errorMsg.toUpperCase() }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ 'account.createAccount.modal.termAndConditions.title' | transloco }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col col-12 col-md-12 col-sm-12 col-lg-12">
+            <h4>{{'common.confirmDocsCreateAccount.label' | transloco}}</h4>
+          </div>
+          <div class="col-lg-12">
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="terms" [(ngModel)]="termsAccepted" />
+                <label class="custom-control-label" for="terms"><a [routerLink]="useTerm" target="_blank"
+                    class="text-destacado">{{'auth.accept.termsAndconditions.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="privacy" [(ngModel)]="privacyAccepted" />
+                <label class="custom-control-label" for="privacy"><a [routerLink]="privacyTerms"  target="_blank"
+                    class="text-destacado">{{'auth.accept.privacyPolicy.label' | transloco}}</a></label>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="consent" [(ngModel)]="consentAccepted" />
+                <label class="custom-control-label" for="consent"><a [routerLink]="telemedicineConsent"  target="_blank"
+                    class="text-destacado">{{'auth.accept.consent.label' | transloco}}</a></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          {{ 'clinicalFile.decline.label' | transloco }}
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"  [disabled]="!termsAccepted || !privacyAccepted || !consentAccepted" (click)="crearCuenta()">
+          {{ 'auth.acceptAndCreate.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>
