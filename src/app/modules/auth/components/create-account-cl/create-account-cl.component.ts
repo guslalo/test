@@ -122,7 +122,7 @@ export class CreateAccountCLComponent implements OnInit {
             phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
             //breed: [null, Validators.required],
             birthdate: [null, Validators.required],
-            prevission: ['', Validators.required],
+            healthInsurance: ['', Validators.required],
             nacionality: [null, Validators.required],
           },
           {
@@ -149,7 +149,7 @@ export class CreateAccountCLComponent implements OnInit {
           phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
           //breed: [null, Validators.required],
           birthdate: [null, Validators.required],
-          prevission: ['', Validators.required],
+          healthInsurance: ['', Validators.required],
           nacionality: [null, Validators.required],
         },
         {
@@ -455,7 +455,7 @@ export class CreateAccountCLComponent implements OnInit {
         ufBirth:  '',
         municipalityBirth:  '',
         nacionality: this.form[1].nacionality.value || '',
-        prevission: this.form[1].prevission.value || ''
+        healthInsurance: this.form[1].healthInsurance.value || ''
       },
       addressData: {
         cep: '',
