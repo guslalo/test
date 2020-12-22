@@ -188,7 +188,7 @@ export class CreateAccountCLComponent implements OnInit {
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: ['', null],
-      postal: ['', null]
+      zipcode: ['', null]
     });
     this.passwordData = new FormGroup(
       {
@@ -463,7 +463,7 @@ export class CreateAccountCLComponent implements OnInit {
         street: this.form[2].street.value,
         streetNumber: parseInt(this.form[2].streetNumber.value),
         complement: this.form[2].complement.value,
-        postal: this.form[2].postal.value
+        zipcode: this.form[2].zipcode.value
       },
       password: this.form[3].password.value,
     };
