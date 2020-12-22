@@ -89,13 +89,15 @@ export class CreateAccountCLComponent implements OnInit {
   public street:any;
   public mayorEdad:boolean;
   public setup:any;
-  
+  public brand: any;
+
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
   }
 
   ngOnInit(): void {
+    this.brand = environment.brand
     this.setup = environment.setup
     this.errorCep = false;
     this.clinic = '5f236fc966fbb0054894b780';
