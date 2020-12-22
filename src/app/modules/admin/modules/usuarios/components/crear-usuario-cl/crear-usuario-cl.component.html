@@ -740,6 +740,8 @@
             </div>
           </div>
         </div>
+
+        <!--brasil
         <div class="row">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
@@ -873,13 +875,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <!-- <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
-                        <th scope="col">
-                          {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                        </th>
-                        <th scope="col">{{ 'common.actions.label' | transloco }}</th>
-                      </tr> -->
+                   
 
                         <th scope="col">
                           {{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}
@@ -945,8 +941,9 @@
               </form>
             </div>
           </div>
-        </div>
-        <div class="row" *ngIf="userType=='professional'">
+        </div> -->
+        <!--chile-->
+        <div class="row" *ngIf="userType =='professional' || userType =='coordinator' || userType =='admin'">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">{{ 'dashboard.home.uncategorized.workNumber.label' | transloco }}</h4>
