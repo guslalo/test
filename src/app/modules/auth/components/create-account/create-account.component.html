@@ -17,20 +17,12 @@
       <div class="row vertical-center h-100">
         <div class="col-12 col-md-9 col-lg-8 mx-auto py-3 align-self-center">
           <div class="text-center mt-5 mb-2 d-block d-sm-none">
-            <ng-container *ngIf="setup === 'BR'">
-              <div class="logo mb-5 d-block d-sm-none bg-white mt-4">
-                <img src="assets/logo-app-mobile-login.png" style="width:65%">
-              </div>
-            </ng-container>
-            <ng-container *ngIf="setup === 'CL'">
-              <div class="logo mb-5 d-block d-sm-none bg-white mt-2">
-                <img src="assets/itms-atrys-chile.svg" style="width:65%">
-              </div>
-            </ng-container>
+
+            <img src="assets/img/{{ brand }}/logo-colors.svg" style="width:65%">
+
           </div>
           <div class="row">
             <div class="col">
-             
               <h2>{{ 'account.createAccount.title' | transloco }}
               </h2>
             </div>
