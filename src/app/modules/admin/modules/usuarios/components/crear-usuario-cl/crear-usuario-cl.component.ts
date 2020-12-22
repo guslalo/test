@@ -875,7 +875,6 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   getIssuingEntities() {
     this.userService.getIssuingEntities().subscribe((data) => {
-      // console.log(data);
       this.issuingEntities = data.payload;
     });
   }
