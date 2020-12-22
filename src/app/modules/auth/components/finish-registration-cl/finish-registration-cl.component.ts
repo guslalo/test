@@ -192,22 +192,15 @@ export class FinishRegistrationCLComponent implements OnInit {
       this.identificationData.get('idDocumentNumber').setValidators(null);
       this.identificationData.get('passport').enable();
       this.identificationData.get('document').disable();
-      this.identificationData.get('extraDocument').disable();
       this.identificationData.get('idDocumentNumber').disable();
-      this.identificationData.get('extraIdDocument').disable();
       this.identificationData.get('idDocumentNumber').reset();
-      this.identificationData.get('extraIdDocument').reset();
       this.identificationData.get('document').reset();
-      this.identificationData.get('extraDocument').reset();
-      this.identificationData.get('issuingBody').reset();
     } else {
       this.identificationData.get('document').setValidators([Validators.required]);
       this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
       this.identificationData.get('passport').setValidators(null);
       this.identificationData.get('document').enable();
-      this.identificationData.get('extraDocument').enable();
       this.identificationData.get('idDocumentNumber').enable();
-      this.identificationData.get('extraIdDocument').enable();
     }
 
     if (this.identificationData.get('document').value === 'rgRegistry') {
