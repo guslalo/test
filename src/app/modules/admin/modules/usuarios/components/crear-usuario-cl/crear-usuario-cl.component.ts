@@ -591,7 +591,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           familySituation:  '',
           healthInsurance: this.formUser[1].value.healthInsurance || '',
           breed:' ',
-          motherName: ' ',
+          motherName: ' '
         },
         addressData: {
           uf: this.formUser[1].value.uf,
@@ -648,7 +648,9 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
+          breed:' ',
+          motherName: ' '
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -730,7 +732,9 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
+          breed:' ',
+          motherName: ' '
         },
         addressData: {
           cep: this.formUser[1].value.cep,
@@ -804,7 +808,9 @@ export class CrearUsuarioComponentCL implements OnInit {
           nacionality: this.formUser[1].value.nacionality,
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
+          breed:' ',
+          motherName: ' '
         },
         addressData: {
           cep: this.formUser[1].value.cep,
