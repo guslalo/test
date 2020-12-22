@@ -23,9 +23,10 @@ export const environment = {
   ttlSession: 600,
   setup: 'BR',
   version: '{BUILD_VERSION}-Medline ',
+  brand: "medline",
   colors: {
     "color-primary": "#394184;",
     "color-secondary": "#D03B34;",
-    "color-hover": "#77787B;",
+    "color-hover": "#77787B;"
   }
 };

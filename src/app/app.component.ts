@@ -17,13 +17,15 @@ import { IdleEventsService } from './services/idle-events.service';
 export class AppComponent {
   message: string;
   title = 'itmstl';
+  public brand: any;
+  favIcon: HTMLLinkElement = document.querySelector('#favIcon');
 
   constructor(
     titleService: Title,
     router: Router,
     private permissionsService: NgxPermissionsService,
     private _policyService: PoliciesService,
-    private idleEvents: IdleEventsService,
+    private idleEvents: IdleEventsService
   ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -57,6 +59,7 @@ export class AppComponent {
   ngOnInit() {
 
     this._policyService.setPoliciesToUser()
+    this.favIcon.href = 'assets/img/' + environment.brand + '/favicon.svg';
 
     /*const userId = 'user001';
     this.messagingService.requestPermission(userId)

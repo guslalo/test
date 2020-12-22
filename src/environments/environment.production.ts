@@ -23,9 +23,10 @@ export const environment = {
   ttlSession: 60,
   setup: 'BR',
   version: '{BUILD_VERSION}-home',
+  brand: "medic",
   colors: {
     "color-primary": "#B99DF0;",
     "color-secondary": "#DC221C;",
-    "color-hover": "#0A6FF5;",
+    "color-hover": "#0A6FF5;"
   }
 };

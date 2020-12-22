@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import * as moment from 'moment';
-// import { BnNgIdleService } from 'bn-ng-idle';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { TranslocoService } from '@ngneat/transloco';
@@ -65,30 +64,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
   currentDate: string;
   public setup:any;
   public mobile:boolean;
-  // public firstAccess:boolean;
+  public brand: any;
 
   constructor(
     public breakpointObserver: BreakpointObserver,
-    // private bnIdle: BnNgIdleService,
     private toastr: ToastrService,
     private translateService: TranslocoService,
     private webNotfications: MessagingService,
     private router: Router
   ) {
-    // 20 MINUTES DEFAULT 
-    // this.bnIdle.startWatching(environment.sessionTime).subscribe((res) => {
-    //   if (res) {
-    //     console.log('session expired');
-    //     this.toastr.info(this.translateService.translate('common.user.sessionExpired.label'));
-
-    //     setTimeout(() => {
-    //       document.location.href = '/';
-    //     }, 10000);
-    //   }else {
-    //     console.log('reactivado');
-    //     this.bnIdle.resetTimer();
-    //   }
-    // });
   }
 
   public state:any;
@@ -97,8 +81,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
   status = false;
   public nots: Array<any> = []
   ngOnInit(): void {
-    //this.state = 'open';
-    //this.firstAccess = true;
+
+    this.brand = environment.brand
+
     $('.dots-mobile').click(function(){
       $('.infoExtra').slideToggle('fast');
     });

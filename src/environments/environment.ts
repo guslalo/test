@@ -22,5 +22,11 @@ export const environment = {
   },
   ttlSession: 20000 * 60,
   setup: 'BR',
-  version: 'local'
+  version: 'local',
+  brand: "atrys",
+  colors: {
+    "color-primary": "#25b0bb;",
+    "color-secondary": "#044AAB;",
+    "color-hover": "#044AAB;"
+  }
 };

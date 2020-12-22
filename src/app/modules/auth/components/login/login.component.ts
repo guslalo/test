@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
   public production: boolean;
   public createRoute = "/create-account";
   public setup:any;
+  public brand: any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.brand = environment.brand
     this.setup = environment.setup
     this.errorLogin = 0;
     localStorage.clear();
