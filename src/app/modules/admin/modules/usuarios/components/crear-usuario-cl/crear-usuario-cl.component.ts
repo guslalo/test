@@ -1009,7 +1009,7 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   addProfessionalRegistry() {
-    if (this.userType == "professional"){
+    if (this.userType == "professional" || "coordinator" || "admin"){
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType || '',
         registry: this.professionalForm.value.professionalRegistry || '',
@@ -1031,6 +1031,7 @@ export class CrearUsuarioComponentCL implements OnInit {
         ufRegistry: ''
       });
     }else{
+      
       this.professionalRegistry.push({
         type: this.professionalForm.value.professionalRegistryType || '',
         registry: this.professionalForm.value.professionalRegistry || '',
