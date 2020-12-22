@@ -285,13 +285,13 @@
                     </select>
                   </div>
                   <div class="form-group col-12 col-md-6">
-                    <label for="prevission">Prevision de salud *</label>
+                    <label for="healthInsurance">Prevision de salud *</label>
                     <div class="input-group">
-                      <select class="form-control" name="prevission" formControlName="prevission"  
+                      <select class="form-control" name="healthInsurance" formControlName="healthInsurance"  
                   
                         [ngClass]="{
                           'is-invalid':
-                            !personalData.get('prevission').valid && personalData.get('prevission').touched
+                            !personalData.get('healthInsurance').valid && personalData.get('healthInsurance').touched
                         }" id="select-type-document">
                         <option  [selected]="true" value="null">{{ 'common.select.label' | transloco }}</option>
                         <option  value="item._id" *ngFor="let item of previsionHealth"  > 
