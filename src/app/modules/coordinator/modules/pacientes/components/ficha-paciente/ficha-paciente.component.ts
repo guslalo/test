@@ -33,6 +33,7 @@ export class FichaPacienteComponent implements OnInit {
   cityMap: any = [];
   countryMap: any = [];
   issuerMap: any = [];
+  public fecha: any;
 
   // EXTRAS
   moment: any = moment;
@@ -88,6 +89,9 @@ export class FichaPacienteComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
+
+    this.getFecha();
+
   }
 
 
@@ -275,6 +279,18 @@ export class FichaPacienteComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+
+  getFecha() {
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month,
+    };
   }
 
   applyFiltersAppointments() {
