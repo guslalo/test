@@ -313,10 +313,14 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.cpfvalid = validate(run);
     console.log(this.cpfvalid, run)
   }
+
+  /*
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
   }
+
+
   validateCPF(cpf: string){
     console.log(this.identificationData.get('document').value)
     if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
@@ -346,7 +350,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       }
       return true
     }
-  }
+  }*/
 
   ufSelect(id) {
     let idSelected = id.value.split(":");
@@ -585,7 +589,9 @@ export class CrearUsuarioComponentCL implements OnInit {
           inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
           familySituation:  '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
+          breed:' ',
+          motherName: ' ',
         },
         addressData: {
           uf: this.formUser[1].value.uf,
