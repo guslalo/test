@@ -989,7 +989,6 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   getSpecialties() {
     this.specialtiesService.getSpecialties().subscribe((data) => {
-      // console.log(data);
       this.specialities = data;
     });
   }
