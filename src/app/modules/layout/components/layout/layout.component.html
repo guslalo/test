@@ -17,13 +17,7 @@
                 </svg>
               </div>
               <div class="logo">
-                <ng-container *ngIf="setup === 'BR'">
-                  <img src="assets/img/logo-app.svg">
-                </ng-container>
-                <ng-container *ngIf="setup === 'CL'">
-                  <img src="assets/itms-atrys-chile.svg">
-                </ng-container>
-
+                <img src="assets/img/{{ brand }}/logo-colors.svg">
               </div>
             </div>
             <!--/col-->
@@ -363,6 +357,12 @@
                   </svg>
                 </div>
                 <i class="text">{{ 'common.menu.home.label' | transloco }}</i>
+              </a>
+              <a class="nav-link" routerLink="consultas" routerLinkActive="active">
+                <div class="icon">
+                  <img src="assets/img/mis-pacientes-icon.svg" />
+                </div>
+                <i class="text">Lista de espera</i>
               </a>
               <a class="nav-link" routerLink="pacientes" routerLinkActive="active">
                 <div class="icon">

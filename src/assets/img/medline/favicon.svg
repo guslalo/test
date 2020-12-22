@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-Personalizado_1">
+      <rect width="32" height="32"/>
+    </clipPath>
+  </defs>
+  <g id="Personalizado_1" data-name="Personalizado – 1" clip-path="url(#clip-Personalizado_1)">
+    <rect width="32" height="32" fill="#fff"/>
+    <path id="Trazado_1" data-name="Trazado 1" d="M12.546,8v5.606H5.594v3.476h6.952V22.75h3.7V17.082H22.6V13.606H16.244V8Z" transform="translate(2 1)" fill="#cd3b33"/>
+  </g>
+</svg>
