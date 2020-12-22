@@ -11,6 +11,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 import { CreateAccountCLComponent } from './components/create-account-cl/create-account-cl.component';
+import { FinishRegistrationCLComponent } from './components/finish-registration-cl/finish-registration-cl.component';
 
 const recovery = 'recovery-password';
 
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'finish-registration',
     component: FinishRegistrationComponent,
+  },
+  {
+    path: 'finish-registration-cl',
+    component: FinishRegistrationCLComponent,
   },
   {
     path: 'context',

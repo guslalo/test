@@ -29,6 +29,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { FinishRegistrationCLComponent } from './components/finish-registration-cl/finish-registration-cl.component';
 import { RouterModule } from '@angular/router';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.component';
@@ -45,7 +46,8 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     ConfirmAccountComponent,
     ResetPasswordComponent,
     RecoveryDoneComponent,
-    CreateAccountCLComponent
+    CreateAccountCLComponent,
+    FinishRegistrationCLComponent
   ],
   imports: [
     CommonModule,
