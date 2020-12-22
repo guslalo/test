@@ -193,7 +193,7 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
+                    <label for="lastName">{{ 'account.lastName.label' | transloco }} *</label>
                     <input
                       type="text"
                       class="form-control"
@@ -740,6 +740,8 @@
             </div>
           </div>
         </div>
+
+        <!--brasil
         <div class="row">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
@@ -873,13 +875,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <!-- <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
-                        <th scope="col">
-                          {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                        </th>
-                        <th scope="col">{{ 'common.actions.label' | transloco }}</th>
-                      </tr> -->
+                   
 
                         <th scope="col">
                           {{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}
@@ -945,8 +941,9 @@
               </form>
             </div>
           </div>
-        </div>
-        <div class="row" *ngIf="userType=='professional'">
+        </div> -->
+        <!--chile-->
+        <div class="row" *ngIf="userType =='professional' || userType =='coordinator' || userType =='admin'">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">{{ 'dashboard.home.uncategorized.workNumber.label' | transloco }}</h4>
@@ -967,8 +964,9 @@
                   <div class="form-group col-md-4">
                     <label for="workState">{{
                       'dashboard.home.uncategorized.workState.label' | transloco
-                    }} * </label>
+                    }} *</label>
                     <select
+                      (change)="ufSelect($event.target)"
                       class="form-control"
                       name="workState"
                       formControlName="workState"
@@ -995,7 +993,7 @@
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities2">
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>
