@@ -284,7 +284,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-8">
                     <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
                     <select
                       class="form-control"
@@ -300,34 +300,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-group col-md-4">
-                    <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
-                    <div class="input-group dateregister">
-                      <input
-                        [disabled]="!isForeign"
-                        [placement]="'bottom'"
-                        [(ngModel)]="inmigrationDate"
-                        class="form-control"
-                        id="inmigrationDate"
-                        placeholder="DD/MM/YYYY"
-                        name="inmigrationDate"
-                        [minDate]="{ year: 1900, month: 1, day: 1 }"
-                        [maxDate]="currentDate"
-                        ngbDatepicker
-                        #e="ngbDatepicker"
-                        formControlName="inmigrationDate"
-                        (click)="e.toggle()"
-                      />
-                      <div class="input-group-append">
-                        <button
-                          [disabled]="!isForeign"
-                          class="btn btn-outline-secondary calendar"
-                          (click)="e.toggle()"
-                          type="button"
-                        ></button>
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
                 <div class="row">
                   

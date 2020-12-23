@@ -730,7 +730,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         isSchool: this.isSchool,
         name: this.formUser[1].value.name,
         lastName: this.formUser[1].value.lastName,
-        motherName: this.formUser[1].value.motherName,
+        //motherName: this.formUser[1].value.motherName,
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: this.formUser[1].value.phoneNumber,
@@ -738,10 +738,10 @@ export class EditarUsuarioCLComponent implements OnInit {
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
+        //inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
         education: this.formUser[1].value.education || '',
         healthInsurance: this.formUser[1].value.healthInsurance || '',
-        breed:' ',
+        //breed:' ',
 
       },
       addressData: {
@@ -751,8 +751,6 @@ export class EditarUsuarioCLComponent implements OnInit {
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
         complement: this.formUser[1].value.complement,
         zipcode: this.formUser[1].value.zipcode,
-        cep:' ',
-        neighborhood:''
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
