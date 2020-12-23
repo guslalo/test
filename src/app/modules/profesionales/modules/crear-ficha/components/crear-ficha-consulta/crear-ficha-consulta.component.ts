@@ -1054,7 +1054,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.antecedentes = data.payload.antecedent.sickness;
        
         if(environment.setup == 'CL'){
-          this.arrayDocuments = data.payload.recemed;
+          this.arrayDocuments = data.payload.recemed.map((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
         }
       },
       (error) => {
