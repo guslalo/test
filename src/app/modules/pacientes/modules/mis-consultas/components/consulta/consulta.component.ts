@@ -6,6 +6,7 @@ import { CurrentUserService } from './../../../../../../services/current-user.se
 import { UserLogin } from './../../../../../../models/models';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MedicalRecordService } from './../../../../../../services/medicalRecord.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-consulta',
@@ -30,7 +31,7 @@ export class ConsultaComponent implements OnInit {
   public allergies: any;
   public antecedentes: any;
   public userId: any;
-
+  public recemed: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +61,14 @@ export class ConsultaComponent implements OnInit {
       console.log(params);
       this.getAppointmentsProfessionalData(id);
       this.getAppointmentsDetails(id);
-      this.getVerifiedSibrareDocuments2(id);
+
+      if(environment.setup == 'CL'){
+        let _user = JSON.parse(localStorage.getItem('currentUser'))
+
+        this.getMedicalRecord(_user.id)
+      }else{
+        this.getVerifiedSibrareDocuments2(id);
+      }
     });
 
     this.getAppointmentsTimeline();
@@ -112,7 +120,7 @@ export class ConsultaComponent implements OnInit {
         this.appoimentDetail = data.payload;
         console.log(this.appoimentDetail);
 
-        this.getMedicalRecord(this.appoimentDetail.patientDetails.userDetails.userId)
+        // this.getMedicalRecord(this.appoimentDetail.patientDetails.userDetails.userId)
         this.userId = this.appoimentDetail.patientDetails.userDetails.userId;
 
         if (this.appoimentDetail.administrativeDetails.waitingRoomId === null) {
@@ -170,11 +178,14 @@ export class ConsultaComponent implements OnInit {
   getMedicalRecord(id) {
     this.medicalRecordService.getByUserId(id).subscribe(
       (data) => {
-        console.log(data);
+        console.log('MEDICAL RECORD', data)
         this.exams = data.payload.exams;
         this.antecedentesGeneral = data.payload.antecedent;
         this.allergies = data.payload.antecedent.allergies;
         this.antecedentes = data.payload.antecedent.sickness;
+
+        this.arrayDocuments = data.payload.recemed
+
       },
       (error) => {
         console.log(error);
@@ -182,6 +193,8 @@ export class ConsultaComponent implements OnInit {
     );
   }
 
-
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 
 }
