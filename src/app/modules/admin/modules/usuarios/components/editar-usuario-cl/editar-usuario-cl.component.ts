@@ -924,23 +924,13 @@ export class EditarUsuarioCLComponent implements OnInit {
 
   addProfessionalRegistry() {
     this.professionalRegistry.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.name,
       university: this.professionalForm.value.university,
       professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry: this.registerUf.name
     });
 
     this.professionalRegistrySend.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.id,
       university: this.professionalForm.value.university,
       professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry: this.registerUf.id
     });
      
     this.professionalForm.controls['professionalRegistryType'].setValue(' ');
