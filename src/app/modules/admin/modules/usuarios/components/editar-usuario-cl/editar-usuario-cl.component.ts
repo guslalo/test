@@ -416,7 +416,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.professionalForm.get('workNumber').setValue(user.professionalData?.workNumber || '')
         this.professionalForm.get('workComplement').setValue(user.professionalData?.workCOmplement || '')
         this.professionalForm.get('workPostal').setValue(user.professionalData?.workPostal || '')
-        this.professionalForm.get('workPhone').setValue(user.professionalData?.workState || '')
+        this.professionalForm.get('workPhone').setValue(user.professionalData?.workPhone || '')
         /*this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
@@ -730,7 +730,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         isSchool: this.isSchool,
         name: this.formUser[1].value.name,
         lastName: this.formUser[1].value.lastName,
-        //motherName: this.formUser[1].value.motherName,
+        //motherName: this.formUser[1].value.motherName || '',
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: this.formUser[1].value.phoneNumber,
