@@ -286,6 +286,7 @@ export class PerfilCLComponent implements OnInit {
       personalData: {
         education: this.personalData.value.education,
         phoneNumber: this.personalData.value.phoneNumber,
+        healthInsurance: this.personalData.value.healthInsurance
       },
       addressData: this.addressData.value,
     };
