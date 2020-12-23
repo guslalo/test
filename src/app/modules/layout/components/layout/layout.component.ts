@@ -65,7 +65,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public setup:any;
   public mobile:boolean;
   public brand: any;
-
+  public perfilRoute: string;
   constructor(
     public breakpointObserver: BreakpointObserver,
     private toastr: ToastrService,
@@ -100,7 +100,12 @@ setTimeout(()=>{
 }, 2500);
     
 
-    this.setup = environment.setup
+    this.setup = environment.setup 
+    if(this.setup == 'CL'){
+      this.perfilRoute = 'perfil-cl'
+    }else{
+      this.perfilRoute = 'perfil'
+    }
     if (localStorage.getItem('inmediateAppointment') === 'true') {
       this.inmediateAppointmentPadre = true;
       this.inmediateAppointment = true;
