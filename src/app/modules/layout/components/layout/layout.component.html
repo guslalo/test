@@ -63,7 +63,7 @@
                 <!--items-->
                 <div class="items itemSub2">
                   <div class="m-0 text-right top-currentUser">
-                    <a routerLink="perfil" class="name">{{ 'common.hello.label' | transloco }},
+                    <a [routerLink]="perfilRoute" class="name">{{ 'common.hello.label' | transloco }},
                       {{ currentUser.name }}</a>
                     <ng-container *ngIf="currentUser.administrativeData.length > 1; else administrative">
                       <ng-container *ngFor="let item of currentUser.administrativeData">
