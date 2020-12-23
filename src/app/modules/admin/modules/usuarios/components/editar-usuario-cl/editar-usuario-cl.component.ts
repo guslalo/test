@@ -191,7 +191,7 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.professionalForm = this.formBuilder.group({
       professionalTitle: ['', Validators.required],
       university: ['', Validators.required],
-      course: ['', Validators.required],
+      course: ['', ],
       ufRegistry: [null, null],
       professionalRegistryType: [null, null],
       professionalRegistry: [null, null],
@@ -320,7 +320,7 @@ export class EditarUsuarioCLComponent implements OnInit {
       this.identificationData.get('document').reset();
       this.identificationData.get('extraDocument').reset();
     } else {
-      this.identificationData.get('document').setValidators([Validators.required]);
+      this.identificationData.get('document').setValidators(null);
       this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
       this.identificationData.get('passport').setValidators(null);
       this.identificationData.get('document').enable();
@@ -670,8 +670,8 @@ export class EditarUsuarioCLComponent implements OnInit {
         if (
           this.formUser[0].valid &&
           this.formUser[1].valid &&
-          this.formUser[4].valid &&
-          this.professionalRegistry.length
+          this.formUser[4].valid
+          && this.professionalRegistry.length
         ) {
           return true;
         } else {
