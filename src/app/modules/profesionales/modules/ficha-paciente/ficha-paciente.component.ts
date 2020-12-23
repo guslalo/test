@@ -11,6 +11,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../services/appointments.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -154,7 +155,13 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
-        this.arrayDocuments = data.payload.prescriptions;
+        
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed;
+        }else{
+          this.arrayDocuments = data.payload.prescriptions;
+        }
+
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.antecedentesGeneral = data.payload.antecedent;
@@ -307,5 +314,9 @@ export class FichaPacienteComponent implements OnInit {
 
     this.appointmentsRecord = temp;
     // console.log(temp);
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 }
