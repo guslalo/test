@@ -1581,25 +1581,40 @@
                         <ng-container> {{ item.documentType }} tipo </ng-container>
                       </td>
                       <td class="text-center">
-                        <ng-container *ngIf="item.documentType === 'prescription'">
+                        <ng-container *ngIf="item.documentType === 'prescription' || item.documentDetails?.type === 'prescription'">
                           {{ 'sibrare.prescription' | transloco}}
                         </ng-container>
                         <ng-container *ngIf="item.documentType === 'report'">
                           {{ 'sibrare.report' | transloco}}
                         </ng-container>
-                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                        <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
                         <!--{{ item.documentType }}-->
                       </td>
-                      <td class="text-center">
+
+                      <td class="text-center" *ngIf="item.uploadDate">
                         {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center" *ngIf="item.documentDetails?.uploadDate">
+                        {{ item.documentDetails.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+
+                      <td class="text-center" *ngIf="item.issuerDetails">
                         {{ item.issuerDetails.fullName }}
                       </td>
+                      <td class="text-center" *ngIf="item.documentDetails?.issuerDetails">
+                        {{ item.documentDetails.issuerDetails[0].name }} {{ item.documentDetails.issuerDetails[0].lastName }}
+                      </td>
+
                       <td class="text-center">
-                        <a (click)="downloadSibrare(item.documentId)">
+                        <a *ngIf="item.documentDetails && item.documentDetails?.path" (click)="goToLink(item.documentDetails?.path)">
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <a (click)="downloadSibrare(item.documentId)" *ngIf="item.documentId">
                           <!-- routerLink="{{urlSibrare}}" target="_blank-->
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
