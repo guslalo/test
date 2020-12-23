@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
+import { PerfilCLComponent } from 'src/app/shared/modules/mi-perfil-cl/mi-perfil-cl.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent,
+  },
+  {
+    path: 'perfil-cl',
+    component: PerfilCLComponent,
   },
   {
     path: 'ayuda',

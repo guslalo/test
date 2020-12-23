@@ -91,7 +91,7 @@
                           [ngStyle]="{ 'border-radius': '50%' }" />
                       </div>
                       <div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" routerLink="perfil">{{
+                        <a class="dropdown-item" [routerLink]="perfilRoute">{{
                           'dashboard.home.userManagment.createAccount.tabs.role.identification.profile.label'
                             | transloco
                         }}</a>

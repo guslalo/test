@@ -18,6 +18,7 @@ import { MiDisponibilidadComponent } from './modules/mi-disponibilidad/mi-dispon
 import { MisPacientesComponent } from './modules/mis-pacientes/mis-pacientes.component';
 import { AgendaComponent } from './modules/agenda/agenda.component';
 import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
+import { PerfilCLComponent } from 'src/app/shared/modules/mi-perfil-cl/mi-perfil-cl.component';
 
 // const profesional
 const historialConsulta = 'historial-consultas';
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent,
+  },
+  {
+    path: 'perfil-cl',
+    component: PerfilCLComponent,
   },
   { path: 'context', component: InicioPComponent },
   { path: 'mi-agenda', component: AgendaComponent, canActivate: [ProfesionalGuard] },

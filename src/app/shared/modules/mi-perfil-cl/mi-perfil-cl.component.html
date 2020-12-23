@@ -1,0 +1,399 @@
+<div class="row">
+  <div class="col mb-2">
+    <h2>{{ 'common.profile.dropdown.profile.label' | transloco }}</h2>
+    <p>{{ 'auth.personalBasicinfo.label' | transloco }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <ul class="nav nav-tabs flex-column flex-sm-row" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="home-tab"
+          data-toggle="tab"
+          href="#home"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+        >
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-calendar3-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2H0z" />
+            <path
+              fill-rule="evenodd"
+              d="M0 3h16v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm6.5 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-8 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+            />
+          </svg>
+          {{ 'profile.personal.tabIdentification.label' | transloco }}
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="timeline-tab"
+          data-toggle="tab"
+          href="#timelineTab"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+          aria-disabled="true"
+        >
+          {{ 'common.currentInvoicing.label' | transloco }}
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content pt-4" id="myTabContent">
+      <!--tab-->
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class=" ">
+              <div class="card-body text-center">
+                <div *ngIf="alertSuccess" class="alert alert-success" role="alert">
+                  <h4 class="alert-heading">{{ 'common.profileUpdated.label' | transloco }}</h4>
+                </div>
+                <div *ngIf="alertError" class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">{{ messageError }}</h4>
+                </div>
+
+                <div class="boxImg imgProfile text-center">
+                  <img src="{{ formData?.photo || '/assets/profile.jpg' }}" class="d-inline-block img-fluid" />
+                </div>
+                <div class="custom-file mt-3">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    (change)="openFile($event)"
+                    id="customFile"
+                    style="overflow: hidden;"
+                  />
+                  <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary mt-4 rounded-pill"
+                  (click)="updateProfilePhoto()"
+                  [disabled]="!foto"
+                >
+                  {{ 'common.updatePic.label' | transloco }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="bg-white rounded-lg">
+              <ul class="nav nav-pills nav-fill w-100 tab-consulta" id="myTab2" role="tablist" style="border: none;">
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link active"
+                    id="profile-tab"
+                    data-toggle="tab"
+                    href="#profile"
+                    role="tab"
+                    aria-controls="profile"
+                    aria-selected="true"
+                    >{{ 'common.identificationData.label' | transloco }}
+                  </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link"
+                    id="contact-tab"
+                    data-toggle="tab"
+                    href="#contact"
+                    role="tab"
+                    aria-controls="contact"
+                    aria-selected="false"
+                    >{{ 'account.createAccount.personalData.label' | transloco }}
+                  </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link"
+                    id="contact-tab2"
+                    data-toggle="tab"
+                    href="#contact2"
+                    role="tab"
+                    aria-controls="contact2"
+                    aria-selected="false"
+                    >{{ 'account.createAccount.address.label' | transloco }}
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content p-2" id="myTabContent">
+                <!--/tab info paciente-->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <!--card-->
+                  <div class="card bg-light mb-3 p-2">
+                    <div class="card-body">
+                      <form [formGroup]="identificationData">
+                        <div class="form-row">
+                          <div class="form-group col-md-4" *ngIf="!isForeign">
+                            <label for="document">{{ 'common.identificationType.label' | transloco }}</label>
+                            <select disabled class="form-control" name="document" formControlName="document">
+                              <option value="run">
+                                RUT
+                              </option>
+                              
+                            </select>
+                          </div>
+                          <div class="form-group col-md-4" *ngIf="!isForeign">
+                            <label for="idDocumentNumber">{{
+                              'clinicalFile.patientData.tabs.identification.birthData.documentNumber.label' | transloco
+                            }}</label>
+                            <input
+                              disabled
+                              type="text"
+                              class="form-control"
+                              name="idDocumentNumber"
+                              formControlName="idDocumentNumber"
+                            />
+                          </div>
+                
+                          <div class="form-group col-md-4">
+                            <label for="passport">{{ 'common.passport.label' | transloco }}</label>
+                            <input
+                              disabled
+                              type="text"
+                              class="form-control"
+                              name="passport"
+                              formControlName="passport"
+                            />
+                          </div>
+                          <div class="form-group col-md-4" *ngIf="isForeign">
+                            <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
+                            <div class="input-group dateregister">
+                              <input
+                                [disabled]="!isForeign"
+                                type="text"
+                                [(ngModel)]="inmigrationDate"
+                                [placement]="'bottom'"
+                                class="form-control"
+                                id="inmigrationDate"
+                                placeholder="DD/MM/YYYY"
+                                name="inmigrationDate"
+                                [minDate]="{ year: 1900, month: 1, day: 1 }"
+                                [maxDate]="currentDate"
+                                ngbDatepicker
+                                #e="ngbDatepicker"
+                                formControlName="inmigrationDate"
+                                (click)="e.toggle()"
+                              />
+                              <div class="input-group-append">
+                                <button
+                                  [disabled]="!isForeign"
+                                  class="btn btn-outline-secondary calendar"
+                                  (click)="e.toggle()"
+                                  type="button"
+                                ></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!--/card-->
+                </div>
+
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                  <!--card-->
+                  <div class="card bg-light mb-3 p-2">
+                    <div class="card-body">
+                      <form [formGroup]="personalData">
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="name">{{ 'common.forms.user.identification.name.label' | transloco }} </label>
+                            <input type="text" class="form-control" id="name" formControlName="name" disabled />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName" disabled />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="secondLastName">{{
+                              'common.forms.user.identification.surname.label' | transloco
+                            }}</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="secondLastName"
+                              formControlName="secondLastName"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="email">{{ 'common.forms.user.identification.email.label' | transloco }}</label>
+                            <input
+                              disabled
+                              type="text"
+                              class="form-control"
+                              id="email"
+                              placeholder="usuario@mail.com"
+                              formControlName="email"
+                              onkeypress="return event.charCode != 32"
+                            />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="phoneNumber">{{
+                              'common.forms.user.identification.phone.label' | transloco
+                            }}</label>
+                            <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="gender">{{
+                              'common.forms.user.identification.grender.label' | transloco
+                            }}</label>
+                            <select disabled class="form-control" name="gender" formControlName="gender">
+                              <option value="male">{{ 'clinicalFile.male.label' | transloco }}</option>
+                              <option value="female">{{ 'clinicalFile.female.label' | transloco }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="birthdate">{{
+                              'profile.personal.tabIdentification.birthData.date.label' | transloco
+                            }}</label>
+                            <input
+                              disabled
+                              type="text"
+                              class="form-control"
+                              id="birthdate"
+                              formControlName="birthdate"
+                            />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="nacionality">{{
+                              'profile.personal.tabIdentification.birthData.nacionality.label' | transloco
+                            }}</label>
+                            <select
+                              disabled
+                              class="form-control"
+                              name="nacionality"
+                              formControlName="nacionality"
+                              [ngClass]="{
+                                'is-invalid': !personalData.get('nacionality').valid
+                              }"
+                            >
+                              <option [ngValue]="null">S/R</option>
+                              <option [ngValue]="item._id" *ngFor="let item of countries">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="education">{{
+                              'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
+                            }}</label>
+                            <select class="form-control" formControlName="education" id="education">
+                              <ng-container *ngFor="let item of educations">
+                                <option value="{{ item._id }}">{{ item.name }}</option>
+                              </ng-container>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-12 col-md-12">
+                            <label for="healthInsurance">{{ 'auth.prevission.label' | transloco }}*</label>
+                            <div class="input-group">
+                                <select class="form-control" name="healthInsurance" formControlName="healthInsurance"  
+                          
+                                [ngClass]="{
+                                  'is-invalid':
+                                    !personalData.get('healthInsurance').valid
+                                }" id="select-type-document">
+                                <option [selected]="true"  [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                                <option  [ngValue]="item._id" *ngFor="let item of previsionHealth" > 
+                                  {{item.name}}
+                                </option>
+                            </select>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!--/card-->
+                </div>
+
+                <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab2">
+                  <!--card-->
+                  <div class="card bg-light mb-3 p-2" *ngIf="formData">
+                    <div class="card-body">
+                      <form [formGroup]="addressData">
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="city">{{ 'account.region.label' | transloco }}</label>
+                            <select class="form-control" formControlName="uf" (change)="ufSelect($event.target)" >
+                              <option [ngValue]="item._id" *ngFor="let item of states">
+                                {{ item.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="city">{{
+                              'account.neighborhood.label' | transloco
+                            }}</label>
+                            <select class="form-control" formControlName="city">
+                              <ng-container *ngFor="let item of cities">
+                                <option value="{{ item._id }}">{{ item.name }}</option>
+                              </ng-container>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="street">{{ 'account.street.label' | transloco }}</label>
+                            <input type="text" class="form-control" id="street" formControlName="street" />
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="streetNumber">{{ 'common.number.label' | transloco }}</label>
+                            <input type="text" class="form-control" id="streetNumber" formControlName="streetNumber" />
+                          </div>
+                          <div class="form-group col-md-4">
+                
+                            <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                            <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                              formControlName="complement" />
+                      
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                          <label for="zipcode">Codigo postal</label>
+                          <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder=""
+                            formControlName="zipcode" />
+                        </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!--/card-->
+                </div>
+
+                <hr />
+                <div class="text-right">
+                  <button class="btn btn-secondary rounded-pill" (click)="updateData()">
+                    {{'common.button.save.label' | transloco}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/tab-->
+    </div>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
+  <!-- <p style="color: white" > cargando...</p> -->
+</ngx-spinner>
