@@ -2320,6 +2320,6 @@
   <!-- <p style="color: white" > cargando...</p> -->
 </ngx-spinner>
 
-<modal-recemed-prescription #modalCreatePrescriptionRecemed></modal-recemed-prescription>
+<modal-recemed-prescription #modalCreatePrescriptionRecemed (saved)="refreshData()"></modal-recemed-prescription>
 <modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>
