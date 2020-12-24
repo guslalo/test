@@ -64,41 +64,39 @@ export class FinishRegistrationCLComponent implements OnInit {
   privacyAccepted: boolean = false;
   consentAccepted: boolean = false;
   previsionHealth: any = [];
-  public clinic:string;
+  public clinic: string;
   form = [];
   minDate = undefined;
   maxDate = undefined;
-  public useTerm:any;
-  public privacyTerms:any;
-  public telemedicineConsent:any;
+  public useTerm: any;
+  public privacyTerms: any;
+  public telemedicineConsent: any;
   prePatientId = this.routerAct.snapshot.queryParamMap.get('patient');
 
-  public errorCepString:string;
-  public errorCep:boolean = false;
-  public ufObject:any;
-  public cityObject:any;
-  public neighborhood:any;
-  public street:any;
+  public errorCepString: string;
+  public errorCep: boolean = false;
+  public ufObject: any;
+  public cityObject: any;
+  public neighborhood: any;
+  public street: any;
 
-  public mayorEdad:boolean;
-
+  public mayorEdad: boolean;
 
   ngOnInit(): void {
-    
-    this.politicas()
+    this.politicas();
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],
       idDocumentNumber: [null, Validators.required],
       passport: ['', null],
     });
     this.personalData = this._formBuilder.group({
-      name: [null, [Validators.required,]],
+      name: [null, [Validators.required]],
       lastName: ['', null],
-      secondLastName: [null, [Validators.required ]],
+      secondLastName: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required, Validators.minLength(2)]],
       gender: [null, [Validators.required, Validators.minLength(2)]],
       phoneNumber: [null, [Validators.required]],
-      healthInsurance: [null, [Validators.required]]
+      healthInsurance: [null, Validators.required],
     });
     this.birthData = this._formBuilder.group({
       birthdate: [null, Validators.required],
@@ -110,8 +108,8 @@ export class FinishRegistrationCLComponent implements OnInit {
       city: [null, Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
-      complement:['', null],
-      zipcode: ['', null]
+      complement: ['', null],
+      zipcode: ['', null],
     });
     this.passwordData = new FormGroup(
       {
@@ -159,7 +157,7 @@ export class FinishRegistrationCLComponent implements OnInit {
     // console.log(this.prePatientId);
     this.getPrePatientData(this.prePatientId);
   }
-  politicas(){
+  politicas() {
     this.useTerm = ['/terms-and-conditions'];
     this.privacyTerms = ['/privacy'];
     this.telemedicineConsent = ['/consent'];
@@ -242,26 +240,20 @@ export class FinishRegistrationCLComponent implements OnInit {
         name: this.form[1].name.value,
         lastName: this.form[1].lastName.value || '',
         secondLastName: this.form[1].secondLastName.value,
-        motherName: '',
         gender: this.form[1].gender.value,
         phoneNumber: this.form[1].phoneNumber.value,
         email: this.form[1].email.value,
-        breed: '',
         birthdate: this.dateAdapter.toModel(this.form[2].birthdate.value),
-        ufBirth: '',
-        municipalityBirth: this.form[2].municipalityBirth.value || '',
         nacionality: this.form[2].nacionality.value,
-        healthInsurance: this.form[1].healthInsurance.value || ''
+        healthInsurance: this.form[1].healthInsurance.value || '',
       },
       addressData: {
-        cep: '',
         uf: this.form[3].uf.value,
         city: this.form[3].city.value,
-        neighborhood: '',
         street: this.form[3].street.value,
         streetNumber: parseInt(this.form[3].streetNumber.value),
         complement: this.form[3].complement.value,
-        zipcode: this.form[3].zipcode.value
+        zipcode: this.form[3].zipcode.value,
       },
       password: this.form[4].password.value,
     };
@@ -300,55 +292,51 @@ export class FinishRegistrationCLComponent implements OnInit {
     });
   }
 
-  getLocationDataFromCep(){
+  getLocationDataFromCep() {
     this.errorCep = false;
-    this.addressData.get('cep').valueChanges.subscribe( x =>  {
+    this.addressData.get('cep').valueChanges.subscribe((x) => {
       console.log(x);
-      if(x.length >= 9) {
+      if (x.length >= 9) {
         this.userService.getLocationDataFromCep(x).subscribe(
-          data => {
+          (data) => {
             console.log(data.payload);
-            if(data.payload.error){
-              this.errorCepString = data.payload.error
-              this.errorCep = true; 
+            if (data.payload.error) {
+              this.errorCepString = data.payload.error;
+              this.errorCep = true;
             } else {
-              this.ufObject = data.payload.uf._id
-              this.cityObject = data.payload.city._id
-              this.neighborhood = data.payload.neighborhood
-              this.street = data.payload.street
+              this.ufObject = data.payload.uf._id;
+              this.cityObject = data.payload.city._id;
+              this.neighborhood = data.payload.neighborhood;
+              this.street = data.payload.street;
               this.errorCep = false;
-              console.log(data)
-              this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              console.log(data);
+              this.addressData.get('uf').setValue(this.ufObject, { emitEvent: false });
               this.addressData.get('city').setValue(this.cityObject);
-              
+
               this.addressData.get('uf').enable();
               this.addressData.get('city').enable();
               this.addressData.get('neighborhood').enable();
               this.addressData.get('street').enable();
               this.addressData.get('streetNumber').enable();
               this.addressData.get('complement').enable();
-              this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
-              this.addressData.get('street').setValue(this.street, {emitEvent: false});
-  
-              this.addressData.get('uf').valueChanges.subscribe( x =>  {
+              this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false });
+              this.addressData.get('street').setValue(this.street, { emitEvent: false });
+
+              this.addressData.get('uf').valueChanges.subscribe((x) => {
                 this.getCitiesforId(this.ufObject);
-  
               });
             }
-           
           },
-          error => {
-            console.log(this.errorCep)
-            console.log(this.errorCep, 'error')
-              this.errorCep = true;
-            console.log(error)
+          (error) => {
+            console.log(this.errorCep);
+            console.log(this.errorCep, 'error');
+            this.errorCep = true;
+            console.log(error);
           }
-        )
+        );
       }
-     }
-    );
+    });
 
-   
     /*
     this.userService.getLocationDataFromCep(cep).subscribe(
       data => {
@@ -388,10 +376,10 @@ export class FinishRegistrationCLComponent implements OnInit {
     });
   }
 
-  getPrevissions(){
-    this.userService.getPrevissions().subscribe((data)=>{
-      this.previsionHealth = data.payload 
-    })
+  getPrevissions() {
+    this.userService.getPrevissions().subscribe((data) => {
+      this.previsionHealth = data.payload;
+    });
   }
 
   getPrePatientData(prePatiendId: string) {
@@ -406,21 +394,21 @@ export class FinishRegistrationCLComponent implements OnInit {
         this.personalData.get('phoneNumber').setValue(patient.phoneNumber);
         const current = new Date();
 
-        if(environment.checkAge === false){
-          this.mayorEdad = false
+        if (environment.checkAge === false) {
+          this.mayorEdad = false;
           this.maxDate = {
             year: current.getFullYear(),
             month: current.getMonth(),
             day: current.getDate(),
           };
         } else {
-          this.mayorEdad = true
+          this.mayorEdad = true;
           this.maxDate = {
             year: current.getFullYear() - 18,
             month: current.getMonth() + 1,
             day: current.getDate(),
           };
-        }  
+        }
       },
       (error) => console.log(error)
     );
