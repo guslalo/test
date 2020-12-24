@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
-  defaultLang: 'pt',
+  defaultLang: 'es',
   checkAge: false,
-  title: 'Itms | Teleconsulta',
-  baseUrl: 'https://b1.atrys.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
+  title: 'Atrys | Teleconsulta',
+  baseUrl: 'https://b1.atrys.telemedicina.com/api/',
   client: 'itms',
-  jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
+  jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',
   apiKey: '',
   clientSecret: '',
-  photoUrlBase: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',//https://itms-prod.s3-sa-east-1.amazonaws.com/
+  photoUrlBase: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',
   sessionTime: 600,
   firebase: {
     apiKey: 'AIzaSyCWaT74uwjxYvlWuv-j8UnKozTNtRM-6sY',
@@ -23,10 +23,10 @@ export const environment = {
   ttlSession: 600,
   setup: 'CL',
   version: '{BUILD_VERSION}-Atrys_Chile ',
-  brand: "atrys",
+  brand: 'atrys',
   colors: {
-    "color-primary": "#4680AE;",
-    "color-secondary": "#4680ae;",
-    "color-hover": "#05A78B;"
-  }
+    'color-primary': '#4680AE;',
+    'color-secondary': '#4680ae;',
+    'color-hover': '#05A78B;',
+  },
 };
