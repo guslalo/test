@@ -418,30 +418,11 @@ export class CreateAccountCLComponent implements OnInit {
     const formObject = {
       clinicId: '5f236fc966fbb0054894b780',
       identificationData: {
-          ...(this.form[0].document.value === 'cpf' && { cpf: this.form[0].idDocumentNumber.value || '' }),
-          ...(this.form[0].document.value === 'cns' && { cns: this.form[0].idDocumentNumber.value || '' }),
           ...(this.form[0].document.value === 'run' && { run: this.form[0].idDocumentNumber.value || '' }),
           ...(this.form[0].document === 'rgRegistry' && {
             rgRegistry: this.form[0].value.idDocumentNumber || '',
           }),
           passport: this.form[0].passport.value || '',
-          issuingBody: this.form[0].issuingBody.value || '',
-          ...(this.form[0].extraDocument.value === 'cbo' && { cbo: this.form[0].extraIdDocument.value || '' }),
-          ...(this.form[0].extraDocument.value === 'pasep' && {
-            pasep: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'ctps' && {
-            ctps: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'idDocumentNumber' && {
-            idDocumentNumber: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'titleVote' && {
-            titleVote: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'professionalUfNumber' && {
-            professionalUfNumber: this.form[0].extraIdDocument.value || '',
-          }),
           isForeign: this.isForeign,
       },
       personalData: {
