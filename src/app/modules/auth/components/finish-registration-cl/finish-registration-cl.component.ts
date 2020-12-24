@@ -234,7 +234,7 @@ export class FinishRegistrationCLComponent implements OnInit {
     const formObject = {
       clinicId: '5f236fc966fbb0054894b780',
       identificationData: {
-        ...(this.form[0].document.value === 'run' && { cns: this.form[0].idDocumentNumber.value || '' }),
+        ...(this.form[0].document.value === 'run' && { run: this.form[0].idDocumentNumber.value || '' }),
         passport: this.form[0].passport.value || '',
         isForeign: this.isForeign,
       },
