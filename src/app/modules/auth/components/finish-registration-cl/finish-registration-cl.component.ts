@@ -261,7 +261,7 @@ export class FinishRegistrationCLComponent implements OnInit {
     if (formObject) {
       console.log(formObject);
 
-      /*this.registerUser
+      this.registerUser
         .registerUser(
           formObject.clinicId,
           formObject.identificationData,
@@ -281,7 +281,7 @@ export class FinishRegistrationCLComponent implements OnInit {
             this.spinner.hide();
             console.log(err);
           }
-        );*/
+        );
     }
   }
 
