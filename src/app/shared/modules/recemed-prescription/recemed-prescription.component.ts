@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ export class RecemedPrescriptionComponent implements OnInit {
 
   public form: FormGroup;
   public appointmentId: any;
+  @Output() saved = new EventEmitter();
 
   constructor(
     private appointmentsService: AppointmentsService,
@@ -39,6 +40,7 @@ export class RecemedPrescriptionComponent implements OnInit {
     payload.documentType = 'prescription'
     this.appointmentsService.createPrescriptionRecemed(payload).subscribe((data) => {
       console.log(data)
+      this.saved.emit();
     })
   }
 
