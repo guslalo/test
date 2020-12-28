@@ -3,7 +3,7 @@ export const environment = {
   defaultLang: 'es', //es, pt
   checkAge: false,
   title: 'Itms Dev | Teleconsulta',
-  baseUrl: 'https://backend-dev-cl.bdot.app/api/',
+  baseUrl: 'https://backend-dev.bdot.app/api/',
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
@@ -21,7 +21,7 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20000 * 60,
-  setup: 'CL',
+  setup: 'BR',
   version: 'local',
   brand: "atrys",
   colors: {
