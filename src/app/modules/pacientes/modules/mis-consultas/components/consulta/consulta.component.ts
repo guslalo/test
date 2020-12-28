@@ -184,7 +184,11 @@ export class ConsultaComponent implements OnInit {
         this.allergies = data.payload.antecedent.allergies;
         this.antecedentes = data.payload.antecedent.sickness;
 
-        this.arrayDocuments = data.payload.recemed
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed.filter((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
+        }else {
+          this.arrayDocuments = data.payload.prescriptions;
+        }
 
       },
       (error) => {

@@ -115,10 +115,16 @@ export class FichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         this.exams = data.payload.exams;
-        this.arrayDocuments = data.payload.prescriptions;
+        
         // console.log(this.exams);
         this.antecedentesGeneral = data.payload.antecedent;
         this.antecedentes = data.payload.antecedent.sickness;
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed.filter((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
+        }else {
+          this.arrayDocuments = data.payload.prescriptions;
+        }
+        
         // console.log(data.antecedent);
       },
       (error) => {
