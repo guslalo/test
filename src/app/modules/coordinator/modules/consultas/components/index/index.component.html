@@ -4,21 +4,25 @@
         <div class="col-12">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#child1" role="tab" aria-controls="child"
-                aria-selected="true">
-                Consultas abiertas
+              <a class="nav-link" id="home-tab" data-toggle="tab" href="#child1" role="tab" aria-controls="child"
+                aria-selected="true" [ngClass]="(openAppointments.length >= 1)?'active':'my-class2'">
+                {{ 'dashboard.home.tab.home.tab.openAppointments.title' | transloco }}
+                <span class="badge bg-secondary">{{openAppointments.length}}</span>
               </a>
+     
             </li>
             <li class="nav-item" role="presentation">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#child2" role="tab" aria-controls="child2"
-                aria-selected="false">
-                Próximas consultas
+                aria-selected="false" [ngClass]="(openAppointments.length == 0 )?'active':'my-class2'">
+                {{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}
+                <span class="badge bg-secondary">{{nextAppointments.length}}</span>
               </a>
             </li>
             <li class="nav-item" role="presentation">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#child3" role="tab" aria-controls="child2"
                 aria-selected="false">
-                Consultas inmediatas
+                {{ 'dashboard.home.tab.home.tab.nextAppointments.title' | transloco }}
+                <span class="badge bg-secondary">{{immediateAppointments.length}}</span>
               </a>
             </li>
             <!--
