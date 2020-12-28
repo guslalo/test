@@ -590,7 +590,7 @@ export class IndexComponent implements OnInit {
         this.specialtiesId = data.payload;
         this.medicalSpecialty = data.payload[0].medicalSpecialtyId;
         this.specialtySelected = data.payload[0].specialtyName;
-        this.professionalSelected  = '';
+        // this.professionalSelected  = '';
       },
       (error) => {
         console.log(error);
@@ -603,7 +603,7 @@ export class IndexComponent implements OnInit {
     this.filteredProfessionals = this.createAvailability.controls['professional'].valueChanges.pipe(startWith(''), map(newVal => {
       if(typeof newVal?.toLowerCase === 'function'){
         return this.professionals.filter(value => {
-          console.log(value);
+          // console.log(value);
           return value.personalData.name?.toLowerCase().includes(newVal?.toLowerCase()) ||
                 value.personalData.secondLastName?.toLowerCase().includes(newVal.toLowerCase()) ||
                 (value.personalData.name + ' ' + value.personalData.secondLastName).toLowerCase().includes(newVal.toLowerCase())
