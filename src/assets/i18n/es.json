@@ -1103,7 +1103,7 @@
           },
           "tab": {
             "nextServices": {
-              "title": "Próximas consultas agendadas",
+              "title": "Próximas consultas",
               "table": {
                 "patients": {
                   "label": "Pacientes"
@@ -1122,6 +1122,52 @@
                 },
                 "action": {
                   "label": "Acción"
+                }
+              }
+            },
+            "openAppointments": {
+              "title": "Consultas abiertas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "nextAppointments": {
+              "title": "Consultas inmediatas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
                 }
               }
             },
