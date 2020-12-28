@@ -51,7 +51,7 @@ export class IndexComponent implements OnInit {
   }
 
   getAppointments() {
-    this.appointmentsService.getAllAppointments(1).subscribe(
+    this.appointmentsService.getAllAppointmentsForCoordinator(1).subscribe(
       (data) => {
         console.log('getAllAppointments', data.payload);
 
