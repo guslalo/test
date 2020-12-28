@@ -3,7 +3,7 @@
     <h2>{{ 'common.menu.history.label' | transloco }}</h2>
   </div>
   <div class="col">
-    <button #newAppointment id="newAppointment" type="button" class="btn btn-primary rounded-pill float-right"
+    <button *ngxPermissionsOnly="['Set:Appointment']" #newAppointment id="newAppointment" type="button" class="btn btn-primary rounded-pill float-right"
       ng-reflect-tour-anchor="agendar" data-toggle="modal" data-target="#modalAppointment">
       {{ 'clinicalFile.newService.label' | transloco }}
       <img src="assets/icons/icon-plus-circle.svg" alt="img" />
