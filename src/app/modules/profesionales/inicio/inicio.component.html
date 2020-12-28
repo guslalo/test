@@ -144,14 +144,14 @@
           <!-- -->
           <li class="nav-item" role="presentation" >
             <a class="nav-link " id="home-tab" data-toggle="tab" href="#child1" role="tab" aria-controls="child"
-              aria-selected="true" [ngClass]="(openAppointments.length >= 1)?'active':'my-class2'">
+              aria-selected="false" [ngClass]="(openAppointments.length >= 1)?'active':'noActive'">
               {{ 'dashboard.home.tab.home.tab.openAppointments.title' | transloco }}
               <span class="badge bg-secondary">{{openAppointments.length}}</span>
             </a>
    
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link " id="profile-tab" data-toggle="tab" href="#child2" role="tab" aria-controls="child2"
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#child2" role="tab" aria-controls="child2"
               aria-selected="false " [ngClass]="(openAppointments.length == 0 )?'active':'my-class2'">
               {{ 'dashboard.home.tab.home.tab.nextServices.title' | transloco }}
               <span class="badge bg-secondary">{{nextAppointments.length}}</span>
@@ -183,7 +183,9 @@
       <div class="col-12">
         <div class="tab-content pt-4" id="myTabContent">
           <!--consultas abiertas -->
-          <div class="tab-pane fade show active" id="child1" role="tabpanel" aria-labelledby="home-tab">
+          <div class="tab-pane fade " id="child1" role="tabpanel" aria-labelledby="home-tab"
+          [ngClass]="(openAppointments.length >= 1 )?'show active':'my-class2'"
+          >
             <div class="tableBox p-4 bg-white mt-3">
               <table class="table">
                 <thead>
@@ -306,7 +308,9 @@
           </div> <!--/consultas abiertas-->
 
           <!-- proximas consultas -->
-          <div class="tab-pane fade" id="child2" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="tab-pane fade" id="child2" role="tabpanel" aria-labelledby="profile-tab"
+          [ngClass]="(openAppointments.length == 0 )?'show active':'my-class2'"
+          >
             <div class="tableBox p-4 bg-white mt-3">
               <table class="table">
                 <thead>

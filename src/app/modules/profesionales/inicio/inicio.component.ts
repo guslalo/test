@@ -33,6 +33,7 @@ export class InicioPComponent implements OnInit {
   public nextAppointments = []
   public openAppointments = []
   public immediateAppointments = []
+  public interval:any;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -52,6 +53,7 @@ export class InicioPComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (environment.production === false) {
       this.isProduction = false;
     } else {
@@ -67,7 +69,20 @@ export class InicioPComponent implements OnInit {
       this.getAppointments()
     })
     this.setup = environment.setup
+
     this.getAppointmentsForTypes();
+    
+    setTimeout(() => {
+       this.interval = setInterval(() => {
+        this.getAppointmentsForTypes();
+       }, 10000);
+    }, 0);
+
+    this.router.events.subscribe(value => {
+      clearInterval(this.interval);
+      console.log(' stop');
+    });
+
   }
 
   ngAfterViewInit() {
@@ -127,7 +142,6 @@ export class InicioPComponent implements OnInit {
     );
   }
 
-
   getAppointmentsForTypes() {
     this.appointmentsService.getAppointmentsForTypes().subscribe(
       (data) => {
@@ -139,6 +153,7 @@ export class InicioPComponent implements OnInit {
         this.nextAppointments = data.payload.nextAppointments
 
         console.log( this.nextAppointments)
+
       },
       (error) => {
         console.log(error);
