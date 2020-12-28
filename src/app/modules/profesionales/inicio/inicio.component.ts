@@ -53,7 +53,7 @@ export class InicioPComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     if (environment.production === false) {
       this.isProduction = false;
     } else {
@@ -141,7 +141,6 @@ export class InicioPComponent implements OnInit {
       }
     );
   }
-
 
   getAppointmentsForTypes() {
     this.appointmentsService.getAppointmentsForTypes().subscribe(
