@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -13,8 +14,10 @@ export class IndexComponent implements OnInit {
   public nextAppointments = []
   public openAppointments = []
   public immediateAppointments = []
+  public interval:any;
 
   constructor( 
+    private router: Router,
     public appointmentsService: AppointmentsService,
     private appointmentsEvents: AppointmentEventsService
   ) { 
@@ -22,8 +25,18 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     this.getAppointmentsForTypes();
+
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsForTypes();
+       }, 10000);
+    }, 0);
+
+    this.router.events.subscribe(value => {
+      clearInterval(this.interval);
+    });
     
   }
 
