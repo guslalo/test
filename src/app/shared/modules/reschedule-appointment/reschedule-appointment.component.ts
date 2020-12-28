@@ -160,8 +160,8 @@ export class RescheduleAppointmentComponent implements OnInit {
       start: [null, Validators.required],
       objective: ['', Validators.required],
 
-      professional: ['', Validators.required],
-      patient: ['', Validators.required],
+      professional: [''],
+      patient: [''],
     });
   }
 
