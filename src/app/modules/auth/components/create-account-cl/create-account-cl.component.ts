@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 import { ClinicService } from '../../../../services/clinic.service';
 import { environment } from '../../../../../environments/environment';
-import { validate } from "rut.js";
+import { validate } from 'rut.js';
 
 import {
   NgbDateStruct,
@@ -24,9 +24,8 @@ import { error } from 'protractor';
 @Component({
   selector: 'app-create-account-cl',
   templateUrl: './create-account-cl.component.html',
-  styleUrls: ['../login/login.component.scss']
+  styleUrls: ['../login/login.component.scss'],
 })
-
 export class CreateAccountCLComponent implements OnInit {
   constructor(
     private router: Router,
@@ -36,8 +35,8 @@ export class CreateAccountCLComponent implements OnInit {
     private config: NgbDatepickerConfig,
     private userService: UsersService,
     private spinner: NgxSpinnerService,
-    private clinicService:ClinicService
-  ) { }
+    private clinicService: ClinicService
+  ) {}
   public userRegister: registerUser;
   public placement = 'bottom';
   public cpfvalid: boolean = true;
@@ -56,7 +55,7 @@ export class CreateAccountCLComponent implements OnInit {
   public password: any;
   public user: any = {};
   public errorMsg: string;
-  public errorCepString:string;
+  public errorCepString: string;
 
   dateAdapter = new CustomDateAdapter();
 
@@ -72,31 +71,32 @@ export class CreateAccountCLComponent implements OnInit {
   maxDate = undefined;
   showPassword: boolean;
 
-
   termsAccepted: boolean = false;
   privacyAccepted: boolean = false;
   consentAccepted: boolean = false;
-  public clinic:string;
+  public clinic: string;
 
-  public useTerm:any;
-  public privacyTerms:any;
-  public telemedicineConsent:any;
-  documentTypeDefault:any;
-  public errorCep:boolean = false;
-  public ufObject:any;
-  public cityObject:any;
-  public neighborhood:any;
-  public street:any;
-  public mayorEdad:boolean;
-  public setup:any;
-  
+  public useTerm: any;
+  public privacyTerms: any;
+  public telemedicineConsent: any;
+  documentTypeDefault: any;
+  public errorCep: boolean = false;
+  public ufObject: any;
+  public cityObject: any;
+  public neighborhood: any;
+  public street: any;
+  public mayorEdad: boolean;
+  public setup: any;
+  public brand: any;
+
   // public form:any;
   onClick(index: number): void {
     // this.selectedIndex = index;
   }
 
   ngOnInit(): void {
-    this.setup = environment.setup
+    this.brand = environment.brand;
+    this.setup = environment.setup;
     this.errorCep = false;
     this.clinic = '5f236fc966fbb0054894b780';
     this.politicas();
@@ -107,49 +107,55 @@ export class CreateAccountCLComponent implements OnInit {
       day: current.getDate(),
     };
 
-    if(environment.checkAge === false){
-      this.mayorEdad = false
-        this.personalData = this._formBuilder.group(
-          {
-            checkAge: [null, ],
-            name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-            lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-            // motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-            secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-            email: [null, [Validators.email, Validators.required]],
-            gender: [null, [Validators.required]],
-            confirmEmail: ['', [Validators.required]],
-            phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
-            //breed: [null, Validators.required],
-            birthdate: [null, Validators.required],
-            prevission: ['', Validators.required],
-            nacionality: [null, Validators.required],
-          },
-          {
-            validators: this.confirmEmail.bind(this),
-          }
-        );
+    if (environment.checkAge === false) {
+      this.mayorEdad = false;
+      this.personalData = this._formBuilder.group(
+        {
+          checkAge: [null],
+          name: ['', [Validators.required]], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          lastName: [''], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          // motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          secondLastName: ['', [Validators.required]], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          email: [null, [Validators.email, Validators.required]],
+          gender: [null, [Validators.required]],
+          confirmEmail: ['', [Validators.required]],
+          phoneNumber: [
+            null,
+            [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)],
+          ],
+          //breed: [null, Validators.required],
+          birthdate: [null, Validators.required],
+          healthInsurance: ['', Validators.required],
+          nacionality: [null, Validators.required],
+        },
+        {
+          validators: this.confirmEmail.bind(this),
+        }
+      );
       this.maxDate = {
         year: current.getFullYear(),
         month: current.getMonth(),
         day: current.getDate(),
       };
     } else {
-      this.mayorEdad = true
+      this.mayorEdad = true;
       this.personalData = this._formBuilder.group(
         {
           checkAge: [null, [Validators.requiredTrue]], //
-          name: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-          lastName: ['', ], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          name: ['', [Validators.required]], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          lastName: [''], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
           // motherName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
-          secondLastName: ['', [Validators.required, ]],//Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
+          secondLastName: ['', [Validators.required]], //Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/)
           email: [null, [Validators.email, Validators.required]],
           gender: [null, [Validators.required]],
           confirmEmail: ['', [Validators.required]],
-          phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
+          phoneNumber: [
+            null,
+            [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)],
+          ],
           //breed: [null, Validators.required],
           birthdate: [null, Validators.required],
-          prevission: ['', Validators.required],
+          healthInsurance: ['', Validators.required],
           nacionality: [null, Validators.required],
         },
         {
@@ -162,11 +168,9 @@ export class CreateAccountCLComponent implements OnInit {
         day: current.getDate(),
       };
     }
-  
-    
-    
+
     this.identificationData = this._formBuilder.group({
-      document:  new FormControl('run'),
+      document: new FormControl('run'),
       idDocumentNumber: [null, Validators.required],
       passport: ['', null],
       rgRegistry: ['', null],
@@ -190,7 +194,7 @@ export class CreateAccountCLComponent implements OnInit {
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
       complement: ['', null],
-      postal: ['', null]
+      zipcode: ['', null],
     });
     this.passwordData = new FormGroup(
       {
@@ -242,13 +246,11 @@ export class CreateAccountCLComponent implements OnInit {
     );
   }
 
-  politicas(){
+  politicas() {
     this.useTerm = ['/terms-and-conditions'];
     this.privacyTerms = ['/privacy'];
     this.telemedicineConsent = ['/consent'];
   }
-
-
 
   // getLocationDataFromCep(){
   //   this.errorCep = false;
@@ -260,7 +262,7 @@ export class CreateAccountCLComponent implements OnInit {
   //           console.log(data.payload);
   //           if(data.payload.error){
   //             this.errorCepString = data.payload.error
-  //             this.errorCep = true; 
+  //             this.errorCep = true;
   //           } else {
   //             this.ufObject = data.payload.uf._id
   //             this.cityObject = data.payload.city._id
@@ -270,7 +272,7 @@ export class CreateAccountCLComponent implements OnInit {
   //             console.log(data)
   //             this.addressData.get('uf').setValue(this.ufObject, {emitEvent: false});
   //             this.addressData.get('city').setValue(this.cityObject);
-              
+
   //             this.addressData.get('uf').enable();
   //             this.addressData.get('city').enable();
   //             //this.addressData.get('neighborhood').enable();
@@ -279,13 +281,13 @@ export class CreateAccountCLComponent implements OnInit {
   //             this.addressData.get('complement').enable();
   //             this.addressData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
   //             this.addressData.get('street').setValue(this.street, {emitEvent: false});
-  
+
   //             this.addressData.get('uf').valueChanges.subscribe( x =>  {
   //               this.getCitiesforId(this.ufObject);
-  
+
   //             });
   //           }
-           
+
   //         },
   //         error => {
   //           console.log(this.errorCep)
@@ -298,7 +300,6 @@ export class CreateAccountCLComponent implements OnInit {
   //    }
   //   );
 
-   
   //   /*
   //   this.userService.getLocationDataFromCep(cep).subscribe(
   //     data => {
@@ -349,44 +350,50 @@ export class CreateAccountCLComponent implements OnInit {
 
     this.identificationData.updateValueAndValidity();
   }
-  validCPF(cpf: string){
+  validCPF(cpf: string) {
     this.cpfvalid = this.validateCPF(cpf);
-    console.log(this.cpfvalid)
+    console.log(this.cpfvalid);
   }
 
-  validRUN(run: string){
-    
+  validRUN(run: string) {
     this.cpfvalid = validate(run);
     console.log(this.cpfvalid, this.identificationData.valid, this.isForeign);
   }
-  validateCPF(cpf: string){
-    console.log(this.identificationData.get('document').value)
-    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
-    if(cpf.length <= 0) return false
-    cpf = cpf.replace(/[^0-9]/, "").replace(/[^0-9]/, "").replace(/[^0-9]/, "")
-    cpf.padStart(11,'0')
-    if (cpf.length != 11) return false
-    
-    else if(cpf == '00000000000' || 
-            cpf == '11111111111' || 
-            cpf == '22222222222' || 
-            cpf == '33333333333' || 
-            cpf == '44444444444' || 
-            cpf == '55555555555' || 
-            cpf == '66666666666' || 
-            cpf == '77777777777' || 
-            cpf == '88888888888' || 
-            cpf == '99999999999') return false
+  validateCPF(cpf: string) {
+    console.log(this.identificationData.get('document').value);
+    if (this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null)
+      return true;
+    if (cpf.length <= 0) return false;
+    cpf = cpf
+      .replace(/[^0-9]/, '')
+      .replace(/[^0-9]/, '')
+      .replace(/[^0-9]/, '');
+    cpf.padStart(11, '0');
+    if (cpf.length != 11) return false;
+    else if (
+      cpf == '00000000000' ||
+      cpf == '11111111111' ||
+      cpf == '22222222222' ||
+      cpf == '33333333333' ||
+      cpf == '44444444444' ||
+      cpf == '55555555555' ||
+      cpf == '66666666666' ||
+      cpf == '77777777777' ||
+      cpf == '88888888888' ||
+      cpf == '99999999999'
+    )
+      return false;
     else {
       for (let i = 9; i < 11; i++) {
-        let j = 0, d = 0
+        let j = 0,
+          d = 0;
         for (let h = 0; j < i; j++) {
-          d += parseInt(cpf[j]) * ((i + 1) - j);  
+          d += parseInt(cpf[j]) * (i + 1 - j);
         }
         d = ((10 * d) % 11) % 10;
-        if(parseInt(cpf[j]) != d) return false
+        if (parseInt(cpf[j]) != d) return false;
       }
-      return true
+      return true;
     }
   }
 
@@ -416,56 +423,31 @@ export class CreateAccountCLComponent implements OnInit {
     const formObject = {
       clinicId: '5f236fc966fbb0054894b780',
       identificationData: {
-          ...(this.form[0].document.value === 'cpf' && { cpf: this.form[0].idDocumentNumber.value || '' }),
-          ...(this.form[0].document.value === 'cns' && { cns: this.form[0].idDocumentNumber.value || '' }),
-          ...(this.form[0].document.value === 'run' && { run: this.form[0].idDocumentNumber.value || '' }),
-          ...(this.form[0].document === 'rgRegistry' && {
-            rgRegistry: this.form[0].value.idDocumentNumber || '',
-          }),
-          passport: this.form[0].passport.value || '',
-          issuingBody: this.form[0].issuingBody.value || '',
-          ...(this.form[0].extraDocument.value === 'cbo' && { cbo: this.form[0].extraIdDocument.value || '' }),
-          ...(this.form[0].extraDocument.value === 'pasep' && {
-            pasep: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'ctps' && {
-            ctps: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'idDocumentNumber' && {
-            idDocumentNumber: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'titleVote' && {
-            titleVote: this.form[0].extraIdDocument.value || '',
-          }),
-          ...(this.form[0].extraDocument.value === 'professionalUfNumber' && {
-            professionalUfNumber: this.form[0].extraIdDocument.value || '',
-          }),
-          isForeign: this.isForeign,
+        ...(this.form[0].document.value === 'run' && { run: this.form[0].idDocumentNumber.value || '' }),
+        ...(this.form[0].document === 'rgRegistry' && {
+          rgRegistry: this.form[0].value.idDocumentNumber || '',
+        }),
+        passport: this.form[0].passport.value || '',
+        isForeign: this.isForeign,
       },
       personalData: {
         name: this.form[1].name.value,
         lastName: this.form[1].lastName.value || '',
         secondLastName: this.form[1].secondLastName.value,
-        motherName: '',
         gender: this.form[1].gender.value,
         phoneNumber: this.form[1].phoneNumber.value,
         email: this.form[1].email.value,
-        breed: '',
         birthdate: this.dateAdapter.toModel(this.form[1].birthdate.value),
-        ufBirth:  '',
-        municipalityBirth:  '',
         nacionality: this.form[1].nacionality.value || '',
-        prevission: this.form[1].prevission.value || ''
+        healthInsurance: this.form[1].healthInsurance.value || '',
       },
       addressData: {
-        cep: '',
         uf: this.form[2].uf.value || '',
         city: this.form[2].city.value || '',
-        neighborhood: '',
         street: this.form[2].street.value,
         streetNumber: parseInt(this.form[2].streetNumber.value),
         complement: this.form[2].complement.value,
-        postal: this.form[2].postal.value
+        zipcode: this.form[2].zipcode.value,
       },
       password: this.form[3].password.value,
     };
@@ -510,19 +492,20 @@ export class CreateAccountCLComponent implements OnInit {
     });
   }
 
-  ufSelect(id){
-    let idSelected = id.value.split(":");
+  ufSelect(id) {
+    let idSelected = id.value.split(':');
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
   }
   getCitiesforId(stateId) {
-    this.userService.getCitiesForUf(stateId).subscribe((data) => {
-      console.log(data);
-      this.citiesFilter = data.payload;
-    },
-    error => {
-      console.log(error)
-    }
+    this.userService.getCitiesForUf(stateId).subscribe(
+      (data) => {
+        console.log(data);
+        this.citiesFilter = data.payload;
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -547,10 +530,10 @@ export class CreateAccountCLComponent implements OnInit {
     });
   }
 
-  getPrevissions(){
-    this.userService.getPrevissions().subscribe((data)=>{
-      this.previsionHealth = data.payload 
-    })
+  getPrevissions() {
+    this.userService.getPrevissions().subscribe((data) => {
+      this.previsionHealth = data.payload;
+    });
   }
 
   submit() {

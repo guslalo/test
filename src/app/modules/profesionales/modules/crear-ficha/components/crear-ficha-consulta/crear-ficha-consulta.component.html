@@ -565,7 +565,7 @@
                                 d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
                                 fill="#7D7D7D" />
                             </svg>
-                            {{ 'clinicalFile.patientData.tabs.videoChat.info.background?.allergies.label' | transloco }}
+                            {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                           </a>
 
                           <div class="collapse show" id="allergies" *ngFor="let item of allergies">
@@ -590,7 +590,7 @@
                                 fill="#7D7D7D" />
                             </svg>
                             {{
-                              'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label'
+                              'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label'
                                 | transloco
                             }}
                           </a>
@@ -791,7 +791,7 @@
                             d="M13.8463 0.18686C13.6309 -0.0417118 13.3006 -0.0417118 13.0852 0.18686L6.99704 6.63257L0.923198 0.171622C0.707814 -0.056949 0.377556 -0.056949 0.162172 0.171622C-0.0532125 0.400193 -0.0532125 0.75067 0.162172 0.979241L6.62371 7.83638C6.8391 8.06496 7.16935 8.06496 7.38474 7.83638L13.8463 0.979241C14.0617 0.765907 14.0617 0.415431 13.8463 0.18686Z"
                             fill="#7D7D7D" />
                         </svg>
-                        {{ 'clinicalFile.patientData.tabs.videoChat.info.background?.allergies.label' | transloco }}
+                        {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                       </a>
                       <div class="add float-right" data-toggle="modal" (click)="categoryChangue('allergies')"
                         data-target="#add">
@@ -826,7 +826,7 @@
                             fill="#7D7D7D" />
                         </svg>
                         {{
-                          'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label'
+                          'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label'
                             | transloco
                         }}
                       </a>
@@ -1288,7 +1288,6 @@
                   </div>
                 </div>
                 <!--/colappsed-->
-
                 <!-- colappsed-->
                 <div class="collapseCustom border">
                   <a class="p-4" data-toggle="collapse" href="#surgicalInterventions" role="button"
@@ -1300,7 +1299,7 @@
                         fill="#7D7D7D" />
                     </svg>
                     {{
-                      'clinicalFile.patientData.tabs.videoChat.info.background?.surgicalInterventions.label' | transloco
+                      'clinicalFile.patientData.tabs.videoChat.info.background.surgicalInterventions.label' | transloco
                     }}
                   </a>
 
@@ -1582,25 +1581,40 @@
                         <ng-container> {{ item.documentType }} tipo </ng-container>
                       </td>
                       <td class="text-center">
-                        <ng-container *ngIf="item.documentType === 'prescription'">
+                        <ng-container *ngIf="item.documentType === 'prescription' || item.documentDetails?.type === 'prescription'">
                           {{ 'sibrare.prescription' | transloco}}
                         </ng-container>
                         <ng-container *ngIf="item.documentType === 'report'">
                           {{ 'sibrare.report' | transloco}}
                         </ng-container>
-                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                        <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
                         <!--{{ item.documentType }}-->
                       </td>
-                      <td class="text-center">
+
+                      <td class="text-center" *ngIf="item.uploadDate">
                         {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center" *ngIf="item.documentDetails?.uploadDate">
+                        {{ item.documentDetails.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+
+                      <td class="text-center" *ngIf="item.issuerDetails">
                         {{ item.issuerDetails.fullName }}
                       </td>
+                      <td class="text-center" *ngIf="item.documentDetails?.issuerDetails">
+                        {{ item.documentDetails.issuerDetails[0].name }} {{ item.documentDetails.issuerDetails[0].lastName }}
+                      </td>
+
                       <td class="text-center">
-                        <a (click)="downloadSibrare(item.documentId)">
+                        <a *ngIf="item.documentDetails && item.documentDetails?.path" (click)="goToLink(item.documentDetails?.path)">
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <a (click)="downloadSibrare(item.documentId)" *ngIf="item.documentId">
                           <!-- routerLink="{{urlSibrare}}" target="_blank-->
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
@@ -2306,6 +2320,6 @@
   <!-- <p style="color: white" > cargando...</p> -->
 </ngx-spinner>
 
-<modal-recemed-prescription #modalCreatePrescriptionRecemed></modal-recemed-prescription>
+<modal-recemed-prescription #modalCreatePrescriptionRecemed (saved)="refreshData()"></modal-recemed-prescription>
 <modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>

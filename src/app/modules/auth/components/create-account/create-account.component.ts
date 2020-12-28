@@ -71,6 +71,7 @@ export class CreateAccountComponent implements OnInit {
   public neighborhood:any;
   public street:any;
   public mayorEdad:boolean;
+  public brand: any;
 
   constructor(
     private router: Router,
@@ -88,6 +89,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.brand = environment.brand
     this.setup = environment.setup
     this.errorCep = false;
     this.clinic = '5f236fc966fbb0054894b780';

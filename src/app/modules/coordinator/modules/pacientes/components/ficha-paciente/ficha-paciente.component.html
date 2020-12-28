@@ -833,25 +833,40 @@
                         <ng-container> {{ item.documentType }} tipo </ng-container>
                       </td>
                       <td class="text-center">
-                        <ng-container *ngIf="item.documentType === 'prescription'">
+                        <ng-container *ngIf="item.documentType === 'prescription' || item.documentDetails?.type === 'prescription'">
                           {{ 'sibrare.prescription' | transloco}}
                         </ng-container>
                         <ng-container *ngIf="item.documentType === 'report'">
                           {{ 'sibrare.report' | transloco}}
                         </ng-container>
-                        <ng-container *ngIf="item.documentType === 'exam-order'">
+                        <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
                         <!--{{ item.documentType }}-->
                       </td>
-                      <td class="text-center">
+
+                      <td class="text-center" *ngIf="item.uploadDate">
                         {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center" *ngIf="item.documentDetails?.uploadDate">
+                        {{ item.documentDetails.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+
+                      <td class="text-center" *ngIf="item.issuerDetails">
                         {{ item.issuerDetails.fullName }}
                       </td>
+                      <td class="text-center" *ngIf="item.documentDetails?.issuerDetails">
+                        {{ item.documentDetails.issuerDetails[0].name }} {{ item.documentDetails.issuerDetails[0].lastName }}
+                      </td>
+
                       <td class="text-center">
-                        <a (click)="downloadSibrare(item.appointmentId, item.documentId)">
+                        <a *ngIf="item.documentDetails && item.documentDetails?.path" (click)="goToLink(item.documentDetails?.path)">
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <a (click)="downloadSibrare(item.appointmentId, item.documentId)" *ngIf="item.documentId">
                           <!-- routerLink="{{urlSibrare}}" target="_blank-->
                           <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
                             {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
@@ -885,18 +900,48 @@
               <div class="bg-white p-4 rounded-lg text-center" *ngIf="timelineRecord.length">
                 <h5 class="mb-0 text-left">{{ 'tabs.timeline.label' | transloco }}</h5>
                 <div class="timeLine">
-                  <div class="line bg-white">{{ moment().format('YYYY') }}</div>
+                  <div class="line bg-white">{{ fecha.year }}</div>
                   <div class="line">
                     <button class="btn btn-secondary rounded-lg">
-                      {{ moment().format('MMMM') }}
+                      {{
+                        (fecha.month === 'enero'
+                          ? 'year.january.label'
+                          : fecha.month === 'febrero'
+                          ? 'year.february.label'
+                          : fecha.month === 'marzo'
+                          ? 'year.march.label'
+                          : fecha.month === 'abril'
+                          ? 'year.april.label'
+                          : fecha.month === 'mayo'
+                          ? 'year.may.label'
+                          : fecha.month === 'junio'
+                          ? 'year.june.label'
+                          : fecha.month === 'julio'
+                          ? 'year.july.label'
+                          : fecha.month === 'agosto'
+                          ? 'year.august.label'
+                          : fecha.month === 'septiembre'
+                          ? 'year.september.label'
+                          : fecha.month === 'octubre'
+                          ? 'year.october.label'
+                          : fecha.month === 'noviembre'
+                          ? 'year.november.label'
+                          : fecha.month === 'diciembre'
+                          ? 'year.december.label'
+                          : null
+                        ) | transloco
+                      }}
                     </button>
                   </div>
                   <ng-container *ngFor="let item of timelineRecord">
                     <div class="line">
                       <div class="row align-items-center">
                         <div class="col-5 text-right p-0">
+                          <h3>{{ item.date | date: 'dd' }}</h3>
+                          {{ item.startAt }} hrs.
+                          <!--
                           <h3>{{ moment(item.date).format('DD') }}</h3>
-                          {{ item.startAt }} {{ 'common.hours.label' | transloco }}
+                          {{ item.startAt }} {{ 'common.hours.label' | transloco }}-->
                         </div>
                         <div class="col p-0">
                           <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -930,6 +975,7 @@
                                 : null
                               ) | transloco
                             }}
+  
                           </button>
                         </div>
                       </div>
@@ -949,12 +995,12 @@
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
                                     {{ item.professional?.lastName }} {{ item.professional?.secondlastName }}
                                   </p>
-                                  <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
+                                  <!--<div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
                                     <ng-container *ngIf="item.isActive; else inactivo">
                                       {{ 'common.status.active.label' | transloco }}
                                     </ng-container>
                                     <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
-                                  </div>
+                                  </div>-->
                                 </div>
                               </div>
                             </div>

@@ -11,6 +11,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -33,6 +34,7 @@ export class FichaPacienteComponent implements OnInit {
   cityMap: any = [];
   countryMap: any = [];
   issuerMap: any = [];
+  public fecha: any;
 
   // EXTRAS
   moment: any = moment;
@@ -88,6 +90,9 @@ export class FichaPacienteComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
+
+    this.getFecha();
+
   }
 
 
@@ -147,9 +152,6 @@ export class FichaPacienteComponent implements OnInit {
     return this.patientAge;
   }
 
-
-
-
   getMedicalRecord(userId) {
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
@@ -160,7 +162,12 @@ export class FichaPacienteComponent implements OnInit {
         this.patientRecord = data.payload.patientData;
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
-        this.arrayDocuments = data.payload.prescriptions;
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed;
+        }else{
+          this.arrayDocuments = data.payload.prescriptions;
+        }
+
 
         this.appointmentsRecord = data.payload.appointments;
         this.tempAppointments = [...data.payload.appointments];
@@ -277,6 +284,18 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
+
+  getFecha() {
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month,
+    };
+  }
+
   applyFiltersAppointments() {
     const searchTerm = this.searchTerm.toLowerCase();
 
@@ -330,5 +349,9 @@ export class FichaPacienteComponent implements OnInit {
 
     this.appointmentsRecord = temp;
     // console.log(temp);
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 }

@@ -79,12 +79,16 @@ export class FinishRegistrationComponent implements OnInit {
   public cityObject:any;
   public neighborhood:any;
   public street:any;
+  public brand: any;
 
   public mayorEdad:boolean;
 
 
   ngOnInit(): void {
+    this.brand = environment.brand
+
     this.setup = environment.setup
+    
     this.politicas()
     this.identificationData = this._formBuilder.group({
       document: [null, Validators.required],

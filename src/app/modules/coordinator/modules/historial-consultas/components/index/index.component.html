@@ -159,7 +159,7 @@
           [sortable]="false">
 
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <div ngbDropdown container="body">
+            <div ngbDropdown container="body" *ngIf="row.canUse">
               <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
@@ -171,6 +171,7 @@
                 <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalReAgendamiento">
                   {{ 'clinicalFile.reschedule.label' | transloco }}
                 </button>
+                
                 <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button">
                   {{ 'common.button.cancel.label' | transloco }}
                 </button>

@@ -23,9 +23,10 @@ export const environment = {
   ttlSession: 900,
   setup: 'CL',
   version: '{BUILD_VERSION}-Chile',
+  brand: "atrys",
   colors: {
     "color-primary": "#4680AE;",
     "color-secondary": "#4680ae;",
-    "color-hover": "#05A78B;",
+    "color-hover": "#05A78B;"
   }
 };

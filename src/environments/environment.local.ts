@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  defaultLang: 'pt',
+  defaultLang: 'es',
   checkAge: false,
   title: 'Itms | Teleconsulta',
   baseUrl: 'http://192.168.0.156:3000/api/', //https://backend.homeclinic.telemedicina.com/api/
@@ -21,11 +21,12 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20000 * 60,
-  setup: 'BR',
+  setup: 'CL',
   version: '{BUILD_VERSION}',
+  brand: "medline",
   colors: {
     "color-primary": "#25b0bb;",
     "color-secondary": "#044AAB;",
-    "color-hover": "#044AAB;",
+    "color-hover": "#044AAB;"
   }
 };

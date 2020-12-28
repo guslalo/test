@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import * as moment from 'moment';
@@ -21,6 +21,12 @@ import { AppointmentEventsService } from '../../../../../../services/appointment
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
+
+  @HostListener('click', ['$event.target']) 
+  onClick(e) {
+    this.appointmentEvents.enableCheckDatesEnableButtons(this.appointments)
+  }
+  
   public appointments: any;
   model2: NgbDateStruct;
   public timeline: any;
@@ -65,6 +71,7 @@ export class IndexComponent implements OnInit {
   dateAdapter = new CustomDateAdapter();
 
   appointmentForm: FormGroup;
+  isEnabled = false
 
   // @ViewChild('newAppointment') openModal: ElementRef;
 
@@ -277,7 +284,8 @@ export class IndexComponent implements OnInit {
       (data) => {
         this.tempAppointments = [...data.payload];
         this.appointments = data.payload;
-        // console.log(this.appointments);
+
+        this.appointmentEvents.enableCheckDatesEnableButtons(data.payload)
       },
       (error) => {
         console.log(error);

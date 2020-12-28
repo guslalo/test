@@ -17,13 +17,13 @@ export class AppointmentsService {
   private reserve = '/reserve';
   private coordinators = 'v1/coordinator';
   private consolidate = '/consolidate'
-  ;
+
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
   private inmediateAppointment = 'v1/administrative/immediate/state';
   private inmediate = 'v1/appointments/immediate/';
   private immediateConsolidate = 'v1/appointments/immediate/consolidate'
-  ;
+  
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
@@ -40,6 +40,8 @@ export class AppointmentsService {
   private objetives = 'v1/objetives/'
   private cancels = 'v1/cancels'
   private prescripcionsRecemed = 'v1/prescriptions/create-prescription'
+
+  private listAppointmentTypes = 'v1/appointments/lists/';
 
   public appointmentStatus = {
     RESERVED: 'reserved',
@@ -86,6 +88,11 @@ export class AppointmentsService {
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
 
+  }
+
+  //trae todas las citas por tipos
+  getAppointmentsForTypes(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.listAppointmentTypes );
   }
 
   getAllAppointments(number): Observable<any> {

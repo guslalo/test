@@ -313,10 +313,14 @@ export class CrearUsuarioComponentCL implements OnInit {
     this.cpfvalid = validate(run);
     console.log(this.cpfvalid, run)
   }
+
+  /*
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
   }
+
+
   validateCPF(cpf: string){
     console.log(this.identificationData.get('document').value)
     if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
@@ -346,7 +350,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       }
       return true
     }
-  }
+  }*/
 
   ufSelect(id) {
     let idSelected = id.value.split(":");
@@ -582,10 +586,8 @@ export class CrearUsuarioComponentCL implements OnInit {
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          familySituation:  '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
         },
         addressData: {
           uf: this.formUser[1].value.uf,
@@ -640,15 +642,12 @@ export class CrearUsuarioComponentCL implements OnInit {
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
         },
         addressData: {
-          cep: this.formUser[1].value.cep,
           uf: this.formUser[1].value.uf,
           city: this.formUser[1].value.city,
-          neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
           complement: this.formUser[1].value.complement,
@@ -722,15 +721,12 @@ export class CrearUsuarioComponentCL implements OnInit {
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
         },
         addressData: {
-          cep: this.formUser[1].value.cep,
           uf: this.formUser[1].value.uf,
           city: this.formUser[1].value.city,
-          neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
           complement: this.formUser[1].value.complement,
@@ -748,6 +744,14 @@ export class CrearUsuarioComponentCL implements OnInit {
           professionalRegistryType: this.formUser[4].value.professionalRegistryType,
           professionalRegistry: this.professionalRegistry,
           ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
+          nrRegistryHealthIntendence: this.formUser[4].value.nrRegistryHealthIntendence,
+          workState: this.formUser[4].value.workState,
+          workCity: this.formUser[4].value.workCity,
+          workStreet: this.formUser[4].value.workStreet,
+          workNumber: this.formUser[4].value.workNumber,
+          workComplement: this.formUser[4].value.workComplement,
+          workPostal: this.formUser[4].value.workPostal,
+          workPhone: this.formUser[4].value.workPhone
         },
         password: this.formUser[5].value.password,
         confirmPassword: this.formUser[5].value.confirmPassword,
@@ -796,15 +800,12 @@ export class CrearUsuarioComponentCL implements OnInit {
           birthdate: this.dateAdapter.toModel(this.formUser[1].value.birthdate),
           gender: this.formUser[1].value.gender,
           nacionality: this.formUser[1].value.nacionality,
-          inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
           education: this.formUser[1].value.education || '',
-          healthInsurance: this.formUser[1].value.healthInsurance || ''
+          healthInsurance: this.formUser[1].value.healthInsurance || '',
         },
         addressData: {
-          cep: this.formUser[1].value.cep,
           uf: this.formUser[1].value.uf,
           city: this.formUser[1].value.city,
-          neighborhood: this.formUser[1].value.neighborhood,
           street: this.formUser[1].value.street,
           streetNumber: parseInt(this.formUser[1].value.streetNumber),
           complement: this.formUser[1].value.complement,
@@ -822,6 +823,14 @@ export class CrearUsuarioComponentCL implements OnInit {
           professionalRegistryType: this.formUser[4].value.professionalRegistryType,
           professionalRegistry: this.professionalRegistry,
           ufProfessionalRegistry: this.formUser[4].value.ufProfessionalRegistry,
+          nrRegistryHealthIntendence: this.formUser[4].value.nrRegistryHealthIntendence,
+          workState: this.formUser[4].value.workState,
+          workCity: this.formUser[4].value.workCity,
+          workStreet: this.formUser[4].value.workStreet,
+          workNumber: this.formUser[4].value.workNumber,
+          workComplement: this.formUser[4].value.workComplement,
+          workPostal: this.formUser[4].value.workPostal,
+          workPhone: this.formUser[4].value.workPhones
         },
         password: this.formUser[5].value.password,
         confirmPassword: this.formUser[5].value.confirmPassword,
@@ -850,8 +859,6 @@ export class CrearUsuarioComponentCL implements OnInit {
       
     }
 
-
-    
   }
 
   getRooms() {
@@ -863,7 +870,6 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   getIssuingEntities() {
     this.userService.getIssuingEntities().subscribe((data) => {
-      // console.log(data);
       this.issuingEntities = data.payload;
     });
   }
@@ -980,7 +986,6 @@ export class CrearUsuarioComponentCL implements OnInit {
 
   getSpecialties() {
     this.specialtiesService.getSpecialties().subscribe((data) => {
-      // console.log(data);
       this.specialities = data;
     });
   }
@@ -1000,47 +1005,28 @@ export class CrearUsuarioComponentCL implements OnInit {
   }
 
   addProfessionalRegistry() {
-    if (this.userType == "professional"){
+    if (this.userType == "professional" || "coordinator" || "admin"){
       this.professionalRegistry.push({
-        type: this.professionalForm.value.professionalRegistryType || '',
-        registry: this.professionalForm.value.professionalRegistry || '',
-        uf: '',
         university: this.professionalForm.value.university || '',
         professionalTitle: this.professionalForm.value.professionalTitle || '',
-        course: this.professionalForm.value.course || '',
-        ufRegistry: ''
       });
   
       
       this.professionalRegistrySend.push({
-        type: this.professionalForm.value.professionalRegistryType || '',
-        registry: this.professionalForm.value.professionalRegistry || '',
-        uf: '',
         university: this.professionalForm.value.university || '',
-        professionalTitle: this.professionalForm.value.professionalTitle || '',
-        course: this.professionalForm.value.course || '',
-        ufRegistry: ''
+        professionalTitle: this.professionalForm.value.professionalTitle || ''
       });
     }else{
+      
       this.professionalRegistry.push({
-        type: this.professionalForm.value.professionalRegistryType || '',
-        registry: this.professionalForm.value.professionalRegistry || '',
-        uf: this.registerUf2.name,
         university: this.professionalForm.value.university || '',
         professionalTitle: this.professionalForm.value.professionalTitle || '',
-        course: this.professionalForm.value.course || '',
-        ufRegistry: this.registerUf2.name
       });
   
       
       this.professionalRegistrySend.push({
-        type: this.professionalForm.value.professionalRegistryType || '',
-        registry: this.professionalForm.value.professionalRegistry || '',
-        uf: this.registerUf2.id,
         university: this.professionalForm.value.university || '',
         professionalTitle: this.professionalForm.value.professionalTitle || '',
-        course: this.professionalForm.value.course || '',
-        ufRegistry: this.registerUf2.id
       });
     }
 

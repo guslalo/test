@@ -33,6 +33,7 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 // components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
+import { PerfilCLComponent } from './modules/mi-perfil-cl/mi-perfil-cl.component';
 import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
@@ -44,7 +45,7 @@ import { RecemedPrescriptionComponent } from './modules/recemed-prescription/rec
 import { RecemedProcedureComponent } from './modules/recemed-procedure/recemed-procedure.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, PerfilCLComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent],
   imports: [
     CommonModule,
     // HttpClientModule,

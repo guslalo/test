@@ -1052,6 +1052,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.antecedentesGeneral = data.payload.antecedent;
         this.allergies = data.payload.antecedent.allergies;
         this.antecedentes = data.payload.antecedent.sickness;
+       
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed.filter((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
+        }
       },
       (error) => {
         console.log(error);
@@ -1319,7 +1323,10 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         this.appointmentEvents.setAppointmentReagendamiento$.emit(data.payload)
 
-        this.getVerifiedSibrareDocuments2(id);
+        if(environment.setup == 'BR'){ 
+          this.getVerifiedSibrareDocuments2(id);
+        }
+
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.getAppointmentsTimeline(this.userId);
@@ -1550,6 +1557,10 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getObjetives().subscribe((data) => {
       this.objetives = data
     })
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 
 }

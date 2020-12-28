@@ -193,7 +193,7 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="lastName">{{ 'account.lastName.label' | transloco }}</label>
+                    <label for="lastName">{{ 'account.lastName.label' | transloco }} *</label>
                     <input
                       type="text"
                       class="form-control"
@@ -740,6 +740,8 @@
             </div>
           </div>
         </div>
+
+        <!--brasil-->
         <div class="row">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
@@ -774,91 +776,11 @@
                       }"
                     />
                   </div>
-                  <div class="form-group col-md-3" *ngIf="userType != 'professional'">
-                    <label for="course">{{
-                      'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco
-                    }}</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="course"
-                      formControlName="course"
-                      [ngClass]="{
-                        'is-invalid': !professionalForm.get('course').valid
-                      }"
-                    />
-                  </div>
-                  <div class="form-group col-md-3" *ngIf="userType != 'professional'">
-                    <label for="registryNumber">{{ 'dashboard.home.uncategorized.ufRecord.label' | transloco }}</label>
-                    <select
-                      class="form-control"
-                      name="ufRegistry"
-                      (change)="ufRegistry($event.target)" 
-                      formControlName="ufRegistry"
-                      [ngClass]="{
-                        'is-invalid': !professionalForm.get('ufRegistry').valid
-                      }"
-                    >
-                      <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state._id" *ngFor="let state of states">
-                        {{ state.name }}
-                      </option>
-                    </select>
-                  </div>
+
                 </div>
+
+                
                 <div class="row">
-                  <div class="form-group col-md-4" *ngIf="userType != 'professional'">
-                    <label for="professionalRegistryType">{{
-                      'dashboard.home.uncategorized.professionalReg.label' | transloco
-                    }}</label>
-                    <select
-                      class="form-control"
-                      name="professionalRegistryType"
-                      formControlName="professionalRegistryType"
-                    >
-                      <option [value]="null" disabled>{{ 'common.select.label' | transloco }}</option>
-                      <option value="CRM">{{ 'dashboard.home.uncategorized.CRM.label' | transloco }}</option>
-                      <option value="COREM">{{ 'dashboard.home.uncategorized.COREN.label' | transloco }}</option>
-                      <option value="CRO">{{ 'dashboard.home.uncategorized.CRO.label' | transloco }}</option>
-                      <option value="CRN">{{ 'dashboard.home.uncategorized.CRN.label' | transloco }}</option>
-                      <option value="CRP">{{ 'dashboard.home.uncategorized.CRP.label' | transloco }}</option>
-                      <option value="CREFITO">{{ 'dashboard.home.uncategorized.CREFITO.label' | transloco }}</option>
-                      <option value="CREFONO">{{ 'dashboard.home.uncategorized.CREFONO.label' | transloco }}</option>
-                      <option value="Ñao definido">Ñao definido</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3" *ngIf="userType != 'professional'">
-                    <label for="professionalRegistryType" >{{
-                      'dashboard.home.uncategorized.regNumber.label' | transloco
-                    }}</label>
-                    <input
-                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
-                      type="text"
-                      class="form-control"
-                      name="professionalRegistry"
-                      formControlName="professionalRegistry"
-                      [ngClass]="{
-                        'is-invalid': !professionalForm.get('professionalRegistry').valid
-                      }"
-                    />
-                  </div>
-                  <div class="col-md-3" *ngIf="userType != 'professional'">
-                    <label for="ufProfessionalRegistry">{{
-                      'clinicalFile.patientData.tabs.identification.info.status.label' | transloco
-                    }}</label>
-                    <select
-                    (change)="ufRegistry2($event.target)" 
-                      [disabled]="professionalForm.value.professionalRegistryType !== 'Ñao definido' ? false : true"
-                      class="form-control"
-                      name="ufProfessionalRegistry"
-                      formControlName="ufProfessionalRegistry"
-                    >
-                      <option [ngValue]="null" disabled>{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="state" *ngFor="let state of states">
-                        {{ state.name }}
-                      </option>
-                    </select>
-                  </div>
                   <div class="form-group col-md-2">
                     <button
                       (click)="addProfessionalRegistry()"
@@ -873,31 +795,13 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <!-- <th scope="col">{{ 'profile.regType.label' | transloco }}</th>
-                        <th scope="col">{{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}</th>
-                        <th scope="col">
-                          {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
-                        </th>
-                        <th scope="col">{{ 'common.actions.label' | transloco }}</th>
-                      </tr> -->
+                   
 
                         <th scope="col">
                           {{ 'dashboard.home.uncategorized.professionalDegree.label' | transloco }}
                         </th>
                         <th scope="col">
                           {{ 'dashboard.home.userManagment.createAccount.tabs.academic.university.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'table.ufReg.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'profile.regType.label' | transloco }}
-                        </th>
-                        <th scope="col" *ngIf="userType != 'professional'">
-                          {{ 'dashboard.home.uncategorized.regNumber.label' | transloco }}
                         </th>
                         <th scope="col" >{{ 'common.actions.label' | transloco }}</th>
                       </tr>
@@ -910,21 +814,6 @@
                         </td>
                         <td>
                           {{ registry.university }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.course }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.ufRegistry }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.type }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.registry }}
-                        </td>
-                        <td *ngIf="userType != 'professional'">
-                          {{ registry.uf }}
                         </td>
                         <td>
                           <div class="custom-control custom-switch">
@@ -945,8 +834,9 @@
               </form>
             </div>
           </div>
-        </div>
-        <div class="row" *ngIf="userType=='professional'">
+        </div> 
+        <!--chile-->
+        <div class="row" *ngIf="userType =='professional' || userType =='coordinator' || userType =='admin'">
           <div class="col-md-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <h4 class="pb-2">{{ 'dashboard.home.uncategorized.workNumber.label' | transloco }}</h4>
@@ -967,8 +857,9 @@
                   <div class="form-group col-md-4">
                     <label for="workState">{{
                       'dashboard.home.uncategorized.workState.label' | transloco
-                    }} * </label>
+                    }} *</label>
                     <select
+                      (change)="ufSelect($event.target)"
                       class="form-control"
                       name="workState"
                       formControlName="workState"
@@ -995,7 +886,7 @@
                       }"
                     >
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of cities2">
+                      <option [ngValue]="item._id" *ngFor="let item of cities">
                         {{ item.name }}
                       </option>
                     </select>

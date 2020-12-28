@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CurrentUserService } from './../../../services/current-user.service';
 import { NgbModal, NgbRatingConfig, NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentsService } from './../../../services/appointments.service';
@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedule-appointment/reschedule-appointment.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-inicio',
@@ -13,6 +14,11 @@ import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedul
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioPComponent implements OnInit {
+  @HostListener('click', ['$event.target']) 
+  onClick(e) {
+    this.appointmentsEvents.enableCheckDatesEnableButtons(this.consultas)
+  }
+
   @ViewChild('modal') private modalContent: TemplateRef<RescheduleAppointmentComponent>
   public consultas: any;
   public currentUser: any = {};
@@ -22,6 +28,11 @@ export class InicioPComponent implements OnInit {
   public consultasFinalizadas: any;
   public consultasEsperas: any;
   public salas: any;
+  public setup:any;
+  private isProduction:boolean;
+  public nextAppointments = []
+  public openAppointments = []
+  public immediateAppointments = []
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -41,6 +52,11 @@ export class InicioPComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (environment.production === false) {
+      this.isProduction = false;
+    } else {
+      this.isProduction = true;
+    }
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
@@ -50,6 +66,8 @@ export class InicioPComponent implements OnInit {
     this.appointmentsEvents.listAppointments$.subscribe(() => {
       this.getAppointments()
     })
+    this.setup = environment.setup
+    this.getAppointmentsForTypes();
   }
 
   ngAfterViewInit() {
@@ -71,11 +89,15 @@ export class InicioPComponent implements OnInit {
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
-        
-        console.log('getAppointments', data);
-
+        if(!this.isProduction) {
+          console.log('getAppointments', data);
+        }
+       
         this.consultas = data.payload.filter((finished) => finished.administrativeDetails.status !== 'finished' && finished.administrativeDetails.status !== 'canceled');
-        console.log(this.consultas);
+        if(!this.isProduction) {
+          console.log(this.consultas);
+        }
+      
         
         if (this.consultas.length > 0) {
           let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
@@ -105,9 +127,32 @@ export class InicioPComponent implements OnInit {
     );
   }
 
+
+  getAppointmentsForTypes() {
+    this.appointmentsService.getAppointmentsForTypes().subscribe(
+      (data) => {
+        if(!this.isProduction) {
+          console.log(data)
+        }
+        this.openAppointments = data.payload.openAppointments
+        this.immediateAppointments = data.payload.immediateAppointments
+        this.nextAppointments = data.payload.nextAppointments
+
+        console.log( this.nextAppointments)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
   getAppointments2() {
     this.appointmentsService.getAppointments(1, 'waitingInList').subscribe(
       (data) => {
+        if(!this.isProduction) {
+          console.log(data)
+        }
         //let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
         //.consultasFinalizadas = finalizadas.length;
         // this.consultasEsperas = data.payload;
@@ -123,7 +168,9 @@ export class InicioPComponent implements OnInit {
     console.log(value);
     this.appointmentsService.getWaitingAppointmentForRoomsId(value).subscribe(
       (data) => {
-        console.log(data);
+        if(!this.isProduction) {
+          console.log(data)
+        }
         this.consultasEsperas = data.payload.filter(x => x.canEnter === true);
         console.log(this.consultasEsperas);
       },
@@ -136,7 +183,9 @@ export class InicioPComponent implements OnInit {
   getRooms() {
     this.appointmentsService.getWaitingRooms().subscribe(
       (data) => {
-        console.log(data);
+        if(!this.isProduction) {
+          console.log(data)
+        }
         this.salas = data.payload;
         console.log(this.salas);
       },
@@ -149,7 +198,9 @@ export class InicioPComponent implements OnInit {
   atender(item) {
     this.appointmentsService.attendAppointmentInmediate(item).subscribe(
       (data) => {
-        console.log(data);
+        if(!this.isProduction) {
+          console.log(data)
+        }
         this.router.navigate(['crear-ficha-consulta/' + item], { relativeTo: this.route });
         // routerLink="crear-ficha-consulta/{{ item._id }}
       },

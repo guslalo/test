@@ -191,7 +191,7 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.professionalForm = this.formBuilder.group({
       professionalTitle: ['', Validators.required],
       university: ['', Validators.required],
-      course: ['', Validators.required],
+      course: ['', ],
       ufRegistry: [null, null],
       professionalRegistryType: [null, null],
       professionalRegistry: [null, null],
@@ -320,7 +320,7 @@ export class EditarUsuarioCLComponent implements OnInit {
       this.identificationData.get('document').reset();
       this.identificationData.get('extraDocument').reset();
     } else {
-      this.identificationData.get('document').setValidators([Validators.required]);
+      this.identificationData.get('document').setValidators(null);
       this.identificationData.get('idDocumentNumber').setValidators([Validators.required]);
       this.identificationData.get('passport').setValidators(null);
       this.identificationData.get('document').enable();
@@ -379,7 +379,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.personalData.get('nacionality').setValue(user.personalData.nacionality);
         this.personalData.get('education').setValue(user.personalData.education || null);
         this.personalData.get('healthInsurance').setValue(user.personalData.healthInsurance || user.personalData.prevission);
-        this.personalData.get('zipcode').setValue(user.personalData?.zipcode || user.personalData?.postal || '');
+        this.personalData.get('zipcode').setValue(user.addressData?.zipcode || user.personalData?.postal || '');
 ;
         this.personalData.get('uf').setValue(user.addressData.uf);
         this.personalData.get('city').setValue(user.addressData.city);
@@ -416,7 +416,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         this.professionalForm.get('workNumber').setValue(user.professionalData?.workNumber || '')
         this.professionalForm.get('workComplement').setValue(user.professionalData?.workCOmplement || '')
         this.professionalForm.get('workPostal').setValue(user.professionalData?.workPostal || '')
-        this.professionalForm.get('workPhone').setValue(user.professionalData?.workState || '')
+        this.professionalForm.get('workPhone').setValue(user.professionalData?.workPhone || '')
         /*this.professionalForm.get('professionalTitle').setValue(user.professionalData?.professionalTitle);
         this.professionalForm.get('university').setValue(user.professionalData?.university);
         this.professionalForm.get('course').setValue(user.professionalData?.course);
@@ -670,8 +670,8 @@ export class EditarUsuarioCLComponent implements OnInit {
         if (
           this.formUser[0].valid &&
           this.formUser[1].valid &&
-          this.formUser[4].valid &&
-          this.professionalRegistry.length
+          this.formUser[4].valid
+          && this.professionalRegistry.length
         ) {
           return true;
         } else {
@@ -730,7 +730,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         isSchool: this.isSchool,
         name: this.formUser[1].value.name,
         lastName: this.formUser[1].value.lastName,
-        motherName: this.formUser[1].value.motherName,
+        //motherName: this.formUser[1].value.motherName || '',
         secondLastName: this.formUser[1].value.secondLastName,
         email: this.formUser[1].value.email,
         phoneNumber: this.formUser[1].value.phoneNumber,
@@ -738,9 +738,11 @@ export class EditarUsuarioCLComponent implements OnInit {
         gender: this.formUser[1].value.gender,
         nacionality: this.formUser[1].value.nacionality,
         originCountry: this.formUser[1].value.originCountry || '',
-        inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
+        //inmigrationDate: this.dateAdapter.toModel(this.formUser[1].value.inmigrationDate) || '',
         education: this.formUser[1].value.education || '',
-        healthInsurance: this.formUser[1].value.healthInsurance || ''
+        healthInsurance: this.formUser[1].value.healthInsurance || '',
+        //breed:' ',
+
       },
       addressData: {
         uf: this.formUser[1].value.uf,
@@ -748,7 +750,7 @@ export class EditarUsuarioCLComponent implements OnInit {
         street: this.formUser[1].value.street,
         streetNumber: parseInt(this.formUser[1].value.streetNumber),
         complement: this.formUser[1].value.complement,
-        zipcode: this.formUser[1].value.zipcode
+        zipcode: this.formUser[1].value.zipcode,
       },
       profiles: _profiles,
       waitingRooms: this.waitingRoomsAssigned,
@@ -920,23 +922,13 @@ export class EditarUsuarioCLComponent implements OnInit {
 
   addProfessionalRegistry() {
     this.professionalRegistry.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.name,
       university: this.professionalForm.value.university,
       professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry: this.registerUf.name
     });
 
     this.professionalRegistrySend.push({
-      type: this.professionalForm.value.professionalRegistryType,
-      registry: this.professionalForm.value.professionalRegistry,
-      uf: this.registerUf2.id,
       university: this.professionalForm.value.university,
       professionalTitle: this.professionalForm.value.professionalTitle,
-      course: this.professionalForm.value.course,
-      ufRegistry: this.registerUf.id
     });
      
     this.professionalForm.controls['professionalRegistryType'].setValue(' ');
