@@ -692,9 +692,7 @@
                           </a>
                         </ng-container>
                         <ng-container *ngIf="
-                            item.administrativeDetails.status === 'running' ||
-                            item.administrativeDetails.status === 'active' ||
-                            item.administrativeDetails.status === 'pending'
+                            item.administrativeDetails.status === 'created'
                           ">
                           <a *ngIf="item.patientDetails.userDetails[0]"
                             routerLink="crear-ficha-consulta/{{ item._id }}">
