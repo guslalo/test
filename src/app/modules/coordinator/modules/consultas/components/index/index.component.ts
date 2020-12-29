@@ -25,13 +25,13 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.getAppointmentsForTypes();
 
     setTimeout(() => {
       this.interval = setInterval(() => {
         this.getAppointmentsForTypes();
-       }, 10000);
+       }, 7000);
     }, 0);
 
     this.router.events.subscribe(value => {
@@ -55,6 +55,16 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  openModalReagendamiento(item) {
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.getProfessionalBlocks$.emit(item)
+  }
+
+  setAppointmentCancelReasons(status){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
+  }
+
+  /*
   setAppointmentCancelReasons(row){
     this.appointmentsEvents.setAppointmentCancelReasons$.emit(row)
   }
@@ -62,7 +72,7 @@ export class IndexComponent implements OnInit {
   openModalReagendamiento(item) {
     this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
     this.appointmentsEvents.getProfessionalBlocks$.emit(item)
-  }
+  }*/
 
 
 }
