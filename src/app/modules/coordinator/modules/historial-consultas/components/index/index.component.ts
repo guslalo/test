@@ -144,9 +144,8 @@ export class IndexComponent implements OnInit {
     this.appointmentEvents.getMedicalSpecialties$.emit()
     this.appointmentEvents.buildForm$.emit(_user.role)
 
-    let _userId = _user.id
-    this.appointmentEvents.getSpecialtiesForProfessional$.emit(_userId)
-
+    // let _userId = _user.id
+    // this.appointmentEvents.getSpecialtiesForProfessional$.emit(_userId)
   }
 
   openModalReagendamiento(item) {

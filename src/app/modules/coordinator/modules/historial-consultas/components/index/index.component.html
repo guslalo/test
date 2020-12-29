@@ -172,7 +172,7 @@
                   {{ 'clinicalFile.reschedule.label' | transloco }}
                 </button>
                 
-                <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointment(row)" data-target="#modalCancelAppointment">
+                <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" data-toggle="modal" (click)="setAppointmentCancelReasons(row)" data-target="#modalCancelAppointment">
                   {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                 </button>
               </div>
