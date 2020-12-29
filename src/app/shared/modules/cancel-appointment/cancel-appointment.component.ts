@@ -52,7 +52,7 @@ export class CancelAppointmentComponent implements OnInit {
     this.appointmentsEvents
     .setAppointmentCancelReasons$
     .subscribe((appointment) => {
-      console.log(appointment)
+      console.log('setAppointmentCancelReasons', appointment)
       this.appointment = appointment
       this.buildSelectCancels(appointment.administrativeDetails.status)
     })
