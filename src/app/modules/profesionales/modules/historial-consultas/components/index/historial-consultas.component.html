@@ -185,7 +185,8 @@
                                   </button>
                                 </a>
                               </ng-container>
-                              <ng-container *ngIf="
+                              
+                              <!-- <ng-container *ngIf="
                                   item.administrativeDetails.status === 'running' ||
                                   item.administrativeDetails.status === 'active' ||
                                   item.administrativeDetails.status === 'pending'
@@ -196,21 +197,21 @@
                                     {{ 'clinicalFile.attend.label' | transloco }}
                                   </button>
                                 </a>
-                              </ng-container>
+                              </ng-container> -->
 
-                              <div *ngIf="item.canUse">
+                              <!-- <div *ngIf="item.canUse">
                                 <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
                                   data-toggle="modal" data-target="#modalReAgendamiento">
                                     {{ 'clinicalFile.reschedule.label' | transloco }}
                                 </button>
-                              </div>
+                              </div> -->
 
-                              <div>
+                              <!-- <div>
                                 <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
                                   data-toggle="modal" data-target="#modalCancelAppointment">
                                   {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                                 </button>
-                              </div>
+                              </div> -->
 
                             </div>
                           </div>
