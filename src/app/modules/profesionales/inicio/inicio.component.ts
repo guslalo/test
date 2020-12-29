@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedule-appointment/reschedule-appointment.component';
 import { environment } from 'src/environments/environment';
+declare var $:any;
 
 @Component({
   selector: 'app-inicio',
@@ -54,6 +55,10 @@ export class InicioPComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if(this.router.url == '/app-professional/cita-cancelada'){
+      $('#avisoCancelado').modal('show');
+    }
+
     if (environment.production === false) {
       this.isProduction = false;
     } else {
@@ -79,8 +84,9 @@ export class InicioPComponent implements OnInit {
     }, 0);
 
     this.router.events.subscribe(value => {
+      
       clearInterval(this.interval);
-      console.log(' stop');
+      //console.log(value);
     });
 
   }
