@@ -143,8 +143,20 @@ export class IndexComponent implements OnInit {
     this.appointmentEvents.getProfessionals$.emit()
     this.appointmentEvents.getMedicalSpecialties$.emit()
     this.appointmentEvents.buildForm$.emit(_user.role)
+
+    let _userId = _user.id
+    this.appointmentEvents.getSpecialtiesForProfessional$.emit(_userId)
+
   }
 
+  openModalReagendamiento(item) {
+    this.appointmentEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentEvents.getProfessionalBlocks$.emit(item)
+  }
+
+  setAppointmentCancelReasons(status){
+    this.appointmentEvents.setAppointmentCancelReasons$.emit(status)
+  }
 
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
