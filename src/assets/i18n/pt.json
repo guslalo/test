@@ -1,4 +1,15 @@
 { 
+  "tables": {
+    "consultas":{
+      "paciente":"paciente",
+      "HoraAgendada":"Horário marcado",
+      "HoraEspera":"Tempo limite",
+      "TiempoAtención":"Hora de atenção",
+      "ProfesionalSalud":"Profissional de saúde",
+      "SalaEspera":"Sala de espera",
+      "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador."
+    }
+  },
   "titularidad": {
     "title":"Titularidade",
     "titular":"Titular ",
