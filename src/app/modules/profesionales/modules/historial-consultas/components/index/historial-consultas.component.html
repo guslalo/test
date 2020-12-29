@@ -166,14 +166,14 @@
                         </button>
                       </td>
                       <td>
-                        <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                        <!-- <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                           <a routerLink="/app-professional/ficha-consulta/{{ item._id }}">
                             <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">
                               {{ 'clinicalFile.viewMedCard.label' | transloco }}
                             </button>
                           </a>
-                        </ng-container>
-                        <ng-container *ngIf="
+                        </ng-container> -->
+                        <!-- <ng-container *ngIf="
                             item.administrativeDetails.status === 'running' ||
                             item.administrativeDetails.status === 'active' ||
                             item.administrativeDetails.status === 'appointed' ||
@@ -184,7 +184,48 @@
                               {{ 'clinicalFile.attend.label' | transloco }}
                             </button>
                           </a>
-                        </ng-container>
+                        </ng-container> -->
+
+
+
+                        <div ngbDropdownMenu>
+                          <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
+                            <a routerLink="/app-professional/ficha-consulta/{{ item._id }}">
+                              <button ngbDropdownItem type="button">
+                                {{ 'clinicalFile.viewMedCard.label' | transloco }}
+                              </button>
+                            </a>
+                          </ng-container>
+                          <ng-container *ngIf="
+                              item.administrativeDetails.status === 'running' ||
+                              item.administrativeDetails.status === 'active' ||
+                              item.administrativeDetails.status === 'pending'
+                            ">
+                            <a *ngIf="item.patientDetails.userDetails[0]"
+                            routerLink="/app-professional/crear-ficha-consulta/{{ item._id }}">
+                              <button ngbDropdownItem type="button">
+                                {{ 'clinicalFile.attend.label' | transloco }}
+                              </button>
+                            </a>
+                          </ng-container>
+
+                          <div>
+                            <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
+                              data-toggle="modal" data-target="#modalReAgendamiento">
+                                {{ 'clinicalFile.reschedule.label' | transloco }}
+                            </button>
+                          </div>
+
+                          <div>
+                            <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
+                              data-toggle="modal" data-target="#modalCancelAppointment">
+                              {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+
+
+
                       </td>
                     </tr>
                   </ng-template>

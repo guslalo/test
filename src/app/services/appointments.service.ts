@@ -389,7 +389,7 @@ export class AppointmentsService {
 
      let object = {
        appointmentDetails: {
-         objetive: objetive
+         objective: objetive
        },
        professionalDetails: {
          specialtyId: SpecialtiesId,
