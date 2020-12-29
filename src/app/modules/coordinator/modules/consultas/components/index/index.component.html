@@ -108,12 +108,14 @@
                       </ng-template>
                     </td>
                     <td>
+                      <!--
                       <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                         S/R
                       </ng-container>
                       <ng-template #info3>
-                        {{ item.administrativeDetails.waitingRoomDetails.name}}
-                      </ng-template>
+                        
+                      </ng-template>-->
+                      {{ item.administrativeDetails.waitingRoomDetails?.name}}
                     </td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -257,16 +259,18 @@
                       </ng-template>
                     </td>
                     <td> 
-                      {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                      {{ item.professionalDetails.userDetails[0].lastName}}
+                      {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                      {{ item.professionalDetails.userDetails[0]?.lastName}}
                     </td>
                     <td>
+                      <!-- 
                       <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                         S/R
                       </ng-container>
                       <ng-template #info3>
                         {{ item.administrativeDetails.waitingRoomDetails.name}}
-                      </ng-template>
+                      </ng-template>-->
+                      {{ item.administrativeDetails.waitingRoomDetails?.name}}
                     </td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -503,16 +507,18 @@
                 </ng-template>
               </td>
               <td> 
-                {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                {{ item.professionalDetails.userDetails[0].lastName}}
+                {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                {{ item.professionalDetails.userDetails[0]?.lastName}}
               </td>
               <td>
+                <!--
                 <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                   S/R
                 </ng-container>
                 <ng-template #info3>
-                  {{ item.administrativeDetails.waitingRoomDetails.name}}
-                </ng-template>
+                 
+                </ng-template> -->
+                {{ item.administrativeDetails.waitingRoomDetails?.name}}
               </td>
               <td>
                 <button type="button" class="btn btn-secondary rounded-pill btn-sm">
