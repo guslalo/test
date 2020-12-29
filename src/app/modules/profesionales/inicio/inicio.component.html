@@ -194,9 +194,9 @@
                     </th>
                     <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <!--horario inicio atencion-->
-                    <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
-                    <th>{{'tables.consultas.TiempoAtención' | transloco}}</th>
+                    <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                    <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                     <th>
                       {{'tables.consultas.SalaEspera' | transloco }}
                     </th>
@@ -347,9 +347,9 @@
                     </th>
                     <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <!--horario inicio atencion-->
-                    <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
-                    <th>{{'tables.consultas.TiempoAtención' | transloco}}</th>
+                    <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                    <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                     <th>
                       {{'tables.consultas.SalaEspera' | transloco }}
                     </th>
@@ -449,21 +449,9 @@
                                   </button>
                                 </a>
                               </ng-container>
-                              <ng-container *ngIf="
-                                  item.administrativeDetails.status === 'running' ||
-                                  item.administrativeDetails.status === 'active' ||
-                                  item.administrativeDetails.status === 'pending'
-                                ">
-                                <a *ngIf="item.patientDetails.userDetails[0]"
-                                  routerLink="crear-ficha-consulta/{{ item._id }}">
-                                  <button ngbDropdownItem type="button">
-                                    {{ 'clinicalFile.attend.label' | transloco }}
-                                  </button>
-                                </a>
-                              </ng-container>
 
-                              <div *ngIf="item.canUse">
-                                <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
+                              <div >
+                                <button  ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
                                   data-toggle="modal" data-target="#modalReAgendamiento">
                                     {{ 'clinicalFile.reschedule.label' | transloco }}
                                 </button>
@@ -593,9 +581,8 @@
               </th>
               <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
               <!--horario inicio atencion-->
-              <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
               <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
-              <th>{{'tables.consultas.TiempoAtención' | transloco}}</th>
+              <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
               <th>
                 {{'tables.consultas.SalaEspera' | transloco }}
               </th>
@@ -617,7 +604,7 @@
                   <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
                 </ng-template>
                 <td>
-                  {{ item.dateDetails.start}}
+                  {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
                   <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
                 </td>
                 <td>
@@ -635,10 +622,6 @@
                   <ng-template #info2>
                     {{ item.attentionTime }}
                   </ng-template>
-                </td>
-                <td> 
-                  {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
-                  {{ item.professionalDetails.userDetails[0]?.lastName}}
                 </td>
                 <td>
                  
