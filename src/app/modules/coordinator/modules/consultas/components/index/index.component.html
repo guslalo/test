@@ -99,8 +99,13 @@
                       </ng-template>
                     </td>
                     <td> 
-                      {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                      {{ item.professionalDetails.userDetails[0].lastName}}
+                      <ng-container *ngIf="item.professionalDetails.userDetails.lenght == 0; else professionalDetailsData">
+                        S/R
+                      </ng-container>
+                      <ng-template #professionalDetailsData>
+                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                        {{ item.professionalDetails.userDetails[0]?.lastName}}
+                      </ng-template>
                     </td>
                     <td>
                       <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
