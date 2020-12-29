@@ -206,7 +206,7 @@
                       <!--/professionals details-->
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div *ngIf ="brand !== 'medline'" class="col-6">
                     <p class="valor text-right">
                       {{ 'waitingRoom.serviceFee.label' | transloco }}: {{ item.appointmentPrice }}
                     </p>
@@ -537,7 +537,7 @@
               </div>
 
               <div class="box boxSeparador pl-3">
-                <p class="m-0 valor">
+                <p *ngIf="brand!=='medline'" class="m-0 valor">
                   {{ 'waitingRoom.serviceFee.label' | transloco }}: ${{
                     reserve.professionalDetails.specialtyDetails.price
                   }}

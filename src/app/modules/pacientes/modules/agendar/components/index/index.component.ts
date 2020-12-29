@@ -58,6 +58,7 @@ export class IndexComponent implements OnInit {
   public urlConfirmacion: any;
   public estadoPagado: boolean = false;
   selectMedicalSpecialties:FormControl;
+  public brand: string;
   public photoUrlBase = environment.photoUrlBase;
   imageError: string;
   isImageSaved: boolean;
@@ -125,7 +126,7 @@ export class IndexComponent implements OnInit {
         console.log('reagendar', this.reagendar);
       }
     });
-
+    this.brand = environment.brand;
     const current = new Date();
     this.textInputFile = 'Selecione Arquivo';
     this.minDate = {
