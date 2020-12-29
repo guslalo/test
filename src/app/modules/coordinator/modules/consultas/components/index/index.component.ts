@@ -60,9 +60,33 @@ export class IndexComponent implements OnInit {
     });
     
   }
+
+
   
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  
+  filterTable(event) {
+    console.log(event)
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById(event);
+    filter = input.value.toUpperCase();
+    table = document.getElementById(event + 'Table');
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
