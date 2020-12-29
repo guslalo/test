@@ -52,6 +52,15 @@ export class HistorialConsultasComponent implements OnInit {
     this.appointmentsEvents.buildForm$.emit(_user.role)
   }
 
+  openModalReagendamiento(item) {
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.getProfessionalBlocks$.emit(item)
+  }
+
+  setAppointmentCancelReasons(status){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
+  }
+
   getFecha() {
 
     const fecha = new Date();

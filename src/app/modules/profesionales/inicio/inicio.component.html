@@ -656,7 +656,7 @@
                               </div>
 
                               <div *ngIf="item.canUse">
-                                <button *ngxPermissionsOnly="['Cancel:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
+                                <button *ngxPermissionsOnly="['Delete:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
                                   data-toggle="modal" data-target="#modalCancelAppointment">
                                   {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                                 </button>
