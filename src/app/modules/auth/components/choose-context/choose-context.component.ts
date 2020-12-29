@@ -124,7 +124,19 @@ export class ChooseContextComponent implements OnInit {
         }
       );
     }else{
-      this.router.navigate(['app-paciente']);
+      this.clinicService.accessMode().subscribe(
+        (data) => {
+          console.log(data)
+          localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+          localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+          localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+          console.log(data);
+          this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 
