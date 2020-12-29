@@ -172,8 +172,8 @@
                               {{ 'clinicalFile.viewMedCard.label' | transloco }}
                             </button>
                           </a>
-                        </ng-container> -->
-                        <!-- <ng-container *ngIf="
+                        </ng-container>
+                        <ng-container *ngIf="
                             item.administrativeDetails.status === 'running' ||
                             item.administrativeDetails.status === 'active' ||
                             item.administrativeDetails.status === 'appointed' ||
@@ -186,9 +186,8 @@
                           </a>
                         </ng-container> -->
 
-
-
-                        <div ngbDropdownMenu>
+                        <ng-container ngbDropdown>
+                          <div ngbDropdownMenu>
                           <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
                             <a routerLink="/app-professional/ficha-consulta/{{ item._id }}">
                               <button ngbDropdownItem type="button">
@@ -223,8 +222,7 @@
                             </button>
                           </div>
                         </div>
-
-
+                        </ng-container>
 
                       </td>
                     </tr>
