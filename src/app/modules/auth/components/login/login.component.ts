@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         localStorage.setItem('clinic', this.currentUser.administrativeData[0].clinicId);
 
-        if (this.currentUser.administrativeData.length) {
+        if (this.currentUser.administrativeData.length < 2) {
           this._policyService.setPoliciesToUser()
         }
 

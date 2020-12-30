@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  defaultLang: 'es', //es, pt
+  defaultLang: 'pt', //es, pt
   checkAge: false,
   title: 'Itms Dev | Teleconsulta',
   baseUrl: 'https://backend-dev.bdot.app/api/',

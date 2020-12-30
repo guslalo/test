@@ -4,10 +4,10 @@
       "paciente":"paciente",
       "HoraAgendada":"Horário marcado",
       "HoraEspera":"Tempo limite",
-      "TiempoAtención":"Hora de atenção",
+      "TiempoAtencion":"Hora de atenção",
       "ProfesionalSalud":"Profissional de saúde",
       "SalaEspera":"Sala de espera",
-      "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador."
+      "cancelado":" Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local."
     }
   },
   "titularidad": {
