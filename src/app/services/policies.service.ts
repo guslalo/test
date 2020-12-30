@@ -32,6 +32,54 @@ export class PoliciesService {
     //   this._backendPolicies = _currentUser.administrativeData
     // }
 
+    if(JSON.parse(localStorage.getItem('firstAccessMultirole')) === true ){
+      
+    let _currentUser: any = JSON.parse(localStorage.getItem('contextRole'));
+    this._backendPolicies = _currentUser
+
+    let _policies
+    let _permissionsSize = []
+    let _mayor = 0
+
+    this.flushPolicies()
+
+    this._backendPolicies.forEach(element => {
+      let _p = this.parse(element)
+      let _pArr = this.makePolicy(_p)
+
+      this.policies.push({
+        'clinic': element.clinicId,
+        'policies': _pArr
+      })
+    });
+
+    for (let i = 0; i < this.policies.length; i++) {
+      const element = this.policies[i];
+      if (element.clinic == localStorage.getItem('clinic')) {
+        _permissionsSize.push(element.policies.length)
+      }else{
+        localStorage.setItem('policies', JSON.stringify(element.policies));
+        this.permissionsService.loadPermissions(element.policies);
+      }
+    }
+
+    for (let i = 0; i < _permissionsSize.length; i++) {
+      const element = _permissionsSize[i];
+      if(element > _mayor) _mayor = element  
+    }
+
+    for (let i = 0; i < this.policies.length; i++) {
+      const element = this.policies[i];
+      if(element.policies.length == _mayor){
+        localStorage.setItem('policies', JSON.stringify(element.policies));
+        this.permissionsService.loadPermissions(element.policies);
+      }
+    }
+
+    this.listPolicies();
+    
+    } else {
+      
     let _currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
     this._backendPolicies = _currentUser?.administrativeData || []
 
@@ -75,6 +123,8 @@ export class PoliciesService {
     }
 
     this.listPolicies()
+    }
+
   }
 
   flushPolicies(): void {
