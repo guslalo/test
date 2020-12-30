@@ -58,7 +58,7 @@ export class ChooseContextComponent implements OnInit {
       }
     }
     localStorage.setItem('contextRole', JSON.stringify(this.arrayAdministrativeData));
-    this._policyService.setPoliciesToUser();
+    //this._policyService.setPoliciesToUser();
 
     if (localStorage.getItem('firstAccessMultirole') === 'true') {
       this.getRouteForClinicAndRole(clinicId, role);
@@ -72,6 +72,7 @@ export class ChooseContextComponent implements OnInit {
             localStorage.setItem('token', JSON.stringify(data.access_token));
             this.getRouteForClinicAndRole(clinicId, role);
           }
+          this._policyService.setPoliciesToUser()
         },
         (error) => {
           console.log(error);
