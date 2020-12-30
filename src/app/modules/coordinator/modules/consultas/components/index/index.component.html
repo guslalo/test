@@ -46,20 +46,26 @@
                <!--consultas abiertas -->
           <div class="tab-pane fade " id="child1" role="tabpanel" aria-labelledby="home-tab"
           [ngClass]="(openAppointments.length >= 1 )?'show active':'my-class2'">
+
+          <input type="text" id="searchopenAppointment" (keyup)='filterTable($event.target.id)' placeholder="Buscar" style="padding-left:10px;">
+
+
+
+
           <div class="tableBox p-4 bg-white mt-3">
-            <table class="table">
+            <table class="table" id="searchopenAppointmentTable">
               <thead>
                 <tr>
                   <th scope="row">
                     {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
-                  <th>Hora agendada</th>
+                  <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                   <!--horario inicio atencion-->
-                  <th>Horario inicio atención</th>
-                  <th>Tiempo de atención</th>
-                  <th>Profesional de salud</th>
+                  <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+                  <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                  <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                   <th>
-                    Sala de espera
+                    {{'tables.consultas.SalaEspera' | transloco }}
                   </th>
                  
                   <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -108,12 +114,14 @@
                       </ng-template>
                     </td>
                     <td>
+                      <!--
                       <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                         S/R
                       </ng-container>
                       <ng-template #info3>
-                        {{ item.administrativeDetails.waitingRoomDetails.name}}
-                      </ng-template>
+                        
+                      </ng-template>-->
+                      {{ item.administrativeDetails.waitingRoomDetails[0]?.name}}
                     </td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -155,35 +163,16 @@
                           </button>
 
                           <div ngbDropdownMenu>
-                            <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                              <a routerLink="ficha-consulta/{{ item._id }}">
-                                <button ngbDropdownItem type="button">
-                                  {{ 'clinicalFile.viewMedCard.label' | transloco }}
-                                </button>
-                              </a>
-                            </ng-container>
-                            <ng-container *ngIf="
-                                item.administrativeDetails.status === 'running' ||
-                                item.administrativeDetails.status === 'active' ||
-                                item.administrativeDetails.status === 'pending'
-                              ">
-                              <a *ngIf="item.patientDetails.userDetails[0]"
-                                routerLink="crear-ficha-consulta/{{ item._id }}">
-                                <button ngbDropdownItem type="button" >
-                                  {{ 'clinicalFile.attend.label' | transloco }}
-                                </button>
-                              </a>
-                            </ng-container>
 
-                            <div *ngIf="item.canUse">
-                              <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
+                            <div *ngIf="item.canUse"><!--*ngIf="item.canUse"-->
+                              <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)='openModalReagendamiento(item)'
                                 data-toggle="modal" data-target="#modalReAgendamiento">
                                   {{ 'clinicalFile.reschedule.label' | transloco }}
                               </button>
                             </div>
 
-                            <div *ngIf="item.canUse">
-                              <button *ngxPermissionsOnly="['Cancel:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
+                            <div ><!--*ngIf="item.canUse" *ngxPermissionsOnly="['Cancel:Appointment']"-->
+                              <button   ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
                                 data-toggle="modal" data-target="#modalCancelAppointment">
                                 {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                               </button>
@@ -204,20 +193,22 @@
         <div class="tab-pane fade" id="child2" role="tabpanel" aria-labelledby="profile-tab"
         [ngClass]="(openAppointments.length == 0 )?'show active':'my-class2'"
         >
+
+        <input type="text" id="searchnextAppointment" (keyup)='filterTable($event.target.id)' placeholder="Buscar" style="padding-left:10px;">
           <div class="tableBox p-4 bg-white mt-3">
-            <table class="table">
+            <table class="table" id="searchnextAppointmentTable">
               <thead>
                 <tr>
                   <th scope="row">
                     {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
-                  <th>Hora agendada</th>
+                  <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                   <!--horario inicio atencion-->
-                  <th>Horario inicio atención</th>
-                  <th>Tiempo de atención</th>
-                  <th>Profesional de salud</th>
+                  <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+                  <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                  <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                   <th>
-                    Sala de espera
+                    {{'tables.consultas.SalaEspera' | transloco }}
                   </th>
                  
                   <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -257,16 +248,18 @@
                       </ng-template>
                     </td>
                     <td> 
-                      {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                      {{ item.professionalDetails.userDetails[0].lastName}}
+                      {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                      {{ item.professionalDetails.userDetails[0]?.lastName}}
                     </td>
                     <td>
+                      <!-- 
                       <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                         S/R
                       </ng-container>
                       <ng-template #info3>
                         {{ item.administrativeDetails.waitingRoomDetails.name}}
-                      </ng-template>
+                      </ng-template>-->
+                      {{ item.administrativeDetails.waitingRoomDetails[0]?.name}}
                     </td>
                     <td>
                       <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -315,20 +308,8 @@
                                 </button>
                               </a>
                             </ng-container>
-                            <ng-container *ngIf="
-                                item.administrativeDetails.status === 'running' ||
-                                item.administrativeDetails.status === 'active' ||
-                                item.administrativeDetails.status === 'pending'
-                              ">
-                              <a *ngIf="item.patientDetails.userDetails[0]"
-                                routerLink="crear-ficha-consulta/{{ item._id }}">
-                                <button ngbDropdownItem type="button">
-                                  {{ 'clinicalFile.attend.label' | transloco }}
-                                </button>
-                              </a>
-                            </ng-container>
 
-                            <div *ngIf="item.canUse">
+                            <div>
                               <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
                                 data-toggle="modal" data-target="#modalReAgendamiento">
                                   {{ 'clinicalFile.reschedule.label' | transloco }}
@@ -346,100 +327,6 @@
                         </div>
                       </ng-container>
                     </td>
-                    <!--
-                    <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
-                      {{ item.patientDetails.userDetails[0].personalData.name }}
-                      {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
-                    </td>
-                    <ng-template #sinInfo>
-                      <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
-                    </ng-template>
-                    <td>
-                      {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
-                    </td>
-                    <td>
-                      {{ item.dateDetails.start }}
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                        {{
-                          (item.administrativeDetails.status === 'reserved'
-                            ? 'clinicalFile.reserved.label'
-                            : item.administrativeDetails.status === 'appointed'
-                            ? 'clinicalFile.scheduled.label'
-                            : item.administrativeDetails.status === 'rescheduled'
-                            ? 'clinicalFile.reScheduled.label'
-                            : item.administrativeDetails.status === 'active'
-                            ? 'clinicalFile.active.label'
-                            : item.administrativeDetails.status === 'waitingInRoom'
-                            ? 'clinicalFile.inWaitingRoom.label'
-                            : item.administrativeDetails.status === 'waitingInList'
-                            ? 'clinicalFile.inWaitingList.label'
-                            : item.administrativeDetails.status === 'running'
-                            ? 'common.status.inProgress.label'
-                            : item.administrativeDetails.status === 'pending'
-                            ? 'clinicalFile.pending.label'
-                            : item.administrativeDetails.status === 'finished'
-                            ? 'clinicalFile.ended.label'
-                            : item.administrativeDetails.status === 'canceled'
-                            ? 'clinicalFile.canceled.label'
-                            : 'S/R'
-                          ) | transloco
-                        }}
-                      </button>
-                    </td>
-
-                    <td>
-                      <ng-container>
-                        <div ngbDropdown container="body">
-                          <button class="btn btn-light btn-sm rounded-pill" ngbDropdownToggle>
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots"
-                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd"
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                            </svg>
-                          </button>
-
-                          <div ngbDropdownMenu>
-                            <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                              <a routerLink="ficha-consulta/{{ item._id }}">
-                                <button ngbDropdownItem type="button">
-                                  {{ 'clinicalFile.viewMedCard.label' | transloco }}
-                                </button>
-                              </a>
-                            </ng-container>
-                            <ng-container *ngIf="
-                                item.administrativeDetails.status === 'running' ||
-                                item.administrativeDetails.status === 'active' ||
-                                item.administrativeDetails.status === 'pending'
-                              ">
-                              <a *ngIf="item.patientDetails.userDetails[0]"
-                                routerLink="crear-ficha-consulta/{{ item._id }}">
-                                <button ngbDropdownItem type="button">
-                                  {{ 'clinicalFile.attend.label' | transloco }}
-                                </button>
-                              </a>
-                            </ng-container>
-
-                            <div *ngIf="item.canUse">
-                              <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
-                                data-toggle="modal" data-target="#modalReAgendamiento">
-                                  {{ 'clinicalFile.reschedule.label' | transloco }}
-                              </button>
-                            </div>
-
-                            <div *ngIf="item.canUse">
-                              <button *ngxPermissionsOnly="['Cancel:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
-                                data-toggle="modal" data-target="#modalCancelAppointment">
-                                {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
-                              </button>
-                            </div>
-
-                          </div>
-                        </div>
-                      </ng-container>
-                    </td>
--->
                   </ng-container>
                 </tr>
               </tbody>
@@ -450,20 +337,20 @@
 
         <!-- consultas inmediatas -->
         <div class="tab-pane fade" id="child3" role="tabpanel" aria-labelledby="profile-tab">
+          <input type="text" id="searchinmediateAppointment" (keyup)='filterTable($event.target.id)' placeholder="Buscar" style="padding-left:10px;">
         <div class="tableBox p-4 bg-white mt-3">
-        <table class="table">
+        <table class="table" id="searchinmediateAppointmentTable">
         <thead>
           <tr>
             <th scope="row">
               {{ 'videoChat.modalEnd.patient.label' | transloco }}
             </th>
-            <th>Hora agendada</th>
+            <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
             <!--horario inicio atencion-->
-            <th>Horario inicio atención</th>
-            <th>Tiempo de atención</th>
-            <th>Profesional de salud</th>
+            <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+            <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
             <th>
-              Sala de espera
+              {{'tables.consultas.SalaEspera' | transloco }}
             </th>
            
             <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -483,7 +370,7 @@
                 <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
               </ng-template>
               <td>
-                {{ item.dateDetails.start}}
+                {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
                 <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
               </td>
               <td>
@@ -502,17 +389,15 @@
                   {{ item.attentionTime }}
                 </ng-template>
               </td>
-              <td> 
-                {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                {{ item.professionalDetails.userDetails[0].lastName}}
-              </td>
               <td>
+                <!--
                 <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                   S/R
                 </ng-container>
                 <ng-template #info3>
-                  {{ item.administrativeDetails.waitingRoomDetails.name}}
-                </ng-template>
+                 
+                </ng-template> -->
+                {{ item.administrativeDetails.waitingRoomDetails[0]?.name}}
               </td>
               <td>
                 <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -554,13 +439,6 @@
                     </button>
 
                     <div ngbDropdownMenu>
-                      <ng-container *ngIf="item.administrativeDetails.status === 'finished'">
-                        <a routerLink="ficha-consulta/{{ item._id }}">
-                          <button ngbDropdownItem type="button">
-                            {{ 'clinicalFile.viewMedCard.label' | transloco }}
-                          </button>
-                        </a>
-                      </ng-container>
                       <ng-container *ngIf="
                           item.administrativeDetails.status === 'running' ||
                           item.administrativeDetails.status === 'active' ||
@@ -569,8 +447,8 @@
                         <a *ngIf="item.patientDetails.userDetails[0]"
                           routerLink="crear-ficha-consulta/{{ item._id }}">
                           <button ngbDropdownItem type="button">
-                            {{ 'clinicalFile.attend.label' | transloco }}
-                          </button>
+                            {{ 'clinicalFile.attend.label' | transloco }} 
+                          </button> 
                         </a>
                       </ng-container>
 
@@ -581,8 +459,8 @@
                         </button>
                       </div>
 
-                      <div *ngIf="item.canUse">
-                        <button *ngxPermissionsOnly="['Cancel:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
+                      <div>
+                        <button  ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
                           data-toggle="modal" data-target="#modalCancelAppointment">
                           {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
                         </button>
@@ -605,3 +483,7 @@
           </div>
         </div>
       </div>
+
+
+<modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>
+<modal-cancel-appointment [modalConfig] #modalCancelAppointment></modal-cancel-appointment>

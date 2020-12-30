@@ -192,13 +192,13 @@
                     <th scope="row">
                       {{ 'videoChat.modalEnd.patient.label' | transloco }}
                     </th>
-                    <th>Hora agendada</th>
+                    <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <!--horario inicio atencion-->
-                    <th>Horario inicio atención</th>
-                    <th>Tiempo de atención</th>
-                    <th>Profesional de salud</th>
+                    <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+                    <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                    <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                     <th>
-                      Sala de espera
+                      {{'tables.consultas.SalaEspera' | transloco }}
                     </th>
                    
                     <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -238,15 +238,15 @@
                         </ng-template>
                       </td>
                       <td> 
-                        {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                        {{ item.professionalDetails.userDetails[0].lastName}}
+                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                        {{ item.professionalDetails.userDetails[0]?.lastName}}
                       </td>
                       <td>
                         <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                           S/R
                         </ng-container>
                         <ng-template #info3>
-                          {{ item.administrativeDetails.waitingRoomDetails.name}}
+                          {{ item.administrativeDetails.waitingRoomDetails[0].name}}
                         </ng-template>
                       </td>
                       <td>
@@ -345,13 +345,13 @@
                     <th scope="row">
                       {{ 'videoChat.modalEnd.patient.label' | transloco }}
                     </th>
-                    <th>Hora agendada</th>
+                    <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
                     <!--horario inicio atencion-->
-                    <th>Horario inicio atención</th>
-                    <th>Tiempo de atención</th>
-                    <th>Profesional de salud</th>
+                    <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+                    <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
+                    <th>{{'tables.consultas.ProfesionalSalud' | transloco}}</th>
                     <th>
-                      Sala de espera
+                      {{'tables.consultas.SalaEspera' | transloco }}
                     </th>
                    
                     <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -391,15 +391,15 @@
                         </ng-template>
                       </td>
                       <td> 
-                        {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                        {{ item.professionalDetails.userDetails[0].lastName}}
+                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
+                        {{ item.professionalDetails.userDetails[0]?.lastName}}
                       </td>
                       <td>
                         <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
                           S/R
                         </ng-container>
                         <ng-template #info3>
-                          {{ item.administrativeDetails.waitingRoomDetails.name}}
+                          {{ item.administrativeDetails.waitingRoomDetails[0].name}}
                         </ng-template>
                       </td>
                       <td>
@@ -449,21 +449,9 @@
                                   </button>
                                 </a>
                               </ng-container>
-                              <ng-container *ngIf="
-                                  item.administrativeDetails.status === 'running' ||
-                                  item.administrativeDetails.status === 'active' ||
-                                  item.administrativeDetails.status === 'pending'
-                                ">
-                                <a *ngIf="item.patientDetails.userDetails[0]"
-                                  routerLink="crear-ficha-consulta/{{ item._id }}">
-                                  <button ngbDropdownItem type="button">
-                                    {{ 'clinicalFile.attend.label' | transloco }}
-                                  </button>
-                                </a>
-                              </ng-container>
 
-                              <div *ngIf="item.canUse">
-                                <button *ngxPermissionsOnly="['Update:Appointment']" ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
+                              <div >
+                                <button  ngbDropdownItem type="button" (click)=openModalReagendamiento(item)
                                   data-toggle="modal" data-target="#modalReAgendamiento">
                                     {{ 'clinicalFile.reschedule.label' | transloco }}
                                 </button>
@@ -591,13 +579,12 @@
               <th scope="row">
                 {{ 'videoChat.modalEnd.patient.label' | transloco }}
               </th>
-              <th>Hora agendada</th>
+              <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
               <!--horario inicio atencion-->
-              <th>Horario inicio atención</th>
-              <th>Tiempo de atención</th>
-              <th>Profesional de salud</th>
+              <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
+              <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
               <th>
-                Sala de espera
+                {{'tables.consultas.SalaEspera' | transloco }}
               </th>
              
               <th>{{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}</th>
@@ -617,7 +604,7 @@
                   <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
                 </ng-template>
                 <td>
-                  {{ item.dateDetails.start}}
+                  {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
                   <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
                 </td>
                 <td>
@@ -636,17 +623,9 @@
                     {{ item.attentionTime }}
                   </ng-template>
                 </td>
-                <td> 
-                  {{ item.professionalDetails.userDetails[0].name}} {{ item.professionalDetails.userDetails[0].secondLastName}} 
-                  {{ item.professionalDetails.userDetails[0].lastName}}
-                </td>
                 <td>
-                  <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
-                    S/R
-                  </ng-container>
-                  <ng-template #info3>
-                    {{ item.administrativeDetails.waitingRoomDetails.name}}
-                  </ng-template>
+                 
+                  {{ item.administrativeDetails.waitingRoomDetails[0]?.name}}
                 </td>
                 <td>
                   <button type="button" class="btn btn-secondary rounded-pill btn-sm">
@@ -696,9 +675,7 @@
                           </a>
                         </ng-container>
                         <ng-container *ngIf="
-                            item.administrativeDetails.status === 'running' ||
-                            item.administrativeDetails.status === 'active' ||
-                            item.administrativeDetails.status === 'pending'
+                            item.administrativeDetails.status === 'created'
                           ">
                           <a *ngIf="item.patientDetails.userDetails[0]"
                             routerLink="crear-ficha-consulta/{{ item._id }}">
@@ -1096,6 +1073,32 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" type="line-scale" size="default" color="#fff">
 
 </ngx-spinner>-->
+</div>
+
+
+<!-- Modal aviso cita cancelada -->
+<div class="modal fade" id="avisoCancelado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1 d-none">
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"  routerLink="/app-professional">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <h5>{{'tables.consultas.cancelado' | transloco}}</h5>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+          routerLink="/app-professional">
+          {{ 'clinicalFile.close.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>

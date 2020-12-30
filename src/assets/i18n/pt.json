@@ -1,4 +1,15 @@
 { 
+  "tables": {
+    "consultas":{
+      "paciente":"paciente",
+      "HoraAgendada":"Horário marcado",
+      "HoraEspera":"Tempo limite",
+      "TiempoAtencion":"Hora de atenção",
+      "ProfesionalSalud":"Profissional de saúde",
+      "SalaEspera":"Sala de espera",
+      "cancelado":" Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local."
+    }
+  },
   "titularidad": {
     "title":"Titularidade",
     "titular":"Titular ",

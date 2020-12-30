@@ -4,6 +4,11 @@ import { IndexComponent } from './components/index/index.component';
 import { ConsultasRoutingModule } from './consultas-routing.module';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table'  
+
+
 
 @NgModule({
   declarations: [IndexComponent],
@@ -11,10 +16,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ConsultasRoutingModule,
     TranslocoRootModule,
-    SharedModule
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
   ],
   exports : [
-    SharedModule
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
   ]
 })
 
