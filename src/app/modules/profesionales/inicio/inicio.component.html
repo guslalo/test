@@ -640,6 +640,8 @@
                         ? 'clinicalFile.active.label'
                         : item.administrativeDetails.status === 'waitingInRoom'
                         ? 'clinicalFile.inWaitingRoom.label'
+                        : item.administrativeDetails.status === 'created'
+                        ? 'clinicalFile.created.label'
                         : item.administrativeDetails.status === 'waitingInList'
                         ? 'clinicalFile.inWaitingList.label'
                         : item.administrativeDetails.status === 'running'
@@ -711,12 +713,12 @@
 
           </div><!-- /consultas inmediatas-->
 
-            
-       
+          
         </div>
       </div>
     </div>
   </div>
+  
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

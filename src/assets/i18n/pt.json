@@ -442,6 +442,9 @@
     "inWaitingRoom": {
       "label": "Na sala de espera"
     },
+    "created": {
+      "label": "criada"
+    },
     "inWaitingList": {
       "label": "Lista de espera"
     },
