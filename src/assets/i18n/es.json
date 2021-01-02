@@ -7,7 +7,8 @@
       "TiempoAtencion":"Tiempo de atención",
       "ProfesionalSalud":"Profesional de salud",
       "SalaEspera":"Sala de espera",
-      "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador."
+      "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador.",
+      "cancelado1": "Se le ha asignado otro profesional. En los proximos minutos sera atendido."
     }
   },
   "titularidad": {
@@ -2320,6 +2321,9 @@
         },
         "workMutuality": {
           "label": "Mutualidad a la que esta afiliado"
+        },
+        "quitAsignation": {
+          "label": "Quitar asignacion"
         }
       }
     }

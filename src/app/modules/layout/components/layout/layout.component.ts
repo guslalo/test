@@ -147,13 +147,13 @@ setTimeout(()=>{
     this.webNotfications.requestPermission()
     this.webNotfications.receiveMessage()
     this.message = this.webNotfications.currentMessage;
-    setInterval(() => {
-      this.webNotfications.getNotifications().subscribe((data) => {
-        let notsArray: Array<any> = data;
-        this.nots = notsArray;
-        this.nots = this.nots.slice();
-      }, (error) => console.log(error))
-    }, 10000)
+    // setInterval(() => {
+    //   this.webNotfications.getNotifications().subscribe((data) => {
+    //     let notsArray: Array<any> = data;
+    //     this.nots = notsArray;
+    //     this.nots = this.nots.slice();
+    //   }, (error) => console.log(error))
+    // }, 10000)
   }
   sideBar() {
     this.state = this.state === 'open' ? 'closed' : 'open';

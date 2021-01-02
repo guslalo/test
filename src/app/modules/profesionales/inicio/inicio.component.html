@@ -676,9 +676,7 @@
                             </button>
                           </a>
                         </ng-container>
-                        <ng-container *ngIf="
-                            item.administrativeDetails.status === 'created'
-                          ">
+                        <ng-container>
                           <a *ngIf="item.patientDetails.userDetails[0]"
                             routerLink="crear-ficha-consulta/{{ item._id }}">
                             <button ngbDropdownItem type="button">
@@ -1100,6 +1098,8 @@
     </div>
   </div>
 </div>
+
+
 
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>
 <modal-cancel-appointment [modalConfig] #modalCancelAppointment></modal-cancel-appointment>
