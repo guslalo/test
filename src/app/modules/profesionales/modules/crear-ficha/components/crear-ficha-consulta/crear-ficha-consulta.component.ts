@@ -1436,7 +1436,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         
-        if(data.payload.administrativeDetails.status == 'canceled'){
+        if(data.payload.administrativeDetails.status == 'canceled' || data.payload.professionalDetails.userDetails.length <= 0){
           this.router.navigate(['/app-professional/cita-cancelada']);
         }
 

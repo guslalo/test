@@ -167,6 +167,35 @@ export class IndexComponent implements OnInit {
     );
   }
 
+  getAppointmentsDetailsRefresh(id) {
+
+    console.log('getAppointmentsDetailsRefresh')
+
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      (data) => {
+        console.log(data);
+        if(this.appointmentDetail.administrativeDetails.status == 'running' && data.payload.professionalDetails.userDetails.length <= 0){
+          this.router.navigate(['/app-paciente/cita-cancelada']);
+        }
+
+        this.appointmentDetail = data.payload;
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        if (data.payload.administrativeDetails.waitingRoomId === null) {
+          this.salaEspera = false;
+          this.getAppointmentsProfessionalData(id);
+        } else {
+          this.salaEspera = true;
+        };
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+
+        console.log(this.appointmentDetail);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getMedicalRecord(id) {
     this.medicalRecord.getByUserId(id).subscribe(
       (data) => {
