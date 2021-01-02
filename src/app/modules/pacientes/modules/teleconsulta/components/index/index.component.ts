@@ -174,8 +174,9 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         console.log(data);
-        if(this.appointmentDetail.administrativeDetails.status == 'running' && data.payload.professionalDetails.userDetails.length <= 0){
-          this.router.navigate(['/app-paciente/cita-cancelada']);
+        console.log(this.appointmentDetail.administrativeDetails.status);
+        if(this.appointmentDetail.administrativeDetails.status != 'waitingInList' && data.payload.administrativeDetails.status == 'waitingInList'){
+          $('#avisoCancelado').modal('show');
         }
 
         this.appointmentDetail = data.payload;
