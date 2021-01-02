@@ -1367,7 +1367,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.permisoGuardar = false;
         }
 
-        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList') {
+        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList' || this.appointmentDetail.administrativeDetails.status == 'created') {
           this.attendPatient(id, (data) => {
             // this.appointmentDetail.administrativeDetails.status = 'running'
             this.getSession(id);
