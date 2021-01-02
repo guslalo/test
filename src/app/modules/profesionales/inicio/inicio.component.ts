@@ -57,6 +57,8 @@ export class InicioPComponent implements OnInit {
 
     if(this.router.url == '/app-professional/cita-cancelada'){
       $('#avisoCancelado').modal('show');
+    }else if(this.router.url == '/app-professional/asignacion-quitada'){
+      $('#avisoCancelado').modal('show');
     }
 
     if (environment.production === false) {

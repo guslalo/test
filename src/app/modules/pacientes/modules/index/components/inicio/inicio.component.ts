@@ -6,6 +6,8 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { NgxSpinnerService } from 'ngx-spinner';
 import { error } from 'protractor';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
+declare var $:any;
 
 @Component({
   selector: 'app-inicio',
@@ -31,12 +33,16 @@ export class InicioComponent implements OnInit {
   constructor(
     public currentUserService: CurrentUserService,
     public homeService: HomeService,
+    private router: Router,
     public appointmentsService: AppointmentsService,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
     console.log('PACIENTE')
+    if(this.router.url == '/app-paciente/cita-cancelada'){
+      $('#avisoCancelado').modal('show');
+    }
     this.appointment = true;
     this.getAppointments();
     this.page = 1;

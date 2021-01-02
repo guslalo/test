@@ -178,6 +178,12 @@
                               </button>
                             </div>
 
+                            <div *ngIf="item.administrativeDetails.isImmediate"><!--*ngIf="item.canUse" *ngxPermissionsOnly="['Cancel:Appointment']"-->
+                              <button   ngbDropdownItem type="button" (click)="quitAsignation(item)">
+                                {{ 'dashboard.home.uncategorized.quitAsignation.label' | transloco }}
+                              </button>
+                            </div>
+
                           </div>
                         </div>
                       </ng-container>
