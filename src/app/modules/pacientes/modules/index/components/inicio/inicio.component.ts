@@ -40,9 +40,6 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('PACIENTE')
-    if(this.router.url == '/app-paciente/cita-cancelada'){
-      $('#avisoCancelado').modal('show');
-    }
     this.appointment = true;
     this.getAppointments();
     this.page = 1;

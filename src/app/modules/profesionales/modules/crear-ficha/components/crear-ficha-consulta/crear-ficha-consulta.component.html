@@ -180,6 +180,8 @@
                         ? 'clinicalFile.scheduled.label'
                         : appointmentDetail.administrativeDetails.status === 'rescheduled'
                         ? 'clinicalFile.reScheduled.label'
+                        : appointmentDetail.administrativeDetails.status === 'created'
+                        ? 'clinicalFile.created.label'
                         : appointmentDetail.administrativeDetails.status === 'active'
                         ? 'clinicalFile.active.label'
                         : appointmentDetail.administrativeDetails.status === 'waitingInRoom'
