@@ -181,7 +181,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.interval = setInterval(() => {
         this.getAppointmentsDetailsRefresh(this.appointmentId);
        }, 10000);
-    }, 0);
+    }, 10000);
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
       this.clearId();
@@ -1436,7 +1436,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         
-        if(data.payload.administrativeDetails.status == 'canceled' || data.payload.professionalDetails.userDetails.length <= 0){
+        if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
           this.router.navigate(['/app-professional/cita-cancelada']);
         }
 
