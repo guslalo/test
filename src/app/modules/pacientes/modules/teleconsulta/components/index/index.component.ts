@@ -33,7 +33,9 @@ export class IndexComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public userId: any;
+  public appointmentId: string;
   public idCancel: any;
+  public interval: any;
   //private router: Router
 
   constructor(
@@ -48,6 +50,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
+      this.appointmentId = id;
       console.log(params);
       this.getAppointmentsDetails(params.appointmentId);
     });
@@ -69,6 +72,11 @@ export class IndexComponent implements OnInit {
     this.getFecha();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+       }, 10000);
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -174,8 +182,7 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
         console.log(data);
-        console.log(this.appointmentDetail.administrativeDetails.status);
-        if(this.appointmentDetail.administrativeDetails.status != 'waitingInList' && data.payload.administrativeDetails.status == 'waitingInList'){
+        if(this.appointmentDetail.professionalDetails.userDetails[0].username && !data.payload.professionalDetails.userDetails[0].username ){
           $('#avisoCancelado').modal('show');
         }
 
