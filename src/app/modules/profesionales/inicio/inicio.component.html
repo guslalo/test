@@ -723,7 +723,7 @@
                     {{ 'videoChat.modalEnd.patient.label' | transloco }}
                   </th>
                   <th>{{'tables.consultas.HoraAgendada' | transloco}}</th>
-                  <!--horario inicio atencion-->
+                  <!--horario inicio atencion
                   <th>{{'tables.consultas.HoraEspera' | transloco}}</th>
                   <th>{{'tables.consultas.TiempoAtencion' | transloco}}</th>
                   <th>
@@ -737,7 +737,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of immediateAppointments" id="{{ item._id }}">
+                <tr *ngFor="let itexm of immediateAppointments" id="{{ item._id }}">
                   <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                       {{ item.patientDetails.userDetails[0].personalData.name }}
@@ -748,7 +748,7 @@
                     </ng-template>
                     <td>
                       {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
-                      <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
+                      <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}
                     </td>
                     <td>
                       <ng-container *ngIf="item.startTime == null; else info1">
