@@ -150,7 +150,7 @@
               <div class="col-6">
                 <div class="card-body text-center mt-3">
                   <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
-                  <button *ngIf="appointmentDetail.administrativeDetails.status === 'active'"
+                  <button *ngIf="appointmentDetail.administrativeDetails.status === 'active' || appointmentDetail.administrativeDetails.status === 'created'"
                     class="btn btn-outline-primary btn-sm rounded-pill d-inline-block mr-2"
                     (click)="runAppointment(appointmentDetail._id, 'run')">
                     {{ 'clinicalFile.start.label' | transloco }}
@@ -180,6 +180,8 @@
                         ? 'clinicalFile.scheduled.label'
                         : appointmentDetail.administrativeDetails.status === 'rescheduled'
                         ? 'clinicalFile.reScheduled.label'
+                        : appointmentDetail.administrativeDetails.status === 'created'
+                        ? 'clinicalFile.created.label'
                         : appointmentDetail.administrativeDetails.status === 'active'
                         ? 'clinicalFile.active.label'
                         : appointmentDetail.administrativeDetails.status === 'waitingInRoom'
@@ -2322,4 +2324,3 @@
 
 <modal-recemed-prescription #modalCreatePrescriptionRecemed (saved)="refreshData()"></modal-recemed-prescription>
 <modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
-<modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>

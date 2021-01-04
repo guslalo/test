@@ -118,6 +118,17 @@ export class IndexComponent implements OnInit {
     this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
   }
 
+  quitAsignation(item){
+    this.appointmentsService.postQuitAsignation(item._id).subscribe(
+      (data)=>{
+        this.getAppointmentsForTypes()
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+
   /*
   setAppointmentCancelReasons(row){
     this.appointmentsEvents.setAppointmentCancelReasons$.emit(row)

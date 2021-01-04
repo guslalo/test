@@ -44,6 +44,7 @@ export class AppointmentsService {
   private listAppointmentTypes = 'v1/appointments/lists/';
 
   private listForCoordinator = 'v1/appointments/coordinator/list/'
+  private quit = 'v1/appointments/quit-asignation'
 
   public appointmentStatus = {
     RESERVED: 'reserved',
@@ -192,6 +193,12 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
     return this.http.post<any>(environment.baseUrl + this.appointments + '/reschedule', object, { params: params });
+  }
+
+  postQuitAsignation(id): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.quit, {}, { params: params })
   }
 
   //reagendar 
