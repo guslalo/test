@@ -6,7 +6,8 @@ import { PerfilCLComponent } from 'src/app/shared/modules/mi-perfil-cl/mi-perfil
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
+    loadChildren: () => import('./modules/consultas/consultas.module').then((m) => m.ConsultasModule),
+    //loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
   },
   {
     path: 'historial-consultas',
