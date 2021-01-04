@@ -1437,7 +1437,19 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(data);
         
         if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
-          this.router.navigate(['/app-professional/cita-cancelada']);
+          if(data.payload.administrativeDetails.status == 'canceled'){
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'cancel'
+              }
+            });
+          }else{
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'quit'
+              }
+            });
+          }
         }
 
         this.appointmentDetail = data.payload;
