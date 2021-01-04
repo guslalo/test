@@ -689,7 +689,34 @@
             <div class="line bg-white">{{ fecha.year }}</div>
             <div class="line">
               <button class="btn btn-secondary rounded-lg">
-                {{ fecha.month }}
+                {{
+                  (fecha.month === 'enero'
+                    ? 'year.january.label'
+                    : fecha.month === 'febrero'
+                    ? 'year.february.label'
+                    : fecha.month === 'marzo'
+                    ? 'year.march.label'
+                    : fecha.month === 'abril'
+                    ? 'year.april.label'
+                    : fecha.month === 'mayo'
+                    ? 'year.may.label'
+                    : fecha.month === 'junio'
+                    ? 'year.june.label'
+                    : fecha.month === 'julio'
+                    ? 'year.july.label'
+                    : fecha.month === 'agosto'
+                    ? 'year.august.label'
+                    : fecha.month === 'septiembre'
+                    ? 'year.september.label'
+                    : fecha.month === 'octubre'
+                    ? 'year.october.label'
+                    : fecha.month === 'noviembre'
+                    ? 'year.november.label'
+                    : fecha.month === 'diciembre'
+                    ? 'year.december.label'
+                    : null
+                  ) | transloco
+                }}
               </button>
             </div>
             <ng-container *ngFor="let item of timeline">
@@ -705,8 +732,31 @@
                     </svg>
                   </div>
                   <div class="col-5 text-left p-0">
-                    <button class="btn btn-primary dos rounded-lg">
-                      {{ item.status }}
+                    <button class="btn btn-primary dos rounded-lg ">
+                      {{
+                        (item.status === 'reserved'
+                          ? 'clinicalFile.reserved.label'
+                          : item.status === 'appointed'
+                          ? 'clinicalFile.scheduled.label'
+                          : item.status === 'rescheduled'
+                          ? 'clinicalFile.reScheduled.label'
+                          : item.status === 'active'
+                          ? 'clinicalFile.active.label'
+                          : item.status === 'waitingInRoom'
+                          ? 'clinicalFile.inWaitingRoom.label'
+                          : item.status === 'waitingInList'
+                          ? 'clinicalFile.inWaitingList.label'
+                          : item.status === 'running'
+                          ? 'common.status.inProgress.label'
+                          : item.status === 'pending'
+                          ? 'clinicalFile.pending.label'
+                          : item.status === 'finished'
+                          ? 'clinicalFile.ended.label'
+                          : item.status === 'canceled'
+                          ? 'clinicalFile.canceled.label'
+                          : null
+                        ) | transloco
+                      }}
                     </button>
                   </div>
                 </div>
@@ -737,7 +787,7 @@
                               {{ item.professional.name }}
                               {{ item.professional.secondLastName }}
                             </p>
-                            <div class="btn btn-primary btn-sm rounded-pill float-left">
+                            <div class="btn btn-primary btn-sm rounded-pill float-left d-none">
                               <ng-container *ngIf="item.isActive; else inactivo">
                                 {{ 'common.status.active.label' | transloco }}
                               </ng-container>

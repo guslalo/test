@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentEventsService } from '../../../services/appointment-events.service'
 import { ModalConfig } from './cancel.interface'
+declare var $:any;
 
 @Component({
   selector: 'modal-cancel-appointment',
@@ -37,6 +38,16 @@ export class CancelAppointmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.appointmentForm = this.formBuilder.group({
+      cancel: [''],
+    });
+
+
+    $('#modalCancelAppointment').on('hidden.bs.modal', function () {
+      this.appointmentForm.controls.cancel =' asd'
+    })
+
+    
     console.log('modal cancel appointment')
     let _user = JSON.parse(localStorage.getItem('currentUser'))
 
@@ -101,6 +112,7 @@ export class CancelAppointmentComponent implements OnInit {
   }
 
   cancelAppointment(){
+   
     let appointmentObject = {
       administrativeDetails: {
         cancellationReason: this.appointmentForm.getRawValue().cancel,
@@ -111,6 +123,7 @@ export class CancelAppointmentComponent implements OnInit {
     this.appointmentsService.putAppointment(this.appointment._id, appointmentObject).subscribe(
       (data) => {
         this.appointmentsEvents.listAppointments$.emit()
+      
       },
       (error) => {
         console.log(error);
