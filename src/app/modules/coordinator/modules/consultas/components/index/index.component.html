@@ -178,7 +178,7 @@
                               </button>
                             </div>
 
-                            <div *ngIf="item.administrativeDetails.isImmediate"><!--*ngIf="item.canUse" *ngxPermissionsOnly="['Cancel:Appointment']"-->
+                            <div *ngIf="item.administrativeDetails.isImmediate == true"><!--*ngIf="item.canUse" *ngxPermissionsOnly="['Cancel:Appointment']"-->
                               <button   ngbDropdownItem type="button" (click)="quitAsignation(item)">
                                 {{ 'dashboard.home.uncategorized.quitAsignation.label' | transloco }}
                               </button>
@@ -326,6 +326,11 @@
                               <button *ngxPermissionsOnly="['Cancel:Appointment']" ngbDropdownItem type="button" (click)="setAppointmentCancelReasons(item)"
                                 data-toggle="modal" data-target="#modalCancelAppointment">
                                 {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
+                              </button>
+                            </div>
+                            <div *ngIf="item.administrativeDetails.isImmediate == true"><!--*ngIf="item.canUse" *ngxPermissionsOnly="['Cancel:Appointment']"-->
+                              <button   ngbDropdownItem type="button" (click)="quitAsignation(item)">
+                                {{ 'dashboard.home.uncategorized.quitAsignation.label' | transloco }}
                               </button>
                             </div>
 
