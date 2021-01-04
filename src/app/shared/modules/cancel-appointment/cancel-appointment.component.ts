@@ -38,14 +38,9 @@ export class CancelAppointmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.appointmentForm = this.formBuilder.group({
-      cancel: [''],
-    });
+  
 
-
-    $('#modalCancelAppointment').on('hidden.bs.modal', function () {
-      this.appointmentForm.controls.cancel =' asd'
-    })
+   
 
     
     console.log('modal cancel appointment')
@@ -67,6 +62,8 @@ export class CancelAppointmentComponent implements OnInit {
       this.appointment = appointment
       this.buildSelectCancels(appointment.administrativeDetails.status)
     })
+
+
   }
 
   getCancelReasons(){
@@ -123,7 +120,7 @@ export class CancelAppointmentComponent implements OnInit {
     this.appointmentsService.putAppointment(this.appointment._id, appointmentObject).subscribe(
       (data) => {
         this.appointmentsEvents.listAppointments$.emit()
-      
+        this.appointmentForm.get('cancel').setValue('null');
       },
       (error) => {
         console.log(error);

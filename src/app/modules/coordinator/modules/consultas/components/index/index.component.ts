@@ -69,19 +69,25 @@ export class IndexComponent implements OnInit {
   
   filterTable(event) {
     console.log(event)
-    var input, filter, table, tr, td, i, txtValue;
+    var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById(event);
     filter = input.value.toUpperCase();
     table = document.getElementById(event + 'Table');
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[0];
+      td1 = tr[i].getElementsByTagName("td")[4];
       if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+        } 
+        else {
+          if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
         }
       }
     }
