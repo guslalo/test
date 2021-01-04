@@ -206,7 +206,7 @@
                       <!--/professionals details-->
                     </div>
                   </div>
-                  <div *ngIf ="brand !== 'medline'" class="col-6">
+                  <div class="col-6">
                     <p class="valor text-right">
                       {{ 'waitingRoom.serviceFee.label' | transloco }}: {{ item.appointmentPrice }}
                     </p>
@@ -543,7 +543,7 @@
                   }}
                 </p>
                 <p class="m-0">
-                  {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
+                  {{ reserve.dateDetails.date.day }}-{{ reserve.dateDetails.date.month }}-{{
                     reserve.dateDetails.date.year
                   }}
                   | {{ reserve.dateDetails.start }}
