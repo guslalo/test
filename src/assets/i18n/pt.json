@@ -9,7 +9,8 @@
       "SalaEspera":"Sala de espera",
       "cancelado":" Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local.",
       "cancelado1": "Outro profissional foi designado para você. Nos próximos minutos você será atendido.",
-      "cancelado2": "Sua consulta foi cancelada. Qualquer dúvida, entre em contato com o suporte."
+      "cancelado2": "Sua consulta foi cancelada. Qualquer dúvida, entre em contato com o suporte.",
+      "cancelado3": "Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local."
     }
   },
   "titularidad": {

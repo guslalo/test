@@ -9,7 +9,8 @@
       "SalaEspera":"Sala de espera",
       "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador.",
       "cancelado1": "Se le ha asignado otro profesional. En los proximos minutos sera atendido.",
-      "cancelado2": "Su cita ha sido cancelada. Si tiene alguna pregunta, comuníquese con el soporte."
+      "cancelado2": "Su cita ha sido cancelada. Si tiene alguna pregunta, comuníquese con el soporte.",
+      "cancelado3": "Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador."
     }
   },
   "titularidad": {

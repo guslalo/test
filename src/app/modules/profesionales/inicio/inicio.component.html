@@ -1008,6 +1008,31 @@
   </div>
 </div>
 
+<!-- Modal aviso cita quitada -->
+<div class="modal fade" id="avisoQuitado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1 d-none">
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"  routerLink="/app-professional">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <h5>{{'tables.consultas.cancelado3' | transloco}}</h5>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+          routerLink="/app-professional">
+          {{ 'clinicalFile.close.label' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <modal-reagendamiento [modalConfig] #modalReAgendamiento></modal-reagendamiento>
