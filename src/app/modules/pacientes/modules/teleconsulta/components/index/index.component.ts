@@ -185,7 +185,8 @@ export class IndexComponent implements OnInit {
         if(this.appointmentDetail.professionalDetails.userDetails[0].username && !data.payload.professionalDetails.userDetails[0].username ){
           $('#avisoCancelado').modal('show');
         }else if(data.payload.administrativeDetails.status == 'canceled'){
-          this.router.navigate(['cita-cancelada'], {
+          clearInterval(this.interval);
+          this.router.navigate(['app-paciente'], {
             queryParams:{ cancel: true }
           })
         }
