@@ -55,11 +55,11 @@ export class InicioPComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.router.url == '/app-professional/cita-cancelada'){
-      $('#avisoCancelado').modal('show');
-    }else if(this.router.url == '/app-professional/asignacion-quitada'){
-      $('#avisoCancelado').modal('show');
-    }
+    this.route.queryParams.subscribe(params => {
+      if(!params['motive']) return;
+      if(params['motive']=='cancel') $('#avisoCancelado').modal('show');
+      if(params['motive']=='quit') $('#avisoQuitado').modal('show');
+    })
 
     if (environment.production === false) {
       this.isProduction = false;
