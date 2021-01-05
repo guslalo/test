@@ -13,6 +13,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -33,7 +34,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxDatatableModule,
     MatAutocompleteModule,
     TranslocoRootModule,
-    NgxPermissionsModule
+    NgxPermissionsModule,
   ],
 })
 export class DisponibilidadModule { }

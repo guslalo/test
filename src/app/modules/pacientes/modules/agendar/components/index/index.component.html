@@ -537,13 +537,13 @@
               </div>
 
               <div class="box boxSeparador pl-3">
-                <p class="m-0 valor">
+                <p *ngIf="brand!=='medline'" class="m-0 valor">
                   {{ 'waitingRoom.serviceFee.label' | transloco }}: ${{
                     reserve.professionalDetails.specialtyDetails.price
                   }}
                 </p>
                 <p class="m-0">
-                  {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
+                  {{ reserve.dateDetails.date.day }}-{{ reserve.dateDetails.date.month }}-{{
                     reserve.dateDetails.date.year
                   }}
                   | {{ reserve.dateDetails.start }}

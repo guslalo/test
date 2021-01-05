@@ -56,7 +56,7 @@ export class FichaPacienteComponent implements OnInit {
   public nameFile: any;
   public textInputFile: any;
   patientAge: any;
-
+  public fecha: any;
   public arrayDocuments: any;
   public descargar: boolean;
   public appointmentId: any;
@@ -87,6 +87,20 @@ export class FichaPacienteComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
+
+    this.getFecha();
+    
+  }
+
+  getFecha() {
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month,
+    };
   }
 
     //getVerifiedSibrareDocuments

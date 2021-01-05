@@ -33,7 +33,9 @@ export class IndexComponent implements OnInit {
   public antecedentesGeneral: any;
   public exams: any;
   public userId: any;
+  public appointmentId: string;
   public idCancel: any;
+  public interval: any;
   //private router: Router
 
   constructor(
@@ -48,6 +50,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
+      this.appointmentId = id;
       console.log(params);
       this.getAppointmentsDetails(params.appointmentId);
     });
@@ -69,6 +72,11 @@ export class IndexComponent implements OnInit {
     this.getFecha();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+       }, 10000);
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -159,6 +167,40 @@ export class IndexComponent implements OnInit {
         //console.log(this.appointmentDetail.professionalDetails.userDetails[0].userId)
         //this.getAppointmentsProfessionalData(this.appointmentDetail.professionalDetails.userDetails[0].userId);
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+        console.log(this.appointmentDetail);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAppointmentsDetailsRefresh(id) {
+
+    console.log('getAppointmentsDetailsRefresh')
+
+    this.appointmentsService.getAppointmentsDetails(id).subscribe(
+      (data) => {
+        console.log(data);
+        if(this.appointmentDetail.professionalDetails.userDetails[0].username && !data.payload.professionalDetails.userDetails[0].username ){
+          $('#avisoCancelado').modal('show');
+        }else if(data.payload.administrativeDetails.status == 'canceled'){
+          clearInterval(this.interval);
+          this.router.navigate(['app-paciente'], {
+            queryParams:{ cancel: true }
+          })
+        }
+
+        this.appointmentDetail = data.payload;
+        this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
+        if (data.payload.administrativeDetails.waitingRoomId === null) {
+          this.salaEspera = false;
+          this.getAppointmentsProfessionalData(id);
+        } else {
+          this.salaEspera = true;
+        };
+        this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
+
         console.log(this.appointmentDetail);
       },
       (error) => {

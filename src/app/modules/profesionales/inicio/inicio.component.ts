@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 import { RescheduleAppointmentComponent } from 'src/app/shared/modules/reschedule-appointment/reschedule-appointment.component';
 import { environment } from 'src/environments/environment';
+declare var $:any;
 
 @Component({
   selector: 'app-inicio',
@@ -33,6 +34,7 @@ export class InicioPComponent implements OnInit {
   public nextAppointments = []
   public openAppointments = []
   public immediateAppointments = []
+  public interval:any;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -52,6 +54,13 @@ export class InicioPComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      if(!params['motive']) return;
+      if(params['motive']=='cancel') $('#avisoCancelado').modal('show');
+      if(params['motive']=='quit') $('#avisoQuitado').modal('show');
+    })
+
     if (environment.production === false) {
       this.isProduction = false;
     } else {
@@ -67,7 +76,21 @@ export class InicioPComponent implements OnInit {
       this.getAppointments()
     })
     this.setup = environment.setup
+
     this.getAppointmentsForTypes();
+    
+    setTimeout(() => {
+       this.interval = setInterval(() => {
+        this.getAppointmentsForTypes();
+       }, 10000);
+    }, 0);
+
+    this.router.events.subscribe(value => {
+      
+      clearInterval(this.interval);
+      //console.log(value);
+    });
+
   }
 
   ngAfterViewInit() {
@@ -127,7 +150,6 @@ export class InicioPComponent implements OnInit {
     );
   }
 
-
   getAppointmentsForTypes() {
     this.appointmentsService.getAppointmentsForTypes().subscribe(
       (data) => {
@@ -139,6 +161,7 @@ export class InicioPComponent implements OnInit {
         this.nextAppointments = data.payload.nextAppointments
 
         console.log( this.nextAppointments)
+
       },
       (error) => {
         console.log(error);

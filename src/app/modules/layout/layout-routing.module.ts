@@ -52,6 +52,11 @@ const routes: Routes = [
         loadChildren: () => import('../profesionales/profesionales.module').then((m) => m.ProfesionalesModule),
         canActivate: [ProfesionalGuard]
       },
+      {
+        path: 'cita-cancelada',
+        loadChildren: () => import('../profesionales/profesionales.module').then((m) => m.ProfesionalesModule),
+        canActivate: [ProfesionalGuard]
+      },
       { path: 'change-password', component: ChangePassComponent, canActivate: [GuardsGuard] }
     ],
   },

@@ -136,9 +136,9 @@ export class RescheduleAppointmentComponent implements OnInit {
     let _time = this.appointmentForm.getRawValue().start
     let _objetiveId = this.appointmentForm.getRawValue().objective
 
-    let objetive = this.objetives.filter((e) => {
+    let objective = this.objetives.filter((e) => {
       return e._id.includes(_objetiveId)
-    })[0].name
+    })[0]._id
 
     this.appointmentsService
     .reScheduleAppointment(
@@ -147,7 +147,7 @@ export class RescheduleAppointmentComponent implements OnInit {
       this.specialtyId, // condicionar
       this.professionalId, // condicionar
       this.appointment._id,
-      objetive
+      objective
     ).subscribe((data) => {
       console.log(data)
       this.appointmentEvents.listAppointments$.emit()
@@ -160,8 +160,8 @@ export class RescheduleAppointmentComponent implements OnInit {
       start: [null, Validators.required],
       objective: ['', Validators.required],
 
-      professional: ['', Validators.required],
-      patient: ['', Validators.required],
+      professional: [''],
+      patient: [''],
     });
   }
 

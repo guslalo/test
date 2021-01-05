@@ -6,6 +6,8 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { NgxSpinnerService } from 'ngx-spinner';
 import { error } from 'protractor';
 import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
+declare var $:any;
 
 @Component({
   selector: 'app-inicio',
@@ -31,11 +33,18 @@ export class InicioComponent implements OnInit {
   constructor(
     public currentUserService: CurrentUserService,
     public homeService: HomeService,
+    private router: ActivatedRoute,
     public appointmentsService: AppointmentsService,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.router.queryParams.subscribe(params => {
+      const cancel = params['cancel'];
+      if(cancel){
+        $('#avisoCancelado1').modal('show');
+      }
+    });
     console.log('PACIENTE')
     this.appointment = true;
     this.getAppointments();

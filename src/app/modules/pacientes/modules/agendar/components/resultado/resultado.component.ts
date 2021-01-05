@@ -11,12 +11,12 @@ export class ResultadoComponent implements OnInit {
   public reserva: any;
   appointmentId: any;
   public appointment: any;
+  public brand: string
 
   constructor(private route: ActivatedRoute, private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
     this.initCall();
-
     /*this.appointmentId = localStorage.getItem('appointmentIdAgenda');
     console.log(this.appointmentId);
 

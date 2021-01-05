@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,11 @@ const states = ['test', 'test3', 'test4'];
   styleUrls: ['./historial-consultas.component.scss'],
 })
 export class HistorialConsultasComponent implements OnInit {
+  @HostListener('click', ['$event.target']) 
+  onClick(e) {
+    this.appointmentsEvents.enableCheckDatesEnableButtons(this.consultas)
+  }
+  
   public model: any;
   public consultas: any;
   model2: NgbDateStruct;
@@ -50,6 +55,15 @@ export class HistorialConsultasComponent implements OnInit {
     let _userId = _user.id
     this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
     this.appointmentsEvents.buildForm$.emit(_user.role)
+  }
+
+  openModalReagendamiento(item) {
+    this.appointmentsEvents.setAppointmentReagendamiento$.emit(item)
+    this.appointmentsEvents.getProfessionalBlocks$.emit(item)
+  }
+
+  setAppointmentCancelReasons(status){
+    this.appointmentsEvents.setAppointmentCancelReasons$.emit(status)
   }
 
   getFecha() {

@@ -111,6 +111,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public objetives: any;
   public notifiableDiseases = [];
   public notifiableDiseases2 = { };
+  public interval:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -137,6 +138,10 @@ export class CrearFichaConsultaComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+   
+
+
     this.objectDiagnostic = {
       _id: null,
       isGES: null,
@@ -171,6 +176,12 @@ export class CrearFichaConsultaComponent implements OnInit {
       this.getAntecedentByProfessional(this.appointmentId);
       this.getDestinies();
     });
+
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+       }, 10000);
+    }, 10000);
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
       this.clearId();
@@ -1356,7 +1367,7 @@ export class CrearFichaConsultaComponent implements OnInit {
           this.permisoGuardar = false;
         }
 
-        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList') {
+        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList' || this.appointmentDetail.administrativeDetails.status == 'created') {
           this.attendPatient(id, (data) => {
             // this.appointmentDetail.administrativeDetails.status = 'running'
             this.getSession(id);
@@ -1423,6 +1434,25 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+        console.log(data);
+        
+        if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
+          clearInterval(this.interval)
+          if(data.payload.administrativeDetails.status == 'canceled'){
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'cancel'
+              }
+            });
+          }else{
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'quit'
+              }
+            });
+          }
+        }
+
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;

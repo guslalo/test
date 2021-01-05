@@ -58,7 +58,7 @@ export class ChooseContextComponent implements OnInit {
       }
     }
     localStorage.setItem('contextRole', JSON.stringify(this.arrayAdministrativeData));
-    this._policyService.setPoliciesToUser();
+    //this._policyService.setPoliciesToUser();
 
     if (localStorage.getItem('firstAccessMultirole') === 'true') {
       this.getRouteForClinicAndRole(clinicId, role);
@@ -72,6 +72,7 @@ export class ChooseContextComponent implements OnInit {
             localStorage.setItem('token', JSON.stringify(data.access_token));
             this.getRouteForClinicAndRole(clinicId, role);
           }
+          this._policyService.setPoliciesToUser()
         },
         (error) => {
           console.log(error);
@@ -124,7 +125,19 @@ export class ChooseContextComponent implements OnInit {
         }
       );
     }else{
-      this.router.navigate(['app-paciente']);
+      this.clinicService.accessMode().subscribe(
+        (data) => {
+          console.log(data)
+          localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+          localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+          localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+          console.log(data);
+          this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 

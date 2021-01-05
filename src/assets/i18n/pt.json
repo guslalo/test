@@ -1,4 +1,18 @@
 { 
+  "tables": {
+    "consultas":{
+      "paciente":"paciente",
+      "HoraAgendada":"Horário marcado",
+      "HoraEspera":"Tempo limite",
+      "TiempoAtencion":"Hora de atenção",
+      "ProfesionalSalud":"Profissional de saúde",
+      "SalaEspera":"Sala de espera",
+      "cancelado":" Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local.",
+      "cancelado1": "Outro profissional foi designado para você. Nos próximos minutos você será atendido.",
+      "cancelado2": "Sua consulta foi cancelada. Qualquer dúvida, entre em contato com o suporte.",
+      "cancelado3": "Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local."
+    }
+  },
   "titularidad": {
     "title":"Titularidade",
     "titular":"Titular ",
@@ -430,6 +444,9 @@
     },
     "inWaitingRoom": {
       "label": "Na sala de espera"
+    },
+    "created": {
+      "label": "criada"
     },
     "inWaitingList": {
       "label": "Lista de espera"
@@ -1103,7 +1120,53 @@
           },
           "tab": {
             "nextServices": {
-              "title": "Próxima consulta agendada",
+              "title": "Próxima consultas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "openAppointments": {
+              "title": "Atendimentos ativos",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "nextAppointments": {
+              "title": "Atendimentos imediatos",
               "table": {
                 "patients": {
                   "label": "Pacientes"
@@ -2260,6 +2323,9 @@
         },
         "workMutuality": {
           "label": "Mutualidad a la que esta afiliado"
+        },
+        "quitAsignation": {
+          "label": "Quitar asignacion"
         }
       }
     }

@@ -43,6 +43,9 @@ export class AppointmentsService {
 
   private listAppointmentTypes = 'v1/appointments/lists/';
 
+  private listForCoordinator = 'v1/appointments/coordinator/list/'
+  private quit = 'v1/appointments/quit-asignation'
+
   public appointmentStatus = {
     RESERVED: 'reserved',
     APPOINTED: 'appointed',
@@ -90,6 +93,12 @@ export class AppointmentsService {
 
   }
 
+  getAllAppointmentsForCoordinator(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
+    return this.http.get<any>(environment.baseUrl + this.listForCoordinator, { params: params } );
+  }
+
   //trae todas las citas por tipos
   getAppointmentsForTypes(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.listAppointmentTypes );
@@ -98,7 +107,7 @@ export class AppointmentsService {
   getAllAppointments(number): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', number);
-    return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
   }
 
   getAllAppointmentsWaitinRooms(): Observable<any> {
@@ -184,6 +193,12 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
     return this.http.post<any>(environment.baseUrl + this.appointments + '/reschedule', object, { params: params });
+  }
+
+  postQuitAsignation(id): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.quit, {}, { params: params })
   }
 
   //reagendar 
@@ -381,7 +396,7 @@ export class AppointmentsService {
 
      let object = {
        appointmentDetails: {
-         objetive: objetive
+         objective: objetive
        },
        professionalDetails: {
          specialtyId: SpecialtiesId,

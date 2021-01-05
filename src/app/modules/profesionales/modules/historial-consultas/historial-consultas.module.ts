@@ -8,6 +8,7 @@ import {
   NgbTypeaheadModule,
   NgbPaginationModule,
   NgbTimepickerModule,
+  NgbDropdownModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -20,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgbTypeaheadModule,
     NgbPaginationModule,
     NgbTimepickerModule,
+    NgbDropdownModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
