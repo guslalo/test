@@ -328,8 +328,8 @@
                         [placement]="placement"
                         class="form-control"
                         id="birthdate"
-                        [maxDate]="maxDate"
                         [minDate]="{ year: 1900, month: 1, day: 1 }"
+                        [maxDate]="{ day: maxDate.day, month: maxDate.month, year: maxDate.year}"
                         placeholder="DD/MM/YYYY"
                         name="birthdate"
                         ngbDatepicker
