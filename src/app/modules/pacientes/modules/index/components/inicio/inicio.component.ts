@@ -42,7 +42,7 @@ export class InicioComponent implements OnInit {
     this.router.queryParams.subscribe(params => {
       const cancel = params['cancel'];
       if(cancel){
-        $('#avisoCancelado').modal('show');
+        $('#avisoCancelado1').modal('show');
       }
     });
     console.log('PACIENTE')
