@@ -1260,7 +1260,7 @@
                   <tbody>
                     <tr *ngFor="let item of exams">
                       <th scope="row">{{ item.name }}</th>
-                      <td>{{ item.type }}</td>
+                      <td> {{ item.type === 'exam' ? 'Examen' : item.type === 'document' ? 'Documento' : 'S/R' }}</td>
                       <td>{{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}</td>
                       <td>{{ item.issuerDetails[0].name }} {{ item.issuerDetails[0].secondLastName }}</td>
                       <td>
