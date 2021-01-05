@@ -27,7 +27,6 @@ export class CrearPerfilComponent implements OnInit {
   constructor(private adminService: AdminService, private location: Location) {}
 
   ngOnInit(): void {
-    // console.log(this.profile);
     this.profile.role = 'admin';
     this.formProfile = new FormGroup({
       profileName: new FormControl(null, { validators: Validators.required }),
@@ -40,7 +39,6 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   checkAll(policies) {
-    // console.log(policies);
     switch (policies) {
       case 'users':
         if (this.checkAllUserPolicies) this.profile.userPolicies = _.mapValues(this.profile.userPolicies, () => true);
@@ -100,10 +98,8 @@ export class CrearPerfilComponent implements OnInit {
 
   crearPerfil() {
     this.profile.isActive = true;
-    // console.log(this.profile);
     if (this.profile.profileName !== null || this.profile.profileName !== '') {
       this.adminService.createProfile(this.profile).subscribe(() => {
-        // console.log(response);
         this.location.back();
       });
     } else {
