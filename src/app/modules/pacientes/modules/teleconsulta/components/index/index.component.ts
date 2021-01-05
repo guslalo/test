@@ -184,6 +184,10 @@ export class IndexComponent implements OnInit {
         console.log(data);
         if(this.appointmentDetail.professionalDetails.userDetails[0].username && !data.payload.professionalDetails.userDetails[0].username ){
           $('#avisoCancelado').modal('show');
+        }else if(data.payload.administrativeDetails.status == 'canceled'){
+          this.router.navigate(['cita-cancelada'], {
+            queryParams:{ cancel: true }
+          })
         }
 
         this.appointmentDetail = data.payload;
