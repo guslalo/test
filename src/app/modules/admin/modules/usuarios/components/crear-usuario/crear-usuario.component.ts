@@ -123,9 +123,10 @@ export class CrearUsuarioComponent implements OnInit {
     this.mayorEdad = false
     this.maxDate = {
       year: current.getFullYear(),
-      month: current.getMonth(),
+      month: current.getMonth() + 1,
       day: current.getDate(),
     };
+
   } else {
     this.mayorEdad = true
     this.maxDate = {
