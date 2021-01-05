@@ -160,7 +160,7 @@ pipelines:
             AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
             APPLICATION_NAME: itms-frontend-homeclinic
             ENVIRONMENT_NAME: Iitms-frontend-homeclinic
-            ZIP_FILE: "itms-frontend-homeclinic.zip"
+            ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: 'elasticbeanstalk-homeclinic'
             WAIT: 'true'
     atryschile:
