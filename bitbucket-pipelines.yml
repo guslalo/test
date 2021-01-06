@@ -136,6 +136,33 @@ pipelines:
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
             WAIT: 'true'
+    homeclinic:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-homeclinic
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Home Clinic"
+        deployment: medline
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            APPLICATION_NAME: itms-frontend-homeclinic
+            ENVIRONMENT_NAME: Itms-HomeClinic
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-homeclinic'
+            WAIT: 'true'
     atryschile:
     - step:
         caches:

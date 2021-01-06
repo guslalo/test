@@ -289,6 +289,7 @@
                     <div class="input-group dateregister">
                       <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" 
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
+                        [maxDate]="maxDate"
                         [startDate]="setDate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate"
                         (click)="d.toggle()" />
                       <div class="input-group-append">

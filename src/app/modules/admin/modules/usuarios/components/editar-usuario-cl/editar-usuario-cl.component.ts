@@ -12,6 +12,7 @@ import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { months } from 'moment';
 import { validate } from 'rut.js';
+import { environment } from './../../../../../../../environments/environment';
 
 const current = new Date();
 
@@ -114,6 +115,23 @@ export class EditarUsuarioCLComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(environment.checkAge === false){
+
+      this.maxDate = {
+        year: current.getFullYear(),
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+  
+    } else {
+    
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
     this.spinner.show();
 
     this.getUser(this.userType, this.userId);

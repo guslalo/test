@@ -22,7 +22,7 @@ export const environment = {
   },
   ttlSession: 60,
   setup: 'BR',
-  version: '{BUILD_VERSION}-staging',
+  version: '{BUILD_VERSION}-homeclinic',
   brand: "medic",
   colors: {
     "color-primary": "#25b0bb;",

@@ -36,7 +36,18 @@ export class CreateAccountCLComponent implements OnInit {
     private userService: UsersService,
     private spinner: NgxSpinnerService,
     private clinicService: ClinicService
-  ) {}
+  ) {
+    /*
+    if (environment.checkAge === false) { 
+      const current = new Date();
+      this.maxDate = {
+        year: current.getFullYear() -18,
+        month: current.getMonth(),
+        day: current.getDate(),
+      };
+
+    }*/
+  }
   public userRegister: registerUser;
   public placement = 'bottom';
   public cpfvalid: boolean = true;
@@ -93,6 +104,7 @@ export class CreateAccountCLComponent implements OnInit {
   onClick(index: number): void {
     // this.selectedIndex = index;
   }
+  
 
   ngOnInit(): void {
     this.brand = environment.brand;
@@ -102,10 +114,10 @@ export class CreateAccountCLComponent implements OnInit {
     this.politicas();
     const current = new Date();
     this.minDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
+      year: current.getFullYear() -1,
+      month: current.getMonth() - 1,
       day: current.getDate(),
-    };
+    };/**/
 
     if (environment.checkAge === false) {
       this.mayorEdad = false;
@@ -132,11 +144,15 @@ export class CreateAccountCLComponent implements OnInit {
           validators: this.confirmEmail.bind(this),
         }
       );
+
       this.maxDate = {
         year: current.getFullYear(),
-        month: current.getMonth(),
+        month: current.getMonth() + 1,
         day: current.getDate(),
       };
+
+
+
     } else {
       this.mayorEdad = true;
       this.personalData = this._formBuilder.group(
@@ -167,6 +183,7 @@ export class CreateAccountCLComponent implements OnInit {
         month: current.getMonth() + 1,
         day: current.getDate(),
       };
+      console.log('mayor de edad')
     }
 
     this.identificationData = this._formBuilder.group({

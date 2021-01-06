@@ -176,7 +176,7 @@
                   <div class="form-group col-md-3">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
-                      <input type="text" [placement]="'bottom'"  class="form-control" id="birthdate" [maxDate]="maxDate"
+                      <input type="text" [placement]="'bottom'"  class="form-control" id="birthdate"   [maxDate]="maxDate"
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
                         [startDate]="setDate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate"
                         (click)="d.toggle()" />

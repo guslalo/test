@@ -120,11 +120,11 @@ export class CreateAccountComponent implements OnInit {
             validators: this.confirmEmail.bind(this),
           }
         );
-      this.maxDate = {
-        year: current.getFullYear(),
-        month: current.getMonth(),
-        day: current.getDate(),
-      };
+        this.maxDate = {
+          year: current.getFullYear(),
+          month: current.getMonth() + 1,
+          day: current.getDate(),
+        };
     } else {
       this.mayorEdad = true
       this.personalData = this._formBuilder.group(

@@ -1123,11 +1123,11 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: this.addExamen.controls.type.value,
       file: this.base64.split(',')[1],
     };
-    this.putAddExamen(formObject, this.userId);
+    this.putAddExamen(formObject, this.userId );
   }
 
   putAddExamen(object, id: string) {
-    this.medicalRecordService.putAddExamen(object, id).subscribe(
+    this.medicalRecordService.putAddExamen(object, id, this.appointmentId).subscribe(
       (data) => {
         console.log(data);
         this.getAppointmentsDetailsRefresh(this.appointmentId);
@@ -1437,6 +1437,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(data);
         
         if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
+          clearInterval(this.interval)
           if(data.payload.administrativeDetails.status == 'canceled'){
             this.router.navigate(['/app-professional'], {
               queryParams: {
