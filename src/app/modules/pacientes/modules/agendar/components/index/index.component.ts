@@ -82,6 +82,7 @@ export class IndexComponent implements OnInit {
   public inputFilesFormGroup: FormGroup;
   public multiDocs: FormGroup;
   public downloadUrl: any;
+  public setUp: string;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -101,6 +102,7 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setUp = environment.setup;
     //condicion para flujo reagendar
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
@@ -193,15 +195,30 @@ export class IndexComponent implements OnInit {
   }
 
   private display(user): string {
-    return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
+    if(this.setUp == 'CL'){
+      return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
+    }else {
+      return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
+    }
+    
   }
 
   filterAutocompleteProfessionals(search: string) {
-    return this.tempProfessionals.filter(
-      (value) =>
-        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
-        value.personalData.secondLastName.toLowerCase().indexOf(search.toLowerCase()) === 0
-    );
+    if(this.setUp == 'CL'){
+      return this.tempProfessionals.filter(
+        (value) =>
+          value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+          value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+      );
+    }else {
+      return this.tempProfessionals.filter(
+        (value) =>
+          value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+          value.personalData.secondLastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+      );
+    }
+    
+  
   }
 
   onChangeTypeSpecialtiesId(value) {

@@ -101,10 +101,10 @@
                         d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                     </svg>
                     {{ nextAppointed[0].patientDetails.userDetails[0].personalData.name }}
-                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
+                    {{ setup == 'CL' ? nextAppointed[0].patientDetails.userDetails[0].personalData.lastName :  nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
                   </td>
                   <td class="d-none" *ngIf="nextAppointed[0].patientDetails.userDetails.lenght > 0">
-                    {{ nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
+                    {{ setup == 'CL' ? nextAppointed[0].patientDetails.userDetails[0].personalData.lastName : nextAppointed[0].patientDetails.userDetails[0].personalData.secondLastName }}
                   </td>
                   <td>
                     <a *ngIf="nextAppointed[0].patientDetails.userDetails[0]"
@@ -212,7 +212,7 @@
                     <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                       <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                         {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                        {{ setup == 'CL' ? item.patientDetails.userDetails[0].personalData.lastName : item.patientDetails.userDetails[0].personalData.secondLastName }}
                       </td>
                       <ng-template #sinInfo>
                         <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -238,8 +238,8 @@
                         </ng-template>
                       </td>
                       <td> 
-                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
-                        {{ item.professionalDetails.userDetails[0]?.lastName}}
+                        {{ item.professionalDetails.userDetails[0]?.name}} 
+                        {{ setup == 'CL' ? item.professionalDetails.userDetails[0]?.lastName : item.professionalDetails.userDetails[0]?.secondLastName}}
                       </td>
                       <td>
                         <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">
@@ -365,7 +365,7 @@
                     <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                       <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                         {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                        {{ setup == 'CL' ? item.patientDetails.userDetails[0].personalData.lastName : item.patientDetails.userDetails[0].personalData.secondLastName }}
                       </td>
                       <ng-template #sinInfo>
                         <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -391,8 +391,8 @@
                         </ng-template>
                       </td>
                       <td> 
-                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
-                        {{ item.professionalDetails.userDetails[0]?.lastName}}
+                        {{ item.professionalDetails.userDetails[0]?.name}}
+                        {{ setup == 'CL' ? item.professionalDetails.userDetails[0]?.lastName : item.professionalDetails.userDetails[0]?.secondLastName}}
                       </td>
                       <td>
                         <ng-container *ngIf="item.administrativeDetails.waitingRoomDetails.length == 0; else info3">

@@ -152,7 +152,7 @@
                   <img src="assets/perfil.png" />
                 </div>
                 <h4 class="text-center mt-2">
-                  {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
+                  {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
                   <br />
                  
                 </h4>
@@ -495,7 +495,7 @@
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
-                      (row.patientDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.patientDetails.userDetails[0].lastName : row.patientDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -505,7 +505,7 @@
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
-                      (row.professionalDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.professionalDetails.userDetails[0].lastName : row.professionalDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -1169,7 +1169,7 @@
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
-                                    {{ item.professional?.secondLastName }}
+                                    {{ setup == 'CL' ? item.professional?.lastName : item.professional?.secondLastName }}
                                   </p>
                                 </div>
                               </div>

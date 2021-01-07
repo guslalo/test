@@ -7,6 +7,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { error } from 'protractor';
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { env } from 'process';
+import { environment } from 'src/environments/environment';
 declare var $:any;
 
 @Component({
@@ -29,6 +31,7 @@ export class InicioComponent implements OnInit {
   public page: number = 1;
   public totalPages: number;
   public idCancel: any;
+  public setUp: string;
 
   constructor(
     public currentUserService: CurrentUserService,
@@ -39,6 +42,7 @@ export class InicioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setUp = environment.setup;
     this.router.queryParams.subscribe(params => {
       const cancel = params['cancel'];
       if(cancel){

@@ -5,6 +5,7 @@ import { NgbDateStruct, NgbCalendar, NgbDateParserFormatter, NgbTimepicker } fro
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AppointmentEventsService } from './../../../../../../services/appointment-events.service';
+import { environment } from 'src/environments/environment';
 
 const states = ['test', 'test3', 'test4'];
 
@@ -26,6 +27,7 @@ export class HistorialConsultasComponent implements OnInit {
   public fecha: any;
   public page: number = 1;
   public totalPages: number;
+  public setup: string;
 
   constructor(private appointmentsService: AppointmentsService, private appointmentsEvents: AppointmentEventsService) { }
 
@@ -39,6 +41,7 @@ export class HistorialConsultasComponent implements OnInit {
     );
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.page = 1;
     this.getAppointments();
     this.getFecha();
