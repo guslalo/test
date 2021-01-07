@@ -79,7 +79,7 @@
                   <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                       {{ item.patientDetails.userDetails[0].personalData.name }}
-                      {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ setup == 'CL' ? item.patientDetails.userDetails[0]?.lastName : item.patientDetails.userDetails[0]?.secondLastName }}
                     </td>
                     <ng-template #sinInfo>
                       <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -109,8 +109,8 @@
                         S/R
                       </ng-container>
                       <ng-template #professionalDetailsData>
-                        {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
-                        {{ item.professionalDetails.userDetails[0]?.lastName}}
+                        {{ item.professionalDetails.userDetails[0]?.name}} 
+                        {{ setup == 'CL' ? item.professionlDetails.userDetails[0]?.lastName : item.professionlDetails.userDetails[0]?.secondLastName }}
                       </ng-template>
                     </td>
                     <td>
@@ -228,7 +228,8 @@
                   <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                       {{ item.patientDetails.userDetails[0].personalData.name }}
-                      {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ setup == 'CL' ? item.patientDetails.userDetails[0]?.lastName : item.patientDetails.userDetails[0]?.secondLastName }}
+                      
                     </td>
                     <ng-template #sinInfo>
                       <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -254,8 +255,8 @@
                       </ng-template>
                     </td>
                     <td> 
-                      {{ item.professionalDetails.userDetails[0]?.name}} {{ item.professionalDetails.userDetails[0]?.secondLastName}} 
-                      {{ item.professionalDetails.userDetails[0]?.lastName}}
+                      {{ item.professionalDetails.userDetails[0]?.name}} 
+                      {{ setup == 'CL' ? item.professionlDetails.userDetails[0]?.lastName : item.professionlDetails.userDetails[0]?.secondLastName }}
                     </td>
                     <td>
                       <!-- 

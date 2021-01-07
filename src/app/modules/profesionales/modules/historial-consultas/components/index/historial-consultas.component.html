@@ -125,7 +125,7 @@
                       </ng-template>
                       <td scope="row" *ngIf="item.patientDetails.userDetails[0]; else sinInfo">
                         {{ item.patientDetails.userDetails[0].personalData.name }}
-                        {{ item.patientDetails.userDetails[0].personalData.secondLastName }}
+                        {{ setup =='CL' ? item.patientDetails.userDetails[0].personalData.lastName : item.patientDetails.userDetails[0].personalData.secondLastName }}
                       </td>
                       <ng-template #sinInfo>
                         <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -332,7 +332,7 @@
                                 <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                 <p class="m-0 text-left">
                                   {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional.name }}
-                                  {{ item.professional.secondLastName }}
+                                  {{ setup == 'CL' ? item.professional.lastName : item.professional.secondLastName }}
                                 </p>
 
                                 <!--

@@ -59,6 +59,7 @@ export class FichaPacienteComponent implements OnInit {
   public descargar: boolean;
   public appointmentId: any;
   public urlSibrare: any;
+  public setup: string;
 
   constructor(
     private routerAct: ActivatedRoute,
@@ -73,6 +74,7 @@ export class FichaPacienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.routerAct.params.subscribe((params) => {
       //const id = params.id
       this.id = params.id;

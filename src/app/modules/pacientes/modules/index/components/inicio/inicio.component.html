@@ -81,10 +81,10 @@
                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                       </svg>
                       {{ nextAppointed[0]?.patientDetails.userDetails[0].personalData.name }}
-                      {{ nextAppointed[0]?.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ setUp == 'CL' ? nextAppointed[0]?.patientDetails.userDetails[0].personalData.lastName : nextAppointed[0]?.patientDetails.userDetails[0].personalData.secondLastName }}
                     </td>
                     <td class="d-none" *ngIf="nextAppointed[0]?.patientDetails.userDetails.lenght > 0">
-                      {{ nextAppointed[0].patientDetails.userDetails[0]?.personalData.secondLastName }}
+                      {{ setUp == 'CL' ? nextAppointed[0].patientDetails.userDetails[0]?.personalData.lastName : nextAppointed[0].patientDetails.userDetails[0]?.personalData.secondLastName }}
                     </td>
                     <td>
                       <a *ngIf="nextAppointed[0]?.patientDetails.userDetails[0]"
@@ -160,7 +160,7 @@
                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                       </svg>
                       {{ item.professionalDetails.userDetails[0]?.name }}
-                      {{ item.professionalDetails.userDetails[0]?.secondLastName }}
+                      {{ setUp == 'CL' ? item.professionalDetails.userDetails[0]?.lastName : item.professionalDetails.userDetails[0]?.secondLastName }}
                       <!--{{item.professionalDetails.userDetails[0].name}} {{item.professionalDetails.userDetails[0].lastName}}-->
                     </td>
 

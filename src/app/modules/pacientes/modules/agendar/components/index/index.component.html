@@ -108,7 +108,7 @@
                 (optionSelected)="escogerProfessional($event.option.value)"
               >
                 <mat-option *ngFor="let item of professionals" [value]="item">
-                  {{ item.personalData?.name + ' ' + item.personalData?.lastName }}
+                  {{ item.personalData?.name + ' ' + (setUp=='CL' ? item.personalData?.lastName : item.personalData?.secondLastName)  }}
                 </mat-option>
               </mat-autocomplete>
               <div class="searchBox">
@@ -528,7 +528,7 @@
               <div class="box mr-3">
                 <p class="m-0 font-weight-bold">
                   {{ blocks[0].professionalDetails.userDetails[0].name }}
-                  {{ blocks[0].professionalDetails.userDetails[0].secondLastName }}
+                  {{ setUp == 'CL' ? blocks[0].professionalDetails.userDetails[0].lastName : blocks[0].professionalDetails.userDetails[0].secondLastName }}
                 </p>
                 <p class="m-0">
                   {{ 'disponibility.modal.create.specialty.label' | transloco }}
