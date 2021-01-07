@@ -201,7 +201,7 @@
               </div>
             </div>
             <div class="col-8">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="bg-white rounded-lg p-4 shadow-sm mb-4" *ngIf="setup != 'CL'">
                 <h4 class="title mb-3">
                   {{ 'account.createAccount.birthData.label' | transloco }}
                 </h4>
@@ -354,7 +354,7 @@
                   <li>
                     <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
-                      patientRecord.addressData?.neighborhood +
+                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood) +
                         ', ' +
                         patientRecord.addressData?.street +
                         ' #' +
