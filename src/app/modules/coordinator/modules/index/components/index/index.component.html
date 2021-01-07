@@ -106,7 +106,7 @@
                     </ng-template>
                     <p class="p-0 mt-2 ml-2 d-inline-block align-top">
                       {{ row.patientDetails.userDetails[0].personalData.name }}  
-                      {{ row.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ setup == 'CL' ? row.patientDetails.userDetails[0].personalData.lastName : row.patientDetails.userDetails[0].personalData.secondLastName }}
                     </p>
                   </ng-template>
                 </ngx-datatable-column>
@@ -152,7 +152,7 @@
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row.professionalDetails.userDetails[0]?.name }}
-                    {{ row.professionalDetails.userDetails[0]?.secondLastName }}
+                    {{ setup == 'CL' ? row.professionalDetails.userDetails[0]?.lastName : row.professionalDetails.userDetails[0]?.secondLastName }}
                   </ng-template>
                 </ngx-datatable-column>
 
@@ -282,7 +282,7 @@
                     </div>
                     <p class="p-0 mt-2 ml-2 d-inline-block align-top">
                       {{ row.patientDetails.userDetails[0].personalData.name }}
-                      {{ row.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ setup == 'CL' ? row.patientDetails.userDetails[0]?.lastName : row.patientDetails.userDetails[0]?.secondLastName }}
                     </p>
                   </ng-template>
                 </ngx-datatable-column>
@@ -325,7 +325,7 @@
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <ng-template *ngIf="row.professionalDetails.userDetails.length; else noProfessional">
                       {{ row.professionalDetails.userDetails[0]?.name }}
-                      {{ row.professionalDetails.userDetails[0]?.secondLastName }}
+                      {{ setup == 'CL' ? row.professionalDetails.userDetails[0]?.lastName : row.professionalDetails.userDetails[0]?.secondLastName }}
                     </ng-template>
                     <ng-template #noProfessional>
                       {{ 'common.noInfo.label' | transloco }}

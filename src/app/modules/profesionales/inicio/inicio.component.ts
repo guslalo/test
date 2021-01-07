@@ -55,6 +55,7 @@ export class InicioPComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.route.queryParams.subscribe(params => {
       if(!params['motive']) return;
       if(params['motive']=='cancel') $('#avisoCancelado').modal('show');

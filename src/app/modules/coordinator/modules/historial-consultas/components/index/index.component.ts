@@ -41,6 +41,7 @@ export class IndexComponent implements OnInit {
   public tempProfessionals = [];
   public blocks = [];
   public specialties = [];
+  public setup: string;
 
   public objetives: any;
 
@@ -86,6 +87,7 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.getAppointments();
 
     this.appointmentEvents.updateAppointments$.subscribe(() => {
