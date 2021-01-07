@@ -32,6 +32,7 @@ export class IndexComponent implements OnInit {
   public access_token: any;
   public downloadUrl: any;
   public setup:any;
+  public price:number;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -80,9 +81,10 @@ export class IndexComponent implements OnInit {
           }).then((res) => {
             this.router.navigate(['/app-paciente']);
           })
-        }1
+        }
         this.appointmentId = data.payload._id;
         this.consolidate.id = data.payload._id;
+        this.price = data.payload.paymentDetails.price;
       },
       (error) => {
         console.log(error);
