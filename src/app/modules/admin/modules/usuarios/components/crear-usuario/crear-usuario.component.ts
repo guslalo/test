@@ -167,6 +167,7 @@ export class CrearUsuarioComponent implements OnInit {
       titularidadCpf: ['', null],
       titularidadName: ['', null]  
     });
+    
 
     //titularForm
       this.titularForm.valueChanges.subscribe((x) => {
@@ -181,7 +182,9 @@ export class CrearUsuarioComponent implements OnInit {
             this.isTutor = false;
           }
         }
-      );  
+      );
+
+      
 
 
     this.personalData = this.formBuilder.group({
@@ -208,6 +211,13 @@ export class CrearUsuarioComponent implements OnInit {
       street: ['', Validators.required],
       complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
+    });
+    this.personalData.controls['birthdate'].valueChanges.subscribe((value) => {
+      const date = this.dateAdapter.toModel(value);
+      if(this.getIfAdult(date) && this.titularForm.get("titularDependiente").value == "dependiente"){
+        console.log("lo cambia")
+        this.personalData.get("email").setValue("");
+      }
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -329,11 +339,13 @@ export class CrearUsuarioComponent implements OnInit {
   getforCpf(cpf) {
     //console.log(cpf)
     this.loarderTutor = true;
-
     this.userService.getForCpf(cpf).subscribe((data) => {
       console.log(data);
+  
       this.titular  = data.payload
       this.titularForm.get('titularidadName').setValue(this.titular.fullName, {emitEvent: false});
+      this.personalData.get('email').setValue(this.titular.email)
+      
       this.loarderTutor = false;
     },
       error => {
@@ -345,7 +357,6 @@ export class CrearUsuarioComponent implements OnInit {
    
   
   }
-
 
   validCPF(cpf: string){
     this.cpfvalid = this.validateCPF(cpf);
@@ -1126,6 +1137,14 @@ export class CrearUsuarioComponent implements OnInit {
 
   removeRegistry(index) {
     this.professionalRegistry.splice(index, 1);
+  }
+  getIfAdult(birthdate: string): boolean{
+    let birthday_arr = birthdate.split("/");
+    let birthday_date = new Date( parseInt(birthday_arr[2]),(parseInt(birthday_arr[1]) - 1, parseInt(birthday_arr[0])) );
+    let ageDifMs = Date.now() - birthday_date.getTime();
+    let ageDate = new Date(ageDifMs);
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    return age > 16
   }
 }
 

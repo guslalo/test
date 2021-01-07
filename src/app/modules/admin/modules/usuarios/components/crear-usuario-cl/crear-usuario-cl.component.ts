@@ -578,6 +578,7 @@ export class CrearUsuarioComponentCL implements OnInit {
           isForeign: this.isForeign,
         },
         personalData: {
+          isTutor: true,
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,

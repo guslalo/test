@@ -171,7 +171,7 @@ export class CrearFichaConsultaComponent implements OnInit {
       if (this.setup != 'BR') {
         //this.setAppointmentsDetails(id);
       }
-
+      this.setAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
       this.getDestinies();
@@ -271,7 +271,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
         if (environment.production === false) {
-          //console.log(data);
+          console.log(data);
         }
       },
       (error) => {
@@ -1323,6 +1323,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     )
   }
 
+  
+
   getAppointmentsDetails(id) {
 
     console.log('getAppointmentsDetails', id)
@@ -1330,6 +1332,8 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
 
+
+        
         console.log('getAppointmentsDetails => DATA', data)
 
         this.appointmentEvents.setAppointmentReagendamiento$.emit(data.payload)
