@@ -798,10 +798,9 @@
                 <!-- <div>
                   <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
                   {{ professionalData.professionalData.ufRegistry.name }}
-
                   <hr />
                 </div> -->
-                <div>
+                <div *ngIf="setup == 'BR'">
                   <p class="title font-weight-bold">
                     {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
                   </p>
