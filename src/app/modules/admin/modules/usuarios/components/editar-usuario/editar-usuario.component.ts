@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { months } from 'moment';
+import { environment } from './../../../../../../../environments/environment';
 
 const current = new Date();
 
@@ -73,11 +74,7 @@ export class EditarUsuarioComponent implements OnInit {
     year: current.getFullYear()
   };
 
-  maxDate = {
-    day: current.getDate(),
-    month: current.getMonth() + 1,
-    year: current.getFullYear() - 18
-  };
+
 
   dateAdapter = new CustomDateAdapter();
   birthDate: NgbDateStruct;
@@ -101,6 +98,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   professionalRegistry: any = [];
   professionalRegistrySend: any = [];
+  maxDate = undefined;
   
 
   constructor(
@@ -118,6 +116,24 @@ export class EditarUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.loarderTutor = false;
     this.spinner.show();
+
+    if(environment.checkAge === false){
+
+      this.maxDate = {
+        year: current.getFullYear(),
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+  
+    } else {
+    
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
 
     this.getUser(this.userType, this.userId);
 

@@ -261,7 +261,7 @@
                     <label for="email">{{ 'auth.email.label' | transloco }}*</label>
                     <input type="email" class="form-control" name="email" formControlName="email" [ngClass]="{
                         'is-invalid': !personalData.get('email').valid
-                      }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com" />
+                      }" onkeypress="return event.charCode != 32" placeholder="usuario@mail.com"/>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="phoneNumber">{{ 'account.phone.label' | transloco }}*</label>
@@ -286,7 +286,7 @@
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
                         ngbDatepicker #d="ngbDatepicker" formControlName="birthdate" [ngClass]="{
                           'is-invalid': !personalData.get('birthdate').valid
-                        }" (click)="d.toggle()" />
+                        }" (click)="d.toggle()"/>
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                       </div>
