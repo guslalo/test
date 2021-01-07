@@ -14,6 +14,7 @@ export class ConfirmAccountComponent implements OnInit {
   };
   public errorMsg: string;
   public setup:any;
+  public brand: any;
 
   email_format: string;
 
@@ -21,6 +22,7 @@ export class ConfirmAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.setup = environment.setup
+    this.brand = environment.brand
   }
 
   // todo: crear aviso registro exitoso
