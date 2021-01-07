@@ -36,6 +36,7 @@ export class IndexComponent implements OnInit {
   public appointmentId: string;
   public idCancel: any;
   public interval: any;
+  public setup:any
   //private router: Router
 
   constructor(
@@ -48,6 +49,7 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
       this.appointmentId = id;

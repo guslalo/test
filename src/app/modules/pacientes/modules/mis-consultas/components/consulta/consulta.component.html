@@ -665,7 +665,7 @@
           </ng-container>
           <hr />
         </div>
-        <div>
+        <div *ngIf="setup == 'BR'"> 
           <p class="title font-weight-bold">
             {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
           </p>
