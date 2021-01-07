@@ -13,6 +13,7 @@ const options = {
     'src/environments/environment.dev.ts', 
     'src/environments/environment.staging.ts',
     'src/environments/environment.production.ts',
+    'src/environments/environment.homeclinic.ts',
     'src/environments/environment.chile.ts',
     'src/environments/environment.medline.ts',
     'src/environments/environment.atryschile.ts'],
