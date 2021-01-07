@@ -879,6 +879,17 @@ table {
   }
 }
 
+
+.imgTimeline {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  img {
+    width: 110%;
+    height: 100%;
+  }
+}
+
 .bg-secondary {
   background-color: #DDDDDD !important;
 }
