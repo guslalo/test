@@ -4,7 +4,7 @@
 <div class="contenido p-4">
   <div class="logo mt-1 ">
     <div class="text-left">
-      <div class="logoLogin">
+      <div class="logoLogin d-none d-lg-block"><!--d-lg-block-->
         <img src="assets/img/{{ brand }}/logo-white.svg">
       </div>
     </div>
@@ -15,7 +15,7 @@
     </h1>
     <p>{{ 'auth.login.welcome.label' | transloco }}</p>
   </div>
-  <p class="copyright align-self-end align-items-end">
+  <p class="copyright align-self-end align-items-end d-none d-lg-block">
     {{ 'common.poweredBy.label' | transloco }} <br>
     version: {{ version }}
   </p>
