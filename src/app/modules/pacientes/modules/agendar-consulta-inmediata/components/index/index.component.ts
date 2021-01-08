@@ -84,7 +84,7 @@ export class IndexComponent implements OnInit {
         }
         this.appointmentId = data.payload._id;
         this.consolidate.id = data.payload._id;
-        this.price = data.payload.paymentDetails.price;
+        this.price = data.payload.appointmentPrice;
       },
       (error) => {
         console.log(error);
