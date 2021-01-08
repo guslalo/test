@@ -149,7 +149,7 @@
             <div class="col-4">
               <div class="bg-white rounded-lg p-4 shadow-sm">
                 <div class="img text-center">
-                  <img src="assets/perfil.png" />
+                  <img [src]="patientRecord.personalData" />
                 </div>
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
