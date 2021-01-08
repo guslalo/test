@@ -151,7 +151,7 @@ export class ChooseContextComponent implements OnInit {
       }
     });
 
-    this.user = new UserLogin(
+    const newUser = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
       JSON.parse(localStorage.getItem('currentUser')).name,
@@ -167,7 +167,7 @@ export class ChooseContextComponent implements OnInit {
     );
 
     localStorage.removeItem('currentUser');
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
     //console.log(this.user);
 
     switch (profile.role) {
