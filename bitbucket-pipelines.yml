@@ -197,10 +197,10 @@ pipelines:
         name: "Build"
         script:
           - npm install
-          - npm run build-atryschile
+          - npm run build-medic
           - apt-get update && apt-get install -y
           - apt-get install zip
-          - zip -r itms-frontend-atryschile.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+          - zip -r itms-frontend-medic.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
         artifacts:
           - itms-frontend-medic.zip
     - step:
