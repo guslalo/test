@@ -159,7 +159,7 @@ pipelines:
             AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
             AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
             APPLICATION_NAME: itms-frontend-homeclinic
-            ENVIRONMENT_NAME: Itms-HomeClinic
+            ENVIRONMENT_NAME: itms-frontend-homeclinic
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: 'elasticbeanstalk-homeclinic'
             WAIT: 'true'

@@ -50,17 +50,19 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.setup = environment.setup;
     this.getAppointmentsForTypes();
-
-    setTimeout(() => {
-      this.interval = setInterval(() => {
-        this.getAppointmentsForTypes();
-       }, 7000);
-    }, 0);
-
+    this.intervalFunction();
     this.router.events.subscribe(value => {
       clearInterval(this.interval);
     });
     
+  }
+
+  intervalFunction(){
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsForTypes();
+       }, 10000);
+    }, 0);
   }
 
 
@@ -68,8 +70,12 @@ export class IndexComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  retryTimer(){
+    this.intervalFunction()
+  }
   
   filterTable(event) {
+    //clearInterval(this.interval);
     console.log(event)
     var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById(event);

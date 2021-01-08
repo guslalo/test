@@ -47,8 +47,14 @@
           <div class="tab-pane fade " id="child1" role="tabpanel" aria-labelledby="home-tab"
           [ngClass]="(openAppointments.length >= 1 )?'show active':'my-class2'">
 
-          <input type="text" id="searchopenAppointment" (keyup)='filterTable($event.target.id)' placeholder="Buscar" style="padding-left:10px;">
-
+          <input type="text" 
+          id="searchopenAppointment" 
+          (keyup)='filterTable($event.target.id)' 
+          placeholder="Buscar" 
+          style="padding-left:10px;"
+          
+          >
+            <!--(mouseout)="retryTimer()"-->
 
 
 
