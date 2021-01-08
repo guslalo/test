@@ -118,15 +118,21 @@ export class EditarUsuarioComponent implements OnInit {
     this.spinner.show();
 
     if(environment.checkAge === false){
-
-      this.maxDate = {
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-      };
-  
-    } else {
     
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+    } else {
       this.maxDate = {
         year: current.getFullYear() - 18,
         month: current.getMonth() + 1,
@@ -134,7 +140,6 @@ export class EditarUsuarioComponent implements OnInit {
       };
     }
   
-
     this.getUser(this.userType, this.userId);
 
     this.clinicId = localStorage.getItem('clinic');

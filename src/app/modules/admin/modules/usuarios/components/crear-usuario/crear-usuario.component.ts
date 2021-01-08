@@ -119,23 +119,30 @@ export class CrearUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.loarderTutor = false;
     
-  if(environment.checkAge === false){
-    this.mayorEdad = false
-    this.maxDate = {
-      year: current.getFullYear(),
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
-
-  } else {
-    this.mayorEdad = true
-    this.maxDate = {
-      year: current.getFullYear() - 18,
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
-  }
-
+    if(environment.checkAge === false){
+      this.mayorEdad = false
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+    } else {
+      this.mayorEdad = true
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
     this.spinner.show();
 
     this.getProfiles();

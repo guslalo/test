@@ -120,6 +120,21 @@ export class CreateAccountCLComponent implements OnInit {
     };/**/
 
     if (environment.checkAge === false) {
+
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+
       this.mayorEdad = false;
       this.personalData = this._formBuilder.group(
         {
@@ -145,11 +160,6 @@ export class CreateAccountCLComponent implements OnInit {
         }
       );
 
-      this.maxDate = {
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-      };
 
 
 
