@@ -16,6 +16,7 @@ export class UsersLogin {
 export class AdministrativeData {
   role: string;
   isActive: boolean;
+  clinicId: string;
 }
 
 // cliente

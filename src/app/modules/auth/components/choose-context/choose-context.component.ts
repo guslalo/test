@@ -90,7 +90,7 @@ export class ChooseContextComponent implements OnInit {
         (data) => {
           //console.log(data);
           localStorage.setItem('token', JSON.stringify(data.access_token));
-          this.user = new UserLogin(
+          const newUser = new UserLogin(
             data.id,
             data.email,
             data.name,
@@ -105,8 +105,8 @@ export class ChooseContextComponent implements OnInit {
             data.photo
           );
           localStorage.setItem('token', JSON.stringify(data.access_token));
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          localStorage.setItem('clinic', this.user.administrativeData[0].clinicId);
+          localStorage.setItem('currentUser', JSON.stringify(newUser));
+          localStorage.setItem('clinic', newUser.administrativeData[0].clinicId);
 
           this.clinicService.accessMode().subscribe(
             (data) => {
