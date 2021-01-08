@@ -75,7 +75,7 @@ export class IndexComponent implements OnInit {
   }
   
   filterTable(event) {
-    //clearInterval(this.interval);
+    clearInterval(this.interval);
     console.log(event)
     var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById(event);
