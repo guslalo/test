@@ -52,9 +52,9 @@
           (keyup)='filterTable($event.target.id)' 
           placeholder="Buscar" 
           style="padding-left:10px;"
-          
+          (focusout)="retryTimer()"
           >
-            <!--(mouseout)="retryTimer()"-->
+            <!-- -->
 
 
 
@@ -116,7 +116,7 @@
                       </ng-container>
                       <ng-template #professionalDetailsData>
                         {{ item.professionalDetails.userDetails[0]?.name}} 
-                        {{ setup == 'CL' ? item.professionlDetails.userDetails[0]?.lastName : item.professionlDetails.userDetails[0]?.secondLastName }}
+                        {{ setup == 'CL' ? item.professionalDetails.userDetails[0]?.lastName : item.professionalDetails.userDetails[0]?.secondLastName }}
                       </ng-template>
                     </td>
                     <td>
