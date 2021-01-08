@@ -23,7 +23,7 @@ export const environment = {
   ttlSession: 20000 * 60,
   setup: 'BR',
   version: '{BUILD_VERSION}',
-  brand: "medic",
+  brand: "medline",
   colors: {
     "color-primary": "#25b0bb;",
     "color-secondary": "#044AAB;",

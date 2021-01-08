@@ -34,6 +34,7 @@ export class IndexComponent implements OnInit {
   emailSent: boolean = false;
 
   patientForm: FormGroup;
+  setup: string;
 
   constructor(
     private patientService: PatientsService,
@@ -43,6 +44,7 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.spinner.show();
     this.patientForm = this.formBuilder.group({
       isTutor: [false],

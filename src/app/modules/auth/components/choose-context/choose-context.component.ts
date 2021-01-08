@@ -21,6 +21,7 @@ export class ChooseContextComponent implements OnInit {
   public user: any = {};
   public arrayAdministrativeData = [];
   public setup:any;
+  public dependents: any[];
 
   constructor(
     private translocoService: TranslocoService,
@@ -46,6 +47,7 @@ export class ChooseContextComponent implements OnInit {
       
     );
     this.user.dependents = JSON.parse(localStorage.getItem('dependents'))
+    this.dependents = this.user.dependents;
   }
 
   chooseContext(clinicId, role) {

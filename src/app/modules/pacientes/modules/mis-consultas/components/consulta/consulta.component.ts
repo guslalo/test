@@ -32,6 +32,7 @@ export class ConsultaComponent implements OnInit {
   public antecedentes: any;
   public userId: any;
   public recemed: any;
+  public setup:any
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +43,7 @@ export class ConsultaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,

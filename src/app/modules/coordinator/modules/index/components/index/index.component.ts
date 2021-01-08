@@ -25,6 +25,7 @@ export class IndexComponent implements OnInit {
   public nextAppointments = []
   public openAppointments = []
   public immediateAppointments = []
+  public setup: string;
 
   ColumnMode = ColumnMode;
   moment: any = moment;
@@ -36,6 +37,7 @@ export class IndexComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getAppointments();
     this.getAppointmentsWaitingRooms();
