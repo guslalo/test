@@ -1163,7 +1163,14 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
