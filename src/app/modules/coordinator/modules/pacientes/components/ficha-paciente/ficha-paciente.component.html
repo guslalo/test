@@ -88,8 +88,14 @@
             <div class="col-4">
               <div class="bg-white rounded-lg p-4 shadow-sm">
                 <div class="img text-center">
-                  <img src="assets/perfil.png" />
-                  <!--   <img src=" {{ patientRecord.personalData?.photo }}" />-->
+                  <div class="img text-center imgUser">
+                    <ng-container *ngIf="patientRecord.personalData.photo != null; else sinFoto1">
+                      <img [src]="patientRecord.personalData.photo" />
+                    </ng-container>
+                    <ng-template #sinFoto1>
+                      <img src="assets/profile.jpg" />
+                    </ng-template>
+                  </div>
                 </div>
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
@@ -987,7 +993,14 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>

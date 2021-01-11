@@ -296,6 +296,19 @@ ul {
   }
 }
 
+.imgUser {
+  width: 100%;
+  max-width: 80%;
+  height:auto;
+  text-align: center;
+  display: inline-block;
+  img {
+    display: inline-block;
+    width: 100%;
+    height:auto;
+  }
+}
+
 .timeline-img {
   background: $color-hover !important;
 }
