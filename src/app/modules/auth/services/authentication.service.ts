@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
+import { IdleEventsService } from '../../../services/idle-events.service'
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -15,7 +16,11 @@ export class AuthenticationService {
   private logoutUrl = '/';
   private httpClient: HttpClient;
 
-  constructor(private http: HttpClient, handler: HttpBackend, private router: Router) {
+  constructor(
+    private http: HttpClient, 
+    handler: HttpBackend, 
+    private router: Router,
+    private idleEventsService: IdleEventsService) {
     this.httpClient = new HttpClient(handler);
   }
 
@@ -54,8 +59,10 @@ export class AuthenticationService {
   }
 
   logout() {
+    console.log('LOGOUT')
     localStorage.clear();
     sessionStorage.clear();
     document.location.href = this.logoutUrl;
+    this.idleEventsService.stopMonitoring()
   }
 }
