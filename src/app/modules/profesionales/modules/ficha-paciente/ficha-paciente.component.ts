@@ -35,6 +35,7 @@ export class FichaPacienteComponent implements OnInit {
   public antecedentes: any;
   public antecedentesGeneral: any;
 
+
   identificationData: any = {};
 
   // EXTRAS

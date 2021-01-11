@@ -1163,7 +1163,14 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
@@ -1187,11 +1194,7 @@
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
-                        <!--
-                        <div class="col-5 text-left p-0">
-                          <h3>24</h3>
-                          12:45 Hrs.
-                        </div>-->
+                   
                       </div>
                     </div>
                   </ng-container>
