@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
+import * as moment from 'moment';
+
 // EXTRAS
 import { AdminService } from '../../../../services/admin.service';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
@@ -66,13 +68,14 @@ export class CrearUsuarioComponentCL implements OnInit {
   profileSelected: any;
   roomSelected: any;
 
+  
   currentDate = {
     year: current.getFullYear(),
-    month: current.getMonth() + 1,
+    month:current.getMonth(),
     day: current.getDate(),
-  };
+  };/**/
 
-
+  
 
 
   dateAdapter = new CustomDateAdapter();
@@ -118,14 +121,24 @@ export class CrearUsuarioComponentCL implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    console.log(current.getMonth())
     if(environment.checkAge === false){
       this.mayorEdad = false
-      this.maxDate = {
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-      };
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+      
+     
   
     } else {
       this.mayorEdad = true

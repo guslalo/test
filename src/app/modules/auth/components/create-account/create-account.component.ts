@@ -101,6 +101,9 @@ export class CreateAccountComponent implements OnInit {
       day: current.getDate(),
     };
 
+   
+  
+
     if(environment.checkAge === false){
       this.mayorEdad = false
         this.personalData = this._formBuilder.group(
@@ -120,11 +123,19 @@ export class CreateAccountComponent implements OnInit {
             validators: this.confirmEmail.bind(this),
           }
         );
-        this.maxDate = {
-          year: current.getFullYear(),
-          month: current.getMonth() + 1,
-          day: current.getDate(),
-        };
+        if(current.getMonth() != 0){
+          this.maxDate = {
+            year: current.getFullYear(),
+            month:current.getMonth() -1, 
+            day: current.getDate() 
+          };   
+        } else {
+          this.maxDate = {
+            year: current.getFullYear() - 1,
+            month:12, 
+            day: current.getDate()  
+          };
+        }
     } else {
       this.mayorEdad = true
       this.personalData = this._formBuilder.group(

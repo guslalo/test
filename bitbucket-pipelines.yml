@@ -151,7 +151,7 @@ pipelines:
           - itms-frontend.zip
     - step:
         name: "Deploy to Home Clinic"
-        deployment: medline
+        deployment: homeclinic
         script:
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
           variables:

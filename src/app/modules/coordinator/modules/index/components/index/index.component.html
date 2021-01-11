@@ -96,8 +96,8 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div *ngIf="row.patientDetails.userDetails[0].photo; else noPhoto" class="boxImg2 rounded-circle d-inline-block">
-                      <img src="{{ photoUrlBase }}{{ row.patientDetails.userDetails[0].photo }}" />
+                    <div *ngIf="row.patientDetails?.userDetails[0].photo; else noPhoto" class="boxImg2 rounded-circle d-inline-block">
+                      <img src="{{ photoUrlBase }}{{ row.patientDetails?.userDetails[0].photo }}" />
                     </div>
                     <ng-template #noPhoto>
                       <div class="boxImg2 rounded-circle d-inline-block">
@@ -105,8 +105,8 @@
                       </div>
                     </ng-template>
                     <p class="p-0 mt-2 ml-2 d-inline-block align-top">
-                      {{ row.patientDetails.userDetails[0].personalData.name }}  
-                      {{ setup == 'CL' ? row.patientDetails.userDetails[0].personalData.lastName : row.patientDetails.userDetails[0].personalData.secondLastName }}
+                      {{ row.patientDetails?.userDetails[0].personalData.name }}  
+                      {{ setup == 'CL' ? row.patientDetails?.userDetails[0].personalData.lastName : row.patientDetails?.userDetails[0].personalData.secondLastName }}
                     </p>
                   </ng-template>
                 </ngx-datatable-column>
@@ -118,7 +118,7 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row.patientDetails.userDetails[0].personalData.phoneNumber }}
+                    {{ row.patientDetails?.userDetails[0].personalData.phoneNumber }}
                   </ng-template>
                 </ngx-datatable-column>
 
@@ -151,8 +151,8 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ row.professionalDetails.userDetails[0]?.name }}
-                    {{ setup == 'CL' ? row.professionalDetails.userDetails[0]?.lastName : row.professionalDetails.userDetails[0]?.secondLastName }}
+                    {{ row.professionalDetails?.userDetails[0]?.name }}
+                    {{ setup == 'CL' ? row.professionalDetails?.userDetails[0]?.lastName : row.professionalDetails?.userDetails[0]?.secondLastName }}
                   </ng-template>
                 </ngx-datatable-column>
 
@@ -277,12 +277,12 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <div *ngIf="row.patientDetails.userDetails[0].photo" class="boxImg2 rounded-circle d-inline-block">
-                      <img src="{{ photoUrlBase }}{{ row.patientDetails.userDetails[0].photo }}" />
+                    <div *ngIf="row.patientDetails?.userDetails[0].photo" class="boxImg2 rounded-circle d-inline-block">
+                      <img src="{{ photoUrlBase }}{{ row.patientDetails?.userDetails[0].photo }}" />
                     </div>
                     <p class="p-0 mt-2 ml-2 d-inline-block align-top">
-                      {{ row.patientDetails.userDetails[0].personalData.name }}
-                      {{ setup == 'CL' ? row.patientDetails.userDetails[0]?.lastName : row.patientDetails.userDetails[0]?.secondLastName }}
+                      {{ row.patientDetails?.userDetails[0].personalData.name }}
+                      {{ setup == 'CL' ? row.patientDetails?.userDetails[0]?.lastName : row.patientDetails?.userDetails[0]?.secondLastName }}
                     </p>
                   </ng-template>
                 </ngx-datatable-column>
@@ -323,9 +323,9 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <ng-template *ngIf="row.professionalDetails.userDetails.length; else noProfessional">
-                      {{ row.professionalDetails.userDetails[0]?.name }}
-                      {{ setup == 'CL' ? row.professionalDetails.userDetails[0]?.lastName : row.professionalDetails.userDetails[0]?.secondLastName }}
+                    <ng-template *ngIf="row.professionalDetails?.userDetails.length; else noProfessional">
+                      {{ row.professionalDetails?.userDetails[0]?.name }}
+                      {{ setup == 'CL' ? row.professionalDetails?.userDetails[0]?.lastName : row.professionalDetails?.userDetails[0]?.secondLastName }}
                     </ng-template>
                     <ng-template #noProfessional>
                       {{ 'common.noInfo.label' | transloco }}
