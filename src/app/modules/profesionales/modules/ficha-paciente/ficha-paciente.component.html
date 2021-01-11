@@ -486,20 +486,21 @@
               [limit]="10"
               [selectAllRowsOnPage]="true"
             >
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span>{{
-                    row.patientDetails.patientId[0].identificationData.cpf ||
+                    row.appointmendId ||
                       row.patientDetails.patientId[0].identificationData.cns ||
                       row.patientDetails.patientId[0].identificationData.rgRegistry ||
+                      row.patientDetails.patientId[0].identificationData.rut ||
+                      row.patientDetails.patientId[0].identificationData.run ||
                       row.patientDetails.patientId[0].identificationData.passport
                   }}</span>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Paciente">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
-                  <!--[src]="row.patientDetails.personalData.photo" -->
+                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.patientDetails.userDetails[0].photo" alt="img" />
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
@@ -509,7 +510,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Profesional">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.professionalDetails.userDetails[0].photo" alt="img" />
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
@@ -517,7 +518,7 @@
                   }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Fecha">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ moment(row.dateDetails.date).format('DD/MM/YYYY') }}
                 </ng-template>
