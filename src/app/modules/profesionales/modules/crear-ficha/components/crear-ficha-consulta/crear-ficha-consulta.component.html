@@ -1742,7 +1742,12 @@
                               <div class="row">
                                 <div class="col-3">
                                   <div class="imgTimeline rounded-circle">
-                                    <img [src]="photoUrlBase+item.professional.photo">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
                                   </div>
                                 </div>
                                 <div class="col-9">

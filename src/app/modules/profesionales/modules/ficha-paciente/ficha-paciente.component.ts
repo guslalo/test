@@ -34,6 +34,7 @@ export class FichaPacienteComponent implements OnInit {
   public antecedentes: any;
   public antecedentesGeneral: any;
 
+
   identificationData: any = {};
 
   // EXTRAS
@@ -61,6 +62,7 @@ export class FichaPacienteComponent implements OnInit {
   public descargar: boolean;
   public appointmentId: any;
   public urlSibrare: any;
+  public setup:any;
 
 
   constructor(
@@ -76,6 +78,7 @@ export class FichaPacienteComponent implements OnInit {
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    this.setup = environment.setup
     console.log(this.userId);
     this.appointmentId = this.userId
     this.getMedicalRecord(this.userId);

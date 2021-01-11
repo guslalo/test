@@ -152,7 +152,7 @@
                   <img src="assets/perfil.png" />
                 </div>
                 <h4 class="text-center mt-2">
-                  {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
+                  {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
                   <br />
                  
                 </h4>
@@ -201,7 +201,7 @@
               </div>
             </div>
             <div class="col-8">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="bg-white rounded-lg p-4 shadow-sm mb-4" *ngIf="setup != 'CL'">
                 <h4 class="title mb-3">
                   {{ 'account.createAccount.birthData.label' | transloco }}
                 </h4>
@@ -354,7 +354,7 @@
                   <li>
                     <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
-                      patientRecord.addressData?.neighborhood +
+                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood) +
                         ', ' +
                         patientRecord.addressData?.street +
                         ' #' +
@@ -495,7 +495,7 @@
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
-                      (row.patientDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.patientDetails.userDetails[0].lastName : row.patientDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -505,7 +505,7 @@
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
-                      (row.professionalDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.professionalDetails.userDetails[0].lastName : row.professionalDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
@@ -1163,13 +1163,20 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
-                                    {{ item.professional?.secondLastName }}
+                                    {{ setup == 'CL' ? item.professional?.lastName : item.professional?.secondLastName }}
                                   </p>
                                 </div>
                               </div>
@@ -1187,11 +1194,7 @@
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
-                        <!--
-                        <div class="col-5 text-left p-0">
-                          <h3>24</h3>
-                          12:45 Hrs.
-                        </div>-->
+                   
                       </div>
                     </div>
                   </ng-container>
