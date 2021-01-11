@@ -173,6 +173,8 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+
+        console.log(this.appointmentsRecord)
         
         if(environment.setup == 'CL'){
           this.arrayDocuments = data.payload.recemed;
