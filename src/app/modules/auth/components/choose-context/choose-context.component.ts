@@ -21,6 +21,7 @@ export class ChooseContextComponent implements OnInit {
   public user: any = {};
   public arrayAdministrativeData = [];
   public setup:any;
+  public dependents: any[];
 
   constructor(
     private translocoService: TranslocoService,
@@ -46,6 +47,7 @@ export class ChooseContextComponent implements OnInit {
       
     );
     this.user.dependents = JSON.parse(localStorage.getItem('dependents'))
+    this.dependents = this.user.dependents;
   }
 
   chooseContext(clinicId, role) {
@@ -88,7 +90,7 @@ export class ChooseContextComponent implements OnInit {
         (data) => {
           //console.log(data);
           localStorage.setItem('token', JSON.stringify(data.access_token));
-          this.user = new UserLogin(
+          const newUser = new UserLogin(
             data.id,
             data.email,
             data.name,
@@ -103,8 +105,8 @@ export class ChooseContextComponent implements OnInit {
             data.photo
           );
           localStorage.setItem('token', JSON.stringify(data.access_token));
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          localStorage.setItem('clinic', this.user.administrativeData[0].clinicId);
+          localStorage.setItem('currentUser', JSON.stringify(newUser));
+          localStorage.setItem('clinic', newUser.administrativeData[0].clinicId);
 
           this.clinicService.accessMode().subscribe(
             (data) => {
@@ -149,7 +151,7 @@ export class ChooseContextComponent implements OnInit {
       }
     });
 
-    this.user = new UserLogin(
+    const newUser = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
       JSON.parse(localStorage.getItem('currentUser')).email,
       JSON.parse(localStorage.getItem('currentUser')).name,
@@ -165,7 +167,7 @@ export class ChooseContextComponent implements OnInit {
     );
 
     localStorage.removeItem('currentUser');
-    localStorage.setItem('currentUser', JSON.stringify(this.user));
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
     //console.log(this.user);
 
     switch (profile.role) {

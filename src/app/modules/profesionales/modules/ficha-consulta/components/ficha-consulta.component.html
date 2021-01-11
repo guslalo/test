@@ -39,7 +39,7 @@
                 <div class="col-5">
                   <p class="p-0 font-weight-bold">
                     {{ appointmentDetail.patientDetails.userDetails.personalData.name | uppercase }} 
-                    {{ appointmentDetail.patientDetails.userDetails.personalData.secondLastName | uppercase }}
+                    {{ (setup =='CL' ? appointmentDetail.patientDetails.userDetails.personalData.lastName : appointmentDetail.patientDetails.userDetails.personalData.secondLastName) | uppercase }}
                   </p>
                   <!--font-weight-bold-->
                   <ul class="simple-list">
@@ -52,8 +52,8 @@
                       </ng-template>
                     </li>
                     <li>Idade: {{ appointmentDetail.patientDetails.userDetails.personalData.age }}</li>
-                    <li>
-                      Nacionalidade: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality[0].name }}
+                    <li *ngIf="setup!='CL'">
+                      Nacionalidade: {{ appointmentDetail.patientDetails.userDetails.personalData.nacionality.name }}
                     </li>
                   </ul>
                 </div>

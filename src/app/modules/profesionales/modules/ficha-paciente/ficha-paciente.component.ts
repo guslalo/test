@@ -12,6 +12,7 @@ import { CustomDateAdapter } from 'src/app/shared/utils';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { AppointmentsService } from './../../../../services/appointments.service';
 import { environment } from 'src/environments/environment';
+import { env } from 'process';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -62,7 +63,7 @@ export class FichaPacienteComponent implements OnInit {
   public descargar: boolean;
   public appointmentId: any;
   public urlSibrare: any;
-  public setup:any;
+  public setup: string;
 
 
   constructor(
@@ -78,7 +79,7 @@ export class FichaPacienteComponent implements OnInit {
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
-    this.setup = environment.setup
+    this.setup = environment.setup;
     console.log(this.userId);
     this.appointmentId = this.userId
     this.getMedicalRecord(this.userId);

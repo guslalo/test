@@ -122,7 +122,7 @@
         <ng-container *ngIf="consultas && consultas.length > 0; else vacio">
           <!--*ngIf="consultas.length > 0; else vacio"-->
           <div class="tableBox bg-white pt-3">
-            <table class="table table-responsive">
+            <table class="table table-responsive-sm">
               <thead>
                 <tr>
                   <th style="width: 25%;">{{ 'clinicalFile.hourDate.label' | transloco }}</th>
@@ -136,7 +136,7 @@
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
             <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0 table-responsive">
+              <table class="table dos table-borderless mb-0 table-responsive-sm">
                 <tbody>
                   <tr>
                     <td style="width: 25%;" class="text-left">
@@ -322,7 +322,7 @@
         <ng-container>
           <!--*ngIf="consultas.length > 0; else vacio"-->
           <div class="tableBox bg-white pt-3">
-            <table class="table table-responsive">
+            <table class="table table-responsive-sm">
               <thead>
                 <tr>
                   <th style="width: 25%;" class="text-right">{{ 'common.createdAt.label' | transloco }}</th>
@@ -336,7 +336,7 @@
           <ng-container *ngFor="let item of consultasActivas">
             <!--| slice: (page - 1) * 10:(page - 1) * 10 + 10-->
             <div class="collapseCustom" id="{{ item._id }}">
-              <table class="table dos table-borderless mb-0 table-responsive">
+              <table class="table dos table-borderless mb-0 table-responsive-sm">
                 <tbody>
                   <tr>
                     <td style="width: 25%;" class="text-center">

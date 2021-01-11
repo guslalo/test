@@ -185,7 +185,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group col-md-8">
+                  <div class="form-group col-md-4">
                     <label for="nacionality">{{ 'account.nationality.label' | transloco }}*</label>
                     <select class="form-control"  name="nacionality" formControlName="nacionality" [ngClass]="{
                         'is-invalid': !personalData.get('nacionality').valid
@@ -201,6 +201,18 @@
                     <select class="form-control" name="education" formControlName="education" [attr.disabled]="userType == 'professional' ? '' : null">
                       <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="item._id" *ngFor="let item of educations">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="uf">{{ 'account.region.label' | transloco }}*</label>
+                    <select class="form-control" name="uf" formControlName="uf" (change)="ufSelect2($event.target)"
+                      [ngClass]="{
+                        'is-invalid': !personalData.get('uf').valid && userType != 'professional'
+                      }">
+                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                      <option [ngValue]="item._id" *ngFor="let item of states">
                         {{ item.name }}
                       </option>
                     </select>
@@ -241,18 +253,7 @@
                       </option>
                     </select>
                   </div> -->
-                  <div class="form-group col-md-8">
-                    <label for="uf">{{ 'account.region.label' | transloco }}*</label>
-                    <select class="form-control" name="uf" formControlName="uf" (change)="ufSelect2($event.target)"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('uf').valid && userType != 'professional'
-                      }">
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of states">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div>
+         
                   <div class="form-group col-md-4">
                     <label for="city">{{ 'account.neighborhood.label' | transloco }}*</label>
                     <select class="form-control" name="city" formControlName="city" [ngClass]="{
@@ -264,11 +265,7 @@
                       </option>
                     </select>
                   </div>
-                </div>
-                
-                <div class="row">
-                  
-                  
+                   
                   <div class="form-group col-12 col-md-4">
                     <label for="healthInsurance">{{ 'auth.prevission.label' | transloco }}*</label>
                     <div class="input-group">
@@ -291,6 +288,11 @@
                         'is-invalid': !personalData.get('street').valid
                       }" />
                   </div>
+                </div>
+                
+                <div class="row">
+                  
+                 
                   <div class="form-group col-md-4">
                     <label for="streetNumber">{{ 'account.number.label' | transloco }}*</label>
                     <input type="text" class="form-control" name="streetNumber" formControlName="streetNumber"
@@ -298,9 +300,6 @@
                         'is-invalid': !personalData.get('streetNumber').valid
                       }" />
                   </div>
-                  
-                </div>
-                <div class="row">
                   <div class="form-group col-md-4">
 
                     <label for="street">{{ 'auth.complement.label' |transloco }}</label>
@@ -313,6 +312,7 @@
                     <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder=""
                       formControlName="zipcode" />
                   </div>
+                  
                 </div>
               </form>
             </div>

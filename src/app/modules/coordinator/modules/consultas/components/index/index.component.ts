@@ -3,6 +3,7 @@ import { AppointmentsService } from './../../../../../../services/appointments.s
 import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table'; 
+import { environment } from 'src/environments/environment';
 
 export interface PeriodicElement {
   name: string;
@@ -36,6 +37,7 @@ export class IndexComponent implements OnInit {
   public openAppointments = []
   public immediateAppointments = []
   public interval:any;
+  public setup: string;
 
   constructor( 
     private router: Router,
@@ -46,7 +48,7 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.setup = environment.setup;
     this.getAppointmentsForTypes();
     this.intervalFunction();
     this.router.events.subscribe(value => {
@@ -73,7 +75,7 @@ export class IndexComponent implements OnInit {
   }
   
   filterTable(event) {
-    //clearInterval(this.interval);
+    clearInterval(this.interval);
     console.log(event)
     var input, filter, table, tr, td, td1, i, txtValue;
     input = document.getElementById(event);

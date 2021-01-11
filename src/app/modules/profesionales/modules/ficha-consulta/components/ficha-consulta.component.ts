@@ -39,6 +39,7 @@ export class FichaConsultaComponent implements OnInit {
   public medicinesByProfessional: any;
   public occupationalByProfessional: any;
   public othersByProfessional: any;
+  public setup:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class FichaConsultaComponent implements OnInit {
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
 

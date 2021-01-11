@@ -41,6 +41,7 @@ export class IndexComponent implements OnInit {
   public tempProfessionals = [];
   public blocks = [];
   public specialties = [];
+  public setup: string;
 
   public objetives: any;
 
@@ -86,6 +87,7 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.getAppointments();
 
     this.appointmentEvents.updateAppointments$.subscribe(() => {
@@ -347,18 +349,34 @@ export class IndexComponent implements OnInit {
     const temp = this.tempAppointments
       // SEARCH FILTER
       .filter((item) => {
+
         return (
-          (item.patientDetails.userDetails[0].identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
-            item.patientDetails.userDetails[0].identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
-            item.patientDetails.userDetails[0].identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
-            item.patientDetails.userDetails[0].identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
-          item.patientDetails.userDetails[0]?.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-          item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-          item.professionalDetails.userDetails[0]?.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
-          moment(item.dateDetails?.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
-          item.dateDetails?.start?.toLowerCase().indexOf(searchTerm) !== -1 ||
-          !searchTerm
-        );
+          item.patientDetails.userDetails[0].identificationData.cpf?.toLowerCase().includes(searchTerm) ||
+          item.patientDetails.userDetails[0].identificationData.cns?.toLowerCase().includes(searchTerm) || 
+          item.patientDetails.userDetails[0].identificationData.rgRegistry?.toLowerCase().includes(searchTerm) || 
+          item.patientDetails.userDetails[0].identificationData.passport?.toLowerCase().includes(searchTerm)
+        ) || 
+        (
+          item.patientDetails.userDetails[0]?.personalData.name?.toLowerCase() + ' ' + 
+          (this.setup == 'CL' ? item.patientDetails.userDetails[0]?.personalData.lastName?.toLowerCase() :
+            item.patientDetails.userDetails[0]?.personalData.secondLastName?.toLowerCase() )
+        ).includes(searchTerm) ||
+        moment(item.dateDetails?.date).format('DD/MM/YYYY').toLowerCase().includes(searchTerm) ||
+        item.dateDetails?.start?.toLowerCase().includes(searchTerm) ||
+        !searchTerm
+
+        // return (
+        //   (item.patientDetails.userDetails[0].identificationData.cpf?.toLowerCase().indexOf(searchTerm) ||
+        //     item.patientDetails.userDetails[0].identificationData.cns?.toLowerCase().indexOf(searchTerm) ||
+        //     item.patientDetails.userDetails[0].identificationData.rgRegistry?.toLowerCase().indexOf(searchTerm) ||
+        //     item.patientDetails.userDetails[0].identificationData.passport?.toLowerCase().indexOf(searchTerm)) !== -1 ||
+        //   item.patientDetails.userDetails[0]?.personalData.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+        //   item.professionalDetails.userDetails[0]?.name.toLowerCase().indexOf(searchTerm) !== -1 ||
+        //   item.professionalDetails.userDetails[0]?.lastName.toLowerCase().indexOf(searchTerm) !== -1 ||
+        //   moment(item.dateDetails?.date).format('DD/MM/YYYY').toLowerCase().indexOf(searchTerm) !== -1 ||
+        //   item.dateDetails?.start?.toLowerCase().indexOf(searchTerm) !== -1 ||
+        //   !searchTerm
+        // );
       })
       // STATUS APPOINTMENT FILTER
       .filter((item) => {

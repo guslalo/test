@@ -390,7 +390,7 @@
     <div class="row">
       <div class="col-12">
         <div class="bg-white p-3 rounded-lg">
-          <table class="table mt-1 table-responsive">
+          <table class="table mt-1 ttable-responsive-sm">
             <thead class="">
               <tr>
                 <th scope="col" class="text-center">
@@ -501,7 +501,7 @@
     <div class="row">
       <div class="col-12">
         <div class="bg-white p-3 rounded-lg">
-          <table class="table mt-1 table-responsive">
+          <table class="table mt-1 table-responsive-sm">
             <thead class="">
               <tr>
                 <th scope="col" class="text-center d-none">
@@ -647,8 +647,12 @@
           <p class="title font-weight-bold">
             {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
           </p>
-          {{professionalData.professionalData.professionalTitle}} -
-          {{professionalData.professionalData.ufProfessionalRegistry}} - 
+          <ng-container *ngIf="professionalData.professionalData.professionalTitle != ' ' ">
+            {{professionalData.professionalData.professionalTitle}} -
+          </ng-container>
+          <ng-container *ngIf="professionalData.professionalData.ufProfessionalRegistry != ' ' ">
+            {{professionalData.professionalData.ufProfessionalRegistry}} -
+          </ng-container>
           {{professionalData.professionalData.ufRegistry}}
           <ul>
             <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
@@ -665,7 +669,7 @@
           </ng-container>
           <hr />
         </div>
-        <div>
+        <div *ngIf="setup == 'BR'"> 
           <p class="title font-weight-bold">
             {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
           </p>

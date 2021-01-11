@@ -76,14 +76,14 @@
                          style="top: -17px !important;
                          position: relative; left:5px"
                          >{{
-                            row.personalData.name + ' ' + row.personalData.secondLastName
+                            row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                           }}
                         </a>
                         <a *ngxPermissionsExcept="['Read:MedicalRecord']"
                           style="top: -17px !important;
                           position: relative; left:5px"
                           >{{
-                            row.personalData.name + ' ' + row.personalData.secondLastName
+                            row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                           }}
                         </a>
                       
@@ -187,7 +187,7 @@
                     >
                      
                       {{
-                        row.name + ' ' + (row.secondLastName)
+                        row.name + ' ' + (setup == 'CL' ? row.lastName : row.secondLastName)
                       }}
                     </a>
                     

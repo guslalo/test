@@ -27,7 +27,11 @@ export class HistorialConsultasComponent implements OnInit {
   public fecha: any;
   public page: number = 1;
   public totalPages: number;
+<<<<<<< HEAD
   public setup:any;
+=======
+  public setup: string;
+>>>>>>> ae3304dc40fae7cf0ef1956f379d013e6706a4c1
 
   constructor(private appointmentsService: AppointmentsService, private appointmentsEvents: AppointmentEventsService) { }
 
@@ -41,7 +45,11 @@ export class HistorialConsultasComponent implements OnInit {
     );
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.setup = environment.setup
+=======
+    this.setup = environment.setup;
+>>>>>>> ae3304dc40fae7cf0ef1956f379d013e6706a4c1
     this.page = 1;
     this.getAppointments();
     this.getFecha();

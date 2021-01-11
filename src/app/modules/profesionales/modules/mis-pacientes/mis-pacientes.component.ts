@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 // import { NgbdPaginationBasic } from './pagination-basic';
 
 @Component({
@@ -29,7 +30,7 @@ export class MisPacientesComponent implements OnInit {
   SelectionType = SelectionType;
   selectedPrePatients = [];
   patientForm: FormGroup;
-
+  setup: string;
   constructor(
     private patientService: PatientsService,
     private formBuilder: FormBuilder,
@@ -38,7 +39,7 @@ export class MisPacientesComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(JSON.parse(localStorage.getItem('currentUser'));
-
+    this.setup = environment.setup;
     this.fetchPatients();
     this.fetchPrePatients();
 
