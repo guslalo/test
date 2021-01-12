@@ -86,11 +86,6 @@ export class InicioPComponent implements OnInit {
        }, 10000);
     }, 0);
 
-    this.router.events.subscribe(value => {
-      
-      clearInterval(this.interval);
-      //console.log(value);
-    });
 
   }
 
