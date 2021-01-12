@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   defaultLang: 'es',
   checkAge: false,
-  title: 'Atrys | Teleconsulta',
+  title: 'Atrys Teleconsulta Chile',
   baseUrl: 'https://b1.atrys.telemedicina.com/api/',
   client: 'itms',
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',
