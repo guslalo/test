@@ -141,17 +141,14 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
-  calcularEdad(dateString) {
-    let separa = dateString.split("/");
-    let separaAno = separa[2]
-    console.log(separaAno.split(""))
-    let today = new Date();
-    if (separaAno.split("").length === 4) {
-      this.patientAge = today.getFullYear() - separa[2]
-    } else {
-      this.patientAge = today.getFullYear() - separa[0]
-    }
-    return this.patientAge;
+  calcularEdad(birthdate) {
+    let birthday_arr = birthdate.split("/");
+    let birthday_date = new Date( parseInt(birthday_arr[2]),(parseInt(birthday_arr[1]) - 1, parseInt(birthday_arr[0])) );
+    let ageDifMs = Date.now() - birthday_date.getTime();
+    let ageDate = new Date(ageDifMs);
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    this.patientAge = age;
+    return age;
   }
 
   getMedicalRecord(userId) {

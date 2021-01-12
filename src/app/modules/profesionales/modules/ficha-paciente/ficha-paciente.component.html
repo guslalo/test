@@ -350,6 +350,10 @@
                   {{ 'clinicalFile.patientData.tabs.identification.addressData.title' | transloco }}
                 </h4>
                 <ul class="datos">
+                  <li *ngIf="setup == 'CL'">
+                    <i>RUT</i>
+                    {{ patientRecord.identificationData.run || 'S/R' }}
+                  </li>
                   <li>
                     <i>{{ 'table.status.label' | transloco }}</i>
                     {{ ufMap[patientRecord.addressData?.uf]?.name || 'S/R' }}
@@ -361,8 +365,7 @@
                   <li>
                     <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
-                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood) +
-                        ', ' +
+                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood + ', ') +
                         patientRecord.addressData?.street +
                         ' #' +
                         patientRecord.addressData?.streetNumber || 'S/R'
