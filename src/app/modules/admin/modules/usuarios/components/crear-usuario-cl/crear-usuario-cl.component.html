@@ -301,37 +301,6 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="inmigrationDate">{{ 'account.countryEntrance.label' | transloco }}</label>
-                    <div class="input-group dateregister">
-                      <input
-                        [disabled]="!isForeign"
-                        [placement]="'bottom'"
-                        [(ngModel)]="inmigrationDate"
-                        class="form-control"
-                        id="inmigrationDate"
-                        placeholder="DD/MM/YYYY"
-                        name="inmigrationDate"
-                        [minDate]="{ year: 1900, month: 1, day: 1 }"
-                        [maxDate]="maxDate"
-                        ngbDatepicker
-                        #e="ngbDatepicker"
-                        formControlName="inmigrationDate"
-                        (click)="e.toggle()"
-                      />
-                      <div class="input-group-append">
-                        <button
-                          [disabled]="!isForeign"
-                          class="btn btn-outline-secondary calendar"
-                          (click)="e.toggle()"
-                          type="button"
-                        ></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  
-                  <div class="form-group col-md-4">
                     <label for="education">{{
                       'dashboard.home.userManagment.createAccount.tabs.academic.education.label' | transloco
                     }}</label>
@@ -342,15 +311,8 @@
                       </option>
                     </select>
                   </div>
-                  <!-- <div class="form-group col-md-4">
-                    <label for="familySituation">{{ 'account.familyStatus.label' | transloco }}</label>
-                    <select class="form-control" name="familySituation" formControlName="familySituation" [attr.disabled]="userType == 'professional' ? '' : null">
-                      <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
-                      <option [ngValue]="item._id" *ngFor="let item of familiarSituations">
-                        {{ item.name }}
-                      </option>
-                    </select>
-                  </div> -->
+                </div>
+                <div class="row">
                   <div class="form-group col-md-4">
                     <label for="uf"
                       >{{
@@ -388,29 +350,6 @@
                       </option>
                     </select>
                   </div>
-                </div>
-                <div class="row" >
-                  <!-- <div class="form-group col-md-2">
-                    <label for="cep">{{ 'account.cep.label' | transloco }} *  {{'exemplo' | transloco}} xxxxx-xxx</label>
-                    <input
-                      [attr.disabled]="userType == 'professional' ? '' : null"
-                      (focusout)="getLocationDataFromCep()"
-                      mask="99999-999"
-                      [dropSpecialCharacters]="false" 
-                      type="text"
-                      class="form-control"
-                      name="cep"
-                      formControlName="cep"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('cep').valid && userType != 'professional'
-                      }"
-                    />
-                    <div *ngIf="errorCep"  class="invalid-feedbackCep">
-                      {{ errorCepString }}
-                    </div>
-                  </div> -->
-                 
-                  
                   <div class="form-group col-12 col-md-4">
                     <label for="healthInsurance">{{ 'auth.prevission.label' | transloco }}*</label>
                     <div class="input-group">
@@ -427,6 +366,11 @@
                     </select>
                     </div>
                   </div>
+                </div>
+            
+                <div class="row" >
+
+                 
                   <div class="form-group col-md-4">
                     <label for="street">{{ 'account.street.label' | transloco }}*</label>
                     <input
@@ -451,18 +395,19 @@
                       }"
                     />
                   </div>
+                  <div class="form-group col-md-4">
+                
+                    <label for="street">{{ 'auth.complement.label' |transloco }}</label>
+                    <input type="text" name="complement" id="complement" class="form-control" placeholder=""
+                      formControlName="complement" />
+              
+                </div>
                 </div>
                 <div class="row">
                   
                   
                   
-                  <div class="form-group col-md-4">
                 
-                      <label for="street">{{ 'auth.complement.label' |transloco }}</label>
-                      <input type="text" name="complement" id="complement" class="form-control" placeholder=""
-                        formControlName="complement" />
-                
-                  </div>
                   <div class="form-group col-12 col-md-4">
                     <label for="zipcode">Codigo postal</label>
                     <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder=""
