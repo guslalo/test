@@ -72,9 +72,23 @@ export class ChooseContextComponent implements OnInit {
             localStorage.setItem('firstAccessMultirole', 'true');
             localStorage.removeItem('token');
             localStorage.setItem('token', JSON.stringify(data.access_token));
-            this.getRouteForClinicAndRole(clinicId, role);
+          
           }
           this._policyService.setPoliciesToUser()
+          
+          this.clinicService.accessMode().subscribe(
+            (data) => {
+              console.log(data)
+              localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+              localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+              localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+              console.log(data);
+              this.getRouteForClinicAndRole(clinicId, role);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         },
         (error) => {
           console.log(error);
