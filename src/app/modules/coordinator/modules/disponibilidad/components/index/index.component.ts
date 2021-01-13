@@ -390,6 +390,7 @@ export class IndexComponent implements OnInit {
             console.log('disponibilidad creada', data);
             this.getAvailability();
             this.resetSearch();
+            this.resetDailyRanges()
           },
           (error) => {
             this.resetSearch();
@@ -466,6 +467,7 @@ export class IndexComponent implements OnInit {
           (data) => {
             console.log(data);
             this.getAvailability();
+            this.resetDailyRanges();
           },
           (error) => {
             console.log(error);
