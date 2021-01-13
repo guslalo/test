@@ -501,7 +501,7 @@
               data-target="#addExamen"
               (click)="resetValue()"
             >
-              {{ 'common.button.add.label' | transloco }} documento
+              {{ 'common.button.add.label' | transloco }} {{'common.input.file.documento' | transloco}}
             </button>
           </div>
         </div>
@@ -692,7 +692,7 @@
         <form [formGroup]="agregarItem" novalidate="">
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">{{ 'common.button.add.label' | transloco }} item</label>
+              <label for="dateBlock">{{ 'common.button.add.label' | transloco }} </label>
               <input
                 type="text"
                 value=""
@@ -806,6 +806,9 @@
             <div class="form-group col">
               <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
               <div class="custom-file">
+                <div class="adjuntar">
+                  {{'common.input.file.seleccionar' | transloco}}
+                </div>
                 <input
                   type="file"
                   class="custom-file-input"
