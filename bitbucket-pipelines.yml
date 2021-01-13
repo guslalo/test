@@ -214,7 +214,7 @@ pipelines:
               AWS_SECRET_ACCESS_KEY: A4U20AF0oA/vtf+In0/RB3UWskSu3/7J58lsPXd0
               AWS_DEFAULT_REGION: 'us-east-1'
               COMMAND: 'upload'                
-              APPLICATION_NAME: 'frontend-testing'
+              APPLICATION_NAME: 'QA-Atrys-TCR'
               ZIP_FILE: 'itms-front-atrys-qa.zip'
               S3_BUCKET: 'tcratrys-front-qa'
     - step:
@@ -226,7 +226,7 @@ pipelines:
               AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
               AWS_SECRET_ACCESS_KEY: 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
               AWS_DEFAULT_REGION: 'us-east-1'
-              APPLICATION_NAME: 'frontend-testing'
+              APPLICATION_NAME: 'QA-Atrys-TCR'
               COMMAND: 'deploy'
               DEPLOYMENT_GROUP: 'FrontEnd'
               ZIP_FILE: 'itms-front-atrys-qa.zip'
