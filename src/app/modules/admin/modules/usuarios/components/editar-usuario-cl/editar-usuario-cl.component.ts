@@ -743,6 +743,7 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.userObject = {
       id: this.userId,
       identificationData: {
+        run:this.formUser[0].value.idDocumentNumber,
         ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
 
         passport: this.formUser[0].value.passport || '',
