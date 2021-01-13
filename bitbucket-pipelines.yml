@@ -219,7 +219,7 @@ pipelines:
               S3_BUCKET: 'itms-frontend-testing'
     - step:
         name: 'Deploy to homeclinic'
-        deployment: homeclinic
+        deployment: testing-homeclinic
         script:
           - pipe: atlassian/aws-code-deploy:0.5.4
             variables:
@@ -261,7 +261,7 @@ pipelines:
               S3_BUCKET: 'itms-frontend-testing'
     - step:
         name: 'Deploy to chile'
-        deployment: chile
+        deployment: testing-chile
         script:
           - pipe: atlassian/aws-code-deploy:0.5.4
             variables:
