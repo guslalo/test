@@ -191,6 +191,48 @@ pipelines:
             S3_BUCKET: 'elasticbeanstalk-us-east-1-023564466378'
             WAIT: 'true'
     testing:
+        - step:
+        caches:
+          - node
+        name: "Build AtrysQA"
+        script:
+          - npm install
+          - npm run build-atrys
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-front-atrys-qa.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-front-atrys-qa.zip
+    - step:
+        name: 'Subiendo Artefacto a S3'         
+        services:            
+          - docker          
+        script:         
+          - pipe: atlassian/aws-code-deploy:0.2.3              
+            variables:                
+              AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
+              AWS_SECRET_ACCESS_KEY: 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
+              AWS_DEFAULT_REGION: 'us-east-1'
+              COMMAND: 'upload'                
+              APPLICATION_NAME: 'frontend-testing'
+              ZIP_FILE: 'itms-front-atrys-qa.zip'
+              S3_BUCKET: 'tcratrys-front-qa'
+    - step:
+        name: 'Deploy to AtrysQA'
+        deployment: testing-homeclinic
+        script:
+          - pipe: atlassian/aws-code-deploy:0.5.4
+            variables:
+              AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
+              AWS_SECRET_ACCESS_KEY: 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
+              AWS_DEFAULT_REGION: 'us-east-1'
+              APPLICATION_NAME: 'frontend-testing'
+              COMMAND: 'deploy'
+              DEPLOYMENT_GROUP: 'FrontEnd'
+              ZIP_FILE: 'itms-front-atrys-qa.zip'
+              S3_BUCKET: 'tcratrys-front-qa'
+              WAIT: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
     - step:
         caches:
           - node
