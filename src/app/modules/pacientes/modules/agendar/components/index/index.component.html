@@ -15,7 +15,7 @@
         </p>
       </div>
       <div class="card-body text-center">
-        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
+        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
           <li class="nav-item" role="presentation" (click)="refreshSearchSpecialty()">
@@ -194,7 +194,7 @@
                       <div class="col-10">
                         <ng-container *ngFor="let item of item.professionalDetails.userDetails">
                           <p class="m-0 font-weight-bold">
-                            {{ item.name }}
+                            Dr(a) {{ item.name }}
                           </p>
                         </ng-container>
                         <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
@@ -384,6 +384,9 @@
               <div class="form-group">
                 <!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
                 <label for="exampleInputEmail1">{{ 'dashboard.home.newService.btnUpload.label' | transloco }}</label>
+                <div class="adjuntar">
+                  {{'common.input.file.seleccionar' | transloco}}
+                </div>
                 <div class="custom-file">
                   <input
                     accept=".xls, .xlsx, .csv, .pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  

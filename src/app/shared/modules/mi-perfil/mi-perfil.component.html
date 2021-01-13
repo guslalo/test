@@ -67,15 +67,23 @@
                 <div class="boxImg imgProfile text-center">
                   <img src="{{ formData?.photo || '/assets/profile.jpg' }}" class="d-inline-block img-fluid" />
                 </div>
+                
                 <div class="custom-file mt-3">
+                  <div class="adjuntar">
+                    {{'common.input.file.seleccionar' | transloco}}
+                  </div>
                   <input
                     type="file"
                     class="custom-file-input"
                     (change)="openFile($event)"
                     id="customFile"
-                    style="overflow: hidden;"
+                    lang="es"
+                    style="overflow: hidden;" 
                   />
-                  <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+                  <label 
+                  class="custom-file-label"
+                 
+                   for="customFile">{{ textInputFile }}</label>
                 </div>
                 <button
                   type="button"

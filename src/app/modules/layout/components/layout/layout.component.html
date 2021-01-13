@@ -71,7 +71,15 @@
                             item.role === currentUser.role &&
                             item.clinicProfileId === currentUser.administrativeDataContext
                           ">
-                          {{ currentUser.role | titlecase }} / {{ item.clinicName }}
+                          <ng-container *ngIf="currentUser.role == 'professional'">
+                            {{'clinicalFile.patientData.tabs.doctor.label' | transloco}}
+                          </ng-container> 
+                          <ng-container *ngIf="currentUser.role == 'admin'">
+                            {{'tabs.admin.label' | transloco}}
+                          </ng-container> 
+                          <ng-container *ngIf="currentUser.role == 'coordinator'">
+                            {{'tabs.coordinator.label' | transloco}}
+                          </ng-container> / {{ item.clinicName }}
                         </div>
                       </ng-container>
                     </ng-container>
