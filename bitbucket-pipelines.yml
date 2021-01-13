@@ -216,7 +216,7 @@ pipelines:
               COMMAND: 'upload'                
               APPLICATION_NAME: 'frontend-testing'
               ZIP_FILE: 'itms-frontend-homeclinic.zip'
-              S3_BUCKET: 'itms-frontend-testing/homeclinic'
+              S3_BUCKET: 'itms-frontend-testing'
     - step:
         name: 'Deploy to homeclinic'
         deployment: homeclinic
@@ -233,4 +233,47 @@ pipelines:
               S3_BUCKET: 'itms-frontend-testing'
               WAIT: 'true'
               FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+    - step:
+        caches:
+          - node
+        name: "Build chile"
+        script:
+          - npm install
+          - npm run build-chile
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend-chile.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend-chile.zip
+    - step:
+        name: 'Subiendo Artefacto a S3'         
+        services:            
+          - docker          
+        script:         
+          - pipe: atlassian/aws-code-deploy:0.2.3              
+            variables:                
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              COMMAND: 'upload'                
+              APPLICATION_NAME: 'frontend-testing'
+              ZIP_FILE: 'itms-frontend-chile.zip'
+              S3_BUCKET: 'itms-frontend-testing'
+    - step:
+        name: 'Deploy to chile'
+        deployment: chile
+        script:
+          - pipe: atlassian/aws-code-deploy:0.5.4
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              APPLICATION_NAME: 'frontend-testing'
+              COMMAND: 'deploy'
+              DEPLOYMENT_GROUP: 'chile'
+              ZIP_FILE: 'itms-frontend-chile.zip'
+              S3_BUCKET: 'itms-frontend-testing'
+              WAIT: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+
 
