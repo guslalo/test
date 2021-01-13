@@ -303,6 +303,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.getAvailability();
             this.fetchCalendar();
             this.createAvailability.reset();
+            this.resetDailyRanges();
           },
           (error) => {
             this.createAvailability.reset();
@@ -415,6 +416,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.daysSelected = [];
             this.getAvailability();
             this.fetchCalendar();
+            this.resetDailyRanges();
           },
           (error) => {
             console.log(error);
