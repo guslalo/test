@@ -260,6 +260,18 @@ ul {
   }
 }
 
+.custom-file-label::after {
+  content: "";
+  width: 100px;
+}
+
+.adjuntar {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  z-index: 2;
+}
+
 .boxThumb {
   width: 100%;
   overflow: hidden;
@@ -278,6 +290,7 @@ ul {
   img {
     height: auto;
     width: 100%;
+    object-fit: contain;
     max-height: 240px;
     filter: blur(4px);
     -webkit-filter: blur(4px);

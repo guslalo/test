@@ -37,11 +37,12 @@ export class AgendaComponent implements OnInit {
     // dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [{ title: 'event 1', date: '2020-08-23', days: 3 }],
     locales: [esLocale, ptLocale],
-    locale: this.translocoService.getActiveLang(),
+    locale: this.translocoService.getActiveLang()
   };
   ngOnInit(): void {
     this.getAppointmentsTimeline();
     this.getFecha();
+    console.log(this.translocoService.getActiveLang())
   }
 
   ngAfterViewInit() {
