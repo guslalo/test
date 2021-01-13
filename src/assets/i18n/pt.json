@@ -1,4 +1,15 @@
 { 
+  "soporte":{
+    "title":"Entre em contato com nosso suporte:",
+    "whatsapp":{
+      "label":"Whatsapp",
+      "text":"+55 34 99960-2027"
+    },
+    "email":{
+      "label":"E-mail",
+      "text":"suporte@medictelemedicina.com"
+    }
+  },
   "tables": {
     "consultas":{
       "paciente":"paciente",

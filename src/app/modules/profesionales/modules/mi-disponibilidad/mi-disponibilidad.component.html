@@ -695,7 +695,9 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+            {{ 'common.button.cancel.label' | transloco }}
+          </button>
           <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
             [disabled]="!availabilityBlocked.valid" (click)="postAvailabilityBlocked()">
             {{ 'disponibility.modal.blockDays.btnCreate.label' | transloco }}
