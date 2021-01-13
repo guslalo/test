@@ -191,7 +191,7 @@ pipelines:
             S3_BUCKET: 'elasticbeanstalk-us-east-1-023564466378'
             WAIT: 'true'
     testing:
-        - step:
+    - step:
         caches:
           - node
         name: "Build AtrysQA"
