@@ -219,7 +219,7 @@ pipelines:
               S3_BUCKET: 'tcratrys-front-qa'
     - step:
         name: 'Deploy to AtrysQA'
-        deployment: testing-homeclinic
+        deployment: atrys-qa
         script:
           - pipe: atlassian/aws-code-deploy:0.5.4
             variables:
