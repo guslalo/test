@@ -10,6 +10,7 @@
         ng-reflect-tour-anchor="agendar"
         data-toggle="modal"
         data-target="#disponibilidad"
+        (click)="createAvailability.reset()"
       >
         {{ 'disponibility.btnNewDisponibility.label' | transloco }}
         <svg
@@ -222,7 +223,7 @@
             class="close"
             data-dismiss="modal"
             aria-label="Close"
-            (click)="createAvailability.reset()"
+            (click)="resetDailyRanges()"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -470,7 +471,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" (click)="resetDailyRanges()">
             {{ 'common.button.cancel.label' | transloco }}
           </button>
           <button
@@ -509,7 +510,7 @@
             class="close"
             data-dismiss="modal"
             aria-label="Close"
-            (click)="resetForm()"
+            (click)="resetForm(); resetDailyRanges()"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -763,7 +764,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal" (click)="resetDailyRanges()">
             {{ 'common.button.cancel.label' | transloco }}
           </button>
           <button
