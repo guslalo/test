@@ -155,7 +155,7 @@
                 <img src="assets/img/+.svg" />
               </div>
 
-              <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+              <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral?.allergies">
                 <ul class="antecedentes">
                   <li class="pl-5">
                     {{ item.value }}
@@ -210,7 +210,7 @@
               <div
                 class="collapse show"
                 id="surgicalInterventions"
-                *ngFor="let item of antecedentesGeneral.surgicalInterventions"
+                *ngFor="let item of antecedentesGeneral?.surgicalInterventions"
               >
                 <ul class="antecedentes">
                   <li class="pl-5">
@@ -662,7 +662,7 @@
               >{{ 'dashboard.home.myHealth.allergies.label' | transloco }}
             </ng-container>
             <ng-container *ngSwitchCase="'surgicalInterventions'"
-              >{{ 'dashboard.home.myHealth.surgicalInterventions.label' | transloco }}
+              >{{ 'dashboard.home.myHealth?.surgicalInterventions.label' | transloco }}
             </ng-container>
             <ng-container *ngSwitchCase="'familiarHistory'">
               {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}

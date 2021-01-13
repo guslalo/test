@@ -3,7 +3,9 @@ export const environment = {
   defaultLang: 'pt',
   checkAge: false,
   title: 'Itms Dev | Teleconsulta',
-  baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://backend-testing-es-cl.bdot.app/api/', // para backend en cl
+  // baseUrl: 'https://backend-testing-pt-br.bdot.app/api/', // para backend en br
+  // baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
