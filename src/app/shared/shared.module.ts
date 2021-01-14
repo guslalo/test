@@ -43,9 +43,11 @@ import { RescheduleAppointmentComponent } from './modules/reschedule-appointment
 import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-appointment.component';
 import { RecemedPrescriptionComponent } from './modules/recemed-prescription/recemed-prescription.component';
 import { RecemedProcedureComponent } from './modules/recemed-procedure/recemed-procedure.component';
+import { RecemedCertificateComponent } from './modules/recemed-certificate/recemed-certificate.component';
+import { RecemedExamOrderComponent } from './modules/recemed-exam-order/recemed-exam-order.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, PerfilCLComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, PerfilCLComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent, RecemedCertificateComponent, RecemedExamOrderComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -94,7 +96,9 @@ import { RecemedProcedureComponent } from './modules/recemed-procedure/recemed-p
     RescheduleAppointmentComponent,
     CancelAppointmentComponent,
     RecemedPrescriptionComponent,
-    RecemedProcedureComponent
+    RecemedProcedureComponent,
+    RecemedCertificateComponent,
+    RecemedExamOrderComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
