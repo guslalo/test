@@ -197,7 +197,7 @@ pipelines:
         name: "Build AtrysQA"
         script:
           - npm install
-          - npm run build-atryschile
+          - npm run build-qaatryschile
           - apt-get update && apt-get install -y
           - apt-get install zip
           - zip -r itms-front-atrys-qa.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
