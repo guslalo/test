@@ -132,6 +132,7 @@ export class LoginComponent implements OnInit {
             if (data.internalCode === 6) {
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
+              
               this.router.navigate(['app-coordinator']).then(() => this.idleEvents.attachMonitor());
             }
             break;
@@ -139,7 +140,20 @@ export class LoginComponent implements OnInit {
             if (data.internalCode === 6) {
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
+              
+              this.clinicService.accessMode().subscribe(
+                (data) => {
+                  console.log(data)
+                  localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+                  localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+                  localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+                  this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+              
             }
             break;
           case 'patient':
