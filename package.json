@@ -13,7 +13,7 @@
         "build-chile": "node ./updateVersion.js && node ./compileCSSVars.js chile && ng build --prod --configuration=chile --output-hashing=all && npm run checkout",
         "build-atryschile": "node ./updateVersion.js && node ./compileCSSVars.js atryschile && ng build --prod --configuration=atryschile --output-hashing=all && npm run checkout",
         "build-qaatryschile": "node ./updateVersion.js && node ./compileCSSVars.js qaatryschile && ng build --prod --configuration=qaatryschile --output-hashing=all && npm run checkout",
-        "build-qaamedline": "node ./updateVersion.js && node ./compileCSSVars.js qaamedline && ng build --prod --configuration=qaamedline --output-hashing=all && npm run checkout",
+        "build-qamedline": "node ./updateVersion.js && node ./compileCSSVars.js qamedline && ng build --prod --configuration=qamedline --output-hashing=all && npm run checkout",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
