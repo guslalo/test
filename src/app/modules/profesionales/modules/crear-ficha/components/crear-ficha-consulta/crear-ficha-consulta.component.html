@@ -74,7 +74,7 @@
                   </div>
                   <div class="text-center boxThumb rounded">
                     <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                      <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                      <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                     </ng-container>
                     <ng-template #noPhoto>
                       <img src="assets/img/profile.png" />
@@ -97,7 +97,7 @@
                   <div class="col-md-4 col-lg-5 text-center mt-5">
                     <div class="img boxImg2 rounded-circle d-inline-block">
                       <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                        <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                        <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                       </ng-container>
                       <ng-template #noPhoto>
                         <img src="assets/img/profile.png" />
