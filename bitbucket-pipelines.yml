@@ -341,6 +341,7 @@ pipelines:
               AWS_DEFAULT_REGION: us-east-1
               APPLICATION_NAME: MedlineFrontendOficial-env-1
               ENVIRONMENT_NAME: Medline-FrontEnd-Oficial
+              COMMAND: 'deploy-only'
               ZIP_FILE: "itms-frontend.zip"
               S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
               WAIT: 'true'
