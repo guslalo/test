@@ -151,7 +151,7 @@ pipelines:
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 APPLICATION_NAME: 'development-frontend'
                 COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'frontend-be'
+                DEPLOYMENT_GROUP: 'frontend-br'
                 ZIP_FILE: 'itms-frontend-dev.zip'
                 S3_BUCKET: 'itms-frontend-testing'
                 WAIT: 'true'
