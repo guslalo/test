@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import esLocale from '@fullcalendar/core/locales/es';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import { TranslocoService } from '@ngneat/transloco';
+import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 
 @Component({
   selector: 'app-agenda',
@@ -19,7 +20,11 @@ export class AgendaComponent implements OnInit {
 
   model2: NgbDateStruct;
 
-  constructor(private appointmentsService: AppointmentsService, private translationService: TranslocoService) {}
+  constructor(
+    private appointmentsService: AppointmentsService,
+    private translationService: TranslocoService,
+    private appointmentsEvents: AppointmentEventsService
+  ) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -37,6 +42,13 @@ export class AgendaComponent implements OnInit {
     this.getAppointmentsTimeline();
   }
 
+  ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    this.appointmentsEvents.buildForm$.emit(_user.role)
+    this.appointmentsEvents.getProfessionals$.emit()
+    this.appointmentsEvents.getMedicalSpecialties$.emit()
+  }
+
   fetchCalendar() {
     this.appointmentsService.getAllAppointments(1).subscribe(
       (data) => {
@@ -46,10 +58,9 @@ export class AgendaComponent implements OnInit {
           // console.log(item);
           events.push({
             type: 'appointment',
-            title: `Consulta, Paciente ${item.patientDetails.userDetails[0].personalData.name} ${
-              item.patientDetails.userDetails[0].personalData.secondLasName ||
+            title: `Consulta, Paciente ${item.patientDetails.userDetails[0].personalData.name} ${item.patientDetails.userDetails[0].personalData.secondLasName ||
               item.patientDetails.userDetails[0].personalData.lastName
-            }`,
+              }`,
             start: `${moment.utc(item.dateDetails.date).format('YYYY-MM-DD')}T${item.dateDetails.start}`,
             end: `${moment.utc(item.dateDetails.date).format('YYYY-MM-DD')}T${item.dateDetails.end}`,
             color: '#6fc1f1',

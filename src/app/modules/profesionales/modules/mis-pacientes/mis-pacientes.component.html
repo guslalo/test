@@ -33,8 +33,8 @@
         </div>
       </div>
       <div class="col-auto mb-4">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="tab" class="nav-tabs">
-          <li ngbNavItem="patients">
+        <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs">
+          <li [ngbNavItem]="1" (click)="tab = '1'">
             <a ngbNavLink>{{ 'clinicalFile.asociatedPatients.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
@@ -56,6 +56,8 @@
                         row.identificationData.cpf ||
                           row.identificationData.cns ||
                           row.identificationData.rgRegistry ||
+                          row.identificationData.rut ||
+                          row.identificationData.run ||
                           row.identificationData.passport
                       }}</span>
                     </ng-template>
@@ -74,14 +76,14 @@
                          style="top: -17px !important;
                          position: relative; left:5px"
                          >{{
-                            row.personalData.name + ' ' + row.personalData.secondLastName
+                            row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                           }}
                         </a>
                         <a *ngxPermissionsExcept="['Read:MedicalRecord']"
                           style="top: -17px !important;
                           position: relative; left:5px"
                           >{{
-                            row.personalData.name + ' ' + row.personalData.secondLastName
+                            row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                           }}
                         </a>
                       
@@ -89,7 +91,8 @@
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{ moment().diff(row.personalData.birthdate, 'year') }}
+                      <!-- {{ moment().diff(row.personalData.birthdate, 'year') }} -->
+                      {{ calcularEdad(row.personalData.birthdate) }}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
@@ -118,8 +121,8 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients" >
-            <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
+          <li [ngbNavItem]="2" *ngxPermissionsOnly="['SendInvitation:User']" (click)="tab = '2'">
+            <a ngbNavLink *ngxPermissionsOnly="['SendInvitation:User']">{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
                 <ngx-datatable
@@ -184,7 +187,7 @@
                     >
                      
                       {{
-                        row.name + ' ' + (row.secondLastName)
+                        row.name + ' ' + (setup == 'CL' ? row.lastName : row.secondLastName)
                       }}
                     </a>
                     
@@ -254,6 +257,7 @@
                             />
                           </svg>
                         </button>
+                        <!---->
                         <div ngbDropdownMenu>
                           <button
                             *ngxPermissionsOnly="['SendInvitation:User']"
@@ -280,6 +284,7 @@
       </div>
       <div class="col-auto">
         <button
+          *ngxPermissionsOnly="['SendInvitation:User']"
           type="button"
           class="btn custom-btn-1 mx-2"
           (click)="sendInvitationEmail()"

@@ -1,0 +1,44 @@
+<div class="modal fade" id="modalCancelAppointment" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100 mt-1">
+                    {{ modalConfig.title | transloco }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body p-4">
+                <form [formGroup]="appointmentForm" class="mt-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <select #profesional id="cancel" class="form-control" name="cancel"
+                                formControlName="cancel">
+                                <option value="null">{{ 'common.select.label' | transloco }}</option>
+                                <option [value]="item.name" *ngFor="let item of cancelsSelect">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="modal-footer text-center justify-content-center">
+                            <button type="button" class="btn btn-secondary rounded-pill"
+                                data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+                                (click)="cancelAppointment()" [disabled]="!appointmentForm.valid">
+                                {{ 'dashboard.home.uncategorized.cancelService.label' | transloco }}
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

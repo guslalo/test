@@ -16,6 +16,7 @@ export class UsersLogin {
 export class AdministrativeData {
   role: string;
   isActive: boolean;
+  clinicId: string;
 }
 
 // cliente
@@ -41,7 +42,8 @@ export class UserLogin {
       reportPolicies?: reportPolicies;
       medicalRecordPolicies?: medicalRecordPolicies;
     },
-    public photo?: string
+    public photo?: string,
+    public dependents?: any[]
   ) {}
 
   // cliente

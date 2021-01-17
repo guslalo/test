@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { PatientsService } from './patients.service';
+import { AppointmentEventsService } from './appointment-events.service';
+import { ProfessionalService } from './professional.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +16,14 @@ export class AppointmentsService {
   private session = '/session';
   private reserve = '/reserve';
   private coordinators = 'v1/coordinator';
-  private consolidate = '/consolidate';
+  private consolidate = '/consolidate'
+
   private reschedule = '/reschedule';
   private pagoStatus = 'v1/appointments/payment/status/';
   private inmediateAppointment = 'v1/administrative/immediate/state';
   private inmediate = 'v1/appointments/immediate/';
-  private immediateConsolidate = 'v1/appointments/immediate/consolidate';
+  private immediateConsolidate = 'v1/appointments/immediate/consolidate'
+  
   private pagoStatusInmediate = 'v1/appointments/immediate/status';
   private waitingForRooms = 'v1/waiting-rooms';
   private waitingAppointmentsForRooms = this.inmediate;
@@ -31,9 +37,38 @@ export class AppointmentsService {
   private cancel = 'v1/appointments/cancel'
   private subirAntecedentesMedico = 'v1/appointments/antecedents/'
   private eliminarAntecedentesMedico = this.subirAntecedentesMedico
+  private objetives = 'v1/objetives/'
+  private cancels = 'v1/cancels'
+  private prescripcionsRecemed = 'v1/prescriptions/create-prescription'
 
+  private listAppointmentTypes = 'v1/appointments/lists/';
 
-  constructor(private http: HttpClient) {}
+  private listForCoordinator = 'v1/appointments/coordinator/list/'
+  private quit = 'v1/appointments/quit-asignation'
+
+  public appointmentStatus = {
+    RESERVED: 'reserved',
+    APPOINTED: 'appointed',
+    RESCHEDULED: 'rescheduled',
+    ACTIVE: 'active',
+    WAITING_IN_ROOM: 'waitingInRoom',
+    IMMEDIATE_CREATED: 'created',
+    WAITING_IN_LIST: 'waitingInList',
+    PROCESS: 'process',
+    RUNNING: 'running',
+    PENDING: 'pending',
+    FINISHED: 'finished',
+    CANCELED: 'canceled',
+  };
+  reservedAppointment: any;
+  self: this;
+
+  constructor(
+    private http: HttpClient, 
+    private patientService: PatientsService, 
+    private appointmentsEvents: AppointmentEventsService,
+    private professionalService: ProfessionalService
+    ) { }
 
   paramsId(id) {
     let params = new HttpParams();
@@ -55,13 +90,24 @@ export class AppointmentsService {
       params = params.append('page', number);
       return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
     }
-    
+
+  }
+
+  getAllAppointmentsForCoordinator(number): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', number);
+    return this.http.get<any>(environment.baseUrl + this.listForCoordinator, { params: params } );
+  }
+
+  //trae todas las citas por tipos
+  getAppointmentsForTypes(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.listAppointmentTypes );
   }
 
   getAllAppointments(number): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', number);
-    return this.http.get<any>(environment.baseUrl + this.appointments + `/all/`, { params: params });
+    return this.http.get<any>(environment.baseUrl + this.appointments + `/`, { params: params });
   }
 
   getAllAppointmentsWaitinRooms(): Observable<any> {
@@ -127,9 +173,12 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.coordinators + '/appointment/reserve', reserve);
   }
 
-  //consolidate appointments
-  postConsolidate(consolidate): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate);
+  //consolidate appointment
+  
+  postConsolidate(consolidate): Observable<any> 
+  {
+    return this.http.post<any>(environment.baseUrl + this.appointments + this.consolidate, consolidate)
+    ;
   }
 
   //get Appointment professional data
@@ -146,15 +195,18 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.appointments + '/reschedule', object, { params: params });
   }
 
+  postQuitAsignation(id): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('appointmentId', id);
+    return this.http.post<any>(environment.baseUrl + this.quit, {}, { params: params })
+  }
+
   //reagendar 
   postCancelarAppointment(id): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', id);
-    return this.http.post<any>(environment.baseUrl + this.cancel, { }, { params: params });
+    return this.http.post<any>(environment.baseUrl + this.cancel, {}, { params: params });
   }
-
-
-  
 
   //events
   postRunAppointment(id): Observable<any> {
@@ -184,12 +236,21 @@ export class AppointmentsService {
     return this.http.put<any>(environment.baseUrl + this.appointments, appointmentDetails, { params: params });
   }
 
+  
+  //put ges notification/
+  /**/ 
+    putGesEno(id, gesEno): Observable<any> {
+      let params = new HttpParams();
+      params = params.append('appointmentId', id);
+      return this.http.put<any>(environment.baseUrl + 'v1/appointments/add-notificable-desease/', gesEno, { params: params });
+    }
+
   //subir antecedentes
   postAntecedentes(appointmentId, antecente, object): Observable<any> {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.post<any>(
-      environment.baseUrl + this.subirAntecedentesMedico + antecente + '/', {value:object}, { params: params }
+      environment.baseUrl + this.subirAntecedentesMedico + antecente + '/', { value: object }, { params: params }
     );
   }
 
@@ -198,7 +259,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.get<any>(
-      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/', { params: params });
+      environment.baseUrl + this.subirAntecedentesMedico + 'professional' + '/', { params: params });
   }
 
   //subir antecedentes
@@ -206,8 +267,8 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.post<any>(
-      environment.baseUrl + this.subirAntecedentesMedico+'professional'+ '/' + antecente + '/', 
-      { value:object },
+      environment.baseUrl + this.subirAntecedentesMedico + 'professional' + '/' + antecente + '/',
+      { value: object },
       { params: params }
     );
   }
@@ -218,7 +279,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.delete<any>(
-      environment.baseUrl + this.eliminarAntecedentesMedico + antecente + '/' + idAntecedente + '/',  { params: params }
+      environment.baseUrl + this.eliminarAntecedentesMedico + antecente + '/' + idAntecedente + '/', { params: params }
     );
   }
 
@@ -227,7 +288,7 @@ export class AppointmentsService {
     let params = new HttpParams();
     params = params.append('appointmentId', appointmentId);
     return this.http.delete<any>(
-      environment.baseUrl + this.eliminarAntecedentesMedico+'professional'+ '/'+ antecente + '/' + idAntecedente + '/',  { params: params }
+      environment.baseUrl + this.eliminarAntecedentesMedico + 'professional' + '/' + antecente + '/' + idAntecedente + '/', { params: params }
     );
   }
 
@@ -240,8 +301,10 @@ export class AppointmentsService {
     return this.http.post<any>(environment.baseUrl + this.inmediate, {});
   }
 
-  postImmediateConsolidate(object): Observable<any> {
-    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object);
+  postImmediateConsolidate(object): Observable<any> 
+  {
+    return this.http.post<any>(environment.baseUrl + this.immediateConsolidate, object)
+    ;
   }
 
   getPaymentStatusAppointmentInmediate(id): Observable<any> {
@@ -302,6 +365,7 @@ export class AppointmentsService {
       return this.http.post<any>(environment.baseUrl + this.blocks, {
         date,
         specialtyId: specialtyId,
+        professionalId: professionalId,
       });
     } else {
       return this.http.post<any>(environment.baseUrl + this.blocks, {
@@ -323,4 +387,158 @@ export class AppointmentsService {
       });
     }
   }
+
+  getObjetives(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.objetives);
+  }
+
+  reScheduleAppointment(date, hour, SpecialtiesId, professionalId, appointmentId, objetive): Observable<any> {
+
+     let object = {
+       appointmentDetails: {
+         objective: objetive
+       },
+       professionalDetails: {
+         specialtyId: SpecialtiesId,
+         userId: professionalId
+       },
+       dateDetails: {
+         date:{
+           day: date.day,
+           month: date.month,
+           year: date.year
+         },
+         start: hour
+      }
+     }
+     
+     return this.postReschedule(appointmentId, object)
+  }
+
+  search(patientControl, method){
+    return patientControl?.valueChanges.pipe(
+      startWith(''),
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(val => {
+        if (typeof val === 'string' && val)
+          switch (method) {
+            case 'patients':
+              return this.searchPatients(val || '')
+              break;
+      
+              case 'professionals':
+                return this.searchProfessionals(val || '')
+                break;
+  
+            default:
+              break;
+          }
+      })
+    )
+  }
+
+  searchPatients(query): Observable<any[]> {
+    return this.patientService.search(query)
+      .pipe(
+        map(res => this.createDisplayForSelect(res.payload, 'patient'))
+      )
+  }
+
+  searchProfessionals(query): Observable<any[]>{
+    return this.professionalService.search(query)
+    .pipe(
+      map(res => this.createDisplayForSelect(res.payload, 'other'))
+    )
+  }
+
+  createDisplayForSelect(item, role) {
+    if (item.length) {
+      return item.map(_e => {
+        let name
+
+        (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
+
+        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport != '') ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
+
+        name += _e.personalData.name + ' ' + _e.personalData.secondLastName
+
+        console.log(_e)
+        let _id
+
+        if(role == 'patient'){
+          _id = _e.userId
+        }else{
+          _id = _e._id
+        }
+        
+        let userId = _e.userData ? _e.userData[0]._id : 'NONE'
+
+        return { id: _id, name, userId }
+      })
+    } else {
+      return []
+    }
+  }
+  
+  cancelReasons(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.cancels);
+  }
+
+  createPrescriptionRecemed(data): Observable<any> {
+    return this.http.post<any>(environment.baseUrl + this.prescripcionsRecemed,  data);
+  }
+
+  reserveAppointment(reserva){
+    return new Promise((resolve, reject) => {
+      this.postReserve(reserva).subscribe(
+        (_data) => {
+          let reservedAppointment = {
+            data: _data,
+            self: this,
+            reserva: reserva
+          }
+          resolve(reservedAppointment)
+        },
+        (error) => {
+          reject(error)
+        }
+      );
+    })
+  }
+
+  consolidateHandler(reservedAppointment){
+    console.log(reservedAppointment)
+    return new Promise((resolve, reject) => {
+      let _obj = {
+        reserved: {
+          id: reservedAppointment.data.payload.id,
+          patientDetails: {
+            symptoms: [],
+            userId: reservedAppointment.reserva.patientDetails.userId
+          }
+        },
+        self: reservedAppointment.self
+      }
+      resolve(_obj)
+    })
+  }
+
+  consolidateAppointment(appointment){
+    return new Promise((resolve, reject) => {
+      appointment.self.postConsolidate(appointment.reserved)
+      .subscribe(
+        (data) => {
+          resolve(data)
+        },
+        (error) => {
+          reject(error)
+        }
+      )
+    })
+  }
+
 }

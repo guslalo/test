@@ -4,7 +4,8 @@
       <h2>{{ 'disponibility.title' | transloco }}</h2>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary rounded-pill float-right" *ngxPermissionsOnly="['Create:Availabilities']" ng-reflect-tour-anchor="agendar"
+      <button type="button" class="btn btn-primary rounded-pill float-right"
+        *ngxPermissionsOnly="['Create:Availabilities']" ng-reflect-tour-anchor="agendar"
         (click)="createAvailability.reset()" data-toggle="modal" data-target="#disponibilidad">
         {{ 'disponibility.btnNewDisponibility.label' | transloco }}
         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
@@ -121,7 +122,7 @@
                           {{ range.start }} hrs - {{ range.end }} hrs
                         </ng-container>
                       </td>
-                      <td class="col-2">{{ item.administrativeDetails.objective }}</td>
+                      <td class="col-2">{{ item.administrativeDetails.objetiveDetails?.name }}</td>
                       <td class="col-2">
                         <ng-container *ngFor="let specialty of item.professionalDetails.specialtyDetails">
                           {{ specialty.specialtyName }}
@@ -144,11 +145,13 @@
                             </svg>
                           </div>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <button data-toggle="modal" *ngxPermissionsOnly="['Update:Availabilities']" data-target="#editar" class="dropdown-item" type="button"
+                            <button data-toggle="modal" *ngxPermissionsOnly="['Update:Availabilities']"
+                              data-target="#editar" class="dropdown-item" type="button"
                               (click)="putAvailability(item._id)">
                               {{ 'clinicalFile.edit.label' | transloco }}
                             </button>
-                            <button class="dropdown-item" type="button" *ngxPermissionsOnly="['Delete:Availabilities']" (click)="deleteAvailability(item._id)">
+                            <button class="dropdown-item" type="button" *ngxPermissionsOnly="['Delete:Availabilities']"
+                              (click)="deleteAvailability(item._id)">
                               {{ 'common.button.delete.label' | transloco }}
                             </button>
                           </div>
@@ -258,7 +261,7 @@
           <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
             {{ 'disponibility.modal.create.title' | transloco }}
           </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetDailyRanges()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -267,9 +270,20 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input type="text" class="form-control" id="objective" formControlName="objective" [ngClass]="{
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <!-- <input type="text" class="form-control" id="objective" formControlName="objective" [ngClass]="{
                     'is-invalid': !createAvailability.get('objective').touched
-                  }" />
+                  }" /> -->
+
               </div>
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
@@ -402,7 +416,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+          <button type="button" class="btn btn-secondary rounded-pill" (click)="resetDailyRanges()" data-dismiss="modal">
             {{ 'common.button.cancel.label' | transloco }}
           </button>
           <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="crearAvailability()"
@@ -423,7 +437,7 @@
           <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">
             {{ 'clinicalFile.editDisponibility.label' | transloco }}
           </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetDailyRanges()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -432,11 +446,21 @@
             <div class="row">
               <div class="form-group col">
                 <label for="objective">{{ 'disponibility.modal.create.objetive.label' | transloco }}</label>
-                <input type="text" class="form-control" id="objective" name="objective" formControlName="objective"
+
+                <select class="form-control" name="objective" formControlName="objective" [ngClass]="{
+                  'is-invalid': !createAvailability.get('objective').touched
+                }">
+                  <option [ngValue]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [ngValue]="item._id" *ngFor="let item of objetives">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <!-- <input type="text" class="form-control" id="objective" name="objective" formControlName="objective"
                   [ngClass]="{
                     'is-invalid':
                       !createAvailability.get('objective').valid && createAvailability.get('objective').touched
-                  }" />
+                  }" /> -->
                 <!--   value="{{idAvailability.administrativeDetails.objective}}"-->
               </div>
               <div class="form-group col">
@@ -502,19 +526,17 @@
                 </p>
               </div>
               <div class="col">
-                <ng-container *ngFor="let data of daysSelected "> <!--let i = index-->
+                <ng-container *ngFor="let data of daysSelected ">
+                  <!--let i = index-->
                   <div class="custom-control custom-control-inline custom-checkbox pr-3">
-                    <input id="put{{ data.name }}" 
-                      class="custom-control-input" type="checkbox" 
-                      [value]="data.value"
-                      (change)="data.checked = !data.checked" 
-                      [checked]="data.checked" />
+                    <input id="put{{ data.name }}" class="custom-control-input" type="checkbox" [value]="data.value"
+                      (change)="data.checked = !data.checked" [checked]="data.checked" />
                     <label class="custom-control-label" for="put{{ data.name }}">
                       {{ data.name | transloco}}
-                    </label> 
+                    </label>
                   </div>
-                  
-                   
+
+
                 </ng-container>
               </div>
             </div>
@@ -610,7 +632,7 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" (click)="resetDailyRanges()" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
             (click)="actualizarAvailability(idAvailability._id)"
             [disabled]="!createAvailability.valid && !this.daysSelected.length">
@@ -629,7 +651,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header text-center">
-          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">Bloquear Días</h5>
+          <h5 class="modal-title text-center w-100 mt-1" id="exampleModalLabel">{{ 'disponibility.modal.blockDays.title' | transloco }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -638,7 +660,7 @@
           <form [formGroup]="availabilityBlocked" novalidate="">
             <div class="row">
               <div class="form-group col">
-                <label for="dateBlock">Fechas</label>
+                <label for="dateBlock">{{ 'common.dates.label' | transloco }}</label>
                 <div class="input-group">
                   <input class="form-control" type="text" placeholder="DD/MM/YYYY" id="dateBlock" name="dateBlock"
                     formControlName="dateBlock" [(ngModel)]="model3" [minDate]="minDate" ngbDatepicker
@@ -651,20 +673,20 @@
                 <div class="custom-control custom-control-inline custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="allDay" name="allDay" formControlName="allDay"
                     (click)="allDayBooleanState()" />
-                  <label class="custom-control-label" for="allDay">Todo el Día</label>
+                  <label class="custom-control-label" for="allDay">{{ 'disponibility.modal.blockDays.allDay.label' | transloco }}</label>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="startBlock">Horario inicial</label>
+                <label for="startBlock">{{ 'disponibility.modal.blockDays.initialDate.label' | transloco }}</label>
                 <div class="d-flex justify-content-center">
                   <ngb-timepicker id="startBlock" formControlName="startBlock"> </ngb-timepicker>
                 </div>
               </div>
               <div class="form-group col" [ngClass]="allDayBoolean === true ? 'd-none' : 'd-block'">
-                <label for="endBlock">Horario final</label>
+                <label for="endBlock">{{ 'disponibility.modal.blockDays.finalDate.label' | transloco }}</label>
                 <div class="d-flex justify-content-center">
                   <ngb-timepicker id="endBlock" formControlName="endBlock"> </ngb-timepicker>
                 </div>
@@ -673,10 +695,12 @@
           </form>
         </div>
         <div class="modal-footer text-center justify-content-center">
-          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">
+            {{ 'common.button.cancel.label' | transloco }}
+          </button>
           <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
             [disabled]="!availabilityBlocked.valid" (click)="postAvailabilityBlocked()">
-            Bloquear día
+            {{ 'disponibility.modal.blockDays.btnCreate.label' | transloco }}
           </button>
         </div>
       </div>

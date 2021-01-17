@@ -5,6 +5,11 @@ import { HomeService } from 'src/app/services/home.service';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { error } from 'protractor';
+import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { env } from 'process';
+import { environment } from 'src/environments/environment';
+declare var $:any;
 
 @Component({
   selector: 'app-inicio',
@@ -17,23 +22,34 @@ export class InicioComponent implements OnInit {
   public user: any;
   public tips: any;
   public inmediateAppointment: boolean;
+  public scheduleAppointment: boolean;
   public consultasActivas: any;
   public consultas: any;
   public nextAppointed: any;
   public consultasFinalizadas: any;
-  public appointment:boolean;
+  public appointment: boolean;
   public page: number = 1;
   public totalPages: number;
-  public idCancel:any;
+  public idCancel: any;
+  public setUp: string;
 
   constructor(
     public currentUserService: CurrentUserService,
     public homeService: HomeService,
+    private router: ActivatedRoute,
     public appointmentsService: AppointmentsService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.setUp = environment.setup;
+    this.router.queryParams.subscribe(params => {
+      const cancel = params['cancel'];
+      if(cancel){
+        $('#avisoCancelado1').modal('show');
+      }
+    });
+    console.log('PACIENTE')
     this.appointment = true;
     this.getAppointments();
     this.page = 1;
@@ -61,7 +77,11 @@ export class InicioComponent implements OnInit {
       this.inmediateAppointment = false;
     }
 
- 
+    if (localStorage.getItem('scheduleAppointment') === 'true') {
+      this.scheduleAppointment = true;
+    } else {
+      this.scheduleAppointment = false;
+    }
 
     this.homeService.getTips().subscribe(
       (data) => {
@@ -71,38 +91,41 @@ export class InicioComponent implements OnInit {
         console.log(error);
       }
     );
-
-
   }
 
-  
   getAppointments() {
     this.appointmentsService.getAppointments(1).subscribe(
       (data) => {
         console.log(data);
-        
+
         this.consultas = data.payload.filter((a) => a.administrativeDetails.status !== 'finished' && a.administrativeDetails.status !== 'canceled')
         this.totalPages = this.consultas.length;
+
         console.log(this.consultas)
-    
-        if (data.payload.length > 0) {
+
+        if (this.consultas.length > 0) {
           this.appointment = true;
-          let arrayForDate = data.payload.map((value) => value.dateDetails.date);
+
+          let arrayForDate = this.consultas.map((value) => value.dateDetails.date);
           var min = arrayForDate[0];
+
           arrayForDate.forEach((numero) => {
             if (numero < min) {
               min = numero;
             }
           });
-          this.nextAppointed = data.payload.filter((now) => now.dateDetails.date === min);
-          let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
-          this.consultasFinalizadas = finalizadas.length;
 
-          console.log(this.consultas);
-          /*var dates = data.payload.map(function(x) { return new Date(x.dateDetails.date); });
-          var latest = new Date(Math.max.apply(null,dates));
-          var earliest = new Date(Math.min.apply(null,dates));*/
-          //this.spinner.hide();
+          this.nextAppointed = this.consultas.filter((now) => {
+            if (now.dateDetails.date === min) {
+              return now
+            }
+          });
+
+          console.log(this.nextAppointed)
+
+          let finalizadas = data.payload.filter((finished) => finished.administrativeDetails.status === 'finished');
+
+          this.consultasFinalizadas = finalizadas.length;
         } else {
           this.appointment = false
         }
@@ -113,19 +136,10 @@ export class InicioComponent implements OnInit {
     );
   }
 
-  cancelarCita(id){
+  cancelarCita(id) {
     this.appointmentsService.postCancelarAppointment(id).subscribe(
       data => {
-        console.log(data);
-        this.appointmentsService.getAppointments(1).subscribe(
-          (data) => {
-            console.log(data);
-            this.consultas = data.payload;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.getAppointments()
       },
       error => {
         console.log(error)
@@ -133,9 +147,7 @@ export class InicioComponent implements OnInit {
     )
   }
 
-  idForCancel(id){
+  idForCancel(id) {
     this.idCancel = id;
   }
-
-  
 }

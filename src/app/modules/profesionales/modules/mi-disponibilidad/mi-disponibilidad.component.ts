@@ -22,6 +22,8 @@ import esLocale from '@fullcalendar/core/locales/es';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import { TranslocoService } from '@ngneat/transloco';
 
+import { AppointmentsService } from './../../../../services/appointments.service';
+
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
 // carrusel
@@ -65,7 +67,8 @@ export class MiDisponibilidadComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private professionalService: ProfessionalService,
     private specialtiesService: SpecialtiesService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private appointmentsService: AppointmentsService
   ) {
     const current = new Date();
     this.minDate = {
@@ -111,6 +114,7 @@ export class MiDisponibilidadComponent implements OnInit {
   public specialtiesId: string;
   public medicalSpecialties: any;
   public state: any;
+  public objetives: any;
 
   timeUpdated = new Subject<string>();
 
@@ -203,6 +207,8 @@ export class MiDisponibilidadComponent implements OnInit {
 
     this.agregardailyRanges();
     this.getSpecialtiesIdService();
+    this.getObjetives();
+    console.log(this.daysSelected)
   }
 
   // controls reactivos
@@ -213,6 +219,11 @@ export class MiDisponibilidadComponent implements OnInit {
     });
 
     this.dailyRanges.push(this.dailyRangeFormGroup);
+  }
+
+  resetDailyRanges(){
+    this.createAvailability.controls['dailyRanges'] = this._formBuilder.array([]);
+    this.agregardailyRanges();
   }
 
   removerDailyRanges(indice: number) {
@@ -287,13 +298,15 @@ export class MiDisponibilidadComponent implements OnInit {
         .postAvailability(formObject.administrativeDetails, formObject.professionalDetails, formObject.dateDetails)
         .subscribe(
           (data) => {
-            this.createAvailability.reset();
             this.daysSelected = [];
             // console.log(this.days);
             this.getAvailability();
             this.fetchCalendar();
+            this.createAvailability.reset();
+            this.resetDailyRanges();
           },
           (error) => {
+            this.createAvailability.reset();
             console.log(error);
           }
         );
@@ -362,6 +375,7 @@ export class MiDisponibilidadComponent implements OnInit {
   }
 
   actualizarAvailability(id) {
+
     //this.createAvailability = id;
     let _days = this.daysSelected
       .filter((item) => {
@@ -402,6 +416,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.daysSelected = [];
             this.getAvailability();
             this.fetchCalendar();
+            this.resetDailyRanges();
           },
           (error) => {
             console.log(error);
@@ -496,9 +511,21 @@ export class MiDisponibilidadComponent implements OnInit {
           .setValue(this.idAvailability.administrativeDetails.appointmentDuration);
 
         this.dailyRangeFormGroup.reset();
-
-        this.dailyRangeFormGroup.get('start').setValue(this.idAvailability.dateDetails.dailyRanges[0].start);
-        this.dailyRangeFormGroup.get('end').setValue(this.idAvailability.dateDetails.dailyRanges[0].end);
+        this.idAvailability.dateDetails.dailyRanges.forEach((element, index) => {
+          if(index == 0){
+            this.dailyRangeFormGroup.get('start').setValue(element.start);
+            this.dailyRangeFormGroup.get('end').setValue(element.end);
+          }else{
+            this.dailyRangeFormGroup = this._formBuilder.group({
+              start: ['', [Validators.required]],
+              end: ['', [Validators.required]],    
+            });
+            this.dailyRangeFormGroup.get('start').setValue(element.start);
+            this.dailyRangeFormGroup.get('end').setValue(element.end);
+            this.dailyRanges.push(this.dailyRangeFormGroup);
+          }
+        });
+        console.log(this.dailyRanges)
       },
       (error) => {
         console.log(error);
@@ -529,9 +556,11 @@ export class MiDisponibilidadComponent implements OnInit {
 
   //GET sub especialidad
   getSpecialtiesIdService() {
-    this.specialtiesService.getSpecialtiesId2().subscribe(
+
+    let _currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    this.specialtiesService.getSpecialtiesForprofessional(_currentUser.id).subscribe(
       (data) => {
-        console.log(data);
+        console.log('getSpecialtiesForprofessional', data);
         this.specialtiesId = data.payload;
         //this.bloquearSelect = false;
       },
@@ -608,4 +637,11 @@ export class MiDisponibilidadComponent implements OnInit {
       this.calendarOptions.events = events;
     }, 2000);
   }
+
+  getObjetives() {
+    this.appointmentsService.getObjetives().subscribe((data) => {
+      this.objetives = data
+    })
+  }
+
 }

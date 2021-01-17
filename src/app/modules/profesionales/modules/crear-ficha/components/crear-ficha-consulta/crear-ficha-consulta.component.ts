@@ -1,4 +1,4 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 import { DocumentService } from './../../../../../../services/document.service';
@@ -13,6 +13,11 @@ import { AdminitrativeService } from './../../../../../../services/administrativ
 import { TranslocoService } from '@ngneat/transloco';
 import { takeWhile } from 'rxjs/operators';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { DestiniesService } from 'src/app/services/destinies.service';
+
+import { IdleEventsService } from '../../../../../../services/idle-events.service';
+
+import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
 
 declare var $: any;
 
@@ -21,6 +26,7 @@ declare var $: any;
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
+
 export class CrearFichaConsultaComponent implements OnInit {
   public idConsulta: any;
   public appointmentDetail: any;
@@ -40,6 +46,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public signos: FormGroup;
   public otros: FormGroup;
   public consultasForm: FormGroup;
+  public formAddGesEno: FormGroup;
   public diagnostico: FormGroup;
   public notes: FormGroup;
   public nutricion: FormGroup;
@@ -70,6 +77,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   public addValidator: boolean;
   public modelAntecedente: any;
   public intervalGlobal: any;
+  public allergies: any;
 
   public sicknessByProfessional: any;
   public allergiesByProfessional: any;
@@ -87,9 +95,23 @@ export class CrearFichaConsultaComponent implements OnInit {
   public searchFormcontrol: boolean;
   public arrayDiagnostic = [];
   public arrayDiagnostic2 = [];
+  public objectDiagnostic:any;
   public preArray = []
   private alive: boolean;
-  
+  public destinies: any;
+  public destiniesSelected = [];
+  public destiniesToSave = [];
+
+  public videoCallStatus: any;
+  public setup: string;
+  public multi:boolean;
+  public multiGes:boolean;
+  public multiEno:boolean;
+
+  public objetives: any;
+  public notifiableDiseases = [];
+  public notifiableDiseases2 = { };
+  public interval:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -103,41 +125,72 @@ export class CrearFichaConsultaComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private adminitrativeService: AdminitrativeService,
     private translateService: TranslocoService,
-    private NgxPermissionsService: NgxPermissionsService
-  ) {}
+    private NgxPermissionsService: NgxPermissionsService,
+    private destinyService: DestiniesService,
+    private idleEvents: IdleEventsService,
+    private cdr: ChangeDetectorRef,
+    private appointmentEvents: AppointmentEventsService
+  ) { }
 
-  ngOnChanges(){
- 
+  ngOnDestroy(): void {
+    this.idleEvents.inVideoCall(false)
   }
 
-  ngOnInit(): void {
-  
 
-    this.NgxPermissionsService.permissions$.subscribe((permissions) => {
-        console.log(permissions)
-    })
+  ngOnInit(): void {
+
+   
+
+
+    this.objectDiagnostic = {
+      _id: null,
+      isGES: null,
+      isENO: null,
+      display: null
+    }
+
+    this.multi = false;
+    console.log(this.multi)
+
+    this.setup = environment.setup
+    //this.arrayDiagnostic = []
+
+    console.log(this.setup)
+
     this.alive = true;
     this.search = false;
     this.textInputFile = 'seleccionar archivo';
     this.spinner.show();
     this.permisoGuardar = false;
+
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
       this.appointmentId = params.appointmentId;
       this.getAppointmentsDetails(id);
+
+      if (this.setup != 'BR') {
+        //this.setAppointmentsDetails(id);
+      }
       this.setAppointmentsDetails(id);
       this.getAppointmentsProfessionalData(id);
       this.getAntecedentByProfessional(this.appointmentId);
+      this.getDestinies();
     });
+
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        this.getAppointmentsDetailsRefresh(this.appointmentId);
+       }, 10000);
+    }, 10000);
 
     $('#fichaConsulta').on('hidden.bs.modal', function () {
       this.clearId();
     })
 
-    $('.responseSearch').mouseout(function () {
-      $(this).css('display', 'none');
-      this.searchDisplay = false;
-    });
+    // $('.responseSearch').mouseout(function () {
+    //   $(this).css('display', 'none');
+    //   this.searchDisplay = false;
+    // });
 
     this.user = new UserLogin(
       JSON.parse(localStorage.getItem('currentUser')).id,
@@ -164,32 +217,40 @@ export class CrearFichaConsultaComponent implements OnInit {
       FR: [''],
       Temp: [''],
       Sat: [''],
-    },{ updateOn: 'blur' });
+    }, { updateOn: 'blur' });
 
     this.otros = this._formBuilder.group({
       physicalExam: [''],
       examHighlights: [''],
-    },{ updateOn: 'blur' });
+    }, { updateOn: 'blur' });
+
+    this.formAddGesEno = this._formBuilder.group({
+      page: [''],
+      diagnostic: [''],
+      type: [''],
+      observations: [''],
+    }, { updateOn: 'blur' });
 
     this.nutricion = this._formBuilder.group({
       weight: [''],
       height: [''],
       imc: [''],
       imcClassification: [''],
-    },{ updateOn: 'blur' });
+    }, { updateOn: 'blur' });
 
     this.consultasForm = this._formBuilder.group({
       motive: [''],
       objective: [''],
       anamnesis: [''],
-    },{ updateOn: 'blur' });
+    }, { updateOn: 'blur' });
 
     this.diagnostico = this._formBuilder.group({
       plan: ['', { updateOn: 'blur' }],
       diagnostic: ['',], // Validators.required
-      type: ['cie10', ], //Validators.required
+      type: ['cie10',], //Validators.required
       comments: ['', { updateOn: 'blur' }], //Validators.required
-      indications: ['',{ updateOn: 'blur' }],
+      indications: ['', { updateOn: 'blur' }],
+      destinies: ['',],
     });
 
     this.notes = this._formBuilder.group({
@@ -202,14 +263,16 @@ export class CrearFichaConsultaComponent implements OnInit {
       data: [null, [Validators.required]],
     });
 
-
+    this.getObjetives()
   }
 
-  saveAppointment(appointmentObject){
+  saveAppointment(appointmentObject) {
+    console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
-        if(environment.production === false){
-          //console.log(data);
+        console.log(data);
+        if (environment.production === false) {
+          console.log(data);
         }
       },
       (error) => {
@@ -218,9 +281,7 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-
-  
-  clearId(){
+  clearId() {
     this.idConsulta = null
   }
 
@@ -230,28 +291,28 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   //autoSave
-  autoSave(){
+  autoSave() {
 
     //consultas form
     this.consultasForm.valueChanges.subscribe((data) => {
-      if(this.consultasForm.controls.motive.value != null){
-        let appointmentObject = { 
+      if (this.consultasForm.controls.motive.value != null) {
+        let appointmentObject = {
           appointmentDetails: {
             motive: this.consultasForm.controls.motive.value
           }
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.consultasForm.controls.objective.value != null){
-        let appointmentObject = { 
+      if (this.consultasForm.controls.objective.value != null) {
+        let appointmentObject = {
           appointmentDetails: {
             objective: this.consultasForm.controls.objective.value
           }
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.consultasForm.controls.anamnesis.value != null){
-        let appointmentObject = { 
+      if (this.consultasForm.controls.anamnesis.value != null) {
+        let appointmentObject = {
           appointmentDetails: {
             anamnesis: this.consultasForm.controls.anamnesis.value
           }
@@ -262,71 +323,71 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     //signos
     this.signos.valueChanges.subscribe((data) => {
-      if(this.signos.controls.PAS.value != null){
+      if (this.signos.controls.PAS.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              PAS:this.signos.controls.PAS.value 
+              PAS: this.signos.controls.PAS.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.PAD.value != null){
+      if (this.signos.controls.PAD.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              PAD:this.signos.controls.PAD.value 
+              PAD: this.signos.controls.PAD.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.PAmedia.value != null){
+      if (this.signos.controls.PAmedia.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              PAmedia:this.signos.controls.PAmedia.value 
+              PAmedia: this.signos.controls.PAmedia.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.FC.value != null){
+      if (this.signos.controls.FC.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              FC:this.signos.controls.FC.value 
+              FC: this.signos.controls.FC.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.FR.value != null){
+      if (this.signos.controls.FR.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              FR:this.signos.controls.FR.value 
+              FR: this.signos.controls.FR.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.Temp.value != null){
+      if (this.signos.controls.Temp.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              Temp:this.signos.controls.Temp.value 
+              Temp: this.signos.controls.Temp.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.signos.controls.Sat.value != null){
+      if (this.signos.controls.Sat.value != null) {
         let appointmentObject = {
           patientDetails: {
             vitalSigns: {
-              Sat:this.signos.controls.Sat.value 
+              Sat: this.signos.controls.Sat.value
             }
           },
         };
@@ -336,21 +397,21 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     //nutricion
     this.nutricion.valueChanges.subscribe(() => {
-      if(this.nutricion.controls.weight.value != null){
+      if (this.nutricion.controls.weight.value != null) {
         let appointmentObject = {
           patientDetails: {
             nutritionalState: {
-              weight:this.nutricion.controls.weight.value 
+              weight: this.nutricion.controls.weight.value
             }
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.nutricion.controls.height.value != null){
+      if (this.nutricion.controls.height.value != null) {
         let appointmentObject = {
           patientDetails: {
             nutritionalState: {
-              height:this.nutricion.controls.height.value 
+              height: this.nutricion.controls.height.value
             }
           },
         };
@@ -359,47 +420,47 @@ export class CrearFichaConsultaComponent implements OnInit {
     });
 
     this.otros.valueChanges.subscribe(() => {
-      if(this.otros.controls.physicalExam.value != null){
+      if (this.otros.controls.physicalExam.value != null) {
         let appointmentObject = {
           appointmentDetails: {
-            physicalExam: this.otros.controls.physicalExam.value 
+            physicalExam: this.otros.controls.physicalExam.value
           },
         };
         this.saveAppointment(appointmentObject);
       }
-      if(this.otros.controls.examHighlights.value != null){
+      if (this.otros.controls.examHighlights.value != null) {
         let appointmentObject = {
           appointmentDetails: {
-            examHighlights: this.otros.controls.examHighlights.value 
+            examHighlights: this.otros.controls.examHighlights.value
           },
         };
         this.saveAppointment(appointmentObject);
       }
     });
 
-    this.diagnostico.get('plan').valueChanges.subscribe( x =>  {
-      if(this.diagnostico.controls.plan.value != null){
+    this.diagnostico.get('plan').valueChanges.subscribe(x => {
+      if (this.diagnostico.controls.plan.value != null) {
         let appointmentObject = {
           appointmentDetails: {
-            plan: this.diagnostico.controls.plan.value  
+            plan: this.diagnostico.controls.plan.value
           },
         };
         this.saveAppointment(appointmentObject);
-       }
       }
+    }
     );
 
     //diagnostico
     this.diagnostico.valueChanges.subscribe((data) => {
       //console.log(data);
-      if(this.diagnostico.controls.comments.value  != null){
+      if (this.diagnostico.controls.comments.value != null) {
         let appointmentObject = {
           appointmentDetails: {
             diagnosticDetails: {
               comments: this.diagnostico.controls.comments.value,
               diagnostics: this.arrayDiagnostic
             }
-            
+
           },
         };
         this.saveAppointment(appointmentObject);
@@ -417,61 +478,21 @@ export class CrearFichaConsultaComponent implements OnInit {
         };
         this.saveAppointment(appointmentObject);
       }*/
-    
-      if(this.diagnostico.controls.indications.value != null){
+
+      if (this.diagnostico.controls.indications.value != null) {
         let appointmentObject = {
           appointmentDetails: {
             diagnosticDetails: {
               indications: this.diagnostico.controls.indications.value,
               diagnostics: this.arrayDiagnostic
             }
-            
           },
         };
-      
         this.saveAppointment(appointmentObject);
-      } 
-    });
+      }
+    }
+    );
 
-    /*let appointmentObject = {
-      patientDetails: {
-        vitalSigns: this.signos.value,
-        nutritionalState: this.nutricion.value,
-      },
-      appointmentDetails: {
-        diagnosticDetails: {
-          //type: this.diagnostico.controls.type.value,
-          diagnostics: this.arrayDiagnostic,
-          comments: this.diagnostico.controls.comments.value,
-          indications: this.diagnostico.controls.indications.value,
-        },
-        motive: this.consultasForm.controls.motive.value,
-        objective: this.consultasForm.controls.objective.value,
-        anamnesis: this.consultasForm.controls.anamnesis.value,
-        physicalExam: this.otros.controls.physicalExam.value,
-        examHighlights: this.otros.controls.examHighlights.value,
-        plan: this.diagnostico.controls.plan.value
-      },
-    };*/
-    //signosForm
-   
-    /*
-    this.signos.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.otros.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.nutricion.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.diagnostico.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    this.addExamen.valueChanges.subscribe(() => {
-      this.putAppointment( this.appointmentId)
-    });
-    */
 
   }
 
@@ -479,17 +500,232 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.search = true;
   }
 
-  selectDiagnostico(item) { 
-    this.preArray.push({
-      display:item.display,
-      _id: item._id,
-      type: 'cie10'
-    })
-    this.arrayDiagnostic = this.preArray.filter((valorActual, indiceActual, arreglo) => {
-      return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
-    });
+  notify(item){
+    this.objectDiagnostic = item;
+    if (environment.setup === 'CL') {
+      if (item.isGES === true) {    
+          
+        $('#addNotificationGes').modal('show')
+      }
+      if (item.isENO === true) {
+        // console.log(item)
+        $('#addNotificationEno').modal('show')
+      }
+   }
+  }
 
-    if(this.arrayDiagnostic!= null){
+  selectDiagnostico(item) {
+    console.log(item)
+    console.log('multi',  this.multi)
+    this.arrayDiagnostic.push(item);
+    this.objectDiagnostic = item
+    console.log( this.objectDiagnostic)
+    this.updateModelDiagnostics();
+
+    if (item.isGES === true && item.isENO === false) {
+      this.multi = false;
+    }
+    if (item.isENO === true && item.isGES === false) {
+      this.multi = false;
+    }
+    if (environment.setup === 'CL') {
+      if (item.isGES === true && item.isENO === false) {
+        this.multi = false;
+        
+        $('#addNotificationGes').modal('show')
+      }
+      if (item.isENO === true && item.isGES === false) {
+        this.multi = false;
+        $('#addNotificationEno').modal('show')
+      }
+      if (item.isENO === true && item.isGES === true) {
+        // console.log(item)
+        this.multi = true;
+        $('#addNotificationGes').modal('show')
+        $('#addNotificationEno').modal('show')
+        //$('#addNotificationGesEno').modal('show')
+      }
+
+      let _i = this.notifiableDiseases?.map((e) => {
+        return e.diagnostic._id
+      }).indexOf(item._id);
+
+      if (_i >= 0) return
+
+     if (this.multi = true ){
+        if(this.multiGes == true && this.multiEno == false) {
+          this.notifiableDiseases.push({
+            isENO: false,
+            isGES: true,
+            diagnostic: item,
+          })
+        }
+        if(this.multiGes == false && this.multiEno == true) {
+          this.notifiableDiseases.push({
+            isENO: true,
+            isGES: false,
+            diagnostic: item,
+          })
+        }
+
+      } else {
+        this.notifiableDiseases.push({
+          isENO: item.isENO,
+          isGES: item.isGES,
+          diagnostic: item,
+        })
+      }/* 
+
+      this.notifiableDiseases.push({
+        isENO: item.isENO,
+        isGES: item.isGES,
+        diagnostic: item,
+      })*/
+    
+     
+      //this.arrayDiagnostic2.push(item);
+      console.log( this.arrayDiagnostic2)
+      
+     
+      // this.arrayDiagnostic = []/**/
+      
+      /*
+      this.arrayDiagnostic.push({
+        display: item.display,
+        _id: item._id,
+        type: 'cie10',
+        isENO: item.isENO,
+        isGES: item.isGES
+      })*/
+
+      console.log(this.arrayDiagnostic)
+
+      /*let appointmentObject = {
+        appointmentDetails: {
+          diagnosticDetails: {
+            diagnostics: this.arrayDiagnostic
+          }
+        },
+      };*/
+      //this.updateModelNotifiableDiseases()
+      this.updateModelDiagnostics();
+      //this.saveAppointment(appointmentObject)
+    } else {
+      // setup BR
+
+      let _i = this.arrayDiagnostic.map((e) => {
+        return e._id
+      }).indexOf(item._id);
+
+      if (_i >= 0) return
+
+      item.type = 'cie10'
+      this.objectDiagnostic = item
+      this.arrayDiagnostic.push(item)
+      console.log(this.arrayDiagnostic)
+
+      this.updateModelDiagnostics()
+    }
+
+    // this.objectDiagnostic = item;
+
+    // console.log(item)
+
+    // this.objectDiagnostic = {
+    //   _id: item._id,
+    //   isGES: item.isGES,
+    //   isENO: item.isENO,
+    //   display: item.display
+    // }
+
+    // this.arrayDiagnostic.push({
+    //   display: item.display,
+    //   _id: item._id,
+    //   type: 'cie10',
+    //   isENO: item.isENO,
+    //   isGES: item.isGES
+    // })
+
+    // this.updateModelDiagnostics()
+  }
+
+  nextStep(type) {
+    console.log('ges',this.multiGes)
+    if(this.multiGes == true) {
+      this.multiEno = false
+    }
+
+    if(this.multiGes == false ||  this.multiEno == true) {
+      this.multiEno = true
+      
+    }
+    
+    console.log('eno', this.multiEno)
+    if (type === 'eno' ) {
+      window.open('https://epivigila.minsal.cl/', "_blank");
+      $('#addEno').modal('hide')
+      $('#addGesEno').modal('show')
+    }
+    if (type === 'ges') {
+      $('#addGesEno').modal('show')
+      $('#addGes').modal('hide')
+    }
+  }
+  addRegistryGesEno2(){
+   
+    this.updateModelNotifiableDiseases();
+    console.log("Se ejecuta")
+    //
+
+    // /*this.notifiableDiseases.forEach((e) => {
+    //   console.log(e);
+    //   e.professionalId = JSON.parse(localStorage.getItem('currentUser')).id,
+    //     e.page = this.formAddGesEno.getRawValue().page,
+    //     e.type = this.formAddGesEno.getRawValue().type,
+    //     e.observations = this.formAddGesEno.getRawValue().observations
+    // })*/
+    //  console.log(appointmentObject)
+    //  this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     if (environment.production === false) {
+    //       console.log(data);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    //this.getAppointmentsDetails(this.appointmentId)
+  }
+
+  addRegistryGesEno() {
+    //let DataisENO = this.objectDiagnostic.isENO
+
+    //this.updateModelNotifiableDiseases()
+
+    // let appointmentObject = {
+    //   appointmentDetails: {
+    //     notifiableDiseases: [
+    //       {
+    //         diagnostic: this.objectDiagnostic,
+    //         professionaId: '5f580599fd059702a80d14d1',
+    //         page: this.formAddGesEno.controls.page.value,
+    //         observations: this.formAddGesEno.controls.observations.value
+    //       }
+    //     ]
+    //   },
+    // };
+    /*
+            isENO: true,
+            isGES: false,
+    */
+    // this.saveAppointment(appointmentObject);
+    this.getAppointmentsDetails(this.appointmentId)
+  }
+
+  updateModelDiagnostics() {
+    if (this.arrayDiagnostic != null) {
       let appointmentObject = {
         appointmentDetails: {
           diagnosticDetails: {
@@ -498,46 +734,122 @@ export class CrearFichaConsultaComponent implements OnInit {
         },
       };
       this.saveAppointment(appointmentObject);
-    } 
+    }
   }
 
-  deleteDiagnostic(_id){
-    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id !== _id);
-    this.arrayDiagnostic2 =  [...this.arrayDiagnostic.filter(item => item._id !== _id)]; 
-    console.log(this.arrayDiagnostic);
-    if(this.arrayDiagnostic!= null){
-      let appointmentObject = {
-        appointmentDetails: {
-          diagnosticDetails: {
-            diagnostics: this.arrayDiagnostic
+  updateModelNotifiableDiseases() {
+    //console.log(this.objectDiagnostic);
+    if(this.objectDiagnostic._id == null) {
+      this.objectDiagnostic = this.arrayDiagnostic[this.arrayDiagnostic.length - 1];
+    }
+    this.notifiableDiseases2 = {
+      name: JSON.parse(localStorage.getItem('currentUser')).name + ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName,
+      professionalId: JSON.parse(localStorage.getItem('currentUser')).id,
+      page: this.formAddGesEno.getRawValue().page,
+      type: this.formAddGesEno.getRawValue().type,
+      observations: this.formAddGesEno.getRawValue().observations,
+      isENO: this.multiEno,
+      isGES: this.multiGes,
+      diagnostic: this.objectDiagnostic,
+    };
+
+    this.appointmentsService.putGesEno(this.appointmentId, this.notifiableDiseases2).subscribe(
+        (data) => {
+          console.log(data);
+          if (environment.production === false) {
+            console.log(data);
           }
+          this.getAppointmentsDetailsRefresh(this.appointmentId);
+          this.multiGes = false;
+          this.multiEno = false;
+          //this.multi = false;
+         
+          this.formAddGesEno.reset();
         },
-      };
-      this.saveAppointment(appointmentObject);
-    } 
+        (error) => {
+          console.log(error);
+        }
+    );
   }
 
+  displayDiagnosticsSetupBR(_array) {
+    this.arrayDiagnostic = _array?.map((item) => { return item.diagnostic })
+  }
+
+  deleteDiagnostic(_id) {
+    this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+    this.updateModelDiagnostics();
+    //
+    if (environment.setup === 'CL') {
+      this.notifiableDiseases = this.notifiableDiseases.filter(item => item.diagnostic._id != _id)
+      this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+      this.updateModelDiagnostics();
+      //this.displayDiagnosticsSetupBR(this.notifiableDiseases)
+
+      console.log(this.notifiableDiseases, _id)
+ 
+
+      //this.updateModelNotifiableDiseases()
+    } else {
+      this.arrayDiagnostic = this.arrayDiagnostic.filter(item => item._id != _id);
+      this.updateModelDiagnostics()
+    }
+  }
+
+  trackItem(index: number, item: any) {
+    return item._id
+  }
+  searchInModal(){
+    $( "#diagnostics" ).focus();
+    $( ".searchBox2 .responseSearch" ).show();
+  }
+
+  searchInModalHide(){
+    $( ".searchBox2 .responseSearch" ).hide();
+  }
   //buscador de diagnostico
   onChangeSearch(event) {
+    
+    console.log(event)
+    this.searchResponse = null;
     //this.arrayDiagnostic =   this.arrayDiagnostic2;
-    console.log(this.searchFormcontrol);
-    if (event && event.length >= 2 ) {
+    // console.log(this.searchFormcontrol);
+    //this.searchResponse = null;
+    /*$("#addGesEno").on("click","#titlelabelgeseno", function(){
+      alert("success");
+    });*/
+    //
+    $(document).on('change','#titlelabelgesen',function(){
+      //your code
+      })
+    if (event && event.length >= 2 ) { //
+
+   
+
       this.spinnerSearch = true;
+
       setTimeout(() => {
         console.log('busqueda activada', event);
+
         this.adminitrativeService.searchDiagnostic('cie10', event).subscribe(
-          (data) => { 
+          (data) => {
             //this.searchFormcontrol = true
+
+            //this.cdr.detectChanges();
+
             this.spinnerSearch = false;
             this.searchDisplay = true;
             this.searchResponse = data.payload;
-            console.log(data);
+
+            console.log('this.searchResponse', this.searchResponse);
           },
           (error) => {
             console.log(error);
           }
         );
-      }, 600);
+
+      }, 800);
+
     } else {
       console.log('busqueda inactiva', event);
     }
@@ -575,6 +887,41 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onChange(deviceValue) {
+    $("#selectSintomaId option:selected").attr('disabled', 'disabled');
+    if (this.destiniesSelected.find((element) => element.destinyId == deviceValue.value)) return
+    this.destiniesToSave.push(deviceValue.value);
+    let selectedDestiny = {
+      destinyId: deviceValue.value,
+      name: deviceValue.selectedOptions[0].innerText,
+    };
+    this.destiniesSelected.push(selectedDestiny);
+    let appointmentObject = {
+      appointmentDetails: {
+        patientDestinies: this.destiniesToSave
+      },
+    };
+
+    this.saveAppointment(appointmentObject)
+    this.getAppointmentsDetailsRefresh(this.appointmentId);
+  }
+
+  getDestinies() {
+    this.destinyService.getDestinies().subscribe(
+      (data) => {
+        this.destinies = data.payload
+      },
+      (error) => console.log(error)
+    )
+  }
+
+  removeDestiny(destino) {
+    this.destiniesSelected = this.destiniesSelected.filter((val) => val.destinyId !== destino);
+    this.destiniesToSave = [...this.destiniesSelected.filter((val) => val.destinyId !== destino).map(val => val.destinyId)]
+    console.log(this.destiniesSelected)
+    this.destinyService.deleteDestiny(this.appointmentId, destino).subscribe(data => console.log(data), error => console.log(error));
   }
 
   //update appointmentDetails
@@ -616,12 +963,16 @@ export class CrearFichaConsultaComponent implements OnInit {
       (data) => {
         this.trustedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(data.payload.requestUrl);
         console.log(data);
+
         setTimeout(() => {
           this.spinner.hide();
         }, 3000);
+        
         this.sibrareDocumentId = data.payload.documentId;
+
         console.log(this.sibrareDocumentId);
         console.log(this.appointmentId);
+        
         let interval = setInterval(() => {
           this.appointmentsService.getSibrareStatus(this.appointmentId, this.sibrareDocumentId).subscribe(
             (data) => {
@@ -708,10 +1059,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   getMedicalRecord(id) {
     this.medicalRecord.getByUserId(id).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         this.exams = data.payload.exams;
         this.antecedentesGeneral = data.payload.antecedent;
+        this.allergies = data.payload.antecedent.allergies;
         this.antecedentes = data.payload.antecedent.sickness;
+       
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed.filter((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
+        }
       },
       (error) => {
         console.log(error);
@@ -768,11 +1124,11 @@ export class CrearFichaConsultaComponent implements OnInit {
       type: this.addExamen.controls.type.value,
       file: this.base64.split(',')[1],
     };
-    this.putAddExamen(formObject, this.userId);
+    this.putAddExamen(formObject, this.userId );
   }
 
   putAddExamen(object, id: string) {
-    this.medicalRecordService.putAddExamen(object, id).subscribe(
+    this.medicalRecordService.putAddExamen(object, id, this.appointmentId).subscribe(
       (data) => {
         console.log(data);
         this.getAppointmentsDetailsRefresh(this.appointmentId);
@@ -781,6 +1137,10 @@ export class CrearFichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  refreshData(){
+    this.getAppointmentsDetailsRefresh(this.appointmentId);
   }
 
   openFile(event) {
@@ -798,6 +1158,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   getSession(id: string) {
+
+    console.log('getSession')
+    console.log('id', id)
+
     this.appointmentsService.getAppointmentsSession(id).subscribe(
       (data) => {
         console.log(data);
@@ -813,6 +1177,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.jitsiGlobal = new (window as any).JitsiMeetExternalAPI(this.url[1].replace('/', ''), options);
         this.jitsiGlobal.executeCommand('subject', 'Consulta');
         console.log(data);
+
+        this.idleEvents.inVideoCall(true)
       },
       (error) => {
         console.log(error);
@@ -897,15 +1263,22 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
-  async setAppointmentsDetails(id){
+  async setAppointmentsDetails(id) {
+    console.log('setAppointmentsDetails', id)
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       data => {
+
+        console.log('setAppointmentsDetails => getAppointmentsDetails', data)
+
         this.consultasForm.controls['motive'].setValue(data.payload.appointmentDetails.motive);
         this.consultasForm.controls['objective'].setValue(data.payload.appointmentDetails.objective);
         this.consultasForm.controls['anamnesis'].setValue(data.payload.appointmentDetails.anamnesis);
 
-        this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);     
+        this.otros.controls['physicalExam'].setValue(data.payload.appointmentDetails.physicalExam);
         this.otros.controls['examHighlights'].setValue(data.payload.appointmentDetails.examHighlights);
+
+
         /*
         if(
           data.payload.patientDetails.vitalSigns.PAS != null,
@@ -925,6 +1298,8 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.signos.controls['Sat'].setValue(data.payload.patientDetails.vitalSigns.Sat);
         }*/
 
+
+      
         this.signos.controls['PAS'].setValue(data.payload.patientDetails.vitalSigns.PAS);
         this.signos.controls['PAD'].setValue(data.payload.patientDetails.vitalSigns.PAD);
         this.signos.controls['PAmedia'].setValue(data.payload.patientDetails.vitalSigns.PAmedia);
@@ -941,52 +1316,82 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.diagnostico.controls['plan'].setValue(data.payload.appointmentDetails.plan);
         this.diagnostico.controls['comments'].setValue(data.payload.appointmentDetails.diagnosticDetails.comments);
         this.diagnostico.controls['indications'].setValue(data.payload.appointmentDetails.diagnosticDetails.indications);
+
+        this.appointmentDetail.appointmentDetails.patientDestinies.forEach(element => {
+          this.destiniesSelected.push(element)
+        });
       }
     )
   }
 
+  
+
   getAppointmentsDetails(id) {
+
+    console.log('getAppointmentsDetails', id)
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
-        this.getVerifiedSibrareDocuments2(id);
+
+        console.log('getAppointmentsDetails => DATA', data)
+
+        this.appointmentEvents.setAppointmentReagendamiento$.emit(data.payload)
+
+        if(environment.setup == 'BR'){ 
+          this.getVerifiedSibrareDocuments2(id);
+        }
+
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.getAppointmentsTimeline(this.userId);
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
-        this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+
+        if (environment.setup === 'CL') {
+
+          this.displayDiagnosticsSetupBR(data.payload.appointmentDetails.notifiableDiseases)
+          this.notifiableDiseases = data.payload.appointmentDetails.notifiableDiseases
+          this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+
+        } else {
+          this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
+        }
+
         console.log(this.arrayDiagnostic)
+
         this.notesArray = data.payload.appointmentDetails.notes;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
-        
-        console.log(this.appointmentDetail);
 
-        if(this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending'){
+        console.log(this.appointmentDetail.administrativeDetails.status)
+
+        if (this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
           this.autoSave();
         } else {
           this.permisoGuardar = false;
         }
 
-        if (this.appointmentDetail.administrativeDetails.status === 'running') {
+        if (this.appointmentDetail.administrativeDetails.status == 'waitingInList' || this.appointmentDetail.administrativeDetails.status == 'created') {
+          this.attendPatient(id, (data) => {
+            // this.appointmentDetail.administrativeDetails.status = 'running'
+            this.getSession(id);
+            this.permisoGuardar = true;
+            this.videoCall = true;
+
+            this.floatVideoCallViewer()
+
+            this.getAppointmentsDetailsRefresh(id)
+          })
+        }
+
+        if (this.appointmentDetail.administrativeDetails.status == 'running') {
           this.getSession(id);
           this.permisoGuardar = true;
           this.videoCall = true;
+          this.floatVideoCallViewer()
+        }
 
+        this.appointmentEvents.setAppointmentDetails$.emit(data.payload)
 
-          //modo flotante video call
-          $(window).bind('scroll', function () {
-            if ($(window).scrollTop() > 200) {
-              $('.vistaFixed').addClass('fixed');
-              $('.mtfixed').css('margin-top', 400);
-              $('.vistaFixed .card').css('box-shadow', 'none !important');
-            } else {
-              $('.toolbox-icon').click();
-              console.log('no fixed');
-              $('.mtfixed').css('margin-top', 0);
-              $('.vistaFixed').removeClass('fixed');
-            }
-          });
-        } 
         /*
         if (this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
@@ -999,16 +1404,66 @@ export class CrearFichaConsultaComponent implements OnInit {
     );
   }
 
+  floatVideoCallViewer() {
+    //modo flotante video call
+    $(window).bind('scroll', function () {
+      if ($(window).scrollTop() > 200) {
+        $('.vistaFixed').addClass('fixed');
+        $('.mtfixed').css('margin-top', 400);
+        $('.vistaFixed .card').css('box-shadow', 'none !important');
+      } else {
+        $('.toolbox-icon').click();
+        console.log('no fixed');
+        $('.mtfixed').css('margin-top', 0);
+        $('.vistaFixed').removeClass('fixed');
+      }
+    });
+  }
+
+  attendPatient(id, cb) {
+    this.appointmentsService.attendAppointmentInmediate(id).subscribe(
+      (data) => {
+        cb(data)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getAppointmentsDetailsRefresh(id) {
+
+    console.log('getAppointmentsDetailsRefresh')
+
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
+        //console.log(data);
+        
+        if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
+          clearInterval(this.interval)
+          if(data.payload.administrativeDetails.status == 'canceled'){
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'cancel'
+              }
+            });
+          }else{
+            this.router.navigate(['/app-professional'], {
+              queryParams: {
+                motive: 'quit'
+              }
+            });
+          }
+        }
+
         this.appointmentDetail = data.payload;
         this.userId = this.appointmentDetail.patientDetails.userDetails.userId;
         this.fotoUser = this.appointmentDetail.patientDetails.userDetails.photo;
         this.notesArray = data.payload.appointmentDetails.notes;
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
-        console.log(this.appointmentDetail);
+
+        //console.log(this.appointmentDetail);
       },
       (error) => {
         console.log(error);
@@ -1081,12 +1536,12 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   //Calcular Indice de Masa Corporal
-  imcCalculateFromWeight(event){
+  imcCalculateFromWeight(event) {
     //Obtengo el valor de la altura y el peso
     let weight = event.srcElement.value || "0";
     let height = this.nutricion.controls['height'].value || "0.1";
-    weight = parseFloat(weight.replace(',','.'))
-    height = parseFloat(height.replace(',','.'))
+    weight = parseFloat(weight.replace(',', '.'))
+    height = parseFloat(height.replace(',', '.'))
     // formula para el calculo
 
     let imc = (weight) / (height * height);
@@ -1094,12 +1549,12 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.setImc(imc)
   }
 
-  imcCalculateFromHeight(event){
+  imcCalculateFromHeight(event) {
     //Obtengo el valor de la altura y el peso
     let weight = this.nutricion.controls['weight'].value || "0";
     let height = event.srcElement.value || "0.1";
-    weight = parseFloat(weight.replace(',','.'))
-    height = parseFloat(height.replace(',','.'))
+    weight = parseFloat(weight.replace(',', '.'))
+    height = parseFloat(height.replace(',', '.'))
     // formula para el calculo
 
     let imc = (weight) / (height * height);
@@ -1107,34 +1562,38 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.setImc(imc)
   }
 
-  setImc(imc: number){
+  setImc(imc: number) {
     this.nutricion.controls['imc'].setValue(imc.toFixed(2));
-    if(imc < 18.50){
+    if (imc < 18.50) {
       let bajo = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.low')
       this.nutricion.controls['imcClassification'].setValue(bajo);
-    }else if(imc >= 18.50 && imc < 25){
+    } else if (imc >= 18.50 && imc < 25) {
       let normal = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.normal')
       this.nutricion.controls['imcClassification'].setValue(normal);
-    }else if(imc >= 25 && imc < 30){
+    } else if (imc >= 25 && imc < 30) {
       let above = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.over')
       this.nutricion.controls['imcClassification'].setValue(above);
-    }else if(imc >= 30 && imc < 35){
+    } else if (imc >= 30 && imc < 35) {
       let type1 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type1')
       this.nutricion.controls['imcClassification'].setValue(type1);
-    }else if(imc >= 35 && imc < 40){
+    } else if (imc >= 35 && imc < 40) {
       let type2 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type2')
       this.nutricion.controls['imcClassification'].setValue(type2);
-    }else {
+    } else {
       let type3 = this.translateService.translate('clinicalFile.patientData.tabs.summary.nutritional.imcClasification.values.type3')
       this.nutricion.controls['imcClassification'].setValue(type3);
     }
   }
 
 
+  getObjetives() {
+    this.appointmentsService.getObjetives().subscribe((data) => {
+      this.objetives = data
+    })
+  }
 
-
-
-
-
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 
 }

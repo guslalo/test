@@ -82,3 +82,111 @@ pipelines:
             ZIP_FILE: "itms-frontend.zip"
             S3_BUCKET: elasticbeanstalk-us-east-1-273347846553
             WAIT: 'true'
+    chile:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-chile
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Chile"
+        deployment: chile
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            APPLICATION_NAME: itms-frontend
+            ENVIRONMENT_NAME: ItmsFrontend-cl
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+            WAIT: 'true'
+    medline:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-medline
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Medline"
+        deployment: medline
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: AKIAT7JGNEGM5C5PE6P5
+            AWS_SECRET_ACCESS_KEY: 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
+            AWS_DEFAULT_REGION: us-east-1
+            APPLICATION_NAME: Tcregional-FrontEnd-MedilineEnv
+            ENVIRONMENT_NAME: TcregionalFrontendMedilineenv-env
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
+            WAIT: 'true'
+    homeclinic:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-homeclinic
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend.zip
+    - step:
+        name: "Deploy to Home Clinic"
+        deployment: homeclinic
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            APPLICATION_NAME: itms-frontend-homeclinic
+            ENVIRONMENT_NAME: itms-frontend-homeclinic
+            ZIP_FILE: "itms-frontend.zip"
+            S3_BUCKET: 'elasticbeanstalk-homeclinic'
+            WAIT: 'true'
+    atryschile:
+    - step:
+        caches:
+          - node
+        name: "Build"
+        script:
+          - npm install
+          - npm run build-atryschile
+          - apt-get update && apt-get install -y
+          - apt-get install zip
+          - zip -r itms-frontend-atryschile.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+        artifacts:
+          - itms-frontend-atryschile.zip
+    - step:
+        name: "Deploy to atryschile"
+        deployment: atryschile
+        script:
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+          variables:
+            AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
+            AWS_SECRET_ACCESS_KEY: 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
+            AWS_DEFAULT_REGION: us-east-1
+            APPLICATION_NAME: Atrys-TCRegional-FrontEnd
+            ENVIRONMENT_NAME: AtrysTcregionalFrontend-env
+            ZIP_FILE: "itms-frontend-atryschile.zip"
+            S3_BUCKET: 'elasticbeanstalk-us-east-1-023564466378'
+            WAIT: 'true'

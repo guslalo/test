@@ -16,7 +16,8 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, listPlugin, i
 
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbDatepickerModule, NgbRatingModule, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgbdTimepickerBasic } from './timepicker-basic';
 
 // Translation
@@ -32,13 +33,21 @@ import { PasswordStrengthMeterModule } from './modules/password-strength/passwor
 // components
 import { ChangePassComponent } from './modules/change-pass/change-pass.component';
 import { PerfilComponent } from './modules/mi-perfil/mi-perfil.component';
+import { PerfilCLComponent } from './modules/mi-perfil-cl/mi-perfil-cl.component';
 import { LoaderComponent } from './loaders/loader.component';
 import { LangComponent } from './lang/lang.component';
 
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { CreateAppointmentComponent } from './modules/create-appointment/create-appointment.component';
+import { RescheduleAppointmentComponent } from './modules/reschedule-appointment/reschedule-appointment.component';
+import { CancelAppointmentComponent } from './modules/cancel-appointment/cancel-appointment.component';
+import { RecemedPrescriptionComponent } from './modules/recemed-prescription/recemed-prescription.component';
+import { RecemedProcedureComponent } from './modules/recemed-procedure/recemed-procedure.component';
+import { RecemedCertificateComponent } from './modules/recemed-certificate/recemed-certificate.component';
+import { RecemedExamOrderComponent } from './modules/recemed-exam-order/recemed-exam-order.component';
 
 @NgModule({
-  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, LoaderComponent, LangComponent],
+  declarations: [NgbdTimepickerBasic, ChangePassComponent, PerfilComponent, PerfilCLComponent, LoaderComponent, LangComponent, CreateAppointmentComponent, RescheduleAppointmentComponent, CancelAppointmentComponent, RecemedPrescriptionComponent, RecemedProcedureComponent, RecemedCertificateComponent, RecemedExamOrderComponent],
   imports: [
     CommonModule,
     // HttpClientModule,
@@ -58,7 +67,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxPermissionsModule,
     NgxMaskModule.forRoot({
       validation: true,
-    })
+    }),
+    NgbPaginationModule,
+    NgbTimepickerModule,
+    MatAutocompleteModule
   ],
   exports: [
     // MODULES TO RE-USE
@@ -79,7 +91,14 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgbdTimepickerBasic,
     ChangePassComponent,
     LangComponent,
-    NgxPermissionsModule
+    NgxPermissionsModule,
+    CreateAppointmentComponent,
+    RescheduleAppointmentComponent,
+    CancelAppointmentComponent,
+    RecemedPrescriptionComponent,
+    RecemedProcedureComponent,
+    RecemedCertificateComponent,
+    RecemedExamOrderComponent
   ],
   bootstrap: [NgbdTimepickerBasic],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

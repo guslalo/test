@@ -11,6 +11,8 @@ export class ClinicService {
   private patients = 'v1/patient';
   private photo = 'v1/account/profilePhoto';
   private politicas = 'v1/clinic/get-term/';
+  private accessModeUrl = 'v1/clinic/access-mode'
+
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +25,13 @@ export class ClinicService {
                   .set('clinicId', clinicId)
     });
   }
+  
+
+    //modo de acceso 
+    accessMode(): Observable<any> {
+      return this.http.get<any>(environment.baseUrl + this.accessModeUrl);
+    }
+  
 
 
 }

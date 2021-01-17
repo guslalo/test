@@ -34,6 +34,7 @@ export class IndexComponent implements OnInit {
   emailSent: boolean = false;
 
   patientForm: FormGroup;
+  setup: string;
 
   constructor(
     private patientService: PatientsService,
@@ -43,6 +44,7 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.spinner.show();
     this.patientForm = this.formBuilder.group({
       isTutor: [false],
@@ -73,6 +75,24 @@ export class IndexComponent implements OnInit {
       }
     );
   }
+
+  calcularEdad(dateString) {
+
+    if(!dateString) return
+
+    let separa = dateString.split("/");
+    let separaAno = separa[2]
+    let today = new Date();
+
+    let _age: any
+
+    if (separaAno.split("").length === 4) {
+      _age = today.getFullYear() - separa[2]
+    } else {
+      _age = today.getFullYear() - separa[0]
+    }
+    return _age;
+  };
 
   sendInvitationEmail(userId?: string) {
     if (this.selectedPrePatients.length) {

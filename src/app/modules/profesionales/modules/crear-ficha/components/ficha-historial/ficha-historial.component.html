@@ -224,6 +224,7 @@
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.comments }}</p>
                   <p>{{ appointmentDetail.appointmentDetails.diagnosticDetails.indications }}</p>
                 </div>
+               
               </div>
               <!--/diagnostico-->
               <hr />
@@ -279,6 +280,16 @@
                 <div>
                   <p class="title">{{ appointmentDetail.appointmentDetails.plan }}</p>
                 </div>
+              </div>
+              <div class="">
+                <p class="title font-weight-bold mb-1">
+                  Defeches
+                </p>
+                <ul>
+                  <ng-container *ngFor="let item of appointmentDetail.appointmentDetails.patientDestinies ">
+                    <li>{{ item.name }}</li>
+                  </ng-container>
+                </ul>
               </div>
               <!--/objetivo-->
 

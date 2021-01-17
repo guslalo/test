@@ -4,11 +4,12 @@
   </div>
   <div class="col">
     <button
+      *ngxPermissionsOnly="['Create:User']"
       type="button"
       class="btn btn-primary rounded-pill float-right"
       data-toggle="modal"
       data-target="#patientModal"
-      [disabled]="tab === 'patients'"
+      
     >
       {{ 'myPatients.btnCreate.label' | transloco }}
       <img src="assets/icons/icon-plus-circle.svg" />
@@ -55,6 +56,8 @@
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <span>{{
+                        row.identificationData.rut ||
+                        row.identificationData.run ||
                         row.identificationData.cpf ||
                           row.identificationData.cns ||
                           row.identificationData.rgRegistry ||
@@ -90,7 +93,7 @@
                           />
                         </ng-template>
                         {{
-                          row.personalData.name + ' ' + (row.personalData.secondLastName)
+                          row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                         }}
                       </a>
                       <a routerLink="{{ row.userId }}" *ngxPermissionsExcept="['Read:MedicalRecord']">
@@ -114,14 +117,15 @@
                           />
                         </ng-template>
                         {{
-                          row.personalData.name + ' ' + (row.personalData.secondLastName)
+                          row.personalData.name + ' ' + (setup == 'CL' ? row.personalData.lastName : row.personalData.secondLastName)
                         }}
                       </a>
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="{{ 'table.age.label' | transloco }}">
                     <ng-template let-row="row" ngx-datatable-cell-template>
-                      {{ moment().diff(row.personalData.birthdate, 'year') || '' }}
+                    <!-- {{ moment().diff(moment(row.personalData.birthdate, 'YYYY-MM-DD'), 'year') }} -->
+                    {{ calcularEdad(row.personalData.birthdate) }}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Sexo">
@@ -150,7 +154,7 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem="pre-patients">
+          <li ngbNavItem="pre-patients" *ngxPermissionsOnly="['SendInvitation:User']">
             <a ngbNavLink>{{ 'dashboard.home.tab.calendar.modal.newAtention.tab.storedPatient.label' | transloco }}</a>
             <ng-template ngbNavContent>
               <div class="tableBox rounded p-4 bg-white">
@@ -209,7 +213,7 @@
                   >
                     <ng-template let-row="row" ngx-datatable-cell-template>
                       <img class="mr-2" id="image0" width="38" height="38" src="/assets/profile.jpg" alt="img" />
-                      {{ row.name + ' ' + (row.secondLastName ) }}
+                      {{ row.name + ' ' + (setup == 'CL' ? row.lastName : row.secondLastName) }}
                     </ng-template>
                   </ngx-datatable-column>
                   <ngx-datatable-column

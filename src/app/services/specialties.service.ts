@@ -11,12 +11,18 @@ export class SpecialtiesService {
   private medicalSpecialties2 = 'v1/professionals/specialties';
   private medicalSpecialtiesCoordinator = 'v1/coordinator/specialties';
   private specialties = 'v1/administrative/specialties';
+  private specialtiesProfessional = 'v1/professionals/specialties/list/'
 
   constructor(private http: HttpClient) {}
 
   //specialties
   getSpecialties(): Observable<any> {
     return this.http.get<any>(environment.baseUrl + this.specialties);
+  }
+
+  //specialties
+  getSpecialtiesForprofessional(userId): Observable<any> {
+    return this.http.get<any>(environment.baseUrl + this.specialtiesProfessional + userId);
   }
 
   //specialties

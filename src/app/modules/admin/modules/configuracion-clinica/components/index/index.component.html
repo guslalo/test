@@ -56,7 +56,9 @@
               <h5>{{ 'tabs.information.label' | transloco }}</h5>
             </div>
             <div class="col mb-2">
-              <button type="button" class="btn btn-sm btn-info rounded-pill float-right" (click)="updateClinicInfo()">
+              <button type="button" 
+              *ngxPermissionsOnly="['UpdateInfo:Clinic']"
+              class="btn btn-sm btn-info rounded-pill float-right" (click)="updateClinicInfo()">
                 {{ 'common.button.save.label' | transloco }}
               </button>
             </div>

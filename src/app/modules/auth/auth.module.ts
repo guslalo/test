@@ -20,6 +20,7 @@ import { RecoveryComponent } from './components/recovery/recovery.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { BlockedAccountComponent } from './components/blocked-account/blocked-account.component';
 import { LeftColumnComponent } from './components/left-column/left-column.component';
+import { CreateAccountCLComponent } from "./components/create-account-cl/create-account-cl.component";
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
@@ -28,6 +29,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
+import { FinishRegistrationCLComponent } from './components/finish-registration-cl/finish-registration-cl.component';
 import { RouterModule } from '@angular/router';
 import { TranslocoRootModule } from 'src/app/transloco-root.module';
 import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.component';
@@ -44,6 +46,8 @@ import { RecoveryDoneComponent } from './components/recovery-done/recovery-done.
     ConfirmAccountComponent,
     ResetPasswordComponent,
     RecoveryDoneComponent,
+    CreateAccountCLComponent,
+    FinishRegistrationCLComponent
   ],
   imports: [
     CommonModule,

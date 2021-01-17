@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-confirm-account',
@@ -12,12 +13,17 @@ export class ConfirmAccountComponent implements OnInit {
     code: null,
   };
   public errorMsg: string;
+  public setup:any;
+  public brand: any;
 
   email_format: string;
 
   constructor(private route: ActivatedRoute, private registerUser: RegisterService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setup = environment.setup
+    this.brand = environment.brand
+  }
 
   // todo: crear aviso registro exitoso
   confirmAccount(code) {

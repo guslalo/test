@@ -4,9 +4,9 @@
 <div class="contenido p-4">
   <div class="logo mt-1 ">
     <div class="text-left">
-      <div class="logoLogin">
-     <img src="assets/img/telemedicina.svg">
-    </div>
+      <div class="logoLogin d-none d-lg-block"><!--d-lg-block-->
+        <img src="assets/img/{{ brand }}/logo-white.svg">
+      </div>
     </div>
   </div>
   <div class="mb-3">
@@ -15,8 +15,8 @@
     </h1>
     <p>{{ 'auth.login.welcome.label' | transloco }}</p>
   </div>
-
-  <p class="copyright align-self-end align-items-end">
-    {{ 'common.poweredBy.label' | transloco }}
+  <p class="copyright align-self-end align-items-end d-none d-lg-block">
+    {{ 'common.poweredBy.label' | transloco }} <br>
+    version: {{ version }}
   </p>
 </div>

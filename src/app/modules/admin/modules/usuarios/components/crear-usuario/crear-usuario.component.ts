@@ -25,12 +25,16 @@ const current = new Date();
 export class CrearUsuarioComponent implements OnInit {
   isForeign: boolean = false;
   isSchool: boolean = false;
+  isTutor: boolean;
   identificationData: FormGroup;
   personalData: FormGroup;
   profilesForm: FormGroup;
   waitingRoomForm: FormGroup;
   profileDataForm: FormGroup;
   specialitiesForm: FormGroup;
+  titularForm: FormGroup;
+  titular:any;
+  loarderTutor:boolean;
   professionalForm: FormGroup;
   professionalRegistrySend: any = [];
   passwordForm: FormGroup;
@@ -113,24 +117,32 @@ export class CrearUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.loarderTutor = false;
     
-  if(environment.checkAge === false){
-    this.mayorEdad = false
-    this.maxDate = {
-      year: current.getFullYear(),
-      month: current.getMonth(),
-      day: current.getDate(),
-    };
-  } else {
-    this.mayorEdad = true
-    this.maxDate = {
-      year: current.getFullYear() - 18,
-      month: current.getMonth() + 1,
-      day: current.getDate(),
-    };
-  }
-
+    if(environment.checkAge === false){
+      this.mayorEdad = false
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+    } else {
+      this.mayorEdad = true
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
     this.spinner.show();
 
     this.getProfiles();
@@ -153,6 +165,34 @@ export class CrearUsuarioComponent implements OnInit {
       extraDocument: [null, null],
       extraIdDocument: ['', null],
     });
+
+    
+    this.titularForm = this.formBuilder.group({
+      //document:  new FormControl('cpf'),
+      id: [''],
+      titularDependiente: ['', Validators.required],
+      titularidadCpf: ['', null],
+      titularidadName: ['', null]  
+    });
+    
+
+    //titularForm
+      this.titularForm.valueChanges.subscribe((x) => {
+          console.log(x)
+          //titularForm.get('titularidadCpf')
+          if(x.titularidadCpf.length >= 9){
+            this.getforCpf(x.titularidadCpf)
+          }
+          if(x.titularDependiente === 'titular' ) {
+            this.isTutor = true;
+          } else {
+            this.isTutor = false;
+          }
+        }
+      );
+
+      
+
 
     this.personalData = this.formBuilder.group({
       name: ['', [Validators.required,]], 
@@ -178,6 +218,13 @@ export class CrearUsuarioComponent implements OnInit {
       street: ['', Validators.required],
       complement: [null, ],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
+    });
+    this.personalData.controls['birthdate'].valueChanges.subscribe((value) => {
+      const date = this.dateAdapter.toModel(value);
+      if(this.getIfAdult(date) && this.titularForm.get("titularDependiente").value == "dependiente"){
+        console.log("lo cambia")
+        this.personalData.get("email").setValue("");
+      }
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -241,7 +288,8 @@ export class CrearUsuarioComponent implements OnInit {
       this.profilesForm,
       this.profileDataForm,
       this.professionalForm,
-      this.passwordForm
+      this.passwordForm,
+      this.titularForm
     );
     setTimeout(() => {
       this.validateForm();
@@ -286,6 +334,35 @@ export class CrearUsuarioComponent implements OnInit {
     }
 
     this.identificationData.updateValueAndValidity();
+  }
+  /*
+  radioSelect(){
+    console.log(this.titularForm)
+  }*/
+
+  
+
+
+  getforCpf(cpf) {
+    //console.log(cpf)
+    this.loarderTutor = true;
+    this.userService.getForCpf(cpf).subscribe((data) => {
+      console.log(data);
+  
+      this.titular  = data.payload
+      this.titularForm.get('titularidadName').setValue(this.titular.fullName, {emitEvent: false});
+      this.personalData.get('email').setValue(this.titular.email)
+      
+      this.loarderTutor = false;
+    },
+      error => {
+        console.log(error)
+        this.loarderTutor = false
+      }
+    );
+  
+   
+  
   }
 
   validCPF(cpf: string){
@@ -466,8 +543,9 @@ export class CrearUsuarioComponent implements OnInit {
           return false;
         }
       case 'patient':
-        if (this.formUser[0].valid 
-            && this.formUser[1].valid 
+        if (this.formUser[0].valid &&
+            this.formUser[6].valid &&
+            this.formUser[1].valid 
             && this.formUser[5].valid && this.cpfvalid) {
           return true;
         } else {
@@ -493,6 +571,7 @@ export class CrearUsuarioComponent implements OnInit {
       name:id.options[id.selectedIndex].text
     }
   }
+
   ufRegistry2(id){
     let idSelected2 =  id.options[id.selectedIndex].value.split(":");
     this.registerUf2 = {
@@ -555,6 +634,8 @@ export class CrearUsuarioComponent implements OnInit {
           isForeign: this.isForeign,
         },
         personalData: {
+          isTutor:this.isTutor,
+          tutorNationalId:this.formUser[6].value.titularidadCpf,
           isSchool: this.isSchool,
           name: this.formUser[1].value.name,
           lastName: this.formUser[1].value.lastName,
@@ -1063,6 +1144,14 @@ export class CrearUsuarioComponent implements OnInit {
 
   removeRegistry(index) {
     this.professionalRegistry.splice(index, 1);
+  }
+  getIfAdult(birthdate: string): boolean{
+    let birthday_arr = birthdate.split("/");
+    let birthday_date = new Date( parseInt(birthday_arr[2]),(parseInt(birthday_arr[1]) - 1, parseInt(birthday_arr[0])) );
+    let ageDifMs = Date.now() - birthday_date.getTime();
+    let ageDate = new Date(ageDifMs);
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    return age > 16
   }
 }
 

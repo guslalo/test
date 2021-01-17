@@ -39,6 +39,7 @@ export class FichaConsultaComponent implements OnInit {
   public medicinesByProfessional: any;
   public occupationalByProfessional: any;
   public othersByProfessional: any;
+  public setup:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +51,7 @@ export class FichaConsultaComponent implements OnInit {
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
 
@@ -115,9 +117,16 @@ export class FichaConsultaComponent implements OnInit {
       (data) => {
         console.log(data);
         this.exams = data.payload.exams;
+        
         // console.log(this.exams);
         this.antecedentesGeneral = data.payload.antecedent;
         this.antecedentes = data.payload.antecedent.sickness;
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed.filter((element)=> element.administrativeDetails.appointmentId == this.appointmentId);
+        }else {
+          this.arrayDocuments = data.payload.prescriptions;
+        }
+        
         // console.log(data.antecedent);
       },
       (error) => {
@@ -143,7 +152,7 @@ export class FichaConsultaComponent implements OnInit {
   getVerifiedSibrareDocuments2(appointmentId) {
     this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
       (data) => {
-        console.log(data);
+        console.log(this.arrayDocuments);
         this.arrayDocuments = data.payload;
       },
       (error) => {
@@ -175,5 +184,8 @@ export class FichaConsultaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 }

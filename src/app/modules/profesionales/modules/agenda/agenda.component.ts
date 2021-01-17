@@ -7,6 +7,7 @@ import { AppointmentsService } from './../../../../services/appointments.service
 import esLocale from '@fullcalendar/core/locales/es';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import { TranslocoService } from '@ngneat/transloco';
+import { AppointmentEventsService } from 'src/app/services/appointment-events.service';
 
 const states = ['test', 'test3', 'test4'];
 @Component({
@@ -21,7 +22,11 @@ export class AgendaComponent implements OnInit {
 
   model2: NgbDateStruct;
 
-  constructor(private appointmentsService: AppointmentsService, private translocoService: TranslocoService) {}
+  constructor(
+    private appointmentsService: AppointmentsService,
+    private translocoService: TranslocoService,
+    private appointmentsEvents: AppointmentEventsService
+  ) { }
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -32,11 +37,19 @@ export class AgendaComponent implements OnInit {
     // dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [{ title: 'event 1', date: '2020-08-23', days: 3 }],
     locales: [esLocale, ptLocale],
-    locale: this.translocoService.getActiveLang(),
+    locale: this.translocoService.getActiveLang()
   };
   ngOnInit(): void {
     this.getAppointmentsTimeline();
     this.getFecha();
+    console.log(this.translocoService.getActiveLang())
+  }
+
+  ngAfterViewInit() {
+    let _user = JSON.parse(localStorage.getItem('currentUser'))
+    let _userId = _user.id
+    this.appointmentsEvents.getSpecialtiesForProfessional$.emit(_userId)
+    this.appointmentsEvents.buildForm$.emit(_user.role)
   }
 
   getFecha() {

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PerfilComponent } from 'src/app/shared/modules/mi-perfil/mi-perfil.component';
+import { PerfilCLComponent } from 'src/app/shared/modules/mi-perfil-cl/mi-perfil-cl.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
+    loadChildren: () => import('./modules/consultas/consultas.module').then((m) => m.ConsultasModule),
+    //loadChildren: () => import('./modules/index/index.module').then((m) => m.IndexModule),
   },
   {
     path: 'historial-consultas',
@@ -29,8 +31,16 @@ const routes: Routes = [
     component: PerfilComponent,
   },
   {
+    path: 'perfil-cl',
+    component: PerfilCLComponent,
+  },
+  {
     path: 'ayuda',
     loadChildren: () => import('./modules/soporte/soporte.module').then((m) => m.SoporteModule),
+  },
+  {
+    path: 'consultas',
+    loadChildren: () => import('./modules/consultas/consultas.module').then((m) => m.ConsultasModule),
   },
 ];
 

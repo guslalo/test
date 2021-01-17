@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-12">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs flex-column flex-sm-row" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <a
           class="nav-link active"
@@ -54,7 +54,7 @@
       <!--tab-->
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-4">
             <div class=" ">
               <div class="card-body text-center">
                 <div *ngIf="alertSuccess" class="alert alert-success" role="alert">
@@ -67,15 +67,23 @@
                 <div class="boxImg imgProfile text-center">
                   <img src="{{ formData?.photo || '/assets/profile.jpg' }}" class="d-inline-block img-fluid" />
                 </div>
+                
                 <div class="custom-file mt-3">
+                  <div class="adjuntar">
+                    {{'common.input.file.seleccionar' | transloco}}
+                  </div>
                   <input
                     type="file"
                     class="custom-file-input"
                     (change)="openFile($event)"
                     id="customFile"
-                    style="overflow: hidden;"
+                    lang="es"
+                    style="overflow: hidden;" 
                   />
-                  <label class="custom-file-label" for="customFile">{{ textInputFile }}</label>
+                  <label 
+                  class="custom-file-label"
+                 
+                   for="customFile">{{ textInputFile }}</label>
                 </div>
                 <button
                   type="button"
@@ -88,7 +96,7 @@
               </div>
             </div>
           </div>
-          <div class="col-8">
+          <div class="col-12 col-md-8">
             <div class="bg-white rounded-lg">
               <ul class="nav nav-pills nav-fill w-100 tab-consulta" id="myTab2" role="tablist" style="border: none;">
                 <li class="nav-item" role="presentation">
@@ -222,6 +230,7 @@
                             <label for="document">{{ 'profile.secondaryIdentification.label' | transloco }}</label>
                             <select
                               class="form-control"
+                              id="extraDocument"
                               name="extraDocument"
                               formControlName="extraDocument"
                               [ngClass]="{
@@ -352,7 +361,7 @@
                               disabled
                               type="text"
                               class="form-control"
-                              id="phoneNumber"
+                              id="birthdate"
                               formControlName="birthdate"
                             />
                           </div>
@@ -497,7 +506,7 @@
                 <hr />
                 <div class="text-right">
                   <button class="btn btn-secondary rounded-pill" (click)="updateData()">
-                    Guardar
+                    {{'common.button.save.label' | transloco}}
                   </button>
                 </div>
               </div>

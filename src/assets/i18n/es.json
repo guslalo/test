@@ -1,4 +1,36 @@
 {
+  "soporte":{
+    "title":"Contacto soporte:",
+    "whatsapp":{
+      "label":"Whatsapp",
+      "text":"+55 34 99960-2027"
+    },
+    "email":{
+      "label":"E-mail",
+      "text":"suporte@medictelemedicina.com"
+    }
+  },
+  "tables": {
+    "consultas":{
+      "paciente":"paciente",
+      "HoraAgendada":"Hora Agendada",
+      "HoraEspera":"Tiempo de espera",
+      "TiempoAtencion":"Tiempo de atención",
+      "ProfesionalSalud":"Profesional de salud",
+      "SalaEspera":"Sala de Espera",
+      "cancelado":"Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador.",
+      "cancelado1": "Se le ha asignado otro Profesional. En los próximos minutos será atendido.",
+      "cancelado2": "Su cita ha sido cancelada. Si tiene alguna pregunta, comuníquese con el soporte.",
+      "cancelado3": "Se le ha quitado la asignación de esta consulta. Si tiene algún inconveniente por favor comunicarse con el administrador."
+    }
+  },
+  "titularidad": {
+    "title":"Titularidad",
+    "titular":"Titular",
+    "dependiente":"Dependiente",
+    "name":"Nombre del titular",
+    "cpf":"CPF del titular"
+  },
   "soon": "Próximamente",
   "cie10": {
     "cie10": " CIE10"
@@ -6,7 +38,11 @@
   "sibrare": {
     "prescription": "Preescripción",
     "report": "Reporte",
-    "exam-order": "Orden de exámen"
+    "exam-order": "Orden de examen"
+  },
+  "waitingRoomInstructions": {
+    "instruction1": "Ubíquese en un lugar tranquilo y sin ruido.",
+    "instruction2": "Recuerde tener cerca sus exámenes antes de iniciar la teleconsulta."
   },
   "exemplo": "Ejemplo",
   "history": {
@@ -27,8 +63,15 @@
   },
   "clinicalFile": {
     "tabs": {
-      "antecentesFromProfessional": "Antecedentes registrados por el profesional de salud",
-      "antecentesFromPatient": "Antecedentes registrados por el paciente"
+      "antecentesFromProfessional": "Antecedentes registrados por el Profesional de Salud",
+      "antecentesFromPatient": "Antecedentes registrados por el paciente",
+      "gesEno": {
+        "label": "Notificaciones GES/ENO",
+        "button": "Registrar notificación"
+      }
+    },
+    "defeche": {
+      "label": "Destino del paciente"
     },
     "patientData": {
       "tabs": {
@@ -125,13 +168,13 @@
                 "label": "Intervenciones Quirúrgicas"
               },
               "habits": {
-                "label": "Hábitos de salud"
+                "label": "Hábitos de Salud"
               },
               "meds": {
                 "label": "Medicamentos"
               },
               "occupational": {
-                "label": "Ocupacionales"
+                "label": "Ocupación"
               },
               "family": {
                 "label": "Antecedentes Familiares"
@@ -160,7 +203,7 @@
               "label": "Tipo"
             },
             "date": {
-              "label": "Fecha de subida"
+              "label": "Fecha de Carga"
             },
             "by": {
               "label": "Realizado por"
@@ -197,7 +240,7 @@
           }
         },
         "timeLine": {
-          "label": "Timeline de consultas"
+          "label": "Timeline de Consultas"
         },
         "summary": {
           "label": "Resumen Consulta",
@@ -218,7 +261,7 @@
             "label": "Síntomas"
           },
           "vitalSigns": {
-            "label": "Signos fisicos",
+            "label": "Signos físicos",
             "pas": {
               "label": "PAS"
             },
@@ -301,7 +344,7 @@
         "label": "id atención"
       },
       "phone": {
-        "label": "telefono:"
+        "label": "teléfono:"
       }
     },
     "status": {
@@ -319,7 +362,7 @@
           "label": "Prescripciones"
         },
         "order": {
-          "label": "Orden de Exámen"
+          "label": "Orden de Examen"
         },
         "license": {
           "label": "Licencia Médica"
@@ -339,7 +382,7 @@
       "label": "No se han encontrado pacientes asociados"
     },
     "sendEmail": {
-      "label": "Enviar Invitacion a Correo"
+      "label": "Enviar invitación a correo"
     },
     "noStoredPatients": {
       "label": "No existen pacientes ingresados"
@@ -363,7 +406,7 @@
       "label": "Femenino"
     },
     "acriveServices": {
-      "label": "Mis consultas activas"
+      "label": "Mis Consultas Activas"
     },
     "noInfo": {
       "label": "Sin Información"
@@ -413,6 +456,9 @@
     "inWaitingRoom": {
       "label": "En Sala de Espera"
     },
+    "created": {
+      "label": "Creada"
+    },
     "inWaitingList": {
       "label": "En Lista de Espera"
     },
@@ -456,7 +502,7 @@
       "label": "Temperatura"
     },
     "exam": {
-      "label": "Exámen"
+      "label": "Examen"
     },
     "edit": {
       "label": "Editar"
@@ -498,7 +544,7 @@
       "label": "Objetivo consulta"
     },
     "anamnesis": {
-      "label": "Anmnesis"
+      "label": "Anamnesis"
     },
     "nutritionalState": {
       "label": "Estado Nutricional"
@@ -516,7 +562,7 @@
       "label": "Comentarios"
     },
     "noStoredNotes": {
-      "label": "no hay notas ingresadas"
+      "label": "No hay notas ingresadas"
     },
     "newNote": {
       "label": "Nueva nota"
@@ -540,13 +586,16 @@
       "label": "N°de consultas mensuales"
     },
     "nextService": {
-      "label": "Proxima consulta"
+      "label": "Próxima consulta"
     },
     "hourDate": {
       "label": "Fecha y Hora"
     },
     "enter": {
       "label": "Entrar"
+    },
+    "enterAppointment": {
+      "label": "Entrar a la consulta"
     },
     "accountScheduleded": {
       "label": "Cuenta agendada"
@@ -567,10 +616,10 @@
       "label": "Número de registro"
     },
     "thisInfoViewPro": {
-      "label": "Esta información será vista por los profesionales."
+      "label": "Esta información será vista por los profesionales"
     },
     "myBackgrounds": {
-      "label": "Mis antecedentes"
+      "label": "Mis Antecedentes"
     },
     "completeThisForBetterService": {
       "label": "Completa tus datos médicos para una mejor atención"
@@ -636,7 +685,7 @@
       "label": "Seleccione síntoma"
     },
     "payService": {
-      "label": "Pagar consulta"
+      "label": "Pagar Consulta"
     },
     "back": {
       "label": "Volver"
@@ -648,7 +697,7 @@
       "label": "Doctores asociados"
     },
     "scheduleApointment": {
-      "label": "Agendar cita"
+      "label": "Agendar Cita"
     },
     "basicInfo": {
       "label": "Información básica"
@@ -663,16 +712,16 @@
       "label": "Exámenes"
     },
     "hintDateCancelService": {
-      "label": "Recuerda respetar la fecha acordad para reagendamientos y cancelaciones revisa el siguiente link en Soporte"
+      "label": "Recuerda respetar la fecha acordada para reagendamientos y cancelaciones revisa el siguiente link en Soporte"
     },
     "doService": {
-      "label": "Realizar consulta"
+      "label": "Realizar Consulta"
     },
     "sat2": {
       "label": "Sat 02"
     },
     "ofDiagnostic": {
-      "label": "de Diagnostico"
+      "label": "de Diagnóstico"
     },
     "updateFile": {
       "label": "Actualización de ficha"
@@ -704,6 +753,9 @@
     "reserveService": {
       "label": "Reservar Consulta"
     },
+    "reSheduleService": {
+      "label": "Reagendar Consulta"
+    },
     "hoursAvailable": {
       "label": "Horas Disponibles"
     },
@@ -720,14 +772,14 @@
       "label": "Ficha de atencíon médica"
     },
     "diagnosisType": {
-      "label": "Tipo de Diagnostico"
+      "label": "Tipo de Diagnóstico"
     },
     "generateDocs": {
       "label": "Generar documentos"
     }
   },
   "disponibility": {
-    "title": "Mi disponibilidad",
+    "title": "Mi Disponibilidad",
     "tabs": {
       "list": {
         "label": "Listado de Disponibilidades",
@@ -782,7 +834,7 @@
     },
     "modal": {
       "create": {
-        "title": "Crear disponibilidad",
+        "title": "Crear Disponibilidad",
         "objetive": {
           "label": "Objetivo"
         },
@@ -796,7 +848,7 @@
           "label": "Tiempo de Consulta (intervalo)"
         },
         "aviability": {
-          "label": "Disponibilidad Días"
+          "label": "Disponibilidad de días"
         },
         "initialDate": {
           "label": "Horario inicial"
@@ -831,7 +883,7 @@
       }
     },
     "edit": {
-      "title": "Mi disponibilidad / Editar",
+      "title": "Mi Disponibilidad / Editar",
       "objetive": {
         "label": "Objetivo"
       },
@@ -926,7 +978,7 @@
       },
       "title": "Acceder a cuenta",
       "forgot": {
-        "label": "¿has olvidado tu contraseña?"
+        "label": "¿Has olvidado tu contraseña?"
       },
       "welcomeTitle": {
         "label": "Bienvenido a tu plataforma de teleconsulta"
@@ -948,10 +1000,10 @@
       "label": "CTPS"
     },
     "identityNumber": {
-      "label": "Numero de Identidad"
+      "label": "Número de Identidad"
     },
     "votantTitle": {
-      "label": "Titulo de Votante"
+      "label": "Título de Votante"
     },
     "proClassReg": {
       "label": "Registro Clase Profesional"
@@ -975,7 +1027,7 @@
       "label": "Aceptar y crear cuenta"
     },
     "phoneReq": {
-      "label": "telefono es necesario"
+      "label": "teléfono es necesario"
     },
     "confirmAccount": {
       "label": "Confirmar Cuenta"
@@ -997,17 +1049,21 @@
     },
     "email": {
       "sendTo": {
-        "label": "Se ha enviado un correo electronico a"
+        "label": "Se ha enviado un correo electrónico a"
       },
       "codeSent": {
-        "label": "con un codigo de verificacion, por favor revisa tu bandeja de entrada."
+        "label": "con un código de verificacion, por favor revisa tu bandeja de entrada."
       },
       "followInstructions": {
         "label": "Sigue las instrucciones del mensaje para restablecer tu contraseña."
-      }
+      },
+      "label": "Correo Electrónico"
+    },
+    "prevission": {
+      "label": "Previsión de salud"
     },
     "verificationCode": {
-      "label": "Ingrese codigo de verificación"
+      "label": "Ingrese código de verificación"
     },
     "surnameReq": {
       "label": "Segundo Apellido es necesario"
@@ -1016,7 +1072,7 @@
       "label": "Acceder Nuevamente"
     },
     "currentPwdInfo": {
-      "label": "Información de tu contraseña actual"
+      "label": "Información de su contraseña actual"
     },
     "currentPwdReq": {
       "label": "Contraseña actual requerida"
@@ -1028,10 +1084,10 @@
       "label": "Contraseña no coincide"
     },
     "pwdUpdated": {
-      "label": "Contraseña Actualizada!"
+      "label": "¡Contraseña actualizada!"
     },
     "emailSendedToAsociatedAccount": {
-      "label": "Se ha enviado un correo electronico de confirmacion a la cuenta asociada."
+      "label": "Se ha enviado un correo electrónico de confirmación a la cuenta asociada."
     },
     "personalBasicinfo": {
       "label": "Información básica de datos personales"
@@ -1041,13 +1097,13 @@
     },
     "accept": {
       "termsAndconditions": {
-        "label": "he leido y aceptado los términos y condiciones"
+        "label": "He leído y aceptado los Términos y Condiciones"
       },
       "privacyPolicy": {
-        "label": "he leido la politica de privacidad"
+        "label": "He leído la Política de Privacidad"
       },
       "consent": {
-        "label": "he leido el consentimiento informado"
+        "label": "He leído el Consentimiento Informado"
       }
     }
   },
@@ -1063,7 +1119,7 @@
       "tab": {
         "home": {
           "services": {
-            "title": "Nº de consultas Realizadas",
+            "title": "Nº de consultas realizadas",
             "label": "Consultas"
           },
           "nextService": {
@@ -1075,7 +1131,7 @@
           },
           "tab": {
             "nextServices": {
-              "title": "Próximas consultas agendadas",
+              "title": "Próximas Consultas",
               "table": {
                 "patients": {
                   "label": "Pacientes"
@@ -1097,8 +1153,54 @@
                 }
               }
             },
+            "openAppointments": {
+              "title": "Consultas abiertas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora Agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "nextAppointments": {
+              "title": "Consultas inmediatas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
             "onHold": {
-              "title": "Pacientes en sala de espera"
+              "title": "Pacientes en Sala de Espera"
             }
           }
         },
@@ -1128,7 +1230,7 @@
                     "label": "Especialidad"
                   },
                   "waitingRoom": {
-                    "label": "Sala de espera"
+                    "label": "Sala de Espera"
                   }
                 },
                 "emailNewUser": {
@@ -1158,7 +1260,7 @@
                     "label": "Especialidad"
                   },
                   "waitingRoom": {
-                    "label": "Sala de espera"
+                    "label": "Sala de Espera"
                   }
                 }
               },
@@ -1171,13 +1273,13 @@
         "title": "Próxima Consulta"
       },
       "newService": {
-        "title": "Agendar consulta médica",
+        "title": "Agendar Consulta Médica",
         "btnCreate": {
           "label": "Agendar una cita"
         },
         "label": "Agende su cita médica",
         "type": {
-          "title": "¿Que quieres buscar?",
+          "title": "¿Qué quieres buscar?",
           "checkSpecialty": {
             "label": "Especialidad"
           },
@@ -1185,27 +1287,27 @@
             "label": "Profesional"
           },
           "profetional": {
-            "label": "Selecciona Tipo de profesional"
+            "label": "Selecciona Tipo de Profesional"
           },
           "specialty": {
             "label": "Selecciona Especialidad"
           },
           "date": {
-            "label": "Selecciona fecha"
+            "label": "Selecciona Fecha"
           },
           "availableDoctor": {
-            "label": "Médicos disponibles"
+            "label": "Médicos Disponibles"
           }
         },
         "unselected": {
-          "title": "Selecciona la especialidad y la fecha para ver las horas",
-          "label": "Selecciona especialidad y fecha para ofrecerte profesionales disponibles"
+          "title": "Selecciona la especialidad y la Fecha para ver las horas",
+          "label": "Selecciona Especialidad y Fecha para ofrecerte profesionales disponibles"
         },
         "doctorFee": {
           "label": "COBRO CONSULTA:"
         },
         "synptoms": {
-          "title": "Detalle consulta",
+          "title": "Detalle Consulta",
           "label": "Seleccione sus sintomas",
           "description": {
             "label": "Describa cómo se siente (opcional)"
@@ -1218,7 +1320,7 @@
           "label": "Subir documentos"
         },
         "btnCheckout": {
-          "label": "Pagar y agendar"
+          "label": "Pagar"
         },
         "success": {
           "title": "Su cita médica ha sido agendada con éxito",
@@ -1245,8 +1347,8 @@
           }
         },
         "inmediateCare": {
-          "title": "Atención inmediata / Acceso a Salas",
-          "label": "Aquí podras acceder a una consulta inmediata",
+          "title": "Atención Inmediata / Acceso a Salas",
+          "label": "Aquí podrá acceder a una consulta inmediata",
           "success": {
             "title": "Su acceso a atención médica ha sido realizado con éxito",
             "btnEnterRoom": {
@@ -1259,7 +1361,7 @@
       "inmediateService": {
         "title": "Consulta inmediata",
         "btnCreate": {
-          "label": "Ingresar a sala"
+          "label": "Ingresar a Sala"
         }
       },
       "medicalAdvice": {
@@ -1287,7 +1389,7 @@
           "label": "Hábitos de Salud"
         },
         "occupationals": {
-          "label": "Ocupacionales"
+          "label": "Antecedentes Ocupacionales"
         },
         "others": {
           "label": "Otros"
@@ -1296,7 +1398,7 @@
           "label": "Completar datos"
         },
         "hint": {
-          "label": "Completa tus datos medicos para una mejor atención"
+          "label": "Completa tus datos médicos para una mejor atención"
         },
         "modal": {
           "createBackground": {
@@ -1317,25 +1419,25 @@
         },
         "categories": {
           "sickness": {
-            "label": "Ej: hipertensión arterial, Diabetes Mellitus, etc."
+            "label": "Ej: Hipertensión arterial, Diabetes Mellitus, etc."
           },
           "allergies": {
             "label": "Ej: Polvo, Polen, Aspirina, etc."
           },
           "surgicalInterventions": {
-            "label": "Ej: Marcapasos, Stent coronario, etc."
+            "label": "Ej: Marcapasos, Stent Coronario, etc."
           },
           "familiarHistory": {
-            "label": "Ej: Infarto (madre), cáncer (hermano), etc."
+            "label": "Ej: Infarto (madre), Cáncer (hermano), etc."
           },
           "medicines": {
-            "label": "Ej: Paracetamol, levotiroxina, insulina, etc."
+            "label": "Ej: Paracetamol, Levotiroxina, Insulina, etc."
           },
           "healthHabits": {
-            "label": "Ej: Fumador (2 cigarros/día), Sedentario, actividad física (3 veces por semana), etc."
+            "label": "Ej: Fumador (2 cigarros/día), Sedentario, Actividad Física (3 veces por semana), etc."
           },
           "occupational": {
-            "label": "Ej: Estudiante, profesor, empleado, pensionado, etc."
+            "label": "Ej: Estudiante, Profesor, Empleado, Pensionado, etc."
           },
           "others": {
             "label": " "
@@ -1350,7 +1452,7 @@
             "label": "Últimas Consultas"
           },
           "timeline": {
-            "label": "Timeline de consultas"
+            "label": "Timeline de Consultas"
           }
         }
       },
@@ -1370,7 +1472,7 @@
         "label": "Actividad"
       },
       "medicalPerformance": {
-        "label": "Desempeño profesionales de salud"
+        "label": "Desempeño Profesionales de Salud"
       },
       "waitingRoomsPerformance": {
         "label": "Desempeño salas de de espera"
@@ -1465,7 +1567,7 @@
             "label": "Administradores"
           },
           "doctors": {
-            "label": "Profesionales de salud "
+            "label": "Profesionales de Salud "
           },
           "coordinators": {
             "label": "Coordinadores"
@@ -1547,10 +1649,10 @@
                 "label": "Personales"
               },
               "name": {
-                "label": "Nombres"
+                "label": "Nombre"
               },
               "surnames": {
-                "label": "Apellidos"
+                "label": "Apellido"
               },
               "socialName": {
                 "label": "Nombre Social"
@@ -1604,7 +1706,7 @@
               }
             },
             "waitingRoom": {
-              "label": "Sala de espera (modalidad)",
+              "label": "Sala de Espera (modalidad)",
               "identification": {
                 "title": "Identificación",
                 "waitingList": {
@@ -1614,7 +1716,7 @@
                   "title": "Agregados",
                   "table": {
                     "waitingRoom": {
-                      "label": "Sala de espera "
+                      "label": "Sala de Espera "
                     },
                     "description": {
                       "label": "Descripción "
@@ -1632,7 +1734,7 @@
             "academic": {
               "label": "Laborales",
               "bio": {
-                "label": "Biografía academica"
+                "label": "Biografía Acádemica"
               },
               "specialty": {
                 "label": "Especialidades"
@@ -1660,7 +1762,7 @@
               }
             },
             "password": {
-              "label": "Clave"
+              "label": "Contraseña"
             }
           }
         }
@@ -1668,12 +1770,12 @@
       "disponibilityManagment": {
         "modal": {
           "createDisponibility": {
-            "title": "Crear disponibilidad",
+            "title": "Crear Disponibilidad",
             "doctorId": {
               "label": "Profesional o ID"
             },
             "type": {
-              "label": "Tipo profesional"
+              "label": "Tipo de Profesional"
             },
             "objetive": {
               "label": "Objetivo"
@@ -1688,7 +1790,7 @@
               "label": "Tiempo de Consulta (intervalo)"
             },
             "daysAvailable": {
-              "label": "Disponibilidad Días"
+              "label": "Disponibilidad de días"
             },
             "initialHour": {
               "label": "Horario inicial"
@@ -1706,7 +1808,7 @@
               "label": "Listado de Disponibilidades"
             },
             "currentWork": {
-              "label": "Mis consultas activas"
+              "label": "Mis Consultas Activas"
             },
             "noDisponibilities": {
               "label": "No hay disponibilidades creadas"
@@ -1745,7 +1847,7 @@
         }
       },
       "waitingRoomManagment": {
-        "title": "Gestión de salas de espera",
+        "title": "Gestión de Salas de Espera",
         "modal": {
           "create": {
             "title": "Nueva sala de espera",
@@ -1759,7 +1861,7 @@
               "label": "Descripción"
             },
             "healthProfessionals": {
-              "label": "Profesionales de salud"
+              "label": "Profesionales de Salud"
             },
             "coordinators": {
               "label": "Coordinadores"
@@ -1784,21 +1886,21 @@
         "title": "Configuración Clínica",
         "tabs": {
           "information": {
-            "label": "Nombre clínica",
+            "label": "Nombre Clínica",
             "description": {
               "label": "Descripción"
             },
             "clinicPhone": {
-              "label": "Teléfono institución"
+              "label": "Teléfono Institución"
             },
             "sipportPhone": {
-              "label": "Teléfono soporte"
+              "label": "Teléfono Soporte"
             },
             "workingDays": {
               "label": "Horario Hábil"
             },
             "address": {
-              "label": "Dirección institución"
+              "label": "Dirección Institución"
             },
             "email": {
               "label": "Email Institucional"
@@ -1931,7 +2033,7 @@
               }
             },
             "modalCreate": {
-              "title": "Agregar especialidad",
+              "title": "Agregar Especialidad",
               "name": {
                 "label": "Nombre de especialidad"
               },
@@ -2003,7 +2105,7 @@
             "modalConfig": {
               "title": "Configurar modulo atención inmediata",
               "waitingRoom": {
-                "label": "Sala de espera"
+                "label": "Sala de Espera"
               },
               "description": {
                 "label": "Descripción"
@@ -2019,7 +2121,7 @@
               "label": "Se recomienda Documentos HTML y formato HTM."
             },
             "privacy": {
-              "label": "Condiciones de Priivacidad"
+              "label": "Condiciones de Privacidad"
             },
             "agreement": {
               "label": "Consentimiento Telemedicina"
@@ -2057,13 +2159,13 @@
         },
         "clinic": {
           "inmediateAtention": {
-            "label": "atencion inmediata"
+            "label": "Atención Inmediata"
           },
           "scheduling": {
-            "label": "agendamiento"
+            "label": "Agendamiento"
           },
           "payments": {
-            "label": "pagos"
+            "label": "Pagos"
           }
         }
       },
@@ -2084,10 +2186,10 @@
           "label": "Editar Usuario"
         },
         "disableUser": {
-          "label": "Desabilitar Usuario"
+          "label": "Deshabilitar Usuario"
         },
         "sendInvitationToPatient": {
-          "label": "Enviar Invitación al Paciente"
+          "label": "Enviar invitación al paciente"
         },
         "virepatientCard": {
           "label": "Ver Ficha Paciente"
@@ -2096,7 +2198,7 @@
           "label": "Ver Consultas"
         },
         "editServices": {
-          "label": "Editar Consultas"
+          "label": "Editar Consulta"
         },
         "viewBackground": {
           "label": "Ver Antecedentes"
@@ -2174,7 +2276,7 @@
           "label": "Gestión de Logs"
         },
         "professionalDegree": {
-          "label": "Titulo Profesional"
+          "label": "Título Profesional"
         },
         "ufRecord": {
           "label": "UF de Registro"
@@ -2205,6 +2307,36 @@
         },
         "regNumber": {
           "label": "N° de Registro"
+        },
+        "nrRegistryHealth": {
+          "label": "Nro de registro de super intendecia de salud"
+        },
+        "workCity": {
+          "label": "Comuna de trabajo"
+        },
+        "workState": {
+          "label": "Región de trabajo"
+        },
+        "workStreet": {
+          "label": "Nombre de la calle de trabajo"
+        },
+        "workNumber": {
+          "label": "Número de la dirección de trabajo"
+        },
+        "workComplement": {
+          "label": "Dpto/Sitio/Otro"
+        },
+        "workPostal": {
+          "label": "Código postal del trabajo"
+        },
+        "workPhone": {
+          "label": "Teléfono del trabajo"
+        },
+        "workMutuality": {
+          "label": "Mutualidad a la que esta afiliado"
+        },
+        "quitAsignation": {
+          "label": "Quitar asignacion"
         }
       }
     }
@@ -2212,6 +2344,12 @@
   "table": {
     "ufReg": {
       "label": "Registro UF"
+    },
+    "fatherSurname": {
+      "label": "Apellido Paterno"
+    },
+    "motherSurname": {
+      "label": "Apellido Materno"
     },
     "patients": {
       "label": "Días"
@@ -2298,7 +2436,7 @@
       "label": "Rol"
     },
     "waitingRoom": {
-      "label": "Sala de espera"
+      "label": "Sala de Espera"
     },
     "description": {
       "label": "Descripción"
@@ -2333,7 +2471,10 @@
       "label": "Últimas Consultas"
     },
     "timeline": {
-      "label": "Timeline de consultas"
+      "label": "Timeline de Consultas"
+    },
+    "gesEno": {
+      "label": "Notificaciones GES/ENO"
     },
     "services": {
       "label": "Consultas"
@@ -2342,13 +2483,13 @@
       "label": "Logs"
     },
     "admins": {
-      "label": "Aministradores "
+      "label": "Administradores "
     },
     "admin": {
-      "label": "Aministrador"
+      "label": "Administrador"
     },
     "doctors": {
-      "label": "Profesionales de salud "
+      "label": "Profesionales de Salud "
     },
     "coordinator": {
       "label": "Coordinador"
@@ -2360,19 +2501,19 @@
       "label": "Pacientes"
     },
     "personal": {
-      "label": "Personales "
+      "label": "Datos Personales "
     },
     "role": {
       "label": "Rol"
     },
     "waitingRoomMod": {
-      "label": "Sala de espera (modalidad) "
+      "label": "Sala de spera (modalidad) "
     },
     "academic": {
       "label": "Laborales"
     },
     "password": {
-      "label": "Clave"
+      "label": "Contraseña"
     },
     "information": {
       "label": "Información "
@@ -2390,7 +2531,7 @@
       "label": "Disponibilidad "
     },
     "waitingRoom": {
-      "label": "Sala de espera "
+      "label": "Sala de Espera "
     },
     "config": {
       "label": "Configuración Clínica "
@@ -2403,6 +2544,9 @@
     "title": "Sala de espera cardiología A1",
     "description": {
       "label": "Sala creada el % por % "
+    },
+    "asignedUsers": {
+      "label": "usuarios asignados"
     },
     "professionals": {
       "label": "Profesional(es)"
@@ -2455,17 +2599,17 @@
       "label": "Usuario(s) en sala de espera"
     },
     "inmediateService": {
-      "title": "Atención inmediata / Acceso a Sala",
-      "label": "Aquí podras acceder a una consulta inmediata"
+      "title": "Atención Inmediata / Acceso a Sala",
+      "label": "Aquí podrá acceder a una consulta inmediata"
     },
     "inmediateServiceHint": {
-      "label": "Usted ingresara en una lista de espera, hasta que un profesional de salud pueda atenderlo, si no deseas esperar haz click en el botón."
+      "label": "Usted ingresará en una lista de espera hasta que un profesional de salud pueda atenderlo; si no desea esperar, haz click en el botón Deseo Agendar."
     },
     "waitingTime": {
       "label": "El tiempo de espera es de 15 minutos aprox."
     },
     "iWantSchedule": {
-      "label": "Deseo agendar mejor"
+      "label": "Deseo Agendar "
     },
     "servicePrice": {
       "label": "VALOR CONSULTA:"
@@ -2474,7 +2618,7 @@
       "label": "Su consulta sera realizará el"
     },
     "roomManagment": {
-      "label": "Gestión de salas"
+      "label": "Gestión de Salas"
     },
     "schedule": {
       "label": "Agenda"
@@ -2486,7 +2630,7 @@
       "label": "Salas de Espera"
     },
     "noWaitingRoomsWithThisParams": {
-      "label": "No existen salas de esperas con estos parametros"
+      "label": "No existen salas de esperas con estos parámetros"
     },
     "roomName": {
       "label": "Nombre Sala"
@@ -2550,31 +2694,31 @@
       "label": "Atención inmediata / Acceso a Sala"
     },
     "joinWaitingListHint": {
-      "label": "Usted ingresara en una lista de espera, hasta que un profesional de salud pueda atenderlo, si no deseas esperar haz click en el botón Deseo Agendar."
+      "label": "Usted ingresará en una lista de espera hasta que un profesional de salud pueda atenderlo; si no desea esperar, haz click en el botón Deseo Agendar."
     },
     "scheduleService": {
       "label": "Agenda una cita médica"
     },
     "healthHabits": {
-      "label": "Habitos de Salud"
+      "label": "Hábitos de Salud"
     },
     "anamnesis": {
       "label": "Anamnesis"
     },
     "phisicalExam": {
-      "label": "Exámen físico"
+      "label": "Examen físico"
     },
     "nutrition": {
       "label": "Nutrición"
     },
     "serviceRoom": {
-      "label": "Sala médica"
+      "label": "Sala Médica"
     },
     "ATW": {
       "label": "Tiempo aproximado de espera"
     },
     "videoService": {
-      "label": "Video consulta"
+      "label": "Video Consulta"
     }
   },
   "support": {
@@ -2594,8 +2738,26 @@
     }
   },
   "common": {
+    "duration": {
+      "label": "Duración"
+    },
+    "detail": {
+      "label": "Detalle"
+    },
+    "observations":{
+      "label": "Observaciones"
+    },
+    "hold":{
+      "label": "Retenida"
+    },
+    "ges":{
+      "label": "GES"
+    },
+    "appointmentHasPreviousImmediate": {
+      "label": "Usted ya cuenta con una consulta inmediata activa. Por favor consulte en el menú MIS CONSULTAS"
+    },
     "withOut": "sin resultados",
-    "Soon": "Proximamente",
+    "Soon": "Próximamente",
     "user": {
       "sessionExpired": {
         "label": "Sesión expirada"
@@ -2606,13 +2768,13 @@
         "label": "ingrese su email"
       },
       "password": {
-        "label": "contraseña"
+        "label": "Contraseña"
       },
       "user": {
         "label": "E-mail"
       },
       "file": {
-        "examen": "exámen",
+        "examen": "examen",
         "documento": "documento",
         "seleccionar": "seleccionar",
         "buscar": "Buscar"
@@ -2638,9 +2800,9 @@
         "label": "Agregar Nuevo"
       },
       "reschedule": {
-        "title": "¿Está seguro en cancelar la consulta?",
+        "title": "¿Está seguro/a que desea cancelar su consulta?",
         "label": "Reagendar",
-        "warning": "Considera que posiblemente perderás la consulta con este profesional"
+        "warning": "Considere que posiblemente perderá la consulta con este profesional"
       },
       "cancel": {
         "label": "Cancelar"
@@ -2699,14 +2861,14 @@
     },
     "dropdown": {
       "language": {
-        "label": "cambiar idioma"
+        "label": "Cambiar Idioma"
       },
       "filter": {
         "label": "FIltrar por"
       }
     },
     "poweredBy": {
-      "label": "Powered by ITMS - Plataforma de medicina"
+      "label": "Powered by ITMS - Plataforma de Medicina"
     },
     "roles": {
       "coordinator": {
@@ -2805,7 +2967,7 @@
         "label": "Ingrese E-mail"
       },
       "phone": {
-        "label": "Ingrese Telefono"
+        "label": "Ingrese Teléfono"
       },
       "birthDate": {
         "label": "Ingrese Fecha de Nacimiento"
@@ -2823,7 +2985,7 @@
         "label": "Ingrese Universidad"
       },
       "degree": {
-        "label": "Ingrese Titulo"
+        "label": "Ingrese Título"
       },
       "regNumber": {
         "label": "Ingrese Número de Registro"
@@ -2835,7 +2997,7 @@
         "label": "Fecha Final"
       },
       "search": {
-        "label": "Busqueda"
+        "label": "Búsqueda"
       },
       "filter": {
         "label": "Filtrar por"
@@ -2857,7 +3019,7 @@
             "label": "Primer apellido"
           },
           "secondSurname": {
-            "label": "Segundo nombre"
+            "label": "Segundo apellido"
           },
           "surname": {
             "label": "Apellido"
@@ -2911,7 +3073,7 @@
       "label": "Reintentar"
     },
     "error": {
-      "label": "error"
+      "label": "Error"
     },
     "disable": {
       "label": "Deshabilitar"
@@ -2944,7 +3106,7 @@
       "label": "Familiares"
     },
     "uploadDate": {
-      "label": "Fecha de Subida"
+      "label": "Fecha de Carga"
     },
     "timelineOf": {
       "label": "Timeline de"
@@ -2971,10 +3133,10 @@
       "label": "Hola"
     },
     "startDate": {
-      "label": "Fecha de Inicio"
+      "label": "Fecha de inicio"
     },
     "finalHour": {
-      "label": "Horario Final"
+      "label": "Horario final"
     },
     "filter": {
       "role": {
@@ -2991,7 +3153,7 @@
       "label": "Agregadas"
     },
     "description": {
-      "label": "Descripcion"
+      "label": "Descripción"
     },
     "aviabilityActualDays": {
       "label": "Disponibilidad de días actual"
@@ -3064,7 +3226,7 @@
       "label": "No definido"
     },
     "recordPerPage": {
-      "label": "Registros por Página"
+      "label": "Registros por página"
     },
     "noRecordsFound": {
       "label": "No se han encontrado registros"
@@ -3085,7 +3247,7 @@
       "label": "N/A"
     },
     "professionalsOnline": {
-      "label": "profesionales online"
+      "label": "Profesionales online"
     },
     "minutes": {
       "label": "minutos"
@@ -3097,7 +3259,7 @@
       "label": "Actual"
     },
     "currentInvoicing": {
-      "label": "Facturacion"
+      "label": "Facturación"
     },
     "profileUpdated": {
       "label": "Perfil Actualizado"
@@ -3109,7 +3271,7 @@
       "label": "Datos de Identificación"
     },
     "identificationType": {
-      "label": "Tipo Identificacion"
+      "label": "Tipo de Identificación"
     },
     "ufState": {
       "label": "Estado (UF)"
@@ -3118,10 +3280,10 @@
       "label": "Número"
     },
     "enterService": {
-      "label": "Ingresar a consulta"
+      "label": "Ingresar a Consulta"
     },
     "createdAt": {
-      "label": "Fecha creación"
+      "label": "Fecha Creación"
     },
     "disabled": {
       "label": "Deshabilitado"
@@ -3227,7 +3389,7 @@
         "personalData": {
           "title": "Datos Personales",
           "name": {
-            "label": "Nombres"
+            "label": "Nombre"
           },
           "firstSurname": {
             "label": "Primer Apellido"
@@ -3270,7 +3432,7 @@
             "label": "Universidad"
           },
           "degree": {
-            "label": "Titulo"
+            "label": "Título"
           },
           "regNumber": {
             "label": "Nº de registro"
@@ -3281,7 +3443,7 @@
         }
       },
       "changePassword": {
-        "title": "Cambiar Clave",
+        "title": "Cambiar Contraseña",
         "label": "Información básica de sus datos",
         "current": {
           "title": "Contraseña actual",
@@ -3314,10 +3476,10 @@
           "label": "Recuperación de contraseña"
         },
         "pwdReseted": {
-          "label": "contraseña reestablecida"
+          "label": "Contraseña reestablecida"
         },
         "emailAsociatedAccount": {
-          "label": "Ingrese su correo electronico asociado a su cuenta."
+          "label": "Ingrese su correo electrónico asociado a su cuenta."
         },
         "emailSendedResetPwd": {
           "label": "Se ha enviado un email para reestablecer tu contraseña"
@@ -3328,7 +3490,7 @@
         "change": {
           "title": "Cambiar contraseña",
           "current": {
-            "label": "Contraseña Actual"
+            "label": "Contraseña actual"
           },
           "new": {
             "label": "Nueva contraseña"
@@ -3336,7 +3498,7 @@
           "repeat": {
             "label": "Repetir contraseña",
             "hint": {
-              "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas"
+              "label": "Recuerda que debes crear una contraseña que contenga caracteres alfanúmericos y que al menos contenga mayúsculas y minúsculas"
             }
           }
         }
@@ -3360,7 +3522,7 @@
             "label": "Tipo cuenta"
           },
           "number": {
-            "label": "Numero cuenta"
+            "label": "Número cuenta"
           },
           "bank": {
             "label": "Banco"
@@ -3369,7 +3531,7 @@
             "label": "Nombre Títular"
           },
           "dni": {
-            "label": "Rut"
+            "label": "RUN"
           },
           "email": {
             "label": "Email"
@@ -3431,7 +3593,7 @@
       "label": "Tipo de Registro"
     },
     "sendInfoToPatient": {
-      "label": "Enviar Informacion al Paciente"
+      "label": "Enviar Información al Paciente"
     },
     "createProfile": {
       "label": "Crear Perfil"
@@ -3440,13 +3602,13 @@
       "label": "Editar Perfil"
     },
     "disableProfile": {
-      "label": "Desabilitar Perfil"
+      "label": "Deshabilitar Perfil"
     },
     "viewPrescription": {
       "label": "Ver Prescripción"
     },
     "generateExamOrder": {
-      "label": "Generar Orden Exámen"
+      "label": "Generar Orden Examen"
     },
     "reportManagment": {
       "label": "Gestión de Reporte"
@@ -3458,7 +3620,7 @@
       "label": "CEP"
     },
     "managmentDisponibility": {
-      "label": "Gestión de disponibilidad"
+      "label": "Gestión de Disponibilidad"
     },
     "updateProfile": {
       "label": "Actualizar Perfil"
@@ -3479,7 +3641,7 @@
         "label": "Datos de identificación"
       },
       "personalData": {
-        "label": "Datos personales"
+        "label": "Datos Personales"
       },
       "majorAge": {
         "label": "¿Tengo más de 18 años?"
@@ -3491,7 +3653,7 @@
         "label": "Dirección"
       },
       "generatePassword": {
-        "title": "Generar clave"
+        "title": "Generar contraseña"
       },
       "modal": {
         "fail": {
@@ -3505,41 +3667,41 @@
         }
       },
       "hint": {
-        "label": "Recuerda que debes crear una clave que contenga caracteres alfanumericos y que al menos contenga Mayusculas y minisculas."
+        "label": "Recuerda que debes crear una contraseña que contenga caracteres alfanúmericos y que al menos contenga mayúsculas y minúsculas"
       }
     },
     "hintDisableUser": {
-      "label": "Estas seguro de que deseas deshabilitar a este usuario?"
+      "label": "¿Estás seguro de que deseas deshabilitar a este usuario?"
     },
     "disableUser": {
       "label": "Deshabilitar Usuario"
     },
     "sendConfirmationEmail": {
-      "label": "Enviar Correo de Confirmacion"
+      "label": "Enviar Correo de Confirmación"
     },
     "updateAccount": {
       "label": "Actualizar Cuenta"
     },
     "identificationDocument": {
-      "label": "Documento de Identificacion"
+      "label": "Documento de identificación"
     },
     "identificationDocumentReq": {
-      "label": "Documento de Identificacion"
+      "label": "Documento de identificacion"
     },
     "selectedDocumentNumberReq": {
-      "label": "N° de Documento Seleccionado"
+      "label": "N° de documento seleccionado"
     },
     "secondaryDoc": {
       "label": "Documentacion Secundaria"
     },
     "votantTitle": {
-      "label": "Titulo de Votante"
+      "label": "Título de Votante"
     },
     "selectedDocumentNumber": {
-      "label": "N° de Documento Seleccionado"
+      "label": "N° de documento seleccionado"
     },
     "schoolAsistant": {
-      "label": "Asistente a Escuela"
+      "label": "¿Es Estudiante?"
     },
     "nameReq": {
       "label": "Nombre"
@@ -3548,13 +3710,13 @@
       "label": "Nombre"
     },
     "lastName": {
-      "label": "Segundo Nombre"
+      "label": "Primer Apellido"
     },
     "surnameReq": {
       "label": "Apellido"
     },
     "surname": {
-      "label": "Apellido"
+      "label": "Segundo Apellido"
     },
     "motherNameReq": {
       "label": "Nombres de la Madre"
@@ -3575,10 +3737,10 @@
       "label": "Confirmar email"
     },
     "phoneReq": {
-      "label": "Telefono"
+      "label": "Teléfono"
     },
     "phone": {
-      "label": "Telefono"
+      "label": "Teléfono"
     },
     "breed": {
       "label": "Raza"
@@ -3602,10 +3764,10 @@
       "label": "Nacionalidad"
     },
     "country": {
-      "label": "Pais de Origen"
+      "label": "País de Origen"
     },
     "countryEntrance": {
-      "label": "Fecha de Entrada al Pais"
+      "label": "Fecha de ingreso al País"
     },
     "erroneous": {
       "label": "erroneo"
@@ -3620,22 +3782,22 @@
       "label": "Ciudad"
     },
     "city": {
-      "label": "Ciudad"
+      "label": "Región"
     },
     "neighborhoodReq": {
       "label": "Barrio"
     },
     "neighborhood": {
-      "label": "Barrio"
+      "label": "Comuna"
     },
     "streetReq": {
       "label": "Calle es necesario"
     },
     "numberReq": {
-      "label": "Numero"
+      "label": "Número"
     },
     "number": {
-      "label": "Numero"
+      "label": "Número"
     },
     "userType": {
       "label": "Tipo de Usuario"
@@ -3671,7 +3833,7 @@
       "label": "minúscula y un caracter especial."
     },
     "userManagmentAccountCreation": {
-      "label": "Gestión de Usuarios / Creacion de Cuenta"
+      "label": "Gestión de Usuarios / Creación de Cuenta"
     },
     "genPassword": {
       "label": "Generar Contraseña"
@@ -3694,6 +3856,9 @@
     "uf": {
       "label": "UF"
     },
+    "region": {
+      "label": "Región"
+    },
     "numerationReq": {
       "label": "Numeración es necesario"
     },
@@ -3704,18 +3869,56 @@
       "label": "* un largo mínimo de 8 carácteres"
     },
     "academicBio": {
-      "label": "Biografia Academica"
+      "label": "Biografía Acádemica"
     }
   },
   "teleconsultation": {
     "tabProfessional": {
       "title": "Profesional",
-      "biografia": "Biografía Academica",
+      "biografia": "Biografía Acádemica",
       "especialidades": "Especialidades",
       "universidad": "Universidad",
       "titulo": "Título",
       "registro": "Número de registro",
       "curso": "Curso"
+    }
+  },
+  "year": {
+    "january": {
+      "label": "Enero"
+    },
+    "february": {
+      "label": "Febrero"
+    },
+    "march": {
+      "label": "Marzo"
+    },
+    "april": {
+      "label": "Abril"
+    },
+    "may": {
+      "label": "Mayo"
+    },
+    "june": {
+      "label": "Junio"
+    },
+    "july": {
+      "label": "Julio"
+    },
+    "august": {
+      "label": "Agosto"
+    },
+    "september": {
+      "label": "Septiembre"
+    },
+    "october": {
+      "label": "Octubre"
+    },
+    "november": {
+      "label": "Noviembre"
+    },
+    "december": {
+      "label": "Diciembre"
     }
   }
 }

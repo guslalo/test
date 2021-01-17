@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AppointmentsService } from './../../../../../../services/appointments.service';
 
 @Component({
@@ -11,12 +12,13 @@ export class ResultadoComponent implements OnInit {
   public reserva: any;
   appointmentId: any;
   public appointment: any;
+  public setUp: string
 
   constructor(private route: ActivatedRoute, private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {
     this.initCall();
-
+    this.setUp = environment.setup;
     /*this.appointmentId = localStorage.getItem('appointmentIdAgenda');
     console.log(this.appointmentId);
 

@@ -15,7 +15,7 @@
         </p>
       </div>
       <div class="card-body text-center">
-        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}?</p>
+        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
           <li class="nav-item" role="presentation" (click)="refreshSearchSpecialty()">
@@ -108,7 +108,7 @@
                 (optionSelected)="escogerProfessional($event.option.value)"
               >
                 <mat-option *ngFor="let item of professionals" [value]="item">
-                  {{ item.personalData?.name + ' ' + item.personalData?.lastName }}
+                  {{ item.personalData?.name + ' ' + (setUp=='CL' ? item.personalData?.lastName : item.personalData?.secondLastName)  }}
                 </mat-option>
               </mat-autocomplete>
               <div class="searchBox">
@@ -194,7 +194,7 @@
                       <div class="col-10">
                         <ng-container *ngFor="let item of item.professionalDetails.userDetails">
                           <p class="m-0 font-weight-bold">
-                            {{ item.name }}
+                            Dr(a) {{ item.name }}
                           </p>
                         </ng-container>
                         <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
@@ -287,7 +287,7 @@
                           {{
                             'clinicalFile.select.label' | transloco
                           }}
-                        </option>
+                        </option><!--  hola -->
                         <ng-container *ngFor="let item of symptoms">
                           <option value="{{ item._id }}">{{ item.name }}</option>
                         </ng-container>
@@ -384,6 +384,9 @@
               <div class="form-group">
                 <!--(change)="fileChangeEvent($event)"  accept="image/*,.pdf,.txt"  -->
                 <label for="exampleInputEmail1">{{ 'dashboard.home.newService.btnUpload.label' | transloco }}</label>
+                <div class="adjuntar">
+                  {{'common.input.file.seleccionar' | transloco}}
+                </div>
                 <div class="custom-file">
                   <input
                     accept=".xls, .xlsx, .csv, .pdf, .doc, .docx, .jpg, .png, .jpeg, .mp4, .mov, .txt, .zip, .rar, .ppt, .pptx, .mp3"  
@@ -528,7 +531,7 @@
               <div class="box mr-3">
                 <p class="m-0 font-weight-bold">
                   {{ blocks[0].professionalDetails.userDetails[0].name }}
-                  {{ blocks[0].professionalDetails.userDetails[0].secondLastName }}
+                  {{ setUp == 'CL' ? blocks[0].professionalDetails.userDetails[0].lastName : blocks[0].professionalDetails.userDetails[0].secondLastName }}
                 </p>
                 <p class="m-0">
                   {{ 'disponibility.modal.create.specialty.label' | transloco }}
@@ -537,13 +540,13 @@
               </div>
 
               <div class="box boxSeparador pl-3">
-                <p class="m-0 valor">
+                <p *ngIf="brand!=='medline'" class="m-0 valor">
                   {{ 'waitingRoom.serviceFee.label' | transloco }}: ${{
                     reserve.professionalDetails.specialtyDetails.price
                   }}
                 </p>
                 <p class="m-0">
-                  {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
+                  {{ reserve.dateDetails.date.day }}-{{ reserve.dateDetails.date.month }}-{{
                     reserve.dateDetails.date.year
                   }}
                   | {{ reserve.dateDetails.start }}

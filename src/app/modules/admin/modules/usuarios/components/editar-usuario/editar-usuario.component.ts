@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { RoomsService } from 'src/app/services/rooms.service';
 import { months } from 'moment';
+import { environment } from './../../../../../../../environments/environment';
 
 const current = new Date();
 
@@ -37,12 +38,12 @@ export class EditarUsuarioComponent implements OnInit {
   showPassword: boolean;
   professionalPhoto: any;
   citiesFilter: any;
-  city2:boolean;
-  registerUf:any;
-  registerUf2:any;
+  city2: boolean;
+  registerUf: any;
+  registerUf2: any;
   profileSelected: any;
   roomSelected: any;
-  setDate:any;
+  setDate: any;
 
   states: any = [];
   cities: any = [];
@@ -56,27 +57,27 @@ export class EditarUsuarioComponent implements OnInit {
 
   specialitiesData: any;
 
-  errorCepString:string;
-  public errorCep:boolean = false;
-  public ufObject:any;
-  public cityObject:any;
-  public neighborhood:any;
-  public street:any;
+  errorCepString: string;
+  public errorCep: boolean = false;
+  public ufObject: any;
+  public cityObject: any;
+  public neighborhood: any;
+  public street: any;
+  titularForm: FormGroup;
+  titular:any;
+  public loarderTutor:boolean;
 
+  // [maxDate]="maxDate" ln 222
   currentDate = {
     day: current.getDate(),
     month: current.getMonth() + 1,
     year: current.getFullYear()
   };
 
-  maxDate = {
-    day: current.getDate(),
-    month: current.getMonth() + 1,
-    year: current.getFullYear() - 18 
-  };
+
 
   dateAdapter = new CustomDateAdapter();
-  birthDate:NgbDateStruct;
+  birthDate: NgbDateStruct;
   inmigrationDate: NgbDateStruct;
 
   formUser: any = [];
@@ -92,12 +93,13 @@ export class EditarUsuarioComponent implements OnInit {
   profilesAssigned: any = [];
   waitingRooms: any = [];
   waitingRoomsAssigned: any = [];
-
   specialities: any = [];
   specialitiesAssigned: any = [];
 
   professionalRegistry: any = [];
   professionalRegistrySend: any = [];
+  maxDate = undefined;
+  
 
   constructor(
     private location: Location,
@@ -112,8 +114,32 @@ export class EditarUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loarderTutor = false;
     this.spinner.show();
 
+    if(environment.checkAge === false){
+    
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
+    } else {
+      this.maxDate = {
+        year: current.getFullYear() - 18,
+        month: current.getMonth() + 1,
+        day: current.getDate(),
+      };
+    }
+  
     this.getUser(this.userType, this.userId);
 
     this.clinicId = localStorage.getItem('clinic');
@@ -139,17 +165,27 @@ export class EditarUsuarioComponent implements OnInit {
       extraIdDocument: ['', null],
     });
 
+       
+    this.titularForm = this.formBuilder.group({
+      //document:  new FormControl('cpf'),
+      //idDocumentNumber: ['', Validators.required],
+      titularDependiente: ['', Validators.required],
+      titularidadCpf: ['', null],
+      titularidadName: ['', null]  
+    });
+
+
     this.personalData = this.formBuilder.group({
-      name: ['', [Validators.required, ]],
-      lastName: ['', ],
-      motherName: ['', [Validators.required, ]],
+      name: ['', [Validators.required,]],
+      lastName: ['',],
+      motherName: ['', [Validators.required,]],
       secondLastName: ['', [Validators.required,]],
       email: ['', [Validators.email, Validators.required]],
-      phoneNumber: [null, [Validators.required, ]],
+      phoneNumber: [null, [Validators.required,]],
       gender: [null, Validators.required],
-      birthdate: [null, null],
-      ufBirth: [null, null],
-      municipalityBirth: [null, null],
+      birthdate: [''],
+      ufBirth: [null],
+      municipalityBirth: [null],
       nacionality: [null, Validators.required],
       originCountry: [null, null],
       inmigrationDate: [null, null],
@@ -163,7 +199,7 @@ export class EditarUsuarioComponent implements OnInit {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       streetNumber: [null, [Validators.required, Validators.pattern(/^(?=.*[0-9])/)]],
-      complement: [null, ],
+      complement: [null,],
     });
 
     this.profilesForm = this.formBuilder.group({
@@ -248,7 +284,7 @@ export class EditarUsuarioComponent implements OnInit {
     let idSelected = id.value.split(":");
     console.log(idSelected[1]);
     this.getCitiesforId(idSelected[1].trim());
-    
+
   }
 
   ufSelect2(id) {
@@ -365,8 +401,8 @@ export class EditarUsuarioComponent implements OnInit {
             user.identificationData.professionalUfNumber
           );
 
-          
-         
+
+
         this.isSchool = user.personalData.isSchool;
         this.personalData.get('name').setValue(user.personalData.name);
         this.personalData.get('lastName').setValue(user.personalData.lastName);
@@ -376,9 +412,9 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('gender').setValue(user.personalData.gender);
         this.birthDate = this.dateAdapter.fromModel(user.personalData.birthdate);
         this.setDate = {
-          day:this.birthDate.year,
-          month:this.birthDate.month,
-          year:this.birthDate.day,
+          day: this.birthDate.year,
+          month: this.birthDate.month,
+          year: this.birthDate.day,
         }
         console.log(this.setDate);
         this.personalData.get('birthdate').setValue(this.setDate);
@@ -399,7 +435,7 @@ export class EditarUsuarioComponent implements OnInit {
         this.personalData.get('streetNumber').setValue(user.addressData.streetNumber);
         this.personalData.get('complement').setValue(user.addressData.complement);
         this.waitingRoomsAssigned = user.waitingRooms || [];
-        console.log(this.birthDate );
+        console.log(this.birthDate);
         console.log(this.dateAdapter.fromModel(user.personalData.birthdate))
         // console.log(this.waitingRoomsAssigned);
 
@@ -436,9 +472,9 @@ export class EditarUsuarioComponent implements OnInit {
               console.log(data);
               this.specialitiesAssigned.push(data.payload[0]);
             },
-            error => {
-              console.log(error)
-            }
+              error => {
+                console.log(error)
+              }
             );
           }
         }
@@ -538,17 +574,17 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
-  getLocationDataFromCep(){
+  getLocationDataFromCep() {
     this.errorCep = false;
-    this.personalData.get('cep').valueChanges.subscribe( x =>  {
+    this.personalData.get('cep').valueChanges.subscribe(x => {
       console.log(x);
-      if(x.length >= 9) {
+      if (x.length >= 9) {
         this.userService.getLocationDataFromCep(x).subscribe(
           data => {
             console.log(data.payload);
-            if(data.payload.error){
+            if (data.payload.error) {
               this.errorCepString = data.payload.error
-              this.errorCep = true; 
+              this.errorCep = true;
             } else {
               this.ufObject = data.payload.uf._id
               this.cityObject = data.payload.city._id
@@ -556,39 +592,36 @@ export class EditarUsuarioComponent implements OnInit {
               this.street = data.payload.street
               this.errorCep = false;
               console.log(data)
-              this.personalData.get('uf').setValue(this.ufObject, {emitEvent: false});
+              this.personalData.get('uf').setValue(this.ufObject, { emitEvent: false });
               this.personalData.get('city').setValue(this.cityObject);
-              
+
               this.personalData.get('uf').enable();
               this.personalData.get('city').enable();
               this.personalData.get('neighborhood').enable();
               this.personalData.get('street').enable();
               this.personalData.get('streetNumber').enable();
               this.personalData.get('complement').enable();
-              this.personalData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false});
-              this.personalData.get('street').setValue(this.street, {emitEvent: false});
-  
-              this.personalData.get('uf').valueChanges.subscribe( x =>  {
+              this.personalData.get('neighborhood').setValue(this.neighborhood, { emitEvent: false });
+              this.personalData.get('street').setValue(this.street, { emitEvent: false });
+
+              this.personalData.get('uf').valueChanges.subscribe(x => {
                 this.getCitiesforId(this.ufObject);
-  
+
               });
             }
-           
+
           },
           error => {
             console.log(this.errorCep)
             console.log(this.errorCep, 'error')
-              this.errorCep = true;
+            this.errorCep = true;
             console.log(error)
           }
         )
       }
-     }
+    }
     );
 
-   
-
-   
     /*
     this.userService.getLocationDataFromCep(cep).subscribe(
       data => {
@@ -600,36 +633,57 @@ export class EditarUsuarioComponent implements OnInit {
     )*/
   }
 
-  validCPF(cpf: string){
+  getforCpf(cpf) {
+    //console.log(cpf)
+    this.loarderTutor = true;
+
+    this.userService.getForCpf(cpf).subscribe((data) => {
+      console.log(data);
+      this.titular  = data.payload
+      this.titularForm.get('titularidadName').setValue(this.titular.fullName, {emitEvent: false});
+      this.loarderTutor = false;
+    },
+      error => {
+        console.log(error)
+        this.loarderTutor = false
+      }
+    );
+  
+   
+  
+  }
+
+
+  validCPF(cpf: string) {
     this.cpfvalid = this.validateCPF(cpf);
     console.log(this.cpfvalid)
   }
-  validateCPF(cpf: string){
+  validateCPF(cpf: string) {
     console.log(this.identificationData.get('document').value)
-    if(this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
-    if(cpf.length <= 0) return false
+    if (this.identificationData.get('document').value != 'cpf' && this.identificationData.get('document').value != null) return true
+    if (cpf.length <= 0) return false
     cpf = cpf.replace(/[^0-9]/, "").replace(/[^0-9]/, "").replace(/[^0-9]/, "")
-    cpf.padStart(11,'0')
+    cpf.padStart(11, '0')
     if (cpf.length != 11) return false
-    
-    else if(cpf == '00000000000' || 
-            cpf == '11111111111' || 
-            cpf == '22222222222' || 
-            cpf == '33333333333' || 
-            cpf == '44444444444' || 
-            cpf == '55555555555' || 
-            cpf == '66666666666' || 
-            cpf == '77777777777' || 
-            cpf == '88888888888' || 
-            cpf == '99999999999') return false
+
+    else if (cpf == '00000000000' ||
+      cpf == '11111111111' ||
+      cpf == '22222222222' ||
+      cpf == '33333333333' ||
+      cpf == '44444444444' ||
+      cpf == '55555555555' ||
+      cpf == '66666666666' ||
+      cpf == '77777777777' ||
+      cpf == '88888888888' ||
+      cpf == '99999999999') return false
     else {
       for (let i = 9; i < 11; i++) {
         let j = 0, d = 0
         for (let h = 0; j < i; j++) {
-          d += parseInt(cpf[j]) * ((i + 1) - j);  
+          d += parseInt(cpf[j]) * ((i + 1) - j);
         }
         d = ((10 * d) % 11) % 10;
-        if(parseInt(cpf[j]) != d) return false
+        if (parseInt(cpf[j]) != d) return false
       }
       return true
     }
@@ -650,7 +704,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   formUserValid() {
-   //console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
+    //console.log(this.formUser[0], this.formUser[1], this.formUser[3], this.formUser[4], this.formUser[5]);
 
     switch (this.userType) {
       case 'admins':
@@ -904,19 +958,19 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
-  ufRegistry(id){
-    let idSelected =  id.options[id.selectedIndex].value.split(":");
+  ufRegistry(id) {
+    let idSelected = id.options[id.selectedIndex].value.split(":");
     console.log(idSelected[1])
     this.registerUf = {
-      id:idSelected[1],
-      name:id.options[id.selectedIndex].text
+      id: idSelected[1],
+      name: id.options[id.selectedIndex].text
     }
   }
-  ufRegistry2(id){
-    let idSelected2 =  id.options[id.selectedIndex].value.split(":");
+  ufRegistry2(id) {
+    let idSelected2 = id.options[id.selectedIndex].value.split(":");
     this.registerUf2 = {
-      id:idSelected2[1],
-      name:id.options[id.selectedIndex].text
+      id: idSelected2[1],
+      name: id.options[id.selectedIndex].text
     }
   }
 
@@ -940,7 +994,7 @@ export class EditarUsuarioComponent implements OnInit {
       course: this.professionalForm.value.course,
       ufRegistry: this.registerUf.id
     });
-     
+
     this.professionalForm.controls['professionalRegistryType'].setValue(' ');
     this.professionalForm.controls['professionalRegistry'].setValue(' ');
     this.professionalForm.controls['ufProfessionalRegistry'].setValue(' ');

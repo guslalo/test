@@ -80,7 +80,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <a
-              *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']"
+              *ngxPermissionsOnly="['ReadExams:MedicalRecord']"
                 class="nav-link"
                 id="profile-tab3"
                 data-toggle="tab"
@@ -94,6 +94,7 @@
             </li>
             <li class="nav-item" role="presentation">
               <a
+                *ngxPermissionsOnly="['ViewPrescriptions:MedicalRecord']"
                 class="nav-link"
                 id="profile-tab"
                 data-toggle="tab"
@@ -102,7 +103,7 @@
                 aria-controls="notas"
                 aria-selected="false"
               >
-                {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }}
+                {{ 'clinicalFile.patientData.tabs.prescriptions.label' | transloco }} 
               </a>
             </li>
             <li class="nav-item" role="presentation">
@@ -148,10 +149,17 @@
             <div class="col-4">
               <div class="bg-white rounded-lg p-4 shadow-sm">
                 <div class="img text-center">
-                  <img src="assets/perfil.png" />
+                  <div class="img text-center imgUser">
+                    <ng-container *ngIf="patientRecord.personalData.photo != null; else sinFoto1">
+                      <img [src]="patientRecord.personalData.photo" />
+                    </ng-container>
+                    <ng-template #sinFoto1>
+                      <img src="assets/profile.jpg" />
+                    </ng-template>
+                  </div>
                 </div>
                 <h4 class="text-center mt-2">
-                  {{ patientRecord.personalData?.name + ' ' + patientRecord.personalData?.secondLastName || null }}
+                  {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
                   <br />
                  
                 </h4>
@@ -200,7 +208,7 @@
               </div>
             </div>
             <div class="col-8">
-              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+              <div class="bg-white rounded-lg p-4 shadow-sm mb-4" *ngIf="setup != 'CL'">
                 <h4 class="title mb-3">
                   {{ 'account.createAccount.birthData.label' | transloco }}
                 </h4>
@@ -342,6 +350,10 @@
                   {{ 'clinicalFile.patientData.tabs.identification.addressData.title' | transloco }}
                 </h4>
                 <ul class="datos">
+                  <li *ngIf="setup == 'CL'">
+                    <i>RUT</i>
+                    {{ patientRecord.identificationData.run || 'S/R' }}
+                  </li>
                   <li>
                     <i>{{ 'table.status.label' | transloco }}</i>
                     {{ ufMap[patientRecord.addressData?.uf]?.name || 'S/R' }}
@@ -353,8 +365,7 @@
                   <li>
                     <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
-                      patientRecord.addressData?.neighborhood +
-                        ', ' +
+                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood + ', ') +
                         patientRecord.addressData?.street +
                         ' #' +
                         patientRecord.addressData?.streetNumber || 'S/R'
@@ -478,37 +489,39 @@
               [limit]="10"
               [selectAllRowsOnPage]="true"
             >
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span>{{
-                    row.patientDetails.patientId[0].identificationData.cpf ||
+                    row.appointmendId ||
                       row.patientDetails.patientId[0].identificationData.cns ||
                       row.patientDetails.patientId[0].identificationData.rgRegistry ||
+                      row.patientDetails.patientId[0].identificationData.rut ||
+                      row.patientDetails.patientId[0].identificationData.run ||
                       row.patientDetails.patientId[0].identificationData.passport
                   }}</span>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Paciente">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.patientDetails.userDetails[0].photo" alt="img" />
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
-                      (row.patientDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.patientDetails.userDetails[0].lastName : row.patientDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Profesional">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.professionalDetails.userDetails[0].photo" alt="img" />
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
-                      (row.professionalDetails.userDetails[0].secondLastName)
+                      (setup == 'CL' ? row.professionalDetails.userDetails[0].lastName : row.professionalDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Fecha">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ moment(row.dateDetails.date).format('DD/MM/YYYY') }}
                 </ng-template>
@@ -633,7 +646,7 @@
                     {{ 'clinicalFile.patientData.tabs.videoChat.info.background.allergies.label' | transloco }}
                   </a>
 
-                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+                  <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral?.allergies">
                     <ul class="antecedentes">
                       <li class="pl-5">
                         {{ item.value }}
@@ -992,7 +1005,72 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody>
+                    <tr *ngFor="let item of arrayDocuments" id="{{ item.documentId }}">
+                      <td scope="row" class="text-center d-none">
+                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.6916 2.3669H10.3091C9.95377 1.1359 8.79281 0.19043 7.35625 0.19043C5.91999 0.19043 4.75919 1.1359 4.40336 2.3669H4.24454C2.2743 2.3669 0.744141 3.81621 0.744141 5.63132V20.1404C0.744141 21.9554 2.2743 23.4047 4.24454 23.4047H16.6917C18.662 23.4047 20.1922 21.9554 20.1922 20.1404V5.63132C20.1922 3.81621 18.662 2.3669 16.6916 2.3669ZM18.6362 20.1406C18.6362 21.2661 17.9186 21.9541 16.6917 21.9541H4.24454C3.01764 21.9541 2.29984 21.2659 2.29984 20.1406V5.63132C2.29984 4.50567 3.01764 3.81778 4.24454 3.81778H5.80055V3.0922C5.80055 2.32046 6.51208 1.64131 7.35625 1.64131C8.20042 1.64131 8.91191 2.32046 8.91191 3.0922V3.81778V8.53308C8.91191 9.30497 8.20042 9.98397 7.35625 9.98397C6.51208 9.98397 5.80055 9.30497 5.80055 8.53308V6.67211V5.94666H4.24454V6.67211V8.53323C4.24454 10.114 5.6424 11.435 7.35625 11.435C9.0701 11.435 10.4679 10.114 10.4679 8.53323V3.81778H16.6916C17.9185 3.81778 18.636 4.50581 18.636 5.63132V20.1406H18.6362Z"
+                            fill="#A9A9A9"
+                          />
+                        </svg>
+                        <ng-container> {{ item.documentType }} tipo </ng-container>
+                      </td>
+                      <td class="text-center">
+                        <ng-container *ngIf="item.documentType === 'prescription' || item.documentDetails?.type === 'prescription'">
+                          {{ 'sibrare.prescription' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'report'">
+                          {{ 'sibrare.report' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
+                          {{ 'sibrare.exam-order' | transloco}}
+                        </ng-container>
+                        <!--{{ item.documentType }}-->
+                      </td>
+
+                      <td class="text-center" *ngIf="item.uploadDate">
+                        {{ item.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+                      <td class="text-center" *ngIf="item.documentDetails?.uploadDate">
+                        {{ item.documentDetails.uploadDate | date: 'dd/MM/yyyy':'+0000' }}
+                      </td>
+
+                      <td class="text-center" *ngIf="item.issuerDetails">
+                        {{ item.issuerDetails.fullName }}
+                      </td>
+                      <td class="text-center" *ngIf="item.documentDetails?.issuerDetails">
+                        {{ item.documentDetails.issuerDetails[0].name }} {{ item.documentDetails.issuerDetails[0].lastName }}
+                      </td>
+
+                      <td class="text-center">
+                        <a *ngIf="item.documentDetails && item.documentDetails?.path" (click)="goToLink(item.documentDetails?.path)">
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <a (click)="downloadSibrare(item.appointmentId, item.documentId)" *ngIf="item.documentId">
+                          <!-- routerLink="{{urlSibrare}}" target="_blank-->
+                          <button type="button" class="btn btn-outline-primary rounded-pill btn-sm mr-3">
+                            {{ 'clinicalFile.patientData.tabs.exams.table.btnView.label' | transloco }}
+                          </button>
+                        </a>
+
+                        <div class="btn-group d-none">
+                          <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled></div>
+                          <div class="dropdown-menu dropdown-menu-right d-none">
+                            <button class="dropdown-item" type="button">
+                              {{ 'common.button.delete.label' | transloco }}
+                            </button>
+                            <button data-toggle="modal" data-target="#editar" class="dropdown-item" type="button">
+                              {{ 'clinicalFile.edit.label' | transloco }}
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -1009,10 +1087,37 @@
                   {{ 'dashboard.home.myServices.tabs.timeline.label' | transloco }}
                 </h5>
                 <div class="timeLine">
-                  <div class="line bg-white">{{ moment().format('YYYY') }}</div>
+                  <div class="line bg-white">{{ fecha.year }}</div>
                   <div class="line">
                     <button class="btn btn-secondary rounded-lg">
-                      {{ moment().format('MMMM') }}
+                      {{
+                        (fecha.month === 'enero'
+                          ? 'year.january.label'
+                          : fecha.month === 'febrero'
+                          ? 'year.february.label'
+                          : fecha.month === 'marzo'
+                          ? 'year.march.label'
+                          : fecha.month === 'abril'
+                          ? 'year.april.label'
+                          : fecha.month === 'mayo'
+                          ? 'year.may.label'
+                          : fecha.month === 'junio'
+                          ? 'year.june.label'
+                          : fecha.month === 'julio'
+                          ? 'year.july.label'
+                          : fecha.month === 'agosto'
+                          ? 'year.august.label'
+                          : fecha.month === 'septiembre'
+                          ? 'year.september.label'
+                          : fecha.month === 'octubre'
+                          ? 'year.october.label'
+                          : fecha.month === 'noviembre'
+                          ? 'year.november.label'
+                          : fecha.month === 'diciembre'
+                          ? 'year.december.label'
+                          : null
+                        ) | transloco
+                      }}
                     </button>
                   </div>
                   <ng-container *ngFor="let item of timelineRecord">
@@ -1070,20 +1175,21 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
                                   <p class="m-0 text-left">
                                     {{ 'clinicalFile.dr.label' | transloco }} {{ item.professional?.name }}
-                                    {{ item.professional?.secondLastName }}
+                                    {{ setup == 'CL' ? item.professional?.lastName : item.professional?.secondLastName }}
                                   </p>
-                                  <div class="btn btn-primary btn-sm rounded-pill float-left mt-2">
-                                    <ng-container *ngIf="item.isActive; else inactivo">
-                                      {{ 'common.status.active.label' | transloco }}
-                                    </ng-container>
-                                    <ng-template #inactivo>{{ 'clinicalFile.inactive.label' | transloco }}</ng-template>
-                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -1100,11 +1206,7 @@
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
-                        <!--
-                        <div class="col-5 text-left p-0">
-                          <h3>24</h3>
-                          12:45 Hrs.
-                        </div>-->
+                   
                       </div>
                     </div>
                   </ng-container>

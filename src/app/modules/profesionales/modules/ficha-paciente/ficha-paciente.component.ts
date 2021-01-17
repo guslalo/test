@@ -10,6 +10,9 @@ import { DocumentService } from 'src/app/services/document.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomDateAdapter } from 'src/app/shared/utils';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { AppointmentsService } from './../../../../services/appointments.service';
+import { environment } from 'src/environments/environment';
+import { env } from 'process';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -31,6 +34,7 @@ export class FichaPacienteComponent implements OnInit {
   countryMap: any = [];
   public antecedentes: any;
   public antecedentesGeneral: any;
+
 
   identificationData: any = {};
 
@@ -54,6 +58,12 @@ export class FichaPacienteComponent implements OnInit {
   public nameFile: any;
   public textInputFile: any;
   patientAge: any;
+  public fecha: any;
+  public arrayDocuments: any;
+  public descargar: boolean;
+  public appointmentId: any;
+  public urlSibrare: any;
+  public setup: string;
 
 
   constructor(
@@ -63,12 +73,15 @@ export class FichaPacienteComponent implements OnInit {
     private userService: UsersService,
     private currentUserService: CurrentUserService,
     private documentService: DocumentService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private appointmentsService: AppointmentsService
   ) { }
   tomorrow = new Date(2020, 9, 20, 14, 34);
 
   ngOnInit(): void {
+    this.setup = environment.setup;
     console.log(this.userId);
+    this.appointmentId = this.userId
     this.getMedicalRecord(this.userId);
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
@@ -78,19 +91,72 @@ export class FichaPacienteComponent implements OnInit {
       type: [null, [Validators.required]],
       data: [null, [Validators.required]],
     });
+
+    this.getFecha();
+    
   }
 
-  calcularEdad(dateString){
-    let separa = dateString.split("/");
-    let separaAno = separa[2]
-    console.log(separaAno.split(""))
-    let today = new Date();
-    if(separaAno.split("").length === 4){
-    this.patientAge =  today.getFullYear() - separa[2]
-    } else {
-      this.patientAge =  today.getFullYear() - separa[0]
+  getFecha() {
+    const fecha = new Date();
+    fecha.getFullYear();
+    const month = fecha.toLocaleString('default', { month: 'long' });
+
+    this.fecha = {
+      year: fecha.getFullYear(),
+      month: month,
+    };
+  }
+
+    //getVerifiedSibrareDocuments
+    getVerifiedSibrareDocuments2(appointmentId) {
+      this.appointmentsService.getVerifiedSibrareDocuments(appointmentId).subscribe(
+        (data) => {
+          console.log(data);
+          this.arrayDocuments = data.payload;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
-    return this.patientAge;
+  
+    downloadSibrare(appointmentId, documentId) {
+      this.descargar = true;
+      this.spinner.show();
+      console.log(documentId);
+      this.getSibrareDocuments(appointmentId, documentId);
+    }
+  
+    // get documents sibrare
+    getSibrareDocuments(id, documentId) {
+      this.appointmentsService.getSibrareDocumentUrl(id, documentId).subscribe(
+        (data) => {
+          this.urlSibrare = data.payload[0].documento;
+          console.log(this.urlSibrare);
+          console.log(data);
+          this.spinner.hide();
+          if (this.descargar === true) {
+            return window.open(this.urlSibrare, "_blank");
+          } else {
+            console.log(this.urlSibrare);
+          }
+          //this.videoCall = true;
+        },
+        (error) => {
+          this.spinner.hide();
+          console.log(error);
+        }
+      );
+    }
+
+  calcularEdad(birthdate){
+    let birthday_arr = birthdate.split("/");
+    let birthday_date = new Date( parseInt(birthday_arr[2]),(parseInt(birthday_arr[1]) - 1, parseInt(birthday_arr[0])) );
+    let ageDifMs = Date.now() - birthday_date.getTime();
+    let ageDate = new Date(ageDifMs);
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    this.patientAge = age;
+    return age;
   }
 
   getMedicalRecord(userId) {
@@ -104,6 +170,15 @@ export class FichaPacienteComponent implements OnInit {
         this.tempAppointments = [...data.payload.appointments];
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
+
+        console.log(this.appointmentsRecord)
+        
+        if(environment.setup == 'CL'){
+          this.arrayDocuments = data.payload.recemed;
+        }else{
+          this.arrayDocuments = data.payload.prescriptions;
+        }
+
         this.calcularEdad(data.payload.patientData.personalData.birthdate)
 
         this.antecedentesGeneral = data.payload.antecedent;
@@ -256,5 +331,9 @@ export class FichaPacienteComponent implements OnInit {
 
     this.appointmentsRecord = temp;
     // console.log(temp);
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 }

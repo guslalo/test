@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col">
-    <h2>{{ 'calendar.inmediateAtentionRoomAccess.label' | transloco }}</h2>
+    <h2>
+      {{ 'calendar.inmediateAtentionRoomAccess.label' | transloco }}
+    </h2>
     <p>{{ 'dashboard.home.newService.inmediateCare.label' | transloco }}</p>
   </div>
 </div>
@@ -220,30 +222,23 @@
 </div>
 
 <!--barra fixedf *ngIf="next" -->
-<div *ngIf="selectSintoma" class="pasosFixed shadow">
+<div  class="pasosFixed shadow">
   <div class="boxItems h-100">
     <div class="items h-100">
       <div class="row align-items-center h-100">
         <div class="col-6 align-items-center">
           <div class="row align-items-center">
             <div class="col-10 align-items-center">
-              <!--
                 <div class="box boxSeparador pl-3">
-                  <p class="m-0 valor">VALOR CONSULTA: ${{ reserve.professionalDetails.specialtyDetails.price }}</p>
-                  <p class="m-0">
-                    {{ reserve.dateDetails.date.day }}- {{ reserve.dateDetails.date.month }}-{{
-                      reserve.dateDetails.date.year
-                    }}
-                    | {{ reserve.dateDetails.start }}
-                  </p>
-                </div>-->
+                  <p class="m-0 valor">VALOR CONSULTA: ${{ price }}</p>
+                </div>
             </div>
           </div>
         </div>
         <div class="col-6">
           <div class="float-right pr-3">
-            <button type="button" data-dismiss="modal" class="btn btn-outline-primary rounded-pill mr-3">
-              {{ 'clinicalFile.back.label' | transloco }}
+            <button type="button" data-dismiss="modal" class="btn btn-outline-primary rounded-pill mr-3" routerLink="/app-paciente">
+              {{ 'clinicalFile.back.label' | transloco }} 
             </button>
             <button type="button" data-dismiss="modal" class="btn btn-primary rounded-pill" (click)="agendar()">
               {{ 'dashboard.home.newService.btnCheckout.label' | transloco }}

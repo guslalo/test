@@ -1,0 +1,79 @@
+<div class="modal fade" id="modalCreatePrescriptionRecemed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100 mt-1">
+                    {{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body p-4">
+
+                <form [formGroup]="form" class="mt-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="detail">{{ 'common.detail.label' | transloco }}
+                            </label>
+
+                            <textarea class="form-control" name="detail" id="detail" cols="20" rows="5" formControlName="detail"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="observations">{{ 'common.observations.label' | transloco }}
+                            </label>
+
+                            <textarea class="form-control" name="observations" id="observations" cols="60" rows="5" formControlName="observations"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col lg-6">
+                            <div class="custom-control custom-switch">
+                                <input formControlName="hold" type="checkbox" class="custom-control-input" id="hold"/>
+                                <label class="custom-control-label" for="hold">{{ 'common.hold.label' | transloco }}</label>
+                              </div>
+                        </div>
+
+                        <div class="form-group col lg-6">
+                            <div class="custom-control custom-switch">
+                                <input formControlName="ges" type="checkbox" class="custom-control-input" id="ges"/>
+                                <label class="custom-control-label" for="ges">{{ 'common.ges.label' | transloco }}</label>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="duration">{{ 'common.duration.label' | transloco }}
+                            </label>
+
+                            <input type="text" class="form-control" name="duration" id="duration" formControlName="duration">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="modal-footer text-center justify-content-center">
+                            <button type="button" class="btn btn-secondary rounded-pill"
+                                data-dismiss="modal">
+                                {{ 'common.button.cancel.label' | transloco }}
+                            </button>
+                            <button (click)="send()" type="button" class="btn btn-primary rounded-pill" data-dismiss="modal"
+                                 [disabled]="!form.valid">
+                                {{ 'common.button.save.label' | transloco }}
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

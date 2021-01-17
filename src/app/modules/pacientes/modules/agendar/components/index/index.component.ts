@@ -58,6 +58,7 @@ export class IndexComponent implements OnInit {
   public urlConfirmacion: any;
   public estadoPagado: boolean = false;
   selectMedicalSpecialties:FormControl;
+  public brand: string;
   public photoUrlBase = environment.photoUrlBase;
   imageError: string;
   isImageSaved: boolean;
@@ -81,6 +82,7 @@ export class IndexComponent implements OnInit {
   public inputFilesFormGroup: FormGroup;
   public multiDocs: FormGroup;
   public downloadUrl: any;
+  public setUp: string;
 
   professionalSelected = new FormControl();
   selecEspecialdad:any
@@ -100,6 +102,7 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setUp = environment.setup;
     //condicion para flujo reagendar
     this.route.params.subscribe((params) => {
       const id = params.appointmentId;
@@ -125,7 +128,7 @@ export class IndexComponent implements OnInit {
         console.log('reagendar', this.reagendar);
       }
     });
-
+    this.brand = environment.brand;
     const current = new Date();
     this.textInputFile = 'Selecione Arquivo';
     this.minDate = {
@@ -139,6 +142,8 @@ export class IndexComponent implements OnInit {
     this.getsymptoms();
     this.access_token = JSON.parse(localStorage.getItem('token'));
     this.downloadUrl = this.documentService.download();
+
+    // ???? se usa????
     $('#exampleModal').on('hidden.bs.modal', function (e) {
       this.this.consolidate = this.consolidateClone
       //clearInterval(this.interval);
@@ -168,14 +173,14 @@ export class IndexComponent implements OnInit {
   onChange(deviceValue) {
     console.log(deviceValue.value);
     $("#selectSintomaId option:selected").attr('disabled','disabled');
-      this.consolidate.patientDetails.symptoms.push(deviceValue.value);
-      let selectedSintoma = {
-        id: deviceValue.value,
-        text: deviceValue.selectedOptions[0].innerText,
-      };
-      console.log(selectedSintoma);
-      this.sintomaSelected.push(selectedSintoma);
-      console.log(this.consolidate.patientDetails.symptoms);
+    this.consolidate.patientDetails.symptoms.push(deviceValue.value);
+    let selectedSintoma = {
+      id: deviceValue.value,
+      text: deviceValue.selectedOptions[0].innerText,
+    };
+    console.log(selectedSintoma);
+    this.sintomaSelected.push(selectedSintoma);
+    console.log(this.consolidate.patientDetails.symptoms);
   }
 
   onChangeTypeProfesional(id) {
@@ -190,15 +195,30 @@ export class IndexComponent implements OnInit {
   }
 
   private display(user): string {
-    return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
+    if(this.setUp == 'CL'){
+      return user ? user.personalData.name + ' ' + user.personalData.lastName : user;
+    }else {
+      return user ? user.personalData.name + ' ' + user.personalData.secondLastName : user;
+    }
+    
   }
 
   filterAutocompleteProfessionals(search: string) {
-    return this.tempProfessionals.filter(
-      (value) =>
-        value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
-        value.personalData.secondLastName.toLowerCase().indexOf(search.toLowerCase()) === 0
-    );
+    if(this.setUp == 'CL'){
+      return this.tempProfessionals.filter(
+        (value) =>
+          value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+          value.personalData.lastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+      );
+    }else {
+      return this.tempProfessionals.filter(
+        (value) =>
+          value.personalData.name.toLowerCase().indexOf(search.toLowerCase()) === 0 ||
+          value.personalData.secondLastName.toLowerCase().indexOf(search.toLowerCase()) === 0
+      );
+    }
+    
+  
   }
 
   onChangeTypeSpecialtiesId(value) {
@@ -232,8 +252,10 @@ export class IndexComponent implements OnInit {
     this.spinner.show();
     this.consolidate.patientDetails.description = this.descripcionSintoma;
     this.consolidateClone = this.consolidate;
+
+        console.log(this.consolidate)
+    console.log(this.consolidateClone)
     this.postConsolidateService(this.consolidate);
-    console.log(this.consolidate)
   }
 
   opcionSeleccionado: any;
@@ -307,6 +329,10 @@ export class IndexComponent implements OnInit {
     this.reserve.professionalDetails.specialtyId = item.professionalDetails.specialtyId;
     this.reserve.professionalDetails.specialtyDetails.price = item.professionalDetails.specialtyDetails[0].price;
     console.log(this.reserve);
+
+    // propiedad para diferenciar agendamiento de consulta inmediata
+    this.reserve.appointmentType = 'agendamiento'
+    
     this.appointmentsService.postReserve(this.reserve).subscribe(
       (data) => {
         console.log(data);

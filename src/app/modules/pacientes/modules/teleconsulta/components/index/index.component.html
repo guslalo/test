@@ -1,10 +1,10 @@
 <ng-container *ngIf="appointmentDetail">
   <div class="row mb-3">
-    <div class="col-9 col-md-9">
+    <div class="col-12 col-md-9">
       <h2>{{ 'clinicalFile.title' | transloco }}</h2>
       <p>{{ 'calendar.serviceRoom.label' | transloco }}</p>
     </div>
-    <div class="col-3 col-md-3">
+    <div class="col-12 col-md-3">
       <button
         *ngIf="
           appointmentDetail.administrativeDetails.status === 'appointed' ||
@@ -41,7 +41,7 @@
   <div class="row">
     <div class="col-12">
       <div class="row mb-4">
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
           <div class="card bg-light shadow-sm">
             <div class="card-body">
               <div class="row">
@@ -65,7 +65,7 @@
                       id="{{ appointmentDetail.professionalDetails.userDetails[0].userId }}"
                     >
                       {{ appointmentDetail.professionalDetails.userDetails[0].name | uppercase }}
-                      {{ appointmentDetail.professionalDetails.userDetails[0].secondLastName | uppercase }}
+                      {{ appointmentDetail.professionalDetails.userDetails[0].lastName | uppercase }}
                     </p>
                     <!--font-weight-bold  *ngIf="appoimentDetail.professionalDetails.specialtyDetails > 0"-->
                     <ul class="simple-list">
@@ -89,16 +89,21 @@
                   </div>
                 </ng-container>
                 <ng-template #salaEspera>
-                  <div class="col-12 text-center mt-4">
+                  <div class="col-12 text-center mt-4 d-none">
                     <img src="assets/icons/icon-online.svg" />
                     <b class="ml-3">4 {{ 'common.professionalsOnline.label' | transloco }}</b>
                   </div>
+                  <div class="col-12 text-center mt-4">
+                    <p>{{'waitingRoomInstructions.instruction1' | transloco}}</p>
+                  </div>
+
+                  
                 </ng-template>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
           <ng-container *ngIf="appointmentDetail.administrativeDetails.waitingRoomId === null; else salaEsperacard2">
             <div class="card bg-light shadow-sm">
               <div class="card-body text-center mt-4">
@@ -130,7 +135,7 @@
           </ng-container>
           <ng-template #salaEsperacard2>
             <div class="card bg-light shadow-sm">
-              <div class="card-body text-center mt-4">
+              <div class="card-body text-center mt-4 d-none">
                 <p class="card-text text-center">
                   {{ 'calendar.ATW.label' | transloco }}
                   <!--{{appoimentDetail.dateDetails.date | date:"dd/MM/yyyy":"+0000"}}-->
@@ -156,10 +161,13 @@
                   17 minutos
                 </h5>
               </div>
+              <div class="card-body text-center mt-4">
+                <p>{{'waitingRoomInstructions.instruction2' | transloco}}</p>
+              </div>
             </div>
           </ng-template>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
           <div class="card bg-light shadow-sm">
             <div class="card-body text-center mt-3">
               <h6 class="card-title mb-1">Estado de consulta</h6>
@@ -173,6 +181,8 @@
                     ? 'clinicalFile.reScheduled.label'
                     : appointmentDetail.administrativeDetails.status === 'active'
                     ? 'clinicalFile.active.label'
+                    : appointmentDetail.administrativeDetails.status === 'created'
+                    ? 'clinicalFile.created.label'
                     : appointmentDetail.administrativeDetails.status === 'waitingInRoom'
                     ? 'clinicalFile.inWaitingRoom.label'
                     : appointmentDetail.administrativeDetails.status === 'waitingInList'
@@ -199,7 +209,7 @@
         <!--nav-tabs-->
         <div class="row">
           <div class="col-12 mb-2">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs  flex-column flex-sm-row" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <a
                   class="nav-link active"
@@ -359,7 +369,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="bg-white p-3 rounded-lg">
-                  <table class="table mt-1">
+                  <table class="table mt-1 table-responsive-xs">
                     <thead class="">
                       <tr>
                         <th scope="col" class="text-center">
@@ -751,7 +761,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div>
                   <p class="title font-weight-bold">
                     {{ 'dashboard.home.userManagment.createAccount.tabs.academic.bio.label' | transloco }}
@@ -768,7 +778,7 @@
                   </ng-container>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div>
                   <p class="title font-weight-bold">
                     {{ 'profile.personal.tabAcademic.academicData.university.label' | transloco }}
@@ -788,10 +798,9 @@
                 <!-- <div>
                   <p class="title font-weight-bold">{{ 'clinicalFile.regNumber.label' | transloco }}</p>
                   {{ professionalData.professionalData.ufRegistry.name }}
-
                   <hr />
                 </div> -->
-                <div>
+                <div *ngIf="setup == 'BR'">
                   <p class="title font-weight-bold">
                     {{ 'dashboard.home.userManagment.createAccount.tabs.academic.course.label' | transloco }}
                   </p>
@@ -807,7 +816,7 @@
           <div class="tab-pane fade" id="timelineTab" role="tabpanel" aria-labelledby="timeline">
             <div class="row">
               <div class="col-12">
-                <div class="bg-white p-5 rounded-lg text-center">
+                <div class="bg-white  p-2 p-sm-5 rounded-lg text-center">
                   <h5 class="mb-0 text-left">{{ 'tabs.timeline.label' | transloco }}</h5>
                   <div class="timeLine">
                     <div class="line bg-white">{{ fecha.year }}</div>
@@ -843,7 +852,7 @@
                       </div>
                       <div class="line">
                         <div class="row align-items-center">
-                          <div class="col-5 text-right p-0">
+                          <div class="col-12 col-md-5 text-right p-0">
                             <div class="box">
                               <div class="boxCont text-center">
                                 <div class="row">
@@ -871,7 +880,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-2 p-0">
+                          <div class="col-2 p-0 d-none d-md-block">
                             <svg
                               width="15"
                               height="15"
@@ -904,7 +913,7 @@
         <!--nav-tabs-->
         <div class="row">
           <div class="col-12 mb-2">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs flex-column flex-sm-row" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <a
                   class="nav-link active"
@@ -1380,7 +1389,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="bg-white p-3 rounded-lg">
-                  <table class="table mt-1">
+                  <table class="table mt-1 table-responsive">
                     <thead class="">
                       <tr>
                         <th scope="col" class="text-center">
@@ -1455,6 +1464,31 @@
         </button>
         <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" (click)="cancelarCita(idCancel)">
           {{ 'common.button.cancel.label' | transloco }} consulta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal aviso cita cancelada -->
+<div class="modal fade" id="avisoCancelado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 mt-1 d-none">
+          {{ 'dashboard.home.tab.calendar.modal.newAtention.title' | transloco }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <h5>{{'tables.consultas.cancelado1' | transloco}}</h5>
+      </div>
+      <div class="modal-footer text-center justify-content-center">
+        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">
+          {{ 'clinicalFile.close.label' | transloco }}
         </button>
       </div>
     </div>

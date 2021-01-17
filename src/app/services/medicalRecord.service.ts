@@ -33,16 +33,20 @@ export class MedicalRecordService {
   }
 
   //putAddAntecedent
-  putAddExamen(object, userId?): Observable<any> {
-    console.log(userId);
-    return this.http.put<any>(environment.baseUrl + this.addExamen + '?userId=' + userId, {
+  putAddExamen(object, userId?, appointmentId?): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('userId', userId);
+    params = params.append('appointmentId', appointmentId);
+
+    return this.http.put<any>(environment.baseUrl + this.addExamen,{
       documentDetails: {
         name: object.name,
         type: object.type,
         data: object.file,
       },
-    });
+    },   { params: params } );
   }
+
 
   //putAddAntecedent
   putAddAntecedent(antecedent, value): Observable<any> {

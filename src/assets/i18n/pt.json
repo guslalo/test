@@ -1,4 +1,36 @@
-{
+{ 
+  "soporte":{
+    "title":"Entre em contato com nosso suporte:",
+    "whatsapp":{
+      "label":"Whatsapp",
+      "text":"+55 34 99960-2027"
+    },
+    "email":{
+      "label":"E-mail",
+      "text":"suporte@medictelemedicina.com"
+    }
+  },
+  "tables": {
+    "consultas":{
+      "paciente":"paciente",
+      "HoraAgendada":"Horário marcado",
+      "HoraEspera":"Tempo limite",
+      "TiempoAtencion":"Hora de atenção",
+      "ProfesionalSalud":"Profissional de saúde",
+      "SalaEspera":"Sala de espera",
+      "cancelado":" Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local.",
+      "cancelado1": "Outro profissional foi designado para você. Nos próximos minutos você será atendido.",
+      "cancelado2": "Sua consulta foi cancelada. Qualquer dúvida, entre em contato com o suporte.",
+      "cancelado3": "Esta consulta foi redirecionada a outro profissional. Qualquer dúvida, entre em contato com o responsável pela Telecosulta local."
+    }
+  },
+  "titularidad": {
+    "title":"Titularidade",
+    "titular":"Titular ",
+    "dependiente":"Dependente",
+    "name":"Nome do Titular",
+    "cpf":"CPF do Titular"
+  },
   "soon": "Em breve",
   "cie10": {
     "cie10": " CID10"
@@ -7,6 +39,10 @@
     "prescription": "prescrição",
     "report": "Atestado",
     "exam-order": "Pedido de exame"
+  },
+  "waitingRoomInstructions": {
+    "instruction1": "Para sua consulta, permaneça em um lugar tranquilo e sem ruídos.",
+    "instruction2": "Lembre-se de ter todos seus exames em mãos antes de iniciar a teleconsulta."
   },
   "exemplo": "exemplo",
   "history": {
@@ -28,7 +64,14 @@
   "clinicalFile": {
     "tabs": {
       "antecentesFromProfessional": "Antecedentes registrados pelo profissional de saúde",
-      "antecentesFromPatient": "Antecedentes registrados pelo paciente"
+      "antecentesFromPatient": "Antecedentes registrados pelo paciente",
+      "gesEno": {
+        "label": "Notificaciones GES/ENO",
+        "button": "Registrar notificación"
+      }
+    },
+    "defeche": {
+      "label": "Desfecho(s)"
     },
     "patientData": {
       "tabs": {
@@ -372,7 +415,7 @@
       "label": "Atender"
     },
     "apointmentWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "dr": {
       "label": "Dr."
@@ -412,6 +455,9 @@
     },
     "inWaitingRoom": {
       "label": "Na sala de espera"
+    },
+    "created": {
+      "label": "criada"
     },
     "inWaitingList": {
       "label": "Lista de espera"
@@ -507,7 +553,7 @@
       "label": "Exame físico"
     },
     "labAspects": {
-      "label": "Resultado exames laboratoriais e/ou imagen"
+      "label": "Resultado exames laboratoriais e/ou imagem"
     },
     "plan": {
       "label": "Plano terapêutico"
@@ -534,7 +580,7 @@
       "label": "Editar disponibilidade"
     },
     "welcome": {
-      "label": "Bem vindo(a)"
+      "label": "Bem-vindo(a)"
     },
     "numberMontlyServices": {
       "label": "Nº de consultas mensais"
@@ -548,11 +594,14 @@
     "enter": {
       "label": "Entrar"
     },
+    "enterAppointment": {
+      "label": "Entrar na consulta"
+    },
     "accountScheduleded": {
       "label": "conta agendada"
     },
     "accountSchedulededWith": {
-      "label": "Compromisso agendado com"
+      "label": "Consulta agendada com"
     },
     "specialty": {
       "label": "Especialidade:"
@@ -703,6 +752,9 @@
     },
     "reserveService": {
       "label": "Reservar consulta"
+    },
+    "reSheduleService": {
+      "label": "Reagendar consulta"
     },
     "hoursAvailable": {
       "label": "Horários disponíveis"
@@ -921,7 +973,7 @@
     },
     "login": {
       "welcome": {
-        "title": "Bem vindo a plataforma de Teleconsulta",
+        "title": "Bem-vindo à plataforma de Teleconsulta",
         "label": "\nFaça login com sua conta ou crie uma nova para acessar."
       },
       "title": "Acessar conta",
@@ -929,7 +981,7 @@
         "label": "Esqueceu sua senha?"
       },
       "welcomeTitle": {
-        "label": "Bem vindo a Plataforma de Teleconsulta"
+        "label": "Bem-vindo à Plataforma de Teleconsulta"
       },
       "invalidEmail": {
         "label": "E-mail inválido"
@@ -1007,6 +1059,9 @@
         "label": "Siga as instruções na mensagem para redefinir sua senha."
       }
     },
+    "prevission": {
+      "label": "Prevision de salud"
+    },
     "verificationCode": {
       "label": "Digite o código de verificação"
     },
@@ -1076,7 +1131,53 @@
           },
           "tab": {
             "nextServices": {
-              "title": "Próxima consulta agendada",
+              "title": "Próxima consultas",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "openAppointments": {
+              "title": "Atendimentos ativos",
+              "table": {
+                "patients": {
+                  "label": "Pacientes"
+                },
+                "date": {
+                  "label": "Data agendada"
+                },
+                "time": {
+                  "label": "Hora agendada"
+                },
+                "objetive": {
+                  "label": "Objetivo"
+                },
+                "status": {
+                  "label": "Estado"
+                },
+                "action": {
+                  "label": "Ação"
+                }
+              }
+            },
+            "nextAppointments": {
+              "title": "Atendimentos imediatos",
               "table": {
                 "patients": {
                   "label": "Pacientes"
@@ -1219,7 +1320,7 @@
           "label": "Anexar documentos"
         },
         "btnCheckout": {
-          "label": "Pagar e agendar"
+          "label": "Avançar"
         },
         "success": {
           "title": "Sua consulta foi agendada com sucesso",
@@ -1324,7 +1425,7 @@
             "label": "Ex: Pó, Pólen ou Aspirina"
           },
           "surgicalInterventions": {
-            "label": "Ex: Marca-passo ou Stent coronario"
+            "label": "Ex: Marcapasso ou Stent coronário"
           },
           "familiarHistory": {
             "label": "Ex: Infarto (mãe) ou Câncer (irmão )"
@@ -2206,6 +2307,36 @@
         },
         "regNumber": {
           "label": "Número de registro."
+        },
+        "nrRegistryHealth": {
+          "label": "Nro de registro da super adminstraçao de saúde"
+        },
+        "workCity": {
+          "label": "Comuna de trabalho"
+        },
+        "workState": {
+          "label": "Regiao de trabalho"
+        },
+        "workStreet": {
+          "label": "Rua de trabalho"
+        },
+        "workNumber": {
+          "label": "Numero de do endereço de trabalho"
+        },
+        "workComplement": {
+          "label": "Dpto/Local/Outro"
+        },
+        "workPostal": {
+          "label": "Codigo postal del trabalho"
+        },
+        "workPhone": {
+          "label": "Telefone del trabalho"
+        },
+        "workMutuality": {
+          "label": "Mutualidad a la que esta afiliado"
+        },
+        "quitAsignation": {
+          "label": "Quitar asignacion"
         }
       }
     }
@@ -2213,6 +2344,12 @@
   "table": {
     "ufReg": {
       "label": "Registro UF"
+    },
+    "fatherSurname": {
+      "label": "Nome do meio"
+    },
+    "motherSurname": {
+      "label": "Sobrenome"
     },
     "patients": {
       "label": "Dias"
@@ -2336,6 +2473,9 @@
     "timeline": {
       "label": "Histórico de consultas"
     },
+    "gesEno": {
+      "label": "Notificaciones GES/ENO"
+    },
     "services": {
       "label": "Consultas"
     },
@@ -2405,11 +2545,14 @@
     "description": {
       "label": "Sala criada em % por %"
     },
+    "asignedUsers": {
+      "label": "usuários atribuídos"
+    },
     "professionals": {
       "label": "Profissional(is)"
     },
     "usersAwaiting": {
-      "label": "% usuário(s) em sala de espera"
+      "label": "% usuário(s) na sala de espera"
     },
     "amountProffetionals": {
       "label": "% profissionais"
@@ -2453,7 +2596,7 @@
       "label": "Não há registros associados"
     },
     "usersInRoom": {
-      "label": "Usuários (s) em sala de espera"
+      "label": "Usuários (s) na sala de espera"
     },
     "inmediateService": {
       "title": "Atendimento imediato / Acesso a sala",
@@ -2595,6 +2738,21 @@
     }
   },
   "common": {
+    "detail": {
+      "label": "Detalle"
+    },
+    "observations":{
+      "label": "Observaciones"
+    },
+    "hold":{
+      "label": "Retenida"
+    },
+    "ges":{
+      "label": "GES"
+    },
+    "appointmentHasPreviousImmediate": {
+      "label": "Você já tem uma consulta imediata ativa, por favor consulte o menu MINHAS CONSULTAS"
+    },
     "withOut": "sem resultados",
     "Soon": "Em breve",
     "user": {
@@ -3209,7 +3367,7 @@
         "label": "Dor no peito"
       },
       "bodyPain": {
-        "label": "Dor de corpo"
+        "label": "Dor no corpo"
       },
       "diarrhea": {
         "label": "Diarréia"
@@ -3470,7 +3628,7 @@
   },
   "account": {
     "completeRegister": {
-      "label": "Registro completo"
+      "label": "Completar cadastro"
     },
     "createAccount": {
       "title": "Criar conta",
@@ -3666,7 +3824,7 @@
       "label": "As senhas não correspondem"
     },
     "passwordHint": {
-      "label": "Lembre-se de criar uma senha que contém caracteres alfanuméricos e conter pelo menos letras maiúsculas, minúsculas e caracteres especiais."
+      "label": "Lembre-se de criar uma senha que contenha, mínimo de 8 caracteres alfanuméricos, conter pelo menos letras maiúsculas, minúsculas e caracteres especiais (@,*,#)."
     },
     "upperAndSpecialChar": {
       "label": "minúsculas e um caractere especial."
@@ -3675,7 +3833,7 @@
       "label": "Gerenciamento de usuários / Criação de Conta"
     },
     "genPassword": {
-      "label": "gerar senha"
+      "label": "Gerar senha"
     },
     "disableUserHint": {
       "label": "Tem certeza de que deseja desativar este usuário?"
@@ -3695,6 +3853,9 @@
     "uf": {
       "label": "UF"
     },
+    "region": {
+      "label": "Region"
+    },
     "numerationReq": {
       "label": "Campo número é obrigatório"
     },
@@ -3706,6 +3867,44 @@
     },
     "academicBio": {
       "label": "Biografia acadêmica"
+    }
+  },
+  "year": {
+    "january": {
+      "label": "Janeiro"
+    },
+    "february": {
+      "label": "Fevereiro"
+    },
+    "march": {
+      "label": "Março"
+    },
+    "april": {
+      "label": "Abril"
+    },
+    "may": {
+      "label": "Maio"
+    },
+    "june": {
+      "label": "Junho"
+    },
+    "july": {
+      "label": "Julho"
+    },
+    "august": {
+      "label": "Agosto"
+    },
+    "september": {
+      "label": "Setembro"
+    },
+    "october": {
+      "label": "Outubro"
+    },
+    "november": {
+      "label": "Novembro"
+    },
+    "december": {
+      "label": "Dezembro"
     }
   }
 }

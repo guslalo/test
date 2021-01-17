@@ -142,7 +142,7 @@
              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'admin' }"
             >
               {{ 'dashboard.home.uncategorized.newAdmin.label' | transloco }}
@@ -200,7 +200,9 @@
                   prop="phone"
                   [name]="'table.phone.label' | transloco"
                 >
+              
                 </ngx-datatable-column>
+             
                 <ngx-datatable-column
                   [resizeable]="false"
                   [flexGrow]="2"
@@ -257,7 +259,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'admins', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -340,7 +342,7 @@
             *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'professional' }"
             >
               {{ 'dashboard.home.userManagment.btnCreateDoctor.label' | transloco }}
@@ -455,7 +457,7 @@
                          *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'professionals', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -543,7 +545,7 @@
               type="button"
               class="btn btn-secondary rounded-pill float-right"
               data-target="#disponibilidad"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'coordinator' }"
             >
               {{ 'dashboard.home.uncategorized.newCoordinator.label' | transloco }}
@@ -658,7 +660,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'coordinators', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}
@@ -755,7 +757,7 @@
              *ngxPermissionsOnly="['Create:User']"
               type="button"
               class="btn btn-secondary rounded-pill float-right"
-              [routerLink]="['crear-usuario']"
+              [routerLink]="[createRoute]"
               [queryParams]="{ userType: 'patient' }"
             >
               {{ 'myPatients.btnCreate.label' | transloco }}
@@ -850,6 +852,24 @@
                 >
                 </ngx-datatable-column>
                 <ngx-datatable-column
+                [resizeable]="false"
+                [flexGrow]="2"
+                prop="isTutor"
+                [name]="'titularidad.title' | transloco"
+              >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <ng-container *ngIf="row.isTutor == false;">
+                  {{'titularidad.dependiente' | transloco}}
+                </ng-container>
+                <ng-container *ngIf="row.isTutor == true;">
+                  {{'titularidad.titular' | transloco}}
+                </ng-container>
+
+ 
+             
+              </ng-template>
+              </ngx-datatable-column>
+                <ngx-datatable-column
                   [resizeable]="false"
                   [flexGrow]="2"
                   prop="status"
@@ -906,7 +926,7 @@
                           *ngxPermissionsOnly="['Update:User']"
                           ngbDropdownItem
                           type="button"
-                          [routerLink]="['editar-usuario']"
+                          [routerLink]="updateRoute"
                           [queryParams]="{ userType: 'patients', userId: row.id }"
                         >
                           {{ 'clinicalFile.edit.label' | transloco }}

@@ -1,9 +1,11 @@
 export const environment = {
   production: false,
-  defaultLang:'pt',
-  checkAge:false,
+  defaultLang: 'pt',
+  checkAge: false,
   title: 'Itms Dev | Teleconsulta',
-  baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://backend-testing-es-cl.bdot.app/api/', // para backend en cl
+  // baseUrl: 'https://backend-testing-pt-br.bdot.app/api/', // para backend en br
+  // baseUrl: 'https://backend-dev.bdot.app/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   photoUrlBase: 'https://itms-dev.s3-sa-east-1.amazonaws.com/',
@@ -20,4 +22,13 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
+  ttlSession: 60,
+  setup: 'BR',
+  version: '{BUILD_VERSION}-dev',
+  brand: "atrys",
+  colors: {
+    "color-primary": "#25b0bb;",
+    "color-secondary": "#044AAB;",
+    "color-hover": "#044AAB;"
+  }
 };

@@ -153,6 +153,74 @@
                 </div>
               </form>
             </div>
+
+             <!--titularidad  *ngIf="userType == 'patient'"-->
+            <ng-container  *ngIf="userType == 'patient'">
+              <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
+                <div class="row">
+                  <h4 class="pl-3 pb-2">
+                    {{ 'titularidad.title' | transloco }}
+                  </h4>
+                </div>
+                <form [formGroup]="titularForm">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" 
+                        value="titular"
+                        id="titular"  formControlName="titularDependiente" 
+                        name="titularDependiente" 
+                        class="custom-control-input">
+                        <label class="custom-control-label" for="titular">{{'titularidad.titular' | transloco}}</label>
+                      </div>
+
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" 
+                        value="dependiente"
+                        id="dependiente" formControlName="titularDependiente" 
+                         name="titularDependiente" 
+                        class="custom-control-input" >
+                        <label class="custom-control-label" for="dependiente">{{'titularidad.dependiente' | transloco}}</label>
+                      </div>
+                   
+                    </div>
+                  
+                  </div>
+                  <div class="row" *ngIf="titularForm.controls.titularDependiente.value == 'dependiente'">
+                    <div class="form-group col-md-6">
+                      <label for="titularidadCpf">{{'titularidad.cpf' | transloco}}</label>
+                     
+                      <!--    (focusOut)="getforCpf(titularForm.controls.titularidadCpf.value)" 
+                        (change)="validCPF(titularForm.get('titularDependiente').value)" (change)="getforCpf(titularForm.get('titularidadCpf').value)"-->
+                      <input  type="text" class="form-control" name="titularidadCpf" 
+                        
+                        formControlName="titularidadCpf"
+                     
+                         [ngClass]="{
+                          'is-invalid': !identificationData.get('idDocumentNumber').valid
+                        }" />
+                      <label for="" *ngIf="!cpfvalid">CPF inválido</label>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div *ngIf="loarderTutor === true" class="spinner-border d-inline-block" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      <ng-container *ngIf="loarderTutor === false">
+                        <label for="titularidadName">{{'titularidad.name' | transloco}}</label>
+                        <input disabled readonly  type="text" class="form-control" name="titularidadName" 
+                          formControlName="titularidadName"
+                          />
+                      </ng-container>
+                    </div>
+                  </div>
+               
+                </form>
+              </div>
+            </ng-container><!--/titularidad-->
+
+
+
+
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
               <div class="row">
                 <h4 class="pl-3 pb-2">
@@ -219,8 +287,9 @@
                   <div class="form-group col-md-3">
                     <label for="birthdate">{{ 'account.dateOfBirth.label' | transloco }}*</label>
                     <div class="input-group dateregister">
-                      <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" [maxDate]="maxDate"
+                      <input type="text" [placement]="'bottom'" class="form-control" id="birthdate" 
                         placeholder="DD/MM/YYYY" name="birthdate" [minDate]="{ year: 1900, month: 1, day: 1 }"
+                        [maxDate]="maxDate"
                         [startDate]="setDate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate"
                         (click)="d.toggle()" />
                       <div class="input-group-append">
@@ -394,7 +463,7 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-white rounded-lg p-4 shadow-sm mb-4">
-              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}es</h4>
+              <h4 class="pb-2">{{ 'dashboard.home.userManagment.createAccount.tabs.role.label' | transloco }}</h4>
               <form [formGroup]="profilesForm" (ngSubmit)="addProfile()">
                 <div class="row">
                   <div class="form-group col-md-3">
@@ -598,7 +667,7 @@
               <form [formGroup]="specialitiesForm">
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="speciality">{{ 'account.name.label' | transloco }}Especialidad</label>
+                    <label for="speciality">{{ 'clinicalFile.select.label' | transloco }} {{ 'clinicalFile.specialty.label' | transloco }}</label>
                     <select class="form-control" name="speciality" formControlName="speciality">
                       <option [ngValue]="null" [disabled]="true">{{ 'common.select.label' | transloco }}</option>
                       <option [ngValue]="speciality" *ngFor="let speciality of specialities">
@@ -748,7 +817,7 @@
                           {{ 'clinicalFile.patientData.tabs.identification.info.status.label' | transloco }}
                         </th>
                         <th scope="col">
-                          Acciones
+                          {{ 'dashboard.home.userManagment.table.action.label' | transloco }}
                         </th>
                       </tr>
                     </thead>
