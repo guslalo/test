@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: /dist/itmstl
+    destination: /var/www/html
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  ApplicationStart:
+    - location: bin/app-start
+      timeout: 120
+      runas: root

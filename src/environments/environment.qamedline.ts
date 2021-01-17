@@ -3,8 +3,7 @@ export const environment = {
   defaultLang: 'pt',
   checkAge: false,
   title: 'Itms | Teleconsulta',
-  baseUrl: 'https://backend-homeclinic.bdot.app/api/',
-  // baseUrl: 'https://backend.homeclinic.telemedicina.com/api/',
+  baseUrl: 'https://b1qa.medline.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
   client: 'itms',
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
   apiKey: '',
@@ -23,11 +22,11 @@ export const environment = {
   },
   ttlSession: 60,
   setup: 'BR',
-  version: '{BUILD_VERSION}-testing-homeclinic',
-  brand: "medic",
+  version: '{BUILD_VERSION}-Medline ',
+  brand: "medline",
   colors: {
-    "color-primary": "#25b0bb;",
-    "color-secondary": "#044AAB;",
-    "color-hover": "#044AAB;"
+    "color-primary": "#394184;",
+    "color-secondary": "#D03B34;",
+    "color-hover": "#77787B;"
   }
 };
