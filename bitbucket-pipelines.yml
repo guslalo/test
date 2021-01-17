@@ -5,56 +5,184 @@ pipelines:
       - step:
           caches:
             - node
-          name: "Build"
+          name: "Build homeclinic"
           script:
             - npm install
-            - npm run build
+            - npm run build-homeclinic
             - apt-get update && apt-get install -y
             - apt-get install zip
-            - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+            - zip -r itms-frontend-homeclinic.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
           artifacts:
-            - itms-frontend.zip
+            - itms-frontend-homeclinic.zip
       - step:
-          name: "Deploy to Production"
-          deployment: production
+          name: 'Subiendo Artefacto a S3'         
+          services:            
+            - docker          
+          script:         
+            - pipe: atlassian/aws-code-deploy:0.2.3              
+              variables:                
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                COMMAND: 'upload'                
+                APPLICATION_NAME: 'homeclinic'
+                ZIP_FILE: 'itms-frontend-homeclinic.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+      - step:
+          name: 'Deploy to homeclinic'
+          deployment: homeclinic
           script:
-          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
-            variables:
-              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-              APPLICATION_NAME: "itms-frontend"
-              ENVIRONMENT_NAME: "itmsFrontend-env"
-              ZIP_FILE: "itms-frontend.zip"
-              S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
-              WAIT: 'true'
+            - pipe: atlassian/aws-code-deploy:0.5.4
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: 'homeclinic'
+                COMMAND: 'deploy'
+                DEPLOYMENT_GROUP: 'frontend'
+                ZIP_FILE: 'itms-frontend-homeclinic.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+                WAIT: 'true'
+                FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+
+      # - step:
+      #     caches:
+      #       - node
+      #     name: "Build"
+      #     script:
+      #       - npm install
+      #       - npm run build
+      #       - apt-get update && apt-get install -y
+      #       - apt-get install zip
+      #       - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+      #     artifacts:
+      #       - itms-frontend.zip
+      # - step:
+      #     name: "Deploy to Production"
+      #     deployment: production
+      #     script:
+      #     - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+      #       variables:
+      #         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      #         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      #         AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+      #         APPLICATION_NAME: "itms-frontend"
+      #         ENVIRONMENT_NAME: "itmsFrontend-env"
+      #         ZIP_FILE: "itms-frontend.zip"
+      #         S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+      #         WAIT: 'true'
     develop:
       - step:
           caches:
             - node
-          name: "Build"
+          name: "Build chile"
+          script:
+            - npm install
+            - npm run build-chile
+            - apt-get update && apt-get install -y
+            - apt-get install zip
+            - zip -r itms-frontend-chile.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
+          artifacts:
+            - itms-frontend-chile.zip
+      - step:
+          name: 'Subiendo Artefacto a S3'         
+          services:            
+            - docker          
+          script:         
+            - pipe: atlassian/aws-code-deploy:0.2.3              
+              variables:                
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                COMMAND: 'upload'                
+                APPLICATION_NAME: 'development-frontend'
+                ZIP_FILE: 'itms-frontend-chile.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+      - step:
+          name: 'Deploy to chile'
+          deployment: frontend-cl
+          script:
+            - pipe: atlassian/aws-code-deploy:0.5.4
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: 'development-frontend'
+                COMMAND: 'deploy'
+                DEPLOYMENT_GROUP: 'frontend-chile'
+                ZIP_FILE: 'itms-frontend-chile.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+                WAIT: 'true'
+                FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+      - step:
+          caches:
+            - node
+          name: "Build dev-br"
           script:
             - npm install
             - npm run build-dev
             - apt-get update && apt-get install -y
             - apt-get install zip
-            - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+            - zip -r itms-frontend-dev.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
           artifacts:
-            - itms-frontend.zip
+            - itms-frontend-dev.zip
       - step:
-          name: "Deploy to Development"
-          deployment: development
+          name: 'Subiendo Artefacto a S3'         
+          services:            
+            - docker          
+          script:         
+            - pipe: atlassian/aws-code-deploy:0.2.3              
+              variables:                
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                COMMAND: 'upload'                
+                APPLICATION_NAME: 'development-frontend'
+                ZIP_FILE: 'itms-frontend-dev.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+      - step:
+          name: 'Deploy to chile'
+          deployment: frontend-br
           script:
-          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
-            variables:
-              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-              APPLICATION_NAME: "itms-frontend"
-              ENVIRONMENT_NAME: "itmsFrontend-dev-env-1"
-              ZIP_FILE: "itms-frontend.zip"
-              S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
-              WAIT: 'true'
+            - pipe: atlassian/aws-code-deploy:0.5.4
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: 'development-frontend'
+                COMMAND: 'deploy'
+                DEPLOYMENT_GROUP: 'frontend-be'
+                ZIP_FILE: 'itms-frontend-dev.zip'
+                S3_BUCKET: 'itms-frontend-testing'
+                WAIT: 'true'
+                FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+
+      # - step:
+      #     caches:
+      #       - node
+      #     name: "Build"
+      #     script:
+      #       - npm install
+      #       - npm run build-dev
+      #       - apt-get update && apt-get install -y
+      #       - apt-get install zip
+      #       - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+      #     artifacts:
+      #       - itms-frontend.zip
+      # - step:
+      #     name: "Deploy to Development"
+      #     deployment: development
+      #     script:
+      #     - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+      #       variables:
+      #         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      #         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      #         AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+      #         APPLICATION_NAME: "itms-frontend"
+      #         ENVIRONMENT_NAME: "itmsFrontend-dev-env-1"
+      #         ZIP_FILE: "itms-frontend.zip"
+      #         S3_BUCKET: 'elasticbeanstalk-sa-east-1-654719900413'
+      #         WAIT: 'true'
     staging:
       - step:
           caches:
@@ -137,32 +265,32 @@ pipelines:
               S3_BUCKET: 'elasticbeanstalk-us-east-1-273347846553'
               WAIT: 'true'
     homeclinic:
-    - step:
-        caches:
-          - node
-        name: "Build"
-        script:
-          - npm install
-          - npm run build-homeclinic
-          - apt-get update && apt-get install -y
-          - apt-get install zip
-          - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
-        artifacts:
-          - itms-frontend.zip
-    - step:
-        name: "Deploy to Home Clinic"
-        deployment: homeclinic
-        script:
-        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
-          variables:
-            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-            APPLICATION_NAME: itms-frontend-homeclinic
-            ENVIRONMENT_NAME: itms-frontend-homeclinic
-            ZIP_FILE: "itms-frontend.zip"
-            S3_BUCKET: 'elasticbeanstalk-homeclinic'
-            WAIT: 'true'
+      - step:
+          caches:
+            - node
+          name: "Build"
+          script:
+            - npm install
+            - npm run build-homeclinic
+            - apt-get update && apt-get install -y
+            - apt-get install zip
+            - zip -r itms-frontend.zip dist/ Dockerfile nginx-file.conf Dockerrun.aws.json
+          artifacts:
+            - itms-frontend.zip
+      - step:
+          name: "Deploy to Home Clinic"
+          deployment: homeclinic
+          script:
+          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              APPLICATION_NAME: itms-frontend-homeclinic
+              ENVIRONMENT_NAME: itms-frontend-homeclinic
+              ZIP_FILE: "itms-frontend.zip"
+              S3_BUCKET: 'elasticbeanstalk-homeclinic'
+              WAIT: 'true'
     atryschile:
       - step:
           caches:
