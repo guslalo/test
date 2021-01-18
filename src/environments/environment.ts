@@ -3,6 +3,7 @@ export const environment = {
   defaultLang: 'es', //es, pt
   checkAge: false,
   title: 'Itms Dev | Teleconsulta',
+  FrontBaseUrl: "http://homeclinic.telemedicina.com/",
   baseUrl: 'https://backend-dev-cl.bdot.app/api/',
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
