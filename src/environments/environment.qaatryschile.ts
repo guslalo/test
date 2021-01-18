@@ -3,6 +3,7 @@ export const environment = {
     defaultLang: 'es',
     checkAge: false,
     title: 'Atrys Teleconsulta Chile',
+    FrontBaseUrl: "http://homeclinic.telemedicina.com/",
     baseUrl: 'https://b1qa.atrys-chile.telemedicina.com/api/',
     client: 'itms',
     jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',
