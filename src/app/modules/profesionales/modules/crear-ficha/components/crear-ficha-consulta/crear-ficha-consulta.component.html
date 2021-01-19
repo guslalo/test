@@ -74,7 +74,7 @@
                   </div>
                   <div class="text-center boxThumb rounded">
                     <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                      <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                      <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                     </ng-container>
                     <ng-template #noPhoto>
                       <img src="assets/img/profile.png" />
@@ -97,7 +97,7 @@
                   <div class="col-md-4 col-lg-5 text-center mt-5">
                     <div class="img boxImg2 rounded-circle d-inline-block">
                       <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                        <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                        <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                       </ng-container>
                       <ng-template #noPhoto>
                         <img src="assets/img/profile.png" />
@@ -1538,6 +1538,22 @@
                     </div>
                   </div>
 
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateCertificateRecemed">
+                        {{ 'clinicalFile.tooltips.documents.license.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateExamOrderRecemed">
+                        {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
+                  
                   <div *ngIf="setup == 'BR'">
                     <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;"
@@ -1549,9 +1565,7 @@
                     data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')"
                     href="javascript:;">{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a>
                   </div>
-                  
 
-                  
                 </div>
               </div>
             </div>
@@ -1742,7 +1756,12 @@
                               <div class="row">
                                 <div class="col-3">
                                   <div class="imgTimeline rounded-circle">
-                                    <img [src]="photoUrlBase+item.professional.photo">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
                                   </div>
                                 </div>
                                 <div class="col-9">
@@ -2368,3 +2387,5 @@
 
 <modal-recemed-prescription #modalCreatePrescriptionRecemed (saved)="refreshData()"></modal-recemed-prescription>
 <modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
+<modal-recemed-certificate #modalCreateCertificateRecemed></modal-recemed-certificate>
+<modal-recemed-examorder #modalCreateExamOrderRecemed></modal-recemed-examorder>

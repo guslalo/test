@@ -70,8 +70,8 @@
                   {{ 'dashboard.home.userManagment.createAccount.tabs.personal.identification.label' | transloco }}
                 </h4>
                 <div class="custom-control custom-checkbox custom-control-inline ml-4 pt-1">
-                  <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign"
-                     /><!-- (change)="validateForm()"-->
+                  <input type="checkbox" class="custom-control-input" id="isForeign" [(ngModel)]="isForeign" (change)="validateForm()"
+                     /><!-- -->
                   <label class="custom-control-label" for="isForeign">{{ 'common.foreign.label' | transloco }}</label>
                 </div>
               </div>
@@ -86,10 +86,10 @@
                       
                       
                       id="select-type-document"
-                      
-                    ><!-- (change)="validateForm()"[ngClass]="{
+                      (change)="validateForm()"[ngClass]="{
                         'is-invalid': (!identificationData.get('document').valid && !isForeign)
-                      }"-->
+                      }"
+                    ><!-- -->
                       <option [value]="null">{{ 'common.select.label' | transloco }}</option>
                       <option value="run" [selected]="!isForeign">
                         RUN

@@ -3,7 +3,7 @@ export const environment = {
   defaultLang: 'pt',
   checkAge: false,
   title: 'Medline | Teleconsulta',
-  baseUrl: 'https://b1.medline.telemedicina.com/api/', //https://backend.homeclinic.telemedicina.com/api/
+  baseUrl: 'https://b1.medline.telemedicina.com/api/',
   client: 'itms',
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/', //meet.bdot.app
   apiKey: '',
@@ -20,7 +20,7 @@ export const environment = {
     appId: '1:976429325991:web:102ef2f452b0bc15ac8582',
     measurementId: 'G-FJ3Z5E7CRC',
   },
-  ttlSession: 600,
+  ttlSession: 60,
   setup: 'BR',
   version: '{BUILD_VERSION}-Medline ',
   brand: "medline",

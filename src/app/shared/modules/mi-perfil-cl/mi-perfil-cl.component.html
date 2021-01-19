@@ -68,6 +68,9 @@
                   <img src="{{ formData?.photo || '/assets/profile.jpg' }}" class="d-inline-block img-fluid" />
                 </div>
                 <div class="custom-file mt-3">
+                  <div class="adjuntar">
+                    {{'common.input.file.seleccionar' | transloco}}
+                  </div>
                   <input
                     type="file"
                     class="custom-file-input"
@@ -125,7 +128,7 @@
                     aria-controls="contact2"
                     aria-selected="false"
                     >{{ 'account.createAccount.address.label' | transloco }}
-                  </a>
+                  </a> 
                 </li>
               </ul>
               <div class="tab-content p-2" id="myTabContent">

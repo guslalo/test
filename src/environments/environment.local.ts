@@ -4,6 +4,8 @@ export const environment = {
   checkAge: false,
   title: 'Itms | Teleconsulta',
   baseUrl: 'http://192.168.0.156:3000/api/', //https://backend.homeclinic.telemedicina.com/api/
+  // baseUrl: 'https://backend-testing-es-cl.bdot.app/api/', // para backend en cl
+  // baseUrl: 'https://backend-testing-pt-br.bdot.app/api/', // para backend en br
   client: 'itms',
   jitsi: 'meet.bdot.app', //meet.bdot.app
   apiKey: '',
@@ -21,9 +23,9 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20,
-  setup: 'BR',
+  setup: 'CL',
   version: '{BUILD_VERSION}',
-  brand: "medline",
+  brand: "atrys",
   colors: {
     "color-primary": "#25b0bb;",
     "color-secondary": "#044AAB;",

@@ -260,6 +260,18 @@ ul {
   }
 }
 
+.custom-file-label::after {
+  content: "";
+  width: 100px;
+}
+
+.adjuntar {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  z-index: 2;
+}
+
 .boxThumb {
   width: 100%;
   overflow: hidden;
@@ -278,6 +290,7 @@ ul {
   img {
     height: auto;
     width: 100%;
+    object-fit: contain;
     max-height: 240px;
     filter: blur(4px);
     -webkit-filter: blur(4px);
@@ -293,6 +306,19 @@ ul {
     height: 100%;
     width: auto;
     min-width: 100%;
+  }
+}
+
+.imgUser {
+  width: 100%;
+  max-width: 80%;
+  height:auto;
+  text-align: center;
+  display: inline-block;
+  img {
+    display: inline-block;
+    width: 100%;
+    height:auto;
   }
 }
 
@@ -795,7 +821,8 @@ table {
   height: 75px;
   overflow: hidden;
   img {
-    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 

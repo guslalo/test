@@ -296,7 +296,7 @@
                         [placement]="placement"
                         class="form-control"
                         id="birthdate"
-                        [maxDate]="maxDate"
+                        [maxDate]="{ day: maxDate.day, month: maxDate.month, year: maxDate.year}"
                         [minDate]="{ year: 1900, month: 1, day: 1 }"
                         placeholder="DD/MM/YYYY"
                         name="birthdate"

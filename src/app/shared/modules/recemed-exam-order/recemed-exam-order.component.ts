@@ -7,11 +7,11 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 import { ProfessionalService } from 'src/app/services/professional.service';
 
 @Component({
-  selector: 'modal-recemed-prescription',
-  templateUrl: './recemed-prescription.component.html',
-  styleUrls: ['./recemed-prescription.component.scss']
+  selector: 'modal-recemed-examorder',
+  templateUrl: './recemed-exam-order.component.html',
+  styleUrls: ['./recemed-exam-order.component.scss']
 })
-export class RecemedPrescriptionComponent implements OnInit {
+export class RecemedExamOrderComponent implements OnInit {
 
   public form: FormGroup;
   public appointmentId: any;
@@ -37,7 +37,7 @@ export class RecemedPrescriptionComponent implements OnInit {
   send(){
     let payload = this.form.getRawValue()
     payload.appointmentId = this.appointmentId
-    payload.documentType = 'prescription'
+    payload.documentType = 'exam-order'
     this.appointmentsService.createPrescriptionRecemed(payload).subscribe((data) => {
       console.log(data)
       this.saved.emit();
@@ -48,10 +48,8 @@ export class RecemedPrescriptionComponent implements OnInit {
     this.form = this.formBuilder.group({
       detail: [null, Validators.required],
       observations: [null, Validators.required],
-      duration: [null, Validators.required],
-      hold: ['', ''],
-      ges: ['', ''],
     });
   }
+
 
 }

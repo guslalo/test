@@ -35,6 +35,8 @@ export class InicioPComponent implements OnInit {
   public openAppointments = []
   public immediateAppointments = []
   public interval:any;
+  public inmediateAppointment: boolean;
+  public scheduleAppointment: boolean; 
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -55,6 +57,20 @@ export class InicioPComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (localStorage.getItem('inmediateAppointment') === 'true') {
+      this.inmediateAppointment = true;
+    } else {
+      this.inmediateAppointment = false;
+    }
+
+    if (localStorage.getItem('scheduleAppointment') === 'true') {
+      this.scheduleAppointment = true;
+    } else {
+      this.scheduleAppointment = false;
+    }
+    this.router.events.subscribe((val) => {
+      clearInterval(this.interval);
+    });
 
     this.route.queryParams.subscribe(params => {
       if(!params['motive']) return;
@@ -86,11 +102,6 @@ export class InicioPComponent implements OnInit {
        }, 10000);
     }, 0);
 
-    this.router.events.subscribe(value => {
-      
-      clearInterval(this.interval);
-      //console.log(value);
-    });
 
   }
 

@@ -2,7 +2,8 @@ export const environment = {
   production: true,
   defaultLang: 'es',
   checkAge: false,
-  title: 'Atrys | Teleconsulta',
+  title: 'Atrys Teleconsulta Chile',
+  FrontBaseUrl: "http://homeclinic.telemedicina.com/",
   baseUrl: 'https://b1.atrys.telemedicina.com/api/',
   client: 'itms',
   jitsi: 'https://tc-regional-brasil.s3.us-east-1.amazonaws.com/',
@@ -25,8 +26,8 @@ export const environment = {
   version: '{BUILD_VERSION}-Atrys_Chile ',
   brand: 'atrys',
   colors: {
-    'color-primary': '#4680AE;',
-    'color-secondary': '#4680ae;',
-    'color-hover': '#05A78B;',
+    "color-primary": "#4680AE;",
+    "color-secondary": "#4680ae;",
+    "color-hover": "#05A78B;"
   },
 };
