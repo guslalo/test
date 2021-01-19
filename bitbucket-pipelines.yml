@@ -141,7 +141,7 @@ pipelines:
                 ZIP_FILE: 'itms-frontend-dev.zip'
                 S3_BUCKET: 'itms-frontend-testing'
       - step:
-          name: 'Deploy to chile'
+          name: 'Deploy to dev br'
           deployment: frontend-br
           script:
             - pipe: atlassian/aws-code-deploy:0.5.4
