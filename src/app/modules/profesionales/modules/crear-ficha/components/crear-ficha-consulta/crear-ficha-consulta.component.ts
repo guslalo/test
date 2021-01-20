@@ -17,15 +17,41 @@ import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
+
+
 import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
 
 declare var $: any;
+
+interface AngularResizeElementEvent {
+  currentWidthValue: number;
+  currentHeightValue: number;
+  originalWidthValue: number;
+  originalHeightValue: number;
+  differenceWidthValue: number;
+  differenceHeightValue: number;
+  originalEvent: MouseEvent;
+}
+
+enum AngularResizeElementDirection {
+  TOP = 'top',
+  TOP_RIGHT = 'top-right',
+  RIGHT = 'right',
+  BOTTOM_RIGHT = 'bottom-right',
+  BOTTOM = 'bottom',
+  BOTTOM_LEFT = 'bottom-left',
+  LEFT = 'left',
+  TOP_LEFT = 'top-left'
+}
+
 
 @Component({
   selector: 'app-crear-ficha-consulta',
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
+
+
 
 export class CrearFichaConsultaComponent implements OnInit {
   public idConsulta: any;
@@ -112,6 +138,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   public notifiableDiseases = [];
   public notifiableDiseases2 = { };
   public interval:any;
+
+
+
+  public readonly AngularResizeElementDirection = AngularResizeElementDirection;
+  public data: any = {};
+  public onResize(evt: AngularResizeElementEvent): void {
+    this.data.width = evt.currentWidthValue;
+    this.data.height = evt.currentHeightValue;
+}
 
   constructor(
     private route: ActivatedRoute,
