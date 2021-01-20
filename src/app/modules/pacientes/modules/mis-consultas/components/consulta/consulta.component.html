@@ -647,13 +647,7 @@
           <p class="title font-weight-bold">
             {{ 'dashboard.home.config.tabs.information.initialTitle.label' | transloco }}
           </p>
-          <ng-container *ngIf="professionalData.professionalData.professionalTitle != ' ' ">
-            {{professionalData.professionalData.professionalTitle}} -
-          </ng-container>
-          <ng-container *ngIf="professionalData.professionalData.ufProfessionalRegistry != ' ' ">
-            {{professionalData.professionalData.ufProfessionalRegistry}} -
-          </ng-container>
-          {{professionalData.professionalData.ufRegistry}}
+    
           <ul>
             <ng-container *ngFor="let item of professionalData.professionalData.professionalRegistry">
               <li>{{ item.professionalTitle }} - {{ item.registry }}</li>
