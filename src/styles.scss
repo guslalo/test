@@ -1242,7 +1242,33 @@ ngb-timepicker .ngb-tp-hour {
   }
 }
 
-//modo flotante veideo call
+.vistaFixed {
+  border-radius: 8px;
+  &.fixed {
+    left: calc(50% + 135px);
+    transform: translateX(-50%);
+    background: white;
+    position: fixed;
+    padding: 20px 11%;
+    width: calc(96% - 225px);
+    box-shadow: 0 1.125rem 1.25rem rgba(0, 0, 0, 0.075) !important;
+    z-index: 3;
+    .leftwatermark {
+      display: none !important;
+    }
+    .card {
+      padding: 10px 6px 0px 6px;
+      box-shadow: none !important;
+    }
+    top: 10px;
+    .meetPatient2 {
+      width: 100% !important;
+      height: 250px !important;
+    }
+  }
+}
+
+/*
 .vistaFixed {
   border-radius: 8px;
   &.fixed {
@@ -1277,7 +1303,7 @@ ngb-timepicker .ngb-tp-hour {
       min-width: 100% !important;
     }
   }
-}
+}*/
 
 .disabled {
   opacity: 0.2;
