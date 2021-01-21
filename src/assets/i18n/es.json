@@ -38,7 +38,9 @@
   "sibrare": {
     "prescription": "Preescripción",
     "report": "Reporte",
-    "exam-order": "Orden de examen"
+    "exam-order": "Orden de examen",
+    "procedure": "Procedimiento",
+    "certificate": "Certificado médico"
   },
   "waitingRoomInstructions": {
     "instruction1": "Ubíquese en un lugar tranquilo y sin ruido.",

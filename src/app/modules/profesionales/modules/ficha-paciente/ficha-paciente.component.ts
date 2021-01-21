@@ -171,11 +171,11 @@ export class FichaPacienteComponent implements OnInit {
         this.antecedentsRecord = data.payload.antecedent;
         this.examsRecord = data.payload.exams;
 
-        console.log(this.appointmentsRecord)
+        console.log(this.examsRecord )
         
         if(environment.setup == 'CL'){
           this.arrayDocuments = data.payload.recemed;
-        }else{
+        } else {
           this.arrayDocuments = data.payload.prescriptions;
         }
 
