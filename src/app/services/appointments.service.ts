@@ -462,12 +462,13 @@ export class AppointmentsService {
         (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
 
         
-        (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
-
-        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name = '';
-
-        if((_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.length) && (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport == '')){
-           name = 'RUN - ' + _e.identificationData.run + ' - '
+        if (environment.setup == 'CL'){
+          (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
+          (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name = '';
+  
+          if((_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.length) && (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport == '')){
+             name = 'RUN - ' + _e.identificationData.run + ' - '
+          }  
         }
 
         name += _e.personalData.name + ' ' + _e.personalData.secondLastName
