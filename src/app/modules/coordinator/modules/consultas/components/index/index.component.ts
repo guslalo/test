@@ -58,11 +58,11 @@ export class IndexComponent implements OnInit {
   }
 
   intervalFunction(){
-    setTimeout(() => {
-      this.interval = setInterval(() => {
-        this.getAppointmentsForTypes();
-       }, 10000);
-    }, 0);
+    // setTimeout(() => {
+    //   this.interval = setInterval(() => {
+    //     this.getAppointmentsForTypes();
+    //    }, 10000);
+    // }, 0);
   }
 
 
