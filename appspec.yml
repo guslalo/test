@@ -11,7 +11,23 @@ permissions:
     group: ubuntu
 
 hooks:
+  BeforeInstall:
+    - location: bin/app-before
+      timeout: 30
+      runas: root
+  ApplicationStop:
+    - location: bin/app-stop
+      timeout: 30
+      runas: root
+  AfterInstall:
+    - location: bin/app-after
+      timeout: 30
+      runas: root
   ApplicationStart:
     - location: bin/app-start
       timeout: 120
+      runas: root
+  ValidateService:
+    - location: bin/app-validate
+      timeout: 30
       runas: root
