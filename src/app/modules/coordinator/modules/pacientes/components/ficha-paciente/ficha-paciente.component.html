@@ -428,7 +428,25 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Paciente">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.patientDetails.userDetails[0].photo" alt="img" />
+                  <img
+                  *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
+                  class="profile mr-2"
+                  id="image0"
+                  width="38"
+                  height="38"
+                  [src]="row.patientDetails?.userDetails[0]?.photo"
+                  alt="img"
+                />
+                <ng-template #noPhoto>
+                  <img
+                    class="profile mr-2"
+                    id="image0"
+                    width="38"
+                    height="38"
+                    src="/assets/profile.jpg"
+                    alt="img"
+                  />
+                </ng-template>
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
@@ -438,7 +456,28 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Profesional">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38"[src]="row.professionalDetails.userDetails[0].photo" alt="img" />
+
+                  <img
+                  *ngIf="(row.professionalDetails?.userDetails)[0]?.photo; else noPhoto"
+                  class="profile mr-2"
+                  id="image0"
+                  width="38"
+                  height="38"
+                  [src]="row.professionalDetails?.userDetails[0]?.photo"
+                  alt="img"
+                />
+                <ng-template #noPhoto>
+                  <img
+                    class="profile mr-2"
+                    id="image0"
+                    width="38"
+                    height="38"
+                    src="/assets/profile.jpg"
+                    alt="img"
+                  />
+                </ng-template>
+
+
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
