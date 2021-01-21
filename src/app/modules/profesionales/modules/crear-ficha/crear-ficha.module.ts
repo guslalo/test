@@ -8,6 +8,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FichaHistorialComponent } from './components/ficha-historial/ficha-historial.component';
 import { JsonPathFinderPipe } from 'src/app/pipes/json-path-finder.pipe';
+import { AngularResizeElementModule } from 'angular-resize-element';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { JsonPathFinderPipe } from 'src/app/pipes/json-path-finder.pipe';
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
-    SharedModule
+    SharedModule,
+    AngularResizeElementModule
   ],
 })
 export class CrearFichaModule { }

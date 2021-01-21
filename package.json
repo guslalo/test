@@ -46,6 +46,7 @@
         "@swimlane/ngx-charts": "^14.0.0",
         "@swimlane/ngx-datatable": "^17.1.0",
         "angular-password-strength-meter": "^2.0.0",
+        "angular-resize-element": "^1.1.6",
         "angular-vertical-timeline": "^0.6.0",
         "angular2-moment": "^1.9.0",
         "bn-ng-idle": "^1.0.1",
