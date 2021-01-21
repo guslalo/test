@@ -79,14 +79,14 @@
                                 "replace": "src/environments/environment.ts",
                                 "with": "src/environments/environment.dev.ts"
                             }],
-                            "optimization": false,
-                            "outputHashing": "none",
+                            "optimization": true,
+                            "outputHashing": "all",
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "extractLicenses": false,
+                            "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": false,
+                            "buildOptimizer": true,
                             "budgets": [{
                                     "type": "initial",
                                     "maximumWarning": "10mb",
