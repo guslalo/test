@@ -322,15 +322,15 @@ pipelines:
       - step:
           caches:
             - node
-          name: "Build AtrysQA"
+          name: "Build testing br"
           script:
             - npm install
-            - npm run build-qaatryschile
+            - npm run build-dev
             - apt-get update && apt-get install -y
             - apt-get install zip
-            - zip -r itms-front-atrys-qa.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
+            - zip -r itms-frontend-dev.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
           artifacts:
-            - itms-front-atrys-qa.zip
+            - itms-frontend-dev.zip
       - step:
           name: 'Subiendo Artefacto a S3'         
           services:            
@@ -338,110 +338,26 @@ pipelines:
           script:         
             - pipe: atlassian/aws-code-deploy:0.2.3              
               variables:                
-                AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
-                AWS_SECRET_ACCESS_KEY: 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
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: 'us-east-1'
                 COMMAND: 'upload'                
-                APPLICATION_NAME: 'tcr-atrys-qa'
-                ZIP_FILE: 'itms-front-atrys-qa.zip'
-                S3_BUCKET: 'tcratrys-front-qa'
+                APPLICATION_NAME: 'development-frontend'
+                ZIP_FILE: 'itms-frontend-dev.zip'
+                S3_BUCKET: 'itms-frontend-testing'
       - step:
-          name: 'Deploy to AtrysQA'
-          deployment: atrys-qa
+          name: 'Deploy to blue/green'
+          deployment: frontend-br
           script:
             - pipe: atlassian/aws-code-deploy:0.5.4
               variables:
-                AWS_ACCESS_KEY_ID: AKIAQK7ENHDFNWKREZH7
-                AWS_SECRET_ACCESS_KEY: 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
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: 'us-east-1'
-                APPLICATION_NAME: 'tcr-atrys-qa'
+                APPLICATION_NAME: 'development-frontend'
                 COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'group-frontend-atrys-qa'
-                ZIP_FILE: 'itms-front-atrys-qa.zip'
-                S3_BUCKET: 'tcratrys-front-qa'
-                WAIT: 'true'
-                FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
-      - step:
-          caches:
-            - node
-          name: "Build homeclinic"
-          script:
-            - npm install
-            - npm run build-homeclinic
-            - apt-get update && apt-get install -y
-            - apt-get install zip
-            - zip -r itms-frontend-homeclinic.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
-          artifacts:
-            - itms-frontend-homeclinic.zip
-      - step:
-          name: 'Subiendo Artefacto a S3'         
-          services:            
-            - docker          
-          script:         
-            - pipe: atlassian/aws-code-deploy:0.2.3              
-              variables:                
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                COMMAND: 'upload'                
-                APPLICATION_NAME: 'frontend-testing'
-                ZIP_FILE: 'itms-frontend-homeclinic.zip'
-                S3_BUCKET: 'itms-frontend-testing'
-      - step:
-          name: 'Deploy to homeclinic'
-          deployment: testing-homeclinic
-          script:
-            - pipe: atlassian/aws-code-deploy:0.5.4
-              variables:
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'frontend-testing'
-                COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'homeclinic'
-                ZIP_FILE: 'itms-frontend-homeclinic.zip'
-                S3_BUCKET: 'itms-frontend-testing'
-                WAIT: 'true'
-                FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
-      - step:
-          caches:
-            - node
-          name: "Build chile"
-          script:
-            - npm install
-            - npm run build-chile
-            - apt-get update && apt-get install -y
-            - apt-get install zip
-            - zip -r itms-frontend-chile.zip dist/ appspec.yml bin/ Dockerfile nginx-file.conf Dockerrun.aws.json
-          artifacts:
-            - itms-frontend-chile.zip
-      - step:
-          name: 'Subiendo Artefacto a S3'         
-          services:            
-            - docker          
-          script:         
-            - pipe: atlassian/aws-code-deploy:0.2.3              
-              variables:                
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                COMMAND: 'upload'                
-                APPLICATION_NAME: 'frontend-testing'
-                ZIP_FILE: 'itms-frontend-chile.zip'
-                S3_BUCKET: 'itms-frontend-testing'
-      - step:
-          name: 'Deploy to chile'
-          deployment: testing-chile
-          script:
-            - pipe: atlassian/aws-code-deploy:0.5.4
-              variables:
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'frontend-testing'
-                COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'chile'
-                ZIP_FILE: 'itms-frontend-chile.zip'
+                DEPLOYMENT_GROUP: 'frontend'
+                ZIP_FILE: 'itms-frontend-dev.zip'
                 S3_BUCKET: 'itms-frontend-testing'
                 WAIT: 'true'
                 FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
