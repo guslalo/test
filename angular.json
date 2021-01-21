@@ -124,10 +124,10 @@
                                 }
                             ]
                         },
-                        "chile": {
+                        "medline": {
                             "fileReplacements": [{
                                 "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.chile.ts"
+                                "with": "src/environments/environment.medline.ts"
                             }],
                             "optimization": true,
                             "outputHashing": "all",
@@ -149,10 +149,10 @@
                                 }
                             ]
                         },
-                        "medline": {
+                        "chile": {
                             "fileReplacements": [{
                                 "replace": "src/environments/environment.ts",
-                                "with": "src/environments/environment.medline.ts"
+                                "with": "src/environments/environment.chile.ts"
                             }],
                             "optimization": true,
                             "outputHashing": "all",

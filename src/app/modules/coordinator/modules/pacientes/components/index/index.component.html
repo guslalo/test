@@ -79,7 +79,7 @@
                           id="image0"
                           width="38"
                           height="38"
-                          [src]="photoUrlBase + (row.patientDetails?.userDetails)[0]?.photo"
+                          [src]="row.patientDetails?.userDetails[0]?.photo"
                           alt="img"
                         />
                         <ng-template #noPhoto>
@@ -103,7 +103,7 @@
                           id="image0"
                           width="38"
                           height="38"
-                          [src]="photoUrlBase + (row.patientDetails?.userDetails)[0]?.photo"
+                          [src]="row.patientDetails?.userDetails[0]?.photo"
                           alt="img"
                         />
                         <ng-template #noPhoto>
