@@ -84,8 +84,8 @@
                 <tr *ngFor="let item of openAppointments" id="{{ item._id }}">
                   <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row" *ngIf="item.patientDetails?.userDetails[0]; else sinInfo">
-                      {{ item.patientDetails?.userDetails[0].personalData.name }}
-                      {{ setup == 'CL' ? item.patientDetails?.userDetails[0]?.lastName : item.patientDetails?.userDetails[0]?.secondLastName }}
+                      {{ item.patientDetails?.userDetails[0].personalData.name + ' ' + (setup == 'CL' ? item.patientDetails?.userDetails[0]?.lastName : item.patientDetails?.userDetails[0]?.secondLastName) }}
+                      
                     </td>
                     <ng-template #sinInfo>
                       <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
@@ -232,8 +232,7 @@
                 <tr *ngFor="let item of nextAppointments" id="{{ item._id }}">
                   <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
                     <td scope="row" *ngIf="item.patientDetails?.userDetails[0]; else sinInfo">
-                      {{ item.patientDetails?.userDetails[0].personalData.name }}
-                      {{ setup == 'CL' ? item.patientDetails?.userDetails[0]?.lastName : item.patientDetails?.userDetails[0]?.secondLastName }}
+                      {{ item.patientDetails?.userDetails[0].personalData.name + ' ' + (setup == 'CL' ? item.patientDetails?.userDetails[0]?.lastName : item.patientDetails?.userDetails[0]?.secondLastName) }}
                       
                     </td>
                     <ng-template #sinInfo>
@@ -260,8 +259,7 @@
                       </ng-template>
                     </td>
                     <td> 
-                      {{ item.professionalDetails?.userDetails[0]?.name}} 
-                      {{ setup == 'CL' ? item.professionlDetails?.userDetails[0]?.lastName : item.professionlDetails?.userDetails[0]?.secondLastName }}
+                      {{ item.professionalDetails?.userDetails[0]?.name}} {{ setup == 'CL' ? item.professionlDetails?.userDetails[0]?.lastName : item.professionlDetails?.userDetails[0]?.secondLastName }}
                     </td>
                     <td>
                       <!-- 
@@ -380,8 +378,7 @@
           <tr *ngFor="let item of immediateAppointments" id="{{ item._id }}">
             <ng-container *ngIf="item.administrativeDetails.status !== 'finished'">
               <td scope="row" *ngIf="item.patientDetails?.userDetails[0]; else sinInfo">
-                {{ item.patientDetails?.userDetails[0].personalData.name }}
-                {{ item.patientDetails?.userDetails[0].personalData.secondLastName }}
+                {{ item.patientDetails?.userDetails[0].personalData.name + ' ' + (setup == 'CL' ? item.patientDetails?.userDetails[0]?.lastName : item.patientDetails?.userDetails[0]?.secondLastName) }}
               </td>
               <ng-template #sinInfo>
                 <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
