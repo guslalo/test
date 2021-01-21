@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo echo "server {
+echo "server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
@@ -9,12 +9,13 @@ sudo echo "server {
         server_name _;
 
         location / {
-                try_files $uri$args $uri$args/ /index.html;
+                try_files \$uri\$args \$uri\$args/ /index.html;
         }
 
         location /health-check {
                 default_type text/html;
                 return 200;
         }
-}" > /etc/nginx/sites-enabled/default &&
+}" > /tmp/nginx-config &&
+sudo cp /tmp/nginx-config /etc/nginx/sites-available/default &&
 sudo service nginx restart
