@@ -1,4 +1,20 @@
 #!/bin/bash
-echo "$LIFECYCLE_EVENT"
-echo "$DEPLOYMENT_ID"
-echo "OK"
+sudo echo "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                try_files $uri$args $uri$args/ /index.html;
+        }
+
+        location /health-check {
+                default_type text/html;
+                return 200;
+        }
+}" > /etc/nginx/sites-enabled/default &&
+sudo service nginx restart
