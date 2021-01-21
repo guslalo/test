@@ -1,2 +1,4 @@
 #!/bin/bash
-sudo return true
+echo "$LIFECYCLE_EVENT"
+echo "$DEPLOYMENT_ID"
+echo "OK"
