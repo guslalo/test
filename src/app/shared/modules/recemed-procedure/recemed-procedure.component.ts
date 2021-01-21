@@ -36,7 +36,7 @@ export class RecemedProcedureComponent implements OnInit {
   send(){
     let payload = this.form.getRawValue()
     payload.appointmentId = this.appointmentId
-    payload.documentType = 'exam-order'
+    payload.documentType = 'procedure'
     this.appointmentsService.createPrescriptionRecemed(payload).subscribe((data) => {
       console.log(data)
     })

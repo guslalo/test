@@ -151,7 +151,7 @@
                 <div class="img text-center">
                   <div class="img text-center imgUser">
                     <ng-container *ngIf="patientRecord.personalData.photo != null; else sinFoto1">
-                      <img [src]="patientRecord.personalData.photo" />
+                      <img [src]="patientRecord.personalData.photo"  class="rounded-circle"/>
                     </ng-container>
                     <ng-template #sinFoto1>
                       <img src="assets/profile.jpg" />
@@ -989,6 +989,7 @@
                       </td>
                       <td class="text-center">
                         {{ item.type === 'exam' ? 'Examen' : item.type === 'document' ? 'Documento' : 'S/R' }}
+
                       </td>
                       <td class="text-center">
                         {{ moment(item.uploadDate).format('DD/MM/YYYY') }}
@@ -1062,6 +1063,16 @@
                         <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
+
+                        <ng-container *ngIf="item.documentType === 'procedure' || item.documentDetails?.type === 'procedure'">
+                          {{ 'sibrare.procedure' | transloco}}
+                        </ng-container>
+
+                        <ng-container *ngIf="item.documentType === 'certificate' || item.documentDetails?.type === 'certificate'">
+                          {{ 'sibrare.certificate' | transloco}}
+                        </ng-container>
+                        
+
                         <!--{{ item.documentType }}-->
                       </td>
 
