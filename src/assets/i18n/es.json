@@ -365,7 +365,10 @@
           "label": "Orden de Examen"
         },
         "license": {
-          "label": "Licencia Médica"
+          "label": "Certificado Médico"
+        },
+        "Procedure": {
+          "label": "Procedimiento"
         }
       }
     },
