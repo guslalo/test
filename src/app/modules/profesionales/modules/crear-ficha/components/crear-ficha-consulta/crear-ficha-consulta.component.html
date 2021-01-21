@@ -1537,15 +1537,20 @@
                       </a>
                     </div>
                   </div>
-
                   <div *ngIf="setup == 'CL'">
                     <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateProcedureRecemed">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateExamOrderRecemed">
                         {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
                       </a>
                     </div>
                   </div>
-
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateProcedureRecemed">
+                        {{ 'clinicalFile.tooltips.documents.Procedure.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
                   <div *ngIf="setup == 'CL'">
                     <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
                       <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateCertificateRecemed">
@@ -1554,24 +1559,23 @@
                     </div>
                   </div>
 
-                  <div *ngIf="setup == 'CL'">
-                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateExamOrderRecemed">
-                        {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
-                      </a>
-                    </div>
-                  </div>
                   
                   <div *ngIf="setup == 'BR'">
                     <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;"
-                    (click)="subirPrescripciones('prescription')">{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a>
-                  <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
-                    data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')"
-                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a>
-                  <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
+                    (click)="subirPrescripciones('prescription')">
+                      {{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}
+                    </a>
+                    <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
+                      data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')"
+                      href="javascript:;">
+                      {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
+                    </a>
+                    <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')"
-                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a>
+                    href="javascript:;">
+                      {{ 'clinicalFile.tooltips.documents.license.label' | transloco }}
+                    </a>
                   </div>
 
                 </div>
