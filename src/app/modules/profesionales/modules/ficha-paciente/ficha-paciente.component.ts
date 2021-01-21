@@ -151,7 +151,12 @@ export class FichaPacienteComponent implements OnInit {
 
   calcularEdad(birthdate){
     let birthday_arr = birthdate.split("/");
-    let birthday_date = new Date( parseInt(birthday_arr[2]),(parseInt(birthday_arr[1]) - 1, parseInt(birthday_arr[0])) );
+    let birthday_date: Date;
+    if(birthday_arr[0].length > 2){
+      birthday_date = new Date( parseInt(birthday_arr[0]),parseInt(birthday_arr[1]), parseInt(birthday_arr[2]) );
+    }else if(birthday_arr[2].length > 2){
+      birthday_date = new Date( parseInt(birthday_arr[2]),parseInt(birthday_arr[1]), parseInt(birthday_arr[0]) );
+    }
     let ageDifMs = Date.now() - birthday_date.getTime();
     let ageDate = new Date(ageDifMs);
     let age = Math.abs(ageDate.getUTCFullYear() - 1970);
