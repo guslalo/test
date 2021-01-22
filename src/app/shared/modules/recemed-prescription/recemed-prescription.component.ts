@@ -48,7 +48,7 @@ export class RecemedPrescriptionComponent implements OnInit {
     this.form = this.formBuilder.group({
       detail: [null, Validators.required],
       observations: [null, Validators.required],
-      duration: [null, Validators.required],
+      duration: [null],
       hold: ['', ''],
       ges: ['', ''],
     });
