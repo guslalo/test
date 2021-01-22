@@ -129,7 +129,11 @@ export class ChooseContextComponent implements OnInit {
               localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
               localStorage.setItem('paymentAppointment', data.payload.payment.toString());
               console.log(data);
-              this.router.navigate(['app-paciente'])
+              if(localStorage.getItem('preURL')){
+                this.router.navigate([localStorage.getItem('preURL')])
+              }else{
+                this.router.navigate(['app-paciente'])
+              }
             },
             (error) => {
               console.log(error);
