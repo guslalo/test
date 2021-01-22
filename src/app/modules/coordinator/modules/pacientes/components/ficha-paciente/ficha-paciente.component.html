@@ -891,6 +891,14 @@
                         <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
+                        <ng-container *ngIf="item.documentType === 'procedure' || item.documentDetails?.type === 'procedure'">
+                          {{ 'sibrare.procedure' | transloco}}
+                        </ng-container>
+
+                        <ng-container *ngIf="item.documentType === 'certificate' || item.documentDetails?.type === 'certificate'">
+                          {{ 'sibrare.certificate' | transloco}}
+                        </ng-container>
+                        
                         <!--{{ item.documentType }}-->
                       </td>
 
