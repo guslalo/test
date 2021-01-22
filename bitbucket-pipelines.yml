@@ -149,7 +149,7 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'development-cl-tf'
+                APPLICATION_NAME: 'development-br-tf'
                 COMMAND: 'deploy'
                 DEPLOYMENT_GROUP: 'frontend'
                 ZIP_FILE: 'itms-frontend-dev.zip'
