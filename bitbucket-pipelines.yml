@@ -25,9 +25,9 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 COMMAND: 'upload'                
-                APPLICATION_NAME: 'homeclinic'
+                APPLICATION_NAME: 'homeclinic-tf'
                 ZIP_FILE: 'itms-frontend-homeclinic.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-homeclinic-frontend'
       - step:
           name: 'Deploy to homeclinic'
           deployment: homeclinic
@@ -37,11 +37,11 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'homeclinic'
+                APPLICATION_NAME: 'homeclinic-tf'
                 COMMAND: 'deploy'
                 DEPLOYMENT_GROUP: 'frontend'
                 ZIP_FILE: 'itms-frontend-homeclinic.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-homeclinic-frontend'
                 WAIT: 'true'
                 FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
 
@@ -95,9 +95,9 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 COMMAND: 'upload'                
-                APPLICATION_NAME: 'development-frontend'
+                APPLICATION_NAME: 'development-cl-tf'
                 ZIP_FILE: 'itms-frontend-chile.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-cl-frontend'
       - step:
           name: 'Deploy to chile'
           deployment: frontend-cl
@@ -107,11 +107,11 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'development-frontend'
+                APPLICATION_NAME: 'development-cl-tf'
                 COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'frontend-chile'
+                DEPLOYMENT_GROUP: 'frontend'
                 ZIP_FILE: 'itms-frontend-chile.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-cl-frontend'
                 WAIT: 'true'
                 FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
       - step:
@@ -137,9 +137,9 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                 COMMAND: 'upload'                
-                APPLICATION_NAME: 'development-frontend'
+                APPLICATION_NAME: 'development-br-tf'
                 ZIP_FILE: 'itms-frontend-dev.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-br-frontend'
       - step:
           name: 'Deploy to dev br'
           deployment: frontend-br
@@ -149,11 +149,11 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                APPLICATION_NAME: 'development-frontend'
+                APPLICATION_NAME: 'development-cl-tf'
                 COMMAND: 'deploy'
-                DEPLOYMENT_GROUP: 'frontend-br'
+                DEPLOYMENT_GROUP: 'frontend'
                 ZIP_FILE: 'itms-frontend-dev.zip'
-                S3_BUCKET: 'itms-frontend-testing'
+                S3_BUCKET: 'oficial-dev-br-frontend'
                 WAIT: 'true'
                 FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
 
