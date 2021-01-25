@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       this.createRoute = "/create-account-cl"
     }
     this.route.queryParams.subscribe(params => {
-      this.return = params['return']
+      this.return = params['return'] || params['returnUrl']
     })
   }
 
