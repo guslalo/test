@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
@@ -65,16 +66,21 @@ export class IndexComponent implements OnInit {
   xAxisLabel = '';
   yAxisLabel = '';
   timeline = true;
+  legendTitle = ''
 
   colorScheme = {
     domain: ['#3976ea', '#6fbfa7', '#7f62c4', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
-  constructor(public currentUserService: CurrentUserService) {
+  constructor(public currentUserService: CurrentUserService, private transloco: TranslocoService) {
+    
     Object.assign(this.multi);
   }
 
   ngOnInit(): void {
+    this.xAxisLabel = this.transloco.translate('dashboard.charts.xAxis.label');
+    this.yAxisLabel = this.transloco.translate('dashboard.charts.yAxis.label')
+    this.legendTitle = this.transloco.translate('dashboard.charts.legend.label')
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   onSelect(event) {

@@ -15,7 +15,7 @@
         </p>
       </div>
       <div class="card-body text-center">
-        <p class="font-weight-bold text-left">{{ 'dashboard.home.newService.type.title' | transloco }}</p>
+        <p class="font-weight-bold text-left w-100">{{ 'dashboard.home.newService.type.title' | transloco }}</p>
         <!--tabs child-->
         <ul class="nav nav-tabs nav-pills nav-justified rounded tabchild mb-3 w-100" id="myTab" role="tablist">
           <li class="nav-item" role="presentation" (click)="refreshSearchSpecialty()">
@@ -161,7 +161,7 @@
             <img src="assets/img/doctora-icon.svg" />
           </p>
           <h5 class="card-title">{{ 'dashboard.home.newService.unselected.title' | transloco }}</h5>
-          <p>{{ 'dashboard.home.newService.unselected.title' | transloco }}</p>
+          
         </div>
       </div>
     </div>
@@ -194,7 +194,7 @@
                       <div class="col-10">
                         <ng-container *ngFor="let item of item.professionalDetails.userDetails">
                           <p class="m-0 font-weight-bold">
-                            Dr(a) {{ item.name }}
+                            Dr(a) {{ item.name + ' ' + ( setUp == 'CL' ? item.firstName : item.secondLastName ) }} 
                           </p>
                         </ng-container>
                         <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">

@@ -1111,6 +1111,17 @@
     "title": "Selecione seu acesso"
   },
   "dashboard": {
+    "charts":{
+      "xAxis": {
+        "label": "População"
+      },
+      "yAxis": {
+        "label": "Ano"
+      },
+      "legend": {
+        "label" : "Lenda"
+      }
+    },
     "home": {
       "shortcut": {
         "appointment": "Agende uma consulta com um profissional de saúde.",
