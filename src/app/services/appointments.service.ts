@@ -456,10 +456,6 @@ export class AppointmentsService {
     if (item.length) {
       return item.map(_e => {
         let name
-
-        (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
-        (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
-        (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
         
         if (environment.setup == 'CL'){
           (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
@@ -467,13 +463,18 @@ export class AppointmentsService {
           if((_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.length) && (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport == '')){
              name = 'RUN - ' + _e.identificationData.run + ' - '
           }  
+        }else{
+          (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
+          (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
+          (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
         }
 
-        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name = '';
+        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length > 1) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name;
 
+        console.log(_e.identificationData.passport.length)
+        
         name += _e.personalData.name + ' ' + _e.personalData.secondLastName
 
-        console.log(_e.identificationData)
 
         let _id
 
