@@ -172,30 +172,32 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                    <span class="badge badge-primary">
                       {{
-                        (row.administrativeDetails.status === 'reserved'
+                        (item.administrativeDetails.status === 'reserved'
                           ? 'clinicalFile.reserved.label'
-                          : row.administrativeDetails.status === 'appointed'
+                          : item.administrativeDetails.status === 'appointed'
                           ? 'clinicalFile.scheduled.label'
-                          : row.administrativeDetails.status === 'rescheduled'
+                          : item.administrativeDetails.status === 'rescheduled'
                           ? 'clinicalFile.reScheduled.label'
-                          : row.administrativeDetails.status === 'active'
+                          : item.administrativeDetails.status === 'active'
                           ? 'clinicalFile.active.label'
-                          : row.administrativeDetails.status === 'waitingInRoom'
+                          : item.administrativeDetails.status === 'waitingInRoom'
                           ? 'clinicalFile.inWaitingRoom.label'
-                          : row.administrativeDetails.status === 'waitingInList'
+                          : item.administrativeDetails.status === 'waitingInList'
                           ? 'clinicalFile.inWaitingList.label'
-                          : row.administrativeDetails.status === 'running'
+                          : item.administrativeDetails.status === 'running'
                           ? 'common.status.inProgress.label'
-                          : row.administrativeDetails.status === 'pending'
+                          : item.administrativeDetails.status === 'pending'
                           ? 'clinicalFile.pending.label'
-                          : row.administrativeDetails.status === 'canceled'
+                          : item.administrativeDetails.status === 'finished'
+                          ? 'clinicalFile.ended.label'
+                          : item.administrativeDetails.status === 'canceled'
                           ? 'clinicalFile.canceled.label'
-                          : null
+                          : 'S/R'
                         ) | transloco
                       }}
-                    </button>
+                    </span>
                   </ng-template>
                 </ngx-datatable-column>
 
@@ -339,30 +341,32 @@
                   [sortable]="false"
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
-                    <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                    <span class="badge badge-primary">
                       {{
-                        (row.administrativeDetails.status === 'reserved'
+                        (item.administrativeDetails.status === 'reserved'
                           ? 'clinicalFile.reserved.label'
-                          : row.administrativeDetails.status === 'appointed'
+                          : item.administrativeDetails.status === 'appointed'
                           ? 'clinicalFile.scheduled.label'
-                          : row.administrativeDetails.status === 'rescheduled'
+                          : item.administrativeDetails.status === 'rescheduled'
                           ? 'clinicalFile.reScheduled.label'
-                          : row.administrativeDetails.status === 'active'
+                          : item.administrativeDetails.status === 'active'
                           ? 'clinicalFile.active.label'
-                          : row.administrativeDetails.status === 'waitingInRoom'
+                          : item.administrativeDetails.status === 'waitingInRoom'
                           ? 'clinicalFile.inWaitingRoom.label'
-                          : row.administrativeDetails.status === 'waitingInList'
+                          : item.administrativeDetails.status === 'waitingInList'
                           ? 'clinicalFile.inWaitingList.label'
-                          : row.administrativeDetails.status === 'running'
+                          : item.administrativeDetails.status === 'running'
                           ? 'common.status.inProgress.label'
-                          : row.administrativeDetails.status === 'pending'
+                          : item.administrativeDetails.status === 'pending'
                           ? 'clinicalFile.pending.label'
-                          : row.administrativeDetails.status === 'canceled'
+                          : item.administrativeDetails.status === 'finished'
+                          ? 'clinicalFile.ended.label'
+                          : item.administrativeDetails.status === 'canceled'
                           ? 'clinicalFile.canceled.label'
-                          : null
+                          : 'S/R'
                         ) | transloco
                       }}
-                    </button>
+                    </span>
                   </ng-template>
                 </ngx-datatable-column>
               </ngx-datatable>
