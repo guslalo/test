@@ -481,8 +481,7 @@
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
-                      (row.professionalDetails.userDetails[0].secondLastName ||
-                        row.professionalDetails.userDetails[0].lastName)
+                      ( setup == 'CL' ? row.professionalDetails.userDetails[0].lastName : row.professionalDetails.userDetails[0].secondLastName)
                   }}
                 </ng-template>
               </ngx-datatable-column>
