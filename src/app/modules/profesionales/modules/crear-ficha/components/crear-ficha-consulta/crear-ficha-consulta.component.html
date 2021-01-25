@@ -140,14 +140,21 @@
                           {{ 'profile.personal.tabIdentification.birthData.nacionality.label' | transloco }}:-->
                           {{ 'account.identificationDocument.label' | transloco }}:
                         </b>
-                        <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.identificationData">
+
+                        <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.identificationData && setup == 'BR'">
+                          {{appointmentDetail.patientDetails.userDetails.identificationData.cpf}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.passport}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.cbo}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.cboDesc}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.ctps}}
+                        </ng-container>
+                          
+                        <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.identificationData && setup === 'CL'">
                           {{appointmentDetail.patientDetails.userDetails.identificationData.run}}
                           {{appointmentDetail.patientDetails.userDetails.identificationData.rut}}
                         </ng-container>
+                          
+                        
                       </li>
                       <li>
                         <b>{{ 'common.forms.user.identification.phone.label' | transloco }}:</b>
