@@ -1,6 +1,6 @@
 {
   "soporte":{
-    "title":"Contacto soporte:",
+    "title":"Entre en contacto con nuestro soporte:",
     "whatsapp":{
       "label":"Teléfono",
       "text":"+56 22 437 4905 (Opción 3)"
@@ -105,7 +105,7 @@
               "label": "Tipo de documento"
             },
             "documentNumber": {
-              "label": "Nº de documento"
+              "label": "Nº de Documento"
             },
             "minicipality": {
               "label": "Municipio de Nacimiento"
@@ -1116,6 +1116,17 @@
     "title": "Seleccione su Acceso"
   },
   "dashboard": {
+    "charts":{
+      "xAxis": {
+        "label": "Población"
+      },
+      "yAxis": {
+        "label": "Año"
+      },
+      "legend": {
+        "label" : "Leyenda"
+      }
+    },
     "home": {
       "shortcut": {
         "appointment": "Agendar una cita médica con un profesional de salud o especialista",
@@ -1625,7 +1636,7 @@
           },
           "tabs": {
             "personal": {
-              "label": "Personales ",
+              "label": "Datos Personales",
               "identification": {
                 "label": "Identificación",
                 "cpf": {
@@ -2696,7 +2707,7 @@
       "label": "Esta agenda no tiene precio asociado"
     },
     "inmediateAtentionRoomAccess": {
-      "label": "Atención inmediata / Acceso a Sala"
+      "label": "Atención Inmediata / Acceso a Sala"
     },
     "joinWaitingListHint": {
       "label": "Usted ingresará en una lista de espera hasta que un profesional de salud pueda atenderlo; si no desea esperar, haz click en el botón Deseo Agendar."
@@ -2780,7 +2791,7 @@
       },
       "file": {
         "examen": "examen",
-        "documento": "documento",
+        "documento": "Documento",
         "seleccionar": "seleccionar",
         "buscar": "Buscar"
       }
@@ -2909,7 +2920,7 @@
         "label": "Soporte"
       },
       "myServices": {
-        "label": "Mis consultas"
+        "label": "Mis Consultas"
       }
     },
     "patient": {
@@ -3493,17 +3504,17 @@
           "label": "Información básica, como el nombre y la foto, seguridad, que utilizas en el sistema de videoconsultas."
         },
         "change": {
-          "title": "Cambiar contraseña",
+          "title": "Cambiar Contraseña",
           "current": {
             "label": "Contraseña actual"
           },
           "new": {
-            "label": "Nueva contraseña"
+            "label": "Nueva Contraseña"
           },
           "repeat": {
-            "label": "Repetir contraseña",
+            "label": "Repetir Contraseña",
             "hint": {
-              "label": "Recuerda que debes crear una contraseña que contenga caracteres alfanúmericos y que al menos contenga mayúsculas y minúsculas"
+              "label": "Recuerda que debes crear una Contraseña que contenga caracteres alfanúmericos y que al menos contenga mayúsculas y minúsculas"
             }
           }
         }
@@ -3832,7 +3843,7 @@
       "label": "Las contraseñas no coinciden"
     },
     "passwordHint": {
-      "label": "Recuerde que debe crear una clave que contenga caracteres alfanuméricos y que contenga al menos una mayúscula, minúscula y un caracter especial."
+      "label": "Recuerde que debe crear una Contraseña que contenga caracteres alfanuméricos y que contenga al menos una mayúscula, minúscula y un caracter especial."
     },
     "upperAndSpecialChar": {
       "label": "minúscula y un caracter especial."
