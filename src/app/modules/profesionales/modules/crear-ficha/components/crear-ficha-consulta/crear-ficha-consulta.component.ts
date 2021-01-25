@@ -17,15 +17,41 @@ import { DestiniesService } from 'src/app/services/destinies.service';
 
 import { IdleEventsService } from '../../../../../../services/idle-events.service';
 
+
+
 import { AppointmentEventsService } from '../../../../../../services/appointment-events.service'
 
 declare var $: any;
+
+interface AngularResizeElementEvent {
+  currentWidthValue: number;
+  currentHeightValue: number;
+  originalWidthValue: number;
+  originalHeightValue: number;
+  differenceWidthValue: number;
+  differenceHeightValue: number;
+  originalEvent: MouseEvent;
+}
+
+enum AngularResizeElementDirection {
+  TOP = 'top',
+  TOP_RIGHT = 'top-right',
+  RIGHT = 'right',
+  BOTTOM_RIGHT = 'bottom-right',
+  BOTTOM = 'bottom',
+  BOTTOM_LEFT = 'bottom-left',
+  LEFT = 'left',
+  TOP_LEFT = 'top-left'
+}
+
 
 @Component({
   selector: 'app-crear-ficha-consulta',
   templateUrl: './crear-ficha-consulta.component.html',
   styleUrls: ['./crear-ficha-consulta.component.scss'],
 })
+
+
 
 export class CrearFichaConsultaComponent implements OnInit {
   public idConsulta: any;
@@ -112,6 +138,15 @@ export class CrearFichaConsultaComponent implements OnInit {
   public notifiableDiseases = [];
   public notifiableDiseases2 = { };
   public interval:any;
+
+
+
+  public readonly AngularResizeElementDirection = AngularResizeElementDirection;
+  public data: any = {};
+  public onResize(evt: AngularResizeElementEvent): void {
+    this.data.width = evt.currentWidthValue;
+    this.data.height = evt.currentHeightValue;
+}
 
   constructor(
     private route: ActivatedRoute,
@@ -267,9 +302,10 @@ export class CrearFichaConsultaComponent implements OnInit {
   }
 
   saveAppointment(appointmentObject) {
-    //console.log(appointmentObject)
+    console.log(appointmentObject)
     this.appointmentsService.putAppointment(this.appointmentId, appointmentObject).subscribe(
       (data) => {
+        console.log(data);
         if (environment.production === false) {
           console.log(data);
         }
@@ -1058,7 +1094,7 @@ export class CrearFichaConsultaComponent implements OnInit {
   getMedicalRecord(id) {
     this.medicalRecord.getByUserId(id).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         this.exams = data.payload.exams;
         this.antecedentesGeneral = data.payload.antecedent;
         this.allergies = data.payload.antecedent.allergies;
@@ -1332,8 +1368,6 @@ export class CrearFichaConsultaComponent implements OnInit {
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
 
-
-        
         console.log('getAppointmentsDetails => DATA', data)
 
         this.appointmentEvents.setAppointmentReagendamiento$.emit(data.payload)
@@ -1366,7 +1400,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
         if (this.appointmentDetail.administrativeDetails.status === 'running' || this.appointmentDetail.administrativeDetails.status === 'pending') {
           this.permisoGuardar = true;
-          //this.autoSave();
+          this.autoSave();
         } else {
           this.permisoGuardar = false;
         }
@@ -1438,7 +1472,7 @@ export class CrearFichaConsultaComponent implements OnInit {
 
     this.appointmentsService.getAppointmentsDetails(id).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         
         if(data.payload.administrativeDetails.status == 'canceled' || !data.payload.professionalDetails.userDetails[0].username){
           clearInterval(this.interval)
@@ -1464,7 +1498,7 @@ export class CrearFichaConsultaComponent implements OnInit {
         this.arrayDiagnostic = data.payload.appointmentDetails.diagnosticDetails.diagnostics;
         this.getMedicalRecord(this.appointmentDetail.patientDetails.userDetails.userId);
 
-        console.log(this.appointmentDetail);
+        //console.log(this.appointmentDetail);
       },
       (error) => {
         console.log(error);

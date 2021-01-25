@@ -62,8 +62,8 @@ export class IndexComponent implements OnInit {
   yAxis = true;
   showYAxisLabel = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Year';
-  yAxisLabel = 'Population';
+  xAxisLabel = '';
+  yAxisLabel = '';
   timeline = true;
 
   colorScheme = {

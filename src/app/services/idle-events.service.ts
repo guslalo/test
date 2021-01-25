@@ -3,6 +3,7 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../environments/environment';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,21 @@ export class IdleEventsService {
   constructor(
     private idle: Idle,
     private keepalive: Keepalive,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) {
 
     this.inVideoCall$ = new EventEmitter();
+
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if(event.url == '/' || event.url == '/index.html'){
+          this.stopMonitoring()
+          console.log('deteniendo el monitoreo de idle sesion', event)
+        }
+      }
+    });
+
   }
 
   public attachMonitor(): void {

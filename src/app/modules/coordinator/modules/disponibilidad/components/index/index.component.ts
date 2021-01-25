@@ -273,6 +273,10 @@ export class IndexComponent implements OnInit {
 
     this.dailyRanges.push(this.dailyRangeFormGroup);
   }
+  resetDailyRanges(){
+    this.createAvailability.controls['dailyRanges'] = this._formBuilder.array([]);
+    this.agregardailyRanges();
+  }
   selectSpecialty(selectSpecialty){
     let item = selectSpecialty.target.value
     if (item!= 'undefined' && item!= '' && item!= null){
@@ -386,6 +390,7 @@ export class IndexComponent implements OnInit {
             console.log('disponibilidad creada', data);
             this.getAvailability();
             this.resetSearch();
+            this.resetDailyRanges()
           },
           (error) => {
             this.resetSearch();
@@ -462,6 +467,7 @@ export class IndexComponent implements OnInit {
           (data) => {
             console.log(data);
             this.getAvailability();
+            this.resetDailyRanges();
           },
           (error) => {
             console.log(error);
@@ -537,12 +543,21 @@ export class IndexComponent implements OnInit {
 
         console.log(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].start));
 
-        this.dailyRangeFormGroup
-          .get('start')
-          .setValue(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].start));
-        this.dailyRangeFormGroup
-          .get('end')
-          .setValue(this.fromModel(this.idAvailability.dateDetails.dailyRanges[0].end));
+        this.dailyRangeFormGroup.reset();
+        this.idAvailability.dateDetails.dailyRanges.forEach((element, index) => {
+          if(index == 0){
+            this.dailyRangeFormGroup.get('start').setValue(this.fromModel(element.start));
+            this.dailyRangeFormGroup.get('end').setValue(this.fromModel(element.end));
+          }else{
+            this.dailyRangeFormGroup = this._formBuilder.group({
+              start: ['', [Validators.required]],
+              end: ['', [Validators.required]],    
+            });
+            this.dailyRangeFormGroup.get('start').setValue(this.fromModel(element.start));
+            this.dailyRangeFormGroup.get('end').setValue(this.fromModel(element.end));
+            this.dailyRanges.push(this.dailyRangeFormGroup);
+          }
+        });
       },
       (error) => {
         console.log(error);

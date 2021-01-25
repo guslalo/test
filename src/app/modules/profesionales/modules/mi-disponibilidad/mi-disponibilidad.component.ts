@@ -208,6 +208,7 @@ export class MiDisponibilidadComponent implements OnInit {
     this.agregardailyRanges();
     this.getSpecialtiesIdService();
     this.getObjetives();
+    console.log(this.daysSelected)
   }
 
   // controls reactivos
@@ -218,6 +219,11 @@ export class MiDisponibilidadComponent implements OnInit {
     });
 
     this.dailyRanges.push(this.dailyRangeFormGroup);
+  }
+
+  resetDailyRanges(){
+    this.createAvailability.controls['dailyRanges'] = this._formBuilder.array([]);
+    this.agregardailyRanges();
   }
 
   removerDailyRanges(indice: number) {
@@ -297,6 +303,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.getAvailability();
             this.fetchCalendar();
             this.createAvailability.reset();
+            this.resetDailyRanges();
           },
           (error) => {
             this.createAvailability.reset();
@@ -409,6 +416,7 @@ export class MiDisponibilidadComponent implements OnInit {
             this.daysSelected = [];
             this.getAvailability();
             this.fetchCalendar();
+            this.resetDailyRanges();
           },
           (error) => {
             console.log(error);
@@ -503,9 +511,21 @@ export class MiDisponibilidadComponent implements OnInit {
           .setValue(this.idAvailability.administrativeDetails.appointmentDuration);
 
         this.dailyRangeFormGroup.reset();
-
-        this.dailyRangeFormGroup.get('start').setValue(this.idAvailability.dateDetails.dailyRanges[0].start);
-        this.dailyRangeFormGroup.get('end').setValue(this.idAvailability.dateDetails.dailyRanges[0].end);
+        this.idAvailability.dateDetails.dailyRanges.forEach((element, index) => {
+          if(index == 0){
+            this.dailyRangeFormGroup.get('start').setValue(element.start);
+            this.dailyRangeFormGroup.get('end').setValue(element.end);
+          }else{
+            this.dailyRangeFormGroup = this._formBuilder.group({
+              start: ['', [Validators.required]],
+              end: ['', [Validators.required]],    
+            });
+            this.dailyRangeFormGroup.get('start').setValue(element.start);
+            this.dailyRangeFormGroup.get('end').setValue(element.end);
+            this.dailyRanges.push(this.dailyRangeFormGroup);
+          }
+        });
+        console.log(this.dailyRanges)
       },
       (error) => {
         console.log(error);

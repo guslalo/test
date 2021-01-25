@@ -149,7 +149,14 @@
             <div class="col-4">
               <div class="bg-white rounded-lg p-4 shadow-sm">
                 <div class="img text-center">
-                  <img src="assets/perfil.png" />
+                  <div class="img text-center imgUser">
+                    <ng-container *ngIf="patientRecord.personalData.photo != null; else sinFoto1">
+                      <img [src]="patientRecord.personalData.photo"  class="rounded-circle"/>
+                    </ng-container>
+                    <ng-template #sinFoto1>
+                      <img src="assets/profile.jpg" />
+                    </ng-template>
+                  </div>
                 </div>
                 <h4 class="text-center mt-2">
                   {{ patientRecord.personalData?.name + ' ' + (setup == 'CL' ? patientRecord.personalData?.lastName : patientRecord.personalData?.secondLastName) }}
@@ -343,6 +350,10 @@
                   {{ 'clinicalFile.patientData.tabs.identification.addressData.title' | transloco }}
                 </h4>
                 <ul class="datos">
+                  <li *ngIf="setup == 'CL'">
+                    <i>RUT</i>
+                    {{ patientRecord.identificationData.run || 'S/R' }}
+                  </li>
                   <li>
                     <i>{{ 'table.status.label' | transloco }}</i>
                     {{ ufMap[patientRecord.addressData?.uf]?.name || 'S/R' }}
@@ -354,8 +365,7 @@
                   <li>
                     <i>{{ 'account.createAccount.address.label' | transloco }}</i>
                     {{
-                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood) +
-                        ', ' +
+                      ( setup == 'CL'  ? '' : patientRecord.addressData?.neighborhood + ', ') +
                         patientRecord.addressData?.street +
                         ' #' +
                         patientRecord.addressData?.streetNumber || 'S/R'
@@ -479,19 +489,39 @@
               [limit]="10"
               [selectAllRowsOnPage]="true"
             >
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="ID">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="ID">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   <span>{{
-                    row.patientDetails.patientId[0].identificationData.cpf ||
+                    row.appointmendId ||
                       row.patientDetails.patientId[0].identificationData.cns ||
                       row.patientDetails.patientId[0].identificationData.rgRegistry ||
+                      row.patientDetails.patientId[0].identificationData.rut ||
+                      row.patientDetails.patientId[0].identificationData.run ||
                       row.patientDetails.patientId[0].identificationData.passport
                   }}</span>
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Paciente">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  <img
+                  *ngIf="(row.patientDetails?.userDetails)[0]?.photo; else noPhoto"
+                  class="profile mr-2"
+                  id="image0"
+                  width="38"
+                  height="38"
+                  [src]="row.patientDetails?.userDetails[0]?.photo"
+                  alt="img"
+                />
+                <ng-template #noPhoto>
+                  <img
+                    class="profile mr-2"
+                    id="image0"
+                    width="38"
+                    height="38"
+                    src="/assets/profile.jpg"
+                    alt="img"
+                  />
+                </ng-template>
                   {{
                     row.patientDetails.userDetails[0].name +
                       ' ' +
@@ -501,7 +531,25 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="3" name="Profesional">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <img class="mr-2" id="image0" width="38" height="38" src="/assets/perfil.png" alt="img" />
+                  <img
+                  *ngIf="(row.professionalDetails?.userDetails)[0]?.photo; else noPhoto"
+                  class="profile mr-2"
+                  id="image0"
+                  width="38"
+                  height="38"
+                  [src]="row.professionalDetails?.userDetails[0]?.photo"
+                  alt="img"
+                />
+                <ng-template #noPhoto>
+                  <img
+                    class="profile mr-2"
+                    id="image0"
+                    width="38"
+                    height="38"
+                    src="/assets/profile.jpg"
+                    alt="img"
+                  />
+                </ng-template>
                   {{
                     row.professionalDetails.userDetails[0].name +
                       ' ' +
@@ -509,7 +557,7 @@
                   }}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Fecha">
+              <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Fecha">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                   {{ moment(row.dateDetails.date).format('DD/MM/YYYY') }}
                 </ng-template>
@@ -941,6 +989,7 @@
                       </td>
                       <td class="text-center">
                         {{ item.type === 'exam' ? 'Examen' : item.type === 'document' ? 'Documento' : 'S/R' }}
+
                       </td>
                       <td class="text-center">
                         {{ moment(item.uploadDate).format('DD/MM/YYYY') }}
@@ -1014,6 +1063,16 @@
                         <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
+
+                        <ng-container *ngIf="item.documentType === 'procedure' || item.documentDetails?.type === 'procedure'">
+                          {{ 'sibrare.procedure' | transloco}}
+                        </ng-container>
+
+                        <ng-container *ngIf="item.documentType === 'certificate' || item.documentDetails?.type === 'certificate'">
+                          {{ 'sibrare.certificate' | transloco}}
+                        </ng-container>
+                        
+
                         <!--{{ item.documentType }}-->
                       </td>
 
@@ -1163,7 +1222,14 @@
                             <div class="boxCont text-center">
                               <div class="row">
                                 <div class="col-3">
-                                  <img src="assets/img/doctor-foto.svg" alt="img" />
+                                  <div class="imgTimeline rounded-circle">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
+                                  </div>
                                 </div>
                                 <div class="col-9">
                                   <p class="m-0 text-left">{{ 'clinicalFile.apointmentWith.label' | transloco }}</p>
@@ -1187,11 +1253,7 @@
                             <circle cx="7.5" cy="7.5" r="7.5" fill="#3BC4CA" />
                           </svg>
                         </div>
-                        <!--
-                        <div class="col-5 text-left p-0">
-                          <h3>24</h3>
-                          12:45 Hrs.
-                        </div>-->
+                   
                       </div>
                     </div>
                   </ng-container>

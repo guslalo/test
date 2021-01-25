@@ -460,10 +460,21 @@ export class AppointmentsService {
         (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
         (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
         (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
+        
+        if (environment.setup == 'CL'){
+          (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
+  
+          if((_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.length) && (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport == '')){
+             name = 'RUN - ' + _e.identificationData.run + ' - '
+          }  
+        }
+
+        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name = '';
 
         name += _e.personalData.name + ' ' + _e.personalData.secondLastName
 
-        console.log(_e)
+        console.log(_e.identificationData)
+
         let _id
 
         if(role == 'patient'){

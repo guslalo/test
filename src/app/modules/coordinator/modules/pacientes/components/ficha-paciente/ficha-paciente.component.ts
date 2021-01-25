@@ -141,20 +141,22 @@ export class FichaPacienteComponent implements OnInit {
     );
   }
 
-  calcularEdad(dateString) {
-    let separa = dateString.split("/");
-    let separaAno = separa[2]
-    console.log(separaAno.split(""))
-    let today = new Date();
-    if (separaAno.split("").length === 4) {
-      this.patientAge = today.getFullYear() - separa[2]
-    } else {
-      this.patientAge = today.getFullYear() - separa[0]
+  calcularEdad(birthdate) {
+    let birthday_arr = birthdate.split("/");
+    let birthday_date: Date;
+    if(birthday_arr[0].length > 2){
+      birthday_date = new Date( parseInt(birthday_arr[0]),parseInt(birthday_arr[1]), parseInt(birthday_arr[2]) );
+    }else if(birthday_arr[2].length > 2){
+      birthday_date = new Date( parseInt(birthday_arr[2]),parseInt(birthday_arr[1]), parseInt(birthday_arr[0]) );
     }
-    return this.patientAge;
+    let ageDifMs = Date.now() - birthday_date.getTime();
+    let ageDate = new Date(ageDifMs);
+    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    this.patientAge = age;
+    return age;
   }
 
-  getMedicalRecord(userId) {
+  getMedicalRecord(userId) {  
     this.spinner.show();
     this.medicalRecordService.getByUserId(userId).subscribe(
       (data) => {
@@ -162,8 +164,8 @@ export class FichaPacienteComponent implements OnInit {
         console.log('PAYLOAD', data.payload);
 
         this.patientRecord = data.payload.patientData;
-        this.calcularEdad(data.payload.patientData.personalData.birthdate)
-
+        let edad = this.calcularEdad(data.payload.patientData.personalData.birthdate)
+        console.log("nacio en "+ data.payload.patientData.personalData.birthdate + " y tiene "+ edad + " años de edad")
         if(environment.setup == 'CL'){
           this.arrayDocuments = data.payload.recemed;
         }else{

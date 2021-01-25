@@ -116,15 +116,22 @@ export class EditarUsuarioCLComponent implements OnInit {
 
   ngOnInit(): void {
     if(environment.checkAge === false){
-
-      this.maxDate = {
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-      };
-  
+      //this.mayorEdad = false
+      if(current.getMonth() != 0){
+        this.maxDate = {
+          year: current.getFullYear(),
+          month:current.getMonth() -1, 
+          day: current.getDate() 
+        };   
+      } else {
+        this.maxDate = {
+          year: current.getFullYear() - 1,
+          month:12, 
+          day: current.getDate()  
+        };
+      }
     } else {
-    
+      //this.mayorEdad = true
       this.maxDate = {
         year: current.getFullYear() - 18,
         month: current.getMonth() + 1,
@@ -736,6 +743,7 @@ export class EditarUsuarioCLComponent implements OnInit {
     this.userObject = {
       id: this.userId,
       identificationData: {
+        run:this.formUser[0].value.idDocumentNumber,
         ...(this.formUser[0].value.document === 'run' && { run: this.formUser[0].value.idDocumentNumber || '' }),
 
         passport: this.formUser[0].value.passport || '',

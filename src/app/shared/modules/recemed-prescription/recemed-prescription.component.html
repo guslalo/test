@@ -34,7 +34,6 @@
 
                     <div class="row">
                         <div class="form-group col lg-6">
-
                             <div class="custom-control custom-switch">
                                 <input formControlName="hold" type="checkbox" class="custom-control-input" id="hold"/>
                                 <label class="custom-control-label" for="hold">{{ 'common.hold.label' | transloco }}</label>
@@ -42,11 +41,19 @@
                         </div>
 
                         <div class="form-group col lg-6">
-
                             <div class="custom-control custom-switch">
                                 <input formControlName="ges" type="checkbox" class="custom-control-input" id="ges"/>
                                 <label class="custom-control-label" for="ges">{{ 'common.ges.label' | transloco }}</label>
                               </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-none">
+                        <div class="form-group col">
+                            <label for="duration">{{ 'common.duration.label' | transloco }}
+                            </label>
+
+                            <input type="text" class="form-control" name="duration" id="duration" formControlName="duration">
                         </div>
                     </div>
 

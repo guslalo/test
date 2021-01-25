@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "$LIFECYCLE_EVENT"
+echo "$DEPLOYMENT_ID"
+echo "OK"

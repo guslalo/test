@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   public createRoute = "/create-account";
   public setup:any;
   public brand: any;
-
+  public return: string;
   constructor(
     private translocoService: TranslocoService,
     private spinner: NgxSpinnerService,
@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
     private appointmentsService: AppointmentsService,
     private _policyService: PoliciesService,
     private idleEvents: IdleEventsService,
-    private clinicService:ClinicService
+    private clinicService:ClinicService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +86,9 @@ export class LoginComponent implements OnInit {
     if(environment.setup == 'CL'){
       this.createRoute = "/create-account-cl"
     }
+    this.route.queryParams.subscribe(params => {
+      this.return = params['return']
+    })
   }
 
   setActiveLang(lang: string) {
@@ -132,6 +136,7 @@ export class LoginComponent implements OnInit {
             if (data.internalCode === 6) {
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
+              
               this.router.navigate(['app-coordinator']).then(() => this.idleEvents.attachMonitor());
             }
             break;
@@ -139,12 +144,26 @@ export class LoginComponent implements OnInit {
             if (data.internalCode === 6) {
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
-              this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
+              
+              this.clinicService.accessMode().subscribe(
+                (data) => {
+                  console.log(data)
+                  localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
+                  localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
+                  localStorage.setItem('paymentAppointment', data.payload.payment.toString());
+                  this.router.navigate(['app-professional']).then(() => this.idleEvents.attachMonitor());
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+              
             }
             break;
           case 'patient':
             if (data.internalCode === 6) {
               localStorage.setItem('dependents', JSON.stringify(data.dependents));
+              localStorage.setItem('preURL', this.return);
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
               this.clinicService.accessMode().subscribe(
@@ -153,8 +172,11 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('inmediateAppointment', data.payload.immediate.toString());
                   localStorage.setItem('scheduleAppointment', data.payload.schedule.toString());
                   localStorage.setItem('paymentAppointment', data.payload.payment.toString());
-                  console.log(data);
-                  this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+                  if(this.return){
+                    this.router.navigate([this.return]).then(() => this.idleEvents.attachMonitor());
+                  }else{
+                    this.router.navigate(['app-paciente']).then(() => this.idleEvents.attachMonitor());
+                  }
                 },
                 (error) => {
                   console.log(error);

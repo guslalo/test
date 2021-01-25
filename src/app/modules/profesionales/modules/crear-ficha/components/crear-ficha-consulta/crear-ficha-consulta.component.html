@@ -1,5 +1,5 @@
 <ng-container *ngIf="appointmentDetail">
-  <div class="row mb-3">
+  <div class="row mb-3" >
     <div class="col-6 col-md-6">
       <h2>{{ 'clinicalFile.title' | transloco }}</h2>
 
@@ -47,8 +47,15 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="row mb-4 vistaFixed">
-        <div class="col-md-5">
+      <!-- #meetPatient2 [style.width.px]="data.width" 
+      [style.height.px]="data.height"-->
+      <div class="row mb-4 vistaFixed"   >
+        <div class="col-md-5 " 
+      >
+        <!--  (resize)="onResize($event)" pcustom resize resize__bottom-left
+        [direction]="AngularResizeElementDirection.BOTTOM_LEFT"
+        [proportionalResize]="false"
+        [targetElement]="meetPatient2" -->
           <div class="card bg-white shadow-sm rounded overflow-hidden">
             <div class="row">
               <div class="videoCall">
@@ -74,7 +81,7 @@
                   </div>
                   <div class="text-center boxThumb rounded">
                     <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                      <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                      <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                     </ng-container>
                     <ng-template #noPhoto>
                       <img src="assets/img/profile.png" />
@@ -82,14 +89,15 @@
                     <!---->
                   </div>
                 </ng-container>
-                <div class="text-center w-100" *ngIf="videoCall === true">
+                <div class="text-center w-100" *ngIf="videoCall === true" >
                   <div id="meet" class="meetPatient2"></div>
                 </div>
+              
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 hideContent">
           <div class="card bg-light shadow-sm">
             <div class="row">
               <div class="col-6 border-right">
@@ -97,7 +105,7 @@
                   <div class="col-md-4 col-lg-5 text-center mt-5">
                     <div class="img boxImg2 rounded-circle d-inline-block">
                       <ng-container *ngIf="appointmentDetail.patientDetails.userDetails.photo; else noPhoto">
-                        <img src="{{ photoUrlBase }}{{ appointmentDetail.patientDetails.userDetails.photo }}" />
+                        <img src="{{ appointmentDetail.patientDetails.userDetails.photo }}" />
                       </ng-container>
                       <ng-template #noPhoto>
                         <img src="assets/img/profile.png" />
@@ -1529,29 +1537,47 @@
                       </a>
                     </div>
                   </div>
-
                   <div *ngIf="setup == 'CL'">
                     <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
-                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateProcedureRecemed">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateExamOrderRecemed">
                         {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
                       </a>
                     </div>
                   </div>
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateProcedureRecemed">
+                        {{ 'clinicalFile.tooltips.documents.Procedure.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
+                  <div *ngIf="setup == 'CL'">
+                    <div *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']">
+                      <a class="dropdown-item" data-toggle="modal" data-target="#modalCreateCertificateRecemed">
+                        {{ 'clinicalFile.tooltips.documents.license.label' | transloco }}
+                      </a>
+                    </div>
+                  </div>
 
+                  
                   <div *ngIf="setup == 'BR'">
                     <a *ngxPermissionsOnly="['CreatePrescriptions:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" href="javascript:;"
-                    (click)="subirPrescripciones('prescription')">{{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}</a>
-                  <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
-                    data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')"
-                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.order.label' | transloco }}</a>
-                  <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
+                    (click)="subirPrescripciones('prescription')">
+                      {{ 'clinicalFile.tooltips.documents.prescriptions.label' | transloco }}
+                    </a>
+                    <a *ngxPermissionsOnly="['CreateExamOrders:MedicalRecord']" class="dropdown-item" data-toggle="modal"
+                      data-target="#preescripcionesModal" (click)="subirPrescripciones('exam-order')"
+                      href="javascript:;">
+                      {{ 'clinicalFile.tooltips.documents.order.label' | transloco }}
+                    </a>
+                    <a *ngxPermissionsOnly="['CreateMedicalLicenses:MedicalRecord']" class="dropdown-item"
                     data-toggle="modal" data-target="#preescripcionesModal" (click)="subirPrescripciones('report')"
-                    href="javascript:;">{{ 'clinicalFile.tooltips.documents.license.label' | transloco }}</a>
+                    href="javascript:;">
+                      {{ 'clinicalFile.tooltips.documents.license.label' | transloco }}
+                    </a>
                   </div>
-                  
 
-                  
                 </div>
               </div>
             </div>
@@ -1596,6 +1622,13 @@
                         <ng-container *ngIf="item.documentType === 'exam-order' || item.documentDetails?.type === 'exam-order'">
                           {{ 'sibrare.exam-order' | transloco}}
                         </ng-container>
+                        <ng-container *ngIf="item.documentType === 'procedure' || item.documentDetails?.type === 'procedure'">
+                          {{ 'sibrare.procedure' | transloco}}
+                        </ng-container>
+                        <ng-container *ngIf="item.documentType === 'certificate' || item.documentDetails?.type === 'certificate'">
+                          {{ 'sibrare.certificate' | transloco}}
+                        </ng-container>
+                        
                         <!--{{ item.documentType }}-->
                       </td>
 
@@ -1742,7 +1775,12 @@
                               <div class="row">
                                 <div class="col-3">
                                   <div class="imgTimeline rounded-circle">
-                                    <img [src]="photoUrlBase+item.professional.photo">
+                                    <ng-container *ngIf="item.professional.photo != null; else sinFoto">
+                                      <img [src]="item.professional.photo">
+                                    </ng-container>
+                                    <ng-template #sinFoto>
+                                      <img src="assets/profile.jpg">
+                                    </ng-template>
                                   </div>
                                 </div>
                                 <div class="col-9">
@@ -2368,3 +2406,5 @@
 
 <modal-recemed-prescription #modalCreatePrescriptionRecemed (saved)="refreshData()"></modal-recemed-prescription>
 <modal-recemed-procedure #modalCreateProcedureRecemed></modal-recemed-procedure>
+<modal-recemed-certificate #modalCreateCertificateRecemed></modal-recemed-certificate>
+<modal-recemed-examorder #modalCreateExamOrderRecemed></modal-recemed-examorder>

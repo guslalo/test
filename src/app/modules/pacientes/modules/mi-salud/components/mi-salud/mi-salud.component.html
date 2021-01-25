@@ -155,7 +155,7 @@
                 <img src="assets/img/+.svg" />
               </div>
 
-              <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral.allergies">
+              <div class="collapse show" id="allergies" *ngFor="let item of antecedentesGeneral?.allergies">
                 <ul class="antecedentes">
                   <li class="pl-5">
                     {{ item.value }}
@@ -210,7 +210,7 @@
               <div
                 class="collapse show"
                 id="surgicalInterventions"
-                *ngFor="let item of antecedentesGeneral.surgicalInterventions"
+                *ngFor="let item of antecedentesGeneral?.surgicalInterventions"
               >
                 <ul class="antecedentes">
                   <li class="pl-5">
@@ -501,7 +501,7 @@
               data-target="#addExamen"
               (click)="resetValue()"
             >
-              {{ 'common.button.add.label' | transloco }} documento
+              {{ 'common.button.add.label' | transloco }} {{'common.input.file.documento' | transloco}}
             </button>
           </div>
         </div>
@@ -662,7 +662,7 @@
               >{{ 'dashboard.home.myHealth.allergies.label' | transloco }}
             </ng-container>
             <ng-container *ngSwitchCase="'surgicalInterventions'"
-              >{{ 'dashboard.home.myHealth.surgicalInterventions.label' | transloco }}
+              >{{ 'dashboard.home.myHealth?.surgicalInterventions.label' | transloco }}
             </ng-container>
             <ng-container *ngSwitchCase="'familiarHistory'">
               {{ 'clinicalFile.patientData.tabs.patientHistory.familyHistory.label' | transloco }}
@@ -692,7 +692,7 @@
         <form [formGroup]="agregarItem" novalidate="">
           <div class="row">
             <div class="form-group col">
-              <label for="dateBlock">{{ 'common.button.add.label' | transloco }} item</label>
+              <label for="dateBlock">{{ 'common.button.add.label' | transloco }} </label>
               <input
                 type="text"
                 value=""
@@ -806,6 +806,9 @@
             <div class="form-group col">
               <label for="dateBlock">{{ 'clinicalFile.loadDocument.label' | transloco }}</label>
               <div class="custom-file">
+                <div class="adjuntar">
+                  {{'common.input.file.seleccionar' | transloco}}
+                </div>
                 <input
                   type="file"
                   class="custom-file-input"
