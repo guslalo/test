@@ -194,7 +194,7 @@
                       <div class="col-10">
                         <ng-container *ngFor="let item of item.professionalDetails.userDetails">
                           <p class="m-0 font-weight-bold">
-                            Dr(a) {{ item.name + ' ' + ( setUp == 'CL' ? item.firstName : item.secondLastName ) }} 
+                            Dr(a) {{ item.name + ' ' + ( setUp == 'CL' ? item.lastName : item.secondLastName ) }} 
                           </p>
                         </ng-container>
                         <ng-container *ngFor="let item of item.professionalDetails.specialtyDetails">
