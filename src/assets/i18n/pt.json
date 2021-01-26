@@ -1056,7 +1056,7 @@
         "label": "com um código de verificação. Verifique sua caixa de entrada."
       },
       "followInstructions": {
-        "label": "Siga as instruções na mensagem para redefinir sua senha."
+        "label": "Siga as instruções para redefinir sua senha."
       }
     },
     "prevission": {
@@ -1069,7 +1069,7 @@
       "label": "Campo Sobrenome é necessário"
     },
     "loginAgain": {
-      "label": "Acesso novamente"
+      "label": "Acessar novamente"
     },
     "currentPwdInfo": {
       "label": "Informações sobre a sua senha atual"
@@ -3481,7 +3481,7 @@
           "label": "As senhas não coincidem"
         },
         "recover": {
-          "label": "Recuperação de senha"
+          "label": "Recuperação de senha realizada com sucesso"
         },
         "pwdReseted": {
           "label": "Senha restaurada"
@@ -3751,7 +3751,8 @@
       "label": "Telefone"
     },
     "breed": {
-      "label": "Raça"
+      "label": "Raça",
+      "required":"Campo raça é obrigatório."
     },
     "grenderReq": {
       "label": "Sexo"

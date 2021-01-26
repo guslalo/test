@@ -47,7 +47,7 @@ export class RecemedExamOrderComponent implements OnInit {
   makeForm() {
     this.form = this.formBuilder.group({
       detail: [null, Validators.required],
-      observations: [null, Validators.required],
+      observation: [null, Validators.required],
     });
   }
 
