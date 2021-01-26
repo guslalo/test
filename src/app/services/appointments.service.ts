@@ -420,8 +420,8 @@ export class AppointmentsService {
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap(val => {
-        if (typeof val === 'string' && val)
+      switchMap((val) => {
+        if (typeof val === 'string' && val){
           switch (method) {
             case 'patients':
               return this.searchPatients(val || '')
@@ -434,6 +434,19 @@ export class AppointmentsService {
             default:
               break;
           }
+        }else{
+          switch (method) {
+            case 'patients':
+              return this.searchPatients(null)
+              break;
+      
+              case 'professionals':
+                return this.searchProfessionals(null)
+                break;
+            default:
+              break;
+          }
+        }
       })
     )
   }
@@ -441,42 +454,51 @@ export class AppointmentsService {
   searchPatients(query): Observable<any[]> {
     return this.patientService.search(query)
       .pipe(
-        map(res => this.createDisplayForSelect(res.payload, 'patient'))
+        map(res => this.createDisplayForSelect(res.payload, 'patient', query))
       )
   }
 
   searchProfessionals(query): Observable<any[]>{
     return this.professionalService.search(query)
     .pipe(
-      map(res => this.createDisplayForSelect(res.payload, 'other'))
+      map(res => this.createDisplayForSelect(res.payload, 'other', query))
     )
   }
 
-  createDisplayForSelect(item, role) {
-    console.log('createDisplayForSelect', item)
-
+  createDisplayForSelect(item, role, query) {
     if (item.length) {
+
       return item.map(_e => {
         let name
-        
+
+        let _queryByPassport = false
+        let _queryByRun = false
+  
+        if(_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.includes(query)){
+          _queryByPassport = true
+        }
+
+        if(_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.includes(query)){
+          _queryByRun = true
+        }
+
         if (environment.setup == 'CL'){
           (_e.identificationData.hasOwnProperty('run') && _e.identificationData.run != '') ? name = 'RUN - ' + _e.identificationData.run + ' - ' : name = '';
-  
-          if((_e.identificationData.hasOwnProperty('run') && _e.identificationData.run.length) && (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport == '')){
-             name = 'RUN - ' + _e.identificationData.run + ' - '
-          }  
         }else{
           (_e.identificationData.hasOwnProperty('rg') && _e.identificationData.rg != '') ? name = 'RG - ' + _e.identificationData.rg + ' - ' : name = '';
           (_e.identificationData.hasOwnProperty('cns') && _e.identificationData.cns != '') ? name = 'CNS - ' + _e.identificationData.cns + ' - ' : name = '';
           (_e.identificationData.hasOwnProperty('cpf') && _e.identificationData.cpf != '') ? name = 'CPF - ' + _e.identificationData.cpf + ' - ' : name = '';
         }
-
-        (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length > 1) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name;
-
-        console.log(_e.identificationData.passport.length)
         
-        name += _e.personalData.name + ' ' + _e.personalData.secondLastName
+        if(_queryByPassport){
+          (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport.length > 1) ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name;
+        }
 
+        if(!_queryByPassport && !_queryByRun){
+          (_e.identificationData.hasOwnProperty('passport') && _e.identificationData.passport != '') ? name = 'PASAPORTE - ' + _e.identificationData.passport + ' - ' : name;
+        }
+
+        name += _e.personalData.name + ' ' + _e.personalData.secondLastName
 
         let _id
 
