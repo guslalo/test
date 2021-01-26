@@ -188,8 +188,7 @@
                     (click)="finish(appointmentDetail._id, 'finish')">
                     {{ 'clinicalFile.endService.label' | transloco }}
                   </button>
-
-                  <button type="button" class="btn btn-primary rounded-pill btn-sm mt-1">
+                  <span class="badge badge-primary">
                     {{
                       (appointmentDetail.administrativeDetails.status === 'reserved'
                         ? 'clinicalFile.reserved.label'
@@ -216,7 +215,7 @@
                         : 'S/R'
                       ) | transloco
                     }}
-                  </button>
+                  </span>
                   <p class="card-text text-center mt-3 mb-2">ID consulta: {{ appointmentDetail._id }}</p>
                   <p class="card-text text-center">
                     {{ 'clinicalFile.madeAt.label' | transloco }}
