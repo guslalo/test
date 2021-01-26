@@ -127,33 +127,34 @@
         </ngx-datatable-column>
         <ngx-datatable-column [resizeable]="false" [flexGrow]="1" name="Estado" prop="administrativeDetails.status">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <button *ngIf="row.administrativeDetails.status !== 'created'; else invalidStatus" type="button"
-              class="btn btn-secondary rounded-pill btn-sm">
-              {{
-                (row.administrativeDetails.status === 'reserved'
-                  ? 'clinicalFile.reserved.label'
-                  : row.administrativeDetails.status === 'appointed'
-                  ? 'clinicalFile.scheduled.label'
-                  : row.administrativeDetails.status === 'rescheduled'
-                  ? 'clinicalFile.reScheduled.label'
-                  : row.administrativeDetails.status === 'active'
-                  ? 'clinicalFile.active.label'
-                  : row.administrativeDetails.status === 'waitingInRoom'
-                  ? 'clinicalFile.inWaitingRoom.label'
-                  : row.administrativeDetails.status === 'waitingInList'
-                  ? 'clinicalFile.inWaitingList.label'
-                  : row.administrativeDetails.status === 'running'
-                  ? 'common.status.inProgress.label'
-                  : row.administrativeDetails.status === 'pending'
-                  ? 'clinicalFile.pending.label'
-                  : row.administrativeDetails.status === 'finished'
-                  ? 'clinicalFile.ended.label'
-                  : row.administrativeDetails.status === 'canceled'
-                  ? 'clinicalFile.canceled.label'
-                  : null
-                ) | transloco
-              }}
-            </button>
+            <span *ngIf="row.administrativeDetails.status !== 'created'; else invalidStatus" 
+            class="badge badge-primary">
+            {{
+              (row.administrativeDetails.status === 'reserved'
+                ? 'clinicalFile.reserved.label'
+                : row.administrativeDetails.status === 'appointed'
+                ? 'clinicalFile.scheduled.label'
+                : row.administrativeDetails.status === 'rescheduled'
+                ? 'clinicalFile.reScheduled.label'
+                : row.administrativeDetails.status === 'active'
+                ? 'clinicalFile.active.label'
+                : row.administrativeDetails.status === 'waitingInRoom'
+                ? 'clinicalFile.inWaitingRoom.label'
+                : row.administrativeDetails.status === 'waitingInList'
+                ? 'clinicalFile.inWaitingList.label'
+                : row.administrativeDetails.status === 'running'
+                ? 'common.status.inProgress.label'
+                : row.administrativeDetails.status === 'pending'
+                ? 'clinicalFile.pending.label'
+                : row.administrativeDetails.status === 'finished'
+                ? 'clinicalFile.ended.label'
+                : row.administrativeDetails.status === 'canceled'
+                ? 'clinicalFile.canceled.label'
+                : null
+              ) | transloco
+            }}
+          </span>
+
             <ng-template #invalidStatus>{{ 'common.notAll.label' | transloco }}</ng-template>
           </ng-template>
         </ngx-datatable-column>

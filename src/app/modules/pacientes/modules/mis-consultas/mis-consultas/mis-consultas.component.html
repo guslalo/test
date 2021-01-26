@@ -184,7 +184,7 @@
                     </td>
 
                     <td style="width: 25%;" class="text-left">
-                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                      <span class="badge badge-primary">
                         {{
                           (item.administrativeDetails.status === 'reserved'
                             ? 'clinicalFile.reserved.label'
@@ -209,7 +209,7 @@
                             : 'S/R'
                           ) | transloco
                         }}
-                      </button>
+                      </span>
                     </td>
                     <td style="width: 25%;" class="text-left">
                       <ng-container
@@ -361,7 +361,7 @@
                     </td>
 
                     <td style="width: 20%;" class="text-center">
-                      <button type="button" class="btn btn-outline-primary rounded-pill text-center btn-sm">
+                      <span class="badge badge-primary">
                         {{
                           (item.administrativeDetails.status === 'reserved'
                             ? 'clinicalFile.reserved.label'
@@ -386,7 +386,8 @@
                             : 'S/R'
                           ) | transloco
                         }}
-                      </button>
+                      </span>
+                 
                     </td>
                     <td style="width: 25%;" class="text-left">
                       <ng-container
