@@ -217,8 +217,9 @@
                         <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
                       </ng-template>
                       <td>
+                        
+                        {{ item.dateDetails.scheduledAt | date: 'dd/MM/yy' }} <br>
                         {{ item.dateDetails.start}}
-                        <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
                       </td>
                       <td>
                         <ng-container *ngIf="item.startTime == null; else info1">
@@ -369,8 +370,8 @@
                         <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
                       </ng-template>
                       <td>
+                        {{ item.dateDetails.scheduledAt | date: 'dd/MM/yy' }} <br>
                         {{ item.dateDetails.start}}
-                        <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
                       </td>
                       <td>
                         <ng-container *ngIf="item.startTime == null; else info1">
@@ -602,8 +603,9 @@
                   <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
                 </ng-template>
                 <td>
+                  {{ item.dateDetails.createdAt | date: 'dd/MM/yy' }} <br>
                   {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
-                  <!--{{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }}-->
+                  
                 </td>
                 <td>
                   <ng-container *ngIf="item.startTime == null; else info1">
