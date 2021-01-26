@@ -23,9 +23,9 @@ export const environment = {
     measurementId: 'G-FJ3Z5E7CRC',
   },
   ttlSession: 20 * 60,
-  setup: 'CL',
+  setup: 'BR',
   version: '{BUILD_VERSION}',
-  brand: "atrys",
+  brand: "medic",
   colors: {
     "color-primary": "#25b0bb;",
     "color-secondary": "#044AAB;",

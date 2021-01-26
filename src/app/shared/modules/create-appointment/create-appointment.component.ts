@@ -89,7 +89,7 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.appointmentsEvents.filterProfessionalsByType$.subscribe(
       (data) => {
-        this.selectedProfessionals = this.appointmentsService.createDisplayForSelect(data, 'other')
+        this.selectedProfessionals = this.appointmentsService.createDisplayForSelect(data, 'other', '')
       }
     )
 
