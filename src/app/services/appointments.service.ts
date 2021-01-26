@@ -453,6 +453,8 @@ export class AppointmentsService {
   }
 
   createDisplayForSelect(item, role) {
+    console.log('createDisplayForSelect', item)
+
     if (item.length) {
       return item.map(_e => {
         let name

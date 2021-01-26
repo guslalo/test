@@ -25,7 +25,7 @@
                             <input *ngIf="patients" type="text" class="form-control"
                                 placeholder="{{ 'common.placeholders.searchPatient.label' | transloco }}"
                                 [matAutocomplete]="autoPatients" formControlName="patient" />
-                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }">
+                            <div class="searchBox" [ngStyle]="{ 'margin-top': '30px' }" (change)="changeEvent($event)">
                                 <img src="assets/icons/icon-search.svg" />
                             </div>
                             <mat-autocomplete #autoPatients="matAutocomplete" [displayWith]="getDisplayFn()"

@@ -75,6 +75,10 @@ export class CreateAppointmentComponent implements OnInit {
     private appointmentsEvents: AppointmentEventsService
   ) { }
 
+  changeEvent($event){
+    console.log($event)
+  }
+
   ngOnInit(): void {
     console.log('INIT MODAL')
     let _user = JSON.parse(localStorage.getItem('currentUser'))
