@@ -73,7 +73,7 @@
           <div class="card bg-light shadow-sm">
             <div class="card-body text-center mt-3">
               <h5 class="card-title mb-1">{{ 'clinicalFile.status.label' | transloco }}</h5>
-              <button type="button" class="btn btn-primary rounded-pill btn-sm">
+              <span class="badge badge-primary">
                 {{
                   (appointmentDetail.administrativeDetails.status === 'reserved'
                     ? 'clinicalFile.reserved.label'
@@ -98,7 +98,7 @@
                     : 'S/R'
                   ) | transloco
                 }}
-              </button>
+              </span>
               <p class="card-text text-center mt-1">ID consulta: {{ appointmentDetail._id }}</p>
             </div>
           </div>

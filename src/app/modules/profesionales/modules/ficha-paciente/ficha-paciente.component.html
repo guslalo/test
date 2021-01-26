@@ -574,7 +574,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Estado">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                  <span class="badge badge-primary">
                     {{
                       (row.administrativeDetails.status === 'reserved'
                         ? 'clinicalFile.reserved.label'
@@ -599,7 +599,7 @@
                         : 'S/R'
                       ) | transloco
                     }}
-                  </button>
+                  </span>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -1171,7 +1171,7 @@
                     <div class="line">
                       <div class="row align-items-center">
                         <div class="col-5 text-right p-0">
-                          <h3>{{ moment(item.date).format('DD') }}</h3>
+                          <h3>{{ moment(item.date).format('DD/MM/YYYY') }}</h3>
                           {{ item.startAt }} Hrs.
                         </div>
                         <div class="col p-0">
@@ -1186,6 +1186,7 @@
                           </svg>
                         </div>
                         <div class="col-5 text-left p-0">
+                         
                           <button class="btn btn-primary dos rounded-lg">
                             {{
                               (item.status === 'reserved'

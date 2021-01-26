@@ -138,7 +138,7 @@
                         sala
                       </td>
                       <td>
-                        <button type="button" class="btn btn-secondary rounded-pill btn-sm">
+                        <span class="badge badge-primary">
                           {{
                             (item.administrativeDetails.status === 'reserved'
                               ? 'clinicalFile.reserved.label'
@@ -163,7 +163,8 @@
                               : 'S/R'
                             ) | transloco
                           }}
-                        </button>
+                        </span>
+                    
                       </td>
                       <td>
                         

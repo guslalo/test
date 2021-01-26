@@ -502,32 +502,34 @@
               </ngx-datatable-column>
               <ngx-datatable-column [resizeable]="false" [flexGrow]="2" name="Estado">
                 <ng-template let-row="row" ngx-datatable-cell-template>
-                  <button type="button" class="btn btn-secondary rounded-pill btn-sm">
-                    {{
-                      (row.administrativeDetails.status === 'reserved'
-                        ? 'clinicalFile.reserved.label'
-                        : row.administrativeDetails.status === 'appointed'
-                        ? 'clinicalFile.scheduled.label'
-                        : row.administrativeDetails.status === 'rescheduled'
-                        ? 'clinicalFile.reScheduled.label'
-                        : row.administrativeDetails.status === 'active'
-                        ? 'clinicalFile.active.label'
-                        : row.administrativeDetails.status === 'waitingInRoom'
-                        ? 'clinicalFile.inWaitingRoom.label'
-                        : row.administrativeDetails.status === 'waitingInList'
-                        ? 'clinicalFile.inWaitingList.label'
-                        : row.administrativeDetails.status === 'running'
-                        ? 'common.status.inProgress.label'
-                        : row.administrativeDetails.status === 'pending'
-                        ? 'clinicalFile.pending.label'
-                        : row.administrativeDetails.status === 'finished'
-                        ? 'clinicalFile.ended.label'
-                        : row.administrativeDetails.status === 'canceled'
-                        ? 'clinicalFile.canceled.label'
-                        : null
-                      ) | transloco
-                    }}
-                  </button>
+
+                  <span 
+                  class="badge badge-primary">
+                  {{
+                    (row.administrativeDetails.status === 'reserved'
+                      ? 'clinicalFile.reserved.label'
+                      : row.administrativeDetails.status === 'appointed'
+                      ? 'clinicalFile.scheduled.label'
+                      : row.administrativeDetails.status === 'rescheduled'
+                      ? 'clinicalFile.reScheduled.label'
+                      : row.administrativeDetails.status === 'active'
+                      ? 'clinicalFile.active.label'
+                      : row.administrativeDetails.status === 'waitingInRoom'
+                      ? 'clinicalFile.inWaitingRoom.label'
+                      : row.administrativeDetails.status === 'waitingInList'
+                      ? 'clinicalFile.inWaitingList.label'
+                      : row.administrativeDetails.status === 'running'
+                      ? 'common.status.inProgress.label'
+                      : row.administrativeDetails.status === 'pending'
+                      ? 'clinicalFile.pending.label'
+                      : row.administrativeDetails.status === 'finished'
+                      ? 'clinicalFile.ended.label'
+                      : row.administrativeDetails.status === 'canceled'
+                      ? 'clinicalFile.canceled.label'
+                      : null
+                    ) | transloco
+                  }}
+                  </span>
                 </ng-template>
               </ngx-datatable-column>
             </ngx-datatable>
@@ -993,7 +995,7 @@
                     <div class="line">
                       <div class="row align-items-center">
                         <div class="col-5 text-right p-0">
-                          <h3>{{ item.date | date: 'dd' }}</h3>
+                          <h3>{{ item.date | date: 'dd/MM/yyyy' }}</h3>
                           {{ item.startAt }} hrs.
                           <!--
                           <h3>{{ moment(item.date).format('DD') }}</h3>
@@ -1006,6 +1008,7 @@
                           </svg>
                         </div>
                         <div class="col-5 text-left p-0">
+                     
                           <button class="btn btn-primary dos rounded-lg">
                             {{
                               (item.status === 'reserved'
