@@ -3759,7 +3759,8 @@
       "label": "Teléfono"
     },
     "breed": {
-      "label": "Raza"
+      "label": "Raza",
+      "required":"Campo raza obligatorio"
     },
     "grenderReq": {
       "label": "Sexo"
