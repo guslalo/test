@@ -300,7 +300,10 @@
                   'is-invalid':
                     !createAvailability.get('specialty').valid }"
                 >
-                  <option value="null"  disabled>Seleccionar especialidad</option>
+                  <option value="null"  disabled>
+                    {{
+                    'dashboard.home.disponibilityManagment.modal.createDisponibility.selectSpecialty.label' | transloco
+                  }}</option>
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>

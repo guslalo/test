@@ -384,8 +384,9 @@
                 <td scope="row">{{ 'common.noInfo.label' | transloco }}</td>
               </ng-template>
               <td>
-                {{ item.dateDetails.createdAt | date: 'dd/MM/yy' }} <br>
+                  {{ item.dateDetails.createdAt | date: 'dd/MM/yy' }} <br>
                   {{ item.dateDetails.createdAt | date: 'HH:MM ' }}
+                  
               </td>
               <td>
                 <ng-container *ngIf="item.startTime == null; else info1">

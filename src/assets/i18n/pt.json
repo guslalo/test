@@ -1803,6 +1803,9 @@
             "daysAvailable": {
               "label": "Disponibilidade de dias"
             },
+            "selectSpecialty": {
+              "label": "Selecionar especialidade"
+            },
             "initialHour": {
               "label": "Horário inicial"
             },
