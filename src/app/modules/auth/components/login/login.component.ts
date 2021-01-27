@@ -164,7 +164,7 @@ export class LoginComponent implements OnInit {
           case 'patient':
             if (data.internalCode === 6) {
               localStorage.setItem('dependents', JSON.stringify(data.dependents));
-              localStorage.setItem('preURL', this.return);
+              if (this.return) localStorage.setItem('preURL', this.return);
               this.router.navigate(['context']).then(() => this.idleEvents.attachMonitor());
             } else {
               this.clinicService.accessMode().subscribe(
