@@ -43,6 +43,9 @@ export class MisConsultasComponent implements OnInit {
             lista.administrativeDetails.status === 'finished'
         );
         //this.consultas = data.payload;
+        console.log(this.consultas.length)
+        this.totalPages = this.consultas.length  ;
+        console.log(this.totalPages)
       },
       (error) => {
         console.log(error);
@@ -57,7 +60,7 @@ export class MisConsultasComponent implements OnInit {
             lista.administrativeDetails.status === 'created' || lista.administrativeDetails.status === 'waitingInList'
         );
         this.consultasActivas = data.payload;
-        this.totalPages =  this.consultasActivas.length;
+        this.totalPages2 = this.consultasActivas.length;
       },
       (error) => {
         console.log(error);
