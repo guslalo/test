@@ -1065,7 +1065,7 @@
       "label": "Correo Electrónico"
     },
     "prevission": {
-      "label": "Previsión de salud"
+      "label": "Previsión de Salud"
     },
     "verificationCode": {
       "label": "Ingrese código de verificación"
@@ -1375,7 +1375,7 @@
         }
       },
       "inmediateService": {
-        "title": "Consulta inmediata",
+        "title": "Consulta Inmediata",
         "btnCreate": {
           "label": "Ingresar a Sala"
         }
@@ -1662,7 +1662,7 @@
                 }
               },
               "personal": {
-                "label": "Personales"
+                "label": "Datos Personales"
               },
               "name": {
                 "label": "Nombre"
@@ -2710,7 +2710,7 @@
       "label": "Atención Inmediata / Acceso a Sala"
     },
     "joinWaitingListHint": {
-      "label": "Usted ingresará en una lista de espera hasta que un profesional de salud pueda atenderlo; si no desea esperar, haz click en el botón Deseo Agendar."
+      "label": "Usted ingresará en una lista de espera hasta que un profesional de salud pueda atenderlo; si no desea esperar, haga click en el botón Deseo Agendar."
     },
     "scheduleService": {
       "label": "Agenda una cita médica"
@@ -3459,7 +3459,7 @@
         }
       },
       "changePassword": {
-        "title": "Cambiar Contraseña",
+        "title": "Cambiar contraseña",
         "label": "Información básica de sus datos",
         "current": {
           "title": "Contraseña actual",

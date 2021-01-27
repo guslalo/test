@@ -130,7 +130,7 @@ export class IndexComponent implements OnInit {
     });
     this.brand = environment.brand;
     const current = new Date();
-    this.textInputFile = 'Selecione Arquivo';
+    this.textInputFile = 'Selecione Archivo';
     this.minDate = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,

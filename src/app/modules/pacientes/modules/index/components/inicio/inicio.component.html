@@ -131,7 +131,7 @@
           <!--/colappsed-->
 
           <!-- mis consultas activas -->
-          <h4>Minhas consultas ativas</h4>
+          <h4>{{ 'clinicalFile.acriveServices.label' | transloco }}</h4>
           <!-- colappsed-->
           <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5">
             <div class="collapseCustom" id="{{ item._id }}">
