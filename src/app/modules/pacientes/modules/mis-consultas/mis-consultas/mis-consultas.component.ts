@@ -16,13 +16,16 @@ export class MisConsultasComponent implements OnInit {
   public timeline: any;
   moment: any = moment;
   page: number = 1;
+  page2: number = 1;
   totalPages: number;
+  totalPages2: number;
   public fecha: any;
 
   constructor(private appointmentsService: AppointmentsService) {}
 
   ngOnInit(): void {    
     this.page = 1;
+    this.page2 = 1;
     this.appointmentsService.getTotalPages().subscribe((data) => {
       console.log(data);
       //this.totalPages = data.payload.numberOfPages;

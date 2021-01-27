@@ -134,7 +134,7 @@
             </table>
           </div>
           <!-- colappsed-->
-          <ng-container *ngFor="let item of consultas | slice: (page - 1) * 10:(page - 1) * 10 + 10">
+          <ng-container *ngFor="let item of consultas | slice: (page - 1) * 5:(page - 1) * 5 + 5">
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0 table-responsive-sm">
                 <tbody>
@@ -160,7 +160,7 @@
                       {{ item.dateDetails.date | date: 'dd/MM/yyyy':'+0000' }} / {{ item.dateDetails.start }}
                     </td>
                     <td style="width: 25%;" class="text-left">
-                      <!--{{item.professionalDetails.userDetails[0].userId}}  *ngIf="item.professionalDetails.userDetails[0].length"-->
+                      <!--{{item.professionalDetails.userDetails[0].userId}} *ngIf="item.professionalDetails.userDetails[0].length"-->
                       <svg
                         width="1em"
                         height="1em"
@@ -333,7 +333,7 @@
             </table>
           </div>
           <!-- colappsed-->
-          <ng-container *ngFor="let item of consultasActivas">
+          <ng-container *ngFor="let item of consultasActivas | slice: (page2 - 1) * 5:(page2 - 1) * 5 + 5">
             <!--| slice: (page - 1) * 10:(page - 1) * 10 + 10-->
             <div class="collapseCustom" id="{{ item._id }}">
               <table class="table dos table-borderless mb-0 table-responsive-sm">
@@ -445,7 +445,7 @@
             </div>
           </ng-container>
 
-          <ngb-pagination [(page)]="page" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
+          <ngb-pagination [(page)]="page2" [pageSize]="10" [collectionSize]="totalPages"></ngb-pagination>
         </ng-container>
 
         <ng-template #vacio>
