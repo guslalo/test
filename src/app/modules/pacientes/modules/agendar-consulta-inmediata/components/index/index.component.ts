@@ -71,9 +71,9 @@ export class IndexComponent implements OnInit {
     this.appointmentsService.AppointmentInmediate().subscribe(
       (data) => {
         console.log(data);
-
+        console.log("sdfhk")
         if (data.internalCode == 117) {
-          this.spinner.hide();
+          
           Swal.fire({
             icon: 'error',
             title:  this.translocoService.translate('common.error.label'), 
@@ -82,9 +82,11 @@ export class IndexComponent implements OnInit {
             this.router.navigate(['/app-paciente']);
           })
         }
+        
         this.appointmentId = data.payload._id;
         this.consolidate.id = data.payload._id;
         this.price = data.payload.appointmentPrice;
+        this.spinner.hide();
       },
       (error) => {
         console.log(error);

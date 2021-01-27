@@ -230,6 +230,7 @@ export class IndexComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigate(['app-paciente']);
+        clearInterval(this.interval)
         /*
         this.appointmentsService.getAppointments(1).subscribe(
           (data) => {
