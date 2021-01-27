@@ -288,7 +288,9 @@
               <div class="form-group col">
                 <label for="specialty">{{ 'disponibility.modal.create.specialty.label' | transloco }}</label>
                 <select class="form-control" id="specialty" formControlName="specialty">
-                  <option [value]="null">{{ 'common.select.label' | transloco }}</option>
+                  <option [value]="null">{{
+                    'dashboard.home.disponibilityManagment.modal.createDisponibility.selectSpecialty.label' | transloco
+                  }}</option>
                   <option *ngFor="let item of specialtiesId; let i = index" value="{{ item._id }}">
                     {{ item.specialtyName }}
                   </option>
