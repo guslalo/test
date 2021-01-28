@@ -205,15 +205,13 @@
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="secondLastName">{{ 'account.surname.label' | transloco }}*</label>
+                    <label for="secondLastName">{{ 'account.surname.label' | transloco }}</label>
                     <input
                       type="text"
                       class="form-control"
                       name="secondLastName"
                       formControlName="secondLastName"
-                      [ngClass]="{
-                        'is-invalid': !personalData.get('secondLastName').valid
-                      }"
+                   
                     />
                   </div>
                 </div>

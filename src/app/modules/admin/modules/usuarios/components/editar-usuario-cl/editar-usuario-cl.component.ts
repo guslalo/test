@@ -171,7 +171,7 @@ export class EditarUsuarioCLComponent implements OnInit {
       name: ['', [Validators.required, ]],
       lastName: ['', [Validators.required,]],
       motherName: ['', null],
-      secondLastName: ['', [Validators.required,]],
+      secondLastName: [''],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, ]],
       gender: [null, Validators.required],

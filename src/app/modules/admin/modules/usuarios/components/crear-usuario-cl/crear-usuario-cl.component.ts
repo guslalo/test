@@ -178,7 +178,7 @@ export class CrearUsuarioComponentCL implements OnInit {
       name: ['', [Validators.required,]], 
       lastName: ['',[Validators.required,]], 
       motherName: ['', null],
-      secondLastName: ['', [Validators.required,]],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
+      secondLastName: [''],//Validators.pattern(/^[a-zA-ZñáéíóúüµùàçéèçÇ\s]*$/)
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)]],
       gender: [null, Validators.required],
